@@ -1,0 +1,97 @@
+---
+title: Java Array
+categories:
+- Software
+- Backend
+- Java
+- JavaSE
+- 工具类
+---
+# Java Array
+
+## Array
+
+- Arrays 是JDK提供的操作数组的工具类, array类提供了动态创建和访问 Java 数组的方法
+
+### Array.newInstance()
+
+- 创建数组
+- 在Java的反射机制中, 通过数组的 class 对象的`getComponentType()`方法可以取得一个数组的Class对象,  通过`Array.newInstance()`可以反射生成数组对象
+
+```java
+ T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length);
+```
+
+### Array.toString()
+
+- 打印数组
+
+```java
+int[] intArray = { 1, 2, 3, 4, 5 };
+String intArrayString = Arrays.toString(intArray);
+
+// 直接打印,则会打印出引用对象的Hash值
+// [I@7150bd4d
+System.out.println(intArray);
+
+// [1, 2, 3, 4, 5]
+System.out.println(intArrayString);
+```
+
+### Array.asList()
+
+- 根据数组创建ArrayList
+
+```java
+String[] stringArray = { "a", "b", "c", "d", "e" };
+ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(stringArray));
+// [a, b, c, d, e]
+System.out.println(arrayList);
+```
+
+### Array.contains()
+
+- 检查数组是否包含某个值
+
+```java
+String[] stringArray = { "a", "b", "c", "d", "e" };
+boolean b = Arrays.asList(stringArray).contains("a");
+// true
+System.out.println(b);
+```
+
+## ArrayUtils
+
+- Apache Commons Lang 库
+
+### ArrayUtils.addAll()
+
+- 合并连接两个数组
+
+```java
+int[] intArray = { 1, 2, 3, 4, 5 };
+int[] intArray2 = { 6, 7, 8, 9, 10 };
+int[] combinedIntArray = ArrayUtils.addAll(intArray, intArray2);
+```
+
+### ArrayUtils.reverse()
+
+- 数组元素反转
+
+```java
+int[] intArray = { 1, 2, 3, 4, 5 };
+ArrayUtils.reverse(intArray);
+//[5, 4, 3, 2, 1]
+System.out.println(Arrays.toString(intArray));
+```
+
+### ArrayUtils.removeElement()
+
+- 移除元素
+
+```java
+int[] intArray = { 1, 2, 3, 4, 5 };
+int[] removed = ArrayUtils.removeElement(intArray, 3);//创建新的数组
+System.out.println(Arrays.toString(removed));
+```
+
