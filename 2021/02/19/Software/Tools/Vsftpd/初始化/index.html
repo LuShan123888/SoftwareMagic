@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Vsftpd 初始化 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vsftpd 初始化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 18:15" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vsftpd 初始化</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Vsftpd 初始化</h1>
+<h2 id="安装FTP服务">安装FTP服务</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt-get install vsftpd<br></code></pre></td></tr></table></figure>
+<h2 id="配置FTP服务">配置FTP服务</h2>
+<blockquote>
+<ul>
+<li>主配置文件:/etc/vsftp.conf</li>
+<li>权限限制用户列表文件:/etc/vsftp.chroot_list</li>
+<li>认证配置文件:/etc/pam.d/vsftpd</li>
+<li>用户列表:/etc/vsftpd.user_list</li>
+</ul>
+</blockquote>
+<h3 id="基本配置">基本配置</h3>
+<ul>
+<li>修改<code>/etc/vsftp.conf</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">anonymous_enable=NO  #是否允许匿名登陆<br>local_enable=YES  # 是否允许本地登陆<br>write_enable=YES  # 设置FTP可写<br></code></pre></td></tr></table></figure>
+<h3 id="用户登录限制">用户登录限制</h3>
+<h4 id="允许-etc-vsftpd-userlist用户列表登录">允许/etc/vsftpd.userlist用户列表登录</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">userlist_enable=YES<br>userlist_deny=NO<br>userlist_file=/etc/vsftpd.user_list<br></code></pre></td></tr></table></figure>
+<h4 id="禁止-etc-vsftpd-userlist用户列表登录">禁止/etc/vsftpd.userlist用户列表登录</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">userlist_enable=YES<br>userlist_deny=YES<br>userlist_file=/etc/vsftpd.user_list<br></code></pre></td></tr></table></figure>
+<h3 id="FTP-用户限制在其-home-目录">FTP 用户限制在其 home 目录</h3>
+<p>由<code>chroot_local_user</code>,<code>chroot_list_enable</code>,<code>chroot_list_file</code>这三个文件控制</p>
+<ul>
+<li><code>chroot_list_enable</code>:是否启用<code>chroot_list_file</code>配置的文件,如果为YES表示<code>chroot_list_file</code>配置的文件生效,否则不生效</li>
+<li><code>chroot_list_file</code>:配置了一个文件路径,默认是<code>/etc/vsftpd.chroot_list</code>,该文件中会填入一些账户名称,但是这些账户的意义不是固定的,是跟配置项<code>chroot_local_user</code>有关的</li>
+<li><code>chroot_local_user</code>:为YES表示所有用户都不能切换到主目录之外其他目录,但是除了<code>chroot_list_file</code>配置的文件列出的用户,<code>chroot_local_user</code>为NO表示所有用户都能切换到主目录之外其他目录,但是除了<code>chroot_list_file</code>配置的文件列出的用户,也可以理解为,<code>chroot_list_file</code>列出的例外情况的用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">chroot_local_user=YES<br>chroot_list_enable=YES<br>chroot_list_file=/etc/vsftpd.chroot_list<br><span class="hljs-meta">#</span><span class="bash">在本地 root 目录中插入用户名</span><br><br><span class="hljs-meta">#</span><span class="bash">定义各个用户的本地 root 目录</span><br>user_sub_token=$USER<br>local_root=/home/$USER/ftp<br></code></pre></td></tr></table></figure>
+<h2 id="配置文件">配置文件</h2>
+<ul>
+<li><code>/etc/vsftpd/vsftpd.conf</code></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># Example config file /etc/vsftpd/vsftpd.conf</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># The default compiled in settings are fairly paranoid. This sample file</span><br><span class="hljs-comment"># loosens things up a bit, to make the ftp daemon more usable.</span><br><span class="hljs-comment"># Please see vsftpd.conf.5 for all compiled in defaults.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># READ THIS: This example file is NOT an exhaustive list of vsftpd options.</span><br><span class="hljs-comment"># Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd&#x27;s</span><br><span class="hljs-comment"># capabilities.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Allow anonymous FTP? (Beware - allowed by default if you comment this out).</span><br>anonymous_enable=YES    &lt;==设置是否允许匿名用户登录FTP服务器,默认为YES<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Uncomment this to allow local users to log in.</span><br><span class="hljs-comment"># When SELinux is enforcing check for SE bool ftp_home_dir</span><br>local_enable=YES    &lt;==是否允许本地用户登录FTP服务器,默认为NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Uncomment this to enable any form of FTP write command.</span><br>write_enable=YES    &lt;==是否对登录用户开启写权限,属全局性设置,默认NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Default umask for local users is 077. You may wish to change this to 022,</span><br><span class="hljs-comment"># if your users expect that (022 is used by most other ftpd&#x27;s)</span><br>local_umask=022    &lt;==设置本地用户的文件生成umask为022,默认是077<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Uncomment this to allow the anonymous FTP user to upload files. This only</span><br><span class="hljs-comment"># has an effect if the above global write enable is activated. Also, you will</span><br><span class="hljs-comment"># obviously need to create a directory writable by the FTP user.</span><br><span class="hljs-comment"># When SELinux is enforcing check for SE bool allow_ftpd_anon_write, allow_ftpd_full_access</span><br><span class="hljs-comment">#anon_upload_enable=YES    &lt;==是否允许匿名用户上传文件,默认为NO</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Uncomment this if you want the anonymous FTP user to be able to create</span><br><span class="hljs-comment"># new directories.</span><br><span class="hljs-comment">#anon_mkdir_write_enable=YES  &lt;==是否允许匿名用户创建目录,默认为NO</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Activate directory messages - messages given to remote users when they</span><br><span class="hljs-comment"># go into a certain directory.</span><br>dirmessage_enable=YES    &lt;==设置是否显示目录消息,若设置为YES,进入目录时候将显示该目录中message_file配置文件(.message)中的内容<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Activate logging of uploads/downloads.</span><br>xferlog_enable=YES     &lt;==是否启用FTP上传或下载日志记录,默认为NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span><br>connect_from_port_20=YES   &lt;==是够允许主动模式FTP,默认为NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># If you want, you can arrange for uploaded anonymous files to be owned by</span><br><span class="hljs-comment"># a different user. Note! Using &quot;root&quot; for uploaded files is not</span><br><span class="hljs-comment"># recommended!</span><br><span class="hljs-comment">#chown_uploads=YES    &lt;==用于设置是否改变匿名用户上传的文档的属主,默认为NO</span><br><span class="hljs-comment">#chown_username=whoever   &lt;==设置匿名用户上传的文档的属主名,只有chown_uploads=YES时才有效,默认为root(建议不要为root用户)</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may override where the log file goes if you like. The default is shown</span><br><span class="hljs-comment"># below.</span><br><span class="hljs-comment">#xferlog_file=/var/log/xferlog    &lt;==设置日志文件名及路径,需启用xferlog_enable选项</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># If you want, you can have your log file in standard ftpd xferlog format.</span><br><span class="hljs-comment"># Note that the default log file location is /var/log/xferlog in this case.</span><br>xferlog_std_format=YES    &lt;==日志文件是否使用标准的xferlog日志文件格式(与wu-ftpd使用的格式相同) ,默认为NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may change the default value for timing out an idle session.</span><br><span class="hljs-comment">#idle_session_timeout=600    &lt;==设置多长时间不对FTP服务器进行任何操作,则断开该FTP连接,单位为秒,默认为300</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may change the default value for timing out a data connection.</span><br><span class="hljs-comment">#data_connection_timeout=120   &lt;==设置建立FTP数据连接的超时时间,默认为300秒</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># It is recommended that you define on your system a unique user which the</span><br><span class="hljs-comment"># ftp server can use as a totally isolated and unprivileged user.</span><br><span class="hljs-comment">#nopriv_user=ftpsecure    &lt;==运行vsftpd需要的非特权系统用户,默认是nobody</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Enable this and the server will recognise asynchronous ABOR requests. Not</span><br><span class="hljs-comment"># recommended for security (the code is non-trivial). Not enabling it,</span><br><span class="hljs-comment"># however, may confuse older FTP clients.</span><br><span class="hljs-comment">#async_abor_enable=YES    &lt;==是否识别异步ABOR请求</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># By default the server will pretend to allow ASCII mode but in fact ignore</span><br><span class="hljs-comment"># the request. Turn on the below options to have the server actually do ASCII</span><br><span class="hljs-comment"># mangling on files when in ASCII mode.</span><br><span class="hljs-comment"># Beware that on some FTP servers, ASCII support allows a denial of service</span><br><span class="hljs-comment"># attack (DoS) via the command &quot;SIZE /big/file&quot; in ASCII mode. vsftpd</span><br><span class="hljs-comment"># predicted this attack and has always been safe, reporting the size of the</span><br><span class="hljs-comment"># raw file.</span><br><span class="hljs-comment"># ASCII mangling is a horrible feature of the protocol.</span><br><span class="hljs-comment">#ascii_upload_enable=YES    &lt;==设置是否启用ASCII模式下载数据,默认为NO</span><br><span class="hljs-comment">#ascii_download_enable=YES    &lt;==设置是否启用ASCII模式上传数据,默认为NO</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may fully customise the login banner string:</span><br><span class="hljs-comment">#ftpd_banner=Welcome to blah FTP service.    &lt;==该配置项用于设置比较简短的欢迎信息,若欢迎信息较多,则可使用banner_file配置项</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may specify a file of disallowed anonymous e-mail addresses. Apparently</span><br><span class="hljs-comment"># useful for combatting certain DoS attacks.</span><br><span class="hljs-comment">#deny_email_enable=YES    &lt;==黑名单设置,如果很讨厌某些email address,就可以使用此设定来取消他的登录权限</span><br><span class="hljs-comment"># (default follows)</span><br><span class="hljs-comment">#banned_email_file=/etc/vsftpd/banned_emails    &lt;==当deny_email_enable=YES时,可以利用这个设定项来规定哪些邮件地址不可登录vsftpd服务器</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may specify an explicit list of local users to chroot() to their home</span><br><span class="hljs-comment"># directory. If chroot_local_user is YES, then this list becomes a list of</span><br><span class="hljs-comment"># users to NOT chroot().</span><br><span class="hljs-comment"># (Warning! chroot&#x27;ing can be very dangerous. If using chroot, make sure that</span><br><span class="hljs-comment"># the user does not have write access to the top level directory within the</span><br><span class="hljs-comment"># chroot)</span><br><span class="hljs-comment">#chroot_local_user=YES   &lt;==是否将实体用户限制在自己的家目录内,默认为NO</span><br><span class="hljs-comment">#chroot_list_enable=YES   &lt;==设置是否启用chroot_list_file配置项指定的用户列表文件,默认为NO</span><br><span class="hljs-comment"># (default follows)</span><br><span class="hljs-comment">#chroot_list_file=/etc/vsftpd/chroot_list  &lt;==用于指定用户列表文件,该文件用于控制哪些用户限制在家目录</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You may activate the &quot;-R&quot; option to the builtin ls. This is disabled by</span><br><span class="hljs-comment"># default to avoid remote users being able to cause excessive I/O on large</span><br><span class="hljs-comment"># sites. However, some broken FTP clients such as &quot;ncftp&quot; and &quot;mirror&quot; assume</span><br><span class="hljs-comment"># the presence of the &quot;-R&quot; option, so there is a strong case for enabling it.</span><br><span class="hljs-comment">#ls_recurse_enable=YES    &lt;==是否允许递归查询,默认为NO,以防止远程用户造成过量的I/O</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># When &quot;listen&quot; directive is enabled, vsftpd runs in standalone mode and</span><br><span class="hljs-comment"># listens on IPv4 sockets. This directive cannot be used in conjunction</span><br><span class="hljs-comment"># with the listen_ipv6 directive.</span><br>listen=NO   &lt;==设置vsftpd服务器是否以standalone模式运行,默认为NO<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># This directive enables listening on IPv6 sockets. By default, listening</span><br><span class="hljs-comment"># on the IPv6 &quot;any&quot; address (::) will accept connections from both IPv6</span><br><span class="hljs-comment"># and IPv4 clients. It is not necessary to listen on *both* IPv4 and IPv6</span><br><span class="hljs-comment"># sockets. If you want that (perhaps because you want to listen on specific</span><br><span class="hljs-comment"># addresses) then you must run two copies of vsftpd with two configuration</span><br><span class="hljs-comment"># files.</span><br><span class="hljs-comment"># Make sure, that one of the listen options is commented !!</span><br>listen_ipv6=YES   &lt;==是否监听ipv6地址,默认为NO<br><br>pam_service_name=vsftpd    &lt;==设置在PAM所使用的名称,默认值为vsftpd<br>userlist_enable=YES    &lt;==决定/etc/vsftpd/user_list文件是否启用生效,YES则生效,NO不生效<br>tcp_wrappers=YES    &lt;==用来设置vsftpd服务器是否与tcp wrapper相结合,进行主机的访问控制<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/">Tools</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/Vsftpd/">Vsftpd</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Tools/Vsftpd/%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vsftpd 命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">ZShell 初始化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

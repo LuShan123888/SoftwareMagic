@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>PHP PearDB - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP PearDB">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 15:22" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP PearDB</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>PHP PearDB</h1>
+<ul>
+<li>示例8-1的程序创建了一个关于科幻小说书籍信息的HTML表格,它说明了如何使用PEAR DB库来连接数据库,执行语句,检查错误和查询结果到HTML,请确保在安装PHP时启用了PEAR,这在Unix/Linux和Windows下有一点不同,PEAR DB代码库是面向对象的,带有类方法(<code>DB::connect()</code>,<code>DB::iserror()</code>)和对象方法(<code>$db-&gt;query()</code>,<code>$q-&gt;fetchInto()</code>)</li>
+</ul>
+<p><strong>示例8-1</strong>:显示书籍信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;&lt;head&gt;&lt;title&gt;Library Books&lt;&#x2F;title&gt;&lt;&#x2F;head&gt;<br>    &lt;body&gt;<br>        &lt;table border&#x3D;1&gt;<br>            &lt;tr&gt;&lt;th&gt;Book&lt;&#x2F;th&gt;Year Published&lt;&#x2F;th&gt;&lt;th&gt;Author&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;<br>    &lt;?php<br>    &#x2F;&#x2F;连接<br>    require_once(&#39;DB.php&#39;);<br>    $db &#x3D; DB::connect(&quot;mysql:&#x2F;&#x2F;librarian:password@local&#x2F;library&quot;);<br>    if(DB::iserror($db))&#123;<br>        die($db-&gt;getMessage());<br>    &#125;<br><br>    &#x2F;&#x2F;执行查询<br>    $sql &#x3D; &quot;SELECT books.title,books.pub_year,authors.name<br> 		FROM books,authors<br> 		WHERE books.authorid&#x3D;authors.authorid<br> 		ORDER BY books.pub_year ASC&quot;;<br>    $q &#x3D; $db-&gt;query($sql);<br>    if(DB::iserror($sql)&#123;<br>        die($q-&gt;getMessage());<br>    &#125;<br>       &#x2F;&#x2F;生成表格<br>       while($q-&gt;fetchInto($row))&#123;<br>    ?&gt;<br>    &lt;tr&gt;&lt;td&gt;&lt;?&#x3D; $row[0] ?&gt;&lt;&#x2F;td&gt;<br>        &lt;td&gt;&lt;?&#x3D; $row[1] ?&gt;&lt;&#x2F;td&gt;<br>        &lt;td&gt;&lt;?&#x3D; $row[2] ?&gt;&lt;&#x2F;td&gt;<br>    &lt;&#x2F;tr&gt;<br>    &lt;?php<br>       &#125;<br>    ?&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="数据源名">数据源名</h2>
+<ul>
+<li>DSN(data source name,数据源名)是一个字符串,它指定数据库的位置,数据库的类型,连接数据库时使用的用户名和密码等信息,在PEAR中DSN的各部分被组合成一个类似于URL的字符串:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">type(dbsyntax):<span class="hljs-comment">//username:password@protocol+hostspec/ddatabase</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>type字段是唯一必须指定的字段,它指定了PHP所使用的数据库类型,下表列出了数据库类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name名称</th>
+<th>Database数据库</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mysql</td>
+<td>MySQL</td>
+</tr>
+<tr>
+<td>mysqli</td>
+<td>MySQL(for MySQL &gt;= 4.1)</td>
+</tr>
+<tr>
+<td>pgsql</td>
+<td>PostgreSQL</td>
+</tr>
+<tr>
+<td>ibase</td>
+<td>InterBase</td>
+</tr>
+<tr>
+<td>msql</td>
+<td>Mini SQL</td>
+</tr>
+<tr>
+<td>mssql</td>
+<td>MicrosoftSQL Server</td>
+</tr>
+<tr>
+<td>oci8</td>
+<td>Oracle 7/8/8i</td>
+</tr>
+<tr>
+<td>odbc</td>
+<td>ODBC</td>
+</tr>
+<tr>
+<td>sybase</td>
+<td>Sybase</td>
+</tr>
+<tr>
+<td>ifx</td>
+<td>Informix</td>
+</tr>
+<tr>
+<td>fbsql</td>
+<td>FrontBase</td>
+</tr>
+<tr>
+<td>dbase</td>
+<td>Dbase</td>
+</tr>
+<tr>
+<td>sqlite</td>
+<td>SQLite</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Prorocol是所用的通信协议,两种常用的值是&quot;tcp&quot;和&quot;unix&quot;,对应的Internet和Unix域套接字,不是所有的数据库后台都支持所有的通信协议</li>
+<li>下面是一些合法的DSN:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">mysql:<span class="hljs-comment">///library</span><br>mysql:<span class="hljs-comment">//localhost/library</span><br>mysql:<span class="hljs-comment">//librarian@localhost/library</span><br>mysql:<span class="hljs-comment">//librarian@tcp+localhost/library</span><br>mysql:<span class="hljs-comment">//librarian:password@localhost/library</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>在示例8-1中,我们用用户名librarian和密码password连接到Mysql数据库library,在实际开发中一个常见的做法是存放DSN到一个PHP文件中,并在所有需要数据库连接的页面中包含这个文件,想这样做的意义是如果要修改信息,不需要改变所有的页面,在一个更加复杂的配置文件中,甚至可以根据程序正处于开发期或运营期来选择不同的DSN</li>
+</ul>
+<h2 id="连接">连接</h2>
+<ul>
+<li>一旦有了DSN,就可以使用<code>connect()</code>方法来创建数据库连接,该方法返回一个数据库对象,利用它可以进行查询和引用参数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$db = DB::connect(DSN [,options]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>options的值可以是布尔型的,指定数据库连接是否是持久性的,或者是一个选项设置的数组,下表给出options的值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Option选项</th>
+<th>Controls控制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>persistent</td>
+<td>在访问间持久连接</td>
+</tr>
+<tr>
+<td>optimize</td>
+<td>要优化的内容</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>显示调试信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>默认情况下,连接是不持久的并且不显示调试信息,optimize的值可以是’performance’和’portability’,默认为’performance’,下面的代码展示了如何启用调试功能和对可移植性的优化:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">$db = DB::connect($datasource);<br><span class="hljs-keyword">if</span>(DB::isError($db))&#123;<br>    <span class="hljs-keyword">die</span>($db-&gt;getMessage());<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果在数据库对象工作时发生错误,<code>DB::isError()</code>方法返回true,如果发生一个错误,通常的做法是停止程序并用<code>getMessage()</code>方法显示错误信息,你可以在任何PEAR DB对象上调用<code>getmessage()</code>方法</p>
+<h2 id="执行语句">执行语句</h2>
+<ul>
+<li>在一个数据库对象上调用<code>query()</code>方法可向数据库发送SQL:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$result = $db-&gt;query(sql);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>操作成功时,一条非查询类的SQL语句(如INSERT,UPDATE,DELETE)返回常量DB_OK来标志操作成功,一条用于查询的SQL语句(如SELECT)返回一个可以用于返回查询结果的对象</li>
+<li>可以用<code>DB::isError()</code>检查操作是否成功:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">$q = $db-&gt;query($sql);<br><span class="hljs-keyword">if</span>(DB::isError($q))&#123;<br>    <span class="hljs-keyword">die</span>($q-&gt;getMessage());<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="获取查询结果">获取查询结果</h2>
+<p>PEAR DB提供两种从查询结果对象中获取数据的方法,一种是返回对应下一行的数组,另一种是存储行数组到以参数形式传递的变量中</p>
+<h3 id="返回行">返回行</h3>
+<ul>
+<li>在一个查询结果对象上调用<code>fetchRow()</code>方法以数组的形式返回结果集中的下一行记录:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$row = $result-&gt;fetchRow([mode]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果没有错误,将返回一个数据数组,如果没有数组时则是NULL(当查询结果集为空时),如果有错误发生则返回<code>DB_ERROR</code>,mode参数控制返回数组的格式</li>
+<li><code>fetchRow()</code>方法的习惯用法是一次一行的处理查询结果,如下所示:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">while</span>($row = $result-&gt;fetchRow())&#123;<br>    <span class="hljs-keyword">if</span>(DB::isError($row))&#123;<br>        <span class="hljs-keyword">die</span>($row-&gt;getMessage());<br>    &#125;<br>    <span class="hljs-comment">//处理行</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="存储行">存储行</h3>
+<ul>
+<li><code>fetchInto()</code>方法不只是获取下一行,还把它存放在作为参数传递的数组变量中:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$success = $result-&gt;fetchInto(<span class="hljs-keyword">array</span>,[mode]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>和<code>fetchRow()</code>类似,如果没有更多的数据<code>fetchInto()</code>返回NULL,或有错误发生时返回<code>DB_ERROR</code></li>
+<li>习惯像下面这样用<code>fetchInto()</code>处理所有结果:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">while</span>($result-&gt;fetchInto($row))&#123;<br> <span class="hljs-keyword">if</span>(DB::isError($success))&#123;<br>     <span class="hljs-keyword">die</span>($success-&gt;getMessage());<br> &#125;<br> <span class="hljs-comment">//处理行</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="行数组的内部">行数组的内部</h3>
+<ul>
+<li>将要返回的这些行是什么呢?默认是带索引的数组,在数组中的位置对应返回结果中列的顺序,例如:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php">$row = $result-&gt;fetchRow();<br><span class="hljs-keyword">if</span>(DB::isError($row))&#123;<br>    <span class="hljs-keyword">die</span>($row-&gt;getMessage());<br>&#125;<br>var_dump($row);<br><span class="hljs-keyword">array</span>(<span class="hljs-number">3</span>)&#123;<br>    [<span class="hljs-number">0</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Foundation&quot;</span>,<br>    [<span class="hljs-number">1</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">4</span>) <span class="hljs-string">&quot;1951&quot;</span>,<br>    [<span class="hljs-number">2</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">12</span>) <span class="hljs-string">&quot;Isaac Asimov&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以传递一个mode参数给<code>fetchRow()</code>或<code>fetchInto()</code>来控制行数组的格式,就像上例中那样,默认地是以<code>DB_FETCHMODE_ORDERED</code>指定的方式</li>
+<li>获取模式<code>DB_FETCHMODE_ASSOC</code>将创建一个数组,其中元素的键名是列名并且它的值来自于列的值:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php">$row = $result-&gt;fetchRow(DB_FETCHMODE_ASSOC);<br><span class="hljs-keyword">if</span>(DB::isError($row))&#123;<br>    <span class="hljs-keyword">die</span>($row-&gt;getMessage());<br>&#125;<br>var_dump($row);<br><span class="hljs-keyword">array</span>(<span class="hljs-number">3</span>)&#123;<br>    [<span class="hljs-string">&quot;title&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Foundation&quot;</span>,<br>    [<span class="hljs-string">&quot;pub_year&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">4</span>) <span class="hljs-string">&quot;1951&quot;</span>,<br>    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">12</span>) <span class="hljs-string">&quot;Isaac Asimov&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>模式<code>DB_FETCHMODE_OBJECT</code>把行转换到一个对象,该对象的属性是结果行的每一列:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php">$row = $result-&gt;fetchRow(DB_FETCHMODE_OBJECT);<br><span class="hljs-keyword">if</span>(DB::isError($row))&#123;<br>    <span class="hljs-keyword">die</span>($row-&gt;getMessage());<br>&#125;<br>var_dump($row);<br><span class="hljs-keyword">object</span> (<span class="hljs-built_in">stdClass</span>)(<span class="hljs-number">3</span>)&#123;<br>    [<span class="hljs-string">&quot;title&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Foundation&quot;</span>,<br>    [<span class="hljs-string">&quot;pub_year&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">4</span>) <span class="hljs-string">&quot;1951&quot;</span>,<br>    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;<span class="hljs-keyword">string</span>(<span class="hljs-number">12</span>) <span class="hljs-string">&quot;Isaac Asimov&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>要在这个对象中访问数据,可以使用<code>$object-&gt;property</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&#123;$row-&gt;title&#125; was published in &#123;$row-&gt;pub_year) and was written by &#123;$row-&gt;name&#125;&quot;</span>;<br><br>Foundation was published in <span class="hljs-number">1951</span> <span class="hljs-keyword">and</span> was written by Isaac Asimov<br></code></pre></td></tr></table></figure>
+<h3 id="结束查询结果">结束查询结果</h3>
+<ul>
+<li>一个查询结果对象通常存放了查询返回的所有行,这将消耗很多内存,要将被查询结果消耗的内存释放归还给操作系统,可以使用<code>free()</code>方法:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$result-&gt;free();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们并不需要严格地这样做,因为当PHP脚本结束时所有的查询会自动调用<code>free()</code></li>
+</ul>
+<h2 id="关闭连接">关闭连接</h2>
+<ul>
+<li>要强制性地PHP断开数据库连接,可以在这个数据库对象上使用<code>disconnect()</code>方法:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$db-&gt;disconnect();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这也不是严格需要的,因为当PHP脚本结束时所有的数据库连接都会被关闭</li>
+</ul>
+<h2 id="高级数据库技术">高级数据库技术</h2>
+<ul>
+<li>PEAR DB将之前所示的数据库原始操作(primitive)进行改进,它提供了一些简化的函数来取得结果集的一行,还提供了唯一行ID系统,以及互相独立的SQL预处理和执行步骤来提高重复查询的效率</li>
+</ul>
+<h3 id="占位符-Placeholder">占位符(Placeholder)</h3>
+<ul>
+<li>像<code>printf()</code>通过把值插入到模板来构建字符串一样,PEAR DB也可以通过把值插入到模板来构建一个查询,传给<code>query()</code>函数带<code>?</code>的SQL来代替特定值,并且增加由要插入到SQL的数组值组成的第二个参数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$result = $db-&gt;query(SQL,values);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>例如,这段代码插入3条记录到books表中:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php">$books = <span class="hljs-keyword">array</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation&#x27;</span>,<span class="hljs-number">1951</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Second Foundation&#x27;</span>,<span class="hljs-number">1953</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation and Empire&#x27;</span>,<span class="hljs-number">1952</span>));<br><span class="hljs-keyword">foreach</span>($books <span class="hljs-keyword">as</span> $book)&#123;<br>    $db-&gt;query(<span class="hljs-string">&#x27;INSERT INTO books (title,pub_year) VALUES (?,?)&#x27;</span>,$book);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在SQL查询中你可以使用以下3种占位符:
+<ul>
+<li><code>?</code>:一个字符串或数字,如果需要的话将带上引号(推荐)</li>
+<li><code>|</code>:一个字符串或数字,将不会用带上引号</li>
+<li><code>&amp;</code>:一个文件名,它的内容将被包含在语句中(例如,在一个BLOB字段存储一个图像文件)</li>
+</ul>
+</li>
+</ul>
+<h3 id="预处理-预编译-和执行">预处理(预编译)和执行</h3>
+<ul>
+<li>当重复地执行相同语句时,先用<code>prepare()</code>编译一次然后使用<code>execute()</code>,<code>executeMultiple()</code>方法多次执行语句将会使效率更高</li>
+<li>第一步是在语句上调用<code>prepare()</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$compiled = $db-&gt;prepare(SQL);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>他将返回一个编译过的查询语句对象(query object),<code>execute()</code>方法的参数是包含有任意占位符的查询,<code>execute()</code>方法会把该查询发送给RDBMS:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$response = $db-&gt;execute(compiled,values);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Values数组包括查询中占位符的值,返回值是一个查询响应对象,如果错误发生则是<code>DB_ERROR</code></li>
+<li>例如,我们可以像下面这样插入多个值到books表中:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">$books = <span class="hljs-keyword">array</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation&#x27;</span>,<span class="hljs-number">1951</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Second Foundation&#x27;</span>,<span class="hljs-number">1953</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation and Empire&#x27;</span>,<span class="hljs-number">1952</span>));<br>$compiled = $q-&gt;prepare(<span class="hljs-string">&#x27;INSERT INTO books (title,pub_year) VALUES (?,?)&#x27;</span>);<br><span class="hljs-keyword">foreach</span>($books <span class="hljs-keyword">as</span> $book)&#123;<br>    $db-&gt;execute($compiled,$book);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>executeMultiple()</code>方法接收二维数组值的插入:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$responses = $db-&gt;executeMultiple(compiled,values);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>values数组的数字索引必须从0开始,并且包含要插入值得数组,已编译得查询为values中每个值执行一次,查询响应应被收集到<code>$responses</code>中</li>
+<li>往books数据表中插入数据得更好的代码如下:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">$books = <span class="hljs-keyword">array</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation&#x27;</span>,<span class="hljs-number">1951</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Second Foundation&#x27;</span>,<span class="hljs-number">1953</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation and Empire&#x27;</span>,<span class="hljs-number">1952</span>));<br>$compiled = $q-&gt;prepare(<span class="hljs-string">&#x27;INSERT INTO books (title,pub_year) VALUES (?,?)&#x27;</span>);<br>$db-&gt;insertMultiple($compiled,$books);<br></code></pre></td></tr></table></figure>
+<h3 id="简化操作">简化操作</h3>
+<p>PEAR DB提供一些快捷的方法,只需要一个步骤就可以执行一个查询和获取结果集:<code>getOne()</code>,<code>getRow()</code>,<code>getCol()</code>,<code>getAssoc()</code>和<code>getAll()</code>,这些方法都允许使用占位符</p>
+<ul>
+<li>
+<p><code>getOne()</code>方法获取SQL查询结果中的第一行的第一列的 内容:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$value = $db-&gt;getOne(SQL [, values ]);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>例如:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">$when = $db-&gt;getOne(<span class="hljs-string">&quot;SELECT avg(pub_year) FROM books&quot;</span>);<br><span class="hljs-keyword">if</span>(DB::isError($when))&#123;<br><span class="hljs-keyword">die</span>($when-&gt;getMessage());<br>&#125;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;The  average book in the library was published in $when&quot;</span>;<br><br>The average book in the library was published in <span class="hljs-number">1974</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li>
+<p><code>getRow()</code>返回SQL查询结果集数据中的第一行的内容:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$row = $db -&gt;getRow(SQL,[,values]])<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>如果你知道只有一行记录将被返回时,这些函数时很有用的,例如:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">list</span>($titl,$author) = $db-&gt;getRow(<span class="hljs-string">&quot;SELECT books.title,authors.name</span><br><span class="hljs-string">								FROM books,authors</span><br><span class="hljs-string">								WHERE books.pub_year=1950</span><br><span class="hljs-string">								AND books.authorid=authors.authorid&quot;</span>);<br><span class="hljs-keyword">echo</span> (<span class="hljs-string">&quot;$title, written by $author)&quot;</span>;<br><br>(I, Robot, written by Isaac Asimov)<br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li>
+<p><code> getCol()</code>方法返回SQL查询结果集数据中的单个列的内容:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$col = $db-&gt;getCol(SQL [, column[, values ]]);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>Column参数可以是一个数字(默认是0表示第一列),或是一个列名,例如,下面的代码用于获取数据库中所有书名,并以出版年排序:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php">$titles = $db-&gt;getAll(<span class="hljs-string">&quot;SELECT title FROM books ORDER BY pub_year ASC&quot;</span>);<br><span class="hljs-keyword">foreach</span>($titles <span class="hljs-keyword">as</span> $title)&#123;<br> <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;$title\n&quot;</span>;<br>&#125;<br><br>the Hobbit<br>I, Robot<br>...<br></code></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li>
+<p><code> getAll()</code>方法返回查询返回所有行中的内容:</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$all = $db-&gt;getAll(SQL [, values [, fetchmode ]]);<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>例如,下面的代码是创建一个包括影片名的可选框,被选中电影的ID将被作为参数值提交</p>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php">$result = $db-&gt;getAll(<span class="hljs-string">&quot;SELECT bookid,title</span><br><span class="hljs-string">					FROM books</span><br><span class="hljs-string">					ORDER BY pub_year ASC&quot;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;select name=&#x27;movie&#x27;&gt;\n&quot;</span>;<br><span class="hljs-keyword">foreach</span> ($results <span class="hljs-keyword">as</span> $result)&#123;<br> <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;option value=&#123;$result[0]&#125;&gt;&#123;$result[1]&#125;&lt;/option&gt;\n&quot;</span>;<br>&#125;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/select&gt;&quot;</span>;<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>如果有错误发生,所有的<code>get*()</code>方法都会返回DB_ERROR</p>
+</li>
+</ul>
+<h3 id="查询响应的细节">查询响应的细节</h3>
+<ul>
+<li>PEAR DB提供了4中方法来获取查询结果对象的信息:<code>numRows()</code>,<code>numCols()</code>,<code>affectedRows()</code>和<code>tableInfo()</code></li>
+<li>通过调用<code>numRows()</code>和<code>numCols()</code>方法可以知道SELECT查询结果的行数和列数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$howmany = $response-&gt;numRowas();<br>$howmany = $response-&gt;numRowCols();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过调用<code>affectedRows()</code>方法可以知道有多少行被INSERT,DELETE或UPDATE操作所影响:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$howmany = $response-&gt;affectedRows();<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>tableInfo()</code>方法可以知道有多少行被INSERT,DELETE或UPDATE操作所影响:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$info = $response-&gt;tableInfo();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>下面的代码是把一个表的信息放到HTML表格中:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//连接</span><br><span class="hljs-keyword">require_once</span>(<span class="hljs-string">&#x27;DB.php&#x27;</span>);<br>$db = DB::connect(<span class="hljs-string">&quot;mysql://librarian:passw0rd@localhost/librart&quot;</span>);<br><span class="hljs-keyword">if</span>(DB::iserror($db))&#123;<br>    <span class="hljs-keyword">die</span>($db-&gt;getMessage());<br>&#125;<br>$info = $q-&gt;tableInfo();<br>a_to_table($info);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a_to_table</span>(<span class="hljs-params">$a</span>)</span>&#123;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;html&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&lt;head&gt;</span><br><span class="hljs-string">    &lt;title&gt;Table Info&lt;/title&gt;</span><br><span class="hljs-string">&lt;/head&gt;&quot;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;table border=1&gt;\n&quot;</span>;<br>    <span class="hljs-keyword">foreach</span>($a <span class="hljs-keyword">as</span> $key =&gt; $value)&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;tr valign=top align=left&gt;</span><br><span class="hljs-string">        &lt;td&gt;$key&lt;/td&gt;</span><br><span class="hljs-string">        &lt;td&gt;&quot;</span>;<br>            <span class="hljs-keyword">if</span>(is_array($value)&#123;<br>            a_to_table($value);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>            print_r($value);<br>            &#125;<br>            <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/td&gt;</span><br><span class="hljs-string">    &lt;/tr&gt;\n&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;/table&gt;\n&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="序列">序列</h3>
+<ul>
+<li>不是所有的RDBMS都可以指定某行记录的唯一ID,各种数据库有许多不同的方法来返回这一信息,PEAR BD序列(sequence)是一种数据库专用ID分配(例如,MySQL是用<code>AUTO_INCREMENT</code>来指定ID的分配)的替代方法</li>
+<li><code>nextID()</code>方法返回给定sequence的下一个ID:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$id = $db-&gt;nextID(sequence);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通常每个需要唯一ID的数据表都会有一个sequence,下面的例子用于插入值到book表中,并给每行记录提供了一个唯一的标识符:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php">$books = <span class="hljs-keyword">array</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation&#x27;</span>,<span class="hljs-number">1951</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Second Foundation&#x27;</span>,<span class="hljs-number">1952</span>),<br>               <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Foundation and Empire&#x27;</span>,<span class="hljs-number">1952</span>));<br><span class="hljs-keyword">foreach</span>($books <span class="hljs-keyword">as</span> $book)&#123;<br>    $id = $db-&gt;nextID(<span class="hljs-string">&#x27;books&#x27;</span>);<br>    splice($book,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,$id);<br>    $db-&gt;query(<span class="hljs-string">&#x27;INSERT INTO book (bookid,title,pub_year)</span><br><span class="hljs-string"> 			VALUES (?,?,?)&#x27;</span>,$book);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Sequence实际上是数据库中的一个表,该表存放了上一次所分配的ID,可以使用<code>create-Sequence()</code>和<code>dropSequence()</code>方法来显示的创建和销毁sequence:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$res = $db-&gt;createSequence(sequence);<br>$res = $db-&gt;dropSequence(sequence);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上述方法的返回值是创建或销毁操作的结果对象,如果有错误发生的话,则是DB_ERROR</li>
+</ul>
+<h3 id="元数据">元数据</h3>
+<ul>
+<li><code>getListOf()</code>然你查询数据库的信息,包括可访问的数据库,用户,视图和函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$data = $db-&gt;gerListOf(what);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>what参数是用于指定要列除的数据库组件的额字符串,大多数的 数据库支持&quot;databases&quot;,某些数据库支持&quot;users&quot;,“views&quot;和&quot;functions”</li>
+<li>例如,下面的代码是把当前可用的数据库列表存放到<code>$dbs</code>中:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$dbs = $db-&gt;getListOf(<span class="hljs-string">&quot;database&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="事务">事务</h3>
+<ul>
+<li>一些RDBMS支持事务(transaction),在事务中,一系列的数据库改变可以被提交(被一次性接受)或回滚(取消对数据库的操作,将不会有任何改变应用于数据库),例如,当银行处例货币转账时,从一个账户取款和存款到另一个账户必须一起发生----不能只发生一个,并且两个动作之间不能有时间间隔,PEAR DB提供了<code>commit()</code>和<code>rollback()</code>方法来帮助完成事务:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$res = $db-&gt;commit();<br>$res = $db-&gt;rollback();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果在一个不支持事务的数据库上调用<code>commit()</code>或<code>rollback()</code>,将会返回<code>DB_ERROR</code></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 数组抽象的数据集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="hidden-mobile">PHP 访问数据库</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

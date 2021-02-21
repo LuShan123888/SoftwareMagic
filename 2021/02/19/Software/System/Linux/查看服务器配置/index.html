@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Linux 查看服务器配置 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux 查看服务器配置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 18:44" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux 查看服务器配置</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Linux 查看服务器配置</h1>
+<h2 id="服务器型号">服务器型号</h2>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit">[root<span class="hljs-symbol">@k80</span> ~]<span class="hljs-meta"># dmidecode|grep <span class="hljs-string">&quot;System Information&quot;</span> -A9|egrep  <span class="hljs-string">&quot;Manufacturer|Product&quot;</span></span><br>    Manufacturer: Sugon<br>    Product Name: W580-G20123123<br></code></pre></td></tr></table></figure>
+<h2 id="操作系统">操作系统</h2>
+<ul>
+<li>查看当前操作系统发行版信息</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">[<span class="hljs-symbol">root@</span>k80 ~]# cat /etc/redhat-release<br>CentOS Linux release <span class="hljs-number">7.3</span><span class="hljs-number">.1611</span> (Core)<span class="hljs-number">1212</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看操作系统发行版详细信息</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># lsb_release -a</span><br><span class="hljs-attr">LSB Version:</span>    <span class="hljs-string">:core-4.1-amd64:core-4.1-noarch</span><br><span class="hljs-attr">Distributor ID:</span> <span class="hljs-string">CentOS</span><br><span class="hljs-attr">Description:</span>    <span class="hljs-string">CentOS</span> <span class="hljs-string">Linux</span> <span class="hljs-string">release</span> <span class="hljs-number">7.3</span><span class="hljs-number">.1611</span> <span class="hljs-string">(Core)</span><br><span class="hljs-attr">Release:</span>    <span class="hljs-number">7.3</span><span class="hljs-number">.1611</span><br><span class="hljs-attr">Codename:</span>   <span class="hljs-string">Core123456123456</span><br></code></pre></td></tr></table></figure>
+<h2 id="CPU">CPU</h2>
+<ul>
+<li>查看CPU统计信息</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># lscpu</span><br><span class="hljs-attr">Architecture:</span>          <span class="hljs-string">x86_64</span><br><span class="hljs-string">CPU</span> <span class="hljs-string">op-mode(s):</span>       <span class="hljs-number">32</span><span class="hljs-string">-bit,</span> <span class="hljs-number">64</span><span class="hljs-string">-bit</span><br><span class="hljs-attr">Byte Order:</span>            <span class="hljs-string">Little</span> <span class="hljs-string">Endian</span><br><span class="hljs-string">CPU(s):</span>               <span class="hljs-number">12</span><br><span class="hljs-string">On-line</span> <span class="hljs-string">CPU(s)</span> <span class="hljs-attr">list:</span>   <span class="hljs-number">0</span><span class="hljs-number">-11</span><br><span class="hljs-string">Thread(s)</span> <span class="hljs-attr">per core:</span>    <span class="hljs-number">1</span><br><span class="hljs-string">Core(s)</span> <span class="hljs-attr">per socket:</span>    <span class="hljs-number">6</span><br><span class="hljs-string">Socket(s):</span>             <span class="hljs-number">2</span><br><span class="hljs-string">NUMA</span> <span class="hljs-string">node(s):</span>          <span class="hljs-number">2</span><br><span class="hljs-attr">Vendor ID:</span>             <span class="hljs-string">GenuineIntel</span><br><span class="hljs-attr">CPU family:</span>            <span class="hljs-number">6</span><br><span class="hljs-attr">Model:</span>                 <span class="hljs-number">63</span><br><span class="hljs-attr">Model name:</span>            <span class="hljs-string">Intel(R)</span> <span class="hljs-string">Xeon(R)</span> <span class="hljs-string">CPU</span> <span class="hljs-string">E5-2609</span> <span class="hljs-string">v3</span> <span class="hljs-string">@</span> <span class="hljs-number">1.</span><span class="hljs-string">90GHz</span><br><span class="hljs-attr">Stepping:</span>              <span class="hljs-number">2</span><br><span class="hljs-attr">CPU MHz:</span>               <span class="hljs-number">1780.062</span><br><span class="hljs-attr">BogoMIPS:</span>              <span class="hljs-number">3805.02</span><br><span class="hljs-attr">Virtualization:</span>        <span class="hljs-string">VT-x</span><br><span class="hljs-attr">L1d cache:</span>             <span class="hljs-string">32K</span><br><span class="hljs-attr">L1i cache:</span>             <span class="hljs-string">32K</span><br><span class="hljs-attr">L2 cache:</span>              <span class="hljs-string">256K</span><br><span class="hljs-attr">L3 cache:</span>              <span class="hljs-string">15360K</span><br><span class="hljs-string">NUMA</span> <span class="hljs-string">node0</span> <span class="hljs-string">CPU(s):</span>     <span class="hljs-number">0</span><span class="hljs-number">-5</span><br><span class="hljs-string">NUMA</span> <span class="hljs-string">node1</span> <span class="hljs-string">CPU(s):</span>     <span class="hljs-number">6</span><span class="hljs-number">-11</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看CPU型号</li>
+</ul>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tcl">[root@k80 ~]# cat /<span class="hljs-keyword">proc</span>/cpuinfo |<span class="hljs-title"> grep</span> name |<span class="hljs-title"> cut</span> -f2 -d: |<span class="hljs-title"> uniq</span> -c<br>     12<span class="hljs-title">  Intel(R)</span> Xeon(R)<span class="hljs-title"> CPU</span> E5-2609<span class="hljs-title"> v3</span> @ 1.90GHz1212<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看物理CPU个数</li>
+</ul>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs coq">[root@k80 ~]# cat /proc/cpuinfo| <span class="hljs-type">grep</span> <span class="hljs-string">&quot;physical id&quot;</span>| <span class="hljs-type">sort</span>| <span class="hljs-type">uniq</span>| <span class="hljs-type">wc</span> -l<br><span class="hljs-number">2</span><br><span class="hljs-number">123123</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看每个物理CPU中core的个数(即核数)</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[root@k80 ~]# cat <span class="hljs-regexp">/proc/</span>cpuinfo| <span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;cpu cores&quot;</span>| uniq<br>cpu cores   : <span class="hljs-number">61212</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看逻辑CPU的个数</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">[root@k80 ~]# cat <span class="hljs-regexp">/proc/</span>cpuinfo| <span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;processor&quot;</span>| wc -l<br><span class="hljs-number">121212</span><br></code></pre></td></tr></table></figure>
+<h2 id="内存">内存</h2>
+<ul>
+<li>查看概要内存使用情况</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># free -g</span><br>              <span class="hljs-string">total</span>       <span class="hljs-string">used</span>       <span class="hljs-string">free</span>      <span class="hljs-string">shared</span>  <span class="hljs-string">buff/cache</span>   <span class="hljs-string">available</span><br><span class="hljs-attr">Mem:</span>           <span class="hljs-number">62</span>          <span class="hljs-number">8</span>          <span class="hljs-number">35</span>         <span class="hljs-number">2</span>       <span class="hljs-number">18</span>         <span class="hljs-number">51</span><br><span class="hljs-attr">Swap:</span>          <span class="hljs-number">31</span>          <span class="hljs-number">0</span>          <span class="hljs-number">31</span><br><span class="hljs-number">1234512345</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>-g是以GB为单位;也可以使用-m,即以MB为单位</li>
+<li>查看内存硬件信息</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[root@k80 ~]# dmidecode -t memory<br><span class="hljs-comment"># dmidecode 3.0</span><br>Scanning /dev/mem <span class="hljs-keyword">for</span> entry point.<br>SMBIOS 3.0 present.<br><br>Handle 0x002B, DMI<span class="hljs-built_in"> type </span>16, 23 bytes<br>Physical Memory Array<br>    Location:<span class="hljs-built_in"> System </span>Board <span class="hljs-keyword">Or</span> Motherboard<br>    Use:<span class="hljs-built_in"> System </span>Memory<br>    <span class="hljs-builtin-name">Error</span> Correction Type: Multi-bit ECC<br>    Maximum Capacity: 256 GB<br>    <span class="hljs-builtin-name">Error</span> Information Handle: <span class="hljs-keyword">Not</span> Provided<br>    Number Of Devices: 4<br><br>Handle 0x002C, DMI<span class="hljs-built_in"> type </span>17, 40 bytes<br>Memory Device<br>    Array Handle: 0x002B<br>    <span class="hljs-builtin-name">Error</span> Information Handle: <span class="hljs-keyword">Not</span> Provided<br>    Total Width: 72 bits<br>    Data Width: 64 bits<br>    Size: 32 GB<br>    Form Factor: DIMM<br>    Set: None<br>    Locator: P1-DIMMA1<br>    Bank Locator: P0_Node0_Channel0_Dimm0<br>    Type: DDR4<br>   <span class="hljs-built_in"> Type </span>Detail: Synchronous<br>    Speed: 2400 MHz<br>    Manufacturer: Samsung<br>    Serial Number: 35A24C2F<br>    Asset Tag: P1-DIMMA1_AssetTag (date:17/19)<br>    Part Number: M393A4K40BB1-CRC<br>    Rank: 2<br>    Configured<span class="hljs-built_in"> Clock </span>Speed: 1600 MHz<br>    Minimum Voltage: Unknown<br>    Maximum Voltage: Unknown<br>    Configured Voltage: Unknown<br><br>    <span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><span class="hljs-built_in">..</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看内存详细使用情况</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># cat /proc/meminfo</span><br><span class="hljs-attr">MemTotal:</span>       <span class="hljs-number">65683572</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">MemFree:</span>        <span class="hljs-number">35808252</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">MemAvailable:</span>   <span class="hljs-number">52288668</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Buffers:</span>            <span class="hljs-number">1020 </span><span class="hljs-string">kB</span><br><span class="hljs-attr">Cached:</span>         <span class="hljs-number">18199556</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">SwapCached:</span>            <span class="hljs-number">0</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Active:</span>         <span class="hljs-number">20343632</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Inactive:</span>        <span class="hljs-number">7164792</span> <span class="hljs-string">kB</span><br><span class="hljs-string">Active(anon):</span>    <span class="hljs-number">9343616</span> <span class="hljs-string">kB</span><br><span class="hljs-string">Inactive(anon):</span>  <span class="hljs-number">2116004</span> <span class="hljs-string">kB</span><br><span class="hljs-string">Active(file):</span>   <span class="hljs-number">11000016</span> <span class="hljs-string">kB</span><br><span class="hljs-string">Inactive(file):</span>  <span class="hljs-number">5048788</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Unevictable:</span>           <span class="hljs-number">0</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Mlocked:</span>               <span class="hljs-number">0</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">SwapTotal:</span>      <span class="hljs-number">32964604</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">SwapFree:</span>       <span class="hljs-number">32964604</span> <span class="hljs-string">kB</span><br><span class="hljs-attr">Dirty:</span>              <span class="hljs-number">1384 </span><span class="hljs-string">kB</span><br><br><span class="hljs-string">......12345678910111213141516171819201234567891011121314151617181920</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看内存的插槽数,已经使用多少插槽.每条内存多大</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># dmidecode|grep -A5 &quot;Memory Device&quot;|grep Size|grep -v Range</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-number">32</span> <span class="hljs-string">GB</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-number">32</span> <span class="hljs-string">GB</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br>    <span class="hljs-attr">Size:</span> <span class="hljs-literal">No</span> <span class="hljs-string">Module</span> <span class="hljs-string">Installed</span><br><span class="hljs-number">123456789101112131415161718123456789101112131415161718</span><br></code></pre></td></tr></table></figure>
+<h2 id="硬盘">硬盘</h2>
+<ul>
+<li>查看硬盘和分区分布</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">[<span class="hljs-symbol">root@</span>k80 ~]# lsblk<br>NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT<br>sda           <span class="hljs-number">8</span>:<span class="hljs-number">0</span>    <span class="hljs-number">0</span> <span class="hljs-number">558.9</span>G  <span class="hljs-number">0</span> disk<br>├─sda1        <span class="hljs-number">8</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>     <span class="hljs-number">1</span>G  <span class="hljs-number">0</span> part /boot<br>└─sda2        <span class="hljs-number">8</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">557.9</span>G  <span class="hljs-number">0</span> part<br>  ├─cl-root <span class="hljs-number">253</span>:<span class="hljs-number">0</span>    <span class="hljs-number">0</span>    <span class="hljs-number">50</span>G  <span class="hljs-number">0</span> lvm  /<br>  ├─cl-swap <span class="hljs-number">253</span>:<span class="hljs-number">1</span>    <span class="hljs-number">0</span>  <span class="hljs-number">31.4</span>G  <span class="hljs-number">0</span> lvm  [SWAP]<br>  └─cl-home <span class="hljs-number">253</span>:<span class="hljs-number">2</span>    <span class="hljs-number">0</span> <span class="hljs-number">476.5</span>G  <span class="hljs-number">0</span> lvm  /home<br>sr0          <span class="hljs-number">11</span>:<span class="hljs-number">0</span>    <span class="hljs-number">1</span>  <span class="hljs-number">1024</span>M  <span class="hljs-number">0</span> rom<br><span class="hljs-number">1234567891012345678910</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看硬盘和分区的详细信息</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yaml">[<span class="hljs-string">root@k80</span> <span class="hljs-string">~</span>]<span class="hljs-comment"># fdisk -l</span><br><br><span class="hljs-attr">Disk /dev/sda:</span> <span class="hljs-number">600.1</span> <span class="hljs-string">GB,</span> <span class="hljs-number">600127266816</span> <span class="hljs-string">bytes,</span> <span class="hljs-number">1172123568</span> <span class="hljs-string">sectors</span><br><span class="hljs-string">Units</span> <span class="hljs-string">=</span> <span class="hljs-string">sectors</span> <span class="hljs-string">of</span> <span class="hljs-number">1</span> <span class="hljs-string">*</span> <span class="hljs-number">512</span> <span class="hljs-string">=</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><span class="hljs-string">Sector</span> <span class="hljs-string">size</span> <span class="hljs-string">(logical/physical):</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span> <span class="hljs-string">/</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><span class="hljs-string">I/O</span> <span class="hljs-string">size</span> <span class="hljs-string">(minimum/optimal):</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span> <span class="hljs-string">/</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><span class="hljs-attr">Disk label type:</span> <span class="hljs-string">dos</span><br><span class="hljs-attr">Disk identifier:</span> <span class="hljs-number">0x00011d6e</span><br><br>   <span class="hljs-string">Device</span> <span class="hljs-string">Boot</span>      <span class="hljs-string">Start</span>         <span class="hljs-string">End</span>      <span class="hljs-string">Blocks</span>   <span class="hljs-string">Id</span>  <span class="hljs-string">System</span><br><span class="hljs-string">/dev/sda1</span>   <span class="hljs-string">*</span>        <span class="hljs-number">2048     </span><span class="hljs-number">2099199</span>     <span class="hljs-number">1048576</span>   <span class="hljs-number">83</span>  <span class="hljs-string">Linux</span><br><span class="hljs-string">/dev/sda2</span>         <span class="hljs-number">2099200</span>  <span class="hljs-number">1172121599</span>   <span class="hljs-number">585011200</span>   <span class="hljs-string">8e</span>  <span class="hljs-string">Linux</span> <span class="hljs-string">LVM</span><br><br><span class="hljs-attr">Disk /dev/mapper/cl-root:</span> <span class="hljs-number">53.7</span> <span class="hljs-string">GB,</span> <span class="hljs-number">53687091200</span> <span class="hljs-string">bytes,</span> <span class="hljs-number">104857600</span> <span class="hljs-string">sectors</span><br><span class="hljs-string">Units</span> <span class="hljs-string">=</span> <span class="hljs-string">sectors</span> <span class="hljs-string">of</span> <span class="hljs-number">1</span> <span class="hljs-string">*</span> <span class="hljs-number">512</span> <span class="hljs-string">=</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><span class="hljs-string">Sector</span> <span class="hljs-string">size</span> <span class="hljs-string">(logical/physical):</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span> <span class="hljs-string">/</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><span class="hljs-string">I/O</span> <span class="hljs-string">size</span> <span class="hljs-string">(minimum/optimal):</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span> <span class="hljs-string">/</span> <span class="hljs-number">512</span> <span class="hljs-string">bytes</span><br><br><span class="hljs-string">......</span><br></code></pre></td></tr></table></figure>
+<h2 id="其他">其他</h2>
+<ul>
+<li>查看网卡的硬件信息</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[root@k80 ~]# lspci | grep -i <span class="hljs-string">&#x27;eth&#x27;</span><br>81:00.0<span class="hljs-built_in"> Ethernet </span>controller: Intel Corporation I350 Gigabit<span class="hljs-built_in"> Network Connection </span>(rev 01)<br>81:00.1<span class="hljs-built_in"> Ethernet </span>controller: Intel Corporation I350 Gigabit<span class="hljs-built_in"> Network Connection </span>(rev 01)<br>12341234<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看显卡运行状况</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">[root@k80 ~]# nvidia-smi<br>Thu Nov 23 10:32:20 2017<br><span class="hljs-code">+-----------------------------------------------------------------------------+</span><br>| NVIDIA-SMI 375.26                 Driver Version: 375.26                    |<br>|-------------------------------<span class="hljs-code">+----------------------+</span>----------------------+<br>| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |<br>| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |<br>|===============================<span class="hljs-code">+======================+</span>======================|<br>|   0  Tesla K80           Off  | 0000:04:00.0     Off |                    0 |<br>| N/A   60C    P0    75W / 149W |   4344MiB / 11439MiB |      2%      Default |<br><span class="hljs-code">+-------------------------------+</span>----------------------<span class="hljs-code">+----------------------+</span><br>|   1  Tesla K80           Off  | 0000:05:00.0     Off |                    0 |<br>| N/A   43C    P0    89W / 149W |   2196MiB / 11439MiB |     15%      Default |<br><span class="hljs-code">+-------------------------------+</span>----------------------<span class="hljs-code">+----------------------+</span><br>|   2  Tesla K80           Off  | 0000:08:00.0     Off |                    0 |<br>| N/A   90C    P0   100W / 149W |   2196MiB / 11439MiB |     98%      Default |<br><span class="hljs-code">+-------------------------------+</span>----------------------<span class="hljs-code">+----------------------+</span><br>|   3  Tesla K80           Off  | 0000:09:00.0     Off |                    0 |<br>| N/A   60C    P0    87W / 149W |   4212MiB / 11439MiB |     26%      Default |<br><span class="hljs-code">+-------------------------------+</span>----------------------<span class="hljs-code">+----------------------+</span><br><br><span class="hljs-code">+-----------------------------------------------------------------------------+</span><br>| Processes:                                                       GPU Memory |<br>|  GPU       PID  Type  Process name                               Usage      |<br>|=============================================================================|<br>|    0     25459    C   python3                                       4336MiB |<br>|    1     25459    C   python3                                       2188MiB |<br>|    2     25459    C   python3                                       2188MiB |<br>|    3     25459    C   python3                                       4204MiB |<br><span class="hljs-code">+-----------------------------------------------------------------------------+</span><br><span class="hljs-symbol">WARNING: </span>infoROM is corrupted at gpu 0000:04:00.0<br><br><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/">System</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/System/Linux/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux 网络配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/System/Linux/%E5%AE%9D%E5%A1%94%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Linux 宝塔命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

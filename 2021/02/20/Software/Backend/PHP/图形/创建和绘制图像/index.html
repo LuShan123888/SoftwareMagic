@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>PHP 创建和绘制图像 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 创建和绘制图像">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-20 13:29" pubdate>
+        2021年2月20日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 创建和绘制图像</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>PHP 创建和绘制图像</h1>
+<ul>
+<li>现在,我们从最简单的GD例子来时学习,示例9-1的PHP脚本可以生成一个黑色正方体,这段代码可以在支持PNG图像格式的任何GD版本下运行</li>
+</ul>
+<p><strong>示例9-1</strong>:白色背景上的一个黑色正方形</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    $im = ImageCreate(<span class="hljs-number">200</span>,<span class="hljs-number">200</span>);<br>$white = ImageColorAllocate($im,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>,<span class="hljs-number">0xFF</span>);<br>$black = ImageColorAllocate($im,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>,<span class="hljs-number">0x00</span>);<br>ImageFilledRectangle($im,<span class="hljs-number">50</span>,<span class="hljs-number">50</span>,<span class="hljs-number">150</span>,<span class="hljs-number">150</span>,$black);<br>header(<span class="hljs-string">&#x27;Content-Type: image/png&#x27;</span>);<br>ImagePNG($im);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>示例9-1演示了创建任何图像的基本步骤演示了创建图像的基本步骤:创建图像,分配颜色,绘图既保存或发送图像</li>
+<li>要查看结果,只需用浏览器访问black.php即可,如果要将该图像嵌入WEB页面,可以使用:</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;black.php&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="图像程序的结构">图像程序的结构</h2>
+<ul>
+<li>大多数动态图像创建程序都遵循示例9-1所采用的基本步骤</li>
+<li>你可以用<code>ImageCreate()</code>函数创建一个256色的图像,该函数返回一个图像句柄:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$imgae = ImageCreate(width,height);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>所有在图像中使用的颜色都要用<code>ImagrColorAllocate()</code>来分配,第一个分配的值会被用作背景色(只有当图像包含调色板时才能实现,使用<code>ImageCreateTrueColor()</code>函数创建的真彩色图像不遵循这个原则)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$color = ImageColorAllocate(image,red,green,blue);<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>ImageColorAllocate()</code>函数的参数分别是组成一种颜色的RGB分值,在示例9-1,我们使用了16进制来表示颜色值,为的是使函数调用时传送的参数与HTML颜色表示相似(“#FFFFFF”和”#000000”)</li>
+<li>GD中有很多绘图元件(drawing,primitive,如矩形,线段,多边形等),示例9-1使用了<code>ImageFillRectangle()</code>函数来制定你要填充的区域,参数中含有矩形左上角和右下角的坐标,它们用于控制图像的大小和位置</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageFillRectangle(image,tlx,tly,brx,bry,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>下一步是将一个Content-Type头部发送到浏览器,该头部信息包含所创建的图像的类型信息,然后我们就可以调用合适的输出函数,如<code>ImageJPEG()</code>,<code>ImagePNG()</code>和<code>ImageWBMP()</code>函数来创建相应的JPEG,PNG和WBMP图像文件:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageJPEG(image [, filename [,quality]]);<br>ImagePNG(iamge [, filename]);<br>ImageWBMP(image [, filename]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果没有指定图像文件名,则图像将发送到浏览器,quality参数可用来指定JPEG图像的质量(0最差,10最好),质量越小,JPEG文件就越小,它的默认值为7.5</li>
+<li>示例9-1中,我们在调用输出函数<code>ImagePNG()</code>之后马上就设置了一个HTTP头,如果你在程序一开始就设置Content-Type,则程序所产生的任何错误都会被当成图像数据来处理,浏览器就会显示一个图像损坏的图标,下表中列出了图像格式和它们相应的Content-Type值:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>Content-Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GIF</td>
+<td>image/gif</td>
+</tr>
+<tr>
+<td>JPEG</td>
+<td>image/jpeg</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>Image//png</td>
+</tr>
+<tr>
+<td>WBMP</td>
+<td>Image/vnd.wap.wbmp</td>
+</tr>
+</tbody>
+</table>
+<h2 id="改变输出的图像格式">改变输出的图像格式</h2>
+<ul>
+<li>就像你所得到的结论,只要在程序中改动两处就能改变图像输出的格式:发送一个不同的Content-Type并使用一个不同的图像生成函数,示例9-2将示例9-1生成的图像的格式由PNG改为JPEG</li>
+</ul>
+<p><strong>示例9-2</strong>:黑色正方形的JPEG版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$im &#x3D; ImageCreate(200,200);<br>$white &#x3D; ImageColorAllocate($im,0xFF,0xFF,0xFF);<br>$black &#x3D; ImageColorAllocate($im,0x00,0x00,0x00);<br>ImageFilledRectangle($im,50,50,150,150,$black);<br>header(&#39;Content-Type: image&#x2F;jpeg&#39;);<br>ImageJPEG($im);<br>?&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="测试支持的图像格式">测试支持的图像格式</h2>
+<ul>
+<li>如果你的代码需要在支持不同图像格式的系统间移植,请使用<code>ImageTypes()</code>函数来检测被支持的图像类型,该函数返回一个位字段(bitfield):你可以使用位与操作符(&amp;)来检验某个位是否被设置,常量IMG_GIF,IMG_JPG,IMG_PNG和IMG----WBMP与相应的图像格式位相对应</li>
+<li>示例9-3中,如果支持PNG格式,则生成PNG图像,如果不支持PNG,则生成JPEG图像,如果两个都不支持,则生成GIF图像</li>
+</ul>
+<p><strong>示例9-3</strong>:检查被支持的图像格式</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-comment">//检查被支持的图像格式</span><br>    $im = ImageCreate(<span class="hljs-number">500</span>, <span class="hljs-number">500</span>);<br>$white = ImageColorAllocate($im, <span class="hljs-number">0xFF</span>, <span class="hljs-number">0xFF</span>, <span class="hljs-number">0xFF</span>);<br>$black = ImageColorAllocate($im, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>);<br>ImageFilledRectangle($im, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>, $black);<br><span class="hljs-keyword">if</span> (ImageTypes() &amp; IMG_PNG) &#123;<br>    header(<span class="hljs-string">&#x27;Content-Type: image/png&#x27;</span>);<br>    ImagePNG($im);<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ImageTypes() &amp; IMG_JPG) &#123;<br>    header(<span class="hljs-string">&#x27;Content-Type: image/jpeg&#x27;</span>);<br>    ImageJPEG($im);<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ImageTypes() &amp; IMG_GIF) &#123;<br>    header(<span class="hljs-string">&#x27;Content-Type: image/gif&#x27;</span>);<br>    ImageGIF($im);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="读一个已存在的文件">读一个已存在的文件</h2>
+<ul>
+<li>如果你想读取一个已经存在的图像文件并修改它,可以使用<code>ImageCreateFromJPEG()</code>或<code>ImageCreateFromPNG()</code>	函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$image = ImageCreateFromJPEG(filename);<br>$image = ImageCreateFromPNG(filename);<br></code></pre></td></tr></table></figure>
+<h2 id="基本绘图函数">基本绘图函数</h2>
+<ul>
+<li>GD有一些函数用于绘制点,线,弧,矩形和多边形,本节将介绍GD2.x所支持的基本绘图函数</li>
+<li>最常用的函数是<code>ImageSetPixel()</code>,用于设定特定像素的颜色:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageSetPixel(image,x,y,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>有两个绘制线条的函数----<code>ImageLine()</code>和<code>ImageDashedLine()</code></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageLine(image,start_x,start_y,end_x,end_y,color);<br>ImageDashedLine(image,start_x,start_y,end_x,end_y,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>有两个绘制矩形的函数,一个只是绘制轮廓,另一个则用指定颜色填充矩形</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageRectangle(image,tlx,tly,brx,bry,color);<br>ImageFillRectangle(image,tlx,tly,brx,bry,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可通过指定左上角和右下角坐标来指定矩形的位置和大小</li>
+<li>你可以用<code>ImagePolygon()</code>和<code>ImageFilledPolygon()</code>函数来绘制任意的多边形</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImagePolygon(image, points,number,color);<br>ImageFilledPolygon(image, points,number,color)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这两个函数都有一个points参数,它是一个数组,该数组描述了多边形的顶点(每个顶点都有两个整数坐标x和y),number参数指定了顶点的个数(典型值是<code>count($points)/2</code>)</li>
+<li><code>ImageArc()</code>函数用于绘制弧线(即椭圆的一部分)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageArc(image,center_X,center_y,width,height,start,end,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>一个椭圆是由它的中心,宽和高定义的(对于圆来说,宽和高是一样的),弧线起始角度(参数start)和结束角度(参数end)是从时钟3点的位置顺时针开始计数的,如果要画一个完整的椭圆,start和end的值应分别为0和360</li>
+<li>填充一个已经画好的形状有两种方法,<code>ImageFill()</code>函数将改变指定位置的像素周围的像素的颜色,并向外扩充,像素颜色的变化标识着填充的边界,<code>ImageFillToBorder()</code>函数允许指定填充区域边界的颜色值</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageFill(image,x,y,color);<br>ImageFillToBorder(image,x,y,border_color,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>还有一个功能可能是你需要的----旋转图像,这个功能可能会很有用,<code>Imagerotate()</code>函数的用法如下:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">Imagerotate(image,angle,background,color);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>示例9-4演示了我们之前见过的黑色正方形图形旋转455度后的结果,background color参数指定了图像旋转后未覆盖的区域的颜色,该参数值为1则显示黑白颜色的对比,在你把图像旋转功能加入到正式产品中之前,请一定要多测试这个函数的执行结果</li>
+</ul>
+<p><strong>示例9-4</strong>:图像旋转示例</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    $im = ImageCreate(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>);<br>$white = ImageColorAllocate($im, <span class="hljs-number">0xFF</span>, <span class="hljs-number">0xFF</span>, <span class="hljs-number">0xFF</span>);<br>$black = ImageColorAllocate($im, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>, <span class="hljs-number">0x00</span>);<br>ImageFilledRectangle($im, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>, $black);<br>header(<span class="hljs-string">&#x27;Content-Type: image/jpeg&#x27;</span>);<br>$im_rotated = imagerotate($im,<span class="hljs-number">45</span>,<span class="hljs-number">1</span>);<br>ImageJPEG($im_rotated);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/%E5%9B%BE%E5%BD%A2/">图形</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/20/Software/Concept/%E5%9B%BE%E5%83%8F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图像的基本概念</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/20/Software/Backend/PHP/%E5%9B%BE%E5%BD%A2/GD%E6%8B%93%E5%B1%95/">
+                        <span class="hidden-mobile">PHP GD扩展</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

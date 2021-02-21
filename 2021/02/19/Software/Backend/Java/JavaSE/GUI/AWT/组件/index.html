@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Java AWT组件 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java AWT组件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 22:12" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java AWT组件</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java AWT组件</h1>
+<h2 id="AWT部件概述">AWT部件概述</h2>
+<ul>
+<li>AWT部件层次关系如下图所示,<code>Component</code>类处于GUI部件类层次的顶层,其直接子类有<code>Container</code>(容器)和其他8个基本部件</li>
+</ul>
+<p><img src="https://www.plantuml.com/plantuml/svg/XLF1RjD04BtxAnPng9I3xRYfCAX2JGCMXnHLf8Zpn1xiLTOprkoO513_pdfJ8IkegW_MUsyrxxqTopTUGRItrFGm91VcbQNQZGqQxR37T1XxDrSxrS6_opA1OzfQxSRzw55g9aNIjEO-suwx3cXPN9PbcLNMeSzwy8gItJiW_NgtpMRMrrv_EdoV40Vptua9ppqqZQNMBFD8xq1QIwQCv1RgGoiyKhDXnsAEdLMC9vzOxAzG0zpQsPRwKCVKuOKIZx-SPeHGpF8gIbjBU79vdM_ArSSggg5ymyUOd_n9X5a_nshdNMOzYqWlek5kkeufq_myegektwpo5ounRrc6-CGXV7ykVsw-ULjT5VzP5FdvGeCbYF0n-9rtNZs_bAW-TBO-47flYdGokiwUFjt2RBWVc90qMKo452WCI60ByyrIs6U00N-muBYTS22LTJWJJ2NGumH3Nq9t4jV3u33QtewgJ1FQmjvXJ0Bw0JwY3kl3dX_ZiVLnO5SBExS7cSW3FkgyvKbP2y8_KbbqJNA3r3pz37y1" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="常用的GUI部件"></p>
+<ul>
+<li><code>Component</code>类为一个抽象类,其中定义了所有GUI部件普遍适用的方法,以下为若干常用方法:
+<ul>
+<li><code>void add(PopupMenu popup)</code>:给部件加入弹出菜单</li>
+<li><code>Color getBackground()</code>:获取部件的背景色</li>
+<li><code>Font getFont()</code>:获取部件的显示字体</li>
+<li><code>Graphics getGraphics()</code>:获取部件的画笔(Graphocs对象)</li>
+<li><code>void repaint(int x,int y, int width,int height)</code>:在部件的指定区域重新绘图</li>
+<li><code>void setBackground(Color c)</code>:设置部件的背景</li>
+<li><code>void setEnabled(boolean b)</code>:是否让部件功能有效,在无效情况下部件将变成灰色</li>
+<li><code>void setFont(Font f)</code>:设置部件的显示字体</li>
+<li><code>void setSize(int width,int height)</code>:设置部件的大小</li>
+<li><code>void setVisible(boolean b)</code>:设置部件是否可见</li>
+<li><code>void setForeground(Color c)</code>:设置部件的前景色</li>
+<li><code>void requestFocus()</code>:让部件获得焦点</li>
+<li><code>Toolkit getToolkit()</code>:取得部件的工具集(Toolkit),利用<code>Toolkit</code>的<code>beep()</code>方法可让计算机发出鸣叫声</li>
+<li><code>FontMetrics getFontMetrics(Font font)</code>:取得某字体对应的<code>FontMerics</code>对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="窗体容器">窗体容器</h2>
+<ul>
+<li>在图形用户界面中经常用到窗体</li>
+<li>在<code>Java Application</code>程序中窗体是图形界面设计所必须的容器</li>
+<li>在<code>Java Applet</code>分有边框的<code>Window</code>子类和无边框的<code>Panel</code>子类</li>
+<li><code>Frame</code>和<code>Applet</code>分别是<code>Window</code>和<code>Panel</code>的子类</li>
+</ul>
+<h3 id="Frame">Frame</h3>
+<ul>
+<li>Frame的常用构造方法为<code>Frame(String title)</code>,其中参数title指定窗体标题,新创建的Frame是不可见的
+<ul>
+<li><code>setVisible(true)</code>方法或<code>show()</code>方法让窗体可见</li>
+<li><code>setSize(width,heiight)</code>方法为窗体设置大小</li>
+<li><code>pack()</code>方法让布局管理器根据部件的大小来调整确定窗体的尺寸</li>
+<li><code>setResizable(flase)</code>方法固定窗体的大小</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FrameTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">//创建容器并初始化标题</span><br>        Frame frame = <span class="hljs-keyword">new</span> Frame(<span class="hljs-string">&quot;Frame&quot;</span>);<br>        <span class="hljs-comment">//设置容器可见性</span><br>        frame.setVisible(<span class="hljs-keyword">true</span>);<br>        <span class="hljs-comment">//设置容器大小</span><br>        frame.setSize(<span class="hljs-number">400</span>, <span class="hljs-number">400</span>);<br>        <span class="hljs-comment">//初始位置</span><br>        frame.setLocation(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>);<br>        <span class="hljs-comment">//同时设置容器大小和初始位置</span><br>        frame.setBounds(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>);<br>        <span class="hljs-comment">//设置背景颜色</span><br>        frame.setBackground(Color.gray);<br>        <span class="hljs-comment">//设置大小固定</span><br>        frame.setResizable(<span class="hljs-keyword">false</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="paint">paint</h4>
+<ul>
+<li>通过重写Frame的<code>paint(Graphics g)</code>方法,可以实现获得画笔<code>Graphics</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestPaint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Frame</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TestPaint</span><span class="hljs-params">()</span> </span>&#123;<br>        setBounds(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span class="hljs-number">600</span>, <span class="hljs-number">500</span>);<br>        setVisible(<span class="hljs-keyword">true</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">paint</span><span class="hljs-params">(Graphics g)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.paint(g);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">new</span> TestPaint();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="Graphics">Graphics</h5>
+<ul>
+<li>设置画笔的属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setColor</span><span class="hljs-params">(Color c)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFont</span><span class="hljs-params">(Font font)</span></span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过画笔绘制图形</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawLine</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x1, <span class="hljs-keyword">int</span> y1, <span class="hljs-keyword">int</span> x2, <span class="hljs-keyword">int</span> y2)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fillRect</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawRect</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span> </span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawArc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height, <span class="hljs-keyword">int</span> startAngle, <span class="hljs-keyword">int</span> arcAngle)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fillArc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height, <span class="hljs-keyword">int</span> startAngle, <span class="hljs-keyword">int</span> arcAngle)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawOval</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fillOval</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)</span></span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过画笔绘制文本</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawString</span><span class="hljs-params">(AttributedCharacterIterator iterator, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span>;<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestPaint</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Frame</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TestPaint</span><span class="hljs-params">()</span> </span>&#123;<br>        setBounds(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>, <span class="hljs-number">600</span>, <span class="hljs-number">500</span>);<br>        setVisible(<span class="hljs-keyword">true</span>);<br>        <span class="hljs-comment">//重新绘制,即重新执行paint方法</span><br>        repaint();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">paint</span><span class="hljs-params">(Graphics g)</span> </span>&#123;<br>        <span class="hljs-comment">//设置画笔颜色</span><br>        g.setColor(Color.red);<br>        <span class="hljs-comment">//空心圆</span><br>        g.drawOval(<span class="hljs-number">100</span>,<span class="hljs-number">100</span>,<span class="hljs-number">100</span>,<span class="hljs-number">100</span>);<br>        <span class="hljs-comment">//实心矩形</span><br>        g.fillRect(<span class="hljs-number">150</span>,<span class="hljs-number">200</span>,<span class="hljs-number">200</span>,<span class="hljs-number">200</span>);<br>        <span class="hljs-comment">//设置字体</span><br>        Font titleFont = <span class="hljs-keyword">new</span> Font(<span class="hljs-string">&quot;宋体&quot;</span>, Font.BOLD, <span class="hljs-number">40</span>);<br>        g.setFont(titleFont);<br>        <span class="hljs-comment">//用于文本对齐</span><br>        FontMetrics fontMetrics = g.getFontMetrics(titleFont);<br>        String text = <span class="hljs-string">&quot;测试文本&quot;</span>;<br>        <span class="hljs-comment">//绘制文本</span><br>        g.drawString(text, mainPosition.x + (mainWidth - fontMetrics.stringWidth(text)) / <span class="hljs-number">2</span>, mainPosition.y + ((mainHeight - fontMetrics.getHeight()) / <span class="hljs-number">2</span>) + fontMetrics.getAscent());<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">new</span> TestPaint();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Panel">Panel</h3>
+<ul>
+<li>Panel需要放置在Frame中,可以在同一个Frame中放置多个</li>
+<li>Panel与Frame都可以放置其他组件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PanelTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Frame frame = <span class="hljs-keyword">new</span> Frame(<span class="hljs-string">&quot;Frame&quot;</span>);<br>        Panel panel = <span class="hljs-keyword">new</span> Panel();<br>        <span class="hljs-comment">//配置frame</span><br>        frame.setLayout(<span class="hljs-keyword">null</span>);<br>        frame.setBounds(<span class="hljs-number">300</span>, <span class="hljs-number">300</span>, <span class="hljs-number">500</span>, <span class="hljs-number">500</span>);<br>        frame.setBackground(Color.gray);<br>        frame.setVisible(<span class="hljs-keyword">true</span>);<br>        <span class="hljs-comment">//配置panel</span><br>        panel.setBounds(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>);<br>        panel.setBackground(Color.BLUE);<br>        <span class="hljs-comment">//将panel加入到frame中</span><br>        frame.add(panel);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="加入交互部件">加入交互部件</h3>
+<ul>
+<li><code>add()</code>方法将指定的GUI部件加入到容器中,GUI部件在容器中如何排列取决于布局选择</li>
+</ul>
+<h2 id="Button">Button</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Button btn = <span class="hljs-keyword">new</span> Button(<span class="hljs-string">&quot;按钮名&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="Button的事件响应">Button的事件响应</h3>
+<ul>
+<li>可以监听按钮被点击的事件</li>
+<li>当多个按钮被同一个监听器监听是,可以通过<code>getActionCommand()</code>获取按钮名</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><span class="hljs-keyword">import</span> java.awt.event.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFrame</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Frame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ActionListener</span> </span>&#123;<br>    Button btn1;<br>    Button btn2;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyFrame</span><span class="hljs-params">()</span> </span>&#123;<br>        btn1 = <span class="hljs-keyword">new</span> Button(<span class="hljs-string">&quot;开始&quot;</span>);<br>        btn2 = <span class="hljs-keyword">new</span> Button(<span class="hljs-string">&quot;关闭&quot;</span>);<br>        add(btn1);<br>        add(btn2);<br>        btn1.addActionListener(<span class="hljs-keyword">this</span>);<br>        btn2.addActionListener(<span class="hljs-keyword">this</span>);<br>        setSize(<span class="hljs-number">300</span>, <span class="hljs-number">200</span>);<br>        setVisible(<span class="hljs-keyword">true</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> </span>&#123;<br>        <span class="hljs-comment">//判断动作事件的事件源需要将按钮的命令名与&quot;关闭”字符串进行相等比较,采用String类的equals()方法进行比较</span><br>        <span class="hljs-keyword">if</span> (e.getActionCommand().equals(<span class="hljs-string">&quot;关闭&quot;</span>)) &#123;<br>            dispose();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">new</span> MyFrame();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="TextField与TextArea">TextField与TextArea</h2>
+<h3 id="TextField">TextField</h3>
+<ul>
+<li>文本框只能编辑一行数据,由TextField类实现,其构造方法有如下4种:
+<ul>
+<li><code>TextField()</code>:构造一个单行文本输入框</li>
+<li><code>TextField(int columns)</code>:构造一个指定长度的单行文本输入框</li>
+<li><code>TextField(String text)</code>:构造一个指定初始内容的单行文本输入框</li>
+<li><code>TextField(String text,int columns)</code>:构造一个指定长度,指定初始内容的单行文本输入框</li>
+</ul>
+</li>
+<li>在某种情况下,用户可能希望自己的输入不被别人看到,这时可以用<code>TextField</code>类中的<code>setEchoChar()</code>方法设置回显字符,使用户的输入全部以某个特殊字符显示在屏幕上,例如,以下设置密码输入框的回显字符为<code>*</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">TextField pass = <span class="hljs-keyword">new</span> TextField(<span class="hljs-number">8</span>);<br>pass.setEchoChar(<span class="hljs-string">&#x27;*&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="TextArea">TextArea</h3>
+<ul>
+<li>文本域也称多行文本输入框,其特点是可以编辑多行文字,文本域由TextArea类实现,其构造方法有如下4种:
+<ul>
+<li><code>TextArea()</code>:构造一个文本域</li>
+<li><code>TextArea(int rows,int columns)</code>:构造一个指定行数和列数的文本域</li>
+<li><code>TextArea(String text)</code>:构造一个显示指定文字的文本域</li>
+<li><code>TextArea(String text,int rows,int columns)</code>:按指定行数,列数和默认值构造多行文本域</li>
+</ul>
+</li>
+<li>例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">TextArea t1 = <span class="hljs-keyword">new</span> TextArea(<span class="hljs-number">10</span>,<span class="hljs-number">45</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="文本部件的常用方法">文本部件的常用方法</h3>
+<h4 id="数据的写入与读取">数据的写入与读取</h4>
+<ul>
+<li>文本框与文本域均是<code>TextComponent</code>类的子类,在这个父类中定义了对文本输入部件的公共方法,其中最常用的是数据的写入与读取
+<ul>
+<li><code>String getText()</code>:获取输入框中的数据</li>
+<li><code>void setText(String text)</code>:想输入框中写入数据</li>
+<li><code>boolean isEditable()</code>:判断输入框是否可编辑,非编辑状态下,不能通过键盘操作输入数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="指定和获取文本区域中-选定状态”文本">指定和获取文本区域中&quot;选定状态”文本</h4>
+<ul>
+<li>本文输入部件中的文本可以进行选定操作,以下方法用于指定和获取文本区域中&quot;选定状态”文本
+<ul>
+<li><code>void select(int start,int end)</code>:选定由开始和结束位置指定的文本</li>
+<li><code>void selectAll()</code>:选定所有文本</li>
+<li><code>void setSelectStart(int start)</code>:设置选定开始位置</li>
+<li><code>void setSelectEnd(int end)</code>:设置选定结束位置</li>
+<li><code>int getSelectionStart()</code>:获取选定开始位置</li>
+<li><code>int getSelectionEnd()</code>:获取选定结束位置</li>
+<li><code>String getSelectedText()</code>:获取选定的文本数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="屏蔽回显">屏蔽回显</h4>
+<ul>
+<li>屏蔽回显只适用于文本框,以下为相关方法
+<ul>
+<li><code>void setEchoChar(char c)</code>:设置回显字符</li>
+<li><code>boolean echoCharIsSet()</code>:确认当前输入框是否处于不回显状态</li>
+<li><code>char getEchoChar()</code>:获取回显屏蔽字符</li>
+</ul>
+</li>
+</ul>
+<h4 id="添加数据">添加数据</h4>
+<ul>
+<li>以下方法只限于文本域,可以在已有内容的基础上添加新数据,具体方法如下:
+<ul>
+<li><code>void append(String s)</code>:将字符串添加到文本域的末尾</li>
+<li><code>void insert(String s,int pos)</code>:将字符串插入到文本域的指定位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="文本部件的事件响应">文本部件的事件响应</h3>
+<ul>
+<li>在文本框中按回车键时,将引发动作事件,事件的注册于处理程序的编写方法与按钮的动作事件相同</li>
+<li>当用户对文本输入部件进行任何操作更改操作(如添加,修改和删除)时将引发<code>TextEvent</code>事件,为了响应该事件,可以通过<code>addTextListener()</code>方法注册监听者,在<code>TextListener</code>接口中定义了如下方法来处理事件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">textValueChanged</span><span class="hljs-params">(TextEvent e)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>**[例11-7]**在图形界面中,安排一个文本框和文本域,将在文本框中输入的字符同时显示在文本域中,即同步显示,在文本框上按回车键将文本框中内容清空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.awt.*;<br><span class="hljs-keyword">import</span> java.awt.event.*;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Textln</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Frame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">TextListener</span>, <span class="hljs-title">ActionListener</span> </span>&#123;<br>    TextField tf;<br>    TextArea ta;<br>    String pre = <span class="hljs-string">&quot;&quot;</span>;<span class="hljs-comment">//记录文本域的先前内容</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Textln</span><span class="hljs-params">()</span> </span>&#123;<br>        tf = <span class="hljs-keyword">new</span> TextField(<span class="hljs-number">20</span>);<br>        ta = <span class="hljs-keyword">new</span> TextArea(<span class="hljs-number">8</span>, <span class="hljs-number">20</span>);<br>        add(<span class="hljs-string">&quot;South&quot;</span>, tf);<br>        add(<span class="hljs-string">&quot;Center&quot;</span>, ta);<br>        tf.addTextListener(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//在文本框有内容变化触发文本改变事件</span><br>        tf.addActionListener(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//在文本框按Enter键后将触发动作事件</span><br>        addWindowListener(<span class="hljs-keyword">new</span> WindowAdapter() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">windowClosing</span><span class="hljs-params">(WindowEvent e)</span> </span>&#123;<br>                System.exit(<span class="hljs-number">0</span>);<br>            &#125;<br>        &#125;);<br>    &#125;<br><br>    <span class="hljs-comment">//在文本框中输入字符时通过文本事件执行</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">textValueChanged</span><span class="hljs-params">(TextEvent e)</span> </span>&#123;<br>        <span class="hljs-comment">//引入变量pre记下文本域中前面行输入的内容,</span><br>        String s = tf.getText();<br>        <span class="hljs-comment">//将pre记录的内容与文本框的内容拼接写入文本域</span><br>        ta.setText(pre + s);<br>    &#125;<br><br>    <span class="hljs-comment">//文本框中按Enter键时通过动作事件执行该方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> </span>&#123;<br>        tf.setText(<span class="hljs-string">&quot;&quot;</span>);<span class="hljs-comment">//清空文本框</span><br>        ta.append(<span class="hljs-string">&quot;\n&quot;</span>);<span class="hljs-comment">//添加一个换行符</span><br>        pre = ta.getText();<span class="hljs-comment">//更新pre变量,记下文本域前面各行内容</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Frame m = <span class="hljs-keyword">new</span> Textln();<br>        m.setSize(<span class="hljs-number">300</span>, <span class="hljs-number">300</span>);<br>        m.setVisible(<span class="hljs-keyword">true</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/GUI/">GUI</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/GUI/AWT/">AWT</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/GUI/Swing/%E7%BB%84%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java Swing 组件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/GUI/AWT/%E4%BA%8B%E4%BB%B6/">
+                        <span class="hidden-mobile">Java AWT事件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

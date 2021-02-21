@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>PHP 初始化数组 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 初始化数组">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 15:44" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 初始化数组</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>PHP 初始化数组</h1>
+<ul>
+<li>在PHP中有两种数组:索引数组和关联数组,索引(indexed)数组的键名 (key)是整数并且从0开始,当你需要通过位置识别元素时可使用索引数组,关联(associative)数组的键名是字符串,看起来像有两个列的数据表,第一列是用与访问键值的键名,第二列是键值(value)</li>
+<li>PHP内部将所有的数组都存储为关联数组,所以关联数组和索引数组的唯一区别在于键(key)是什么,一些数组功能主要用于使用索引数组,因为它们假设你有或者需要从0开始连续的整数作为键,在两种情况下,键都是唯一的,换句话说,不管键是字符串还是整数,都不能为两个元素使用相同的键</li>
+<li>PHP数组的元素有一个人不依赖于键和值的内部顺序,这个顺序一般就是把值放入到数组的顺序,很多用于遍历数组的函数都是基于这个内部顺序,但是稍后介绍的各种排序函数可以让你基于键,值或其他来改变数组中元素的顺序</li>
+</ul>
+<h2 id="创建数组">创建数组</h2>
+<ul>
+<li>如果数组不存在,那么新数组存放值将创建该数组,但是在一个未定义的数组中检索值不会创建数组,例如:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//在此之前$addresses没有定义</span><br><span class="hljs-keyword">echo</span> $addresses[<span class="hljs-number">0</span>];		<span class="hljs-comment">//无输出</span><br><span class="hljs-keyword">echo</span> $addresses;		<span class="hljs-comment">//无输出</span><br>$addresses[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>;<br><span class="hljs-keyword">echo</span> $addresses;		<span class="hljs-comment">//输出&quot;Array&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>下面的代码用简单的赋值来初始化程序中的一个数组:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">$addresses[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>;<br>$addresses[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;abuse@example.com&#x27;</span>;<br>$addresses[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;root@example.com&#x27;</span>;<br><span class="hljs-comment">//...</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的代码使用是一个索引数组,其索引是从0开始的整数索引,下面是关联数组:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$addresses = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>,<span class="hljs-string">&#x27;abuse@example.com&#x27;</span>,<span class="hljs-string">&#x27;root@example.com&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>要用<code>array()</code>创建一个关联数组,可使用=&gt;符号来分隔索引和值:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">$price = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Gasket&#x27;</span> =&gt; <span class="hljs-number">15.29</span>,<br>            <span class="hljs-string">&#x27;Wheel&#x27;</span> =&gt; <span class="hljs-number">75</span>,<span class="hljs-number">25</span>,<br>            <span class="hljs-string">&#x27;Tire&#x27;</span> =&gt; <span class="hljs-number">50.00</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意使用空白符和对齐,虽然我们也可以把代码都挤在一起,但是那样不易阅读:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$price = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Gasket&#x27;</span> =&gt; <span class="hljs-number">15.29</span>,<span class="hljs-string">&#x27;Wheel&#x27;</span> =&gt; <span class="hljs-number">75</span>,<span class="hljs-number">25</span>,<span class="hljs-string">&#x27;Tire&#x27;</span> =&gt; <span class="hljs-number">50.00</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>要创建一个空数组,则不传递参数给<code>array()</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$addresses = <span class="hljs-keyword">array</span>();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以用=&gt;来指定一个初始索引,并在后面跟着一系列键值,键值从初始键开始插入到数组中,后面的元素索引是连续的:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$days = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Monday&#x27;</span>,<span class="hljs-string">&#x27;Tuesday&#x27;</span>,<span class="hljs-string">&#x27;Wednesday&#x27;</span>,<span class="hljs-string">&#x27;Thursday&#x27;</span>,<span class="hljs-string">&#x27;Friday&#x27;</span>,<span class="hljs-string">&#x27;Saturday&#x27;</span>,<span class="hljs-string">&#x27;Sunday&#x27;</span>);	<span class="hljs-comment">//数组中2号元素是Tuesday,3号是Wednesday,等等</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果初始索引是一个非数字的字符串,那么后面的索引是从0开始的整数,因此,下面的代码可能是一个错误:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">$whoops = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-string">&#x27;Green&#x27;</span>);<br><span class="hljs-comment">//与下面相同</span><br>$whoops = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Green&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>$whoops[0]本该为’Black’,但却指向了’Brown’</li>
+</ul>
+<h2 id="多维数组">多维数组</h2>
+<ul>
+<li>数组中的值也可以是数组,这使你可以轻松地创建多维数组:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">$row_0 = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);<br>$row_0 = <span class="hljs-keyword">array</span>(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>);<br>$row_0 = <span class="hljs-keyword">array</span>(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>);<br>$multi = <span class="hljs-keyword">array</span>($row_0,$row_1,$row_2);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以通过添加更多的[]来引用多维数组的元素:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$value = $multi[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>];<span class="hljs-comment">//第2行,第0列,$value=7</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>可使用变量替换来访问多维数组中的元素,必须将整个元素用大括号括起来:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;The value at row 2, column 0 is &#123;$multi[2][0]&#125;\n&quot;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果不使用大括号,则输出结果如下所示:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">The value at row <span class="hljs-number">2</span>,column <span class="hljs-number">0</span> is <span class="hljs-keyword">Array</span>[<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
+<h2 id="在数组末尾添加值">在数组末尾添加值</h2>
+<ul>
+<li>要把更多的值插入到一个已存在的索引数组末尾,使用<code>[]</code>语法:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$family = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Fred&#x27;</span>,<span class="hljs-string">&#x27;Wilma&#x27;</span>);<br>$family[] = <span class="hljs-string">&#x27;Pebbles&#x27;</span>;		<span class="hljs-comment">//$family[2]为&#x27;Pebbles&#x27;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个语言结构假设该数组的索引是数字,并且把元素分配给下一个可用的数字索引,数字从0开始,试图添加值到一个关联数组是程序员常犯的错误,但是PHP会给新的元素指定数字索引而不发出警告:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$person = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;name&#x27;</span> =&gt; <span class="hljs-string">&#x27;Fred&#x27;</span>);<br>$person[] = <span class="hljs-string">&#x27;Wilma&#x27;</span>;		<span class="hljs-comment">//$person[0]现在是&#x27;Wilma&#x27;</span><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/PHP/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E7%BB%84/%E6%8E%92%E5%BA%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 数组排序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/">
+                        <span class="hidden-mobile">PHP 数组抽象的数据集合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>合并排序 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="合并排序">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-10 11:24" pubdate>
+        2020年12月10日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">合并排序</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>合并排序</h1>
+<h2 id="算法分析">算法分析</h2>
+<ul>
+<li>合并排序算法就是用分治策略实现对n个元素进行排序的算法</li>
+<li>将待排序元素分成大小大致相同的两个子集合, 分别对两个子集合进行排序, 最终将排好序的子集合合并成所要求的排好序的集合</li>
+</ul>
+<h2 id="代码实现">代码实现</h2>
+<h3 id="流程图">流程图</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-08-Flowchart-4824882.svg" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="Flowchart"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.Array;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MergeSort</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Integer[] a = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>&#125;;<br>        System.out.println(<span class="hljs-string">&quot;排序前:&quot;</span>);<br>        <span class="hljs-keyword">for</span> (Integer item : a) &#123;<br>            System.out.print(item + <span class="hljs-string">&quot;  &quot;</span>);<br>        &#125;<br>        System.out.println();<br>        MergeSort(a, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>);<br>        System.out.println(<span class="hljs-string">&quot;排序后:&quot;</span>);<br>        <span class="hljs-keyword">for</span> (Integer item : a) &#123;<br>            System.out.print(item + <span class="hljs-string">&quot;  &quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span><span class="hljs-params">(T[] a, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;<br>        T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length);<br>        <span class="hljs-comment">//至少有2个元素</span><br>        <span class="hljs-keyword">if</span> (left &lt; right) &#123;<br>            <span class="hljs-comment">//取中点</span><br>            <span class="hljs-keyword">int</span> i = (left + right) / <span class="hljs-number">2</span>;<br>            <span class="hljs-comment">//对前半部分排序</span><br>            MergeSort(a, left, i);<br>            <span class="hljs-comment">//对后半部分排序</span><br>            MergeSort(a, i + <span class="hljs-number">1</span>, right);<br>            <span class="hljs-comment">//合并到数组b</span><br>            Merge(a, b, left, i, right);<br>            <span class="hljs-comment">//复制回数组a</span><br>            Copy(a, b, left, right);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(T[] a, T[] b, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> i = l;<br>        <span class="hljs-keyword">int</span> j = m + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> k = l;<br>        <span class="hljs-comment">//a[l:m]与a[m+1,r]中的元素两两比较,把小的放在前面,大的放在后面</span><br>        <span class="hljs-keyword">while</span> ((i &lt;= m) &amp;&amp; (j &lt;= r)) &#123;<br>            <span class="hljs-keyword">if</span> (a[i].compareTo(a[j]) &lt;= <span class="hljs-number">0</span>) &#123;<br>                b[k++] = a[i++];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                b[k++] = a[j++];<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//当a[l:m]或a[m+1,r]的某一个中的全部元素已经全部放入b[]中后,将另一个接在b[]的最后</span><br>        <span class="hljs-keyword">if</span> (i &gt; m) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> q = j; q &lt;= r; q++) &#123;<br>                b[k++] = a[q];<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> q = i; q &lt;= m; q++) &#123;<br>                b[k++] = a[q];<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Copy</span><span class="hljs-params">(T[] a, T[] b, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (r + <span class="hljs-number">1</span> - l &gt;= <span class="hljs-number">0</span>) System.arraycopy(b, l, a, l, r + <span class="hljs-number">1</span> - l);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>MergeSort(T[] a, int left, int right)</code>:对<code>a[left:right]</code>进行排序</li>
+<li><code>Merge(T[] a, T[] b, int l, int m, int r)</code>:合并<code>a[l:m]</code>和<code>a[m+1:r]</code>到<code>b[l:r]</code></li>
+<li><code> Copy(T[] a, T[] b, int l, int r)</code>:将<code>b[l:r]</code>复制到<code>a[l:r]</code></li>
+</ul>
+<h2 id="算法改进">算法改进</h2>
+<ul>
+<li>首先将数组a中相邻元素两两配对, 用合并算法将它们排序, 构成n/2组长度为2的排好序的子数组段, 然后再将它们排序成长度为4的排好序的子数组段, 如此继续下去, 直至整个数组排好序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.reflect.Array;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MergeSort</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Integer[] a = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>&#125;;<br>        MergeSort(a, a.length);<br>        <span class="hljs-keyword">for</span> (Integer item : a) &#123;<br>            System.out.print(item + <span class="hljs-string">&quot;  &quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span><span class="hljs-params">(T[] a, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length);<br>        <span class="hljs-keyword">int</span> s = <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">//至少有2个元素</span><br>        <span class="hljs-keyword">while</span> (s &lt; n) &#123;<br>            <span class="hljs-comment">//合并排序到数组b</span><br>            MergePass(a, b, s, n);<br>            s += s;<br>            <span class="hljs-comment">//合并排序到数组a</span><br>            MergePass(b, a, s, n);<br>            s += s;<br>        &#125;<br>    &#125;<br><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergePass</span><span class="hljs-params">(T[] x, T[] y, <span class="hljs-keyword">int</span> s, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">//合并大小为s的相邻2段子数组</span><br>        <span class="hljs-keyword">while</span> (i &lt;= n - <span class="hljs-number">2</span> * s) &#123;<br>            Merge(x, y, i, i + s - <span class="hljs-number">1</span>, i + <span class="hljs-number">2</span> * s - <span class="hljs-number">1</span>);<br>            i = i + <span class="hljs-number">2</span> * s;<br>        &#125;<br>        <span class="hljs-comment">//剩下的元素个数少于2s</span><br>        <span class="hljs-comment">//当剩下元素可被划分成大小不同的数组段时</span><br>        <span class="hljs-keyword">if</span> (i + s &lt; n) &#123;<br>            Merge(x, y, i, i + s - <span class="hljs-number">1</span>, n - <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//当剩下元素个数不够s时, 不用划分在合并, 直接加在最后</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt;= n - <span class="hljs-number">1</span>; j++) &#123;<br>                y[j] = x[j];<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(T[] a, T[] b, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> r)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> i = l;<br>        <span class="hljs-keyword">int</span> j = m + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> k = l;<br>        <span class="hljs-comment">//a[l:m]与a[m+1,r]中的元素两两比较,把小的放在前面,大的放在后面</span><br>        <span class="hljs-keyword">while</span> ((i &lt;= m) &amp;&amp; (j &lt;= r)) &#123;<br>            <span class="hljs-keyword">if</span> (a[i].compareTo(a[j]) &lt;= <span class="hljs-number">0</span>) &#123;<br>                b[k++] = a[i++];<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                b[k++] = a[j++];<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//当a[l:m]或a[m+1,r]的某一个中的全部元素已经全部放入b[]中后,将另一个接在b[]的最后</span><br>        <span class="hljs-keyword">if</span> (i &gt; m) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> q = j; q &lt;= r; q++) &#123;<br>                b[k++] = a[q];<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> q = i; q &lt;= m; q++) &#123;<br>                b[k++] = a[q];<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>MergeSort(T[] a, int n)</code>:对数组<code>a[n-1]</code>进行排序</li>
+<li><code>MergePass(T[] x, T[] y, int s, int n) </code>:将数组<code>x[n-1]</code>以s个元素一组, 划分出n/s组,合并排序大小为s的相邻子数组, 并存入数组<code>y[n]</code>中</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Algorithm/">Algorithm</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/">递归与分治策略</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/10/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">快速排序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/10/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/%E6%95%B4%E6%95%B0%E5%88%92%E5%88%86/">
+                        <span class="hidden-mobile">整数划分</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

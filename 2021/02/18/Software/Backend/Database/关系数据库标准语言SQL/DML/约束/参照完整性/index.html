@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>SQL 参照完整性 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 参照完整性">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-18 09:28" pubdate>
+        2021年2月18日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 参照完整性</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 参照完整性</h1>
+<h2 id="定义参照完整性">定义参照完整性</h2>
+<ul>
+<li>关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码,用REFERENCES短语指明这些外码参照哪些表的主码</li>
+<li>例如,关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码</li>
+</ul>
+<p>**[例5.3]**定义SC中的参照完整性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span>  <span class="hljs-keyword">TABLE</span> SC<br> (<br>     Sno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">9</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>     Cno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<br>     Grade <span class="hljs-built_in">SMALLINT</span>,<br>     PRIMARY <span class="hljs-keyword">KEY</span> (Sno,Cno),      <span class="hljs-comment">/*在表级定义实体完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno),<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>);<br></code></pre></td></tr></table></figure>
+<h2 id="参照完整性检查和违约处理">参照完整性检查和违约处理</h2>
+<ul>
+<li>参照完整性将两个表中的相应元素联系起来了,因此,对被参照表和参照表进行增,删,改操作时有可能破坏参照完整性,必须进行检查以保证这两个表的相容性</li>
+<li>例如,对表SC和Student有4种可能破坏参照完整性的情况,如下表所示:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>被参照表(例如Student)</th>
+<th>参照表(例如SC)</th>
+<th>违约处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可能破坏参照完整性</td>
+<td>插入元组</td>
+<td>拒绝</td>
+</tr>
+<tr>
+<td>可能破坏参照完整性</td>
+<td>修改外码值</td>
+<td>拒绝</td>
+</tr>
+<tr>
+<td>删除元组</td>
+<td>可能破坏参照完整性</td>
+<td>拒绝/级联删除/设置为空值</td>
+</tr>
+<tr>
+<td>修改主码值</td>
+<td>可能破坏参照完整性</td>
+<td>拒绝/级联删除/设置为空值</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>SC表中增加一个元组,该元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
+<li>修改SC表中的一个元组,修改后该元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
+<li>从Student表中删除一个元组,造成SC表中某些元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
+<li>修改Student表中一个元组的Sno属性,造成SC表中某些元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
+<li>当上述的不一致发生时,系统可以采用以下策略加以处理
+<ul>
+<li>拒绝(NO ACTION)执行
+<ul>
+<li>不允许该操作执行,该策略一般设置为默认策略</li>
+</ul>
+</li>
+<li>级联(CASCADE)操作
+<ul>
+<li>当删除或修改被参照表(Student)的一个元组导致与参照表(SC)的不一致时,删除或修改参照表中的所有道义不一致的元组</li>
+<li>例如,删除Student表中Sno值为&quot;201215121&quot;的元组,则从要SC表中级联删除SC.Sno='201215121’的所有元组</li>
+</ul>
+</li>
+<li>设置为空值
+<ul>
+<li>当删除或修改被参照表的一个元组时造成了不一致,则将参照表中的所有造成不一致的元组的对应属性设置为空值,例如,有下面两个关系:</li>
+<li>学生(<u>学号</u>,姓名,性别,专业号,年龄)</li>
+<li>专业(<u>专业号</u>,专业名)</li>
+<li>其中学生关系的&quot;专业号&quot;是外码,因为专业号是专业关系的主码</li>
+<li>假设专业表中的某个元组被删除,专业号为12,按照设置为空值的策略,就要把学生表中专业号=12的所有元组的专业号设置为空值,这对应了这样的语义:某个专业删除了,该专业的所有学生专业未定,等待重新分配专业</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这里讲解一下外码能否接收空值的问题</li>
+<li>例如,学生表中&quot;专业号&quot;是外码,按照应用的实际情况可以取空值,表示这个学生的专业尚未确定,但在学生----选课数据库中,关系Student为被参照关系,其主码为Sno,SC为参照关系,Sno为外码,它能否取空值呢?答案是否定的,因为Sno为SC的主属性,按照实体完整性Sno不能为空值,若SC的Sno为空值,则表明尚不存在的某个学生,或按照实体完整性Sno不能为空值,若SC的Sno为空值,则表明尚不存在的某个学生,或者某个不知学号的学生,选修了某门课程,其成绩记录在Grade列中,这与学校的应用环境是不相符的,因此SC的Sno列不能取空值,同样SC的Cno是外码,也是SC的主属性,也不能取空值</li>
+<li>因此对于参照完整性,除了应该定义外码,还应定义外码列是否允许空值</li>
+<li>一般地,当对参照表和被参照表的操作违反了参照完整性时,系统选用默认策略,即拒绝执行,如果想让系统采用其他策略则必须在创建参照表时显式地加以说明</li>
+</ul>
+<p>**[例5.4]**显式说明参照完整性的违约处理示例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>     (<br>         Sno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">9</span>),<br>         Cno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">4</span>),<br>         Grade <span class="hljs-built_in">SMALLINT</span>,<br>         PRIMARY <span class="hljs-keyword">KEY</span> (Sno,Cno),<span class="hljs-comment">/*在表级定义实体完整性,Sno,Cno都不能取空值*/</span><br>         <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span>  <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">CASCADE</span> <span class="hljs-comment">/*当删除Student表中的元组时,级联删除SC表中相应元组*/</span><br>             <span class="hljs-keyword">ON</span>  <span class="hljs-keyword">UPDATE</span>  <span class="hljs-keyword">CASCADE</span> ,<span class="hljs-comment">/*当更新Student表中的sno时,级联更新SC表中的相应的元组*/</span><br>         <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">NO</span> <span class="hljs-keyword">ACTION</span> <span class="hljs-comment">/*当删除Course表中的元组造成与SC表不一致时,拒绝删除*/</span><br>             <span class="hljs-keyword">ON</span> <span class="hljs-keyword">UPDATE</span>  <span class="hljs-keyword">CASCADE</span> <span class="hljs-comment">/*当更新Course表中的Cno时,级联更新SC表中相应的元组*/</span><br>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以对DELETE和UPDATE采用不同的策略,例如,例5.4中当删除被参照表Course表中的元组,造成与参照表(SC表)不一致时,拒绝删除被参照表的元组,对更新操作则采取级联更新的策略</li>
+<li>从上面的讨论可以看到,关系数据库管理系统在实现参照完整性时,除了要提供定义主码,外码的机制外,还需要提供不同的策略供用户选择,具体选择哪种策略,要根据应用环境的要求确定</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/">DML</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E7%BA%A6%E6%9D%9F/">约束</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/18/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E7%BA%A6%E6%9D%9F/%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL 实体完整性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/18/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">SQL 单表查询</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

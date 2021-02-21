@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Vim Vundle - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vim Vundle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 18:39" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vim Vundle</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Vim Vundle</h1>
+<h2 id="简介">简介</h2>
+<ul>
+<li>在.vimrc中跟踪和管理插件</li>
+<li>安装特定格式的插件(a.k.a. scripts/bundle)</li>
+<li>更新特定格式插件</li>
+<li>通过插件名称搜索Vim scripts中的插件</li>
+<li>清理未使用的插件</li>
+<li>可以通过单一按键完成以上操作,详见interactive mode</li>
+<li>Vundle 自动完成</li>
+<li>管理已安装插件的runtime path</li>
+<li>安装和更新后,重新生成帮助标签</li>
+</ul>
+<h2 id="安装vundle">安装vundle</h2>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/VundleVim/</span>Vundle.vim.git ~<span class="hljs-regexp">/.vim/</span>bundle/Vundle.vim<br></code></pre></td></tr></table></figure>
+<ul>
+<li>默认安装在<code>~/.vim/bundle/vundle</code>下</li>
+</ul>
+<h2 id="配置说明">配置说明</h2>
+<ul>
+<li>插件有三种类型:
+<ul>
+<li>Github上vim-scripts仓库的插件</li>
+<li>Github上非vim-scripts仓库的插件</li>
+<li>不在Github上的插件</li>
+</ul>
+</li>
+<li>对于不同的插件,vundle自动管理和下载插件的时候,有不同的地址填写方法,有如下三类:
+<ul>
+<li>在Github上vim-scripts用户下的仓库,只需要写出repos(仓库)名称</li>
+<li>在Github其他用户下的repos, 需要写出&quot;用户名/repos名&quot;</li>
+<li>不在Github上的插件,需要写出git全路径</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置vundle插件">配置vundle插件:</h2>
+<ul>
+<li>可以在终端通过vim打开<code>~/.vimrc</code>文件</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-meta"><span class="hljs-meta-keyword">$vim</span> ~/.vimrc</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>也可以直接在目录中打开(快捷键ctrl+H显示隐藏文件)</li>
+<li>将以下加在<code>~/.vimrc</code>文件中,加入之后保存之后就可以使用vundle了</li>
+</ul>
+<h3 id="添加的配置信息-样例">添加的配置信息(样例)</h3>
+<ul>
+<li><strong>注意</strong>:以后安装新插件就直接编辑vimrc,添加plugin就行了,在这里我们添加的plugin只是例子,你可以不安装这些插件,换上自己需要安装的插件</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">set</span> nocompatible              <span class="hljs-comment">&quot; 去除VI一致性,必须要添加</span><br><span class="hljs-keyword">filetype</span> off                  <span class="hljs-comment">&quot; 必须要添加</span><br><br><span class="hljs-comment">&quot; 设置包括vundle和初始化相关的runtime path</span><br><span class="hljs-keyword">set</span> rtp+=~/.<span class="hljs-keyword">vim</span>/bundle/Vundle.<span class="hljs-keyword">vim</span><br><span class="hljs-keyword">call</span> vundle#begin()<br><span class="hljs-comment">&quot; 另一种选择, 指定一个vundle安装插件的路径</span><br><span class="hljs-comment">&quot;call vundle#begin(&#x27;~/some/path/here&#x27;)</span><br><br><span class="hljs-comment">&quot; 让vundle管理插件版本,必须</span><br>Plugin <span class="hljs-string">&#x27;VundleVim/Vundle.vim&#x27;</span><br><br><span class="hljs-comment">&quot; 以下范例用来支持不同格式的插件安装</span><br><span class="hljs-comment">&quot; 请将安装插件的命令放在vundle#begin和vundle#end之间</span><br><span class="hljs-comment">&quot; Github上的插件</span><br><span class="hljs-comment">&quot; 格式为 Plugin &#x27;用户名/插件仓库名&#x27;</span><br>Plugin <span class="hljs-string">&#x27;tpope/vim-fugitive&#x27;</span><br><span class="hljs-comment">&quot; 来自 http://vim-scripts.org/vim/scripts.html 的插件</span><br><span class="hljs-comment">&quot; Plugin &#x27;插件名称&#x27; 实际上是 Plugin &#x27;vim-scripts/插件仓库名&#x27; 只是此处的用户名可以省略</span><br>Plugin <span class="hljs-string">&#x27;L9&#x27;</span><br><span class="hljs-comment">&quot; 由Git支持但不再github上的插件仓库 Plugin &#x27;git clone 后面的地址&#x27;</span><br>Plugin <span class="hljs-string">&#x27;git://git.wincent.com/command-t.git&#x27;</span><br><span class="hljs-comment">&quot; 本地的Git仓库(例如自己的插件) Plugin &#x27;file:///+本地插件仓库绝对路径&#x27;</span><br>Plugin <span class="hljs-string">&#x27;file:///home/gmarik/path/to/plugin&#x27;</span><br><span class="hljs-comment">&quot; 插件在仓库的子目录中</span><br><span class="hljs-comment">&quot; 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下</span><br>Plugin <span class="hljs-string">&#x27;rstacruz/sparkup&#x27;</span>, &#123;<span class="hljs-string">&#x27;rtp&#x27;</span>: <span class="hljs-string">&#x27;vim/&#x27;</span>&#125;<br><span class="hljs-comment">&quot; 安装L9,如果已经安装过这个插件,可利用以下格式避免命名冲突</span><br>Plugin <span class="hljs-string">&#x27;ascenator/L9&#x27;</span>, &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;newL9&#x27;</span>&#125;<br><br><span class="hljs-comment">&quot; 你的所有插件需要在下面这行之前</span><br><span class="hljs-keyword">call</span> vundle#end()            <span class="hljs-comment">&quot; 必须</span><br><span class="hljs-keyword">filetype</span> plugin <span class="hljs-built_in">indent</span> <span class="hljs-keyword">on</span>    <span class="hljs-comment">&quot; 必须 加载vim自带和插件相应的语法和文件类型相关脚本</span><br><span class="hljs-comment">&quot; 忽视插件改变缩进,可以使用以下替代:</span><br><span class="hljs-comment">&quot;filetype plugin on</span><br><span class="hljs-comment">&quot;</span><br><span class="hljs-comment">&quot; 常用的命令</span><br><span class="hljs-comment">&quot; :PluginList       - 列出所有已配置的插件</span><br><span class="hljs-comment">&quot; :PluginInstall  	 - 安装插件,追加 ! 用以更新或使用 :PluginUpdate</span><br><span class="hljs-comment">&quot; :PluginSearch foo - 搜索 foo ; 追加 ! 清除本地缓存</span><br><span class="hljs-comment">&quot; :PluginClean      - 清除未使用插件,需要确认; 追加 ! 自动批准移除未使用插件</span><br><span class="hljs-comment">&quot;</span><br><span class="hljs-comment">&quot; 查阅 :h vundle 获取更多细节和wiki以及FAQ</span><br><span class="hljs-comment">&quot; 将你自己对非插件片段放在这行之后</span><br></code></pre></td></tr></table></figure>
+<h2 id="安装需要的插件">安装需要的插件</h2>
+<ul>
+<li>将想要安装的插件,按照地址填写方法,将地址填写在vundle#begin和vundle#end之间就可以</li>
+<li>保存之后,有两种方法安装插件</li>
+</ul>
+<ol>
+<li>运行 vim ,再运行 :PluginInstall</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">vim</span><br> <span class="hljs-selector-pseudo">:PluginInstall</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>通过命令行直接安装 :vim +PluginInstall +qall</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> +PluginInstall +<span class="hljs-keyword">qall</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装完成之后,插件就可以使用</li>
+</ul>
+<h3 id="移除不需要的插件">移除不需要的插件</h3>
+<ul>
+<li>编辑.vimrc文件移除的你要移除的插件所对应的plugin那一行</li>
+<li>保存退出当前的vim</li>
+<li>重新打开vim,输入命令<code>:PluginClean</code></li>
+</ul>
+<h3 id="其他常用命令">其他常用命令</h3>
+<ul>
+<li>更新插件<code>:PluginUpdate</code></li>
+<li>列出所有插件<code>:PluginList</code></li>
+<li>查找插件<code>:PluginSearch</code></li>
+<li>当然,这些插件都是拜Vim本身的插件支持特性所赐,Vim为了支持丰富的第三方插件,自身定义了一套简单的脚本开发语言,供程序员自行开发自己所需要的插件,插件开发介绍可以参考:
+<ul>
+<li>《Writing Vim Plugins》:<br>
+<a target="_blank" rel="noopener" href="http://stevelosh.com/blog/2011/09/writing-vim-plugins/">http://stevelosh.com/blog/2011/09/writing-vim-plugins/</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/">Tools</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/Vim/">Vim</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Tools/Vim/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vim 初始化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/UML/%E6%A6%82%E8%BF%B0/">
+                        <span class="hidden-mobile">UML 概述</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

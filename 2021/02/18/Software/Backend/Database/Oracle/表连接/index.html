@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Oracle 表连接 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Oracle 表连接">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-18 10:12" pubdate>
+        2021年2月18日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Oracle 表连接</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Oracle 表连接</h1>
+<h2 id="概述">概述</h2>
+<ul>
+<li>即查询的时候同时需要多张表(特别是存在外键关系的), 此时需要多张表之间的值进行连接</li>
+<li>目前 SQL 标准提出过两种连接查询, 第一种是较早的 SQL92 标准, 第二种是目前使用广泛的较新的 SQL99 标准</li>
+<li>92 形式简单, 但编写较为冗长, 99 不仅在底层得到优化, 而且形式看上去更加一目了然, 逻辑性更强, 一般建议使用 99 标准</li>
+</ul>
+<h2 id="92语法">92语法</h2>
+<ul>
+<li>多张表需要全部放在 from 之后, 所有的连接条件都放在 where 当中, 因此SQL92 中的等值连接, 非等值链接, 外连接等等其实只是 where 条件的筛选结构:<strong>select … from table1, table2 ,table3 … where…</strong></li>
+<li>很多时候需要为表取别名(1, 简化表名 2, 可能存在自连接的情况)</li>
+<li>连接的原理:按照 from 后面表的出现顺序, 前面的表作为内存的 for 循环, 后出现的表作为外层的 for 循环</li>
+</ul>
+<h3 id="等值连接">等值连接</h3>
+<ul>
+<li>不同表的键之间用<code>=</code>号进行连接</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询员工的信息以及所在部门的信息</li>
+<li>查询的数据:员工信息, 部门信息</li>
+<li>数据来源:emp, dept</li>
+<li>连接条件:emp.deptno=dept.deptno</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span> emp e,dept d<br><span class="hljs-keyword">where</span> e.deptno=d.deptno;<br></code></pre></td></tr></table></figure>
+<h3 id="非等值连接">非等值连接</h3>
+<ul>
+<li>不同表的键之间用<code>!=, &gt;, &lt;, &lt;&gt;, between and</code>进行连接</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询每一个员工的姓名, 工资金额, 入职时间, 对应工资等级</li>
+<li>查询数据:ename, sal, hiredate, grade</li>
+<li>数据来源:emp, salgrade</li>
+<li>连接条件:emp, sal between losal and hisal</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, hiredate, s.grade<br><span class="hljs-keyword">from</span> emp e, salgrade s<br><span class="hljs-keyword">where</span> e.sal <span class="hljs-keyword">between</span> s.losal <span class="hljs-keyword">and</span> s.hisal;<br></code></pre></td></tr></table></figure>
+<h3 id="自连接">自连接</h3>
+<ul>
+<li>查询出每一个员工(有上级存在的员工)自己的信息, 以及上级的信息</li>
+<li>查询信息:员工信息, 上级信息</li>
+<li>数据来源:emp e, emp m</li>
+<li>连接条件:e.mgr = m.empno</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span> emp e,emp m<br><span class="hljs-keyword">where</span> e.mgr = m.empno;<br></code></pre></td></tr></table></figure>
+<h3 id="外连接">外连接</h3>
+<ul>
+<li>内联接使用比较运算符根据每个表共有的列的值匹配两个表中的行</li>
+<li>外联接可以是左向外联接, 右向外联接或完整外部联接</li>
+<li>左向外联接的结果集包括 LEFT OUTER 子句中指定的左表的所有行, 而不仅仅是联接列所匹配的行,如果左表的某行在右表中没有匹配行, 则在相关联的结果集行中右表的所有选择列表列均为空值</li>
+<li>右向外联接是左向外联接的反向联接,将返回右表的所有行,如果右表的某行在左表中没有匹配行, 则将为左表返回空值</li>
+<li><code>+</code>:带<code>+</code>的表为从表, 对立面的表为主表</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询每一个部门的信息及对应人数</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br>  <span class="hljs-keyword">from</span> dept d, (<span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(*), deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno) c<br> <span class="hljs-keyword">where</span> d.deptno = c.deptno(+);<br></code></pre></td></tr></table></figure>
+<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019144355608.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019144355608" style="zoom:50%;" />
+<h2 id="99语法">99语法</h2>
+<h3 id="cross-join">cross join</h3>
+<ul>
+<li>交叉连接, 可实现笛卡尔积</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询所有员工姓名及所在部门的名称</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">cross</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
+<h3 id="natural-join">natural join</h3>
+<ul>
+<li>自然连接(Natural join)是一种特殊的等值连接, 它要求两个关系中进行比较的分量必须是相同的属性组, 并且在结果中把重复的属性列去掉</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询所有员工姓名, 员工编号, 所属的部门编号, 部门名称</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,empno,deptno,dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查询部门10的员工名称, 部门编号, 部门名称</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept <span class="hljs-keyword">where</span> deptno = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="join-using">join using()</h3>
+<ul>
+<li>有一种特殊情况, 当两个要关联表的字段名是一样的, 可以使用 <strong>USING</strong>, 可减少 SQL 语句的长度</li>
+<li>自然连接也可以用<code>join...using</code>来实现</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname<br><span class="hljs-keyword">from</span> emp<br><span class="hljs-keyword">join</span> dept<br><span class="hljs-keyword">using</span> (deptno)<br><span class="hljs-keyword">where</span> deptno = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="join-on">join on</h3>
+<ul>
+<li>on连接, 可做等值连接, 非等值连接, 自连接, 可以解决一切连接, 关系列必须要区分</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>使用on可以做等值连接</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, empno, e.deptno, dname<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">join</span> dept d<br><span class="hljs-keyword">on</span> e.deptno = d.deptno;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用on还可以做非等值连接</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,grade <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">join</span> salgrade s <span class="hljs-keyword">on</span><br>sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查询30部门员工姓名, 工资, 部门编号, 工资等级, 部门名称</li>
+<li>数据来源:emp e,  salgrade s, dept d</li>
+<li>连接条件:sal between losal and hisal e.deptno=d.deptno</li>
+<li>题意条件:e.deptno=30</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, deptno, grade, dname<br>  <span class="hljs-keyword">from</span> emp e<br>  <span class="hljs-keyword">join</span> dept d<br>    <span class="hljs-keyword">on</span> e.deptno = d.deptno<br>  <span class="hljs-keyword">join</span> salgrade<br>    <span class="hljs-keyword">on</span> e.sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal<br> <span class="hljs-keyword">where</span> e.deptno = <span class="hljs-number">30</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="外连接-2">外连接</h3>
+<ul>
+<li>left [outer] join on</li>
+<li>left [outer] join using</li>
+<li>right [outer] join on</li>
+<li>right [outer] join using</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>查询员工编号, 员工名称, 上级编号, 上级名称</li>
+<li>LEFT JOIN 关键字从左表(table1)返回所有的行,即使右表(table2)中没有匹配,如果右表中没有匹配,则结果为 NULL</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.empno 员工编号,<br>       e.ename 员工名称,<br>       e.mgr   上级编号,<br>       m.ename 上级名称<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp m<br><span class="hljs-keyword">on</span> e.mgr = m.empno;<br></code></pre></td></tr></table></figure>
+<h2 id="集合操作">集合操作</h2>
+<ul>
+<li>Union, 并集(去重) 对两个结果集进行并集操作, 不包括重复行同时进行默认规则的排序</li>
+<li>Union All, 全集(不去重) 对两个结果集进行并集操作, 包括重复行, 不进行排序</li>
+<li>Intersect, 交集(找出重复) 对两个结果集进行交集操作, 不包括重复行, 同时进行默认规则的排序</li>
+<li>Minus, 差集(减去重复) 对两个结果集进行差操作, 不包括重复行, 同时进行默认规则的排序</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/18/Software/Backend/Database/%E6%A6%82%E5%BF%B5/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据库系统的基本概念</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/18/Software/Backend/Database/Oracle/%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90/">
+                        <span class="hidden-mobile">Oracle 概念与组成</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

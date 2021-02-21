@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Java  数据的输入与输出 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java  数据的输入与输出">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 22:19" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java  数据的输入与输出</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java  数据的输入与输出</h1>
+<h2 id="使用标准输入-输出流">使用标准输入/输出流</h2>
+<h3 id="数据的输出">数据的输出</h3>
+<p>标准输出流(System.out)中提供如下方法实现数据的输出显示</p>
+<ul>
+<li>
+<p><code>print()</code>方法:实现不换行的数据输出</p>
+</li>
+<li>
+<p><code>println()</code>方法:与上面方法的差别是输出数据后将换行</p>
+</li>
+<li>
+<p><code>printf()</code>方法:带格式描述的数据输出,该方法包含两个参数,第一个参数中给出输出格式的描述,第2个参数的输出数据,其中,输出格式描述字符串中需要安排与输出数据对应的格式符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">对应的数据类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">十进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%f</td>
+<td style="text-align:center">浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%e</td>
+<td style="text-align:center">科学计数法表示的浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%n</td>
+<td style="text-align:center">换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">十六进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">字符串</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>**[例2-2]**数据输出应用举例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String a[])</span></span>&#123;<br>        <span class="hljs-keyword">int</span> m=<span class="hljs-number">12</span>,n=<span class="hljs-number">517</span>;<br>        System.out.print(<span class="hljs-string">&quot;n%m=&quot;</span>+(n%m));<br>        System.out.println(<span class="hljs-string">&quot;\tn/m&quot;</span>+(n/m));<br>        System.out.print(Integer.toBinaryString(m));<br>        System.out.println(<span class="hljs-string">&quot;\t&quot;</span>+Integer.toBinaryString(m&gt;&gt;<span class="hljs-number">2</span>));<br>        System.out.printf(<span class="hljs-string">&quot;Value ofPI is %.3f%n,Math.PI&quot;</span>);<br>        System.out.printf(<span class="hljs-string">&quot;result1=%e%n&quot;</span>,<span class="hljs-number">1500.34</span>);<br>        System.out.printf(<span class="hljs-string">&quot;result2=%13.8e%n&quot;</span>,<span class="hljs-number">1500.34</span>);<br>    &#125;<br>&#125;<br><br>n%m=<span class="hljs-number">1</span>	n/m=<span class="hljs-number">43</span><br>    <span class="hljs-number">1100</span>	<span class="hljs-number">11</span><br>    Value of PI is <span class="hljs-number">3.142</span><br>    result1=<span class="hljs-number">1.500340e+03</span><br>    result2=<span class="hljs-number">1.50034000e+03</span><br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<p>第6,7行用到的<code>Integer.toBinaryString()</code>方法用于将一个整数转换为二进制形式的数字串,第8行的<code>printf()</code>方法的输出格式中%.3f表示按保留小数点后3位的形式在此位置输出数据项内容,默认按6位小数位输出,第9行的<code>printf()</code>方法的格式中%e表示用科学表示法,默认小数点后数据按6位输出,第10行的<code>printf()</code>方法中%13.8e表示小数点后按8位输出,整个数据占13位宽度,宽度值多余额前面补空格,不足按实际数据占的宽度输出</p>
+<h3 id="数据的输入">数据的输入</h3>
+<h4 id="字符的输入">字符的输入</h4>
+<p>利用标准输入流的<code>read()</code>方法,可以从键盘读取字符,但要注意,<code>read()</code>方法从键盘获取的是输入的字符的字节表示形式,需要使用强制类型转换将其转换为字符型,例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">char</span> c = (<span class="hljs-keyword">char</span>)System.in.read();<span class="hljs-comment">//读一个字符</span><br></code></pre></td></tr></table></figure>
+<h4 id="字符串的输入">字符串的输入</h4>
+<ul>
+<li>从标准输入流(<a target="_blank" rel="noopener" href="http://System.in">System.in</a>)取得数据,经过InputStreamReader转换为字符流,并经过BufferedReader进行包装后,借助BuferedReader流对象提供的readLine()方法从键盘读取一行字符</li>
+</ul>
+<p>**[例2-3]**字符串类型数据输入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InputString</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span></span>&#123;<br>        String s=<span class="hljs-string">&quot;&quot;</span>;<br>        System.out.print(<span class="hljs-string">&quot;pkease enter a String:&quot;</span>);<br>        <span class="hljs-keyword">try</span> &#123;<br>            BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in));<br>            s = in.readLine();<span class="hljs-comment">//读一行字符</span><br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;&#125;<br>        System.out.println(<span class="hljs-string">&quot;You&#x27;ve enter a String:&quot;</span>+s);<br>    &#125;<br>&#125;<br><br>please enter a String:Hello World!<br>    You<span class="hljs-string">&#x27;ve enter a String:Hello World!</span><br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<ul>
+<li>
+<p>第9行用流对象的radLIne( )方法读数据时有可能产生IO异常(IOException)对于IO异常,JAVA编译器强制要求程序中必须对这类异常进行捕获处理,将可能产生异常的代码放在try块中,catch部分用于定义捕获哪类异常以及相关处理代码</p>
+</li>
+<li>
+<p>第4行在定义变量s时给其赋初值有必要,在try块中第9行读取数据给s赋值不能保证一定成功,如果在第11行访问s时不能确定s赋过值,则编译不能通过</p>
+</li>
+</ul>
+<p>程序中还常需要输入数值数据,如整数和实数,这类数据必须先通过上面的方法获取字符串,然后通过基本数据类型的包装类提供的方法将字符串转换为相应类型的数据,下面是整数和双精度数的转换方法:</p>
+<blockquote>
+<p><code>Integer.parseInt(String)</code>方法:将数字字符串转换为整数<code>Double.parseDouble(String)</code>方法:将字符串形式的数字转换为双精度数</p>
+</blockquote>
+<p>例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">String x = <span class="hljs-string">&quot;123&quot;</span>;<br><span class="hljs-keyword">int</span> m=Integer.parseInt(x); <span class="hljs-comment">//m的值为123</span><br>x=<span class="hljs-string">&quot;123.41&quot;</span>;<br><span class="hljs-keyword">double</span> n= Double.parseDouble(x);<span class="hljs-comment">//n的值为123.41</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用java.util.Scanner类读取数据:一个扫描器,使用分隔符分解它的输入,默认情况下用空格作为分隔符,Scanner的输入源取决于构造函数.以下从标准输入(键盘)获取数据</li>
+</ul>
+<p><strong>常用方法</strong>:</p>
+<ul>
+<li><code>boolean: hasNext()</code>:判断是否有下一个数据</li>
+<li><code>next() </code>:遇见第一个有效字符(非空格,非换行符)时,开始扫描,直到遇见第一个分隔符或结束符(空格或换行符)时,结束扫描,光标还是在本行</li>
+<li><code>int: nextInt()</code>:读取整数,只读取数值,剩下&quot;\n&quot;还没有读取,所以光标还在本行中</li>
+<li><code>double: nextDouble()</code>:读取双精度数,只读取数值,剩下&quot;\n&quot;还没有读取,所以光标还在本行中</li>
+<li><code>String: nextLine()</code>:读取下一行字符串,扫描到一行内容当作是字符串处理,所以光标在下一行首部</li>
+<li><strong>注意</strong>:一般来说,next(),nextInt() 不推荐和 nextLine()混合使用,因为nextLine()会读取next他们遗留下的结束符(换行)直接结束读取,如果非要使用,可以在next()/nextInt() 和 nextLine() 之间用一个 nextLine() 过滤掉结束</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Scanner input = <span class="hljs-keyword">new</span> Scanner(System.in);<br>String one = input.nextLine();<span class="hljs-comment">//读取下一行字符串</span><br><span class="hljs-keyword">boolean</span> one = input.hasNext();<span class="hljs-comment">//判断是否有下一个数据</span><br><span class="hljs-keyword">int</span> one = input.nextInt();<span class="hljs-comment">//读取整数</span><br>Double one = input.nextDouble();<span class="hljs-comment">//读取双精度数</span><br>System.out.println(one);<br>input.close();<br></code></pre></td></tr></table></figure>
+<h2 id="用Swing对话框实现输入-输出">用Swing对话框实现输入/输出</h2>
+<h3 id="数据输入">数据输入</h3>
+<p>可用javax.swing.JOptionPane类的showInputDialog()方法从输入对话框获得字符串,该方法最简单的一种格式为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">Static <span class="hljs-keyword">void</span> <span class="hljs-title">showInputDialog</span><span class="hljs-params">(Object message)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>其中,参数message为代表输入提示信息的对象</p>
+<h3 id="数据输出">数据输出</h3>
+<p>javax.swing.JOptionPane类的showMessageDialog()方法从输入对话框获得字符串,该方法最简单的一种格式为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">Static <span class="hljs-keyword">void</span> <span class="hljs-title">showMessageDialog</span><span class="hljs-params">(Component parentComponent, Object message)</span></span><br></code></pre></td></tr></table></figure>
+<p>其中,参数parentComponent代表该对话框的父窗体部件,如果存在,则对话框显示在窗体的中央,在值为null时表	示该对话框在屏幕的中央显示;参数message为显示的内容</p>
+<p>**[例2-4]**用Swing对话框输入和显示数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test2</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span></span>&#123;<br>        String s = JOptionPane.showInputDialog(<span class="hljs-string">&quot;请输入你的姓名&quot;</span>):<br>        JOptionPane.showMessageDialog(<span class="hljs-keyword">null</span>,<span class="hljs-string">&quot;华东交大欢迎你:&quot;</span>+s);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 数据类型与变量</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E6%8E%A5%E5%8F%A3/">
+                        <span class="hidden-mobile">Java 接口</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

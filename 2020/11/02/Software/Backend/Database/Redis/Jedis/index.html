@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Redis Jedis - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis Jedis">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-02 10:19" pubdate>
+        2020年11月2日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis Jedis</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月21日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Redis Jedis</h1>
+<h2 id="连接Redis">连接Redis</h2>
+<h3 id="Ping">Ping</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>,<span class="hljs-number">6379</span>);<br>System.out.println(<span class="hljs-string">&quot;连接成功&quot;</span>);<br><span class="hljs-comment">//查看服务是否运行</span><br>System.out.println(<span class="hljs-string">&quot;服务正在运行: &quot;</span>+jedis.ping());<br></code></pre></td></tr></table></figure>
+<h3 id="Connect">Connect</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br><span class="hljs-comment">//验证密码,如果没有设置密码这段代码省略</span><br><span class="hljs-comment">//        jedis.auth(&quot;password&quot;);</span><br>jedis.connect(); <span class="hljs-comment">//连接</span><br>jedis.disconnect(); <span class="hljs-comment">//断开连接</span><br>jedis.flushAll(); <span class="hljs-comment">//清空所有的key</span><br></code></pre></td></tr></table></figure>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="key">key</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>System.out.println(<span class="hljs-string">&quot;清空数据:&quot;</span>+jedis.flushDB());<br>System.out.println(<span class="hljs-string">&quot;判断某个键是否存在:&quot;</span>+jedis.exists(<span class="hljs-string">&quot;username&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;新增&lt;&#x27;username&#x27;,&#x27;test&#x27;&gt;的键值对:&quot;</span>+jedis.set(<span class="hljs-string">&quot;username&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;新增&lt;&#x27;password&#x27;,&#x27;password&#x27;&gt;的键值对:&quot;</span>+jedis.set(<span class="hljs-string">&quot;password&quot;</span>, <span class="hljs-string">&quot;password&quot;</span>));<br>System.out.print(<span class="hljs-string">&quot;系统中所有的键如下:&quot;</span>);<br>Set&lt;String&gt; keys = jedis.keys(<span class="hljs-string">&quot;*&quot;</span>);<br>System.out.println(keys);<br>System.out.println(<span class="hljs-string">&quot;删除键password:&quot;</span>+jedis.del(<span class="hljs-string">&quot;password&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;判断键password是否存在:&quot;</span>+jedis.exists(<span class="hljs-string">&quot;password&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;查看键username所存储的值的类型:&quot;</span>+jedis.type(<span class="hljs-string">&quot;username&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;随机返回key空间的一个:&quot;</span>+jedis.randomKey());<br>System.out.println(<span class="hljs-string">&quot;重命名key:&quot;</span>+jedis.rename(<span class="hljs-string">&quot;username&quot;</span>,<span class="hljs-string">&quot;name&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;取出改后的name:&quot;</span>+jedis.get(<span class="hljs-string">&quot;name&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;按索引查询:&quot;</span>+jedis.select(<span class="hljs-number">0</span>));<br>System.out.println(<span class="hljs-string">&quot;删除当前选择数据库中的所有key:&quot;</span>+jedis.flushDB());<br>System.out.println(<span class="hljs-string">&quot;返回当前数据库中key的数目:&quot;</span>+jedis.dbSize());<br>System.out.println(<span class="hljs-string">&quot;删除所有数据库中的所有key:&quot;</span>+jedis.flushAll());<br></code></pre></td></tr></table></figure>
+<h3 id="String">String</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>jedis.flushDB();<br>System.out.println(<span class="hljs-string">&quot;===========增加数据===========&quot;</span>);<br>System.out.println(jedis.set(<span class="hljs-string">&quot;key1&quot;</span>,<span class="hljs-string">&quot;value1&quot;</span>));<br>System.out.println(jedis.set(<span class="hljs-string">&quot;key2&quot;</span>,<span class="hljs-string">&quot;value2&quot;</span>));<br>System.out.println(jedis.set(<span class="hljs-string">&quot;key3&quot;</span>, <span class="hljs-string">&quot;value3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;删除键key2:&quot;</span>+jedis.del(<span class="hljs-string">&quot;key2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取键key2:&quot;</span>+jedis.get(<span class="hljs-string">&quot;key2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;修改key1:&quot;</span>+jedis.set(<span class="hljs-string">&quot;key1&quot;</span>, <span class="hljs-string">&quot;value1Changed&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取key1的值:&quot;</span>+jedis.get(<span class="hljs-string">&quot;key1&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;在key3后面加入值:&quot;</span>+jedis.append(<span class="hljs-string">&quot;key3&quot;</span>, <span class="hljs-string">&quot;End&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;key3的值:&quot;</span>+jedis.get(<span class="hljs-string">&quot;key3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;增加多个键值对:&quot;</span>+jedis.mset(<span class="hljs-string">&quot;key01&quot;</span>,<span class="hljs-string">&quot;value01&quot;</span>,<span class="hljs-string">&quot;key02&quot;</span>,<span class="hljs-string">&quot;value02&quot;</span>,<span class="hljs-string">&quot;key03&quot;</span>,<span class="hljs-string">&quot;value03&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取多个键值对:&quot;</span>+jedis.mget(<span class="hljs-string">&quot;key01&quot;</span>,<span class="hljs-string">&quot;key02&quot;</span>,<span class="hljs-string">&quot;key03&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取多个键值对:&quot;</span>+jedis.mget(<span class="hljs-string">&quot;key01&quot;</span>,<span class="hljs-string">&quot;key02&quot;</span>,<span class="hljs-string">&quot;key03&quot;</span>,<span class="hljs-string">&quot;key04&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;删除多个键值对:&quot;</span>+jedis.del(<span class="hljs-string">&quot;key01&quot;</span>,<span class="hljs-string">&quot;key02&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取多个键值对:&quot;</span>+jedis.mget(<span class="hljs-string">&quot;key01&quot;</span>,<span class="hljs-string">&quot;key02&quot;</span>,<span class="hljs-string">&quot;key03&quot;</span>));<br><br>jedis.flushDB();<br>System.out.println(<span class="hljs-string">&quot;===========新增键值对防止覆盖原先值==============&quot;</span>);<br>System.out.println(jedis.setnx(<span class="hljs-string">&quot;key1&quot;</span>, <span class="hljs-string">&quot;value1&quot;</span>));<br>System.out.println(jedis.setnx(<span class="hljs-string">&quot;key2&quot;</span>, <span class="hljs-string">&quot;value2&quot;</span>));<br>System.out.println(jedis.setnx(<span class="hljs-string">&quot;key2&quot;</span>, <span class="hljs-string">&quot;value2-new&quot;</span>));<br>System.out.println(jedis.get(<span class="hljs-string">&quot;key1&quot;</span>));<br>System.out.println(jedis.get(<span class="hljs-string">&quot;key2&quot;</span>));<br><br>System.out.println(<span class="hljs-string">&quot;===========新增键值对并设置有效时间=============&quot;</span>);<br>System.out.println(jedis.setex(<span class="hljs-string">&quot;key3&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;value3&quot;</span>));<br>System.out.println(jedis.get(<span class="hljs-string">&quot;key3&quot;</span>));<br><span class="hljs-keyword">try</span> &#123;<br>TimeUnit.SECONDS.sleep(<span class="hljs-number">3</span>);<br>&#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>e.printStackTrace();<br>&#125;<br>System.out.println(jedis.get(<span class="hljs-string">&quot;key3&quot;</span>));<br><br>System.out.println(<span class="hljs-string">&quot;===========获取原值,更新为新值==========&quot;</span>);<br>System.out.println(jedis.getSet(<span class="hljs-string">&quot;key2&quot;</span>, <span class="hljs-string">&quot;key2GetSet&quot;</span>));<br>System.out.println(jedis.get(<span class="hljs-string">&quot;key2&quot;</span>));<br><br>System.out.println(<span class="hljs-string">&quot;获得key2的值的字串:&quot;</span>+jedis.getrange(<span class="hljs-string">&quot;key2&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>));<br></code></pre></td></tr></table></figure>
+<h3 id="List">List</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>jedis.flushDB();<br>System.out.println(<span class="hljs-string">&quot;===========添加一个list===========&quot;</span>);<br>jedis.lpush(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-string">&quot;ArrayList&quot;</span>, <span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Stack&quot;</span>, <span class="hljs-string">&quot;HashMap&quot;</span>, <span class="hljs-string">&quot;WeakHashMap&quot;</span>, <span class="hljs-string">&quot;LinkedHashMap&quot;</span>);<br>jedis.lpush(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-string">&quot;HashSet&quot;</span>);<br>jedis.lpush(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-string">&quot;TreeSet&quot;</span>);<br>jedis.lpush(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-string">&quot;TreeMap&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<span class="hljs-comment">//-1代表倒数第一个元素,-2代表倒数第二个元素,end为-1表示查询全部</span><br>System.out.println(<span class="hljs-string">&quot;collections区间0-3的元素:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>));<br>System.out.println(<span class="hljs-string">&quot;===============================&quot;</span>);<br><span class="hljs-comment">// 删除列表指定的值 ,第二个参数为删除的个数(有重复时),后add进去的值先被删,类似于出栈</span><br>System.out.println(<span class="hljs-string">&quot;删除指定元素个数:&quot;</span>+jedis.lrem(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;HashMap&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;删除下表0-3区间之外的元素:&quot;</span>+jedis.ltrim(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;collections列表出栈(左端):&quot;</span>+jedis.lpop(<span class="hljs-string">&quot;collections&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;collections添加元素,从列表右端,与lpush相对应:&quot;</span>+jedis.rpush(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-string">&quot;EnumMap&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;collections列表出栈(右端):&quot;</span>+jedis.rpop(<span class="hljs-string">&quot;collections&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;修改collections指定下标1的内容:&quot;</span>+jedis.lset(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;LinkedArrayList&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;collections的内容:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(<span class="hljs-string">&quot;===============================&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;collections的长度:&quot;</span>+jedis.llen(<span class="hljs-string">&quot;collections&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取collections下标为2的元素:&quot;</span>+jedis.lindex(<span class="hljs-string">&quot;collections&quot;</span>, <span class="hljs-number">2</span>));<br>System.out.println(<span class="hljs-string">&quot;===============================&quot;</span>);<br>jedis.lpush(<span class="hljs-string">&quot;sortedList&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>,<span class="hljs-string">&quot;6&quot;</span>,<span class="hljs-string">&quot;2&quot;</span>,<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;7&quot;</span>,<span class="hljs-string">&quot;4&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;sortedList排序前:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;sortedList&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br>System.out.println(jedis.sort(<span class="hljs-string">&quot;sortedList&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;sortedList排序后:&quot;</span>+jedis.lrange(<span class="hljs-string">&quot;sortedList&quot;</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>));<br></code></pre></td></tr></table></figure>
+<h3 id="set">set</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>jedis.flushDB();<br>System.out.println(<span class="hljs-string">&quot;============向集合中添加元素(不重复)============&quot;</span>);<br>System.out.println(jedis.sadd(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e1&quot;</span>,<span class="hljs-string">&quot;e2&quot;</span>,<span class="hljs-string">&quot;e4&quot;</span>,<span class="hljs-string">&quot;e3&quot;</span>,<span class="hljs-string">&quot;e0&quot;</span>,<span class="hljs-string">&quot;e8&quot;</span>,<span class="hljs-string">&quot;e7&quot;</span>,<span class="hljs-string">&quot;e5&quot;</span>));<br>System.out.println(jedis.sadd(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e6&quot;</span>));<br>System.out.println(jedis.sadd(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e6&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet的所有元素为:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;删除一个元素e0:&quot;</span>+jedis.srem(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e0&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet的所有元素为:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;删除两个元素e7和e6:&quot;</span>+jedis.srem(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e7&quot;</span>,<span class="hljs-string">&quot;e6&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet的所有元素为:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;随机的移除集合中的一个元素:&quot;</span>+jedis.spop(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;随机的移除集合中的一个元素:&quot;</span>+jedis.spop(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet的所有元素为:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet中包含元素的个数:&quot;</span>+jedis.scard(<span class="hljs-string">&quot;eleSet&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;e3是否在eleSet中:&quot;</span>+jedis.sismember(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;e1是否在eleSet中:&quot;</span>+jedis.sismember(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e1&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;e1是否在eleSet中:&quot;</span>+jedis.sismember(<span class="hljs-string">&quot;eleSet&quot;</span>, <span class="hljs-string">&quot;e5&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;=================================&quot;</span>);<br>System.out.println(jedis.sadd(<span class="hljs-string">&quot;eleSet1&quot;</span>, <span class="hljs-string">&quot;e1&quot;</span>,<span class="hljs-string">&quot;e2&quot;</span>,<span class="hljs-string">&quot;e4&quot;</span>,<span class="hljs-string">&quot;e3&quot;</span>,<span class="hljs-string">&quot;e0&quot;</span>,<span class="hljs-string">&quot;e8&quot;</span>,<span class="hljs-string">&quot;e7&quot;</span>,<span class="hljs-string">&quot;e5&quot;</span>));<br>System.out.println(jedis.sadd(<span class="hljs-string">&quot;eleSet2&quot;</span>, <span class="hljs-string">&quot;e1&quot;</span>,<span class="hljs-string">&quot;e2&quot;</span>,<span class="hljs-string">&quot;e4&quot;</span>,<span class="hljs-string">&quot;e3&quot;</span>,<span class="hljs-string">&quot;e0&quot;</span>,<span class="hljs-string">&quot;e8&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;将eleSet1中删除e1并存入eleSet3中:&quot;</span>+jedis.smove(<span class="hljs-string">&quot;eleSet1&quot;</span>, <span class="hljs-string">&quot;eleSet3&quot;</span>, <span class="hljs-string">&quot;e1&quot;</span>));<span class="hljs-comment">//移到集合元素</span><br>System.out.println(<span class="hljs-string">&quot;将eleSet1中删除e2并存入eleSet3中:&quot;</span>+jedis.smove(<span class="hljs-string">&quot;eleSet1&quot;</span>, <span class="hljs-string">&quot;eleSet3&quot;</span>, <span class="hljs-string">&quot;e2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet1中的元素:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet1&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet3中的元素:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;============集合运算=================&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;eleSet1中的元素:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet1&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet2中的元素:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet1和eleSet2的交集:&quot;</span>+jedis.sinter(<span class="hljs-string">&quot;eleSet1&quot;</span>,<span class="hljs-string">&quot;eleSet2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet1和eleSet2的并集:&quot;</span>+jedis.sunion(<span class="hljs-string">&quot;eleSet1&quot;</span>,<span class="hljs-string">&quot;eleSet2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;eleSet1和eleSet2的差集:&quot;</span>+jedis.sdiff(<span class="hljs-string">&quot;eleSet1&quot;</span>,<span class="hljs-string">&quot;eleSet2&quot;</span>));<span class="hljs-comment">//eleSet1中有,eleSet2中没有</span><br>jedis.sinterstore(<span class="hljs-string">&quot;eleSet4&quot;</span>,<span class="hljs-string">&quot;eleSet1&quot;</span>,<span class="hljs-string">&quot;eleSet2&quot;</span>);<span class="hljs-comment">//求交集并将交集保存到dstkey的集合</span><br>System.out.println(<span class="hljs-string">&quot;eleSet4中的元素:&quot;</span>+jedis.smembers(<span class="hljs-string">&quot;eleSet4&quot;</span>));<br></code></pre></td></tr></table></figure>
+<h3 id="Hash">Hash</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java">Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>jedis.flushDB();<br>Map&lt;String,String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;String,String&gt;();<br>map.put(<span class="hljs-string">&quot;key1&quot;</span>,<span class="hljs-string">&quot;value1&quot;</span>);<br>map.put(<span class="hljs-string">&quot;key2&quot;</span>,<span class="hljs-string">&quot;value2&quot;</span>);<br>map.put(<span class="hljs-string">&quot;key3&quot;</span>,<span class="hljs-string">&quot;value3&quot;</span>);<br>map.put(<span class="hljs-string">&quot;key4&quot;</span>,<span class="hljs-string">&quot;value4&quot;</span>);<br><span class="hljs-comment">//添加名称为hash(key)的hash元素</span><br>jedis.hmset(<span class="hljs-string">&quot;hash&quot;</span>,map);<br><span class="hljs-comment">//向名称为hash的hash中添加key为key5,value为value5元素</span><br>jedis.hset(<span class="hljs-string">&quot;hash&quot;</span>, <span class="hljs-string">&quot;key5&quot;</span>, <span class="hljs-string">&quot;value5&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;散列hash的所有键值对为:&quot;</span>+jedis.hgetAll(<span class="hljs-string">&quot;hash&quot;</span>));<span class="hljs-comment">//return Map&lt;String,String&gt;</span><br>System.out.println(<span class="hljs-string">&quot;散列hash的所有键为:&quot;</span>+jedis.hkeys(<span class="hljs-string">&quot;hash&quot;</span>));<span class="hljs-comment">//return Set&lt;String&gt;</span><br>System.out.println(<span class="hljs-string">&quot;散列hash的所有值为:&quot;</span>+jedis.hvals(<span class="hljs-string">&quot;hash&quot;</span>));<span class="hljs-comment">//return List&lt;String&gt;</span><br>System.out.println(<span class="hljs-string">&quot;将key6保存的值加上一个整数,如果key6不存在则添加key6:&quot;</span>+jedis.hincrBy(<span class="hljs-string">&quot;hash&quot;</span>, <span class="hljs-string">&quot;key6&quot;</span>, <span class="hljs-number">6</span>));<br>System.out.println(<span class="hljs-string">&quot;散列hash的所有键值对为:&quot;</span>+jedis.hgetAll(<span class="hljs-string">&quot;hash&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;将key6保存的值加上一个整数,如果key6不存在则添加key6:&quot;</span>+jedis.hincrBy(<span class="hljs-string">&quot;hash&quot;</span>, <span class="hljs-string">&quot;key6&quot;</span>, <span class="hljs-number">3</span>));<br>System.out.println(<span class="hljs-string">&quot;散列hash的所有键值对为:&quot;</span>+jedis.hgetAll(<span class="hljs-string">&quot;hash&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;删除一个或者多个键值对:&quot;</span>+jedis.hdel(<span class="hljs-string">&quot;hash&quot;</span>, <span class="hljs-string">&quot;key2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;散列hash的所有键值对为:&quot;</span>+jedis.hgetAll(<span class="hljs-string">&quot;hash&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;散列hash中键值对的个数:&quot;</span>+jedis.hlen(<span class="hljs-string">&quot;hash&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;判断hash中是否存在key2:&quot;</span>+jedis.hexists(<span class="hljs-string">&quot;hash&quot;</span>,<span class="hljs-string">&quot;key2&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;判断hash中是否存在key3:&quot;</span>+jedis.hexists(<span class="hljs-string">&quot;hash&quot;</span>,<span class="hljs-string">&quot;key3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取hash中的值:&quot;</span>+jedis.hmget(<span class="hljs-string">&quot;hash&quot;</span>,<span class="hljs-string">&quot;key3&quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;获取hash中的值:&quot;</span>+jedis.hmget(<span class="hljs-string">&quot;hash&quot;</span>,<span class="hljs-string">&quot;key3&quot;</span>,<span class="hljs-string">&quot;key4&quot;</span>));<br></code></pre></td></tr></table></figure>
+<h2 id="事务">事务</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//创建客户端连接服务端,redis服务端需要被开启</span><br>Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>);<br>jedis.flushDB();<br><br>JSONObject jsonObject = <span class="hljs-keyword">new</span> JSONObject();<br>jsonObject.put(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>);<br>jsonObject.put(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>);<br><span class="hljs-comment">//开启事务</span><br>Transaction multi = jedis.multi();<br>String result = jsonObject.toJSONString();<br><span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-comment">//向redis存入一条数据</span><br>    multi.set(<span class="hljs-string">&quot;json&quot;</span>, result);<br>    <span class="hljs-comment">//再存入一条数据</span><br>    multi.set(<span class="hljs-string">&quot;json2&quot;</span>, result);<br>    <span class="hljs-comment">//这里引发了异常,用0作为被除数</span><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">100</span>/<span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//如果没有引发异常,执行进入队列的命令</span><br>    multi.exec();<br>    &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>        e.printStackTrace();<br>        <span class="hljs-comment">//如果出现异常,回滚</span><br>        multi.discard();<br>    &#125;<span class="hljs-keyword">finally</span>&#123;<br>        System.out.println(jedis.get(<span class="hljs-string">&quot;json&quot;</span>));<br>        System.out.println(jedis.get(<span class="hljs-string">&quot;json2&quot;</span>));<br>        <span class="hljs-comment">//最终关闭客户端</span><br>        jedis.close();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Redis/">Redis</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/02/Software/Tools/Vim/%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Vim visual模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/02/Software/Backend/Database/Redis/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                        <span class="hidden-mobile">Redis 主从复制</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>
