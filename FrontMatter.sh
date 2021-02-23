@@ -10,7 +10,7 @@ function front_matter(){
             dir=$1 # 当前目录
             fullPath=$1"/"$file
             createdTime=$(GetFileInfo -d $fullPath) # 获取文件创建时间
-            modifiedTime=$(GetFileInfo -d $fullPath) # 获取文件修改时间
+            modifiedTime=$(GetFileInfo -m $fullPath) # 获取文件修改时间
             echo $fullPath # 输出正在处理的文件
             path=${dir:${#baseDir}+1} # 截取相对路径
             categories=(${path//// }) # 根据路径生成目录数组
@@ -24,13 +24,15 @@ function front_matter(){
                 gsed -i "4 i\- ${categories[i]}" $1"/"$file
             done
             SetFile -d "$createdTime" $fullPath # 写入文件创建时间
-            SetFile -d "$modifiedTime" $fullPath # 获取文件修改时间
+            SetFile -m "$modifiedTime" $fullPath # 获取文件修改时间
         fi
     done
 } 
 
+# 替换post文件夹
 rm -rf ~/Code/Project/SoftwareMagic/source/_posts/*
 cp -rfp ~/Documents/Notes/Software ~/Code/Project/SoftwareMagic/source/_posts/Software
 cp -rfp ~/Documents/Notes/Hardware ~/Code/Project/SoftwareMagic/source/_posts/Hardware
 cp -rfp ~/Documents/Notes/Internet ~/Code/Project/SoftwareMagic/source/_posts/Internet
+
 front_matter $baseDir;
