@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <title>Yarn 命令 - SoftwareMagic</title>
+  <title>Webpack 初始化 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Yarn 命令">
+            <span class="h2" id="subtitle" title="Webpack 初始化">
               
             </span>
 
@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-08 15:11" pubdate>
-        2020年12月8日 下午
+      <time datetime="2021-02-22 16:54" pubdate>
+        2021年2月22日 下午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      479 字
+      146 字
     </span>
   
 
@@ -170,7 +170,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      1
        分钟
     </span>
   
@@ -200,39 +200,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Yarn 命令</h1>
+            <h1 style="display: none">Webpack 初始化</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月22日 下午
+                  本文最后更新于：2021年2月23日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Yarn 命令</h1>
-<h2 id="安装包">安装包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn install #安装package.json里所有包,并将包及它的所有依赖项保存进yarn.lock<br>yarn global install #全局安装<br>yarn install --flat #安装一个包的单一版本<br>yarn install --force #强制重新下载所有包<br>yarn install --production #只安装dependencies里的包<br>yarn install --no-lockfile #不读取或生成yarn.lock<br>yarn install --pure-lockfile #不生成yarn.lock<br></code></pre></td></tr></table></figure>
-<h2 id="添加包">添加包</h2>
+              <h1>Webpack 初始化</h1>
+<h2 id="安装Webpack">安装Webpack</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save-dev webpack webpack-cli<br></code></pre></td></tr></table></figure>
+<h2 id="配置运行脚本">配置运行脚本</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>    &quot;clean&quot;: &quot;rm dist/bundle.js&quot;,<br>    &quot;build&quot;: &quot;webpack&quot;,<br>    &quot;build-dev&quot;: &quot;webpack --mode development&quot;,<br>    &quot;build-prod&quot;: &quot;webpack --mode production&quot;,<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h2 id="编写配置文件">编写配置文件</h2>
 <ul>
-<li>会更新package.json和yarn.lock</li>
+<li><code>webpack.config.js</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn add [package] #在当前的项目中添加一个依赖包,会自动更新到package.json和yarn.lock文件中<br>yarn add [package]@[version] #安装指定版本,这里指的是主要版本,如果需要精确到小版本,使用-E参数<br>yarn add [package]@[tag] #安装某个tag(比如beta,next或者latest)<br></code></pre></td></tr></table></figure>
-<p>不指定依赖类型默认安装到dependencies里,你也可以指定依赖类型</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn add --dev/-D #加到 devDependencies<br>yarn add --peer/-P #加到 peerDependencies<br>yarn add --optional/-O #加到 optionalDependencies<br></code></pre></td></tr></table></figure>
-<p>默认安装包的主要版本里的最新版本,下面两个命令可以指定版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn add --exact/-E #安装包的精确版本,例如yarn add foo@1.2.3会接受1.9.1版,但是yarn add foo@1.2.3 --exact只会接受1.2.3版<br>yarn add --tilde/-T #安装包的次要版本里的最新版,例如yarn add foo@1.2.3 --tilde会接受1.2.9,但不接受1.3.0<br></code></pre></td></tr></table></figure>
-<h2 id="发布包">发布包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn publish<br></code></pre></td></tr></table></figure>
-<h2 id="移除一个包">移除一个包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn remove &lt;packageName&gt; #移除一个包,会自动更新package.json和yarn.lock<br>yarn global remove &lt;packageName&gt; #全局移除<br></code></pre></td></tr></table></figure>
-<h2 id="更新一个依赖">更新一个依赖</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn upgrade #用于更新包到基于规范范围的最新版本<br></code></pre></td></tr></table></figure>
-<h2 id="运行脚本">运行脚本</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn run #用来执行在 package.json 中 scripts 属性下定义的脚本<br></code></pre></td></tr></table></figure>
-<h2 id="显示某个包的信息">显示某个包的信息</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn info &lt;packageName&gt; #可以用来查看某个模块的最新版本信息s<br></code></pre></td></tr></table></figure>
-<h2 id="缓存">缓存</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">yarn cache<br>yarn cache list # 列出已缓存的每个包<br>yarn cache dir # 返回 全局缓存位置<br>syarn cache clean # 清除缓存<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>);<br><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);<br><br><span class="hljs-keyword">const</span> config = &#123;<br>    entry: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,<br>    output: &#123;<br>        path: path.resolve(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),<br>        filename: <span class="hljs-string">&#x27;bundle.js&#x27;</span><br>    &#125;,<br>    resolve: &#123;<br>        extensions: [<span class="hljs-string">&quot;.js&quot;</span>, <span class="hljs-string">&quot;.json&quot;</span>, <span class="hljs-string">&quot;.jsx&quot;</span>, <span class="hljs-string">&quot;.css&quot;</span>, <span class="hljs-string">&quot;.vue&quot;</span>],<br>    &#125;,<br>&#125;;<br><br><span class="hljs-built_in">module</span>.exports = config;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>entry</code>:入口</li>
+<li><code>output</code>:出口</li>
+<li><code>extensions</code>:可省略的扩展名</li>
+</ul>
+<h2 id="打包">打包</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm run build<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -246,7 +239,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/Yarn/">Yarn</a>
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/Webpack/">Webpack</a>
                     
                   </div>
                 
@@ -260,9 +253,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/08/Software/Frontend/NPM/%E5%91%BD%E4%BB%A4/">
+                      <a href="/2021/02/22/Software/Frontend/Webpack/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NPM 命令</span>
+                        <span class="hidden-mobile">Webpack 配置文件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -270,8 +263,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/08/Software/Frontend/Yarn/%E5%88%9D%E5%A7%8B%E5%8C%96/">
-                        <span class="hidden-mobile">Yarn 初始化</span>
+                      <a href="/2021/02/22/Software/Frontend/Webpack/Vue/">
+                        <span class="hidden-mobile">Webpack 整合Vue</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <title>Webpack Plugin - SoftwareMagic</title>
+  <title>Shell 变量 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Webpack Plugin">
+            <span class="h2" id="subtitle" title="Shell 变量">
               
             </span>
 
@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-17 15:30" pubdate>
-        2021年2月17日 下午
+      <time datetime="2021-02-23 13:32" pubdate>
+        2021年2月23日 下午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      481 字
+      735 字
     </span>
   
 
@@ -170,7 +170,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -200,97 +200,91 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Webpack Plugin</h1>
+            <h1 style="display: none">Shell 变量</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月22日 下午
+                  本文最后更新于：2021年2月23日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Webpack Plugin</h1>
-<h2 id="BannerPlugin">BannerPlugin</h2>
-<p><strong>配置</strong></p>
+              <h1>Shell 变量</h1>
+<h2 id="定义变量">定义变量</h2>
+<p>定义变量时,变量名不加美元符号($,PHP语言中变量需要),如:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;test&quot;<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:</p>
 <ul>
-<li><code>webpack.config.js</code></li>
+<li>变量名和等号之间不能有空格</li>
+<li>命名只能使用英文字母,数字和下划线,首个字符不能以数字开头</li>
+<li>中间不能有空格,可以使用下划线(_)</li>
+<li>不能使用标点符号</li>
+<li>不能使用bash里的关键字(可用help命令查看保留关键字)</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">plugins: [<br>  <span class="hljs-keyword">new</span> webpack.BannerPlugin(<span class="hljs-string">&#x27;Copyright&#x27;</span>)<br>]<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
 <ul>
-<li>将版权信息写在括号中</li>
+<li>有效的 Shell 变量名</li>
 </ul>
-<p><strong>查看</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">Test<br>LD_LIBRARY_PATH<br>_var<br>var2<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在dist中生成<code>bundle.js.LICENSE.txt</code></li>
+<li>无效的变量命名</li>
 </ul>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">/*! Copyright */<br></code></pre></td></tr></table></figure>
-<h2 id="HtmlWebpackPlugin">HtmlWebpackPlugin</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">?var=123<br>user*name=test<br></code></pre></td></tr></table></figure>
 <ul>
-<li>自动生成一个<code>index.html</code>文件(可以指定模板生成)</li>
-<li>将打包的<code>bundle.js</code>,自动通过script标签插入到body中</li>
+<li>除了显式地直接赋值,还可以用语句给变量赋值,如:</li>
 </ul>
-<p><strong>安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save-dev html-webpack-plugin<br></code></pre></td></tr></table></figure>
-<p><strong>配置</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">for file in `ls /etc`<br><span class="hljs-meta">#</span><span class="bash">或</span><br>for file in $(ls /etc)<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>webpack.config.js</code></li>
+<li>以上语句将<code>/etc</code>下目录的文件名循环赋值到变量file</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);<br><span class="hljs-comment">//...</span><br>plugins: [<br>        <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;<br>            template: __dirname + <span class="hljs-string">&quot;/src/index.tmpl.html&quot;</span><br>        &#125;)<br>    ],<br></code></pre></td></tr></table></figure>
+<h2 id="使用变量">使用变量</h2>
 <ul>
-<li><code>index.tmpl.html</code></li>
+<li>使用一个定义过的变量,只要在变量名前面加美元符号即可,如:</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Webpack Sample Project<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&#x27;app&#x27;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<h2 id="UglifyJsPlugin">UglifyJsPlugin</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;test&quot;<br>echo $your_name<br>echo $&#123;your_name&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>压缩JS代码</li>
-<li>webpack4以上只需要在配置文件中配置<code>mode: &quot;development&quot;</code>,即可自动开启</li>
+<li>变量名外面的<code>&#123;&#125;</code>是可选的,加花括号是为了帮助解释器识别变量的边界,比如下面这种情况:</li>
 </ul>
-<p><strong>配置</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">plugins: [<br>  <span class="hljs-keyword">new</span> webpack.optimize.UglifyJsPlugin()<br>  ]<br></code></pre></td></tr></table></figure>
-<h2 id="OccurenceOrderPlugin">OccurenceOrderPlugin</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">for skill in Ada Coffe Action Java; do<br>    echo &quot;I am good at $&#123;skill&#125;Script&quot;<br>done<br></code></pre></td></tr></table></figure>
 <ul>
-<li>为组件分配ID,通过这个插件webpack可以分析和优先考虑使用最多的模块,并为它们分配最小的ID</li>
+<li>如果不给skill变量加花括号,写成<code>echo &quot;I am good at $skillScript</code>,解释器就会把$skillScript当成一个变量(其值为空)</li>
+<li>推荐给所有变量加上花括号,这是个好的编程习惯</li>
+<li>已定义的变量,可以被重新定义,如:</li>
 </ul>
-<p><strong>配置</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">plugins: [<br>  <span class="hljs-keyword">new</span> webpack.optimize.OccurrenceOrderPlugin()<br>  ]<br></code></pre></td></tr></table></figure>
-<h2 id="ExtractTextPlugin">ExtractTextPlugin</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;tom&quot;<br>echo $your_name<br>your_name=&quot;alibaba&quot;<br>echo $your_name<br></code></pre></td></tr></table></figure>
 <ul>
-<li>分离CSS和JS文件</li>
+<li>这样写是合法的,但注意,第二次赋值的时候不能写<code>$your_name=&quot;alibaba&quot;</code>,使用变量的时候才加美元符<code>$</code></li>
 </ul>
-<p><strong>安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save-dev extract-text-webpack-plugin<br></code></pre></td></tr></table></figure>
-<p><strong>配置</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> ExtractTextPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;extract-text-webpack-plugin&#x27;</span>);<br><span class="hljs-comment">//...</span><br>plugins: [<br>        <span class="hljs-keyword">new</span> ExtractTextPlugin(<span class="hljs-string">&quot;style.css&quot;</span>)<br>    ]<br></code></pre></td></tr></table></figure>
-<h2 id="CleanWebpackPlugin">CleanWebpackPlugin</h2>
+<h2 id="只读变量">只读变量</h2>
 <ul>
-<li>打包时自动删除指定目录的文件</li>
+<li>使用 readonly 命令可以将变量定义为只读变量,只读变量的值不能被改变</li>
+<li>下面的例子尝试更改只读变量,结果报错:</li>
 </ul>
-<p><strong>安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install clean-webpack-plugin --save-dev<br></code></pre></td></tr></table></figure>
-<p><strong>配置</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> CleanWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;clean-webpack-plugin&quot;</span>);<br>  plugins: [<br>    <span class="hljs-keyword">new</span> CleanWebpackPlugin(<span class="hljs-string">&#x27;build/*.*&#x27;</span>, &#123;<br>      root: __dirname,<br>      verbose: <span class="hljs-literal">true</span>,<br>      dry: <span class="hljs-literal">false</span><br>  &#125;)<br>  ]<br></code></pre></td></tr></table></figure>
-<h2 id="CopyWebpackPlugin">CopyWebpackPlugin</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>myUrl=<span class="hljs-string">&quot;https://www.google.com&quot;</span><br><span class="hljs-built_in">readonly</span> myUrl<br>myUrl=<span class="hljs-string">&quot;https://www.baidu.com&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>把静态资源都拷贝到构建目录</li>
+<li>运行脚本,结果如下:</li>
 </ul>
-<p><strong>安装</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save-dev copy-webpack-plugin<br></code></pre></td></tr></table></figure>
-<p><strong>配置</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> CopyPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;copy-webpack-plugin&quot;</span>);<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  plugins: [<br>    <span class="hljs-keyword">new</span> CopyPlugin(&#123;<br>      patterns: [<br>        &#123; <span class="hljs-attr">from</span>: <span class="hljs-string">&quot;source&quot;</span>, <span class="hljs-attr">to</span>: <span class="hljs-string">&quot;dest&quot;</span> &#125;,<br>        &#123; <span class="hljs-attr">from</span>: <span class="hljs-string">&quot;other&quot;</span>, <span class="hljs-attr">to</span>: <span class="hljs-string">&quot;public&quot;</span> &#125;,<br>      ],<br>    &#125;),<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/bin/sh: NAME: This variable is read only.<br></code></pre></td></tr></table></figure>
+<h2 id="删除变量">删除变量</h2>
 <ul>
-<li><code>form</code>:相对于项目的路径</li>
-<li><code>to</code>:相对于outputDir的路径</li>
-<li>将<code>form</code>指定的文件或文件夹复制到<code>to</code>目录下</li>
-<li>如果省略<code>to</code>,则默认为outputDir</li>
+<li>使用 unset 命令可以删除变量</li>
 </ul>
-<h2 id="ProvidePlugin">ProvidePlugin</h2>
-<p><strong>配置</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">unset variable_name<br></code></pre></td></tr></table></figure>
 <ul>
-<li>遇到或处理 <code>jQuery</code> 或 <code>$</code> 都会去自动加载 jquery 这个库</li>
+<li>变量被删除后不能再次使用,unset 命令不能删除只读变量</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">new</span> webpack.ProvidePlugin(&#123;<br>  $: <span class="hljs-string">&#x27;jquery&#x27;</span>,<br>  jQuery: <span class="hljs-string">&#x27;jquery&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
-<p><strong>调用</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">$(<span class="hljs-string">&#x27;#item&#x27;</span>);<br>jQuery(<span class="hljs-string">&#x27;#item&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br>myUrl=&quot;https://www.runoob.com&quot;<br>unset myUrl<br>echo $myUrl<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上实例执行将没有任何输出</li>
+</ul>
+<h2 id="变量类型">变量类型</h2>
+<p>运行shell时,会同时存在三种变量</p>
+<ul>
+<li><strong>局部变量</strong> 局部变量在脚本或命令中定义,仅在当前shell实例中有效,其他shell启动的程序不能访问局部变量</li>
+<li><strong>环境变量</strong> 所有的程序,包括shell启动的程序,都能访问环境变量,有些程序需要环境变量来保证其正常运行,必要的时候shell脚本也可以定义环境变量</li>
+<li><strong>shell变量</strong> shell变量是由shell程序设置的特殊变量,shell变量中有一部分是环境变量,有一部分是局部变量,这些变量保证了shell的正常运行</li>
+</ul>
 
             </div>
             <hr>
@@ -302,9 +296,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/">Software</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/Webpack/">Webpack</a>
+                      <a class="hover-with-bg" href="/categories/Software/Shell/">Shell</a>
                     
                   </div>
                 
@@ -318,9 +310,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/17/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%B4%BB%E5%8A%A8%E5%AE%89%E6%8E%92%E9%97%AE%E9%A2%98/">
+                      <a href="/2021/02/23/Software/Shell/%E8%BF%90%E7%AE%97%E7%AC%A6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">活动安排问题</span>
+                        <span class="hidden-mobile">Shell 基本运算符</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -328,8 +320,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/17/Software/Backend/Distributed/Hadoop/HDFS/">
-                        <span class="hidden-mobile">Hadoop HDFS</span>
+                      <a href="/2021/02/23/Software/Shell/printf%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Shell printf 命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

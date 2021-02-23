@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <title>Shell 变量 - SoftwareMagic</title>
+  <title>Webpack 整合Vue - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Shell 变量">
+            <span class="h2" id="subtitle" title="Webpack 整合Vue">
               
             </span>
 
@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-18 13:19" pubdate>
-        2021年2月18日 下午
+      <time datetime="2021-02-22 16:54" pubdate>
+        2021年2月22日 下午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      736 字
+      234 字
     </span>
   
 
@@ -170,7 +170,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      2
        分钟
     </span>
   
@@ -200,91 +200,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Shell 变量</h1>
+            <h1 style="display: none">Webpack 整合Vue</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月22日 下午
+                  本文最后更新于：2021年2月23日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Shell 变量</h1>
-<h2 id="定义变量">定义变量</h2>
-<p>定义变量时,变量名不加美元符号($,PHP语言中变量需要),如:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;test&quot;<br></code></pre></td></tr></table></figure>
-<p><strong>注意</strong>:</p>
+              <h1>Webpack 整合Vue</h1>
+<h2 id="安装">安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install --save vue vue-loader vue-style-loader vue-template-compiler<br></code></pre></td></tr></table></figure>
+<h2 id="配置">配置</h2>
 <ul>
-<li>变量名和等号之间不能有空格</li>
-<li>命名只能使用英文字母,数字和下划线,首个字符不能以数字开头</li>
-<li>中间不能有空格,可以使用下划线(_)</li>
-<li>不能使用标点符号</li>
-<li>不能使用bash里的关键字(可用help命令查看保留关键字)</li>
+<li><code>webpack.config.js</code></li>
 </ul>
-<p><strong>实例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> VueLoaderPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;vue-loader/lib/plugin&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>    mode: <span class="hljs-string">&#x27;development&#x27;</span>,<br>    <span class="hljs-built_in">module</span>: &#123;<br>        rules: [<br>            &#123;<br>                test: <span class="hljs-regexp">/\.vue$/</span>,<br>                loader: <span class="hljs-string">&#x27;vue-loader&#x27;</span><br>            &#125;,<br>            <span class="hljs-comment">// 它会应用到普通的 `.js` 文件</span><br>            <span class="hljs-comment">// 以及 `.vue` 文件中的 `&lt;script&gt;` 块</span><br>            &#123;<br>                test: <span class="hljs-regexp">/\.js$/</span>,<br>                loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span><br>            &#125;,<br>            <span class="hljs-comment">// 它会应用到普通的 `.css` 文件</span><br>            <span class="hljs-comment">// 以及 `.vue` 文件中的 `&lt;style&gt;` 块</span><br>            &#123;<br>                test: <span class="hljs-regexp">/\.css$/</span>,<br>                use: [<br>                    <span class="hljs-string">&#x27;vue-style-loader&#x27;</span>,<br>                    <span class="hljs-string">&#x27;css-loader&#x27;</span><br>                ]<br>            &#125;<br>        ]<br>    &#125;,<br>    plugins: [<br>        <span class="hljs-keyword">new</span> VueLoaderPlugin()<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="导入测试">导入测试</h2>
 <ul>
-<li>有效的 Shell 变量名</li>
+<li><code>index.js</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">Test<br>LD_LIBRARY_PATH<br>_var<br>var2<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><br><span class="hljs-keyword">new</span> Vue(&#123;<br>    el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>    render: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> h(App)<br>&#125;)<br></code></pre></td></tr></table></figure>
 <ul>
-<li>无效的变量命名</li>
+<li><code>App.vue</code></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">?var=123<br>user*name=test<br></code></pre></td></tr></table></figure>
-<ul>
-<li>除了显式地直接赋值,还可以用语句给变量赋值,如:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">for file in `ls /etc`<br><span class="hljs-meta">#</span><span class="bash">或</span><br>for file in $(ls /etc)<br></code></pre></td></tr></table></figure>
-<ul>
-<li>以上语句将<code>/etc</code>下目录的文件名循环赋值到变量file</li>
-</ul>
-<h2 id="使用变量">使用变量</h2>
-<ul>
-<li>使用一个定义过的变量,只要在变量名前面加美元符号即可,如:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;test&quot;<br>echo $your_name<br>echo $&#123;your_name&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>变量名外面的花括号是可选的,加花括号是为了帮助解释器识别变量的边界,比如下面这种情况:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">for skill in Ada Coffe Action Java; do<br>    echo &quot;I am good at $&#123;skill&#125;Script&quot;<br>done<br></code></pre></td></tr></table></figure>
-<ul>
-<li>如果不给skill变量加花括号,写成<code>echo &quot;I am good at $skillScript</code>,解释器就会把$skillScript当成一个变量(其值为空)</li>
-<li>推荐给所有变量加上花括号,这是个好的编程习惯</li>
-<li>已定义的变量,可以被重新定义,如:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">your_name=&quot;tom&quot;<br>echo $your_name<br>your_name=&quot;alibaba&quot;<br>echo $your_name<br></code></pre></td></tr></table></figure>
-<ul>
-<li>这样写是合法的,但注意,第二次赋值的时候不能写<code>$your_name=&quot;alibaba&quot;</code>,使用变量的时候才加美元符<code>$</code></li>
-</ul>
-<h2 id="只读变量">只读变量</h2>
-<ul>
-<li>使用 readonly 命令可以将变量定义为只读变量,只读变量的值不能被改变</li>
-<li>下面的例子尝试更改只读变量,结果报错:</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>myUrl=<span class="hljs-string">&quot;https://www.google.com&quot;</span><br><span class="hljs-built_in">readonly</span> myUrl<br>myUrl=<span class="hljs-string">&quot;https://www.baidu.com&quot;</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>运行脚本,结果如下:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/bin/sh: NAME: This variable is read only.<br></code></pre></td></tr></table></figure>
-<h2 id="删除变量">删除变量</h2>
-<ul>
-<li>使用 unset 命令可以删除变量</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">unset variable_name<br></code></pre></td></tr></table></figure>
-<ul>
-<li>变量被删除后不能再次使用,unset 命令不能删除只读变量</li>
-</ul>
-<p><strong>实例</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br>myUrl=&quot;https://www.runoob.com&quot;<br>unset myUrl<br>echo $myUrl<br></code></pre></td></tr></table></figure>
-<ul>
-<li>以上实例执行将没有任何输出</li>
-</ul>
-<h2 id="变量类型">变量类型</h2>
-<p>运行shell时,会同时存在三种变量</p>
-<ul>
-<li><strong>局部变量</strong> 局部变量在脚本或命令中定义,仅在当前shell实例中有效,其他shell启动的程序不能访问局部变量</li>
-<li><strong>环境变量</strong> 所有的程序,包括shell启动的程序,都能访问环境变量,有些程序需要环境变量来保证其正常运行,必要的时候shell脚本也可以定义环境变量</li>
-<li><strong>shell变量</strong> shell变量是由shell程序设置的特殊变量,shell变量中有一部分是环境变量,有一部分是局部变量,这些变量保证了shell的正常运行</li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>&lt;div id&#x3D;&quot;app&quot;&gt;<br>    &lt;h1 class&#x3D;&quot;title&quot;&gt;&#123;&#123; message &#125;&#125;&lt;&#x2F;h1&gt;<br>    &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>    export default &#123;<br>        name: &quot;App&quot;,<br>        data() &#123;<br>            return &#123;<br>                message: &quot;Hello Vue-Webpack&quot;<br>            &#125;;<br>        &#125;<br>    &#125;;<br>&lt;&#x2F;script&gt;<br>&lt;style scoped&gt;<br>    .title&#123;<br>        color: blue;<br>    &#125;<br>&lt;&#x2F;style&gt;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -296,7 +237,9 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/">Software</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Shell/">Shell</a>
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/Webpack/">Webpack</a>
                     
                   </div>
                 
@@ -310,9 +253,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/18/Software/Shell/printf%E5%91%BD%E4%BB%A4/">
+                      <a href="/2021/02/22/Software/Frontend/Webpack/%E5%88%9D%E5%A7%8B%E5%8C%96/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell printf 命令</span>
+                        <span class="hidden-mobile">Webpack 初始化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -320,8 +263,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/18/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/commit/">
-                        <span class="hidden-mobile">Git commit</span>
+                      <a href="/2021/02/22/Software/Frontend/Webpack/Plugin/">
+                        <span class="hidden-mobile">Webpack Plugin</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

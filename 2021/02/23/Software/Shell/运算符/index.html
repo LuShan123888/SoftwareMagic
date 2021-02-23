@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-17 15:34" pubdate>
-        2021年2月17日 下午
+      <time datetime="2021-02-23 13:52" pubdate>
+        2021年2月23日 下午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.2k 字
     </span>
   
 
@@ -204,7 +204,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月22日 下午
+                  本文最后更新于：2021年2月23日 下午
                 
               </p>
             
@@ -305,10 +305,12 @@
 <ul>
 <li>条件表达式要放在方括号之间,并且要有空格,例如:<code> [$a==$b]</code>是错误的,必须写成 <code>[ $a == $b ]</code>,如果包含两个条件表达式,则用<code>[[]]</code></li>
 <li>shell 语言中 0 代表 true,0 以外的值代表 false</li>
+<li>两个<code>*</code>在运算时代表 “次方” 的意思</li>
 </ul>
 </blockquote>
 <ul>
-<li>代码中的<code>[]</code>执行基本的算数运算,如:</li>
+<li>代码中的<code>[]</code>执行基本的算数运算</li>
+<li><strong>注意</strong>:要想取到运算结果，需要用<code>$</code>引用</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>a=5<br>b=6<br><br>result=$[a+b] <span class="hljs-comment"># 注意等号两边不能有空格</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;result 为:<span class="hljs-variable">$result</span>&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -511,8 +513,8 @@
 <p><strong>实例</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><br>file=<span class="hljs-string">&quot;/var/www/test/test.sh&quot;</span><br><span class="hljs-keyword">if</span> [ -r <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件可读&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不可读&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -w <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件可写&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不可写&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -x <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件可执行&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不可执行&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -f <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件为普通文件&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件为特殊文件&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -d <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件是个目录&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不是个目录&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -s <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不为空&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件为空&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ -e <span class="hljs-variable">$file</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件存在&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;文件不存在&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
 <h2 id="let-命令">let 命令</h2>
-<p>let 命令是 BASH 中用于计算的工具,用于执行一个或多个表达式,变量计算中不需要加上 $ 来表示变量,如果表达式中包含了空格或其他特殊字符,则必须引起来</p>
-<h3 id="语法格式">语法格式</h3>
+<p>let 命令是 BASH 中用于计算的工具,用于执行一个或多个表达式,变量计算中不需要加上<code>$</code>来表示变量,如果表达式中包含了空格或其他特殊字符,则必须引起来</p>
+<p><strong>语法格式</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">let arg [arg ...]<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>arg</code>:要执行的表达式</li>
@@ -527,6 +529,30 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><br><br>let a=5+4<br>let b=9-3<br>echo $a $b<br></code></pre></td></tr></table></figure>
 <p>以上实例执行结果为:</p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">9 </span><span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<h3 id="">(( ))</h3>
+</li>
+<li>
+<ul>
+<li>与 let 指令相似，用在算数运算上，是 bash 的内建功能。所以，在执行效率上会比使用 let指令要好许多
+<ul>
+<li>想取到运算结果，需要用<code>$</code>引用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<pre><code class="language-shell">  #!/bin/bash
+  a=$((1+2))
+  b=$(((2+3)*4))
+  count=1
+  ((count++))
+  echo $count
+</code></pre>
+</li>
+</ul>
+
             </div>
             <hr>
             <div>
@@ -551,9 +577,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+                      <a href="/2021/02/23/Software/Shell/%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaScript 类型转换</span>
+                        <span class="hidden-mobile">Shell 特殊符号</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -561,8 +587,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%AF%B9%E8%B1%A1/String/">
-                        <span class="hidden-mobile">JavaScript String对象</span>
+                      <a href="/2021/02/23/Software/Shell/%E5%8F%98%E9%87%8F/">
+                        <span class="hidden-mobile">Shell 变量</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
