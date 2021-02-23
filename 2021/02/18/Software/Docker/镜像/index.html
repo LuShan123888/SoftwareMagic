@@ -254,12 +254,12 @@
 <h3 id="images">images</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker images</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>**-a 😗*列出本地所有的镜像(含中间映像层,默认情况下,过滤掉中间映像层);</li>
-<li>**–digests 😗*显示镜像的摘要信息;</li>
-<li>**-f 😗*显示满足条件的镜像;</li>
-<li>**–format 😗*指定返回值的模板文件;</li>
-<li>**–no-trunc 😗*显示完整的镜像信息;</li>
-<li>**-q 😗*只显示镜像ID</li>
+<li>**-a :**列出本地所有的镜像(含中间映像层,默认情况下,过滤掉中间映像层);</li>
+<li>**–digests :**显示镜像的摘要信息;</li>
+<li>**-f :**显示满足条件的镜像;</li>
+<li>**–format :**指定返回值的模板文件;</li>
+<li>**–no-trunc :**显示完整的镜像信息;</li>
+<li>**-q :**只显示镜像ID</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> images<br><span class="hljs-attribute">REPOSITORY</span>          TAG                 IMAGE ID            CREATED             SIZE<br><span class="hljs-attribute">mysql</span>                   latest              e<span class="hljs-number">1</span>d<span class="hljs-number">7</span>dc<span class="hljs-number">9731</span>da        <span class="hljs-number">2</span> weeks ago         <span class="hljs-number">544</span>MB<br><span class="hljs-attribute">hello</span>-world         latest              bf<span class="hljs-number">756</span>fb<span class="hljs-number">1</span>ae<span class="hljs-number">65</span>        <span class="hljs-number">8</span> months ago        <span class="hljs-number">13</span>.<span class="hljs-number">3</span>kB<br></code></pre></td></tr></table></figure>
@@ -272,8 +272,8 @@
 <h3 id="rmi">rmi</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker rmi -f 镜像ID/镜像名</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>**-f 😗*强制删除;</li>
-<li>**–no-prune 😗*不移除该镜像的过程镜像,默认移除;</li>
+<li>**-f :**强制删除;</li>
+<li>**–no-prune :**不移除该镜像的过程镜像,默认移除;</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker rmi -f $(docker images -aq) <span class="hljs-comment">#删除全部镜像</span></span><br><span class="hljs-meta">$</span><span class="bash"> docker rmi ID1 ID2 ID3 <span class="hljs-comment">#同时删除多个镜像</span></span><br></code></pre></td></tr></table></figure>
@@ -292,9 +292,9 @@
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker search 镜像名<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>–filter</strong>:搜索筛选</li>
-<li>**–automated 😗*只列出 automated build类型的镜像;</li>
-<li>**–no-trunc 😗*显示完整的镜像描述;</li>
-<li>**-s 😗*列出收藏数不小于指定值的镜像</li>
+<li>**–automated :**只列出 automated build类型的镜像;</li>
+<li>**–no-trunc :**显示完整的镜像描述;</li>
+<li>**-s :**列出收藏数不小于指定值的镜像</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker search mysql<br>NAME                          		     DESCRIPTION                                     				STARS               OFFICIAL            AUTOMATED<br>mysql                         		      MySQL is a widely used, open-source relation<span class="hljs-built_in">..</span>.              9990                 [OK]<br>mariadb                           		MariaDB is a community-developed fork of MyS<span class="hljs-built_in">..</span>.          3659                 [OK]<br>mysql/mysql-server                   Optimized MySQL<span class="hljs-built_in"> Server </span>Docker images. Create<span class="hljs-built_in">..</span>.            730                                                      [OK]<br>percona                           		Percona<span class="hljs-built_in"> Server </span>is a fork of the MySQL relati<span class="hljs-built_in">..</span>.                     512                 [OK]<br>centos/mysql-57-centos7        MySQL 5.7 SQL database<span class="hljs-built_in"> server </span>                                             83<br>mysql/mysql-cluster                  Experimental MySQL Cluster Docker images. Cr<span class="hljs-built_in">..</span>.               75<br>centurylink/mysql                       Image containing mysql. Optimized <span class="hljs-keyword">to</span> be link<span class="hljs-built_in">..</span>.                   61                                                        [OK]<br></code></pre></td></tr></table></figure>
@@ -305,8 +305,8 @@
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker pull 镜像名[<span class="hljs-symbol">:tag</span>]<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>tag</code>:版本号,如果不写tag默认为最新版</li>
-<li>**-a 😗*拉取所有 tagged 镜像</li>
-<li>**–disable-content-trust 😗*忽略镜像的校验,默认开启</li>
+<li>**-a :**拉取所有 tagged 镜像</li>
+<li>**–disable-content-trust :**忽略镜像的校验,默认开启</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker pull mysql</span><br><br>Using default tag: latest<br>latest: Pulling from library/mysql # 分层下载,联合文件系统<br>d121f8d1c412: Pull complete<br>f3cebc0b4691: Pull complete<br>1862755a0b37: Pull complete<br>489b44f3dbb4: Pull complete<br>690874f836db: Pull complete<br>baa8be383ffb: Pull complete<br>55356608b4ac: Pull complete<br>dd35ceccb6eb: Pull complete<br>429b35712b19: Pull complete<br>162d8291095c: Pull complete<br>5e500ef7181b: Pull complete<br>af7528e958b6: Pull complete<br>Digest: sha256:e1bfe11693ed2052cb3b4e5fa356c65381129e87e38551c6cd6ec532ebe0e808 # 签名<br>Status: Downloaded newer image for mysql:latest # 真实地址<br>docker.io/library/mysql:latest<br></code></pre></td></tr></table></figure>
@@ -316,7 +316,7 @@
 <li>push前需要tag本地镜像</li>
 <li>将本地的镜像上传到镜像仓库,要先登陆到镜像仓库</li>
 <li>以下命令中的 username 为你的 Docker 账号用户名</li>
-<li>**–disable-content-trust 😗*忽略镜像的校验,默认开启</li>
+<li>**–disable-content-trust :**忽略镜像的校验,默认开启</li>
 </ul>
 <h3 id="login-logout">login/logout</h3>
 <ul>
@@ -324,8 +324,8 @@
 </ul>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ docker <span class="hljs-keyword">login</span> [<span class="hljs-keyword">OPTIONS</span>] [<span class="hljs-keyword">SERVER</span>]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>**-u 😗*登陆的用户名</li>
-<li>**-p 😗*登陆的密码</li>
+<li>**-u :**登陆的用户名</li>
+<li>**-p :**登陆的密码</li>
 <li>登出一个Docker镜像仓库,如果未指定镜像仓库地址,默认为官方仓库 Docker Hub</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker logout [<span class="hljs-keyword">OPTIONS</span>] [SERVER]<br></code></pre></td></tr></table></figure>
