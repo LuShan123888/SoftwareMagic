@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Mybatis 缓存 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Mybatis 缓存">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Mybatis 缓存</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Mybatis 缓存</h1>
+<h2 id="简介">简介</h2>
+<ul>
+<li>缓存[Cache]概述
+<ul>
+<li>存在内存中的临时数据</li>
+<li>将用户经常查询的数据放在缓存(内存)中, 用户去查询数据就不用从磁盘上(关系型数据库数据文件)查询, 从缓存中查询, 从而提高查询效率, 解决了高并发系统的性能问题</li>
+</ul>
+</li>
+<li>为什么使用缓存？
+<ul>
+<li>减少和数据库的交互次数, 减少系统开销, 提高系统效率</li>
+</ul>
+</li>
+<li>什么样的数据能使用缓存？
+<ul>
+<li>经常查询并且不经常改变的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="Mybatis缓存">Mybatis缓存</h3>
+<ul>
+<li>
+<p>MyBatis包含一个非常强大的查询缓存特性, 它可以非常方便地定制和配置缓存,缓存可以极大的提升查询效率</p>
+</li>
+<li>
+<p>MyBatis系统中默认定义了两级缓存**:一级缓存<strong>和</strong>二级缓存**</p>
+</li>
+<li>
+<ul>
+<li>默认情况下, 只有一级缓存开启,(SqlSession级别的缓存, 也称为本地缓存)
+<ul>
+<li>二级缓存需要手动开启和配置, 他是基于namespace级别的缓存</li>
+<li>为了提高扩展性, MyBatis定义了缓存接口Cache,我们可以通过实现Cache接口来自定义二级缓存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="一级缓存">一级缓存</h2>
+<ul>
+<li>一级缓存也叫本地缓存,本质是一个map</li>
+<li>与数据库同一次会话期间查询到的数据会放在本地缓存中</li>
+<li>以后如果需要获取相同的数据, 直接从缓存中拿, 没必须再去查询数据库</li>
+<li>一级缓存是SqlSession级别的缓存, 是一直开启的, 我们关闭不了它</li>
+</ul>
+<h3 id="一级缓存失效的四种情况">一级缓存失效的四种情况</h3>
+<p>一级缓存失效情况:没有使用到当前的一级缓存, 效果就是, 还需要再向数据库中发起一次查询请求</p>
+<ol>
+<li>sqlSession不同</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   SqlSession session2 = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session.close();<br>   session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>结果</strong>:发现发送了两条SQL语句</li>
+<li><strong>结论</strong>:每个sqlSession中的缓存相互独立</li>
+</ul>
+<ol start="2">
+<li>sqlSession相同, 查询条件不同</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   User user2 = mapper2.queryUserById(<span class="hljs-number">2</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>结果</strong>:发现发送了两条SQL语句</li>
+<li><strong>结论</strong>:当前缓存中, 不存在这个数据</li>
+</ul>
+<ol start="3">
+<li>sqlSession相同, 两次查询之间执行了增删改操作</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br><br>   HashMap map = <span class="hljs-keyword">new</span> HashMap();<br>   map.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;test&quot;</span>);<br>   map.put(<span class="hljs-string">&quot;id&quot;</span>,<span class="hljs-number">4</span>);<br>   mapper.updateUser(map);<br><br>   User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br><br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>结果</strong>:查询在中间执行了增删改操作后, 重新执行了</li>
+<li><strong>结论</strong>:因为增删改操作可能会对当前数据产生影响</li>
+</ul>
+<ol start="4">
+<li>sqlSession相同, 手动清除一级缓存</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br><br>   session.clearCache();<span class="hljs-comment">//手动清除缓存</span><br><br>   User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br><br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="二级缓存">二级缓存</h2>
+<ul>
+<li>二级缓存也叫全局缓存, 一级缓存作用域太低了, 所以诞生了二级缓存</li>
+<li>基于namespace级别的缓存, 一个名称空间, 对应一个二级缓存</li>
+<li>查出的数据都会被默认先放在一级缓存中</li>
+<li>只要开启了二级缓存, 我们在同一个Mapper中的查询, 可以在二级缓存中拿到数据</li>
+<li>只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中</li>
+</ul>
+<h3 id="使用步骤">使用步骤</h3>
+<ol>
+<li>开启全局缓存<code>mybatis-config.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cacheEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>在<code>mapper.xml</code>中配置使用二级缓存</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">cache</span>/&gt;</span><br><br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个更高级的配置创建了一个 FIFO 缓存, 每隔 60 秒刷新, 最多可以存储结果对象或列表的 512 个引用, 而且返回的对象被认为是只读的, 因此对它们进行修改可能会在不同线程中的调用者产生冲突</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">cache</span></span><br><span class="hljs-tag"> <span class="hljs-attr">eviction</span>=<span class="hljs-string">&quot;FIFO&quot;</span></span><br><span class="hljs-tag"> <span class="hljs-attr">flushInterval</span>=<span class="hljs-string">&quot;60000&quot;</span></span><br><span class="hljs-tag"> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;512&quot;</span></span><br><span class="hljs-tag"> <span class="hljs-attr">readOnly</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>代码测试
+<ul>
+<li>所有的实体类先实现序列化接口</li>
+<li>测试代码</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   SqlSession session2 = MybatisUtils.getSession();<br><br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   session.close();<br><br>   User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>结果</strong>:只访问了一次数据库, 二级缓存生效</li>
+</ul>
+<h3 id="缓存原理图">缓存原理图</h3>
+<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-02-640-20201101234043284.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="img" style="zoom:67%;" />
+<h2 id="EhCache">EhCache</h2>
+<p>Ehcache是一种广泛使用的java分布式缓存, 用于通用缓存</p>
+<ul>
+<li>pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis.caches<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-ehcache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>在<code>mapper.xml</code>中使用对应的缓存</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span> = <span class="hljs-string">&quot;org.acme.FooMapper” &gt;</span></span><br><span class="hljs-tag"><span class="hljs-string">   &lt;cache type = &quot;</span><span class="hljs-attr">org.mybatis.caches.ehcache.EhcacheCache</span>” /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>编写ehcache.xml文件, 如果在加载时未找到/ehcache.xml资源或出现问题, 则将使用默认配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ehcache</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">xsi:noNamespaceSchemaLocation</span>=<span class="hljs-string">&quot;http://ehcache.org/ehcache.xsd&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">updateCheck</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">diskStore</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;./tmpdir/Tmp_EhCache&quot;</span>/&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">defaultCache</span></span><br><span class="hljs-tag">           <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;10000&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;259200&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">cache</span></span><br><span class="hljs-tag">           <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cloud_user&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;5000&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ehcache</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>diskStore:为缓存路径, ehcache分为内存和磁盘两级, 此属性定义磁盘的缓存位置,参数解释如下:
+<ul>
+<li>user.home – 用户主目录</li>
+<li>user.dir – 用户当前工作目录</li>
+<li>java.io.tmpdir – 默认临时文件路径</li>
+</ul>
+</li>
+<li>defaultCache:默认缓存策略, 当ehcache找不到定义的缓存时, 则使用这个缓存策略,只能定义一个
+<ul>
+<li>name:缓存名称</li>
+<li>maxElementsInMemory:缓存最大数目</li>
+<li>maxElementsOnDisk:硬盘最大缓存个数</li>
+<li>eternal:对象是否永久有效, 一但设置了, timeout将不起作用</li>
+<li>overflowToDisk:是否保存到磁盘, 当系统宕机时</li>
+<li>timeToIdleSeconds:设置对象在失效前的允许闲置时间(单位:秒),仅当eternal=false对象不是永久有效时使用, 可选属性, 默认值是0, 也就是可闲置时间无穷大</li>
+<li>timeToLiveSeconds:设置对象在失效前允许存活时间(单位:秒),最大时间介于创建时间和失效时间之间,仅当eternal=false对象不是永久有效时使用, 默认是0., 也就是对象存活时间无穷大</li>
+<li>diskPersistent:是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false</li>
+<li>diskSpoolBufferSizeMB:这个参数设置DiskStore(磁盘缓存)的缓存区大小,默认是30MB,每个Cache都应该有自己的一个缓冲区</li>
+<li>diskExpiryThreadIntervalSeconds:磁盘失效线程运行时间间隔, 默认是120秒</li>
+<li>memoryStoreEvictionPolicy:当达到maxElementsInMemory限制时, Ehcache将会根据指定的策略去清理内存,默认策略是LRU(最近最少使用),你可以设置为FIFO(先进先出)或是LFU(较少使用)</li>
+<li>clearOnFlush:内存数量最大时是否清除</li>
+<li>memoryStoreEvictionPolicy:可选策略有:LRU(最近最少使用, 默认策略), FIFO(先进先出), LFU(最少访问次数)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>FIFO</strong>:first in first out 先进先出<br>
+<strong>LFU</strong>: Less Frequently Used 最少被使用的, 缓存的元素有一个hit属性, hit值最小的将会被清出缓存,也就是淘汰一定时期内被访问次数最少的<br>
+<strong>LRU</strong>:Least Recently Used 最近最少使用的, 最后一次被使用到发生调度的时间最长的被清出缓存</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SSM/">SSM</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SSM/Mybatis/">Mybatis</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Java/SSM/Mybatis/%E5%8A%A8%E6%80%81SQL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mybatis 动态SQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Java/SSM/Mybatis/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">Mybatis 问题解决</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

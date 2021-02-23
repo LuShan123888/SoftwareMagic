@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>SQL 连接查询 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 连接查询">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 连接查询</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 连接查询</h1>
+<h3 id="JOIN">JOIN</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-sql-join.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="img"></p>
+<h3 id="INNER-JOIN">INNER JOIN</h3>
+<p>INNER JOIN 关键字在表中存在至少一个匹配时返回行</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-img_innerjoin.gif" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="SQL INNER JOIN"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br><span class="hljs-comment">--或:</span><br><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br></code></pre></td></tr></table></figure>
+<p><strong>注释</strong>:INNER JOIN 与 JOIN 是相同的</p>
+<h3 id="LEFT-JOIN">LEFT JOIN</h3>
+<p>LEFT JOIN 关键字从左表(table1)返回所有的行,即使右表(table2)中没有匹配,如果右表中没有匹配,则结果为 NULL</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-img_leftjoin.gif" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="SQL LEFT JOIN"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql">SQL LEFT JOIN 语法<br><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br><span class="hljs-comment">--或:</span><br><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br></code></pre></td></tr></table></figure>
+<p><strong>注释</strong>:在某些数据库中,LEFT JOIN 称为 LEFT OUTER JOIN</p>
+<h3 id="RIGHT-JOIN">RIGHT JOIN</h3>
+<p>RIGHT JOIN 关键字从右表(table2)返回所有的行,即使左表(table1)中没有匹配,如果左表中没有匹配,则结果为 NULL</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-img_rightjoin.gif" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="SQL RIGHT JOIN"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br><span class="hljs-comment">--或:</span><br><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br></code></pre></td></tr></table></figure>
+<p><strong>注释</strong>:在某些数据库中,RIGHT JOIN 称为 RIGHT OUTER JOIN</p>
+<h3 id="FULL-JOIN">FULL JOIN</h3>
+<ul>
+<li>FULL OUTER JOIN 关键字只要左表(table1)和右表(table2)其中一个表中存在匹配,则返回行</li>
+<li>FULL OUTER JOIN 关键字结合了 LEFT JOIN 和 RIGHT JOIN 的结果</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-img_fulljoin.gif" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="SQL FULL OUTER JOIN"></p>
+<h3 id="SQL-FULL-OUTER-JOIN-语法">SQL FULL OUTER JOIN 语法</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> column_name(s)<br><span class="hljs-keyword">FROM</span> table1<br><span class="hljs-keyword">FULL</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> table2<br><span class="hljs-keyword">ON</span> table1.column_name=table2.column_name;<br></code></pre></td></tr></table></figure>
+<h2 id="等值与非等值连接查询">等值与非等值连接查询</h2>
+<p>连接查询的WHERE子句中用来连接两个表的条件称为连接条件或连接谓词,其一般格式为</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">[&lt;表名1&gt;.] &lt;列名1&gt; &lt;比较运算符&gt; [&lt;表名2&gt;.] &lt;列名2&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其中比较运算符主要有<code>=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;=</code>,<code>&lt;=</code>,<code>!=(或&lt;&gt;)</code> 等</li>
+<li>外连接谓词还可以使用下面形式:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">[&lt;  &gt;.] &lt;列名1&gt; BETWEEN [&lt;表名2&gt;.] &lt;列名2&gt; AND [&lt;表名3&gt;.] &lt;列名3&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>当连接运算符为=时,称为等值连接,使用其他运算符称为非等值连接</li>
+<li>连接谓词中的列名称为连接字符,连接条件中的各连接字段类型必须是可比的,但名字不必相同</li>
+</ul>
+<p>**[例3.49]**查询每个学生及其选修课程的情况</p>
+<p>学生情况存放在Student表中,学生选课情况存放在SC表中,所以本查询实际上涉及Student与SC两个表,这两个表之间的联系是通过公共属性Sno实现的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.*,SC.*<br><span class="hljs-keyword">FROM</span> Student,SC<br>    <span class="hljs-keyword">WHERE</span> Student.Sno=SC.Sno;<span class="hljs-comment">/*将Student与SC中同一学生的元组连接起来*/</span><br></code></pre></td></tr></table></figure>
+<p>结果为:</p>
+<table>
+<thead>
+<tr>
+<th>Student.Sno</th>
+<th>Sname</th>
+<th>Ssex</th>
+<th>Sage</th>
+<th>Sdept</th>
+<th>SC.Sno</th>
+<th>Cno</th>
+<th>Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>201215121</td>
+<td>李勇</td>
+<td>男</td>
+<td>20</td>
+<td>CS</td>
+<td>201215121</td>
+<td>1</td>
+<td>92</td>
+</tr>
+<tr>
+<td>201215121</td>
+<td>李勇</td>
+<td>男</td>
+<td>20</td>
+<td>CS</td>
+<td>201215121</td>
+<td>2</td>
+<td>85</td>
+</tr>
+<tr>
+<td>201215121</td>
+<td>李勇</td>
+<td>男</td>
+<td>20</td>
+<td>CS</td>
+<td>201215121</td>
+<td>3</td>
+<td>88</td>
+</tr>
+<tr>
+<td>201215122</td>
+<td>刘晨</td>
+<td>女</td>
+<td>19</td>
+<td>CS</td>
+<td>201215122</td>
+<td>2</td>
+<td>90</td>
+</tr>
+<tr>
+<td>201215122</td>
+<td>刘晨</td>
+<td>女</td>
+<td>19</td>
+<td>CS</td>
+<td>201215122</td>
+<td>3</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>本例中,SELECT子句与WHERE子句中的属性名前都加上了表名前缀,这是为了避免混淆,如果属性名在参加连接的各表中是唯一的,则可以省略表名前缀</li>
+<li>关系数据库管理系统执行该连接操作的一种可能过程是:首先在表Student中找到第一个元组,然后从头开始扫描SC表,逐一查找于Student第一个元组的Sno相等的SC元组,找到后就将Student中的第一个元组于该元组拼接起来,形成结果表中一个元组,SC全部查找完成后,再找Student中的第二个元组,然后再从头开始扫描SC,逐一查找满足连接条件的元组,找到后就将Student中的第二个元组与该元组拼接起来,形成结果表中一个元组,重复上述的操作,知道Student中的全部元组都处理完毕为止,这就是嵌套循环连接算法的基本思想</li>
+<li>如果在SC表Sno上建立了索引的话,就不用每次全表扫描SC表了,而是根据Sno值通过索引找到相应的SC元组,用索引查询SC中满足条件的元组一般会比全表扫描块</li>
+<li>若在等值连接中把目标中重复的属性列去掉则为自然连接</li>
+</ul>
+<p>**[例3.50]**对例3.49用自然连接完成</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.Sno,Sname,Ssex,Sage,Sdept,Cno,Grade<br><span class="hljs-keyword">FROM</span> Student,SC<br><span class="hljs-keyword">WHERE</span> Student.Sno=SC.Sno;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>本例中,由于Student.Sno,Sname,Ssex,Sage,Sdept,Cno和Grade属性列在Student表与SC表中是唯一的,因此引用时可以去掉表名前缀,而Sno在两个表都出现了,因此引用时必须加上表名前缀</li>
+<li>一条SQL语句可以同时完成选择和连接查询,这时WHERE子句是由连接谓词和选择谓词组成的复合条件</li>
+</ul>
+<p>**[例3.51]**查询选修2号课程且成绩在90分以上的所有学生的学号和姓名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.Sno,Sname<br><span class="hljs-keyword">FROM</span> Student,SC<br><span class="hljs-keyword">WHERE</span> Student.Sno=SC.Sno <span class="hljs-keyword">AND</span> <span class="hljs-comment">/*连接谓词*/</span><br>		SC.Cno=<span class="hljs-string">&#x27;2&#x27;</span> <span class="hljs-keyword">AND</span> SC.Grade&gt;<span class="hljs-number">90</span>;<span class="hljs-comment">/*其他限定条件*/</span><br></code></pre></td></tr></table></figure>
+<p>该查询的一种优化(高效)的执行过程是,先从SC中挑选出Cno='2’并且Grade&gt;90的元组形成一个中间关系,再和Student中满足连接条件的元组进行连接得到最终的结果关系</p>
+<h3 id="自身连接">自身连接</h3>
+<p>连接操作不仅可以在两个表之间进行,也可以是一个表与其自己进行连接,称为表的自身连接</p>
+<p>**[例3.52]**查询每一门课的间接先修课(即先修课的先修课)</p>
+<ul>
+<li>在Course表中只有每门课的之间先修课信息,而没有先修课的先修课,要得到这个信息,必须先对一门课找到其先修课,再按此先修课的课程号查找它的先修课程,这就要将Cours表与其自身连接</li>
+<li>为此,要为Course表取两个别名,一个是FIRST,另一个是SECOUND</li>
+</ul>
+<p><strong>FIRST表(Course表)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cno</th>
+<th>Cname</th>
+<th>Cpno</th>
+<th>Ccredit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>数据库</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数学</td>
+<td></td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>信息系统</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>操作系统</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>数据结构</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>数据处理</td>
+<td></td>
+<td>2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PASCAL语言</td>
+<td>6</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SECOUND表(Course表)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cno</th>
+<th>Cname</th>
+<th>Cpno</th>
+<th>Ccredit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>数据库</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>数学</td>
+<td></td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>信息系统</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>操作系统</td>
+<td>6</td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>数据结构</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>数据处理</td>
+<td></td>
+<td>2</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PASCAL语言</td>
+<td>6</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>完成该查询的SQL语句为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> FIRST.Cno,SECOND.Cpno<br><span class="hljs-keyword">FROM</span> Course <span class="hljs-keyword">FIRST</span>,Course <span class="hljs-keyword">SECOND</span><br><span class="hljs-keyword">WHERE</span> FIRST.Cpno=SECOND.Cno;<br></code></pre></td></tr></table></figure>
+<p>结果为:</p>
+<table>
+<thead>
+<tr>
+<th>Cno</th>
+<th>Cpno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>7</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多表连接">多表连接</h3>
+<p>连接操作除了可以是两表连接,一个表与其自身连接外,还可以是两个以上的表进行连接,后者通常称为多表连接关系</p>
+<p>**[例3.54]**查询每个学生的学号,姓名,选修的课程名及成绩</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.Sno,Sname,Cname,Grade<br><span class="hljs-keyword">FROM</span> Student,SC,Course<br><span class="hljs-keyword">WHERE</span> Student.Sno=SC.Sno <span class="hljs-keyword">AND</span> SC.Cno=Course.Cno;<br></code></pre></td></tr></table></figure>
+<p>关系数据库管理系统在执行多表连接时,通常是先进行两个表的连接操作,再将其连接结果与第三个表进行连接,本例中的一种可能的执行方式是,先将Student表与SC表进行连接,得到每个学生的学号,姓名,所选课程号和相对应的成绩,然后再将其与Course表进行连接,得到最终结果</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DDL/">DDL</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Java/SSM/SpringFramework/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring 声明式事务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Server/Nginx/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <span class="hidden-mobile">Nginx 配置文件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

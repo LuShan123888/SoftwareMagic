@@ -153,22 +153,25 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/Web/%E5%8F%98%E9%87%8F/">PHP Web变量</a>
+        <a href="/2021/02/23/Software/Docker/DockerFile/">DockerFile</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/Web/%E5%8F%98%E9%87%8F/">
+        <a href="/2021/02/23/Software/Docker/DockerFile/">
           
           
             
           
-          PHP Web变量
+          DockerFile
 
+Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
 
-本节介绍3种使用PHP脚本来获取服务器环境信息,请求信息(包括表单参数和cookie)的方法,我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)
+Dockerfile文件指令
+FROM
 
+定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx
 
-如果php.ini文件中的register_globals选项被启用,PHP就会为每一个表单参数,请求信息及服务器环境创建一个独立的全局变量,这个功能非常方便,它可以让
+12FROM nginxRUN echo &#x27;这是一个本地构建的nginx镜像&#x27; &gt; /usr
         </a>
       </p>
 
@@ -176,8 +179,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:29" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -187,11 +190,7 @@
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/Web/">Web</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -206,18 +205,25 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E5%AF%B9%E8%B1%A1/%E8%87%AA%E7%9C%81/">PHP 自省</a>
+        <a href="/2021/02/23/Software/Docker/%E5%AE%B9%E5%99%A8/">Docker 容器</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E5%AF%B9%E8%B1%A1/%E8%87%AA%E7%9C%81/">
+        <a href="/2021/02/23/Software/Docker/%E5%AE%B9%E5%99%A8/">
           
           
             
           
-          PHP 自省
+          Docker 容器
+容器生命周期
+run
+1$ docker run [可选参数] 镜像名/镜像ID [命令]
 
-自省(introspection)是一种让程序检查对象特性的机制,可以检查对象的名称,父类(如果存在),属性和访问等,利用自省,你可以编写对任何类或对象进行操作的代码,在编写代码时你不需要知道类中定义了哪些属性和方法,相反,你可以在运行时得到那些信息,这使得你可以写出通用的调试器(debugger),串行化器(serializer)和解剖器(profiler)等,本节将介绍PHP提
+-a stdin:指定标准输入输出内容类型,可选 STDIN/STDOUT/STDERR 三项;
+-d:后台运行容器,并返回容器ID
+-i:以交互模式运行容器,通常与 -t 同时使用
+-P:随机端口映射,容器内部端口随机映射到主机的端口
+-p:指定端口映射,格式为**:主机(宿主)端口
         </a>
       </p>
 
@@ -225,8 +231,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:29" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -236,11 +242,7 @@
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E5%AF%B9%E8%B1%A1/">对象</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -255,24 +257,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%87%BD%E6%95%B0/">PHP 数组的函数</a>
+        <a href="/2021/02/23/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">Docker 网络</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E7%9A%84%E5%87%BD%E6%95%B0/">
+        <a href="/2021/02/23/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">
           
           
             
           
-          PHP 数组的函数
+          Docker 网络
 
-PHP有一些有用的函数来修改或将一个操作应用到数组的所有元素,可以合并数组,寻找数组间差别,计算总数等等,这些都可以由内置函数来完成
+docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
+所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
+Docker中的所有的网络接口都是虚拟的
 
-指定值的范围
+port
 
-range()函数创建一个连续整数或字符的数组,整数或字符的值在传递给函数的两个参数之间,例如:
+快捷地查看端口的绑定情况
 
-123$numbers = range(2,5);	//$numbers = array(2,3,4,5);$letters 
+1$ dock
         </a>
       </p>
 
@@ -280,8 +284,8 @@ range()函数创建一个连续整数或字符的数组,整数或字符的值在
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:28" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -291,11 +295,7 @@ range()函数创建一个连续整数或字符的数组,整数或字符的值在
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E6%95%B0%E7%BB%84/">数组</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -310,28 +310,20 @@ range()函数创建一个连续整数或字符的数组,整数或字符的值在
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E9%AD%94%E6%9C%AF%E5%B8%B8%E9%87%8F/">PHP 魔术常量</a>
+        <a href="/2021/02/23/Software/Docker/%E9%95%9C%E5%83%8F/">Docker 镜像</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E9%AD%94%E6%9C%AF%E5%B8%B8%E9%87%8F/">
+        <a href="/2021/02/23/Software/Docker/%E9%95%9C%E5%83%8F/">
           
           
             
           
-          PHP 魔术常量
+          Docker 镜像
+镜像加载原理
+UnionES (联合文件系统)
 
-PHP 向它运行的任何脚本提供了大量的预定义常量
-不过很多常量都是由不同的扩展库定义的,只有在加载了这些扩展库时才会出现,或者动态加载后,或者在编译时已经包括进去了
-有八个魔术常量它们的值随着它们在代码中的位置改变而改变
-例如 LINE 的值就依赖于它在脚本中所处的行来决定,这些特殊的常量不区分大小写,如下:
-
-LINE
-
-文件中的当前行号
-
-实例
-1&lt;?php echo
+Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系统,它支持对文件系统的修改作为一次提交来一层层的叠加,同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem), Union文件系统是Docker镜像
         </a>
       </p>
 
@@ -339,8 +331,8 @@ LINE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:19" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -350,11 +342,7 @@ LINE
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -369,23 +357,21 @@ LINE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E8%AF%8D%E6%B3%95%E7%BB%93%E6%9E%84/">PHP 词法结构</a>
+        <a href="/2021/02/23/Software/Docker/%E6%9C%AC%E5%9C%B0%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">Docker 本地导入导出</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E8%AF%8D%E6%B3%95%E7%BB%93%E6%9E%84/">
+        <a href="/2021/02/23/Software/Docker/%E6%9C%AC%E5%9C%B0%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
           
           
             
           
-          PHP 词法结构
-大小写
+          Docker 本地导入导出
+概述
 
-和内置结构及关键字(如echo,while,Class等)一样,用户定义的类名和函数名也是不区分大小写的,因此,下面3行等价:
-
-123echo(&quot;hello,world&quot;);ECHO(&quot;hello,world&quot;);EcHo(&quot;hello,world&quot;);
-
-但是,变量时区分大小写的.也就是说,$name,$N
+docker save保存的是镜像(image),docker export保存的是容器(container)
+docker load用来载入镜像包,docker import 用来载入容器包,但两者都会恢复为镜像
+docker export导出的是一个容器的快照, 不是镜像本身, 也就是说没 layer,dockerfile 里的workdir,entrypo
         </a>
       </p>
 
@@ -393,8 +379,8 @@ LINE
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:19" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -404,11 +390,7 @@ LINE
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -423,41 +405,20 @@ LINE
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Markdown/Mermaid/">Markdown Mermaid</a>
+        <a href="/2021/02/23/Software/Shell/printf%E5%91%BD%E4%BB%A4/">Shell printf 命令</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Markdown/Mermaid/">
+        <a href="/2021/02/23/Software/Shell/printf%E5%91%BD%E4%BB%A4/">
           
           
             
           
-          Markdown Mermaid
-Graph
-12graph LR    A --&gt; B
+          Shell printf 命令
 
-
-这是申明一个由左到右,水平向右的图
-可能方向有:
-
-TB - top bottom
-BT - bottom top
-RL - right left
-LR - left right
-TD - same as TB
-
-
-
-节点与形状
-默认节点
-
-graph LR
-id1
-
-
-
-注意:id显示在节点内部
-
+printf 命令模仿 C 程序库(library)里的 printf() 程序
+printf 由 POSIX 标准所定义,因此使用 printf 的脚本比使用 echo 移植性好
+printf 使用引用文本或空格分隔的参数,外面可以在 printf 中使用格式化字符串,还可以制定字符串的宽度,左右对齐方式等,默认 printf 不会像 echo 自动添加换行符,
         </a>
       </p>
 
@@ -465,8 +426,8 @@ id1
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:11" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -476,7 +437,7 @@ id1
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Markdown/">Markdown</a>
+              <a href="/categories/Software/Shell/">Shell</a>
             
           </div>
         
@@ -491,20 +452,50 @@ id1
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%AC%A6.md/">PHP 表达式与操作符</a>
+        <a href="/2021/02/23/Software/Frontend/CSS/%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/">CSS 盒子模型</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%AC%A6.md/">
+        <a href="/2021/02/23/Software/Frontend/CSS/%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/">
           
           
             
           
-          PHP 表达式与操作符
-表达式
+          CSS 盒子模型
+height
+属性定义及使用说明
 
-表达式(expression)是可以通过求值来产生一个值的PHP代码块,最简单的表达式是直接量和变量,直接量对自身求值,变量则获取存放在变量中的值,更复杂的表达式由简单的表达式和操作符(operator)构成
-操作符(operator)取得一些值(操作数),然后进行某种操作(例如,把它们加起来).操作符的书写和标点符号一样,例如,我们所熟知的+和-来自于数学,有些
+height属性设置元素的高度
+注意:height属性不包括填充,边框,或页边距!
+
+属性值
+
+
+
+值
+描述
+
+
+
+
+auto
+默认,浏览器会计算出实际的高度,
+
+
+length
+使用 px,cm 等单位定义高度,
+
+
+%
+基于包含它的块级对象的百分比高度,
+
+
+inherit
+规定应该从父元素继承 height 属性的值,
+
+
+
+min/ma
         </a>
       </p>
 
@@ -512,101 +503,8 @@ id1
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:08" pubdate>
-              2021-02-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/21/Software/Frontend/HTML/%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/">HTML 特殊符号</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Frontend/HTML/%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/">
-          
-          
-            
-          
-          HTML 特殊符号
-
-
-
-符号
-说明
-编码
-符号
-说明
-编码
-符号
-说明
-编码
-
-
-
-
-”
-双引号
-&amp;quot;
-×
-乘号
-&amp;times;
-←
-向左箭头
-&amp;larr;
-
-
-&amp;
-AND符号
-&amp;amp;
-÷
-除号
-&amp;divide;
-↑
-向上箭头
-&amp;uarr;
-
-
-&lt;
-小于符号
-&amp;lt;
-±
-正负符号
-&amp;plusmn;
-→
-向
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 17:04" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -618,7 +516,7 @@ AND符号
             
               <a href="/categories/Software/Frontend/">Frontend</a>
             
-              <a href="/categories/Software/Frontend/HTML/">HTML</a>
+              <a href="/categories/Software/Frontend/CSS/">CSS</a>
             
           </div>
         
@@ -633,24 +531,27 @@ AND符号
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E6%B5%81%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">PHP 流程控制语句</a>
+        <a href="/2021/02/23/Software/Frontend/JavaScript/Ajax/">JavaScript AJAX</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E6%B5%81%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">
+        <a href="/2021/02/23/Software/Frontend/JavaScript/Ajax/">
           
           
             
           
-          PHP 流程控制语句
-PHP支持许多传统程序结构来控制程序的执行流程,条件语句(如if/else和switch)依据一些条件,允许程序执行不同的代码块或什么都不执行,循环(如while和for)支持重复执行特定的代码段
-if
+          JavaScript AJAX
 
-if语句检查一个表达式的真假,如果表达式为true,则执行一条语句,if语句如下所示:
+AJAX = 异步 JavaScript 和 XML
+AJAX 是一种用于创建快速动态网页的技术
+通过在后台与服务器进行少量数据交换,AJAX 可以使网页实现异步更新,这意味着可以在不重新加载整个网页的情况下,对网页的某部分进行更新
+传统的网页(不使用 AJAX)如果需要更新内容,必需重载整个网页面
 
-12if(expression)statement
+AJAX 工作原理
 
-当表达式为false时,使用
+XMLHttpRequest 对象
+
+X
         </a>
       </p>
 
@@ -658,8 +559,8 @@ if语句检查一个表达式的真假,如果表达式为true,则执行一条语
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 16:44" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -669,11 +570,9 @@ if语句检查一个表达式的真假,如果表达式为true,则执行一条语
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Frontend/">Frontend</a>
             
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
-            
-              <a href="/categories/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
             
           </div>
         
@@ -688,20 +587,27 @@ if语句检查一个表达式的真假,如果表达式为true,则执行一条语
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">PHP 数据类型</a>
+        <a href="/2021/02/23/Software/Frontend/JavaScript/Cookie/">JavaScript Cookie</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/21/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+        <a href="/2021/02/23/Software/Frontend/JavaScript/Cookie/">
           
           
             
           
-          PHP 数据类型
-整型
+          JavaScript Cookie
 
-整型都是整数,例如1,12和256,可接受的范围根据具体的平台而定,但是一般是从-2 147 483 648到+2 147 483 647,特别要注意的是,这个范围和C编译器中的长整型范围相同,不幸的是,C标准里没有指定长整型一定在什么范围内,所以在一些系统里会有不同的整型范围
-整型直接量可以用十进制,八进制或十六进制表示,十进制值由不以0开头的数字序列表示,这个数列可以
+Cookie 用于存储 web 页面的用户信息
+
+Cookie 概述
+
+Cookie 是一些数据, 存储于你电脑上的文本文件中
+当 web 服务器向浏览器发送 web 页面时,在连接关闭后,服务端不会记录用户的信息
+Cookie 的作用就是用于解决 “如何记录客户端的用户信息”:
+
+当用户访问 web 页面时,他的名字可以记录在 cookie 中
+在用户下一次
         </a>
       </p>
 
@@ -709,8 +615,8 @@ if语句检查一个表达式的真假,如果表达式为true,则执行一条语
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 16:34" pubdate>
-              2021-02-21
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
             </time>
           </div>
         
@@ -720,11 +626,66 @@ if语句检查一个表达式的真假,如果表达式为true,则执行一条语
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Frontend/">Frontend</a>
             
-              <a href="/categories/Software/Backend/PHP/">PHP</a>
+              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
             
-              <a href="/categories/Software/Backend/PHP/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">语言基础</a>
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/23/Software/Frontend/JavaScript/JSON/">JavaScript JSON</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/23/Software/Frontend/JavaScript/JSON/">
+          
+          
+            
+          
+          JavaScript JSON
+JSON.stringify()
+
+JSON.stringify() 方法用于将 JavaScript 值转换为 JSON 字符串
+
+语法
+1JSON.stringify(value[, replacer[, space]])
+参数说明:
+
+value:必需, 要转换的 JavaScript 值(通常为对象或数组)
+replacer:
+
+可选,用于转换结果的函数或数
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-23 14:52" pubdate>
+              2021-02-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Frontend/">Frontend</a>
+            
+              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
             
           </div>
         

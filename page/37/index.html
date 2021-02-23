@@ -153,20 +153,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DCL/%E5%AE%A1%E8%AE%A1/">SQL 审计</a>
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E6%9F%A5%E8%AF%A2/">Oracle 查询</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DCL/%E5%AE%A1%E8%AE%A1/">
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E6%9F%A5%E8%AF%A2/">
           
           
             
           
-          SQL 审计
+          Oracle 查询
+虚表
 
-AUDIT语句用来设置审计功能,NOAUDIT语句则取消审计功能
-审计一般可以分为用户级审计和系统级审计,用户级审计是任何用户可设置的审计,主要是用户针对自己创建的数据库表或视图进行审计,记录所有用户对这些表或视图的一切成功和(或)不成功的访问要求以及各种类型的SQL操作
-统级审计只能由数据库管理员设置,用以i检测成功或失败的登陆要求,监测授权和收回操作以及其他数据库级权限下的操作
+dual 是一个虚表, 虚拟表, 是用来构成 select 的语法规则, oracle 保证 dual 里面永远只有一条记录
+该表只有一行一列, 它和其他表一样, 可以执行插入, 更新, 删除操作, 还可以执行 drop 操作,但是不要去执行 drop 表的操作, 否则会使系统出错
+dual 主要用来选择系统变量或是求一个表达式的值,如果不需要从具体的表来取得表中数据,
         </a>
       </p>
 
@@ -174,7 +175,7 @@ AUDIT语句用来设置审计功能,NOAUDIT语句则取消审计功能
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 09:25" pubdate>
+            <time datetime="2021-02-18 10:12" pubdate>
               2021-02-18
             </time>
           </div>
@@ -189,9 +190,7 @@ AUDIT语句用来设置审计功能,NOAUDIT语句则取消审计功能
             
               <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DCL/">DCL</a>
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -206,79 +205,23 @@ AUDIT语句用来设置审计功能,NOAUDIT语句则取消审计功能
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Hardware/Others/%E6%B6%B2%E6%99%B6%E9%9D%A2%E6%9D%BF/">液晶面板</a>
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E5%87%BD%E6%95%B0/">Oracle 函数</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Hardware/Others/%E6%B6%B2%E6%99%B6%E9%9D%A2%E6%9D%BF/">
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E5%87%BD%E6%95%B0/">
           
           
             
           
-          液晶面板
+          Oracle 函数
+nvl (表达式1,表达式2)
 
+如果表达式1为空值,nvl返回值为表达式2的值,否则返回表达式1的值
+该函数的目的是把一个空值(null)转换成一个实际的值,其表达式的值可以是数字型,字符型和日期型,但是表达式1和表达式2的数据类型必须为同一个类型
 
-
-种类
-响应时间
-对比度
-亮度
-可视角度
-价格
-
-
-
-
-TN
-短
-普通
-普通或高
-小
-便宜
-
-
-IPS
-普通
-普通
-高
-大
-昂贵
-
-
-经济型IPS
-普通
-普通
-普通
-较大
-一般
-
-
-S-PVA
-较长
-高
-高
-较大
-昂贵
-
-
-C-PVA
-较长
-高
-普通
-较大
-一般
-
-
-PLS
-普通
-普通
-高
-较大
-一般
-
-
-
-
+实例
+12--将薪资与奖金合并为月收入, 如果奖金为null则转换为0select ename,sal,comm,sal+nv
         </a>
       </p>
 
@@ -286,142 +229,8 @@ PLS
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 23:54" pubdate>
-              2021-02-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Hardware/">Hardware</a>
-            
-              <a href="/categories/Hardware/Others/">Others</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/17/Hardware/Others/%E8%A7%86%E9%A2%91%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8E%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4/">视频分辨率与磁盘空间</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/17/Hardware/Others/%E8%A7%86%E9%A2%91%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8E%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4/">
-          
-          
-            
-          
-          视频分辨率与磁盘空间
-
-
-
-分辨率
-推荐码率(全帧率)
-所需存储空间
-
-
-
-
-
-
-
-
-小时
-天
-周
-月
-半年
-
-
-2560x1920
-20Mbps
-8.8GB
-210.9GB
-1.44TB
-6.18TB
-
-
-QXGA(2048x1536)
-13Mbps
-5.7GB
-137GB
-960GB
-4TB
-
-
-QXGA(2048x1536)
-9Mbps
-4GB
-95GB
-665GB
-2.78TB
-
-
-QXG
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 23:52" pubdate>
-              2021-02-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Hardware/">Hardware</a>
-            
-              <a href="/categories/Hardware/Others/">Others</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/17/Software/Backend/Java/JavaEE/%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1/">Java EE 短信服务</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Backend/Java/JavaEE/%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1/">
-          
-          
-            
-          
-          Java EE 短信服务
-pom.xml
-12345678910111213141516171819&lt;dependency&gt;           &lt;groupId&gt;com.aliyun&lt;/groupId&gt;           &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;           &
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 17:18" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 10:12" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -433,59 +242,9 @@ pom.xml
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Java/JavaEE/">JavaEE</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/17/Software/Shell/%E5%87%BD%E6%95%B0/">Shell 函数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Shell/%E5%87%BD%E6%95%B0/">
-          
-          
-            
-          
-          Shell 函数
-
-shell中函数的定义格式如下:
-
-123456789[ function ] funname [()]&#123;    action;    [return int;]&#125;
-
-可以带function fun()定义,也可以直接fun() 定义,不带任何参数
-参数返回,可以显示加:return 返回,如果不加,将以最后一条命令运行结果,作为返回值,return后跟数值
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:46" pubdate>
-              2021-02-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Shell/">Shell</a>
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -500,21 +259,24 @@ shell中函数的定义格式如下:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Software/Algorithm/%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%95/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">单源最短路径问题</a>
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/rownum&rowid/">Oracle rownum&amp;rowid</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Algorithm/%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%95/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">
+        <a href="/2021/02/18/Software/Backend/Database/Oracle/rownum&rowid/">
           
           
             
           
-          单源最短路径问题
-问题描述
-给定一个带权有向图G=(V,E),其中每条边的权是非负实数,另外,该给定V中的一个节点,称为源,现在要计算从源到所有其他各节点的最短路长度,这里路的长度是指路上各权值和,这个问题通常称为单源最短路径问题
-算法设计
+          Oracle rownum&amp;rowid
 
-算法从图G的源节点s和空优先队列开始,结点s被扩展后,它的儿子结点被依次插入堆中,此后,算法从堆中取出具有最小当前路长的结点作为当前扩展结点,并依次检查与当
+分页的核心就是计算每页多少记录和总页数以及第几页,每一页的数据则只需计算起始的记录和结束记录即可
+
+rownum
+
+rownum 不是一个真实存在的列, 它是用于从查询返回的行的编号, 返回的第一行分配的是 1, 第二行是 2, 依此类推, 这个伪字段可以用于限制查询返回的总行数
+
+1select * from emp where rownum &
         </a>
       </p>
 
@@ -522,8 +284,8 @@ shell中函数的定义格式如下:
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:42" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 10:12" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -533,9 +295,11 @@ shell中函数的定义格式如下:
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Algorithm/%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%95/">分支限界法</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -550,25 +314,26 @@ shell中函数的定义格式如下:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Software/Tools/Tmux/%E5%91%BD%E4%BB%A4/">Tmux 命令</a>
+        <a href="/2021/02/18/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/">MySQL 配置</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Tools/Tmux/%E5%91%BD%E4%BB%A4/">
+        <a href="/2021/02/18/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/">
           
           
             
           
-          Tmux 命令
-Conception
-tmux的主要元素分为三层:
+          MySQL 配置
+SQL查询区分大小写
+Mysql默认的字符检索策略:
 
-Session 一组窗口的集合,通常用来概括同一个任务,session可以有自己的名字便于任务之间的切换
-Window 单个可见窗口,Windows有自己的编号,也可以认为和ITerm2中的Tab类似
-Pane 窗格,被划分成小块的窗口,类似于Vim中 C-w +v 后的效果, 一图以蔽之:
+utf8_general_ci,表示不区分大小写;
+utf8_general_cs表示区分大小写
+utf8_bin表示二进制比较,同样也区分大小写
+注意:在Mysql5.6.10版本中,不支持utf8_genral_cs
 
-
-Tmux为了防止与全局快捷键冲突
+修改表collate属性
+创建表时,直接设置表的collate属性为utf8_general_cs或者
         </a>
       </p>
 
@@ -576,8 +341,8 @@ Tmux为了防止与全局快捷键冲突
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:37" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 10:10" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -587,9 +352,11 @@ Tmux为了防止与全局快捷键冲突
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Tmux/">Tmux</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
             
           </div>
         
@@ -604,30 +371,73 @@ Tmux为了防止与全局快捷键冲突
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">JavaScript 类型转换</a>
+        <a href="/2021/02/18/Internet/WLAN/WiFi%E5%8D%8F%E8%AE%AE/">WiFi协议</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+        <a href="/2021/02/18/Internet/WLAN/WiFi%E5%8D%8F%E8%AE%AE/">
           
           
             
           
-          JavaScript 类型转换
+          WiFi协议
+802.11b
 
-JavaScript 变量可以转换为新变量或其他数据类型:
-
-通过使用 JavaScript 函数
-通过 JavaScript 自身自动转换
-
+最高速率11Mbps
+调制方式速率(Mbps)DSSS1DSSS2CCK5.5CCK11
 
 
-将数字转换为字符串
 
-全局方法 String() 可以将数字转换为字符串
-该方法可用于任何类型的数字,字母,变量,表达式:
 
-123String(x)         // 将变量 x 转换为字符串并返回String(
+调制方式
+速率(Mbps)
+
+
+
+
+DSSS
+1
+
+
+DSSS
+2
+
+
+CCK
+5.5
+
+
+CCK
+11
+
+
+
+802.11a/g
+
+最高速率54Mbps
+
+
+
+
+调制方式
+码率
+速率(Mbps)
+
+
+
+
+BPSK
+1/2
+6
+
+
+BPSK
+3/4
+9
+
+
+QPSK
+1
         </a>
       </p>
 
@@ -635,8 +445,8 @@ JavaScript 变量可以转换为新变量或其他数据类型:
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:35" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 10:02" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -644,15 +454,9 @@ JavaScript 变量可以转换为新变量或其他数据类型:
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Software/">Software</a>
+              <a href="/categories/Internet/">Internet</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">基本语法</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+              <a href="/categories/Internet/WLAN/">WLAN</a>
             
           </div>
         
@@ -667,30 +471,21 @@ JavaScript 变量可以转换为新变量或其他数据类型:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%AF%B9%E8%B1%A1/String/">JavaScript String对象</a>
+        <a href="/2021/02/18/Internet/TCPIP/TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B/">TCP/IP参考模型</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%AF%B9%E8%B1%A1/String/">
+        <a href="/2021/02/18/Internet/TCPIP/TCPIP%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B/">
           
           
             
           
-          JavaScript String对象
+          TCP/IP参考模型
+OSI参考模型
+OSI参考模型虽然完备,但是太过复杂,不实用,而之后的TCP/IP参考模型经过一系列的修改和完善得到了广泛的应用,TCP/IP参考模型包括应用层,传输层,网络层和网络接口层,TCP/IP参考模型与OSI参考模型有较多相似之处,各层也有一定的对应关系,具体对应关系如下图所示:
 
-JavaScript 字符串用于存储和处理文本
 
-创建String对象
-
-String 对象用于处理文本(字符串)
-String 对象创建方法: new String()
-
-1var txt = new String(&quot;string&quot;);
-
-或者更简单方式:
-
-1var txt = &quot;string&quot;;
-String特
+应用层,TCP/IP参考模型的应用层包含了所有高层协议,该层与OSI的会话层,表示
         </a>
       </p>
 
@@ -698,8 +493,8 @@ String特
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:34" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 10:01" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -707,13 +502,9 @@ String特
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Software/">Software</a>
+              <a href="/categories/Internet/">Internet</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/%E5%AF%B9%E8%B1%A1/">对象</a>
+              <a href="/categories/Internet/TCPIP/">TCPIP</a>
             
           </div>
         
@@ -728,29 +519,41 @@ String特
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">JavaScript 正则表达式</a>
+        <a href="/2021/02/18/Internet/HTTP/StatusCode/">HTTP StatusCode</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+        <a href="/2021/02/18/Internet/HTTP/StatusCode/">
           
           
             
           
-          JavaScript 正则表达式
+          HTTP StatusCode
 
-正则表达式是由一个字符序列形成的搜索模式
-当你在文本中搜索数据时,你可以用搜索模式来描述你要查询的内容
-正则表达式可以是一个简单的字符,或一个更复杂的模式
-正则表达式可用于所有文本搜索和文本替换的操作
 
-语法
-1/正则表达式主体/修饰符(可选)
-实例
-1var patt = /test/i
 
-/test/i 是一个正则表达式
-test 是一个正则表达式主体 (用
+状态码
+原因短语
+代表含义
+HTTP 版本
+
+
+
+
+消息响应
+
+
+
+
+
+100
+Continue (继续)
+客户端应当继续发送请求.这个临时响应是用来通知客户端它的部分请求已经被服务器接收,且仍未被拒绝.客户端应当继续发送请求的剩余部分,或者如果请求已经完成,忽略这个响应.服务器必须在请求完成后向客户端发送一个最终响应.
+HTTP/1.1 可用
+
+
+101
+S
         </a>
       </p>
 
@@ -758,8 +561,8 @@ test 是一个正则表达式主体 (用
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-17 15:33" pubdate>
-              2021-02-17
+            <time datetime="2021-02-18 09:57" pubdate>
+              2021-02-18
             </time>
           </div>
         
@@ -767,13 +570,169 @@ test 是一个正则表达式主体 (用
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Software/">Software</a>
+              <a href="/categories/Internet/">Internet</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
+              <a href="/categories/Internet/HTTP/">HTTP</a>
             
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/18/Internet/HTTP/Cookie&Session&Token/">HTTP Cookie&amp;Session&amp;Token</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/18/Internet/HTTP/Cookie&Session&Token/">
+          
+          
             
-              <a href="/categories/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">基本语法</a>
+          
+          HTTP Cookie&amp;Session&amp;Token
+Cookie
+
+cookie是一个非常具体的东西,指的就是浏览器里面能永久存储的一种数据,仅仅是浏览器实现的一种数据存储功能
+cookie由服务器生成,发送给浏览器,浏览器把cookie以kv键值对形式保存到某个目录下的文本文件内,下一次请求同一网站时会把该cookie发送给服务器
+由于cookie是存在客户端上的,所以浏览器加入
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-18 09:57" pubdate>
+              2021-02-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Internet/">Internet</a>
+            
+              <a href="/categories/Internet/HTTP/">HTTP</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/18/Internet/Devices/NetworkCable/">NetworkCable</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/18/Internet/Devices/NetworkCable/">
+          
+          
+            
+          
+          NetworkCable
+交叉线与平行线
+交叉线的做法
+
+一头采用568A标准,一头采用568B标准
+
+平行线的做法
+
+两头同为568A标准或568B标准,(一般用到的都是568B平行线的做法)
+
+标准
+568A标准
+
+绿白,绿,橙白,蓝,蓝白,橙,棕白,棕
+
+568B标准
+
+橙白,橙,绿白,蓝,蓝白,绿,棕白,棕
+
+
+总结
+
+两种做法的差别就是橙色和绿色对换而已
+如果连接的双方地位不对等的,则使
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-18 09:57" pubdate>
+              2021-02-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Internet/">Internet</a>
+            
+              <a href="/categories/Internet/Devices/">Devices</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/18/Hardware/Perpheral/Keyboard/">Keyboard</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/18/Hardware/Perpheral/Keyboard/">
+          
+          
+            
+          
+          Keyboard
+
+黑轴:黑轴一般是作为游戏用的键盘,使得键盘双击很容易,但是这种键盘的轴设计是整体的,按一个键的时候整个键盘的轴都在下压,所以黑轴的机械键盘在打字的时候稍累,游戏玩家推荐
+青轴:特点是只有当声音响起的时候按键才被触发,因此打字的时候噼里啪啦,无论是指尖还是心理上都得到了极大满足,但是其&quot;抽动性”打字和双击时效果并不是很好,因为触底比&quot;触发”要高,这款特别适合输
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-18 09:56" pubdate>
+              2021-02-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Hardware/">Hardware</a>
+            
+              <a href="/categories/Hardware/Perpheral/">Perpheral</a>
             
           </div>
         

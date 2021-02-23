@@ -148,7 +148,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-23 13:52" pubdate>
+      <time datetime="2021-02-23 15:29" pubdate>
         2021年2月23日 下午
       </time>
     </span>
@@ -305,7 +305,7 @@
 <ul>
 <li>条件表达式要放在方括号之间,并且要有空格,例如:<code> [$a==$b]</code>是错误的,必须写成 <code>[ $a == $b ]</code>,如果包含两个条件表达式,则用<code>[[]]</code></li>
 <li>shell 语言中 0 代表 true,0 以外的值代表 false</li>
-<li>两个<code>*</code>在运算时代表 “次方” 的意思</li>
+<li>两个<code>*</code>在运算时代表次方</li>
 </ul>
 </blockquote>
 <ul>
@@ -320,7 +320,7 @@
 <p><strong>实例</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>a=10<br>b=20<br><br>val=`expr <span class="hljs-variable">$a</span> + <span class="hljs-variable">$b</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a + b : <span class="hljs-variable">$val</span>&quot;</span><br><br>val=`expr <span class="hljs-variable">$a</span> - <span class="hljs-variable">$b</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a - b : <span class="hljs-variable">$val</span>&quot;</span><br><br>val=`expr <span class="hljs-variable">$a</span> \* <span class="hljs-variable">$b</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a * b : <span class="hljs-variable">$val</span>&quot;</span><br><br>val=`expr <span class="hljs-variable">$b</span> / <span class="hljs-variable">$a</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;b / a : <span class="hljs-variable">$val</span>&quot;</span><br><br>val=`expr <span class="hljs-variable">$b</span> % <span class="hljs-variable">$a</span>`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;b % a : <span class="hljs-variable">$val</span>&quot;</span><br><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> == <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a 等于 b&quot;</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> != <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a 不等于 b&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> == ! <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> == !<span class="hljs-variable">$b</span> : a 等于 非b&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> != !<span class="hljs-variable">$b</span>: a 不等于 非b&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$a</span> -lt 100 &amp;&amp; <span class="hljs-variable">$b</span> -gt 100 ]]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;返回 true&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;返回 false&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$a</span> -lt 100 || <span class="hljs-variable">$b</span> -gt 100 ]]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;返回 true&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;返回 false&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
 <blockquote>
-<p><strong>注意:</strong></p>
+<p><strong>注意</strong>:</p>
 <ul>
 <li>乘号<code>*</code>前边必须加反斜杠<code>\</code>才能实现乘法运算</li>
 <li>在 MAC 中 shell 的 expr 语法是:<code>$((表达式))</code>,此处表达式中的<code>*</code>不需要转义符号<code>\</code></li>
@@ -521,9 +521,9 @@
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>自加操作:<strong>let no++</strong></li>
-<li>自减操作:<strong>let no–</strong></li>
-<li>简写形式 <strong>let no+=10,let no-=20</strong>,分别等同于 <strong>let no=no+10,let no=no-20</strong></li>
+<li><strong>自加操作:</strong><code>let no++</code></li>
+<li><strong>自减操作:</strong><code>let no--</code></li>
+<li>**简写形式: **<code>let no+=10,let no-=20</code>,分别等同于<code>let no=no+10,let no=no-20</code></li>
 </ul>
 <p>以下实例计算 a 和 b 两个表达式,并输出结果:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><br><br>let a=5+4<br>let b=9-3<br>echo $a $b<br></code></pre></td></tr></table></figure>
@@ -577,9 +577,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Shell/%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/">
+                      <a href="/2021/02/23/Software/System/macOS/Hotkey/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell 特殊符号</span>
+                        <span class="hidden-mobile">macOS 键盘快捷键</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -587,8 +587,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Shell/%E5%8F%98%E9%87%8F/">
-                        <span class="hidden-mobile">Shell 变量</span>
+                      <a href="/2021/02/23/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/BFG/">
+                        <span class="hidden-mobile">Git BFG</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

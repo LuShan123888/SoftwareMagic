@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Redis GEO - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis GEO">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis GEO</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Redis GEO</h1>
+<ul>
+<li>Redis GEO 主要用于存储地理位置信息,并对存储的信息进行操作,该功能在 Redis 3.2 版本新增</li>
+<li>Redis GEO 操作方法有:
+<ul>
+<li><code>geoadd</code>:添加地理位置的坐标</li>
+<li><code>geopos</code>:获取地理位置的坐标</li>
+<li><code>geodist</code>:计算两个位置之间的距离</li>
+<li><code>georadius</code>:根据用户给定的经纬度坐标来获取指定范围内的地理位置集合</li>
+<li><code>georadiusbymember</code>:根据储存在位置集合里面的某个地点获取指定范围内的地理位置集合</li>
+<li><code>geohash</code>:返回一个或多个位置对象的 geohash 值</li>
+</ul>
+</li>
+<li>Redis GEO是基于Zset实现的,可以使用Zset命令来操作GEO</li>
+</ul>
+<h2 id="geoadd">geoadd</h2>
+<ul>
+<li>geoadd 用于存储指定的地理空间位置,可以将一个或多个经度(longitude),纬度(latitude),位置名称(member)添加到指定的 key 中</li>
+<li>geoadd 语法格式如下:</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">GEOADD <span class="hljs-built_in">key</span> longitude latitude <span class="hljs-built_in">member</span> [longitude latitude <span class="hljs-built_in">member</span> ...]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以下实例中 key 为 Sicily,Catania 为位置名称 :</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lsl">redis&gt; GEOADD Sicily <span class="hljs-number">13.361389</span> <span class="hljs-number">38.115556</span> <span class="hljs-string">&quot;Palermo&quot;</span> <span class="hljs-number">15.087269</span> <span class="hljs-number">37.502669</span> <span class="hljs-string">&quot;Catania&quot;</span><br>(<span class="hljs-type">integer</span>) <span class="hljs-number">2</span><br>redis&gt; GEODIST Sicily Palermo Catania<br><span class="hljs-string">&quot;166274.1516&quot;</span><br>redis&gt; GEORADIUS Sicily <span class="hljs-number">15</span> <span class="hljs-number">37</span> <span class="hljs-number">100</span> km<br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;Catania&quot;</span><br>redis&gt; GEORADIUS Sicily <span class="hljs-number">15</span> <span class="hljs-number">37</span> <span class="hljs-number">200</span> km<br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;Palermo&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;Catania&quot;</span><br>redis&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="geopos">geopos</h2>
+<ul>
+<li>geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置(经度和纬度),不存在的返回 nil</li>
+<li>geopos 语法格式如下:</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">GEOPOS <span class="hljs-built_in">key</span> <span class="hljs-built_in">member</span> [<span class="hljs-built_in">member</span> ...]<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lsl">redis&gt; GEOADD Sicily <span class="hljs-number">13.361389</span> <span class="hljs-number">38.115556</span> <span class="hljs-string">&quot;Palermo&quot;</span> <span class="hljs-number">15.087269</span> <span class="hljs-number">37.502669</span> <span class="hljs-string">&quot;Catania&quot;</span><br>(<span class="hljs-type">integer</span>) <span class="hljs-number">2</span><br>redis&gt; GEOPOS Sicily Palermo Catania NonExisting<br><span class="hljs-number">1</span>) <span class="hljs-number">1</span>) <span class="hljs-string">&quot;13.36138933897018433&quot;</span><br>   <span class="hljs-number">2</span>) <span class="hljs-string">&quot;38.11555639549629859&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-number">1</span>) <span class="hljs-string">&quot;15.08726745843887329&quot;</span><br>   <span class="hljs-number">2</span>) <span class="hljs-string">&quot;37.50266842333162032&quot;</span><br><span class="hljs-number">3</span>) (nil)<br>redis&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="geodist">geodist</h2>
+<ul>
+<li>geodist 用于返回两个给定位置之间的距离</li>
+<li>geodist 语法格式如下:</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">GEODIST</span> key member<span class="hljs-number">1</span> member<span class="hljs-number">2</span><span class="hljs-meta"> [m|km|ft|mi]</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>member1 member2 为两个地理位置</p>
+</li>
+<li>
+<p>最后一个距离单位参数说明:</p>
+<ul>
+<li>m :米,默认单位</li>
+<li>km :千米</li>
+<li>mi :英里</li>
+<li>ft :英尺</li>
+</ul>
+</li>
+<li>
+<p>计算 Palermo 与 Catania 之间的距离:</p>
+</li>
+<li>
+<p><strong>实例</strong></p>
+</li>
+<li>
+<pre><code>  redis&gt; GEOADD Sicily 13.361389 38.115556 &quot;Palermo&quot; 15.087269 37.502669 &quot;Catania&quot;
+  (integer) 2
+  redis&gt; GEODIST Sicily Palermo Catania
+  &quot;166274.1516&quot;
+  redis&gt; GEODIST Sicily Palermo Catania km
+  &quot;166.2742&quot;
+  redis&gt; GEODIST Sicily Palermo Catania mi
+  &quot;103.3182&quot;
+  redis&gt; GEODIST Sicily Foo Bar
+  (nil)
+  redis&gt;
+  &lt;!--hexoPostRenderEscape:&lt;figure class=&quot;highlight routeros&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs routeros&quot;&gt;&lt;br&gt;- ## georadius,georadiusbymember&lt;br&gt;&lt;br&gt;- - georadius 以给定的经纬度为中心, 返回键包含的位置元素当中, 与中心的距离不超过给定最大距离的所有位置元素&lt;br&gt;    - georadiusbymember 和 GEORADIUS 命令一样, 都可以找出位于指定范围内的元素, 但是 georadiusbymember 的中心点是由给定的位置元素决定的, 而不是使用经度和纬度来决定中心点&lt;br&gt;    - georadius 与 georadiusbymember 语法格式如下:&lt;br&gt;&lt;br&gt;- ```&lt;br&gt;    GEORADIUS key longitude latitude&lt;span class=&quot;hljs-built_in&quot;&gt; radius &lt;/span&gt;m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]&lt;br&gt;    GEORADIUSBYMEMBER key member&lt;span class=&quot;hljs-built_in&quot;&gt; radius &lt;/span&gt;m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;:hexoPostRenderEscape--&gt;
+
+</code></pre>
+</li>
+<li>
+<ul>
+<li>参数说明:<br>
+- m :米,默认单位<br>
+- km :千米<br>
+- mi :英里<br>
+- ft :英尺<br>
+- WITHDIST: 在返回位置元素的同时, 将位置元素与中心之间的距离也一并返回<br>
+- WITHCOORD: 将位置元素的经度和维度也一并返回<br>
+- WITHHASH: 以 52 位有符号整数的形式, 返回位置元素经过原始 geohash 编码的有序集合分值, 这个选项主要用于底层应用或者调试, 实际中的作用并不大<br>
+- COUNT 限定返回的记录数<br>
+- ASC: 查找结果根据距离从近到远排序<br>
+- DESC: 查找结果根据从远到近排序</li>
+</ul>
+</li>
+<li>
+<p><strong>georadius 实例</strong>:</p>
+</li>
+<li>
+<pre><code>  redis&gt; GEOADD Sicily 13.361389 38.115556 &quot;Palermo&quot; 15.087269 37.502669 &quot;Catania&quot;
+  (integer) 2
+  redis&gt; GEORADIUS Sicily 15 37 200 km WITHDIST
+  1) 1) &quot;Palermo&quot;
+     2) &quot;190.4424&quot;
+  2) 1) &quot;Catania&quot;
+     2) &quot;56.4413&quot;
+  redis&gt; GEORADIUS Sicily 15 37 200 km WITHCOORD
+  1) 1) &quot;Palermo&quot;
+     2) 1) &quot;13.36138933897018433&quot;
+        2) &quot;38.11555639549629859&quot;
+  2) 1) &quot;Catania&quot;
+     2) 1) &quot;15.08726745843887329&quot;
+        2) &quot;37.50266842333162032&quot;
+  redis&gt; GEORADIUS Sicily 15 37 200 km WITHDIST WITHCOORD
+  1) 1) &quot;Palermo&quot;
+     2) &quot;190.4424&quot;
+     3) 1) &quot;13.36138933897018433&quot;
+        2) &quot;38.11555639549629859&quot;
+  2) 1) &quot;Catania&quot;
+     2) &quot;56.4413&quot;
+     3) 1) &quot;15.08726745843887329&quot;
+        2) &quot;37.50266842333162032&quot;
+  redis&gt;
+  &lt;!--hexoPostRenderEscape:&lt;figure class=&quot;highlight angelscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs angelscript&quot;&gt;&lt;br&gt;- **georadiusbymember 实例**:&lt;br&gt;&lt;br&gt;- ```&lt;br&gt;    redis&amp;gt; GEOADD Sicily &lt;span class=&quot;hljs-number&quot;&gt;13.583333&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;37.316667&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Agrigento&amp;quot;&lt;/span&gt;&lt;br&gt;    (&lt;span class=&quot;hljs-built_in&quot;&gt;int&lt;/span&gt;eger) &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;&lt;br&gt;    redis&amp;gt; GEOADD Sicily &lt;span class=&quot;hljs-number&quot;&gt;13.361389&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;38.115556&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Palermo&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;15.087269&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;37.502669&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Catania&amp;quot;&lt;/span&gt;&lt;br&gt;    (&lt;span class=&quot;hljs-built_in&quot;&gt;int&lt;/span&gt;eger) &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;&lt;br&gt;    redis&amp;gt; GEORADIUSBYMEMBER Sicily Agrigento &lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt; km&lt;br&gt;    &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;) &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Agrigento&amp;quot;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;) &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Palermo&amp;quot;&lt;/span&gt;&lt;br&gt;    redis&amp;gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;:hexoPostRenderEscape--&gt;
+
+</code></pre>
+</li>
+<li>
+<h2 id="geohash">geohash</h2>
+</li>
+<li>
+<ul>
+<li>Redis GEO 使用 geohash 来保存地理位置的坐标
+<ul>
+<li>geohash 用于获取一个或多个位置元素的 geohash 值</li>
+<li>geohash 语法格式如下:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<pre><code>  GEOHASH key member [member ...]
+  &lt;!--hexoPostRenderEscape:&lt;figure class=&quot;highlight lsl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs lsl&quot;&gt;&lt;br&gt;- **实例**&lt;br&gt;&lt;br&gt;- ```&lt;br&gt;    redis&amp;gt; GEOADD Sicily &lt;span class=&quot;hljs-number&quot;&gt;13.361389&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;38.115556&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Palermo&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;15.087269&lt;/span&gt; &lt;span class=&quot;hljs-number&quot;&gt;37.502669&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Catania&amp;quot;&lt;/span&gt;&lt;br&gt;    (&lt;span class=&quot;hljs-type&quot;&gt;integer&lt;/span&gt;) &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;&lt;br&gt;    redis&amp;gt; GEOHASH Sicily Palermo Catania&lt;br&gt;    &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;) &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;sqc8b49rny0&amp;quot;&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;) &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;sqdtr74hyu0&amp;quot;&lt;/span&gt;&lt;br&gt;    redis&amp;gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;:hexoPostRenderEscape--&gt;
+
+</code></pre>
+</li>
+<li></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Redis/">Redis</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Redis/Value/">Value</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Java/SpringBoot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring Boot 配置文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">
+                        <span class="hidden-mobile">SQL 用户与权限</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

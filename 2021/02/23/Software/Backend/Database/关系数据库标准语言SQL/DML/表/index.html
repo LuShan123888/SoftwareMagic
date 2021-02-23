@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>SQL 表 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 表">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 表</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 表</h1>
+<h2 id="基本表的定义与删除">基本表的定义与删除</h2>
+<h3 id="定义基本表">定义基本表</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span>&lt;表名&gt;(&lt;列名&gt;&lt;数据类型&gt;[列级完整性约束条件]<br>[,&lt;列名&gt;&lt;数据类型&gt;[列级完整性约束条件]]<br>...<br>[,&lt;表级完整性约束条件&gt;]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>建表的同时通常还可以定义与该表有关的完整性约束条件,这些完整性约束条件被存入系统的数据字典中,当用户操作表中数据时由关系数据库管理系统自动检查该操作是否违背这些完整性约束条件.如果完整性约束条件设=涉及该表的多个属性列,则必须定义在表级上,否则既可以定义在列级,也可以定义在表级</li>
+<li><code>AUTO_INCREMENT</code>:自增字段</li>
+<li><code>COMMENT</code>:注释</li>
+<li><code>DEFAULT</code>:默认值</li>
+</ul>
+<p>**[例3.5]**建立一个&quot;学生&quot;表Student</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student<br>	(Sno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">9</span>) PRIMARY <span class="hljs-keyword">KEY</span>,<span class="hljs-comment">/*列级完整性约束条件,Sno是主码*/</span><br>	 Sname <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">UNIQUE</span>,<span class="hljs-comment">/*Sname取唯一值*/</span><br>	 Ssex <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">2</span>),<br>	 Sage <span class="hljs-built_in">SMALLINT</span>,<br>	 Sdept <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">20</span>)<br>	);<br></code></pre></td></tr></table></figure>
+<p>系统执行该CREATE TABLE语句后,就在数据库中建立一个新的空&quot;学生&quot;表Student,并将有关&quot;学生&quot;表的定义及有关约束条件存放在数据字典中</p>
+<p>**[例3.6]**建立一个&quot;课程&quot;表Course</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Course<br>	(Cno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">4</span>) PRIMARY <span class="hljs-keyword">KEY</span>,<span class="hljs-comment">/*列级完整性约束,Cno是主码*/</span><br>	 Cname <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">40</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,<span class="hljs-comment">/*列级完整性约束条件,Cname不能取空值*/</span><br>	 Cpno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">4</span>),/Cpno的含义是先修课*/<br>	 Ccredit <span class="hljs-built_in">SMALLINT</span>,<br>	 <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Cpno) <span class="hljs-keyword">REFERENCES</span> Course (Cno)<br>	 <span class="hljs-comment">/*表级完整性约束条件,Cpno是外码,被参照表是Course,被参照列是Cno*/</span><br>	);<br></code></pre></td></tr></table></figure>
+<p>本例说明参照表和参照表可以是同一个表</p>
+<p>**[例3.7]**建立学生选课表SC</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>	(Sno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">9</span>),<br>	 Cno <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">4</span>),<br>	 Grade <span class="hljs-built_in">SMALLINT</span>,<br>	 PRIMARY <span class="hljs-keyword">KEY</span> (Sno,Cno),<span class="hljs-comment">/*主码由两个属性构成,必须作为表级完整性进行定义*/</span><br>	 <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Sno) <span class="hljs-keyword">REFERENCES</span>(Sno),<br>	 <span class="hljs-comment">/*表级完整性约束条件,Sno是外码,被参照表是Student*/</span><br>	 <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (Cno) <span class="hljs-keyword">REFERENCES</span>(Cno)<br>	 <span class="hljs-comment">/*表级完整性约束条件,Cno是外码,被参照表是Course*/</span><br>	);<br></code></pre></td></tr></table></figure>
+<h3 id="数据类型">数据类型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">CHAR(n),CHARACYER(n)</td>
+<td style="text-align:center">长度为n的定长字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">VARCHAR(n),CHARACTERVARYING(n)</td>
+<td style="text-align:center">最大长度为n的变长字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">CLOB</td>
+<td style="text-align:center">字符串大对象</td>
+</tr>
+<tr>
+<td style="text-align:center">BLOB</td>
+<td style="text-align:center">二进制大对象</td>
+</tr>
+<tr>
+<td style="text-align:center">INT,INTEGER</td>
+<td style="text-align:center">长整数(4字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">SMALLINT</td>
+<td style="text-align:center">短整数(2字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">BIGINT</td>
+<td style="text-align:center">大整数(8字节)</td>
+</tr>
+<tr>
+<td style="text-align:center">NUMERIC(p,d)</td>
+<td style="text-align:center">定点数,由p为数字(不包括符号,小数点)组成,小数点后面有d位数字</td>
+</tr>
+<tr>
+<td style="text-align:center">DECIMAL(p,d),DEC(p,d)</td>
+<td style="text-align:center">同NUMERIC</td>
+</tr>
+<tr>
+<td style="text-align:center">REAL</td>
+<td style="text-align:center">取决于机器精度的单精度浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">DOUBLE PRECISION</td>
+<td style="text-align:center">取决于机器精度的双精度浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">FLOAT(n)</td>
+<td style="text-align:center">可选精度的浮点数,精度至少为n位数字</td>
+</tr>
+<tr>
+<td style="text-align:center">BOOLEAN</td>
+<td style="text-align:center">逻辑布尔量</td>
+</tr>
+<tr>
+<td style="text-align:center">DATE</td>
+<td style="text-align:center">日期,包括年,月,日,格式为YYYY-MM-DD</td>
+</tr>
+<tr>
+<td style="text-align:center">TIME</td>
+<td style="text-align:center">时间,包含一日的时,分,秒,格式为HH:MM:SS</td>
+</tr>
+<tr>
+<td style="text-align:center">TIMESTAMP</td>
+<td style="text-align:center">时间戳类型</td>
+</tr>
+<tr>
+<td style="text-align:center">INTERVAL</td>
+<td style="text-align:center">时间间隔类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模式与表">模式与表</h3>
+<p>每一个基本表都属于某一个模式,一个模式包含多个基本表,当定义基本表时一般可以有三种方法定义它所属的模式:</p>
+<ul>
+<li>
+<p>在表名中明显地给出模式名</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">&quot;S-T&quot;</span>.Student(...);<span class="hljs-comment">/*Student所属的模式是&quot;S-T&quot;*/</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">&quot;S-T&quot;</span>.SC(...);<span class="hljs-comment">/*SC所属的模式是&quot;S-T&quot;*/</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">&quot;S-T&quot;</span>.Course(...);<span class="hljs-comment">/*Course所属的模式是&quot;S-T&quot;*/</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p>在创建模式语句中同时创建表</p>
+</li>
+<li>
+<p>设置所属的模式,这样在创建表时表名中不必给出模式名</p>
+</li>
+<li>
+<p>当用户创建基本表(其他数据库对象也一样)时若没有指定模式,系统根据搜索路径(search path)来确定该对象所属的模式,搜索路径包含一组模式列表,关系数据库管理系统会使用模式列表中第一个存在的模式作为数据库对象的模式名,若搜索路径中的模式名都不存在,系统将给出错误</p>
+</li>
+<li>
+<p>使用下面的语句可以显示当前的搜索路径:</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> search_path;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>搜索路径的当前默认值是$user,PUBLIC.其含义是首先搜索与用户名相同的模式名,如果该模式名不存在,则使用PUBLIC模式</li>
+<li>数据库管理员也可以设置搜索路径,例如:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> search_path <span class="hljs-keyword">TO</span> <span class="hljs-string">&quot;S-T&quot;</span>,<span class="hljs-keyword">PUBLIC</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>然后定义基本表:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student(...)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>实际结果是建立了S-T.Student基本表.因为关系数据库管理系统发现搜索路径中第一个模式名S-T存在,就把该模式作为基本表Student所属的模式</li>
+</ul>
+<h3 id="删除基本表">删除基本表</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span>&lt;表名&gt; [RESTRICT|<span class="hljs-keyword">CASCADE</span>];<br></code></pre></td></tr></table></figure>
+<h4 id="注意">注意:</h4>
+<ul>
+<li>若选择RESTRICT,则该表的删除是有限制条件的.欲删除的基本表不能被其他表的约束所引用(如CHECK,FOREIGN KEY等约束),不能有视图,不能有触发器(trigger),不能有存储过程或函数等,如果存在这些依赖该表的对象,则此表不能被删除</li>
+<li>若选择CASCADE,则该表的删除没有限制条件,在删除基本表的同时,相关的依赖对象,例如视图,都将一起删除</li>
+<li>默认情况是RESTRICT</li>
+</ul>
+<p>**[例3.11]**删除Student表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">CASCADE</span>;<br></code></pre></td></tr></table></figure>
+<p>基本表定义一旦被删除,不仅表中的数据和此表的定义将被删除,而且此表上建立的索引,触发器等对象一般也都将被删除,有的关系数据库管理系统还会同时删除在此表上的索引,触发器等对象一般也都将被删除,有的关系数据库管理系统还会同时删除在此表上建立的视图,如果欲删除的基本表被其他基本表所引用,则这些表也可能被删除,SC也被级联删除,因此执行删除基本表的操作一定要格外小心</p>
+<p>**[例3.12]**若表上建有视图,选择RESTRICT时表不能删除,选择CASCADE时可以删除表,视图也自动被删除</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> IS_Student <span class="hljs-comment">/*Student表上建立视图*/</span><br><span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> Sno,Sname,Sage<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept=<span class="hljs-string">&#x27;IS&#x27;</span>;<br><br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> Student RESTRICT;<span class="hljs-comment">/*删除Student表*/</span><br><span class="hljs-comment">--ERROR:cannot drop table Student because other objects depend on it</span><br><span class="hljs-comment">/*系统返回错误信息,存在依赖该表的对象,此表不能被删除*/</span><br><br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">CASCADE</span>;<span class="hljs-comment">/*删除Student表*/</span><br><span class="hljs-comment">--NOTICE:drop cascades to view IS_Student</span><br><span class="hljs-comment">/*系统返回提示,此表上的视图也被删除*/</span><br><br><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> IS_Student;<br><span class="hljs-comment">--ERROR:relation &quot;IS_Student&quot;does not exist</span><br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:</p>
+<p>不同的数据库产品在遵循SQL标准的基础上具体实现细节和处理策略会与标准有差别</p>
+<h2 id="修改基本表">修改基本表</h2>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span>&lt;表名&gt;<br>[<span class="hljs-keyword">ADD</span>[<span class="hljs-keyword">COLUMN</span>]&lt;新列名&gt;&lt;数据类型&gt;[完整性约束]]<br>[<span class="hljs-keyword">ADD</span>&lt;表级完整性约束&gt;]<br>[<span class="hljs-keyword">DROP</span>[<span class="hljs-keyword">COLUMN</span>]&lt;列名&gt;[<span class="hljs-keyword">CASCADE</span>|RESTRICT]]<br>[<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">CONSTRAINT</span>&lt;完整性约束名&gt;[RESTRICT|<span class="hljs-keyword">CASCADE</span>]]<br>[<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">COLUMN</span>&lt;列名&gt;&lt;数据类型&gt;];<br></code></pre></td></tr></table></figure>
+<ul>
+<li>&lt;表名&gt;是要修改的就基本表</li>
+<li>ADD子句用于增加新列,新的列级完整性约束条件和新的表级完整性约束条件</li>
+<li>DROP COLUMN子句用于删除表中的列如果指定了CASCADE短语,则自动删除引用了该列的其他对象,比如视图;如果指定了RESTRICT短语,则如果该列被其他对象引用,RDBMS将拒绝删除该列</li>
+<li>DROP CONSTRAINT子句用于删除指定的完整性约束条件</li>
+<li>ALTER COLUMN子句用于修改原有的列定义,包括修改列名和数据类型</li>
+</ul>
+<p>**[例3.8]**向Student表增加&quot;入学时间&quot;列,其数据类型为日期型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plsql">ALTER TABLE Student ADD S_entrance DATE;<br></code></pre></td></tr></table></figure>
+<p>不论基本表中原来是否已有数据,新增加的列一律为空值</p>
+<p>**[例3.9]**将年龄的数据类型由字符型(假设原来的数据类型是字符型)改为整数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Student <span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">COLUMN</span> Sage <span class="hljs-built_in">INT</span>;<br></code></pre></td></tr></table></figure>
+<p>**[例4.10]**增加课程名称必须取唯一值的约束条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mssql">ALTER TABLE Course ADD UNIQUE(Cname);<br></code></pre></td></tr></table></figure>
+<p><strong>修改表名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">rename</span> 原表名 <span class="hljs-keyword">to</span> 新表名<br></code></pre></td></tr></table></figure>
+<p><strong>修改列名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> 表名 <span class="hljs-keyword">rename</span> <span class="hljs-keyword">column</span> 列名 <span class="hljs-keyword">to</span> 新列名<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/">DML</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E7%B4%A2%E5%BC%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL 索引</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+                        <span class="hidden-mobile">Java Lambda表达式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

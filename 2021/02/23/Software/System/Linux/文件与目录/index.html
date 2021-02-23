@@ -1,0 +1,810 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Linux 文件与目录 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux 文件与目录">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux 文件与目录</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Linux 文件与目录</h1>
+<h2 id="目录管理">目录管理</h2>
+<h3 id="cd">cd</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd 路径 #切换目录命令<br>cd ./  #当前目录<br>cd ../ #返回上一级目录<br>cd ~ #用户目录<br>cd / #根路径<br></code></pre></td></tr></table></figure>
+<h3 id="ls">ls</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls<br>-s #文件大小<br>-a #all,查看全部的文件,包括隐藏文件<br>-l #列表显示,包含文件的属性和权限,没有隐藏文件<br>-k #以k字节的形式表示文件的大小<br><span class="hljs-meta">#</span><span class="bash"> 可以组合使用</span><br>ls -al #显示所有文件的详细信息<br>ls -sk #以K字节为单位显示文件大小<br>ls -l #ll<br></code></pre></td></tr></table></figure>
+<h3 id="pwd">pwd</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pwd #显示当前的路径(绝对路径)<br></code></pre></td></tr></table></figure>
+<h3 id="mkdir">mkdir</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir test1 #创建目录<br>mkdir -p test2/test3/test4 #创建多级目录<br></code></pre></td></tr></table></figure>
+<h3 id="rmdir">rmdir</h3>
+<p>rmdir 仅能删除空的目录,如果下面存在文件,需要先删除文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">rmdir test1 #删除目录<br>rmdir -p test2/test3/test4 #删除多级目录<br></code></pre></td></tr></table></figure>
+<h3 id="cp">cp</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp [options] source dest<br>或<br>cp [options] source... directory<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-a:此选项通常在复制目录时使用,它保留链接,文件属性,并复制目录下的所有内容,其作用等于dpR参数组合</li>
+<li>-d:复制时保留链接,这里所说的链接相当于Windows系统中的快捷方式</li>
+<li>-f:覆盖已经存在的目标文件而不给出提示</li>
+<li>-i:与-f选项相反,在覆盖目标文件之前给出提示,要求用户确认是否覆盖,回答&quot;y&quot;时目标文件将被覆盖</li>
+<li>-p:除复制文件的内容外,还把修改时间和访问权限也复制到新文件中</li>
+<li>-r:若给出的源文件是一个目录文件,此时将复制该目录下所有的子目录和文件</li>
+<li>-l:不复制文件,只是生成链接文件</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -ri ./* ../<br></code></pre></td></tr></table></figure>
+<ul>
+<li>将当前目录下的所有文件复制到上层目录中</li>
+</ul>
+<h3 id="rm">rm</h3>
+<ul>
+<li>删除一个文件或者目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm [options] name...<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-i:删除前逐一询问确认</li>
+<li>-f:即使原档案属性设为唯读,亦直接删除,无需逐一确认</li>
+<li>-r:将目录及以下之档案亦逐一删除</li>
+</ul>
+<h3 id="mv">mv</h3>
+<p>移动文件或者目录,重命名文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">mv (原路径)/原文件名 (新路径)/新文件名<br>-f 强制<br>-u 只替换已经更新过的文件<br></code></pre></td></tr></table></figure>
+<h3 id="touch">touch</h3>
+<p>命令创建文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch ~/1.txt<br></code></pre></td></tr></table></figure>
+<h3 id="echo">echo</h3>
+<ul>
+<li>输入字符串,也可以输入到文件中</li>
+<li><code>&gt;&gt;</code>将前面的输出追加到后面文件的尾部</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo &#x27;字符串&#x27; &gt;&gt; 路径名/文件名<br></code></pre></td></tr></table></figure>
+<h2 id="查找文件">查找文件</h2>
+<h3 id="whereis">whereis</h3>
+<ul>
+<li>Linux whereis命令用于查找文件</li>
+<li>该指令会在特定目录中查找符合条件的文件,这些文件应属于原始代码,二进制文件,或是帮助文件</li>
+<li>该指令只能用于查找二进制文件,源代码文件和man手册页,一般文件的定位需使用locate命令</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs markdown">whereis [<span class="hljs-string">-bfmsu</span>][<span class="hljs-symbol">-B &lt;目录&gt;...</span>][<span class="hljs-string">-M &lt;目录&gt;...</span>][<span class="hljs-symbol">-S &lt;目录&gt;...</span>][<span class="hljs-string">文件...</span>]<br></code></pre></td></tr></table></figure>
+<p><strong>参数</strong>:</p>
+<ul>
+<li><code>-b</code> 　只查找二进制文件</li>
+<li><code>-B&lt;目录&gt;</code> 　只在设置的目录下查找二进制文件</li>
+<li><code>-f</code> 　不显示文件名前的路径名称</li>
+<li><code>-m</code> 　只查找说明文件</li>
+<li><code>-M&lt;目录&gt;</code> 　只在设置的目录下查找说明文件</li>
+<li><code>-s</code> 　只查找原始代码文件</li>
+<li><code>-S&lt;目录&gt;</code> 　只在设置的目录下查找原始代码文件</li>
+<li><code>-u</code> 　查找不包含指定类型的文件</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>使用指令&quot;whereis&quot;查看指令&quot;bash&quot;的位置,输入如下命令:</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>whereis bash<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的指令执行后,输出信息如下所示:</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">bash:<span class="hljs-regexp">/bin/</span>bash<span class="hljs-regexp">/etc/</span>bash.bashrc<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/man/m</span>an1/bash.<span class="hljs-number">1</span>.gz<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:以上输出信息从左至右分别为查询的程序名,bash路径,bash的man 手册页路径</li>
+<li>如果用户需要单独查询二进制文件或帮助文件,可使用如下命令:</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>whereis -b bash<br><span class="hljs-variable">$ </span>whereis -m bash<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出信息如下:</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ whereis -b bash               <span class="hljs-comment">#显示bash 命令的二进制程序</span><br>bash: <span class="hljs-regexp">/bin/</span>bash <span class="hljs-regexp">/etc/</span>bash.bashrc <span class="hljs-regexp">/usr/</span>share/bash    <span class="hljs-comment"># bash命令的二进制程序的地址</span><br>$ whereis -m bash               <span class="hljs-comment">#显示bash 命令的帮助文件</span><br>bash: <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/man/m</span>an1/bash.<span class="hljs-number">1</span>.gz  <span class="hljs-comment">#bash命令的帮助文件地址</span><br></code></pre></td></tr></table></figure>
+<h2 id="文件属性">文件属性</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">➜  ~ ll<br>total 264<br>drwx------@   3 cian  staff    96B Mar 13 17:38 Applications<br>drwxr-xr-x@   7 cian  staff   224B Jul 28 15:49 Code<br>drwx------@   9 cian  staff   288B Jul 29 14:06 Desktop<br>drwx------@  12 cian  staff   384B Jul 29 22:29 Documents<br>drwx------+   7 cian  staff   224B Jul 29 20:18 Downloads<br>drwx------@  75 cian  staff   2.3K Jun 12 10:19 Library<br>drwx------+   8 cian  staff   256B Jun  2 08:35 Movies<br>drwx------+   7 cian  staff   224B Mar 14 10:24 Music<br>drwx------+   7 cian  staff   224B Jun  5 13:26 Pictures<br>drwxr-x---+   5 cian  staff   160B Jul  9 11:04 Public<br>drwxr-xr-x    7 cian  staff   224B Jun 19 00:08 Virtual Machines.localized<br>drwx------   11 cian  staff   352B May  2 16:01 iCloud Drive (Archive)<br>drwxr-xr-x  305 cian  staff   9.5K Jul 11 20:19 node_modules<br>-rw-r--r--@   1 cian  staff   129K Jul 11 20:19 package-lock.json<br></code></pre></td></tr></table></figure>
+<p>在Linux中第一个字符代表这个文件是目录,文件或链接文件等等:</p>
+<ul>
+<li>当为[ <strong>d</strong> ]则是目录</li>
+<li>当为[ <strong>-</strong> ]则是文件</li>
+<li>若是[ <strong>l</strong> ]则表示为链接文档 ( link file )</li>
+<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )</li>
+<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备,例如键盘,鼠标 ( 一次性读取装置 )</li>
+</ul>
+<p>接下来的字符中,以三个为一组,且均为『rwx』 的三个参数的组合</p>
+<ul>
+<li>[ r ]代表可读(read)</li>
+<li>[ w ]代表可写(write)</li>
+<li>[ x ]代表可执行(execute)</li>
+<li>[ - ]无权限</li>
+</ul>
+<p>每个文件的属性由左边第一部分的10个字符来确定(如下图):</p>
+<p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-vZfXuBbAkPIRg2J.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20200729223243490"></p>
+<p>从左至右用0-9这些数字来表示</p>
+<ul>
+<li>
+<p>第0位确定文件类型</p>
+</li>
+<li>
+<p>第1-3位确定属主(该文件的所有者)拥有该文件的权限</p>
+</li>
+<li>
+<p>第4-6位确定属组(所有者的同组用户)拥有该文件的权限</p>
+</li>
+<li>
+<p>第7-9位确定其他用户拥有该文件的权限</p>
+</li>
+</ul>
+<p>其中:</p>
+<ul>
+<li>
+<p>第1,4,7位表示读权限,如果用&quot;r&quot;字符表示,则有读权限,如果用&quot;-&quot;字符表示,则没有读权限</p>
+</li>
+<li>
+<p>第2,5,8位表示写权限,如果用&quot;w&quot;字符表示,则有写权限,如果用&quot;-&quot;字符表示没有写权限</p>
+</li>
+<li>
+<p>第3,6,9位表示可执行权限,如果用&quot;x&quot;字符表示,则有执行权限,如果用&quot;-&quot;字符表示,则没有执行权限</p>
+</li>
+</ul>
+<p>对于文件来说,它都有一个特定的所有者,也就是对该文件具有所有权的用户, 同时,在Linux系统中,用户是按组分类的,一个用户属于一个或多个组, 文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户,因此,Linux系统按文件所有者,文件所有者同组用户和其他用户来规定了不同的文件访问权限</p>
+<p>在以上实例中,属主为cian和属组为staff</p>
+<h3 id="chgrp">chgrp</h3>
+<p>更改文件属组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">chgrp [-R] 属组名 文件名<br>-R #递归更改文件属组<br></code></pre></td></tr></table></figure>
+<h3 id="chown">chown</h3>
+<p>更改文件属主,也可以同时更改文件属组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">chown [–R] 属主名 文件名<br>chown [-R] 属主名:属组名 文件名<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-c 显示更改的部分的信息</li>
+<li>-f 忽略错误信息</li>
+<li>-h 修复符号链接</li>
+<li>-R 处理指定目录以及其子目录下的所有文件</li>
+<li>-v 显示详细的处理信息</li>
+<li>-deference 作用于符号链接的指向,而不是链接文件本身</li>
+</ul>
+<h3 id="chmod">chmod</h3>
+<p><code>chmod [-R] xyz</code>文件或目录 Linux文件属性有两种设置方法,一种是数字(常用的是数字),一种是符号</p>
+<p>Linux文件的基本权限就有九个,分别是owner/group/others三种身份各有自己的read/write/execute 权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">r:4 w:2 x:1<br>可读可写不可执行 rw- 6<br>可读可写不课执行 rwx 7<br>chomd 777 文件赋予所有用户可读可执行!<br></code></pre></td></tr></table></figure>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的,例如当权限为:[-rwxrwx—] 分数则是:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">owner = rwx = 4+2+1 = 7<br>group = rwx = 4+2+1 = 7<br>others= --- = 0+0+0 = 0<br>chmod 770 filename<br></code></pre></td></tr></table></figure>
+<ul>
+<li>u 表示该文件的拥有者,g 表示与该文件的拥有者属于同一个群体(group)者,o 表示其他以外的人,a 表示这三者皆是</li>
+<li>+ 表示增加权限,- 表示取消权限,= 表示唯一设定权限</li>
+<li>r 表示可读取,w 表示可写入,x 表示可执行,X 表示只有当该文件是个子目录或者该文件已经被设定过为可执行</li>
+<li>-c : 若该文件权限确实已经更改,才显示其更改动作</li>
+<li>-f : 若该文件权限无法被更改也不要显示错误讯息</li>
+<li>-v : 显示权限变更的详细资料</li>
+<li>-R : 对目前目录下的所有文件与子目录进行相同的权限变更(即以递归的方式逐个变更)</li>
+<li>–help : 显示辅助说明</li>
+<li>–version : 显示版本</li>
+</ul>
+<h2 id="文件内容">文件内容</h2>
+<h3 id="cat">cat</h3>
+<ul>
+<li>由第一行开始显示文件内容</li>
+</ul>
+<h3 id="tac">tac</h3>
+<ul>
+<li>从最后一行开始显示,可以看出 tac 是 cat 的倒着写</li>
+</ul>
+<h3 id="nl">nl</h3>
+<ul>
+<li>显示的时候输出行号</li>
+</ul>
+<h3 id="more">more</h3>
+<ul>
+<li>一页一页的显示文件内容</li>
+<li>空格代表翻页</li>
+<li><code>enter</code> 代表向下看一行</li>
+<li><code> :f</code> 查看行号</li>
+</ul>
+<h3 id="less">less</h3>
+<ul>
+<li>空格下翻页</li>
+<li><code>pageDown</code>,<code>pageUp</code>键代表翻动页面</li>
+<li><code>q</code>退出</li>
+<li>查找字符串
+<ul>
+<li><code>/</code> 向下查询</li>
+<li><code>?</code> 向上查询</li>
+</ul>
+</li>
+<li>要查询的字符串
+<ul>
+<li><code>n</code> 继续搜寻下一个</li>
+<li><code>N</code> 上寻找</li>
+</ul>
+</li>
+</ul>
+<h3 id="head">head</h3>
+<ul>
+<li>只看开始几行,通过 -n 参数来控制显示几行</li>
+</ul>
+<h3 id="tail">tail</h3>
+<ul>
+<li>只看结尾几行 -n 参数 要查看几行</li>
+</ul>
+<h3 id="grep">grep</h3>
+<ul>
+<li>Linux grep 命令用于查找文件里符合条件的字符串</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep [正则表达式] [文件或目录...]<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>-v 或 --invert-match</strong> : 显示不包含匹配文本的所有行</li>
+</ul>
+<h2 id="文件解压">文件解压</h2>
+<ul>
+<li>Linux下常见的压缩包格式有5种:
+<ul>
+<li>zip</li>
+<li>tar.gz</li>
+<li>tar.bz2</li>
+<li>tar.xz</li>
+<li>tar.Z</li>
+</ul>
+</li>
+<li>其中tar是种打包格式,gz和bz2等后缀才是指代压缩方式:gzip和bzip2</li>
+</ul>
+<h3 id="zip">zip</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">unzip</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.zip</span><br></code></pre></td></tr></table></figure>
+<h3 id="tar-gz">tar.gz</h3>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">tar -zxvf filename<span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span> -C ~/tar<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其中zxvf含义分别如下
+<ul>
+<li>z: g<strong>z</strong>ip压缩格式</li>
+<li>x: e<strong>x</strong>tract 解压</li>
+<li>v: <strong>v</strong>erbose详细信息</li>
+<li>f**:f**ile(file=archieve)文件</li>
+<li>-C: 建立压缩档案,解压到指定目录下</li>
+</ul>
+</li>
+</ul>
+<h3 id="tar-bz2">tar.bz2</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-jxvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.bz2</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>j: bzip2压缩格式</li>
+<li>其它选项和tar.gz解压含义相同</li>
+</ul>
+<h3 id="tar-xz">tar.xz</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-Jxvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.xz</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意J大写</li>
+</ul>
+<h3 id="tar-Z">tar.Z</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-Zxvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.Z</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意Z大写</li>
+</ul>
+<h3 id="tar">tar</h3>
+<ul>
+<li>关于tar的详细命令可以</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">tar <span class="hljs-comment">--help</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>事实上, 从1.15版本开始tar就可以自动识别压缩的格式,故不需人为区分压缩格式就能正确解压</strong></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span><br><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.bz2</span><br><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.xz</span><br><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">-xvf</span> <span class="hljs-selector-tag">filename</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.Z</span><br></code></pre></td></tr></table></figure>
+<h2 id="传输文件">传输文件</h2>
+<h3 id="sftp">sftp</h3>
+<h4 id="登陆">登陆</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sftp user@ip<br></code></pre></td></tr></table></figure>
+<h4 id="帮助">帮助</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">help<br></code></pre></td></tr></table></figure>
+<p>建立连接后, linux shell中的$编程了sftp&gt;,  这也对, 现在执行以下help, 可以看看sftp支持哪些命令</p>
+<h4 id="查看当前目录的路径">查看当前目录的路径</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pwd<br>lpwd<br></code></pre></td></tr></table></figure>
+<p>pwd是看远端服务器的目录, 即sftp服务器默认的当前目录,  lpwd是查看本地目录</p>
+<h4 id="查看当前目录的文件">查看当前目录的文件</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls<br>lls<br></code></pre></td></tr></table></figure>
+<p>ls是看sftp服务器下当前目录下的东东, lls是查看本地当前目录下</p>
+<h4 id="上传">上传</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">put a.txt<br></code></pre></td></tr></table></figure>
+<p>把linux本地目录下的a.txt文件上传到sftp服务器的当前目录下</p>
+<h4 id="下载">下载</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">get b.txt<br></code></pre></td></tr></table></figure>
+<p>把sftp服务器当前目录下的b.txt文件下载到本地当前目录下</p>
+<h4 id="本地执行">本地执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">!command<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个是指在本地上执行command这个命令, 比如!ls是列举本地当前目录下的东东, !rm a.txt是删除本地当前目录下的a.txt文件</li>
+<li>这个命令非常非常有用, 因为在sftp&gt; 后输入命令, 默认值针对sftp服务器的, 所以执行rm a.txt删除的是sftp服务器上的a.txt文件, 而非本地的linux上的a.txt文件</li>
+</ul>
+<h4 id="退出">退出</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">exit<br>quit<br></code></pre></td></tr></table></figure>
+<h3 id="scp">scp</h3>
+<ul>
+<li>Linux scp 命令用于 Linux 之间复制文件和目录</li>
+<li>scp 是 secure copy 的缩写, scp 是 linux 系统下基于 ssh 登陆进行安全的远程文件拷贝命令</li>
+<li>scp 是加密的,rcp是不加密的,scp 是 rcp 的加强版</li>
+</ul>
+<h4 id="语法">语法</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp [-1246BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file]<br>[-l <span class="hljs-built_in">limit</span>] [-o ssh_option] [-P port] [-S program]<br>[[user@]host1:]file1 [...] [[user@]host2:]file2<br></code></pre></td></tr></table></figure>
+<p>简易写法:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">scp</span> <span class="hljs-selector-attr">[可选参数]</span> <span class="hljs-selector-tag">file_source</span> <span class="hljs-selector-tag">file_target</span><br></code></pre></td></tr></table></figure>
+<p><strong>参数说明</strong>:</p>
+<ul>
+<li>-1:强制scp命令使用协议ssh1</li>
+<li>-2:强制scp命令使用协议ssh2</li>
+<li>-4:强制scp命令只使用IPv4寻址</li>
+<li>-6:强制scp命令只使用IPv6寻址</li>
+<li>-B:使用批处理模式(传输过程中不询问传输口令或短语)</li>
+<li>-C:允许压缩,(将-C标志传递给ssh,从而打开压缩功能)</li>
+<li>-p:保留原文件的修改时间,访问时间和访问权限</li>
+<li>-q:不显示传输进度条</li>
+<li>-r:递归复制整个目录</li>
+<li>-v:详细方式显示输出,scp和ssh会显示出整个过程的调试信息,这些信息用于调试连接,验证和配置问题</li>
+<li>-c cipher:以cipher将数据传输进行加密,这个选项将直接传递给ssh</li>
+<li>-F ssh_config:指定一个替代的ssh配置文件,此参数直接传递给ssh</li>
+<li>-i identity_file:从指定文件中读取传输时使用的密钥文件,此参数直接传递给ssh</li>
+<li>-l limit:限定用户所能使用的带宽,以Kbit/s为单位</li>
+<li>-o ssh_option:如果习惯于使用ssh_config中的参数传递方式</li>
+<li>-P port:注意是大写的P, port是指定数据传输用到的端口号</li>
+<li>-S program:指定加密传输时所使用的程序,此程序必须能够理解ssh的选项</li>
+</ul>
+<h4 id="复制文件">复制文件</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp local_file remote_username@remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_username@remote_ip:remote_file<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_ip:remote_file<br></code></pre></td></tr></table></figure>
+<ul>
+<li>第1,2个指定了用户名,命令执行后需要再输入密码,第1个仅指定了远程的目录,文件名字不变,第2个指定了文件名</li>
+<li>第3,4个没有指定用户名,命令执行后需要输入用户名和密码,第3个仅指定了远程的目录,文件名字不变,第4个指定了文件名</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music<br>scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3<br>scp /home/space/music/1.mp3 www.runoob.com:/home/root/others/music<br>scp /home/space/music/1.mp3 www.runoob.com:/home/root/others/music/001.mp3<br></code></pre></td></tr></table></figure>
+<h4 id="复制目录">复制目录</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp -r local_folder remote_username@remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp -r local_folder remote_ip:remote_folder<br></code></pre></td></tr></table></figure>
+<ul>
+<li>第1个指定了用户名,命令执行后需要再输入密码</li>
+<li>第2个没有指定用户名,命令执行后需要输入用户名和密码</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">scp -r <span class="hljs-regexp">/home/</span>space<span class="hljs-regexp">/music/</span> root@www.runoob.com:<span class="hljs-regexp">/home/</span>root<span class="hljs-regexp">/others/</span><br>scp -r <span class="hljs-regexp">/home/</span>space<span class="hljs-regexp">/music/</span> www.runoob.com:<span class="hljs-regexp">/home/</span>root<span class="hljs-regexp">/others/</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面命令将本地 music 目录复制到远程 others 目录下</li>
+</ul>
+<h4 id="说明">说明</h4>
+<ul>
+<li>从远程复制到本地,只要将从本地复制到远程的命令的后2个参数调换顺序即可</li>
+<li>如果远程服务器防火墙有为scp命令设置了指定的端口,我们需要使用 -P 参数来设置命令的端口号,命令格式如下:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">scp 命令使用端口号 4588</span><br>scp -P 4588 remote@www.runoob.com:/usr/local/sin.sh /home/administrator<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用scp命令要确保使用的用户具有可读取远程服务器相应文件的权限,否则scp命令是无法起作用的</li>
+</ul>
+<h2 id="链接">链接</h2>
+<p><strong>硬链接</strong></p>
+<ul>
+<li>A—B,假设B是A的硬链接,那么他们两个指向了同一个文件,即允许一个文件拥有多个路径,用户可以通过这种机制建立硬链接到一些重要文件上,防止误删</li>
+</ul>
+<p><strong>软链接</strong></p>
+<ul>
+<li>类似Window下的快捷方式,删除的源文件,快捷方式也访问不了</li>
+</ul>
+<h3 id="ln命令">ln命令</h3>
+<p><strong>创建一个硬链接</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln &lt;sourceDir&gt; f1<br></code></pre></td></tr></table></figure>
+<p>删除源文件之后,f1仍然可以正常访问</p>
+<p><strong>创建一个软链接(符号连接)</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -s &lt;sourceDir&gt; f2<br></code></pre></td></tr></table></figure>
+<p>删除源文件之后,f2不能被访问</p>
+<h2 id="磁盘管理">磁盘管理</h2>
+<h3 id="df">df</h3>
+<p>列出文件系统整体的磁盘使用量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">df<br>/dev/disk1s1                                      373871240 239508040  105521744    70%   1710292 1867645908    0%   /System/Volumes/Data<br><br>-h #进制换算<br></code></pre></td></tr></table></figure>
+<h3 id="du">du</h3>
+<p>检查当前目录空间的使用量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">du<br>248	./.config/ranger<br>24	./.config/configstore<br>7944	./.config/clash<br>104	./.config/filezilla<br>8344	./.config<br><br>-a #包括隐藏文件<br>-h #进制换算<br>-sm #查看本目录所占用的容量<br>-sm 目录 #查看指定目录所占的容量<br>-sm 目录/* #查看指定目录下的所有目录所占的容量<br></code></pre></td></tr></table></figure>
+<h3 id="mount">mount</h3>
+<p>挂载本地磁盘或者文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount 外部设备路径 目标目录<br>mount /dev/usb /mnt/usb<br></code></pre></td></tr></table></figure>
+<h3 id="unmount">unmount</h3>
+<p>卸载本地磁盘或者文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">umount 挂载位置<br>-f #强制卸载<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/">System</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Server/Nginx/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nginx 配置文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Database/Redis/Value/BitMap/">
+                        <span class="hidden-mobile">Redis BitMap</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>
