@@ -163,7 +163,7 @@ xmlhttp.onreadystatechange=function()
 }
 ```
 
-- **注意:** onreadystatechange 事件被触发 4 次(0 - 4), 分别是: 0-1,1-2,2-3,3-4,对应着 readyState 的每个变化
+- **注意**:onreadystatechange 事件被触发 4 次(0 - 4), 分别是: 0-1,1-2,2-3,3-4,对应着 readyState 的每个变化
 
 ## 使用回调函数
 

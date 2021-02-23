@@ -14,7 +14,7 @@ categories:
 
 list-style-image 属性使用图像来替换列表项的标记
 
-**注意:** 请始终规定一个 "list-style-type" 属性以防图像不可用
+**注意**:请始终规定一个 "list-style-type" 属性以防图像不可用
 
 **属性值**
 

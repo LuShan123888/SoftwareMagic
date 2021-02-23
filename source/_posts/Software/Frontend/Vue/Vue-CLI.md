@@ -61,11 +61,11 @@ vue add <插件名>
 
 ```json
 {
-  "useTaobaoRegistry": true,
-  "presets": {},
-  "latestVersion": "4.5.7",
-  "lastChecked": 1602748738512,
-  "packageManager": "yarn"
+    "useTaobaoRegistry": true,
+    "presets": {},
+    "latestVersion": "4.5.7",
+    "lastChecked": 1602748738512,
+    "packageManager": "yarn"
 }
 ```
 

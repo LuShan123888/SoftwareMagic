@@ -124,7 +124,7 @@ GEODIST key member1 member2 [m|km|ft|mi]
         - ASC: 查找结果根据距离从近到远排序
         - DESC: 查找结果根据从远到近排序
 
-- **georadius 实例:**
+- **georadius 实例**:
 
 - ```
     redis> GEOADD Sicily 13.361389 38.115556 "Palermo" 15.087269 37.502669 "Catania"
@@ -153,7 +153,7 @@ GEODIST key member1 member2 [m|km|ft|mi]
     redis>
     ```
 
-- **georadiusbymember 实例:**
+- **georadiusbymember 实例**:
 
 - ```
     redis> GEOADD Sicily 13.583333 37.316667 "Agrigento"

@@ -34,7 +34,7 @@ public interface Controller {
 <bean name="/t1" class="com.example.controller.ControllerTest1"/>
 ```
 
-**说明:**
+**说明**:
 
 - 实现接口Controller定义控制器是较老的办法
 

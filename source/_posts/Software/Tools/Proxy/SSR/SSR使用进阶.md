@@ -17,7 +17,7 @@ categories:
 -  配置文件路径:`/etc/shadowsocks.json`
 - 日志文件路径:`/var/log/shadowsocks.log `
 - 代码安装目录:`/usr/local/shadowsocks `
-- 卸载ssr服务 :` ./shadowsocksR.sh uninstall `
+- 卸载ssr服务:` ./shadowsocksR.sh uninstall `
 
 ## 配置多端口
 

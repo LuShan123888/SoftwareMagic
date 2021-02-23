@@ -21,33 +21,33 @@ npm install --save vue vue-loader vue-style-loader vue-template-compiler
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      // 它会应用到普通的 `.js` 文件
-      // 以及 `.vue` 文件中的 `<script>` 块
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-      // 它会应用到普通的 `.css` 文件
-      // 以及 `.vue` 文件中的 `<style>` 块
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
+            // 它会应用到普通的 `.js` 文件
+            // 以及 `.vue` 文件中的 `<script>` 块
+            {
+                test: /\.js$/,
+                loader: 'babel-loader'
+            },
+            // 它会应用到普通的 `.css` 文件
+            // 以及 `.vue` 文件中的 `<style>` 块
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                ]
+            }
         ]
-      }
+    },
+    plugins: [
+        new VueLoaderPlugin()
     ]
-  },
-  plugins: [
-    new VueLoaderPlugin()
-  ]
 }
 ```
 
@@ -67,27 +67,27 @@ new Vue({
 
 - `App.vue`
 
-```html
+```vue
 <template>
-  <div id="app">
+<div id="app">
     <h1 class="title">{{ message }}</h1>
-  </div>
+    </div>
 </template>
 
 <script>
-export default {
-  name: "App",
-  data() {
-    return {
-      message: "Hello Vue-Webpack"
+    export default {
+        name: "App",
+        data() {
+            return {
+                message: "Hello Vue-Webpack"
+            };
+        }
     };
-}
-};
 </script>
 <style scoped>
-  .title{
-    color: blue;
-  }
+    .title{
+        color: blue;
+    }
 </style>
 ```
 

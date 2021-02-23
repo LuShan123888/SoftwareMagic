@@ -51,7 +51,7 @@ java -jar bfg.jar --strip-blobs-bigger-than 50M  my-repo.git
 java -jar bfg.jar --delete-folders doc  my-repo.git
 ```
 
-**注意**:**删除文件后别忘了gc命令**,工具不会清除最近一次提交的文件内容,如果需要删除,使用
+**注意**:删除文件后别忘了gc命令,工具不会清除最近一次提交的文件内容,如果需要删除,使用
 `--no-blob-protection`,官方不推荐,在删除前最好确保最新的提交为干净的
 
 ## 详细命令

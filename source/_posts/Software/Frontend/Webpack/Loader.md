@@ -27,23 +27,23 @@ npm install --save-dev css-loader style-loader
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [
-            'style-loader',
+    module: {
+        rules: [
             {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                    localIdentName: '[name]__[local]--[hash:base64:5]'
-                }
-            }
-         ],
-      },
-    ],
-  },
+                test: /\.css$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:5]'
+                        }
+                    }
+                ],
+            },
+        ],
+    },
 };
 ```
 

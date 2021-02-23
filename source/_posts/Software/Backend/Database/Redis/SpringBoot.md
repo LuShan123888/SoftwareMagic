@@ -46,7 +46,7 @@ spring:
 
 ### RedisTemplate
 
-**methods:**
+**methods**
 
 - `opsForValue`:操作字符串
 

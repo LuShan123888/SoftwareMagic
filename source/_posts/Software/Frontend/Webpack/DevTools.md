@@ -19,15 +19,15 @@ npm install --save-dev webpack-dev-server
 
 - `webpack.config.js`
 
-```js
-  devServer: {
+```json
+devServer: {
     contentBase: "./public",
     port: 8000,
     stats: { colors: true },
     historyApiFallback: true,
     inline: true,
     hot: true,
-  }
+}
 ```
 
 - `contentBase`:本地服务器所加载的页面所在的目录
@@ -39,10 +39,10 @@ npm install --save-dev webpack-dev-server
 - `package.json`
 
 ```json
-  "scripts": {
+"scripts": {
     "build": "webpack",
     "server": "webpack serve"
-  },
+},
 ```
 
 ### 启动
@@ -68,7 +68,7 @@ npm run server
 - 对小到中型的项目中,`eval-source-map`是一个很好的选项,再次强调你只应该开发阶段使用它,我们继续对上文新建的`webpack.config.js`,进行如下配置:
 
 ```js
-	devtool: 'eval-source-map'
+devtool: 'eval-source-map'
 ```
 
 - **注意**:`cheap-module-eval-source-map`方法构建速度更快,但是不利于调试,推荐在大型项目考虑时间成本时使用

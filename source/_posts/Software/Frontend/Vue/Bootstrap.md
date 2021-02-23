@@ -35,13 +35,13 @@ import "./styles/index.scss"
 const webpack = require('webpack')
 module.exports = {
     configureWebpack: {
-      plugins: [
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
-        })
-      ]
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery'
+            })
+        ]
     }
-  }
+}
 ```
 

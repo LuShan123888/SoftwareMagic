@@ -85,11 +85,11 @@ git rebase --continue
 
 希望将develop分支中的C~E部分复制到master分支中,这时就可以通过rebase命令来实现(如果只是复制某一两个提交到其他分支,建议使用更简单的命令:`git cherry-pick`)
 在实际模拟中,创建了master和develop两个分支:
-**master分支:**
+**master分支**:
 
 ![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-443.png)
 
-**develop分支:**
+**develop分支**:
 
 ![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-455.png)
 

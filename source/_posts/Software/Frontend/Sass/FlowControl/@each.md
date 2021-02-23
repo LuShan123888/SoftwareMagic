@@ -132,6 +132,6 @@ $icons:
 }
 ```
 
-**💡 Fun fact:**
+**💡 Fun fact**:
 
 Because `@each` supports destructuring and [maps count as lists of lists](https://sass-lang.com/documentation/values/maps), `@each`’s map support works without needing special support for maps in particular.

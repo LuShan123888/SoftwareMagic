@@ -111,7 +111,7 @@ function setCookie(cname,cvalue,exdays)
 }
 ```
 
-**函数解析:**
+**函数解析**:
 
 - 以上的函数参数中,cookie 的名称为 cname,cookie 的值为 cvalue,并设置了 cookie 的过期时间 expires
 - 该函数设置了 cookie 名,cookie 值,cookie过期时间
@@ -134,7 +134,7 @@ function getCookie(cname)
 }
 ```
 
-**函数解析:**
+**函数解析**:
 
 - cookie 名的参数为 cname
 - 创建一个文本变量用于检索指定 cookie :`cname + "="`

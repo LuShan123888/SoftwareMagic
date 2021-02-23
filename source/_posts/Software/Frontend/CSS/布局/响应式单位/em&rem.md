@@ -122,7 +122,7 @@ html {font-size: 62.5%;  } /*  公式16px*62.5%=10px  */
 
 ![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-nKrYJt45FoVcPXf.png)
 
-**注意:**
+**注意**:
 
 - 值得注意的浏览器支持问题: IE8,Safari 4或 iOS 3.2中不支持rem单位
 - 如果你的用户群都使用最新版的浏览器,那推荐使用rem,如果要考虑兼容性,那就使用px,或者两者同时使用

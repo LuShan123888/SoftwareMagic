@@ -17,9 +17,9 @@ printf  format-string  [arguments...]
 
 **参数说明**
 
-- **format-string:** 为格式控制字符串,单引号与双引号效果一样,没有引号也可以输出
+- **format-string**:为格式控制字符串,单引号与双引号效果一样,没有引号也可以输出
 
-- **arguments:** 为参数列表
+- **arguments**:为参数列表
 
     - 格式只指定了一个参数,但多出的参数仍然会按照该格式输出,format-string 被重用
 

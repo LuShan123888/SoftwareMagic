@@ -76,7 +76,7 @@ Cookie: name=xyz
 
 通过 Servlet 设置 Cookie 包括三个步骤:
 
-- **创建一个 Cookie 对象:**您可以调用带有 cookie 名称和 cookie 值的 Cookie 构造函数,cookie 名称和 cookie 值都是字符串
+- **创建一个 Cookie 对象**:您可以调用带有 cookie 名称和 cookie 值的 Cookie 构造函数,cookie 名称和 cookie 值都是字符串
 
 ```java
 Cookie cookie = new Cookie("key","value");
@@ -88,13 +88,13 @@ Cookie cookie = new Cookie("key","value");
 [ ] ( ) = , " / ? @ : ;
 ```
 
-- **设置最大生存周期:**您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间(以秒为单位),下面将设置一个最长有效期为 24 小时的 cookie
+- **设置最大生存周期**:您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间(以秒为单位),下面将设置一个最长有效期为 24 小时的 cookie
 
 ```java
 cookie.setMaxAge(60*60*24);
 ```
 
-- **发送 Cookie 到 HTTP 响应头:**您可以使用 **response.addCookie** 来添加 HTTP 响应头中的 Cookie,如下所示:
+- **发送 Cookie 到 HTTP 响应头**:您可以使用`response.addCookie`来添加 HTTP 响应头中的 Cookie,如下所示:
 
 ```
 response.addCookie(cookie);

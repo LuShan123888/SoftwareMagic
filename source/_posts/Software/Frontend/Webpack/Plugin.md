@@ -14,9 +14,9 @@ categories:
 - `webpack.config.js`
 
 ```js
-  plugins: [
+plugins: [
     new webpack.BannerPlugin('Copyright')
-  ]
+]
 ```
 
 - 将版权信息写在括号中
@@ -48,10 +48,10 @@ npm install --save-dev html-webpack-plugin
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //...
 plugins: [
-        new HtmlWebpackPlugin({
-            template: __dirname + "/src/index.tmpl.html"
-        })
-    ],
+    new HtmlWebpackPlugin({
+        template: __dirname + "/src/index.tmpl.html"
+    })
+],
 ```
 
 - `index.tmpl.html`
@@ -59,14 +59,14 @@ plugins: [
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Webpack Sample Project</title>
-  </head>
-  <body>
-    <div id='app'>
-    </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>Webpack Sample Project</title>
+    </head>
+    <body>
+        <div id='app'>
+        </div>
+    </body>
 </html>
 ```
 
@@ -79,8 +79,8 @@ plugins: [
 
 ```js
 plugins: [
-  new webpack.optimize.UglifyJsPlugin()
-  ]
+    new webpack.optimize.UglifyJsPlugin()
+]
 ```
 
 ## OccurenceOrderPlugin
@@ -91,8 +91,8 @@ plugins: [
 
 ```js
 plugins: [
-  new webpack.optimize.OccurrenceOrderPlugin()
-  ]
+    new webpack.optimize.OccurrenceOrderPlugin()
+]
 ```
 
 ## ExtractTextPlugin
@@ -111,8 +111,8 @@ npm install --save-dev extract-text-webpack-plugin
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //...
 plugins: [
-        new ExtractTextPlugin("style.css")
-    ]
+    new ExtractTextPlugin("style.css")
+]
 ```
 
 ## CleanWebpackPlugin
@@ -129,13 +129,13 @@ npm install clean-webpack-plugin --save-dev
 
 ```js
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-  plugins: [
+plugins: [
     new CleanWebpackPlugin('build/*.*', {
-      root: __dirname,
-      verbose: true,
-      dry: false
-  })
-  ]
+        root: __dirname,
+        verbose: true,
+        dry: false
+    })
+]
 ```
 
 ## CopyWebpackPlugin
@@ -154,14 +154,14 @@ npm install --save-dev copy-webpack-plugin
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        { from: "source", to: "dest" },
-        { from: "other", to: "public" },
-      ],
-    }),
-  ],
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: "source", to: "dest" },
+                { from: "other", to: "public" },
+            ],
+        }),
+    ],
 };
 ```
 
@@ -178,8 +178,8 @@ module.exports = {
 
 ```js
 new webpack.ProvidePlugin({
-  $: 'jquery',
-  jQuery: 'jquery'
+    $: 'jquery',
+    jQuery: 'jquery'
 })
 ```
 

@@ -279,16 +279,16 @@ categories:
 
 快捷键    | 操作
 :---: | :---:
- **Command (⌘)-R:** | 从内建的 [macOS 恢复](https://support.apple.com/zh-cn/HT201314)系统启动,或者,您也可以使用 Option-Command-R 或 Shift-Option-Command-R 以通过互联网从 macOS 恢复功能启动,[macOS 恢复功能可以安装不同版本的 macOS](https://support.apple.com/zh-cn/HT204904),具体取决于您在电脑启动时使用的组合键,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
-**Option (⌥):**|启动进入"[启动管理器](https://support.apple.com/zh-cn/HT202796)”,您可以从中选取其他启动磁盘或宗卷(若可用),如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
-**Option-Command-P-R:**|[重置 NVRAM](https://support.apple.com/zh-cn/HT204063) 或 PRAM,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),它会忽略这个组合键或从 macOS 恢复功能启动
-**Shift (⇧):**|以[安全模式](https://support.apple.com/zh-cn/HT201262)启动
-**D:**|从内建的 [Apple Hardware Test](https://support.apple.com/zh-cn/HT201257) 或"[Apple 诊断](https://support.apple.com/zh-cn/HT202731)”实用工具启动,具体取决于您的 Mac 机型,或者,您也可以使用 Option-D 通过互联网从这个实用工具启动
-**N:**|从 NetBoot 服务器启动,[如果您的 Mac 支持网络启动宗卷](https://support.apple.com/zh-cn/HT202770),要使用服务器上默认的引导映像,请按住 Option-N
-**Command-S:**|以[单用户模式](https://support.apple.com/zh-cn/HT201573)启动,这个组合键要求使用 [macOS High Sierra 或更早版本](https://support.apple.com/zh-cn/HT201260)
-**T:**|以[目标磁盘模式](https://support.apple.com/zh-cn/HT201462)启动
-**Command-V:**|以[详细模式](https://support.apple.com/zh-cn/HT201573)启动
-**推出键** (⏏),**F12**,**鼠标按钮**或**触控板按钮:**|推出可移动介质,例如光盘
+ **Command (⌘)-R** | 从内建的 [macOS 恢复](https://support.apple.com/zh-cn/HT201314)系统启动,或者,您也可以使用 Option-Command-R 或 Shift-Option-Command-R 以通过互联网从 macOS 恢复功能启动,[macOS 恢复功能可以安装不同版本的 macOS](https://support.apple.com/zh-cn/HT204904),具体取决于您在电脑启动时使用的组合键,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
+**Option (⌥)**|启动进入"[启动管理器](https://support.apple.com/zh-cn/HT202796)”,您可以从中选取其他启动磁盘或宗卷(若可用),如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
+**Option-Command-P-R**|[重置 NVRAM](https://support.apple.com/zh-cn/HT204063) 或 PRAM,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),它会忽略这个组合键或从 macOS 恢复功能启动
+**Shift (⇧)**|以[安全模式](https://support.apple.com/zh-cn/HT201262)启动
+**D**|从内建的 [Apple Hardware Test](https://support.apple.com/zh-cn/HT201257) 或"[Apple 诊断](https://support.apple.com/zh-cn/HT202731)”实用工具启动,具体取决于您的 Mac 机型,或者,您也可以使用 Option-D 通过互联网从这个实用工具启动
+**N**|从 NetBoot 服务器启动,[如果您的 Mac 支持网络启动宗卷](https://support.apple.com/zh-cn/HT202770),要使用服务器上默认的引导映像,请按住 Option-N
+**Command-S**|以[单用户模式](https://support.apple.com/zh-cn/HT201573)启动,这个组合键要求使用 [macOS High Sierra 或更早版本](https://support.apple.com/zh-cn/HT201260)
+**T**|以[目标磁盘模式](https://support.apple.com/zh-cn/HT201462)启动
+**Command-V**|以[详细模式](https://support.apple.com/zh-cn/HT201573)启动
+**推出键** (⏏),**F12**,**鼠标按钮**或**触控板按钮**|推出可移动介质,例如光盘
 
 ## Mac 上"终端”中的键盘快捷键
 

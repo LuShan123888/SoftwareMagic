@@ -17,7 +17,7 @@ categories:
 JSON.stringify(value[, replacer[, space]])
 ```
 
-**参数说明:**
+**参数说明**:
 
 - **value**:必需, 要转换的 JavaScript 值(通常为对象或数组)
 - **replacer**:
@@ -26,7 +26,7 @@ JSON.stringify(value[, replacer[, space]])
     - 如果 replacer 是一个数组,则仅转换该数组中具有键值的成员,成员的转换顺序与键在数组中的顺序一样
 - **space**:可选,文本添加缩进,空格和换行符,如果 space 是一个数字,则返回值文本在每个级别缩进指定数目的空格,如果 space 大于 10,则文本缩进 10 个空格,space 也可以使用非数字,如:\t
 
-**返回值:**
+**返回值**:
 
 - 返回包含 JSON 文本的字符串
 
@@ -56,12 +56,12 @@ document.write("<pre>" + str_pretty2 + "</pre>" ); // pre 用于格式化输出
 JSON.parse(text[, reviver])
 ```
 
-**参数说明:**
+**参数说明**:
 
-- **text:**必需, 一个有效的 JSON 字符串
-- **reviver:** 可选,一个转换结果的函数, 将为对象的每个成员调用此函数
+- **text**:必需, 一个有效的 JSON 字符串
+- **reviver**:可选,一个转换结果的函数, 将为对象的每个成员调用此函数
 
-**返回值:**
+**返回值**:
 
 - 返回给定 JSON 字符串转换后的对象
 

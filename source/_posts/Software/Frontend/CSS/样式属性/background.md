@@ -101,7 +101,7 @@ background-size: length|percentage|cover|contain;
 
 **提示和注释**
 
-**提示:** background-position属性设置背景图像位置,如果指定的位置是没有任何背景,图像总是放在元素的左上角
+**提示**:background-position属性设置背景图像位置,如果指定的位置是没有任何背景,图像总是放在元素的左上角
 
 **属性值**
 

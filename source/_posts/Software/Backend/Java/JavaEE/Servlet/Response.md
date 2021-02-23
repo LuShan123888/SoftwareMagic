@@ -60,7 +60,7 @@ HeaderN: ...
 | **void setLocale(Locale loc)** 如果响应还未被提交,设置响应的区域, |
 | **void setStatus(int sc)** 为该响应设置状态码,               |
 
-**getParameter()和getAttribute ()区别:**
+**getParameter()和getAttribute ()区别**:
 
 - 赋值方式不一样,前者是客户端如浏览器端将请求参数值送给服务器端,而后者则是在请求到达服务器端之后,在服务器进行存放进去
 - 两者的返回值类型不一样,前者永远返回字符串,后者返回任意对象

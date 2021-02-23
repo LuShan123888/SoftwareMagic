@@ -93,7 +93,7 @@ protected static class PooledDataSourceConfiguration {
 - Spring Boot 不仅提供了默认的数据源,同时默认已经配置好了`JdbcTemplate`放在了容器中,程序员只需自己注入即可使用
 - JdbcTemplate 的自动配置是依赖`org.springframework.boot.autoconfigure.jdbc`包下的`JdbcTemplateConfiguration`类
 
-**JdbcTemplate主要提供以下几类方法:**
+**JdbcTemplate主要提供以下几类方法**:
 
 - `execute`:可以用于执行任何SQL语句,一般用于执行DDL语句
 - `update`与`batchUpdate方法`:`update`用于执行新增,修改,删除等语句,`batchUpdate`用于执行批处理相关语句
