@@ -26,10 +26,10 @@ categories:
 **Command-Z**|撤销上一个命令,随后您可以按 Shift-Command-Z 来重做,从而反向执行撤销命令,在某些 App 中,您可以撤销和重做多个命令
 **Command-A**|全选各项
 **Command-F**|查找文稿中的项目或打开"查找”窗口
-**Command-G**|再次查找|查找之前所找到项目出现的下一个位置,要查找出现的上一个位置,请按 Shift-Command-G
+**Command-G**|再次查找
 **Command-H**|隐藏最前面的 App 的窗口,要查看最前面的 App 但隐藏所有其他 App,请按 Option-Command-H
 **Command-M**|将最前面的窗口最小化至"程序坞”,要最小化最前面的 App 的所有窗口,请按 Option-Command-M
-**Command-O|**打开所选项,或打开一个对话框以选择要打开的文件
+**Command-O**|打开所选项,或打开一个对话框以选择要打开的文件
 **Command-P**|打印当前文稿
 **Command-S**|存储当前文稿
 **Command-T**|打开新标签页
@@ -41,7 +41,7 @@ categories:
 **空格键**|使用[快速查看](https://support.apple.com/zh-cn/guide/mac-help/quick-look-files-and-folders-mh14119/mac)来预览所选项
 **Command-Tab**|在打开的 App 中切换到下一个最近使用的 App
 **Shift-Command-5**|在 [macOS Mojave 或更高版本](https://support.apple.com/zh-cn/HT201260)中,拍摄截屏或录制屏幕,也可以使用 Shift-Command-3 或 Shift-Command-4 来拍摄截屏,[进一步了解截屏](https://support.apple.com/zh-cn/HT201361)
-**Shift-Command-N|**在"访达”中创建一个新文件夹
+**Shift-Command-N**|在"访达”中创建一个新文件夹
 **Command-逗号 (,)**|打开最前面的 App 的偏好设置
 
 ## 睡眠,退出登录和关机快捷键
@@ -107,7 +107,7 @@ categories:
 **Command–调度中心**|显示桌面
 **Control–下箭头**|显示最前面的 App 的所有窗口
 **Option–调高音量**|打开"声音”偏好设置,这个快捷键可与任一音量键搭配使用
-**Option-Shift–调高音量**或 **Option-Shift–调低音量**:|以较小的步幅调节音量
+**Option-Shift–调高音量**或 **Option-Shift–调低音量**|以较小的步幅调节音量
 **Option–键盘调高亮度**|打开"键盘”偏好设置,
 **Option-Shift–键盘调高亮度**或 **Option-Shift–键盘调低亮度**|以较小的步幅调节键盘亮度
 **连按 Option 键**|在单独的窗口中打开项目,然后关闭原始窗口
@@ -132,17 +132,17 @@ categories:
 **Command-T**|显示或隐藏"字体”窗口
 **Command-D**|从"打开”对话框或"存储”对话框内选择"桌面”文件夹
 **Control-Command-D**|显示或隐藏所选字词的定义
-**Shift-Command–冒号 (:)**|显示"拼写和语法”窗口
-**Command–分号 (;)**|查找文稿中拼写错误的字词
+**Shift-Command–冒号`:`**|显示"拼写和语法”窗口
+**Command–分号`;`**|查找文稿中拼写错误的字词
 **Option-Delete**|删除插入点左边的字词
 **Control-H**|删除插入点左边的字符,也可以使用 Delete 键
 **Control-D**|删除插入点右边的字符,也可以使用 Fn-Delete
 **Fn-Delete**|在没有向前删除  键的键盘上向前删除,也可以使用 Control-D
 **Control-K**|删除插入点与行或段落末尾处之间的文本
-**Fn–上箭头**|Page Up|向上滚动一页
-**Fn–下箭头**|Page Down|向下滚动一页
-**Fn–左箭头|**Home|滚动到文稿开头
-**Fn–右箭头**|End|滚动到文稿末尾
+**Fn–上箭头**|Page Up
+**Fn–下箭头**|Page Down
+**Fn–左箭头**|Home
+**Fn–右箭头**|End
 **Command–上箭头**|将插入点移至文稿开头
 **Command–下箭头**|将插入点移至文稿末尾
 **Command–左箭头**|将插入点移至当前行的行首
@@ -170,20 +170,20 @@ categories:
 **Control–N**|下移一行
 **Control–O**|在插入点后新插入一行
 **Control–T**|将插入点后面的字符与插入点前面的字符交换
-**Command–左花括号 ({)**|左对齐
-**Command–右花括号 (})**|右对齐
-**Shift-Command–竖线 (|)**|居中对齐
+**Command–左花括号`{`**|左对齐
+**Command–右花括号`}`**|右对齐
+**Shift-Command–竖线`|`**|居中对齐
 **Option-Command-F**|前往搜索栏
 **Option-Command-T**|显示或隐藏 App 中的工具栏
-**Option-Command-C**|拷贝样式|将所选项的格式设置拷贝到剪贴板
-**Option-Command-V**|粘贴样式|将拷贝的样式应用到所选项
-**Option-Shift-Command-V**|粘贴并匹配样式|将周围内容的样式应用到粘贴在该内容中的项目
+**Option-Command-C**|拷贝样式
+**Option-Command-V**|粘贴样式
+**Option-Shift-Command-V**|粘贴并匹配样式
 **Option-Command-I**|显示或隐藏检查器窗口
-**Shift-Command-P**|页面设置|显示用于选择文稿设置的窗口
+**Shift-Command-P**|页面设置
 **Shift-Command-S**|显示"存储为”对话框或复制当前文稿
 **Shift-Command-减号 (-)**|缩小所选项
 **Shift-Command-加号 (+)**|放大所选项,Command–等号 (=) 可实现相同的功能
-- **Shift-Command–问号 (?)**|打开"帮助”菜单
+**Shift-Command–问号 (?)**|打开"帮助”菜单
 
 ## Mac 上的"聚焦”键盘快捷键
 

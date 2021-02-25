@@ -65,7 +65,7 @@ import css from "style.css";
 
 ```css
 .className {
-  color: green;
+    color: green;
 }
 ```
 
@@ -94,18 +94,18 @@ npm install sass-loader sass --save-dev
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          "sass-loader"
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -150,18 +150,18 @@ npm install less less-loader --save-dev
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          "less-loader"
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "less-loader"
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -202,39 +202,39 @@ npm install --save-dev autoprefixer postcss-preset-env
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                  plugins: [
-                      [
-                          "postcss-preset-env",
-                          {
-                              //其它选项
-                          },
-                      ],
-                      [
-                          "autoprefixer",
-                          {
-                              //其它选项
-                          },
-                      ]
-                   ]
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            //其它选项
+                                        },
+                                    ],
+                                    [
+                                        "autoprefixer",
+                                        {
+                                            //其它选项
+                                        },
+                                    ]
+                                ]
+                                ],
+                            },
+                        },
+                    },
                 ],
-              },
             },
-          },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -260,7 +260,7 @@ import css from "style.css";
 **安装**
 
 ```bash
-npm install -D babel-loader babel-core babel-preset-es2015 babel-preset-env
+npm install -D babel-loader @babel/core @babel/preset-env
 ```
 
 **配置**
@@ -270,16 +270,18 @@ npm install -D babel-loader babel-core babel-preset-es2015 babel-preset-env
 ```js
 module: {
     rules: [
-       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015','env']
-          }
+        {
+            test: /\.m?js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        ['@babel/preset-env', { targets: "defaults" }]
+                    ]
+                }
+            }
         }
-      },
     ]
 }
 ```
@@ -288,7 +290,7 @@ module: {
 
 ```json
 {
-  "presets": ["es2015", "env"]
+    "presets": ['@babel/preset-env', { targets: "defaults" }]
 }
 ```
 
@@ -334,22 +336,22 @@ npm install file-loader --save-dev
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-                name: '[name].[ext]?[hash:8]',
-                outputPath: 'static/images/'
-            }
-          }
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]?[hash:8]',
+                            outputPath: 'static/images/'
+                        }
+                    }
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -380,23 +382,23 @@ npm install url-loader file-loader --save-dev
 
 ```js
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[name].[ext]?[hash:8]',
-              outputPath: 'static/images/'
+    module: {
+        rules: [
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,
+                            name: '[name].[ext]?[hash:8]',
+                            outputPath: 'static/images/'
+                        },
+                    },
+                ],
             },
-          },
         ],
-      },
-    ],
-  },
+    },
 };
 ```
 
@@ -435,26 +437,26 @@ npm install html-withimg-loader --save
 ```js
 module: {
     rules: [
-      {
-        test: /\.(png|jpg|gif|jpeg|svg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[name].[ext]?[hash:8]',
-              outputPath: 'static/img/',
-              esModule: false,
-            }
-          }
-        ],
-      },
-      {
-        test: /\.(html)$/,
-        loader: 'html-withimg-loader'
-      }
+        {
+            test: /\.(png|jpg|gif|jpeg|svg)$/i,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8192,
+                        name: '[name].[ext]?[hash:8]',
+                        outputPath: 'static/img/',
+                        esModule: false,
+                    }
+                }
+            ],
+        },
+        {
+            test: /\.(html)$/,
+            loader: 'html-withimg-loader'
+        }
     ]
-  },
+},
 ```
 
 - `esModule`:默认为true,图片打包后的默认路径带default对象
