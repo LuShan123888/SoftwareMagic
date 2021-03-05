@@ -1,0 +1,771 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <title>Hadoop 初始化 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hadoop 初始化">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-17 15:24" pubdate>
+        2021年2月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hadoop 初始化</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月17日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Hadoop 初始化</h1>
+<h2 id="绪论">绪论</h2>
+<ul>
+<li>使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark</li>
+<li>集群共有5台机器, 主机名分别为 h01, h02, h03, h04, h05,其中 h01 为 master, 其他的为 slave</li>
+<li>JDK 1.8</li>
+<li>Scala 2.11.6</li>
+<li>Hadoop 3.2.1</li>
+<li>Hbase 2.1.3</li>
+<li>Spark 2.4.0</li>
+</ul>
+<h2 id="准备工作">准备工作</h2>
+<h3 id="配置Docker">配置Docker</h3>
+<ul>
+<li>现在的 Docker 网络能够提供 DNS 解析功能, 我们可以使用如下命令为接下来的 Hadoop 集群单独构建一个虚拟的网络</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker network create --driver=bridge hadoop<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上命令创建了一个名为 Hadoop 的虚拟桥接网络, 该虚拟网络内部提供了自动的DNS解析服务</li>
+<li>使用下面这个命令查看 Docker 中的网络, 可以看到刚刚创建的名为 <code>hadoop</code> 的虚拟桥接网络</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker network ls<br><br>NETWORK ID          NAME                DRIVER              SCOPE<br>06548c9440f8        bridge              bridge              <span class="hljs-built_in">local</span><br>b21dba8dc351        hadoop              bridge              <span class="hljs-built_in">local</span><br>eb48a64969d1        host                host                    <span class="hljs-built_in">local</span><br>3e8c9d771ec8        none                null                     <span class="hljs-built_in">local</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>查找 ubuntu 容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker search ubuntu<br><br>NAME                                                             DESCRIPTION                                                                          STARS               OFFICIAL            AUTOMATED<br>ubuntu                                                       Ubuntu is a Debian-based Linux operating sys...               9326                  [OK]<br>dorowu/ubuntu-desktop-lxde-vnc   Docker image to provide HTML5 VNC interface ...                281                                                [OK]<br>rastasheep/ubuntu-sshd                     Dockerized SSH service, built on top of offi...                        209                                               [OK]<br>consol/ubuntu-xfce-vnc                      Ubuntu container with <span class="hljs-string">&quot;headless&quot;</span> VNC session...                 161                                                [OK]<br>ubuntu-upstart                                       Upstart is an event-based replacement <span class="hljs-keyword">for</span> th...                      97                  [OK]<br>ansible/ubuntu14.04-ansible              Ubuntu 14.04 LTS with ansible                                                     96                                               [OK]<br>neurodebian                                            NeuroDebian provides neuroscience research s...                   56                  [OK]<br>ubuntu-debootstrap                              debootstrap --variant=minbase --components=m...            40                   [OK]<br>nuagebec/ubuntu                                  Simple always updated Ubuntu docker images w...                23                                               [OK]<br>tutum/ubuntu                                         Simple Ubuntu docker images with SSH access                      19<br></code></pre></td></tr></table></figure>
+<ul>
+<li>下载 ubuntu 16.04 版本的镜像文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker pull ubuntu:16.04<br><br>16.04: Pulling from library/ubuntu<br>34667c7e4631: Pull complete<br>d18d76a881a4: Pull complete<br>119c7358fbfc: Pull complete<br>2aaf13f3eff0: Pull complete<br>Digest: sha256:58d0da8bc2f434983c6ca4713b08be00ff5586eb5cdff47bcde4b2e88fd40f88<br>Status: Downloaded newer image <span class="hljs-keyword">for</span> ubuntu:16.04<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看已经下载的镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker images<br><br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br>&lt;none&gt;              &lt;none&gt;              ccac37c7045c        4 days ago          1.85GB<br>ubuntu              16.04               9361ce633ff1        7 days ago          118MB<br></code></pre></td></tr></table></figure>
+<ul>
+<li>根据镜像启动一个容器, 可以看出 shell 已经是容器的 shell 了</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run -it ubuntu:16.04 /bin/bash<br></code></pre></td></tr></table></figure>
+<h3 id="安装-Scala-与-Java">安装 Scala 与 Java</h3>
+<ul>
+<li>直接输入命令安装 jdk 1.8</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install openjdk-8-jdk<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试一下安装结果</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -version<br><br>openjdk version <span class="hljs-string">&quot;1.8.0_191&quot;</span><br>OpenJDK Runtime Environment (build 1.8.0_191-8u191-b12-2ubuntu0.16.04.1-b12)<br>OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>再输入命令安装 Scala</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install scala<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试一下安装结果</li>
+</ul>
+<blockquote>
+<p>MacOS 下可以直接按 <code>Ctrl + D</code> 退出 Scala 的交互模式</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">scala<br><br>Welcome to Scala version 2.11.6 (OpenJDK 64-Bit Server VM, Java 1.8.0_191).<br>Type <span class="hljs-keyword">in</span> expressions to have them evaluated.<br>Type :<span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> more information.<br><br>scala&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="安装-Vim-与网络工具包">安装 Vim 与网络工具包</h3>
+<ul>
+<li>安装 vim, 用来编辑文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install vim<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装 net-tools</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install net-tools<br></code></pre></td></tr></table></figure>
+<h3 id="安装-SSH">安装 SSH</h3>
+<ul>
+<li>安装 SSH, 并配置免密登录, 由于后面的容器之间是由一个镜像启动的, 就像同一个磨具出来的 5 把锁与钥匙, 可以互相开锁,所以在当前容器里配置 SSH 自身免密登录就 OK 了</li>
+<li>安装 SSH</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install openssh-server<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装 SSH 的客户端</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install openssh-client<br></code></pre></td></tr></table></figure>
+<ul>
+<li>生成密钥, 不用输入, 一直回车就行, 生成的密钥在当前用户根目录下的 <code>.ssh</code> 文件夹中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~<br>ssh-keygen -t rsa -P <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>将公钥追加到 authorized_keys 文件中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat .ssh/id_rsa.pub &gt;&gt; .ssh/authorized_keys<br></code></pre></td></tr></table></figure>
+<ul>
+<li>启动 SSH 服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">service ssh start<br> * Starting OpenBSD Secure Shell server sshd                                                                                                                                 [ OK ]<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试免密登录自己</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh 127.0.0.1<br><br>Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.15.0-45-generic x86_64)<br><br> * Documentation:  https://help.ubuntu.com<br> * Management:     https://landscape.canonical.com<br> * Support:        https://ubuntu.com/advantage<br>Last login: Tue Mar 19 07:46:14 2019 from 127.0.0.1<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>~/.bashrc</code> 文件, 启动 shell 的时候, 自动启动 SSH 服务</li>
+<li>用 vim 打开 <code>~/.bashrc</code> 文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ~/.bashrc<br></code></pre></td></tr></table></figure>
+<ul>
+<li>添加命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ -f ~/.bash_aliases ]; <span class="hljs-keyword">then</span><br>    . ~/.bash_aliases<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># enable programmable completion features (you don&#x27;t need to enable</span><br><span class="hljs-comment"># this, if it&#x27;s already enabled in /etc/bash.bashrc and /etc/profile</span><br><span class="hljs-comment"># sources /etc/bash.bashrc).</span><br><span class="hljs-comment">#if [ -f /etc/bash_completion ] &amp;&amp; ! shopt -oq posix; then</span><br><span class="hljs-comment">#    . /etc/bash_completion</span><br><span class="hljs-comment">#fi</span><br>service ssh start<br></code></pre></td></tr></table></figure>
+<h2 id="安装-Hadoop">安装 Hadoop</h2>
+<h3 id="下载解压Hadoop">下载解压Hadoop</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://mirrors.hust.edu.cn/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz<br></code></pre></td></tr></table></figure>
+<ul>
+<li>解压到 <code>/usr/local</code> 目录下面并重命名文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxvf hadoop-3.2.1.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/<br> mv hadoop-3.2.1 hadoop<br></code></pre></td></tr></table></figure>
+<h3 id="修改配置文件">修改配置文件</h3>
+<ul>
+<li>修改 <code>/etc/profile</code> 文件, 添加一下环境变量到文件中</li>
+<li>先用 vim 打开 <code>/etc/profile</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/profile<br></code></pre></td></tr></table></figure>
+<ul>
+<li>追加以下内容</li>
+</ul>
+<blockquote>
+<p>JAVA_HOME 为 JDK 安装路径, 使用 apt 安装就是这个, 用 <code>update-alternatives --config java</code> 可查看</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#java</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><span class="hljs-built_in">export</span> JRE_HOME=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/jre<br><span class="hljs-built_in">export</span> CLASSPATH=.:<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="hljs-variable">$&#123;JRE_HOME&#125;</span>/lib<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment">#hadoop</span><br><span class="hljs-built_in">export</span> HADOOP_HOME=/usr/<span class="hljs-built_in">local</span>/hadoop<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">export</span> HADOOP_COMMON_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_HDFS_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_MAPRED_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_YARN_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_INSTALL=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/lib/native<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_LIBEXEC_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/libexec<br><span class="hljs-built_in">export</span> JAVA_LIBRARY_PATH=<span class="hljs-variable">$HADOOP_HOME</span>/lib/native:<span class="hljs-variable">$JAVA_LIBRARY_PATH</span><br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_PREFIX</span>/etc/hadoop<br><span class="hljs-built_in">export</span> HDFS_DATANODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_DATANODE_SECURE_USER=root<br><span class="hljs-built_in">export</span> HDFS_SECONDARYNAMENODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_NAMENODE_USER=root<br><span class="hljs-built_in">export</span> YARN_RESOURCEMANAGER_USER=root<br><span class="hljs-built_in">export</span> YARN_NODEMANAGER_USER=root<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使环境变量生效</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在目录 <code>/usr/local/hadoop/etc/hadoop</code> 下</li>
+<li>修改<code> hadoop-env.sh</code> 文件, 在文件末尾添加一下信息</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><span class="hljs-built_in">export</span> HDFS_NAMENODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_DATANODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_SECONDARYNAMENODE_USER=root<br><span class="hljs-built_in">export</span> YARN_RESOURCEMANAGER_USER=root<br><span class="hljs-built_in">export</span> YARN_NODEMANAGER_USER=root<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>core-site.xml</code>, 修改为</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>fs.default.name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hdfs://h01:9000<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hadoop.tmp.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop3/hadoop/tmp<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>hdfs-site.xml</code>, 修改为</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.replication<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.namenode.name.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop3/hadoop/hdfs/name<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.namenode.data.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop3/hadoop/hdfs/data<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>mapred-site.xml</code>, 修改为</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.framework.name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>yarn<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.application.classpath<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span><br>            /usr/local/hadoop/etc/hadoop,<br>            /usr/local/hadoop/share/hadoop/common/*,<br>            /usr/local/hadoop/share/hadoop/common/lib/*,<br>            /usr/local/hadoop/share/hadoop/hdfs/*,<br>            /usr/local/hadoop/share/hadoop/hdfs/lib/*,<br>            /usr/local/hadoop/share/hadoop/mapreduce/*,<br>            /usr/local/hadoop/share/hadoop/mapreduce/lib/*,<br>            /usr/local/hadoop/share/hadoop/yarn/*,<br>            /usr/local/hadoop/share/hadoop/yarn/lib/*<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>yarn-site.xml</code>, 修改为</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>h01<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>mapreduce_shuffle<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>workers</code>为</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">h01<br>h02<br>h03<br>h04<br>h05<br></code></pre></td></tr></table></figure>
+<h3 id="在-Docker-中启动集群">在 Docker 中启动集群</h3>
+<ul>
+<li>先将当前容器导出为镜像, 并查看当前镜像</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker commit -m <span class="hljs-string">&quot;haddop&quot;</span> -a <span class="hljs-string">&quot;hadoop&quot;</span> fab4da838c2f newuhadoop<br><br>sudo docker images<br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br>newuhadoop          latest              648d8e082a23        7 seconds ago       1.82GB<br>&lt;none&gt;              &lt;none&gt;              ccac37c7045c        4 days ago          1.85GB<br>ubuntu              16.04               9361ce633ff1        7 days ago          118MB<br></code></pre></td></tr></table></figure>
+<ul>
+<li>启动 5 个终端, 分别执行这几个命令</li>
+<li>第一条命令启动的是 <code>h01</code> 是做 master 节点的, 所以暴露了端口, 以供访问 web 页面</li>
+</ul>
+<blockquote>
+<p>–network hadoop 参数是将当前容器加入到名为 <code>hadoop</code> 的虚拟桥接网络中, 此网站提供自动的 DNS 解析功能</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run -it --network hadoop -h <span class="hljs-string">&quot;h01&quot;</span> --name <span class="hljs-string">&quot;h01&quot;</span> -p 9870:9870 -p 8088:8088 newuhadoop /bin/bash<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其余的四条命令就是几乎一样的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run -it --network hadoop -h <span class="hljs-string">&quot;h02&quot;</span> --name <span class="hljs-string">&quot;h02&quot;</span> newuhadoop /bin/bash<br>sudo docker run -it --network hadoop -h <span class="hljs-string">&quot;h03&quot;</span> --name <span class="hljs-string">&quot;h03&quot;</span> newuhadoop /bin/bash<br>sudo docker run -it --network hadoop -h <span class="hljs-string">&quot;h04&quot;</span> --name <span class="hljs-string">&quot;h04&quot;</span> newuhadoop /bin/bash<br>sudo docker run -it --network hadoop -h <span class="hljs-string">&quot;h05&quot;</span> --name <span class="hljs-string">&quot;h05&quot;</span> newuhadoop /bin/bash<br></code></pre></td></tr></table></figure>
+<ul>
+<li>接下来, 在 <code>h01</code> 主机中, 启动 Haddop 集群</li>
+<li>先进行格式化操作</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop namenode -format<br></code></pre></td></tr></table></figure>
+<ul>
+<li>进入 hadoop 的 sbin 目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/hadoop/sbin/<br></code></pre></td></tr></table></figure>
+<ul>
+<li>启动</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash">./start-all.sh<br><br>Starting namenodes on [h01]<br>h01: Warning: Permanently added <span class="hljs-string">&#x27;h01,172.18.0.7&#x27;</span> (ECDSA) to the list of known hosts.<br>Starting datanodes<br>h05: Warning: Permanently added <span class="hljs-string">&#x27;h05,172.18.0.11&#x27;</span> (ECDSA) to the list of known hosts.<br>h02: Warning: Permanently added <span class="hljs-string">&#x27;h02,172.18.0.8&#x27;</span> (ECDSA) to the list of known hosts.<br>h03: Warning: Permanently added <span class="hljs-string">&#x27;h03,172.18.0.9&#x27;</span> (ECDSA) to the list of known hosts.<br>h04: Warning: Permanently added <span class="hljs-string">&#x27;h04,172.18.0.10&#x27;</span> (ECDSA) to the list of known hosts.<br>h03: WARNING: /usr/<span class="hljs-built_in">local</span>/hadoop/logs does not exist. Creating.<br>h05: WARNING: /usr/<span class="hljs-built_in">local</span>/hadoop/logs does not exist. Creating.<br>h02: WARNING: /usr/<span class="hljs-built_in">local</span>/hadoop/logs does not exist. Creating.<br>h04: WARNING: /usr/<span class="hljs-built_in">local</span>/hadoop/logs does not exist. Creating.<br>Starting secondary namenodes [h01]<br>Starting resourcemanager<br>Starting nodemanagers<br></code></pre></td></tr></table></figure>
+<ul>
+<li>访问本机的 8088 与 9870 端口就可以看到监控信息了</li>
+<li>使用命令 <code>./hadoop dfsadmin -report</code> 可查看分布式文件系统的状态</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop dfsadmin -report<br><br>WARNING: Use of this script to execute dfsadmin is deprecated.<br>WARNING: Attempting to execute replacement <span class="hljs-string">&quot;hdfs dfsadmin&quot;</span> instead.<br><br>Configured Capacity: 5893065379840 (5.36 TB)<br>Present Capacity: 5237598752768 (4.76 TB)<br>DFS Remaining: 5237598629888 (4.76 TB)<br>DFS Used: 122880 (120 KB)<br>DFS Used%: 0.00%<br>Replicated Blocks:<br>    Under replicated blocks: 0<br>    Blocks with corrupt replicas: 0<br>    Missing blocks: 0<br>    Missing blocks (with replication factor 1): 0<br>    Low redundancy blocks with highest priority to recover: 0<br>    Pending deletion blocks: 0<br>Erasure Coded Block Groups:<br>    Low redundancy block groups: 0<br>    Block groups with corrupt internal blocks: 0<br>    Missing block groups: 0<br>    Low redundancy blocks with highest priority to recover: 0<br>    Pending deletion blocks: 0<br><br>-------------------------------------------------<br>Live datanodes (5):<br><br>Name: 172.18.0.10:9866 (h03.hadoop)<br>Hostname: h03<br>Decommission Status : Normal<br>Configured Capacity: 1178613075968 (1.07 TB)<br>DFS Used: 24576 (24 KB)<br>Non DFS Used: 71199543296 (66.31 GB)<br>DFS Remaining: 1047519793152 (975.58 GB)<br>DFS Used%: 0.00%<br>DFS Remaining%: 88.88%<br>Configured Cache Capacity: 0 (0 B)<br>Cache Used: 0 (0 B)<br>Cache Remaining: 0 (0 B)<br>Cache Used%: 100.00%<br>Cache Remaining%: 0.00%<br>Xceivers: 1<br>Last contact: Tue Mar 19 09:12:13 UTC 2019<br>Last Block Report: Tue Mar 19 09:10:46 UTC 2019<br>Num of Blocks: 0<br><br><br>Name: 172.18.0.11:9866 (h02.hadoop)<br>Hostname: h02<br>Decommission Status : Normal<br>Configured Capacity: 1178613075968 (1.07 TB)<br>DFS Used: 24576 (24 KB)<br>Non DFS Used: 71199625216 (66.31 GB)<br>DFS Remaining: 1047519711232 (975.58 GB)<br>DFS Used%: 0.00%<br>DFS Remaining%: 88.88%<br>Configured Cache Capacity: 0 (0 B)<br>Cache Used: 0 (0 B)<br>Cache Remaining: 0 (0 B)<br>Cache Used%: 100.00%<br>Cache Remaining%: 0.00%<br>Xceivers: 1<br>Last contact: Tue Mar 19 09:12:13 UTC 2019<br>Last Block Report: Tue Mar 19 09:10:46 UTC 2019<br>Num of Blocks: 0<br><br><br>Name: 172.18.0.7:9866 (h01)<br>Hostname: h01<br>Decommission Status : Normal<br>Configured Capacity: 1178613075968 (1.07 TB)<br>DFS Used: 24576 (24 KB)<br>Non DFS Used: 71199633408 (66.31 GB)<br>DFS Remaining: 1047519703040 (975.58 GB)<br>DFS Used%: 0.00%<br>DFS Remaining%: 88.88%<br>Configured Cache Capacity: 0 (0 B)<br>Cache Used: 0 (0 B)<br>Cache Remaining: 0 (0 B)<br>Cache Used%: 100.00%<br>Cache Remaining%: 0.00%<br>Xceivers: 1<br>Last contact: Tue Mar 19 09:12:13 UTC 2019<br>Last Block Report: Tue Mar 19 09:10:46 UTC 2019<br>Num of Blocks: 0<br><br><br>Name: 172.18.0.8:9866 (h05.hadoop)<br>Hostname: h05<br>Decommission Status : Normal<br>Configured Capacity: 1178613075968 (1.07 TB)<br>DFS Used: 24576 (24 KB)<br>Non DFS Used: 71199625216 (66.31 GB)<br>DFS Remaining: 1047519711232 (975.58 GB)<br>DFS Used%: 0.00%<br>DFS Remaining%: 88.88%<br>Configured Cache Capacity: 0 (0 B)<br>Cache Used: 0 (0 B)<br>Cache Remaining: 0 (0 B)<br>Cache Used%: 100.00%<br>Cache Remaining%: 0.00%<br>Xceivers: 1<br>Last contact: Tue Mar 19 09:12:13 UTC 2019<br>Last Block Report: Tue Mar 19 09:10:46 UTC 2019<br>Num of Blocks: 0<br><br><br>Name: 172.18.0.9:9866 (h04.hadoop)<br>Hostname: h04<br>Decommission Status : Normal<br>Configured Capacity: 1178613075968 (1.07 TB)<br>DFS Used: 24576 (24 KB)<br>Non DFS Used: 71199625216 (66.31 GB)<br>DFS Remaining: 1047519711232 (975.58 GB)<br>DFS Used%: 0.00%<br>DFS Remaining%: 88.88%<br>Configured Cache Capacity: 0 (0 B)<br>Cache Used: 0 (0 B)<br>Cache Remaining: 0 (0 B)<br>Cache Used%: 100.00%<br>Cache Remaining%: 0.00%<br>Xceivers: 1<br>Last contact: Tue Mar 19 09:12:13 UTC 2019<br>Last Block Report: Tue Mar 19 09:10:46 UTC 2019<br>Num of Blocks: 0<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Hadoop 集群已经构建好了</li>
+</ul>
+<h3 id="运行内置WordCount例子">运行内置WordCount例子</h3>
+<ul>
+<li>把license作为需要统计的文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat LICENSE.txt &gt; file1.txt<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在 HDFS 中创建 input 文件夹</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop fs -mkdir /input<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上传 file1.txt 文件到 HDFS 中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop fs -put ../file1.txt /input<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看 HDFS 中 input 文件夹里的内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop fs -ls /input<br><br>Found 1 items<br>-rw-r--r--   2 root supergroup     150569 2019-03-19 11:13 /input/file1.txt<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行wordcount 例子程序</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop jar ../share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar wordcount /input /output<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs bash">2019-03-19 11:18:23,953 INFO client.RMProxy: Connecting to ResourceManager at h01/172.18.0.7:8032<br>2019-03-19 11:18:24,381 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding <span class="hljs-keyword">for</span> path: /tmp/hadoop-yarn/staging/root/.staging/job_1552986653954_0001<br>2019-03-19 11:18:24,659 INFO input.FileInputFormat: Total input files to process : 1<br>2019-03-19 11:18:25,095 INFO mapreduce.JobSubmitter: number of splits:1<br>2019-03-19 11:18:25,129 INFO Configuration.deprecation: yarn.resourcemanager.system-metrics-publisher.enabled is deprecated. Instead, use yarn.system-metrics-publisher.enabled<br>2019-03-19 11:18:25,208 INFO mapreduce.JobSubmitter: Submitting tokens <span class="hljs-keyword">for</span> job: job_1552986653954_0001<br>2019-03-19 11:18:25,210 INFO mapreduce.JobSubmitter: Executing with tokens: []<br>2019-03-19 11:18:25,368 INFO conf.Configuration: resource-types.xml not found<br>2019-03-19 11:18:25,368 INFO resource.ResourceUtils: Unable to find <span class="hljs-string">&#x27;resource-types.xml&#x27;</span>.<br>2019-03-19 11:18:25,797 INFO impl.YarnClientImpl: Submitted application application_1552986653954_0001<br>2019-03-19 11:18:25,836 INFO mapreduce.Job: The url to track the job: http://h01:8088/proxy/application_1552986653954_0001/<br>2019-03-19 11:18:25,837 INFO mapreduce.Job: Running job: job_1552986653954_0001<br>2019-03-19 11:18:33,990 INFO mapreduce.Job: Job job_1552986653954_0001 running <span class="hljs-keyword">in</span> uber mode : <span class="hljs-literal">false</span><br>2019-03-19 11:18:33,991 INFO mapreduce.Job:  map 0% reduce 0%<br>2019-03-19 11:18:39,067 INFO mapreduce.Job:  map 100% reduce 0%<br>2019-03-19 11:18:45,106 INFO mapreduce.Job:  map 100% reduce 100%<br>2019-03-19 11:18:46,124 INFO mapreduce.Job: Job job_1552986653954_0001 completed successfully<br>2019-03-19 11:18:46,227 INFO mapreduce.Job: Counters: 54<br>    File System Counters<br>        FILE: Number of bytes <span class="hljs-built_in">read</span>=46852<br>        FILE: Number of bytes written=537641<br>        FILE: Number of <span class="hljs-built_in">read</span> operations=0<br>        FILE: Number of large <span class="hljs-built_in">read</span> operations=0<br>        FILE: Number of write operations=0<br>        HDFS: Number of bytes <span class="hljs-built_in">read</span>=150665<br>        HDFS: Number of bytes written=35324<br>        HDFS: Number of <span class="hljs-built_in">read</span> operations=8<br>        HDFS: Number of large <span class="hljs-built_in">read</span> operations=0<br>        HDFS: Number of write operations=2<br>        HDFS: Number of bytes <span class="hljs-built_in">read</span> erasure-coded=0<br>    Job Counters<br>        Launched map tasks=1<br>        Launched reduce tasks=1<br>        Data-local map tasks=1<br>        Total time spent by all maps <span class="hljs-keyword">in</span> occupied slots (ms)=3129<br>        Total time spent by all reduces <span class="hljs-keyword">in</span> occupied slots (ms)=3171<br>        Total time spent by all map tasks (ms)=3129<br>        Total time spent by all reduce tasks (ms)=3171<br>        Total vcore-milliseconds taken by all map tasks=3129<br>        Total vcore-milliseconds taken by all reduce tasks=3171<br>        Total megabyte-milliseconds taken by all map tasks=3204096<br>        Total megabyte-milliseconds taken by all reduce tasks=3247104<br>    Map-Reduce Framework<br>        Map input records=2814<br>        Map output records=21904<br>        Map output bytes=234035<br>        Map output materialized bytes=46852<br>        Input split bytes=96<br>        Combine input records=21904<br>        Combine output records=2981<br>        Reduce input groups=2981<br>        Reduce shuffle bytes=46852<br>        Reduce input records=2981<br>        Reduce output records=2981<br>        Spilled Records=5962<br>        Shuffled Maps =1<br>        Failed Shuffles=0<br>        Merged Map outputs=1<br>        GC time elapsed (ms)=111<br>        CPU time spent (ms)=2340<br>        Physical memory (bytes) snapshot=651853824<br>        Virtual memory (bytes) snapshot=5483622400<br>        Total committed heap usage (bytes)=1197998080<br>        Peak Map Physical memory (bytes)=340348928<br>        Peak Map Virtual memory (bytes)=2737307648<br>        Peak Reduce Physical memory (bytes)=311504896<br>        Peak Reduce Virtual memory (bytes)=2746314752<br>    Shuffle Errors<br>        BAD_ID=0<br>        CONNECTION=0<br>        IO_ERROR=0<br>        WRONG_LENGTH=0<br>        WRONG_MAP=0<br>        WRONG_REDUCE=0<br>    File Input Format Counters<br>        Bytes Read=150569<br>    File Output Format Counters<br>        Bytes Written=35324<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看 HDFS 中的 /output 文件夹的内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop fs -ls /output<br><br>Found 2 items<br>-rw-r--r--   2 root supergroup          0 2019-03-19 11:18 /output/_SUCCESS<br>-rw-r--r--   2 root supergroup      35324 2019-03-19 11:18 /output/part-r-00000<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看 <code>part-r-00000</code> 文件的内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop fs -cat /output/part-r-00000<br></code></pre></td></tr></table></figure>
+<h2 id="安装-Hbase">安装 Hbase</h2>
+<ul>
+<li>在 Hadoop 集群的基础上安装 Hbase</li>
+</ul>
+<h3 id="下载解压Hbase">下载解压Hbase</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://downloads.apache.org/hbase/2.3.3/hbase-2.3.3-bin.tar.gz<br></code></pre></td></tr></table></figure>
+<ul>
+<li>解压到 <code>/usr/local</code> 目录下面</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxvf hbase-2.3.3-bin.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br></code></pre></td></tr></table></figure>
+<h3 id="修改配置文件-2">修改配置文件</h3>
+<p>修改 <code>/etc/profile</code> 环境变量文件, 添加 Hbase 的环境变量, 追加下述代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> HBASE_HOME=/usr/<span class="hljs-built_in">local</span>/hbase-2.3.3<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HBASE_HOME</span>/bin<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使环境变量配置文件生效</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">root@h01:/usr/<span class="hljs-built_in">local</span><span class="hljs-comment"># source /etc/profile</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>使用 <code>ssh h02</code> 可进入其他四个容器, 依次修改</p>
+</li>
+<li>
+<p>即是每个容器都要在 <code>/etc/profile</code> 文件后追加那两行环境变量</p>
+</li>
+<li>
+<p>在目录 <code>/usr/local/hbase-2.1.3/conf</code> 修改配置</p>
+</li>
+<li>
+<p>修改<code>hbase-env.sh</code>, 追加</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><span class="hljs-built_in">export</span> HBASE_MANAGES_ZK=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>hbase-site.xml</code>为</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hbase.rootdir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hdfs://h01:9000/hbase<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hbase.cluster.distributed<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hbase.master<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>h01:60000<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hbase.zookeeper.quorum<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>h01,h02,h03,h04,h05<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/home/hadoop/zoodata<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改 <code>regionservers</code> 文件为</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">h01<br>h02<br>h03<br>h04<br>h05<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>scp</code> 命令将配置好的 Hbase 复制到其他 4 个容器中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp -r /usr/<span class="hljs-built_in">local</span>/hbase-2.3.3 root@h02:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/hbase-2.3.3 root@h03:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/hbase-2.3.3 root@h04:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/hbase-2.3.3 root@h05:/usr/<span class="hljs-built_in">local</span>/<br></code></pre></td></tr></table></figure>
+<h3 id="启动-Hbase">启动 Hbase</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash"> ./start-hbase.sh<br><br>WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.<br>SLF4J: Class path contains multiple SLF4J bindings.<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/lib/client-facing-thirdparty/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: See http://www.slf4j.org/codes.html<span class="hljs-comment">#multiple_bindings for an explanation.</span><br>SLF4J: Actual binding is of <span class="hljs-built_in">type</span> [org.slf4j.impl.Log4jLoggerFactory]<br>WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.<br>SLF4J: Class path contains multiple SLF4J bindings.<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/lib/client-facing-thirdparty/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: See http://www.slf4j.org/codes.html<span class="hljs-comment">#multiple_bindings for an explanation.</span><br>SLF4J: Actual binding is of <span class="hljs-built_in">type</span> [org.slf4j.impl.Log4jLoggerFactory]<br>h04: running zookeeper, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-zookeeper-h04.out<br>h01: running zookeeper, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-zookeeper-h01.out<br>h05: running zookeeper, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-zookeeper-h05.out<br>h03: running zookeeper, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-zookeeper-h03.out<br>h02: running zookeeper, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-zookeeper-h02.out<br>running master, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/logs/hbase--master-h01.out<br>WARNING: log4j.properties is not found. HADOOP_CONF_DIR may be incomplete.<br>SLF4J: Class path contains multiple SLF4J bindings.<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: Found binding <span class="hljs-keyword">in</span> [jar:file:/usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/lib/client-facing-thirdparty/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]<br>SLF4J: See http://www.slf4j.org/codes.html<span class="hljs-comment">#multiple_bindings for an explanation.</span><br>SLF4J: Actual binding is of <span class="hljs-built_in">type</span> [org.slf4j.impl.Log4jLoggerFactory]<br>h03: running regionserver, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-regionserver-h03.out<br>h01: running regionserver, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-regionserver-h01.out<br>h04: running regionserver, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-regionserver-h04.out<br>h05: running regionserver, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-regionserver-h05.out<br>h02: running regionserver, logging to /usr/<span class="hljs-built_in">local</span>/hbase-2.1.3/bin/../logs/hbase-root-regionserver-h02.out<br></code></pre></td></tr></table></figure>
+<ul>
+<li>打开 Hbase 的 shell</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">hbase shell<br><br>hbase(main):001:0&gt; whoami<br>root (auth:SIMPLE)<br>    groups: root<br>Took 0.0134 seconds<br></code></pre></td></tr></table></figure>
+<h2 id="安装-Spark">安装 Spark</h2>
+<ul>
+<li>在 Hadoop 的基础上安装 Spark</li>
+</ul>
+<h2 id="下载解压Spark">下载解压Spark</h2>
+<ul>
+<li>下载 Spark 2.4.0</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://apache.website-solution.net/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz<br></code></pre></td></tr></table></figure>
+<ul>
+<li>解压到 <code>/usr/local</code> 目录下面</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxvf spark-2.4.7-bin-hadoop2.7.tgz  -C /usr/<span class="hljs-built_in">local</span>/<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改文件夹的名字</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/<br>mv spark-2.4.7-bin-hadoop2.7 spark-2.4.0<br></code></pre></td></tr></table></figure>
+<h3 id="修改配置文件-3">修改配置文件</h3>
+<ul>
+<li>修改 <code>/etc/profile</code> 环境变量文件, 添加 Hbase 的环境变量, 追加下述代码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> SPARK_HOME=/usr/<span class="hljs-built_in">local</span>/spark-2.4.0<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使环境变量配置文件生效</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>使用 <code>ssh h02</code> 可进入其他四个容器, 依次修改</p>
+</li>
+<li>
+<p>即是每个容器都要在 <code>/etc/profile</code> 文件后追加那两行环境变量</p>
+</li>
+<li>
+<p>在目录 <code>/usr/local/spark-2.4.0/conf</code> 修改配置</p>
+</li>
+<li>
+<p>修改文件名</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mv spark-env.sh.template spark-env.sh<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>spark-env.sh</code>, 追加</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><span class="hljs-built_in">export</span> HADOOP_HOME=/usr/<span class="hljs-built_in">local</span>/hadoop<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=/usr/<span class="hljs-built_in">local</span>/hadoop/etc/hadoop<br><span class="hljs-built_in">export</span> SCALA_HOME=/usr/share/scala<br><br><span class="hljs-built_in">export</span> SPARK_MASTER_HOST=h01<br><span class="hljs-built_in">export</span> SPARK_MASTER_IP=h01<br><span class="hljs-built_in">export</span> SPARK_WORKER_MEMORY=4g<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改文件名</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mv slaves.template slaves<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改<code>slaves</code>如下</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">h01<br>h02<br>h03<br>h04<br>h05<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>scp</code> 命令将配置好的Spark复制到其他 4 个容器中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp -r /usr/<span class="hljs-built_in">local</span>/spark-2.4.7 root@h02:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/spark-2.4.7 root@h03:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/spark-2.4.7 root@h04:/usr/<span class="hljs-built_in">local</span>/<br>scp -r /usr/<span class="hljs-built_in">local</span>/spark-2.4.7 root@h05:/usr/<span class="hljs-built_in">local</span>/<br></code></pre></td></tr></table></figure>
+<h3 id="启动-Spark">启动 Spark</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">./start-all.sh<br><br>starting org.apache.spark.deploy.master.Master, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark--org.apache.spark.deploy.master.Master-1-h01.out<br>h04: starting org.apache.spark.deploy.worker.Worker, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-h04.out<br>h05: starting org.apache.spark.deploy.worker.Worker, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-h05.out<br>h01: starting org.apache.spark.deploy.worker.Worker, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-h01.out<br>h03: starting org.apache.spark.deploy.worker.Worker, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-h03.out<br>h02: starting org.apache.spark.deploy.worker.Worker, logging to /usr/<span class="hljs-built_in">local</span>/spark-2.4.0/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-h02.out<br></code></pre></td></tr></table></figure>
+<h2 id="其他">其他</h2>
+<h3 id="HDFS-重格式化问题">HDFS 重格式化问题</h3>
+<blockquote>
+<p>参考 <code>https://blog.csdn.net/gis_101/article/details/52821946</code></p>
+</blockquote>
+<ul>
+<li>重新格式化意味着集群的数据会被全部删除, 格式化前需考虑数据备份或转移问题</li>
+<li>先删除主节点(即namenode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容 (注意是删除目录下的内容不是目录)</li>
+<li>删除所有数据节点(即datanode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容</li>
+<li>格式化一个新的分布式文件系统:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./hadoop namenode -format<br></code></pre></td></tr></table></figure>
+<p><strong>注意事项</strong></p>
+<ul>
+<li>Hadoop的临时存储目录tmp(即core-site.xml配置文件中的hadoop.tmp.dir属性, 默认值是/tmp/hadoop-${<a target="_blank" rel="noopener" href="http://user.name">user.name</a>}), 如果没有配置hadoop.tmp.dir属性, 那么hadoop格式化时将会在/tmp目录下创建一个目录, 例如在cloud用户下安装配置hadoop, 那么Hadoop的临时存储目录就位于/tmp/hadoop-cloud目录下</li>
+<li>Hadoop的namenode元数据目录(即hdfs-site.xml配置文件中的dfs.namenode.name.dir属性, 默认值是${hadoop.tmp.dir}/dfs/name), 同样如果没有配置该属性, 那么hadoop在格式化时将自行创建,必须注意的是在格式化前必须清楚所有子节点(即DataNode节点)dfs/name下的内容, 否则在启动hadoop时子节点的守护进程会启动失败,这是由于, 每一次format主节点namenode, dfs/name/current目录下的VERSION文件会产生新的clusterID, namespaceID,但是如果子节点的dfs/name/current仍存在, hadoop格式化时就不会重建该目录, 因此形成子节点的clusterID, namespaceID与主节点(即namenode节点)的clusterID, namespaceID不一致,最终导致hadoop启动失败</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Hadoop/">Hadoop</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/17/Software/Backend/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/URL%E4%B8%8EURLConnection/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java URL与URLConnection</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/17/Software/System/Windows/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">Windows 问题解决</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>
