@@ -5,7 +5,7 @@ categories:
 - Backend
 - Java
 - JavaSE
-- 泛型与Collections
+- 泛型与集合
 ---
 # Java Comparable &Comparator接口
 

@@ -27,13 +27,39 @@ $ service apache2 start
 
 ![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-12-04-bg2016030703.png)
 
-## 系统管理
+## Systemd 命令组
 
-Systemd 并不是一个命令,而是一组命令,涉及到系统管理的方方面面
+- Systemd 并不是一个命令,而是一组命令,涉及到系统管理的方方面面
 
 ### systemctl
 
-`systemctl`是 Systemd 的主命令,用于管理系统
+`systemctl`是 Systemd 的主命令,用于管理系统和服务
+
+```shell
+# 启动服务
+$ sudo systemctl start <service>
+
+# 开机启动
+$ sudo systemctl enable <service>
+
+# 查看服务
+$ sudo systemctl status <service>
+
+# 停止服务
+$ sudo systemctl stop <service>
+
+# 杀死服务
+$ sudo systemctl kill <service>
+
+# 重启服务
+$ sudo systemctl restart <service>
+```
+
+**注意**:
+
+- 对于那些支持 Systemd 的软件，安装的时候，会自动在`/usr/lib/systemd/system`目录添加一个配置文件
+- `enable`命令相当于在`/etc/systemd/system`目录添加一个符号链接，指向`/usr/lib/systemd/system`里面的`httpd.service`文件
+- 这是因为开机时，`Systemd`只执行`/etc/systemd/system`目录里面的配置文件。这也意味着，如果把修改后的配置文件放在该目录，就可以达到覆盖原始配置的效果
 
 ```bash
 # 重启系统
@@ -134,8 +160,6 @@ $ loginctl show-user ruanyf
 ```
 
 ## Unit
-
-### 说明
 
 - Systemd 可以管理所有系统资源,不同的资源统称为 Unit(单位)
 - Unit 一共分成12种
