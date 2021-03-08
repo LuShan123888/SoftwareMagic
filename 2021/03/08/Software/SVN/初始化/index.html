@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <title>CSS 问题解决 - SoftwareMagic</title>
+  <title>SVN 初始化 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CSS 问题解决">
+            <span class="h2" id="subtitle" title="SVN 初始化">
               
             </span>
 
@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-19 19:27" pubdate>
-        2021年2月19日 晚上
+      <time datetime="2021-03-08 11:42" pubdate>
+        2021年3月8日 中午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      427 字
+      333 字
     </span>
   
 
@@ -200,45 +200,75 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CSS 问题解决</h1>
+            <h1 style="display: none">SVN 初始化</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月19日 晚上
+                  本文最后更新于：2021年3月8日 中午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>CSS 问题解决</h1>
-<h2 id="CSS单行-多行文本溢出显示省略号">CSS单行,多行文本溢出显示省略号</h2>
-<h3 id="单行文本溢出显示省略号">单行文本溢出显示省略号</h3>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">overflow</span><span class="hljs-selector-pseudo">:hidden</span>;<br><span class="hljs-selector-tag">text-overflow</span><span class="hljs-selector-pseudo">:ellipsis</span>;<br><span class="hljs-selector-tag">white-space</span><span class="hljs-selector-pseudo">:nowrap</span>;<br><span class="hljs-comment">/*需要对容器设置单行高度*/</span><br></code></pre></td></tr></table></figure>
-<h3 id="多行文本溢出显示省略号">多行文本溢出显示省略号</h3>
-<p><strong>webkit浏览器或移动端的页面</strong></p>
+              <h1>SVN 初始化</h1>
+<h2 id="安装">安装</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y subversion<br></code></pre></td></tr></table></figure>
+<p><strong>查看版本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">svn --version<br></code></pre></td></tr></table></figure>
+<h2 id="创建版本库">创建版本库</h2>
+<p><strong>创建版本库目录</strong></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -p <span class="hljs-regexp">/var/</span>svn/repository<br></code></pre></td></tr></table></figure>
+<p><strong>在版本库目录下创建具体项目目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir helloworld<br></code></pre></td></tr></table></figure>
+<p><strong>初始化版本库</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">svnadmin create /var/svn/repository/helloworld<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在webkit浏览器或移动端(绝大部分是webkit内核的浏览器)可以直接使用webkit的css扩展属性(webkit是私有属性)<code>-webkit-line-clamp;</code></li>
-<li><strong>注意</strong>:这是一个不规范的属性,它没有在CSS的规范草案中</li>
-<li><code>-webkit-line-clamp</code>用来限制在一个块元素显示的文本行数,为了实现效果,他要与一下webkit属性结合使用</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">overflow</span><span class="hljs-selector-pseudo">:hidden</span>;<br><span class="hljs-selector-tag">text-overflow</span><span class="hljs-selector-pseudo">:ellipsis</span>;<br><span class="hljs-selector-tag">display</span><span class="hljs-selector-pseudo">:-webkit-box</span>; <span class="hljs-comment">/*必须结合的属性,将对象作为弹性伸缩盒子模型展示*/</span><br><span class="hljs-selector-tag">-webkit-line-clamp</span><span class="hljs-selector-pseudo">:2</span>;<br><span class="hljs-selector-tag">-webkit-box-orient</span><span class="hljs-selector-pseudo">:vertical</span>; <span class="hljs-comment">/*必须结合的属性,设置或检索伸缩盒对象的子元素的排列方式*/</span><br></code></pre></td></tr></table></figure>
-<p><strong>跨浏览器兼容的方案</strong></p>
+<li>版本库目录下会新增如下文件
 <ul>
-<li>比较靠谱简单的做法就是设置相对定位的容器高度,用包含省略号(…)的元素模拟实现</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">position</span>:relative;<br><span class="hljs-attribute">line-height</span>:<span class="hljs-number">1.4em</span>;<br><span class="hljs-comment">/*设置容器高度为3倍行高就是显示3行*/</span><br><span class="hljs-attribute">height</span>:<span class="hljs-number">4.2em</span>;<br><span class="hljs-attribute">overflow</span>:hidden;<br>&#125;<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::after</span>&#123;<br><span class="hljs-attribute">content</span>:<span class="hljs-string">&#x27;...&#x27;</span>;<br><span class="hljs-attribute">font-weight</span>:bold;<br><span class="hljs-attribute">position</span>:absolute;<br><span class="hljs-attribute">bottom</span>:<span class="hljs-number">0</span>;<br><span class="hljs-attribute">right</span>:<span class="hljs-number">0</span>;<br><span class="hljs-attribute">padding</span>:<span class="hljs-number">0</span> <span class="hljs-number">20px</span> <span class="hljs-number">1px</span> <span class="hljs-number">45px</span>;<br><span class="hljs-attribute">background</span>:<span class="hljs-number">#fff</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li><strong>注意</strong>:IE6-7不显示content内容,所以要兼容IE6-7可以是在内容中加入一个标签,比如<span>…</span>去模拟;要支持IE8,需要将::after替换为:after</li>
-</ul>
-<p><strong>JavaScript解决方案</strong></p>
-<ul>
-<li>使用js也可以根据上面的思路去模拟,实现也很简单,推荐两个做类似工作的成熟小工具:
-<ul>
-<li><code>clamp.js</code></li>
-<li><code>jquery.dotdotdot</code></li>
+<li><code>conf</code> ：是这个仓库的配置文件（仓库的用户访问账号、权限等）</li>
+<li><code>db</code> ：是所有版本控制的数据存放文件</li>
+<li><code>hooks</code> ：放置hook脚本文件的目录</li>
+<li><code>locks</code> ：用来放置subversion见艰苦锁定数据的目录，用来追踪存取文件库的客户端</li>
 </ul>
 </li>
 </ul>
-
+<h2 id="配置SVNserve服务">配置SVNserve服务</h2>
+<h3 id="修改服务配置">修改服务配置</h3>
+<ul>
+<li>将创建的版本库交给SVN服务管理</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/sysconfig/svnserve<br></code></pre></td></tr></table></figure>
+<ul>
+<li>修改启动选项</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">OPTIONS</span>=<span class="hljs-string">&quot;-r /var/svn/repository&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>**-r:**版本库的目录</p>
+<ul>
+<li>
+<p>由于<code>-r</code>配置方式的不一样，SVN启动就可以有两种不同的访问方式</p>
+</li>
+<li>
+<p>直接指定到版本库(称之为单库svnserve方式)</p>
+</li>
+<li>
+<p>指定到版本库的上级目录(称之为多库svnserve方式)</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>–listen-port:</strong> 指定SVN监听端口，不加此参数，SVN默认监听3690</p>
+</li>
+</ul>
+<h3 id="查看SVN服务">查看SVN服务</h3>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">systemctl </span><span class="hljs-built_in">list-unit-files</span> | <span class="hljs-string">grep </span><span class="hljs-string">svn</span><br></code></pre></td></tr></table></figure>
+<h3 id="设置开机自启">设置开机自启</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">systemctl <span class="hljs-builtin-name">enable</span> svnserve.service<br></code></pre></td></tr></table></figure>
+<h3 id="启动服务">启动服务</h3>
+<ul>
+<li>客户端请求服务器端的 <code>helloworld</code> 项目的URL地址：<code>svn://ip:3690/helloworld</code></li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">systemctl <span class="hljs-literal">start</span> svnserve.service<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -249,9 +279,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/">Software</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/CSS/">CSS</a>
+                      <a class="hover-with-bg" href="/categories/Software/SVN/">SVN</a>
                     
                   </div>
                 
@@ -265,9 +293,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/19/Software/Frontend/JavaScript/BOM/">
+                      <a href="/2021/03/08/Software/SVN/%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaScript BOM</span>
+                        <span class="hidden-mobile">SVN 权限管理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -275,8 +303,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/19/Software/Frontend/Node.js/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-                        <span class="hidden-mobile">Node.js 基本概念</span>
+                      <a href="/2021/03/08/Software/SVN/%E7%AE%80%E4%BB%8B/">
+                        <span class="hidden-mobile">SVN 简介</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

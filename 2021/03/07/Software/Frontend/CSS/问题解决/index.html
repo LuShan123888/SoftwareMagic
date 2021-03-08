@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <title>Vue Vue-CLI - SoftwareMagic</title>
+  <title>CSS 问题解决 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -138,7 +138,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Vue Vue-CLI">
+            <span class="h2" id="subtitle" title="CSS 问题解决">
               
             </span>
 
@@ -148,8 +148,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-22 22:02" pubdate>
-        2021年2月22日 晚上
+      <time datetime="2021-03-07 17:32" pubdate>
+        2021年3月7日 下午
       </time>
     </span>
   
@@ -160,7 +160,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      137 字
+      535 字
     </span>
   
 
@@ -170,7 +170,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -200,47 +200,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Vue Vue-CLI</h1>
+            <h1 style="display: none">CSS 问题解决</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月22日 晚上
+                  本文最后更新于：2021年3月7日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Vue Vue-CLI</h1>
-<h2 id="安装">安装</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g @vue/cli<br><span class="hljs-comment"># OR</span><br>yarn global add @vue/cli<br></code></pre></td></tr></table></figure>
+              <h1>CSS 问题解决</h1>
+<h2 id="CSS单行-多行文本溢出显示省略号">CSS单行,多行文本溢出显示省略号</h2>
+<h3 id="单行文本溢出显示省略号">单行文本溢出显示省略号</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">overflow</span><span class="hljs-selector-pseudo">:hidden</span>;<br><span class="hljs-selector-tag">text-overflow</span><span class="hljs-selector-pseudo">:ellipsis</span>;<br><span class="hljs-selector-tag">white-space</span><span class="hljs-selector-pseudo">:nowrap</span>;<br><span class="hljs-comment">/*需要对容器设置单行高度*/</span><br></code></pre></td></tr></table></figure>
+<h3 id="多行文本溢出显示省略号">多行文本溢出显示省略号</h3>
+<p><strong>webkit浏览器或移动端的页面</strong></p>
 <ul>
-<li>查看版本</li>
+<li>在webkit浏览器或移动端(绝大部分是webkit内核的浏览器)可以直接使用webkit的css扩展属性(webkit是私有属性)<code>-webkit-line-clamp;</code></li>
+<li><strong>注意</strong>:这是一个不规范的属性,它没有在CSS的规范草案中</li>
+<li><code>-webkit-line-clamp</code>用来限制在一个块元素显示的文本行数,为了实现效果,他要与一下webkit属性结合使用</li>
 </ul>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">vue <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">overflow</span><span class="hljs-selector-pseudo">:hidden</span>;<br><span class="hljs-selector-tag">text-overflow</span><span class="hljs-selector-pseudo">:ellipsis</span>;<br><span class="hljs-selector-tag">display</span><span class="hljs-selector-pseudo">:-webkit-box</span>; <span class="hljs-comment">/*必须结合的属性,将对象作为弹性伸缩盒子模型展示*/</span><br><span class="hljs-selector-tag">-webkit-line-clamp</span><span class="hljs-selector-pseudo">:2</span>;<br><span class="hljs-selector-tag">-webkit-box-orient</span><span class="hljs-selector-pseudo">:vertical</span>; <span class="hljs-comment">/*必须结合的属性,设置或检索伸缩盒对象的子元素的排列方式*/</span><br></code></pre></td></tr></table></figure>
+<p><strong>跨浏览器兼容的方案</strong></p>
 <ul>
-<li>升级</li>
+<li>比较靠谱简单的做法就是设置相对定位的容器高度,用包含省略号(…)的元素模拟实现</li>
 </ul>
-<p>如需升级全局的 Vue CLI 包,请运行:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm update -g @vue/cli<br><span class="hljs-comment"># OR</span><br>yarn global upgrade --latest @vue/cli<br></code></pre></td></tr></table></figure>
-<h2 id="命令">命令</h2>
-<h3 id="创建一个项目">创建一个项目</h3>
-<h4 id="命令行">命令行</h4>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">vue creare <span class="hljs-tag">&lt;<span class="hljs-name">项目名</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<h4 id="使用图形化界面">使用图形化界面</h4>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vue ui</span><br></code></pre></td></tr></table></figure>
-<h3 id="插件">插件</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">position</span>:relative;<br><span class="hljs-attribute">line-height</span>:<span class="hljs-number">1.4em</span>;<br><span class="hljs-comment">/*设置容器高度为3倍行高就是显示3行*/</span><br><span class="hljs-attribute">height</span>:<span class="hljs-number">4.2em</span>;<br><span class="hljs-attribute">overflow</span>:hidden;<br>&#125;<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::after</span>&#123;<br><span class="hljs-attribute">content</span>:<span class="hljs-string">&#x27;...&#x27;</span>;<br><span class="hljs-attribute">font-weight</span>:bold;<br><span class="hljs-attribute">position</span>:absolute;<br><span class="hljs-attribute">bottom</span>:<span class="hljs-number">0</span>;<br><span class="hljs-attribute">right</span>:<span class="hljs-number">0</span>;<br><span class="hljs-attribute">padding</span>:<span class="hljs-number">0</span> <span class="hljs-number">20px</span> <span class="hljs-number">1px</span> <span class="hljs-number">45px</span>;<br><span class="hljs-attribute">background</span>:<span class="hljs-number">#fff</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在现有的项目中安装插件</li>
+<li><strong>注意</strong>:IE6-7不显示content内容,所以要兼容IE6-7可以是在内容中加入一个标签,比如<span>…</span>去模拟;要支持IE8,需要将::after替换为:after</li>
 </ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">vue <span class="hljs-keyword">add</span><span class="bash"> &lt;插件名&gt;</span><br></code></pre></td></tr></table></figure>
-<h2 id="配置文件">配置文件</h2>
+<p><strong>JavaScript解决方案</strong></p>
 <ul>
-<li><code>~/.vuerc</code></li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>    <span class="hljs-attr">&quot;useTaobaoRegistry&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">&quot;presets&quot;</span>: &#123;&#125;,<br>    <span class="hljs-attr">&quot;latestVersion&quot;</span>: <span class="hljs-string">&quot;4.5.7&quot;</span>,<br>    <span class="hljs-attr">&quot;lastChecked&quot;</span>: <span class="hljs-number">1602748738512</span>,<br>    <span class="hljs-attr">&quot;packageManager&quot;</span>: <span class="hljs-string">&quot;yarn&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<li>使用js也可以根据上面的思路去模拟,实现也很简单,推荐两个做类似工作的成熟小工具:
 <ul>
-<li><code>presets</code>:预设</li>
-<li><code>packageManager</code>:包管理器</li>
+<li><code>clamp.js</code></li>
+<li><code>jquery.dotdotdot</code></li>
 </ul>
+</li>
+</ul>
+<h2 id="设置图片不可拖动的方法">设置图片不可拖动的方法</h2>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>css居中对齐<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span> <br>      div&#123;<br>        width: 500px;<br>        height: 500px;<br>        border: 1px solid red;&#125;<br><br>      img &#123;<br>        -webkit-user-drag: none;<br>      &#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img/3.jpg&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="隐藏滚动条">隐藏滚动条</h2>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-pseudo">::-webkit-scrollbar</span> &#123;<br>    <span class="hljs-attribute">display</span>: none;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -254,7 +255,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/Vue/">Vue</a>
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/CSS/">CSS</a>
                     
                   </div>
                 
@@ -268,9 +269,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Shell/%E5%8F%98%E9%87%8F/">
+                      <a href="/2021/03/08/Software/SVN/%E7%AE%80%E4%BB%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell 变量</span>
+                        <span class="hidden-mobile">SVN 简介</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,8 +279,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/22/Software/Frontend/Webpack/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                        <span class="hidden-mobile">Webpack 配置文件</span>
+                      <a href="/2021/03/07/Software/Frontend/CSS/%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7/Others/">
+                        <span class="hidden-mobile">CSS 其他样式属性</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

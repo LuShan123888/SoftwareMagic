@@ -153,26 +153,23 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">Docker 网络</a>
+        <a href="/2021/02/23/Software/Backend/Database/Redis/%E6%8C%81%E4%B9%85%E5%8C%96/">Redis 持久化</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">
+        <a href="/2021/02/23/Software/Backend/Database/Redis/%E6%8C%81%E4%B9%85%E5%8C%96/">
           
           
             
           
-          Docker 网络
+          Redis 持久化
+RDB(Redis Database)
+机制
 
-docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
-所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
-Docker中的所有的网络接口都是虚拟的
-
-port
-
-快捷地查看端口的绑定情况
-
-1$ dock
+在指定的时间间隔内将内存中的数据集快照写入磁盘,也就是Snapshot快照,它恢复时是将快照文件直接读到内存里
+Redis会单独创建(fork)一个子进程来进行持久化,会先将数据写入到一个临时文件中,待持久化过程都结束了,再用这个临时文件替换上次持久化好的文件
+整个过程中,主进程是不进行任何IO操作的,这就确保了极高的性能
+如果需
         </a>
       </p>
 
@@ -180,7 +177,7 @@ port
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
+            <time datetime="2021-02-23 15:12" pubdate>
               2021-02-23
             </time>
           </div>
@@ -191,7 +188,11 @@ port
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Docker/">Docker</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -206,20 +207,34 @@ port
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Docker/%E9%95%9C%E5%83%8F/">Docker 镜像</a>
+        <a href="/2021/02/23/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/">Redis 事务</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Docker/%E9%95%9C%E5%83%8F/">
+        <a href="/2021/02/23/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/">
           
           
             
           
-          Docker 镜像
-镜像加载原理
-UnionES (联合文件系统)
+          Redis 事务
 
-Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系统,它支持对文件系统的修改作为一次提交来一层层的叠加,同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem), Union文件系统是Docker镜像
+Redis 事务可以一次执行多个命令, 并且带有以下三个重要的保证:
+
+批量操作在发送 EXEC 命令前被放入队列缓存
+收到 EXEC 命令后进入事务执行,事务中任意命令执行失败,其余的命令依然被执行
+在事务执行过程,其他客户端提交的命令请求不会插入到事务执行命令序列中
+
+
+一个事务从开始到执行会经历以下三个阶段:
+
+开始事务
+命令入队
+执行事务
+
+
+
+实例
+以下是一个事务的例
         </a>
       </p>
 
@@ -227,7 +242,7 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
+            <time datetime="2021-02-23 15:11" pubdate>
               2021-02-23
             </time>
           </div>
@@ -238,7 +253,11 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Docker/">Docker</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -253,20 +272,23 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Shell/printf%E5%91%BD%E4%BB%A4/">Shell printf 命令</a>
+        <a href="/2021/02/23/Software/Backend/Database/Redis/SpringBoot/">Redis Spring Boot整合</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Shell/printf%E5%91%BD%E4%BB%A4/">
+        <a href="/2021/02/23/Software/Backend/Database/Redis/SpringBoot/">
           
           
             
           
-          Shell printf 命令
+          Redis Spring Boot整合
+pom.xml
 
-printf 命令模仿 C 程序库(library)里的 printf() 程序
-printf 由 POSIX 标准所定义,因此使用 printf 的脚本比使用 echo 移植性好
-printf 使用引用文本或空格分隔的参数,外面可以在 printf 中使用格式化字符串,还可以制定字符串的宽度,左右对齐方式等,默认 printf 不会像 echo 自动添加换行符,
+在Spring Boot2.x之后,原来使用的jedis被替换为lettuce
+jedis使用直连server,多线程操作时有安全隐患,可使用jedis pool连接池改善,类似BIO模式
+lettuce底层使用netty实例可以在多个线程中进行共享,不存在线程不安全的情况,可以减少线程数据,类似NIO模式
+
+1234&lt;depende
         </a>
       </p>
 
@@ -274,7 +296,7 @@ printf 使用引用文本或空格分隔的参数,外面可以在 printf 中使�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
+            <time datetime="2021-02-23 15:11" pubdate>
               2021-02-23
             </time>
           </div>
@@ -285,7 +307,11 @@ printf 使用引用文本或空格分隔的参数,外面可以在 printf 中使�
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Shell/">Shell</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -300,50 +326,143 @@ printf 使用引用文本或空格分隔的参数,外面可以在 printf 中使�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Frontend/CSS/%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/">CSS 盒子模型</a>
+        <a href="/2021/02/23/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/">Oracle 表连接</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/CSS/%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B/">
+        <a href="/2021/02/23/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
           
           
             
           
-          CSS 盒子模型
-height
-属性定义及使用说明
+          Oracle 表连接
+概述
 
-height属性设置元素的高度
-注意:height属性不包括填充,边框,或页边距!
+即查询的时候同时需要多张表(特别是存在外键关系的), 此时需要多张表之间的值进行连接
+目前 SQL 标准提出过两种连接查询, 第一种是较早的 SQL92 标准, 第二种是目前使用广泛的较新的 SQL99 标准
+92 形式简单, 但编写较为冗长, 99 不仅在底层得到优化, 而且形式看上去更加一目了然, 逻辑性更强, 一般建议使用 99 标准
 
-属性值
+92语法
+
+多张表需要全
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-23 15:11" pubdate>
+              2021-02-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/23/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">MySQL 问题解决</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/23/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+          
+          
+            
+          
+          MySQL 问题解决
+MySQL数据库存入Date时显示不正常的问题
+原驱动:
+1jdbc:mysql://localhost:3306/sms?serverTimezone=UTC
+改为
+1jdbc:mysql://localhost:3306/sms?serverTimezone=Asia/Shanghai
+Host is blocked
+报错信息
+
+Host is blocked becau
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-23 15:10" pubdate>
+              2021-02-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/23/Internet/HTTP/Header/">HTTP Header</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/23/Internet/HTTP/Header/">
+          
+          
+            
+          
+          HTTP Header
 
 
 
-值
+头信息
 描述
 
 
 
 
-auto
-默认,浏览器会计算出实际的高度,
+Allow
+这个头信息指定服务器支持的请求方法(GET,POST 等),
 
 
-length
-使用 px,cm 等单位定义高度,
-
-
-%
-基于包含它的块级对象的百分比高度,
-
-
-inherit
-规定应该从父元素继承 height 属性的值,
-
-
-
-min/ma
+Cache-Control
+这个头信息指定响应文档在何种情况下可以安全地缓存,可能的值有public,private 或 no-cache 等,Public 意味着文档是可缓存,Private 意味着文档是单个用户私用文档,且只能存储在私有(非共享)缓存中,no-cac
         </a>
       </p>
 
@@ -351,7 +470,7 @@ min/ma
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
+            <time datetime="2021-02-23 15:00" pubdate>
               2021-02-23
             </time>
           </div>
@@ -360,11 +479,9 @@ min/ma
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Software/">Software</a>
+              <a href="/categories/Internet/">Internet</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/CSS/">CSS</a>
+              <a href="/categories/Internet/HTTP/">HTTP</a>
             
           </div>
         
@@ -379,27 +496,24 @@ min/ma
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Frontend/JavaScript/Ajax/">JavaScript AJAX</a>
+        <a href="/2021/02/23/Software/Backend/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/">Java 方法引用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/JavaScript/Ajax/">
+        <a href="/2021/02/23/Software/Backend/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/">
           
           
             
           
-          JavaScript AJAX
+          Java 方法引用
 
-AJAX = 异步 JavaScript 和 XML
-AJAX 是一种用于创建快速动态网页的技术
-通过在后台与服务器进行少量数据交换,AJAX 可以使网页实现异步更新,这意味着可以在不重新加载整个网页的情况下,对网页的某部分进行更新
-传统的网页(不使用 AJAX)如果需要更新内容,必需重载整个网页面
+方法引用通过方法的名字来指向一个方法
+如果除了方法名外,方法参数一致,返回类型相同,因此,我们说两者的方法签名一致,可以直接把方法名作为Lambda表达式传入
+方法引用使用一对冒号::
 
-AJAX 工作原理
+实例
 
-XMLHttpRequest 对象
-
-X
+因为Comparator&lt;String&gt;接口定义的方法是int compare(String, String),和静态方法int cmp(String, String)相
         </a>
       </p>
 
@@ -407,7 +521,7 @@ X
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
+            <time datetime="2021-02-23 14:54" pubdate>
               2021-02-23
             </time>
           </div>
@@ -418,9 +532,13 @@ X
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a>
             
           </div>
         
@@ -435,27 +553,25 @@ X
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Frontend/JavaScript/Cookie/">JavaScript Cookie</a>
+        <a href="/2021/02/23/Software/Docker/DockerFile/">DockerFile</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/JavaScript/Cookie/">
+        <a href="/2021/02/23/Software/Docker/DockerFile/">
           
           
             
           
-          JavaScript Cookie
+          DockerFile
 
-Cookie 用于存储 web 页面的用户信息
+Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
 
-Cookie 概述
+Dockerfile文件指令
+FROM
 
-Cookie 是一些数据, 存储于你电脑上的文本文件中
-当 web 服务器向浏览器发送 web 页面时,在连接关闭后,服务端不会记录用户的信息
-Cookie 的作用就是用于解决 “如何记录客户端的用户信息”:
+定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx
 
-当用户访问 web 页面时,他的名字可以记录在 cookie 中
-在用户下一次
+12FROM nginxRUN echo &#x27;这是一个本地构建的nginx镜像&#x27; &gt; /usr
         </a>
       </p>
 
@@ -474,9 +590,7 @@ Cookie 的作用就是用于解决 “如何记录客户端的用户信息”:
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -491,28 +605,25 @@ Cookie 的作用就是用于解决 “如何记录客户端的用户信息”:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Frontend/JavaScript/JSON/">JavaScript JSON</a>
+        <a href="/2021/02/23/Software/Docker/%E5%AE%B9%E5%99%A8/">Docker 容器</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/JavaScript/JSON/">
+        <a href="/2021/02/23/Software/Docker/%E5%AE%B9%E5%99%A8/">
           
           
             
           
-          JavaScript JSON
-JSON.stringify()
+          Docker 容器
+容器生命周期
+run
+1$ docker run [可选参数] 镜像名/镜像ID [命令]
 
-JSON.stringify() 方法用于将 JavaScript 值转换为 JSON 字符串
-
-语法
-1JSON.stringify(value[, replacer[, space]])
-参数说明:
-
-value:必需, 要转换的 JavaScript 值(通常为对象或数组)
-replacer:
-
-可选,用于转换结果的函数或数
+-a stdin:指定标准输入输出内容类型,可选 STDIN/STDOUT/STDERR 三项;
+-d:后台运行容器,并返回容器ID
+-i:以交互模式运行容器,通常与 -t 同时使用
+-P:随机端口映射,容器内部端口随机映射到主机的端口
+-p:指定端口映射,格式为**:主机(宿主)端口
         </a>
       </p>
 
@@ -531,9 +642,7 @@ replacer:
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/JavaScript/">JavaScript</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
@@ -548,33 +657,21 @@ replacer:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%85%83%E4%BF%A1%E6%81%AF/">HTML 元信息标签</a>
+        <a href="/2021/02/23/Software/Docker/%E6%9C%AC%E5%9C%B0%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">Docker 本地导入导出</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%85%83%E4%BF%A1%E6%81%AF/">
+        <a href="/2021/02/23/Software/Docker/%E6%9C%AC%E5%9C%B0%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
           
           
             
           
-          HTML 元信息标签
-&lt;head&gt;
-标签定义及使用说明
+          Docker 本地导入导出
+概述
 
-
-&lt;head&gt; 元素是所有头部元素的容器
-
-
-&lt;head&gt; 元素必须包含文档的标题(title),可以包含脚本,样式,meta 信息 以及其他更多的信息
-
-
-以下列出的元素能被用在 &lt;head&gt; 元素内部:
-
-&lt;title&gt;(在头部中,这个元素是必需的)
-
-
-
-&lt;style&
+docker save保存的是镜像(image),docker export保存的是容器(container)
+docker load用来载入镜像包,docker import 用来载入容器包,但两者都会恢复为镜像
+docker export导出的是一个容器的快照, 不是镜像本身, 也就是说没 layer,dockerfile 里的workdir,entrypo
         </a>
       </p>
 
@@ -593,136 +690,7 @@ replacer:
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/HTML/">HTML</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%85%A8%E5%B1%80%E5%B1%9E%E6%80%A7/">HTML 全局属性</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%85%A8%E5%B1%80%E5%B1%9E%E6%80%A7/">
-          
-          
-            
-          
-          HTML 全局属性
-accesskey
-定义和用法
-accesskey 属性规定激活(使元素获得焦点)元素的快捷键
-注意:在不同操作系统中不同的浏览器中访问快捷键的方式不同:
-
-
-
-Browser
-Windows
-Linux
-Mac
-
-
-
-
-Internet Explorer
-[Alt] + accesskey
-N/A
-
-
-
-Chrome
-[Alt] + accesskey
-[Alt] + acc
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
-              2021-02-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/HTML/">HTML</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%9F%BA%E7%A1%80/">HTML 基础标签</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/23/Software/Frontend/HTML/%E5%9F%BA%E7%A1%80/">
-          
-          
-            
-          
-          HTML 基础标签
-&lt;!DOCTYPE&gt;
-标签定义及使用说明
-
-
- 声明位于文档中的最前面的位置,处于  标签之前
-&lt;/!doctype&gt;
-
-
- 声明不是一个 HTML 标签;它是用来告知 Web 浏览器页面使用了哪种 HTML 版本
-&lt;/!doctype&gt;
-
-
-在 HTML 4.01 中,&lt;!DOCTYPE&gt; 声明需引用 DTD (文档类型声明),
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 14:52" pubdate>
-              2021-02-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/HTML/">HTML</a>
+              <a href="/categories/Software/Docker/">Docker</a>
             
           </div>
         
