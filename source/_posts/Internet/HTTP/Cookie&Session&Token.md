@@ -325,4 +325,4 @@ public class RedisSessionInitializer extends AbstractHttpSessionApplicationIniti
 > 5. 客户端发起请求，需要携带该Token
 > 6. 服务端收到请求后，首先验证Token，之后返回数据
 >
-> <img src="https://img2018.cnblogs.com/blog/1010726/201911/1010726-20191103045557729-778248059.png" alt="img" style="zoom:33%;" />　　
+> <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-05-1010726-20191103045557729-778248059.png" alt="img" style="zoom:33%;" />　　

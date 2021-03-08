@@ -35,8 +35,6 @@ yarn global upgrade --latest @vue/cli
 
 ### 创建一个项目
 
-#### 命令行
-
 ```
 vue creare <项目名>
 ```
@@ -47,7 +45,7 @@ vue creare <项目名>
 vue ui
 ```
 
-### 插件
+### 安装插件
 
 - 在现有的项目中安装插件
 
