@@ -3,7 +3,6 @@ title: NPM nrm
 categories:
 - Software
 - Frontend
-- NPM
 ---
 # NPM nrm
 
@@ -19,8 +18,8 @@ categories:
 
 ## 安装
 
-```
-sudo npm install -g nrm
+```shell
+yarn global add nrm
 ```
 
 ## 列出可用的源

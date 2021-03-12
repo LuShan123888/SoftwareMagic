@@ -3,7 +3,6 @@ title: gh-pages
 categories:
 - Software
 - Frontend
-- NPM
 ---
 # gh-pages
 
@@ -12,7 +11,7 @@ categories:
 ## 安装
 
 ```bash
-npm install gh-pages --save-dev
+yarn add gh-pages --save-dev
 ```
 
 ## 配置package.json
@@ -28,6 +27,6 @@ npm install gh-pages --save-dev
 ## 使用
 
 ```bash
-npm run deploy
+yarn deploy
 ```
 

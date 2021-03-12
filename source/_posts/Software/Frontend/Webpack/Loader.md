@@ -18,7 +18,7 @@ categories:
 **安装**
 
 ```bash
-npm install --save-dev css-loader style-loader
+yarn add -D css-loader style-loader
 ```
 
 **配置**
@@ -85,7 +85,7 @@ element.innerHTML = '<div class="' + styles.className + '">';
 **安装**
 
 ```bash
-npm install sass-loader sass --save-dev
+yarn add -D sass-loader sass
 ```
 
 **配置**
@@ -141,7 +141,7 @@ import "./style.scss";
 **安装**
 
 ```bash
-npm install less less-loader --save-dev
+yarn add -D less less-loader
 ```
 
 **配置**
@@ -184,13 +184,13 @@ import "./style.less";
 **安装**
 
 ```bash
-npm install --save-dev postcss-loader postcss
+yarn add -D postcss-loader postcss
 ```
 
 **插件安装**
 
 ```bash
-npm install --save-dev autoprefixer postcss-preset-env
+yarn add -D autoprefixer postcss-preset-env
 ```
 
 - `autoprefixer`:动态添加浏览器前缀,提高兼容性
@@ -260,7 +260,7 @@ import css from "style.css";
 **安装**
 
 ```bash
-npm install -D babel-loader @babel/core @babel/preset-env
+yarn add -D babel-loader @babel/core @babel/preset-env
 ```
 
 **配置**
@@ -299,7 +299,7 @@ module: {
 **全局安装**
 
 ```bash
-npm install -g babel-cli
+yarn global add babel-cli
 ```
 
 **转码结果写入一个文件**
@@ -329,7 +329,7 @@ babel src -d dist2
 **安装**
 
 ```bash
-npm install file-loader --save-dev
+yarn add -D file-loader
 ```
 
 **配置**
@@ -373,7 +373,7 @@ import img from './file.png';
 **安装**
 
 ```bash
-npm install url-loader file-loader --save-dev
+yarn add -D url-loader file-loader
 ```
 
 **配置**
@@ -429,7 +429,7 @@ html中直接使用img标签src加载图片的话,因为没有被依赖,图片�
 **安装**
 
 ```bash
-npm install html-withimg-loader --save
+yarn add -D html-withimg-loader
 ```
 
 **配置**

@@ -10,7 +10,7 @@ categories:
 ## 安装
 
 ```bash
-npm install --save axios vue-axios
+yarn add  axios vue-axios
 ```
 
 ## 配置

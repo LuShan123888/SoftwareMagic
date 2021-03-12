@@ -9,7 +9,7 @@ categories:
 ## 安装
 
 ```
-npm install hexo-cli -g
+yarn global add hexo-cli
 ```
 
 ## 初始化
@@ -17,7 +17,7 @@ npm install hexo-cli -g
 ```bash
 hexo init <folder>
 cd <folder>
-npm install
+yarn install
 ```
 
 ## 新建文章
@@ -338,13 +338,13 @@ markdown:
 ### 删除原本渲染引擎
 
 ```
-npm uninstall hexo-renderer-marked --save
+yarn remove hexo-renderer-marked --save
 ```
 
 ### 安装Markdown-it渲染引擎
 
 ```
-npm install git+https://github.com/hexojs/hexo-renderer-markdown-it.git --save
+yarn add git+https://github.com/hexojs/hexo-renderer-markdown-it.git --save
 ```
 
 ### 配置_config.yml
@@ -389,7 +389,7 @@ markdown:
 ### 安装
 
 ```
-npm install --save hexo-theme-fluid
+yarn add --save hexo-theme-fluid
 ```
 
 ### 指定主题

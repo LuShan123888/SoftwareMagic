@@ -10,10 +10,10 @@ categories:
 ## 安装
 
 ```bash
-npm i --save @fortawesome/fontawesome
-npm i --save @fortawesome/fontawesome-free-solid
-npm i --save @fortawesome/fontawesome-free-regular
-npm i --save @fortawesome/fontawesome-free-brands
+yarn add @fortawesome/fontawesome
+yarn add @fortawesome/fontawesome-free-solid
+yarn add @fortawesome/fontawesome-free-regular
+yarn add @fortawesome/fontawesome-free-brands
 ```
 
 ## 配置

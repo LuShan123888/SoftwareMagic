@@ -10,7 +10,7 @@ categories:
 ## 安装
 
 ```bash
-npm install --sava jquery popper.js bootstrap
+yarn add  jquery popper.js bootstrap
 ```
 
 ## 配置

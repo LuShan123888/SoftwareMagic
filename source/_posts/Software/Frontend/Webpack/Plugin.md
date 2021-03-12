@@ -37,7 +37,7 @@ plugins: [
 **安装**
 
 ```bash
-npm install --save-dev html-webpack-plugin
+yarn add -D html-webpack-plugin
 ```
 
 **配置**
@@ -102,7 +102,7 @@ plugins: [
 **安装**
 
 ```bash
-npm install --save-dev extract-text-webpack-plugin
+yarn add -D extract-text-webpack-plugin
 ```
 
 **配置**
@@ -122,7 +122,7 @@ plugins: [
 **安装**
 
 ```bash
-npm install clean-webpack-plugin --save-dev
+yarn add -D clean-webpack-plugin
 ```
 
 **配置**
@@ -145,7 +145,7 @@ plugins: [
 **安装**
 
 ```bash
-npm install --save-dev copy-webpack-plugin
+yarn add -D copy-webpack-plugin
 ```
 
 **配置**

@@ -66,8 +66,8 @@ User selectUserByNP2(Map<String,Object> map);
 2. 编写sql语句的时候, 需要传递参数类型, 参数类型为map
 
 ```xml
-<select id="selectUserByNP2" parameterType="map"resultType="com.example.pojo.User">
-select * from user where name = #{username} and pwd = #{pwd}
+<select id="selectUserByNP2" parameterType="map"cresultType="com.example.pojo.User">
+  select * from user where name = #{username} and pwd = #{pwd}
 </select>
 ```
 

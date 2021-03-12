@@ -10,7 +10,7 @@ categories:
 ##   安装模块
 
 ```bash
-npm install mysql
+yarn add  mysql
 ```
 
 ## 连接数据库

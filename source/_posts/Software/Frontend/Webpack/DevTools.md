@@ -12,7 +12,7 @@ categories:
 ### 安装
 
 ```bash
-npm install --save-dev webpack-dev-server
+yarn add -D webpack-dev-server
 ```
 
 ### 配置
@@ -48,7 +48,7 @@ devServer: {
 ### 启动
 
 ```bash
-npm run server
+yarn server
 ```
 
 ## Source Map
