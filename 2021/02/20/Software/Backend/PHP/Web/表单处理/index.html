@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -230,7 +230,7 @@
 <li>现实中,幂等性常常被忽略,目前浏览器的缓存功能都很差,并且&quot;刷新&quot;按钮很容易用户点到,所以程序员通常只考虑是否想将参数显示在浏览器的URL地址栏上,如果不想显示,就用POST方法,但你要记住,在服务器的响应页面可能会变化的情况下(例如下订单或者更新数据库),不要使用GET方法</li>
 <li>一个请求所用的方法类型可以用<code>$_SERVER['REQUEST_METHOD']</code>来获知,如:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>($_SERVER[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;GET&#x27;</span>)&#123;<br>    <span class="hljs-comment">//处理一个GET请求</span><br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;You may only GET this page.&quot;</span>);<br>    <span class="hljs-comment">//你只能用GET方法请求这个页面</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;GET&#x27;</span>)&#123;<br>    <span class="hljs-comment">//处理一个GET请求</span><br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;You may only GET this page.&quot;</span>);<br>    <span class="hljs-comment">//你只能用GET方法请求这个页面</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="参数">参数</h2>
 <ul>
 <li>在PHP程序中我们可使用<code>$_POST</code>,<code>$_GET</code>和<code>$_FILES</code>数组来访问表单的参数,数组的键名时表单参数的名称,数组元素的值是表单参数的值,因为句点&quot;.&quot;在HTML的表单字段命名中是合法的,但是在PHP的变量命名中是不合法的,所以在数组中字符名中的句点被转换成了下划线<code>_</code></li>
@@ -249,15 +249,15 @@
 <li>例如,如果你在文本框总输入&quot;O’Reilly&quot;并点击按钮,你就会发现被分块的字符串其实是&quot;O’Reilly&quot;,这就说明<code>magic_quotes_gpc</code>在工作</li>
 <li>为了处理用户输入的字符串,可以禁用php.ini中的<code>magic_quotes_gpc</code>选项或者对$_GET,$_POST和$_COOKIES使用<code>stripslashes()</code>函数,正确使用字符串的方法如下:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$value = ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes($_GET[<span class="hljs-string">&#x27;word&#x27;</span>]) : $_GET[<span class="hljs-string">&#x27;word&#x27;</span>];<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>]) : <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>];<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果要处理大量字符串,为此定义一个函数是聪明的做法:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">raw_param</span>(<span class="hljs-params">$name</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes($_GET[<span class="hljs-string">&#x27;word&#x27;</span>]) : $_GET[<span class="hljs-string">&#x27;word&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">raw_param</span>(<span class="hljs-params"><span class="hljs-variable">$name</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>]) : <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>你可以这样调用该函数:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$value = raw_param(<span class="hljs-string">&#x27;word&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = raw_param(<span class="hljs-string">&#x27;word&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <p><strong>提示</strong>:在本章后面的例子中,假设你的php.ini中的<code>magic_quotes_gpc</code>选项是不启用的,如果你已经启用,你需要改写示例中的代码,对所有参数使用<code>stripslashes()</code>函数</p>
 <h2 id="自处理页面">自处理页面</h2>
 <ul>
@@ -332,11 +332,11 @@
 <ul>
 <li>检测一个文件是否已将成功上传的正确方法是使用<code>io_uploaded_file()</code>函数:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(is_uploaded_file($_FILES[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>])&#123;<br> <span class="hljs-comment">//上传成功</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(is_uploaded_file(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>])&#123;<br> <span class="hljs-comment">//上传成功</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>上传的文件被存储在服务器的默认临时文件夹中,该目录由php.ini中的<code>upload_tmp_dir</code>选项指定,可使用<code>move_uploaded_file()</code>函数来移动临时文件</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">move_uploaded_files($_FILES[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>],<span class="hljs-string">&quot;path/to/put/file/$file&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">move_uploaded_files(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>],<span class="hljs-string">&quot;path/to/put/file/<span class="hljs-subst">$file</span>&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>调用<code>move_uploaded_file()</code>会自动检测文件是否为一个上传的文件,当PHP脚本执行完毕,任何由该脚本上传的文件会从临时文件夹中删除</li>
 </ul>
@@ -351,15 +351,15 @@
 <li>在这个例子中,验证只是简单地检查值是否已经提供,当$name,$type,$filename都不为空时,我们将$validated设置为true,其他可能的验证包括:检查E-mail地址是否合法,确认提供的文件名是否是本地的,确认文件是否存在</li>
 <li>例如,年龄字段的验证是看输入的是否为一个正整数:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$age = $_POST[<span class="hljs-string">&#x27;age&#x27;</span>];<br>$valid_age = strspn($age,<span class="hljs-string">&quot;1234567890&quot;</span>) == strlen($age);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$age</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;age&#x27;</span>];<br><span class="hljs-variable">$valid_age</span> = strspn(<span class="hljs-variable">$age</span>,<span class="hljs-string">&quot;1234567890&quot;</span>) == strlen(<span class="hljs-variable">$age</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>通过调用<code>strspn()</code>取得字符串中最靠前的数字,一个非负整数仅由数字组成,所以判断年龄是否合法是看它是否全由数字组成,我们也可以用正则表达式进行检查:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$valid_age = preg_match(<span class="hljs-string">&#x27;/^\d+$/&#x27;</span>,$age);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$valid_age</span> = preg_match(<span class="hljs-string">&#x27;/^\d+$/&#x27;</span>,<span class="hljs-variable">$age</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>验证E-mail地址是一个很困难的工作,没有现存的方法来检查一个字符串是否满足合法E-mail地址的要求,然而你可以要求用户输入E-mail地址两次(在不同的文本框中),也可以用如下的方法防止用户输入&quot;me&quot;或者&quot;me@aol&quot;这样的E-mail地址:要求所有输入的字符串都包含一个@符号,并且其中有一个点号,你也可以检查不想向其发送E-mail的域(如whitehouse.gov或竞争对手),例如:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php">$email1 = strtolower($_POST[<span class="hljs-string">&#x27;email1&#x27;</span>]);<br>$email2 = strtolower($_POST[<span class="hljs-string">&#x27;email2&#x27;</span>]);<br><span class="hljs-keyword">if</span>($email1 !== $email2)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email addresses didn&#x27;t match&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&#x27;/@.+\..+$/&#x27;</span>,$email1)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email address is invalid&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(strpos($email,<span class="hljs-string">&quot;Whitehorse.gov&quot;</span>))&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;I will not send mail to the White House&quot;</span>):<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$email1</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email1&#x27;</span>]);<br><span class="hljs-variable">$email2</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email2&#x27;</span>]);<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$email1</span> !== <span class="hljs-variable">$email2</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email addresses didn&#x27;t match&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&#x27;/@.+\..+$/&#x27;</span>,<span class="hljs-variable">$email1</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email address is invalid&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(strpos(<span class="hljs-variable">$email</span>,<span class="hljs-string">&quot;Whitehorse.gov&quot;</span>))&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;I will not send mail to the White House&quot;</span>):<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>表单字段验证是基本的字符串操作,在本例中,我们使用了正则表达式和字符串函数来保证用户所输入的字符串符号我们的要求</li>
 </ul>

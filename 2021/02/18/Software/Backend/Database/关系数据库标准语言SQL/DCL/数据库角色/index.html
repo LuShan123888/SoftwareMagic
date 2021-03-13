@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -221,17 +221,17 @@
 <ul>
 <li>创建角色的SQL语句格式是:</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ROLE</span> &lt;角色名&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ROLE <span class="hljs-operator">&lt;</span>角色名<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>刚刚创建的角色是空的,没有任何内容,可以用GRANT为角色授权</li>
 </ul>
 <h2 id="给角色权限">给角色权限</h2>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> &lt;权限&gt; [,&lt;权限&gt;]...<br><span class="hljs-keyword">ON</span> &lt;对象类型&gt; 对象名<br><span class="hljs-keyword">TO</span> &lt;角色&gt; [,&lt;角色&gt;]...<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> 对象名<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>]...<br></code></pre></td></tr></table></figure>
 <ul>
 <li>数据库管理员和用户可以利用GRANT语句将权限授予某一个或几个角色</li>
 </ul>
 <h2 id="将一个角色授予其他的角色或用户">将一个角色授予其他的角色或用户</h2>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> &lt;角色<span class="hljs-number">1</span>&gt; [,&lt;角色<span class="hljs-number">2</span>&gt;]..<br><span class="hljs-keyword">TO</span> &lt;角色<span class="hljs-number">3</span>&gt;[,&lt;用户<span class="hljs-number">1</span>&gt;]...<br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">ADMIN</span> <span class="hljs-keyword">OPTION</span>]<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-number">1</span><span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>角色<span class="hljs-number">2</span><span class="hljs-operator">&gt;</span>]..<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-number">3</span><span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-number">1</span><span class="hljs-operator">&gt;</span>]...<br>[<span class="hljs-keyword">WITH</span> ADMIN OPTION]<br></code></pre></td></tr></table></figure>
 <ul>
 <li>该语句把角色授予某用户,或授予另一个角色,这样,一个角色(例如角色3)所拥有的权限就是授予它的全部角色(例如角色1和角色2)所包含的权限的总和</li>
 <li>授予者或者是角色的创建者,或者拥有在这个角色上的ADMIN OPTION</li>
@@ -239,7 +239,7 @@
 <li>一个角色包含的权限包括直接授予这个角色的全部权限加上其他角色授予这个角色的全部权限</li>
 </ul>
 <h2 id="角色权限的收回">角色权限的收回</h2>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> &lt;权限&gt; [,&lt;权限&gt;]...<br><span class="hljs-keyword">ON</span> &lt;对象类型&gt; &lt;对象名&gt;<br><span class="hljs-keyword">FROM</span> &lt;角色&gt; [,&lt;角色&gt;]...<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span><br><span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>角色<span class="hljs-operator">&gt;</span>]...<br></code></pre></td></tr></table></figure>
 <ul>
 <li>用户可以收回角色的权限,从而修改角色拥有的权限</li>
 <li>REVOKE动作的执行者或者是角色的创建者,或者拥有再这个(些)角色上的ADMIN OPTION</li>
@@ -248,11 +248,11 @@
 <ul>
 <li>
 <p>首先创建一个角色R1</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">ROLE</span> R1;<br></code></pre></td></tr></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> ROLE R1;<br></code></pre></td></tr></table></figure>
 </li>
 <li>
 <p>然后使用GRANT语句,使角色R1拥有Student表的SELECT,UPDATE,INSERT权限</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span>,<span class="hljs-keyword">UPDATE</span>,<span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> R1;<br></code></pre></td></tr></table></figure>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span>,UPDATE,<span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> R1;<br></code></pre></td></tr></table></figure>
 </li>
 <li>
 <p>将这个角色授予王平,张明,赵玲,使他们具有角色R1所包含的全部权限</p>

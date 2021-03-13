@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -619,19 +619,19 @@
 <ul>
 <li>判断<code>$http_user_agent</code>值中是否含有 MSIE 字符串,如果包含则执行代码块中的代码</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (<span class="hljs-variable">$http_user_agent</span> <span class="hljs-regexp">~ MSIE)</span> &#123;<br>  <span class="hljs-comment"># ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> ($http_user_agent <span class="hljs-regexp">~ MSIE)</span> &#123;<br>  <span class="hljs-comment"># ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="判断请求的文件是否存在">判断请求的文件是否存在</h3>
 <ul>
 <li><code>-f</code>:如果请求的文件存在,那么该条件为true</li>
 <li><code>!-f</code>:如果该文件的目录存在,该文件不存在,那么返回true,如果该文件和目录都不存在,则为false</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (-f <span class="hljs-variable">$request_filename</span>) &#123;<br>  // 判断请求的文件是否存在<br>&#125;<br><br><span class="hljs-attribute">if</span> (!-f <span class="hljs-variable">$request_filename</span>) &#123;<br>  // 判断请求的文件是否不存在<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (-f $request_filename) &#123;<br>  // 判断请求的文件是否存在<br>&#125;<br><br><span class="hljs-attribute">if</span> (!-f $request_filename) &#123;<br>  // 判断请求的文件是否不存在<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="判断请求的目录是否存在">判断请求的目录是否存在</h3>
 <ul>
 <li><code>-d</code>:如果请求的目录存在,则返回true,否则返回false</li>
 <li><code>!-d</code>:如果请求的目录不存在,但是该请求的上级目录存在,则返回true,如果该上级目录不存在,则返回false</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (-d <span class="hljs-variable">$request_filename</span>) &#123;<br>  // 判断请求的目录是否存在<br>&#125;<br><br><span class="hljs-attribute">if</span> (!-d <span class="hljs-variable">$request_filename</span>) &#123;<br>  // 判断请求的目录是否不存在<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">if</span> (-d $request_filename) &#123;<br>  // 判断请求的目录是否存在<br>&#125;<br><br><span class="hljs-attribute">if</span> (!-d $request_filename) &#123;<br>  // 判断请求的目录是否不存在<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="index指令">index指令</h2>
 <ul>
 <li>指定网站的初始页</li>
@@ -640,7 +640,7 @@
 <li>文件可以使用变量$来命名</li>
 <li>该指令拥有默认值,index index.html,即,如果没有给出index,默认初始页为index.html</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">index</span> index.<span class="hljs-variable">$geo</span>.html index.<span class="hljs-number">0</span>.html /index.html;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">index</span> index.$geo.html index.<span class="hljs-number">0</span>.html /index.html;<br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong></p>
 <ul>
 <li>index指令并不是查到文件之后,就直接拿来用了</li>

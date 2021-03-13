@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -476,20 +476,20 @@
 <p>这个命令设置了在使用电池电量的情景下,显示器睡眠倒计时为 5 分钟,保留电池上的其他设定并且其他电源不受影响:</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">pmset -<span class="hljs-keyword">b </span><span class="hljs-keyword">displaysleep </span><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 <p>设置显示器睡眠倒计时为 10 分钟,磁盘睡眠倒计时为 10 分钟,系统睡眠倒计时为 30 分钟,并且为全部电源情景(交流电,电池和 UPS)启动 WakeOnMagicPacket:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset -a displaysleep <span class="hljs-number">10</span> disksleep <span class="hljs-number">10</span> sleep <span class="hljs-number">30</span> womp <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> -a displaysleep <span class="hljs-number">10</span> disksleep <span class="hljs-number">10</span> sleep <span class="hljs-number">30</span> womp <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 <p>恢复系统的能源设定为默认值:</p>
 <p>对于一个附带并支持 UPS 的系统来说,这指示系统在 UPS 电池电量低于 40% 的时候要紧急关闭</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset -u haltlevel <span class="hljs-number">40</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> -u haltlevel <span class="hljs-number">40</span><br></code></pre></td></tr></table></figure>
 <p>对于一个附带并支持 UPS 的系统来说,下面这条指令指示了系统在 UPS 电池电量低于 25% 或者 UPS 预估可用时间少于 30 分钟时要紧急关闭这两个条件满足一个就会执行系统关闭:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset -u haltlevel <span class="hljs-number">25</span> haltremain <span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> -u haltlevel <span class="hljs-number">25</span> haltremain <span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
 <p>对于一个附带并支持 UPS 的系统来说,这个指令指示当系统使用 UPS 电池时在两分钟后关闭系统:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset -u haltafter <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> -u haltafter <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 <p>系统计划于 2016 年 7 月 4 日 20:00 的时候自动从睡眠中唤醒:</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">pmset <span class="hljs-keyword">schedule </span>wake <span class="hljs-string">&quot;07/04/16 20:00:00&quot;</span><br></code></pre></td></tr></table></figure>
 <p>系统计划在每周的周二到周六上午 11 点钟关闭:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset repeat shutdown TWRFS <span class="hljs-number">11</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> repeat shutdown TWRFS <span class="hljs-number">11</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
 <p>计划在每周二的中午 12 点唤醒或供电,并且在每天晚上 8 点钟睡眠:</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">pmset repeat wakeorpoweron T <span class="hljs-number">12</span>:<span class="hljs-number">00</span> sleep MTWRFSU <span class="hljs-number">20</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pmset</span> repeat wakeorpoweron T <span class="hljs-number">12</span>:<span class="hljs-number">00</span> sleep MTWRFSU <span class="hljs-number">20</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
 <p>打印系统在使用的电量管理设定:</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">pmset -g</span><br></code></pre></td></tr></table></figure>
 <p>打印此刻的电池或电源的状态快照:</p>

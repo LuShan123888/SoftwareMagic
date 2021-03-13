@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -217,7 +217,7 @@
 <ul>
 <li>浏览器地址会显示跳转新的URL地址</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>	<span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>	<span class="hljs-attribute">server_name</span> example.com;<br>	<span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://www.example.com<span class="hljs-variable">$request_uri</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>	<span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>	<span class="hljs-attribute">server_name</span> example.com;<br>	<span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://www.example.com$request_uri;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://xn--example-v81no5u9hk60d5t0b6r2e.xn--comwww-r88i31evzhx93a8rygj4i.example.com">这样用户打开example.com时候就会转到www.example.com</a></li>
 </ul>
@@ -225,7 +225,7 @@
 <ul>
 <li>浏览器地址会显示跳转新的URL地址</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> example.com;<br>    <span class="hljs-attribute">index</span> index.html index.php;<br>    <span class="hljs-attribute">root</span> html;<br>    <span class="hljs-attribute">if</span> (<span class="hljs-variable">$http_host</span> <span class="hljs-regexp">~ &quot;^example\.com$&quot;</span> &#123;<br>        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^(.*)</span> http://www.example.com<span class="hljs-variable">$1</span> <span class="hljs-literal">redirect</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> example.com;<br>    <span class="hljs-attribute">index</span> index.html index.php;<br>    <span class="hljs-attribute">root</span> html;<br>    <span class="hljs-attribute">if</span> ($http_host <span class="hljs-regexp">~ &quot;^example\.com$&quot;</span> &#123;<br>        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^(.*)</span> http://www.example.com<span class="hljs-variable">$1</span> <span class="hljs-literal">redirect</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://xn--example-v81no5u9hk60d5t0b6r2e.xn--comwww-r88i31evzhx93a8rygj4i.example.com">这样用户打开example.com时候就会转到www.example.com</a></li>
 </ul>
@@ -233,7 +233,7 @@
 <ul>
 <li>如果请求来自于移动端,则重定向至移动站点</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> example.com;<br>    <span class="hljs-attribute">index</span> index.html index.php;<br>    <span class="hljs-attribute">root</span> html;<br>    <span class="hljs-attribute">if</span> ( <span class="hljs-variable">$http_user_agent</span> <span class="hljs-regexp">~* &quot;(Android)|(iPhone)|(Mobile)|(WAP)|(UCWEB)&quot;</span> )&#123;<br>        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^/$</span>  http://www.m.example.com  <span class="hljs-literal">permanent</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> example.com;<br>    <span class="hljs-attribute">index</span> index.html index.php;<br>    <span class="hljs-attribute">root</span> html;<br>    <span class="hljs-attribute">if</span> ( $http_user_agent <span class="hljs-regexp">~* &quot;(Android)|(iPhone)|(Mobile)|(WAP)|(UCWEB)&quot;</span> )&#123;<br>        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^/$</span>  http://www.m.example.com  <span class="hljs-literal">permanent</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <ul>
 <li>permanent表示301永久重定向</li>
 </ul>

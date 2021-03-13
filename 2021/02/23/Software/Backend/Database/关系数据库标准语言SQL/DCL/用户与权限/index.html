@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -302,7 +302,7 @@
 <ul>
 <li>GRANT语句的一般格式为:</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> &lt;权限&gt; [,&lt;权限&gt;]...<br><span class="hljs-keyword">ON</span> &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...<br><span class="hljs-keyword">TO</span> &lt;用户&gt;[,&lt;用户&gt;]...<br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">OPTION</span>];<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]...<br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION];<br></code></pre></td></tr></table></figure>
 <ul>
 <li>其语义为:将对指定操作对象的指定操作权限授予指定的用户,发出该GRANT语句的可以是数据库管理员,也可以是该数据库对象创建者(即属主owner),还可以是已经拥有该权限的用户,接收权限的用户可以是一个或多个具体用户,也可以是PUBLIC,即全体用户</li>
 <li>如果指定了WITH GRANT OPTION子句,则获得某种权限的用户还可以把这种权限再授予其他的用户,如果没有指定WITH GRANT OPTION子句,则获得某种权限的用户只能使用该权限,不能传播该权限</li>
@@ -321,16 +321,16 @@
 <p>**[例4.1]**把查询Student表的权限授给用户U1</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> U1;<br></code></pre></td></tr></table></figure>
 <p>**[例4.2]**把对Student表和Course表的全部操作权限授予用户U2和U3</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">PRIVILEGES</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student,Course<br><span class="hljs-keyword">TO</span> U2,U3;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES<br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student,Course<br><span class="hljs-keyword">TO</span> U2,U3;<br></code></pre></td></tr></table></figure>
 <p>**[例4.3]**把对表SC的查询权限授予所有用户</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> <span class="hljs-keyword">PUBLIC</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> PUBLIC;<br></code></pre></td></tr></table></figure>
 <p>**[例4.4]**把查询Student表和修改学生学号的权限授给用户U4</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">UPDATE</span> (Sno),<span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> U4<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> UPDATE (Sno),<span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> U4<br></code></pre></td></tr></table></figure>
 <ul>
 <li>这里,实际上要授予U4用户的是对基本表Student的SELECT权限和对属性列Sno的UPDATE权限,对属性列授权时必须明确指出相应的属性列名</li>
 </ul>
 <p>**[例4.5]**把对表SC的INSERT权限授予U5用户,并允许将此权限再授予其他用户</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U5<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">OPTION</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U5<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION<br></code></pre></td></tr></table></figure>
 <ul>
 <li>执行此SQL语句后,U5不仅拥有了对表SC的INSERT权限,还可以传播此权限,即由U5用户发上述GRANT命令给其他用户,例如U5可以将此权限授予U6(如下例)</li>
 </ul>
@@ -348,13 +348,13 @@
 <ul>
 <li>授予用户的权限可以由数据库管理员或其他授权者用REVOKE语句收回,REVOKE语句的一般格式为:</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> &lt;权限&gt; [,&lt;权限&gt;]...<br><span class="hljs-keyword">ON</span> &lt;对象类型&gt; &lt;对象名&gt; [,&lt;对象类型&gt; &lt;对象名&gt;]...<br><span class="hljs-keyword">FROM</span> &lt;用户&gt; [,&lt;用户&gt;]...[<span class="hljs-keyword">CASCADE</span>|RESTRICT];<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]...[CASCADE<span class="hljs-operator">|</span>RESTRICT];<br></code></pre></td></tr></table></figure>
 <p>**[例4.8]**把用户U4修改学生学号的权限收回</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mssql">REVOKE UPDATE(Sno)<br>ON TABLE Student<br>FROM U4;<br></code></pre></td></tr></table></figure>
 <p>**[例4.9]**收回所有用户对表SC的查询权限</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> <span class="hljs-keyword">PUBLIC</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> PUBLIC;<br></code></pre></td></tr></table></figure>
 <p>**[例4.10]**把用户U5对SC表的INSERT权限收回</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> U5 <span class="hljs-keyword">CASCADE</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> U5 CASCADE;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>把用户U5的INSERT权限收回的同时,级联(CASCADE)收回了U6和U7的INSERT权限,否则系统将拒绝执行该命令,因为再例4.6中,U5将对SC表的INSERT权限授予了U6,而U6又将其授予了U7(例4.7)</li>
 </ul>
@@ -403,9 +403,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DDL/%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0/">
+                      <a href="/2021/02/23/Software/Backend/Java/SpringBoot/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 数据更新</span>
+                        <span class="hidden-mobile">Spring Boot 配置文件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -413,8 +413,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">SQL 模式</span>
+                      <a href="/2021/02/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DDL/%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0/">
+                        <span class="hidden-mobile">SQL 数据更新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -224,13 +224,13 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker port 容器名 端口号</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> port </span>adoring_stonebraker 5000<br>127.0.0.1:5001<br></code></pre></td></tr></table></figure>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">$ docker port adoring_stonebraker <span class="hljs-number">5000</span><br><span class="hljs-number">127.0.0.1:5001</span><br></code></pre></td></tr></table></figure>
 <h2 id="docker虚拟网络管理">docker虚拟网络管理</h2>
 <h3 id="network-ls">network ls</h3>
 <ul>
 <li>可以查看所有创建的网络情况</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> network </span>ls<br><br>NETWORK ID          NAME                DRIVER              SCOPE<br>bf09a744b7c6       <span class="hljs-built_in"> bridge </span>            <span class="hljs-built_in"> bridge </span>             local<br>3e193114b45d        hadoop             <span class="hljs-built_in"> bridge </span>             local<br>e0b336240072        host                host                local<br>3040b975b80d        none                <span class="hljs-literal">null</span>                local<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ docker network ls<br><br>NETWORK ID          <span class="hljs-type">NAME</span>                DRIVER              SCOPE<br>bf09a744b7c6        bridge              bridge              <span class="hljs-keyword">local</span><br><span class="hljs-number">3e193114</span>b45d        hadoop              bridge              <span class="hljs-keyword">local</span><br>e0b336240072        host                host                <span class="hljs-keyword">local</span><br><span class="hljs-number">3040</span>b975b80d        <span class="hljs-keyword">none</span>                <span class="hljs-keyword">null</span>                <span class="hljs-keyword">local</span><br></code></pre></td></tr></table></figure>
 <h3 id="network-inspect">network inspect</h3>
 <ul>
 <li>查看docker网络的详细信息</li>
@@ -243,7 +243,7 @@
 <li>新建自定义docker虚拟网络</li>
 <li>当多个容器加入同一个docker虚拟网络后,可以通过容器名替代ip访问其他容器</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> network </span>create -d 网络类型 网络名<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker network create -d 网络类型 网络名<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>-d</strong>:指定 Docker 网络类型,有 bridge,overlay等,其中 overlay 网络类型用于 Swarm mode</li>
 <li><strong>–subnet</strong>:指定子网(192.168.0.0/16)</li>
@@ -253,7 +253,7 @@
 <ul>
 <li>移除docker虚拟网络</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> network </span>rm 网络名<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker network <span class="hljs-built_in">rm</span> 网络名<br></code></pre></td></tr></table></figure>
 <h2 id="容器连接网络">容器连接网络</h2>
 <ul>
 <li>Docker容器运行的时候有<code>host</code>,<code>bridge</code>,<code>none</code>三种网络可供配置
@@ -295,23 +295,23 @@
 <ul>
 <li>运行一个容器并连接到新建的 test-net 网络:</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test1 --network <span class="hljs-built_in">test</span>-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test1 --network test-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>打开新的终端,再运行一个容器并加入到 test-net 网络:</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test2 --network <span class="hljs-built_in">test</span>-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test2 --network test-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
 <h2 id="容器与网络连接与断开">容器与网络连接与断开</h2>
 <h3 id="network-connect">network connect</h3>
 <ul>
 <li>将容器与docker虚拟网络连接</li>
 <li>单个容器可与多个docker虚拟网络连接</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> network </span>connect 网络名 容器名<br></code></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">$ docker network <span class="hljs-built_in">connect</span> 网络名 容器名<br></code></pre></td></tr></table></figure>
 <h3 id="network-disconnect">network disconnect</h3>
 <ul>
 <li>将容器与docker虚拟网络断开连接</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ sdocker<span class="hljs-built_in"> network </span>connect 网络名 容器名<br></code></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">$ sdocker network <span class="hljs-built_in">connect</span> 网络名 容器名<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>

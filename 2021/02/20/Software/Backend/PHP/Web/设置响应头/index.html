@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -243,15 +243,15 @@
 <ul>
 <li>要使文档在页面生成后的3小时后过期,我们使用<code>time()</code>和<code>gmstrftime()</code>函数生成过期日期字符串:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">$now = time();<br>$then = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>,$now+<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">3</span>);<br>header(<span class="hljs-string">&quot;Expires:$then&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$now</span> = time();<br><span class="hljs-variable">$then</span> = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>,<span class="hljs-variable">$now</span>+<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">3</span>);<br>header(<span class="hljs-string">&quot;Expires:<span class="hljs-subst">$then</span>&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>为了使一个文档永不过期,可使用一年为时间期限:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">$now = time();<br>$then = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>,$now+<span class="hljs-number">365</span>*<span class="hljs-number">86440</span>);<br>header(<span class="hljs-string">&quot;Expires:$then&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$now</span> = time();<br><span class="hljs-variable">$then</span> = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>,<span class="hljs-variable">$now</span>+<span class="hljs-number">365</span>*<span class="hljs-number">86440</span>);<br>header(<span class="hljs-string">&quot;Expires:<span class="hljs-subst">$then</span>&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>为了把文档标记为过期,可用当前时间或以前的时间:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$then = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>);<br>header(<span class="hljs-string">&quot;Expires:$then&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$then</span> = gmstrftime(<span class="hljs-string">&quot;%a, %d %b %Y %H:%M:%S GMT&quot;</span>);<br>header(<span class="hljs-string">&quot;Expires:<span class="hljs-subst">$then</span>&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>以下是不使浏览器或代理缓存保存你的文档的最好方法;</li>
 </ul>
@@ -269,7 +269,7 @@
 <li>可以使用各种方法来验证用户名和密码,例如:查询数据库,或读一个保存着合法用户名的文件,或者查询一个Microsoft域服务器</li>
 <li>下例检查密码是否为翻转的用户名:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php">$auth_ok = <span class="hljs-number">0</span>;<br>$user = $_SERVER[<span class="hljs-string">&#x27;PHP_AUTH_USER&#x27;</span>];<br>$pass = $_SERVER[<span class="hljs-string">&#x27;PHP_AUTH_PW&#x27;</span>];<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>($user) &amp;&amp; <span class="hljs-keyword">isset</span>($pass) &amp;&amp; $user === strrev($pass))&#123;<br> $auth_ok = <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">if</span>(!$auth_ok)&#123;<br> header(<span class="hljs-string">&#x27;WWW-Authenticate: Basic realm=&quot;Top Secret Files&quot;&#x27;</span>);<br> header(<span class="hljs-string">&#x27;HTTP/1.0 401 Unauthorized&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$auth_ok</span> = <span class="hljs-number">0</span>;<br><span class="hljs-variable">$user</span> = <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;PHP_AUTH_USER&#x27;</span>];<br><span class="hljs-variable">$pass</span> = <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;PHP_AUTH_PW&#x27;</span>];<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$user</span>) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$pass</span>) &amp;&amp; <span class="hljs-variable">$user</span> === strrev(<span class="hljs-variable">$pass</span>))&#123;<br> <span class="hljs-variable">$auth_ok</span> = <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">if</span>(!<span class="hljs-variable">$auth_ok</span>)&#123;<br> header(<span class="hljs-string">&#x27;WWW-Authenticate: Basic realm=&quot;Top Secret Files&quot;&#x27;</span>);<br> header(<span class="hljs-string">&#x27;HTTP/1.0 401 Unauthorized&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>将其放入一个文档:</li>
 </ul>

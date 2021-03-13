@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -236,7 +236,7 @@
 <li>数据来源:emp, dept</li>
 <li>连接条件:emp.deptno=dept.deptno</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span> emp e,dept d<br><span class="hljs-keyword">where</span> e.deptno=d.deptno;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">from</span> emp e,dept d<br><span class="hljs-keyword">where</span> e.deptno<span class="hljs-operator">=</span>d.deptno;<br></code></pre></td></tr></table></figure>
 <h3 id="非等值连接">非等值连接</h3>
 <ul>
 <li>不同表的键之间用<code>!=, &gt;, &lt;, &lt;&gt;, between and</code>进行连接</li>
@@ -256,7 +256,7 @@
 <li>数据来源:emp e, emp m</li>
 <li>连接条件:e.mgr = m.empno</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br><span class="hljs-keyword">from</span> emp e,emp m<br><span class="hljs-keyword">where</span> e.mgr = m.empno;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">from</span> emp e,emp m<br><span class="hljs-keyword">where</span> e.mgr <span class="hljs-operator">=</span> m.empno;<br></code></pre></td></tr></table></figure>
 <h3 id="外连接">外连接</h3>
 <ul>
 <li>内联接使用比较运算符根据每个表共有的列的值匹配两个表中的行</li>
@@ -269,7 +269,7 @@
 <ul>
 <li>查询每一个部门的信息及对应人数</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> *<br>  <span class="hljs-keyword">from</span> dept d, (<span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(*), deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno) c<br> <span class="hljs-keyword">where</span> d.deptno = c.deptno(+);<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br>  <span class="hljs-keyword">from</span> dept d, (<span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>), deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno) c<br> <span class="hljs-keyword">where</span> d.deptno <span class="hljs-operator">=</span> c.deptno(<span class="hljs-operator">+</span>);<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019144355608.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019144355608" style="zoom:50%;" />
 <h2 id="99语法">99语法</h2>
 <h3 id="cross-join">cross join</h3>
@@ -280,7 +280,7 @@
 <ul>
 <li>查询所有员工姓名及所在部门的名称</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">cross</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">cross</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
 <h3 id="natural-join">natural join</h3>
 <ul>
 <li>自然连接(Natural join)是一种特殊的等值连接, 它要求两个关系中进行比较的分量必须是相同的属性组, 并且在结果中把重复的属性列去掉</li>
@@ -293,13 +293,13 @@
 <ul>
 <li>查询部门10的员工名称, 部门编号, 部门名称</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept <span class="hljs-keyword">where</span> deptno = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="join-using">join using()</h3>
 <ul>
 <li>有一种特殊情况, 当两个要关联表的字段名是一样的, 可以使用 <strong>USING</strong>, 可减少 SQL 语句的长度</li>
 <li>自然连接也可以用<code>join...using</code>来实现</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname<br><span class="hljs-keyword">from</span> emp<br><span class="hljs-keyword">join</span> dept<br><span class="hljs-keyword">using</span> (deptno)<br><span class="hljs-keyword">where</span> deptno = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname<br><span class="hljs-keyword">from</span> emp<br><span class="hljs-keyword">join</span> dept<br><span class="hljs-keyword">using</span> (deptno)<br><span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="join-on">join on</h3>
 <ul>
 <li>on连接, 可做等值连接, 非等值连接, 自连接, 可以解决一切连接, 关系列必须要区分</li>
@@ -308,7 +308,7 @@
 <ul>
 <li>使用on可以做等值连接</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, empno, e.deptno, dname<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">join</span> dept d<br><span class="hljs-keyword">on</span> e.deptno = d.deptno;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, empno, e.deptno, dname<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">join</span> dept d<br><span class="hljs-keyword">on</span> e.deptno <span class="hljs-operator">=</span> d.deptno;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用on还可以做非等值连接</li>
 </ul>
@@ -319,7 +319,7 @@
 <li>连接条件:sal between losal and hisal e.deptno=d.deptno</li>
 <li>题意条件:e.deptno=30</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, deptno, grade, dname<br>  <span class="hljs-keyword">from</span> emp e<br>  <span class="hljs-keyword">join</span> dept d<br>    <span class="hljs-keyword">on</span> e.deptno = d.deptno<br>  <span class="hljs-keyword">join</span> salgrade<br>    <span class="hljs-keyword">on</span> e.sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal<br> <span class="hljs-keyword">where</span> e.deptno = <span class="hljs-number">30</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, deptno, grade, dname<br>  <span class="hljs-keyword">from</span> emp e<br>  <span class="hljs-keyword">join</span> dept d<br>    <span class="hljs-keyword">on</span> e.deptno <span class="hljs-operator">=</span> d.deptno<br>  <span class="hljs-keyword">join</span> salgrade<br>    <span class="hljs-keyword">on</span> e.sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal<br> <span class="hljs-keyword">where</span> e.deptno <span class="hljs-operator">=</span> <span class="hljs-number">30</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="外连接-2">外连接</h3>
 <ul>
 <li>left [outer] join on</li>
@@ -332,7 +332,7 @@
 <li>查询员工编号, 员工名称, 上级编号, 上级名称</li>
 <li>LEFT JOIN 关键字从左表(table1)返回所有的行,即使右表(table2)中没有匹配,如果右表中没有匹配,则结果为 NULL</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.empno 员工编号,<br>       e.ename 员工名称,<br>       e.mgr   上级编号,<br>       m.ename 上级名称<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp m<br><span class="hljs-keyword">on</span> e.mgr = m.empno;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.empno 员工编号,<br>       e.ename 员工名称,<br>       e.mgr   上级编号,<br>       m.ename 上级名称<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp m<br><span class="hljs-keyword">on</span> e.mgr <span class="hljs-operator">=</span> m.empno;<br></code></pre></td></tr></table></figure>
 <h2 id="集合操作">集合操作</h2>
 <ul>
 <li>Union, 并集(去重) 对两个结果集进行并集操作, 不包括重复行同时进行默认规则的排序</li>

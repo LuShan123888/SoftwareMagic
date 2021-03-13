@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -218,9 +218,9 @@
 <li>使用客户端向 Redis 服务器发送一个 PING ,如果服务器运作正常的话,会返回一个 PONG</li>
 <li>通常用于测试与服务器的连接是否仍然生效,或者用于测量延迟值</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">redis <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6379</span>&gt; PING<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; PING<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 客户端和服务器连接正常</span><br><br>redis 127.0.0.1:6379&gt; PING<br>PONG<br><br><span class="hljs-comment"># 客户端和服务器连接不正常(网络不正常或服务器未能正常运行)</span><br><br>redis 127.0.0.1:6379&gt; PING<br>Could <span class="hljs-keyword">not</span> connect <span class="hljs-keyword">to</span> Redis at 127.0.0.1:6379:<span class="hljs-built_in"> Connection </span>refused<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># 客户端和服务器连接正常</span><br><br><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; PING<br>PONG<br><br><span class="hljs-comment"># 客户端和服务器连接不正常(网络不正常或服务器未能正常运行)</span><br><br>redis <span class="hljs-number">127.0.0.1:6379</span>&gt; PING<br>Could not connect to Redis at <span class="hljs-number">127.0.0.1:6379</span>: Connection refused<br></code></pre></td></tr></table></figure>
 <h2 id="性能测试">性能测试</h2>
 <ul>
 <li>Redis 性能测试是通过同时执行多个命令实现的</li>
@@ -330,7 +330,7 @@
 <ul>
 <li>以下实例使用了多个参数来测试 redis 性能:</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">$</span> <span class="hljs-string">redis-benchmark</span> <span class="hljs-string">-h</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-string">-p</span> <span class="hljs-number">6379</span> <span class="hljs-string">-t</span> <span class="hljs-string">set,lpush</span> <span class="hljs-string">-n</span> <span class="hljs-number">10000</span> <span class="hljs-string">-q</span><br><br><span class="hljs-attr">SET:</span> <span class="hljs-number">146198.83</span> <span class="hljs-string">requests</span> <span class="hljs-string">per</span> <span class="hljs-string">second</span><br><span class="hljs-attr">LPUSH:</span> <span class="hljs-number">145560.41</span> <span class="hljs-string">requests</span> <span class="hljs-string">per</span> <span class="hljs-string">second</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> redis-benchmark -h <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> -p <span class="hljs-number">6379</span> -t <span class="hljs-keyword">set</span>,lpush <span class="hljs-comment">-n 10000 -q</span><br><br><span class="hljs-keyword">SET</span>: 146198.83 requests <span class="hljs-comment">per second</span><br>LPUSH: 145560.41 requests <span class="hljs-comment">per second</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>以上实例中主机为 127.0.0.1,端口号为 6379,执行的命令为 set,lpush,请求数为 10000,通过 -q 参数让结果只显示每秒执行的请求数</li>
 </ul>
@@ -377,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/17/Software/Frontend/JavaScript/%E5%AF%B9%E8%B1%A1/Number/">
-                        <span class="hidden-mobile">JavaScript Number 对象</span>
+                      <a href="/2020/10/17/Software/Frontend/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E4%BA%8B%E4%BB%B6/">
+                        <span class="hidden-mobile">JavaScript 事件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

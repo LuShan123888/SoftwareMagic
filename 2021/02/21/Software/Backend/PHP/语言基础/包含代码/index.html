@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -238,13 +238,13 @@
 <li>例如,设计页面时,我们把各个页面组件都存放在各自的文件中,它们需要知道当前用户的偏好选择(例如长宽,样式等),组件库需要使用require_once来加载用户的选择设置代码,然后页面设计师可以包含一个页面组件而不用担心用户设置代码是否已经加载过了</li>
 <li>包含文件中的代码被导入时,它在include语句出现的地方开始有效(即作用域为include语句之后),所以被包含的代码可以看见和修改你代码中的变量,这是非常有用的,例如,一个用户跟踪库可以将当前用户名存放在全局变量<code>$user</code>中</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//主页面</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;userprefs.inc&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello, $user.;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//主页面</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;userprefs.inc&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-subst">$user</span>.;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>库能够看见和改变你的变量的能力,也会引起问题,你不得不知道库中使用的所有全局变量,以确保你不会偶然地使用它们中的一个来命名自己的变量,因此而覆盖了库中的值并干扰他的工作</li>
 <li>如果include或require结构在一个函数中,在包含文件中的变量会成为该函数中的函数作用域变量</li>
 <li>因为include和require是关键字而不是真正的语句,所以在条件和循环语句中必须把它们用大括号括起来:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">for</span>($i = <span class="hljs-number">0</span>; $i &lt; <span class="hljs-number">10</span>; $i++)&#123;<br>    <span class="hljs-keyword">include</span> <span class="hljs-string">&quot;repeated_element.html&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-number">10</span>; <span class="hljs-variable">$i</span>++)&#123;<br>    <span class="hljs-keyword">include</span> <span class="hljs-string">&quot;repeated_element.html&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用<code>get_included_files()</code>函数可获知脚本中包含(include或require)了哪些文件,它返回一个包含每个include或require的文件名的数组,文件名都是完整的系统路径名,没有解析的文件不被包含在这个数组中</li>
 </ul>

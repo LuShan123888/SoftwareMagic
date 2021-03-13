@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -219,32 +219,32 @@
 <li>该函数的目的是把一个空值(null)转换成一个实际的值,其表达式的值可以是数字型,字符型和日期型,但是表达式1和表达式2的数据类型必须为同一个类型</li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--将薪资与奖金合并为月收入, 如果奖金为null则转换为0</span><br><span class="hljs-keyword">select</span> ename,sal,comm,sal+nvl(comm,<span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> 月收入 <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--将薪资与奖金合并为月收入, 如果奖金为null则转换为0</span><br><span class="hljs-keyword">select</span> ename,sal,comm,sal<span class="hljs-operator">+</span>nvl(comm,<span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> 月收入 <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
 <h2 id="concat-x-y">concat(x,y)</h2>
 <ul>
 <li>连接字符串 x 和 y</li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询所有员工的姓名和工种</span><br><span class="hljs-keyword">select</span> ename,job <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--将员工姓名和工种一起显示</span><br><span class="hljs-keyword">select</span> ename||job namejob <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--使用函数</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">concat</span>(ename,job) namejob <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询所有员工的姓名和工种</span><br><span class="hljs-keyword">select</span> ename,job <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--将员工姓名和工种一起显示</span><br><span class="hljs-keyword">select</span> ename<span class="hljs-operator">||</span>job namejob <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--使用函数</span><br><span class="hljs-keyword">select</span> concat(ename,job) namejob <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
 <h2 id="instr-x-str-start-n">instr(x,str,start,n)</h2>
 <ul>
 <li>在 x 中查找 str, 可以指定从 start 开始, 也可以指定从第 n 次开始</li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查找字符串&quot;helloworld”中&quot;e”所在位置</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">instr</span>(<span class="hljs-string">&#x27;helloworld&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">--查找字符串&quot;helloworld”中&quot;e”所在位置,从第6次开始</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">instr</span>(<span class="hljs-string">&#x27;helloworld&#x27;</span>,<span class="hljs-string">&#x27;l&#x27;</span>,<span class="hljs-number">6</span>) <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查找字符串&quot;helloworld”中&quot;e”所在位置</span><br><span class="hljs-keyword">select</span> instr(<span class="hljs-string">&#x27;helloworld&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">--查找字符串&quot;helloworld”中&quot;e”所在位置,从第6次开始</span><br><span class="hljs-keyword">select</span> instr(<span class="hljs-string">&#x27;helloworld&#x27;</span>,<span class="hljs-string">&#x27;l&#x27;</span>,<span class="hljs-number">6</span>) <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
 <h2 id="substr-x-start-length">substr(x, start,length)</h2>
 <ul>
 <li>返回 x 的字符窜, 从 start 处开始, 截取 length 个字符, 缺省 length, 默认到结尾</li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--对字符串进行特定的截取</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">substr</span>(<span class="hljs-string">&#x27;abcedrt&#x27;</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">--显示员工姓名的第一个字母</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">substr</span>(ename,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--显示员工姓名的第三四个字母</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">substr</span>(ename,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--显示员工姓名的最后一个字母</span><br><span class="hljs-keyword">select</span> ename,<span class="hljs-keyword">substr</span>(ename,<span class="hljs-keyword">length</span>(ename)) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--对字符串进行特定的截取</span><br><span class="hljs-keyword">select</span> substr(<span class="hljs-string">&#x27;abcedrt&#x27;</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">--显示员工姓名的第一个字母</span><br><span class="hljs-keyword">select</span> substr(ename,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--显示员工姓名的第三四个字母</span><br><span class="hljs-keyword">select</span> substr(ename,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>) <span class="hljs-keyword">from</span> emp;<br><span class="hljs-comment">--显示员工姓名的最后一个字母</span><br><span class="hljs-keyword">select</span> ename,substr(ename,length(ename)) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
 <h2 id="日期函数">日期函数</h2>
 <ul>
 <li><code>sysdate</code>:当前系统时间</li>
 <li><code>current_date</code>:返回当前系统日期</li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--获取当前系统的时间</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">sysdate</span> <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">current_date</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--获取当前系统的时间</span><br><span class="hljs-keyword">select</span> sysdate <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">current_date</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>add_months(d1,n1)</code>:返回在日期 d1 基础上再加 n1 个月后新的日期
 <ul>
@@ -256,11 +256,11 @@
 <ul>
 <li><code>last_day(d1)</code>: 返回日期d1所在月份最后一天的日期</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询当前月的最后一天是多少号</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">last_day</span>(<span class="hljs-keyword">sysdate</span>) <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询当前月的最后一天是多少号</span><br><span class="hljs-keyword">select</span> last_day(sysdate) <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>months_between(d1,d2)</code> :返回日期 d1 到日期 d2 之间的月数</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询所有员工到现在已经工作了多久</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">sysdate</span>,hiredate,months_between(<span class="hljs-keyword">sysdate</span>,hiredate) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">--查询所有员工到现在已经工作了多久</span><br><span class="hljs-keyword">select</span> sysdate,hiredate,months_between(sysdate,hiredate) <span class="hljs-keyword">from</span> emp;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>to_char(x,c)</code> :将日期或数据 x 按照 c 的格式转换为 char 数据类型</li>
 </ul>
@@ -268,7 +268,7 @@
 <ul>
 <li><code>to_date(chars,charFormat)</code>: 将字符(一定格式)转成日期</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">to_date</span>(<span class="hljs-string">&#x27;2020/09/16&#x27;</span>,<span class="hljs-string">&#x27;yyyy/mm/dd&#x27;</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">to_date</span>(<span class="hljs-string">&#x27;2020/09/16&#x27;</span>,<span class="hljs-string">&#x27;yyyy/mm/dd&#x27;</span>)+<span class="hljs-number">4</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;2020/09/16&#x27;</span>,<span class="hljs-string">&#x27;yyyy/mm/dd&#x27;</span>) <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;2020/09/16&#x27;</span>,<span class="hljs-string">&#x27;yyyy/mm/dd&#x27;</span>)<span class="hljs-operator">+</span><span class="hljs-number">4</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

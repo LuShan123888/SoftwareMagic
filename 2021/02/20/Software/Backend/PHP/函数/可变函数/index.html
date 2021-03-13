@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -216,23 +216,23 @@
 <ul>
 <li>通过使用可变变量,你可以基于变量的值调用函数,例如,考虑下面这种情况,变量被用于决定调用3个函数中的哪一个:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">switch</span>($which)&#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;first&#x27;</span>:<br>        first();<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;second&#x27;</span>:<br>        second();<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;third&#x27;</span>:<br>        third();<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">switch</span>(<span class="hljs-variable">$which</span>)&#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;first&#x27;</span>:<br>        first();<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;second&#x27;</span>:<br>        second();<br>        <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;third&#x27;</span>:<br>        third();<br>        <span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>在这里,我们可以使用可变函数(variable function)的调用来调用合适的函数,要调用一个可变函数,需要在变量之后加上圆括号,圆括号里写上要传递给函数的参数,重写前面的示例:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$which();	<span class="hljs-comment">//如果$which是&quot;first&quot;,调用函数first()</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$which</span>();	<span class="hljs-comment">//如果$which是&quot;first&quot;,调用函数first()</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果没有为这个变量存在的函数,则代码执行时会产生一个运行时错误,要阻止这种情况的话,可以在调用函数前使用内部函数function_exists(function_name);来确定是否有一个为该变量存在的函数</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">$yes_or_no = function_exists(function_name)<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$yes_or_no</span> = function_exists(function_name)<br></code></pre></td></tr></table></figure>
 <ul>
 <li>例如:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(function_exists($which))&#123;<br>    $which():	<span class="hljs-comment">//如果$which时&quot;first&quot;,调用函数first()</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(function_exists(<span class="hljs-variable">$which</span>))&#123;<br>    <span class="hljs-variable">$which</span>():	<span class="hljs-comment">//如果$which时&quot;first&quot;,调用函数first()</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>语言结构(如echo()和isset())不能通过可变函数被调用:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">$f = <span class="hljs-string">&#x27;echo&#x27;</span>;<br>$f(<span class="hljs-string">&#x27;hello ,world&#x27;</span>);	<span class="hljs-comment">//不能工作</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$f</span> = <span class="hljs-string">&#x27;echo&#x27;</span>;<br><span class="hljs-variable">$f</span>(<span class="hljs-string">&#x27;hello ,world&#x27;</span>);	<span class="hljs-comment">//不能工作</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

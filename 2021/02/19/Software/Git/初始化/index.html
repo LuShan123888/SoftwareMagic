@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -248,11 +248,11 @@
 <h3 id="代理">代理</h3>
 <h4 id="HTTP-形式">HTTP 形式</h4>
 <p><strong>走 HTTP 代理</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git<span class="hljs-built_in"> config </span>--global http.proxy <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br>git<span class="hljs-built_in"> config </span>--global https.proxy <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs verilog">git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> http<span class="hljs-variable">.proxy</span> <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br>git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> https<span class="hljs-variable">.proxy</span> <span class="hljs-string">&quot;http://127.0.0.1:8080&quot;</span><br></code></pre></td></tr></table></figure>
 <p><strong>走 socks5 代理（如 Shadowsocks）</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git<span class="hljs-built_in"> config </span>--global http.proxy <span class="hljs-string">&quot;socks5://127.0.0.1:1080&quot;</span><br>git<span class="hljs-built_in"> config </span>--global https.proxy <span class="hljs-string">&quot;socks5://127.0.0.1:1080&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs verilog">git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> http<span class="hljs-variable">.proxy</span> <span class="hljs-string">&quot;socks5://127.0.0.1:1080&quot;</span><br>git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> https<span class="hljs-variable">.proxy</span> <span class="hljs-string">&quot;socks5://127.0.0.1:1080&quot;</span><br></code></pre></td></tr></table></figure>
 <p><strong>取消设置</strong></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git<span class="hljs-built_in"> config </span>--global --unset http.proxy<br>git<span class="hljs-built_in"> config </span>--global --unset https.proxy<br></code></pre></td></tr></table></figure>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs tcl">git config --<span class="hljs-keyword">global</span> --<span class="hljs-keyword">unset</span> <span class="hljs-keyword">http</span>.proxy<br>git config --<span class="hljs-keyword">global</span> --<span class="hljs-keyword">unset</span> https.proxy<br></code></pre></td></tr></table></figure>
 <p><strong>只对github.com代理</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http://github.com.proxy socks5://127.0.0.1:1080<br></code></pre></td></tr></table></figure>
 <p><strong>取消github.com代理</strong></p>
@@ -261,14 +261,14 @@
 <ul>
 <li>修改 <code>~/.ssh/config</code> 文件（不存在则新建）：</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 必须是 github.com</span><br>Host github.com<br>   HostName github.com<br>  <span class="hljs-built_in"> User </span>git<br>   # 走 HTTP 代理<br>   # ProxyCommand socat - PROXY:127.0.0.1:%h:%p,<span class="hljs-attribute">proxyport</span>=8080<br>   # 走 socks5 代理（如 Shadowsocks）<br>   # ProxyCommand nc -v -x 127.0.0.1:1080 %h %p<br></code></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-comment"># 必须是 github.com</span><br>Host github.com<br>   HostName github.com<br>   <span class="hljs-keyword">User</span> <span class="hljs-title">git</span><br>   <span class="hljs-comment"># 走 HTTP 代理</span><br>   <span class="hljs-comment"># ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=8080</span><br>   <span class="hljs-comment"># 走 socks5 代理（如 Shadowsocks）</span><br>   <span class="hljs-comment"># ProxyCommand nc -v -x 127.0.0.1:1080 %h %p</span><br></code></pre></td></tr></table></figure>
 <h3 id="CRLF-LF自动转换">CRLF/LF自动转换</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF,检出时转换为CRLF</span><br>git config --global core.autocrlf true<br><br><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF,检出时不转换</span><br>git config --global core.autocrlf input<br><br><span class="hljs-meta">#</span><span class="bash"> 提交检出均不转换</span><br>git config --global core.autocrlf false<br></code></pre></td></tr></table></figure>
 <h2 id="初始化仓库">初始化仓库</h2>
 <ul>
 <li>init命令用于新建仓库</li>
 </ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git init</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git <span class="hljs-keyword">init</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>运行完命令之后可以看到目录下生成了.git文件夹</li>
 </ul>

@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -220,11 +220,11 @@
 <ul>
 <li>rownum 不是一个真实存在的列, 它是用于从查询返回的行的编号, 返回的第一行分配的是 1, 第二行是 2, 依此类推, 这个伪字段可以用于限制查询返回的总行数</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> <span class="hljs-keyword">rownum</span> &lt;= <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> rownum <span class="hljs-operator">&lt;=</span> <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>不能对rownum用<code>&gt;</code>, 下列查询是失败的</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> <span class="hljs-keyword">rownum</span> &gt; <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> rownum <span class="hljs-operator">&gt;</span> <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>查询出未匹配的行已经被丢弃, 之后查出来的rownum仍然是1,这样永远也不会成功</li>
 <li>同样道理, rownum如果单独用<code>=</code>,也只有在<code>rownum=1</code>时才成功</li>
@@ -233,26 +233,26 @@
 <ul>
 <li>虽然 ronum 不能直接查询大于 1 的记录, 但是我们可以自己添加伪列, 将查询的结果集中的 rownum 作为查询的来源, 则此时来源中的 rownum 变成了普通字段, 再通过这个 rownum 来进行某段记录的选取即可</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,rw,<span class="hljs-keyword">rownum</span> <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> ename,sal,deptno,<span class="hljs-keyword">rownum</span> rw <span class="hljs-keyword">from</span> emp)<br><span class="hljs-keyword">where</span> rw&gt;<span class="hljs-number">5</span> <span class="hljs-keyword">and</span> rw&lt;=<span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,rw,rownum <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> ename,sal,deptno,rownum rw <span class="hljs-keyword">from</span> emp)<br><span class="hljs-keyword">where</span> rw<span class="hljs-operator">&gt;</span><span class="hljs-number">5</span> <span class="hljs-keyword">and</span> rw<span class="hljs-operator">&lt;=</span><span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019112139977.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019112139977" style="zoom:50%;" />
 <p><strong>实例</strong></p>
 <ul>
 <li>查询员工的信息, 姓名, 工资, 部门编号, 按照工资降序排序, 实现分页</li>
 <li>每一页显示3条记录, 查询第一页的数据</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,<span class="hljs-keyword">rownum</span> r1 <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,rownum r1 <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span><br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019113234148.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019113234148" style="zoom: 67%;" />
 <ul>
 <li>此时结果<code>r1</code>发生了乱序, 是因为这个查询存在按照其他的列进行排序</li>
 <li>再次对该结果集取<code>rownum</code>使<code>rownum</code>按升序排列</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,r1,<span class="hljs-keyword">rownum</span> r2 <span class="hljs-keyword">from</span>(<br>	<span class="hljs-keyword">select</span> ename,sal,deptno,<span class="hljs-keyword">rownum</span> r1 <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,r1,rownum r2 <span class="hljs-keyword">from</span>(<br>	<span class="hljs-keyword">select</span> ename,sal,deptno,rownum r1 <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span>)<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-06-image-20201019113330065.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019113330065" style="zoom:50%;" />
 <ul>
 <li>此时<code>r2</code>为最初查询结果集的升序<code>rowndum</code></li>
 <li>查询当前<code>rownum</code>中小于等于3的记录</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,r2 <span class="hljs-keyword">from</span>(<br>	<span class="hljs-keyword">select</span> ename,sal,deptno,r1,<span class="hljs-keyword">rownum</span> r2 <span class="hljs-keyword">from</span>(<br>		<span class="hljs-keyword">select</span> ename,sal,deptno,<span class="hljs-keyword">rownum</span> r1<br>		<span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span><br>	)<br>)<span class="hljs-keyword">where</span> r2&lt;=<span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,r2 <span class="hljs-keyword">from</span>(<br>	<span class="hljs-keyword">select</span> ename,sal,deptno,r1,rownum r2 <span class="hljs-keyword">from</span>(<br>		<span class="hljs-keyword">select</span> ename,sal,deptno,rownum r1<br>		<span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> sal <span class="hljs-keyword">desc</span><br>	)<br>)<span class="hljs-keyword">where</span> r2<span class="hljs-operator">&lt;=</span><span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-06-image-20201019113411210.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019113411210" style="zoom:50%;" />
 <h2 id="rowid">rowid</h2>
 <ul>
@@ -269,29 +269,29 @@
 <ul>
 <li>查询rowid</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> deptno,dname,loc,<span class="hljs-keyword">rowid</span> <span class="hljs-keyword">from</span> tempcp;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> deptno,dname,loc,rowid <span class="hljs-keyword">from</span> tempcp;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019132935238.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019132935238" style="zoom:50%;" />
 <ul>
 <li>插入重复数据, 查看结果</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> tempcp <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> dept;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> tempcp <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> dept;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133113356.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019133113356" style="zoom:50%;" />
 <ul>
 <li>将数据进行分组, 按照重复信息进行分组</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133351902.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019133351902" style="zoom:50%;" />
 <ul>
 <li>查找出rowid最小的记录(可以保证只有一条 )</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">min</span>(<span class="hljs-keyword">rowid</span>) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">min</span>(rowid) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc;<br></code></pre></td></tr></table></figure>
 <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133505973.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201019133505973" style="zoom:50%;" />
 <ul>
 <li>查找rowid不在这些之内的记录</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">where</span> <span class="hljs-keyword">rowid</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span>(<br>    	<span class="hljs-keyword">select</span> <span class="hljs-keyword">min</span>(<span class="hljs-keyword">rowid</span>) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc<br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">where</span> rowid <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span>(<br>    	<span class="hljs-keyword">select</span> <span class="hljs-built_in">min</span>(rowid) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc<br>);<br></code></pre></td></tr></table></figure>
 <p>删除这些记录,  即完成列去重</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">where</span> <span class="hljs-keyword">rowid</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span>(<br>	<span class="hljs-keyword">select</span> <span class="hljs-keyword">min</span>(<span class="hljs-keyword">rowid</span>) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc<br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">where</span> rowid <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span>(<br>	<span class="hljs-keyword">select</span> <span class="hljs-built_in">min</span>(rowid) <span class="hljs-keyword">from</span> tempcp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno,dname,loc<br>);<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

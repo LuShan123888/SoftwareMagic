@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -220,12 +220,12 @@
 <ul>
 <li>可以通过以下命令查看是否设置了密码验证:</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">127.0.0.1:6379&gt;<span class="hljs-built_in"> CONFIG </span><span class="hljs-builtin-name">get</span> requirepass<br>1) <span class="hljs-string">&quot;requirepass&quot;</span><br>2) <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">6379</span>&gt; CONFIG get requirepass<br><span class="hljs-attribute">1</span>) <span class="hljs-string">&quot;requirepass&quot;</span><br><span class="hljs-attribute">2</span>) <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>默认情况下 requirepass 参数是空的,这就意味着你无需通过密码验证就可以连接到 redis 服务</li>
 <li>你可以通过以下命令来修改该参数:</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">127.0.0.1:6379&gt;<span class="hljs-built_in"> CONFIG </span><span class="hljs-builtin-name">set</span> requirepass <span class="hljs-string">&quot;test&quot;</span><br>OK<br>127.0.0.1:6379&gt;<span class="hljs-built_in"> CONFIG </span><span class="hljs-builtin-name">get</span> requirepass<br>1) <span class="hljs-string">&quot;requirepass&quot;</span><br>2) <span class="hljs-string">&quot;test&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">6379</span>&gt; CONFIG set requirepass <span class="hljs-string">&quot;test&quot;</span><br><span class="hljs-attribute">OK</span><br><span class="hljs-attribute">127</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span>:<span class="hljs-number">6379</span>&gt; CONFIG get requirepass<br><span class="hljs-attribute">1</span>) <span class="hljs-string">&quot;requirepass&quot;</span><br><span class="hljs-attribute">2</span>) <span class="hljs-string">&quot;test&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>设置密码后,客户端连接 redis 服务就需要密码验证,否则无法执行命令</li>
 </ul>

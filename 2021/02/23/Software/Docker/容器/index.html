@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -215,7 +215,7 @@
               <h1>Docker 容器</h1>
 <h2 id="容器生命周期">容器生命周期</h2>
 <h3 id="run">run</h3>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">$ docker <span class="hljs-keyword">run</span><span class="bash"> [可选参数] 镜像名/镜像ID [命令]</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker run <span class="hljs-comment">[可选参数]</span> 镜像名/镜像ID <span class="hljs-comment">[命令]</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>-a stdin</strong>:指定标准输入输出内容类型,可选 STDIN/STDOUT/STDERR 三项;</li>
 <li><strong>-d</strong>:后台运行容器,并返回容器ID</li>
@@ -333,7 +333,7 @@
 <li>也可以通过 <strong>docker ps -a</strong> 命令查看已经在运行的容器,然后使用容器 ID 进入容器</li>
 <li>查看已经在运行的容器 ID:</li>
 </ul>
-<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python-repl">$ docker ps -a<br><span class="hljs-meta">...</span><br>9df70f9a0714        openjdk             &quot;/usercode/script.sh...&quot;<br><span class="hljs-meta">...</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">$ docker ps -a<br>...<br>9df70f9a0714        openjdk             &quot;&#x2F;usercode&#x2F;script.sh...&quot;<br>...<br></code></pre></td></tr></table></figure>
 <ul>
 <li>第一列的 9df70f9a0714 就是容器 ID</li>
 <li>通过 exec 命令对指定的容器执行 bash:</li>
@@ -398,7 +398,7 @@
 <ul>
 <li>列出所有在运行的容器信息</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker ps<br>CONTAINER ID   IMAGE          COMMAND                ...  PORTS                    NAMES<br><span class="hljs-number">09</span>b93464c2f7   nginx:latest   <span class="hljs-string">&quot;nginx -g &#x27;daemon off&quot;</span> ...  <span class="hljs-number">80</span>/tcp, <span class="hljs-number">443</span>/tcp          mynginx<br><span class="hljs-number">96f</span>7f14e99ab   mysql:<span class="hljs-number">5.6</span>      <span class="hljs-string">&quot;docker-entrypoint.sh&quot;</span> ...  <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">3306</span>-&gt;<span class="hljs-number">3306</span>/tcp   mymysql<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker ps<br><span class="hljs-function"><span class="hljs-title">CONTAINER</span></span> ID   IMAGE          COMMAND                ...  PORTS                    NAMES<br><span class="hljs-number">09</span>b93464c2f7   nginx:latest   <span class="hljs-string">&quot;nginx -g &#x27;daemon off&quot;</span> ...  <span class="hljs-number">80</span>/tcp, <span class="hljs-number">443</span>/tcp          mynginx<br><span class="hljs-number">96</span>f7f14e99ab   mysql:<span class="hljs-number">5.6</span>      <span class="hljs-string">&quot;docker-entrypoint.sh&quot;</span> ...  <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">3306</span>-&gt;<span class="hljs-number">3306</span>/tcp   mymysql<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
 <p><strong>CONTAINER ID</strong>:容器 ID</p>
@@ -439,7 +439,7 @@
 <ul>
 <li>列出所有创建的容器ID</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker ps -a -q<br><span class="hljs-number">09</span>b93464c2f7<br>b8573233d675<br>b1a0703e41e7<br>f46fb1dec520<br>a63b4a5597de<br><span class="hljs-number">6</span>a4aa42e947b<br>de7bb36e7968<br><span class="hljs-number">43</span>a432b73776<br><span class="hljs-number">664</span>a8ab1a585<br>ba52eb632bbd<br>...<br></code></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dns">$ docker ps -a -q<br><span class="hljs-number">09</span>b<span class="hljs-number">93464c2f7</span><br>b8<span class="hljs-number">573233d675</span><br>b1a<span class="hljs-number">0703e41e7</span><br>f46fb1dec520<br>a63b4a5597de<br><span class="hljs-number">6</span>a4aa42e947b<br>de7bb36e7968<br><span class="hljs-number">43</span>a<span class="hljs-number">432b73776</span><br><span class="hljs-number">664</span>a8ab1a585<br>ba52eb632bbd<br>...<br></code></pre></td></tr></table></figure>
 <h3 id="stats">stats</h3>
 <ul>
 <li>容器占用资源的信息</li>
@@ -477,7 +477,7 @@
 <ul>
 <li>查看容器mymysql的进程信息</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker top mymysql<br>UID    PID    PPID    C      STIME   TTY  TIME       CMD<br><span class="hljs-number">999</span>    <span class="hljs-number">40347</span>  <span class="hljs-number">40331</span>   <span class="hljs-number">18</span>     <span class="hljs-number">00</span>:<span class="hljs-number">58</span>   ?    <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">02</span>   mysqld<br></code></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">$ docker top mymysql<br>UID    PID    PPID    C      STIME   TTY  TIME       CMD<br>999   <span class="hljs-number"> 40347 </span><span class="hljs-number"> 40331 </span> <span class="hljs-number"> 18 </span>    00:58   ?    00:00:02   mysqld<br></code></pre></td></tr></table></figure>
 <ul>
 <li>查看所有运行容器的进程信息</li>
 </ul>
@@ -486,7 +486,7 @@
 <ul>
 <li>通过 <strong>docker ps</strong> 命令可以查看到容器的端口映射,<strong>docker</strong> 还提供了另一个快捷方式 <strong>docker port</strong>,使用 <strong>docker port</strong> 可以查看指定 (ID 或者名字)容器的某个确定端口映射到宿主机的端口号</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> port </span>容器名/容器id<br></code></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">$ docker port 容器名/容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker top wizardly_chandrasekhar</span><br>UID     PID         PPID          ...       TIME                CMD<br>root    23245       23228         ...       00:00:00            python app.py<br></code></pre></td></tr></table></figure>
 <h3 id="inspect">inspect</h3>
@@ -575,7 +575,7 @@
 <ul>
 <li>将容器a404c6c174a2 保存为新的镜像,并添加提交人信息和说明信息</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ docker <span class="hljs-keyword">commit</span> -a <span class="hljs-string">&quot;test&quot;</span> -m <span class="hljs-string">&quot;my apache&quot;</span> a404c6c174a2  mymysql:v1<br>sha256:<span class="hljs-number">37</span>af1236adef1544e8886be23010b66577647a40bc02c0885a6600b33ee28057<br><span class="hljs-keyword">test</span>@<span class="hljs-keyword">test</span>:~$ docker images mymysql:v1<br>REPOSITORY          TAG                 IMAGE <span class="hljs-keyword">ID</span>                CREATED                    <span class="hljs-keyword">SIZE</span><br>mymysql                   v1                  <span class="hljs-number">37</span>af1236adef        <span class="hljs-number">15</span> <span class="hljs-keyword">seconds</span> ago      <span class="hljs-number">329</span> MB<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker commit -a <span class="hljs-string">&quot;test&quot;</span> -m <span class="hljs-string">&quot;my apache&quot;</span> a404c6c174a2  <span class="hljs-symbol">mymysql:</span>v1<br><span class="hljs-symbol">sha256:</span><span class="hljs-number">37</span>af1236adef1544e8886be23010b66577647a40bc02c0885a6600b33ee28057<br>test<span class="hljs-variable">@test</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>docker images <span class="hljs-symbol">mymysql:</span>v1<br>REPOSITORY          TAG                 IMAGE ID                CREATED                    SIZE<br>mymysql                   v1                  <span class="hljs-number">37</span>af1236adef        <span class="hljs-number">15</span> seconds ago      <span class="hljs-number">329</span> MB<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

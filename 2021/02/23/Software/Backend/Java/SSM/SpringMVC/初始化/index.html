@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -214,7 +214,7 @@
             <div class="markdown-body">
               <h1>创建基础Spring MVC程序</h1>
 <h2 id="pom-xml">pom.xml</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-webmvc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.2.0.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-webmvc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.2.0.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>&lt;/dependency<br></code></pre></td></tr></table></figure>
 <h2 id="通过配置文件创建">通过配置文件创建</h2>
 <ul>
 <li>配置<code>web.xml</code>  , 注册<code>DispatcherServlet</code></li>
@@ -257,7 +257,7 @@
 <li><strong>注意</strong>:在视图解析器中我们把所有的视图都存放在<code>/WEB-INF/</code>目录下,这样可以保证视图安全,因为这个目录下的文件,客户端不能直接访问</li>
 <li>创建<code>Controller</code></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">package com.example.controller;<br><br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.ui.Model;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br>@Controller<br>@RequestMapping(<span class="hljs-string">&quot;/HelloController&quot;</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> </span>&#123;<br><br>   <span class="hljs-comment">//真实访问地址 : 项目名/HelloController/hello</span><br>   @RequestMapping(<span class="hljs-string">&quot;/hello&quot;</span>)<br>   public <span class="hljs-built_in">String</span> sayHello(Model model)&#123;<br>       <span class="hljs-comment">//向模型中添加属性msg与值,可以在JSP页面中取出并渲染</span><br>       model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;hello,Spring MVC&quot;</span>);<br>       <span class="hljs-comment">//web-inf/jsp/hello.jsp</span><br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">package com.example.controller;<br><br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.ui.Model;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br>@Controller<br>@RequestMapping(<span class="hljs-string">&quot;/HelloController&quot;</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> </span>&#123;<br><br>   <span class="hljs-comment">//真实访问地址 : 项目名/HelloController/hello</span><br>   @RequestMapping(<span class="hljs-string">&quot;/hello&quot;</span>)<br>   public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">sayHello</span>(<span class="hljs-params">Model model</span>)</span>&#123;<br>       <span class="hljs-comment">//向模型中添加属性msg与值,可以在JSP页面中取出并渲染</span><br>       model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;hello,Spring MVC&quot;</span>);<br>       <span class="hljs-comment">//web-inf/jsp/hello.jsp</span><br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong></p>
 <ul>
 <li><code>@Controller</code>是为了让Spring IOC容器初始化时自动扫描到;</li>
@@ -300,9 +300,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/23/Software/Backend/Java/SSM/SpringFramework/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+                      <a href="/2021/02/23/Software/Backend/Java/SSM/Mybatis/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 声明式事务</span>
+                        <span class="hidden-mobile">Mybatis 问题解决</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

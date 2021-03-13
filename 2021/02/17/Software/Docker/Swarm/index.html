@@ -62,7 +62,7 @@
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.0.2"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -270,12 +270,12 @@
 <ul>
 <li>分别进入两个机器里,指定添加至上一步中创建的集群,这里会用到上一步复制的内容</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker-machine ssh worker1<br><br><span class="hljs-symbol">docker@</span>worker1:~$ docker swarm join \<br>--token SWMTKN<span class="hljs-number">-1</span><span class="hljs-number">-4</span>pk8cjoduk06tm2buh989p0bszlqbhst69h0xoqgxg1pttiddf-d3ppau9w5q326b1xo21jw3367 \<br><span class="hljs-number">192.168</span><span class="hljs-number">.99</span><span class="hljs-number">.101</span>:<span class="hljs-number">2377</span><br><br>This node joined a swarm as a worker.<br><br>$ docker-machine ssh worker2<br><br><span class="hljs-symbol">docker@</span>worker1:~$ docker swarm join \<br>--token SWMTKN<span class="hljs-number">-1</span><span class="hljs-number">-4</span>pk8cjoduk06tm2buh989p0bszlqbhst69h0xoqgxg1pttiddf-d3ppau9w5q326b1xo21jw3367 \<br><span class="hljs-number">192.168</span><span class="hljs-number">.99</span><span class="hljs-number">.101</span>:<span class="hljs-number">2377</span><br><br>This node joined a swarm as a worker.<br></code></pre></td></tr></table></figure>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">$ docker-machine ssh worker1<br><br>docker@worker1:~$ docker swarm join \<br>--token SWMTKN-<span class="hljs-number">1</span>-4pk8cjoduk06tm2buh989p0bszlqbhst69h0xoqgxg1pttiddf-d3ppau9w5q326b1xo21jw3367 \<br><span class="hljs-number">192.168.99.101:2377</span><br><br>This node joined a swarm as a worker.<br><br>$ docker-machine ssh worker2<br><br>docker@worker1:~$ docker swarm join \<br>--token SWMTKN-<span class="hljs-number">1</span>-4pk8cjoduk06tm2buh989p0bszlqbhst69h0xoqgxg1pttiddf-d3ppau9w5q326b1xo21jw3367 \<br><span class="hljs-number">192.168.99.101:2377</span><br><br>This node joined a swarm as a worker.<br></code></pre></td></tr></table></figure>
 <h3 id="查看集群信息">查看集群信息</h3>
 <ul>
 <li>在管理节点使用 <code>docker node ls</code> 查看集群</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker-machine ssh manager<br>$ docker node ls<br><br>ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION<br>w7md97939hauk58sogs4g2z23 *   manager             Ready               Active              Leader              <span class="hljs-number">19.03</span><span class="hljs-number">.12</span><br>j0clwh8gnpnp9mmtuk49d431x     worker1             Ready               Active                                  <span class="hljs-number">19.03</span><span class="hljs-number">.12</span><br>nb4pzo265tt5gxgf9oxk6jp7w     worker2             Ready               Active                                  <span class="hljs-number">19.03</span><span class="hljs-number">.12</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">$ docker-machine ssh manager<br>$ docker <span class="hljs-keyword">node</span> <span class="hljs-title">ls</span><br><br>ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE <span class="hljs-keyword">VERSION</span><br>w7md97939hauk58sogs4g2z23 *   manager             Ready               Active              Leader              <span class="hljs-number">19.03</span>.<span class="hljs-number">12</span><br>j0clwh8gnpnp9mmtuk49d431x     worker1             Ready               Active                                  <span class="hljs-number">19.03</span>.<span class="hljs-number">12</span><br>nb4pzo265tt5gxgf9oxk6jp7w     worker2             Ready               Active                                  <span class="hljs-number">19.03</span>.<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
 <h2 id="swarm命令">swarm命令</h2>
 <ul>
 <li>初始化与管理swarm集群</li>
@@ -284,7 +284,7 @@
 <ul>
 <li>初始化swarm,该节点自动成为manager</li>
 </ul>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker swarm init<br></code></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">$ docker swarm <span class="hljs-keyword">init</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>--advertise-addr</code> :指定本节点的广播IP</li>
 </ul>
@@ -315,12 +315,12 @@
 <ul>
 <li>新建服务</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>create [OPTIONS] IMAGE [COMMAND] [ARG<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker service create <span class="hljs-comment">[OPTIONS]</span> IMAGE <span class="hljs-comment">[COMMAND]</span> <span class="hljs-comment">[ARG...]</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
 <li>在 <code>Swarm</code> 集群中运行一个名为 <code>nginx</code> 服务</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>create --replicas 3 -p 80:80 --name nginx nginx:1.13.7-alpine<br></code></pre></td></tr></table></figure>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">$</span> <span class="hljs-comment">docker</span> <span class="hljs-comment">service</span> <span class="hljs-comment">create</span> --<span class="hljs-comment">replicas</span> <span class="hljs-comment">3</span> <span class="hljs-literal">-</span><span class="hljs-comment">p</span> <span class="hljs-comment">80:80</span> --<span class="hljs-comment">name</span> <span class="hljs-comment">nginx</span> <span class="hljs-comment">nginx:1</span><span class="hljs-string">.</span><span class="hljs-comment">13</span><span class="hljs-string">.</span><span class="hljs-comment">7</span><span class="hljs-literal">-</span><span class="hljs-comment">alpine</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>--replicas</code>:task的数量</li>
 <li><code>--mode</code>:服务运行的的模式
@@ -346,27 +346,27 @@
 <ul>
 <li>查看当前 <code>Swarm</code> 集群运行的服务</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>ls<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker service <span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
 <h3 id="ps">ps</h3>
 <ul>
 <li>查看某个服务的Task</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>ps [OPTIONS]<span class="hljs-built_in"> SERVICE </span>[SERVICE<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service ps [<span class="hljs-keyword">OPTIONS</span>] SERVICE [SERVICE...]<br></code></pre></td></tr></table></figure>
 <h3 id="inpect">inpect</h3>
 <ul>
 <li>查看某个服务的详细信息</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>inspect [OPTIONS]<span class="hljs-built_in"> SERVICE </span>[SERVICE<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service inspect [<span class="hljs-keyword">OPTIONS</span>] SERVICE [SERVICE...]<br></code></pre></td></tr></table></figure>
 <h3 id="logs">logs</h3>
 <ul>
 <li>查看某个服务的日志</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>logs [OPTIONS]<span class="hljs-built_in"> SERVICE </span>[SERVICE<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service logs [<span class="hljs-keyword">OPTIONS</span>] SERVICE [SERVICE...]<br></code></pre></td></tr></table></figure>
 <h3 id="update">update</h3>
 <ul>
 <li>更新服务的信息</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>update [OPTIONS] SERVICE<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service update [<span class="hljs-keyword">OPTIONS</span>] SERVICE<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>--image</code> :更新服务的镜像</li>
 <li><code>--secret-add</code> :增加一个密钥</li>
@@ -376,21 +376,21 @@
 <ul>
 <li>将 <code>NGINX</code> 版本升级到 <code>1.13.12</code></li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>update \<br>    --image nginx:1.13.12-alpine \<br>    nginx<br></code></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livescript">$ docker service update <span class="hljs-string">\</span><br>    --image nginx:<span class="hljs-number">1.13</span>.<span class="hljs-number">12</span>-alpine <span class="hljs-string">\</span><br>    nginx<br></code></pre></td></tr></table></figure>
 <h3 id="rollback">rollback</h3>
 <ul>
 <li>Revert changes to a service’s configuration</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>rollback [OPTIONS] SERVICE<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service rollback [<span class="hljs-keyword">OPTIONS</span>] SERVICE<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
 <li>现在假设发现 <code>nginx</code> 服务的镜像升级到 <code>nginx:1.13.12-alpine</code> 出现了一些问题,我们可以使用命令一键回退</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>rollback nginx<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker service rollback nginx<br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用 <code>docker service ps</code> 命令查看 <code>nginx</code> 服务详情</li>
 </ul>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">$ docker service ps nginx<br><br>ID                  NAME                IMAGE                  NODE                DESIRED STATE       CURRENT STATE                ERROR               PORTS<br>rt677gop9d4x        nginx<span class="hljs-number">.1</span>             nginx:<span class="hljs-number">1.13</span><span class="hljs-number">.7</span>-alpine   VM<span class="hljs-number">-20</span><span class="hljs-number">-83</span>-debian     Running             Running about a minute ago<br>d9pw13v59d00         \_ nginx<span class="hljs-number">.1</span>         nginx:<span class="hljs-number">1.13</span><span class="hljs-number">.12</span>-alpine  VM<span class="hljs-number">-20</span><span class="hljs-number">-83</span>-debian     Shutdown            Shutdown <span class="hljs-number">2</span> minutes ago<br>i7ynkbg6ybq5         \_ nginx<span class="hljs-number">.1</span>         nginx:<span class="hljs-number">1.13</span><span class="hljs-number">.7</span>-alpine   VM<span class="hljs-number">-20</span><span class="hljs-number">-83</span>-debian     Shutdown            Shutdown <span class="hljs-number">2</span> minutes ago<br></code></pre></td></tr></table></figure>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs subunit">$ docker service ps nginx<br><br>ID                  NAME                IMAGE                  NODE                DESIRED STATE       CURRENT STATE                ERROR               PORTS<br>rt677gop9d4x        nginx.1             nginx:1.13.7-alpine   VM<span class="hljs-string">-20</span><span class="hljs-string">-83</span>-debian     Running             Running about a minute ago<br>d9pw13v59d00         \_ nginx.1         nginx:1.13.12-alpine  VM<span class="hljs-string">-20</span><span class="hljs-string">-83</span>-debian     Shutdown            Shutdown 2 minutes ago<br>i7ynkbg6ybq5         \_ nginx.1         nginx:1.13.7-alpine   VM<span class="hljs-string">-20</span><span class="hljs-string">-83</span>-debian     Shutdown            Shutdown 2 minutes ago<br></code></pre></td></tr></table></figure>
 <ul>
 <li>结果的输出详细记录了服务的部署,滚动升级,回退的过程</li>
 </ul>
@@ -403,7 +403,7 @@
 <ul>
 <li>删除服务</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> service </span>rm [OPTIONS]<span class="hljs-built_in"> SERVICE </span>[SERVICE<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker service rm [<span class="hljs-keyword">OPTIONS</span>] SERVICE [SERVICE...]<br></code></pre></td></tr></table></figure>
 <h2 id="stack命令">stack命令</h2>
 <ul>
 <li>Swarm 集群中使用 <code>docker-compose.yml</code> 需要使用<code>docker stack</code> 命令来部署和管理服务</li>
@@ -448,7 +448,7 @@
 <ul>
 <li>Create a secret from a file or STDIN as content</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> secret </span>create [OPTIONS]<span class="hljs-built_in"> SECRET </span>[file|-]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker secret create [<span class="hljs-keyword">OPTIONS</span>] SECRET [<span class="hljs-keyword">file</span>|-]<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>-l, --label</code>:Secret labels</li>
 </ul>
@@ -456,22 +456,22 @@
 <ul>
 <li>以管道符的形式创建随机的 <code>secret</code></li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ openssl rand -base64 20 | docker<span class="hljs-built_in"> secret </span>create mysql_password -<br><br>$ openssl rand -base64 20 | docker<span class="hljs-built_in"> secret </span>create mysql_root_password -<br></code></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">$ openssl rand -base64 20 | docker secret <span class="hljs-keyword">create</span> mysql_password -<br><br>$ openssl rand -<span class="hljs-built_in">base64</span> <span class="hljs-number">20</span> | docker secret <span class="hljs-keyword">create</span> mysql_root_password -<br></code></pre></td></tr></table></figure>
 <h3 id="ls-3">ls</h3>
 <ul>
 <li>List secrets</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> secret </span>ls [OPTIONS]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker secret ls [<span class="hljs-keyword">OPTIONS</span>]<br></code></pre></td></tr></table></figure>
 <p>###crm</p>
 <ul>
 <li>Remove one or more secrets</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> secret </span>rm<span class="hljs-built_in"> SECRET </span>[SECRET<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker secret <span class="hljs-built_in">rm</span> SECRET [<span class="hljs-type">SECRET...</span>]<br></code></pre></td></tr></table></figure>
 <h3 id="inspect">inspect</h3>
 <ul>
 <li>Display detailed information on one or more secrets</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> secret </span>inspect [OPTIONS]<span class="hljs-built_in"> SECRET </span>[SECRET<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker secret inspect [<span class="hljs-keyword">OPTIONS</span>] SECRET [SECRET...]<br></code></pre></td></tr></table></figure>
 <h2 id="config命令">config命令</h2>
 <ul>
 <li>在动态的,大规模的分布式集群上,管理和分发配置文件也是很重要的工作,传统的配置文件分发方式(如配置文件放入镜像中,设置环境变量,volume 动态挂载等)都降低了镜像的通用性</li>
@@ -482,7 +482,7 @@
 <ul>
 <li>Create a config from a file or STDIN</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> config </span>create [OPTIONS]<span class="hljs-built_in"> CONFIG </span>file|-<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker config create [<span class="hljs-keyword">OPTIONS</span>] CONFIG <span class="hljs-keyword">file</span>|-<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>-l, --label</code>:Config labels</li>
 </ul>
@@ -490,17 +490,17 @@
 <ul>
 <li>List configs</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> config </span>ls [OPTIONS]<br></code></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker config ls [<span class="hljs-keyword">OPTIONS</span>]<br></code></pre></td></tr></table></figure>
 <h3 id="rm-3">rm</h3>
 <ul>
 <li>Remove one or more configs</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> config </span>rm<span class="hljs-built_in"> CONFIG </span>[CONFIG<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">$ docker <span class="hljs-built_in">config</span> rm <span class="hljs-built_in">CONFIG</span> [<span class="hljs-built_in">CONFIG</span>...]<br></code></pre></td></tr></table></figure>
 <h3 id="inpect-2">inpect</h3>
 <ul>
 <li>Display detailed information on one or more configs</li>
 </ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker<span class="hljs-built_in"> config </span>inspect [OPTIONS]<span class="hljs-built_in"> CONFIG </span>[CONFIG<span class="hljs-built_in">..</span>.]<br></code></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">$ docker <span class="hljs-built_in">config</span> <span class="hljs-keyword">inspect </span>[OPTIONS] <span class="hljs-built_in">CONFIG</span> [<span class="hljs-built_in">CONFIG</span>...]<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
