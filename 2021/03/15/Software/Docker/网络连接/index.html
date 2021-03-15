@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Docker 网络 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker 网络">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-15 15:17" pubdate>
+        2021年3月15日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker 网络</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月15日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Docker 网络</h1>
+<ul>
+<li>docker网络实现原理是通过<code>veth-pair</code>实现的,<code>veth-pair</code>是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁</li>
+<li>所有的容器不指定网络的情况下,都是<code>docker0</code>路由的,docker会给我们的容器分配一个默认的可用IP</li>
+<li>Docker中的所有的网络接口都是虚拟的</li>
+</ul>
+<h2 id="port">port</h2>
+<ul>
+<li>快捷地查看端口的绑定情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker port 容器名 端口号</span><br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">$ docker port adoring_stonebraker <span class="hljs-number">5000</span><br><span class="hljs-number">127.0.0.1:5001</span><br></code></pre></td></tr></table></figure>
+<h2 id="docker虚拟网络管理">docker虚拟网络管理</h2>
+<h3 id="network-ls">network ls</h3>
+<ul>
+<li>可以查看所有创建的网络情况</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">$ docker network ls<br><br>NETWORK ID          <span class="hljs-type">NAME</span>                DRIVER              SCOPE<br>bf09a744b7c6        bridge              bridge              <span class="hljs-keyword">local</span><br><span class="hljs-number">3e193114</span>b45d        hadoop              bridge              <span class="hljs-keyword">local</span><br>e0b336240072        host                host                <span class="hljs-keyword">local</span><br><span class="hljs-number">3040</span>b975b80d        <span class="hljs-keyword">none</span>                <span class="hljs-keyword">null</span>                <span class="hljs-keyword">local</span><br></code></pre></td></tr></table></figure>
+<h3 id="network-inspect">network inspect</h3>
+<ul>
+<li>查看docker网络的详细信息</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker network inspect 网络编号</span><br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs json">$ docker network inspect 3e193114b45d<br><br>[<br>    &#123;<br>        <span class="hljs-attr">&quot;Name&quot;</span>: <span class="hljs-string">&quot;hadoop&quot;</span>,<br>        <span class="hljs-attr">&quot;Id&quot;</span>: <span class="hljs-string">&quot;3e193114b45db660af253a1dfa4c5d08947d7a53040c699b3496731a04f91e9a&quot;</span>,<br>        <span class="hljs-attr">&quot;Created&quot;</span>: <span class="hljs-string">&quot;2020-09-29T06:30:33.919043629Z&quot;</span>,<br>        <span class="hljs-attr">&quot;Scope&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,<br>        <span class="hljs-attr">&quot;Driver&quot;</span>: <span class="hljs-string">&quot;bridge&quot;</span>,<br>        <span class="hljs-attr">&quot;EnableIPv6&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">&quot;IPAM&quot;</span>: &#123;<br>            <span class="hljs-attr">&quot;Driver&quot;</span>: <span class="hljs-string">&quot;default&quot;</span>,<br>            <span class="hljs-attr">&quot;Options&quot;</span>: &#123;&#125;,<br>            <span class="hljs-attr">&quot;Config&quot;</span>: [<br>                &#123;<br>                    <span class="hljs-attr">&quot;Subnet&quot;</span>: <span class="hljs-string">&quot;172.18.0.0/16&quot;</span>,<br>                    <span class="hljs-attr">&quot;Gateway&quot;</span>: <span class="hljs-string">&quot;172.18.0.1&quot;</span><br>                &#125;<br>            ]<br>        &#125;,<br>        <span class="hljs-attr">&quot;Internal&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">&quot;Attachable&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">&quot;Ingress&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">&quot;ConfigFrom&quot;</span>: &#123;<br>            <span class="hljs-attr">&quot;Network&quot;</span>: <span class="hljs-string">&quot;&quot;</span><br>        &#125;,<br>        <span class="hljs-attr">&quot;ConfigOnly&quot;</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">&quot;Containers&quot;</span>: &#123;&#125;,<br>        <span class="hljs-attr">&quot;Options&quot;</span>: &#123;&#125;,<br>        <span class="hljs-attr">&quot;Labels&quot;</span>: &#123;&#125;<br>    &#125;<br>]<br></code></pre></td></tr></table></figure>
+<h3 id="network-create">network create</h3>
+<ul>
+<li>新建自定义docker虚拟网络</li>
+<li>当多个容器加入同一个docker虚拟网络后,可以通过容器名替代ip访问其他容器</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker network create -d 网络类型 网络名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>-d</strong>:指定 Docker 网络类型,有 bridge,overlay等,其中 overlay 网络类型用于 Swarm mode</li>
+<li><strong>–subnet</strong>:指定子网(192.168.0.0/16)</li>
+<li><strong>–gateway</strong>:指定网关</li>
+</ul>
+<h3 id="network-rm">network rm</h3>
+<ul>
+<li>移除docker虚拟网络</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker network <span class="hljs-built_in">rm</span> 网络名<br></code></pre></td></tr></table></figure>
+<h2 id="容器连接网络">容器连接网络</h2>
+<ul>
+<li>Docker容器运行的时候有<code>host</code>,<code>bridge</code>,<code>none</code>三种网络可供配置
+<ul>
+<li>默认是<code>bridge</code>,即桥接网络,以桥接模式连接到宿主机</li>
+<li><code>host</code>是宿主网络,即与宿主机共用网络</li>
+<li><code>none</code>则表示无网络,容器将无法联网</li>
+</ul>
+</li>
+</ul>
+<h3 id="birdge">birdge</h3>
+<ul>
+<li>使用<code>host.docker.internal</code>这个特殊的DNS名称来解析宿主机IP</li>
+<li>使用容器名解析其他容器的IP,在 Docker Compose 中也可以使用服务名解析其他容器的IP</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d -p 主机端口:容器端口 容器名</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>-P</strong>:是容器内部端口<strong>随机</strong>映射到主机的高端口</li>
+<li><strong>-p</strong>:是容器内部端口绑定到<strong>指定</strong>的主机端口</li>
+<li>另外,我们可以指定容器绑定的网络地址,比如绑定 127.0.0.1</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d -p 127.0.0.1:5001:5000 training/webapp python app.py</span><br>95c6ceef88ca3e71eaf303c2833fd6701d8d1b2572b5613b5a932dfdfe8a857c<br>docker ps<br>CONTAINER ID        IMAGE               COMMAND           ...     PORTS                                NAMES<br>95c6ceef88ca        training/webapp     &quot;python app.py&quot;   ...  5000/tcp, 127.0.0.1:5001-&gt;5000/tcp   adoring_stonebraker<br>33e4523d30aa        training/webapp     &quot;python app.py&quot;   ...  0.0.0.0:5000-&gt;5000/tcp               berserk_bartik<br>fce072cc88ce        training/webapp     &quot;python app.py&quot;   ...    0.0.0.0:32768-&gt;5000/tcp              grave_hopper<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样我们就可以通过访问 127.0.0.1:5001 来访问容器的 5000 端口</li>
+<li>上面的例子中,默认都是绑定 tcp 端口,如果要绑定 UDP 端口,可以在端口后面加上 <strong>/udp</strong></li>
+</ul>
+<h3 id="host">host</h3>
+<ul>
+<li>当容器使用<code>host</code>网络时,容器与宿主共用网络</li>
+<li>使用host网络可以使用<code>localhost</code>访问宿主机,因而通用性比上一种方法好</li>
+<li>但是,由于<code>host</code>网络没有<code>bridge</code>网络的隔离性好,使用<code>host</code>网络安全性不如<code>bridge</code>高</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker run -d --name nginx --network host nginx<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的命令中,没有必要像前面一样使用<code>-p</code>来映射端口,是因为本身与宿主机共用了网络,容器中暴露端口等同于宿主机暴露端口</li>
+</ul>
+<h3 id="连接自定义docker虚拟网络">连接自定义docker虚拟网络</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd  --network 网络名 容器名</span><br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<ul>
+<li>运行一个容器并连接到新建的 test-net 网络:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test1 --network test-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>打开新的终端,再运行一个容器并加入到 test-net 网络:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -itd --name test2 --network test-net ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
+<h2 id="容器与网络连接与断开">容器与网络连接与断开</h2>
+<h3 id="network-connect">network connect</h3>
+<ul>
+<li>将容器与docker虚拟网络连接</li>
+<li>单个容器可与多个docker虚拟网络连接</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">$ docker network <span class="hljs-built_in">connect</span> 网络名 容器名<br></code></pre></td></tr></table></figure>
+<h3 id="network-disconnect">network disconnect</h3>
+<ul>
+<li>将容器与docker虚拟网络断开连接</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">$ sdocker network <span class="hljs-built_in">connect</span> 网络名 容器名<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Docker/">Docker</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/15/Software/Docker/Compose/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker Compose</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/15/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式 适配器模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+
+</body>
+</html>

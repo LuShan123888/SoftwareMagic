@@ -156,25 +156,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/">Java 表达式与运算符</a>
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%BC%95%E7%94%A8/">Java 对象的创建与引用</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%BC%95%E7%94%A8/">
           
           
             
           
-          Java 表达式与运算符
-
-表达式是由操作数和运算符按一定的语法形式组成的式子,一个常量或一个变量可以看作表达式的特例,其值即该常量或变量的值在表达式中,表示各种不同运算的符号称为运算符,参与运算的数据称为操作数
-组成表达式的运算符有很多种,按操作数的数目来分,有如下3种:
-
-一元运算符
-
-只需要一个运算对象的运算符称为一元运算符 ,例如,++,–,+,-等,如:
-
-12y = -x;		//将x
+          Java 对象的创建与引用
+创建对象及访问对象成员
+定义java类后,就可以使用&quot;new+构造方法”来创造类的对象,并将创建的对象赋给某个引用变量,就可以使用&quot;引用变量名,属性”访问对象的属性,并将创建的对象赋给某个引用变量,就可以使用&quot;引用变量名.属性&quot;访问对象的属性,使用&quot;引用变量名.方法名(实参表)&quot;访问对象的方法,同一类可以创建任
         </a>
       </p>
 
@@ -182,7 +175,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:25" pubdate>
+            <time datetime="2021-02-19 23:11" pubdate>
               2021-02-19
             </time>
           </div>
@@ -199,7 +192,7 @@
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
             
           </div>
         
@@ -214,23 +207,319 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E7%AC%A6%E5%8F%B7/">Java 符号</a>
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/">Java 类的定义</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E7%AC%A6%E5%8F%B7/">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/">
           
           
             
           
-          Java 符号
-标识符
-在程序中,通常要为各种变量,方法,对象和类等加以命名,将所有由用户定义的名字称为标识符,zaiJava语言中,标识符是以字母,汉字,下划线,美元符开始的一个字符序列,后面可以跟字母,汉字,下划线,美元符,数字.标识符的长度没有限制
+          Java 类的定义
+类定义包括声明和类体两部分,类定义的语法格式为:
+123[修饰符]class 类名 [extends 父类名][implements 接口列表]&#123;    ... //类体部分&#125;
+说明
+
+类定义中带方括号&quot;[]&quot;的内容为可选部分
+修饰符有访问控制修饰(如public)和类型修饰(如abstract,final)
+关键字class引导要定义的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:11" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/">Java 类变量与静态变量</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F/">
+          
+          
+            
+          
+          Java 类变量与静态变量
+类变量
+用static修饰符修饰的属性是仅属于类的静态属性,相应的成员变量也称类变量或者静态变量
+类变量的访问形式
+类变量通常是通过类名作为前缀来访问的,通过对象作前缀也可以访问,在本类中甚至可以通过变量名直接访问,例如:
+
+
+
+在本例中直接访问:k++
+
+
+通过类名作前缀访问:A.k
+
+
+通过类的一个对象作前缀访问:x1.k++
+
+
+
+1234567891011121
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:10" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/this/">Java this</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/this/">
+          
+          
+            
+          
+          Java this
+this出现在类的实例方法或构造方法中,用来代表使用该方法的对象,用this作前缀可访问当前对象的实例变量或成员方法,具体形式为:
+
+
+this.实例变量
+
+
+this.成员方法(参数)
+
+
+this的用途主要包含以下几种情形:
+
+在实例变量和局部变量名称相同时,用this作前缀来特指访问实例变量
+把当前对象的引用作为参数传递给另一个方法
+在一个构造方法中调用同类的另一个构造方
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:09" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/">Java 变量作用域</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+          
+          
+            
+          
+          Java 变量作用域
+变量的作用域也称变量的有效范围,它是指程序中的一个区域,变量在其 作用域内可以被访问,作用域也决定Java运行系统什么时候为变量创建和释放内存,根据变量在程序中声明的位置,可以将变量分为以下4种情形:
+
+成员变量:其作用域是整个类体,成员变量定义时系统会自动赋默认初值
+局部变量:也称自动变量,是在方法内定义或者在一段代码块中定义的变量 ,方法中局部变量的作用域从它的声明位置扩
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:08" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E4%BD%BF%E7%94%A8%E5%8C%85%E7%BB%84%E7%BB%87%E7%B1%BB/">Java 使用包组织类</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E4%BD%BF%E7%94%A8%E5%8C%85%E7%BB%84%E7%BB%87%E7%B1%BB/">
+          
+          
+            
+          
+          Java 使用包组织类
+Java中的所有资源也是以文件方式组织的,其中主要包含大量的类文件,它们也需要组织管理,Java采用了包来组织类,与操作系统的目录树形结构一样,但Java中采用了&quot;,&quot;来分隔目录,通常将逻辑相关的类放在同一个包中,包将类的命名空间进行了有效划分,同一包中不能有两个同名的类
+Java系统提供的类库也称为Java API,它是系统提供的已实现的标准类的集合,
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-19 23:07" pubdate>
+              2021-02-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5/">Java 跳转语句</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E8%B7%B3%E8%BD%AC%E8%AF%AD%E5%8F%A5/">
+          
+          
+            
+          
+          Java 跳转语句
+break语句
+在switch语句中,break语句已经得到应用,在各类循环语句中,break语句也给我们提供了一种方便的跳出循环的方法,它有两种使用形式:
+
+
+break:不带标号,从break所处的循环体中直接跳转出来
+
+
+break标号名:带标号,跳出标号所指的代码块,执行块后的下一条语句
+
+
 注意
-
-Java的保留字(也称关键字)不能作为标识符,如if,int,pulic等
-Java是大小写敏感的语言
-标识符能在一定程度上反映他所表示
+给代码块加标号的格式如下:
+1BlockLabel:&#123;code
         </a>
       </p>
 
@@ -238,7 +527,7 @@ Java是大小写敏感的语言
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:21" pubdate>
+            <time datetime="2021-02-19 22:42" pubdate>
               2021-02-19
             </time>
           </div>
@@ -255,7 +544,7 @@ Java是大小写敏感的语言
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">流程控制语句</a>
             
           </div>
         
@@ -270,21 +559,26 @@ Java是大小写敏感的语言
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/">Java 数据类型与变量</a>
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5/">Java 条件选择语句</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5/">
           
           
             
           
-          Java 数据类型与变量
-数据类型
-在程序设计中要使用和处理各种数据,数据按其表示信息的含义和占用空间大小分为不同类型,Java语言的数据类型可以分为简单数据类型和复合数据类型两大类如下图所示:
-graph LR
-A[数据类型]--&gt;B[&quot;简单数据类型&lt;br&#x2F;&gt;(基本类型)&quot;]
-A--&gt;C[&quot;复合数据类型&lt;br&#x2F;&gt
+          Java 条件选择语句
+if语句
+无else的if语句
+其格式如下:
+123if(条件表达式)&#123;	if块;&#125;
+说明
+
+如果条件表达式的值为真,则执行&quot;if块&quot;部分的语句,否则直接执行后续语句
+用大括号括住要执行一组语句,也称语句块,语句块以&quot;{“表示块的开始,以”}&quot;表示块的结束,如果要执行的if块为单条语句,可以省略大括号
+
+**[例3
         </a>
       </p>
 
@@ -292,7 +586,7 @@ A--&gt;C[&quot;复合数据类型&lt;br&#x2F;&gt
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:19" pubdate>
+            <time datetime="2021-02-19 22:41" pubdate>
               2021-02-19
             </time>
           </div>
@@ -309,7 +603,7 @@ A--&gt;C[&quot;复合数据类型&lt;br&#x2F;&gt
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">流程控制语句</a>
             
           </div>
         
@@ -324,28 +618,21 @@ A--&gt;C[&quot;复合数据类型&lt;br&#x2F;&gt
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/">Java  数据的输入与输出</a>
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">Java 控制语句</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/">
           
           
             
           
-          Java  数据的输入与输出
-使用标准输入/输出流
-数据的输出
-标准输出流(System.out)中提供如下方法实现数据的输出显示
-
-
-print()方法:实现不换行的数据输出
-
-
-println()方法:与上面方法的差别是输出数据后将换行
-
-
-printf()方法:带格式描述的数据输出,该方法包含两个参数,第一个参数中给出输出格式的描述,第2个参数的输出数据,其中,输出格式描述字符串中需要安排与
+          Java 控制语句
+循环语句是在一定条件下反复执行一段代码,被反复执行的程序段称为循环体,Java语言中提供的循环语句有while语句,do…while语句,for语句
+While语句
+while语句的格式如下
+1234While(条件表达式)&#123;    循环体;&#125;
+while语句的执行首先检查条件表达式的值是否为真,若为真,则执行循环体,然后继续判断是否继续循环,直到条件表达式
         </a>
       </p>
 
@@ -353,7 +640,7 @@ printf()方法:带格式描述的数据输出,该方法包含两个参数,第一
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:19" pubdate>
+            <time datetime="2021-02-19 22:40" pubdate>
               2021-02-19
             </time>
           </div>
@@ -370,7 +657,7 @@ printf()方法:带格式描述的数据输出,该方法包含两个参数,第一
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">流程控制语句</a>
             
           </div>
         
@@ -385,17 +672,23 @@ printf()方法:带格式描述的数据输出,该方法包含两个参数,第一
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E5%86%85%E5%B5%8C%E7%B1%BB/">Java 内嵌类</a>
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E9%9D%A2%E5%90%91%E5%AD%97%E8%8A%82%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/">面向字节的输入输出流</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E5%86%85%E5%B5%8C%E7%B1%BB/">
+        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E9%9D%A2%E5%90%91%E5%AD%97%E8%8A%82%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/">
           
           
             
           
-          Java 内嵌类
-内嵌类是指嵌套在一个类中的类,因此,有时也称为嵌套类(NestedClass)或内部类(InnerClass),而包含内嵌类的那个类称为外层类(OuterClass),内嵌类与外层类存在逻辑上的所属关系,内嵌类的使用要依托外层类,这点与包的限制类似,内嵌类一般用来实现一些没有通用意义的功能逻辑,与类的其他成员一样,内嵌类也分带static修饰的静态内嵌类和不带static修饰的成
+          面向字节的输入输出流
+面向字节的输入流
+类InputStream介绍
+面向字节的输入流类都是类InputStream的子类,如下图所示,类InputStream是一个抽象类,定义了如下方法:
+
+
+public int read():读一个字节,返回读到字节的ini表示方式,读到流的末尾时返回-1
+public int read(byte b[]):读多个字节到字节数组,返回结果为读到的实际字节个数
         </a>
       </p>
 
@@ -403,7 +696,7 @@ printf()方法:带格式描述的数据输出,该方法包含两个参数,第一
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:18" pubdate>
+            <time datetime="2021-02-19 22:36" pubdate>
               2021-02-19
             </time>
           </div>
@@ -420,276 +713,7 @@ printf()方法:带格式描述的数据输出,该方法包含两个参数,第一
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">抽象类和接口</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">Java 自定义异常</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">
-          
-          
-            
-          
-          Java 自定义异常
-在某些应用中,编程人员也可以根据程序的特殊逻辑在用户程序里自己创建自定义的异常类和异常对象,主要用来处理用户程序中特定的逻辑运行错误
-自定义异常类设计
-创建用户自定义异常一般是通过继承Exception类来实现的,在自定义异常类中一般包括异常标识,构造方法和toString()方法
-**[例9-3]**一个简单的自定义异常类
-1234567891011public class
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:18" pubdate>
-              2021-02-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%84/">Java 异常处理</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%84%E7%90%86%E7%BB%93%E6%9E%84/">
-          
-          
-            
-          
-          Java 异常处理
-进行异常处理必须使用try程序块,将可能产生异常的放在try中,当JVM执行过程中发现了异常,会立即停止执行后续代码,然后开始查找异常处理器,对try后面的catch块按次序进行匹配检查,一旦找到一个匹配者,则执行catch块中的代码,不再检查后面的catch块,如果try块中没有异常发生,则程序执行过程中将忽略后面的catch块
-以下为异常处理语句格式:
-123456789t
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:18" pubdate>
-              2021-02-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%84%E7%90%86/">Java 字符串的处理</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%84%E7%90%86/">
-          
-          
-            
-          
-          Java 字符串的处理
-
-字符串是字符的序列,在某种程度上类似字符的数组,实际上,在有些语言中(如C语言)就是用字符数组表示字符串,在Java中则是用类的对象来表示,Java中使用String类和StringBuffer类来封装字符串,String类用于不变字符串的操作,StringBuffer类则用于可变字符串处理,换句话说,String类创建的字符串是不会改变的,而StringBuffer类创
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:17" pubdate>
-              2021-02-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/">常用数据类型处理类</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/">Java 生成随机数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/">
-          
-          
-            
-          
-          Java 生成随机数
-UUID.randomUUID
-
-返回通用唯一识别码 (Universally Unique Identifier), 它保证对在同一时空中的所有机器都是唯一的, 是由一个十六位的数字组成,表现出来的形式
-
-实例
-
-返回没有-的UUID字符串
-
-123456public class IDUtil &#123;    public static String genId()&#
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:17" pubdate>
-              2021-02-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Joda-Time/">Java Joda-Time</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Joda-Time/">
-          
-          
-            
-          
-          Java Joda-Time
-
-在Java中处理日期和时间是很常见的需求,基础的工具类就是我们熟悉的Date和Calendar,然而这些工具类的api使用并不是很方便和强大,于是就诞生了Joda-Time这个专门处理日期时间的库
-
-pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;joda-time&lt;/groupId&gt;    &lt;a
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 22:17" pubdate>
-              2021-02-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">流式输入输出与文件处理</a>
             
           </div>
         
@@ -702,7 +726,7 @@ pom.xml
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/27/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/#board">26</a><a class="page-number" href="/page/27/#board">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#board">29</a><a class="page-number" href="/page/30/#board">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/65/#board">65</a><a class="extend next" rel="next" href="/page/29/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/27/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/#board">26</a><a class="page-number" href="/page/27/#board">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#board">29</a><a class="page-number" href="/page/30/#board">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/#board">67</a><a class="extend next" rel="next" href="/page/29/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -151,7 +151,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-13 19:59" pubdate>
+      <time datetime="2021-03-13 23:20" pubdate>
         2021年3月13日 晚上
       </time>
     </span>
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8 字
+      401 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -213,6 +213,20 @@
             
             <div class="markdown-body">
               <h1>设计模式 原型模式</h1>
+<ul>
+<li>通过 new 产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式</li>
+<li>原型模式就是构建一个对象的原型，通过原型来创建出新的对象</li>
+</ul>
+<p><strong>浅克隆</strong></p>
+<ul>
+<li><strong>特点</strong>:如果某个对象的属性是其他对象时,则克隆出来的新对象中的对应属性是引用原对象的</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>    Date date = <span class="hljs-keyword">new</span> Date();<br>    Product p1 = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">&quot;p1&quot;</span>, date);<br>    <span class="hljs-comment">//浅克隆</span><br>    Product p2 = (Product) p1.clone();<br>    System.out.println(<span class="hljs-string">&quot;p1=&gt;&quot;</span> + p1 + <span class="hljs-string">&quot; hash:&quot;</span> + p1.hashCode());<br>    System.out.println(<span class="hljs-string">&quot;p2=&gt;&quot;</span> + p2 + <span class="hljs-string">&quot; hash:&quot;</span> + p2.hashCode());<br>    date.setTime(<span class="hljs-number">1321312</span>);<br>    <span class="hljs-comment">// date 修改后 p1 和 p2 都改变了,说明 p2 只克隆了 date 的引用</span><br>    System.out.println(<span class="hljs-string">&quot;p1=&gt;&quot;</span> + p1 + <span class="hljs-string">&quot; hash:&quot;</span> + p1.hashCode());<br>    System.out.println(<span class="hljs-string">&quot;p2=&gt;&quot;</span> + p2 + <span class="hljs-string">&quot; hash:&quot;</span> + p2.hashCode());<br>  &#125;<br>&#125;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> String name;<br>  <span class="hljs-keyword">private</span> Date createTime;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.clone();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>深克隆</strong></p>
+<ul>
+<li>主要通过重写 clone 方法实现深克隆</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>    Date date = <span class="hljs-keyword">new</span> Date();<br>    Product p1 = <span class="hljs-keyword">new</span> Product(<span class="hljs-string">&quot;p1&quot;</span>, date);<br>    <span class="hljs-comment">//深克隆</span><br>    Product p2 = (Product) p1.clone();<br>    System.out.println(<span class="hljs-string">&quot;p1=&gt;&quot;</span> + p1 + <span class="hljs-string">&quot; hash:&quot;</span> + p1.hashCode());<br>    System.out.println(<span class="hljs-string">&quot;p2=&gt;&quot;</span> + p2 + <span class="hljs-string">&quot; hash:&quot;</span> + p2.hashCode());<br>    date.setTime(<span class="hljs-number">1321312</span>);<br>    <span class="hljs-comment">// date 修改后 只有 p1 改变了</span><br>    System.out.println(<span class="hljs-string">&quot;p1=&gt;&quot;</span> + p1 + <span class="hljs-string">&quot; hash:&quot;</span> + p1.hashCode());<br>    System.out.println(<span class="hljs-string">&quot;p2=&gt;&quot;</span> + p2 + <span class="hljs-string">&quot; hash:&quot;</span> + p2.hashCode());<br>  &#125;<br>&#125;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@AllArgsConstructor</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> String name;<br>  <span class="hljs-keyword">private</span> Date createTime;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException </span>&#123;<br>    Object obj = <span class="hljs-keyword">super</span>.clone();<br>    Product p = (Product) obj;<br>    p.createTime = (Date) <span class="hljs-keyword">this</span>.createTime.clone();<br>    <span class="hljs-keyword">return</span> obj;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -244,12 +258,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/03/14/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 字符串的处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/13/Software/Frontend/Yarn/%E5%91%BD%E4%BB%A4/">
-                        <span class="hidden-mobile">Yarn 命令</span>
+                      <a href="/2021/03/13/Software/DesignPattern/%E6%A6%82%E8%AE%BA/">
+                        <span class="hidden-mobile">设计模式 概论</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
