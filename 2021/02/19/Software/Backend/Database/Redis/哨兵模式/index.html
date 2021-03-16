@@ -14,9 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#0a5fff">
-  
-    <meta name="description" content="">
-  
+  <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   
@@ -58,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -218,7 +216,7 @@
 <li>哨兵模式是一种特殊的模式,首先Reds提供了哨兵的命令,哨兵是一个独立的进程,作为进程,它会独立运行</li>
 <li><strong>原理</strong>:哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例</li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201014145054696.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201014145054696" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201014145054696.png" srcset="/img/loading.gif" lazyload alt="image-20201014145054696" style="zoom:50%;" />
 <h3 id="哨兵的作用">哨兵的作用</h3>
 <ul>
 <li>通过发送命令,让 Redish服务器返回监控其运行状态,包括主节点和从节点</li>
@@ -241,7 +239,7 @@
 <ul>
 <li>单个哨兵进程对 Redis服务器进行监控,可能会出现问题,为此,我们可以使用多个哨兵进行监控,各个哨兵之间还会进行监控,这样就形成了多哨兵模式</li>
 </ul>
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201014145522937.png" srcset="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/loading.gif" alt="image-20201014145522937" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201014145522937.png" srcset="/img/loading.gif" lazyload alt="image-20201014145522937" style="zoom:50%;" />
 <ul>
 <li>假设主节点宕机,哨兵1先检测到这个结果,系统并不会马上进行<code>failover</code>过程,仅仅是哨兵1主观的认为主服务器不可用,这个现象成为主观下线</li>
 <li>当后面的哨兵也检测到主节点不可用,并且数量达到一定值时,那么哨兵之间就会进行一次投票,投票的结 果由一个哨兵发起,进行 <code>failover[故障转移]</code>操作,切换成功后,就会通过发布订阅模式,让各个哨兵把自己监控的从节点实现切换主节点,这个过程称为客观下线</li>
@@ -439,8 +437,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -463,7 +462,7 @@
 
 
   
-    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/lazyload.js" ></script>
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
   
 
 
@@ -533,7 +532,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
-
 
 
 </body>
