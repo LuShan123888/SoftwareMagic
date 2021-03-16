@@ -12,8 +12,6 @@ categories:
 
 ## TCP头部
 
-
-
 ![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-12-v2-8f5725f163d7f6390a75f3a2d337bc1c_1440w.jpg)
 
 - 源端口和目的端口在TCP层确定双方进程，序列号表示的是报文段数据中的第一个字节号，ACK表示确认号，该确认号的发送方期待接收的下一个序列号，即最后被成功接收的数据字节序列号加1，这个字段只有在ACK位被启用的时候才有效。
