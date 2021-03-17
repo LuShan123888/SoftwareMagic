@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-17 08:50" pubdate>
-        2021年3月17日 早上
+      <time datetime="2021-03-17 20:50" pubdate>
+        2021年3月17日 晚上
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      2.8k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      14
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月17日 早上
+                  本文最后更新于：2021年3月17日 晚上
                 
               </p>
             
@@ -257,6 +257,7 @@
 <p>对于可达性分析中不可达的对象，也并不是没有存活的可能。</p>
 <h3 id="判定-finalize-是否有必要执行">判定 finalize() 是否有必要执行</h3>
 <ul>
+<li>当垃圾回收机制回收某个对象所占用的内存之前，通常要求程序调用适当的方法来清理资源，在没有明确指定资源清理的情况下，Java提供了默认机制来清理资源，即调用finalize方法，它是Object类的方法，原型为：<code>protected void finalize() throws Throwable</code> ，任何Java类都可以覆盖Object类的finalize方法。 它可以抛出任何类型的异常。垃圾回收机制何时调用对象的finalize方法是完全透明的，只有当程序需要更多额外内存时，才会进行垃圾回收。</li>
 <li>JVM 会判断此对象是否有必要执行<code>finalize()</code>方法，如果对象没有覆盖<code>finalize()</code>方法，或者<code>finalize()</code>方法已经被虚拟机调用过，那么视为“没有必要执行”。那么对象基本上就真的被回收了。</li>
 <li>如果对象被判定为有必要执行<code>finalize()</code>方法，那么对象会被放入一个 F-Queue 队列中，虚拟机会以较低的优先级执行这些<code>finalize()</code>方法，但不会确保所有的<code>finalize()</code>方法都会执行结束。如果<code>finalize()</code>方法出现耗时操作，虚拟机就直接停止指向该方法，将对象清除。</li>
 </ul>
@@ -304,11 +305,11 @@
 <li>为了解决空间利用率问题，可以将内存分为三块： Eden、From Survivor、To Survivor，比例是 8:1:1，每次使用 Eden 和其中一块 Survivor。回收时，将 Eden 和 Survivor 中还存活的对象一次性复制到另外一块 Survivor 空间上，最后清理掉 Eden 和刚才使用的 Survivor 空间。这样只有 10% 的内存被浪费。</li>
 <li>但是我们无法保证每次回收都只有不多于 10% 的对象存活，当 Survivor 空间不够，需要依赖其他内存（指老年代）进行分配担保。</li>
 </ul>
-<h4 id="分配担保">分配担保</h4>
+<p><strong>分配担保</strong></p>
 <p>为对象分配内存空间时，如果 Eden+Survivor 中空闲区域无法装下该对象，会触发 MinorGC 进行垃圾收集。但如果 Minor GC 过后依然有超过 10% 的对象存活，这样存活的对象直接通过分配担保机制进入老年代，然后再将新对象存入 Eden 区。</p>
 <h3 id="标记-整理算法（老年代）">标记-整理算法（老年代）</h3>
 <ul>
-<li><strong>标记</strong>：它的第一个阶段与<strong>标记/清除算法</strong>是一模一样的，均是遍历 <code>GC Roots</code>，然后将存活的对象标记。</li>
+<li><strong>标记</strong>：它的第一个阶段与<strong>标记-清除算法</strong>是一模一样的，均是遍历 <code>GC Roots</code>，然后将存活的对象标记。</li>
 <li><strong>整理</strong>：移动所有<strong>存活的对象</strong>，且按照内存地址次序依次排列，然后将末端内存地址以后的内存全部回收。因此，第二阶段才称为整理阶段。</li>
 <li>这是一种老年代的垃圾收集算法。老年代的对象一般寿命比较长，因此每次垃圾回收会有大量对象存活，如果采用复制算法，每次需要复制大量存活的对象，效率很低。</li>
 </ul>
@@ -353,9 +354,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/17/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E6%96%AD%E8%A8%80/">
+                      <a href="/2021/03/17/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 断言</span>
+                        <span class="hidden-mobile">JVM 内存结构</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -363,8 +364,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/17/Software/UML/%E6%A6%82%E8%BF%B0/">
-                        <span class="hidden-mobile">UML 概述</span>
+                      <a href="/2021/03/17/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E6%96%AD%E8%A8%80/">
+                        <span class="hidden-mobile">Java 断言</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
