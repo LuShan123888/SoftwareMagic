@@ -18,7 +18,7 @@
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   
-  <title>Git 问题解决 - SoftwareMagic</title>
+  <title>设计模式 适配器模式 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -139,7 +139,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Git 问题解决">
+            <span class="h2" id="subtitle" title="设计模式 适配器模式">
               
             </span>
 
@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-09 16:23" pubdate>
-        2021年3月9日 下午
+      <time datetime="2021-03-20 00:23" pubdate>
+        2021年3月20日 凌晨
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      256 字
+      551 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -201,63 +201,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Git 问题解决</h1>
+            <h1 style="display: none">设计模式 适配器模式</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月9日 下午
+                  本文最后更新于：2021年3月20日 凌晨
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Git 问题解决</h1>
-<h2 id="删除某些文件的全部提交记录">删除某些文件的全部提交记录</h2>
-<ol>
-<li>查询较大的文件</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ROOT_OF_YOUR_REPO<br>git verify-pack -v .git/objects/pack/*.idx  | sort -k 3 -n | tail -3<br>edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 3319670<br>34d5e541f538e86861f2cbcbd99c31172fcbbc9b blob   11080068 3615988 29584633<br>81c33b34dbffb320aa797c9c08d50c7502bce925 blob   13362444 4524205 13876485<br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>获取hash对应的文件名</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git rev-list --objects --all | grep 81c33b34dbffb320aa797c9c08d50c7502bce925<br>34d5e541f538e86861f2cbcbd99c31172fcbbc9b tests/tests<br></code></pre></td></tr></table></figure>
-<ol start="3">
-<li>删除该文件</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git filter-branch --force --index-filter   &quot;git rm --cached --ignore-unmatch tests/tests&quot;   --prune-empty --tag-name-filter cat -- --all<br></code></pre></td></tr></table></figure>
-<ol start="4">
-<li>推送到github</li>
-</ol>
-<p>根据文件所在的位置,二选一,你可以都尝试,只要管用即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git push origin --force --all<br>git push origin --force --tags<br></code></pre></td></tr></table></figure>
-<ol start="5">
-<li>本地GC</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">git for-each-ref --format=&quot;delete %(refname)&quot; refs/original | git update-ref --stdin<br>git reflog expire --expire=now --all<br>git gc --prune=now<br></code></pre></td></tr></table></figure>
-<h2 id="清除所有提交历史">清除所有提交历史</h2>
-<ol>
-<li>提交未保存的修改并切换到新的分支</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git checkout --orphan latest_branch<br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>缓存所有文件(除了.gitignore中声名排除的)</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git add -A<br></code></pre></td></tr></table></figure>
-<ol start="3">
-<li>提交跟踪过的文件</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git commit -am &quot;first commit&quot;<br></code></pre></td></tr></table></figure>
-<ol start="4">
-<li>删除master分支</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git branch -D main<br></code></pre></td></tr></table></figure>
-<ol start="5">
-<li>重命名当前分支为master</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git branch -m main<br></code></pre></td></tr></table></figure>
-<ol start="6">
-<li>提交到远程master分支</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git push -f origin main<br></code></pre></td></tr></table></figure>
+              <h1>设计模式 适配器模式</h1>
+<ul>
+<li>将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的类可以一起工作</li>
+<li><strong>目标接口</strong>:客户所期待的接口,目标可以是具体或抽象的类,也可以是接口</li>
+<li><strong>需要适配的类</strong>:需要适配的类或适配者类</li>
+<li><strong>适配器</strong>:通过包装一个需要适配的对象,把原接口转换成目标对象</li>
+<li><strong>适用场景</strong>:
+<ul>
+<li>系统需要使用一些现有的类,而这些类的接口(如方法名)不符合系统的需要,甚至没有这些类的源代码。</li>
+<li>想创建一个可以重复使用的类,用于与一些彼此之间没有太大关联的一些类,包括一些可能在将来的类一起工作</li>
+</ul>
+</li>
+</ul>
+<h2 id="类适配器模式">类适配器模式</h2>
+<ul>
+<li>类适配器模式需要多重继承对一个接口对另一个接口进行适配，而C#,Java不支持多重继承,其使用有一定的局限性（不推荐使用）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AdapterMode</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Device device = <span class="hljs-keyword">new</span> Device();<br>    Adapter adapter = <span class="hljs-keyword">new</span> NetworkAdapter();<br>    device.connectNetwork(adapter);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkCable</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">connectDevice</span><span class="hljs-params">()</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;成功连接设备&quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Device</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">connectNetwork</span><span class="hljs-params">(Adapter adapter)</span> </span>&#123;<br>    adapter.handleRequest();<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkAdapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">NetworkCable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Adapter</span> </span>&#123;<br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.connectDevice();<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Adapter</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="对象适配器模式">对象适配器模式</h2>
+<ul>
+<li>采用组合的方式</li>
+<li>一个对象适配器可以把多个不同的适配者适配到同一个目标</li>
+<li>可以适配一个适配者的子类,由于适配器和适配者之间是关联关系,根据&quot;里氏代换原则&quot;,适配者的子类也可以通过该适配器进行适配</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AdapterMode</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Device device = <span class="hljs-keyword">new</span> Device();<br>    NetworkAdapter adapter = <span class="hljs-keyword">new</span> NetworkAdapter();<br>    adapter.setNetworkCable(<span class="hljs-keyword">new</span> NetworkCable());<br>    device.connectNetwork(adapter);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkCable</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">connectDevice</span><span class="hljs-params">()</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;成功连接设备&quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Device</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">connectNetwork</span><span class="hljs-params">(Adapter adapter)</span> </span>&#123;<br>    adapter.handleRequest();<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Adapter</span> </span>&#123;<br><br>  <span class="hljs-keyword">private</span> NetworkCable networkCable;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setNetworkCable</span><span class="hljs-params">(NetworkCable networkCable)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.networkCable = networkCable;<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>&#123;<br>    networkCable.connectDevice();<br>  &#125;<br><br>  <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Adapter</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span></span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -269,7 +246,9 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/">Software</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Git/">Git</a>
+                      <a class="hover-with-bg" href="/categories/Software/DesignPattern/">DesignPattern</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
                     
                   </div>
                 
@@ -287,18 +266,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/09/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/commit/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git commit</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/09/Software/SVN/%E5%86%B2%E7%AA%81/">
-                        <span class="hidden-mobile">SVN 冲突</span>
+                      <a href="/2021/03/19/Software/Git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">Git 问题解决</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
