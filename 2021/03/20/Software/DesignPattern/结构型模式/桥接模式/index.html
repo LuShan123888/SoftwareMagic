@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-14 17:40" pubdate>
-        2021年3月14日 下午
+      <time datetime="2021-03-20 15:25" pubdate>
+        2021年3月20日 下午
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      104 字
+      540 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月14日 下午
+                  本文最后更新于：2021年3月20日 下午
                 
               </p>
             
@@ -214,7 +214,26 @@
 <ul>
 <li>将抽象部分与它的实现部分分离，使它们都可以独立的变化。而不会直接影响到其他部分。</li>
 <li>桥接模式解决了多层继承的结构，处理多维度变化的场景，将各个维度设计成独立的继承结构。使各个维度可以独立的扩展在抽象层建立联系。</li>
+<li><strong>优点</strong>
+<ul>
+<li>桥接模式偶尔类似于多继承方案,但是多继承方案违背了类的单一职责原则,复用性比较 差,类的个数也非常多,桥接模式是比多继承方案更好的解决方法。极大的减少了子类的个数,从而降低管理和维护的成本</li>
+<li>桥接模式提高了系统的可扩充性,在两个变化维度中任意扩展一个维度,都不需要修改原 有系统。符合开闭原则,就像一座桥,可以把两个变化的维度连接起来</li>
 </ul>
+</li>
+<li><strong>缺点</strong>
+<ul>
+<li>桥接模式的引入会增加系统的理解与设计难度,由于聚合关联关系建立在抽象层,要求开发者针对抽象进行设计与编程。</li>
+<li>桥接模式要求正确识别出系统中两个独立变化的维度,因此其使用范围具有一定的局限性。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>
+<ul>
+<li>Java语言通过Java虚拟机实现了平台的无关性。</li>
+<li>JDBC驱动程序也是桥接模式的应用之一</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BridgeMode</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// Apple Laptop</span><br>    Computer appleLaptop= <span class="hljs-keyword">new</span> Laptop(<span class="hljs-keyword">new</span> Apple());<br>    appleLaptop.info();<br>    <span class="hljs-comment">// Lenovo Desktop</span><br>    Computer lenovoDesktop = <span class="hljs-keyword">new</span> Desktop(<span class="hljs-keyword">new</span> Lenovo());<br>    lenovoDesktop.info();<br><br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Laptop</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Computer</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Laptop</span><span class="hljs-params">(Brand brand)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>(brand);<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.info();<br>    System.out.println(<span class="hljs-string">&quot;Laptop&quot;</span>);<br>  &#125;<br>&#125;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Desktop</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Computer</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Desktop</span><span class="hljs-params">(Brand brand)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>(brand);<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>.info();<br>    System.out.println(<span class="hljs-string">&quot;Desktop&quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computer</span> </span>&#123;<br>  <span class="hljs-keyword">protected</span> Brand brand;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Computer</span><span class="hljs-params">(Brand brand)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.brand = brand;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span> </span>&#123;<br>    brand.info();<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Lenovo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Brand</span> </span>&#123;<br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span> </span>&#123;<br>    System.out.print(<span class="hljs-string">&quot;Lenovo &quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Apple</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Brand</span> </span>&#123;<br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span> </span>&#123;<br>    System.out.print(<span class="hljs-string">&quot;Apple &quot;</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Brand</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -246,9 +265,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2021/03/20/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式 组合模式</span>
+                        <span class="hidden-mobile">设计模式 代理模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -256,8 +275,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">设计模式 外观模式</span>
+                      <a href="/2021/03/20/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式 适配器模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
