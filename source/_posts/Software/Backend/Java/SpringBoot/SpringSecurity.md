@@ -12,9 +12,9 @@ categories:
 
 - Spring Security 是针对Spring项目的安全框架,也是Spring Boot底层安全模块默认的技术选型,可以实现强大的Web安全控制,对于安全控制,仅需要引入 spring-boot-starter-security 模块,进行少量的配置,即可实现强大的安全管理
 - 核心类与注解
-    - WebSecurityConfigurerAdapter:自定义Security策略
-    - AuthenticationManagerBuilder:自定义认证策略
-    - @EnableWebSecurity:开启WebSecurity模式
+    - `WebSecurityConfigurerAdapter`:自定义Security策略
+    - `AuthenticationManagerBuilder`:自定义认证策略
+    - `@EnableWebSecurity`:开启WebSecurity模式
 - Spring Security的两个主要目标
     - 认证(Authentication)
         - 身份验证是关于验证您的凭据,如用户名/用户ID和密码,以验证您的身份
@@ -27,8 +27,8 @@ categories:
 
 ```xml
 <dependency>
-   <groupId>org.springframework.boot</groupId>
-   <artifactId>spring-boot-starter-security</artifactId>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 ```
 
@@ -46,8 +46,8 @@ importorg.springframework.security.config.annotation.web.configuration.WebSecuri
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-   @Override
-   protected void configure(HttpSecurity http) throws Exception {
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
 
   }
 }
@@ -70,12 +70,12 @@ http.formLogin();
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-   auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-          .withUser("example").password(new BCryptPasswordEncoder().encode("123456")).roles("vip2","vip3")
-          .and()
-          .withUser("root").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1","vip2","vip3")
-          .and()
-          .withUser("guest").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1","vip2");
+  auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+    .withUser("example").password(new BCryptPasswordEncoder().encode("123456")).roles("vip2","vip3")
+    .and()
+    .withUser("root").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1","vip2","vip3")
+    .and()
+    .withUser("guest").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1","vip2");
 }
 ```
 
@@ -84,10 +84,10 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 ```java
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-   http.authorizeRequests().antMatchers("/").permitAll()
-  .antMatchers("/level1/**").hasRole("vip1")
-  .antMatchers("/level2/**").hasRole("vip2")
-  .antMatchers("/level3/**").hasRole("vip3");
+  http.authorizeRequests().antMatchers("/").permitAll()
+    .antMatchers("/level1/**").hasRole("vip1")
+    .antMatchers("/level2/**").hasRole("vip2")
+    .antMatchers("/level3/**").hasRole("vip3");
 }
 ```
 
@@ -98,7 +98,7 @@ protected void configure(HttpSecurity http) throws Exception {
 ```java
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-    http.logout().deleteCookies("remember-me").invalidateHttpSession(true).logoutSuccessUrl("/");
+  http.logout().deleteCookies("remember-me").invalidateHttpSession(true).logoutSuccessUrl("/");
 }
 ```
 
@@ -106,7 +106,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ```html
 <a class="item" th:href="@{/logout}">
-   <i class="address card icon"></i> 注销
+  <i class="address card icon"></i> 注销
 </a>
 ```
 
@@ -125,9 +125,9 @@ http.csrf().disable();
 ```xml
 <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
 <dependency>
-   <groupId>org.thymeleaf.extras</groupId>
-   <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-   <version>3.0.4.RELEASE</version>
+  <groupId>org.thymeleaf.extras</groupId>
+  <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+  <version>3.0.4.RELEASE</version>
 </dependency>
 ```
 
@@ -145,27 +145,27 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 <!--登录注销-->
 <div class="right menu">
 
-   <!--如果未登录-->
-   <div sec:authorize="!isAuthenticated()">
-       <a class="item" th:href="@{/login}">
-           <i class="address card icon"></i> 登录
-       </a>
-   </div>
+  <!--如果未登录-->
+  <div sec:authorize="!isAuthenticated()">
+    <a class="item" th:href="@{/login}">
+      <i class="address card icon"></i> 登录
+    </a>
+  </div>
 
-   <!--如果已登录-->
-   <div sec:authorize="isAuthenticated()">
-       <a class="item">
-           <i class="address card icon"></i>
-          用户名:<span sec:authentication="principal.username"></span>
-          角色:<span sec:authentication="principal.authorities"></span>
-       </a>
-   </div>
+  <!--如果已登录-->
+  <div sec:authorize="isAuthenticated()">
+    <a class="item">
+      <i class="address card icon"></i>
+      用户名:<span sec:authentication="principal.username"></span>
+      角色:<span sec:authentication="principal.authorities"></span>
+    </a>
+  </div>
 
-   <div sec:authorize="isAuthenticated()">
-       <a class="item" th:href="@{/logout}">
-           <i class="address card icon"></i> 注销
-       </a>
-   </div>
+  <div sec:authorize="isAuthenticated()">
+    <a class="item" th:href="@{/logout}">
+      <i class="address card icon"></i> 注销
+    </a>
+  </div>
 </div>
 ```
 
@@ -178,7 +178,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 ```java
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-   http.rememberMe();
+  http.rememberMe();
 }
 ```
 
@@ -213,22 +213,22 @@ http.rememberMe().rememberMeParameter("remember");
 
 ```html
 <form th:action="@{/login}" method="post">
-   <div class="field">
-       <label>Username</label>
-       <div class="ui left icon input">
-           <input type="text" placeholder="Username" name="username">
-           <i class="user icon"></i>
-       </div>
-   </div>
-   <div class="field">
-       <label>Password</label>
-       <div class="ui left icon input">
-           <input type="password" name="password">
-           <i class="lock icon"></i>
-       </div>
-   </div>
-   <input type="submit" class="ui blue submit button"/>
-    <input type="checkbox" name="remember"> 记住我
+  <div class="field">
+    <label>Username</label>
+    <div class="ui left icon input">
+      <input type="text" placeholder="Username" name="username">
+      <i class="user icon"></i>
+    </div>
+  </div>
+  <div class="field">
+    <label>Password</label>
+    <div class="ui left icon input">
+      <input type="password" name="password">
+      <i class="lock icon"></i>
+    </div>
+  </div>
+  <input type="submit" class="ui blue submit button"/>
+  <input type="checkbox" name="remember"> 记住我
 </form>
 ```
 
