@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-19 22:33" pubdate>
-        2021年2月19日 晚上
+      <time datetime="2021-03-21 14:31" pubdate>
+        2021年3月21日 下午
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      854 字
+      1.8k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      11
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月19日 晚上
+                  本文最后更新于：2021年3月21日 下午
                 
               </p>
             
@@ -227,9 +227,8 @@
 <ul>
 <li><code>File(File dir,String name)</code>:利用已存在 的File对象的路径定义新文件的路径,第2个参数为文件名</li>
 </ul>
-<p>值得一提的是,不同平台下路径分隔符可能不一样,如果应用程序要考虑跨平台的情形,可以使用<code>System.dirSep</code>这个静态属性来给出分隔符</p>
-<p>读取文件内容,需要用到<code>FileInputStream</code>,可根据文件名创建<code>FileInputStream</code>对象,也可根据<code>File</code>对象创建<code>FileInputStream</code>对象,例如:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">File myFile = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;/ect/motd&quot;</span>);<br>FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream(myFile);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">File myFile = <span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;/ect/motd&quot;</span>,<span class="hljs-string">&quot;new filename&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:不同平台下路径分隔符可能不一样,如果应用程序要考虑跨平台的情形,可以使用<code>System.dirSep</code>这个静态属性来给出分隔符</p>
 <h2 id="获取文件或目录属性">获取文件或目录属性</h2>
 <p>借助File对象,可以获取文件和相关目录的属性信息,以下为常用的方法</p>
 <ul>
@@ -256,8 +255,50 @@
 <li><code>boolean equals(File f)</code>:比较两个文件或目录是否相等</li>
 </ul>
 <p>**[例113-7]**显示若干文件的基本信息,文件名通过命令行参数提供</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> 显示文件的信息 </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i =<span class="hljs-number">0</span>;i&lt;args.length;i++)<br>            info(<span class="hljs-keyword">new</span> File(args[i]));<span class="hljs-comment">//调用方法输出指定文件信息</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">(File f)</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Name:&quot;</span>+f.getName());<br>        System.out.println(<span class="hljs-string">&quot;Path:&quot;</span>+f.getPath());<br>        System.out.println(<span class="hljs-string">&quot;Absolute Path:&quot;</span>+f.getAbsolutePath());<br>        <span class="hljs-keyword">if</span> (f.exists())&#123;<br>            System.out.println(<span class="hljs-string">&quot;File is Readable:&quot;</span>+f.canRead());<br>            System.out.println(<span class="hljs-string">&quot;File is Writeable:&quot;</span>+f.canWrite());<br>            System.out.println(<span class="hljs-string">&quot;File is &quot;</span>+f.length()+<span class="hljs-string">&quot;bytes&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;File does not exist&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br><br>Name:显示文件的信息.java<br>    Path:src/Study/流式输入输出与文件处理/文件与目录管理/显示文件的信息.java<br>        Absolute Path:/Users/lucian/Documents/Code/Java/src/Study/流式输入输出与文件处理/文件与目录管理/显示文件的信息.java<br>            File is Readable:<span class="hljs-keyword">true</span><br>                File is Writeable:<span class="hljs-keyword">true</span><br>                    File is 809bytes<br></code></pre></td></tr></table></figure>
-<p><strong>说明</strong>:第8~19行定义了<code>indo()</code>方法显示指定文件的信息,第4,5行通过循环并调用<code>info()</code>方法将所有命令行参数指定文件的信息显示出来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> 显示文件的信息 </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// 通过循环并调用info()方法将所有命令行参数指定文件的信息显示出来</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i =<span class="hljs-number">0</span>;i&lt;args.length;i++)<br>      info(<span class="hljs-keyword">new</span> File(args[i]));<span class="hljs-comment">//调用方法输出指定文件信息</span><br>  &#125;<br><br>  <span class="hljs-comment">//定义了indo()方法显示指定文件的信息</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">info</span><span class="hljs-params">(File f)</span></span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;Name:&quot;</span>+f.getName());<br>    System.out.println(<span class="hljs-string">&quot;Path:&quot;</span>+f.getPath());<br>    System.out.println(<span class="hljs-string">&quot;Absolute Path:&quot;</span>+f.getAbsolutePath());<br>    <span class="hljs-keyword">if</span> (f.exists())&#123;<br>      System.out.println(<span class="hljs-string">&quot;File is Readable:&quot;</span>+f.canRead());<br>      System.out.println(<span class="hljs-string">&quot;File is Writeable:&quot;</span>+f.canWrite());<br>      System.out.println(<span class="hljs-string">&quot;File is &quot;</span>+f.length()+<span class="hljs-string">&quot;bytes&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>      System.out.println(<span class="hljs-string">&quot;File does not exist&quot;</span>);<br>    &#125;<br>  &#125;<br>&#125;<br><br>Name:显示文件的信息.java<br>Path:src/Study/流式输入输出与文件处理/文件与目录管理/显示文件的信息.java<br>Absolute Path:/Users/lucian/Documents/Code/Java/src/Study/流式输入输出与文件处理/文件与目录管理/显示文件的信息.java<br>File is Readable:<span class="hljs-keyword">true</span><br>File is Writeable:<span class="hljs-keyword">true</span><br>File is 809bytes<br></code></pre></td></tr></table></figure>
+<h2 id="文件的随机访问">文件的随机访问</h2>
+<ul>
+<li>一般的文件访问均是顺序访问,对同一文件操作只限于读操作或者写数据,不能同时进行,而且只能按记录顺序逐个读或逐个写</li>
+<li><code>RandomAccessFile</code>类提供了对流进行随机读写的能力,该类实现了<code>DataInput</code>和<code>DataOutput</code>接口,因此,可使用两接口中定义的所有方法实现数据的读写操作,为支持流的随机读写访问,该类该添加定哦以来如下方法
+<ul>
+<li><code>long getFilePointer()</code>:返回当前指针</li>
+<li><code>void seek(long pos)</code>:将文件指针定位到一个绝对地址,地址是相对于文件头的偏移量,地址0表示文件的开头</li>
+<li><code>long length()</code>:返回文件的长度</li>
+<li><code>setLength(long new Length)</code>:设置文件的长度,在删除记录时可以采用,如果文件的长度大于设定值,则按设定值设定新长度,删除文件多余部分,如果文件长度小于设定值,则对文扩展,扩充部分内容不定</li>
+</ul>
+</li>
+<li><code>RamdomAccessFile</code>类的构造方法如下:
+<ul>
+<li><code>public RandomAccessFile(String name,String mode)</code></li>
+<li><code>public RandomAccessFile(File file,String mode)</code>
+<ul>
+<li>其中,第1个参数指定要打开的文件,第2个参数决定了访问文件的权限,其值可以为‘r’或‘rw’,‘r’表示只读,‘rw’表示可进行读和写两种访问,创建<code>RandomAccessFile</code>对象时,如果文件不存在,则打开文件,如果不存在将创建一个文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>**[例13-8]**应用系统用户访问统计</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.FileNotFoundException;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.RandomAccessFile;<br><span class="hljs-keyword">import</span> java.util.RandomAccess;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> 应用系统用户访问统计 </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">long</span> count;<span class="hljs-comment">//用来表示访问计数值</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      RandomAccessFile fio;<br>      fio = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">&quot;src/Study/流式输入输出与文件处理/文件的随机访问/count.txt&quot;</span>, <span class="hljs-string">&quot;rw&quot;</span>);<br>      <span class="hljs-keyword">if</span> (fio.length() == <span class="hljs-number">0</span>)<span class="hljs-comment">//新建文件的长度为0</span><br>        count = <span class="hljs-number">1L</span>;<span class="hljs-comment">//第一次访问</span><br>      <span class="hljs-keyword">else</span> &#123;<br>        fio.seek(<span class="hljs-number">0</span>);<span class="hljs-comment">//定位到文件首字节</span><br>        count = fio.readLong();<span class="hljs-comment">//读原来保存的计数值</span><br>        count = count + <span class="hljs-number">1L</span>;<span class="hljs-comment">//计数增1</span><br>        System.out.println(count);<br>      &#125;<br>      fio.seek(<span class="hljs-number">0</span>);<br>      fio.writeLong(count);<span class="hljs-comment">//写入新计数值</span><br>      fio.close();<br>    &#125; <span class="hljs-keyword">catch</span> (FileNotFoundException e) &#123;<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong>:利用随机文件存储访问计数值,将计数值写入文件的开始位置,注意,进行读写操作前要关注文件指针的定位</p>
+<h2 id="Files-Paths">Files &amp; Paths</h2>
+<ul>
+<li>从Java 7开始，提供了<code>Files</code>和<code>Paths</code>这两个工具类，能极大地方便我们读写文件。</li>
+<li>虽然<code>Files</code>和<code>Paths</code>是<code>java.nio</code>包里面的类，但封装了很多读写文件的简单方法，例如，我们要把一个文件的全部内容读取为一个<code>byte[]</code>，可以这么写：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">byte</span>[] data = Files.readAllBytes(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果是文本文件，可以把一个文件的全部内容读取为<code>String</code>：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 默认使用UTF-8编码读取:</span><br>String content1 = Files.readString(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>));<br><span class="hljs-comment">// 可指定编码:</span><br>String content2 = Files.readString(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>), StandardCharsets.ISO_8859_1);<br><span class="hljs-comment">// 按行读取并返回每行内容:</span><br>List&lt;String&gt; lines = Files.readAllLines(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>写入文件也非常方便：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 写入二进制文件:</span><br><span class="hljs-keyword">byte</span>[] data = ...<br>Files.write(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>), data);<br><span class="hljs-comment">// 写入文本并指定编码:</span><br>Files.writeString(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>), <span class="hljs-string">&quot;文本内容...&quot;</span>, StandardCharsets.ISO_8859_1);<br><span class="hljs-comment">// 按行写入文本:</span><br>List&lt;String&gt; lines = ...<br>Files.write(Paths.get(<span class="hljs-string">&quot;/path/to/file.txt&quot;</span>), lines);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>此外，<code>Files</code>工具类还有<code>copy()</code>、<code>delete()</code>、<code>exists()</code>、<code>move()</code>等快捷方法操作文件和目录。</li>
+<li><strong>注意</strong>:<code>Files</code>提供的读写方法，受内存限制，只能读写小文件，例如配置文件等，不可一次读入几个G的大文件。读写大型文件仍然要使用文件流，每次只读写一部分文件内容。</li>
+</ul>
 
             </div>
             <hr>
@@ -293,9 +334,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+                      <a href="/2021/03/21/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 输入输出基本概念</span>
+                        <span class="hidden-mobile">Java 基本数据类型包装类</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -303,8 +344,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/02/19/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E6%96%87%E4%BB%B6%E7%9A%84%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE/">
-                        <span class="hidden-mobile">Java 文件的随机访问</span>
+                      <a href="/2021/03/21/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E5%AF%B9%E8%B1%A1%E4%B8%B2%E8%A1%8C%E5%8C%96/">
+                        <span class="hidden-mobile">Java 对象串行化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
