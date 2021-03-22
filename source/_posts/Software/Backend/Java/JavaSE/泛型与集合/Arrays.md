@@ -1,28 +1,28 @@
 ---
-title: Java Array
+title: Java Arrays
 categories:
 - Software
 - Backend
 - Java
 - JavaSE
-- 工具类
+- 泛型与集合
 ---
-# Java Array
+# Java Arrays
 
-## Array
+## Arrays
 
 - Arrays 是JDK提供的操作数组的工具类, array类提供了动态创建和访问 Java 数组的方法
 
-### Array.newInstance()
+### Arrays.newInstance()
 
 - 创建数组
 - 在Java的反射机制中, 通过数组的 class 对象的`getComponentType()`方法可以取得一个数组的Class对象,  通过`Array.newInstance()`可以反射生成数组对象
 
 ```java
- T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length);
+ T[] b = (T[]) Arrays.newInstance(a.getClass().getComponentType(), a.length);
 ```
 
-### Array.toString()
+### Arrays.toString()
 
 - 打印数组
 
@@ -38,7 +38,7 @@ System.out.println(intArray);
 System.out.println(intArrayString);
 ```
 
-### Array.asList()
+### Arrays.asList()
 
 - 根据数组创建ArrayList
 
@@ -49,7 +49,7 @@ ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(stringArray));
 System.out.println(arrayList);
 ```
 
-### Array.contains()
+### Arrays.contains()
 
 - 检查数组是否包含某个值
 
@@ -63,6 +63,17 @@ System.out.println(b);
 ## ArrayUtils
 
 - Apache Commons Lang 库
+
+### pom.xml
+
+```java
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.11</version>
+</dependency>
+```
 
 ### ArrayUtils.addAll()
 

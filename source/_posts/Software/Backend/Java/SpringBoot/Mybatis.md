@@ -83,7 +83,18 @@ public interface EmployeeMapper {
 ```
 
 - `@Mapper`:表示本类是一个 MyBatis 的 Mapper
+- 基于注解的开发也有其他手段帮助 Mybatis 找到 mapper，那就是`@MapperScan`注解，可以在启动类上添加该注解，自动扫描包路径下的所有接口。
 
+```java
+@SpringBootApplication
+@MapperScan("com.example.mapper")
+public class UserEurekaClientApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(UserEurekaClientApplication.class, args);
+    }
+}
+```
 3. 编写`EmployeeMapper.xml`配置文件
 
 ```xml
@@ -168,4 +179,6 @@ public class EmployeeController {
 
 }
 ```
+
+
 
