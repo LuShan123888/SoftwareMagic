@@ -79,8 +79,10 @@ public interface Collection<E> extends Iterable<E>
 | 在指定位置添加/删除 | 需要移动元素 | 不需要移动元素       |
 | 内存占用            | 少           | 较大                 |
 
-- 如果需要快速插入,删除元素,应该使用LinkedList,如果需要快速随机访问元素,则应该使用ArrayList
-- 通常情况下，我们总是优先使用`ArrayList`
+- ArrayList 是实现了基于动态数组的数据结构，LinkedList 基于链表的数据结构。
+- 对于随机访问 get 和 set，ArrayList 绝对优于 LinkedList，因为 LinkedList 要移动指针。
+- 对于新增和删除操作 add 和 remove，LinedList 比较占优势，因为 ArrayList 要移动数据。
+- **若只对单条数据插入或删除，ArrayList 的速度反而优于 LinkedList。**但若是批量随机的插入删除数据，LinkedList 的速度大大优于 ArrayList. 因为 ArrayList 每插入一条数据，要移动插入点及之后的所有数据。
 
 #### ArrayList
 
@@ -436,7 +438,7 @@ public class Main {
 
 - TreeSet 是一个有序集合，其底层是基于 TreeMap 实现的，非线程安全。TreeSet 可以确保集合元素处于排序状态。
 - TreeSet 支持两种排序方式，自然排序和定制排序，其中自然排序为默认的排序方式。
-- 当我们构造 TreeSet 时，若使用不带参数的构造函数，则 TreeSet 的使用自然比较器；若用户需要使用自定义的比较器，则需要使用带比较器的参数。
+- 放入TreeSet的元素，必须实现`Comparable`接口,如果没有实现`Comparable`接口,则必须在创建 TreeSet 时传入自定义的 `Comparator`对象，TreeSet 会自动对元素的进行排序
 
 > **注意**：TreeSet 集合不是通过 hashcode 和 equals 函数来比较元素的. 它是通过 compare 或者 comparaeTo 函数来判断元素是否相等. compare 函数通过判断两个对象的 id，相同的 id 判断为重复元素，不会被加入到集合中。
 
@@ -454,6 +456,28 @@ public class Main {
   }
 }
 ```
+
+### HashSet、LinkedHashSet、TreeSet 比较
+
+#### HashSet
+
+- HashSet 有以下特点：
+  - 不能保证元素的排列顺序，顺序有可能发生变化。
+  - 不是同步的。
+  - 集合元素可以是 null，但只能放入一个 null。
+- 当向 HashSet 结合中存入一个元素时，HashSet 会调用该对象的 hashCode() 方法来得到该对象的 hashCode 值，然后根据 hashCode 值来决定该对象在 HashSet 中存储位置。简单的说，**HashSet 集合判断两个元素相等的标准是两个对象通过 equals 方法比较相等，并且两个对象的 hashCode() 方法返回值也相等。**
+
+> **注意**:如果要把一个对象放入 HashSet 中，重写该对象对应类的 equals 方法，也应该重写其 hashCode() 方法。其规则是如果两个对象通过 equals 方法比较返回 true 时，其 hashCode 也应该相同。另外，对象中用作 equals 比较标准的属性，都应该用来计算 hashCode 的值。
+
+#### LinkedHashSet
+
+- LinkedHashSet 集合同样是根据元素的 hashCode 值来决定元素的存储位置，但是它同时使用链表维护元素的次序。这样使得元素看起来像是以插入顺序保存的，也就是说，当遍历该集合时候，LinkedHashSet 将会以元素的添加顺序访问集合的元素。
+- **LinkedHashSet 在迭代访问 Set 中的全部元素时，性能比 HashSet 好，但是插入时性能稍微逊色于 HashSet。**
+
+#### TreeSet 类
+
+- TreeSet 是 SortedSet 接口的唯一实现类，TreeSet 可以确保集合元素处于排序状态。
+- **TreeSet 判断两个对象不相等的方式是两个对象通过 equals 方法返回 false，或者通过 CompareTo 方法比较没有返回 0。**
 
 ## Queue
 
@@ -572,8 +596,8 @@ Queue<String> queue = new LinkedList<>();
 
 ### PriorityQueue
 
-- `PriorityQueue`和`Queue`的区别在于，它的出队顺序与元素的优先级有关，对`PriorityQueue`调用`remove()`或`poll()`方法，返回的总是优先级最高的元素。
-- 放入`PriorityQueue`的元素，必须实现`Comparable`接口，`PriorityQueue`会根据元素的排序顺序决定出队的优先级。
+- PriorityQueue和Queue的区别在于，它的出队顺序与元素的优先级有关，对PriorityQueue调用`remove()`或`poll()`方法，返回的总是优先级最高的元素。
+- 放入PriorityQueue的元素，必须实现`Comparable`接口,如果没有实现`Comparable`接口,则必须在创建 TreeMap 时传入自定义的 `Comparator`对象，PriorityQueue会根据元素的排序顺序决定出队的优先级。
 
 ```java
 class Test {

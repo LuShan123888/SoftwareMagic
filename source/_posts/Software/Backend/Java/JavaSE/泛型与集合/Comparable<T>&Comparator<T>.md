@@ -11,7 +11,7 @@ categories:
 
 Java提供了`Comparable<T>`与`Comparator<T>`两个接口定义对数组或集合中对象进行排序,实现次接口的对象数组或列表可以通过`Arrays.sort`或`Collections.sort`进行自动排序
 
-##  `Comparable<T>`接口
+##  Comparable接口
 
 - `Comparable<T>`接口定义了如下方法:
 
@@ -59,7 +59,7 @@ public class User implements Comparable<User> {
   张三:30
 ```
 
-## `Comparator<T>`接口
+## Comparator接口
 
 - `Comparator<T>`接口中定义了如下方法:
 
