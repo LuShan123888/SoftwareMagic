@@ -18,7 +18,7 @@
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   
-  <title>Linux Systemd - SoftwareMagic</title>
+  <title>Linux 用户与权限 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -139,7 +139,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux Systemd">
+            <span class="h2" id="subtitle" title="Linux 用户与权限">
               
             </span>
 
@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-03 15:54" pubdate>
-        2021年3月3日 下午
+      <time datetime="2021-03-23 08:58" pubdate>
+        2021年3月23日 早上
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4k 字
+      5.7k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25
+      34
        分钟
     </span>
   
@@ -201,17 +201,96 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux Systemd</h1>
+            <h1 style="display: none">Linux 用户与权限</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月3日 下午
+                  本文最后更新于：2021年3月23日 早上
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Linux Systemd</h1>
-<h2 id="概述">概述</h2>
+              <h1>Linux 用户与权限</h1>
+<ul>
+<li>Linux系统是一个多用户多任务的分时操作系统,任何一个要使用系统资源的用户,都必须首先向系统管理员申请一个账号,然后以这个账号的身份进入系统</li>
+<li>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪,并控制他们对系统资源的访问;另 一方面也可以帮助用户组织文件,并为用户提供安全性保护</li>
+<li>每个用户账号都拥有一个唯一的用户名和各自的口令, 用户在登录时键入正确的用户名和口令后,就能够进入系统和自己的主目录, 实现用户账号的管理,要完成的工作主要有如下几个方面:
+<ul>
+<li>用户账号的添加</li>
+<li>删除与修改</li>
+<li>用户口令的管理</li>
+<li>用户组的管理</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户账号的管理">用户账号的管理</h2>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia">用户名<span class="hljs-meta">@主机名</span>:目录(<span class="hljs-comment">#|$)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>#表示是具有root权限的用户</li>
+<li>$表示不具有root权限的用户</li>
+</ul>
+<h3 id="who">who</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">who - <span class="hljs-selector-attr">[husfV]</span> <span class="hljs-selector-attr">[user]</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>-H 或 --heading:显示各栏位的标题信息列</li>
+<li>-i 或 -u 或 --idle:显示闲置时间,若该用户在前一分钟之内有进行任何动作,将标示成&quot;.&quot;号,如果该用户已超过24小时没有任何动作,则标示出&quot;old&quot;字符串</li>
+<li>-m:此参数的效果和指定&quot;am i&quot;字符串相同</li>
+<li>-q 或–count:只显示登入系统的帐号名称和总人数</li>
+<li>-s:此参数将忽略不予处理,仅负责解决who指令其他版本的兼容性问题</li>
+<li>-w 或-T或–mesg或–message或–writable:显示用户的信息状态栏</li>
+<li>–help:在线帮助</li>
+<li>–version:显示版本信息</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>显示当前登录系统的用户</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">who<br>root   tty7     2014-05-13 12:12 (:0)<br>root   pts/0    2014-05-14 17:09 (:0.0)<br>root   pts/1    2014-05-14 18:51 (192.168.1.17)<br>root   pts/2    2014-05-14 19:48 (192.168.1.17)<br></code></pre></td></tr></table></figure>
+<h3 id="useradd">useradd</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">useradd -选项 用户名<br>-c comment #comment指定一段注释性描述<br>-d 目录 #指定用户瞩目哭,如果此目录不存在,则同时使用-m选项,可以创建主目录<br>-m #自动创建这个用户的主目录/home/用户名<br>-g 用户组 #指定用户所属的用户组<br>-G 用户组 #指定用户所属的附加组<br>-s shell文件 #指定用户的登录shell<br>-u 用户号 #指定用户的用户号,如果同时有-o选项,则可以重复使用其他用户的标识号<br></code></pre></td></tr></table></figure>
+<p>Linux中一切皆文件,这里的添加用户说就是往<code>/etc/passwd</code>中写入用户的信息</p>
+<h3 id="userdel">userdel</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">userdel -选项 用户名<br>-r 用户名 #删除用户的时候将他的目录页一并删掉!<br></code></pre></td></tr></table></figure>
+<h3 id="usermod">usermod</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">usermod -选项 修改内容 用户名<br>-c comment #comment指定一段注释性描述<br>-d 目录 #指定用户瞩目哭,如果此目录不存在,则同时使用-m选项,可以创建主目录<br>-m #自动创建这个用户的主目录/home/用户名<br>-g 用户组 #指定用户所属的用户组<br>-G 用户组 用户组 #注定==指定用户所属的附加组<br>-s shell文件 #指定用户的登录shell<br>-u 用户号 #指定用户的用户号,如果同时有-o选项,则可以重复使用其他用户的标识号<br></code></pre></td></tr></table></figure>
+<h3 id="su">su</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">su 用户名 #切换用户<br>su -用户名 #如果想在切换用户之后使用新用户的工作环境,可以在su和username之间加-<br></code></pre></td></tr></table></figure>
+<h3 id="sudo">sudo</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo 命令 # 以管理员的权限运行命令<br>sudo su #从普通用户切换到root用户<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-i</code>:为了频繁的执行某些只有超级用户才能执行的权限,而不用每次输入密码,可以使用该命令,提示输入密码时该密码为当前账户的密码,没有时间限制,执行该命令后提示符变为&quot;#”而不是&quot;$”,想退回普通账户时可以执行&quot;exit”或&quot;logout”</li>
+</ul>
+<h3 id="exit">exit</h3>
+<ul>
+<li><code>exit</code>命令用于退出目前的shell</li>
+<li>执行exit可使shell以指定的状态值退出,若不设置状态值参数,则shell以预设值退出,状态值0代表执行成功,其他值代表执行失败,exit也可用在script,离开正在执行的script,回到shell</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">exit #退回原来的用户,等同于&lt;C-r&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="passwd">passwd</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">root用户</span><br>passwd 用户名<br>new password: #输入密码<br>re password: #重新输入密码<br><span class="hljs-meta">#</span><span class="bash">普通用户</span><br>passwd<br>(current) UNIX password:<br>new password:<br>re password:<br><br><span class="hljs-meta">#</span><span class="bash"> 锁定账户</span><br>passwd -l 用户名 #锁定之后这个用户不能登录<br>passwd -d 用户名 #没有密码也不能登录<br></code></pre></td></tr></table></figure>
+<h3 id="hostname">hostname</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">hostname #查看主机名<br>hostname 主机名 #修改主机名(临时修改)<br></code></pre></td></tr></table></figure>
+<h2 id="用户组管理">用户组管理</h2>
+<p>每个用户都有一个用户组,系统可以对一个用户组中的所有用户进行集中管理(开发,测试,运维, root),不同Linux 系统对用户组的规定有所不同,如Linux下的用户属于与它同名的用户组,这个用户 组在创建用户时同时创建</p>
+<p>用户组的管理涉及用户组的添加,删除和修改,组的增加,删除和修改实际上就是对<code>/etc/group</code>文件的更新</p>
+<h3 id="groupadd">groupadd</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupadd 组名 #创建完用户组后可以得到一个组的id,这个id是可以指定的<br>-g id #如果不指定就是自增1<br></code></pre></td></tr></table></figure>
+<h3 id="groupdel">groupdel</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupdel 组名<br></code></pre></td></tr></table></figure>
+<h3 id="groupmod">groupmod</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupmod -选项 修改内容 组名<br>-g id #修改组id<br>-n 新组名 #修改新组名<br></code></pre></td></tr></table></figure>
+<h3 id="newgrp">newgrp</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">newgrp 组名<br></code></pre></td></tr></table></figure>
+<p>newgrp 指令类似 login 指令,它是以相同的帐号,另一个群组名称,再次登入系统,欲使用 newgrp 指令切换群组,您必须是该群组的用户,否则将无法登入指定的群组,单一用户要同时隶属多个群组,需利用交替用户的设置,若不指定群组名称,则 newgrp 指令会登入该用户名称的预设群组</p>
+<h3 id="etc-passwd">/etc/passwd</h3>
+<p>这个文件中的每一行都代表这一个用户</p>
+<p>登录口令:把真正的加密后的用户口令字存放到<code>/etc/shadow</code>文件中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">用户名:口令(登录密码x,不可见):用户标识号:组标识号:注释性描述:主目录:登录Shell<br><br>root:*:0:0:System Administrator:/var/root:/bin/sh<br>daemon:*:1:1:System Services:/var/root:/usr/bin/false<br></code></pre></td></tr></table></figure>
+<h3 id="etc-group">/etc/group</h3>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">组名:口令:组标识号:组内用户列表<br><br>wheel:*:0:root<br>daemon:*:1:root<br>kmem:*:2:root<br>sys:*:3:root<br>tty:*:4:root<br>operator:*:5:root<br>mail:*:6:_teamsserver<br>bin:*:7:<br></code></pre></td></tr></table></figure>
+<h3 id="etc-shadow">/etc/shadow</h3>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span><br></code></pre></td></tr></table></figure>
+<h2 id="Systemd">Systemd</h2>
 <ul>
 <li>历史上,Linux 的启动一直采用<code>init</code>进程</li>
 </ul>
@@ -229,11 +308,11 @@
 <li>Systemd 的优点是功能强大,使用方便,缺点是体系庞大,非常复杂,事实上,现在还有很多人反对使用 Systemd,理由就是它过于复杂,与操作系统的其他部分强耦合,违反&quot;keep simple, keep stupid&quot;的Unix 哲学</li>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-12-04-bg2016030703.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h2 id="Systemd-命令组">Systemd 命令组</h2>
+<h3 id="Systemd-命令组">Systemd 命令组</h3>
 <ul>
 <li>Systemd 并不是一个命令,而是一组命令,涉及到系统管理的方方面面</li>
 </ul>
-<h3 id="systemctl">systemctl</h3>
+<h4 id="systemctl">systemctl</h4>
 <p><code>systemctl</code>是 Systemd 的主命令,用于管理系统和服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 启动服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl start &lt;service&gt;</span><br><br><span class="hljs-meta">#</span><span class="bash"> 开机启动</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">enable</span> &lt;service&gt;</span><br><br><span class="hljs-meta">#</span><span class="bash"> 查看服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl status &lt;service&gt;</span><br><br><span class="hljs-meta">#</span><span class="bash"> 停止服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl stop &lt;service&gt;</span><br><br><span class="hljs-meta">#</span><span class="bash"> 杀死服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl <span class="hljs-built_in">kill</span> &lt;service&gt;</span><br><br><span class="hljs-meta">#</span><span class="bash"> 重启服务</span><br><span class="hljs-meta">$</span><span class="bash"> sudo systemctl restart &lt;service&gt;</span><br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong>:</p>
@@ -243,22 +322,22 @@
 <li>这是因为开机时，<code>Systemd</code>只执行<code>/etc/systemd/system</code>目录里面的配置文件。这也意味着，如果把修改后的配置文件放在该目录，就可以达到覆盖原始配置的效果</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 重启系统</span><br>$ sudo systemctl reboot<br><br><span class="hljs-comment"># 关闭系统,切断电源</span><br>$ sudo systemctl poweroff<br><br><span class="hljs-comment"># CPU停止工作</span><br>$ sudo systemctl halt<br><br><span class="hljs-comment"># 暂停系统</span><br>$ sudo systemctl <span class="hljs-built_in">suspend</span><br><br><span class="hljs-comment"># 让系统进入冬眠状态</span><br>$ sudo systemctl hibernate<br><br><span class="hljs-comment"># 让系统进入交互式休眠状态</span><br>$ sudo systemctl hybrid-sleep<br><br><span class="hljs-comment"># 启动进入救援状态(单用户状态)</span><br>$ sudo systemctl rescue<br></code></pre></td></tr></table></figure>
-<h3 id="systemd-analyze">systemd-analyze</h3>
+<h4 id="systemd-analyze">systemd-analyze</h4>
 <p><code>systemd-analyze</code>命令用于查看启动耗时</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看启动耗时</span><br>$ systemd-analyze<br><br><span class="hljs-comment"># 查看每个服务的启动耗时</span><br>$ systemd-analyze blame<br><br><span class="hljs-comment"># 显示瀑布状的启动过程流</span><br>$ systemd-analyze critical-chain<br><br><span class="hljs-comment"># 显示指定服务的启动流</span><br>$ systemd-analyze critical-chain atd.service<br></code></pre></td></tr></table></figure>
-<h3 id="hostnamectl">hostnamectl</h3>
+<h4 id="hostnamectl">hostnamectl</h4>
 <p><code>hostnamectl</code>命令用于查看当前主机的信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 显示当前主机的信息</span><br>$ hostnamectl<br><br><span class="hljs-comment"># 设置主机名</span><br>$ sudo hostnamectl set-hostname rhel7<br></code></pre></td></tr></table></figure>
-<h3 id="localectl">localectl</h3>
+<h4 id="localectl">localectl</h4>
 <p><code>localectl</code>命令用于查看本地化设置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看本地化设置</span><br>$ localectl<br><br><span class="hljs-comment"># 设置本地化参数</span><br>$ sudo localectl set-locale LANG=en_GB.utf8<br>$ sudo localectl set-keymap en_GB<br></code></pre></td></tr></table></figure>
-<h3 id="timedatectl">timedatectl</h3>
+<h4 id="timedatectl">timedatectl</h4>
 <p><code>timedatectl</code>命令用于查看当前时区设置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看当前时区设置</span><br>$ timedatectl<br><br><span class="hljs-comment"># 显示所有可用的时区</span><br>$ timedatectl list-timezones<br><br><span class="hljs-comment"># 设置当前时区</span><br>$ sudo timedatectl set-timezone America/New_York<br>$ sudo timedatectl set-time YYYY-MM-DD<br>$ sudo timedatectl set-time HH:MM:SS<br></code></pre></td></tr></table></figure>
-<h3 id="loginctl">loginctl</h3>
+<h4 id="loginctl">loginctl</h4>
 <p><code>loginctl</code>命令用于查看当前登录的用户</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出当前session</span><br>$ loginctl list-sessions<br><br><span class="hljs-comment"># 列出当前登录用户</span><br>$ loginctl list-users<br><br><span class="hljs-comment"># 列出显示指定用户的信息</span><br>$ loginctl show-user ruanyf<br></code></pre></td></tr></table></figure>
-<h2 id="Unit">Unit</h2>
+<h3 id="Unit">Unit</h3>
 <ul>
 <li>Systemd 可以管理所有系统资源,不同的资源统称为 Unit(单位)</li>
 <li>Unit 一共分成12种
@@ -278,18 +357,18 @@
 </ul>
 </li>
 </ul>
-<h3 id="查看Unit">查看Unit</h3>
+<h4 id="查看Unit">查看Unit</h4>
 <p><code>systemctl list-units</code>命令可以查看当前系统的所有 Unit</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出正在运行的 Unit</span><br>$ systemctl list-units<br><br><span class="hljs-comment"># 列出所有Unit,包括没有找到配置文件的或者启动失败的</span><br>$ systemctl list-units --all<br><br><span class="hljs-comment"># 列出所有没有运行的 Unit</span><br>$ systemctl list-units --all --state=inactive<br><br><span class="hljs-comment"># 列出所有加载失败的 Unit</span><br>$ systemctl list-units --failed<br><br><span class="hljs-comment"># 列出所有正在运行的,类型为 service 的 Unit</span><br>$ systemctl list-units --<span class="hljs-built_in">type</span>=service<br></code></pre></td></tr></table></figure>
-<h3 id="Unit-的状态">Unit 的状态</h3>
+<h4 id="Unit-的状态">Unit 的状态</h4>
 <p><code>systemctl status</code>命令用于查看系统状态和单个 Unit 的状态</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 显示系统状态</span><br>$ systemctl status<br><br><span class="hljs-comment"># 显示单个 Unit 的状态</span><br>$ sysystemctl status bluetooth.service<br><br><span class="hljs-comment"># 显示远程主机的某个 Unit 的状态</span><br>$ systemctl -H root@rhel7.example.com status httpd.service<br></code></pre></td></tr></table></figure>
 <p>除了<code>status</code>命令,<code>systemctl</code>还提供了三个查询状态的简单方法,主要供脚本内部的判断语句使用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 显示某个 Unit 是否正在运行</span><br>$ systemctl is-active application.service<br><br><span class="hljs-comment"># 显示某个 Unit 是否处于启动失败状态</span><br>$ systemctl is-failed application.service<br><br><span class="hljs-comment"># 显示某个 Unit 服务是否建立了启动链接</span><br>$ systemctl is-enabled application.service<br></code></pre></td></tr></table></figure>
-<h3 id="Unit-管理">Unit 管理</h3>
+<h4 id="Unit-管理">Unit 管理</h4>
 <p>对于用户来说,最常用的是下面这些命令,用于启动和停止 Unit(主要是 service)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 立即启动一个服务</span><br>$ sudo systemctl start apache.service<br><br><span class="hljs-comment"># 立即停止一个服务</span><br>$ sudo systemctl stop apache.service<br><br><span class="hljs-comment"># 重启一个服务</span><br>$ sudo systemctl restart apache.service<br><br><span class="hljs-comment"># 杀死一个服务的所有子进程</span><br>$ sudo systemctl <span class="hljs-built_in">kill</span> apache.service<br><br><span class="hljs-comment"># 重新加载一个服务的配置文件</span><br>$ sudo systemctl reload apache.service<br><br><span class="hljs-comment"># 重载所有修改过的配置文件</span><br>$ sudo systemctl daemon-reload<br><br><span class="hljs-comment"># 显示某个 Unit 的所有底层参数</span><br>$ systemctl show httpd.service<br><br><span class="hljs-comment"># 显示某个 Unit 的指定属性的值</span><br>$ systemctl show -p CPUShares httpd.service<br><br><span class="hljs-comment"># 设置某个 Unit 的指定属性</span><br>$ sudo systemctl set-property httpd.service CPUShares=500<br></code></pre></td></tr></table></figure>
-<h3 id="依赖关系">依赖关系</h3>
+<h4 id="依赖关系">依赖关系</h4>
 <ul>
 <li>Unit 之间存在依赖关系:A 依赖于 B,就意味着 Systemd 在启动 A 的时候,同时会去启动 B</li>
 <li><code>systemctl list-dependencies</code>命令列出一个 Unit 的所有依赖</li>
@@ -297,8 +376,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ systemctl list-dependencies nginx.service<br></code></pre></td></tr></table></figure>
 <p>上面命令的输出结果之中,有些依赖是 Target 类型(详见下文),默认不会展开显示,如果要展开 Target,就需要使用<code>--all</code>参数</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ systemctl list-dependencies --all nginx.service<br></code></pre></td></tr></table></figure>
-<h2 id="Unit的配置文件">Unit的配置文件</h2>
-<h3 id="概述-2">概述</h3>
+<h3 id="Unit的配置文件">Unit的配置文件</h3>
+<h4 id="概述">概述</h4>
 <ul>
 <li>每一个 Unit 都有一个配置文件,告诉 Systemd 怎么启动这个 Unit</li>
 <li>Systemd 默认从目录<code>/etc/systemd/system/</code>读取配置文件,但是,里面存放的大部分文件都是符号链接,指向目录<code>/usr/lib/systemd/system/</code>,真正的配置文件存放在那个目录</li>
@@ -313,7 +392,7 @@
 <ul>
 <li>配置文件的后缀名,就是该 Unit 的种类,比如<code>sshd.socket</code>,如果省略,Systemd 默认后缀名为<code>.service</code>,所以<code>sshd</code>会被理解成<code>sshd.service</code></li>
 </ul>
-<h3 id="配置文件的状态">配置文件的状态</h3>
+<h4 id="配置文件的状态">配置文件的状态</h4>
 <p><code>systemctl list-unit-files</code>命令用于列出所有配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 列出所有配置文件</span><br>$ systemctl list-unit-files<br><br><span class="hljs-comment"># 列出指定类型的配置文件</span><br>$ systemctl list-unit-files --<span class="hljs-built_in">type</span>=service<br></code></pre></td></tr></table></figure>
 <p>这个命令会输出一个列表</p>
@@ -331,7 +410,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ systemctl status bluetooth.service<br></code></pre></td></tr></table></figure>
 <p>一旦修改配置文件,就要让 Systemd 重新加载配置文件,然后重新启动,否则修改不会生效</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ sudo systemctl daemon-reload<br>$ sudo systemctl restart httpd.service<br></code></pre></td></tr></table></figure>
-<h3 id="配置文件的格式">配置文件的格式</h3>
+<h4 id="配置文件的格式">配置文件的格式</h4>
 <ul>
 <li>配置文件就是普通的文本文件,可以用文本编辑器打开</li>
 <li><code>systemctl cat</code>命令可以查看配置文件的内容</li>
@@ -345,7 +424,7 @@
 <ul>
 <li><strong>注意</strong>:键值对的等号两侧不能有空格</li>
 </ul>
-<h3 id="配置文件的区块">配置文件的区块</h3>
+<h4 id="配置文件的区块">配置文件的区块</h4>
 <p><code>[Unit]</code>区块通常是配置文件的第一个区块,用来定义 Unit 的元数据,以及配置与其他 Unit 的关系,它的主要字段如下</p>
 <blockquote>
 <ul>
@@ -393,7 +472,7 @@
 </ul>
 </blockquote>
 <p>Unit 配置文件的完整字段清单,请参考<a target="_blank" rel="noopener" href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">官方文档</a></p>
-<h2 id="Target">Target</h2>
+<h3 id="Target">Target</h3>
 <ul>
 <li>启动计算机的时候,需要启动大量的 Unit,如果每一次启动,都要一一写明本次启动需要哪些 Unit,显然非常不方便,Systemd 的解决方案就是 Target</li>
 <li>简单说,Target 就是一个 Unit 组,包含许多相关的 Unit,启动某个 Target 的时候,Systemd 就会启动里面所有的 Unit,从这个意义上说,Target 这个概念类似于&quot;状态点&quot;,启动某个 Target 就好比启动到某种状态</li>
@@ -413,7 +492,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="日志管理">日志管理</h2>
+<h3 id="日志管理">日志管理</h3>
 <ul>
 <li>Systemd 统一管理所有 Unit 的启动日志,带来的好处就是,可以只用<code>journalctl</code>一个命令,查看所有日志(内核日志和应用日志),日志的配置文件是<code>/etc/systemd/journald.conf</code></li>
 <li><code>journalctl</code>功能强大,用法非常多</li>
@@ -449,9 +528,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/03/Software/Backend/Database/MySQL/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
+                      <a href="/2021/03/23/Software/System/Linux/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 命令行操作</span>
+                        <span class="hidden-mobile">Linux 文件系统</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -459,8 +538,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/03/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/">
-                        <span class="hidden-mobile">Linux 进程与服务</span>
+                      <a href="/2021/03/22/Software/Backend/Java/SSM/SpringFramework/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <span class="hidden-mobile">Spring 配置文件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
