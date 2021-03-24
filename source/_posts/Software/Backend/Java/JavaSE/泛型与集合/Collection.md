@@ -1,5 +1,5 @@
 ---
-title: Java Collection
+title:  Java Collection
 categories:
 - Software
 - Backend
@@ -7,7 +7,7 @@ categories:
 - JavaSE
 - 泛型与集合
 ---
-# Java Collection
+#  Java Collection
 
 接口Collection处于Collection API的最高层,在该接口中定义了所有低层接口或类的公共方法,下图给出了Collection API的实现层次,图中省略了AbstractCollection等5个抽象类,省略了Collection接口的子接口Queue
 
@@ -474,7 +474,7 @@ public class Main {
 - LinkedHashSet 集合同样是根据元素的 hashCode 值来决定元素的存储位置，但是它同时使用链表维护元素的次序。这样使得元素看起来像是以插入顺序保存的，也就是说，当遍历该集合时候，LinkedHashSet 将会以元素的添加顺序访问集合的元素。
 - **LinkedHashSet 在迭代访问 Set 中的全部元素时，性能比 HashSet 好，但是插入时性能稍微逊色于 HashSet。**
 
-#### TreeSet 类
+#### TreeSet
 
 - TreeSet 是 SortedSet 接口的唯一实现类，TreeSet 可以确保集合元素处于排序状态。
 - **TreeSet 判断两个对象不相等的方式是两个对象通过 equals 方法返回 false，或者通过 CompareTo 方法比较没有返回 0。**
