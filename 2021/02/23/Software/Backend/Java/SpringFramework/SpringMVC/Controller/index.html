@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Spring MVC 控制器 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring MVC 控制器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring MVC 控制器</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月23日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Spring MVC 控制器</h1>
+<ul>
+<li>控制器复杂提供访问应用程序的行为,通常通过接口定义或注解定义两种方法实现</li>
+<li>控制器负责解析用户的请求并将其转换为一个模型</li>
+<li>在Spring MVC中一个控制器类可以包含多个方法</li>
+<li>在Spring MVC中,对于Controller的配置方式有很多种</li>
+</ul>
+<h2 id="创建Controller">创建Controller</h2>
+<h3 id="实现Controller接口">实现Controller接口</h3>
+<ul>
+<li>Controller是一个接口,在org.springframework.web.servlet.mvc包下,接口中只有一个方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//实现该接口的类获得控制器功能</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Controller</span> </span>&#123;<br>   <span class="hljs-comment">//处理请求且返回一个模型与视图对象</span><br>   <span class="hljs-function">ModelAndView <span class="hljs-title">handleRequest</span><span class="hljs-params">(HttpServletRequest var1, HttpServletResponse var2)</span> <span class="hljs-keyword">throws</span> Exception</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编写完毕后,去Spring配置文件中注册请求的bean,name对应请求路径,class对应处理请求的类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;bean name=<span class="hljs-string">&quot;/t1&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.controller.ControllerTest1&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong>:</p>
+<ul>
+<li>
+<p>实现接口Controller定义控制器是较老的办法</p>
+</li>
+<li>
+<p>缺点是:一个控制器中只有一个方法,如果要多个方法则需要定义多个Controller,定义的方式比较麻烦</p>
+</li>
+</ul>
+<h3 id="使用注解-Controller">使用注解@Controller</h3>
+<ul>
+<li>@Controller注解类型用于声明Spring类的实例是一个控制器</li>
+<li>Spring可以使用扫描机制来找到应用程序中所有基于注解的控制器类,为了保证Spring能找到你的控制器,需要在配置文件中声明组件扫描</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 自动扫描指定的包,下面所有注解类交给IOC容器管理 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.example.controller&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>增加一个ControllerTest2类,使用注解实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//@Controller注解的类会自动添加到Spring上下文中</span><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ControllerTest2</span></span>&#123;<br><br>   <span class="hljs-comment">//映射访问路径</span><br>   <span class="hljs-meta">@RequestMapping(&quot;/t2&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">index</span><span class="hljs-params">(Model model)</span></span>&#123;<br>       <span class="hljs-comment">//Spring MVC会自动实例化一个Model对象用于向视图中传值</span><br>       model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;ControllerTest2&quot;</span>);<br>       <span class="hljs-comment">//返回视图名</span><br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="接收请求">接收请求</h2>
+<h3 id="RequestMapping">@RequestMapping</h3>
+<ul>
+<li>@RequestMapping注解用于映射url到控制器类或一个特定的处理程序方法,可用于类或方法上</li>
+</ul>
+<p><strong>只注解在方法上面</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span> </span>&#123;<br>   <span class="hljs-meta">@RequestMapping(&quot;/h1&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>访问路径:<code>http://localhost:8080 / 项目名 / h1</code></li>
+</ul>
+<p><strong>同时注解类与方法</strong></p>
+<ul>
+<li>用于类上,表示类中的所有响应请求的方法都是以该地址作为父路径</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-meta">@RequestMapping(&quot;/admin&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span> </span>&#123;<br>   <span class="hljs-meta">@RequestMapping(&quot;/h1&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>访问路径:<code>http://localhost:8080 / 项目名/ admin /h1 </code> , 需要先指定类的路径再指定方法的路径</li>
+</ul>
+<p><strong>属性</strong></p>
+<p><code>value</code>:表示映射URL, 可以用集合表示同时匹配多个URL</p>
+<ul>
+<li><code>@RequestMapping()</code>括号中默认为value</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span> </span>&#123;<br>   <span class="hljs-meta">@RequestMapping(value=&#123;&quot;/h1&quot;,&quot;/h2&quot;,&quot;/h3&quot;&#125;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>method</code>:用于约束请求的类型,可以收窄请求范围,指定请求谓词的类型如GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE, TRACE等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//映射访问路径,必须是POST请求</span><br><span class="hljs-meta">@RequestMapping(value = &quot;/hello&quot;,method = &#123;RequestMethod.POST&#125;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">index2</span><span class="hljs-params">(Model model)</span></span>&#123;<br>   model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;hello!&quot;</span>);<br>   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:所有的地址栏请求默认都会是 HTTP GET 类型的</li>
+<li>方法级别的注解变体有如下几个:</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@GetMapping</span><br><span class="hljs-variable">@PostMapping</span><br><span class="hljs-variable">@PutMapping</span><br><span class="hljs-variable">@DeleteMapping</span><br><span class="hljs-variable">@PatchMapping</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>@GetMapping 是一个组合注解,平时使用的会比较多!</li>
+<li>它所扮演的是<code>@RequestMapping(method =RequestMethod.GET)</code>的一个快捷方式</li>
+</ul>
+<h3 id="PathVariable">@PathVariable</h3>
+<ul>
+<li>让方法参数的值对应绑定到一个URI模板变量上</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RestFulController</span> </span>&#123;<br><br>   <span class="hljs-comment">//映射访问路径</span><br>   <span class="hljs-meta">@RequestMapping(&quot;/commit/&#123;p1&#125;/&#123;p2&#125;&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">index</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> <span class="hljs-keyword">int</span> p1, <span class="hljs-meta">@PathVariable</span> <span class="hljs-keyword">int</span> p2, Model model)</span></span>&#123;<br><br>       <span class="hljs-keyword">int</span> result = p1+p2;<br>       <span class="hljs-comment">//Spring MVC会自动实例化一个Model对象用于向视图中传值</span><br>       model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>, <span class="hljs-string">&quot;结果:&quot;</span>+result);<br>       <span class="hljs-comment">//返回视图名</span><br>       <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>路径参数支持正则表达式,例如我们在使用/sex/sex}接口的时候,要求sex必须是F(Female)或者M(Male),那么我们的URL模板可以定义为/sex/{sex:MF,代码如下:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/sex/&#123;sex:M|F&#125;&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">findUser2</span>(<span class="hljs-params">@PathVariable(value = <span class="hljs-string">&quot;sex&quot;</span>) <span class="hljs-built_in">String</span> sex</span>)</span>&#123;<br>    log.info(sex);<br>    <span class="hljs-keyword">return</span> sex;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>只有/sex/F或者/sex/M的请求才会进入findUser2控制器方法,其他该路径前缀的请求都是非法的,会返回404状态码</li>
+</ul>
+<h3 id="RequestParam">@RequestParam</h3>
+<ul>
+<li>可接收url中的键值对(GET)</li>
+<li>可接受ContentType指定为application/x-www-form-urlencoded的请求体(POST)</li>
+<li>如果请求为以上两种方法请求且参数名与形式参数名相同,可以省略该注释</li>
+<li>这种情况下,用到的参数处理器是<code>RequestParamMapMethodArgumentResolver</code></li>
+<li><strong>注意</strong>:形式参数可以为实体类的对象,这时请求的键值对会自动按照键名与属性名匹配的原则自动注入,这种情况下,不能使用本注解,参数处理器为ServletModelAttributeMethodProcessor,主要是把HttpServletRequest中的表单参数封装到MutablePropertyValues实例中,再通过参数类型实例化(通过构造反射创建User实例),反射匹配属性进行值的填充</li>
+</ul>
+<p><strong>属性</strong></p>
+<ul>
+<li><code>value</code>:默认的属性,指定键值对中的键名</li>
+<li><code>require</code>:该参数是否是必须的</li>
+<li><code>defaultValue</code>:默认参数值,如果设置了该值require由true自动转为false,如果没有转该参数,就是使用默认值</li>
+</ul>
+<h3 id="RequestBody">@RequestBody</h3>
+<ul>
+<li>将接收到的json格式的数据转换为指定的数据对象user,比如<code>&#123;name:&quot;test&quot;&#125;,name</code>为User类的属性域</li>
+<li>通过ResponseBody注解,可以返回json格式的数据</li>
+<li>Spring MVC默认使用Jackson处理@RequestBody的参数转换</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span></span>&#123;<br>  <span class="hljs-meta">@RequestMapping(&quot;\test&quot;)</span><br>  <span class="hljs-meta">@ResponseBody</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> User user)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> user.name();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:在一个方法内使用一次@RequestBody后,就无法再读取请求体内的其他参数,因为request的content-body是以流的形式进行读取的,读取完一次后,便无法再次读取了,所以转换为多个对象在以上方式是不支持的</li>
+</ul>
+<p><strong>解决方法</strong></p>
+<ul>
+<li>增加一个包装类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span></span>&#123;<br>  <span class="hljs-meta">@RequestMapping(&quot;\test&quot;)</span><br>  <span class="hljs-meta">@ResponseBody</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> RetureResult <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> Param param)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ReturnResult();<br>  &#125;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Param</span></span>&#123;<br>  <span class="hljs-keyword">public</span> User user;<br>  <span class="hljs-keyword">public</span> Address address;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>注意</strong>:类中属性必须为public,或者有setter和getter</p>
+</li>
+<li>
+<p>Param类中的属性只能比json中的属性多,不能少</p>
+</li>
+<li>
+<p>此时传输的json数据格式变为{user:{name:“test”},address:{location:“新华路”}}</p>
+</li>
+<li>
+<p>由于只是在TestController中增加一个包装类,不会影响其他的类以及已经定义好的model类,因此可以非常方便的达到接收多个对象参数的目的</p>
+</li>
+<li>
+<p>将接收参数定义为Map&lt;String, Object&gt;</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span></span>&#123;<br>  <span class="hljs-meta">@RequestMapping(&quot;\test&quot;)</span><br>  <span class="hljs-meta">@ResponseBody</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> Map&lt;String, Object&gt; models)</span></span>&#123;<br>　　　User user=JsonXMLUtils.map2object((Map&lt;String, Object&gt;)models.get(<span class="hljs-string">&quot;user&quot;</span>),User.class);<br>　　　Address address=JsonXMLUtils.map2object((Map&lt;String, Object&gt;)models.get(<span class="hljs-string">&quot;address&quot;</span>),Address.class);<br>　　　<span class="hljs-keyword">return</span> models;<br>　&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>此时,即使自定义的Param类中的属性即使比json数据中的属性少了,也没关系</li>
+<li>其中JSONUtils为自定义的工具类,可使用常见的fastjson等工具包包装实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JsonXMLUtils</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">obj2json</span><span class="hljs-params">(Object obj)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> JSON.toJSONString(obj);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">json2obj</span><span class="hljs-params">(String jsonStr, Class&lt;T&gt; clazz)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> JSON.parseObject(jsonStr, clazz);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">Map&lt;String, Object&gt; <span class="hljs-title">json2map</span><span class="hljs-params">(String jsonStr)</span>     <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>            <span class="hljs-keyword">return</span> JSON.parseObject(jsonStr, Map.class);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">map2obj</span><span class="hljs-params">(Map&lt;?, ?&gt; map, Class&lt;T&gt; clazz)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> JSON.parseObject(JSON.toJSONString(map), clazz);<br>    &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="RequestPart">@RequestPart</h3>
+<ul>
+<li>,请求的Content-Type需要为<code>form-data</code></li>
+<li>该注解的参数处理器用到的是<code>RequestPartMethodArgumentResolver</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(value = &quot;/file1&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">file1</span><span class="hljs-params">(<span class="hljs-meta">@RequestPart(name = &quot;file1&quot;)</span> MultipartFile multipartFile)</span> </span>&#123;<br>    String content = String.format(<span class="hljs-string">&quot;name = %s,originName = %s,size = %d&quot;</span>,<br>            multipartFile.getName(), multipartFile.getOriginalFilename(), multipartFile.getSize());<br>    log.info(content);<br>    <span class="hljs-keyword">return</span> content;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可知MultipartFile实例的主要属性分别来自Content-Disposition,content-type和content-length,另外,InputStream用于读取请求体的最后部分(文件的字节序列)</li>
+</ul>
+<h3 id="RequestHeader">@RequestHeader</h3>
+<ul>
+<li>请求头的值主要通过@RequestHeader注解的参数获取</li>
+<li>参数处理器是RequestHeaderMethodArgumentResolver,需要在注解中指定请求头的Key</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(value = &quot;/header&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">header</span><span class="hljs-params">(<span class="hljs-meta">@RequestHeader(name = &quot;Content-Type&quot;)</span> String contentType)</span> </span>&#123;<br>   <span class="hljs-keyword">return</span> contentType;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="CookieValue">@CookieValue</h3>
+<ul>
+<li>Cookie的值主要通过@CookieValue注解的参数获取</li>
+<li>参数处理器为ServletCookieValueMethodArgumentResolver,需要在注解中指定Cookie的Key</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@PostMapping(value = <span class="hljs-string">&quot;/cookie&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">cookie</span>(<span class="hljs-params">@CookieValue(name = <span class="hljs-string">&quot;JSESSIONID&quot;</span>) <span class="hljs-built_in">String</span> sessionId</span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> sessionId;&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="返回响应">返回响应</h2>
+<h3 id="转发与重定向">转发与重定向</h3>
+<ul>
+<li>转发与重定向不通过视图解析器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Redirect</span> </span>&#123;<br>    <span class="hljs-meta">@RequestMapping(&quot;/redirect&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">redirect</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//转发</span><br>    	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;forward:/index.jsp&quot;</span>;<br><span class="hljs-comment">//    	return &quot;include:/index.jsp&quot;;</span><br>    <span class="hljs-comment">//重定向</span><br><span class="hljs-comment">//        return &quot;redirect:/index.jsp&quot;;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="返回页面与数据">返回页面与数据</h3>
+<h4 id="ModelAndView">ModelAndView</h4>
+<figure class="highlight java"><figcaption><span>a</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ControllerTest1</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Controller</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title">handleRequest</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>       <span class="hljs-comment">//返回一个模型视图对象</span><br>       ModelAndView mv = <span class="hljs-keyword">new</span> ModelAndView();<br>       mv.addObject(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;ControllerTest1&quot;</span>);<br>       mv.setViewName(<span class="hljs-string">&quot;test&quot;</span>);<br>       <span class="hljs-keyword">return</span> mv;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="ModelMap">ModelMap</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/hello&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;username&quot;)</span> String name, ModelMap model)</span></span>&#123;<br>   <span class="hljs-comment">//封装要显示到视图中的数据</span><br>   <span class="hljs-comment">//相当于req.setAttribute(&quot;name&quot;,name);</span><br>   model.addAttribute(<span class="hljs-string">&quot;name&quot;</span>,name);<br>   System.out.println(name);<br>   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Model">Model</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/ct2/hello&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(&quot;username&quot;)</span> String name, Model model)</span></span>&#123;<br>   <span class="hljs-comment">//封装要显示到视图中的数据</span><br>   <span class="hljs-comment">//相当于req.setAttribute(&quot;name&quot;,name);</span><br>   model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,name);<br>   System.out.println(name);<br>   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;test&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>对比</strong></p>
+<ul>
+<li>Model 只有寥寥几个方法只适合用于储存数据,简化了新手对于Model对象的操作和理解</li>
+<li>ModelMap 继承了 LinkedMap ,除了实现了自身的一些方法,同样的继承 LinkedMap 的方法和特性</li>
+<li>ModelAndView 可以在储存数据的同时,可以进行设置返回的逻辑视图,进行控制展示层的跳转</li>
+</ul>
+<h3 id="返回Json字符串">返回Json字符串</h3>
+<ul>
+<li>Controller类的方法返回的Java对象会自动由<code>Jackson</code>转换为Json字符串,并返回响应</li>
+</ul>
+<h4 id="ResponseBody">@ResponseBody</h4>
+<ul>
+<li>表示该方法返回的是Json字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span> </span>&#123;<br>   <span class="hljs-meta">@RequestMapping(&quot;/h1&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">ajax2</span><span class="hljs-params">()</span></span>&#123;<br>   	List&lt;User&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;User&gt;();<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test1&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test2&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test3&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>     <span class="hljs-keyword">return</span> list;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="RestController">@RestController</h4>
+<ul>
+<li>添加在Controller类上,等同于该类所有的方法加上@ResponseBody注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestController</span> </span>&#123;<br>   <span class="hljs-meta">@RequestMapping(&quot;/h1&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">ajax2</span><span class="hljs-params">()</span></span>&#123;<br>   	List&lt;User&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;User&gt;();<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test1&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test2&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>   	list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test3&quot;</span>,<span class="hljs-number">3</span>,<span class="hljs-string">&quot;男&quot;</span>));<br>     <span class="hljs-keyword">return</span> list;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Servlet-API">Servlet API</h2>
+<h3 id="HttpServletRequest-HttpServletResponse">HttpServletRequest&amp;HttpServletResponse</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultGo</span> </span>&#123;<br><br>   <span class="hljs-meta">@RequestMapping(&quot;/result/t1&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse rsp)</span> throwsIOException </span>&#123;<br>       rsp.getWriter().println(<span class="hljs-string">&quot;Hello,Spring BY servlet API&quot;</span>);<br>  &#125;<br><br>   <span class="hljs-meta">@RequestMapping(&quot;/result/t2&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse rsp)</span> throwsIOException </span>&#123;<br>       rsp.sendRedirect(<span class="hljs-string">&quot;/index.jsp&quot;</span>);<br>  &#125;<br><br>   <span class="hljs-meta">@RequestMapping(&quot;/result/t3&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test3</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse rsp)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>       <span class="hljs-comment">//转发</span><br>       req.setAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;/result/t3&quot;</span>);<br>       req.getRequestDispatcher(<span class="hljs-string">&quot;/WEB-INF/jsp/test.jsp&quot;</span>).forward(req,rsp);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="HttpSsession">HttpSsession</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultGo</span> </span>&#123;<br><br>   <span class="hljs-meta">@RequestMapping(&quot;/result/t1&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">(HttpSession session)</span> throwsIOException </span>&#123;<br>       session.addAttribute(<span class="hljs-string">&quot;meg&quot;</span>,<span class="hljs-string">&quot;Hello,Spring BY servlet API&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="URL匹配"><strong>URL匹配</strong></h2>
+<ul>
+<li>Spring MVC中会按照URL的模式进行匹配,使用的是Ant路径风格,处理工具类为<code>org.springframework.util.AntPathMatcher</code>,从此类的注释来看,匹配规则主要包括下面四点:
+<ul>
+<li><code>?</code>匹配1个字符</li>
+<li><code>*</code>匹配0个或者多个<strong>字符</strong></li>
+<li><code>**</code>匹配路径中0个或者多个<strong>目录</strong></li>
+<li><code>&#123;key:[a-z]+&#125;</code>将正则表达式[a-z]+匹配到的值,赋值给名为<code>key</code>的路径变量</li>
+</ul>
+</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>?形式的URL:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/pattern?&quot;</span>)public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br><br>/pattern  <span class="hljs-number">404</span> Not Found<br>/patternd  <span class="hljs-number">200</span> OK<br>/patterndd  <span class="hljs-number">404</span> Not Found<br>/pattern/  <span class="hljs-number">404</span> Not Found<br>/patternd/s  <span class="hljs-number">404</span> Not Found<br></code></pre></td></tr></table></figure>
+<ul>
+<li>*形式的URL:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/pattern*&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br><br>/pattern  <span class="hljs-number">200</span> OK<br>/pattern/  <span class="hljs-number">200</span> OK<br>/patternd  <span class="hljs-number">200</span> OK<br>/pattern/a  <span class="hljs-number">404</span> Not Found<br></code></pre></td></tr></table></figure>
+<ul>
+<li>**形式的URL:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/pattern/**/p&quot;</span>)public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br><br>/pattern/p  <span class="hljs-number">200</span> OK<br>/pattern/x/p  <span class="hljs-number">200</span> OK<br>/pattern/x/y/p  <span class="hljs-number">200</span> OK<br></code></pre></td></tr></table></figure>
+<ul>
+<li>{key:[a-z]+}形式的URL:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/pattern/&#123;key:\[a-c\]+&#125;&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern</span>(<span class="hljs-params">@PathVariable(name = <span class="hljs-string">&quot;key&quot;</span>) <span class="hljs-built_in">String</span> key</span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br><br>/pattern/a  <span class="hljs-number">200</span> OK<br>/pattern/ab  <span class="hljs-number">200</span> OK<br>/pattern/abc  <span class="hljs-number">200</span> OK<br>/pattern  <span class="hljs-number">404</span> Not Found<br>/pattern/abcd  <span class="hljs-number">404</span> Not Found<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的四种URL模式可以组合使用</li>
+<li>URL匹配还遵循<strong>精确匹配原则</strong>,也就是存在两个模式对同一个URL都能够匹配成功,则选取最精确的URL匹配,进入对应的控制器方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript">@GetMapping(value = <span class="hljs-string">&quot;/pattern/**/p&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern1</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br><br>@GetMapping(value = <span class="hljs-string">&quot;/pattern/p&quot;</span>)<br>public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">pattern2</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;success&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面两个控制器,如果请求URL为/pattern/p,最终进入的方法为<code>pattern2</code></li>
+<li>最后,<code>org.springframework.util.AntPathMatcher</code>作为一个工具类,可以单独使用,不仅仅可以用于匹配URL,也可以用于匹配系统文件路径,不过需要使用其带参数构造改变内部的pathSeparator变量,例如:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">AntPathMatcher antPathMatcher = <span class="hljs-keyword">new</span> AntPathMatcher(File.separator);<br></code></pre></td></tr></table></figure>
+<h2 id="其他注解">其他注解</h2>
+<h3 id="ModelAttribute">@ModelAttribute</h3>
+<ul>
+<li>@ModelAttribute最主要的作用是将数据添加到模型对象中, 用于视图页面展示时使用</li>
+<li>@ModelAttribute等价于 model.addAttribute(“attributeName”, abc); 但是根据@ModelAttribute注释的位置不同, 和其他注解组合使用, 致使含义有所不同</li>
+</ul>
+<h4 id="ModelAttribute注释方法">@ModelAttribute注释方法</h4>
+<ul>
+<li>被@ModelAttribute注释的方法会在此controller每个方法执行前被执行, 因此对于一个controller映射多个URL的用法来说, 要谨慎使用</li>
+</ul>
+<p><strong>实例</strong></p>
+<p><strong>@ModelAttribute注释void返回值的方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br> <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>     <span class="hljs-meta">@ModelAttribute</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">populateModel</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String abc, Model model)</span> </span>&#123;<br>          model.addAttribute(<span class="hljs-string">&quot;attributeName&quot;</span>, abc);<br>       &#125;<br><br>     <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld&quot;)</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">helloWorld</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;helloWorld&quot;</span>;<br>         &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>获得请求/helloWorld 后, populateModel方法在helloWorld方法之前先被调用, 它把请求参数(/helloWorld?abc=text)加入到一个名为attributeName的model属性中, 在它执行后 helloWorld被调用, 返回视图名helloWorld和model已由@ModelAttribute方法生产好了</li>
+</ul>
+<p><strong>@ModelAttribute注释返回具体类的方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ModelAttribute</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Account <span class="hljs-title">addAccount</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String number)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> accountManager.findAccount(number);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这种情况, model属性的名称没有指定, 它由返回类型隐含表示, 如这个方法返回Account类型, 那么这个model属性的名称是account</li>
+<li>这个例子中model属性名称有返回对象类型隐含表示, model属性对象就是方法的返回值,它无须要特定的参数</li>
+</ul>
+<p><strong>@ModelAttribute(value=“”)注释返回具体类的方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>    <span class="hljs-meta">@ModelAttribute(&quot;attributeName&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">addAccount</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String abc)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> abc;<br>      &#125;<br><br>    <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">helloWorld</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;helloWorld&quot;</span>;<br>          &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个例子中使用@ModelAttribute注释的value属性, 来指定model属性的名称,model属性对象就是方法的返回值,它无须要特定的参数</li>
+</ul>
+<p><strong>@ModelAttribute和@RequestMapping同时注释一个方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>    <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld.do&quot;)</span><br>    <span class="hljs-meta">@ModelAttribute(&quot;attributeName&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">helloWorld</span><span class="hljs-params">()</span> </span>&#123;<br>         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hi&quot;</span>;<br>     &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这时这个方法的返回值并不是表示一个视图名称, 而是model属性的值, 视图名称由<code>RequestToViewNameTranslator</code>根据请求&quot;/helloWorld.do&quot;转换为逻辑视图helloWorld</li>
+<li>Model属性名称有@ModelAttribute(value=””)指定, 相当于在request中封装了key=attributeName, value=hi</li>
+</ul>
+<h4 id="ModelAttribute注释方法的参数">@ModelAttribute注释方法的参数</h4>
+<p><strong>从model中获取</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>    <span class="hljs-meta">@ModelAttribute(&quot;user&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">addAccount</span><span class="hljs-params">()</span> </span>&#123;<br>       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;jz&quot;</span>,<span class="hljs-string">&quot;123&quot;</span>);<br>     &#125;<br><br>    <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">helloWorld</span><span class="hljs-params">(<span class="hljs-meta">@ModelAttribute(&quot;user&quot;)</span> User user)</span> </span>&#123;<br>           user.setUserName(<span class="hljs-string">&quot;jizhou&quot;</span>);<br>           <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;helloWorld&quot;</span>;<br>        &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在这个例子里, <code>@ModelAttribute(&quot;user&quot;) User user</code>注释方法参数, 参数user的值来源于<code>addAccount()</code>方法中的model属性</li>
+<li>此时如果方法体没有标注@SessionAttributes(“user”), 那么scope为request, 如果标注了, 那么scope为session</li>
+</ul>
+<p><strong>从Form表单或URL参数中获取</strong></p>
+<ul>
+<li>实际上, 不做此注释也能拿到user对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>    <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld&quot;)</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">helloWorld</span><span class="hljs-params">(<span class="hljs-meta">@ModelAttribute</span> User user)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;helloWorld&quot;</span>;<br>     &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>它的作用是将该绑定的命令对象以&quot;user”为名称添加到模型对象中供视图页面展示使用</li>
+<li>此时可以在视图页面使用${user.username}来获取绑定的命令对象的属性</li>
+</ul>
+<h4 id="ModelAttribute注释方法的返回值">@ModelAttribute注释方法的返回值</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldController</span> </span>&#123;<br>     <span class="hljs-meta">@RequestMapping(value = &quot;/helloWorld&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-meta">@ModelAttribute(&quot;user2&quot;)</span> <span class="hljs-function">User <span class="hljs-title">helloWorld</span><span class="hljs-params">(<span class="hljs-meta">@ModelAttribute</span> User user)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();<br>     &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以看到返回值类型是对象类型, 而且通过 @ModelAttribute(“user2”) 注解, 此时会添加返回值到模型数据( 名字为user2 ) 中供视图展示使用</li>
+<li>@ModelAttribute 注解的返回值会覆盖参数注解对象user</li>
+</ul>
+<h3 id="SessionAttributes">@SessionAttributes</h3>
+<ul>
+<li>用于在请求之间的HTTP Servlet会话中存储model属性</li>
+<li>它是类级别的注解, 用于声明特定控制器使用的会话属性</li>
+<li>这通常列出应透明地存储在会话中以供后续访问请求的模型属性的名称或模型属性的类型</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SessionAttributes(&quot;user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginController</span> </span>&#123;<br><br>	<span class="hljs-meta">@ModelAttribute(&quot;user&quot;)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">setUpUserForm</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以看到@SessionAttributes是类注解, 用来在session中存储model</li>
+<li>如上面的例子, 定义了一个名为&quot;User”的model并把它存储在Session中</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SpringFramework/SpringMVC/">SpringMVC</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Backend/Database/Redis/Value/BitMap/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis BitMap</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/23/Software/Shell/%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7/">
+                        <span class="hidden-mobile">Shell 特殊符号</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
