@@ -163,7 +163,7 @@ dubbo.registry.address=zookeeper://127.0.0.1:2181
 - 正常步骤是需要将服务提供者的接口打包,然后用pom文件导入
 - 这里使用简单的方式,直接将服务的接口拿过来,路径必须保证正确,即和服务提供者相同
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-image-20201118151125167.png" alt="image-20201118151125167" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-image-20201118151125167.png" alt="image-20201118151125167" style="zoom:50%;" />
 
 ### 使用服务
 
@@ -215,8 +215,8 @@ public class ConsumerServerApplicationTests {
 
 **控制台**
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-640-20201118153138639.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138639.png)
 
 **监控中心 **
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-640-20201118153138762.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138762.png)

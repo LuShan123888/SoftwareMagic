@@ -13,7 +13,7 @@ git pull <远程主机名> <远程分支名>:<本地分支名>
 
 尽管 git fetch 可用于获取某个分支的远程信息,但我们也可以执行 git pull,git pull 实际上是两个命令合成了一个:git fetch 和 git merge,当我们从来源拉取修改时,我们首先是像 git fetch 那样取回所有数据,然后最新的修改会自动合并到本地分支中
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-vS253GcLbUsfOzW.gif)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-vS253GcLbUsfOzW.gif)
 
 要取回`origin`主机的`next`分支,与本地的`master`分支合并,需要写成下面这样 :
 

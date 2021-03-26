@@ -30,7 +30,7 @@ list-style-image 属性使用图像来替换列表项的标记
 
 list-style-position属性指示如何相对于对象的内容绘制列表项标记
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-E3EA5DE4-B898-450C-BE58-D2EBC1C70D8E.jpg" alt="img" style="zoom:33%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-E3EA5DE4-B898-450C-BE58-D2EBC1C70D8E.jpg" alt="img" style="zoom:33%;" />
 
 **属性值**
 

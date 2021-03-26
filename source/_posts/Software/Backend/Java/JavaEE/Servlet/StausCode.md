@@ -123,4 +123,4 @@ public class showError extends HttpServlet {
 
 现在,调用上面的 Servlet 将显示以下结果:
 
-![image-20200920102106261](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-06-image-20200920102106261.png)
+![image-20200920102106261](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-image-20200920102106261.png)

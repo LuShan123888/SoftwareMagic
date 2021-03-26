@@ -36,7 +36,7 @@ select ename,sal,deptno,rw,rownum from (select ename,sal,deptno,rownum rw from e
 where rw>5 and rw<=10;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019112139977.png" alt="image-20201019112139977" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019112139977.png" alt="image-20201019112139977" style="zoom:50%;" />
 
 **实例**
 
@@ -47,7 +47,7 @@ where rw>5 and rw<=10;
 select ename,sal,deptno,rownum r1 from emp order by sal desc
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019113234148.png" alt="image-20201019113234148" style="zoom: 67%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019113234148.png" alt="image-20201019113234148" style="zoom: 67%;" />
 
 - 此时结果`r1`发生了乱序, 是因为这个查询存在按照其他的列进行排序
 - 再次对该结果集取`rownum`使`rownum`按升序排列
@@ -57,7 +57,7 @@ select ename,sal,deptno,r1,rownum r2 from(
 	select ename,sal,deptno,rownum r1 from emp order by sal desc)
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-06-image-20201019113330065.png" alt="image-20201019113330065" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-image-20201019113330065.png" alt="image-20201019113330065" style="zoom:50%;" />
 
 - 此时`r2`为最初查询结果集的升序`rowndum`
 - 查询当前`rownum`中小于等于3的记录
@@ -71,7 +71,7 @@ select ename,sal,deptno,r2 from(
 )where r2<=3;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-06-image-20201019113411210.png" alt="image-20201019113411210" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-image-20201019113411210.png" alt="image-20201019113411210" style="zoom:50%;" />
 
 ## rowid
 
@@ -92,7 +92,7 @@ select ename,sal,deptno,r2 from(
 select deptno,dname,loc,rowid from tempcp;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019132935238.png" alt="image-20201019132935238" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019132935238.png" alt="image-20201019132935238" style="zoom:50%;" />
 
 - 插入重复数据, 查看结果
 
@@ -100,7 +100,7 @@ select deptno,dname,loc,rowid from tempcp;
 insert into tempcp select * from dept;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133113356.png" alt="image-20201019133113356" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133113356.png" alt="image-20201019133113356" style="zoom:50%;" />
 
 - 将数据进行分组, 按照重复信息进行分组
 
@@ -108,7 +108,7 @@ insert into tempcp select * from dept;
 select * from tempcp group by deptno,dname,loc;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133351902.png" alt="image-20201019133351902" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133351902.png" alt="image-20201019133351902" style="zoom:50%;" />
 
 - 查找出rowid最小的记录(可以保证只有一条 )
 
@@ -116,7 +116,7 @@ select * from tempcp group by deptno,dname,loc;
 select min(rowid) from tempcp group by deptno,dname,loc;
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201019133505973.png" alt="image-20201019133505973" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133505973.png" alt="image-20201019133505973" style="zoom:50%;" />
 
 - 查找rowid不在这些之内的记录
 

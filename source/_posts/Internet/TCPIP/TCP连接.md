@@ -12,7 +12,7 @@ categories:
 
 ## TCP头部
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-12-v2-8f5725f163d7f6390a75f3a2d337bc1c_1440w.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-8f5725f163d7f6390a75f3a2d337bc1c_1440w.jpg)
 
 - 源端口和目的端口在TCP层确定双方进程，序列号表示的是报文段数据中的第一个字节号，ACK表示确认号，该确认号的发送方期待接收的下一个序列号，即最后被成功接收的数据字节序列号加1，这个字段只有在ACK位被启用的时候才有效。
 - 当新建一个连接时，从客户端发送到服务端的第一个报文段的SYN位被启用，这称为SYN报文段，这时序列号字段包含了在本次连接的这个方向上要使用的第一个序列号，即初始序列号ISN，之后发送的数据是ISN加1，因此SYN位字段会消耗一个序列号，这意味着使用重传进行可靠传输。而不消耗序列号的ACK则不是。
@@ -27,7 +27,7 @@ categories:
 
 - 三次握手和四次挥手的状态转换如下图。 
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-12-v2-e8aaab48ff996e5cd8a5b39dc450bd6a_1440w.jpg" alt="img" style="zoom: 33%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-e8aaab48ff996e5cd8a5b39dc450bd6a_1440w.jpg" alt="img" style="zoom: 33%;" />
 
 ## 三次握手
 
@@ -55,7 +55,7 @@ categories:
 2. 服务端发送自己的SYN段作为应答，同样指明自己的ISN(s)。为了确认客户端的SYN，将ISN(c)+1作为ACK数值。这样，每发送一个SYN，序列号就会加1. 如果有丢失的情况，则会重传。
 3. 为了确认服务器端的SYN，客户端将ISN(s)+1作为返回的ACK数值。
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-12-v2-07c065a0321f887ae69e269d8dda9f43_1440w.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-07c065a0321f887ae69e269d8dda9f43_1440w.jpg)
 
 ## 四次挥手
 
@@ -66,7 +66,7 @@ TCP连接是双向传输的对等的模式，就是说双方都可以同时向�
 3. 服务端发起自己的FIN段:ACK=x+1, Seq=y
 4. 客户端确认:ACK=L+1
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-12-v2-629f51f6f535ebd7683f944707b21d1e_1440w.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-629f51f6f535ebd7683f944707b21d1e_1440w.jpg)
 
 ## 为什么建立连接是三次握手，而关闭连接却是四次挥手呢？
 

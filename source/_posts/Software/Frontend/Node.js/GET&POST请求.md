@@ -150,7 +150,7 @@ http.createServer(function (req, res) {
 
 - 运行结果:
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2021-01-28-image-20210128114256666.png" alt="image-20210128114256666" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-01-28-image-20210128114256666.png" alt="image-20210128114256666" style="zoom:50%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2021-01-28-image-20210128114307090.png" alt="image-20210128114307090" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-01-28-image-20210128114307090.png" alt="image-20210128114307090" style="zoom:50%;" />
 

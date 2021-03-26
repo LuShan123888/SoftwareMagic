@@ -27,7 +27,7 @@ categories:
 
 - Apache Shiro 是一个全面的,蕴含丰富功能的安全框架,下图为描述 Shiro 功能的框架图:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-ShiroFeatures.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-ShiroFeatures.png)
 
 - Authentication(认证), Authorization(授权), Session Management(会话管理), Cryptography(加密)被 Shiro 框架的开发团队称之为应用安全的四大基石,那么就让我们来看看它们吧:
     - **Authentication(认证)**:用户身份识别,通常被称为用户"登录”
@@ -47,7 +47,7 @@ categories:
 
 在概念层,Shiro 架构包含三个主要的理念:Subject,SecurityManager和 Realm,下面的图展示了这些组件如何相互作用,我们将在下面依次对其进行描述
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-ShiroBasicArchitecture.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-ShiroBasicArchitecture.png)
 
 - Subject:当前用户,Subject 可以是一个人,但也可以是第三方服务,守护进程帐户,时钟守护任务或者其它–当前和软件交互的任何事件
 - SecurityManager:管理所有Subject,SecurityManager 是 Shiro 架构的核心,配合内部安全组件共同组成安全伞
@@ -57,7 +57,7 @@ categories:
 
 ## 运行原理
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-18-1-5714097.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-1-5714097.png)
 
 1. Subject:主体,可以看到主体可以是任何与应用交互的"用户”
 2. SecurityManager:相当于 SpringMVC 中的 DispatcherServlet 或者 Struts2 中的 FilterDispatcher,它是 Shiro 的核心,所有具体的交互都通过 SecurityManager 进行控制,它管理着所有 Subject,且负责进行认证和授权,及会话,缓存的管理

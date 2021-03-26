@@ -8,9 +8,9 @@ categories:
 
 ## 分类的IP地址
 
-![image-20200520145853702](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-G9oiYI8saleWEfn.png)
+![image-20200520145853702](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png)
 
-![image-20200520145902844](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-la9Hrsd8OPA1Jk6.png)
+![image-20200520145902844](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-la9Hrsd8OPA1Jk6.png)
 
 - IP地址根据网络号和主机号来分,分为A,B,C三类及特殊地址D,E,  全0和全1的都保留不用
     - A类:(1.0.0.0-126.0.0.0)(默认子网掩码:255.0.0.0或 0xFF000000)第一个字节为网络号,后三个字节为主机号,该类IP地址的最前面为"0”,所以地址的网络号取值于1~126之间,一般用于大型网络

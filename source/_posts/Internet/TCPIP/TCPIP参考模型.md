@@ -10,7 +10,7 @@ categories:
 
 OSI参考模型虽然完备,但是太过复杂,不实用,而之后的TCP/IP参考模型经过一系列的修改和完善得到了广泛的应用,TCP/IP参考模型包括应用层,传输层,网络层和网络接口层,TCP/IP参考模型与OSI参考模型有较多相似之处,各层也有一定的对应关系,具体对应关系如下图所示:
 
-![2019042317573274](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-zrXt8dNwZ21Olc9.png)
+![2019042317573274](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-zrXt8dNwZ21Olc9.png)
 
 - 应用层,TCP/IP参考模型的应用层包含了所有高层协议,该层与OSI的会话层,表示层和应用层相对应
 - 传输层,TCP/IP参考模型的传输层与OSI的传输层相对应,该层允许源主机与目标主机上的对等体之间进行对话,该层定义了两个端到端的传输协议:TCP协议和UDP协议
@@ -25,4 +25,4 @@ OSI参考模型虽然完备,但是太过复杂,不实用,而之后的TCP/IP参�
 - TCP/IP模型没有区分物理层和数据链路层这两个功能完全不同的层
 - OSI模型比较适合理论研究和新网络技术研究,而TCP/IP模型真正做到了流行和应用
 
-![20190423192449566](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-20190423192449566.PNG)
+![20190423192449566](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-20190423192449566.PNG)

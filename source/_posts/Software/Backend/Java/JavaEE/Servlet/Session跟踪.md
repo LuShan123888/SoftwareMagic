@@ -159,11 +159,11 @@ public class SessionTrack extends HttpServlet {
 
 在浏览器地址栏输入 *http://localhost:8080/TomcatTest/SessionTrack*,当您第一次运行时将显示如下结果:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-servlet-session.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-servlet-session.jpg)
 
 再次尝试运行相同的 Servlet,它将显示如下结果:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-servlet-session2.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-servlet-session2.jpg)
 
 ## 删除 Session 会话数据
 

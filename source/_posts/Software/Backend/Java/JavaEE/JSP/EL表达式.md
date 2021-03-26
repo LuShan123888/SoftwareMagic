@@ -188,6 +188,6 @@ ${pageContext.request.queryString}
 
 - 运行结果如下:
 
-![jsp-expression-language](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-jsp-expression-language.jpg)
+![jsp-expression-language](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-jsp-expression-language.jpg)
 
 - header对象返回单一值,而headerValues则返回一个字符串数组

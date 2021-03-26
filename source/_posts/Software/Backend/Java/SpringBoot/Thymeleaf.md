@@ -12,7 +12,7 @@ categories:
 
 模板引擎的作用就是通过一个页面模板,将表达式解析,从后台提取数值并填充到指定的位置,最终生成一个静态页面
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-16-640-20201116091443136.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-16-640-20201116091443136.png)
 
 
 
@@ -76,7 +76,7 @@ spring.thymeleaf.cache=false
 - 指令的设计,正是Thymeleaf的高明之处,也是它优于其它模板引擎的原因,动静结合的设计,使得无论是前端开发人员还是后端开发人员可以完美契合
 - 可以使用任意的 th:attr 来替换Html中原生属性的值
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-19-640-20201116170238354.jpeg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-19-640-20201116170238354.jpeg)
 
 ### 变量
 
@@ -365,7 +365,7 @@ const user = /*[[Thymeleaf表达式]]*/ "静态环境下的默认值";
 
 **控制台**
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-11-16-1-20201116192058797.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-16-1-20201116192058797.png)
 
 
 

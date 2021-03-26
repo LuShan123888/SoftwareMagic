@@ -35,7 +35,7 @@ response.sendRedirect();
 - **注意**:使用request.setAttribute的内容,不能读取了,你可以用session代替,或者用include,forward代替
 
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-sendRedirect%25E7%259A%2584%25E6%25B5%2581%25E7%25A8%258B.PNG)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-sendRedirect%25E7%259A%2584%25E6%25B5%2581%25E7%25A8%258B.PNG)
 
 ## `RequestDispatcher`
 
@@ -61,7 +61,7 @@ request.getRequestDispatcher("jsp2.jsp").include(request,   response);
 - 使用`request.setAttribute`的内容,可以正常使用
 
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-include%25E6%25B5%2581%25E7%25A8%258B.PNG)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-include%25E6%25B5%2581%25E7%25A8%258B.PNG)
 
 
 
@@ -87,7 +87,7 @@ request.getRequestDispatcher("jsp2.jsp").forward(request,  response);
 - 使用`request.setAttribute`的内容,可以正常使用
 
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-forward%25E6%25B5%2581%25E7%25A8%258B.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-forward%25E6%25B5%2581%25E7%25A8%258B.png)
 
 
 

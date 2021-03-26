@@ -167,4 +167,4 @@ The price of the second book: 2000
 
 - 运行结果如下:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-xml-1.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-xml-1.jpg)

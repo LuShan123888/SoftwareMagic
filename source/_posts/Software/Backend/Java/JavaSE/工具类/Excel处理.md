@@ -469,7 +469,7 @@ class Test {
 - EasyExcel 是阿里巴巴开源的一个 excel处理框架,以使用简单,节省内存著称
 - EasyExcel 能大大减少内存占用的主要原因是在解析 Excel 时没有将文件数据一次性全部加载到内存中,而是从磁盘上一行行读取数据,逐个解析
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2021-02-06-resize,w_746.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-06-resize,w_746.png)
 
 ### pom.xml
 

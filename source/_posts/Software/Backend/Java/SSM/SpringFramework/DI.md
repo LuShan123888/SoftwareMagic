@@ -598,7 +598,7 @@ public class SpringAction {  
 - 在Spring中,那些组成应用程序的主体及由Spring IoC容器所管理的对象,被称之为bean
 - bean就是由IoC容器初始化,装配及管理的对象
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-640-20201017143022056.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640-20201017143022056.png)
 
 - 几种作用域中,request,session作用域仅在基于web的应用中使用(不必关心你所采用的是什么web应用框架),只能用在基于web的Spring ApplicationContext环境
 

@@ -42,7 +42,7 @@ public interface Collection<E> extends Iterable<E>
 
 ## List
 
-![image-20210321213904818](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-21-image-20210321213904818.png)
+![image-20210321213904818](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-21-image-20210321213904818.png)
 
 - **List 集合代表一个有序集合，集合中每个元素都有其对应的顺序索引。List 集合允许使用重复元素，可以通过索引来访问指定位置的集合元素。**
 - List 接口继承于 Collection 接口，它可以定义一个允许重复的有序集合。因为 List 中的元素是有序的，所以我们可以通过使用索引（元素在 List 中的位置，类似于数组下标）来访问 List 中的元素，这类似于 Java 的数组。

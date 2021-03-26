@@ -14,7 +14,7 @@ categories:
 
 ## AJAX 工作原理
 
-![AJAX](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-ajax-yl.png)
+![AJAX](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-ajax-yl.png)
 
 ## XMLHttpRequest 对象
 

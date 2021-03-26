@@ -17,7 +17,7 @@ categories:
 
 - 在桌面端,视口指的是在桌面端,指的是浏览器的可视区域;而在移动端,它涉及3个视口:Layout Viewport(布局视口),Visual Viewport(视觉视口),Ideal Viewport(理想视口)
 - 视口单位中的"视口”,桌面端指的是浏览器的可视区域;移动端指的就是Viewport中的Layout Viewport
-    <img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-QBM61YZg8vqx7NE.jpg" alt="img" style="zoom:67%;" />
+    <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-QBM61YZg8vqx7NE.jpg" alt="img" style="zoom:67%;" />
 
 ## vh/vw与%区别
 
@@ -26,7 +26,7 @@ categories:
 | %     | 元素的祖先元素 |
 | vh/vw | 视口的尺寸     |
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-MX5GjOE2ackwKBY.jpg" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-MX5GjOE2ackwKBY.jpg" alt="img" style="zoom:50%;" />
 
 | 单位 | 解释                   |
 | ---- | ---------------------- |

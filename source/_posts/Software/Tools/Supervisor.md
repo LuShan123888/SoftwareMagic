@@ -117,4 +117,4 @@ supervisor> reload
 
 浏览器输入主配置文件中的地址与端口号
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-2020-12-10-2020-11-27-v2-3032f202ef1566428701231235529c76_1440w.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-10-2020-11-27-v2-3032f202ef1566428701231235529c76_1440w.jpg)

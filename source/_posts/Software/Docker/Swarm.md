@@ -21,7 +21,7 @@ categories:
     - 管理节点默认也作为工作节点,你也可以通过配置让服务只运行在管理节点
 - 来自 Docker 官网的这张图片形象的展示了集群中管理节点与工作节点的关系
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2021-02-15-swarm-diagram.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-15-swarm-diagram.png)
 
 ###  服务和任务
 
@@ -32,7 +32,7 @@ categories:
     - `global services` 每个工作节点上运行一个任务两种模式通过 `docker service create` 的 `--mode` 参数指定
 - 来自 Docker 官网的这张图片形象的展示了容器,任务,服务的关系
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2021-02-15-services-diagram-20210215180815269.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-15-services-diagram-20210215180815269.png)
 
 ## 创建Swarm集群
 

@@ -271,7 +271,7 @@ public class ReadCookies extends HttpServlet {
 
 - 编译上面的 Servlet **ReadCookies**,并在 web.xml 文件中创建适当的条目,尝试运行 *http://localhost:8080/TomcatTest/ReadCookies*,将显示如下结果:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg)
 
 ## 通过 Servlet 删除 Cookie
 
@@ -366,4 +366,4 @@ public class DeleteCookies extends HttpServlet {
 
 - 编译上面的 Servlet **DeleteCookies**,并在 web.xml 文件中创建适当的条目,现在运行 *http://localhost:8080/TomcatTest/DeleteCookies*,将显示如下结果:
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-19D5A4A6-2673-46E6-A9E2-0745D379350A.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-19D5A4A6-2673-46E6-A9E2-0745D379350A.jpg)

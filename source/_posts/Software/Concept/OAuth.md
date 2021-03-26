@@ -60,7 +60,7 @@ scope=read
 - `scope`:表示申请的权限范围,可选项
 - `state`:表示客户端的当前状态,可以指定任意值,认证服务器会原封不动地返回这个值
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019040902.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019040902.jpg)
 
 2. 用户跳转后,B网站会要求用户登录,然后询问是否同意给予 A 网站授权,如果用户表示同意,这时 B 网站就会跳回`redirect_uri`参数指定的网址,跳转时,会传回一个授权码,就像下面这样:
 
@@ -71,7 +71,7 @@ https://a.com/callback?code=AUTHORIZATION_CODE
 - `code`:表示授权码,必选项,该码的有效期应该很短,通常设为10分钟,客户端只能使用该码一次,否则会被授权服务器拒绝,该码与客户端ID和重定向URI,是一一对应关系
 - `state`:如果客户端的请求中包含这个参数,认证服务器的回应也必须一模一样包含这个参数
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019040907.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019040907.jpg)
 
 3. A 网站拿到授权码以后,就可以在后端,向 B 网站请求令牌
 
@@ -89,7 +89,7 @@ redirect_uri=CALLBACK_URL
 - `code`:表示上一步获得的授权码,必选项
 - `redirect_uri`:表示重定向URI,必选项,且必须与步骤1中的该参数值保持一致
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019040904-20201210155049080.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019040904-20201210155049080.jpg)
 
 4. B 网站收到请求以后,就会颁发令牌,具体做法是向`redirect_uri`指定的网址,发送一段 JSON 数据
 
@@ -111,7 +111,7 @@ redirect_uri=CALLBACK_URL
 - `refresh_token`:表示更新令牌,用来获取下一次的访问令牌,可选项
 - `scope`:表示权限范围,如果与客户端申请的范围一致,此项可省略
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019040905.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019040905.jpg)
 
 ### 隐藏式
 
@@ -160,7 +160,7 @@ expires_in=3600
 - `state`:如果客户端的请求中包含这个参数,认证服务器的回应也必须一模一样包含这个参数
 - **注意**:令牌的位置是 URL 锚点(fragment),而不是查询字符串(querystring),这是因为 OAuth 2.0 允许跳转网址是 HTTP 协议,因此存在"中间人攻击"的风险,而浏览器跳转时,锚点不会发到服务器,就减少了泄漏令牌的风险
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019040906.jpg)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019040906.jpg)
 
 - 这种方式把令牌直接传给前端,是很不安全的,因此,只能用于一些安全要求不高的场景,并且令牌的有效期必须非常短,通常就是会话期间(session)有效,浏览器关掉,令牌就失效了
 
@@ -301,7 +301,7 @@ refresh_token=REFRESH_TOKEN
 - 一个应用要求 OAuth 授权,必须先到对方网站登记,让对方知道是谁在请求
 - 访问这个[网址](https://github.com/settings/applications/new),填写登记表
 
-<img src="https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-image-20201210162547810.png" alt="image-20201210162547810" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201210162547810.png" alt="image-20201210162547810" style="zoom:50%;" />
 
 - 提交表单以后,GitHub 应该会返回客户端 ID(client ID)和客户端密钥(client secret),这就是应用的身份识别码
 
@@ -324,7 +324,7 @@ https://github.com/login/oauth/authorize?
 
 - 登录后,GitHub 询问用户,该应用正在请求数据,你是否同意授权
 
-![img](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-10-bg2019042104.png)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019042104.png)
 
 - 如果用户同意授权,GitHub 就会跳转到`redirect_uri`指定的跳转网址,并且带上授权码:
 

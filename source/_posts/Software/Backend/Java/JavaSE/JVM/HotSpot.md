@@ -13,7 +13,7 @@ categories:
 
 ### 对象的内存布局
 
-![object-memory-layout.png](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-16-object-memory-layout.png)
+![object-memory-layout.png](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-16-object-memory-layout.png)
 
 - 在 HotSpot 虚拟机中，对象的内存布局分为以下 3 块区域：
 
@@ -69,13 +69,13 @@ categories:
 - 堆中需要有一块叫做“句柄池”的内存空间，句柄中包含了对象实例数据与类型数据各自的具体地址信息。
 - 引用类型的变量存放的是该对象的句柄地址（reference）。访问对象时，首先需要通过引用类型的变量找到该对象的句柄，然后根据句柄中对象的地址找到对象。
 
-![handle-access](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-16-handle-access.jpg)
+![handle-access](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-16-handle-access.jpg)
 
 **直接指针访问方式**
 
 - 引用类型的变量直接存放对象的地址，从而不需要句柄池，通过引用能够直接访问对象。但对象所在的内存空间需要额外的策略存储对象所属的类信息的地址。
 
-![direct-pointer](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-16-direct-pointer.jpg)
+![direct-pointer](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-16-direct-pointer.jpg)
 
 - 需要说明的是，HotSpot 采用第二种方式，即直接指针方式来访问对象，只需要一次寻址操作，所以在性能上比句柄访问方式快一倍。但像上面所说，它需要**额外的策略**来存储对象在方法区中类信息的地址。
 
@@ -91,14 +91,14 @@ HotSpot 虚拟机提供了多种垃圾收集器，每种收集器都有各自的
 - 一般客户端应用所需内存较小，不会创建太多对象，而且堆内存不大，因此垃圾收集器回收时间短，即使在这段时间停止一切用户线程，也不会感觉明显卡顿。因此 Serial 垃圾收集器**适合客户端**使用
 - 由于 Serial 收集器只使用一条 GC 线程，避免了线程切换的开销，从而简单高效
 
-![Serial](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-17-serial.png)
+![Serial](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-serial.png)
 
 #### ParNew 垃圾收集器（多线程）
 
 - ParNew 是 Serial 的多线程版本。由多条 GC 线程并行地进行垃圾清理。但清理过程依然需要 Stop The World。
 - ParNew 追求“**低停顿时间**”,与 Serial 唯一区别就是使用了多线程进行垃圾收集，在多 CPU 环境下性能比 Serial 会有一定程度的提升,但**线程切换需要额外的开销**，因此在单 CPU 环境中表现不如 Serial。
 
-![ParNew](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-17-parnew.png)
+![ParNew](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-parnew.png)
 
 #### Parallel Scavenge 垃圾收集器（多线程）
 
@@ -130,7 +130,7 @@ HotSpot 虚拟机提供了多种垃圾收集器，每种收集器都有各自的
   - 并发清除：只使用一条 GC 线程，与用户线程并发执行，清除刚才标记的对象。这个过程非常耗时。
 - 并发标记与并发清除过程耗时最长，且可以与用户线程一起工作，因此，**总体上说**，CMS 收集器的内存回收过程是与用户线程**一起并发执行**的。
 
-![CMS](https://cdn.jsdelivr.net/gh/LuShan123888/Files@main/Pictures/2021-03-17-cms.png)
+![CMS](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-cms.png)
 
 - **缺点**
   - 吞吐量低

@@ -26,7 +26,7 @@ categories:
 
 #### 流程图
 
-![Flowchart](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-21-Flowchart-8545082.png)
+![Flowchart](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-21-Flowchart-8545082.png)
 
 ```java
 import java.util.*;
@@ -120,7 +120,7 @@ public class test {
 
 #### 流程图
 
-![Flowchart (1)](https://cdn.jsdelivr.net/gh/LuShan123888/Files@master/Pictures/2020-12-21-Flowchart%2520(1).png)
+![Flowchart (1)](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-21-Flowchart%2520(1).png)
 
 ```java
 public class test {
