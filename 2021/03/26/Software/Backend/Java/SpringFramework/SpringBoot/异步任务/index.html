@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-19 01:24" pubdate>
-        2020年11月19日 凌晨
+      <time datetime="2021-03-26 15:50" pubdate>
+        2021年3月26日 下午
       </time>
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2020年11月19日 凌晨
+                  本文最后更新于：2021年3月26日 下午
                 
               </p>
             
@@ -218,11 +218,11 @@
 <li>在异步方法上添加@Async注解,告诉Spring这是一个异步方法</li>
 <li>假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Async</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>   <span class="hljs-keyword">try</span> &#123;<br>       Thread.sleep(<span class="hljs-number">3000</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>       e.printStackTrace();<br>  &#125;<br>   System.out.println(<span class="hljs-string">&quot;业务进行中....&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Async</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    Thread.sleep(<span class="hljs-number">3000</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>    e.printStackTrace();<br>  &#125;<br>  System.out.println(<span class="hljs-string">&quot;业务进行中....&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>SpringBoot就会自己开一个线程池,进行调用,但是要让这个注解生效,还需要在主程序上添加一个注解<code>@EnableAsync</code>,开启异步注解功能</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableAsync</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringbootTaskApplication</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>       SpringApplication.run(SpringbootTaskApplication.class, args);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableAsync</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringbootTaskApplication</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    SpringApplication.run(SpringbootTaskApplication.class, args);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>访问http://localhost:8080/hello进行测试,立即出现success,不用等待3000ms</li>
 </ul>
@@ -261,9 +261,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/19/Software/Backend/Java/JavaEE/Servlet/%E6%9D%83%E9%99%90%E8%BF%87%E6%BB%A4/">
+                      <a href="/2021/03/26/Software/Backend/Java/Maven/%E6%8F%92%E4%BB%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Servlet Filter 权限过滤</span>
+                        <span class="hidden-mobile">Maven 插件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -271,8 +271,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/19/Software/Backend/Java/SpringFramework/SpringBoot/%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81/">
-                        <span class="hidden-mobile">Spring Boot 邮件发送</span>
+                      <a href="/2021/03/26/Software/Backend/Java/SpringFramework/SpringBoot/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">Spring Boot 静态资源处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
