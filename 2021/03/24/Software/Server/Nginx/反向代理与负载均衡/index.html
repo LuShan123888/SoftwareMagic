@@ -1,0 +1,501 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Nginx 反向代理与负载均衡 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Nginx 反向代理与负载均衡">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-24 22:53" pubdate>
+        2021年3月24日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Nginx 反向代理与负载均衡</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月24日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Nginx 反向代理与负载均衡</h1>
+<h2 id="反向代理">反向代理</h2>
+<ul>
+<li>将<code>project.lushan.com</code>代理到<code>localhost:8080/project</code>上</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span>    <span class="hljs-number">80</span>;<br>  <span class="hljs-attribute">server_name</span> project.lushan.com;<br>  <span class="hljs-attribute">location</span> / &#123;<br>    <span class="hljs-attribute">proxy_pass</span> http://localhost:8080/project/;<br>    <span class="hljs-attribute">proxy_cookie_path</span>  /project /;<br>    <span class="hljs-attribute">proxy_set_header</span>  Host  $host;<br>    <span class="hljs-attribute">proxy_set_header</span>  X-Real-IP  $remote_addr;<br>    <span class="hljs-attribute">proxy_set_header</span>  X-Forwarded-For $proxy_add_x_forwarded_for;<br>    <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">3</span>;<br>    <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">30</span>;<br>    <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">30</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>proxy_cookie_path</code>:转发cookie和session,如果路径相同则不用转发</li>
+<li><code>proxy_connect_timeout</code>:nginx跟后端服务器连接超时时间(代理连接超时)</li>
+<li><code>proxy_send_timeout</code>:后端服务器数据回传时间(代理发送超时)</li>
+<li><code>proxy_read_timeout</code>:连接成功后,后端服务器响应时间(代理接收超时)</li>
+</ul>
+<h2 id="负载均衡">负载均衡</h2>
+<ul>
+<li>负载均衡主要分为硬件负载均衡和软件负载均衡,硬件负载均衡是使用专门的软件和硬件相结合的设备,设备商会提供完整成熟的解决方案,比如F5,在数据的稳定性以及安全性来说非常可靠,但是相比软件而言造价会更加昂贵,软件的负载均衡以Nginx这类软件为主,实现的一种消息队列分发机制</li>
+<li>简单来说所谓的负载均衡就是把很多请求进行分流,将他们分配到不同的服务器去处理,比如我有3个服务器,分别为A,B,C,然后使用Nginx进行负载均衡,使用轮询策略,此时如果收到了9个请求,那么会均匀的将这9个请求分发给A,B,Cf服务器,每一个服务器处理3个请求,这样的话我们可以利用多台机器集群的特性减少单个服务器的压力</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-05-640-7179448.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="负载均衡策略">负载均衡策略</h3>
+<p>NGINX开源支持四种负载平衡方法,而NGINX Plus又增加了两种方法</p>
+<h4 id="Round-Robin">Round Robin</h4>
+<p>对所有的请求进行轮询发送请求,默认的分配方式</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:上面的域名也可以用IP替代</p>
+<h4 id="Least-Connections">Least Connections</h4>
+<p>以最少的活动连接数将请求发送到服务器,同样要考虑服务器权重</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  least_conn;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="IP-Hash">IP Hash</h4>
+<p>发送请求的服务器由客户机IP地址决定,在这种情况下,使用IPv4地址的前三个字节或整个IPv6地址来计算散列值,该方法保证来自相同地址的请求到达相同的服务器,除非该服务器不可用</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  ip_hash;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Generic-Hash">Generic Hash</h4>
+<p>请求发送到的服务器由用户定义的键决定,该键可以是文本字符串,变量或组合</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  <span class="hljs-attribute">hash</span> $request_uri consistent;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Least-Time-NGINX-Plus-only">Least Time (NGINX Plus only)</h4>
+<p>对于每个请求,NGINX Plus选择具有最低平均延迟和最低活动连接数的服务器,其中最低平均延迟是根据包含least_time指令的下列参数计算的:</p>
+<ul>
+<li>header:从服务器接收第一个字节的时间</li>
+<li>last_byte:从服务器接收完整响应的时间</li>
+<li>last_byte inflight:从服务器接收完整响应的时间</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  <span class="hljs-attribute">least_time</span> header;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="Random">Random</h4>
+<ul>
+<li>
+<p>每个请求将被传递到随机选择的服务器,如果指定了两个参数,首先,NGINX根据服务器权重随机选择两个服务器,然后使用指定的方法选择其中一个</p>
+</li>
+<li>
+<p>least_conn:活动连接的最少数量</p>
+</li>
+<li>
+<p>least_time=header (NGINX Plus):从服务器接收响应标头的最短平均时间 ($upstream_header_time)</p>
+</li>
+<li>
+<p>least_time=last_byte (NGINX Plus):从服务器接收完整响应的最短平均时间($upstream_response_time)</p>
+</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>  <span class="hljs-attribute">random</span> two least_time=last_byte;<br>  <span class="hljs-attribute">server</span> www.panchengming.com;<br>  <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="fair-第三方">fair(第三方)</h4>
+<ul>
+<li>按后端服务器的响应时间来分配请求,响应时间短的优先分配</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> backserver &#123;<br>  fair;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.0.14</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.0.15</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="url-hash-第三方">url_hash(第三方)</h4>
+<ul>
+<li>按访问url的hash结果来分配请求,使每个url定向到同一个后端服务器,后端服务器为缓存时比较有效</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> images6.static.com &#123;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.11.11:80</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.12:80</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.13:80</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.14:80</span>;<br>  <span class="hljs-attribute">hash</span>    $request_uri;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="weight">weight</h3>
+<p>指定轮询几率,weight和访问比率成正比,用于后端服务器性能不均的情况</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> tomcat &#123;<br>  ip_hash;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8081</span> weight=<span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8082</span> weight=<span class="hljs-number">2</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8083</span> weight=<span class="hljs-number">3</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="配置文件实例">配置文件实例</h2>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> tomcat &#123;<br>  ip_hash;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8081</span> weight=<span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8082</span> weight=<span class="hljs-number">2</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8083</span> weight=<span class="hljs-number">3</span>;<br>&#125;<br><br><span class="hljs-section">server</span> &#123;<br>  <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>  <span class="hljs-attribute">server_name</span> project.lushan.com;<br>  <span class="hljs-comment">#charset koi8-r;</span><br>  <span class="hljs-comment">#access_log  logs/host.access.log  main;</span><br><br>  <span class="hljs-attribute">location</span> / &#123;<br>    <span class="hljs-attribute">index</span> index.html index.htm;<br>    <span class="hljs-attribute">proxy_pass</span> http://tomcat;<br>    <span class="hljs-attribute">proxy_cookie_path</span> /project /;<br>    <span class="hljs-attribute">proxy_set_header</span> Host $host;<br>    <span class="hljs-attribute">proxy_set_header</span> X-Real-IP $remote_addr;<br>    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;<br>    <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">3</span>;<br>    <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">30</span>;<br>    <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">30</span>;<br>  &#125;<br><br>  <span class="hljs-comment">#error_page  404              /404.html;</span><br><br>  <span class="hljs-comment"># redirect server error pages to the static page /50x.html</span><br>  <span class="hljs-comment">#</span><br>  <span class="hljs-attribute">error_page</span> <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span> /50x.html;<br>  <span class="hljs-attribute">location</span> = /50x.html &#123;<br>    <span class="hljs-attribute">root</span> html;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Server/">Server</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Server/Nginx/">Nginx</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/24/Software/Server/Nginx/SSL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nginx SSL证书部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/24/Software/Server/Tomcat/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">Tomcat 初始化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

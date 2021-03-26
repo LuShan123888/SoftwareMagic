@@ -154,25 +154,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">MySQL 问题解决</a>
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">Redis 哨兵模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">
           
           
             
           
-          MySQL 问题解决
-MySQL数据库存入Date时显示不正常的问题
-原驱动
-1jdbc:mysql://localhost:3306/sms?serverTimezone=UTC
-改为
-1jdbc:mysql://localhost:3306/sms?serverTimezone=Asia/Shanghai
-Host is blocked
-报错信息
+          Redis 哨兵模式
 
-Host is blocked becaus
+哨兵模式能够后台监控主机是否故障,如果故障了根据投票数自动将从节点转换为主节点
+哨兵模式是一种特殊的模式,首先Reds提供了哨兵的命令,哨兵是一个独立的进程,作为进程,它会独立运行
+原理:哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例
+
+
+哨兵的作用
+
+通过发送命令,让 Redish服务器返回监控其运行状态,包括主节点和从节点
+当哨兵监测到
         </a>
       </p>
 
@@ -180,8 +181,8 @@ Host is blocked becaus
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:31" pubdate>
-              2021-03-15
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -195,7 +196,7 @@ Host is blocked becaus
             
               <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -210,26 +211,29 @@ Host is blocked becaus
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/">MySQL 配置</a>
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/">Redis 缓存穿透与雪崩</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/">
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/">
           
           
             
           
-          MySQL 配置
-SQL查询区分大小写
-Mysql默认的字符检索策略:
+          Redis 缓存穿透与雪崩
 
-utf8_general_ci,表示不区分大小写;
-utf8_general_cs表示区分大小写
-utf8_bin表示二进制比较,同样也区分大小写
-注意:在Mysql5.6.10版本中,不支持utf8_genral_cs
+服务的高可用问题
 
-修改表collate属性
-创建表时,直接设置表的collate属性为utf8_general_cs或者
+缓存穿透
+概述
+
+用户想要查询一个数据,发现 redis内存数据库没有,也就是缓存没有命中,于是向持久层数据库查询,如果持久层也没有,本次查询失败
+当用户很多的时候,缓存都没有命中,于是都去请求了持久层数据库,这会给持久层数据库造成很大的压力,这时候就相当于出现了缓存穿透
+
+解决方法
+布隆过滤器
+
+布隆过滤器是一种数据结构,对所有可能查询的参数以h
         </a>
       </p>
 
@@ -237,8 +241,8 @@ utf8_bin表示二进制比较,同样也区分大小写
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:27" pubdate>
-              2021-03-15
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -252,7 +256,7 @@ utf8_bin表示二进制比较,同样也区分大小写
             
               <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -267,22 +271,24 @@ utf8_bin表示二进制比较,同样也区分大小写
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Docker/Compose/">Docker Compose</a>
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/rownum&rowid/">Oracle rownum&amp;rowid</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Docker/Compose/">
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/rownum&rowid/">
           
           
             
           
-          Docker Compose
+          Oracle rownum&amp;rowid
 
-Compose 是用于定义和运行多容器 Docker 应用程序的工具,通过 Compose,您可以使用 YML 文件来配置应用程序需要的所有服务,然后,使用一个命令,就可以从 YML 文件配置中创建并启动所有服务
-Compose 使用的三个步骤:
+分页的核心就是计算每页多少记录和总页数以及第几页,每一页的数据则只需计算起始的记录和结束记录即可
 
-使用Dockerfile定义应用程序的环境
-使用docker-compose.yml定义构成应用程序的服务,这样它们可
+rownum
+
+rownum 不是一个真实存在的列, 它是用于从查询返回的行的编号, 返回的第一行分配的是 1, 第二行是 2, 依此类推, 这个伪字段可以用于限制查询返回的总行数
+
+1select * from emp where rownum &
         </a>
       </p>
 
@@ -290,8 +296,8 @@ Compose 使用的三个步骤:
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:17" pubdate>
-              2021-03-15
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -301,7 +307,11 @@ Compose 使用的三个步骤:
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Docker/">Docker</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -316,26 +326,25 @@ Compose 使用的三个步骤:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">Docker 网络</a>
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90/">Oracle 概念与组成</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/">
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90/">
           
           
             
           
-          Docker 网络
+          Oracle 概念与组成
 
-docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
-所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
-Docker中的所有的网络接口都是虚拟的
+数据库
 
-port
+Oracle数据库是数据的物理存储,这就包括(数据文件ORA或者DBF, 控制文件, 联机日志, 参数文件)
+其实Oracle数据库的概念和其它数据库不一样, 这里的数据库是一个操作系统只有一个库,可以看作是Oracle就只有一个大数据库
 
-快捷地查看端口的绑定情况
+实例
 
-1$ dock
+一个Oracle实例(Oracle Instance)有一系列的后台进程(Backguound Processe
         </a>
       </p>
 
@@ -343,8 +352,8 @@ port
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:17" pubdate>
-              2021-03-15
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -354,7 +363,11 @@ port
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Docker/">Docker</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -369,27 +382,25 @@ port
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/14/Software/Tools/Homebrew/%E5%91%BD%E4%BB%A4/">HomeBrew 命令</a>
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/">Oracle 表连接</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/14/Software/Tools/Homebrew/%E5%91%BD%E4%BB%A4/">
+        <a href="/2021/03/24/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
           
           
             
           
-          HomeBrew 命令
-包管理
-查看包的信息
-1brew info [包名]
-查询可用包
-1brew search [包名]
-安装软件包
-1234brew install [包名]//使用rb文件安装brew install ./Formula/thrift.rb
-查询可更新的包
-1brew outdated
-更新包
-12345678//更新所有brew upgrade//更新指定包brew up
+          Oracle 表连接
+概述
+
+即查询的时候同时需要多张表(特别是存在外键关系的), 此时需要多张表之间的值进行连接
+目前 SQL 标准提出过两种连接查询, 第一种是较早的 SQL92 标准, 第二种是目前使用广泛的较新的 SQL99 标准
+92 形式简单, 但编写较为冗长, 99 不仅在底层得到优化, 而且形式看上去更加一目了然, 逻辑性更强, 一般建议使用 99 标准
+
+92语法
+
+多张表需要全
         </a>
       </p>
 
@@ -397,8 +408,8 @@ port
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 22:18" pubdate>
-              2021-03-14
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -408,56 +419,11 @@ port
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Homebrew/">Homebrew</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Internet/TCPIP/TCP%E8%BF%9E%E6%8E%A5/">TCP 连接</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Internet/TCPIP/TCP%E8%BF%9E%E6%8E%A5/">
-          
-          
-            
-          
-          TCP 连接
-
-TCP是一种面向连接的单播协议，在发送数据前，通信双方必须在彼此间建立一条连接。所谓的“连接”，其实是客户端和服务器的内存里保存的一份关于对方的信息，如ip地址、端口号等。
-TCP可以看成是一种字节流，它会处理IP层或以下的层的丢包、重复以及错误问题。在连接的建立过程中，双方需要交换一些连接的参数。这些参数可以放在TCP头部。
-TCP提供了一种可靠、面向连接、字节流、传输层的服务，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:47" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Internet/">Internet</a>
-            
-              <a href="/categories/Internet/TCPIP/">TCPIP</a>
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -472,21 +438,22 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">设计模式 装饰模式</a>
+        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/admin/">Dubbo admin</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/admin/">
           
           
             
           
-          设计模式 装饰模式
+          Dubbo admin
 
-装饰模式也称为装饰者模式或者装饰器模式，表示动态的给一个对象添加一些新的功能（利用子类继承父类也可以实现），但是比生成子类方式更灵活。
-例如：我们每个人身上穿的衣服，鞋子，领带，披风都可以理解为是对人的装饰。
+Dubbo本身并不是一个服务软件,而是一个jar包,能够帮你的java程序连接到zookeeper,并利用zookeeper消费,提供服务
+但是为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin,不过这个监控即使不装也不影响使用
 
-
+下载dubbo-admin
+地址 :https://github.com/apache/dub
         </a>
       </p>
 
@@ -494,8 +461,8 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:41" pubdate>
-              2021-03-14
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -505,60 +472,11 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">设计模式 组合模式</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
-          
-          
-            
-          
-          设计模式 组合模式
-
-将对象组合成树形结构以表示：部分–整体 的层次结构。
-组合模式使得用户对单个对象和组合对象的使用具有一致性。
-基本上见到的树形结构都使用到了组合模式。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:40" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
-            
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -573,28 +491,24 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">设计模式 外观模式</a>
+        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/">Dubbo 概念</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/">
           
           
             
           
-          设计模式 外观模式
+          Dubbo 概念
+
+Apache Dubbo |ˈdʌbəʊ| 是一款高性能,轻量级的开源Java RPC框架,它提供了三大核心能力:面向接口的远程方法调用,智能容错和负载均衡,以及服务自动注册和发现
+Dubbo官网 http://dubbo.apache.org/zh-cn/index.html
+
+Dubbo 组成
 
 
-为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口。这个接口使得这一子系统更加容易使用。
-
-
-遵守迪米特法则（最少知识原则）。可以理解为封装。
-
-
-外观模式的核心：为子系统提供统一的入口，封装子系统的复杂性，便于客户端调用
-
-
-
+服务提供者(Provider):暴露服务的服务提供方,服务提供者在启动时,向
         </a>
       </p>
 
@@ -602,8 +516,8 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:40" pubdate>
-              2021-03-14
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -613,9 +527,11 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -630,20 +546,19 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">设计模式 享元模式</a>
+        <a href="/2021/03/24/Software/Backend/Java/Maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">Maven 问题解决</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/03/24/Software/Backend/Java/Maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
           
           
             
           
-          设计模式 享元模式
+          Maven 问题解决
+优先使用本地仓库
 
-运用共享技术有效的支持大量细粒度对象的重用。它能做到共享的关键就是区分了内部状态（可以共享，不会随环境变化而变化）和外部状态（不可以共享，会随环境变化而变化）
-如果项目中有很多完全相同或相似的对象，则可以使用享元模式，节省内存。
-
+1-DarchetypeCatalog=internal
 
         </a>
       </p>
@@ -652,8 +567,8 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:39" pubdate>
-              2021-03-14
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -663,9 +578,125 @@ TCP提供了一种可靠、面向连接、字节流、传输层的服务，
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/Maven/">Maven</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Druid/">Spring Boot 整合Druid</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Druid/">
+          
+          
+            
+          
+          Spring Boot 整合Druid
+Druid 简介
+
+Java程序很大一部分要操作数据库,为了提高性能操作数据库的时候,又不得不使用数据库连接池
+Druid 是阿里巴巴开源平台上一个数据库连接池实现,结合了 C3P0,DBCP 等 DB 池的优点,同时加入了日志监控
+Druid 可以很好的监控 DB 池连接和 SQL 的执行情况,天生就是针对监控而生的 DB 连接池
+Druid已经在阿里巴巴
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/SpringBoot/">SpringBoot</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Dubbo/">Spring Boot 整合 Dubbo</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Dubbo/">
+          
+          
+            
+          
+          Spring Boot 整合 Dubbo
+准备工作
+
+安装并启动Zookeeper
+启动Dubbo-admin可视化界面
+创建Spring Boot 空项目
+
+服务提供者
+
+在项目中新建模块,并添加web框架
+将服务提供者注册到注册中心,需要整合Dubbo和zookeeper
+
+pom.xml
+Dubbo
+123456&lt;!-- Dubbo Spring Boot Starter --&gt;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/SpringBoot/">SpringBoot</a>
             
           </div>
         
