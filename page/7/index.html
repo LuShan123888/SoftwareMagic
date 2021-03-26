@@ -154,26 +154,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">Redis 哨兵模式</a>
+        <a href="/2021/03/24/Software/System/macOS/SIP/">macOS SIP</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/03/24/Software/System/macOS/SIP/">
           
           
             
           
-          Redis 哨兵模式
+          macOS SIP
+查看SIP状态
+1csrutil status
 
-哨兵模式能够后台监控主机是否故障,如果故障了根据投票数自动将从节点转换为主节点
-哨兵模式是一种特殊的模式,首先Reds提供了哨兵的命令,哨兵是一个独立的进程,作为进程,它会独立运行
-原理:哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例
+未关闭 enabled:
 
+1System Integrity Protection status: enabled.
 
-哨兵的作用
+已关闭 disabled:
 
-通过发送命令,让 Redish服务器返回监控其运行状态,包括主节点和从节点
-当哨兵监测到
+1System Integrity Protection status: disabled
+关闭SIP
+
+关机,然后重新启动你的Mac电脑,在开机时一直按住Command+R迸入
         </a>
       </p>
 
@@ -192,11 +195,9 @@
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/System/">System</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+              <a href="/categories/Software/System/macOS/">macOS</a>
             
           </div>
         
@@ -211,29 +212,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Database/Redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/">Redis 缓存穿透与雪崩</a>
+        <a href="/2021/03/24/Software/System/macOS/TimeMachine/">macOS 时间机器</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Database/Redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E4%B8%8E%E9%9B%AA%E5%B4%A9/">
+        <a href="/2021/03/24/Software/System/macOS/TimeMachine/">
           
           
             
           
-          Redis 缓存穿透与雪崩
+          macOS 时间机器
+删除本地缓存
+打开&quot;终端”输入如下代码
+1sudo tmutil listlocalsnapshots /
+键入密码(不会显示,直接输完回车即可)出现以下画面
 
-服务的高可用问题
-
-缓存穿透
-概述
-
-用户想要查询一个数据,发现 redis内存数据库没有,也就是缓存没有命中,于是向持久层数据库查询,如果持久层也没有,本次查询失败
-当用户很多的时候,缓存都没有命中,于是都去请求了持久层数据库,这会给持久层数据库造成很大的压力,这时候就相当于出现了缓存穿透
-
-解决方法
-布隆过滤器
-
-布隆过滤器是一种数据结构,对所有可能查询的参数以h
+接下来只需逐个删除就行,终端输入
+1tmutil deletelocalsnapshots 2017-12-18-093234(上面文件末尾显示的日期)
+即可删除相关备份
+加速命令
+1sudo sysctl
         </a>
       </p>
 
@@ -252,11 +250,168 @@
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/System/">System</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
+              <a href="/categories/Software/System/macOS/">macOS</a>
             
-              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Tools/Aria2/%E5%88%9D%E5%A7%8B%E5%8C%96/">Aria2 初始化</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Tools/Aria2/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+          
+          
+            
+          
+          Aria2 初始化
+安装
+下载并运行脚本:
+123wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.shchmod +x aria2.shbash aria2.sh
+脚本安装界面:
+
+进程管理
+
+启动:service aria2 start
+停止:servi
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Aria2/">Aria2</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Tools/Tmux/%E5%91%BD%E4%BB%A4/">Tmux 命令</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Tools/Tmux/%E5%91%BD%E4%BB%A4/">
+          
+          
+            
+          
+          Tmux 命令
+Conception
+tmux的主要元素分为三层:
+
+Session 一组窗口的集合,通常用来概括同一个任务,session可以有自己的名字便于任务之间的切换
+Window 单个可见窗口,Windows有自己的编号,也可以认为和ITerm2中的Tab类似
+Pane 窗格,被划分成小块的窗口,类似于Vim中 C-w +v 后的效果, 一图以蔽之:
+
+
+Tmux为了防止与全局快捷键冲突
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Tmux/">Tmux</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/">Vim 普通模式</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/">
+          
+          
+            
+          
+          Vim 普通模式
+Vim编辑方式的主要用途是在被编辑的文件中移动光标的位置,一旦光标移到到所要的位置,就可以进行剪切和粘贴正文块,删除正文和插入新的正文,当完成所有的编辑工作后,需要保存编辑器结果,退出编辑程序回到终端,可以发出ZZ命令,连续按两次大写的Z键
+移动光标
+如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能
+
+k:上移
+j
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Vim/">Vim</a>
             
           </div>
         
@@ -438,22 +593,24 @@ Oracle数据库是数据的物理存储,这就包括(数据文件ORA或者DBF, �
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/admin/">Dubbo admin</a>
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">Redis 发布订阅</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/admin/">
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
           
           
             
           
-          Dubbo admin
+          Redis 发布订阅
 
-Dubbo本身并不是一个服务软件,而是一个jar包,能够帮你的java程序连接到zookeeper,并利用zookeeper消费,提供服务
-但是为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin,不过这个监控即使不装也不影响使用
+Redis 发布订阅 (pub/sub) 是一种消息通信模式:发送者 (pub) 发送消息,订阅者 (sub) 接收消息
+Redis 客户端可以订阅任意数量的频道
+下图展示了频道 channel1 , 以及订阅这个频道的三个客户端——client2 , client5 和 client1 之间的关系:
 
-下载dubbo-admin
-地址 :https://github.com/apache/dub
+
+
+当有新消息通过 PUBLISH 命令发送给频道 channel1 
         </a>
       </p>
 
@@ -474,9 +631,9 @@ Dubbo本身并不是一个服务软件,而是一个jar包,能够帮你的java程
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -491,24 +648,26 @@ Dubbo本身并不是一个服务软件,而是一个jar包,能够帮你的java程
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/">Dubbo 概念</a>
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">Redis 哨兵模式</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/">
+        <a href="/2021/03/24/Software/Backend/Database/Redis/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">
           
           
             
           
-          Dubbo 概念
+          Redis 哨兵模式
 
-Apache Dubbo |ˈdʌbəʊ| 是一款高性能,轻量级的开源Java RPC框架,它提供了三大核心能力:面向接口的远程方法调用,智能容错和负载均衡,以及服务自动注册和发现
-Dubbo官网 http://dubbo.apache.org/zh-cn/index.html
+哨兵模式能够后台监控主机是否故障,如果故障了根据投票数自动将从节点转换为主节点
+哨兵模式是一种特殊的模式,首先Reds提供了哨兵的命令,哨兵是一个独立的进程,作为进程,它会独立运行
+原理:哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例
 
-Dubbo 组成
 
+哨兵的作用
 
-服务提供者(Provider):暴露服务的服务提供方,服务提供者在启动时,向
+通过发送命令,让 Redish服务器返回监控其运行状态,包括主节点和从节点
+当哨兵监测到
         </a>
       </p>
 
@@ -529,174 +688,9 @@ Dubbo 组成
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/24/Software/Backend/Java/Maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">Maven 问题解决</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/Maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-          
-          
-            
-          
-          Maven 问题解决
-优先使用本地仓库
-
-1-DarchetypeCatalog=internal
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-24 22:53" pubdate>
-              2021-03-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/Maven/">Maven</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Druid/">Spring Boot 整合Druid</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Druid/">
-          
-          
-            
-          
-          Spring Boot 整合Druid
-Druid 简介
-
-Java程序很大一部分要操作数据库,为了提高性能操作数据库的时候,又不得不使用数据库连接池
-Druid 是阿里巴巴开源平台上一个数据库连接池实现,结合了 C3P0,DBCP 等 DB 池的优点,同时加入了日志监控
-Druid 可以很好的监控 DB 池连接和 SQL 的执行情况,天生就是针对监控而生的 DB 连接池
-Druid已经在阿里巴巴
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-24 22:53" pubdate>
-              2021-03-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringBoot/">SpringBoot</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Dubbo/">Spring Boot 整合 Dubbo</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/SpringBoot/Dubbo/">
-          
-          
-            
-          
-          Spring Boot 整合 Dubbo
-准备工作
-
-安装并启动Zookeeper
-启动Dubbo-admin可视化界面
-创建Spring Boot 空项目
-
-服务提供者
-
-在项目中新建模块,并添加web框架
-将服务提供者注册到注册中心,需要整合Dubbo和zookeeper
-
-pom.xml
-Dubbo
-123456&lt;!-- Dubbo Spring Boot Starter --&gt;
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-24 22:53" pubdate>
-              2021-03-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringBoot/">SpringBoot</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         

@@ -1,0 +1,709 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Spring MVC 数据验证 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring MVC 数据验证">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-17 15:32" pubdate>
+        2021年2月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring MVC 数据验证</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年2月17日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Spring MVC 数据验证</h1>
+<ul>
+<li><code>Java API</code>规范 (<code>JSR303</code>) 定义了<code>Bean</code>校验的标准<code>validation-api</code>,但没有提供实现,<code>hibernate validation</code>是对这个规范的实现,并增加了校验注解如<code>@Email</code>,<code>@Length</code>等,<code>Spring Validation</code>是对<code>hibernate validation</code>的二次封装,用于支持<code>spring mvc</code>参数自动校验</li>
+</ul>
+<h2 id="JSR-303">JSR-303</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Constraint</th>
+<th style="text-align:center">详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@Null</td>
+<td style="text-align:center">被注释的元素必须为 null</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotNull</td>
+<td style="text-align:center">被注释的元素必须不为 null</td>
+</tr>
+<tr>
+<td style="text-align:left">@AssertTrue</td>
+<td style="text-align:center">被注释的元素必须为 true</td>
+</tr>
+<tr>
+<td style="text-align:left">@AssertFalse</td>
+<td style="text-align:center">被注释的元素必须为 false</td>
+</tr>
+<tr>
+<td style="text-align:left">@Min(value)</td>
+<td style="text-align:center">被注释的元素必须是一个数字,其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">@Max(value)</td>
+<td style="text-align:center">被注释的元素必须是一个数字,其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">@DecimalMin(value)</td>
+<td style="text-align:center">被注释的元素必须是一个数字,其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">@DecimalMax(value)</td>
+<td style="text-align:center">被注释的元素必须是一个数字,其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">@Size(max, min)</td>
+<td style="text-align:center">被注释的元素的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@Digits (integer, fraction)</td>
+<td style="text-align:center">被注释的元素必须是一个数字,其值必须在可接受的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@Past</td>
+<td style="text-align:center">被注释的元素必须是一个过去的日期</td>
+</tr>
+<tr>
+<td style="text-align:left">@Future</td>
+<td style="text-align:center">被注释的元素必须是一个将来的日期</td>
+</tr>
+<tr>
+<td style="text-align:left">@Pattern(value)</td>
+<td style="text-align:center">被注释的元素必须符合指定的正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:left">@Email</td>
+<td style="text-align:center">被注释的元素必须是电子邮箱地址</td>
+</tr>
+<tr>
+<td style="text-align:left">@Length</td>
+<td style="text-align:center">被注释的字符串的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotEmpty</td>
+<td style="text-align:center">被注释的字符串的必须非空</td>
+</tr>
+<tr>
+<td style="text-align:left">@Range</td>
+<td style="text-align:center">被注释的元素必须在合适的范围内</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pom-xml">pom.xml</h2>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.hibernate.validator<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hibernate-validator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.0.5.Final<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="注释">注释</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">区别</th>
+<th style="text-align:left">@Valid</th>
+<th style="text-align:left">@Validated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">提供者</td>
+<td style="text-align:left">JSR-303 规范</td>
+<td style="text-align:left">Spring</td>
+</tr>
+<tr>
+<td style="text-align:left">是否支持分组</td>
+<td style="text-align:left">不支持</td>
+<td style="text-align:left">支持</td>
+</tr>
+<tr>
+<td style="text-align:left">标注位置</td>
+<td style="text-align:left">METHOD, FIELD, CONSTRUCTOR, PARAMETER, TYPE_USE</td>
+<td style="text-align:left">TYPE, METHOD, PARAMETER</td>
+</tr>
+<tr>
+<td style="text-align:left">嵌套校验</td>
+<td style="text-align:left">支持</td>
+<td style="text-align:left">不支持</td>
+</tr>
+</tbody>
+</table>
+<h2 id="requestBody参数校验">requestBody参数校验</h2>
+<ul>
+<li><code>POST</code>,<code>PUT</code>请求一般会使用<code>requestBody</code>传递参数,这种情况下,后端使用DTO 对象进行接收</li>
+<li>只要给 DTO 对象加上<code>@Validated</code>注解就能实现自动参数校验</li>
+<li></li>
+<li>如果校验失败,会抛出<code>MethodArgumentNotValidException</code>异常,<code>Spring</code>默认会将其转为<code>400(Bad Request)</code>请求</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>比如,有一个保存<code>User</code>的接口,要求<code>userName</code>长度是<code>2-10</code>,<code>account</code>和<code>password</code>字段长度是<code>6-20</code></li>
+<li>在<code>DTO</code>字段上声明约束注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDTO</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> Long userId;<br><br>    <span class="hljs-meta">@NotNull</span><br>    <span class="hljs-meta">@Length(min = 2, max = 10)</span><br>    <span class="hljs-keyword">private</span> String userName;<br><br>    <span class="hljs-meta">@NotNull</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20)</span><br>    <span class="hljs-keyword">private</span> String account;<br><br>    <span class="hljs-meta">@NotNull</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20)</span><br>    <span class="hljs-keyword">private</span> String password;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在方法参数上声明校验注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/save&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">saveUser</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> <span class="hljs-meta">@Validated</span> UserDTO userDTO)</span> </span>&#123;<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这种情况下,使用<code>@Valid</code>和<code>@Validated</code>都可以</li>
+</ul>
+<h3 id="requestParam-PathVariable参数校验">requestParam/PathVariable参数校验</h3>
+<ul>
+<li><code>GET</code>请求一般会使用<code>requestParam/PathVariable</code>传参</li>
+<li>在这种情况下,必须在<code>Controller</code>类上标注<code>@Validated</code>注解,并在入参上声明约束注解 (如<code>@Min</code>等)</li>
+<li>如果校验失败,会抛出<code>ConstraintViolationException</code>异常,代码示例如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/api/user&quot;)</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@Validated</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br><br>    <span class="hljs-meta">@GetMapping(&quot;&#123;userId&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">detail</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;userId&quot;)</span> <span class="hljs-meta">@Min(10000000000000000L)</span> Long userId)</span> </span>&#123;<br><br>        UserDTO userDTO = <span class="hljs-keyword">new</span> UserDTO();<br>        userDTO.setUserId(userId);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        userDTO.setUserName(<span class="hljs-string">&quot;xixi&quot;</span>);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        <span class="hljs-keyword">return</span> Result.ok(userDTO);<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;getByAccount&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">getByAccount</span><span class="hljs-params">(<span class="hljs-meta">@Length(min = 6, max = 20)</span> <span class="hljs-meta">@NotNull</span> String  account)</span> </span>&#123;<br><br>        UserDTO userDTO = <span class="hljs-keyword">new</span> UserDTO();<br>        userDTO.setUserId(<span class="hljs-number">10000000000000003L</span>);<br>        userDTO.setAccount(account);<br>        userDTO.setUserName(<span class="hljs-string">&quot;xixi&quot;</span>);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        <span class="hljs-keyword">return</span> Result.ok(userDTO);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="统一异常处理">统一异常处理</h2>
+<ul>
+<li>如果校验失败,会抛出<code>MethodArgumentNotValidException</code>或者<code>ConstraintViolationException</code>异常</li>
+<li>在实际项目开发中,通常会用<strong>统一异常处理</strong>来返回一个更友好的提示</li>
+<li>比如我们系统要求无论发送什么异常,<code>http</code>的状态码必须返回<code>200</code>,由业务码去区分系统的异常情况</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestControllerAdvice</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CommonExceptionHandler</span> </span>&#123;<br><br>    <span class="hljs-meta">@ExceptionHandler(&#123;MethodArgumentNotValidException.class&#125;)</span><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.OK)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">handleMethodArgumentNotValidException</span><span class="hljs-params">(MethodArgumentNotValidException ex)</span> </span>&#123;<br>        BindingResult bindingResult = ex.getBindingResult();<br>        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;校验失败:&quot;</span>);<br>        <span class="hljs-keyword">for</span> (FieldError fieldError : bindingResult.getFieldErrors()) &#123;<br>            sb.append(fieldError.getField()).append(<span class="hljs-string">&quot;:&quot;</span>).append(fieldError.getDefaultMessage()).append(<span class="hljs-string">&quot;, &quot;</span>);<br>        &#125;<br>        String msg = sb.toString();<br>       <span class="hljs-keyword">return</span> Result.fail(BusinessCode.参数校验失败, msg);<br>    &#125;<br><br>    <span class="hljs-meta">@ExceptionHandler(&#123;ConstraintViolationException.class&#125;)</span><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.OK)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">handleConstraintViolationException</span><span class="hljs-params">(ConstraintViolationException ex)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> Result.fail(BusinessCode.参数校验失败, ex.getMessage());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="分组校验">分组校验</h2>
+<ul>
+<li>
+<p>在实际项目中,可能多个方法需要使用同一个<code>DTO</code>类来接收参数,而不同方法的校验规则很可能是不一样的</p>
+</li>
+<li>
+<p>这个时候,简单地在<code>DTO</code>类的字段上加约束注解无法解决这个问题</p>
+</li>
+<li>
+<p>因此,<code>spring-validation</code>支持了<strong>分组校验</strong>的功能,专门用来解决这类问题</p>
+</li>
+<li>
+<p>比如保存<code>User</code>的时候,<code>UserId</code>是可空的,但是更新<code>User</code>的时候,<code>UserId</code>的值必须<code>&gt;=10000000000000000L</code></p>
+</li>
+<li>
+<p>约束注解上声明适用的分组信息<code>groups</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDTO</span> </span>&#123;<br><br>    <span class="hljs-meta">@Min(value = 10000000000000000L, groups = Update.class)</span><br>    <span class="hljs-keyword">private</span> Long userId;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 2, max = 10, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String userName;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String account;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String password;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Save</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Update</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>@Validated</code>注解上指定校验分组</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/save&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">saveUser</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> <span class="hljs-meta">@Validated(UserDTO.Save.class)</span> UserDTO userDTO)</span> </span>&#123;<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br><br><span class="hljs-meta">@PostMapping(&quot;/update&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">updateUser</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> <span class="hljs-meta">@Validated(UserDTO.Update.class)</span> UserDTO userDTO)</span> </span>&#123;<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="嵌套校验">嵌套校验</h2>
+<ul>
+<li>前面的示例中,<code>DTO</code>类里面的字段都是<code>基本数据类型</code>和<code>String</code>类型,但是实际场景中,有可能某个字段也是一个对象,这种情况先,可以使用<code>嵌套校验</code></li>
+<li>比如,上面保存<code>User</code>信息的时候同时还带有<code>Job</code>信息,需要注意的是,此时<code>DTO</code>类的对应字段必须标记<code>@Valid</code>注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserDTO</span> </span>&#123;<br><br>    <span class="hljs-meta">@Min(value = 10000000000000000L, groups = Update.class)</span><br>    <span class="hljs-keyword">private</span> Long userId;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 2, max = 10, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String userName;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String account;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Length(min = 6, max = 20, groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-keyword">private</span> String password;<br><br>    <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>    <span class="hljs-meta">@Valid</span><br>    <span class="hljs-keyword">private</span> Job job;<br><br>    <span class="hljs-meta">@Data</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Job</span> </span>&#123;<br><br>        <span class="hljs-meta">@Min(value = 1, groups = Update.class)</span><br>        <span class="hljs-keyword">private</span> Long jobId;<br><br>        <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>        <span class="hljs-meta">@Length(min = 2, max = 10, groups = &#123;Save.class, Update.class&#125;)</span><br>        <span class="hljs-keyword">private</span> String jobName;<br><br>        <span class="hljs-meta">@NotNull(groups = &#123;Save.class, Update.class&#125;)</span><br>        <span class="hljs-meta">@Length(min = 2, max = 10, groups = &#123;Save.class, Update.class&#125;)</span><br>        <span class="hljs-keyword">private</span> String position;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Save</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Update</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>嵌套校验可以结合分组校验一起使用,还有就是<code>嵌套集合校验</code>会对集合里面的每一项都进行校验,例如<code>List&lt;Job&gt;</code>字段会对这个<code>list</code>里面的每一个<code>Job</code>对象都进行校验</li>
+</ul>
+<h2 id="集合校验">集合校验</h2>
+<ul>
+<li>
+<p>如果请求体直接传递了<code>json</code>数组给后台,并希望对数组中的每一项都进行参数校验</p>
+</li>
+<li>
+<p>此时,如果我们直接使用<code>java.util.Collection</code>下的<code>list</code>或者<code>set</code>来接收数据,参数校验并不会生效!我们可以使用自定义<code>list</code>集合来接收参数:</p>
+</li>
+<li>
+<p>包装<code>List</code>类型,并声明<code>@Valid</code>注解</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValidationList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br><br>    <span class="hljs-meta">@Delegate</span><br>    <span class="hljs-meta">@Valid</span><br>    <span class="hljs-keyword">public</span> List&lt;E&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> list.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>@Delegate</code>注解受<code>lombok</code>版本限制,<code>1.18.6</code>以上版本可支持,如果校验不通过,会抛出<code>NotReadablePropertyException</code>,同样可以使用统一异常进行处理</li>
+<li>比如,我们需要一次性保存多个<code>User</code>对象,<code>Controller</code>层的方法可以这么写:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;/saveList&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">saveList</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> <span class="hljs-meta">@Validated(UserDTO.Save.class)</span> ValidationList&lt;UserDTO&gt; userList)</span> </span>&#123;<br><br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="自定义校验">自定义校验</h2>
+<ul>
+<li>
+<p>业务需求总是比框架提供的这些简单校验要复杂的多,我们可以自定义校验来满足我们的需求</p>
+</li>
+<li>
+<p>自定义<code>spring validation</code>非常简单,假设我们自定义<code>加密id</code>(由数字或者<code>a-f</code>的字母组成,<code>32-256</code>长度)校验,主要分为两步:</p>
+</li>
+<li>
+<p>自定义约束注解</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(&#123;METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER&#125;)</span><br><span class="hljs-meta">@Retention(RUNTIME)</span><br><span class="hljs-meta">@Documented</span><br><span class="hljs-meta">@Constraint(validatedBy = &#123;EncryptIdValidator.class&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> EncryptId &#123;<br><br>    <span class="hljs-function">String <span class="hljs-title">message</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;加密id格式错误&quot;</span>;<br><br>    Class&lt;?&gt;[] groups() <span class="hljs-keyword">default</span> &#123;&#125;;<br><br>    Class&lt;? extends Payload&gt;[] payload() <span class="hljs-keyword">default</span> &#123;&#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>实现<code>ConstraintValidator</code>接口编写约束校验器</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EncryptIdValidator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ConstraintValidator</span>&lt;<span class="hljs-title">EncryptId</span>, <span class="hljs-title">String</span>&gt; </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Pattern PATTERN = Pattern.compile(<span class="hljs-string">&quot;^[a-f\\d]&#123;32,256&#125;$&quot;</span>);<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValid</span><span class="hljs-params">(String value, ConstraintValidatorContext context)</span> </span>&#123;<br><br>        <span class="hljs-keyword">if</span> (value != <span class="hljs-keyword">null</span>) &#123;<br>            Matcher matcher = PATTERN.matcher(value);<br>            <span class="hljs-keyword">return</span> matcher.find();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样我们就可以使用<code>@EncryptId</code>进行参数校验</li>
+</ul>
+<h3 id="编程式校验">编程式校验</h3>
+<ul>
+<li>上面的示例都是基于<code>注解</code>来实现自动校验的,在某些情况下,我们可能希望以<code>编程方式</code>调用验证</li>
+<li>这个时候可以注入<code>javax.validation.Validator</code>对象,然后再调用其<code>api</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> javax.validation.Validator globalValidator;<br><br><span class="hljs-meta">@PostMapping(&quot;/saveWithCodingValidate&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">saveWithCodingValidate</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> UserDTO userDTO)</span> </span>&#123;<br>    Set&lt;ConstraintViolation&lt;UserDTO&gt;&gt; validate = globalValidator.validate(userDTO, UserDTO.Save.class);<br><br>    <span class="hljs-keyword">if</span> (validate.isEmpty()) &#123;<br><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">for</span> (ConstraintViolation&lt;UserDTO&gt; userDTOConstraintViolation : validate) &#123;<br><br>            System.out.println(userDTOConstraintViolation);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> Result.ok();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="快速失败-Fail-Fast">快速失败 (Fail Fast)</h3>
+<p><code>Spring Validation</code>默认会校验完所有字段,然后才抛出异常,可以通过一些简单的配置,开启<code>Fali Fast</code>模式,一旦校验失败就立即返回</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Validator <span class="hljs-title">validator</span><span class="hljs-params">()</span> </span>&#123;<br>    ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class)<br>            .configure()<br><br>            .failFast(<span class="hljs-keyword">true</span>)<br>            .buildValidatorFactory();<br>    <span class="hljs-keyword">return</span> validatorFactory.getValidator();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="整合JSP">整合JSP</h2>
+<h3 id="配置Controller类">配置Controller类</h3>
+<ul>
+<li>在Controller中,在需要验证的参数前面加入@Valid注解</li>
+<li>方法参数列表中,加入BindingResult对象,用来接收验证的错误信息,并根据这个进行不同情况的跳转</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;addUser&quot;, method = RequestMethod.POST)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sub_data</span><span class="hljs-params">(<span class="hljs-meta">@Valid</span> User user, BindingResult bindingResult)</span> </span>&#123;<br>    <span class="hljs-comment">//打印所有报错信息</span><br>    <span class="hljs-keyword">if</span> (bindingResult.hasErrors()) &#123;<br>        List&lt;ObjectError&gt; errorList = bindingResult.getAllErrors();<br>        <span class="hljs-keyword">for</span> (ObjectError error : errorList) &#123;<br>            System.out.println(error.getDefaultMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;validPage&quot;</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;succeefull&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="实体类约束">实体类约束</h3>
+<ul>
+<li>在被验证的表单对象所属类中,给需要验证的属性上加入指定注解</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-meta">@NotEmpty(message = &quot;姓名不能为空&quot;)</span><br><span class="hljs-keyword">private</span> String name;<br><span class="hljs-meta">@Min(message = &quot;年龄必须大于0&quot;, value = 0L)</span><br><span class="hljs-keyword">private</span> Integer age;<br><span class="hljs-meta">@Past(message = &quot;必须是过去的日期&quot;)</span><br><span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span><br><span class="hljs-keyword">private</span> Date birthday;<br></code></pre></td></tr></table></figure>
+<h3 id="报错回显至JSP">报错回显至JSP</h3>
+<ul>
+<li>要访问一个Controller再跳转到JSP页面,同时需要向Model中添加一个名字叫User的对象,否则跳转到JSP页面的时候会报错</li>
+<li><code>@ModelAttribute</code>:在进入Controller时先调用getUser方法, 将User空对象放入Model中, 可在其他接口中用User类接收前端的ModelAttribute,并且可以将Model中的User带回页面</li>
+<li><code>@SessionAttributes</code>:将Model中的User存入Session中, 避免每次请求重复创建Model</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SessionAttributes(&quot;User&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValidForm</span> </span>&#123;<br>    <span class="hljs-meta">@ModelAttribute(&quot;User&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> User  <span class="hljs-title">getUser</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>JSP标签库</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<span class="hljs-meta">@taglib</span> prefix=<span class="hljs-string">&quot;sf&quot;</span><br>uri=<span class="hljs-string">&quot;http://www.springframework.org/tags/form&quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>JSP提交表单与报错回显</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;sf:form action=<span class="hljs-string">&quot;addUser&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>  modelAttribute=<span class="hljs-string">&quot;User&quot;</span>&gt;<br>		&lt;sf:label path=&quot;name&quot;&gt;用户名:&lt;/sf:label&gt;<br>		&lt;sf:input path=<span class="hljs-string">&quot;name&quot;</span>/&gt;<br>		&lt;sf:errors path=&quot;name&quot; cssStyle=&quot;color:red&quot;&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>		&lt;sf:label path=&quot;age&quot;&gt; 年   龄:&lt;/sf:label&gt;<br>		&lt;sf:input path=<span class="hljs-string">&quot;age&quot;</span>/&gt;<br>		&lt;sf:errors path=&quot;age&quot; cssStyle=&quot;color:red&quot;&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>		&lt;sf:label path=&quot;birthday&quot;&gt; 生   日:&lt;/sf:label&gt;<br>		&lt;sf:input path=<span class="hljs-string">&quot;birthday&quot;</span>/&gt;<br>		&lt;sf:errors path=&quot;birthday&quot; cssStyle=&quot;color:red&quot;&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>		&lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;提交&quot;</span>/&gt;<br>	&lt;/sf:form<br></code></pre></td></tr></table></figure>
+<ul>
+<li>进入当前页面model中必须有User变量对应对象, 对象中必须有name age和birthday属性</li>
+<li>input标签中的path属性的值对应的是表单对象中的属性</li>
+</ul>
+<h2 id="实现原理">实现原理</h2>
+<h3 id="requestBody参数校验实现原理">requestBody参数校验实现原理</h3>
+<p>在<code>spring-mvc</code>中,<code>RequestResponseBodyMethodProcessor</code>是用于解析<code>@RequestBody</code>标注的参数以及处理<code>@ResponseBody</code>标注方法的返回值的,显然,执行参数校验的逻辑肯定就在解析参数的方法<code>resolveArgument()</code>中:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RequestResponseBodyMethodProcessor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractMessageConverterMethodProcessor</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">resolveArgument</span><span class="hljs-params">(MethodParameter parameter, <span class="hljs-meta">@Nullable</span> ModelAndViewContainer mavContainer,</span></span><br><span class="hljs-function"><span class="hljs-params">                                  NativeWebRequest webRequest, <span class="hljs-meta">@Nullable</span> WebDataBinderFactory binderFactory)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>        parameter = parameter.nestedIfOptional();<br><br>        Object arg = readWithMessageConverters(webRequest, parameter, parameter.getNestedGenericParameterType());<br>        String name = Conventions.getVariableNameForParameter(parameter);<br><br>        <span class="hljs-keyword">if</span> (binderFactory != <span class="hljs-keyword">null</span>) &#123;<br>            WebDataBinder binder = binderFactory.createBinder(webRequest, arg, name);<br>            <span class="hljs-keyword">if</span> (arg != <span class="hljs-keyword">null</span>) &#123;<br><br>                validateIfApplicable(binder, parameter);<br>                <span class="hljs-keyword">if</span> (binder.getBindingResult().hasErrors() &amp;&amp; isBindExceptionRequired(binder, parameter)) &#123;<br>                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> MethodArgumentNotValidException(parameter, binder.getBindingResult());<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (mavContainer != <span class="hljs-keyword">null</span>) &#123;<br>                mavContainer.addAttribute(BindingResult.MODEL_KEY_PREFIX + name, binder.getBindingResult());<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> adaptArgumentIfNecessary(arg, parameter);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看到,<code>resolveArgument()</code>调用了<code>validateIfApplicable()</code>进行参数校验</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">validateIfApplicable</span><span class="hljs-params">(WebDataBinder binder, MethodParameter parameter)</span> </span>&#123;<br><br>    Annotation[] annotations = parameter.getParameterAnnotations();<br>    <span class="hljs-keyword">for</span> (Annotation ann : annotations) &#123;<br><br>        Validated validatedAnn = AnnotationUtils.getAnnotation(ann, Validated.class);<br><br>        <span class="hljs-keyword">if</span> (validatedAnn != <span class="hljs-keyword">null</span> || ann.annotationType().getSimpleName().startsWith(<span class="hljs-string">&quot;Valid&quot;</span>)) &#123;<br>            Object hints = (validatedAnn != <span class="hljs-keyword">null</span> ? validatedAnn.value() : AnnotationUtils.getValue(ann));<br>            Object[] validationHints = (hints <span class="hljs-keyword">instanceof</span> Object[] ? (Object[]) hints : <span class="hljs-keyword">new</span> Object[] &#123;hints&#125;);<br><br>            binder.validate(validationHints);<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看到这里,大家应该能明白为什么这种场景下<code>@Validated</code>,<code>@Valid</code>两个注解可以混用,我们接下来继续看<code>WebDataBinder.validate()</code>实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">validate</span><span class="hljs-params">(Object target, Errors errors, Object... validationHints)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.targetValidator != <span class="hljs-keyword">null</span>) &#123;<br>        processConstraintViolations(<br><br>            <span class="hljs-keyword">this</span>.targetValidator.validate(target, asValidationGroups(validationHints)), errors);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>最终发现底层最终还是调用了<code>Hibernate Validator</code>进行真正的校验处理</p>
+<h3 id="方法级别的参数校验实现原理">方法级别的参数校验实现原理</h3>
+<p>上面提到的将参数一个个平铺到方法参数中,然后在每个参数前面声明<code>约束注解</code>的校验方式,就是方法级别的参数校验,实际上,这种方式可用于任何<code>Spring Bean</code>的方法上,比如<code>Controller</code>/<code>Service</code>等,其底层实现原理就是<code>AOP</code>,具体来说是通过<code>MethodValidationPostProcessor</code>动态注册<code>AOP</code>切面,然后使用<code>MethodValidationInterceptor</code>对切点方法织入增强</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MethodValidationPostProcessor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractBeanFactoryAwareAdvisingPostProcessorimplements</span> <span class="hljs-title">InitializingBean</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterPropertiesSet</span><span class="hljs-params">()</span> </span>&#123;<br><br>        Pointcut pointcut = <span class="hljs-keyword">new</span> AnnotationMatchingPointcut(<span class="hljs-keyword">this</span>.validatedAnnotationType, <span class="hljs-keyword">true</span>);<br><br>        <span class="hljs-keyword">this</span>.advisor = <span class="hljs-keyword">new</span> DefaultPointcutAdvisor(pointcut, createMethodValidationAdvice(<span class="hljs-keyword">this</span>.validator));<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Advice <span class="hljs-title">createMethodValidationAdvice</span><span class="hljs-params">(<span class="hljs-meta">@Nullable</span> Validator validator)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> (validator != <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">new</span> MethodValidationInterceptor(validator) : <span class="hljs-keyword">new</span> MethodValidationInterceptor());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>接着看一下<code>MethodValidationInterceptor</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MethodValidationInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(MethodInvocation invocation)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br><br>        <span class="hljs-keyword">if</span> (isFactoryBeanMetadataMethod(invocation.getMethod())) &#123;<br>            <span class="hljs-keyword">return</span> invocation.proceed();<br>        &#125;<br><br>        Class&lt;?&gt;[] groups = determineValidationGroups(invocation);<br>        ExecutableValidator execVal = <span class="hljs-keyword">this</span>.validator.forExecutables();<br>        Method methodToValidate = invocation.getMethod();<br>        Set&lt;ConstraintViolation&lt;Object&gt;&gt; result;<br>        <span class="hljs-keyword">try</span> &#123;<br><br>            result = execVal.validateParameters(<br>                invocation.getThis(), methodToValidate, invocation.getArguments(), groups);<br>        &#125;<br>        <span class="hljs-keyword">catch</span> (IllegalArgumentException ex) &#123;<br>            ...<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (!result.isEmpty()) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ConstraintViolationException(result);<br>        &#125;<br><br>        Object returnValue = invocation.proceed();<br><br>        result = execVal.validateReturnValue(invocation.getThis(), methodToValidate, returnValue, groups);<br><br>        <span class="hljs-keyword">if</span> (!result.isEmpty()) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ConstraintViolationException(result);<br>        &#125;<br>        <span class="hljs-keyword">return</span> returnValue;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>实际上,不管是<code>requestBody参数校验</code>还是<code>方法级别的校验</code>,最终都是调用<code>Hibernate Validator</code>执行校验,<code>Spring Validation</code>只是做了一层封装</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/Spring/SpringMVC/">SpringMVC</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/17/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL 初始化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/17/Software/Shell/%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                        <span class="hidden-mobile">Shell 字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

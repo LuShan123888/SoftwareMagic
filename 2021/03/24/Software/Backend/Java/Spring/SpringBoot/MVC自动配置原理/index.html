@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Spring Boot MVC 自动配置原理 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring Boot MVC 自动配置原理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-24 22:53" pubdate>
+        2021年3月24日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring Boot MVC 自动配置原理</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月24日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Spring Boot MVC 自动配置原理</h1>
+<h2 id="官方文档">官方文档</h2>
+<p><strong>地址</strong>:<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration">https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration</a></p>
+<blockquote>
+<p><strong>Spring MVC Auto-configuration</strong></p>
+<ul>
+<li>Spring Boot provides auto-configuration for Spring MVC that works well with most applications</li>
+<li>The auto-configuration adds the following features on top of Spring’s defaults:
+<ul>
+<li>Inclusion of ContentNegotiatingViewResolver and BeanNameViewResolver beans.</li>
+<li>Support for serving static resources, including support for WebJars</li>
+<li>Automatic registration of Converter, GenericConverter, and Formatter beans.</li>
+<li>HttpMessageConverters:Support for HttpMessageConverters (covered later in this document).</li>
+<li>Automatic registration of MessageCodesResolver (covered later in this document).</li>
+<li>Static index.html support.</li>
+<li>Custom Favicon support (covered later in this document).</li>
+<li>Automatic use of a ConfigurableWebBindingInitializer bean (covered later in this document).</li>
+</ul>
+</li>
+<li>If you want to keep Spring Boot MVC features and you want to add additional MVC configuration<br>
+(interceptors, formatters, view controllers, and other features), you can add your own<br>
+@Configuration class of type WebMvcConfigurer but without @EnableWebMvc. If you wish to provide<br>
+custom instances of RequestMappingHandlerMapping, RequestMappingHandlerAdapter, or<br>
+ExceptionHandlerExceptionResolver, you can declare a WebMvcRegistrationsAdapter instance to provide such components.</li>
+<li>If you want to take complete control of Spring MVC, you can add your own @Configuration annotated with @EnableWebMvc.</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>Converter</strong>:转换器,这就是我们网页提交数据到后台自动封装成为对象的东西,比如把&quot;1&quot;字符串自动转换为int类型</li>
+<li><strong>Formatter</strong>:格式化器,比如页面给我们了一个2019-8-10,它会给我们自动格式化为Date对象</li>
+<li><strong>HttpMessageConverters</strong>: Spring MVC用来转换Http请求和响应的的,比如我们要把一个User对象转换为JSON字符串</li>
+</ul>
+<h2 id="ContentNegotiatingViewResolver">ContentNegotiatingViewResolver</h2>
+<ul>
+<li>内容协商视图解析器</li>
+<li>自动配置了ViewResolver,就是Spring MVC的视图解析器</li>
+<li>即根据方法的返回值取得视图对象(View),然后由视图对象决定如何渲染(转发,重定向)</li>
+</ul>
+<p><strong>分析源码</strong></p>
+<p><code>WebMvcAutoConfiguration</code>类的<code>viewResolver</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@ConditionalOnBean(ViewResolver.class)</span><br><span class="hljs-meta">@ConditionalOnMissingBean(name = &quot;viewResolver&quot;, value = ContentNegotiatingViewResolver.class)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> ContentNegotiatingViewResolver <span class="hljs-title">viewResolver</span><span class="hljs-params">(BeanFactory beanFactory)</span> </span>&#123;<br>    ContentNegotiatingViewResolver resolver = <span class="hljs-keyword">new</span> ContentNegotiatingViewResolver();<br>    resolver.setContentNegotiationManager(beanFactory.getBean(ContentNegotiationManager.class));<br>    <span class="hljs-comment">// ContentNegotiatingViewResolver使用所有其他视图解析器来定位视图,因此它应该具有较高的优先级</span><br>    resolver.setOrder(Ordered.HIGHEST_PRECEDENCE);<br>    <span class="hljs-keyword">return</span> resolver;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>ContentNegotiatingViewResolver</code>类的<code>resolveViewName</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Nullable</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">resolveViewName</span><span class="hljs-params">(String viewName, Locale locale)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    RequestAttributes attrs = RequestContextHolder.getRequestAttributes();<br>    Assert.state(attrs <span class="hljs-keyword">instanceof</span> ServletRequestAttributes, <span class="hljs-string">&quot;No current ServletRequestAttributes&quot;</span>);<br>    List&lt;MediaType&gt; requestedMediaTypes = <span class="hljs-keyword">this</span>.getMediaTypes(((ServletRequestAttributes)attrs).getRequest());<br>    <span class="hljs-keyword">if</span> (requestedMediaTypes != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">// 获取候选的视图对象</span><br>        List&lt;View&gt; candidateViews = <span class="hljs-keyword">this</span>.getCandidateViews(viewName, locale, requestedMediaTypes);<br>        <span class="hljs-comment">// 选择一个最适合的视图对象,然后把这个对象返回</span><br>        View bestView = <span class="hljs-keyword">this</span>.getBestView(candidateViews, requestedMediaTypes, attrs);<br>        <span class="hljs-keyword">if</span> (bestView != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> bestView;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// .....</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>结论</strong>:<code>ContentNegotiatingViewResolver</code>这个视图解析器是用来组合所有的视图解析器的</p>
+<p><code>viewResolvers</code>通过<code>ContentNegotiatingViewResolver</code>类的<code>initServletContext</code>方法赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initServletContext</span><span class="hljs-params">(ServletContext servletContext)</span> </span>&#123;<br>    <span class="hljs-comment">// 这里它是从beanFactory工具中获取容器中的所有视图解析器</span><br>    <span class="hljs-comment">// ViewRescolver.class 把所有的视图解析器来组合的</span><br>    Collection&lt;ViewResolver&gt; matchingBeans = BeanFactoryUtils.beansOfTypeIncludingAncestors(<span class="hljs-keyword">this</span>.obtainApplicationContext(), ViewResolver.class).values();<br>    ViewResolver viewResolver;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.viewResolvers == <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">this</span>.viewResolvers = <span class="hljs-keyword">new</span> ArrayList(matchingBeans.size());<br>    &#125;<br>    <span class="hljs-comment">// ...............</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="自定义视图解析器">自定义视图解析器</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> ViewResolver <span class="hljs-title">myViewResolver</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MyViewResolver();<br>&#125;<br><br><span class="hljs-comment">//写一个静态内部类,视图解析器就需要实现ViewResolver接口</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyViewResolver</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ViewResolver</span></span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">resolveViewName</span><span class="hljs-params">(String s, Locale locale)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>测试</strong></p>
+<ul>
+<li>查看我们自定义的视图解析器是否起作用</li>
+<li>给<code>DispatcherServlet</code>中的<code>doDispatch</code>方法加个断点进行调试一下,因为所有的请求都会走到这个方法中</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436625.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>启动项目,然后随便访问一个页面,看一下Debug信息</li>
+<li>找到this</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436779.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>找到视图解析器,看到自定义的视图解析器名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436757.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="Formatter">Formatter</h2>
+<p><strong>分析源码</strong></p>
+<ul>
+<li><code>ContentNegotiatingViewResolver</code>类的<code>mvcConversionService</code>方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> FormattingConversionService <span class="hljs-title">mvcConversionService</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 拿到配置文件中的格式化规则</span><br>    WebConversionService conversionService =<br>        <span class="hljs-keyword">new</span> WebConversionService(<span class="hljs-keyword">this</span>.mvcProperties.getDateFormat());<br>    addFormatters(conversionService);<br>    <span class="hljs-keyword">return</span> conversionService;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>WebMvcProperties</code>类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.mvc&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebMvcProperties</span> </span>&#123;<br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * Date format to use. For instance, `dd/MM/yyyy`.</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">private</span> String dateFormat;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDateFormat</span><span class="hljs-params">()</span> </span>&#123;<br>	   <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.dateFormat;<br>    &#125;<br>   <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以查看<code>WebMvcProperties</code>这个类,通过配置文件配置<code>Formatter</code></li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.date-format</span>=<span class="hljs-string">&quot;yyyy-MM-dd&quot;</span><br></code></pre></td></tr></table></figure>
+<h2 id="扩展使用Spring-MVC">扩展使用Spring MVC</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addViewControllers</span><span class="hljs-params">(ViewControllerRegistry registry)</span> </span>&#123;<br>        <span class="hljs-comment">// 浏览器发送/test,就会跳转到test页面</span><br>        registry.addViewController(<span class="hljs-string">&quot;/test&quot;</span>).setViewName(<span class="hljs-string">&quot;test&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>分析源码</strong></p>
+<ul>
+<li><code>WebMvcAutoConfiguration</code>是<code>Spring MVC</code>的自动配置类,里面有一个类<code>WebMvcAutoConfigurationAdapter</code></li>
+<li>这个类上有一个注解,在做其他自动配置时会导入:<code>@Import(EnableWebMvcConfiguration.class)</code></li>
+<li>点进<code>EnableWebMvcConfiguration</code>这个类,它继承了一个父类<code>DelegatingWebMvcConfiguration</code></li>
+<li>这个父类中有这样一段代码:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegatingWebMvcConfiguration</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebMvcConfigurationSupport</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> WebMvcConfigurerComposite configurers = <span class="hljs-keyword">new</span> WebMvcConfigurerComposite();<br><br>  <span class="hljs-comment">// 从容器中获取所有的webmvcConfigurer</span><br>    <span class="hljs-meta">@Autowired(required = false)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setConfigurers</span><span class="hljs-params">(List&lt;WebMvcConfigurer&gt; configurers)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!CollectionUtils.isEmpty(configurers)) &#123;<br>            <span class="hljs-keyword">this</span>.configurers.addWebMvcConfigurers(configurers);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以在这个类中去寻找一个刚才设置的viewController当做参考,有如下方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addViewControllers</span><span class="hljs-params">(ViewControllerRegistry registry)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.configurers.addViewControllers(registry);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看上面的<code>addViewControllers</code>方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addViewControllers</span><span class="hljs-params">(ViewControllerRegistry registry)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (WebMvcConfigurer delegate : <span class="hljs-keyword">this</span>.delegates) &#123;<br>        delegate.addViewControllers(registry);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>结论</strong>:所有的<code>WebMvcConfiguration</code>都会被作用,不止Spring自己的配置类,自己的配置类当然也会被调用</li>
+</ul>
+<h2 id="全面接管Spring-MVC">全面接管Spring MVC</h2>
+<ul>
+<li>全面接管即:SpringBoot对SpringMVC的自动配置不需要了,所有都是自己去配置</li>
+<li>只需在配置类中要加一个<code>@EnableWebMvc</code></li>
+<li><strong>不推荐使用全面接管SpringMVC</strong></li>
+</ul>
+<p><strong>分析源码</strong></p>
+<p><code>@EnableWebMvc</code>为什么会使自动配置失效</p>
+<ul>
+<li>查看<code>@EnableWebMvc</code>发现它是导入了一个类<code>DelegatingWebMvcConfiguration</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Import(&#123;DelegatingWebMvcConfiguration.class&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> EnableWebMvc &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看<code>DelegatingWebMvcConfiguration</code>:它继承了一个父类<code>WebMvcConfigurationSupport</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DelegatingWebMvcConfiguration</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebMvcConfigurationSupport</span> </span>&#123;<br>  <span class="hljs-comment">// ......</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>回顾<code>WebMvcAutoConfiguration</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">Configuration(proxyBeanMethods = <span class="hljs-keyword">false</span>)<br><span class="hljs-meta">@ConditionalOnWebApplication(type = Type.SERVLET)</span><br><span class="hljs-meta">@ConditionalOnClass(&#123; Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class &#125;)</span><br><span class="hljs-comment">// 这个注解的意思是:容器中没有这个组件的时候,这个自动配置类才生效</span><br><span class="hljs-meta">@ConditionalOnMissingBean(WebMvcConfigurationSupport.class)</span><br><span class="hljs-meta">@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)</span><br><span class="hljs-meta">@AutoConfigureAfter(&#123; DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class,</span><br><span class="hljs-meta">    ValidationAutoConfiguration.class &#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebMvcAutoConfiguration</span> </span>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>总结</strong>:<code>@EnableWebMvc</code>将<code>WebMvcConfigurationSupport</code>导入,导致<code>WebMvcAutoConfiguration</code>失效</li>
+<li><code>WebMvcConfigurationSupport</code>只包含SpringMVC最基本的功能</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/Spring/SpringBoot/">SpringBoot</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/24/Software/Backend/Java/Spring/SpringBoot/Dubbo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring Boot 整合 Dubbo</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/24/Software/Backend/Java/Spring/SpringBoot/Thymeleaf/">
+                        <span class="hidden-mobile">Spring Boot 整合Thymeleaf</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
