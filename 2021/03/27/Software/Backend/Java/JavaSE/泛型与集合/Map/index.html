@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-26 23:43" pubdate>
-        2021年3月26日 晚上
+      <time datetime="2021-03-27 13:34" pubdate>
+        2021年3月27日 下午
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5k 字
+      5.3k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31
+      32
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月26日 晚上
+                  本文最后更新于：2021年3月27日 下午
                 
               </p>
             
@@ -246,7 +246,27 @@
 <ul>
 <li>HashMap以哈希表数据结构实现，查找对象时通过哈希函数计算其位置，它是为快速查询而设计的，其内部定义了一个 hash 表数组<code>Entry[] table</code>，元素会通过哈希转换函数将元素的哈希地址转换成数组中存放的索引，如果有冲突，则使用散列链表的形式将所有相同哈希地址的元素串起来，可以通过查看<code>HashMap.Entry</code>的源码它是一个单链表结构。</li>
 <li>HashMap 是线程不安全的，不是同步的</li>
+<li>JDK 1.7 采用头插法来添加链表元素，存在链表成环的问题，1.8 中做了优化，采用尾插法来添加链表元素</li>
 </ul>
+<blockquote>
+<p><strong>Hash冲突处理</strong></p>
+<ul>
+<li>冲突处理分为以下四种方式：
+<ul>
+<li><strong>开放地址法</strong>:出现冲突后按照一定算法查找一个空位置存放
+<ul>
+<li>线性探测再散列</li>
+<li>二次探测再散列</li>
+<li>伪随机探测再散列</li>
+</ul>
+</li>
+<li><strong>再哈希法</strong>:出现冲突后采用其他的哈希函数计算，直到不再冲突为止。</li>
+<li><strong>链地址法(拉链法)</strong>:不同与前两种方法，他是在出现冲突的地方存储一个链表，所有的同义词记录都存在其中</li>
+<li><strong>建立公共溢出区</strong>:建立公共溢出区的基本思想是：假设哈希函数的值域是[1,m-1]，则设向量HashTable[0…m-1]为基本表，每个分量存放一个记录，另外设向量OverTable[0…v]为溢出表，所有关键字和基本表中关键字为同义词的记录，不管它们由哈希函数得到的哈希地址是什么，一旦发生冲突，都填入溢出表。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Map</span>接口的使用 </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map&lt;String,String&gt; m = <span class="hljs-keyword">new</span> HashMap&lt;String, String&gt;();<br>    m.put(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;2003011&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;李四&quot;</span>,<span class="hljs-string">&quot;2003012&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;王五&quot;</span>,<span class="hljs-string">&quot;2003013&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;2003001&quot;</span>);<span class="hljs-comment">//添加一个已有相同关键字的元素时将修改元素的键值</span><br>    Set&lt;String&gt; keys = m.keySet();<span class="hljs-comment">//通过Map对象的keySet()方法得到关键字的集合</span><br>    <span class="hljs-keyword">for</span> (Iterator&lt;String&gt; i = keys.iterator();i.hasNext();)&#123;<br>      System.out.print(i.next()+<span class="hljs-string">&quot;,&quot;</span>);<br>    &#125;<br>    System.out.println(m.values());<br>  &#125;<br>&#125;<br><br>李四,张三,王五<br>  [<span class="hljs-number">2003012</span>, <span class="hljs-number">2003001</span>, <span class="hljs-number">2003013</span>]<br></code></pre></td></tr></table></figure>
 <h2 id="LinkedHashMap">LinkedHashMap</h2>
 <ul>
@@ -537,7 +557,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/26/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/HashMap/">
+                      <a href="/2021/03/27/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/HashMap/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Java HashMap</span>
                         <span class="visible-mobile">上一篇</span>
