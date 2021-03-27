@@ -610,22 +610,24 @@ node.js 中 url 模块中的 parse 函数提供了这个功能
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/cherry-pick/">Git cherry-pick</a>
+        <a href="/2021/03/24/Software/Git/%E7%8A%B6%E6%80%81%E4%B8%8E%E8%AE%B0%E5%BD%95/reflog/">Git reflog</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/cherry-pick/">
+        <a href="/2021/03/24/Software/Git/%E7%8A%B6%E6%80%81%E4%B8%8E%E8%AE%B0%E5%BD%95/reflog/">
           
           
             
           
-          Git cherry-pick
+          Git reflog
 
-当一个特定分支包含活动分支需要的某个提交时,对那个提交执行 cherry-pick,对一个提交执行 cherry-pick 时,会在活动分支上创建一个新的提交,其中包含由拣选出来的提交所引入的修改
+reflog是一个非常有用的命令,可以展示已经执行过的所有动作的日志,包括合并,重置,还原,基本上包含对分支所做的任何修改
 
-1git cherry-pick 版本号
+1git reflog commit-id/HEAD@&#123;number&#125;
 
-假设 dev 分支上的提交 76d12 为 index.js 文件添加了一项修改,而希望将其整合到 master 分支中,
+
+如果犯了错,可以根据 reflog 提供的信息通过重置 HEAD 来轻松地重做
+假设实际上并不需要合并原有分支,当我们执行 git reflog 命令时,
         </a>
       </p>
 
@@ -646,7 +648,7 @@ node.js 中 url 模块中的 parse 函数提供了这个功能
             
               <a href="/categories/Software/Git/">Git</a>
             
-              <a href="/categories/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">版本管理</a>
+              <a href="/categories/Software/Git/%E7%8A%B6%E6%80%81%E4%B8%8E%E8%AE%B0%E5%BD%95/">状态与记录</a>
             
           </div>
         
@@ -661,25 +663,22 @@ node.js 中 url 模块中的 parse 函数提供了这个功能
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/rebase/">Git rebase</a>
+        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/cherry-pick/">Git cherry-pick</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/rebase/">
+        <a href="/2021/03/24/Software/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/cherry-pick/">
           
           
             
           
-          Git rebase
-变基(Rebasing)
+          Git cherry-pick
 
-将当前分支的提交复制到指定的分支之上
-变基与合并有一个重大的区别:Git 不会尝试确定要保留或不保留哪些文件,在执行 rebase 的分支总是含有想要保留的最新近的修改,这样不会遇到任何合并冲突,而且可以保留一个漂亮的,线性的 Git 历史记录
+当一个特定分支包含活动分支需要的某个提交时,对那个提交执行 cherry-pick,对一个提交执行 cherry-pick 时,会在活动分支上创建一个新的提交,其中包含由拣选出来的提交所引入的修改
 
-1git rebase  &lt;branch_name&gt;
+1git cherry-pick 版本号
 
-
-上面这个例子展示了在 maste
+假设 dev 分支上的提交 76d12 为 index.js 文件添加了一项修改,而希望将其整合到 master 分支中,
         </a>
       </p>
 
