@@ -18,7 +18,7 @@
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   
-  <title>Yarn 命令 - SoftwareMagic</title>
+  <title>Nginx 虚拟主机 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -139,7 +139,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Yarn 命令">
+            <span class="h2" id="subtitle" title="Nginx 虚拟主机">
               
             </span>
 
@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-19 17:23" pubdate>
-        2021年3月19日 下午
+      <time datetime="2021-03-31 10:17" pubdate>
+        2021年3月31日 上午
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      690 字
+      327 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      3
        分钟
     </span>
   
@@ -201,66 +201,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Yarn 命令</h1>
+            <h1 style="display: none">Nginx 虚拟主机</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月19日 下午
+                  本文最后更新于：2021年3月31日 上午
                 
               </p>
             
             <div class="markdown-body">
-              <h1>Yarn 命令</h1>
-<h2 id="新建项目">新建项目</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn init</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>-y,--yes</code>:表示默认选项都为<code>yes</code></li>
-</ul>
-<h2 id="安装所有包">安装所有包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn install <span class="hljs-comment">#安装package.json里所有包,并将包及它的所有依赖项保存进yarn.lock</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn global install <span class="hljs-comment">#全局安装</span></span><br></code></pre></td></tr></table></figure>
-<ul>
-<li><strong>–flat</strong>:安装一个包的单一版本</li>
-<li><strong>–force</strong>:强制重新下载所有包</li>
-<li><strong>–production</strong>:只安装dependencies里的包</li>
-<li><strong>–no-lockfile</strong>:不读取或生成<code>yarn.lock</code></li>
-<li><strong>–pure-lockfile</strong>:不生成<code>yarn.lock</code></li>
-</ul>
-<h2 id="添加包">添加包</h2>
-<ul>
-<li>会更新<code>package.json</code>和<code>yarn.lock</code></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn add [package] <span class="hljs-comment">#在当前的项目中添加一个依赖包,会自动更新到package.json和yarn.lock文件中</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn add [package]@[version] <span class="hljs-comment">#安装指定版本,这里指的是主要版本,如果需要精确到小版本,使用-E参数</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn add [package]@[tag] <span class="hljs-comment">#安装某个tag(比如beta,next或者latest)</span></span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>不指定依赖类型默认安装到dependencies里,你也可以指定依赖类型</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn add --dev/-D <span class="hljs-comment">#加到 devDependencies</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn add --peer/-P <span class="hljs-comment">#加到 peerDependencies</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn add --optional/-O <span class="hljs-comment">#加到 optionalDependencies</span></span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>默认安装包的主要版本里的最新版本,下面两个命令可以指定版本</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn add --exact/-E <span class="hljs-comment">#安装包的精确版本,例如yarn add foo@1.2.3会接受1.9.1版,但是yarn add foo@1.2.3 --exact只会接受1.2.3版</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn add --tilde/-T <span class="hljs-comment">#安装包的次要版本里的最新版,例如yarn add foo@1.2.3 --tilde会接受1.2.9,但不接受1.3.0</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="查看所有包">查看所有包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn list <span class="hljs-comment">#查看当前项目的所有包</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn global list --depth=0 <span class="hljs-comment"># 查看全局安装的所有包</span></span><br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>--depth</code>:指定查询的深度</li>
-</ul>
-<h2 id="显示包的信息">显示包的信息</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn info &lt;packageName&gt; <span class="hljs-comment">#可以用来查看某个模块的最新版本信息</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="移除包">移除包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn remove &lt;packageName&gt; <span class="hljs-comment">#移除一个包,会自动更新package.json和yarn.lock</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn global remove &lt;packageName&gt; <span class="hljs-comment">#全局移除</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="更新包">更新包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn outdated <span class="hljs-comment">#查看已经过时的包</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn upgrade <span class="hljs-comment">#用于更新包到基于规范范围的最新版本</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn global upgrade <span class="hljs-comment">#全局更新</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="运行脚本">运行脚本</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn run <span class="hljs-comment">#用来执行在 package.json 中 scripts 属性下定义的脚本</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="缓存">缓存</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn cache list <span class="hljs-comment"># 列出已缓存的每个包</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn cache dir <span class="hljs-comment"># 返回全局缓存位置</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn cache clean <span class="hljs-comment"># 清除缓存</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="发布包">发布包</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn publish</span><br></code></pre></td></tr></table></figure>
-<h2 id="配置">配置</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yarn config list <span class="hljs-comment">#显示所有配置项</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn config get &lt;key&gt; <span class="hljs-comment">#显示某配置项</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn config delete &lt;key&gt; <span class="hljs-comment">#删除某配置项</span></span><br><span class="hljs-meta">$</span><span class="bash"> yarn config list <span class="hljs-comment">#显示所有配置项</span></span><br></code></pre></td></tr></table></figure>
-<p><strong>实例</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 改变 yarn 全局安装位置</span><br><span class="hljs-meta">$</span><span class="bash"> yarn config  <span class="hljs-built_in">set</span> global-folder <span class="hljs-string">&quot;你的磁盘路径&quot;</span></span><br><span class="hljs-meta">#</span><span class="bash"> 改变 yarn 缓存位置</span><br><span class="hljs-meta">$</span><span class="bash"> yarn config <span class="hljs-built_in">set</span> cache-folder <span class="hljs-string">&quot;你的磁盘路径&quot;</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="全局变量">全局变量</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 检查当前yarn的 bin的 位置</span><br><span class="hljs-meta">$</span><span class="bash"> yarn global bin</span><br>/usr/local/bin<br><span class="hljs-meta">#</span><span class="bash"> 检查当前 yarn 的 全局安装位置</span><br><span class="hljs-meta">$</span><span class="bash">yarn global dir</span><br>/Users/cian/.config/yarn/global<br></code></pre></td></tr></table></figure>
+              <h1>Nginx 虚拟主机</h1>
+<h2 id="编辑-nginx-conf-配置文件">编辑 <code>nginx.conf</code> 配置文件</h2>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> vim /usr/local/nginx/conf/nginx.conf<br></code></pre></td></tr></table></figure>
+<h2 id="添加虚拟域名配置文件">添加虚拟域名配置文件</h2>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">include</span> vhost/<span class="hljs-regexp">*.conf</span><br></code></pre></td></tr></table></figure>
+<h2 id="配置虚拟主机">配置虚拟主机</h2>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-comment">#listen [::]:80;</span><br>    <span class="hljs-attribute">server_name</span> www.lushan.computer lushan.computer;<br>    <span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://lushan.computer$request_uri;<br>    <span class="hljs-attribute">index</span> index.html index.htm index.php default.html default.htm default.php;<br>    <span class="hljs-attribute">root</span> /home/wwwroot/wordpress;<br><br>    <span class="hljs-attribute">include</span> rewrite/wordpress.conf;<br>    <span class="hljs-comment">#error_page   404   /404.html;</span><br><br>    <span class="hljs-comment"># Deny access to PHP files in specific directory</span><br>    <span class="hljs-comment">#location ~ /(wp-content|uploads|wp-includes|images)/.*\.php$ &#123; deny all; &#125;</span><br><br>    <span class="hljs-attribute">include</span> enable-php-pathinfo.conf;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span> &#123;<br>        <span class="hljs-attribute">expires</span> <span class="hljs-number">30d</span>;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ .*\.(js|css)?$</span> &#123;<br>        <span class="hljs-attribute">expires</span> <span class="hljs-number">12h</span>;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ /.well-known</span> &#123;<br>        <span class="hljs-attribute">allow</span> all;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ /\.</span> &#123;<br>        <span class="hljs-attribute">deny</span> all;<br>    &#125;<br><br>    <span class="hljs-attribute">access_log</span> /home/wwwlogs/lushan.computer.log;<br>&#125;<br><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> ssl http2;<br>    <span class="hljs-comment">#listen [::]:443 ssl http2;</span><br>    <span class="hljs-attribute">server_name</span> www.lushan.computer lushan.computer;<br>    <span class="hljs-attribute">index</span> index.html index.htm index.php default.html default.htm default.php;<br>    <span class="hljs-attribute">root</span> /home/wwwroot/wordpress;<br>    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">ssl_certificate</span> /usr/local/nginx/conf/ssl/lushan.computer/fullchain.cer;<br>    <span class="hljs-attribute">ssl_certificate_key</span> /usr/local/nginx/conf/ssl/lushan.computer/lushan.computer.key;<br>    <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;<br>    <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;<br>    <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">ssl_ciphers</span> <span class="hljs-string">&quot;EECDH+CHACHA20:EECDH+CHACHA20-draft:EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5&quot;</span>;<br>    <span class="hljs-attribute">ssl_session_cache</span> builtin:<span class="hljs-number">1000</span> shared:SSL:<span class="hljs-number">10m</span>;<br>    <span class="hljs-comment"># openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048</span><br>    <span class="hljs-attribute">ssl_dhparam</span> /usr/local/nginx/conf/ssl/dhparam.pem;<br><br>    <span class="hljs-attribute">include</span> rewrite/wordpress.conf;<br>    <span class="hljs-comment">#error_page   404   /404.html;</span><br><br>    <span class="hljs-comment"># Deny access to PHP files in specific directory</span><br>    <span class="hljs-comment">#location ~ /(wp-content|uploads|wp-includes|images)/.*\.php$ &#123; deny all; &#125;</span><br><br>    <span class="hljs-attribute">include</span> enable-php-pathinfo.conf;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ .*\.(gif|jpg|jpeg|png|bmp|swf)$</span> &#123;<br>        <span class="hljs-attribute">expires</span> <span class="hljs-number">30d</span>;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ .*\.(js|css)?$</span> &#123;<br>        <span class="hljs-attribute">expires</span> <span class="hljs-number">12h</span>;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ /.well-known</span> &#123;<br>        <span class="hljs-attribute">allow</span> all;<br>    &#125;<br><br>    <span class="hljs-attribute">location</span> <span class="hljs-regexp">~ /\.</span> &#123;<br>        <span class="hljs-attribute">deny</span> all;<br>    &#125;<br><br>    <span class="hljs-attribute">access_log</span> /home/wwwlogs/lushan.computer.log;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -272,9 +228,9 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/">Software</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
+                      <a class="hover-with-bg" href="/categories/Software/Server/">Server</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Frontend/Yarn/">Yarn</a>
+                      <a class="hover-with-bg" href="/categories/Software/Server/Nginx/">Nginx</a>
                     
                   </div>
                 
@@ -292,9 +248,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/19/Software/Backend/Java/JavaSE/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E7%B1%BB/%E6%9E%9A%E4%B8%BE/">
+                      <a href="/2021/03/31/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 枚举</span>
+                        <span class="hidden-mobile">Vim 命令模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +258,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/19/Software/Backend/Java/SpringFramework/SpringBoot/SpringSecurity/">
-                        <span class="hidden-mobile">Spring Boot 整合 Spring  Security</span>
+                      <a href="/2021/03/31/Software/Frontend/Yarn/%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Yarn 命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

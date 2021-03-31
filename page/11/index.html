@@ -319,20 +319,27 @@ Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/Redirect/">Servlet 网页重定向</a>
+        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/LifeCycle/">Servlet 生命周期</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/Redirect/">
+        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/LifeCycle/">
           
           
             
           
-          Servlet 网页重定向
-当文档移动到新的位置,我们需要向客户端发送这个新位置时,我们需要用到网页重定向,当然,也可能是为了负载均衡,或者只是为了简单的随机,这些情况都有可能用到网页重定向
-setStatus() 和 setHeader()
-该方法把响应连同状态码和新的网页位置发送回浏览器,您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果:
-123
+          Servlet 生命周期
+
+Servlet 生命周期可被定义为从创建直到毁灭的整个过程,以下是 Servlet 遵循的过程:
+
+Servlet 通过调用 init () 方法进行初始化
+Servlet 调用 service() 方法来处理客户端的请求
+Servlet 通过调用 destroy() 方法终止(结束)
+最后,Servlet 是由 JVM 的垃圾回收器进行垃圾回收的
+
+
+
+init() 
         </a>
       </p>
 
@@ -372,27 +379,20 @@ setStatus() 和 setHeader()
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/LifeCycle/">Servlet 生命周期</a>
+        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/Redirect/">Servlet 网页重定向</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/LifeCycle/">
+        <a href="/2021/03/24/Software/Backend/Java/JavaEE/Servlet/Redirect/">
           
           
             
           
-          Servlet 生命周期
-
-Servlet 生命周期可被定义为从创建直到毁灭的整个过程,以下是 Servlet 遵循的过程:
-
-Servlet 通过调用 init () 方法进行初始化
-Servlet 调用 service() 方法来处理客户端的请求
-Servlet 通过调用 destroy() 方法终止(结束)
-最后,Servlet 是由 JVM 的垃圾回收器进行垃圾回收的
-
-
-
-init() 
+          Servlet 网页重定向
+当文档移动到新的位置,我们需要向客户端发送这个新位置时,我们需要用到网页重定向,当然,也可能是为了负载均衡,或者只是为了简单的随机,这些情况都有可能用到网页重定向
+setStatus() 和 setHeader()
+该方法把响应连同状态码和新的网页位置发送回浏览器,您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果:
+123
         </a>
       </p>
 
@@ -656,18 +656,22 @@ web.xml 配置
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/24/Software/Backend/Java/Mybatis/MybatisPlus/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8F%92%E4%BB%B6/">Mybatis Plus 性能分析插件</a>
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">Java 线程同步</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/24/Software/Backend/Java/Mybatis/MybatisPlus/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8F%92%E4%BB%B6/">
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
           
           
             
           
-          Mybatis Plus 性能分析插件
-配置插件
-12345678@Bean@Profile(&#123;&quot;dev&quot;,&quot;test&quot;&#125;)// 设置 dev test 环境开启public PerformanceInterceptor performanceInterceptor() &#123;    PerformanceInterceptor p
+          Java 线程同步
+临界资源问题
+
+多个线程共享的数据称为临界资源,由于是线程调度程序负责线程的调度,程序员无法精确控制多线程的交替次序,如果没有特殊控制,多线程对临界资源的访问将导致数据的不一致性
+以堆栈操作为例,涉及出栈和进栈两个操作,程序代码如下:
+
+1234567891011121314public class Stack &#123;    int idx = 0;    char[] 
         </a>
       </p>
 
@@ -690,9 +694,9 @@ web.xml 配置
             
               <a href="/categories/Software/Backend/Java/">Java</a>
             
-              <a href="/categories/Software/Backend/Java/Mybatis/">Mybatis</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/Mybatis/MybatisPlus/">MybatisPlus</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
             
           </div>
         

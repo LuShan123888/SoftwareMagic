@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-30 09:32" pubdate>
-        2021年3月30日 上午
+      <time datetime="2021-03-31 11:13" pubdate>
+        2021年3月31日 上午
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.4k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      14
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月30日 上午
+                  本文最后更新于：2021年3月31日 上午
                 
               </p>
             
@@ -334,15 +334,26 @@
 <h2 id="配置文件">配置文件</h2>
 <h3 id="etc-passwd">/etc/passwd</h3>
 <ul>
-<li>这个文件中的每一行都代表这一个用户</li>
+<li>用户组的所有信息都存放在/etc/group文件中。此文件的格式是由冒号(:)隔开若干个字段</li>
 <li>登录口令:把真正的加密后的用户口令字存放到<code>/etc/shadow</code>文件中</li>
 <li>0~999为系统保留的系统标识号</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">用户名:口令(登录密码x,不可见):用户标识号:组标识号:注释性描述:主目录:登录Shell<br><br>root:x:0:0:root:/root:/bin/bash<br>daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin # 无法登录该用户<br>bin:x:2:2:bin:/bin:/usr/sbin/nologin<br>sys:x:3:3:sys:/dev:/usr/sbin/nologin<br>sync:x:4:65534:sync:/bin:/bin/sync<br>games:x:5:60:games:/usr/games:/usr/sbin/nologin<br>man:x:6:12:man:/var/cache/man:/usr/sbin/nologin<br>lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin<br>mail:x:8:8:mail:/var/mail:/usr/sbin/nologin<br>news:x:9:9:news:/var/spool/news:/usr/sbin/nologin<br></code></pre></td></tr></table></figure>
-<h3 id="etc-group">/etc/group</h3>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">组名:口令:组标识号:组内用户列表</span><br><br><span class="hljs-section">root:x:0:</span><br><span class="hljs-section">daemon:x:1:</span><br><span class="hljs-section">bin:x:2:</span><br><span class="hljs-section">sys:x:3:</span><br><span class="hljs-section">adm:x:4:</span><br><span class="hljs-section">tty:x:5:</span><br><span class="hljs-section">disk:x:6:</span><br><span class="hljs-section">lp:x:7:</span><br><span class="hljs-section">mail:x:8:</span><br><span class="hljs-section">news:x:9:</span><br><span class="hljs-section">uucp:x:10:</span><br><span class="hljs-section">man:x:12:</span><br><span class="hljs-section">proxy:x:13:</span><br><span class="hljs-section">kmem:x:15:</span><br><span class="hljs-section">dialout:x:20:</span><br><span class="hljs-section">fax:x:21:</span><br><span class="hljs-section">voice:x:22:</span><br><span class="hljs-section">cdrom:x:24:</span><br><span class="hljs-section">floppy:x:25:</span><br></code></pre></td></tr></table></figure>
 <h3 id="etc-shadow">/etc/shadow</h3>
+<ul>
+<li>用于存储 Linux 系统中用户的密码信息</li>
+</ul>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs dns">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志<br><br>root:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>daemon:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>bin:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>sys:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>sync:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>games:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>man:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>lp:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>mail:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>news:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>uucp:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>proxy:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>www-data:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>backup:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>list:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>irc:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>gnats:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>nobody:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br></code></pre></td></tr></table></figure>
+<h3 id="etc-group">/etc/group</h3>
+<ul>
+<li>存放用户组的所有信息</li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">组名:口令:组标识号:组内用户列表</span><br><br><span class="hljs-section">root:x:0:</span><br><span class="hljs-section">daemon:x:1:</span><br><span class="hljs-section">bin:x:2:</span><br><span class="hljs-section">sys:x:3:</span><br><span class="hljs-section">adm:x:4:</span><br><span class="hljs-section">tty:x:5:</span><br><span class="hljs-section">disk:x:6:</span><br><span class="hljs-section">lp:x:7:</span><br><span class="hljs-section">mail:x:8:</span><br><span class="hljs-section">news:x:9:</span><br><span class="hljs-section">uucp:x:10:</span><br><span class="hljs-section">man:x:12:</span><br><span class="hljs-section">proxy:x:13:</span><br><span class="hljs-section">kmem:x:15:</span><br><span class="hljs-section">dialout:x:20:</span><br><span class="hljs-section">fax:x:21:</span><br><span class="hljs-section">voice:x:22:</span><br><span class="hljs-section">cdrom:x:24:</span><br><span class="hljs-section">floppy:x:25:</span><br></code></pre></td></tr></table></figure>
+<h3 id="etc-gshadow">/etc/gshadow</h3>
+<ul>
+<li>用于存储 Linux 系统中用户组的密码信息</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">组名：加密密码：组管理员：组附加用户列表<br><br>root:*::<br>daemon:*::<br>bin:*::<br>sys:*::<br>adm:*::<br>tty:*::<br>disk:*::<br>lp:*::<br>mail:*::<br>news:*::<br>uucp:*::<br>man:*::<br>proxy:*::<br>kmem:*::<br>dialout:*::<br>fax:*::<br>voice:*::<br>cdrom:*::<br>floppy:*::<br>tape:*::<br>sudo:*::<br>audio:*::<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -374,9 +385,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/30/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/">
+                      <a href="/2021/03/31/Software/Concept/%E9%9D%A2%E8%AF%95%E9%A2%98/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM 内存分配与回收策略</span>
+                        <span class="hidden-mobile">面试题</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -384,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/30/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/">
-                        <span class="hidden-mobile">Linux 进程与服务</span>
+                      <a href="/2021/03/31/Software/Tools/Vim/%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Vim 命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
