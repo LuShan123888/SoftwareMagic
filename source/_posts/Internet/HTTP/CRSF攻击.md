@@ -152,8 +152,6 @@ GET https://example.com/addComment?comment=XXX&dest=orderId
 - 另外，前面说过，CSRF大多数情况下来自第三方域名，但并不能排除本域发起。如果攻击者有权限在本域发布评论（含链接、图片等，统称UGC），那么它可以直接在本域发起攻击，这种情况下同源策略无法达到防护的作用。
 - 综上所述：同源验证是一个相对简单的防范方法，能够防范绝大多数的CSRF攻击。但这并不是万无一失的，对于安全性要求较高，或者有较多用户输入内容的网站，我们就要对关键的接口做额外的防护措施。
 
-
-
 ### Samesite Cookie属性
 
 - 防止CSRF攻击的办法已经有上面的预防措施。为了从源头上解决这个问题，Google起草了一份草案来改进HTTP协议，那就是为Set-Cookie响应头新增Samesite属性，它用来标明这个 Cookie是个“同站 Cookie”，同站Cookie只能作为第一方Cookie，不能作为第三方Cookie，Samesite 有两个属性值，分别是 Strict 和 Lax，下面分别讲解：
@@ -209,6 +207,7 @@ private void addTokenCookieAndHeader(HttpServletRequest httpRequest, HttpServlet
 
 - 前面讲到CSRF的另一个特征是，攻击者无法直接窃取到用户的信息（Cookie，Header，网站内容等），仅仅是冒用Cookie中的信息。
 - 而CSRF攻击之所以能够成功，是因为服务器误把攻击者发送的请求当成了用户自己的请求。那么我们可以要求所有的用户请求都携带一个CSRF攻击者无法获取到的Token。服务器通过校验请求是否携带正确的Token，来把正常的请求和攻击的请求区分开，也可以防范CSRF的攻击。
+- 因为在POST请求的瞬间,cookie会被浏览器自动添加到请求头中,但token不同,浏览器不会自动添加到headers里,攻击者也无法访问用户cookie 中的token并添加到 headers,所以提交的表单无法通过服务器过滤,也就无法形成攻击
 
 #### 原理
 
