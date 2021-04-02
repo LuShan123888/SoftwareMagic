@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-26 11:23" pubdate>
-        2021年3月26日 上午
+      <time datetime="2021-04-02 14:38" pubdate>
+        2021年4月2日 下午
       </time>
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月26日 上午
+                  本文最后更新于：2021年4月2日 下午
                 
               </p>
             
@@ -265,7 +265,8 @@
 <li><code>logging.pattern.file</code>:默认使用日志模式</li>
 <li><code>logging.pattern.level</code>:日志级别</li>
 </ul>
-<h4 id="XML-配置日志">XML 配置日志</h4>
+<h4 id="配置文件">配置文件</h4>
+<h5 id="xml">xml</h5>
 <ul>
 <li>Spring Boot 中的 logback 默认使用 <code>src/main/resources</code> 文件夹下的 <code>logback.xml</code> 或 <code>logback-spring.xml</code> 作为日志配置,Spring Boot 官方推荐优先使用带有 <code>-spring</code> 的文件名作为日志配置文件,因为如果命名为 <code>logback-spring.xml</code> 日志配置,就可以在日志输出的时候引入一些 Spring Boot 特有的配置项,也可以通过自定义的方式指定配置文件:<code>logging.config=classpath:logback-confg.xml</code></li>
 <li><code>application.properities</code> 配置:</li>
@@ -338,14 +339,14 @@
 <li>root 是根 logger,所以他两是一回事,只不过 root 中不能有 name 和 additivity 属性,是有一个 level</li>
 <li>appender 是一个日志打印的组件,这里组件里面定义了打印过滤的条件,打印输出方式,滚动策略,编码方式,打印格式等等,但是它仅仅是一个打印组件,如果我们不使用一个 logger 或者 root 的 appender-ref 指定某个具体的 appender 时,它就没有什么意义</li>
 </ul>
-<h3 id="配置文件">配置文件</h3>
+<h5 id="properties">properties</h5>
 <p><code>application.properties</code></p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">logging.level.root</span>=<span class="hljs-string">INFO</span><br><span class="hljs-meta">logging.level.org.springframework.web</span>=<span class="hljs-string">DEBUG</span><br><span class="hljs-comment">#logging.path=/home/user/log</span><br><span class="hljs-meta">logging.file</span>=<span class="hljs-string">/home/user/log/spring.log</span><br></code></pre></td></tr></table></figure>
 <h3 id="使用日志">使用日志</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/all&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">all</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    log.debug(<span class="hljs-string">&quot;logger: debug&quot;</span>);<br>    log.info(<span class="hljs-string">&quot;logger: info&quot;</span>);<br>    log.warn(<span class="hljs-string">&quot;logger: warn&quot;</span>);<br>    System.out.println(<span class="hljs-number">1</span> / <span class="hljs-number">0</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    log.error(<span class="hljs-string">&quot;log:error&quot;</span>, e);<br>    <span class="hljs-keyword">throw</span> e;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;all&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="Log4j">Log4j</h2>
 <h3 id="pom-xml">pom.xml</h3>
-<p>过滤掉自带的spring-boot-starter-logging,然后添加spring-boot-starter-log4j依赖包</p>
+<p>过滤掉自带的<code>spring-boot-starter-logging</code>,然后添加<code>spring-boot-starter-log4j</code>依赖包</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- log4j --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-log4j<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.3.8.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="配置-2">配置</h3>
 <h4 id="配置根Logger">配置根Logger</h4>
@@ -439,18 +440,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/26/Software/Backend/Java/SpringFramework/Spring/%E6%95%B4%E5%90%88SSM/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SSM 整合SSM框架</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/26/Software/Backend/Java/SpringFramework/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                        <span class="hidden-mobile">Spring 配置文件</span>
+                      <a href="/2021/04/02/Software/Tools/Vim/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">Vim 初始化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
