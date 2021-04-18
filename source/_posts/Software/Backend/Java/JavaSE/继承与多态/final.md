@@ -1,5 +1,5 @@
 ---
-title: Java final修饰符
+title: Java final
 categories:
 - Software
 - Backend
@@ -7,7 +7,7 @@ categories:
 - JavaSE
 - 继承与多态
 ---
-# Java final修饰符
+# Java final
 
 ## final作为类修饰符
 

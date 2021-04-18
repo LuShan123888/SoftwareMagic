@@ -369,21 +369,21 @@ Java8引入了三个原始类型特化流接口:IntStream,LongStream,DoubleStrea
 ```java
 @Test
 public void testJava() {
-    List<int[]> resultList = new ArrayList<>();
-    for (int a = 1; a <= 100; a++) {
-        for (int b = a; b <= 100; b++) {
-            double c = Math.sqrt(a * a + b * b);
-            if (c % 1 == 0) {
-                resultList.add(new int[]{a, b, (int) c});
-            }
-        }
+  List<int[]> resultList = new ArrayList<>();
+  for (int a = 1; a <= 100; a++) {
+    for (int b = a; b <= 100; b++) {
+      double c = Math.sqrt(a * a + b * b);
+      if (c % 1 == 0) {
+        resultList.add(new int[]{a, b, (int) c});
+      }
     }
+  }
 
-    int size = resultList.size();
-    for (int i = 0; i < size && i < 5; i++) {
-        int[] a = resultList.get(i);
-        System.out.println(a[0] + " " + a[1] + " " + a[2]);
-    }
+  int size = resultList.size();
+  for (int i = 0; i < size && i < 5; i++) {
+    int[] a = resultList.get(i);
+    System.out.println(a[0] + " " + a[1] + " " + a[2]);
+  }
 }
 ```
 
@@ -392,13 +392,13 @@ Java8之后,我们可以用上 flatMap:
 ```java
 @Test
 public void flatMap() {
-    Stream<int[]> stream = IntStream.rangeClosed(1, 100)
-        .boxed()
-        .flatMap(a -> IntStream.rangeClosed(a, 100)
-                 .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
-                 .mapToObj(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)})
-                );
-    stream.limit(5).forEach(a -> System.out.println(a[0] + " " + a[1] + " " + a[2]));
+  Stream<int[]> stream = IntStream.rangeClosed(1, 100)
+    .boxed()
+    .flatMap(a -> IntStream.rangeClosed(a, 100)
+             .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
+             .mapToObj(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)})
+            );
+  stream.limit(5).forEach(a -> System.out.println(a[0] + " " + a[1] + " " + a[2]));
 }
 ```
 
@@ -417,39 +417,39 @@ import java.util.stream.Collectors;
 import java.util.Map;
 
 public class Java8Tester {
-    public static void main(String args[]){
-        System.out.println("列表: " +strings);
+  public static void main(String args[]){
+    System.out.println("列表: " +strings);
 
-        count = strings.stream().filter(string->string.isEmpty()).count();
-        System.out.println("空字符串数量为: " + count);
+    count = strings.stream().filter(string->string.isEmpty()).count();
+    System.out.println("空字符串数量为: " + count);
 
-        count = strings.stream().filter(string -> string.length() == 3).count();
-        System.out.println("字符串长度为 3 的数量为: " + count);
+    count = strings.stream().filter(string -> string.length() == 3).count();
+    System.out.println("字符串长度为 3 的数量为: " + count);
 
-        filtered = strings.stream().filter(string ->!string.isEmpty()).collect(Collectors.toList());
-        System.out.println("筛选后的列表: " + filtered);
+    filtered = strings.stream().filter(string ->!string.isEmpty()).collect(Collectors.toList());
+    System.out.println("筛选后的列表: " + filtered);
 
-        mergedString = strings.stream().filter(string ->!string.isEmpty()).collect(Collectors.joining(", "));
-        System.out.println("合并字符串: " + mergedString);
+    mergedString = strings.stream().filter(string ->!string.isEmpty()).collect(Collectors.joining(", "));
+    System.out.println("合并字符串: " + mergedString);
 
-        squaresList = numbers.stream().map( i ->i*i).distinct().collect(Collectors.toList());
-        System.out.println("Squares List: " + squaresList);
-        System.out.println("列表: " +integers);
+    squaresList = numbers.stream().map( i ->i*i).distinct().collect(Collectors.toList());
+    System.out.println("Squares List: " + squaresList);
+    System.out.println("列表: " +integers);
 
-        IntSummaryStatistics stats = integers.stream().mapToInt((x) ->x).summaryStatistics();
+    IntSummaryStatistics stats = integers.stream().mapToInt((x) ->x).summaryStatistics();
 
-        System.out.println("列表中最大的数 : " + stats.getMax());
-        System.out.println("列表中最小的数 : " + stats.getMin());
-        System.out.println("所有数之和 : " + stats.getSum());
-        System.out.println("平均数 : " + stats.getAverage());
-        System.out.println("随机数: ");
+    System.out.println("列表中最大的数 : " + stats.getMax());
+    System.out.println("列表中最小的数 : " + stats.getMin());
+    System.out.println("所有数之和 : " + stats.getSum());
+    System.out.println("平均数 : " + stats.getAverage());
+    System.out.println("随机数: ");
 
-        random.ints().limit(10).sorted().forEach(System.out::println);
+    random.ints().limit(10).sorted().forEach(System.out::println);
 
-        // 并行处理
-        count = strings.parallelStream().filter(string -> string.isEmpty()).count();
-        System.out.println("空字符串的数量为: " + count);
-    }
+    // 并行处理
+    count = strings.parallelStream().filter(string -> string.isEmpty()).count();
+    System.out.println("空字符串的数量为: " + count);
+  }
 
 }
 ```
