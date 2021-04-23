@@ -25,13 +25,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-/**
- * @description 使用transient关键字不序列化某个变量
- *        注意读取的时候，读取数据的顺序一定要和存放数据的顺序保持一致
- *        
- * @author Alexia
- * @date  2013-10-15
- */
 public class TransientTest {
 
   public static void main(String[] args) {
@@ -131,13 +124,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-/**
- * @description 使用transient关键字不序列化某个变量
- *        注意读取的时候，读取数据的顺序一定要和存放数据的顺序保持一致
- *        
- * @author Alexia
- * @date  2013-10-15
- */
 public class TransientTest {
 
   public static void main(String[] args) {
@@ -223,9 +209,9 @@ password: null
 
 这说明反序列化后类中static型变量username的值为当前JVM中对应static变量的值，为修改后jmwang，而不是序列化时的值Alexia。
 
-## transient使用细节——被transient关键字修饰的变量真的不能被序列化吗？
+## Externalizable 实现串行化
 
-思考下面的例子：
+被transient关键字修饰的变量真的不能被序列化吗？思考下面的例子：
 
 ```java
 import java.io.Externalizable;
@@ -238,13 +224,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
-/**
- * @descripiton Externalizable接口的使用
- * 
- * @author Alexia
- * @date 2013-10-15
- *
- */
 public class ExternalizableTest implements Externalizable {
 
     private transient String content = "是的，我将会被序列化，不管我是否被transient关键字修饰";

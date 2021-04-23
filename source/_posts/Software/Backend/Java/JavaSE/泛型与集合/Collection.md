@@ -13,6 +13,10 @@ categories:
 
 ![](https://www.plantuml.com/plantuml/svg/XP91Jjj058RtFiKW5aXUs8u9mgqG2aHO80M46jhzn7xOeundeZVFYcZLAvH3L3q0QyxJzXfzdj340G5UMFh_yVp_DyypSYIH6cNAHYw2FR6ZJA7R4WJLq42qQ1lTTskYXViOnoYNKQMeRcUj0ooi8J0K5RQ99-sqbcQGxcTP5kTAWuiRwGWmljRIqEVBIToBFd9qf-4uC9R3lmM2dsjPbifKOf1uUIcnKaPaNfpAObwXRKqvjjgYMDQAmA-SMrHV6KFg4wqgqp2EAFW5w9S_hVQW0HI30szDb85LocuopePdkNSPlhHBtnzy3z1QkjgWRR6iELClztpWj3kEoABaUKMUxnyEatSEqQVCk3xG86zVw--7Zp_a1-cBY3HvFb2Eb8Xs-PJNPnw-CPJElQbLCJVWd4YZBkWeVlfreRZWASkPXZy_Vls-_nc4eU083GKfQzPUAAP06yNI8a6vRORY1W7O-_lmkFhgNBfwevd4ROMS8CgxpbnlODRvbl65GIp-bznBFFzEZe0l_UhY_mC0)
 
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-939.png)
+
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-835.png)
+
 ## Collection
 
 Collection接口的定义如下:
@@ -393,7 +397,7 @@ public class TestSet {
 - HashSet 是一个没有重复元素的集合。它是由 HashMap 实现的，不保证元素的顺序 (这里所说的没有顺序是指：元素插入的顺序与输出的顺序不一致)，而且 HashSet 允许使用 null 元素。
 - HashSet 是非同步的，如果多个线程同时访问一个哈希 set，而其中至少一个线程修改了该 set，那么它必须保持外部同步。
 - HashSet 按 Hash 算法来存储集合的元素，因此具有很好的存取和查找性能。
-- HashSet 的实现方式大致如下，通过一个 HashMap 存储元素，元素是存放在 HashMap 的 Key 中，而 Value 统一使用一个 Object 对象。
+- HashSet 的实现方式大致如下，通过一个 HashMap 存储元素，元素是存放在 HashMap 的 Key 中，而 Value 统一使用一个名为PRESENT的 Object 对象。
 - **HashSet 使用和理解中容易出现的误区:**
   - **HashSet 中存放 null 值。**HashSet 中是允许存入 null 值的，但是在 HashSet 中仅仅能够存入一个 null 值。
   - **HashSet 中存储元素的位置是固定的。**HashSet 中存储的元素的是无序的，但是由于 HashSet 底层是基于 Hash 算法实现的，使用了 hashcode，所以 HashSet 中相应的元素的位置是固定的。
@@ -413,6 +417,17 @@ public class Main {
   }
 }
 ```
+
+**保证唯一性**
+
+- `HashSet`是调用的`HashMap`的`put()`方法，而`put()`方法中有这么一行逻辑，如果`哈希值`和`key`都一样，就会直接拿新值覆盖旧值，而`HashSet`就是利用这个特性来保证唯一性。
+
+```java
+ if (p.hash == hash && ((k = p.key) == key || (key != null && key.equals(k))))
+     e = p;
+```
+
+- 所以在存放对象的时候需要重写`hashCode()`和`equals()`方法，因为就是用这两个方法来判断唯一性的，否则就会出现下面这样的情况，创建两个属性一样的对象，放入`HashSet`中会发现重复了，那是因为创建两个对象肯定哈希值是不一样的，所以需要自己重写`hashCode()`和`equals()`。
 
 ### LinkedHashSet
 

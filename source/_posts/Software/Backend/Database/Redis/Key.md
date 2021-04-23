@@ -8,6 +8,7 @@ categories:
 ---
 # Redis key
 
+- Redis的键key只能为字符串
 - Redis 键命令用于管理 redis 的键
 
 ```

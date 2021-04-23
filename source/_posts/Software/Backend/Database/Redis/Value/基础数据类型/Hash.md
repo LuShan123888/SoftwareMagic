@@ -6,6 +6,7 @@ categories:
 - Database
 - Redis
 - Value
+- 基础数据类型
 ---
 # Redis 哈希(Hash)
 

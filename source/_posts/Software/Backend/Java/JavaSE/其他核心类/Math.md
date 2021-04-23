@@ -1,13 +1,13 @@
 ---
-title: Java 常用的数学方法
+title: Java  Math
 categories:
 - Software
 - Backend
 - Java
 - JavaSE
-- 数据类型与表达式
+- 其他核心类
 ---
-# Java 常用的数学方法
+# Java  Math
 
 `Java.lang.Math`类封装了常用的数学函数和常量,Math.PI和Math.E两个常量分别代表数学上的π和e,下表列出了Math类的常用静态方法,通过类名作前缀即可调用,例如,`Math.round(5.56)`的结果为6,`Math.floor(5.56)`的结果为5.9
 
@@ -41,4 +41,8 @@ public class 常用的数学方法 {
     }
 }
 ```
+
+**Math.round(11.5) 等于多少？Math.round(-11.5)等于多少？**
+
+- Math.round(11.5)的返回值是12，Math.round(-11.5)的返回值是-11。四舍五入的原理是在参数上加0.5然后进行下取整。
 

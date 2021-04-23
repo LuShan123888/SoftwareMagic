@@ -40,10 +40,9 @@ categories:
 >
 > - 冲突处理分为以下四种方式：
 >   - **开放地址法**:出现冲突后按照一定算法查找一个空位置存放
->     - 线性探测再散列
->     - 二次探测再散列
->     - 伪随机探测再散列
->   - **再哈希法**:出现冲突后采用其他的哈希函数计算，直到不再冲突为止。
+>     - **线性探测再散列**:线性探测方法就是线性探测空白单元。当数据通过哈希函数计算应该放在700这个位置，但是700这个位置已经有数据了，那么接下来就应该查看701位置是否空闲，再查看702位置，依次类推。
+>     - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推。**二次探测的步数是原始位置相隔的步数的平方**。
+>     - **再哈希法**:出现冲突后采用其他的哈希函数计算，直到不再冲突为止。
 >   - **链地址法(拉链法)**:不同与前两种方法，他是在出现冲突的地方存储一个链表，所有的同义词记录都存在其中
 >   - **建立公共溢出区**:建立公共溢出区的基本思想是：假设哈希函数的值域是[1,m-1]，则设向量HashTable[0...m-1]为基本表，每个分量存放一个记录，另外设向量OverTable[0...v]为溢出表，所有关键字和基本表中关键字为同义词的记录，不管它们由哈希函数得到的哈希地址是什么，一旦发生冲突，都填入溢出表。
 
@@ -72,7 +71,7 @@ public class Map接口的使用 {
 - LinkedHashMap 是 HashMap 的一个子类，它保留插入的顺序，如果需要输出的顺序和输入时的相同，那么就选用 LinkedHashMap
 - **LinkedHashMap 是 Map 接口的哈希表和链接列表实现，具有可预知的迭代顺序。**此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。
 - LinkedHashMap 实现与 HashMap 的不同之处在于，前者维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。
-- 根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序 (调用 get 方法) 的链表。默认是按插入顺序排序，如果指定按访问顺序排序，那么调用 get 方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。
+- 根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序 (调用 get 方法) 的链表。默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾(其实是先删除再插入)。
 
 > **注意**:
 >
@@ -97,10 +96,518 @@ public class Map接口的使用 {
   [2003012, 2003001, 2003013]
 ```
 
+### 定义
+
+- LinkedHashMap继承了HashMap，所以它们有很多相似的地方。
+
+```java
+public class LinkedHashMap<K,V>
+  extends HashMap<K,V>
+  implements Map<K,V>
+{
+```
+
+#### 构造方法
+
+- LinkedHashMap提供了多个构造方法，我们先看空参的构造方法。
+
+```java
+public LinkedHashMap() {
+  // 调用HashMap的构造方法，其实就是初始化Entry[] table
+  super();
+  // 这里是指是否基于访问排序，默认为false
+  accessOrder = false;
+}
+```
+
+- 首先使用super调用了父类HashMap的构造方法，其实就是根据初始容量、负载因子去初始化Entry[] table
+- 然后把accessOrder设置为false，这就跟存储的顺序有关了，LinkedHashMap存储数据是有序的，而且分为两种：插入顺序和访问顺序。
+- 这里accessOrder设置为false，表示不是访问顺序而是插入顺序存储的，这也是默认值，表示LinkedHashMap中存储的顺序是按照调用put方法插入的顺序进行排序的。LinkedHashMap也提供了可以设置accessOrder的构造方法，我们来看看这种模式下，它的顺序有什么特点？
+
+```dart
+// 第三个参数用于指定accessOrder值
+Map<String, String> linkedHashMap = new LinkedHashMap<>(16, 0.75f, true);
+linkedHashMap.put("name1", "josan1");
+linkedHashMap.put("name2", "josan2");
+linkedHashMap.put("name3", "josan3");
+System.out.println("开始时顺序：");
+Set<Entry<String, String>> set = linkedHashMap.entrySet();
+Iterator<Entry<String, String>> iterator = set.iterator();
+while(iterator.hasNext()) {
+  Entry entry = iterator.next();
+  String key = (String) entry.getKey();
+  String value = (String) entry.getValue();
+  System.out.println("key:" + key + ",value:" + value);
+}
+System.out.println("通过get方法，导致key为name1对应的Entry到表尾");
+linkedHashMap.get("name1");
+Set<Entry<String, String>> set2 = linkedHashMap.entrySet();
+Iterator<Entry<String, String>> iterator2 = set2.iterator();
+while(iterator2.hasNext()) {
+  Entry entry = iterator2.next();
+  String key = (String) entry.getKey();
+  String value = (String) entry.getValue();
+  System.out.println("key:" + key + ",value:" + value);
+}
+```
+
+- 因为调用了get("name1")导致了name1对应的Entry移动到了最后，这里只要知道LinkedHashMap有插入顺序和访问顺序两种就可以，后面会详细讲原理。
+- 还记得，上一篇HashMap解析中提到，在HashMap的构造函数中，调用了init方法，而在HashMap中init方法是空实现，但LinkedHashMap重写了该方法，所以在LinkedHashMap的构造方法里，调用了自身的init方法，init的重写实现如下：
+
+```dart
+/**
+     * Called by superclass constructors and pseudoconstructors (clone,
+     * readObject) before any entries are inserted into the map.  Initializes
+     * the chain.
+     */
+@Override
+void init() {
+  // 创建了一个hash=-1，key、value、next都为null的Entry
+  header = new Entry<>(-1, null, null, null);
+  // 让创建的Entry的before和after都指向自身，注意after不是之前提到的next
+  // 其实就是创建了一个只有头部节点的双向链表
+  header.before = header.after = header;
+}
+```
+
+- 这好像跟我们上一篇HashMap提到的Entry有些不一样，HashMap中静态内部类Entry是这样定义的：
+
+```dart
+static class Entry<K,V> implements Map.Entry<K,V> {
+  final K key;
+  V value;
+  Entry<K,V> next;
+  int hash;
+}
+```
+
+- 没有before和after属性啊！原来，LinkedHashMap有自己的静态内部类Entry，它继承了HashMap.Entry，定义如下:
+
+```cpp
+/**
+     * LinkedHashMap entry.
+     */
+private static class Entry<K,V> extends HashMap.Entry<K,V> {
+  // These fields comprise the doubly linked list used for iteration.
+  Entry<K,V> before, after;
+
+  Entry(int hash, K key, V value, HashMap.Entry<K,V> next) {
+    super(hash, key, value, next);
+  }
+```
+
+- 所以LinkedHashMap构造函数，主要就是调用HashMap构造函数初始化了一个Entry[] table，然后调用自身的init初始化了一个只有头结点的双向链表。完成了如下操作：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222855769.png" alt="image-20210421222855769" style="zoom:50%;" />
+
+### put方法
+
+- LinkedHashMap没有重写put方法，所以还是调用HashMap得到put方法，如下：
+
+```csharp
+public V put(K key, V value) {
+  // 对key为null的处理
+  if (key == null)
+    return putForNullKey(value);
+  // 计算hash
+  int hash = hash(key);
+  // 得到在table中的index
+  int i = indexFor(hash, table.length);
+  // 遍历table[index]，是否key已经存在，存在则替换，并返回旧值
+  for (Entry<K,V> e = table[i]; e != null; e = e.next) {
+    Object k;
+    if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+      V oldValue = e.value;
+      e.value = value;
+      e.recordAccess(this);
+      return oldValue;
+    }
+  }
+
+  modCount++;
+  // 如果key之前在table中不存在，则调用addEntry，LinkedHashMap重写了该方法
+  addEntry(hash, key, value, i);
+  return null;
+}
+```
+
+- 我们看看LinkedHashMap的addEntry方法：
+
+```csharp
+void addEntry(int hash, K key, V value, int bucketIndex) {
+  // 调用父类的addEntry，增加一个Entry到HashMap中
+  super.addEntry(hash, key, value, bucketIndex);
+
+  // removeEldestEntry方法默认返回false，不用考虑
+  Entry<K,V> eldest = header.after;
+  if (removeEldestEntry(eldest)) {
+    removeEntryForKey(eldest.key);
+  }
+}
+```
+
+- 这里调用了父类HashMap的addEntry方法，如下：
+
+```csharp
+void addEntry(int hash, K key, V value, int bucketIndex) {
+  // 扩容相关
+  if ((size >= threshold) && (null != table[bucketIndex])) {
+    resize(2 * table.length);
+    hash = (null != key) ? hash(key) : 0;
+    bucketIndex = indexFor(hash, table.length);
+  }
+  // LinkedHashMap进行了重写
+  createEntry(hash, key, value, bucketIndex);
+}
+```
+
+- 前面是扩容相关的代码，在上一篇HashMap解析中已经讲过了。这里主要看createEntry方法，LinkedHashMap进行了重写。
+
+```csharp
+void createEntry(int hash, K key, V value, int bucketIndex) {
+  HashMap.Entry<K,V> old = table[bucketIndex];
+  // e就是新创建了Entry，会加入到table[bucketIndex]的表头
+  Entry<K,V> e = new Entry<>(hash, key, value, old);
+  table[bucketIndex] = e;
+  // 把新创建的Entry，加入到双向链表中
+  e.addBefore(header);
+  size++;
+}
+```
+
+- 我们来看看LinkedHashMap.Entry的addBefore方法：
+
+```cpp
+        private void addBefore(Entry<K,V> existingEntry) {
+            after  = existingEntry;
+            before = existingEntry.before;
+            before.after = this;
+            after.before = this;
+        }
+```
+
+- 从这里就可以看出，当put元素时，不但要把它加入到HashMap中去，还要加入到双向链表中，所以可以看出LinkedHashMap就是HashMap+双向链表，下面用图来表示逐步往LinkedHashMap中添加数据的过程，红色部分是双向链表，黑色部分是HashMap结构，header是一个Entry类型的双向链表表头，本身不存储数据。
+- 首先是只加入一个元素Entry1，假设index为0：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222936322.png" alt="image-20210421222936322" style="zoom:50%;" />
+
+- 当再加入一个元素Entry2，假设index为15：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222956770.png" alt="image-20210421222956770" style="zoom:50%;" />
+
+- 当再加入一个元素Entry3, 假设index也是0：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223014204.png" alt="image-20210421223014204" style="zoom:50%;" />
+
+- 以上，就是LinkedHashMap的put的所有过程了，总体来看，跟HashMap的put类似，只不过多了把新增的Entry加入到双向列表中。
+
+### 扩容
+
+- 在HashMap的put方法中，如果发现前元素个数超过了扩容阀值时，会调用resize方法，如下：
+
+```java
+void resize(int newCapacity) {
+  Entry[] oldTable = table;
+  int oldCapacity = oldTable.length;
+  if (oldCapacity == MAXIMUM_CAPACITY) {
+    threshold = Integer.MAX_VALUE;
+    return;
+  }
+
+  Entry[] newTable = new Entry[newCapacity];
+  boolean oldAltHashing = useAltHashing;
+  useAltHashing |= sun.misc.VM.isBooted() &&
+    (newCapacity >= Holder.ALTERNATIVE_HASHING_THRESHOLD);
+  boolean rehash = oldAltHashing ^ useAltHashing;
+  // 把旧table的数据迁移到新table
+  transfer(newTable, rehash);
+  table = newTable;
+  threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+}
+```
+
+- LinkedHashMap重写了transfer方法，数据的迁移，它的实现如下：
+
+```java
+    void transfer(HashMap.Entry[] newTable, boolean rehash) {
+        // 扩容后的容量是之前的2倍
+        int newCapacity = newTable.length;
+        // 遍历双向链表，把所有双向链表中的Entry，重新计算hash，并加入到新的table中
+        for (Entry<K,V> e = header.after; e != header; e = e.after) {
+            if (rehash)
+                e.hash = (e.key == null) ? 0 : hash(e.key);
+            int index = indexFor(e.hash, newCapacity);
+            e.next = newTable[index];
+            newTable[index] = e;
+        }
+    }
+```
+
+- 可以看出，LinkedHashMap扩容时，数据的再散列和HashMap是不一样的。
+- HashMap是先遍历旧table，再遍历旧table中每个元素的单向链表，取得Entry以后，重新计算hash值，然后存放到新table的对应位置。
+- LinkedHashMap是遍历的双向链表，取得每一个Entry，然后重新计算hash值，然后存放到新table的对应位置。
+- 从遍历的效率来说，遍历双向链表的效率要高于遍历table，因为遍历双向链表是N次（N为元素个数）；而遍历table是N+table的空余个数（N为元素个数）。
+
+### 双向链表的重排序
+
+- 前面分析的，主要是当前LinkedHashMap中不存在当前key时，新增Entry的情况。当key如果已经存在时，则进行更新Entry的value。就是HashMap的put方法中的如下代码：
+
+```csharp
+for (Entry<K,V> e = table[i]; e != null; e = e.next) {
+  Object k;
+  if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+    V oldValue = e.value;
+    e.value = value;
+    // 重排序
+    e.recordAccess(this);
+    return oldValue;
+  }
+}
+```
+
+- 主要看e.recordAccess(this)，这个方法跟访问顺序有关，而HashMap是无序的，所以在HashMap.Entry的recordAccess方法是空实现，但是LinkedHashMap是有序的,LinkedHashMap.Entry对recordAccess方法进行了重写。
+
+```csharp
+void recordAccess(HashMap<K,V> m) {
+  LinkedHashMap<K,V> lm = (LinkedHashMap<K,V>)m;
+  // 如果LinkedHashMap的accessOrder为true，则进行重排序
+  // 比如前面提到LruCache中使用到的LinkedHashMap的accessOrder属性就为true
+  if (lm.accessOrder) {
+    lm.modCount++;
+    // 把更新的Entry从双向链表中移除
+    remove();
+    // 再把更新的Entry加入到双向链表的表尾
+    addBefore(lm.header);
+  }
+}
+```
+
+- 在LinkedHashMap中，只有accessOrder为true，即是访问顺序模式，才会put时对更新的Entry进行重新排序，而如果是插入顺序模式时，不会重新排序，这里的排序跟在HashMap中存储没有关系，只是指在双向链表中的顺序。
+- 举个栗子：开始时，HashMap中有Entry1、Entry2、Entry3，并设置LinkedHashMap为访问顺序，则更新Entry1时，会先把Entry1从双向链表中删除，然后再把Entry1加入到双向链表的表尾，而Entry1在HashMap结构中的存储位置没有变化，对比图如下所示：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223149619.png" alt="image-20210421223149619" style="zoom:50%;" />
+
+### get方法
+
+- LinkedHashMap有对get方法进行了重写，如下：
+
+```kotlin
+public V get(Object key) {
+  // 调用genEntry得到Entry
+  Entry<K,V> e = (Entry<K,V>)getEntry(key);
+  if (e == null)
+  return null;
+  // 如果LinkedHashMap是访问顺序的，则get时，也需要重新排序
+  e.recordAccess(this);
+  return e.value;
+}
+```
+
+- 先是调用了getEntry方法，通过key得到Entry，而LinkedHashMap并没有重写getEntry方法，所以调用的是HashMap的getEntry方法，在上一篇文章中我们分析过HashMap的getEntry方法：首先通过key算出hash值，然后根据hash值算出在table中存储的index，然后遍历table[index]的单向链表去对比key，如果找到了就返回Entry。
+- 后面调用了LinkedHashMap.Entry的recordAccess方法，上面分析过put过程中这个方法，其实就是在访问顺序的LinkedHashMap进行了get操作以后，重新排序，把get的Entry移动到双向链表的表尾。
+
+### 遍历方式取数据
+
+- 我们先来看看HashMap使用遍历方式取数据的过程：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223241731.png" alt="image-20210421223241731" style="zoom:50%;" />
+
+- 很明显，这样取出来的Entry顺序肯定跟插入顺序不同了，既然LinkedHashMap是有序的，那么它是怎么实现的呢？
+  先看看LinkedHashMap取遍历方式获取数据的代码：
+
+```dart
+Map<String, String> linkedHashMap = new LinkedHashMap<>();
+linkedHashMap.put("name1", "josan1");
+linkedHashMap.put("name2", "josan2");
+linkedHashMap.put("name3", "josan3");
+// LinkedHashMap没有重写该方法，调用的HashMap中的entrySet方法
+Set<Entry<String, String>> set = linkedHashMap.entrySet();
+Iterator<Entry<String, String>> iterator = set.iterator();
+while(iterator.hasNext()) {
+  Entry entry = iterator.next();
+  String key = (String) entry.getKey();
+  String value = (String) entry.getValue();
+  System.out.println("key:" + key + ",value:" + value);
+}
+```
+
+- LinkedHashMap没有重写entrySet方法，我们先来看HashMap中的entrySet，如下：
+
+```dart
+public Set<Map.Entry<K,V>> entrySet() {
+  return entrySet0();
+}
+
+private Set<Map.Entry<K,V>> entrySet0() {
+  Set<Map.Entry<K,V>> es = entrySet;
+  return es != null ? es : (entrySet = new EntrySet());
+}
+
+private final class EntrySet extends AbstractSet<Map.Entry<K,V>> {
+  public Iterator<Map.Entry<K,V>> iterator() {
+    return newEntryIterator();
+  }
+  // 无关代码
+  ......
+}
+```
+
+- 可以看到，HashMap的entrySet方法，其实就是返回了一个EntrySet对象。
+- 我们得到EntrySet会调用它的iterator方法去得到迭代器Iterator，从上面的代码也可以看到，iterator方法中直接调用了newEntryIterator方法并返回，而LinkedHashMap重写了该方法
+
+```dart
+Iterator<Map.Entry<K,V>> newEntryIterator() { 
+  return new EntryIterator();
+}
+```
+
+- 这里直接返回了EntryIterator对象，这个和上一篇HashMap中的newEntryIterator方法中一模一样，都是返回了EntryIterator对象，其实他们返回的是各自的内部类。我们来看看LinkedHashMap中EntryIterator的定义：
+
+```java
+private class EntryIterator extends LinkedHashIterator<Map.Entry<K,V>> {
+  public Map.Entry<K,V> next() { 
+    return nextEntry();
+  }
+}
+```
+
+- 该类是继承LinkedHashIterator，并重写了next方法；而HashMap中是继承HashIterator。
+- 我们再来看看LinkedHashIterator的定义：
+
+```java
+private abstract class LinkedHashIterator<T> implements Iterator<T> {
+  // 默认下一个返回的Entry为双向链表表头的下一个元素
+  Entry<K,V> nextEntry    = header.after;
+  Entry<K,V> lastReturned = null;
+
+  public boolean hasNext() {
+    return nextEntry != header;
+  }
+
+  Entry<K,V> nextEntry() {
+    if (modCount != expectedModCount)
+      throw new ConcurrentModificationException();
+    if (nextEntry == header)
+      throw new NoSuchElementException();
+
+    Entry<K,V> e = lastReturned = nextEntry;
+    nextEntry = e.after;
+    return e;
+  }
+  // 不相关代码
+  ......
+}
+```
+
+- 我们先不看整个类的实现，只要知道在LinkedHashMap中，Iterator<Entry<String, String>> iterator = set.iterator()，这段代码会返回一个继承LinkedHashIterator的Iterator，它有着跟HashIterator不一样的遍历规则。
+- 接着，我们会用while(iterator.hasNext())去循环判断是否有下一个元素，LinkedHashMap中的EntryIterator没有重写该方法，所以还是调用LinkedHashIterator中的hasNext方法，如下：
+
+```java
+public boolean hasNext() {
+  // 下一个应该返回的Entry是否就是双向链表的头结点
+  // 有两种情况：1.LinkedHashMap中没有元素；2.遍历完双向链表回到头部
+  return nextEntry != header;
+}
+```
+
+- nextEntry表示下一个应该返回的Entry，默认值是header.after，即双向链表表头的下一个元素。而上面介绍到，LinkedHashMap在初始化时，会调用init方法去初始化一个before和after都指向自身的Entry，但是put过程会把新增加的Entry加入到双向链表的表尾，所以只要LinkedHashMap中有元素，第一次调用hasNext肯定不会为false。
+- 然后我们会调用next方法去取出Entry，LinkedHashMap中的EntryIterator重写了该方法，如下：
+
+```csharp
+public Map.Entry<K,V> next() { 
+  return nextEntry(); 
+}
+```
+
+- 而它自身又没有重写nextEntry方法，所以还是调用的LinkedHashIterator中的nextEntry方法：
+
+```csharp
+Entry<K,V> nextEntry() {
+  // 保存应该返回的Entry
+  Entry<K,V> e = lastReturned = nextEntry;
+  //把当前应该返回的Entry的after作为下一个应该返回的Entry
+  nextEntry = e.after;
+  // 返回当前应该返回的Entry
+  return e;
+}
+```
+
+- 这里其实遍历的是双向链表，所以不会存在HashMap中需要寻找下一条单向链表的情况，从头结点Entry header的下一个节点开始，只要把当前返回的Entry的after作为下一个应该返回的节点即可。直到到达双向链表的尾部时，after为双向链表的表头节点Entry header，这时候hasNext就会返回false，表示没有下一个元素了。LinkedHashMap的遍历取值如下图所示：
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223450436.png" alt="image-20210421223450436" style="zoom:50%;" />
+
+- 易知，遍历出来的结果为Entry1、Entry2...Entry6。
+- 可得，LinkedHashMap是有序的，且是通过双向链表来保证顺序的。
+
+### remove方法
+
+LinkedHashMap没有提供remove方法，所以调用的是HashMap的remove方法，实现如下：
+
+```csharp
+public V remove(Object key) {
+  Entry<K,V> e = removeEntryForKey(key);
+  return (e == null ? null : e.value);
+}
+
+final Entry<K,V> removeEntryForKey(Object key) {
+  int hash = (key == null) ? 0 : hash(key);
+  int i = indexFor(hash, table.length);
+  Entry<K,V> prev = table[i];
+  Entry<K,V> e = prev;
+
+  while (e != null) {
+    Entry<K,V> next = e.next;
+    Object k;
+    if (e.hash == hash &&
+        ((k = e.key) == key || (key != null && key.equals(k)))) {
+      modCount++;
+      size--;
+      if (prev == e)
+        table[i] = next;
+      else
+        prev.next = next;
+      // LinkedHashMap.Entry重写了该方法
+      e.recordRemoval(this);
+      return e;
+    }
+    prev = e;
+    e = next;
+  }
+
+  return e;
+}
+```
+
+- 在上一篇HashMap中就分析了remove过程，其实就是断开其他对象对自己的引用。比如被删除Entry是在单向链表的表头，则让它的next放到表头，这样它就没有被引用了；如果不是在表头，它是被别的Entry的next引用着，这时候就让上一个Entry的next指向它自己的next，这样，它也就没被引用了。
+- 在HashMap.Entry中recordRemoval方法是空实现，但是LinkedHashMap.Entry对其进行了重写，如下：
+
+```csharp
+void recordRemoval(HashMap<K,V> m) {
+  remove();
+}
+
+private void remove() {
+  before.after = after;
+  after.before = before;
+}
+```
+
+- 易知，这是要把双向链表中的Entry删除，也就是要断开当前要被删除的Entry被其他对象通过after和before的方式引用。
+- 所以，LinkedHashMap的remove操作。首先把它从table中删除，即断开table或者其他对象通过next对其引用，然后也要把它从双向链表中删除，断开其他对应通过after和before对其引用。
+
+###  HashMap与LinkedHashMap的结构对比
+
+再来看看HashMap和LinkedHashMap的结构图，是不是秒懂了。LinkedHashMap其实就是可以看成HashMap的基础上，多了一个双向链表来维持顺序。
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223642737.png" alt="image-20210421223642737" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223700724.png" alt="image-20210421223700724" style="zoom:50%;" />
+
 ## Hashtable
 
-- Hashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。
+- Hashtable是原始的java.util的一部分， 是一个Dictionary具体的实现 。然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中。它和HashMap类很相似，但是它支持同步。所有的读写等操作都进行了锁（`synchronized`）保护，在多线程环境下没有安全问题。但是锁保护也是有代价的，会对读写的效率产生较大影响。
 - 像HashMap一样，Hashtable在哈希表中存储键/值对。当使用一个哈希表，要指定用作键的对象，以及要链接到该键的值。然后，该键经过哈希处理，所得到的散列码被用作存储在该表中值的索引。但是HashTable 的 key、value 都不可为 null 
+- HashTable类中，保存实际数据的，依然是`Entry`对象。其数据结构与HashMap是相同的。
 
 > **Hashtable定义了四个构造方法**
 >
@@ -134,22 +641,22 @@ public class Map接口的使用 {
 
 - Hashtable中除了从Map接口中定义的方法外，还定义了以下方法：
 
-| **序号** | **方法描述**                                                 |
-| :------- | :----------------------------------------------------------- |
-| 1        | **void clear( )**  将此哈希表清空，使其不包含任何键。        |
-| 2        | **Object clone( )** 创建此哈希表的浅表副本。                 |
-| 3        | **boolean contains(Object value)**  测试此映射表中是否存在与指定值关联的键。 |
-| 4        | **boolean containsKey(Object key)** 测试指定对象是否为此哈希表中的键。 |
-| 5        | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值，则返回 true。 |
-| 6        | **Enumeration elements( )** 返回此哈希表中的值的枚举。       |
-| 7        | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v；否则，返回 null。 |
-| 8        | **boolean isEmpty( )** 测试此哈希表是否没有键映射到值。      |
-| 9        | **Enumeration keys( )**  返回此哈希表中的键的枚举。          |
-| 10       | **Object put(Object key, Object value)** 将指定 key 映射到此哈希表中的指定 value。 |
-| 11       | **void rehash( )** 增加此哈希表的容量并在内部对其进行重组，以便更有效地容纳和访问其元素。 |
-| 12       | **Object remove(Object key)** 从哈希表中移除该键及其相应的值。 |
-| 13       | **int size( )**  返回此哈希表中的键的数量。                  |
-| 14       | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", " （逗号加空格）分隔开的、括在括号中的一组条目。 |
+| 序号 | 方法描述                                                     |
+| :--- | :----------------------------------------------------------- |
+| 1    | **void clear( )**  将此哈希表清空，使其不包含任何键。        |
+| 2    | **Object clone( )** 创建此哈希表的浅表副本。                 |
+| 3    | **boolean contains(Object value)**  测试此映射表中是否存在与指定值关联的键。 |
+| 4    | **boolean containsKey(Object key)** 测试指定对象是否为此哈希表中的键。 |
+| 5    | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值，则返回 true。 |
+| 6    | **Enumeration elements( )** 返回此哈希表中的值的枚举。       |
+| 7    | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v；否则，返回 null。 |
+| 8    | **boolean isEmpty( )** 测试此哈希表是否没有键映射到值。      |
+| 9    | **Enumeration keys( )**  返回此哈希表中的键的枚举。          |
+| 10   | **Object put(Object key, Object value)** 将指定 key 映射到此哈希表中的指定 value。 |
+| 11   | **void rehash( )** 增加此哈希表的容量并在内部对其进行重组，以便更有效地容纳和访问其元素。 |
+| 12   | **Object remove(Object key)** 从哈希表中移除该键及其相应的值。 |
+| 13   | **int size( )**  返回此哈希表中的键的数量。                  |
+| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", " （逗号加空格）分隔开的、括在括号中的一组条目。 |
 
 **实例**
 
@@ -207,7 +714,334 @@ Zara's new balance: 4434.34
 - TreeMap 中判断相等的标准是：两个 key 通过`equals()`方法返回为 true，并且通过`compare()`方法比较应该返回为 0。
 - 要严格按照`compare()`规范实现比较逻辑，否则，`TreeMap`将不能正常工作。如果使用自定义的类来作为 TreeMap 中的 key 值，且想让 TreeMap 能够良好的工作，则必须重写自定义类中的`equals()`方法
 
-**实例**:定义了`Student`类，并用分数`score`进行排序，高分在前
+### 节点
+
+```java
+static final class Entry<K,V> implements Map.Entry<K,V> {
+        K key;
+        V value;
+        Entry<K,V> left;
+        Entry<K,V> right;
+        Entry<K,V> parent;
+        boolean color = BLACK;
+}
+```
+
+- 红黑树的节点是用Entry类表示的，该类包括两个指向左右两个孩子节点的指针left、right，一个指向父亲节点的指针parent，表示当前颜色的变量color,默认为黑色。K泛型的key表示键，V泛型的value表示值。
+
+### 插入算法
+
+首先执行二叉搜索树的插入算法，保证左子树的关键字最大不超过x.key，右子树的关键字最小不低于x.key。
+
+```java
+Entry<K,V> t = root;
+if (t == null) { 
+  @1
+    compare(key, key); // type (and possibly null) check
+
+  root = new Entry<>(key, value, null);
+  size = 1;
+  modCount++;
+  return null;
+}
+@2
+  int cmp;
+Entry<K,V> parent;
+// split comparator and comparable paths
+Comparator<? super K> cpr = comparator;
+if (cpr != null) {
+  do {
+    parent = t;
+    cmp = cpr.compare(key, t.key);
+    if (cmp < 0)
+      t = t.left;
+    else if (cmp > 0)
+      t = t.right;
+    else  @3
+      return t.setValue(value);
+  } while (t != null);
+}
+else {
+  if (key == null)
+    throw new NullPointerException();
+  @SuppressWarnings("unchecked")
+    Comparable<? super K> k = (Comparable<? super K>) key;
+  do {
+    parent = t;
+    cmp = k.compareTo(t.key);
+    if (cmp < 0)
+      t = t.left;
+    else if (cmp > 0)
+      t = t.right;
+    else
+      return t.setValue(value);
+  } while (t != null);
+}
+@4
+  Entry<K,V> e = new Entry<>(key, value, parent);
+if (cmp < 0)
+  parent.left = e;
+else
+  parent.right = e;
+```
+
+- @1 表示根节点为空的情况直接插入到根节点
+- @2 表示根节点非空，通过传入的Comparator或者key自身实现的Comparable来比较key的值，先从根部节点比较。
+- @3 如果key的值与比较节点的值相同，直接将value赋给节点返回。
+- @4 如果key.value < root.value，接下来比较key与root左子树的值；如果key.value > root.value,接下来比较key与root右子树的值。以此循环，直到要比较的节点为空,将新节点插入该位置。
+
+### 插入后的颜色修复
+
+经过二叉搜索树的插入算法，此时树已满足二叉搜索树的条件，接下来在不破坏二叉搜索树性质的条件下对颜色修复使得该树满足红黑树的性质。
+
+```java
+private void fixAfterInsertion(Entry<K,V> x) {
+  x.color = RED;
+
+  while (x != null && x != root && x.parent.color == RED) { @1
+    if (parentOf(x) == leftOf(parentOf(parentOf(x)))) { 
+      Entry<K,V> y = rightOf(parentOf(parentOf(x)));
+      if (colorOf(y) == RED) { //情况1
+        setColor(parentOf(x), BLACK);
+        setColor(y, BLACK);
+        setColor(parentOf(parentOf(x)), RED);
+        x = parentOf(parentOf(x));
+      } else {
+        if (x == rightOf(parentOf(x))) { //情况2
+          x = parentOf(x);
+          rotateLeft(x);
+        }
+        //情况3
+        setColor(parentOf(x), BLACK);
+        setColor(parentOf(parentOf(x)), RED);
+        rotateRight(parentOf(parentOf(x)));
+      }
+    } else {
+      Entry<K,V> y = leftOf(parentOf(parentOf(x)));
+      if (colorOf(y) == RED) {
+        setColor(parentOf(x), BLACK);
+        setColor(y, BLACK);
+        setColor(parentOf(parentOf(x)), RED);
+        x = parentOf(parentOf(x));
+      } else {
+        if (x == leftOf(parentOf(x))) {
+          x = parentOf(x);
+          rotateRight(x);
+        }
+        setColor(parentOf(x), BLACK);
+        setColor(parentOf(parentOf(x)), RED);
+        rotateLeft(parentOf(parentOf(x)));
+      }
+    }
+  }
+  root.color = BLACK;
+}
+```
+
+- 如果新插入的节点非根节点，并且父亲是红色，因为它自身也是红色，因此违反了性质4，需要调整颜色。
+- 下面以**父节点是左孩子**的判断分支分析，父节点是右孩子的状况具有对称性，不重复推导。
+
+#### 情况一，叔节点是红色
+
+如果当前节点x的父亲是左节点，并且和叔节点y（父亲的兄弟节点）都是红色，这时候父亲的父亲节点必须是黑色的，否则不满足性质4。将父亲x,p和叔节点y都染成黑色，将父亲的父亲x.p.p节点染成红色。此时插入的节点x、插入节点的父亲节点x.p、叔节点y都满足红黑树性质，但是父亲的父亲节点x.p.p被染成红色后未必还满足红黑树性质，所以将x设置为x.p.p节点，交给下个迭代解决。
+
+![5222801-68bc399c25e54a54](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-68bc399c25e54a54.png)
+
+#### 情况二，当前的节点是右孩子，叔节点是黑色
+
+如果x是右孩子，将x设置成x.p，对x左旋。
+
+![5222801-7d40ed5b0316cf08](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-7d40ed5b0316cf08.png)
+
+#### 情况三，当前节点是左孩子，叔节点y是黑色
+
+- 将x的父亲节点x.p染成黑色，再将x节点的父亲的父亲x.p.p染成红色。
+
+![5222801-72872e4214af6dee](../../../../../../../Downloads/5222801-72872e4214af6dee.png)
+
+- 将x.p.p右旋
+
+![5222801-2d3f2e12beb9ccf7](../../../../../../../Downloads/5222801-2d3f2e12beb9ccf7.png)
+
+- 经过上述步骤的变化现在已经成为一颗符合性质的红黑树。
+- 三种情况针对父亲节点是左孩子的情况，父亲是右孩子的情况可以根据三种情况反推。
+
+**插入算法小结**
+
+因为一颗有n个节点的红黑树，其高度为lg n，二叉搜索树的插入最多执行O(lg n)的时间。而颜色修复在情况一沿着树上升2层，循环才会重复执行。循环可能执行的总数为O(lg n),一旦进入情况2或3，下面执行的旋转不超过2次，循环就结束了。所以红黑树的插入算法时间是O(lg n)。
+
+### 删除算法
+
+```java
+public V remove(Object key) {
+  Entry<K,V> p = getEntry(key);
+  if (p == null)
+    return null;
+
+  V oldValue = p.value;
+  deleteEntry(p);
+  return oldValue;
+}
+```
+
+首先通过getEntry找到与key对应的节点，然后调用deleteEntry方法删除节点:
+
+```java
+private void deleteEntry(Entry<K,V> p) {
+  modCount++;
+  size--;
+
+  // If strictly internal, copy successor's element to p and then make p
+  // point to successor.
+  if (p.left != null && p.right != null) {
+    Entry<K,V> s = successor(p);
+    p.key = s.key;
+    p.value = s.value;
+    p = s;
+  } // p has 2 children
+
+  // Start fixup at replacement node, if it exists.
+  Entry<K,V> replacement = (p.left != null ? p.left : p.right);
+
+  if (replacement != null) {
+    // Link replacement to parent
+    replacement.parent = p.parent;
+    if (p.parent == null)
+      root = replacement;
+    else if (p == p.parent.left)
+      p.parent.left  = replacement;
+    else
+      p.parent.right = replacement;
+
+    // Null out links so they are OK to use by fixAfterDeletion.
+    p.left = p.right = p.parent = null;
+
+    // Fix replacement
+    if (p.color == BLACK)
+      fixAfterDeletion(replacement);
+  } else if (p.parent == null) { // return if we are the only node.
+    root = null;
+  } else { //  No children. Use self as phantom replacement and unlink.
+    if (p.color == BLACK)
+      fixAfterDeletion(p);
+
+    if (p.parent != null) {
+      if (p == p.parent.left)
+        p.parent.left = null;
+      else if (p == p.parent.right)
+        p.parent.right = null;
+      p.parent = null;
+    }
+  }
+}
+```
+
+首先根据二叉搜索树的删除算法删除节点，具体表现为:
+
+1. 如果删除的节点没有子树，直接删除，如果它是黑色的，从哨兵节点开始颜色修复。
+2. 如果删除的节点只有一个子树，用它的孩子节点替换它，如果它是黑色的，从它的孩子开始执行颜色修复。
+3. 如果删除的节点有双子树，用右子树最小的节点替换它，并对最小节点的右节点执行颜色修复。
+
+### 删除后的颜色修复
+
+- 删除节点完毕后，开始执行颜色修复算法,颜色修复只指针替换节点为黑色的，因为路径中少了一个黑色节点破坏了性质5。
+- 下面以**修复节点是左孩子分析**，如果该节点是右孩子与它是左孩子具有对称性，不再重复分析。
+
+```java
+private void fixAfterDeletion(Entry<K,V> x) {
+  while (x != root && colorOf(x) == BLACK) {
+    if (x == leftOf(parentOf(x))) {
+      Entry<K,V> sib = rightOf(parentOf(x));
+
+      if (colorOf(sib) == RED) { //情况一
+        setColor(sib, BLACK);
+        setColor(parentOf(x), RED);
+        rotateLeft(parentOf(x));
+        sib = rightOf(parentOf(x));
+      }
+
+      if (colorOf(leftOf(sib))  == BLACK &&
+          colorOf(rightOf(sib)) == BLACK) { //情况二
+        setColor(sib, RED);
+        x = parentOf(x);
+      } else {
+        if (colorOf(rightOf(sib)) == BLACK) {//情况三
+          setColor(leftOf(sib), BLACK);
+          setColor(sib, RED);
+          rotateRight(sib);
+          sib = rightOf(parentOf(x));
+        }
+        setColor(sib, colorOf(parentOf(x))); //情况四
+        setColor(parentOf(x), BLACK);
+        setColor(rightOf(sib), BLACK);
+        rotateLeft(parentOf(x));
+        x = root;
+      }
+    } else { // symmetric
+      Entry<K,V> sib = leftOf(parentOf(x));
+
+      if (colorOf(sib) == RED) {
+        setColor(sib, BLACK);
+        setColor(parentOf(x), RED);
+        rotateRight(parentOf(x));
+        sib = leftOf(parentOf(x));
+      }
+
+      if (colorOf(rightOf(sib)) == BLACK &&
+          colorOf(leftOf(sib)) == BLACK) {
+        setColor(sib, RED);
+        x = parentOf(x);
+      } else {
+        if (colorOf(leftOf(sib)) == BLACK) {
+          setColor(rightOf(sib), BLACK);
+          setColor(sib, RED);
+          rotateLeft(sib);
+          sib = leftOf(parentOf(x));
+        }
+        setColor(sib, colorOf(parentOf(x)));
+        setColor(parentOf(x), BLACK);
+        setColor(leftOf(sib), BLACK);
+        rotateRight(parentOf(x));
+        x = root;
+      }
+    }
+  }
+
+  setColor(x, BLACK);
+}
+```
+
+#### 情况一，兄弟sib是红色节点
+
+将兄弟设置黑色，将x的父亲设置为红色，并将x的父亲左旋，设置新的兄弟节点为sib。将情况1转换成情况2或3或4。
+
+![5222801-09e94eae29227f07](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-09e94eae29227f07.png)
+
+#### 情况二，兄弟节点sib是黑色的，且sib的两个孩子节点也是黑色的
+
+设置兄弟节点sib为红色,将x设置为x的父亲。完成后sib被抹去一层黑色，以此向上循环达到平衡。
+
+![5222801-d38835da660ca5c4](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-d38835da660ca5c4.png)
+
+#### 情况三，兄弟节点sib是黑色的，sib的左孩子是红色，sib的右孩子是黑色
+
+设置sib的左孩子为黑色，设置sib为红色，将sib右旋，重新设置sib为x的兄弟节点。
+
+![5222801-6c588b0851c02bab](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-6c588b0851c02bab.png)
+
+#### 情况四，兄弟sib是黑色的，sib的右孩子是红色的
+
+设置sib为父亲的颜色，设置父亲为黑色，设置sib的右孩子为黑色，对父亲左旋，并将x设置为root。这样将情况3转换为情况4。
+
+![5222801-278da115ddb782d7](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-278da115ddb782d7.png)
+
+**删除算法小结**
+
+因为包含n个节点的红黑树高度为O(lg n),因此执行二叉搜索树的删除算法时间效率为O(lg n)，在执行删除后的颜色调整时，情况1、3、4执行至多三次旋转便能终止。情况2最多循环数的高度O(lg n)，且不会执行旋转。所以红黑树的删除时间为O(lg n)。
+
+**实例**
+
+定义了`Student`类，并用分数`score`进行排序，高分在前
 
 ```java
 public class Main {
@@ -364,8 +1198,7 @@ props.load(new FileReader("settings.properties", StandardCharsets.UTF_8));
 正确使用`Map`必须保证：
 
 1. 作为`key`的对象必须正确覆写`equals()`方法，相等的两个`key`实例调用`equals()`必须返回`true`
-2. 作为`key`的对象还必须正确覆写`hashCode()`方法，因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法，它返回一个`int`整数。`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引，继而直接返回`value`,
-3. 且`hashCode()`方法要严格遵循以下规范：
+2. 作为`key`的对象还必须正确覆写`hashCode()`方法，因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法，它返回一个`int`整数。`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引，继而直接返回`value`,且`hashCode()`方法要严格遵循以下规范：
    - 如果两个对象相等，则两个对象的`hashCode()`必须相等
    - 如果两个对象不相等，则两个对象的`hashCode()`尽量不要相等。
 4. 即对应两个实例`a`和`b`：
@@ -427,6 +1260,17 @@ int hashCode() {
 
 - 编写`equals()`和`hashCode()`遵循的原则是：`equals()`用到的用于比较的每一个字段，都必须在`hashCode()`中用于计算；`equals()`中没有使用到的字段，绝不可放在`hashCode()`中计算。
 - 另外注意，对于放入`HashMap`的`value`对象，没有任何要求。
+
+> **补充**：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》（很多软件公司，《Effective Java》、《Java编程思想》以及《重构：改善既有代码质量》）中是这样介绍equals方法的：
+>
+> - 首先equals方法必须满足自反性（x.equals(x)必须返回true）、对称性（x.equals(y)返回true时，y.equals(x)也必须返回true）、传递性（x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true）和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值），而且对于任何非null值的引用x，x.equals(null)必须返回false。
+> - 实现高质量的equals方法的诀窍包括：
+>   1. 使用==操作符检查"参数是否为这个对象的引用"
+>   2. 使用instanceof操作符检查"参数是否为正确的类型"
+>   3. 对于类中的关键属性，检查参数传入对象的属性是否与之相匹配
+>   4. 编写完equals方法后，问自己它是否满足对称性、传递性、一致性
+>   5. 重写equals时总是要重写hashCode
+>   6. 不要将equals方法参数中的Object对象替换为其他的类型，在重写时不要忘掉@Override注解。
 
 ## HashMap、Hashtable、LinkedHashMap 和 TreeMap 比较
 

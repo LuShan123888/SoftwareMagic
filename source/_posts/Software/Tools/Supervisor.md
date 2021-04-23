@@ -26,7 +26,7 @@ yum install supervisor -y
 
 - **提示** `;`符号是表示该行配置被注释
 
-```text
+```toml
 [unix_http_server]
 file=/home/supervisor/supervisor.sock   ; supervisorctl使用的 socket文件的路径
 ;chmod=0700                 ; 默认的socket文件权限0700

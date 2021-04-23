@@ -119,34 +119,103 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBC {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        //创建数据表
-        String url = "jdbc:mysql://localhost:3306/Classroom_Management";
-        String sql = "CREATE TABLE Student" +
-            "(name VARCHAR(20)," +
-            "sex CHAR(2)," +
-            "birthday DATE," +
-            "leave BIT," +
-            "stnumber INTEGER)";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (java.lang.ClassNotFoundException e) {
-        }
-        try {
-            Connection con = DriverManager.getConnection(url, "账号", "密码");
-            Statement stmt = con.createStatement();
-            stmt.executeUpdate(sql);
-            System.out.println("student table created");
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-        }
+  public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    //创建数据表
+    String url = "jdbc:mysql://localhost:3306/Classroom_Management";
+    String sql = "CREATE TABLE Student" +
+      "(name VARCHAR(20)," +
+      "sex CHAR(2)," +
+      "birthday DATE," +
+      "leave BIT," +
+      "stnumber INTEGER)";
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+    } catch (java.lang.ClassNotFoundException e) {
     }
+    try {
+      Connection con = DriverManager.getConnection(url, "账号", "密码");
+      Statement stmt = con.createStatement();
+      stmt.executeUpdate(sql);
+      System.out.println("student table created");
+      stmt.close();
+      con.close();
+    } catch (SQLException ex) {
+    }
+  }
 ```
 
-**注意**
+**注意**:运行程序将在所连接的数据库中创建一个数据库表格student,如果数据库中已有该表,则不会覆盖已有表,要创建新表,必须先将原表删除(用drop命令)
 
-运行程序将在所连接的数据库中创建一个数据库表格student,如果数据库中已有该表,则不会覆盖已有表,要创建新表,必须先将原表删除(用drop命令)
+### 用PreparedStatement类实现SQL操作
+
+- 从上面的例子可以看出,SQL语句的拼接结果往往比较长,日期数据还需要使用转换函数,容易出错,以下介绍一种新的处理方法,即利用`PreparedStatement(String)`方法可获取一个PreparedStatement接口对象,利用该对象可创建一个表示预编译的SQL语句,然后可以用其提供的方法多次处理语句中的数据,例如:
+
+```java
+PreparedStatement ps = con.preparedStatement("INSERT INTO Teacher VALUES(?,?,?,?,?,?)");
+```
+
+- 其中,SQL语句中的问号为数据占位符,每个"?"号根据其在语句中出现的次序对应有一个位置编号,可以调用PreparedStatement提供的方法将某个数据插入到占位符的位置,例如,以下语句将字符串'”china”插入到第一个问号处
+
+```java
+ps.setString(1,"china");
+```
+
+- PreparedStatement提供了如下方法以便将各种类型数据插入到语句中
+  - `void setAsciiStream(int parameterIndex,InputStream x,int length)`:从InputStream流(字符数据)读取length个字节数据插入到parameterIndex位置
+  - `void setBinaryStream(int parameterIndex,InputStream x,int length)`:从InputStream流(二进制数据)读取length个字节数据插入到parameterIndex位置
+  - `void setCharacterStream(int parameterIndex,InputStream x,int length)`:从字符输入流读取length个字节数据插入到parameterIndex位置
+  - `void setBoolean(int parameterIndex,boolean x)`:在指定位置插入一个布尔值
+  - `void setByte(int parameterIndex,byte x)`:在指定位置插入一个Byte值
+  - `void setBytes(int parameterIndex,byte[] x)`:在指定位置插入一个Byte数组
+  - `void setDate(int parameterIndex,Date x)`:在指定位置插入一个Date对象
+  - `void setDouble(int parameterIndex,double x)`:在指定位置插入一个double值
+  - `void setFloat(int parameterIndex,float x)`:在指定位置插入一个float值
+  - `void setInt(int parameterIndex,int x)`:在指定位置插入一个int值
+  - `void setLong(int parameterIndex,long x)`:在指定位置插入一个long值
+  - `void setShort(int parameterIndex,short x)`:在指定位置插入一个short值
+  - `void setString(int parameterIndex,String x)`:将一个字符串插入到指定位置
+  - `void setNull(int parameterIndex,int sqlType)`:将指定参数设置为SQL NULL
+  - `void setObject(int parameterIndex,Object x)`:用给定对象设置指定参数的值
+
+**[例17-5]**采用PreparedStatement实现数据写入
+
+```java
+public class 用PreparedStatement类实现SQL操作{
+  public static void main(String[] args) {
+    String url = "jdbc:mysql://localhost:3306/Classroom_Management";
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
+      Statement stmt = con.createStatement();
+      String sql="INSERT INTO teacher VALUES (?,?,?,?,?,?)";
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setString(1,"10000006");
+      ps.setString(2,"李斌");
+      ps.setString(3,"男");
+      ps.setInt(4,35);
+      ps.setString(5,"13010001006");
+      ps.setString(6,"00000005");
+      ps.executeUpdate();
+      System.out.println("add 1 Item");
+      stmt.close();
+      con.close();
+    } catch (SQLException | ClassNotFoundException ex) {
+      System.out.println(ex.getMessage());
+    }
+  }
+}
+```
+
+
+
+> **Statement和PreparedStatement有什么区别?** 
+>
+> - PreparedStatement接口代表预编译的语句，它主要的优势在于可以减少SQL的编译错误并增加SQL的安全性（减少SQL注射攻击的可能性）
+> - PreparedStatement中的SQL语句是可以带参数的，避免了用字符串连接拼接SQL语句的麻烦和不安全
+> - 当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快（不用再次编译和生成执行计划）。
+>
+
+> **补充**：为了提供对存储过程的调用，JDBC API中还提供了CallableStatement接口。存储过程（Stored Procedure）是数据库中一组为了完成特定功能的SQL语句的集合，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。虽然调用存储过程会在网络开销、安全性、性能上获得很多好处，但是存在如果底层数据库发生迁移时就会有很多麻烦，因为每种数据库的存储过程在书写上存在不少的差别。
 
 ## 数据库查询
 
@@ -189,36 +258,34 @@ String s = rs.getString(2);
 ```java
 import java.sql.*;
 public class 数据库查询 {
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/Classroom_Management";
-        String sql = "SELECT * FROM teacher";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (java.lang.ClassNotFoundException ignored) {
-        }
-        try {
-            Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()){
-                String s0 = rs.getString("Tid");
-                String s1 = rs.getString("Tname");
-                String s2 = rs.getString("Tsex");
-                int s3 = rs.getInt("Tage");
-                System.out.println("Tid:"+s0+" Tname:"+s1+" Tsex:"+s2+" Tage"+s3);
-            }
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+  public static void main(String[] args) {
+    String url = "jdbc:mysql://localhost:3306/Classroom_Management";
+    String sql = "SELECT * FROM teacher";
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+    } catch (java.lang.ClassNotFoundException ignored) {
     }
+    try {
+      Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
+      Statement stmt = con.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+      while (rs.next()){
+        String s0 = rs.getString("Tid");
+        String s1 = rs.getString("Tname");
+        String s2 = rs.getString("Tsex");
+        int s3 = rs.getInt("Tage");
+        System.out.println("Tid:"+s0+" Tname:"+s1+" Tsex:"+s2+" Tage"+s3);
+      }
+      stmt.close();
+      con.close();
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+  }
 }
 ```
 
-**说明**
-
-在循环条件中通过结果集的`next()`方法实现对所有行的遍历访问,在第14~18行,针对不同类型字段分别用不同的获取数据方法
+**说明**:在循环条件中通过结果集的`next()`方法实现对所有行的遍历访问,在第14~18行,针对不同类型字段分别用不同的获取数据方法
 
 #### 创建可滚动结果集
 
@@ -226,22 +293,20 @@ public class 数据库查询 {
 
 #### 创建滚动记录集
 
-必须用如下方法创建Statement对象
+- 必须用如下方法创建Statement对象
 
-`Statement createStatement(int resultSetType,int resultSetConcurrency)`
+```
+Statement createStatement(int resultSetType,int resultSetConcurrency)
+```
 
-其中,resultSetType代表结果集类型,包括如下情形
-
-- ResultSet.TYPE_FORWARD_ONLY:结果集的游标只能向后滚动
-- ResultSet.TYPE_SCROLL_INSENSITIVE:结果集的游标可以向前后滚动,但结果集不随数据库内容的改变而变化
-- ResultSet.TYPE_SCROLL_SENSITIVE:结果集的游标可以前后滚动,而且结果集与数据库的内容保持同步
-
-resultSetConcurrency代表并发类型,取值如下:
-
-- ResultSet.CONCUR_READ_ONLY:不能用结果集更新数据库表
-- ResultSet.CONCUR_UPDATABLE:结果集会引起数据库表内容的改变
-
-具体选择创建什么样的的结果集取决于应用需要,与数据表脱离且滚动方向单一的结果在访问效率上更高
+- 其中,resultSetType代表结果集类型,包括如下情形
+  - ResultSet.TYPE_FORWARD_ONLY:结果集的游标只能向后滚动
+  - ResultSet.TYPE_SCROLL_INSENSITIVE:结果集的游标可以向前后滚动,但结果集不随数据库内容的改变而变化
+  - ResultSet.TYPE_SCROLL_SENSITIVE:结果集的游标可以前后滚动,而且结果集与数据库的内容保持同步
+- resultSetConcurrency代表并发类型,取值如下:
+  - ResultSet.CONCUR_READ_ONLY:不能用结果集更新数据库表
+  - ResultSet.CONCUR_UPDATABLE:结果集会引起数据库表内容的改变
+- 具体选择创建什么样的的结果集取决于应用需要,与数据表脱离且滚动方向单一的结果在访问效率上更高
 
 ####　游标的移动与检查
 
@@ -266,38 +331,36 @@ resultSetConcurrency代表并发类型,取值如下:
 import java.sql.*;
 import java.util.*;
 public class 数据库查询{
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/Classroom_Management";
-        String sql = "SELECT * FROM teacher";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
-            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = stmt.executeQuery(sql);
-            rs.last();
-            int num= rs.getRow();
-            System.out.println("共有老师数量:"+num);
-            rs.beforeFirst();
-            while (rs.next()){
-                String s0 = rs.getString("Tid");
-                String s1 = rs.getString("Tname");
-                String s2 = rs.getString("Tsex");
-                int s3 = rs.getInt("Tage");
-                System.out.println("Tid:"+s0+" Tname:"+s1+" Tsex:"+s2+" Tage"+s3);
-            }
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+  public static void main(String[] args) {
+    String url = "jdbc:mysql://localhost:3306/Classroom_Management";
+    String sql = "SELECT * FROM teacher";
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+      ResultSet rs = stmt.executeQuery(sql);
+      rs.last();
+      int num= rs.getRow();
+      System.out.println("共有老师数量:"+num);
+      rs.beforeFirst();
+      while (rs.next()){
+        String s0 = rs.getString("Tid");
+        String s1 = rs.getString("Tname");
+        String s2 = rs.getString("Tsex");
+        int s3 = rs.getInt("Tage");
+        System.out.println("Tid:"+s0+" Tname:"+s1+" Tsex:"+s2+" Tage"+s3);
+      }
+      stmt.close();
+      con.close();
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
     }
+  }
 }
 
 ```
 
-**说明**
-
-第10行创建的Statement对象可实现记录集的前后滚动,在数据查询应用中经常使用该形式,第12,13行给出了获取数据库表格中记录数的办法,就是先将游标一道最后一行,然后用`getRow()`方法得到记录的行号,第15到22行遍历访问记录的办法是,首先将游标移动到首条记录之前,然后用循环执行记录集的`next()`方法移动到后续记录
+**说明**:第10行创建的Statement对象可实现记录集的前后滚动,在数据查询应用中经常使用该形式,第12,13行给出了获取数据库表格中记录数的办法,就是先将游标一道最后一行,然后用`getRow()`方法得到记录的行号,第15到22行遍历访问记录的办法是,首先将游标移动到首条记录之前,然后用循环执行记录集的`next()`方法移动到后续记录
 
 ## 数据库的更新
 
@@ -310,109 +373,43 @@ public class 数据库查询{
 ```java
 import java.sql.*;
 public class 数据库的更新{
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/Classroom_Management";
-        String sql = "INSERT INTO teacher "+
-            "VALUES('10000006','李斌','男',35,'13010001006','00000005');";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (java.lang.ClassNotFoundException ignored) {
-        }
-        try {
-            Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
-            Statement stmt = con.createStatement();
-            stmt.executeUpdate(sql);
-            System.out.println("1 Item have been inserted");
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+  public static void main(String[] args) {
+    String url = "jdbc:mysql://localhost:3306/Classroom_Management";
+    String sql = "INSERT INTO teacher "+
+      "VALUES('10000006','李斌','男',35,'13010001006','00000005');";
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+    } catch (java.lang.ClassNotFoundException ignored) {
     }
+    try {
+      Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
+      Statement stmt = con.createStatement();
+      stmt.executeUpdate(sql);
+      System.out.println("1 Item have been inserted");
+      stmt.close();
+      con.close();
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+  }
 }
 ```
 
-**说明**
-
-运行该程序,打开数据库将发现在数据表中新加入了一条记录,在SQL语句中提供的数据要与数据库中的字段一致
-
-**注意**
-
-插入日期新数据要使用SQL中的DataValue转换函数将字符型表示转为日期数据,如果写'78/12/03'是表示字符串,写78/12/03则为整数表达式
+- **说明**:运行该程序,打开数据库将发现在数据表中新加入了一条记录,在SQL语句中提供的数据要与数据库中的字段一致
+- **注意**:插入日期新数据要使用SQL中的DataValue转换函数将字符型表示转为日期数据,如果写'78/12/03'是表示字符串,写78/12/03则为整数表达式
 
 ###　数据修改和数据删除
 
-要实现数据修改只要将SQL语句改用UPDATE语句即可,而删除则使用DELETE语句,例如,以下SQL语句将张三的性别改为'女'
+- 要实现数据修改只要将SQL语句改用UPDATE语句即可,而删除则使用DELETE语句,例如,以下SQL语句将张三的性别改为'女'
 
 ```java
 sql = "UPDATE Teacher SET Tsex='女' WHERE Tname='张三'";
 ```
 
-实际编程中经常需要从变量获取要拼接的数据,Java的字符串连接运算符可以方便地将各种类型数据与字符串拼接,如以下SQL语句删除姓名为'张三'的记录
+- 实际编程中经常需要从变量获取要拼接的数据,Java的字符串连接运算符可以方便地将各种类型数据与字符串拼接,如以下SQL语句删除姓名为'张三'的记录
 
 ```java
 String x = "张三";
 sql = "DELETE FROM Teacher WHERE Tname='"+x+'"";
-```
-
-## 用PreparedStatement类实现SQL操作
-
-从上面的例子可以看出,SQL语句的拼接结果往往比较长,日期数据还需要使用转换函数,容易出错,以下介绍一种新的处理方法,即利用`PreparedStatement(String)`方法可获取一个PreparedStatement接口对象,利用该对象可创建一个表示预编译的SQL语句,然后可以用其提供的方法多次处理语句中的数据,例如:
-
-```java
-PreparedStatement ps = con.preparedStatement("INSERT INTO Teacher VALUES(?,?,?,?,?,?)");
-```
-
-其中,SQL语句中的问号为数据占位符,每个"?"号根据其在语句中出现的次序对应有一个位置编号,可以调用PreparedStatement提供的方法将某个数据插入到占位符的位置,例如,以下语句将字符串'”china”插入到第一个问号处
-
-```java
-ps.setString(1,"china");
-```
-
-PreparedStatement提供了如下方法以便将各种类型数据插入到语句中
-
-- `void setAsciiStream(int parameterIndex,InputStream x,int length)`:从InputStream流(字符数据)读取length个字节数据插入到parameterIndex位置
-- `void setBinaryStream(int parameterIndex,InputStream x,int length)`:从InputStream流(二进制数据)读取length个字节数据插入到parameterIndex位置
-- `void setCharacterStream(int parameterIndex,InputStream x,int length)`:从字符输入流读取length个字节数据插入到parameterIndex位置
-- `void setBoolean(int parameterIndex,boolean x)`:在指定位置插入一个布尔值
-- `void setByte(int parameterIndex,byte x)`:在指定位置插入一个Byte值
-- `void setBytes(int parameterIndex,byte[] x)`:在指定位置插入一个Byte数组
-- `void setDate(int parameterIndex,Date x)`:在指定位置插入一个Date对象
-- `void setDouble(int parameterIndex,double x)`:在指定位置插入一个double值
-- `void setFloat(int parameterIndex,float x)`:在指定位置插入一个float值
-- `void setInt(int parameterIndex,int x)`:在指定位置插入一个int值
-- `void setLong(int parameterIndex,long x)`:在指定位置插入一个long值
-- `void setShort(int parameterIndex,short x)`:在指定位置插入一个short值
-- `void setString(int parameterIndex,String x)`:将一个字符串插入到指定位置
-- `void setNull(int parameterIndex,int sqlType)`:将指定参数设置为SQL NULL
-- `void setObject(int parameterIndex,Object x)`:用给定对象设置指定参数的值
-
-**[例17-5]**采用PreparedStatement实现数据写入
-
-```java
-public class 用PreparedStatement类实现SQL操作{
-    public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/Classroom_Management";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url, "root", "pwforSQL990511");
-            Statement stmt = con.createStatement();
-            String sql="INSERT INTO teacher VALUES (?,?,?,?,?,?)";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1,"10000006");
-            ps.setString(2,"李斌");
-            ps.setString(3,"男");
-            ps.setInt(4,35);
-            ps.setString(5,"13010001006");
-            ps.setString(6,"00000005");
-            ps.executeUpdate();
-            System.out.println("add 1 Item");
-            stmt.close();
-            con.close();
-        } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-}
 ```
 

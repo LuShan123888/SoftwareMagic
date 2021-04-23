@@ -6,6 +6,7 @@ categories:
 - Database
 - Redis
 - Value
+- 特殊数据类型
 ---
 # Redis GEO
 

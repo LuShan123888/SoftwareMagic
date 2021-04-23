@@ -26,3 +26,5 @@ OSI参考模型虽然完备,但是太过复杂,不实用,而之后的TCP/IP参�
 - OSI模型比较适合理论研究和新网络技术研究,而TCP/IP模型真正做到了流行和应用
 
 ![20190423192449566](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-20190423192449566.PNG)
+
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-v2-2d62ba265be486cb94ab531912aa3b9c_720w.jpg)
