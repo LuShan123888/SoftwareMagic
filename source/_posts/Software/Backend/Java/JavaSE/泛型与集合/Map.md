@@ -1,5 +1,5 @@
 ---
-title: Java Map
+
 categories:
 - Software
 - Backend
@@ -7,6 +7,8 @@ categories:
 - JavaSE
 - 泛型与集合
 ---
+
+
 # Java Map
 
 - 除了Collection接口表示的这种单一对象数据集合,对于**关键字=值**表示的数据集合在CollectionAPI中提供了Map接口
@@ -950,11 +952,11 @@ private void fixAfterInsertion(Entry<K,V> x) {
 
 - 将x的父亲节点x.p染成黑色，再将x节点的父亲的父亲x.p.p染成红色。
 
-![5222801-72872e4214af6dee](../../../../../../../Downloads/5222801-72872e4214af6dee.png)
+![image-20210428010746640](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010746640.png)
 
 - 将x.p.p右旋
 
-![5222801-2d3f2e12beb9ccf7](../../../../../../../Downloads/5222801-2d3f2e12beb9ccf7.png)
+![image-20210428010759930](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010759930.png)
 
 - 经过上述步骤的变化现在已经成为一颗符合性质的红黑树。
 - 三种情况针对父亲节点是左孩子的情况，父亲是右孩子的情况可以根据三种情况反推。
