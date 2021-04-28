@@ -155,7 +155,7 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
 
 - 例如:在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录(webroot)下的文件可以直接访问的,但是由于`DispatcherServlet`配置了映射路径是:`/`,它几乎把所有的请求都拦截了,从而导致`1.png`访问不到,这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题,其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性(根目录下的文件可以直接访问),`DefaultServletHttpRequestHandler`是帮助回归这个特性的
 
-### configureViewResolvers(ViewResolverRegistry registry)
+## configureViewResolvers(ViewResolverRegistry registry)
 
 - 从方法名称我们就能看出这个方法是用来配置视图解析器的,该方法的参数`ViewResolverRegistry`是一个注册器,用来注册你想自定义的视图解析器等,`ViewResolverRegistry`常用的几个方法:
 

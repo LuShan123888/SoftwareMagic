@@ -16,8 +16,6 @@ categories:
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-16-640-20201116091443136.png)
 
-
-
 ## pom.xml
 
 ```xml 
@@ -368,6 +366,3 @@ const user = /*[[Thymeleaf表达式]]*/ "静态环境下的默认值";
 **控制台**
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-16-1-20201116192058797.png)
-
-
-

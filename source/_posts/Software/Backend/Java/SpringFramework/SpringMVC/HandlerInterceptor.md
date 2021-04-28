@@ -57,7 +57,7 @@ public class MyInterceptor implements HandlerInterceptor {
 
 ## 配置拦截器
 
-- 在Spring MVC的配置文件中配置拦截器
+- **Spring**
 
 ```xml
 <!--关于拦截器的配置-->
@@ -81,6 +81,25 @@ public class MyInterceptor implements HandlerInterceptor {
         </property>
     </bean>	
 </mvc:interceptors>
+```
+
+**SpringBoot**
+
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class DemoMvcConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new DemoLoginHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/index.html","/user/login","/css/**","/js/**","/img/**");
+    }
+}
 ```
 
 ## 实例
