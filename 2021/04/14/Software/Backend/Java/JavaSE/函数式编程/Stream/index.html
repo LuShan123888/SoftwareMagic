@@ -1,0 +1,713 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java Stream - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Stream">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-14 22:35" pubdate>
+        2021年4月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Stream</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月14日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java Stream</h1>
+<ul>
+<li>Java 8 API添加了一个新的抽象称为流Stream,可以让你以一种声明的方式处理数据</li>
+<li>Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象</li>
+<li>Stream API可以极大提高Java程序员的生产力,让程序员写出高效率,干净,简洁的代码</li>
+<li>这种风格将要处理的元素集合看作一种流,流在管道中传输,并且可以在管道的节点上进行处理,比如筛选,排序,聚合等</li>
+<li>元素流在管道中经过中间操作(intermediate operation)的处理,最后由最终操作(terminal operation)得到前面处理的结果</li>
+</ul>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">stream</span> of elements ----&gt;</span> <span class="hljs-function"><span class="hljs-title">filter</span>----&gt;</span><span class="hljs-function"><span class="hljs-title">sorted</span>----&gt;</span> <span class="hljs-function"><span class="hljs-title">map</span>----&gt;</span> collect<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上的流程转换为 Java 代码为:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Integer&gt; transactionsIds =<br>    widgets.stream()<br>    .filter(b -&gt; b.getColor() == RED)<br>    .sorted((x,y) -&gt; x.getWeight() - y.getWeight())<br>    .mapToInt(Widget::getWeight)<br>    .sum();<br></code></pre></td></tr></table></figure>
+<h2 id="什么是-Stream">什么是 Stream</h2>
+<p>Stream(流)是一个来自数据源的元素队列并支持聚合操作</p>
+<ul>
+<li>元素是特定类型的对象,形成一个队列,Java中的Stream并不会存储元素,而是按需计算</li>
+<li><strong>数据源</strong> 流的来源,可以是集合,数组,I/O channel,产生器generator 等</li>
+<li><strong>聚合操作</strong> 类似SQL语句一样的操作,比如filter, map, reduce, find, match, sorted等</li>
+</ul>
+<p>和以前的Collection操作不同,Stream操作还有两个基础的特征:</p>
+<ul>
+<li><strong>Pipelining</strong>: 中间操作都会返回流对象本身,这样多个操作可以串联成一个管道,如同流式风格(fluent style),这样做可以对操作进行优化,比如延迟执行(laziness)和短路( short-circuiting)</li>
+<li><strong>内部迭代</strong>:以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代,这叫做外部迭代,Stream提供了内部迭代的方式,通过访问者模式(Visitor)实现</li>
+</ul>
+<h2 id="流处理的特性">流处理的特性</h2>
+<ul>
+<li>不存储数据</li>
+<li>不会改变数据源</li>
+<li>不可以重复使用</li>
+<li>通过连续执行多个操作倒便就组成了 Stream 中的执行管道(pipeline)</li>
+<li>需要注意的是这些管道被添加后并不会真正执行,只有等到调用终值操作之后才会执行</li>
+</ul>
+<h2 id="生成流">生成流</h2>
+<h3 id="由集合对象创建流">由集合对象创建流</h3>
+<ul>
+<li>支持流处理的对象包括 <code>Collection</code> 集合及其子类</li>
+</ul>
+<h4 id="stream">stream()</h4>
+<ul>
+<li>为集合创建串行流</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt; strings = Arrays.asList(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;bc&quot;</span>, <span class="hljs-string">&quot;efg&quot;</span>, <span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;jkl&quot;</span>);<br>List&lt;String&gt; filtered = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<h4 id="parallelStream">parallelStream()</h4>
+<ul>
+<li>parallelStream 是流并行处理程序的代替方法</li>
+<li>以下实例我们使用 parallelStream 来输出空字符串的数量</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt; strings = Arrays.asList(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;bc&quot;</span>, <span class="hljs-string">&quot;efg&quot;</span>, <span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;jkl&quot;</span>);<br><span class="hljs-comment">// 获取空字符串的数量</span><br><span class="hljs-keyword">long</span> count = strings.parallelStream().filter(string -&gt; string.isEmpty()).count();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们可以很容易的在顺序运行和并行直接切换</li>
+</ul>
+<h3 id="由数组创建流">由数组创建流</h3>
+<ul>
+<li>通过静态方法 <code>Arrays.stream()</code> 将数组转化为流(Stream)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">IntStream stream = Arrays.stream(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;);<br></code></pre></td></tr></table></figure>
+<h3 id="通过静态方法-Stream-of">通过静态方法 Stream.of()</h3>
+<ul>
+<li>底层其实还是调用<code>Arrays.stream()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Stream&lt;Integer&gt; stream = Stream.of(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:还有两种比较特殊的流
+<ul>
+<li>空流:<code>Stream.empty()</code></li>
+<li>无限流<code>Stream.generate()</code> 和<code>Stream.iterate()</code>,可以配合<code>limit()</code>使用限制数量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 接受一个 Supplier 作为参数</span><br>Stream.generate(Math::random).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br><span class="hljs-comment">// 初始值是 0,新值是前一个元素值 + 2</span><br>Stream.iterate(<span class="hljs-number">0</span>, n -&gt; n + <span class="hljs-number">2</span>).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+<h2 id="中间操作-intermediate">中间操作(intermediate)</h2>
+<p>调用中间操作方法返回的是一个新的流对象</p>
+<h3 id="peek">peek()</h3>
+<ul>
+<li>提供了一种对流中所有元素操作的方法,生成一个包含原Stream的所有元素的新Stream,同时会提供一个消费函数(Consumer实例)</li>
+<li>新Stream每个元素被消费的时候都会执行给定的消费函数</li>
+<li>一般不推荐使用,文档提示:该方法主要用于调试,做一些消耗这个对象但不修改它的东西(发送通知,打印模型等)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Stream.of(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>)<br>    .filter(e -&gt; e.length() &gt; <span class="hljs-number">3</span>)<br>    .peek(e -&gt; System.out.println(<span class="hljs-string">&quot;Filtered value: &quot;</span> + e))<br>    .map(String::toUpperCase)<br>    .peek(e -&gt; System.out.println(<span class="hljs-string">&quot;Mapped value: &quot;</span> + e))<br>    .collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<ul>
+<li>peek调试打印流中某操作后的每个元素</li>
+</ul>
+<h3 id="map">map()</h3>
+<ul>
+<li>map 方法用于映射每个元素到对应的结果</li>
+<li>以下代码片段使用 map 输出了元素对应的平方数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Integer&gt; numbers = Arrays.asList(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>);<br><span class="hljs-comment">// 获取对应的平方数</span><br>List&lt;Integer&gt; squaresList = numbers.stream().map( i -&gt; i*i).distinct().collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<h3 id="filter">filter()</h3>
+<ul>
+<li>filter 方法用于通过设置的条件过滤出元素</li>
+<li>以下代码片段使用 filter 方法过滤出空字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt;strings = Arrays.asList(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;bc&quot;</span>, <span class="hljs-string">&quot;efg&quot;</span>, <span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;jkl&quot;</span>);<br><span class="hljs-comment">// 获取空字符串的数量</span><br><span class="hljs-keyword">long</span> count = strings.stream().filter(string -&gt; string.isEmpty()).count();<br></code></pre></td></tr></table></figure>
+<h3 id="distinct">distinct()</h3>
+<ul>
+<li>distinct方法用于过滤相同元素</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Collection&lt;String&gt; list = Arrays.asList(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>);<br>List&lt;String&gt; Elements = list.stream().distinct().collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<h3 id="max">max()</h3>
+<ul>
+<li>max方法用于过滤出最大值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Collection&lt;String&gt; list = Arrays.asList(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br>List&lt;String&gt; Elements = list.stream().max().collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<h3 id="min">min()</h3>
+<ul>
+<li>min方法用于过滤出最小值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Collection&lt;String&gt; list = Arrays.asList(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>);<br>List&lt;String&gt; Elements = list.stream().min().collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
+<h3 id="limit">limit()</h3>
+<ul>
+<li>limit 方法用于获取指定数量的流</li>
+<li>以下代码片段使用 limit 方法打印出 10 条数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Random random = <span class="hljs-keyword">new</span> Random();<br>random.ints().limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+<h3 id="sorted">sorted()</h3>
+<ul>
+<li>sorted 方法用于对流进行排序</li>
+<li>以下代码片段使用 sorted 方法对输出的 10 个随机数进行排序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Random random = <span class="hljs-keyword">new</span> Random();<br>random.ints().limit(<span class="hljs-number">10</span>).sorted().forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+<h2 id="终值操作-terminal">终值操作(terminal)</h2>
+<p>在调用该方法后,将执行之前所有的中间操作,并返回结果</p>
+<h3 id="toArray">toArray()</h3>
+<ul>
+<li>toArray方法将Stream流转换为数组</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Integer&gt; numbers = Arrays.asList(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>);<br>List&lt;Integer&gt; list = numbers.stream().toArray();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>若是对象数组,则要在 toArray 里面加上 生产对象数组的方法引用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//Integer 数组</span><br>toArray(Integer[] :: <span class="hljs-keyword">new</span>)<br><span class="hljs-comment">//person 数组</span><br>toArray(person[] ::  <span class="hljs-keyword">new</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="forEach">forEach()</h3>
+<ul>
+<li>Stream 提供了新的方法<code>forEach()</code>来迭代流中的每个数据</li>
+<li>以下代码片段使用 forEach 输出了10个随机数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Random random = <span class="hljs-keyword">new</span> Random();<br>random.ints().limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+<h3 id="collect与Collectors">collect与Collectors</h3>
+<ul>
+<li>
+<p>Stream 接口中 <code>collect()</code> 使用Collector做参数</p>
+</li>
+<li>
+<p>Collectors类实现了很多归约操作,例如将流转换成集合和聚合元素</p>
+</li>
+<li>
+<p>Collectors可用于返回列表或字符串</p>
+</li>
+<li>
+<p>Collectors 被指定和四个函数一起工作,并实现累加 entries 到一个可变的结果容器,并可选择执行该结果的最终变换,这四个函数就是:</p>
+<table>
+<thead>
+<tr>
+<th>接口函数</th>
+<th>作用</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>supplier()</td>
+<td>创建并返回一个新的可变结果容器</td>
+<td>Supplier</td>
+</tr>
+<tr>
+<td>accumulator()</td>
+<td>把输入值加入到可变结果容器</td>
+<td>BiConsumer</td>
+</tr>
+<tr>
+<td>combiner()</td>
+<td>将两个结果容器组合成一个</td>
+<td>BinaryOperator</td>
+</tr>
+<tr>
+<td>finisher()</td>
+<td>转换中间结果为终值结果</td>
+<td>Function</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>其中,<code>collect(Supplier&lt;R&gt; supplier, BiConsumer&lt;R, ? super T&gt; accumulator, BiConsumer&lt;R, R&gt; combiner)</code> 无非就是比Collector少一个 finisher,本质上是一样的</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt;strings = Arrays.asList(<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;bc&quot;</span>, <span class="hljs-string">&quot;efg&quot;</span>, <span class="hljs-string">&quot;abcd&quot;</span>,<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;jkl&quot;</span>);<br>List&lt;String&gt; filtered = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.toList());<br><br>System.out.println(<span class="hljs-string">&quot;筛选列表: &quot;</span> + filtered);<br>String mergedString = strings.stream().filter(string -&gt; !string.isEmpty()).collect(Collectors.joining(<span class="hljs-string">&quot;, &quot;</span>));<br>System.out.println(<span class="hljs-string">&quot;合并字符串: &quot;</span> + mergedString);<br></code></pre></td></tr></table></figure>
+<h4 id="求和">求和</h4>
+<ul>
+<li>Collectors.summingInt()</li>
+<li>Collectors.summingLong()</li>
+<li>Collectors.summingDouble()</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220911037-2007965978.jpg" srcset="/img/loading.gif" lazyload alt="sum"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">applestore.stream().collect(summingInt(Apple::getWeight()))<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过引用 <code>import static java.util.stream.Collectors.summingInt;</code> 就可以直接调用<code>summingInt()</code></li>
+<li><code>Apple::getWeight()</code>可以写为<code>apple -&gt; apple.getWeight()</code>,求和函数的参数是结果转换函数 <strong>Function</strong></li>
+</ul>
+<h4 id="求平均值">求平均值</h4>
+<ul>
+<li>Collectors.averagingInt()</li>
+<li>Collectors.averagingKLong()</li>
+<li>Collectors.averagingDouble()</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220927770-127840192.jpg" srcset="/img/loading.gif" lazyload alt="average"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">applestore.stream().collect(aceragingInt(Apple::getWeight())<br></code></pre></td></tr></table></figure>
+<h4 id="归约">归约</h4>
+<ul>
+<li>Collectors.reducing()</li>
+<li>归约就是为了遍历数据容器,将每个元素对象转换为特定的值,通过累积函数,得到一个最终值</li>
+<li>转换函数,函数输入参数的对象类型是跟<code>Stream&lt;T&gt;</code>中的 T 一样的对象类型,输出的对象类型的是和初始值一样的对象类型</li>
+<li>累积函数,就是把转换函数的结果与上一次累积的结果进行一次合并,如果是第一次累积,那么取初始值来计算
+<ul>
+<li>累积函数还可以作用于两个<code>Stream&lt;T&gt; </code>合并时的累积,这个可以结合 groupingBy 来理解</li>
+</ul>
+</li>
+<li>初始值的对象类型,和每一次累积函数输出值的对象类型是相同的,这样才能一直进行累积函数的运算</li>
+<li>归约不仅仅可以支持加法,还可以支持比如乘法以及其他更高级的累积公式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reduce</span><span class="hljs-params">()</span> </span>&#123;<br>    Integer sum = appleStore.stream().collect(reducing(<span class="hljs-number">0</span>, Apple::getWeight, (a, b) -&gt; a + b));<br>    System.out.println(sum);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717080958680-295486211.jpg" srcset="/img/loading.gif" lazyload alt="reducing"></p>
+<h4 id="计数">计数</h4>
+<ul>
+<li>Collectors.counting()</li>
+<li>计数只是归约的一种特殊形式:等同于初始值为 <strong>0</strong>,转换函数 <strong>f(x)=1</strong>(x 就是<code>Stream&lt;T&gt;</code>的 T 类型),累积函数就是做加法的reducing()</li>
+</ul>
+<h4 id="分组">分组</h4>
+<ul>
+<li>Collectors.groupingBy()</li>
+<li>分组与SQL 中的 <strong>GROUP BY</strong> 十分类似,所以<code>groupingBy()</code>的所有参数中有一个参数是 Collector接口,这样就能够和求和/求平均值/归约 一起使用<br>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg" srcset="/img/loading.gif" lazyload alt="groupingBy"></li>
+<li>传入参数的接口是 Function 接口,实现这个接口可以是实现从 A 类型到 B 类型的转换</li>
+<li>其中有一个方法可以传入参数 <code>Supplier mapFactory</code>,这个可以通过自定义 Map工厂,来创建自定义的分组 Map</li>
+</ul>
+<h4 id="分区">分区</h4>
+<ul>
+<li>Collectors.partitioningBy()</li>
+<li>传入参数的是 Predicate 接口</li>
+<li>分区只是分组的一种特殊形式</li>
+<li>分区相当于把流中的数据,分组分成了&quot;正反两个阵营”</li>
+</ul>
+<h3 id="summaryStatistics">summaryStatistics()</h3>
+<p>产生统计结果的收集器也非常有用,它们主要用于int,double,long等基本类型上,它们可以用来产生类似如下的统计结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Integer&gt; numbers = Arrays.asList(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>);<br><br>IntSummaryStatistics stats = numbers.stream().mapToInt((x) -&gt; x).summaryStatistics();<br><br>System.out.println(<span class="hljs-string">&quot;列表中最大的数 : &quot;</span> + stats.getMax());<br>System.out.println(<span class="hljs-string">&quot;列表中最小的数 : &quot;</span> + stats.getMin());<br>System.out.println(<span class="hljs-string">&quot;所有数之和 : &quot;</span> + stats.getSum());<br>System.out.println(<span class="hljs-string">&quot;平均数 : &quot;</span> + stats.getAverage());<br></code></pre></td></tr></table></figure>
+<h2 id="数值流">数值流</h2>
+<p>Java8引入了三个原始类型特化流接口:IntStream,LongStream,DoubleStream,分别将流中的元素特化为 int,long,double<br>
+普通对象流和原始类型特化流之间可以相互转化</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-30-1730512-20200717202104577-1160921711.jpg" srcset="/img/loading.gif" lazyload alt="stream-map"></p>
+<ul>
+<li>其中 IntStream 和 LongStream 可以调用 asDoubleStream 变为 DoubleStream,但是这是单向的转化方法</li>
+<li><code>IntStream.boxed()</code>可以得到<code>Stream&lt;Integer&gt;</code>,这个也是一个单向方法,支持数值流转换回对象流,LongStream 和 DoubleStream 也有类似的方法</li>
+</ul>
+<h3 id="生成一个数值流">生成一个数值流</h3>
+<ul>
+<li>IntStream.range(int startInclusive, int endExclusive)</li>
+<li>IntStream.rangeClosed(int startInclusive, int endInclusive)</li>
+<li>range 和 rangeClosed 的区别在于数值流是否包含 end 这个值,range 代表的区间是 [start, end) , rangeClosed 代表的区间是 [start, end]</li>
+<li>LongStream 也有 range 和 rangeClosed 方法,但是 DoubleStream 没有</li>
+</ul>
+<h3 id="flatMap">flatMap</h3>
+<ul>
+<li>Stream.flatMap 就是流中的每个对象,转换产生一个对象流</li>
+<li>Stream.flatMapToInt 指定流中的每个对象,转换产生一个 IntStream 数值流,类似的,还有 flatMapToLong,flatMapToDouble</li>
+<li>IntStream.flatMap 数值流中的每个对象,转换产生一个数值流</li>
+<li>flatMap 可以代替一些嵌套循环来开展业务</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>比如要求勾股数(即 a*a+b*b=c*c 的一组数中的 a,b,c),且我们要求 a 和 b 的范围是 [1,100],我们在 Java8之前会这样写:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testJava</span><span class="hljs-params">()</span> </span>&#123;<br>  List&lt;<span class="hljs-keyword">int</span>[]&gt; resultList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>; a &lt;= <span class="hljs-number">100</span>; a++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = a; b &lt;= <span class="hljs-number">100</span>; b++) &#123;<br>      <span class="hljs-keyword">double</span> c = Math.sqrt(a * a + b * b);<br>      <span class="hljs-keyword">if</span> (c % <span class="hljs-number">1</span> == <span class="hljs-number">0</span>) &#123;<br>        resultList.add(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;a, b, (<span class="hljs-keyword">int</span>) c&#125;);<br>      &#125;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">int</span> size = resultList.size();<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size &amp;&amp; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>    <span class="hljs-keyword">int</span>[] a = resultList.get(i);<br>    System.out.println(a[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot; &quot;</span> + a[<span class="hljs-number">1</span>] + <span class="hljs-string">&quot; &quot;</span> + a[<span class="hljs-number">2</span>]);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Java8之后,我们可以用上 flatMap:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">flatMap</span><span class="hljs-params">()</span> </span>&#123;<br>  Stream&lt;<span class="hljs-keyword">int</span>[]&gt; stream = IntStream.rangeClosed(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br>    .boxed()<br>    .flatMap(a -&gt; IntStream.rangeClosed(a, <span class="hljs-number">100</span>)<br>             .filter(b -&gt; Math.sqrt(a * a + b * b) % <span class="hljs-number">1</span> == <span class="hljs-number">0</span>)<br>             .mapToObj(b -&gt; <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;a, b, (<span class="hljs-keyword">int</span>) Math.sqrt(a * a + b * b)&#125;)<br>            );<br>  stream.limit(<span class="hljs-number">5</span>).forEach(a -&gt; System.out.println(a[<span class="hljs-number">0</span>] + <span class="hljs-string">&quot; &quot;</span> + a[<span class="hljs-number">1</span>] + <span class="hljs-string">&quot; &quot;</span> + a[<span class="hljs-number">2</span>]));<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>创建一个从 1 到 100 的数值范围来创建 a 的值,对每个给定的 a 值,创建一个三元数流</li>
+<li>flatMap 方法在做映射的同时,还会把所有生成的三元数流扁平化成一个流</li>
+</ul>
+<h2 id="Stream-完整实例">Stream 完整实例</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">import</span> java.util.IntSummaryStatistics;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Random;<br><span class="hljs-keyword">import</span> java.util.stream.Collectors;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Java8Tester</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span></span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;列表: &quot;</span> +strings);<br><br>    count = strings.stream().filter(string-&gt;string.isEmpty()).count();<br>    System.out.println(<span class="hljs-string">&quot;空字符串数量为: &quot;</span> + count);<br><br>    count = strings.stream().filter(string -&gt; string.length() == <span class="hljs-number">3</span>).count();<br>    System.out.println(<span class="hljs-string">&quot;字符串长度为 3 的数量为: &quot;</span> + count);<br><br>    filtered = strings.stream().filter(string -&gt;!string.isEmpty()).collect(Collectors.toList());<br>    System.out.println(<span class="hljs-string">&quot;筛选后的列表: &quot;</span> + filtered);<br><br>    mergedString = strings.stream().filter(string -&gt;!string.isEmpty()).collect(Collectors.joining(<span class="hljs-string">&quot;, &quot;</span>));<br>    System.out.println(<span class="hljs-string">&quot;合并字符串: &quot;</span> + mergedString);<br><br>    squaresList = numbers.stream().map( i -&gt;i*i).distinct().collect(Collectors.toList());<br>    System.out.println(<span class="hljs-string">&quot;Squares List: &quot;</span> + squaresList);<br>    System.out.println(<span class="hljs-string">&quot;列表: &quot;</span> +integers);<br><br>    IntSummaryStatistics stats = integers.stream().mapToInt((x) -&gt;x).summaryStatistics();<br><br>    System.out.println(<span class="hljs-string">&quot;列表中最大的数 : &quot;</span> + stats.getMax());<br>    System.out.println(<span class="hljs-string">&quot;列表中最小的数 : &quot;</span> + stats.getMin());<br>    System.out.println(<span class="hljs-string">&quot;所有数之和 : &quot;</span> + stats.getSum());<br>    System.out.println(<span class="hljs-string">&quot;平均数 : &quot;</span> + stats.getAverage());<br>    System.out.println(<span class="hljs-string">&quot;随机数: &quot;</span>);<br><br>    random.ints().limit(<span class="hljs-number">10</span>).sorted().forEach(System.out::println);<br><br>    <span class="hljs-comment">// 并行处理</span><br>    count = strings.parallelStream().filter(string -&gt; string.isEmpty()).count();<br>    System.out.println(<span class="hljs-string">&quot;空字符串的数量为: &quot;</span> + count);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>执行以上程序,输出结果为:</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs dns">列表: [abc, , bc, efg, abcd, , jkl]<br>空字符串数量为: <span class="hljs-number">2</span><br>字符串长度为 <span class="hljs-number">3</span> 的数量为: <span class="hljs-number">3</span><br>筛选后的列表: [abc, bc, efg, abcd, jkl]<br>合并字符串: abc, bc, efg, abcd, jkl<br>Squares List: [<span class="hljs-number">9</span>, <span class="hljs-number">4</span>, <span class="hljs-number">49</span>, <span class="hljs-number">25</span>]<br>列表: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">13</span>, <span class="hljs-number">4</span>, <span class="hljs-number">15</span>, <span class="hljs-number">6</span>, <span class="hljs-number">17</span>, <span class="hljs-number">8</span>, <span class="hljs-number">19</span>]<br>列表中最大的数 : <span class="hljs-number">19</span><br>列表中最小的数 : <span class="hljs-number">1</span><br>所有数之和 : <span class="hljs-number">85</span><br>平均数 : <span class="hljs-number">9</span>.<span class="hljs-number">444444444444445</span><br>随机数:<br>-<span class="hljs-number">1743813696</span><br>-<span class="hljs-number">1301974944</span><br>-<span class="hljs-number">1299484995</span><br>-<span class="hljs-number">779981186</span><br><span class="hljs-number">136544902</span><br><span class="hljs-number">555792023</span><br><span class="hljs-number">1243315896</span><br><span class="hljs-number">1264920849</span><br><span class="hljs-number">1472077135</span><br><span class="hljs-number">1706423674</span><br>空字符串的数量为: <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/15/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM 内存分配与回收策略</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/14/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">快速排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,996 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java 表达式与运算符 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 表达式与运算符">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-21 19:35" pubdate>
+        2021年4月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 表达式与运算符</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月21日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java 表达式与运算符</h1>
+<ul>
+<li>表达式是由操作数和运算符按一定的语法形式组成的式子,一个常量或一个变量可以看作表达式的特例,其值即该常量或变量的值在表达式中,表示各种不同运算的符号称为运算符,参与运算的数据称为操作数</li>
+<li>组成表达式的运算符有很多种,按操作数的数目来分,有如下3种:</li>
+</ul>
+<h2 id="一元运算符">一元运算符</h2>
+<ul>
+<li>只需要一个运算对象的运算符称为一元运算符 ,例如,++,–,+,-等,如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">y = -x;		<span class="hljs-comment">//将x的值取反赋值给x</span><br>y = ++x;	<span class="hljs-comment">//将x的值加1赋给y</span><br></code></pre></td></tr></table></figure>
+<p><strong>一元运算符支持前缀或者后缀记号</strong></p>
+<ul>
+<li>前缀记号是指运算符出现在它的运算对象之前,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">operator op		<span class="hljs-comment">//前缀记号</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>后缀记号是指运算符出现在它的运算对象之后,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">op operator<br></code></pre></td></tr></table></figure>
+<h2 id="二元运算符">二元运算符</h2>
+<ul>
+<li>需要两个运算对象额运算符号称为二元运算符,例如赋值号&quot;=&quot;,可以看作是一个二元运算符,它指将右边的运算对象赋给左边的运算对象,其他二元运算符有+, -, *, /, &lt;, &gt;等,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">x = x+<span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>所有的二元运算符使用中缀记号,及运算符出现在两个运算对象中间</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">op1 operator op2	<span class="hljs-comment">//中缀记号</span><br></code></pre></td></tr></table></figure>
+<h2 id="三元运算符">三元运算符</h2>
+<ul>
+<li>三元运算符需要3个运算对象,Java有一个三元运算符&quot;?:&quot;,它是一个简单的if…else语句</li>
+<li>三元运算符也使用中缀记号,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">op1?op2:op3	<span class="hljs-comment">//其含义是如果op1结果为真值执行op2,否则执行op3</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>运算除了执行一个操作,还返回一个数值.返回数值和它的类型取决于运算符号和运算对象的类型,例如,算术运算符完成基本的算数操作(如加,减)并且返回数值作为算数操作的结果.由算术运算符返回的数据类型取决与它的运算对象的类型.如果两个整型数相加,结果就是一个整形数;如果量的实型数相加,那么将结果为实型数</li>
+<li>可以将运算符分为算术运算符,关系运算符,逻辑运算符,位运算符,赋值组合运算符和其他运算符</li>
+</ul>
+<h2 id="算数运算符">算数运算符</h2>
+<p>算术运算是针对数值类型操作数进行的运算,根据需要参与运算的操作数的数目要求,可将算术运算符分为双目运算符和单目运算符两种</p>
+<h3 id="双目算术运算符">双目算术运算符</h3>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>使用形式</th>
+<th>描述</th>
+<th>举例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>op1+op2</td>
+<td>op1加上op2</td>
+<td>5+6</td>
+<td>11</td>
+</tr>
+<tr>
+<td>-</td>
+<td>op1-op2</td>
+<td>op1减去op2</td>
+<td>6.2-2</td>
+<td>4.2</td>
+</tr>
+<tr>
+<td>*</td>
+<td>op1*op2</td>
+<td>op1乘以op2</td>
+<td>3*4</td>
+<td>12</td>
+</tr>
+<tr>
+<td>/</td>
+<td>op1/op2</td>
+<td>op1除以op2</td>
+<td>7/2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>%</td>
+<td>op1%op2</td>
+<td>op1除以op2的余数</td>
+<td>9%2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong></p>
+<ul>
+<li>&quot;/&quot;运算对整数和浮点数的情况不同,7/2结果为3. ,而7.0/2.0结果为3.5,也就是说整数相除将舍去小数部分.而浮点数相除则要保留小数部分</li>
+<li>取模运算&quot;%&quot;一般用于整数运算,它用来得到余数部分.例如,7%4的结果为3,但参与运算的值为负数时,结果的正负性取决于被除数的正负</li>
+<li>如果出现各种类型数据的混合运算,系统将按自动转换原则将操作数转换为同一类型,再进行运算.如一个整数和一个浮点数进行计算,结果为浮点型</li>
+</ul>
+<h3 id="单目算术运算符">单目算术运算符</h3>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>使用形式</th>
+<th>描述</th>
+<th>功能等价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>++</td>
+<td>a<ins>或</ins>a</td>
+<td>自增</td>
+<td>a=a+1</td>
+</tr>
+<tr>
+<td>- -</td>
+<td>a- -或- -a</td>
+<td>自减</td>
+<td>a=a-1</td>
+</tr>
+<tr>
+<td>-</td>
+<td>-a</td>
+<td>求相反数</td>
+<td>a=-a</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>变量的自增与自减与<ins>和- -出现在该变量前后位置无关,无论是</ins>x还是x++均表示x要增1</li>
+<li>表达式的值与运算符的位置有关.例如,x=2,则(<ins>x)结果为9,也就是</ins>x的返回值时3;而(x<ins>3)结果为6,即x</ins>的返回值为2,如果是变量打头,则取变量在 递增前的值作为表达式结果,实际就是变量原有值;如果是++打头,则强调要取&quot;加后:的结果,也即取变量递增后的值作为表达式结果</li>
+</ul>
+<h3 id="关系运算符">关系运算符</h3>
+<p>关系运算符也称比较运算符,用于比较两个数据之间的大小关系,如下表所示,关系运算结果是布尔值(true或false),如果x的值为5,则x&gt;3的结果为true</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>描述</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>op1&gt;op2</td>
+<td>op1大于op2</td>
+<td>x&gt;3</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>op1&gt;=op2</td>
+<td>op1大于等于op2</td>
+<td>x&gt;=4</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>op1&lt;op2</td>
+<td>op1小于op2</td>
+<td>x&lt;3</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>op1&lt;=op2</td>
+<td>op1小于等于op2</td>
+<td>x&lt;=4</td>
+</tr>
+<tr>
+<td>==</td>
+<td>op1==op2</td>
+<td>op1等于op2</td>
+<td>x==2</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>op1!=op2</td>
+<td>op1不等于op2</td>
+<td>x!=1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="逻辑运算符">逻辑运算符</h3>
+<ul>
+<li>逻辑运算是针对布尔型数据进行的计算,运算的结果仍然是布尔型,常用的逻辑运算有与(AND),或(OR),非(NOT),如下表所示:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>逻辑运算</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A AND B</td>
+<td>A,B均为真时结果才为真</td>
+</tr>
+<tr>
+<td>A OR B</td>
+<td>A,B中有一个为真时结果就为真</td>
+</tr>
+<tr>
+<td>NOT A</td>
+<td>结果为A的相反值</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>下表列出了Java语言支持的逻辑运算符:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>何时结果为true</th>
+<th>附加特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>op1&amp;&amp;op2</td>
+<td>op1和op2都是true</td>
+<td>op1为false时,不计算op2</td>
+</tr>
+<tr>
+<td>||</td>
+<td>op1||op2</td>
+<td>op1或op2是true</td>
+<td>op1为true时,不计算op2</td>
+</tr>
+<tr>
+<td>!</td>
+<td>!op</td>
+<td>op为false</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>从上表可以看出,计算逻辑表达式时,在某些情况下,不必要对整个表达式的各部分进行计算.例如,<code>(5==2)&amp;&amp;(2&lt;3)</code>的结果为false.实际只用计算<code>5==2</code>的值,发现其为false,则判定整个逻辑表达式的结果为false,右边的(2&lt;3)没被计算.在一些特殊情况下,右边的表达式也许会产生某个异常情形,但却因为没有执行右边的计算而没有表现出来.对于或逻辑,在左边的运算为真时也不执行右边的运算</li>
+<li>例如,设x=3,执行下面语句结果为true:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">System.out.println((x==<span class="hljs-number">3</span>)||(x/<span class="hljs-number">0</span>&gt;<span class="hljs-number">2</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果将代码改为:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">System.out.println((x/<span class="hljs-number">0</span>&gt;<span class="hljs-number">2</span>)||(x==<span class="hljs-number">3</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>则运行时将因为用x去除0而产生算术运算异常</li>
+</ul>
+<h3 id="位运算符">位运算符</h3>
+<p>位运算是对操作数以二进制比特(bit)位为单位进行的操作运算,位运算的操作数和结果都是整型数,几种位运算符和相应的运算规则如下表所示:</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>用法</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~</td>
+<td>~op</td>
+<td>结果时op按比特位求反</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>op1&gt;&gt;op2</td>
+<td>将op1右移op2个位(带符号)</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>op1&lt;&lt;op2</td>
+<td>将op1左移op2个位(带符号)</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>op1&gt;&gt;&gt;op2</td>
+<td>将op1右移op2个位(不带符号的右移)</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>op1&amp;op2</td>
+<td>op1和op2都是true,结果才为true</td>
+</tr>
+<tr>
+<td>|</td>
+<td>op1|op2</td>
+<td>op1或op2有一个是true,则结果为true</td>
+</tr>
+<tr>
+<td>^</td>
+<td>op1^op1</td>
+<td>op1和op2是不同值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong></p>
+<ul>
+<li>对于<code>&amp;</code>和<code>|</code>运算符,参与运算的两个运算量可以是逻辑值,也可以是数值数据,对于数值数据,将对两运算量按位对应计算,这时,1相当于true,0相当于false,这个位运算符没有前面逻辑运算符的附加特点</li>
+<li>二进制数变为负数:先补全8位,将源码的每一位求反再加一得到补码</li>
+</ul>
+<blockquote>
+<p><strong>&amp;和&amp;&amp;的区别？</strong></p>
+<ul>
+<li>&amp;运算符有两种用法：按位与和逻辑与</li>
+<li>&amp;&amp;运算符是短路与运算。逻辑与跟短路与的差别是非常巨大的，虽然二者都要求运算符左右两端的布尔值都是true整个表达式的值才是true。&amp;&amp;之所以称为短路运算是因为，如果&amp;&amp;左边的表达式的值是false，右边的表达式会被直接短路掉，不会进行运算。</li>
+<li>很多时候我们可能都需要用&amp;&amp;而不是&amp;，例如在验证用户登录时判定用户名不是null而且不是空字符串，应当写为：<code>username != null &amp;&amp;!username.equals(&quot;&quot;)</code>，二者的顺序不能交换，更不能用&amp;运算符，因为第一个条件如果不成立，根本不能进行字符串的equals比较，否则会产生NullPointerException异常。</li>
+<li><strong>注意</strong>：逻辑或运算符（|）和短路或运算符（||）的差别也是如此。</li>
+</ul>
+</blockquote>
+<h4 id="移位运算符">移位运算符</h4>
+<ul>
+<li>移位运算符是将某一变量所包含的各比特位按指定方向移动指定的位数,移位运算符通过对第一个运算对象左移或者右移位来对数据执行位操作,移动的位数由右边的操作数决定,移位的方向取决于预算符本身,下表给出移位运算符使用的具体例子</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>x(十进制表示)</th>
+<th>x的二进制补码表示</th>
+<th>x&lt;&lt;2</th>
+<th>x&gt;&gt;2</th>
+<th>x&gt;&gt;&gt;2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>00011110</td>
+<td>01111000</td>
+<td>00000111</td>
+<td>00000111</td>
+</tr>
+<tr>
+<td>-17</td>
+<td>11101111</td>
+<td>10111100</td>
+<td>11111011</td>
+<td>00111011</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>从上表可以看出,数据在计算机内部是以二进制补码的形式存储的,正负数的区别看最高位,最高位为0则数据是正数,为1则数据是负数.显然,对数据的移位操作不能改变数据的正负性质,因此,在处理带符号的右移中,右移后左边留出的空位上复制的是原数的符号位.而不带符号的右移中,右移后左边的空位一律填0.带符号的左移在后边填补0</li>
+</ul>
+<h4 id="按位逻辑运算符">按位逻辑运算符</h4>
+<ul>
+<li>位运算符<code>&amp;</code>,<code>|</code>,<code>~</code>,<code>^</code>分别提供了基于位的与(AND),或(OR),求反(NOT),异或(XOR)操作,其中异或<code>~</code>是指两位值不同时,对应的结果位为1,否则为0</li>
+<li>不妨用两个数进行计算,例如,<code>x=13</code>,<code>y=43</code>,计算各运算结果
+<ul>
+<li>首先,将数据转换为二进制形式:<code>x=1101</code>,<code>y=101011</code>,考虑到数据在计算机内的存储表示,不妨以字节数据为例,x和y占用一个字节,所以x和y的二进制为:<code>x=00001101</code>,<code>y=00101011</code></li>
+<li><code>~x</code>结果应为11110010,十进制结果为-14</li>
+<li>14的二进制为1110,补全8位即00001110,-14的补码是14的原码求反加1,即<code>11110001+1=11110010</code></li>
+<li><code>x&amp;y=1001</code>,即十进制的9</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">	00001101</span><br>&amp;	00101011<br>------------<br><span class="hljs-code">	00001001</span><br></code></pre></td></tr></table></figure>
+<h3 id="赋值组合运算符">赋值组合运算符</h3>
+<ul>
+<li>赋值组合运算符是指在赋值运算符的左边有一个其他运算符,例如</li>
+</ul>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas"><span class="hljs-meta">x</span>+=2; //相当于<span class="hljs-meta">x</span>=<span class="hljs-meta">x</span>+2<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其功能是先将左边变量与右边的表达式进行某种运算后,再把运算的结果赋给变量能与赋值符结合的运算符包括算数运算符(<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>&amp;</code>),位运算符(<code>&amp;</code>,<code>|</code>,<code>^</code>)和位移运算符(<code>&gt;&gt;</code>,<code>&lt;&lt;</code>,<code>&gt;&gt;&gt;</code>)</li>
+</ul>
+<h3 id="其他运算符">其他运算符</h3>
+<p>下表给出了其他运算符的简要说明,这些运算符的具体应用将在以后用到</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>?:</td>
+<td>作用相当于if…else语句</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>用于声明数据,创建数组以及访问数组元素</td>
+</tr>
+<tr>
+<td>.</td>
+<td>用于访问对象或者类的成员</td>
+</tr>
+<tr>
+<td>(type)</td>
+<td>强制类型转换</td>
+</tr>
+<tr>
+<td>new</td>
+<td>创建一个新的对象或者新的数组</td>
+</tr>
+<tr>
+<td>instanceof</td>
+<td>判断对象是否为类的实例</td>
+</tr>
+</tbody>
+</table>
+<p><strong>说明</strong></p>
+<ul>
+<li>条件运算符是唯一的一个三元运算符,其格式如下:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">条件?表达式<span class="hljs-number">1</span>:表达式<span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其含义是如果条件的计算结果位真,则结果为表达式1的计算结果,否则为表达式2的计算结果,利用以下语句可以求两个数a,b的最大值:</li>
+<li><code>instanceof</code>用来决定第一个运算对象是否为第二个运算对象的一个实例 ,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">String x=<span class="hljs-string">&quot;hello World!&quot;</span>;<br><span class="hljs-keyword">if</span>(x &gt; instanceif String)<br>System,out.println(<span class="hljs-string">&quot;x is a instance of String:&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h2 id="运算符优先级">运算符优先级</h2>
+<ul>
+<li>运算符的优先级决定了表达式中不同运算执行的先后顺序,例如,在算术表达式中,<code>*</code>号额优先级高于<code>+</code>号,所以<code>5+3\*4</code>相当于<code>5+(3*4)</code>;在逻辑表达式中,关系运算符的优先级高于逻辑运算符,所以<code>x&gt;y&amp;&amp;x&lt;5</code>相当于<code>(x&gt;y)&amp;&amp;(x&lt;5)</code></li>
+<li>在运算符优先级相同时,运算的进行次序取决于运算符的结合性,例如,<code>4*7%3</code>应理解为<code>(4\*7)%3</code>,结果为1,而不是<code>4*(7%3)</code>,结果为4</li>
+<li>运算符的结合性分为左结合和右结合,左结合就是按由左向右的次序计算表达式,例如上面的<code>4*7%3</code>,而右结合就是按右到左的次序计算,例如,<code>a=b=c</code>相当于<code>a=(b=c)</code>,再如,<code>a?b:c?d:e</code>相当于<code>a?b:(c?d:e)</code>,Java运算符的优先级与结合表如下表所示:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">优先级</th>
+<th style="text-align:center">综合性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">( )</td>
+<td style="text-align:center">圆括号</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">new</td>
+<td style="text-align:center">创建对象</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">[ ]</td>
+<td style="text-align:center">数组下标运算</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">访问成员(属性,方法)</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">++,–</td>
+<td style="text-align:center">后缀自增,自减1</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">++,–</td>
+<td style="text-align:center">前缀自增,自减1</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">~</td>
+<td style="text-align:center">按位求反</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">!</td>
+<td style="text-align:center">逻辑非</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">-,+</td>
+<td style="text-align:center">算术符号(负号,正号)</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">(type)</td>
+<td style="text-align:center">强制类型转换</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">*,/,%</td>
+<td style="text-align:center">乘,除,取模</td>
+<td style="text-align:center">12</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">+,-</td>
+<td style="text-align:center">加,减</td>
+<td style="text-align:center">11</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;,&gt;&gt;,&gt;&gt;&gt;</td>
+<td style="text-align:center">移位</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;,&gt;,&lt;=,&gt;=,instanceof</td>
+<td style="text-align:center">关系运算</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">==,!=</td>
+<td style="text-align:center">相等性运算</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">位逻辑与</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">位逻辑异或</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">|</td>
+<td style="text-align:center">位逻辑或</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;&amp;</td>
+<td style="text-align:center">逻辑与</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">||</td>
+<td style="text-align:center">逻辑或</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">左</td>
+</tr>
+<tr>
+<td style="text-align:center">?:</td>
+<td style="text-align:center">条件运算符</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">右</td>
+</tr>
+<tr>
+<td style="text-align:center">=,+=,-=,*=,/=,%=&amp;=,^=,|=,&lt;&lt;=,&gt;&gt;=,&gt;&gt;&gt;=</td>
+<td style="text-align:center">赋值运算符</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">右</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/21/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 数据类型与变量</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/21/Software/Backend/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/Object%E7%B1%BB/">
+                        <span class="hidden-mobile">Java Object类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

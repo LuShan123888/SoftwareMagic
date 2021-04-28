@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java 条件选择语句 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 条件选择语句">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-21 18:49" pubdate>
+        2021年4月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 条件选择语句</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月21日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java 条件选择语句</h1>
+<h2 id="if语句">if语句</h2>
+<h3 id="无else的if语句">无else的if语句</h3>
+<p>其格式如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(条件表达式)&#123;<br>	<span class="hljs-keyword">if</span>块;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<ul>
+<li>如果条件表达式的值为真,则执行&quot;if块&quot;部分的语句,否则直接执行后续语句</li>
+<li>用大括号括住要执行一组语句,也称语句块,语句块以&quot;{“表示块的开始,以”}&quot;表示块的结束,如果要执行的if块为单条语句,可以省略大括号</li>
+</ul>
+<p>**[例3-1]**从键盘输入3个整数,输出其中的最大者</p>
+<p>程序代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ex3_1</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mian</span><span class="hljs-params">(String args[])</span></span>&#123;<br>        <span class="hljs-keyword">int</span> a,b,c,max;<br>        String s;<br>        s = JOptionPane.showInputDialog(<span class="hljs-string">&quot;输入第1个整型数:&quot;</span>);<br>        a = Integer.parseInt(s);<br>        s = JOptionPane.showInputDialog(<span class="hljs-string">&quot;输入第2个整型数:&quot;</span>);<br>        b = Integer.parseInt(s);<br>        s = JOptionPane.showInputDialog(<span class="hljs-string">&quot;输入第3个整型数:&quot;</span>);<br>        c = Integer.parseInt(s);<br>        max = a;<br>        <span class="hljs-keyword">if</span>(b &gt; max)<br>            max = b;<br>        <span class="hljs-keyword">if</span>(c &gt; max)<br>            max = c;<br>        JOptionPane.showInputDialog(<span class="hljs-keyword">null</span>,<span class="hljs-string">&quot;最大值是:&quot;</span>+max);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong>:第6~11行采用Swing对话框获取输入数据并转换为整数给a,b,c三个变量赋值,第12~16行是完成求最大值的核心,先假定a最大,以后的b和c分别与最大还大,则自己最大,第17行通过String消息对话框显示输出结果</p>
+<h3 id="带else的if语句">带else的if语句</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">if</span>块;<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<ul>
+<li>
+<p>该格式是一种更常见的形式,即if与else配套使用,所以一般称做if…else语句,如果条件表达式为真,执行&quot;if块&quot;的代码,否则执行&quot;else块&quot;的代码</p>
+</li>
+<li>
+<p>&quot;if块&quot;和&quot;else块&quot;为单条语句,可以省略大括号</p>
+</li>
+</ul>
+<h2 id="if语句的嵌套">if语句的嵌套</h2>
+<p>在稍微复杂额编程中,常出现条件的分支不止两种情况,一种方法是用if嵌套来解决,所谓if嵌套就是在if语句的&quot;if块 &quot;或&quot;else块&quot;中继续含有if语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">if</span>(条件表达式)&#123;<br>        <span class="hljs-keyword">if</span>块;<br>    &#125;<br>    <span class="hljs-keyword">if</span>块;<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>例如,上面求a,b,c3个数中的最大数,也可以采用if嵌套来实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(a&gt;b)&#123;<br>    <span class="hljs-keyword">if</span>(a&gt;c)<br>        System.out.println(<span class="hljs-string">&quot;三个数中最大值是:&quot;</span>+a);<br>    <span class="hljs-keyword">else</span><br>        System.out.println(<span class="hljs-string">&quot;三个数中最大值是:&quot;</span>+c);<br>&#125;<br><span class="hljs-keyword">else</span>&#123;	<span class="hljs-comment">//a&lt;=b的情况</span><br>    <span class="hljs-keyword">if</span>(a&gt;c)<br>        System.out.println(<span class="hljs-string">&quot;三个数中最大值是:&quot;</span>+b);<br>    <span class="hljs-keyword">else</span><br>        System.out.println(<span class="hljs-string">&quot;三个数中最大值是:&quot;</span>+c);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>关于if嵌套要注意的一个问题是if与else的匹配问题,由于if语句有带else和不带else两种形式,编译程序在给else语句寻找匹配的if语句时是按最近匹配原则来配对的,所以在出现if嵌套时最好用花括号来标识清楚相应的块</p>
+<h2 id="阶梯else-if">阶梯else if</h2>
+<p>阶梯else if是嵌套if中一种特殊情况的简写形式,这种特殊情况就是&quot;else块&quot;中逐层嵌套if语句,使用阶梯else if可以使程序更简短和清晰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">if</span>块;<br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(条件表达式)&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br><span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">else</span>块;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>**[例3-2]**输入一个学生的成绩,根据所在分数段输出信息,0~59输出&quot;不及格&quot;,60~69输出&quot;及格&quot;,70~79输出&quot;中&quot;,80~89输出&quot;良&quot;,90以上输出&quot;优&quot;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ex3_2</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mian</span><span class="hljs-params">(String args[])</span></span>&#123;<br>        <span class="hljs-keyword">int</span> s;<br>        s = Integer.parseInt(JOptionPane.showInputDialog(<span class="hljs-string">&quot;输入分数:&quot;</span>));<br>        <span class="hljs-keyword">if</span>(s&lt;<span class="hljs-number">60</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;不及格&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s&lt;<span class="hljs-number">70</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;及格&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s&lt;<span class="hljs-number">80</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;中&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(s&lt;<span class="hljs-number">90</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;良&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span><br>            System.out.println(<span class="hljs-string">&quot;优&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>说明</strong>:该程序是if嵌套的一种比较特殊的情况,除了最后一个else外,其他3个else的语句块中正好是一个if语句</li>
+<li><strong>注意</strong>:在else if中条件的排列是按照范围逐步缩小的,下一个条件是上一个条件不满足情况下的一种限制,例如,条件s&lt;90处实际上包括s&gt;=80的限制</li>
+</ul>
+<h2 id="多分支语句switch">多分支语句switch</h2>
+<p>对于多分支的处理,Java提供了switch语句,其格式如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Switch(expression)<br>&#123;<br>    Case value1:语句块<span class="hljs-number">1</span>;<span class="hljs-keyword">break</span>;<span class="hljs-comment">//分支一</span><br>    Case value2:语句块<span class="hljs-number">2</span>;<span class="hljs-keyword">break</span>;<span class="hljs-comment">//分支二</span><br>    Case value3:语句块<span class="hljs-number">3</span>;<span class="hljs-keyword">break</span>;<span class="hljs-comment">//分支三</span><br>    ......<br>        Case valueN:语句块N;<span class="hljs-keyword">break</span>;<span class="hljs-comment">//分支N</span><br>    [<span class="hljs-keyword">default</span>:默认语句块;]<span class="hljs-comment">//分支n+1,均不符合其他case分支</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong></p>
+<ul>
+<li>switch语句执行时首先计算表达式的值,这个值可以是整型,字符型或字符串类型(其中字符串类型是在JDK1.7中新增的支持),同时要与case分支的判断值的类型一致,计算出表达式的值后,它首先与第一个case分支进行比较,若相同,执行第一个case分支的语句块,否则再检查第二个case分支,以此类推</li>
+<li>case子句的值valueN必须是常量,各个case子句中的值不同</li>
+<li>如果没有匹配情况,就执行default指定的语句,但default子句本身是可选的</li>
+<li>break语句用来在执行完一个case分支后,使程序跳出switch语句,即终止switch语句的执行,否则,找到一个匹配的情况后面所有的语句都会被执行,直到遇到break为止,在特殊情况下,多个不同的case值要执行一组相同的操作,这时可以不用break</li>
+</ul>
+<p><strong>注意</strong>:在Java 5以前，switch(expr)中，expr只能是byte、short、char、int。从Java 5开始，Java中引入了枚举类型，expr也可以是enum类型，从Java 7开始，expr还可以是字符串（String），但是长整型（long）在目前所有的版本中都是不可以的。</p>
+<p>**[例3-2]**也可以采用switch语句实现,修改后的程序代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.swing.*;<br>piblic <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ex3_2</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> s;<br>        s = Integer.parseInt(JOptionPane.showInputDialog(<span class="hljs-string">&quot;输入分数:&quot;</span>));<br>        <span class="hljs-keyword">int</span> x = s / <span class="hljs-number">10</span>;<br>        <span class="hljs-keyword">switch</span> (x) &#123;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:<br>                System.out.println(<span class="hljs-string">&quot;不及格&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:<br>                System.out.println(<span class="hljs-string">&quot;及格&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>:<br>                System.out.println(<span class="hljs-string">&quot;中&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">8</span>:<br>                System.out.println(<span class="hljs-string">&quot;良&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">9</span>:<br>            <span class="hljs-keyword">case</span> <span class="hljs-number">10</span>:<br>                System.out.println(<span class="hljs-string">&quot;优&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong>:这里的关键是通过除10取整,将成绩的判定条件转换为整数值范围的情形,第8~12行所列出的case情形无任何执行语句,所以按执行流程均会执行第14行语句</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">流程控制语句</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/21/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 类的定义</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/21/Software/Backend/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB/">
+                        <span class="hidden-mobile">Java 基本数据类型包装类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

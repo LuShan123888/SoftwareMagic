@@ -40,7 +40,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -102,13 +102,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -154,25 +154,57 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/31/Software/Tools/Vim/%E5%91%BD%E4%BB%A4/">Vim 命令</a>
+        <a href="/2021/04/24/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0/" target="_self">
+          Redis 用户签到
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Tools/Vim/%E5%91%BD%E4%BB%A4/">
+        <a href="/2021/04/24/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0/" target="_self">
           
           
             
           
-          Vim 命令
-启动Vim
+          Redis 用户签到
+MySQL
 
-vim -c cmd file: 在打开文件前,先执行指定的命令
-vim -r file: 恢复上次异常退出的文件
-vim -R file: 以只读的方式打开文件,但可以强制保存
-vim -M file: 以只读的方式打开文件,不可以强制保存
-vim -y num file: 将编辑窗口的大小设为num行
-vim + file: 从文件的末尾开始
-vim +num fi
+如果使用关系型数据库来实现签到功能，核心表（user_sign）如下：
+
+
+
+
+字段名
+描述
+
+
+
+
+id
+数据表主键（AUTO_INCREMENT）
+
+
+user_id
+用户ID
+
+
+sign_date
+签到日期（如 2021-03-09）
+
+
+amount
+连续签到天数
+
+
+
+
+
+签到：插入一条记录，并更新连续签到天数
+
+
+查询：根据签到日期查询
+
+
+统计：
         </a>
       </p>
 
@@ -180,8 +212,8 @@ vim +num fi
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:55" pubdate>
-              2021-03-31
+            <time datetime="2021-04-24 13:07" pubdate>
+              2021-04-24
             </time>
           </div>
         
@@ -191,9 +223,13 @@ vim +num fi
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Vim/">Vim</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/">实例</a>
             
           </div>
         
@@ -208,23 +244,22 @@ vim +num fi
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/31/Software/Tools/Vim/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">Vim 底行模式</a>
+        <a href="/2021/04/24/Software/Backend/Database/Redis/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+          Redis 问题解决
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Tools/Vim/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/04/24/Software/Backend/Database/Redis/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
           
           
             
           
-          Vim 底行模式
+          Redis 问题解决
+解决Redis远程连接不上的问题
+修改配置文件
+12bind 127.0.0.1 ---&gt; #bind 127.0.0.1protected-mode yes ---&gt; protected-mode no
 
-在Vim的底行模式下,可以使用复杂的命令,在编辑模式下键入 : ,光标就跳到屏幕最后一行,并在那里显示冒号,此时已进入底行模式,用户输入的内容均显示在屏幕的最后一行,按回车键,Vim 执行命令
-
-打开,保存,退出
-在已经启动的Vim中打开一个文件需要用 :e 命令
-1:e path_to_file/filename
-保存当前编辑的文件需要用 :w 命令(单词 write 的缩写
         </a>
       </p>
 
@@ -232,8 +267,8 @@ vim +num fi
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:54" pubdate>
-              2021-03-31
+            <time datetime="2021-04-24 12:48" pubdate>
+              2021-04-24
             </time>
           </div>
         
@@ -243,9 +278,11 @@ vim +num fi
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Vim/">Vim</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -260,22 +297,31 @@ vim +num fi
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/31/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/">Vim 命令模式</a>
+        <a href="/2021/04/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E7%B4%A2%E5%BC%95/" target="_self">
+          SQL 索引
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/">
+        <a href="/2021/04/23/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/%E7%B4%A2%E5%BC%95/" target="_self">
           
           
             
           
-          Vim 命令模式
-Vim编辑方式的主要用途是在被编辑的文件中移动光标的位置,一旦光标移到到所要的位置,就可以进行剪切和粘贴正文块,删除正文和插入新的正文,当完成所有的编辑工作后,需要保存编辑器结果,退出编辑程序回到终端,可以发出ZZ命令,连续按两次大写的Z键
-移动光标
-如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能
+          SQL 索引
+一条查询语句是如何执行的
 
-k:上移
-j
+首先来看,在 MySQL 数据库中，一条查询语句是如何执行的，索引出现在哪个环节，起到了什么作用。
+
+
+应用程序发现 SQL 到服务端
+
+当执行 SQL 语句时，应用程序会连接到相应的数据库服务器，然后服务器对 SQL 进行处理。
+
+
+查询缓存
+
+接着数据库服务器会先去查询是否有该 SQL 语句的缓存，key 是查询的语句，value 是查询的结果。如果你
         </a>
       </p>
 
@@ -283,8 +329,8 @@ j
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:54" pubdate>
-              2021-03-31
+            <time datetime="2021-04-23 15:51" pubdate>
+              2021-04-23
             </time>
           </div>
         
@@ -294,9 +340,13 @@ j
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Vim/">Vim</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/">DML</a>
             
           </div>
         
@@ -311,22 +361,25 @@ j
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/31/Software/Server/Nginx/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">Nginx 虚拟主机</a>
+        <a href="/2021/04/23/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Collection/" target="_self">
+          Java Collection
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Server/Nginx/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">
+        <a href="/2021/04/23/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Collection/" target="_self">
           
           
             
           
-          Nginx 虚拟主机
-编辑 nginx.conf 配置文件
-1sudo vim /usr/local/nginx/conf/nginx.conf
-添加虚拟域名配置文件
-1include vhost/*.conf
-配置虚拟主机
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748
+          Java Collection
+接口Collection处于Collection API的最高层,在该接口中定义了所有低层接口或类的公共方法,下图给出了Collection API的实现层次,图中省略了AbstractCollection等5个抽象类,省略了Collection接口的子接口Queue
+
+
+
+Collection
+Collection接口的定义如下:
+1public interfac
         </a>
       </p>
 
@@ -334,184 +387,8 @@ j
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:17" pubdate>
-              2021-03-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/31/Software/Frontend/Yarn/%E5%91%BD%E4%BB%A4/">Yarn 命令</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Frontend/Yarn/%E5%91%BD%E4%BB%A4/">
-          
-          
-            
-          
-          Yarn 命令
-新建项目
-1$ yarn init
-
--y,--yes:表示默认选项都为yes
-
-安装所有包
-12$ yarn install #安装package.json里所有包,并将包及它的所有依赖项保存进yarn.lock$ yarn global install #全局安装
-
-–flat:安装一个包的单一版本
-–force:强制重新下载所有包
-–production:只安装depende
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:07" pubdate>
-              2021-03-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/Yarn/">Yarn</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/31/Software/Frontend/NPM/%E5%91%BD%E4%BB%A4/">NPM 命令</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/31/Software/Frontend/NPM/%E5%91%BD%E4%BB%A4/">
-          
-          
-            
-          
-          NPM 命令
-新建项目
-1$ npm init
-
--y,--yes:表示默认选项都为yes
-
-安装模块
-
-npm不仅会安装当前包,如果该包有依赖其他模块,还会查找其依赖的所有模块,并一起安装,模块越复杂,需要安装的依赖就越多
-
-本地安装
-
-模块安装成功后,就可以在本地目录node_modules目录中找到该模块; 所有依赖的模块同样被安装在该模块node_modules目录中
-
-1$ npm in
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:03" pubdate>
-              2021-03-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/NPM/">NPM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/30/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">JVM 内存结构</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/30/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">
-          
-          
-            
-          
-          JVM 内存结构
-
-Java 虚拟机的内存空间分为 5 个部分：
-
-程序计数器
-Java 虚拟机栈
-本地方法栈
-堆
-方法区
-
-
-
-
-注意:JDK 1.8 同 JDK 1.7 比，最大的差别就是：元空间(元数据区)取代了永久代。元空间的本质和永久代类似，都是对 JVM 规范中方法区的实现。不过元空间与永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。
-程序计数器（PC 寄存器）
-
-定
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-30 16:24" pubdate>
-              2021-03-30
+            <time datetime="2021-04-23 15:21" pubdate>
+              2021-04-23
             </time>
           </div>
         
@@ -527,7 +404,7 @@ Java 虚拟机栈
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
             
           </div>
         
@@ -542,31 +419,21 @@ Java 虚拟机栈
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/30/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/">Linux 进程与服务</a>
+        <a href="/2021/04/23/Software/Backend/Mybatis/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Mybatis 初始化
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/30/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/">
+        <a href="/2021/04/23/Software/Backend/Mybatis/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          Linux 进程与服务
-基本概念
-
-在Linux中,每一个程序都是有自己的一个进程,每一个进程都有一个id号
-每一个进程都会有一个父进程
-进程可以有两种存在方式
-
-前台运行
-后台运行
-
-
-一般的话服务都是后台运行的,基本的程序都是前台运行的
-
-进程
-ps
-123456789101112ps #查看当前系统中正在执行的各种进程的信息!-a 显示当前终端运行的所有的进程信息(当前的进程一个)-u 以用
+          Mybatis 初始化
+思路流程:搭建环境—&gt;导入Mybatis—&gt;编写代码—&gt;测试
+搭建实验数据库
+1234567891011121314CREATE DATABASE `mybatis`;USE `mybatis`;DROP TABLE IF EXISTS `user`;CREATE TABLE `user` (  `id` int(20) NOT NULL,  `name`
         </a>
       </p>
 
@@ -574,8 +441,8 @@ ps
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-30 08:11" pubdate>
-              2021-03-30
+            <time datetime="2021-04-23 11:50" pubdate>
+              2021-04-23
             </time>
           </div>
         
@@ -585,9 +452,9 @@ ps
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/System/">System</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/System/Linux/">Linux</a>
+              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
             
           </div>
         
@@ -602,22 +469,38 @@ ps
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/29/Software/System/Linux/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">Linux 环境变量</a>
+        <a href="/2021/04/23/Software/Backend/Mybatis/%E7%BC%93%E5%AD%98/" target="_self">
+          Mybatis 缓存
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/29/Software/System/Linux/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
+        <a href="/2021/04/23/Software/Backend/Mybatis/%E7%BC%93%E5%AD%98/" target="_self">
           
           
             
           
-          Linux 环境变量
-查看环境变量
+          Mybatis 缓存
+简介
 
-linux中使用:分隔路径
-目录的优先级由前向后依次递减
+缓存[Cache]概述
 
-12echo $PATH/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Apple/usr/bin:/Users/
+存在内存中的临时数据
+将用户经常查询的数据放在缓存(内存)中, 用户去查询数据就不用从磁盘上(关系型数据库数据文件)查询, 从缓存中查询, 从而提高查询效率, 解决了高并发系统的性能问题
+
+
+为什么使用缓存？
+
+减少和数据库的交互次数, 减少系统开销, 提高系统效率
+
+
+什么样的数据能使用缓存？
+
+经常查询并且不经常改变的数据
+
+
+
+Myba
         </a>
       </p>
 
@@ -625,8 +508,8 @@ linux中使用:分隔路径
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-29 17:27" pubdate>
-              2021-03-29
+            <time datetime="2021-04-23 11:46" pubdate>
+              2021-04-23
             </time>
           </div>
         
@@ -636,9 +519,9 @@ linux中使用:分隔路径
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/System/">System</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/System/Linux/">Linux</a>
+              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
             
           </div>
         
@@ -653,31 +536,28 @@ linux中使用:分隔路径
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/29/Software/System/Linux/%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4/">Linux 其他命令</a>
+        <a href="/2021/04/23/Software/Backend/Database/Redis/%E9%9B%86%E7%BE%A4/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
+          Redis 哨兵模式
+        </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/29/Software/System/Linux/%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4/">
+        <a href="/2021/04/23/Software/Backend/Database/Redis/%E9%9B%86%E7%BE%A4/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          Linux 其他命令
-clear
+          Redis 哨兵模式
 
-清屏
+哨兵模式能够后台监控主机是否故障,如果故障了根据投票数自动将从节点转换为主节点
+哨兵模式是一种特殊的模式,首先Reds提供了哨兵的命令,哨兵是一个独立的进程,作为进程,它会独立运行
+原理:哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例
 
-1clear
-man
 
-查看各个命令的使用文档
+哨兵的作用
 
-1man cp
-shutdown
-
-关机与重启
-
-12345shutdown –h now # 立马关机shutdown –h 20:25 # 系统会在今天20:25关机shutdown –h +10 # 十分钟后关机shutdown –r now # 系统立马重启shutdown –r +10 # 系统
+通过发送命令,让 Redis服务器返回监控其运行状态,包括主节点和从节点
+当哨兵监测到主
         </a>
       </p>
 
@@ -685,8 +565,8 @@ shutdown
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-29 17:25" pubdate>
-              2021-03-29
+            <time datetime="2021-04-23 11:39" pubdate>
+              2021-04-23
             </time>
           </div>
         
@@ -696,9 +576,182 @@ shutdown
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/System/">System</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/System/Linux/">Linux</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/%E9%9B%86%E7%BE%A4/">集群</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/23/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
+          Redis 高并发问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/23/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
+          
+          
+            
+          
+          Redis 高并发问题
+缓存穿透
+
+缓存穿透是指用户请求的数据在缓存中不存在即没有命中，同时在数据库中也不存在，导致用户每次请求该数据都要去数据库中查询一遍。如果有恶意攻击者不断请求系统中不存在的数据，会导致短时间大量请求落在数据库上，造成数据库压力过大，甚至导致数据库承受不住而宕机崩溃。
+缓存穿透的关键在于在Redis中查不到key值，它和缓存击穿的根本区别在于传进来的key在Redis中是不存
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-23 11:35" pubdate>
+              2021-04-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/23/Software/Backend/Database/Redis/Key/" target="_self">
+          Redis key
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/23/Software/Backend/Database/Redis/Key/" target="_self">
+          
+          
+            
+          
+          Redis key
+
+Redis的键key只能为字符串
+Redis 键命令用于管理 redis 的键
+
+1redis 127.0.0.1:6379&gt; COMMAND KEY_NAME
+实例
+1234redis 127.0.0.1:6379&gt; SET testkey redisOKredis 127.0.0.1:6379&gt; DEL testkey(integer) 1
+
+在以上实例
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-23 11:28" pubdate>
+              2021-04-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/23/Software/Backend/Database/Redis/Value/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Zset/" target="_self">
+          Redis Zset
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/23/Software/Backend/Database/Redis/Value/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Zset/" target="_self">
+          
+          
+            
+          
+          Redis Zset
+
+Redis 有序集合(sorted set)和集合一样也是string类型元素的集合,且不允许重复的成员
+不同的是每个元素都会关联一个double类型的分数,redis正是通过分数来为集合中的成员进行从小到大的排序
+有序集合的成员是唯一的,但分数(score)却可以重复
+集合是通过哈希表实现的,所以添加,删除,查找的复杂度都是O(1), 集合中最大的成员数为 232 - 1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-23 11:24" pubdate>
+              2021-04-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/Value/">Value</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/Value/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基础数据类型</a>
             
           </div>
         
@@ -785,7 +838,6 @@ shutdown
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/debouncer.js" ></script>
 <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
 <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
 
