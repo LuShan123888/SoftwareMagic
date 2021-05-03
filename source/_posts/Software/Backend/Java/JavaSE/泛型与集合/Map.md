@@ -1,5 +1,5 @@
 ---
-
+title: Java Map
 categories:
 - Software
 - Backend
@@ -7,8 +7,6 @@ categories:
 - JavaSE
 - 泛型与集合
 ---
-
-
 # Java Map
 
 - 除了Collection接口表示的这种单一对象数据集合,对于**关键字=值**表示的数据集合在CollectionAPI中提供了Map接口

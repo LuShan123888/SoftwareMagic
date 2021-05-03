@@ -188,8 +188,6 @@ After iterate : [aaa, bbb, kkk, nnn]
 
 ## Iterator 和 ListIterator 区别
 
-- ListIterator 有`add()`方法，可以向 List 中添加对象，而 Iterator 不能
-- ListIterator 和 Iterator 都有`hasNext()`和`next()`方法，可以实现顺序向后遍历，但是 ListIterator 有`hasPrevious()`和`previous()`方法，可以实现逆向（顺序向前）遍历。Iterator 就不可以。
-- ListIterator 可以定位当前的索引位置，`nextIndex()`和`previousIndex()`可以实现。Iterator 没有此功能。
-- 都可实现删除对象，但是 ListIterator 可以实现对象的修改，`set()`方法可以实现。Iierator 仅能遍历，不能修改。
-- 因为 ListIterator 的这些功能，可以实现对 LinkedList 等 List 数据结构的操作。其实，数组对象也可以用迭代器来实现。
+- Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List
+- Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向
+- ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。
