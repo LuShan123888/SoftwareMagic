@@ -3,7 +3,7 @@ title: Git reset
 categories:
 - Software
 - Git
-- 版本管理
+- 基本命令
 ---
 # Git reset
 

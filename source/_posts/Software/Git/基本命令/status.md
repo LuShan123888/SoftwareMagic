@@ -3,7 +3,7 @@ title: Git status
 categories:
 - Software
 - Git
-- 状态与记录
+- 基本命令
 ---
 # Git status
 

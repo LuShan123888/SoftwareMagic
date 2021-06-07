@@ -3,7 +3,6 @@ title: Git HEAD
 categories:
 - Software
 - Git
-- 版本管理
 ---
 # Git HEAD
 

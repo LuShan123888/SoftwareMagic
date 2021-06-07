@@ -3,7 +3,7 @@ title: Git reflog
 categories:
 - Software
 - Git
-- 状态与记录
+- 基本命令
 ---
 # Git reflog
 

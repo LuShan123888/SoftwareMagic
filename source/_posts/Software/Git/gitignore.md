@@ -40,7 +40,14 @@ git check-ignore -v App.class
 
 Git会告诉我们,`.gitignore`的第3行规则忽略了该文件,于是我们就可以知道应该修订哪个规则
 
-## 配置文件
+## 使用配置文件
+
+- `~/,gitconfig`
+
+```toml
+[core]
+	excludesfile = /Users/cian/.gitignore_global
+```
 
 - `~/.gitignore_global`
 

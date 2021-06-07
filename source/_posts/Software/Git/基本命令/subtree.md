@@ -3,7 +3,7 @@ title: Git subtree
 categories:
 - Software
 - Git
-- 远程仓库
+- 基本命令
 ---
 # Git subtree
 

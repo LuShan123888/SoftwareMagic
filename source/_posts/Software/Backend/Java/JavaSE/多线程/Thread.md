@@ -28,7 +28,7 @@ public Thread(ThreadGroup group,Runnable target,String name);
 ```java
 public Thread();
 public Thread(Runnable target);
-public Thread(runnable target,String name);
+public Thread(Runnable target,String name);
 public Thread(String name);
 public Thread(ThreadGroup group,Runnable target);
 public Thread(ThreadGroup group,String name);

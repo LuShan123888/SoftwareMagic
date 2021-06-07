@@ -3,7 +3,7 @@ title: Git Push命令
 categories:
 - Software
 - Git
-- 远程仓库
+- 基本命令
 ---
 # Git Push命令
 

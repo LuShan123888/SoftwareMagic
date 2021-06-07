@@ -3,7 +3,7 @@ title: git stash
 categories:
 - Software
 - Git
-- 状态与记录
+- 基本命令
 ---
 # git stash
 

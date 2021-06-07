@@ -3,7 +3,6 @@ title: Git BFG
 categories:
 - Software
 - Git
-- 版本管理
 ---
 # Git BFG
 
