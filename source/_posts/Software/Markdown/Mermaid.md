@@ -28,7 +28,7 @@ graph LR
 ###### 默认节点
 
 > graph LR
-> id1
+> id
 
 ![  ](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef20jloj30df02i741.jpg)
 
@@ -40,7 +40,7 @@ graph LR
 
 ```
 graph LR
-id[This is the text in the box];1212
+id[This is the text in the box];
 ```
 
 ###### 圆角节点
@@ -49,7 +49,7 @@ id[This is the text in the box];1212
 
 ```
 graph LR
-id(This is the text in the box);1212
+id(This is the text in the box);
 ```
 
 ###### 圆节点(The form of a circle)
@@ -58,7 +58,7 @@ id(This is the text in the box);1212
 
 ```
 graph LR
-id((This is the text in the circle));1212
+id((This is the text in the circle));
 ```
 
 ###### 非对称节点(asymetric shape)
@@ -67,7 +67,7 @@ id((This is the text in the circle));1212
 
 ```
 graph LR
-id>This is the text in the box]1212
+id>This is the text in the box]
 ```
 
 ###### 菱形节点(rhombus)
@@ -76,7 +76,7 @@ id>This is the text in the box]1212
 
 ```
 graph LR
-id{This is the text in the box}1212
+id{This is the text in the box}
 ```
 
 #### 连接线
@@ -88,8 +88,8 @@ id{This is the text in the box}1212
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef05braj306i038jr5.jpg)
 
 ```
-graph LR;
-  A-->B;1212
+graph LR
+  A-->B
 ```
 
 ###### 开放行连接
@@ -98,7 +98,7 @@ graph LR;
 
 ```
 graph LR
-A --- B1212
+A --- B
 ```
 
 ###### 标签连接
@@ -107,7 +107,7 @@ A --- B1212
 
 ```
 graph LR
-A -- This is the label text --- B;1212
+A -- This is the label text --- B
 ```
 
 ###### 箭头标签连接
@@ -120,7 +120,7 @@ A -- This is the label text --- B;1212
 
 ```
 graph LR
- A-- text -->B1212
+ A-- text -->B
 ```
 
 ###### 虚线(dotted link,点连线)
@@ -131,7 +131,7 @@ graph LR
 
 ```
 graph LR
-A-.->B1212
+A-.->B
 ```
 
 > -.-.
@@ -140,7 +140,7 @@ A-.->B1212
 
 ```
 graph LR
-A-.-.B1212
+A-.-.B
 ```
 
 ###### 标签虚线
@@ -149,10 +149,10 @@ A-.-.B1212
 
 ```
 graph LR
-A-.text.->B1212
+A-.text.->B
 ```
 
-![这里写图片描述](https://tva1.sinaimg.cn/large/006tNbRwgy1gb6ef1iuszj308a03awe9.jpg)
+![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/006tNbRwgy1gb6ef1iuszj308a03awe9.jpg)
 
 ###### 粗实线
 
@@ -160,7 +160,7 @@ A-.text.->B1212
 
 ```
 graph LR
-A==>B1212
+A==>B
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ees3g4nj306z03kmwx.jpg)
@@ -169,7 +169,7 @@ A==>B1212
 
 ```
 graph LR
-A===B1212
+A===B
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eeuwa41j307r02njr5.jpg)
@@ -180,7 +180,7 @@ A===B1212
 
 ```
 graph LR
-A==text==>B1212
+A==text==>B
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef2wr2yj307m03b0si.jpg)
@@ -189,7 +189,7 @@ A==text==>B1212
 
 ```
 graph LR
-A==text===B1212
+A==text===B
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eevd27dj308303ct8h.jpg)
@@ -203,7 +203,7 @@ A==text===B1212
 
 ```
 graph LR
-d1["This is the (text) in the box"]1212
+d1["This is the (text) in the box"]
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eeu03bcj309h02yq2q.jpg)
@@ -213,7 +213,7 @@ d1["This is the (text) in the box"]1212
 转义字符的使用语法:
 流程图定义如下:
 
-> graph LR\
+> graph LR
 > A["A double quote:#quot;”] –> B["A dec char:#9829;”]
 
 渲染后的图如下:
@@ -222,13 +222,13 @@ d1["This is the (text) in the box"]1212
 
 ```
 graph LR
-        A["A double quote:#quot;"]-->B["A dec char:#9829;"]1212
+        A["A double quote:#quot;"]-->B["A dec char:#9829;"]
 ```
 
 #### 子图(Subgraphs)
 
-> subgraph title\
-> graph definition\
+> subgraph title
+> graph definition
 > end
 
 示例:
@@ -244,7 +244,7 @@ graph TB
         subgraph three
         c1 --> c2
         end
-        c1 --> a212345678910111234567891011
+        c1 --> a2
 ```
 
 结果:
@@ -263,7 +263,7 @@ graph TD
       B["fa:fa-twitter for peace"]
       B-->C[fa:fa-ban forbidden]
       B-->D(fa:fa-spinner);
-      B-->E(A fa:fa-camerra-retro perhaps?);1234512345
+      B-->E(A fa:fa-camerra-retro perhaps?);
 ```
 
 渲染图如下:
@@ -273,7 +273,7 @@ graph TD
       B["fa:fa-twitter for peace"]
       B-->C[fa:fa-ban forbidden]
       B-->D(fa:fa-spinner);
-      B-->E(A fa:fa-camera-retro perhaps?);1234512345
+      B-->E(A fa:fa-camera-retro perhaps?);
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eermif1j30cw05rjr9.jpg)
@@ -289,7 +289,7 @@ graph TD
 graph LR
      id1(Start)-->id2(Stop)
      style id1 fill:#f9f,stroke:#333,stroke-width:4px;
-     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;12341234
+     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;
 ```
 
 渲染结果:
@@ -300,7 +300,7 @@ graph LR
 graph LR
      id1(Start)-->id2(Stop)
      style id1 fill:#f9f,stroke:#333,stroke-width:4px;
-     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;12341234
+     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;
 ```
 
 备注:这些样式参考CSS样式
@@ -311,19 +311,19 @@ graph LR
 类的定义示例:
 
 ```
-classDef className fill:#f9f,stroke:#333,stroke-width:4px;11
+classDef className fill:#f9f,stroke:#333,stroke-width:4px;
 ```
 
 对节点使用样式类:
 
 ```
-class nodeId className;11
+class nodeId className;
 ```
 
 同时对多个节点使用相同的样式类:
 
 ```
-class nodeId1,nodeId2 className;11
+class nodeId1,nodeId2 className;
 ```
 
 可以在CSS中提前定义样式类,应用在图表的定义中
@@ -332,13 +332,13 @@ class nodeId1,nodeId2 className;11
 graph LR
       A-->B[AAABBB];
       B-->D;
-      class A cssClass;12341234
+      class A cssClass;
 ```
 
 默认样式类:当没有指定样式的时候,默认采用
 
 ```
-classDef default fill:#f9f,stroke:#333,stroke-width:4px;11
+classDef default fill:#f9f,stroke:#333,stroke-width:4px;
 ```
 
 示例:
@@ -346,7 +346,7 @@ classDef default fill:#f9f,stroke:#333,stroke-width:4px;11
 ```{mermaid}
 graph LR
     classDef default fill:#f90,stroke:#555,stroke-width:4px;
-    id1(Start)-->id2(Stop)123123
+    id1(Start)-->id2(Stop)
 ```
 
 结果:
@@ -354,7 +354,7 @@ graph LR
 ```
 graph LR
 classDef default fill:#f90,stroke:#555,stroke-width:4px;
-id1(Start)-->id2(Stop)123123
+id1(Start)-->id2(Stop)
 ```
 
 ![这里写图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eewxchfj309k034mwy.jpg)

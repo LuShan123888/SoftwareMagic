@@ -1364,13 +1364,3 @@ int hashCode() {
 >   4. 编写完equals方法后，问自己它是否满足对称性、传递性、一致性
 >   5. 重写equals时总是要重写hashCode
 >   6. 不要将equals方法参数中的Object对象替换为其他的类型，在重写时不要忘掉@Override注解。
-
-## HashMap、Hashtable、LinkedHashMap 和 TreeMap 比较
-
-- Hashmap 是一个最常用的 Map，它根据键的 HashCode 值存储数据，根据键可以直接获取它的值，具有很快的访问速度。遍历时，取得数据的顺序是完全随机的。**HashMap 最多只允许一条记录的键为 Null；允许多条记录的值为 Null；HashMap 不支持线程的同步，即任一时刻可以有多个线程同时写 HashMap；可能会导致数据的不一致。**如果需要同步，可以用 Collections 的 synchronizedMap 方法使 HashMap 具有同步的能力。
-- Hashtable 与 HashMap 类似，不同的是：**它不允许记录的键或者值为空；它支持线程的同步**，即任一时刻只有一个线程能写 Hashtable，因此也导致了 Hashtale 在写入时会比较慢。
-- LinkedHashMap 是 HashMap 的一个子类，如果需要输出的顺序和输入的相同，那么用 LinkedHashMap 可以实现，它还可以按读取顺序来排列，像连接池中可以应用。
-  - LinkedHashMap 保存了记录的插入顺序，在用 Iterator 遍历 LinkedHashMap 时，先得到的记录肯定是先插入的，也可以在构造时用带参数，按照应用次数排序。在遍历的时候会比 HashMap 慢，不过有种情况例外，**当 HashMap 容量很大，实际数据较少时，遍历起来可能会比 LinkedHashMap 慢，因为 LinkedHashMap 的遍历速度只和实际数据有关，和容量无关，而 HashMap 的遍历速度和他的容量有关。**
-  - **LinkedHashMap 实现与 HashMap 的不同之处在于，后者维护着一个运行于所有条目的双重链表**。此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。对于 LinkedHashMap 而言，它继承与 HashMap、底层使用哈希表与双向链表来保存所有元素。其基本操作与父类 HashMap 相似，它通过重写父类相关的方法，来实现自己的链接列表特性。
-- **TreeMap 实现 SortMap 接口，内部实现是红黑树。**能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时，得到的记录是排过序的。TreeMap 不允许 key 的值为 null。非同步的。
-  - TreeMap 取出来的是排序后的键值对。但如果您要按自然顺序或自定义顺序遍历键，那么 TreeMap 会更好。

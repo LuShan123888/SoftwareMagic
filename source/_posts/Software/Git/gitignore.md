@@ -42,7 +42,11 @@ Git会告诉我们,`.gitignore`的第3行规则忽略了该文件,于是我们�
 
 ## 使用配置文件
 
-- `~/,gitconfig`
+```
+ git config --global core.excludesfile "%USERPROFILE%\.gitignore"
+```
+
+- `~/.gitconfig`
 
 ```toml
 [core]
@@ -68,6 +72,7 @@ tests/**/coverage/
 *.ntvs*
 *.njsproj
 *.sln
+*.iml
 
 #java
 target/

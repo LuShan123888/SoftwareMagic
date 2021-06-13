@@ -718,3 +718,18 @@ d2.offerLast("z");
 ```
 
 - **注意**:避免把`null`添加到队列
+
+## List，Set，Map的区别
+
+- List有序存取元素，可以有重复元素
+- Set不能存放重复元素，存入的元素是无序的
+- Map保存键值对映射，映射关系可以是一对一或多对一
+
+## HashMap,Hashtable,HashSet,LinkedHashMap 和 TreeMap 比较
+
+- Hashmap 是一个最常用的 Map，它根据键的 HashCode 值存储数据，根据键可以直接获取它的值，具有很快的访问速度。遍历时，取得数据的顺序是完全随机的。HashMap 最多只允许一条记录的键为Null，允许多条记录的值为 Null
+- Hashtable 与 HashMap 类似，不同的是：它不允许记录的键或者值为空，它支持线程的同步，即任一时刻只有一个线程能写 Hashtable，因此也导致了 Hashtale 在写入时会比较慢。
+- HashSet 是一个没有重复元素的集合。它是由 HashMap 实现的，不保证元素的顺序 (这里所说的没有顺序是指：元素插入的顺序与输出的顺序不一致)，而且 HashSet 允许使用 null 元素。
+- LinkedHashMap 是 HashMap 的一个子类，如果需要输出的顺序和输入的相同，那么用 LinkedHashMap 可以实现，它还可以按读取顺序来排列，像连接池中可以应用。
+    - LinkedHashMap 实现与 HashMap 的不同之处在于，后者维护着一个运行于所有条目的双重链表。此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。对于 LinkedHashMap 而言，它继承与 HashMap、底层使用哈希表与双向链表来保存所有元素。其基本操作与父类 HashMap 相似，它通过重写父类相关的方法，来实现自己的链接列表特性。
+- TreeMap 实现 SortMap 接口，内部实现是红黑树。能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时，得到的记录是排过序的。TreeMap 不允许 key 的值为 null。非同步的。
