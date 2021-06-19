@@ -42,7 +42,7 @@ mvn clean package -Dmaven.test.skip=true
 
 ## 运行服务
 
-- `dubbo-admin\target`下`的dubbo-admin-0.0.1-SNAPSHOT.jar`
+- `dubbo-admin\target`下的`dubbo-admin-0.0.1-SNAPSHOT.jar`
 
 ```bash
 java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
@@ -52,6 +52,6 @@ java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
 
 ## 测试
 
-- 访问 http://localhost:7001/,这时候我们需要输入登录账户和密码默认为root:root
+- 访问 http://localhost:7001/,这时候我们需要输入登录账户和密码默认为`root:root`
 
 ![image-20201118124849858](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-image-20201118124849858.png)

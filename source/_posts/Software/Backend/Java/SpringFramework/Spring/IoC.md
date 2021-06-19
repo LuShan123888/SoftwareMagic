@@ -1,5 +1,5 @@
 ---
-title: Spring IoC控制反转
+title: Spring IoC 控制反转
 categories:
 - Software
 - Backend
@@ -7,7 +7,7 @@ categories:
 - SpringFramework
 - Spring
 ---
-# Spring IoC控制反转
+# Spring IoC 控制反转
 
 ## IoC本质
 

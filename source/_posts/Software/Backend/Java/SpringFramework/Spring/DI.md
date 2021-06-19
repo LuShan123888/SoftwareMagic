@@ -1,5 +1,5 @@
 ---
-title: Spring 依赖注入
+title: Spring DI
 categories:
 - Software
 - Backend
@@ -7,7 +7,7 @@ categories:
 - SpringFramework
 - Spring
 ---
-# Spring 依赖注入
+# Spring DI
 
 ##  @Autowired
 
