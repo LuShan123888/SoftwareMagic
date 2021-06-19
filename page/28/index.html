@@ -154,22 +154,33 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Java/JavaSE/JVM/%E6%B2%99%E7%AE%B1%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" target="_self">
-          JVM 沙箱安全机制
+        <a href="/2021/03/24/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reset/" target="_self">
+          Git reset
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Java/JavaSE/JVM/%E6%B2%99%E7%AE%B1%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" target="_self">
+        <a href="/2021/03/24/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reset/" target="_self">
           
           
             
           
-          JVM 沙箱安全机制
+          Git reset
 
-沙箱是一个限制程序运行的环境。沙箱机制就是将 Java 代码限定在虚拟机(JVM)特定的运行范围中，并且严格限制代码对本地系统资源访问，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。
-沙箱主要限制系统资源访问，那系统资源包括CPU、内存、文件系统、网络。不同级别的沙箱对这些资源访问的限制也可以不一样。
-所有的Java程序运行都可以指定沙箱，可以定制安全策略。
+git reset能让让我们可以控制 HEAD 应该指向的位置
+
+软重置
+1git reset --soft HEAD~[~...]
+
+
+移动HEAD的指向,将其指向上一个快照
+
+
+不修改暂存区域和工作目录
+
+
+软重置会将 HEAD 移至指定的提交(或与 HEAD 相比的提交的索引),而不会移除该提交之后加入的修改!
+假设不想保留添加了一个 style.css 文件的提交 9
         </a>
       </p>
 
@@ -177,8 +188,354 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 21:38" pubdate>
-              2021-03-15
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Git/">Git</a>
+            
+              <a href="/categories/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/revert/" target="_self">
+          Git revert
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/revert/" target="_self">
+          
+          
+            
+          
+          Git revert
+
+通过对特定的提交执行还原操作,创建一个包含已还原修改的新提交
+
+1git revert 版本号
+
+假设 ec5be 添加了一个 index.js 文件,但之后我们发现其实我们再也不需要由这个提交引入的修改了,那就还原 ec5be 提交吧!
+
+
+提交 9e78i 还原了由提交 ec5be 引入的修改,在撤销特定的提交时,git revert 非常有用,同时也不会修改分支的历史
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:53" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Git/">Git</a>
+            
+              <a href="/categories/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/SVN/%E5%86%B2%E7%AA%81/" target="_self">
+          SVN 冲突
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/SVN/%E5%86%B2%E7%AA%81/" target="_self">
+          
+          
+            
+          
+          SVN 冲突
+过时的文件
+
+在一个相对服务器端版本来说是旧版本的基础上进行了修改的文件，这时候如果提交则会失败！
+所有过时的文件都必须先执行更新操作，更新后在最新版基础上修改的文件才允许提交。
+更新完之后，user1对文件的修改也同步到了user2的工作副本，之后user2就可以正常提交了
+
+冲突的产生
+
+从服务器端更新下来的修改和本地的修改在“同文件同位置”不一致，也就是修改了同一行内容
+现在两
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:50" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/SVN/">SVN</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Frontend/CSS/%E5%B8%83%E5%B1%80/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E4%B8%8E%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0/" target="_self">
+          CSS 块级元素与行内元素
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Frontend/CSS/%E5%B8%83%E5%B1%80/%E8%A1%8C%E5%86%85%E5%85%83%E7%B4%A0%E4%B8%8E%E5%9D%97%E7%BA%A7%E5%85%83%E7%B4%A0/" target="_self">
+          
+          
+            
+          
+          CSS 块级元素与行内元素
+块级元素(block):独占一行,对宽高的属性值生效;如果不给宽度,块级元素就默认为浏览器的宽度,即就是100%宽
+行内元素(inline):可以多个标签存在一行,对宽高属性值不生效,完全靠内容撑开宽高
+行内块元素(inline-block):结合的行内和块级的优点,既可以设置长宽,可以让padding和margin生效,又可以和其他行内元素并排
+
+其中img和inpu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:50" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Frontend/">Frontend</a>
+            
+              <a href="/categories/Software/Frontend/CSS/">CSS</a>
+            
+              <a href="/categories/Software/Frontend/CSS/%E5%B8%83%E5%B1%80/">布局</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式 抽象工厂模式
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_self">
+          
+          
+            
+          
+          设计模式 抽象工厂模式
+
+抽象工厂模式用来生产不同产品簇的全部产品，对于只增加产品某一部分则不适用。抽象工厂模式是工厂模式的一种升级版本
+抽象工程模式提供了一个创建一系列相关或者相互依赖对象的接口,无需指定它们具体的类
+使用场景
+
+客户端(应用层)不依赖于产品类实例如何被创建,实现等细节
+强调一系列相关的产品对象(属于同一产品簇)一起使用创建对象需要大量的重复代码
+提供一个产品类的库,所有的产品以
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:50" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+            
+              <a href="/categories/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">创建型模式</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0/" target="_self">
+          Java 集合概述
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0/" target="_self">
+          
+          
+            
+          
+          Java 集合概述
+集合框架图
+
+简化图
+
+说明
+
+所有集合类都位于java.util包下。Java 的集合类主要由两个接口派生而出：Collection 和 Map，Collection 和 Map 是 Java 集合框架的根接口，这两个接口又包含了一些子接口或实现类。
+集合接口：6 个接口（短虚线表示），表示不同集合类型，是集合框架的基础。
+抽象类：5 个抽象类（长虚线表示），对集合接口的部分
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:50" pubdate>
+              2021-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Java/">Java</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/JVM/HotSpot/" target="_self">
+          JVM HotSpot
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/24/Software/Backend/Java/JavaSE/JVM/HotSpot/" target="_self">
+          
+          
+            
+          
+          JVM HotSpot
+HotSpot 虚拟机对象
+对象的内存布局
+
+
+
+在 HotSpot 虚拟机中，对象的内存布局分为以下 3 块区域：
+
+
+对象头（Header）
+对象头记录了对象在运行过程中所需要使用的一些数据：
+
+哈希码
+GC 分代年龄
+锁状态标志
+线程持有的锁
+偏向线程 ID
+偏向时间戳
+
+对象头可能包含类型指针，通过该指针能确定对象属于哪个类。如果对象是一个数组，那么对象头还会包括数
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-24 22:49" pubdate>
+              2021-03-24
             </time>
           </div>
         
@@ -209,28 +566,22 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_self">
-          JVM 类文件结构
+        <a href="/2021/03/22/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Collections/" target="_self">
+          Java  Collections
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_self">
+        <a href="/2021/03/22/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Collections/" target="_self">
           
           
             
           
-          JVM 类文件结构
-JVM 的“无关性”
+          Java  Collections
+Java还提供了一个包装类java.util.Collections,它包含有针对Collection(收集)操作的众多静态方法,下面列出常用的若干方法
 
-谈论 JVM 的无关性，主要有以下两个：
-
-平台无关性：任何操作系统都能运行 Java 代码
-语言无关性： JVM 能运行除 Java 以外的其他代码
-
-
-Java 源代码首先需要使用 Javac 编译器编译成 .class 文件，然后由 JVM 执行 .class 文件，从而程序开始运行。
-JVM 只认识 .class 文件，它不关心是何种语言生成了 
+addAll(Collection&lt;? super T&gt; c, T... elements):将指定元素添加到指定收集中
+sort(List&lt;T&gt; list):根据元素的自然顺序对指定
         </a>
       </p>
 
@@ -238,8 +589,8 @@ JVM 只认识 .class 文件，它不关心是何种语言生成了
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 17:12" pubdate>
-              2021-03-15
+            <time datetime="2021-03-22 17:12" pubdate>
+              2021-03-22
             </time>
           </div>
         
@@ -255,7 +606,7 @@ JVM 只认识 .class 文件，它不关心是何种语言生成了
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
             
           </div>
         
@@ -270,27 +621,30 @@ JVM 只认识 .class 文件，它不关心是何种语言生成了
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          MySQL 问题解决
+        <a href="/2021/03/22/Software/Backend/Mybatis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" target="_self">
+          Mybatis 配置文件
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+        <a href="/2021/03/22/Software/Backend/Mybatis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" target="_self">
           
           
             
           
-          MySQL 问题解决
-MySQL数据库存入Date时显示不正常的问题
-原驱动
-1jdbc:mysql://localhost:3306/sms?serverTimezone=UTC
-改为
-1jdbc:mysql://localhost:3306/sms?serverTimezone=Asia/Shanghai
-Host is blocked
-报错信息
+          Mybatis 配置文件
 
-Host is blocked becaus
+mybatis-config.xml 系统核心配置文件
+MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息
+配置的内容如下:
+
+configuration(配置)
+properties(属性)
+settings(设置)
+typeAliases(类型别名)
+typeHandlers(类型处理器)
+objectFactory(对象工厂)
+plu
         </a>
       </p>
 
@@ -298,8 +652,8 @@ Host is blocked becaus
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:31" pubdate>
-              2021-03-15
+            <time datetime="2021-03-22 10:32" pubdate>
+              2021-03-22
             </time>
           </div>
         
@@ -311,9 +665,7 @@ Host is blocked becaus
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
             
           </div>
         
@@ -328,28 +680,27 @@ Host is blocked becaus
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/" target="_self">
-          MySQL 配置
+        <a href="/2021/03/21/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/PrintStream&PrintWriter/" target="_self">
+          Java PrintStream &amp; PrintWriter
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Backend/Database/MySQL/%E9%85%8D%E7%BD%AE/" target="_self">
+        <a href="/2021/03/21/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/PrintStream&PrintWriter/" target="_self">
           
           
             
           
-          MySQL 配置
-SQL查询区分大小写
-Mysql默认的字符检索策略:
+          Java PrintStream &amp; PrintWriter
 
-utf8_general_ci,表示不区分大小写;
-utf8_general_cs表示区分大小写
-utf8_bin表示二进制比较,同样也区分大小写
-注意:在Mysql5.6.10版本中,不支持utf8_genral_cs
+PrintStream是一种能接收各种数据类型的输出，打印数据时比较方便：
+PrintWriter是基于Writer的输出。
 
-修改表collate属性
-创建表时,直接设置表的collate属性为utf8_general_cs或者
+PrintStream
+
+PrintStream是一种FilterOutputStream，它在OutputStream的接口上，额外提供了一些写入各种数据类型的方法：
+
+写入int：print(in
         </a>
       </p>
 
@@ -357,8 +708,8 @@ utf8_bin表示二进制比较,同样也区分大小写
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:27" pubdate>
-              2021-03-15
+            <time datetime="2021-03-21 18:05" pubdate>
+              2021-03-21
             </time>
           </div>
         
@@ -370,337 +721,11 @@ utf8_bin表示二进制比较,同样也区分大小写
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
+              <a href="/categories/Software/Backend/Java/">Java</a>
             
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/15/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
-          Docker 网络
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/15/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
-          
-          
-            
-          
-          Docker 网络
-
-docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
-所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
-Docker中的所有的网络接口都是虚拟的
-
-port
-
-快捷地查看端口的绑定情况
-
-1$ dock
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-15 15:17" pubdate>
-              2021-03-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Docker/">Docker</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/Tools/Homebrew/%E5%91%BD%E4%BB%A4/" target="_self">
-          HomeBrew 命令
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/Tools/Homebrew/%E5%91%BD%E4%BB%A4/" target="_self">
-          
-          
-            
-          
-          HomeBrew 命令
-包管理
-查看包的信息
-1brew info [包名]
-查询可用包
-1brew search [包名]
-安装软件包
-1234brew install [包名]//使用rb文件安装brew install ./Formula/thrift.rb
-查询可更新的包
-1brew outdated
-更新包
-12345678//更新所有brew upgrade//更新指定包brew up
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 22:18" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Homebrew/">Homebrew</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式 装饰模式
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/" target="_self">
-          
-          
-            
-          
-          设计模式 装饰模式
-
-装饰模式也称为装饰者模式或者装饰器模式，表示动态的给一个对象添加一些新的功能（利用子类继承父类也可以实现），但是比生成子类方式更灵活。
-例如：我们每个人身上穿的衣服，鞋子，领带，披风都可以理解为是对人的装饰。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:41" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
-            
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式 组合模式
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" target="_self">
-          
-          
-            
-          
-          设计模式 组合模式
-
-将对象组合成树形结构以表示：部分–整体 的层次结构。
-组合模式使得用户对单个对象和组合对象的使用具有一致性。
-基本上见到的树形结构都使用到了组合模式。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:40" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
-            
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式 外观模式
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" target="_self">
-          
-          
-            
-          
-          设计模式 外观模式
-
-
-为子系统中的一组接口提供一个一致的界面，此模式定义了一个高层接口。这个接口使得这一子系统更加容易使用。
-
-
-遵守迪米特法则（最少知识原则）。可以理解为封装。
-
-
-外观模式的核心：为子系统提供统一的入口，封装子系统的复杂性，便于客户端调用
-
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:40" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
-            
-              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/14/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式 访问者模式
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/14/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
-          
-          
-            
-          
-          设计模式 访问者模式
-
-表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-14 17:38" pubdate>
-              2021-03-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
-            
-              <a href="/categories/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">行为型模式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">流式输入输出与文件处理</a>
             
           </div>
         
@@ -713,7 +738,7 @@ port
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/27/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/#board">26</a><a class="page-number" href="/page/27/#board">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#board">29</a><a class="page-number" href="/page/30/#board">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/69/#board">69</a><a class="extend next" rel="next" href="/page/29/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/27/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/#board">26</a><a class="page-number" href="/page/27/#board">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#board">29</a><a class="page-number" href="/page/30/#board">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/70/#board">70</a><a class="extend next" rel="next" href="/page/29/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

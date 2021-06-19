@@ -1,0 +1,1023 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>SQL 索引 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 索引">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-18 19:54" pubdate>
+        2021年6月18日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      65
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 索引</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月18日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 索引</h1>
+<h2 id="一条查询语句是如何执行的">一条查询语句是如何执行的</h2>
+<ul>
+<li>首先来看,在 MySQL 数据库中，一条查询语句是如何执行的，索引出现在哪个环节，起到了什么作用。</li>
+</ul>
+<ol>
+<li>应用程序发现 SQL 到服务端
+<ul>
+<li>当执行 SQL 语句时，应用程序会连接到相应的数据库服务器，然后服务器对 SQL 进行处理。</li>
+</ul>
+</li>
+<li>查询缓存
+<ul>
+<li>接着数据库服务器会先去查询是否有该 SQL 语句的缓存，key 是查询的语句，value 是查询的结果。如果你的查询能够直接命中，就会直接从缓存中拿出 value 来返回客户端。</li>
+<li><strong>注：查询不会被解析、不会生成执行计划、不会被执行。</strong></li>
+</ul>
+</li>
+<li>查询优化处理，生成执行计划
+<ul>
+<li>如果没有命中缓存，则开始第三步。</li>
+<li><strong>解析 SQL</strong>：生成解析树，验证关键字如 select,where,left join 等）是否正确。</li>
+<li><strong>预处理</strong>：进一步检查解析树是否合法，如 <strong>检查数据表和列是否存在</strong>，验证用户权限等。</li>
+<li><strong>优化 SQL</strong>：<strong>决定使用哪个索引</strong>，或者在多个表相关联的时候决定表的连接顺序。紧接着，<strong>将 SQL 语句转成执行计划</strong>。</li>
+</ul>
+</li>
+<li>将查询结果返回客户端
+<ul>
+<li>最后，数据库服务器将查询结果返回给客户端。(如果查询可以缓存，MySQL 也会将结果放到查询缓存中)</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-4383d050326b869fde80b6e5b937a2fe-20210423010306492.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>这就是一条查询语句的执行流程，可以看到索引出现在优化 SQL 的流程步骤中，接下来了解索引到底是什么？</li>
+</ul>
+<h2 id="索引的基本概念">索引的基本概念</h2>
+<ul>
+<li><strong>优点</strong>
+<ul>
+<li>提高查询速度</li>
+<li>确保数据的唯一性</li>
+<li>可以加速表和表之间的连接 , 实现表与表之间的参照完整性</li>
+<li>使用分组和排序子句进行数据检索时 , 可以显著减少分组和排序的时间</li>
+<li>全文检索字段进行搜索优化</li>
+</ul>
+</li>
+<li><strong>缺点</strong>
+<ul>
+<li>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。</li>
+<li>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。</li>
+<li>当对表中的数据进行增加、删除和修改的时候，索引也要同步动态的维护，这样就降低了数据的增删改速度。</li>
+</ul>
+</li>
+<li><strong>注意</strong>
+<ul>
+<li>小数据量的表建议不要加索引</li>
+<li>索引一般应加在查找条件的字段</li>
+<li>不要盲目的创建索引，只为查询操作频繁的列创建索引，创建索引会使查询操作变得更加快速，但是会降低增加、删除、更新操作的速度，因为执行这些操作的同时会对索引文件进行重新排序或更新</li>
+<li>在大数据导入时，可以先删除索引，再批量插入数据，最后再添加索引</li>
+</ul>
+</li>
+</ul>
+<h2 id="索引的数据结构">索引的数据结构</h2>
+<ul>
+<li>hash类型的索引:查询单条快,范围查询慢</li>
+<li>btree类型的索引:b+树,层数越多,数据量指数级增长(innodb默认支持)</li>
+</ul>
+<h3 id="哈希索引">哈希索引</h3>
+<ul>
+<li>MySQL并没有显式支持Hash索引，而是作为内部的一种优化。具体在Innodb存储引擎里，会监控对表上二级索引的查找，如果发现某二级索引被频繁访问，二级索引成为热数据，就为之建立hash索引。因此，在MySQL的Innodb里，对于热点的数据会自动生成Hash索引。这种hash索引，根据其使用的场景特点，也叫自适应Hash索引。</li>
+<li>哈希索引就是采用一定的哈希算法，只需一次哈希算法即可立刻定位到相应的位置，速度非常快。<strong>本质上就是把键值换算成新的哈希值，根据这个哈希值来定位</strong>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-4fcef0bbdee325d31a1c8728ffbcf471.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>局限性</strong></p>
+<ul>
+<li>哈希索引没办法利用索引完成排序。</li>
+<li>不能进行多字段查询。</li>
+<li>在有大量重复键值的情况下，哈希索引的效率也是极低的（出现哈希碰撞问题）。</li>
+<li>不支持范围查询。</li>
+</ul>
+<h3 id="B-树">B 树</h3>
+<ul>
+<li>关键字分布在整棵树的所有节点。</li>
+<li>任何一个关键字 <strong>出现且只出现在一个节点中</strong>。</li>
+<li>搜索有可能在 <strong>非叶子节点</strong> 结束。</li>
+<li>其搜索性能等价于在关键字全集内做一次二分查找。如下图所示：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-738dad15de38d0f053e0379be06d3607.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="B-树-2">B+树</h3>
+<ul>
+<li>了解了 B 树，再来看一下 B+树，也是 MySQL 索引大部分情况所使用的数据结构。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-0551516c9afd2623a96838cd0900c396.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>B+树基本特点</strong></p>
+<ul>
+<li>有n棵子树的非叶子结点中含有n个关键字（b树是n-1个），这些关键字不保存数据，只用来索引，所有数据都保存在叶子节点（b树是每个关键字都保存数据）。</li>
+<li>所有的非叶子结点可以看成是索引部分，结点中仅含其子树中的最大（或最小）关键字。</li>
+<li>非叶子节点的子树指针 P[i]，指向关键字属于 <strong>[k[i],K[i+1])</strong> 的子树（<strong>注意：区间是前闭后开</strong>)。</li>
+<li>所有的叶子结点中包含了全部关键字的信息，及指向含这些关键字记录的指针，且叶子结点本身依关键字的大小自小而大顺序链接。</li>
+<li><strong>所有关键字都在叶子节点出现</strong>。</li>
+</ul>
+<p><strong>B+树的特性</strong></p>
+<ul>
+<li>所有的关键字 <strong>都出现在叶子节点的链表中</strong>，且链表中的关键字是有序的。</li>
+<li><strong>搜索只在叶子节点命中</strong>。</li>
+<li>非叶子节点相当于是 <strong>叶子节点的索引层</strong>，叶子节点是 <strong>存储关键字数据的数据层</strong>。</li>
+</ul>
+<h3 id="相对-B-树，B-树做索引的优势">相对 B 树，B+树做索引的优势</h3>
+<ul>
+<li>B+树的中间节点不保存数据，所以磁盘页能容纳更多节点元素，更“矮胖”；</li>
+<li><strong>树的查询效率更加稳定</strong>。B+树所有数据都存在于叶子节点，所有关键字查询的路径长度相同，每次数据的查询效率相当。而 B 树可能在非叶子节点就停止查找了，所以查询效率不够稳定。</li>
+<li><strong>B+树只需要去遍历叶子节点就可以实现整棵树的遍历</strong>。</li>
+</ul>
+<blockquote>
+<p><strong>问题：对于相同个数的数据构建 m 叉树索引，m 叉树中的 m 越大，那树的高度就越小，那 m 叉树中的 m 是不是越大越好呢？到底多大才合适呢？</strong></p>
+<ul>
+<li>不管是内存中的数据还是磁盘中的数据，操作系统都是按页（一页的大小通常是 4kb，这个值可以通过<code>getconfig(PAGE_SIZE)</code>命令查看）来读取的，一次只会读取一页的数据。</li>
+<li>如果要读取的数据量超过了一页的大小，就会触发多次 IO 操作。所以在选择 m 大小的时候，要尽量让每个节点的大小等于一个页的大小。</li>
+<li>一般实际应用中，出度 d（树的分叉数）是非常大的数字，通常超过 100；<strong><mark>树的高度（h）非常小，通常不超过 3</mark></strong>。</li>
+</ul>
+<p><strong>MongoDB 的索引为什么选择 B 树，而 MySQL 的索引是 B+树？</strong></p>
+<ul>
+<li>因为 MongoDB 不是传统的关系型数据库，而是以 Json 格式作为存储的 NoSQL 非关系型数据库，目的就是高性能、高可用、易扩展。摆脱了关系模型，所以 <strong>范围查询和遍历查询的需求就没那么强烈了</strong>。</li>
+</ul>
+</blockquote>
+<h2 id="索引的分类">索引的分类</h2>
+<ul>
+<li>主键索引 (Primary Key)</li>
+<li>唯一索引 (Unique)</li>
+<li>常规索引 (Index)</li>
+<li>全文索引 (FullText)</li>
+</ul>
+<h3 id="根据底层数据结构划分">根据底层数据结构划分</h3>
+<p>索引是提高查询效率的数据结构，而能够提高查询效率的数据结构有很多，如二叉搜索树，红黑树，跳表，哈希表（散列表）等，而MySQL中用到了B+Tree和散列表（Hash表）作为索引的底层数据结构。</p>
+<h3 id="根据索引字段个数划分">根据索引字段个数划分</h3>
+<p>为了能应对不同的数据检索需求，索引既可以仅包含一个字段，也可以同时包含多个字段。单个字段组成的索引可以称为单值索引，否则称之为复合索引，也称为组合索引或多值索引。</p>
+<h3 id="根据是否是在主键上建立的索引进行划分">根据是否是在主键上建立的索引进行划分</h3>
+<p><strong>主键索引</strong></p>
+<p>MySQL中是根据主键来组织数据的，所以每张表都必须有主键索引，主键索引只能有一个，不能为null同时必须保证唯一性。建表时如果没有指定主键索引，则会自动生成一个隐藏的字段作为主键索引。</p>
+<p><strong>辅助索引</strong></p>
+<ul>
+<li>如果不是主键索引，则就可以称之为非主键索引，又可以称之为辅助索引或者二级索引。主键索引的叶子节点存储了完整的数据行，而非主键索引的叶子节点存储的则是主键索引值，通过非主键索引查询数据时，会先查找到主键索引，然后再到主键索引上去查找对应的数据。</li>
+<li>在这里假设我们有张表user，具有三列：ID，age，name，create_time，id是主键，（age，create_time,，name）建立辅助索引。执行如下sql语句：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> name <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> age<span class="hljs-operator">&gt;</span><span class="hljs-number">2</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> create_time <span class="hljs-keyword">desc</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>正常的话，查询分两步：
+<ol>
+<li>按照辅助索引，查找到记录的主键，</li>
+<li>按照主键主键索引里查找记录，返回name。</li>
+</ol>
+</li>
+<li>但实际上，我们可以看到，辅助索引节点是按照age，create_time，name建立的，索引信息里完全包含我们所要的信息，如果能从辅助索引里返回name信息，则第二步是完全没有必要的，可以极大提升查询速度。</li>
+<li>按照这种思想Innodb里针对使用辅助索引的查询场景做了优化，叫<strong>覆盖索引</strong></li>
+</ul>
+<h3 id="根据数据与索引的存储关联性划分">根据数据与索引的存储关联性划分</h3>
+<ul>
+<li>根据数据与索引的存储关联性，可以分为聚簇索引和非聚簇索引（也叫聚集索引和非聚集索引）。聚簇索引也叫簇类索引，是一种对磁盘上实际数据重新组织以按指定的一个或多个列的值排序。</li>
+<li><strong>区别就是索引的存储顺序和数据的存储顺序是否是关系的，有关就是聚簇索引，无关就是非聚簇索引</strong>。具体实现方式根据索引的数据结构不同会有所不同。下面以B+树实现的索引为例，举例来说明聚簇索引和非聚簇索引。</li>
+</ul>
+<p><strong>聚簇索引</strong></p>
+<p>Innodb的主键索引，非叶子节点存储的是索引指针，叶子节点存储的是既有索引也有数据，是典型的聚簇索引（这里可以发现，索引和数据的存储顺序是强相关的。因此是典型的聚簇索引），如图：</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-v2-c331556ac3a0587a1be119db8df53240_720w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>非聚簇索引</strong></p>
+<p>MyISAM中索引和数据文件分开存储，B+Tree的叶子节点存储的是数据存放的地址，而不是具体的数据，是典型的非聚簇索引；换言之，数据可以在磁盘上随便找地方存，索引也可以在磁盘上随便找地方存，只要叶子节点记录对了数据存放地址就行。因此，索引存储顺序和数据存储关系毫无关联，是典型的非聚簇索引，另外Inndob里的辅助索引也是非聚簇索引。</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-v2-a8605af42a9013d8ae4315b5d853cc3f_720w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="主键索引">主键索引</h2>
+<ul>
+<li><strong>主键</strong> : 某一个属性组能唯一标识一条记录,不可以出现相同的值，但可以有NULL值</li>
+<li><strong>特点</strong>
+<ul>
+<li>最常见的索引类型</li>
+<li>确保数据记录的唯一性</li>
+<li>确定特定数据记录在数据库中的位置</li>
+</ul>
+</li>
+</ul>
+<h2 id="唯一索引">唯一索引</h2>
+<ul>
+<li><strong>作用</strong> : 避免同一个表中某数据列中的值重复</li>
+<li><strong>特点</strong>
+<ul>
+<li>不允许出现相同的值，且不能为NULL值，一个表只能有一个<code>primary_key</code>索引</li>
+</ul>
+</li>
+</ul>
+<h2 id="常规索引">常规索引</h2>
+<ul>
+<li><strong>作用</strong> : 快速定位特定数据</li>
+<li><strong>注意</strong>
+<ul>
+<li>允许出现相同的索引内容</li>
+<li><code>INDEX</code>和<code>KEY</code>关键字都可以设置常规索引</li>
+<li>应加在查询找条件的字段</li>
+<li>不宜添加太多常规索引,影响数据的插入,删除和修改操作</li>
+</ul>
+</li>
+</ul>
+<h2 id="全文索引">全文索引</h2>
+<ul>
+<li><strong>作用</strong> : 快速定位特定数据</li>
+<li><strong>注意</strong> :
+<ul>
+<li>适合大型数据集</li>
+<li>MySQL 5.6 以前的版本,只有 MyISAM 存储引擎支持全文索引</li>
+<li>MySQL 5.6 及以后的版本,MyISAM 和 InnoDB 存储引擎均支持全文索引</li>
+<li>只有字段的数据类型为 char,varchar,text 及其系列才可以建全文索引</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用全文索引</strong></p>
+<ul>
+<li>全文搜索通过 <code>MATCH()</code> 函数完成</li>
+<li>搜索字符串作为<code>AGAINST()</code>的参数被给定,搜索以忽略字母大小写的方式执行,对于表中的每个记录行,<code>MATCH()</code> 返回一个相关性值,即,在搜索字符串与记录行在 <code>MATCH()</code> 列表中指定的列的文本之间的相似性尺度</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">EXPLAIN SELECT *FROM student WHERE MATCH(studentname) AGAINST(&#39;love&#39;);<br></code></pre></td></tr></table></figure>
+<h2 id="组合索引与前缀索引">组合索引与前缀索引</h2>
+<ul>
+<li>这两种称呼是对建立索引技巧的一种称呼，并非索引的类型</li>
+</ul>
+<h3 id="组合索引">组合索引</h3>
+<ul>
+<li>MySQL单列索引和组合索引究竟有何区别呢？</li>
+<li>为了形象地对比两者，先建一个表：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `myIndex` ( <br>    `i_testID` <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,  <br>    `vc_Name` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,  <br>    `vc_City` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,  <br>    `i_Age` <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,  <br>    `i_SchoolID` <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,  <br>    <span class="hljs-keyword">PRIMARY</span> KEY (`i_testID`)  <br>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>假设表内已有1000条数据，在这 10000 条记录里分布了 5 条 <code>vc_Name=”erquan”</code>的记录，只不过<code>city,age,school</code>的组合各不相同。来看这条语句：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> `i_testID` <span class="hljs-keyword">FROM</span> `myIndex` <span class="hljs-keyword">WHERE</span> `vc_Name`<span class="hljs-operator">=</span><span class="hljs-string">&#x27;erquan&#x27;</span> <span class="hljs-keyword">AND</span> `vc_City`<span class="hljs-operator">=</span><span class="hljs-string">&#x27;郑州&#x27;</span> <span class="hljs-keyword">AND</span> `i_Age`<span class="hljs-operator">=</span><span class="hljs-number">25</span>; <span class="hljs-comment">-- 关联搜索;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>首先考虑建MySQL单列索引：</li>
+<li>在<code>vc_Name</code>列上建立了索引。执行SQL时，MYSQL 很快将目标锁定在了 <code>vc_Name=erquan</code>的 5 条记录上，取出来放到一中间结果集。在这个结果集里，先排除掉<code>vc_City</code>不等于”郑州”的记录，再排除<code>i_Age</code>不等于 25 的记录，最后筛选出唯一的符合条件的记录。虽然在<code>vc_Name</code>上建立了索引，查询时MYSQL不用扫描整张表，效率有所提高，但离我们的要求还有一定的距离。同样的,在<code>vc_City</code>和<code>i_Age</code>分别建立的MySQL单列索引的效率相似</li>
+<li>为了进一步榨取 MySQL 的效率，就要考虑建立组合索引。就是将 <code>vc_Name</code>,<code>vc_City</code>,<code>i_Age</code>建到一个索引里：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `myIndex` <span class="hljs-keyword">ADD</span> INDEX `name_city_age` (vc_Name(<span class="hljs-number">10</span>),vc_City,i_Age);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>建表时，<code>vc_Name</code>长度为 50，这里为什么用 10 呢？这就是下文要说到的前缀索引，因为一般情况下名字的长度不会超过 10，这样会加速索引查询速度，还会减少索引文件的大小，提高 INSERT 的更新速度。</li>
+<li>执行SQL时，MySQL 无须扫描任何记录就到找到唯一的记录</li>
+<li>如果分别在<code>vc_Name</code>,<code>vc_City</code>,<code>i_Age</code>上建立单列索引，让该表有 3 个单列索引，查询时和上述的组合索引效率一样吗？答案是大不一样，远远低于我们的组合索引。虽然此时有了三个索引，但 MySQL 只能用到其中的那个它认为似乎是最有效率的单列索引，另外两个是用不到的，也就是说还是一个全表扫描的过程</li>
+<li>建立这样的组合索引，其实是相当于分别建立了：
+<ul>
+<li>vc_Name,vc_City,i_Age</li>
+<li>vc_Name,vc_City</li>
+<li>vc_Name</li>
+</ul>
+</li>
+<li>这样的三个组合索引,为什么没有<code>vc_City</code>,<code>i_Age</code>等这样的组合索引呢？这是因为 MySQL 组合索引 “最左前缀” 的结果。简单的理解就是只从最左面的开始组合。并不是只要包含这三列的查询都会用到该组合索引，下面的几个 SQL 会用到：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> myIndex WHREE vc_Name<span class="hljs-operator">=</span>”erquan” <span class="hljs-keyword">AND</span> vc_City<span class="hljs-operator">=</span>”郑州” <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> myIndex WHREE vc_Name<span class="hljs-operator">=</span>”erquan”<br></code></pre></td></tr></table></figure>
+<ul>
+<li>而下面几个则不会用到：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> myIndex WHREE i_Age<span class="hljs-operator">=</span><span class="hljs-number">20</span> <span class="hljs-keyword">AND</span> vc_City<span class="hljs-operator">=</span>”郑州”<br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> myIndex WHREE vc_City<span class="hljs-operator">=</span>”郑州”<br></code></pre></td></tr></table></figure>
+<ul>
+<li>也就是，<code>name_city_age(vc_Name(10),vc_City,i_Age)</code> 从左到右进行索引，如果没有左前索引MySQL不执行索引查询。</li>
+</ul>
+<h4 id="组合索引存储结构">组合索引存储结构</h4>
+<ul>
+<li>首先，有一个T1表， 然后表T1有字段a,b,c,d,e，其中a是主键，除e为varchar其余为int类型，并创建了一个组合索引idx_t1_bcd(b,c,d)，然后b、c、d三列作为组合索引，在B+树上的结构正如下图所示。</li>
+<li>index（b、c、d）组合索引在B+树上的结构图如下：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20200813202442.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>T1表中的数据如下图</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-20200813202446.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>我们先看T1表，他的主键暂且我们将它设为整型自增的 ，InnoDB会使用主键索引在B+树维护索引和数据文件，然后我们创建了一个组合索引（b，c，d）也会生成一个索引树，同样是B+树的结构，只不过它的 <strong>data部分</strong> 存储的是组合索引所在行记录的主键值 <strong>（上图叶子节点紫色背景部分）</strong> 。为什么是主键值，而不是 整个行记录呢？ 因为这个组合索引是个 <strong>非聚簇索引</strong> 。</li>
+<li>好了大致情况都介绍完了。下面我们结合这俩图来解释一下。</li>
+<li>对于组合索引来说只不过比单值索引多了几列，而这些索引列全都出现在索引树上。对于组合索引，存储引擎会首先根据第一个索引列排序，如上图我们可以单看第一个索引列，如，1 1 5 12 13…它是单调递增的,如果第一列相等则再根据第二列排序，依次类推就构成了上图的索引树，上图中的1 1 4 ，1 1 5以及13 12 4, 13 16 1, 13 16 5就可以说明这种情况。</li>
+</ul>
+<h4 id="组合索引具体查找步骤">组合索引具体查找步骤</h4>
+<ul>
+<li>当我们的SQL语言可以应用到索引的时候，比如<code>select * from T1 where b = 12 and c = 14 and d = 3;</code>也就是T1表中a列为4的这条记录。</li>
+<li>查找步骤具体如下：
+<ol>
+<li>存储引擎首先从根节点（一般常驻内存）开始查找，第一个索引的第一个索引列为1,12大于1，第二个索引的第一个索引列为56,12小于56，于是从这俩索引的中间读到下一个节点的磁盘文件地址（此处实际上是存在一个指针的，指向的是下一个节点的磁盘位置）。</li>
+<li>进行一次磁盘IO，将此节点值加载后内存中，然后根据第一步一样进行判断，发现 数据都是匹配的，然后根据指针将此组合索引值所在的叶子节点也从磁盘中加载后内存，此时又发生了一次磁盘IO，最终根据叶子节点中索引值关联的 <strong>主键值</strong> 。</li>
+<li>根据主键值 <strong>回表</strong> 去主键索引树（聚簇索引）中查询具体的行记录。</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-20200813202449.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="组合索引的最左前缀原则">组合索引的最左前缀原则</h4>
+<blockquote>
+<p>之所以会有最左前缀匹配原则和组合索引的索引构建方式及存储结构是有关系的。</p>
+</blockquote>
+<ul>
+<li>首先我们创建的idx_t1_bcd(b,c,d)索引，相当于创建了(b)、（b、c）（b、c、d）三个索引，看完下面你就知道为什么相当于创建了三个索引。</li>
+<li>我们看，组合索引是首先使用多列索引的第一列构建的索引树，用上面idx_t1_bcd(b,c,d)的例子就是优先使用b列构建，当b列值相等时再以c列排序，若c列的值也相等则以d列排序。我们可以取出索引树的叶子节点看一下。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20200813202455.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>索引的第一列也就是b列可以说是从左到右单调递增的，但我们看c列和d列并没有这个特性，它们只能在b列值相等的情况下这个小范围内递增，如第一叶子节点的第1、2个元素和第二个叶子节点的后三个元素。  由于组合索引是上述那样的索引构建方式及存储结构，所以组合索引只能从多列索引的第一列开始查找。所以如果你的查找条件不包含b列如（c,d）、(c）、(d)是无法应用缓存的，以及跨列也是无法完全用到索引如(b,d)，只会用到b列索引。</li>
+<li>这就像我们的电话本一样，有名和姓以及电话，名和姓就是组合索引。在姓可以以姓的首字母排序，姓的首字母相同的情况下，再以名的首字母排序。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">M<br>    毛 不易   <span class="hljs-number">178</span>********<br>    马 化腾   <span class="hljs-number">183</span>********<br>    马 云     <span class="hljs-number">188</span>********<br>Z<br>    张 杰     <span class="hljs-number">189</span>********<br>    张 靓颖   <span class="hljs-number">138</span>********<br>    张 艺兴   <span class="hljs-number">176</span>********  <br>复制代码<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们知道名和姓是很快就能够从姓的首字母索引定位到姓，然后定位到名，进而找到电话号码，因为所有的姓从上到下按照既定的规则（首字母排序）是有序的，而名是在姓的首字母一定的条件下也是按照名的首字母排序的，但是整体来看，所有的名放在一起是无序的，所以如果只知道名查找起来就比较慢，因为无法用已排好的结构快速查找。</li>
+<li>到这里大家是否明白了为啥会有最左前缀匹配原则了吧。</li>
+</ul>
+<h3 id="前缀索引">前缀索引</h3>
+<ul>
+<li>如果索引列长度过长，这种列索引时将会产生很大的索引文件，不便于操作</li>
+<li>可以使用前缀索引方式进行索引前缀索引应该控制在一个合适的点，控制在0.31黄金值即可（大于这个值就可以创建）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span>(<span class="hljs-keyword">LEFT</span>(`title`,<span class="hljs-number">10</span>)))<span class="hljs-operator">/</span><span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> Arctic; <br></code></pre></td></tr></table></figure>
+<ul>
+<li>这个值大于0.31就可以创建前缀索引</li>
+<li>Distinct去重复</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `<span class="hljs-keyword">user</span>` <span class="hljs-keyword">ADD</span> INDEX `uname`(title(<span class="hljs-number">10</span>)); <br></code></pre></td></tr></table></figure>
+<ul>
+<li>增加前缀索引SQL，将人名的索引建立在10，这样可以减少索引文件大小，加快索引查询速度</li>
+</ul>
+<h2 id="索引操作">索引操作</h2>
+<h3 id="创建索引">创建索引</h3>
+<p><strong>CREATE TABLE</strong></p>
+<ul>
+<li>创建表时添加索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE 表名 (<br>    字段名1 数据类型 [完整性约束条件...],<br>    字段名2 数据类型 [完整性约束条件...],<br>    [PRIMARY | UNIQUE | FULLTEXT ]  KEY<br>    [索引名] (字段名[(长度)] [ASC |DESC])<br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `test1` ( <br>    `id` <span class="hljs-type">smallint</span>(<span class="hljs-number">5</span>) UNSIGNED AUTO_INCREMENT <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>, <span class="hljs-comment">-- 注意，下面创建了主键索引，这里就不用创建了 </span><br>    `username` <span class="hljs-type">varchar</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;用户名&#x27;</span>, <br>    `nickname` <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;昵称/姓名&#x27;</span>, <br>    `intro` text, <br>    <span class="hljs-keyword">PRIMARY</span> KEY (`id`),  <br>    <span class="hljs-keyword">UNIQUE</span> KEY `unique1` (`username`),<br>    KEY `index1` (`nickname`), <br>    FULLTEXT KEY `intro` (`intro`) <br>) ENGINE<span class="hljs-operator">=</span>MyISAM AUTO_INCREMENT<span class="hljs-operator">=</span><span class="hljs-number">4</span> <span class="hljs-keyword">DEFAULT</span> CHARSET<span class="hljs-operator">=</span>utf8 COMMENT<span class="hljs-operator">=</span><span class="hljs-string">&#x27;后台用户表&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>CREATE INDEX</strong></p>
+<ul>
+<li>在已存在的表上创建索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE [UNIQUE | FULLTEXT | SPATIAL ] INDEX 索引名<br>                   ON 表名 (字段名[(长度)] [ASC |DESC]) ;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> INDEX index_name <span class="hljs-keyword">ON</span> table_name (column_list) <br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">UNIQUE</span> INDEX index_name <span class="hljs-keyword">ON</span> table_name (column_list)<br></code></pre></td></tr></table></figure>
+<p><strong>ALTER TABLE</strong></p>
+<ul>
+<li>在已存在的表上创建索引</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE 表名 ADD 索引类型 (UNIQUE,PRIMARY KEY,FULLTEXT KEY,INDEX) 索引名 (字段名[(长度)] [ASC |DESC]) ;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `table_name` <span class="hljs-keyword">ADD</span> INDEX `index_name` (`column_list`) <br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `table_name` <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">UNIQUE</span> (`column_list`) <br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `table_name` <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY (`column_list`) <br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> `table_name` <span class="hljs-keyword">ADD</span> FULLTEXT KEY (`column_list`)<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>索引名可省略，即当前的索引名就是该字段名</li>
+<li><code>&lt;表名&gt;</code>是要建索引的基本表的名字,索引可以建立在该表的一列或多列上,各<code>&lt;列名&gt;</code>之间用逗号分隔,每个<code>&lt;列名&gt;</code>后面还可以用<code>&lt;次序&gt;</code>指定索引值的排列次序,可选ASC(升序)或DESC(降序),默认值为ASC</li>
+<li><code>UNIQUE</code>表明此索引的每一个索引值只对应唯一的数据记录</li>
+<li><code>CLUSTER</code>表示要建立的索引是聚簇索引</li>
+</ul>
+<h3 id="删除索引">删除索引</h3>
+<p><strong>删除索引</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">DROP INDEX 索引名 ON 表名;<br></code></pre></td></tr></table></figure>
+<p><strong>删除主键索引</strong></p>
+<ul>
+<li>主键索引只能用这种方式删除</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER TABLE 表名 DROP PRIMARY KEY;<br></code></pre></td></tr></table></figure>
+<h3 id="查看索引">查看索引</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW INDEX FROM 表名;<br></code></pre></td></tr></table></figure>
+<h3 id="修改索引">修改索引</h3>
+<p><strong>修改索引名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> INDEX <span class="hljs-operator">&lt;</span>旧索引名<span class="hljs-operator">&gt;</span> RENAME <span class="hljs-keyword">TO</span><span class="hljs-operator">&lt;</span>新索引名<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> INDEX SCno RENAME <span class="hljs-keyword">TO</span> SCSno;<br></code></pre></td></tr></table></figure>
+<h2 id="EXPLAIN">EXPLAIN</h2>
+<ul>
+<li>EXPLAIN可以帮助开发人员分析SQL问题，EXPLAIN显示了mysql如何使用索引来处理查询语句以及连接表，可以帮助选择更好的索引和写出更优化的查询语句。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> student <span class="hljs-keyword">WHERE</span> studentno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1000&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>MySQL在执行一条查询之前，会对发出的每条SQL进行分析，决定是否使用索引或全表扫描</li>
+<li>如果发送一条<code>select * from blog where false</code>，MySQL是不会执行查询操作的，因为经过SQL分析器的分析后MySQL已经清楚不会有任何语句符合操作</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> EXPLAIN <span class="hljs-keyword">SELECT</span> `birday` <span class="hljs-keyword">FROM</span> `<span class="hljs-keyword">user</span>` <span class="hljs-keyword">WHERE</span> `birthday` <span class="hljs-operator">&lt;</span> &quot;1990/2/2&quot;; <br>id: <span class="hljs-number">1</span> <br><br>select_type: SIMPLE <span class="hljs-comment">-- 查询类型（简单查询、联合查询、子查询） </span><br><br><span class="hljs-keyword">table</span>: <span class="hljs-keyword">user</span> <span class="hljs-comment">-- 显示这一行的数据是关于哪张表的 。</span><br><br>type: <span class="hljs-keyword">range</span> <span class="hljs-comment">-- 区间索引（在小于1990/2/2区间的数据)，这是重要的列，显示连接使用了何种类型。从最好到最差的连接类型为system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL,const代表一次就命中，ALL代表扫描了全表才确定结果。一般来说，得保证查询至少达到range级别,最好能达到ref。 </span><br><br>possible_keys: birthday  <span class="hljs-comment">-- 指出MySQL能使用哪个索引在该表中找到行。如果是空的，没有相关的索引。这时要提高性能，可通过检验WHERE子句，看是否引用某些字段，或者检查字段不是适合索引。  </span><br><br>key: birthday <span class="hljs-comment">-- 实际使用到的索引。如果为NULL，则没有使用索引。如果为primary的话，表示使用了主键。 </span><br><br>key_len: <span class="hljs-number">4</span> <span class="hljs-comment">-- 最长的索引宽度。如果键是NULL，长度就是NULL。在不损失精确性的情况下，长度越短越好。</span><br><br><span class="hljs-keyword">ref</span>: const <span class="hljs-comment">-- 显示哪个字段或常数与key一起被使用。  </span><br><br><span class="hljs-keyword">rows</span>: <span class="hljs-number">1</span> <span class="hljs-comment">-- 这个数表示mysql要遍历多少数据才能找到，在innodb上是不准确的。 </span><br><br>Extra: <span class="hljs-keyword">Using</span> <span class="hljs-keyword">where</span>; <span class="hljs-keyword">Using</span> index <span class="hljs-comment">-- 执行状态说明，这里可以看到的坏的例子是Using temporary和Using</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>id</strong>
+<ul>
+<li>id相同时，执行顺序由上至下</li>
+<li>如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行</li>
+<li>id如果相同，可以认为是一组，从上往下顺序执行；在所有组中，id值越大，优先级越高，越先执行</li>
+</ul>
+</li>
+<li>select_type:显示查询中每个select子句的类型
+<ul>
+<li>SIMPLE(简单SELECT,不使用UNION或子查询等)</li>
+<li>PRIMARY(查询中若包含任何复杂的子部分,最外层的select被标记为PRIMARY)</li>
+<li>UNION(UNION中的第二个或后面的SELECT语句)</li>
+<li>DEPENDENT UNION(UNION中的第二个或后面的SELECT语句，取决于外面的查询)</li>
+<li>UNION RESULT(UNION的结果)</li>
+<li>SUBQUERY(子查询中的第一个SELECT)</li>
+<li>DEPENDENT SUBQUERY(子查询中的第一个SELECT，取决于外面的查询)</li>
+<li>DERIVED(派生表的SELECT, FROM子句的子查询)</li>
+<li>UNCACHEABLE SUBQUERY(一个子查询的结果不能被缓存，必须重新评估外链接的第一行)</li>
+</ul>
+</li>
+<li>table:显示这一行的数据是关于哪张表的，有时不是真实的表名字,看到的是derivedx(x是第x步执行的结果)</li>
+<li>type:表示MySQL在表中找到所需行的方式，又称“访问类型”。常用的类型有： ALL, index, range, ref, eq_ref, const, system, NULL（从左到右，性能从差到好）
+<ul>
+<li>ALL：Full Table Scan， MySQL将遍历全表以找到匹配的行</li>
+<li>index: Full Index Scan，index与ALL区别为index类型只遍历索引树</li>
+<li>range:只检索给定范围的行，使用一个索引来选择行</li>
+<li>ref: 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值</li>
+<li>eq_ref: 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件</li>
+<li>const、system: 当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量,system是const类型的特例，当查询的表只有一行的情况下，使用system</li>
+<li>NULL: MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。</li>
+</ul>
+</li>
+<li>possible_keys:指出MySQL能使用哪个索引在表中找到记录，查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询使用
+<ul>
+<li>该列完全独立于EXPLAIN输出所示的表的次序。这意味着在possible_keys中的某些键实际上不能按生成的表次序使用。</li>
+<li>如果该列是NULL，则没有相关的索引。在这种情况下，可以通过检查WHERE子句看是否它引用某些列或适合索引的列来提高你的查询性能。如果是这样，创造一个适当的索引并且再次用EXPLAIN检查查询</li>
+</ul>
+</li>
+<li>Key:key列显示MySQL实际决定使用的键（索引）
+<ul>
+<li>如果没有选择索引，键是NULL。要想强制MySQL使用或忽视possible_keys列中的索引，在查询中使用FORCE INDEX、USE INDEX或者IGNORE INDEX。</li>
+</ul>
+</li>
+<li>key_len:表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度（key_len显示的值为索引字段的最大可能长度，并非实际使用长度，即key_len是根据表定义计算而得，不是通过表内检索出的)
+<ul>
+<li>不损失精确性的情况下，长度越短越好</li>
+</ul>
+</li>
+<li>ref:表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值</li>
+<li>rows:表示MySQL根据表统计信息及索引选用情况，估算的找到所需的记录所需要读取的行数</li>
+<li>Extra:该列包含MySQL解决查询的详细信息,有以下几种情况:
+<ul>
+<li>Using where:列数据是从仅仅使用了索引中的信息而没有读取实际的行动的表返回的，这发生在对表的全部的请求列都是同一个索引的部分的时候，表示mysql服务器将在存储引擎检索行后再进行过滤</li>
+<li>Using temporary：表示MySQL需要使用临时表来存储结果集，常见于排序和分组查询</li>
+<li>Using filesort：MySQL中无法利用索引完成的排序操作称为“文件排序”</li>
+<li>Using join buffer：改值强调了在获取连接条件时没有使用索引，并且需要连接缓冲区来存储中间结果。如果出现了这个值，那应该注意，根据查询的具体情况可能需要添加索引来改进能。</li>
+<li>Impossible where：这个值强调了where语句会导致没有符合条件的行。</li>
+<li>Select tables optimized away：这个值意味着仅通过使用索引，优化器可能仅从聚合函数结果中返回一行</li>
+</ul>
+</li>
+</ul>
+<h2 id="索引设计原则">索引设计原则</h2>
+<p>根据数据库的功能，可以在数据库设计器中创建三种索引</p>
+<ul>
+<li>唯一索引：唯一索引是不允许其中任何两行具有相同索引值的索引</li>
+<li>主键索引：表定义主键将自动创建主键索引，主键索引是唯一索引的特定类型。该索引要求主键中的每个值都唯一。当在查询中使用主键索引时， 它允许对数据的快速访问</li>
+<li>聚集索引：表中行的物理顺序与键值的逻辑（索引）顺序相同。一个表只能包含一个聚集索引</li>
+</ul>
+<blockquote>
+<p>选择索引的最终目的是为了使查询的速度变快。下面给出的原则是最基本的准则，但不能拘泥于这些准则，应该根据应用的实际情况进行分析和判断，选择最合适的索引方式。</p>
+</blockquote>
+<h3 id="索引最左匹配原则">索引最左匹配原则</h3>
+<ul>
+<li>
+<p>索引可以简单如一个列(a)，也可以复杂如多个列(a, b, c, d)，即组合索引。</p>
+</li>
+<li>
+<p>如果是组合索引，那么key也由多个列组成，同时，索引只能用于查找key是否存在（相等），遇到范围查询(&gt;、&lt;、between、like左匹配)等就不能进一步匹配了，后续退化为线性查找。因此，列的排列顺序决定了可命中索引的列数。</p>
+</li>
+<li>
+<p>如有索引(a, b, c, d)，查询条件a = 1 and b = 2 and c &gt; 3 and d = 4，则会在每个节点依次命中a、b、c，无法命中d。(很简单：索引命中只能是相等的情况，不能是范围匹配)</p>
+</li>
+</ul>
+<blockquote>
+<p>明白最左匹配原则，对我们设计索引和编写高效SQL语句非常有帮助</p>
+</blockquote>
+<h3 id="索引失效的情况">索引失效的情况</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> `sname` <span class="hljs-keyword">FROM</span> `stu` <span class="hljs-keyword">WHERE</span> `age`<span class="hljs-operator">+</span><span class="hljs-number">10</span><span class="hljs-operator">=</span><span class="hljs-number">30</span>; <span class="hljs-comment">-- 不会使用索引，因为所有索引列参与了计算 </span><br><br><span class="hljs-keyword">SELECT</span> `sname` <span class="hljs-keyword">FROM</span> `stu` <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">LEFT</span>(`<span class="hljs-type">date</span>`,<span class="hljs-number">4</span>) <span class="hljs-operator">&lt;</span><span class="hljs-number">1990</span>; <span class="hljs-comment">-- 不会使用索引，因为使用了函数运算，原理与上面相同 </span><br><br><span class="hljs-comment">-- like 中以通配符开头(’%abc’)</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `houdunwang` <span class="hljs-keyword">WHERE</span> `uname` <span class="hljs-keyword">LIKE</span><span class="hljs-string">&#x27;后盾%&#x27;</span> ; <span class="hljs-comment">-- 走索引 </span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `houdunwang` <span class="hljs-keyword">WHERE</span> `uname` <span class="hljs-keyword">LIKE</span> &quot;%后盾%&quot;;  <span class="hljs-comment">-- 不走索引 </span><br><br><span class="hljs-comment">-- 正则表达式不使用索引，这应该很好理解，所以为什么在SQL中很难看到regexp关键字的原因 </span><br><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> age <span class="hljs-operator">!=</span> <span class="hljs-number">20</span>; <span class="hljs-comment">--使用不等于（!= 、&lt;&gt;）</span><br><br><span class="hljs-comment">-- 字符串与数字比较不使用索引(类型转换); </span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `a` (`a` <span class="hljs-type">char</span>(<span class="hljs-number">10</span>)); <br>EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `a` <span class="hljs-keyword">WHERE</span> `a`<span class="hljs-operator">=</span>&quot;1&quot;; <span class="hljs-comment">-- 走索引 </span><br>EXPLAIN <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> `a` <span class="hljs-keyword">WHERE</span> `a`<span class="hljs-operator">=</span><span class="hljs-number">1</span>; <span class="hljs-comment">-- 不走索引 </span><br><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> dept  <span class="hljs-keyword">WHERE</span> dname<span class="hljs-operator">=</span><span class="hljs-string">&#x27;xxx&#x27;</span> <span class="hljs-keyword">OR</span> loc<span class="hljs-operator">=</span><span class="hljs-string">&#x27;xx&#x27;</span> <span class="hljs-keyword">OR</span> deptno<span class="hljs-operator">=</span><span class="hljs-number">45</span>; <span class="hljs-comment">-- 如果条件中有OR，即使其中有条件带索引也不会使用。换言之，就是要求使用的所有字段，都必须建立索引，我们建议大家尽量避免使用OR关键字 </span><br><br><span class="hljs-comment">-- 如果mysql估计使用全表扫描要比使用索引快，则不使用索引</span><br></code></pre></td></tr></table></figure>
+<h3 id="为经常需要排序、分组操作的字段建立索引">为经常需要排序、分组操作的字段建立索引</h3>
+<p>经常需要ORDER BY、GROUP BY、DISTINCT等操作的字段，排序操作会浪费很多时间。如果为其建立索引，可以有效地避免排序操作。</p>
+<blockquote>
+<p>分组字段或者排序字段应该创建索引</p>
+</blockquote>
+<h3 id="为常作为查询条件的字段建立索引">为常作为查询条件的字段建立索引</h3>
+<p>如果某个字段经常用来做查询条件，那么该字段的查询速度会影响整个表的查询速度。因此，为这样的字段建立索引，可以提高整个表的查询速度。</p>
+<blockquote>
+<p>Where 子句中经常使用的字段应该创建索引</p>
+</blockquote>
+<h3 id="限制索引的数目">限制索引的数目</h3>
+<p>索引的数目不是越多越好。每个索引都需要占用磁盘空间，索引越多，需要的磁盘空间就越大。修改表时，对索引的重构和更新很麻烦。越多的索引，会使更新表变得很浪费时间。</p>
+<h3 id="尽量选择区分度高的列作为索引">尽量选择区分度高的列作为索引</h3>
+<p>尽量选择区分度高的列作为索引,区分度的公式是count(distinct col)/count(*)，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录</p>
+<h3 id="扩展索引">扩展索引</h3>
+<p>尽量的扩展索引，不要新建索引。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可</p>
+<h3 id="尽量使用数据量少的索引">尽量使用数据量少的索引</h3>
+<p>如果索引的值很长，那么查询的速度会受到影响。例如，对一个CHAR(100)类型的字段进行全文检索需要的时间要比对CHAR(10)类型的字段需要的时间要多。</p>
+<h3 id="尽量使用前缀来索引">尽量使用前缀来索引</h3>
+<p>如果索引字段的值很长，最好使用值的前缀来索引。例如，TEXT和BLOG类型的字段，进行全文检索会很浪费时间。如果只检索字段的前面的若干个字符，这样可以提高检索速度。</p>
+<h3 id="删除不再使用或者很少使用的索引">删除不再使用或者很少使用的索引</h3>
+<p>表中的数据被大量更新，或者数据的使用方式被改变后，原有的一些索引可能不再需要。数据库管理员应当定期找出这些索引，将它们删除，从而减少索引对更新操作的影响。</p>
+<h3 id="和in可以乱序。">=和in可以乱序。</h3>
+<p>比如a = 1 and b = 2 and c = 3 建立(a,b,c)索引可以任意顺序，mysql的查询优化器会帮你优化成索引可以识别的形式</p>
+<h3 id="联合查询">联合查询</h3>
+<p>联合查询，子查询等多表操作时关连字段要加索引</p>
+<h3 id="多表关联时的索引效率">多表关联时的索引效率</h3>
+<ul>
+<li>假设数据库中有 3 个表A,B,C,每个表都有一列分别为a,b,c,每列中有 6 行,为数字 1,2,3,4,5,6</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> A.a,B.b,C.c <span class="hljs-keyword">FROM</span> A <span class="hljs-keyword">JOIN</span> B <span class="hljs-keyword">JOIN</span> C <span class="hljs-keyword">ON</span> A.a<span class="hljs-operator">=</span>B.b <span class="hljs-keyword">AND</span> B.b<span class="hljs-operator">=</span>C.c;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在没有添加索引时会执行 <code>6*6*6=216</code>次查询,如果数据量很大,例如每个表都有 2000 条记录,结果会是 80 亿次查询,这个结果是很糟糕的</li>
+<li>所以建议在多表join的时候尽量少join几张表，因为一不小心就是一个笛卡尔乘积的恐怖扫描</li>
+<li>另外建议尽量使用left join，以少关联多。因为使用join 的话，第一张表是必须的全扫描的，以少关联多就可以减少这个扫描次数</li>
+</ul>
+<h2 id="NULL值是怎么在记录中存储的">NULL值是怎么在记录中存储的</h2>
+<p>在MySQL中，每一条记录都有它固定的格式，我们以<code>InnoDB</code>存储引擎的<code>Compact</code>行格式为例，来看一下<code>NULL</code>值是怎样存储的。在<code>Compact</code>行格式下，一条记录是由下边这几个部分构成的：</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1.png" srcset="/img/loading.gif" lazyload alt="image_1dfqmp377ebqgqf15e1tuv1qri6r.png-72.8kB"></p>
+<ul>
+<li>为了故事的顺利发展，我们新建一个称之为<code>record_format_demo</code>的表：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> record_format_demo (<br>     c1 <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>),<br>     c2 <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     c3 <span class="hljs-type">CHAR</span>(<span class="hljs-number">10</span>),<br>     c4 <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">10</span>)<br> ) CHARSET<span class="hljs-operator">=</span>ascii ROW_FORMAT<span class="hljs-operator">=</span>COMPACT;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>因为我们的重点是<code>NULL</code>值是如何存储在记录中的，所以重点唠叨一下行格式的<code>NULL值列表</code>部分，其他的部分可以到小册中查看。存储<code>NULL</code>值的过程如下：</p>
+<ol>
+<li>
+<p>首先统计表中允许存储<code>NULL</code>的列有哪些。</p>
+<p>我们前边说过，主键列、被<code>NOT NULL</code>修饰的列都是不可以存储<code>NULL</code>值的，所以在统计的时候不会把这些列算进去。比方说表<code>record_format_demo</code>的3个列<code>c1</code>、<code>c3</code>、<code>c4</code>都是允许存储<code>NULL</code>值的，而<code>c2</code>列是被<code>NOT NULL</code>修饰，不允许存储<code>NULL</code>值。</p>
+</li>
+<li>
+<p>如果表中没有允许存储<code>NULL</code>的列，则<code>NULL值列表</code>也不存在了，否则将每个允许存储<code>NULL</code>的列对应一个二进制位，二进制位按照列的顺序逆序排列，二进制位表示的意义如下：</p>
+<ul>
+<li>二进制位的值为<code>1</code>时，代表该列的值为<code>NULL</code>。</li>
+<li>二进制位的值为<code>0</code>时，代表该列的值不为<code>NULL</code>。</li>
+</ul>
+<p>因为表<code>record_format_demo</code>有3个值允许为<code>NULL</code>的列，所以这3个列和二进制位的对应关系就是这样：</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423014429762.png" srcset="/img/loading.gif" lazyload alt="image_1dfqn3dt810cpog1l4710q637q78.png-19.3kB"></p>
+<ul>
+<li>再一次强调，二进制位按照列的顺序逆序排列，所以第一个列<code>c1</code>和最后一个二进制位对应。</li>
+</ul>
+<ol start="3">
+<li>
+<p>设计<code>InnoDB</code>的大叔规定<code>NULL值列表</code>必须用整数个字节的位表示，如果使用的二进制位个数不是整数个字节，则在字节的高位补0。</p>
+<p>表<code>record_format_demo</code>只有3个值允许为<code>NULL</code>的列，对应3个二进制位，不足一个字节，所以在字节的高位补0，效果就是这样：</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423014510742.png" srcset="/img/loading.gif" lazyload alt="image_1dfqn48071s0i104314m31isi1ks97l.png-37.7kB"></p>
+<ul>
+<li>以此类推，如果一个表中有9个允许为<code>NULL</code>，那这个记录的<code>NULL值列表</code>部分就需要2个字节来表示了。</li>
+<li>假设我们现在向<code>record_format_demo</code>表中插入一条记录：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> record_format_demo(c1, c2, c3, c4)<br>    <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">&#x27;eeee&#x27;</span>, <span class="hljs-string">&#x27;fff&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-keyword">NULL</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这条记录的<code>c1</code>、<code>c3</code>、<code>c4</code>这3个列中<code>c3</code>和<code>c4</code>的值都为<code>NULL</code>，所以这3个列对应的二进制位的情况就是：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/16cb6f08cbf7699e" srcset="/img/loading.gif" lazyload alt="image_1dfqng28g7df1l68r4737p3a882.png-38.6kB"></p>
+<ul>
+<li>所以这记录的<code>NULL值列表</code>用十六进制表示就是：<code>0x06</code>。</li>
+</ul>
+<h2 id="键值为NULL的记录是怎么在B-树中存放的">键值为NULL的记录是怎么在B+树中存放的</h2>
+<ul>
+<li>对于InnoDB存储引擎来说，记录都是存储在页面中的（一个页面默认是16KB大小），这些页面可以作为<code>B+</code>树的节点而组成一个索引，类似这种样子（只是用下边的图举个B+树的例子而已，跟我们上边列举的表没关系）：</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423014552189.png" srcset="/img/loading.gif" lazyload alt="image_1dfqnp86e76v16h31l7qk21v458f.png-296kB" style="zoom:67%;" />
+<p>聚簇索引和二级索引都对应着像上图一样的<code>B+</code>树（也就是说有多少个索引就有多少棵对应的<code>B+</code>树），不过：</p>
+<ul>
+<li>对于聚簇索引索引来说，页面中的记录是按照主键值进行排序的；而对于二级索引来说，页面中的记录是按照给定的索引列的值进行排序的。</li>
+<li>对于聚簇索引来说，B+树每一层节点（页面）都是按照页中记录的主键值大小进行排序的；而对于二级索引来说，B+树每一层节点（页面）都是按照页中记录的给定的索引列的值进行排序的。</li>
+<li>对于聚簇索引来说，B+树叶子节点对应的页面中存储的是完整的用户记录（就是一条记录中包含我们定义的所有列值，还包含一些InnoDB自己添加的一些隐藏列）；而对于二级索引来说，B+树叶子节点对应的页面中存储的只是<code>索引列的值 + 主键值</code>。</li>
+</ul>
+<p>按规定，一条记录的主键值不允许存储<code>NULL</code>值，所以下边语句中的WHERE子句结果肯定为<code>FALSE</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> tbl_name <span class="hljs-keyword">WHERE</span> primary_key <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
+<p>像这样的语句优化器自己就能判定出WHERE子句必定为NULL，所以压根儿不会去执行它，不信我们看（Extra信息提示WHERE子句压根儿不成立）：</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423014622552.png" srcset="/img/loading.gif" lazyload alt="image_1dfqofhth2941mtorq72f1nqf8s.png-35.5kB"></p>
+<p>对于二级索引来说，索引列的值可能为<code>NULL</code>。那对于索引列值为<code>NULL</code>的二级索引记录来说，它们被放在<code>B+</code>树的哪里呢？答案是：放在B+树的最左边。比方说我们有如下查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> s1 <span class="hljs-keyword">WHERE</span> key1 <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
+<p>那它的查询示意图就如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423014637880.png" srcset="/img/loading.gif" lazyload alt="image_1dfqqjqnahm6176uta91j7j1q8ram.png-52.9kB"></p>
+<p>从图中可以看出，对于<code>s1</code>表的二级索引<code>idx_key1</code>来说，值为<code>NULL</code>的二级索引记录都被放在了<code>B+</code>树的最左边，这是因为设计<code>InnoDB</code>的大叔有这样的规定：</p>
+<blockquote>
+<p>We define the SQL null to be the smallest possible value of a field.</p>
+</blockquote>
+<ul>
+<li>也就是说他们把SQL中的<code>NULL</code>值认为是列中最小的值。</li>
+<li>在通过二级索引<code>idx_key1</code>对应的<code>B+</code>树快速定位到叶子节点中符合条件的最左边的那条记录后，也就是本例中<code>id</code>值为<code>521</code>的那条记录之后，就可以顺着每条记录都有的<code>next_record</code>属性沿着由记录组成的单向链表去获取记录了，直到某条记录的<code>key1</code>列不为NULL。</li>
+</ul>
+<h2 id="使不使用索引的依据到底是什么？">使不使用索引的依据到底是什么？</h2>
+<ul>
+<li>那既然<code>IS NULL</code>、<code>IS NOT NULL</code>、<code>!=</code>这些条件都可能使用到索引，那到底什么时候索引，什么时候采用全表扫描呢？</li>
+<li>答案很简单：成本。当然，关于如何定量的计算使用某个索引执行查询的成本比较复杂，我们在小册中花了很大的篇幅来唠叨了。不过因为篇幅有限，我们在这里只准备定性的分析一下。对于使用二级索引进行查询来说，成本组成主要有两个方面：
+<ul>
+<li>读取二级索引记录的成本</li>
+<li>将二级索引记录执行回表操作，也就是到聚簇索引中找到完整的用户记录的操作所付出的成本。</li>
+</ul>
+</li>
+<li>很显然，要扫描的二级索引记录条数越多，那么需要执行的回表操作的次数也就越多，达到了某个比例时，使用二级索引执行查询的成本也就超过了全表扫描的成本（举一个极端的例子，比方说要扫描的全部的二级索引记录，那就要对每条记录执行一遍回表操作，自然不如直接扫描聚簇索引来的快）。</li>
+<li>所以MySQL优化器在真正执行查询之前，对于每个可能使用到的索引来说，都会预先计算一下需要扫描的二级索引记录的数量，比方说对于下边这个查询：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> s1 <span class="hljs-keyword">WHERE</span> key1 <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>优化器会分析出此查询只需要查找<code>key1</code>值为<code>NULL</code>的记录，然后访问一下二级索引<code>idx_key1</code>，看一下值为<code>NULL</code>的记录有多少（如果符合条件的二级索引记录数量较少，那么统计结果是精确的，如果太多的话，会采用一定的手段计算一个模糊的值，当然算法也比较麻烦，我们就不展开说了，小册里有说），这种在查询真正执行前优化器就率先访问索引来计算需要扫描的索引记录数量的方式称之为<code>index dive</code>。当然，对于某些查询，比方说WHERE子句中有IN条件，并且IN条件中包含许多参数的话，比方说这样：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> s1 <span class="hljs-keyword">WHERE</span> key1 <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, ... , <span class="hljs-string">&#x27;zzzzzzz&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样的话需要统计的<code>key1</code>值所在的区间就太多了，这样就不能采用<code>index dive</code>的方式去真正的访问二级索引<code>idx_key1</code>，而是需要采用之前在背地里产生的一些统计数据去估算匹配的二级索引记录有多少条（很显然根据统计数据去估算记录条数比<code>index dive</code>的方式精确性差了很多）。</li>
+<li>反正不论采用<code>index dive</code>还是依据统计数据估算，最终要得到一个需要扫描的二级索引记录条数，如果这个条数占整个记录条数的比例特别大，那么就趋向于使用全表扫描执行查询，否则趋向于使用这个索引执行查询。</li>
+<li>理解了这个也就好理解为什么在WHERE子句中出现<code>IS NULL</code>、<code>IS NOT NULL</code>、<code>!=</code>这些条件仍然可以使用索引，本质上都是优化器去计算一下对应的二级索引数量占所有记录数量的比值而已。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">关系数据库标准语言SQL</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/DML/">DML</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/18/Software/Backend/Java/Maven/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%B8%8E%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Maven 目录结构与配置文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/18/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%94%81/">
+                        <span class="hidden-mobile">Java 锁</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
