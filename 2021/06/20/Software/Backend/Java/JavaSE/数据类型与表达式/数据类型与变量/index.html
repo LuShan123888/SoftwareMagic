@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java 数据类型与变量 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 数据类型与变量">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:30" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 数据类型与变量</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java 数据类型与变量</h1>
+<h2 id="数据类型">数据类型</h2>
+<p>在程序设计中要使用和处理各种数据,数据按其表示信息的含义和占用空间大小分为不同类型,Java语言的数据类型可以分为简单数据类型和复合数据类型两大类如下图所示:</p>
+<pre><code class=" mermaid">graph LR
+A[数据类型]--&gt;B[&quot;简单数据类型&lt;br&#x2F;&gt;(基本类型)&quot;]
+A--&gt;C[&quot;复合数据类型&lt;br&#x2F;&gt;(引用)&quot;]
+B--&gt;D[&quot;整数类型(byte,short,int,long)&quot;]
+B--&gt;E[&quot;浮点类型(float,double)&quot;]
+B--&gt;F[&quot;字符类型(char)&quot;]
+B--&gt;G[&quot;布尔类型(boolean)&quot;]
+C--&gt;H[&quot;类(class)&quot;]
+C--&gt;I[&quot;接口(interface)&quot;]
+C--&gt;数组
+</code></pre>
+<ul>
+<li>简单数据类型也称基本类型,它代表的是语言能处理的基本数据,如数值数据中的整数和实数(也叫浮点数),字符类型和代表逻辑值的布尔类型,基本数据类型数据的特点是占用的存储空间是固定的</li>
+<li>复合数据类型也为引用类型,其数据存储取决于数据类型的定义,通常由多个基本类型或复合类型的数据组合构成</li>
+<li>数据所占存储空间的大小以字节为单位,下表列出了Java所有基本数据类型分配的存储空间大小及数据取值范围,在某些情况下,系统自动给基本数据类型的存储单元赋默认值,下表中给出了各种基本类型的默认值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>数据类型</th>
+<th>所占字节</th>
+<th>默认值</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>字节型</td>
+<td>1</td>
+<td>0</td>
+<td>-2[<sup>7]~2[</sup>7]-1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>短整型</td>
+<td>2</td>
+<td>0</td>
+<td>-2[<sup>15]~2[</sup>15]-1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整型</td>
+<td>4</td>
+<td>0</td>
+<td>-2[<sup>31]~2[</sup>31]-1</td>
+</tr>
+<tr>
+<td>long</td>
+<td>长整型</td>
+<td>8</td>
+<td>0</td>
+<td>-2[<sup>63]~2[</sup>63]-1</td>
+</tr>
+<tr>
+<td>float</td>
+<td>单精度浮点型</td>
+<td>4</td>
+<td>0.0F</td>
+<td>1.4e[<sup>-45]~3.4e[</sup>+038]</td>
+</tr>
+<tr>
+<td>double</td>
+<td>双精度浮点型</td>
+<td>8</td>
+<td>0.0D</td>
+<td>4.9e[<sup>-324]~1.798e[</sup>+308]</td>
+</tr>
+<tr>
+<td>char</td>
+<td>字符型</td>
+<td>2</td>
+<td>0</td>
+<td>0~65535</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布尔型</td>
+<td>1</td>
+<td>false</td>
+<td>true,false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常量">常量</h2>
+<p>常量是指在程序运行过程中其值保持不变的量,没中过基本数据类型均有相应的常量,如布尔常量,整型常量,浮点常量,字符常量等,另外还有一种常量是字符串常量,该类常量的处理有些特殊,原因在于Java并没有将字符串作为简单类型,而是作为一种复合类型对待,在Java中专门有一个类String对应字符串的处理</p>
+<h3 id="布尔常量">布尔常量</h3>
+<p>只有true和false两个取值,它表示逻辑的两种状态,true表示真,false表示假,注意:Java中的布尔类型是一个独立的类型,不对应任何整数值,这与C语言的中的布尔值用0或非0来表示是完全不同的</p>
+<h3 id="整型常量">整型常量</h3>
+<p>整型常量就是不带小数的整数,包括负数,在Java中整型常量分为long,int,short和byte4种类型,在Java语言中,对于数值数据的表示又以下4种形式:</p>
+<ul>
+<li>十进制:数据以非0开头,如4,-15</li>
+<li>八进制:数据以0开头,其中,每位数字的范围为0-7,如054,012</li>
+<li>十六进制:数据以0x开头,每位数字的范围为0-9和A-F,如0x11,0xAD00</li>
+<li>二进制,数据以;0b开头,如0b11</li>
+</ul>
+<p><strong>注意</strong>Java语言的整型常量默认为int类型,要将一个常量声明为长整型类型 则需在数据的后面加L或1(一般使用L).如12代表一个整型常量,占4个字节,12L代表一个长整型常量,占8个字节</p>
+<h3 id="浮点常量">浮点常量</h3>
+<p>浮点常量也称为实数,包括float和double两种类型,浮点常量有以下两种表示形式:</p>
+<ul>
+<li>
+<p>小数点形式:也就是以小数表示法来表示实数,如6.37,-0.023</p>
+</li>
+<li>
+<p>指数形式:也称科学表示法,e/E左边的数为底数,右边的数据是10的幂,如3e-2代表0.03,只有实数采用科学表示法,整型常量不能用这种形式</p>
+</li>
+</ul>
+<p><strong>注意</strong>为了区分float和double两类常量,可以在常量后面加后缀修饰, float类型常量以F/f结尾,double类型常量以D/d结尾,如果浮点常量不带后缀,则默认为双精度常量</p>
+<h3 id="字符常量">字符常量</h3>
+<ul>
+<li>字符常量是由一对单引号括起来的单个字符或以反斜线<code>\</code>开头的转义符,Java的字符编码采用了国际统一标准的Unicode码,一个字符用16位无符号型数据表示:<code>A</code>的编码为65,<code>a</code>的编码为98,大小写字母相差32</li>
+</ul>
+<p><strong>注意</strong>表示字符的另一种方法是用转义字符加编码值来表示,具体有以下两种方法:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">’</td>
+<td style="text-align:center">单引号字符</td>
+</tr>
+<tr>
+<td style="text-align:center">&quot;</td>
+<td style="text-align:center">双引号字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">走纸换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">横向跳格</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格</td>
+</tr>
+</tbody>
+</table>
+<p>表示字符的另一种方式是用转义字符加编码值来表示,具体有以下两种方法:</p>
+<ul>
+<li><code>\ddd</code>:用1到3为八进制数(ddd)表示字符</li>
+<li><code>(u)xxxx</code>:用一到4位十六进制数(xxxx)表示字符</li>
+</ul>
+<h3 id="字符串常量">字符串常量</h3>
+<ul>
+<li>字符串常量是用双引号括起来的由0个或多个字符组成的字符序列,字符串中可以包含转义字符,例如,”12345”,”a”</li>
+<li>Java中,字符串实际上是String类常量,String类在Java中有特殊的地位,编译器能自动把双引号之间的字符识别为String常量</li>
+</ul>
+<h2 id="变量">变量</h2>
+<h3 id="变量的定义与赋值">变量的定义与赋值</h3>
+<p>在程序中通过变量来保存那些运行可变的数据,Java中的变量必须先声明,后使用,声明变量包括指明变量的类型和变量的名称,根据需要也可以指定变量额初始值,变量定义与赋值的格式为:</p>
+<blockquote>
+<p>类型 变量名[=值][,变量名[=值],…];</p>
+</blockquote>
+<p><strong>说明</strong>:格式中方括号表示可选部分,其含义是在定义变量时可以设置变量的初始值,如果在同一语句中要声明多个变量,则变量间用逗号分隔,例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> count;<span class="hljs-comment">//定义count为整型变量</span><br><span class="hljs-keyword">double</span> m,n=<span class="hljs-number">0</span>;<span class="hljs-comment">//定义变量m和n为双精度型,同时给变量n赋初值0</span><br><span class="hljs-keyword">char</span> c=<span class="hljs-string">&#x27;a&#x27;</span>;<span class="hljs-comment">//定义字符串变量c并给其赋初值</span><br>count=<span class="hljs-number">0</span>;<span class="hljs-comment">//给变量count赋值</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>说明</strong>:上述给变量赋值的语句称为赋值语句,其效果是将赋值号&quot;=&quot;右边的值赋给左边的变量</li>
+<li>声明变量又称创建变量,执行变量声明语句时系统根据变量额数据类型在内存中开辟相应的内存空间,并将变量的值 存入该空间,可以想象每个变量为一个小盒子,变量名为盒子的标记,而变量的值为盒中的内容</li>
+<li>在某些情况下,变量没有赋初值时系统将其所属类型给变量赋初值,但是,通常要养成引用变量前保证变量已赋值的习惯</li>
+<li>变量的命名要符合标识符的规定,每个变量均有一个作用域,在变量的作用域内不能定义两个同名的变量,程序中用变量名来引用变量的数值,在变量作用域外不能再访问该变量,无效变量占用空间也将由系统垃圾回收程序自动将其释放</li>
+</ul>
+<h3 id="变量的取值范围">变量的取值范围</h3>
+<p>变量所分配的存储空间的大小取决与变量的数据类型,不同数值型变量的存储空间大小不同,因此能存储的数值范围也不同各种数值变量对应的包装类中分别定义<code>MAX_VALUE</code>和<code>MIN_VALUE</code>两个属性常量来指示相应基本类型的数值范围</p>
+<h3 id="赋值与强制类型转换">赋值与强制类型转换</h3>
+<p>在程序中经常需要通过赋值运算设置或更改变量的值,赋值语句的格式为:</p>
+<blockquote>
+<p>变量=表达式;</p>
+</blockquote>
+<ul>
+<li>其功能是先计算右边表达式的值,再将结果赋给左边的变量</li>
+<li>表达式可以是常数,变量或一个运算式,例如:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">int</span> x=<span class="hljs-number">5</span>;<span class="hljs-comment">//将5赋值给变量x</span><br>x=x+<span class="hljs-number">1</span>;<span class="hljs-comment">//将x的值增加1重新赋值给x</span><br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong></p>
+<ul>
+<li>赋值不同于数学上的&quot;=&quot;,x=x+1再数学上不成立,但这里的作用是给变量x的值增加1,程序中常用这样的方式将一个变量的值递增</li>
+<li>在使用赋值运算时可能会遇到等号左边的数据类型于等号右边的数据类型不一致的情况,这时需要将等号右边的结果转换为左边的而数据类型,再赋值给左边的变量,可能出现以下两种情况:一种是系统自动转换,另一种是必须使用强制转换,Java规定,数据表示范围小的&quot;短数据类型&quot;转换为数据表示范围大的&quot;长数据类型&quot;,系统将自动进行转换,反之必须使用强制类型转换</li>
+<li>以上情况很容易理解,短数据类型的数据转换为长数据类型显然不存在数据超出范围问题,而将长数据类型的数据存储在短数据类型的空间中,则存在存储超出范围的问题,因此,强制转换有可能会造成数据的部分丢失</li>
+</ul>
+<h4 id="自动转换">自动转换</h4>
+<p>基本数据类型自动转换的递增顺序为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">byte</span>-&gt;<span class="hljs-keyword">short</span>-&gt;<span class="hljs-keyword">char</span>-&gt;<span class="hljs-keyword">int</span>-&gt;<span class="hljs-keyword">long</span>-&gt;<span class="hljs-keyword">float</span>-&gt;<span class="hljs-keyword">double</span><br></code></pre></td></tr></table></figure>
+<h4 id="强制类型转换">强制类型转换</h4>
+<blockquote>
+<p>变量 = (数据类型)表达式</p>
+</blockquote>
+<p><strong>注意</strong>:布尔类型不能与其他类型进行转换</p>
+<p>**[例2-1]**简单数据类型输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleDataType</span></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span></span>&#123;<br>    <span class="hljs-keyword">int</span> i=<span class="hljs-number">3</span>;<span class="hljs-comment">//整常数默认为int型</span><br>    <span class="hljs-keyword">byte</span> b = (<span class="hljs-keyword">byte</span>)i;<span class="hljs-comment">//将int类型转换为byte型要使用强制转换</span><br>    <span class="hljs-keyword">short</span> si.=<span class="hljs-number">20000</span>;<br>    <span class="hljs-keyword">int</span> li = (<span class="hljs-keyword">int</span>)<span class="hljs-number">4.25</span>;<span class="hljs-comment">//实数转换为整数</span><br>    <span class="hljs-keyword">float</span> f = <span class="hljs-number">3.14f</span>;<span class="hljs-comment">//实数默认为双精度型,通过后缀指定为float型</span><br>    System.out.println(b+<span class="hljs-string">&quot;\t&quot;</span>+si+<span class="hljs-string">&quot;\t&quot;</span>+i+<span class="hljs-string">&quot;\t&quot;</span>+li+<span class="hljs-string">&quot;\t&quot;</span>+f);<br>  &#125;<br>&#125;<br><br><span class="hljs-number">3</span>	<span class="hljs-number">20000</span>	<span class="hljs-number">3</span>	<span class="hljs-number">4</span>	<span class="hljs-number">3.14</span><br></code></pre></td></tr></table></figure>
+<p><strong>说明</strong>:对于用整数常数给变量赋值,系统将自动检查数据的大小是否超出变量类型的范围,例如,第5行的20000虽然是int类型常数,但其值在short类型有效范围内,因此系统将自动转换赋值,如果数据超出范围,则不能通过编译,例如:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">short</span> si=<span class="hljs-number">200000</span>;<span class="hljs-comment">//编译指示将丢失数据精度</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>但要注意,以上指的是赋值号右边为常数情况,如果赋值号右边是变量则严格按照类型转换原则进行检查,如果将第4行改为<code>byte b = i;</code>,则编译器将提示错误</li>
+<li>常数后加f是必要的,不能将双精度数给float变量直接赋值,否则将不能通过编译,也可以使用强制转换</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">float</span> f =(<span class="hljs-keyword">float</span>)<span class="hljs-number">3.14</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>有些情况下,强制转换会导致数据结果的错误,例如:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">byte</span> x=<span class="hljs-number">25</span>,y=<span class="hljs-number">125</span>;<br><span class="hljs-keyword">byte</span> m = (<span class="hljs-keyword">byte</span>)(x+y);<br>System.out.println(<span class="hljs-string">&quot;m=&quot;</span>+m);<br><br>m=-<span class="hljs-number">106</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>字节数据的最大表示范围是127,再大的数只能进位到符号位,因此,产生的结果为一个负数,如果不使用强制类型转换,直接写成如下形式:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">byte</span> m = x+y;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编译会给出<code>possible loss of precision</code>的错误提示信息</li>
+</ul>
+<p><strong>注意</strong>:为避免数据溢出,Java虚拟机将两短整数相加的结果默认为int类型,因此两整数进行加,乘等运算,如果将结果赋值给长度小于int类型大的变量,编译要求进行强制类型转换,否则不能通过编译</p>
+<blockquote>
+<p><strong>short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗</strong></p>
+<ul>
+<li>对于<code>short s1 = 1; s1 = s1 + 1;</code>由于1是int类型,因此s1+1运算结果也是int 型,需要强制转换类型才能赋值给short型</li>
+<li>而<code>short s1 = 1; s1 += 1;</code>可以正确编译,因为s1+= 1;相当于s1 = (short)(s1 + 1);其中有隐含的强制类型转换</li>
+</ul>
+<p><strong>float f=3.4;是否正确？</strong></p>
+<ul>
+<li>不正确,3.4是双精度数,将双精度型(double)赋值给浮点型(float)属于下转型(down-casting,也称为窄化)会造成精度损失,因此需要强制类型转换float f =(float)3.4; 或者写成float f =3.4F;</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E6%8E%A5%E5%8F%A3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 接口</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/">
+                        <span class="hidden-mobile">Java 表达式与运算符</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

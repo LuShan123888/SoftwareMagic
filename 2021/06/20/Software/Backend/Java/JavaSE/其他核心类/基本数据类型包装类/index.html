@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java 基本数据类型包装类 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 基本数据类型包装类">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:30" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 基本数据类型包装类</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java 基本数据类型包装类</h1>
+<blockquote>
+<p><strong>为什么需要包装类?</strong></p>
+<ul>
+<li>很多人会有疑问,既然Java中为了提高效率,提供了八种基本数据类型,为什么还要提供包装类呢？</li>
+<li>因为Java是一种面向对象语言,很多地方都需要使用对象而不是基本数据类型,比如,在集合类中,我们是无法将int,double等类型放进去的,因为集合的容器要求元素是Object类型</li>
+<li>为了让基本类型也具有对象的特征,就出现了包装类型,它相当于将基本类型&quot;包装起来”,使得它具有了对象的性质,并且为其添加了属性和方法,丰富了基本类型的操作</li>
+</ul>
+</blockquote>
+<p>每个Java基本类型均有相应的类型包装类,例如Integer类包装int值,Float类包装float值,下表列出了基本数据类型和相应包装类</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>相应包装类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+</tbody>
+</table>
+<h2 id="构造方法">构造方法</h2>
+<p>数值类型的包装类均提供了以相应基本类型的数据作为参数的构造方法,同时也提供了以字符串类型作为参数的构造方法,但如果字符串中数据不能代表相应数据类型则会抛出<code>NumberFormatException</code>异常,例如,Integer(整型)类的构造方法如下:</p>
+<ul>
+<li><code>public Integer(int value)</code>:根据整数值创建Integer对象</li>
+<li><code>public Integer(String s)</code>:根据数字字符串创建Integer对象</li>
+</ul>
+<h2 id="获得包装类的值">获得包装类的值</h2>
+<p>每个包装类均提供有相应的方法用来从包装对象中抽取相应的数据,对于Boolean类的对象,可以调用<code>booleanValue()</code>方法,对于Character对象,可以调用<code>charValue()</code>方法,其他6个类可以利用如下方法抽取数值数据,这些方法在它们的父类Number中定义,但Number类是抽象类,没有具体实现这些方法,每个包装子类提供了方法的具体实现</p>
+<ul>
+<li><code>public byte byteValue()</code></li>
+<li><code>public short shortValue()</code></li>
+<li><code>public int intValue()</code></li>
+<li><code>public long longValue()</code></li>
+<li><code>public float floatValue()</code></li>
+<li><code>public double doubleValue()</code></li>
+</ul>
+<h2 id="静态方法">静态方法</h2>
+<ul>
+<li>
+<p>包装类提供了各种static方法,例如,Character类提供有<code>isDigit(char ch)</code>方法可判断一个字符是否为数字,除Character类外的所有包装类均提供有<code>valueOf(String s)</code>的静态方法,它将得到一个相应类型的对象,例如,<code>Long.valueOf(&quot;23&quot;)</code>构造返回一个包装了数据值23的Long对象</p>
+</li>
+<li>
+<p>Integer类的<code>toString(int i,in tradix)</code>方法返回一个整数的某种进制表示形式,例如,<code>Inter.toString(12,8)</code>的结果为14,方法<code>toString(12,8)</code>的结果为14,方法<code>toString(int i)</code>返回十进制表示形式,方法<code>toBinaryString(int i)</code>返回整数的二进制串表示形式</p>
+</li>
+<li>
+<p>还有一组非常有用的静态包装方法是<code>parseXXX()</code>方法,他们是:</p>
+<ul>
+<li><code>public static byte Byte.parseByte(String s)</code></li>
+</ul>
+</li>
+<li>
+<p><code>public static short Short.parseShort(String s)</code></p>
+<ul>
+<li><code>public static int Integer.parseInt(String s)</code></li>
+</ul>
+</li>
+<li>
+<p><code>public static long Long.parseLong(String s)</code></p>
+<ul>
+<li><code>public static float Float.parseFloat(String s)</code></li>
+</ul>
+</li>
+<li>
+<p><code>public static double Double.parseDouble(String s)</code></p>
+</li>
+<li>
+<p>这些方法以字符串作为参数,返回相应的基本类型数据,在分析时如果数据不正常均会抛出<code>NumberFormatException</code>异常</p>
+</li>
+</ul>
+<h2 id="拆箱与装箱">拆箱与装箱</h2>
+<ul>
+<li>将原始类型值转换成对应的对象,比如将int的变量转换成Integer对象,这个过程叫做装箱,反之将Integer对象转换成int类型值,这个过程叫做拆箱</li>
+</ul>
+<p><strong>自动装箱与自动拆箱的实现原理</strong></p>
+<ul>
+<li>既然Java提供了自动拆装箱的能力,那么,我们就来看一下,到底是什么原理,Java是如何实现的自动拆装箱功能</li>
+<li>自动拆装箱的代码:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[]args)</span></span>&#123;<br>  Integer integer=<span class="hljs-number">1</span>; <span class="hljs-comment">//装箱</span><br>  <span class="hljs-keyword">int</span> i=integer; <span class="hljs-comment">//拆箱</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>对以上代码进行反编译后可以得到以下代码:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[]args)</span></span>&#123;<br>  Integer integer=Integer.valueOf(<span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">int</span> i=integer.intValue();<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>哪些地方会自动拆装箱</strong></p>
+<ol>
+<li>将基本数据类型放入集合类</li>
+<li>包装类型和基本类型的大小比较:包装类与基本数据类型进行比较运算,是先将包装类进行拆箱成基本数据类型,然后进行比较的</li>
+<li>包装类型的运算:两个包装类型之间的运算,会被自动拆箱成基本类型进行</li>
+<li>三目运算符的使用:当第二,第三位操作数分别为基本类型和对象时,其中的对象就会拆箱为基本类型进行操作</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">true</span>;<br>Integer i = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">int</span> k = flag ? i : j;<br><span class="hljs-comment">// 其实在int k = flag ? i : j;这一行,会发生自动拆箱,反编译后代码如下:</span><br><span class="hljs-keyword">boolean</span> flag = <span class="hljs-keyword">true</span>;<br>Integer i = Integer.valueOf(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">int</span> k = flag ? i.intValue() : j;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>第二段的i是一个包装类型的对象,而第三段的j是一个基本类型,所以会对包装类进行自动拆箱,如果这个时候i的值为null,那么久会发生NPE,(自动拆箱导致空指针异常)</li>
+</ul>
+<ol start="5">
+<li>函数参数与返回值</li>
+</ol>
+<h2 id="缓存">缓存</h2>
+<p>Java SE的自动拆装箱还提供了一个和缓存有关的功能,我们先来看以下代码,猜测一下输出结果:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String... strings)</span> </span>&#123;<br><br>  Integer integer1 = <span class="hljs-number">3</span>;<br>  Integer integer2 = <span class="hljs-number">3</span>;<br><br>  <span class="hljs-keyword">if</span> (integer1 == integer2)<br>    System.out.println(<span class="hljs-string">&quot;integer1 == integer2&quot;</span>);<br>  <span class="hljs-keyword">else</span><br>    System.out.println(<span class="hljs-string">&quot;integer1 != integer2&quot;</span>);<br><br>  Integer integer3 = <span class="hljs-number">300</span>;<br>  Integer integer4 = <span class="hljs-number">300</span>;<br><br>  <span class="hljs-keyword">if</span> (integer3 == integer4)<br>    System.out.println(<span class="hljs-string">&quot;integer3 == integer4&quot;</span>);<br>  <span class="hljs-keyword">else</span><br>    System.out.println(<span class="hljs-string">&quot;integer3 != integer4&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们普遍认为上面的两个判断的结果都是false,虽然比较的值是相等的,但是由于比较的是对象,而对象的引用不一样,所以会认为两个if判断都是false的</li>
+<li>在Java中,<code>==</code>比较的是对象应用,而equals比较的是值</li>
+<li>所以,在这个例子中,不同的对象有不同的引用,所以在进行比较的时候都将返回false,奇怪的是,这里两个类似的if条件判断返回不同的布尔值</li>
+<li>上面这段代码真正的输出结果:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">integer1 == integer2<br>integer3 != integer4<br></code></pre></td></tr></table></figure>
+<ul>
+<li>原因就和Integer中的缓存机制有关,在Java 5中,在Integer的操作上引入了一个新功能来节省内存和提高性能,整型对象通过使用相同的对象引用实现了缓存和重用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Cache to support the object identity semantics of autoboxing for values between</span><br><span class="hljs-comment">     * -128 and 127 (inclusive) as required by JLS.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * The cache is initialized on first usage.  The size of the cache</span><br><span class="hljs-comment">     * may be controlled by the &#123;<span class="hljs-doctag">@code</span> -XX:AutoBoxCacheMax=&lt;size&gt;&#125; option.</span><br><span class="hljs-comment">     * During VM initialization, java.lang.Integer.IntegerCache.high property</span><br><span class="hljs-comment">     * may be set and saved in the private system properties in the</span><br><span class="hljs-comment">     * sun.misc.VM class.</span><br><span class="hljs-comment">     */</span><br><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntegerCache</span> </span>&#123;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> low = -<span class="hljs-number">128</span>;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> high;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer cache[];<br><br>  <span class="hljs-keyword">static</span> &#123;<br>    <span class="hljs-comment">// high value may be configured by property</span><br>    <span class="hljs-keyword">int</span> h = <span class="hljs-number">127</span>;<br>    String integerCacheHighPropValue =<br>      sun.misc.VM.getSavedProperty(<span class="hljs-string">&quot;java.lang.Integer.IntegerCache.high&quot;</span>);<br>    <span class="hljs-keyword">if</span> (integerCacheHighPropValue != <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">int</span> i = parseInt(integerCacheHighPropValue);<br>        i = Math.max(i, <span class="hljs-number">127</span>);<br>        <span class="hljs-comment">// Maximum array size is Integer.MAX_VALUE</span><br>        h = Math.min(i, Integer.MAX_VALUE - (-low) -<span class="hljs-number">1</span>);<br>      &#125; <span class="hljs-keyword">catch</span>( NumberFormatException nfe) &#123;<br>        <span class="hljs-comment">// If the property cannot be parsed into an int, ignore it.</span><br>      &#125;<br>    &#125;<br>    high = h;<br><br>    cache = <span class="hljs-keyword">new</span> Integer[(high - low) + <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">int</span> j = low;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; cache.length; k++)<br>      cache[k] = <span class="hljs-keyword">new</span> Integer(j++);<br><br>    <span class="hljs-comment">// range [-128, 127] must be interned (JLS7 5.1.7)</span><br>    <span class="hljs-keyword">assert</span> IntegerCache.high &gt;= <span class="hljs-number">127</span>;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">IntegerCache</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>适用于整数值区间-128 至 +127</li>
+<li>只适用于自动装箱,使用构造函数创建对象不适用</li>
+<li>我们只需要知道,当需要进行自动装箱时,如果数字在-128至127之间时,会直接使用缓存中的对象,而不是重新创建一个对象</li>
+<li>其中的javadoc详细的说明了缓存支持-128到127之间的自动装箱过程,最大值127可以通过<code>-XX:AutoBoxCacheMax=size</code>修改</li>
+<li>这使我们可以根据应用程序的实际情况灵活地调整来提高性能,到底是什么原因选择这个-128到127范围呢？因为这个范围的数字是最被广泛使用的,在程序中,第一次使用Integer的时候也需要一定的额外时间来初始化这个缓存</li>
+</ul>
+<blockquote>
+<ul>
+<li>在Boxing Conversion部分的Java语言规范(JLS)规定如下:</li>
+<li>如果一个变量p的值是:
+<ul>
+<li>-128至127之间的整数</li>
+<li>true 和 false的布尔值</li>
+<li>‘\u0000’至 ‘\u007f’之间的字符</li>
+</ul>
+</li>
+<li>范围内的时,将p包装成a和b两个对象时,可以直接使用a==b判断a和b的值是否相等</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>笔试题</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer i1 =<span class="hljs-number">59</span>;<br><span class="hljs-keyword">int</span> i2 = <span class="hljs-number">59</span>;<br>Integer i3 = Integer.valueOf(<span class="hljs-number">59</span>);<br>Integer i4 = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">59</span>);<br>System.out.println(i1 == i2); <span class="hljs-comment">// true:包装类和基本类型比较时,包装类自动拆箱为基本类型</span><br>System.out.println(i1 == i3); <span class="hljs-comment">// true:数值59 在-128到127之间,上文所说的缓存,因此为true,若数值不在-128到127之间则为false</span><br>System.out.println(i1 == i4); <span class="hljs-comment">// false:引用类型比较地址值,地址值不同</span><br>System.out.println(i2 == i3); <span class="hljs-comment">// true:i1的源码是i3,i2和i3比较结果和i2与i1比较结果相同,包装类和基本类型比较时自动拆箱</span><br>System.out.println(i2 == i4); <span class="hljs-comment">// true:包装类和基本类型比较时自动拆箱</span><br>System.out.println(i3 == i4); <span class="hljs-comment">// 同i1 == i4</span><br></code></pre></td></tr></table></figure></blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/">其他核心类</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM 类文件结构</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Future%E4%B8%8ECompletableFuture/">
+                        <span class="hidden-mobile">Java Future与CompletableFuture</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

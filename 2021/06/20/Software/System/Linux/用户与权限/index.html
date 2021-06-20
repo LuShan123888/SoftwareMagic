@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Linux 用户与权限 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux 用户与权限">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:29" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux 用户与权限</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Linux 用户与权限</h1>
+<ul>
+<li>Linux系统是一个多用户多任务的分时操作系统,任何一个要使用系统资源的用户,都必须首先向系统管理员申请一个账号,然后以这个账号的身份进入系统</li>
+<li>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪,并控制他们对系统资源的访问;另 一方面也可以帮助用户组织文件,并为用户提供安全性保护</li>
+<li>每个用户账号都拥有一个唯一的用户名和各自的口令, 用户在登录时键入正确的用户名和口令后,就能够进入系统和自己的主目录, 实现用户账号的管理,要完成的工作主要有如下几个方面:
+<ul>
+<li>用户账号的添加</li>
+<li>删除与修改</li>
+<li>用户口令的管理</li>
+<li>用户组的管理</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户账号的管理">用户账号的管理</h2>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs julia">用户名<span class="hljs-meta">@主机名</span>:目录(<span class="hljs-comment">#|$)</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>#表示是具有root权限的用户</li>
+<li>$表示不具有root权限的用户</li>
+</ul>
+<h3 id="who">who</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">who - <span class="hljs-selector-attr">[husfV]</span> <span class="hljs-selector-attr">[user]</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>-H 或 --heading:显示各栏位的标题信息列</li>
+<li>-i 或 -u 或 --idle:显示闲置时间,若该用户在前一分钟之内有进行任何动作,将标示成&quot;.&quot;号,如果该用户已超过24小时没有任何动作,则标示出&quot;old&quot;字符串</li>
+<li>-m:此参数的效果和指定&quot;am i&quot;字符串相同</li>
+<li>-q 或–count:只显示登入系统的帐号名称和总人数</li>
+<li>-s:此参数将忽略不予处理,仅负责解决who指令其他版本的兼容性问题</li>
+<li>-w 或-T或–mesg或–message或–writable:显示用户的信息状态栏</li>
+</ul>
+<p><strong>实例</strong>:显示当前登录系统的用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">who<br>root   tty7     2014-05-13 12:12 (:0)<br>root   pts/0    2014-05-14 17:09 (:0.0)<br>root   pts/1    2014-05-14 18:51 (192.168.1.17)<br>root   pts/2    2014-05-14 19:48 (192.168.1.17)<br></code></pre></td></tr></table></figure>
+<h3 id="whoami">whoami</h3>
+<ul>
+<li>显示当前登录的用户</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>whoami<br></code></pre></td></tr></table></figure>
+<h3 id="useradd">useradd</h3>
+<ul>
+<li>Linux中一切皆文件,这里的添加用户说就是往<code>/etc/passwd</code>中写入用户的信息</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">useradd -选项 用户名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-c&lt;备注&gt;</code>:指定用户帐号的备注文字</li>
+<li><code>-d登入目录&gt;</code>:指定用户登入时的目录</li>
+<li><code>-e&lt;有效期限&gt;</code>:指定帐号的有效期限</li>
+<li><code>-f&lt;缓冲天数&gt;</code>:指定在密码过期后多少天即关闭该帐号</li>
+<li><code>-g&lt;群组&gt;</code>:指定用户所属的群组</li>
+<li><code>-G&lt;群组&gt;</code>:指定用户所属的附加群组</li>
+<li><code>-l&lt;帐号名称&gt;</code>:指定用户帐号名称</li>
+<li><code>-L</code>:锁定用户密码,使密码无效</li>
+<li><code>-U</code>:解除密码锁定</li>
+<li><code>-s&lt;shell&gt;</code>:指定用户登入后所使用的shell</li>
+<li><code>-u&lt;uid&gt;</code>:指定用户ID</li>
+</ul>
+<h3 id="userdel">userdel</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">userdel -选项 用户名<br>-r 用户名 #删除用户的时候将他的目录页一并删掉!<br></code></pre></td></tr></table></figure>
+<h3 id="usermod">usermod</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">usermod -选项 修改内容 用户名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-c&lt;备注&gt;</code>:修改用户帐号的备注文字</li>
+<li><code>-d登入目录&gt;</code>:修改用户登入时的目录</li>
+<li><code>-e&lt;有效期限&gt;</code>:修改帐号的有效期限</li>
+<li><code>-f&lt;缓冲天数&gt;</code>:修改在密码过期后多少天即关闭该帐号</li>
+<li><code>-g&lt;群组&gt;</code>:修改用户所属的群组,覆盖群组</li>
+<li><code>-G&lt;群组&gt;</code>:修改用户所属的附加群组,添加群组</li>
+<li><code>-l&lt;帐号名称&gt;</code>:修改用户帐号名称</li>
+<li><code>-L</code>:锁定用户密码,使密码无效</li>
+<li><code>-U</code>:解除密码锁定</li>
+<li><code>-s&lt;shell&gt;</code>:修改用户登入后所使用的shell</li>
+<li><code>-u&lt;uid&gt;</code>:修改用户ID</li>
+</ul>
+<h3 id="su">su</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">su 用户名 #切换用户<br>su -用户名 #如果想在切换用户之后使用新用户的工作环境,可以在su和username之间加-<br></code></pre></td></tr></table></figure>
+<h3 id="sudo">sudo</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo 命令 # 以管理员的权限运行命令<br>sudo su #从普通用户切换到root用户<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-i</code>:为了频繁的执行某些只有超级用户才能执行的权限,而不用每次输入密码,可以使用该命令,提示输入密码时该密码为当前账户的密码,没有时间限制,执行该命令后提示符变为&quot;#”而不是&quot;$”,想退回普通账户时可以执行&quot;exit”或&quot;logout”</li>
+</ul>
+<h3 id="exit">exit</h3>
+<ul>
+<li><code>exit</code>命令用于退出目前的shell</li>
+<li>执行exit可使shell以指定的状态值退出,若不设置状态值参数,则shell以预设值退出,状态值0代表执行成功,其他值代表执行失败,exit也可用在script,离开正在执行的script,回到shell</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">exit #退回原来的用户,等同于&lt;C-r&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="passwd">passwd</h3>
+<ul>
+<li>设置用户的密码</li>
+</ul>
+<p><strong>root用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> passwd [username]</span><br>new password: #输入密码<br>re password: #重新输入密码<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-l 用户名</code>:锁定之后这个用户不能登录</li>
+<li><code>-u 用户名</code>:解锁某个用户</li>
+<li><code>-d 用户名</code>:没有密码也不能登录</li>
+<li><code>-S 或 --status 用户名</code>:查看用户状态信息</li>
+</ul>
+<p><strong>普通用户</strong></p>
+<ul>
+<li>只能修改自己的密码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> passwd</span><br>(current) UNIX password:<br>Enter new UNIX password:<br>Retype new UNIX password:<br></code></pre></td></tr></table></figure>
+<h3 id="hostname">hostname</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">hostname #查看主机名<br>hostname 主机名 #修改主机名(临时修改)<br></code></pre></td></tr></table></figure>
+<h3 id="write">write</h3>
+<p>write命令用于向指定登录用户终端上发送信息,通过write命令可传递信息给另一位登入系统的用户,当输入完毕后,键入EOF表示信息结束,write命令就会将信息传给对方,如果接收信息的用户不只登入本地主机一次,你可以指定接收信息的终端机编号</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">write</span><span class="hljs-params">(参数)</span></span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>用户</strong>:指定要接受信息的登录用户</li>
+<li><strong>登陆终端</strong>:指定接收信息的用户的登录终端(ttyname)</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>传信息给Rollaend,此时Rollaend只有一个tty:</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">write</span> Rollaend<br></code></pre></td></tr></table></figure>
+<ul>
+<li>接下来就是将信息打上去,结束请Ctrl+C:</li>
+<li>传信息给Rollaend,Rollaend的tty有pts/2,pts/3:</li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">write</span> Rollaend <span class="hljs-keyword">pts</span>/<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>接下来就是将信息打上去,结束请Ctrl+C:</li>
+<li>若对方设定<code>mesg n</code>,则此时信息将无法传给对方</li>
+</ul>
+<h3 id="wall">wall</h3>
+<p>wall命令用于向系统当前所有打开的终端上输出信息,通过wall命令可将信息发送给每位同意接收公众信息的终端机用户,若不给予其信息内容,则wall命令会从标准输入设备读取数据,然后再把所得到的数据传送给所有终端机用户</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">wall</span><span class="hljs-params">(参数)</span></span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>消息</code>:指定广播消息</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">$ wall <span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> a test line<br><br>Broadcast message from root (pts/<span class="hljs-number">1</span>) (Fri Dec <span class="hljs-number">20</span> <span class="hljs-number">11</span>:<span class="hljs-number">36</span>:<span class="hljs-number">51</span> <span class="hljs-number">2013</span>):<br><br><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> a test line<br></code></pre></td></tr></table></figure>
+<h2 id="用户组管理">用户组管理</h2>
+<ul>
+<li>每个用户都有一个用户组,系统可以对一个用户组中的所有用户进行集中管理(开发,测试,运维, root),不同Linux 系统对用户组的规定有所不同,如Linux下的用户属于与它同名的用户组,这个用户 组在创建用户时同时创建</li>
+<li>用户组的管理涉及用户组的添加,删除和修改,组的增加,删除和修改实际上就是对<code>/etc/group</code>文件的更新</li>
+</ul>
+<h3 id="groupadd">groupadd</h3>
+<ul>
+<li>添加用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupadd 组名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-g id</code>: 创建完用户组后可以得到一个组的id,这个id是可以指定的,如果不指定就是自增1</li>
+</ul>
+<h3 id="groupdel">groupdel</h3>
+<ul>
+<li>删除用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupdel 组名<br></code></pre></td></tr></table></figure>
+<h3 id="groupmod">groupmod</h3>
+<ul>
+<li>修改用户组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupmod -选项 修改内容 组名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-g id</code>:修改组id</li>
+<li><code>-n 新组名</code>:修改新组名</li>
+</ul>
+<h3 id="gpasswd">gpasswd</h3>
+<ul>
+<li>使用gpasswd命令设定用户组密码</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">gpasswd <span class="hljs-selector-attr">[可选项]</span> 组名<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-a</code>:添加用户到组</li>
+<li><code>-d</code>:从组删除用户</li>
+<li><code>-A</code>:指定管理员</li>
+<li><code>-M</code>:指定组成员和-A的用途差不多</li>
+<li><code>-r</code>:删除密码</li>
+<li><code>-R</code>:限制用户登入组,只有组中的成员才可以用newgrp加入该组</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>如系统有个 peter 账户,该账户本身不是 groupname 群组的成员,使用 newgrp 需要输入密码即可</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">gpasswd groupname</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>让使用者暂时加入成为该组成员,之后 peter 建立的文件 group 也会是 groupname,所以该方式可以暂时让 peter 建立文件时使用其他的组,而不是 peter 本身所在的组</li>
+<li>所以使用 gpasswd groupname 设定密码,就是让知道该群组密码的人可以暂时切换具备 groupname 群组功能的</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">gpasswd -<span class="hljs-selector-tag">A</span> peter users<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样 peter 就是 users 群组的管理员,就可以执行下面的操作:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">gpasswd -<span class="hljs-selector-tag">a</span> mary users<br>gpasswd -<span class="hljs-selector-tag">a</span> allen users<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:添加用户到某一个组 可以使用 <strong>usermod -G group_name user_name</strong> 这个命令可以添加一个用户到指定的组,但是以前添加的组就会清空掉</li>
+<li>所以想要添加一个用户到一个组,同时保留以前添加的组时,请使用 gpasswd 这个命令来添加操作用户:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">gpasswd -<span class="hljs-selector-tag">a</span> user_name group_name<br></code></pre></td></tr></table></figure>
+<h3 id="newgrp">newgrp</h3>
+<ul>
+<li>用户可以在登录后,使用命令newgrp切换到其他用户组,这个命令的参数就是目的用户组</li>
+<li>newgrp 指令类似 login 指令,它是以相同的帐号,另一个群组名称,再次登入系统,欲使用 newgrp 指令切换群组,您必须是该群组的用户,否则将无法登入指定的群组</li>
+<li>单一用户如果同时隶属多个群组,需利用交替用户的设置,若不指定群组名称,则 newgrp 指令会登入该用户名称的预设群组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">newgrp 组名<br></code></pre></td></tr></table></figure>
+<h2 id="配置文件">配置文件</h2>
+<h3 id="etc-passwd">/etc/passwd</h3>
+<ul>
+<li>用户组的所有信息都存放在/etc/group文件中,此文件的格式是由冒号(:)隔开若干个字段</li>
+<li>登录口令:把真正的加密后的用户口令字存放到<code>/etc/shadow</code>文件中</li>
+<li>0~999为系统保留的系统标识号</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">用户名:口令(登录密码x,不可见):用户标识号:组标识号:注释性描述:主目录:登录Shell<br><br>root:x:0:0:root:/root:/bin/bash<br>daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin # 无法登录该用户<br>bin:x:2:2:bin:/bin:/usr/sbin/nologin<br>sys:x:3:3:sys:/dev:/usr/sbin/nologin<br>sync:x:4:65534:sync:/bin:/bin/sync<br>games:x:5:60:games:/usr/games:/usr/sbin/nologin<br>man:x:6:12:man:/var/cache/man:/usr/sbin/nologin<br>lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin<br>mail:x:8:8:mail:/var/mail:/usr/sbin/nologin<br>news:x:9:9:news:/var/spool/news:/usr/sbin/nologin<br></code></pre></td></tr></table></figure>
+<h3 id="etc-shadow">/etc/shadow</h3>
+<ul>
+<li>用于存储 Linux 系统中用户的密码信息</li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs dns">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志<br><br>root:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>daemon:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>bin:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>sys:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>sync:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>games:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>man:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>lp:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>mail:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>news:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>uucp:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>proxy:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>www-data:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>backup:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>list:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>irc:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>gnats:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br>nobody:*:<span class="hljs-number">18646:0</span>:<span class="hljs-number">99999:7</span>:::<br></code></pre></td></tr></table></figure>
+<h3 id="etc-group">/etc/group</h3>
+<ul>
+<li>存放用户组的所有信息</li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">组名:口令:组标识号:组内用户列表</span><br><br><span class="hljs-section">root:x:0:</span><br><span class="hljs-section">daemon:x:1:</span><br><span class="hljs-section">bin:x:2:</span><br><span class="hljs-section">sys:x:3:</span><br><span class="hljs-section">adm:x:4:</span><br><span class="hljs-section">tty:x:5:</span><br><span class="hljs-section">disk:x:6:</span><br><span class="hljs-section">lp:x:7:</span><br><span class="hljs-section">mail:x:8:</span><br><span class="hljs-section">news:x:9:</span><br><span class="hljs-section">uucp:x:10:</span><br><span class="hljs-section">man:x:12:</span><br><span class="hljs-section">proxy:x:13:</span><br><span class="hljs-section">kmem:x:15:</span><br><span class="hljs-section">dialout:x:20:</span><br><span class="hljs-section">fax:x:21:</span><br><span class="hljs-section">voice:x:22:</span><br><span class="hljs-section">cdrom:x:24:</span><br><span class="hljs-section">floppy:x:25:</span><br></code></pre></td></tr></table></figure>
+<h3 id="etc-gshadow">/etc/gshadow</h3>
+<ul>
+<li>用于存储 Linux 系统中用户组的密码信息</li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">组名:加密密码:组管理员:组附加用户列表</span><br><br><span class="hljs-section">root:*::</span><br><span class="hljs-section">daemon:*::</span><br><span class="hljs-section">bin:*::</span><br><span class="hljs-section">sys:*::</span><br><span class="hljs-section">adm:*::</span><br><span class="hljs-section">tty:*::</span><br><span class="hljs-section">disk:*::</span><br><span class="hljs-section">lp:*::</span><br><span class="hljs-section">mail:*::</span><br><span class="hljs-section">news:*::</span><br><span class="hljs-section">uucp:*::</span><br><span class="hljs-section">man:*::</span><br><span class="hljs-section">proxy:*::</span><br><span class="hljs-section">kmem:*::</span><br><span class="hljs-section">dialout:*::</span><br><span class="hljs-section">fax:*::</span><br><span class="hljs-section">voice:*::</span><br><span class="hljs-section">cdrom:*::</span><br><span class="hljs-section">floppy:*::</span><br><span class="hljs-section">tape:*::</span><br><span class="hljs-section">sudo:*::</span><br><span class="hljs-section">audio:*::</span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/">System</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/System/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/System/Linux/%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux 其他命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Tools/Homebrew/%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">HomeBrew 命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java Concurrent集合 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Concurrent集合">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:38" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Concurrent集合</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java Concurrent集合</h1>
+<ul>
+<li>使用<code>java.util.concurrent</code>包提供的线程安全的并发集合可以大大简化多线程编程</li>
+<li>尽量使用Java标准库提供的并发集合,避免自己编写同步代码</li>
+<li>针对<code>List</code>,<code>Map</code>,<code>Set</code>,<code>Deque</code>等,<code>java.util.concurrent</code>包也提供了对应的并发集合类:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">interface</th>
+<th style="text-align:left">non-thread-safe</th>
+<th style="text-align:left">thread-safe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">List</td>
+<td style="text-align:left">ArrayList</td>
+<td style="text-align:left">CopyOnWriteArrayList</td>
+</tr>
+<tr>
+<td style="text-align:left">Map</td>
+<td style="text-align:left">HashMap</td>
+<td style="text-align:left">ConcurrentHashMap</td>
+</tr>
+<tr>
+<td style="text-align:left">Set</td>
+<td style="text-align:left">HashSet / TreeSet</td>
+<td style="text-align:left">CopyOnWriteArraySet</td>
+</tr>
+<tr>
+<td style="text-align:left">Queue</td>
+<td style="text-align:left">ArrayDeque / LinkedList</td>
+<td style="text-align:left">ArrayBlockingQueue / LinkedBlockingQueue</td>
+</tr>
+<tr>
+<td style="text-align:left">Deque</td>
+<td style="text-align:left">ArrayDeque / LinkedList</td>
+<td style="text-align:left">LinkedBlockingDeque</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>java.util.Collections</code>工具类还提供了一些旧的线程安全集合转换器,可以这么用:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Collections.synchronizedMap(<span class="hljs-keyword">new</span> HashMap(););<br>Collections.synchronizedSet(<span class="hljs-keyword">new</span> HashSet&lt;&gt;());<br></code></pre></td></tr></table></figure>
+<ul>
+<li>但是它实际上是用一个包装类包装了非线程安全的集合,然后对所有读写方法都用<code>synchronized</code>加锁,这样获得的线程安全集合的性能比<code>java.util.concurrent</code>集合要低很多,所以不推荐使用</li>
+</ul>
+<h2 id="CopyOnWrite">CopyOnWrite</h2>
+<ul>
+<li>CopyOnWrite(写入时复制COW):计算机程序设计领域的一种优化策略,多个线程调用的时候,list,读取的时候,固定的,写入(覆盖),在写入的时候避免覆盖,造成数据问题</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.concurrent.CopyOnWriteArrayList;<br><span class="hljs-comment">// java.util.ConcurrentModificationException 并发修改异常!</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListTest</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>    List&lt;String&gt; list = <span class="hljs-keyword">new</span> CopyOnWriteArrayList&lt;&gt;();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i++) &#123;<br>      <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>        list.add(UUID.randomUUID().toString().substring(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>));<br>        System.out.println(list);<br>      &#125;,String.valueOf(i)).start();<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SetTest</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set&lt;String&gt; set = <span class="hljs-keyword">new</span> CopyOnWriteArraySet&lt;&gt;();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;=<span class="hljs-number">30</span> ; i++) &#123;<br>      <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>        set.add(UUID.randomUUID().toString().substring(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>));<br>        System.out.println(set); &#125;,String.valueOf(i)).start();<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="ConcurrentHashMap">ConcurrentHashMap</h2>
+<ul>
+<li>
+<p>Concurrenthashmap是线程安全的</p>
+</li>
+<li>
+<p>JDK1.7</p>
+<ul>
+<li>
+<p>采用Segment + HashEntry的方式进行实现的,Segment 类继承于 ReentrantLock 类,从而使得 Segment 对象能充当锁的角色,每个 Segment 对象用来守护其(成员对象 table 中)包含的若干个桶</p>
+</li>
+<li>
+<p>size的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:</p>
+<ol>
+<li>如果前后两次计算结果相同,则说明计算出来的元素个数是准确的</li>
+<li>如果前后两次计算结果都不同,则给每个Segment进行加锁,再计算一次元素的个数</li>
+</ol>
+</li>
+<li>
+<p>ConcurrentHashMap 类中包含两个静态内部类 HashEntry 和 Segment,HashEntry 用来封装映射表的键 / 值对,Segment 用来充当锁的角色,每个 Segment 对象守护整个散列映射表的若干个桶,每个桶是由若干个 HashEntry 对象链接起来的链表,一个 ConcurrentHashMap 实例中包含由若干个 Segment 对象组成的数组,HashEntry 用来封装散列映射表中的键值对,在 HashEntry 类中,key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型</p>
+</li>
+<li>
+<p>在ConcurrentHashMap 中,在散列时如果产生&quot;碰撞”,将采用&quot;分离链接法”来处理&quot;碰撞”:把&quot;碰撞”的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反</p>
+</li>
+</ul>
+</li>
+<li>
+<p>JDK1.8</p>
+<ul>
+<li>放弃了Segment臃肿的设计,取而代之的是采用Node + CAS + Synchronized来保证并发安全进行实现</li>
+<li>使用一个volatile类型的变量baseCount记录元素的个数,当插入新数据或则删除数据时,会通过addCount()方法更新baseCount,通过累加baseCount和CounterCell数组中的数量,即可得到元素的总个数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapTest</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;=<span class="hljs-number">30</span>; i++) &#123;<br>      <span class="hljs-keyword">new</span> Thread(()-&gt;&#123;<br>        map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring( <span class="hljs-number">0</span>,<span class="hljs-number">5</span>));<br>        System.out.println(map); &#125;,String.valueOf(i)).start();<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="BlockingQueue">BlockingQueue</h2>
+<h3 id="ArrayBlockingQueue-LinkedBlockingQueue">ArrayBlockingQueue / LinkedBlockingQueue</h3>
+<ul>
+<li>试图插元素到一个满的队列会被阻塞,从空队列里面取元素也会被阻塞</li>
+<li><code>void put(E e)</code>:插入元素,如果队列满则一直等待,插null会抛出NullPointerException,等待的时候被打断会抛出InterruptedException</li>
+<li><code>E take()</code>:拿出队头的元素,返回该元素,队列空一直等待,和put对应</li>
+<li><code>boolean offer(E e,long timeout,TimeUnit unit)</code>:插入元素,成功返回true,队列满则等待一定的时间,如果超时返回false,就是说直接放弃了此次操作</li>
+<li><code>E poll(E e,long timeout,TimeUnit unit)</code>:拿出队头元素,成功返回true,队列满则等待一定的时间,如果超时返回false,和offer对应</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>  ArrayBlockingQueue blockingQueue = <span class="hljs-keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="hljs-number">3</span>);<br>  blockingQueue.put(<span class="hljs-string">&quot;a&quot;</span>);<br>  blockingQueue.put(<span class="hljs-string">&quot;b&quot;</span>);<br>  blockingQueue.put(<span class="hljs-string">&quot;c&quot;</span>);<br>  blockingQueue.put(<span class="hljs-string">&quot;d&quot;</span>); <span class="hljs-comment">// 队列没有位置了,一直阻塞</span><br>  System.out.println(blockingQueue.take());<br>  System.out.println(blockingQueue.take());<br>  System.out.println(blockingQueue.take());<br>  System.out.println(blockingQueue.take()); <span class="hljs-comment">// 队列为空,一直阻塞</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>  ArrayBlockingQueue blockingQueue = <span class="hljs-keyword">new</span> ArrayBlockingQueue&lt;&gt;(<span class="hljs-number">3</span>);<br>  blockingQueue.offer(<span class="hljs-string">&quot;a&quot;</span>);<br>  blockingQueue.offer(<span class="hljs-string">&quot;b&quot;</span>);<br>  blockingQueue.offer(<span class="hljs-string">&quot;c&quot;</span>);<br>  blockingQueue.offer(<span class="hljs-string">&quot;d&quot;</span>,<span class="hljs-number">2</span>,TimeUnit.SECONDS); <span class="hljs-comment">// 等待超过2秒就退出</span><br>  System.out.println(<span class="hljs-string">&quot;===============&quot;</span>);<br>  System.out.println(blockingQueue.poll());<br>  System.out.println(blockingQueue.poll());<br>  System.out.println(blockingQueue.poll());<br>  blockingQueue.poll(<span class="hljs-number">2</span>,TimeUnit.SECONDS); <span class="hljs-comment">// 等待超过2秒就退出</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="LinkedBlockingDeque">LinkedBlockingDeque</h3>
+<ul>
+<li>LinkedBlockingQueue是一个单向链表实现的阻塞队列</li>
+<li>该队列按 FIFO(先进先出)排序元素,新元素插入到队列的尾部,并且队列获取操作会获得位于队列头部的元素</li>
+<li>链接队列的吞吐量通常要高于基于数组的队列,但是在大多数并发应用程序中,其可预知的性能要低</li>
+<li>此外,LinkedBlockingQueue还是可选容量的(防止过度膨胀),即可以指定队列的容量,如果不指定,默认容量大小等于Integer.MAX_VALUE</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedBlockingQueueDemo1</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Queue&lt;String&gt; queue = <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;String&gt;();<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// 同时启动两个线程对queue进行操作!</span><br>    <span class="hljs-keyword">new</span> MyThread(<span class="hljs-string">&quot;ta&quot;</span>).start();<br>    <span class="hljs-keyword">new</span> MyThread(<span class="hljs-string">&quot;tb&quot;</span>).start();<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printAll</span><span class="hljs-params">()</span> </span>&#123;<br>    String value;<br>    Iterator iter = queue.iterator();<br>    <span class="hljs-keyword">while</span>(iter.hasNext()) &#123;<br>      value = (String)iter.next();<br>      System.out.print(value+<span class="hljs-string">&quot;, &quot;</span>);<br>    &#125;<br>    System.out.println();<br>  &#125;<br><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    MyThread(String name) &#123;<br>      <span class="hljs-keyword">super</span>(name);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>      <span class="hljs-keyword">while</span> (i++ &lt; <span class="hljs-number">6</span>) &#123;<br>        String val = Thread.currentThread().getName()+i;<br>        queue.add(val);<br>        printAll();<br>      &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="SynchronousQueue">SynchronousQueue</h3>
+<ul>
+<li>SynchronousQueue,实际上它不是一个真正的队列,因为它不会为队列中元素维护存储空间,与其他队列不同的是,它维护一组线程,这些线程在等待着把元素加入或移出队列</li>
+<li>因为SynchronousQueue没有存储功能,因此put和take会一直阻塞,直到有另一个线程已经准备好参与到交付过程中,仅当有足够多的消费者,并且总是有一个消费者准备好获取交付的工作时,才适合使用同步队列</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronousQueueExample</span> </span>&#123;<br><br>  <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronousQueueProducer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <span class="hljs-keyword">protected</span> BlockingQueue&lt;String&gt; blockingQueue;<br>    <span class="hljs-keyword">final</span> Random random = <span class="hljs-keyword">new</span> Random();<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SynchronousQueueProducer</span><span class="hljs-params">(BlockingQueue&lt;String&gt; queue)</span> </span>&#123;<br>      <span class="hljs-keyword">this</span>.blockingQueue = queue;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>          String data = UUID.randomUUID().toString();<br>          System.out.println(<span class="hljs-string">&quot;Put: &quot;</span> + data);<br>          blockingQueue.put(data);<br>          Thread.sleep(<span class="hljs-number">1000</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>          e.printStackTrace();<br>        &#125;<br>      &#125;<br>    &#125;<br><br>  &#125;<br><br>  <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynchronousQueueConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>    <span class="hljs-keyword">protected</span> BlockingQueue&lt;String&gt; blockingQueue;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SynchronousQueueConsumer</span><span class="hljs-params">(BlockingQueue&lt;String&gt; queue)</span> </span>&#123;<br>      <span class="hljs-keyword">this</span>.blockingQueue = queue;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>          String data = blockingQueue.take();<br>          System.out.println(Thread.currentThread().getName()<br>                             + <span class="hljs-string">&quot; take(): &quot;</span> + data);<br>          Thread.sleep(<span class="hljs-number">2000</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>          e.printStackTrace();<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> BlockingQueue&lt;String&gt; synchronousQueue = <span class="hljs-keyword">new</span> SynchronousQueue&lt;String&gt;();<br>    SynchronousQueueProducer queueProducer = <span class="hljs-keyword">new</span> SynchronousQueueProducer(<br>      synchronousQueue);<br>    <span class="hljs-keyword">new</span> Thread(queueProducer).start();<br>    SynchronousQueueConsumer queueConsumer1 = <span class="hljs-keyword">new</span> SynchronousQueueConsumer(<br>      synchronousQueue);<br>    <span class="hljs-keyword">new</span> Thread(queueConsumer1).start();<br>    SynchronousQueueConsumer queueConsumer2 = <span class="hljs-keyword">new</span> SynchronousQueueConsumer(<br>      synchronousQueue);<br>    <span class="hljs-keyword">new</span> Thread(queueConsumer2).start();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/Internet/TCPIP/TCP%E8%BF%9E%E6%8E%A5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TCP 连接</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Distributed/ZooKeeper/zkCli/">
+                        <span class="hidden-mobile">Zookeeper zkCli</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

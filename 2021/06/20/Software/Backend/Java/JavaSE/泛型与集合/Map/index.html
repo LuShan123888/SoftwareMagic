@@ -1,0 +1,1006 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Java Map - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Map">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:31" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      80
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Map</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java Map</h1>
+<ul>
+<li>除了Collection接口表示的这种单一对象数据集合,对于<strong>关键字=值</strong>表示的数据集合在CollectionAPI中提供了Map接口</li>
+<li>在 Map 中它保证了 key 与 value 之间的一一对应关系,也就是说一个 key 对应一个 value,所以它不能存在相同的 key 值,当然 value 值可以相同</li>
+<li>Map接口及其子接口的实现层次如下图所示,其中,<code>K</code>为关键字对象的数据类型,而<code>V</code>类映射值对象的数据类型</li>
+</ul>
+<p><img src="https://www.plantuml.com/plantuml/svg/XPBVIiCm58Vl-nGHBmP5cgxRiCeOqs4PE6MuwNriZsrOcfGafQZu2leGuWDuxVEehs6QJQqRQYy2vvVqEr_-39KcKkUK9pafd1RQeZncPG98Pv23LvGvQwQPreNQnrYIoakfpihBKe6C1TV0jHUB74_AMKPuE-Y4OOWZoa3Xd2WD4ayPuVhyP88RwBxIrmm63XS6VkiWyqr9ab2UehPlonCYKyfHQ8j34YzIAKgUZ0GJ4bKPrM1dnaBI6wD1s06ZAS-D3ehD0D9Edot_aHmaQlTiDA4SbfHjVnHsZoAR6lb4LBQ_S-T88VJfjzeFbo_Fm9Oj2vpLsq6Xvw-tYABERjV_PnDDoz2qTnYGgz_wD-6ZlQWNR202V_r03P98AQeLh-dS_UDGwdIUqNZ1GIaKU3MeZrTNvngjed-ySp5uktzwVNXqN1UDYSe-q_VdbpgQ2QaXsLZgeha4QAuTWdcBo_Vu0G00" srcset="/img/loading.gif" lazyload alt=""></p>
+<ul>
+<li>
+<p>Map是包括了关键字,值以及它们的映射关系的集合,可分别使用如下方法得到</p>
+<ul>
+<li><code>public Set&lt;K&gt; keySet()</code>:关键字的集合</li>
+<li><code>public Collection&lt;V&gt; values()</code>:值的集合</li>
+<li><code>public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code>:</li>
+</ul>
+</li>
+<li>
+<p>Map中还定义了对Map数据集合的操作方法,如下所示:</p>
+<ul>
+<li><code>public void clear()</code>:清空整个数据集合</li>
+<li><code>public V get(K key)</code>:根据关键字得到对应值</li>
+<li><code>public V put(K key,V value)</code>:加入新的&quot;关键字-值”,如果该映射关系在map中已存在,则修改映射的值,返回原来的值,如果该映射关系在map中不存在,则返回null</li>
+<li><code>public V remove(Object key)</code>:删除Map中关键字所对应的映射关系,返回结果同<code>put()</code>方法</li>
+<li><code>public boolean equals(Object obj)</code>:判断Map对象与参数对象是否等价 ,两个 Map相等,当且仅当其<code>entrySet()</code>得到的集合是一致的</li>
+<li><code>public boolean containsKey(Object key)</code>:判断在Map中是否存在与键值匹配的映射关系</li>
+<li><code>public boolean contains Values(Object value)</code>:判断在Map中是否存在与键值匹配的映射关系</li>
+</ul>
+</li>
+<li>
+<p>实现Map接口的类有很多,其中最常用的有HashMap和Hashtable,两者使用上的最大差别是,Hashtable是线程访问安全的,而HashMap需要提供外同步,Hashtable还有个子类Properties,其关键字和值只能是String类型,经常被用来存储和访问配置信息</p>
+</li>
+</ul>
+<h2 id="HashMap">HashMap</h2>
+<ul>
+<li>HashMap以哈希表数据结构实现,查找对象时通过哈希函数计算其位置,它是为快速查询而设计的,其内部定义了一个 hash 表数组<code>Entry[] table</code>,元素会通过哈希转换函数将元素的哈希地址转换成数组中存放的索引,如果有冲突,则使用散列链表的形式将所有相同哈希地址的元素串起来,可以通过查看<code>HashMap.Entry</code>的源码它是一个单链表结构</li>
+<li>HashMap 是线程不安全的,不是同步的</li>
+<li>JDK 1.7 采用头插法来添加链表元素,存在链表成环的问题,1.8 中做了优化,采用尾插法来添加链表元素</li>
+</ul>
+<blockquote>
+<p><strong>Hash冲突处理</strong></p>
+<ul>
+<li>冲突处理分为以下四种方式:
+<ul>
+<li><strong>开放地址法</strong>:出现冲突后按照一定算法查找一个空位置存放
+<ul>
+<li><strong>线性探测再散列</strong>:线性探测方法就是线性探测空白单元,当数据通过哈希函数计算应该放在700这个位置,但是700这个位置已经有数据了,那么接下来就应该查看701位置是否空闲,再查看702位置,依次类推</li>
+<li><strong>二次探测再散列</strong>:二次探测是过程是x+1,x+4,x+9,以此类推,<strong>二次探测的步数是原始位置相隔的步数的平方</strong></li>
+<li><strong>再哈希法</strong>:出现冲突后采用其他的哈希函数计算,直到不再冲突为止</li>
+</ul>
+</li>
+<li><strong>链地址法(拉链法)</strong>:不同与前两种方法,他是在出现冲突的地方存储一个链表,所有的同义词记录都存在其中</li>
+<li><strong>建立公共溢出区</strong>:建立公共溢出区的基本思想是:假设哈希函数的值域是[1,m-1],则设向量HashTable[0…m-1]为基本表,每个分量存放一个记录,另外设向量OverTable[0…v]为溢出表,所有关键字和基本表中关键字为同义词的记录,不管它们由哈希函数得到的哈希地址是什么,一旦发生冲突,都填入溢出表</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Map</span>接口的使用 </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map&lt;String,String&gt; m = <span class="hljs-keyword">new</span> HashMap&lt;String, String&gt;();<br>    m.put(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;2003011&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;李四&quot;</span>,<span class="hljs-string">&quot;2003012&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;王五&quot;</span>,<span class="hljs-string">&quot;2003013&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;2003001&quot;</span>);<span class="hljs-comment">//添加一个已有相同关键字的元素时将修改元素的键值</span><br>    Set&lt;String&gt; keys = m.keySet();<span class="hljs-comment">//通过Map对象的keySet()方法得到关键字的集合</span><br>    <span class="hljs-keyword">for</span> (Iterator&lt;String&gt; i = keys.iterator();i.hasNext();)&#123;<br>      System.out.print(i.next()+<span class="hljs-string">&quot;,&quot;</span>);<br>    &#125;<br>    System.out.println(m.values());<br>  &#125;<br>&#125;<br><br>李四,张三,王五<br>  [<span class="hljs-number">2003012</span>, <span class="hljs-number">2003001</span>, <span class="hljs-number">2003013</span>]<br></code></pre></td></tr></table></figure>
+<h2 id="LinkedHashMap">LinkedHashMap</h2>
+<ul>
+<li>LinkedHashMap 是 HashMap 的一个子类,它保留插入的顺序,如果需要输出的顺序和输入时的相同,那么就选用 LinkedHashMap</li>
+<li>**LinkedHashMap 是 Map 接口的哈希表和链接列表实现,具有可预知的迭代顺序,**此实现提供所有可选的映射操作,并允许使用 null 值和 null 键,此类不保证映射的顺序,特别是它不保证该顺序恒久不变</li>
+<li>LinkedHashMap 实现与 HashMap 的不同之处在于,前者维护着一个运行于所有条目的双重链接列表,此链接列表定义了迭代顺序,该迭代顺序可以是插入顺序或者是访问顺序</li>
+<li>根据链表中元素的顺序可以分为:按插入顺序的链表,和按访问顺序 (调用 get 方法) 的链表,默认是按插入顺序排序,如果是访问顺序,那put和get操作已存在的Entry时,都会把Entry移动到双向链表的表尾(其实是先删除再插入)</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>此实现不是同步的,如果多个线程同时访问链接的哈希映射,而其中至少一个线程从结构上修改了该映射,则它必须保持外部同步</li>
+<li>由于 LinkedHashMap 需要维护元素的插入顺序,因此性能略低于 HashMap 的性能,但在迭代访问 Map 里的全部元素时将有很好的性能,因为它以链表来维护内部顺序</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Map</span>接口的使用 </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map&lt;String,String&gt; m = <span class="hljs-keyword">new</span> LinkedHashMap&lt;String, String&gt;();<br>    m.put(<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;2003011&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;李四&quot;</span>,<span class="hljs-string">&quot;2003012&quot;</span>);<br>    m.put(<span class="hljs-string">&quot;王五&quot;</span>,<span class="hljs-string">&quot;2003013&quot;</span>);<br>    Set&lt;String&gt; keys = m.keySet();<br>    <span class="hljs-keyword">for</span> (Iterator&lt;String&gt; i = keys.iterator();i.hasNext();)<br>      System.out.print(i.next()+<span class="hljs-string">&quot;,&quot;</span>);<br>    System.out.println(m.values());<br>  &#125;<br>&#125;<br><br>张三,李四,王五<br>  [<span class="hljs-number">2003012</span>, <span class="hljs-number">2003001</span>, <span class="hljs-number">2003013</span>]<br></code></pre></td></tr></table></figure>
+<h3 id="定义">定义</h3>
+<ul>
+<li>LinkedHashMap继承了HashMap,所以它们有很多相似的地方</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedHashMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;</span><br><span class="hljs-class">  <span class="hljs-keyword">extends</span> <span class="hljs-title">HashMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;</span><br><span class="hljs-class">  <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;</span><br><span class="hljs-class"></span>&#123;<br></code></pre></td></tr></table></figure>
+<h4 id="构造方法">构造方法</h4>
+<ul>
+<li>LinkedHashMap提供了多个构造方法,我们先看空参的构造方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedHashMap</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-comment">// 调用HashMap的构造方法,其实就是初始化Entry[] table</span><br>  <span class="hljs-keyword">super</span>();<br>  <span class="hljs-comment">// 这里是指是否基于访问排序,默认为false</span><br>  accessOrder = <span class="hljs-keyword">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>首先使用super调用了父类HashMap的构造方法,其实就是根据初始容量,负载因子去初始化Entry[] table</li>
+<li>然后把accessOrder设置为false,这就跟存储的顺序有关了,LinkedHashMap存储数据是有序的,而且分为两种:插入顺序和访问顺序</li>
+<li>这里accessOrder设置为false,表示不是访问顺序而是插入顺序存储的,这也是默认值,表示LinkedHashMap中存储的顺序是按照调用put方法插入的顺序进行排序的,LinkedHashMap也提供了可以设置accessOrder的构造方法,我们来看看这种模式下,它的顺序有什么特点？</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 第三个参数用于指定accessOrder值</span><br><span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; linkedHashMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;(<span class="hljs-number">16</span>, <span class="hljs-number">0.75</span>f, <span class="hljs-keyword">true</span>);<br>linkedHashMap.put(<span class="hljs-string">&quot;name1&quot;</span>, <span class="hljs-string">&quot;josan1&quot;</span>);<br>linkedHashMap.put(<span class="hljs-string">&quot;name2&quot;</span>, <span class="hljs-string">&quot;josan2&quot;</span>);<br>linkedHashMap.put(<span class="hljs-string">&quot;name3&quot;</span>, <span class="hljs-string">&quot;josan3&quot;</span>);<br>System.out.println(<span class="hljs-string">&quot;开始时顺序:&quot;</span>);<br><span class="hljs-built_in">Set</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; <span class="hljs-keyword">set</span> = linkedHashMap.entrySet();<br><span class="hljs-built_in">Iterator</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; iterator = <span class="hljs-keyword">set</span>.iterator();<br><span class="hljs-keyword">while</span>(iterator.hasNext()) &#123;<br>  Entry entry = iterator.next();<br>  <span class="hljs-built_in">String</span> key = (<span class="hljs-built_in">String</span>) entry.getKey();<br>  <span class="hljs-built_in">String</span> value = (<span class="hljs-built_in">String</span>) entry.getValue();<br>  System.out.println(<span class="hljs-string">&quot;key:&quot;</span> + key + <span class="hljs-string">&quot;,value:&quot;</span> + value);<br>&#125;<br>System.out.println(<span class="hljs-string">&quot;通过get方法,导致key为name1对应的Entry到表尾&quot;</span>);<br>linkedHashMap.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;name1&quot;</span>);<br><span class="hljs-built_in">Set</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; set2 = linkedHashMap.entrySet();<br><span class="hljs-built_in">Iterator</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; iterator2 = set2.iterator();<br><span class="hljs-keyword">while</span>(iterator2.hasNext()) &#123;<br>  Entry entry = iterator2.next();<br>  <span class="hljs-built_in">String</span> key = (<span class="hljs-built_in">String</span>) entry.getKey();<br>  <span class="hljs-built_in">String</span> value = (<span class="hljs-built_in">String</span>) entry.getValue();<br>  System.out.println(<span class="hljs-string">&quot;key:&quot;</span> + key + <span class="hljs-string">&quot;,value:&quot;</span> + value);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>因为调用了get(“name1”)导致了name1对应的Entry移动到了最后,这里只要知道LinkedHashMap有插入顺序和访问顺序两种就可以,后面会详细讲原理</li>
+<li>还记得,上一篇HashMap解析中提到,在HashMap的构造函数中,调用了init方法,而在HashMap中init方法是空实现,但LinkedHashMap重写了该方法,所以在LinkedHashMap的构造方法里,调用了自身的init方法,init的重写实现如下:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment"><span class="markdown">/<span class="hljs-strong">**</span></span></span><br><span class="hljs-comment"><span class="markdown"><span class="hljs-bullet">     *</span> Called by superclass constructors and pseudoconstructors (clone,</span></span><br><span class="hljs-comment"><span class="markdown"><span class="hljs-bullet">     *</span> readObject) before any entries </span>are<span class="markdown"> inserted into </span>the<span class="markdown"> map.  Initializes</span></span><br><span class="hljs-comment"><span class="markdown"><span class="hljs-bullet">     *</span> </span>the<span class="markdown"> chain.</span></span><br><span class="hljs-comment"><span class="markdown"><span class="hljs-code">     */</span></span></span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">void</span> init() &#123;<br>  <span class="hljs-comment">// 创建了一个hash=-1,key,value,next都为null的Entry</span><br>  header = <span class="hljs-keyword">new</span> Entry&lt;&gt;(<span class="hljs-number">-1</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>);<br>  <span class="hljs-comment">// 让创建的Entry的before和after都指向自身,注意after不是之前提到的next</span><br>  <span class="hljs-comment">// 其实就是创建了一个只有头部节点的双向链表</span><br>  header.before = header.after = header;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这好像跟我们上一篇HashMap提到的Entry有些不一样,HashMap中静态内部类Entry是这样定义的:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>  <span class="hljs-keyword">final</span> K key;<br>  V value;<br>  Entry&lt;K,V&gt; next;<br>  <span class="hljs-built_in">int</span> hash;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>没有before和after属性啊!原来,LinkedHashMap有自己的静态内部类Entry,它继承了HashMap.Entry,定义如下:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment">     * LinkedHashMap entry.</span><br><span class="hljs-comment">     */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span>&lt;</span>K,V&gt; extends HashMap.Entry&lt;K,V&gt; &#123;<br>  <span class="hljs-comment">// These fields comprise the doubly linked list used for iteration.</span><br>  Entry&lt;K,V&gt; before, after;<br><br>  <span class="hljs-built_in">Entry</span>(<span class="hljs-keyword">int</span> hash, K key, V value, HashMap.Entry&lt;K,V&gt; next) &#123;<br>    <span class="hljs-built_in">super</span>(hash, key, value, next);<br>  &#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>所以LinkedHashMap构造函数,主要就是调用HashMap构造函数初始化了一个Entry[] table,然后调用自身的init初始化了一个只有头结点的双向链表,完成了如下操作:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222855769.png" srcset="/img/loading.gif" lazyload alt="image-20210421222855769" style="zoom:50%;" />
+<h3 id="put方法">put方法</h3>
+<ul>
+<li>LinkedHashMap没有重写put方法,所以还是调用HashMap得到put方法,如下:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">put</span>(<span class="hljs-params">K key, V <span class="hljs-keyword">value</span></span>)</span> &#123;<br>  <span class="hljs-comment">// 对key为null的处理</span><br>  <span class="hljs-keyword">if</span> (key == <span class="hljs-literal">null</span>)<br>    <span class="hljs-keyword">return</span> putForNullKey(<span class="hljs-keyword">value</span>);<br>  <span class="hljs-comment">// 计算hash</span><br>  <span class="hljs-built_in">int</span> hash = hash(key);<br>  <span class="hljs-comment">// 得到在table中的index</span><br>  <span class="hljs-built_in">int</span> i = indexFor(hash, table.length);<br>  <span class="hljs-comment">// 遍历table[index],是否key已经存在,存在则替换,并返回旧值</span><br>  <span class="hljs-keyword">for</span> (Entry&lt;K,V&gt; e = table[i]; e != <span class="hljs-literal">null</span>; e = e.next) &#123;<br>    Object k;<br>    <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.<span class="hljs-keyword">equals</span>(k))) &#123;<br>      V oldValue = e.<span class="hljs-keyword">value</span>;<br>      e.<span class="hljs-keyword">value</span> = <span class="hljs-keyword">value</span>;<br>      e.recordAccess(<span class="hljs-keyword">this</span>);<br>      <span class="hljs-keyword">return</span> oldValue;<br>    &#125;<br>  &#125;<br><br>  modCount++;<br>  <span class="hljs-comment">// 如果key之前在table中不存在,则调用addEntry,LinkedHashMap重写了该方法</span><br>  addEntry(hash, key, <span class="hljs-keyword">value</span>, i);<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们看看LinkedHashMap的addEntry方法:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addEntry</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> hash, K key, V <span class="hljs-keyword">value</span>, <span class="hljs-built_in">int</span> bucketIndex</span>)</span> &#123;<br>  <span class="hljs-comment">// 调用父类的addEntry,增加一个Entry到HashMap中</span><br>  super.addEntry(hash, key, <span class="hljs-keyword">value</span>, bucketIndex);<br><br>  <span class="hljs-comment">// removeEldestEntry方法默认返回false,不用考虑</span><br>  Entry&lt;K,V&gt; eldest = header.after;<br>  <span class="hljs-keyword">if</span> (removeEldestEntry(eldest)) &#123;<br>    removeEntryForKey(eldest.key);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这里调用了父类HashMap的addEntry方法,如下:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addEntry</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> hash, K key, V <span class="hljs-keyword">value</span>, <span class="hljs-built_in">int</span> bucketIndex</span>)</span> &#123;<br>  <span class="hljs-comment">// 扩容相关</span><br>  <span class="hljs-keyword">if</span> ((size &gt;= threshold) &amp;&amp; (<span class="hljs-literal">null</span> != table[bucketIndex])) &#123;<br>    resize(<span class="hljs-number">2</span> * table.length);<br>    hash = (<span class="hljs-literal">null</span> != key) ? hash(key) : <span class="hljs-number">0</span>;<br>    bucketIndex = indexFor(hash, table.length);<br>  &#125;<br>  <span class="hljs-comment">// LinkedHashMap进行了重写</span><br>  createEntry(hash, key, <span class="hljs-keyword">value</span>, bucketIndex);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>前面是扩容相关的代码,在上一篇HashMap解析中已经讲过了,这里主要看createEntry方法,LinkedHashMap进行了重写</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createEntry</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> hash, K key, V <span class="hljs-keyword">value</span>, <span class="hljs-built_in">int</span> bucketIndex</span>)</span> &#123;<br>  HashMap.Entry&lt;K,V&gt; old = table[bucketIndex];<br>  <span class="hljs-comment">// e就是新创建了Entry,会加入到table[bucketIndex]的表头</span><br>  Entry&lt;K,V&gt; e = <span class="hljs-keyword">new</span> Entry&lt;&gt;(hash, key, <span class="hljs-keyword">value</span>, old);<br>  table[bucketIndex] = e;<br>  <span class="hljs-comment">// 把新创建的Entry,加入到双向链表中</span><br>  e.addBefore(header);<br>  size++;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们来看看LinkedHashMap.Entry的addBefore方法:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addBefore</span><span class="hljs-params">(Entry&lt;K,V&gt; existingEntry)</span> </span>&#123;<br>    after  = existingEntry;<br>    before = existingEntry.before;<br>    before.after = <span class="hljs-keyword">this</span>;<br>    after.before = <span class="hljs-keyword">this</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>从这里就可以看出,当put元素时,不但要把它加入到HashMap中去,还要加入到双向链表中,所以可以看出LinkedHashMap就是HashMap+双向链表,下面用图来表示逐步往LinkedHashMap中添加数据的过程,红色部分是双向链表,黑色部分是HashMap结构,header是一个Entry类型的双向链表表头,本身不存储数据</li>
+<li>首先是只加入一个元素Entry1,假设index为0:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222936322.png" srcset="/img/loading.gif" lazyload alt="image-20210421222936322" style="zoom:50%;" />
+<ul>
+<li>当再加入一个元素Entry2,假设index为15:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421222956770.png" srcset="/img/loading.gif" lazyload alt="image-20210421222956770" style="zoom:50%;" />
+<ul>
+<li>当再加入一个元素Entry3, 假设index也是0:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223014204.png" srcset="/img/loading.gif" lazyload alt="image-20210421223014204" style="zoom:50%;" />
+<ul>
+<li>以上,就是LinkedHashMap的put的所有过程了,总体来看,跟HashMap的put类似,只不过多了把新增的Entry加入到双向列表中</li>
+</ul>
+<h3 id="扩容">扩容</h3>
+<ul>
+<li>在HashMap的put方法中,如果发现前元素个数超过了扩容阀值时,会调用resize方法,如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> newCapacity)</span> </span>&#123;<br>  Entry[] oldTable = table;<br>  <span class="hljs-keyword">int</span> oldCapacity = oldTable.length;<br>  <span class="hljs-keyword">if</span> (oldCapacity == MAXIMUM_CAPACITY) &#123;<br>    threshold = Integer.MAX_VALUE;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  Entry[] newTable = <span class="hljs-keyword">new</span> Entry[newCapacity];<br>  <span class="hljs-keyword">boolean</span> oldAltHashing = useAltHashing;<br>  useAltHashing |= sun.misc.VM.isBooted() &amp;&amp;<br>    (newCapacity &gt;= Holder.ALTERNATIVE_HASHING_THRESHOLD);<br>  <span class="hljs-keyword">boolean</span> rehash = oldAltHashing ^ useAltHashing;<br>  <span class="hljs-comment">// 把旧table的数据迁移到新table</span><br>  transfer(newTable, rehash);<br>  table = newTable;<br>  threshold = (<span class="hljs-keyword">int</span>)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + <span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>LinkedHashMap重写了transfer方法,数据的迁移,它的实现如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">transfer</span><span class="hljs-params">(HashMap.Entry[] newTable, <span class="hljs-keyword">boolean</span> rehash)</span> </span>&#123;<br>    <span class="hljs-comment">// 扩容后的容量是之前的2倍</span><br>    <span class="hljs-keyword">int</span> newCapacity = newTable.length;<br>    <span class="hljs-comment">// 遍历双向链表,把所有双向链表中的Entry,重新计算hash,并加入到新的table中</span><br>    <span class="hljs-keyword">for</span> (Entry&lt;K,V&gt; e = header.after; e != header; e = e.after) &#123;<br>        <span class="hljs-keyword">if</span> (rehash)<br>            e.hash = (e.key == <span class="hljs-keyword">null</span>) ? <span class="hljs-number">0</span> : hash(e.key);<br>        <span class="hljs-keyword">int</span> index = indexFor(e.hash, newCapacity);<br>        e.next = newTable[index];<br>        newTable[index] = e;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以看出,LinkedHashMap扩容时,数据的再散列和HashMap是不一样的</li>
+<li>HashMap是先遍历旧table,再遍历旧table中每个元素的单向链表,取得Entry以后,重新计算hash值,然后存放到新table的对应位置</li>
+<li>LinkedHashMap是遍历的双向链表,取得每一个Entry,然后重新计算hash值,然后存放到新table的对应位置</li>
+<li>从遍历的效率来说,遍历双向链表的效率要高于遍历table,因为遍历双向链表是N次(N为元素个数),而遍历table是N+table的空余个数(N为元素个数)</li>
+</ul>
+<h3 id="双向链表的重排序">双向链表的重排序</h3>
+<ul>
+<li>前面分析的,主要是当前LinkedHashMap中不存在当前key时,新增Entry的情况,当key如果已经存在时,则进行更新Entry的value,就是HashMap的put方法中的如下代码:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">for</span> (Entry&lt;K,V&gt; e = table[i]; e != <span class="hljs-literal">null</span>; e = e.next) &#123;<br>  Object k;<br>  <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.<span class="hljs-keyword">equals</span>(k))) &#123;<br>    V oldValue = e.<span class="hljs-keyword">value</span>;<br>    e.<span class="hljs-keyword">value</span> = <span class="hljs-keyword">value</span>;<br>    <span class="hljs-comment">// 重排序</span><br>    e.recordAccess(<span class="hljs-keyword">this</span>);<br>    <span class="hljs-keyword">return</span> oldValue;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>主要看e.recordAccess(this),这个方法跟访问顺序有关,而HashMap是无序的,所以在HashMap.Entry的recordAccess方法是空实现,但是LinkedHashMap是有序的,LinkedHashMap.Entry对recordAccess方法进行了重写</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">recordAccess</span>(<span class="hljs-params">HashMap&lt;K,V&gt; m</span>)</span> &#123;<br>  LinkedHashMap&lt;K,V&gt; lm = (LinkedHashMap&lt;K,V&gt;)m;<br>  <span class="hljs-comment">// 如果LinkedHashMap的accessOrder为true,则进行重排序</span><br>  <span class="hljs-comment">// 比如前面提到LruCache中使用到的LinkedHashMap的accessOrder属性就为true</span><br>  <span class="hljs-keyword">if</span> (lm.accessOrder) &#123;<br>    lm.modCount++;<br>    <span class="hljs-comment">// 把更新的Entry从双向链表中移除</span><br>    <span class="hljs-keyword">remove</span>();<br>    <span class="hljs-comment">// 再把更新的Entry加入到双向链表的表尾</span><br>    addBefore(lm.header);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在LinkedHashMap中,只有accessOrder为true,即是访问顺序模式,才会put时对更新的Entry进行重新排序,而如果是插入顺序模式时,不会重新排序,这里的排序跟在HashMap中存储没有关系,只是指在双向链表中的顺序</li>
+<li>举个栗子:开始时,HashMap中有Entry1,Entry2,Entry3,并设置LinkedHashMap为访问顺序,则更新Entry1时,会先把Entry1从双向链表中删除,然后再把Entry1加入到双向链表的表尾,而Entry1在HashMap结构中的存储位置没有变化,对比图如下所示:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223149619.png" srcset="/img/loading.gif" lazyload alt="image-20210421223149619" style="zoom:50%;" />
+<h3 id="get方法">get方法</h3>
+<ul>
+<li>LinkedHashMap有对get方法进行了重写,如下:</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">public</span> V <span class="hljs-keyword">get</span>(Object key) &#123;<br>  <span class="hljs-comment">// 调用genEntry得到Entry</span><br>  Entry&lt;K,V&gt; e = (Entry&lt;K,V&gt;)getEntry(key);<br>  <span class="hljs-keyword">if</span> (e == <span class="hljs-literal">null</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>  <span class="hljs-comment">// 如果LinkedHashMap是访问顺序的,则get时,也需要重新排序</span><br>  e.recordAccess(<span class="hljs-keyword">this</span>);<br>  <span class="hljs-keyword">return</span> e.value;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>先是调用了getEntry方法,通过key得到Entry,而LinkedHashMap并没有重写getEntry方法,所以调用的是HashMap的getEntry方法,在上一篇文章中我们分析过HashMap的getEntry方法:首先通过key算出hash值,然后根据hash值算出在table中存储的index,然后遍历table[index]的单向链表去对比key,如果找到了就返回Entry</li>
+<li>后面调用了LinkedHashMap.Entry的recordAccess方法,上面分析过put过程中这个方法,其实就是在访问顺序的LinkedHashMap进行了get操作以后,重新排序,把get的Entry移动到双向链表的表尾</li>
+</ul>
+<h3 id="遍历方式取数据">遍历方式取数据</h3>
+<ul>
+<li>我们先来看看HashMap使用遍历方式取数据的过程:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223241731.png" srcset="/img/loading.gif" lazyload alt="image-20210421223241731" style="zoom:50%;" />
+<ul>
+<li>很明显,这样取出来的Entry顺序肯定跟插入顺序不同了,既然LinkedHashMap是有序的,那么它是怎么实现的呢？先看看LinkedHashMap取遍历方式获取数据的代码:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; linkedHashMap = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();<br>linkedHashMap.put(<span class="hljs-string">&quot;name1&quot;</span>, <span class="hljs-string">&quot;josan1&quot;</span>);<br>linkedHashMap.put(<span class="hljs-string">&quot;name2&quot;</span>, <span class="hljs-string">&quot;josan2&quot;</span>);<br>linkedHashMap.put(<span class="hljs-string">&quot;name3&quot;</span>, <span class="hljs-string">&quot;josan3&quot;</span>);<br><span class="hljs-comment">// LinkedHashMap没有重写该方法,调用的HashMap中的entrySet方法</span><br><span class="hljs-built_in">Set</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; <span class="hljs-keyword">set</span> = linkedHashMap.entrySet();<br><span class="hljs-built_in">Iterator</span>&lt;Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;&gt; iterator = <span class="hljs-keyword">set</span>.iterator();<br><span class="hljs-keyword">while</span>(iterator.hasNext()) &#123;<br>  Entry entry = iterator.next();<br>  <span class="hljs-built_in">String</span> key = (<span class="hljs-built_in">String</span>) entry.getKey();<br>  <span class="hljs-built_in">String</span> value = (<span class="hljs-built_in">String</span>) entry.getValue();<br>  System.out.println(<span class="hljs-string">&quot;key:&quot;</span> + key + <span class="hljs-string">&quot;,value:&quot;</span> + value);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>LinkedHashMap没有重写entrySet方法,我们先来看HashMap中的entrySet,如下:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs dart">public <span class="hljs-built_in">Set</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;K,V&gt;&gt; entrySet() &#123;<br>  <span class="hljs-keyword">return</span> entrySet0();<br>&#125;<br><br>private <span class="hljs-built_in">Set</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;K,V&gt;&gt; entrySet0() &#123;<br>  <span class="hljs-built_in">Set</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;K,V&gt;&gt; es = entrySet;<br>  <span class="hljs-keyword">return</span> es != <span class="hljs-keyword">null</span> ? es : (entrySet = <span class="hljs-keyword">new</span> EntrySet());<br>&#125;<br><br>private <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EntrySet</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractSet</span>&lt;<span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;&gt; </span>&#123;<br>  public <span class="hljs-built_in">Iterator</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;K,V&gt;&gt; iterator() &#123;<br>    <span class="hljs-keyword">return</span> newEntryIterator();<br>  &#125;<br>  <span class="hljs-comment">// 无关代码</span><br>  ......<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以看到,HashMap的entrySet方法,其实就是返回了一个EntrySet对象</li>
+<li>我们得到EntrySet会调用它的iterator方法去得到迭代器Iterator,从上面的代码也可以看到,iterator方法中直接调用了newEntryIterator方法并返回,而LinkedHashMap重写了该方法</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">Iterator</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;K,V&gt;&gt; newEntryIterator() &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> EntryIterator();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这里直接返回了EntryIterator对象,这个和上一篇HashMap中的newEntryIterator方法中一模一样,都是返回了EntryIterator对象,其实他们返回的是各自的内部类,我们来看看LinkedHashMap中EntryIterator的定义:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EntryIterator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashIterator</span>&lt;<span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt;&gt; </span>&#123;<br>  <span class="hljs-keyword">public</span> Map.<span class="hljs-function">Entry&lt;K,V&gt; <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> nextEntry();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>该类是继承LinkedHashIterator,并重写了next方法,而HashMap中是继承HashIterator</li>
+<li>我们再来看看LinkedHashIterator的定义:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedHashIterator</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>  <span class="hljs-comment">// 默认下一个返回的Entry为双向链表表头的下一个元素</span><br>  Entry&lt;K,V&gt; nextEntry    = header.after;<br>  Entry&lt;K,V&gt; lastReturned = <span class="hljs-keyword">null</span>;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> nextEntry != header;<br>  &#125;<br><br>  <span class="hljs-function">Entry&lt;K,V&gt; <span class="hljs-title">nextEntry</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (modCount != expectedModCount)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ConcurrentModificationException();<br>    <span class="hljs-keyword">if</span> (nextEntry == header)<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NoSuchElementException();<br><br>    Entry&lt;K,V&gt; e = lastReturned = nextEntry;<br>    nextEntry = e.after;<br>    <span class="hljs-keyword">return</span> e;<br>  &#125;<br>  <span class="hljs-comment">// 不相关代码</span><br>  ......<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们先不看整个类的实现,只要知道在LinkedHashMap中,Iterator&lt;Entry&lt;String, String&gt;&gt; iterator = set.iterator(),这段代码会返回一个继承LinkedHashIterator的Iterator,它有着跟HashIterator不一样的遍历规则</li>
+<li>接着,我们会用while(iterator.hasNext())去循环判断是否有下一个元素,LinkedHashMap中的EntryIterator没有重写该方法,所以还是调用LinkedHashIterator中的hasNext方法,如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-comment">// 下一个应该返回的Entry是否就是双向链表的头结点</span><br>  <span class="hljs-comment">// 有两种情况:1.LinkedHashMap中没有元素,2.遍历完双向链表回到头部</span><br>  <span class="hljs-keyword">return</span> nextEntry != header;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>nextEntry表示下一个应该返回的Entry,默认值是header.after,即双向链表表头的下一个元素,而上面介绍到,LinkedHashMap在初始化时,会调用init方法去初始化一个before和after都指向自身的Entry,但是put过程会把新增加的Entry加入到双向链表的表尾,所以只要LinkedHashMap中有元素,第一次调用hasNext肯定不会为false</li>
+<li>然后我们会调用next方法去取出Entry,LinkedHashMap中的EntryIterator重写了该方法,如下:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> Map.<span class="hljs-function">Entry&lt;K,V&gt; <span class="hljs-title">next</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-keyword">return</span> nextEntry();<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>而它自身又没有重写nextEntry方法,所以还是调用的LinkedHashIterator中的nextEntry方法:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function">Entry&lt;K,V&gt; <span class="hljs-title">nextEntry</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-comment">// 保存应该返回的Entry</span><br>  Entry&lt;K,V&gt; e = lastReturned = nextEntry;<br>  <span class="hljs-comment">//把当前应该返回的Entry的after作为下一个应该返回的Entry</span><br>  nextEntry = e.after;<br>  <span class="hljs-comment">// 返回当前应该返回的Entry</span><br>  <span class="hljs-keyword">return</span> e;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这里其实遍历的是双向链表,所以不会存在HashMap中需要寻找下一条单向链表的情况,从头结点Entry header的下一个节点开始,只要把当前返回的Entry的after作为下一个应该返回的节点即可,直到到达双向链表的尾部时,after为双向链表的表头节点Entry header,这时候hasNext就会返回false,表示没有下一个元素了,LinkedHashMap的遍历取值如下图所示:</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223450436.png" srcset="/img/loading.gif" lazyload alt="image-20210421223450436" style="zoom:50%;" />
+<ul>
+<li>易知,遍历出来的结果为Entry1,Entry2…Entry6</li>
+<li>可得,LinkedHashMap是有序的,且是通过双向链表来保证顺序的</li>
+</ul>
+<h3 id="remove方法">remove方法</h3>
+<p>LinkedHashMap没有提供remove方法,所以调用的是HashMap的remove方法,实现如下:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">remove</span>(<span class="hljs-params">Object key</span>)</span> &#123;<br>  Entry&lt;K,V&gt; e = removeEntryForKey(key);<br>  <span class="hljs-keyword">return</span> (e == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : e.<span class="hljs-keyword">value</span>);<br>&#125;<br><br><span class="hljs-function">final Entry&lt;K,V&gt; <span class="hljs-title">removeEntryForKey</span>(<span class="hljs-params">Object key</span>)</span> &#123;<br>  <span class="hljs-built_in">int</span> hash = (key == <span class="hljs-literal">null</span>) ? <span class="hljs-number">0</span> : hash(key);<br>  <span class="hljs-built_in">int</span> i = indexFor(hash, table.length);<br>  Entry&lt;K,V&gt; prev = table[i];<br>  Entry&lt;K,V&gt; e = prev;<br><br>  <span class="hljs-keyword">while</span> (e != <span class="hljs-literal">null</span>) &#123;<br>    Entry&lt;K,V&gt; next = e.next;<br>    Object k;<br>    <span class="hljs-keyword">if</span> (e.hash == hash &amp;&amp;<br>        ((k = e.key) == key || (key != <span class="hljs-literal">null</span> &amp;&amp; key.<span class="hljs-keyword">equals</span>(k)))) &#123;<br>      modCount++;<br>      size--;<br>      <span class="hljs-keyword">if</span> (prev == e)<br>        table[i] = next;<br>      <span class="hljs-keyword">else</span><br>        prev.next = next;<br>      <span class="hljs-comment">// LinkedHashMap.Entry重写了该方法</span><br>      e.recordRemoval(<span class="hljs-keyword">this</span>);<br>      <span class="hljs-keyword">return</span> e;<br>    &#125;<br>    prev = e;<br>    e = next;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> e;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在上一篇HashMap中就分析了remove过程,其实就是断开其他对象对自己的引用,比如被删除Entry是在单向链表的表头,则让它的next放到表头,这样它就没有被引用了,如果不是在表头,它是被别的Entry的next引用着,这时候就让上一个Entry的next指向它自己的next,这样,它也就没被引用了</li>
+<li>在HashMap.Entry中recordRemoval方法是空实现,但是LinkedHashMap.Entry对其进行了重写,如下:</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">recordRemoval</span>(<span class="hljs-params">HashMap&lt;K,V&gt; m</span>)</span> &#123;<br>  <span class="hljs-keyword">remove</span>();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span>(<span class="hljs-params"></span>)</span> &#123;<br>  before.after = after;<br>  after.before = before;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>易知,这是要把双向链表中的Entry删除,也就是要断开当前要被删除的Entry被其他对象通过after和before的方式引用</li>
+<li>所以,LinkedHashMap的remove操作,首先把它从table中删除,即断开table或者其他对象通过next对其引用,然后也要把它从双向链表中删除,断开其他对应通过after和before对其引用</li>
+</ul>
+<h3 id="HashMap与LinkedHashMap的结构对比">HashMap与LinkedHashMap的结构对比</h3>
+<p>再来看看HashMap和LinkedHashMap的结构图,是不是秒懂了,LinkedHashMap其实就是可以看成HashMap的基础上,多了一个双向链表来维持顺序</p>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223642737.png" srcset="/img/loading.gif" lazyload alt="image-20210421223642737" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223700724.png" srcset="/img/loading.gif" lazyload alt="image-20210421223700724" style="zoom:50%;" />
+<h2 id="Hashtable">Hashtable</h2>
+<ul>
+<li>Hashtable是原始的java.util的一部分,是一个Dictionary具体的实现,然而,Java 2 重构的Hashtable实现了Map接口,因此,Hashtable现在集成到了集合框架中,它和HashMap类很相似,但是它支持同步,所有的读写等操作都进行了锁(<code>synchronized</code>)保护,在多线程环境下没有安全问题,但是锁保护也是有代价的,会对读写的效率产生较大影响</li>
+<li>像HashMap一样,Hashtable在哈希表中存储键/值对,当使用一个哈希表,要指定用作键的对象,以及要链接到该键的值,然后,该键经过哈希处理,所得到的散列码被用作存储在该表中值的索引,但是HashTable 的 key,value 都不可为 null</li>
+<li>HashTable类中,保存实际数据的,依然是<code>Entry</code>对象,其数据结构与HashMap是相同的</li>
+</ul>
+<blockquote>
+<p><strong>Hashtable定义了四个构造方法</strong></p>
+<ul>
+<li>默认构造方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Hashtable()<br></code></pre></td></tr></table></figure>
+<ul>
+<li>创建指定大小的哈希表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Hashtable(<span class="hljs-keyword">int</span> size)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>创建一个指定大小的哈希表,并且通过fillRatio指定填充比例</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Hashtable(<span class="hljs-keyword">int</span> size,<span class="hljs-keyword">float</span> fillRatio)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>填充比例必须介于0.0和1.0之间,它决定了哈希表在重新调整大小之前的充满程度</p>
+</li>
+<li>
+<p>创建一个以M中元素为初始化元素的哈希表</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Hashtable(Map m)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>哈希表的容量被设置为M的两倍</li>
+</ul>
+</blockquote>
+<ul>
+<li>Hashtable中除了从Map接口中定义的方法外,还定义了以下方法:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">方法描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>void clear( )</strong>  将此哈希表清空,使其不包含任何键,</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>Object clone( )</strong> 创建此哈希表的浅表副本,</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>boolean contains(Object value)</strong>  测试此映射表中是否存在与指定值关联的键,</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>boolean containsKey(Object key)</strong> 测试指定对象是否为此哈希表中的键,</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>boolean containsValue(Object value)</strong> 如果此 Hashtable 将一个或多个键映射到此值,则返回 true,</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>Enumeration elements( )</strong> 返回此哈希表中的值的枚举,</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>Object get(Object key)</strong>  返回指定键所映射到的值,如果此映射不包含此键的映射,则返回 null. 更确切地讲,如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射,则此方法返回 v,否则,返回 null,</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>boolean isEmpty( )</strong> 测试此哈希表是否没有键映射到值,</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>Enumeration keys( )</strong>  返回此哈希表中的键的枚举,</td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>Object put(Object key, Object value)</strong> 将指定 key 映射到此哈希表中的指定 value,</td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>void rehash( )</strong> 增加此哈希表的容量并在内部对其进行重组,以便更有效地容纳和访问其元素,</td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>Object remove(Object key)</strong> 从哈希表中移除该键及其相应的值,</td>
+</tr>
+<tr>
+<td style="text-align:left">13</td>
+<td style="text-align:left"><strong>int size( )</strong>  返回此哈希表中的键的数量,</td>
+</tr>
+<tr>
+<td style="text-align:left">14</td>
+<td style="text-align:left"><strong>String toString( )</strong> 返回此 Hashtable 对象的字符串表示形式,其形式为 ASCII 字符 &quot;, &quot;(逗号加空格)分隔开的,括在括号中的一组条目,</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实例</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashTableDemo</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>    <span class="hljs-comment">// Create a hash map</span><br>    Hashtable balance = <span class="hljs-keyword">new</span> Hashtable();<br>    Enumeration names;<br>    String str;<br>    <span class="hljs-keyword">double</span> bal;<br><br>    balance.put(<span class="hljs-string">&quot;Zara&quot;</span>, <span class="hljs-keyword">new</span> Double(<span class="hljs-number">3434.34</span>));<br>    balance.put(<span class="hljs-string">&quot;Mahnaz&quot;</span>, <span class="hljs-keyword">new</span> Double(<span class="hljs-number">123.22</span>));<br>    balance.put(<span class="hljs-string">&quot;Ayan&quot;</span>, <span class="hljs-keyword">new</span> Double(<span class="hljs-number">1378.00</span>));<br>    balance.put(<span class="hljs-string">&quot;Daisy&quot;</span>, <span class="hljs-keyword">new</span> Double(<span class="hljs-number">99.22</span>));<br>    balance.put(<span class="hljs-string">&quot;Qadir&quot;</span>, <span class="hljs-keyword">new</span> Double(-<span class="hljs-number">19.08</span>));<br><br>    <span class="hljs-comment">// Show all balances in hash table.</span><br>    names = balance.keys();<br>    <span class="hljs-keyword">while</span>(names.hasMoreElements()) &#123;<br>      str = (String) names.nextElement();<br>      System.out.println(str + <span class="hljs-string">&quot;: &quot;</span> +<br>                         balance.get(str));<br>    &#125;<br>    System.out.println();<br>    <span class="hljs-comment">// Deposit 1,000 into Zara&#x27;s account</span><br>    bal = ((Double)balance.get(<span class="hljs-string">&quot;Zara&quot;</span>)).doubleValue();<br>    balance.put(<span class="hljs-string">&quot;Zara&quot;</span>, <span class="hljs-keyword">new</span> Double(bal+<span class="hljs-number">1000</span>));<br>    System.out.println(<span class="hljs-string">&quot;Zara&#x27;s new balance: &quot;</span> +<br>                       balance.get(<span class="hljs-string">&quot;Zara&quot;</span>));<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上实例编译运行结果如下:</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Qadir</span>: -<span class="hljs-number">19</span>.<span class="hljs-number">08</span><br><span class="hljs-attribute">Zara</span>: <span class="hljs-number">3434</span>.<span class="hljs-number">34</span><br><span class="hljs-attribute">Mahnaz</span>: <span class="hljs-number">123</span>.<span class="hljs-number">22</span><br><span class="hljs-attribute">Daisy</span>: <span class="hljs-number">99</span>.<span class="hljs-number">22</span><br><span class="hljs-attribute">Ayan</span>: <span class="hljs-number">1378</span>.<span class="hljs-number">0</span><br><br><span class="hljs-attribute">Zara</span>&#x27;s new balance: <span class="hljs-number">4434</span>.<span class="hljs-number">34</span><br></code></pre></td></tr></table></figure>
+<h2 id="TreeMap">TreeMap</h2>
+<ul>
+<li>TreeMap 是一个有序的 key-value 集合,非同步,基于红黑树(Red-Black tree)实现,每一个 key-value 节点作为红黑树的一个节点</li>
+<li>放入TreeMap的元素,必须实现<code>Comparable</code>接口,如果没有实现<code>Comparable</code>接口,则必须在创建 TreeMap 时传入自定义的 <code>Comparator</code>对象,TreeMap 会自动对元素的进行排序</li>
+<li>TreeMap 中判断相等的标准是:两个 key 通过<code>equals()</code>方法返回为 true,并且通过<code>compare()</code>方法比较应该返回为 0</li>
+<li>要严格按照<code>compare()</code>规范实现比较逻辑,否则,<code>TreeMap</code>将不能正常工作,如果使用自定义的类来作为 TreeMap 中的 key 值,且想让 TreeMap 能够良好的工作,则必须重写自定义类中的<code>equals()</code>方法</li>
+</ul>
+<h3 id="使用TreeMap">使用TreeMap</h3>
+<p><strong>key排序</strong></p>
+<p>TreeMap默认是升序的,如果我们需要改变排序方式,则需要使用比较器:Comparator,Comparator可以对集合对象或者数组进行排序的比较器接口,实现该接口的public compare(T o1,To2)方法即可实现排序,如下:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> java.util.Comparator;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">Iterator</span>;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">Map</span>;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">Set</span>;<br><span class="hljs-keyword">import</span> java.util.TreeMap;<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeMapTest</span> </span>&#123;<br>  public <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-built_in">String</span>[] args) &#123;<br>    <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; map = <span class="hljs-keyword">new</span> TreeMap&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;(<br>      <span class="hljs-keyword">new</span> Comparator&lt;<span class="hljs-built_in">String</span>&gt;() &#123;<br>        public <span class="hljs-built_in">int</span> compare(<span class="hljs-built_in">String</span> obj1, <span class="hljs-built_in">String</span> obj2) &#123;<br>          <span class="hljs-comment">// 降序排序</span><br>          <span class="hljs-keyword">return</span> obj2.compareTo(obj1);<br>        &#125;<br>      &#125;);<br>    map.put(<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;ccccc&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;aaaaa&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;bbbbb&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;ddddd&quot;</span>);<br><br>    <span class="hljs-built_in">Set</span>&lt;<span class="hljs-built_in">String</span>&gt; keySet = map.keySet();<br>    <span class="hljs-built_in">Iterator</span>&lt;<span class="hljs-built_in">String</span>&gt; iter = keySet.iterator();<br>    <span class="hljs-keyword">while</span> (iter.hasNext()) &#123;<br>      <span class="hljs-built_in">String</span> key = iter.next();<br>      System.out.println(key + <span class="hljs-string">&quot;:&quot;</span> + map.<span class="hljs-keyword">get</span>(key));<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行如下:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">d:aaaaa<br>c:bbbbb<br>b:ccccc<br>a:ddddd<br></code></pre></td></tr></table></figure>
+<h3 id="value排序">value排序</h3>
+<ul>
+<li>上面例子是对根据TreeMap的key值来进行排序的,但是有时我们需要根据TreeMap的value来进行排序,对value排序我们就需要借助于Collections的<code>sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c)</code>方法,该方法根据指定比较器产生的顺序对指定列表进行排序,但是有一个前提条件,那就是所有的元素都必须能够根据所提供的比较器来进行比较,如下:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.Collections;<br><span class="hljs-keyword">import</span> java.util.Comparator;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">List</span>;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">Map</span>;<br><span class="hljs-keyword">import</span> java.util.<span class="hljs-built_in">Map</span>.Entry;<br><span class="hljs-keyword">import</span> java.util.TreeMap;<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeMapTest</span> </span>&#123;<br>  public <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-built_in">String</span>[] args) &#123;<br>    <span class="hljs-built_in">Map</span>&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; map = <span class="hljs-keyword">new</span> TreeMap&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt;();<br>    map.put(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;ddddd&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;bbbbb&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;aaaaa&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;ccccc&quot;</span>);<br><br>    <span class="hljs-comment">//这里将map.entrySet()转换成list</span><br>    <span class="hljs-built_in">List</span>&lt;<span class="hljs-built_in">Map</span>.Entry&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">String</span>&gt;&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;<span class="hljs-built_in">Map</span>.Entry&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">String</span>&gt;&gt;(map.entrySet());<br>    <span class="hljs-comment">//然后通过比较器来实现排序</span><br>    Collections.sort(list,<span class="hljs-keyword">new</span> Comparator&lt;<span class="hljs-built_in">Map</span>.Entry&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">String</span>&gt;&gt;() &#123;<br>      <span class="hljs-comment">//升序排序</span><br>      public <span class="hljs-built_in">int</span> compare(Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; o1,<br>                         Entry&lt;<span class="hljs-built_in">String</span>, <span class="hljs-built_in">String</span>&gt; o2) &#123;<br>        <span class="hljs-keyword">return</span> o1.getValue().compareTo(o2.getValue());<br>      &#125;<br><br>    &#125;);<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">Map</span>.Entry&lt;<span class="hljs-built_in">String</span>,<span class="hljs-built_in">String</span>&gt; mapping:list)&#123;<br>      System.out.println(mapping.getKey()+<span class="hljs-string">&quot;:&quot;</span>+mapping.getValue());<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果如下:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">d:aaaaa<br>c:bbbbb<br>b:ccccc<br>a:ddddd<br></code></pre></td></tr></table></figure>
+<h3 id="节点">节点</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>        K key;<br>        V value;<br>        Entry&lt;K,V&gt; left;<br>        Entry&lt;K,V&gt; right;<br>        Entry&lt;K,V&gt; parent;<br>        <span class="hljs-keyword">boolean</span> color = BLACK;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>红黑树的节点是用Entry类表示的,该类包括两个指向左右两个孩子节点的指针left,right,一个指向父亲节点的指针parent,表示当前颜色的变量color,默认为黑色,K泛型的key表示键,V泛型的value表示值</li>
+</ul>
+<h3 id="插入算法">插入算法</h3>
+<p>首先执行二叉搜索树的插入算法,保证左子树的关键字最大不超过x.key,右子树的关键字最小不低于x.key</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java">Entry&lt;K,V&gt; t = root;<br><span class="hljs-keyword">if</span> (t == <span class="hljs-keyword">null</span>) &#123;<br>  @<span class="hljs-number">1</span><br>    compare(key, key); <span class="hljs-comment">// type (and possibly null) check</span><br><br>  root = <span class="hljs-keyword">new</span> Entry&lt;&gt;(key, value, <span class="hljs-keyword">null</span>);<br>  size = <span class="hljs-number">1</span>;<br>  modCount++;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>&#125;<br>@<span class="hljs-number">2</span><br>  <span class="hljs-keyword">int</span> cmp;<br>Entry&lt;K,V&gt; parent;<br><span class="hljs-comment">// split comparator and comparable paths</span><br>Comparator&lt;? <span class="hljs-keyword">super</span> K&gt; cpr = comparator;<br><span class="hljs-keyword">if</span> (cpr != <span class="hljs-keyword">null</span>) &#123;<br>  <span class="hljs-keyword">do</span> &#123;<br>    parent = t;<br>    cmp = cpr.compare(key, t.key);<br>    <span class="hljs-keyword">if</span> (cmp &lt; <span class="hljs-number">0</span>)<br>      t = t.left;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cmp &gt; <span class="hljs-number">0</span>)<br>      t = t.right;<br>    <span class="hljs-keyword">else</span>  @<span class="hljs-number">3</span><br>      <span class="hljs-keyword">return</span> t.setValue(value);<br>  &#125; <span class="hljs-keyword">while</span> (t != <span class="hljs-keyword">null</span>);<br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>  <span class="hljs-keyword">if</span> (key == <span class="hljs-keyword">null</span>)<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>  <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br>    Comparable&lt;? <span class="hljs-keyword">super</span> K&gt; k = (Comparable&lt;? <span class="hljs-keyword">super</span> K&gt;) key;<br>  <span class="hljs-keyword">do</span> &#123;<br>    parent = t;<br>    cmp = k.compareTo(t.key);<br>    <span class="hljs-keyword">if</span> (cmp &lt; <span class="hljs-number">0</span>)<br>      t = t.left;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cmp &gt; <span class="hljs-number">0</span>)<br>      t = t.right;<br>    <span class="hljs-keyword">else</span><br>      <span class="hljs-keyword">return</span> t.setValue(value);<br>  &#125; <span class="hljs-keyword">while</span> (t != <span class="hljs-keyword">null</span>);<br>&#125;<br>@<span class="hljs-number">4</span><br>  Entry&lt;K,V&gt; e = <span class="hljs-keyword">new</span> Entry&lt;&gt;(key, value, parent);<br><span class="hljs-keyword">if</span> (cmp &lt; <span class="hljs-number">0</span>)<br>  parent.left = e;<br><span class="hljs-keyword">else</span><br>  parent.right = e;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>@1 表示根节点为空的情况直接插入到根节点</li>
+<li>@2 表示根节点非空,通过传入的Comparator或者key自身实现的Comparable来比较key的值,先从根部节点比较</li>
+<li>@3 如果key的值与比较节点的值相同,直接将value赋给节点返回</li>
+<li>@4 如果key.value &lt; root.value,接下来比较key与root左子树的值,如果key.value &gt; root.value,接下来比较key与root右子树的值,以此循环,直到要比较的节点为空,将新节点插入该位置</li>
+</ul>
+<h3 id="插入后的颜色修复">插入后的颜色修复</h3>
+<p>经过二叉搜索树的插入算法,此时树已满足二叉搜索树的条件,接下来在不破坏二叉搜索树性质的条件下对颜色修复使得该树满足红黑树的性质</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fixAfterInsertion</span><span class="hljs-params">(Entry&lt;K,V&gt; x)</span> </span>&#123;<br>  x.color = RED;<br><br>  <span class="hljs-keyword">while</span> (x != <span class="hljs-keyword">null</span> &amp;&amp; x != root &amp;&amp; x.parent.color == RED) &#123; @<span class="hljs-number">1</span><br>    <span class="hljs-keyword">if</span> (parentOf(x) == leftOf(parentOf(parentOf(x)))) &#123;<br>      Entry&lt;K,V&gt; y = rightOf(parentOf(parentOf(x)));<br>      <span class="hljs-keyword">if</span> (colorOf(y) == RED) &#123; <span class="hljs-comment">//情况1</span><br>        setColor(parentOf(x), BLACK);<br>        setColor(y, BLACK);<br>        setColor(parentOf(parentOf(x)), RED);<br>        x = parentOf(parentOf(x));<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (x == rightOf(parentOf(x))) &#123; <span class="hljs-comment">//情况2</span><br>          x = parentOf(x);<br>          rotateLeft(x);<br>        &#125;<br>        <span class="hljs-comment">//情况3</span><br>        setColor(parentOf(x), BLACK);<br>        setColor(parentOf(parentOf(x)), RED);<br>        rotateRight(parentOf(parentOf(x)));<br>      &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      Entry&lt;K,V&gt; y = leftOf(parentOf(parentOf(x)));<br>      <span class="hljs-keyword">if</span> (colorOf(y) == RED) &#123;<br>        setColor(parentOf(x), BLACK);<br>        setColor(y, BLACK);<br>        setColor(parentOf(parentOf(x)), RED);<br>        x = parentOf(parentOf(x));<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (x == leftOf(parentOf(x))) &#123;<br>          x = parentOf(x);<br>          rotateRight(x);<br>        &#125;<br>        setColor(parentOf(x), BLACK);<br>        setColor(parentOf(parentOf(x)), RED);<br>        rotateLeft(parentOf(parentOf(x)));<br>      &#125;<br>    &#125;<br>  &#125;<br>  root.color = BLACK;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果新插入的节点非根节点,并且父亲是红色,因为它自身也是红色,因此违反了性质4,需要调整颜色</li>
+<li>下面以<strong>父节点是左孩子</strong>的判断分支分析,父节点是右孩子的状况具有对称性,不重复推导</li>
+</ul>
+<h4 id="情况一-叔节点是红色">情况一,叔节点是红色</h4>
+<p>如果当前节点x的父亲是左节点,并且和叔节点y(父亲的兄弟节点)都是红色,这时候父亲的父亲节点必须是黑色的,否则不满足性质4,将父亲x,p和叔节点y都染成黑色,将父亲的父亲x.p.p节点染成红色,此时插入的节点x,插入节点的父亲节点x.p,叔节点y都满足红黑树性质,但是父亲的父亲节点x.p.p被染成红色后未必还满足红黑树性质,所以将x设置为x.p.p节点,交给下个迭代解决</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-68bc399c25e54a54.png" srcset="/img/loading.gif" lazyload alt="5222801-68bc399c25e54a54"></p>
+<h4 id="情况二-当前的节点是右孩子-叔节点是黑色">情况二,当前的节点是右孩子,叔节点是黑色</h4>
+<p>如果x是右孩子,将x设置成x.p,对x左旋</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-7d40ed5b0316cf08.png" srcset="/img/loading.gif" lazyload alt="5222801-7d40ed5b0316cf08"></p>
+<h4 id="情况三-当前节点是左孩子-叔节点y是黑色">情况三,当前节点是左孩子,叔节点y是黑色</h4>
+<ul>
+<li>将x的父亲节点x.p染成黑色,再将x节点的父亲的父亲x.p.p染成红色</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010746640.png" srcset="/img/loading.gif" lazyload alt="image-20210428010746640"></p>
+<ul>
+<li>将x.p.p右旋</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010759930.png" srcset="/img/loading.gif" lazyload alt="image-20210428010759930"></p>
+<ul>
+<li>经过上述步骤的变化现在已经成为一颗符合性质的红黑树</li>
+<li>三种情况针对父亲节点是左孩子的情况,父亲是右孩子的情况可以根据三种情况反推</li>
+</ul>
+<p><strong>插入算法小结</strong></p>
+<p>因为一颗有n个节点的红黑树,其高度为lg n,二叉搜索树的插入最多执行O(lg n)的时间,而颜色修复在情况一沿着树上升2层,循环才会重复执行,循环可能执行的总数为O(lg n),一旦进入情况2或3,下面执行的旋转不超过2次,循环就结束了,所以红黑树的插入算法时间是O(lg n)</p>
+<h3 id="删除算法">删除算法</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">remove</span><span class="hljs-params">(Object key)</span> </span>&#123;<br>  Entry&lt;K,V&gt; p = getEntry(key);<br>  <span class="hljs-keyword">if</span> (p == <span class="hljs-keyword">null</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br><br>  V oldValue = p.value;<br>  deleteEntry(p);<br>  <span class="hljs-keyword">return</span> oldValue;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>首先通过getEntry找到与key对应的节点,然后调用deleteEntry方法删除节点:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteEntry</span><span class="hljs-params">(Entry&lt;K,V&gt; p)</span> </span>&#123;<br>  modCount++;<br>  size--;<br><br>  <span class="hljs-comment">// If strictly internal, copy successor&#x27;s element to p and then make p</span><br>  <span class="hljs-comment">// point to successor.</span><br>  <span class="hljs-keyword">if</span> (p.left != <span class="hljs-keyword">null</span> &amp;&amp; p.right != <span class="hljs-keyword">null</span>) &#123;<br>    Entry&lt;K,V&gt; s = successor(p);<br>    p.key = s.key;<br>    p.value = s.value;<br>    p = s;<br>  &#125; <span class="hljs-comment">// p has 2 children</span><br><br>  <span class="hljs-comment">// Start fixup at replacement node, if it exists.</span><br>  Entry&lt;K,V&gt; replacement = (p.left != <span class="hljs-keyword">null</span> ? p.left : p.right);<br><br>  <span class="hljs-keyword">if</span> (replacement != <span class="hljs-keyword">null</span>) &#123;<br>    <span class="hljs-comment">// Link replacement to parent</span><br>    replacement.parent = p.parent;<br>    <span class="hljs-keyword">if</span> (p.parent == <span class="hljs-keyword">null</span>)<br>      root = replacement;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p == p.parent.left)<br>      p.parent.left  = replacement;<br>    <span class="hljs-keyword">else</span><br>      p.parent.right = replacement;<br><br>    <span class="hljs-comment">// Null out links so they are OK to use by fixAfterDeletion.</span><br>    p.left = p.right = p.parent = <span class="hljs-keyword">null</span>;<br><br>    <span class="hljs-comment">// Fix replacement</span><br>    <span class="hljs-keyword">if</span> (p.color == BLACK)<br>      fixAfterDeletion(replacement);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p.parent == <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// return if we are the only node.</span><br>    root = <span class="hljs-keyword">null</span>;<br>  &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">//  No children. Use self as phantom replacement and unlink.</span><br>    <span class="hljs-keyword">if</span> (p.color == BLACK)<br>      fixAfterDeletion(p);<br><br>    <span class="hljs-keyword">if</span> (p.parent != <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">if</span> (p == p.parent.left)<br>        p.parent.left = <span class="hljs-keyword">null</span>;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p == p.parent.right)<br>        p.parent.right = <span class="hljs-keyword">null</span>;<br>      p.parent = <span class="hljs-keyword">null</span>;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>首先根据二叉搜索树的删除算法删除节点,具体表现为:</p>
+<ol>
+<li>如果删除的节点没有子树,直接删除,如果它是黑色的,从哨兵节点开始颜色修复</li>
+<li>如果删除的节点只有一个子树,用它的孩子节点替换它,如果它是黑色的,从它的孩子开始执行颜色修复</li>
+<li>如果删除的节点有双子树,用右子树最小的节点替换它,并对最小节点的右节点执行颜色修复</li>
+</ol>
+<h3 id="删除后的颜色修复">删除后的颜色修复</h3>
+<ul>
+<li>删除节点完毕后,开始执行颜色修复算法,颜色修复只指针替换节点为黑色的,因为路径中少了一个黑色节点破坏了性质5</li>
+<li>下面以<strong>修复节点是左孩子分析</strong>,如果该节点是右孩子与它是左孩子具有对称性,不再重复分析</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fixAfterDeletion</span><span class="hljs-params">(Entry&lt;K,V&gt; x)</span> </span>&#123;<br>  <span class="hljs-keyword">while</span> (x != root &amp;&amp; colorOf(x) == BLACK) &#123;<br>    <span class="hljs-keyword">if</span> (x == leftOf(parentOf(x))) &#123;<br>      Entry&lt;K,V&gt; sib = rightOf(parentOf(x));<br><br>      <span class="hljs-keyword">if</span> (colorOf(sib) == RED) &#123; <span class="hljs-comment">//情况一</span><br>        setColor(sib, BLACK);<br>        setColor(parentOf(x), RED);<br>        rotateLeft(parentOf(x));<br>        sib = rightOf(parentOf(x));<br>      &#125;<br><br>      <span class="hljs-keyword">if</span> (colorOf(leftOf(sib))  == BLACK &amp;&amp;<br>          colorOf(rightOf(sib)) == BLACK) &#123; <span class="hljs-comment">//情况二</span><br>        setColor(sib, RED);<br>        x = parentOf(x);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (colorOf(rightOf(sib)) == BLACK) &#123;<span class="hljs-comment">//情况三</span><br>          setColor(leftOf(sib), BLACK);<br>          setColor(sib, RED);<br>          rotateRight(sib);<br>          sib = rightOf(parentOf(x));<br>        &#125;<br>        setColor(sib, colorOf(parentOf(x))); <span class="hljs-comment">//情况四</span><br>        setColor(parentOf(x), BLACK);<br>        setColor(rightOf(sib), BLACK);<br>        rotateLeft(parentOf(x));<br>        x = root;<br>      &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// symmetric</span><br>      Entry&lt;K,V&gt; sib = leftOf(parentOf(x));<br><br>      <span class="hljs-keyword">if</span> (colorOf(sib) == RED) &#123;<br>        setColor(sib, BLACK);<br>        setColor(parentOf(x), RED);<br>        rotateRight(parentOf(x));<br>        sib = leftOf(parentOf(x));<br>      &#125;<br><br>      <span class="hljs-keyword">if</span> (colorOf(rightOf(sib)) == BLACK &amp;&amp;<br>          colorOf(leftOf(sib)) == BLACK) &#123;<br>        setColor(sib, RED);<br>        x = parentOf(x);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (colorOf(leftOf(sib)) == BLACK) &#123;<br>          setColor(rightOf(sib), BLACK);<br>          setColor(sib, RED);<br>          rotateLeft(sib);<br>          sib = leftOf(parentOf(x));<br>        &#125;<br>        setColor(sib, colorOf(parentOf(x)));<br>        setColor(parentOf(x), BLACK);<br>        setColor(leftOf(sib), BLACK);<br>        rotateRight(parentOf(x));<br>        x = root;<br>      &#125;<br>    &#125;<br>  &#125;<br><br>  setColor(x, BLACK);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="情况一-兄弟sib是红色节点">情况一,兄弟sib是红色节点</h4>
+<p>将兄弟设置黑色,将x的父亲设置为红色,并将x的父亲左旋,设置新的兄弟节点为sib,将情况1转换成情况2或3或4</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-09e94eae29227f07.png" srcset="/img/loading.gif" lazyload alt="5222801-09e94eae29227f07"></p>
+<h4 id="情况二-兄弟节点sib是黑色的-且sib的两个孩子节点也是黑色的">情况二,兄弟节点sib是黑色的,且sib的两个孩子节点也是黑色的</h4>
+<p>设置兄弟节点sib为红色,将x设置为x的父亲,完成后sib被抹去一层黑色,以此向上循环达到平衡</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-d38835da660ca5c4.png" srcset="/img/loading.gif" lazyload alt="5222801-d38835da660ca5c4"></p>
+<h4 id="情况三-兄弟节点sib是黑色的-sib的左孩子是红色-sib的右孩子是黑色">情况三,兄弟节点sib是黑色的,sib的左孩子是红色,sib的右孩子是黑色</h4>
+<p>设置sib的左孩子为黑色,设置sib为红色,将sib右旋,重新设置sib为x的兄弟节点</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-6c588b0851c02bab.png" srcset="/img/loading.gif" lazyload alt="5222801-6c588b0851c02bab"></p>
+<h4 id="情况四-兄弟sib是黑色的-sib的右孩子是红色的">情况四,兄弟sib是黑色的,sib的右孩子是红色的</h4>
+<p>设置sib为父亲的颜色,设置父亲为黑色,设置sib的右孩子为黑色,对父亲左旋,并将x设置为root,这样将情况3转换为情况4</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-278da115ddb782d7.png" srcset="/img/loading.gif" lazyload alt="5222801-278da115ddb782d7"></p>
+<p><strong>删除算法小结</strong></p>
+<p>因为包含n个节点的红黑树高度为O(lg n),因此执行二叉搜索树的删除算法时间效率为O(lg n),在执行删除后的颜色调整时,情况1,3,4执行至多三次旋转便能终止,情况2最多循环数的高度O(lg n),且不会执行旋转,所以红黑树的删除时间为O(lg n)</p>
+<p><strong>实例</strong></p>
+<p>定义了<code>Student</code>类,并用分数<code>score</code>进行排序,高分在前</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map&lt;Student, Integer&gt; map = <span class="hljs-keyword">new</span> TreeMap&lt;&gt;(<span class="hljs-keyword">new</span> Comparator&lt;Student&gt;() &#123;<br>      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Student p1, Student p2)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> p1.score &gt; p2.score ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>;<br>      &#125;<br>    &#125;);<br>    map.put(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-number">77</span>), <span class="hljs-number">1</span>);<br>    map.put(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">66</span>), <span class="hljs-number">2</span>);<br>    map.put(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-number">99</span>), <span class="hljs-number">3</span>);<br>    <span class="hljs-keyword">for</span> (Student key : map.keySet()) &#123;<br>      System.out.println(key);<br>    &#125;<br>    System.out.println(map.get(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">66</span>))); <span class="hljs-comment">// null?</span><br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;<br>  <span class="hljs-keyword">public</span> String name;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> score;<br>  Student(String name, <span class="hljs-keyword">int</span> score) &#123;<br>    <span class="hljs-keyword">this</span>.name = name;<br>    <span class="hljs-keyword">this</span>.score = score;<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">&quot;&#123;%s: score=%d&#125;&quot;</span>, name, score);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在<code>for</code>循环中,我们确实得到了正确的顺序,但是根据相同的Key:<code>new Student(&quot;Bob&quot;, 66)</code>进行查找时,结果为<code>null</code></li>
+<li>在这个例子中,<code>TreeMap</code>出现问题,原因其实出在这个<code>Comparator</code>上:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Student p1, Student p2)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> p1.score &gt; p2.score ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在<code>p1.score</code>和<code>p2.score</code>不相等的时候,它的返回值是正确的,但是,在<code>p1.score</code>和<code>p2.score</code>相等的时候,它并没有返回<code>0</code>,这就是为什么<code>TreeMap</code>工作不正常的原因:<code>TreeMap</code>在比较两个Key是否相等时,依赖Key的<code>compareTo()</code>方法或者<code>Comparator.compare()</code>方法,在两个Key相等时,必须返回<code>0</code>,因此,修改代码如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Student p1, Student p2)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (p1.score == p2.score) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> p1.score &gt; p2.score ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>或者直接借助<code>Integer.compare(int, int)</code>也可以返回正确的比较结果</li>
+</ul>
+<h2 id="EnumMap">EnumMap</h2>
+<ul>
+<li>如果Map作为key的对象是<code>enum</code>类型,那么,还可以使用Java集合库提供的一种<code>EnumMap</code>,它在内部以一个非常紧凑的数组存储value,并且根据<code>enum</code>类型的key直接定位到内部数组的索引,并不需要计算<code>hashCode()</code>,不但效率最高,而且没有额外的空间浪费</li>
+<li>我们以<code>DayOfWeek</code>这个枚举类型为例,为它做一个&quot;翻译”功能:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map&lt;DayOfWeek, String&gt; map = <span class="hljs-keyword">new</span> EnumMap&lt;&gt;(DayOfWeek.class);<br>    map.put(DayOfWeek.MONDAY, <span class="hljs-string">&quot;星期一&quot;</span>);<br>    map.put(DayOfWeek.TUESDAY, <span class="hljs-string">&quot;星期二&quot;</span>);<br>    map.put(DayOfWeek.WEDNESDAY, <span class="hljs-string">&quot;星期三&quot;</span>);<br>    map.put(DayOfWeek.THURSDAY, <span class="hljs-string">&quot;星期四&quot;</span>);<br>    map.put(DayOfWeek.FRIDAY, <span class="hljs-string">&quot;星期五&quot;</span>);<br>    map.put(DayOfWeek.SATURDAY, <span class="hljs-string">&quot;星期六&quot;</span>);<br>    map.put(DayOfWeek.SUNDAY, <span class="hljs-string">&quot;星期日&quot;</span>);<br>    System.out.println(map);<br>    System.out.println(map.get(DayOfWeek.MONDAY));<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>EnumMap</code>的时候,总是用<code>Map</code>接口来引用它,因此,实际上把<code>HashMap</code>和<code>EnumMap</code>互换,在客户端看来没有任何区别</li>
+</ul>
+<h2 id="Properties">Properties</h2>
+<ul>
+<li>Java集合库提供了一个<code>Properties</code>来表示一组&quot;配置”,由于历史遗留原因,<code>Properties</code>内部本质上是一个<code>Hashtable</code>,但我们只需要用到<code>Properties</code>自身关于读写配置的接口</li>
+</ul>
+<h3 id="读取配置文件">读取配置文件</h3>
+<ul>
+<li>用<code>Properties</code>读取配置文件非常简单,Java默认配置文件以<code>.properties</code>为扩展名,每行以<code>key=value</code>表示,以<code>#</code>课开头的是注释,以下是一个典型的配置文件:</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># setting.properties</span><br><br><span class="hljs-attr">last_open_file</span>=<span class="hljs-string">/data/hello.txt</span><br><span class="hljs-attr">auto_save_interval</span>=<span class="hljs-string">60</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以从文件系统读取这个<code>.properties</code>文件:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">String f = <span class="hljs-string">&quot;setting.properties&quot;</span>;<br>Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.load(<span class="hljs-keyword">new</span> java.io.FileInputStream(f));<br><br>String filepath = props.getProperty(<span class="hljs-string">&quot;last_open_file&quot;</span>);<br>String interval = props.getProperty(<span class="hljs-string">&quot;auto_save_interval&quot;</span>, <span class="hljs-string">&quot;120&quot;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可见,用<code>Properties</code>读取配置文件,一共有三步:
+<ul>
+<li>创建<code>Properties</code>实例</li>
+<li>调用<code>load()</code>读取文件</li>
+<li>调用<code>getProperty()</code>获取配置</li>
+</ul>
+</li>
+<li>调用<code>getProperty()</code>获取配置时,如果key不存在,将返回<code>null</code>,我们还可以提供一个默认值,这样,当key不存在的时候,就返回默认值</li>
+<li>也可以从classpath读取<code>.properties</code>文件,因为<code>load(InputStream)</code>方法接收一个<code>InputStream</code>实例,表示一个字节流,它不一定是文件流,也可以是从jar包中读取的资源流:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.load(getClass().getResourceAsStream(<span class="hljs-string">&quot;/common/setting.properties&quot;</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果有多个<code>.properties</code>文件,可以反复调用<code>load()</code>读取,后读取的key-value会覆盖已读取的key-value:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.load(getClass().getResourceAsStream(<span class="hljs-string">&quot;/common/setting.properties&quot;</span>));<br>props.load(<span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;C:\\conf\\setting.properties&quot;</span>));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的代码演示了<code>Properties</code>的一个常用用法:可以把默认配置文件放到classpath中,然后,根据机器的环境编写另一个配置文件,覆盖某些默认的配置</li>
+<li><strong>注意</strong>:<code>Properties</code>设计的目的是存储<code>String</code>类型的key－value,但<code>Properties</code>实际上是从<code>Hashtable</code>派生的,它的设计实际上是有问题的,但是为了保持兼容性,现在已经没法修改了,除了<code>getProperty()</code>和<code>setProperty()</code>方法外,还有从<code>Hashtable</code>继承下来的<code>get()</code>和<code>put()</code>方法,这些方法的参数签名是<code>Object</code>,我们在使用<code>Properties</code>的时候,不要去调用这些从<code>Hashtable</code>继承下来的方法</li>
+</ul>
+<h3 id="写入配置文件">写入配置文件</h3>
+<ul>
+<li>如果通过<code>setProperty()</code>修改了<code>Properties</code>实例,可以把配置写入文件,以便下次启动时获得最新配置,写入配置文件使用<code>store()</code>方法:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.setProperty(<span class="hljs-string">&quot;url&quot;</span>, <span class="hljs-string">&quot;http://www.liaoxuefeng.com&quot;</span>);<br>props.setProperty(<span class="hljs-string">&quot;language&quot;</span>, <span class="hljs-string">&quot;Java&quot;</span>);<br>props.store(<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">&quot;C:\\conf\\setting.properties&quot;</span>), <span class="hljs-string">&quot;这是写入的properties注释&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="编码">编码</h3>
+<ul>
+<li>早期版本的Java规定<code>.properties</code>文件编码是ASCII编码(ISO8859-1),如果涉及到中文就必须用<code>name=\u4e2d\u6587</code>来表示,从JDK9开始,Java的<code>.properties</code>文件可以使用UTF-8编码了</li>
+<li>不过,需要注意的是,由于<code>load(InputStream)</code>默认总是以ASCII编码读取字节流,所以会导致读到乱码,我们需要用另一个重载方法<code>load(Reader)</code>读取:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.load(<span class="hljs-keyword">new</span> FileReader(<span class="hljs-string">&quot;settings.properties&quot;</span>, StandardCharsets.UTF_8));<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>InputStream</code>和<code>Reader</code>的区别是一个是字节流,一个是字符流,字符流在内存中已经以<code>char</code>类型表示了,不涉及编码问题</li>
+</ul>
+<h2 id="重写-equals-和-hashCode">重写 equals 和 hashCode</h2>
+<p>正确使用<code>Map</code>必须保证:</p>
+<ol>
+<li>作为<code>key</code>的对象必须正确覆写<code>equals()</code>方法,相等的两个<code>key</code>实例调用<code>equals()</code>必须返回<code>true</code></li>
+<li>作为<code>key</code>的对象还必须正确覆写<code>hashCode()</code>方法,因为通过<code>key</code>计算索引的方式就是调用<code>key</code>对象的<code>hashCode()</code>方法,它返回一个<code>int</code>整数,<code>HashMap</code>正是通过这个方法直接定位<code>key</code>对应的<code>value</code>的索引,继而直接返回<code>value</code>,且<code>hashCode()</code>方法要严格遵循以下规范:
+<ul>
+<li>如果两个对象相等,则两个对象的<code>hashCode()</code>必须相等</li>
+<li>如果两个对象不相等,则两个对象的<code>hashCode()</code>尽量不要相等</li>
+</ul>
+</li>
+<li>即对应两个实例<code>a</code>和<code>b</code>:
+<ul>
+<li>如果<code>a</code>和<code>b</code>相等,那么<code>a.equals(b)</code>一定为<code>true</code>,则<code>a.hashCode()</code>必须等于<code>b.hashCode()</code></li>
+<li>如果<code>a</code>和<code>b</code>不相等,那么<code>a.equals(b)</code>一定为<code>false</code>,则<code>a.hashCode()</code>和<code>b.hashCode()</code>尽量不要相等</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>上述第一条规范是正确性,必须保证实现,否则<code>HashMap</code>不能正常工作</li>
+<li>而第二条如果尽量满足,则可以保证查询效率,因为不同的对象,如果返回相同的<code>hashCode()</code>,会造成<code>Map</code>内部存储冲突,使存取的效率下降</li>
+</ul>
+<p><strong>实例</strong>:以<code>Person</code>类为例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br>    String firstName;<br>    String lastName;<br>    <span class="hljs-keyword">int</span> age;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>把需要比较的字段找出来,然后,引用类型使用<code>Objects.equals()</code>比较,基本类型使用<code>==</code>比较</li>
+<li>在正确实现<code>equals()</code>的基础上,我们还需要正确实现<code>hashCode()</code>,即上述3个字段分别相同的实例,<code>hashCode()</code>返回的<code>int</code>必须相同:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br>  String firstName;<br>  String lastName;<br>  <span class="hljs-keyword">int</span> age;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> h = <span class="hljs-number">0</span>;<br>    h = <span class="hljs-number">31</span> * h + firstName.hashCode();<br>    h = <span class="hljs-number">31</span> * h + lastName.hashCode();<br>    h = <span class="hljs-number">31</span> * h + age;<br>    <span class="hljs-keyword">return</span> h;<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">instanceof</span> Person) &#123;<br>      Person p = (Person) obj;<br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.firstName == p.firstName &amp;&amp; <span class="hljs-keyword">this</span>.lastName == p.lastName &amp;&amp; <span class="hljs-keyword">this</span>.age == p.age;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>String类已经正确实现了<code>hashCode()</code>方法,我们在计算<code>Person</code>的<code>hashCode()</code>时,反复使用<code>31*h</code>,这样做的目的是为了尽量把不同的Person实例的<code>hashCode()</code>均匀分布到整个<code>int</code>范围</li>
+<li>和实现<code>equals()</code>方法遇到的问题类似,如果firstName或lastName为<code>null</code>,上述代码工作起来就会抛<code>NullPointerException</code>,为了解决这个问题,我们在计算<code>hashCode()</code>的时候,经常借助<code>Objects.hash()</code>来计算:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> Objects.hash(firstName, lastName, age);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编写<code>equals()</code>和<code>hashCode()</code>遵循的原则是:<code>equals()</code>用到的用于比较的每一个字段,都必须在<code>hashCode()</code>中用于计算,<code>equals()</code>中没有使用到的字段,绝不可放在<code>hashCode()</code>中计算</li>
+<li>另外注意,对于放入<code>HashMap</code>的<code>value</code>对象,没有任何要求</li>
+</ul>
+<blockquote>
+<p><strong>补充</strong>:关于equals和hashCode方法,很多Java程序都知道,但很多人也就是仅仅知道而已,在Joshua Bloch的大作《Effective Java》(很多软件公司,《Effective Java》,《Java编程思想》以及《重构:改善既有代码质量》)中是这样介绍equals方法的:</p>
+<ul>
+<li>首先equals方法必须满足自反性(x.equals(x)必须返回true),对称性(x.equals(y)返回true时,y.equals(x)也必须返回true),传递性(x.equals(y)和y.equals(z)都返回true时,x.equals(z)也必须返回true)和一致性(当x和y引用的对象信息没有被修改时,多次调用x.equals(y)应该得到同样的返回值),而且对于任何非null值的引用x,x.equals(null)必须返回false</li>
+<li>实现高质量的equals方法的诀窍包括:
+<ol>
+<li>使用==操作符检查&quot;参数是否为这个对象的引用&quot;</li>
+<li>使用instanceof操作符检查&quot;参数是否为正确的类型&quot;</li>
+<li>对于类中的关键属性,检查参数传入对象的属性是否与之相匹配</li>
+<li>编写完equals方法后,问自己它是否满足对称性,传递性,一致性</li>
+<li>重写equals时总是要重写hashCode</li>
+<li>不要将equals方法参数中的Object对象替换为其他的类型,在重写时不要忘掉@Override注解</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%94%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 锁</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/20/Software/Concept/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">
+                        <span class="hidden-mobile">编程思想</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
