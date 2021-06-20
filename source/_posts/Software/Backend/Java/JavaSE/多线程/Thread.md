@@ -107,7 +107,7 @@ Slow: Sun Jan 12 11:50:30 CST 2020
 ## 停止线程
 
 - 不推荐使用JDK提供的`stop()`和`destroy()`方法(已废弃)
-- 建议在其他线程中对目标线程调用`interrupt()`方法，目标线程需要反复检测自身状态是否是interrupted状态，如果是，就立刻结束运行。
+- 建议在其他线程中对目标线程调用`interrupt()`方法,目标线程需要反复检测自身状态是否是interrupted状态,如果是,就立刻结束运行
 
 ```java
 public class Main {
@@ -132,8 +132,8 @@ class MyThread extends Thread {
 }
 ```
 
-- `main`线程通过调用`t.interrupt()`方法中断`t`线程，但是要注意，`interrupt()`方法仅仅向`t`线程发出了“中断请求”，至于`t`线程是否能立刻响应，要看具体代码。而`t`线程的`while`循环会检测`isInterrupted()`，所以上述代码能正确响应`interrupt()`请求，使得自身立刻结束运行`run()`方法。
-- 如果线程处于等待状态，例如，`t.join()`会让`main`线程进入等待状态，此时，如果对`main`线程调用`interrupt()`，`join()`方法会立刻抛出`InterruptedException`，因此，目标线程只要捕获到`join()`方法抛出的`InterruptedException`，就说明有其他线程对其调用了`interrupt()`方法，通常情况下该线程应该立刻结束运行。
+- `main`线程通过调用`t.interrupt()`方法中断`t`线程,但是要注意,`interrupt()`方法仅仅向`t`线程发出了"中断请求”,至于`t`线程是否能立刻响应,要看具体代码,而`t`线程的`while`循环会检测`isInterrupted()`,所以上述代码能正确响应`interrupt()`请求,使得自身立刻结束运行`run()`方法
+- 如果线程处于等待状态,例如,`t.join()`会让`main`线程进入等待状态,此时,如果对`main`线程调用`interrupt()`,`join()`方法会立刻抛出`InterruptedException`,因此,目标线程只要捕获到`join()`方法抛出的`InterruptedException`,就说明有其他线程对其调用了`interrupt()`方法,通常情况下该线程应该立刻结束运行
 
 ```java
 public static void main(String[] args) throws InterruptedException {
@@ -175,9 +175,9 @@ class HelloThread extends Thread {
 }
 ```
 
-- `main`线程通过调用`t.interrupt()`从而通知`t`线程中断，而此时`t`线程正位于`hello.join()`的等待中，此方法会立刻结束等待并抛出`InterruptedException`。
-- 由于我们在`t`线程中捕获了`InterruptedException`，因此，就可以准备结束该线程。在`t`线程结束前，对`hello`线程也进行了`interrupt()`调用通知其中断。如果去掉这一行代码，可以发现`hello`线程仍然会继续运行，且JVM不会退出。
-- 另一个常用的中断线程的方法是设置标志位。我们通常会用一个`running`标志位来标识线程是否应该继续运行，在外部线程中，通过把`HelloThread.running`置为`false`，就可以让线程结束：
+- `main`线程通过调用`t.interrupt()`从而通知`t`线程中断,而此时`t`线程正位于`hello.join()`的等待中,此方法会立刻结束等待并抛出`InterruptedException`
+- 由于我们在`t`线程中捕获了`InterruptedException`,因此,就可以准备结束该线程,在`t`线程结束前,对`hello`线程也进行了`interrupt()`调用通知其中断,如果去掉这一行代码,可以发现`hello`线程仍然会继续运行,且JVM不会退出
+- 另一个常用的中断线程的方法是设置标志位,我们通常会用一个`running`标志位来标识线程是否应该继续运行,在外部线程中,通过把`HelloThread.running`置为`false`,就可以让线程结束:
 
 ```java
 public class Main {
@@ -202,15 +202,11 @@ class HelloThread extends Thread {
 }
 ```
 
-- 注意到`HelloThread`的标志位`boolean running`是一个线程间共享的变量。线程间共享变量需要使用`volatile`关键字标记，确保每个线程都能读取到更新后的变量值。
+- 注意到`HelloThread`的标志位`boolean running`是一个线程间共享的变量,线程间共享变量需要使用`volatile`关键字标记,确保每个线程都能读取到更新后的变量值
 
 ## 线程休眠
 
-- sleep时间达到后线程进入就绪状态
-- sleep(时间)指定当前线程阻塞的毫秒数
-- sleep存在异常`InterruptedException`
-- sleep可以模拟网络延时,倒计时等
-- 每一个对象都有一个锁,sleep不会释放锁
+- 一定是当前线程调用此方法,当前线程进入TIMED_WAITING状态,但不释放对象锁,millis后线程自动苏醒进入就绪状态
 
 ```java
 class TestSleep implements Runnable {
@@ -248,7 +244,7 @@ class TestSleep implements Runnable {
 
 ## 线程让步
 
-- 将线程从运行状态转为就绪状态,并让CPU重新调度
+- 一定是当前线程调用此方法,当前线程放弃获取的CPU时间片,但不释放锁资源,由运行状态变为就绪状态,让OS再次选择线程
 
 ```java
 class TestYield implements Runnable {
@@ -269,8 +265,7 @@ class TestYield implements Runnable {
 
 ## 线程插入
 
-- 其他线程要等待调用该方法的线程结束后,再往下执行
-- 在该线程执行的时候,原本运行进程进入阻塞状态
+- 当前线程里调用其它线程t的join方法,当前线程进入`WAITING/TIMED_WAITING`状态,当前线程不会释放已经持有的对象锁,线程t执行完毕或者millis时间到,当前线程一般情况下进入RUNNABLE状态,也有可能进入BLOCKED状态(因为join是基于wait实现的)
 
 ```java
 class TestJoin implements Runnable {
@@ -395,8 +390,8 @@ class TestPriority implements Runnable {
 
 ## 守护线程
 
-- 守护线程是指为其他线程服务的线程。在JVM中，所有非守护线程都执行完毕后，无论有没有守护线程，虚拟机都会自动退出。
-- 在守护线程中，编写代码要注意：守护线程不能持有任何需要关闭的资源，例如打开文件等，因为虚拟机退出时，守护线程没有任何机会来关闭文件，这会导致数据丢失。
+- 守护线程是指为其他线程服务的线程,在JVM中,所有非守护线程都执行完毕后,无论有没有守护线程,虚拟机都会自动退出
+- 在守护线程中,编写代码要注意:守护线程不能持有任何需要关闭的资源,例如打开文件等,因为虚拟机退出时,守护线程没有任何机会来关闭文件,这会导致数据丢失
 
 ```java
 class TestDaemon {

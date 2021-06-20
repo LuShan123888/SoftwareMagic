@@ -126,13 +126,10 @@ class Winning extends Frame implements Runnable {
 
 > **步骤**
 >
-> 1. 实现Callable 接口(在泛型中指定返回值类型)
-> 2. 重写call方法(需要抛出异常)
-> 3. 创建目标对象
-> 4. 创建执行服务
-> 5. 提交执行
-> 6. 获取结果
-> 7. 关闭服务
+> 1. 创建Callable接口的实现类,并实现call()方法,该call()方法将作为线程执行体,并且有返回值
+> 2. 创建Callable实现类的实例,使用FutureTask类来包装Callable对象,该FutureTask对象封装了该Callable对象的call()方法的返回值
+> 3. 使用FutureTask对象作为Thread对象的target创建并启动新线程
+> 4. 调用FutureTask对象的get()方法来获得子线程执行结束后的返回值
 
 **特点**
 
@@ -144,23 +141,20 @@ class Winning extends Frame implements Runnable {
 ```java
 public class CallableTest {
   public static void main(String[] args) throws ExecutionException,
-  InterruptedException { 
-    // new Thread(new Runnable()).start(); 
-    // new Thread(new FutureTask<V>()).start();
-    // new Thread(new FutureTask<V>( Callable )).start(); 
-    MyThread thread = new MyThread(); 
+  InterruptedException {
+    CallableTest thread = new CallableTest();
     FutureTask futureTask = new FutureTask(thread); // 适配类
     new Thread(futureTask,"A").start();
-    new Thread(futureTask,"B").start(); // 结果会被缓存，效率高
+    new Thread(futureTask,"B").start(); // 结果会被缓存,效率高
     Integer o = (Integer) futureTask.get(); //get 方法可能会产生阻塞
-    // 或者使用异步通信来处理！
+    // 或者使用异步通信来处理!
     System.out.println(o);
   }
 }
-class MyThread implements Callable<Integer> {
+class CallableTest implements Callable<Integer> {
   @Override
   public Integer call() {
-    System.out.println("call()"); // 会打印几个call 
+    System.out.println("call()"); // 会打印几个call
     // 耗时的操作
     return 1024;
   }

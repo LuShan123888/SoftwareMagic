@@ -343,7 +343,7 @@ PEAR DB提供一些快捷的方法,只需要一个步骤就可以执行一个查
     > die($when->getMessage());
     > }
     > echo "The  average book in the library was published in $when";
-    > 
+    >
     > The average book in the library was published in 1974
     > ```
 
@@ -361,7 +361,7 @@ PEAR DB提供一些快捷的方法,只需要一个步骤就可以执行一个查
     > 								WHERE books.pub_year=1950
     > 								AND books.authorid=authors.authorid");
     > echo ("$title, written by $author)";
-    > 
+    >
     > (I, Robot, written by Isaac Asimov)
     > ```
 
@@ -378,7 +378,7 @@ PEAR DB提供一些快捷的方法,只需要一个步骤就可以执行一个查
     > foreach($titles as $title){
     >  echo "$title\n";
     > }
-    > 
+    >
     > the Hobbit
     > I, Robot
     > ...

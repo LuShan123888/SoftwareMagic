@@ -48,7 +48,7 @@ public class MyInterceptor implements HandlerInterceptor {
        System.out.println("------------处理后------------");
   }
 
-   //在dispatcherServlet处理后执行,做清理工作.
+   //在dispatcherServlet处理后执行,做清理工作
    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
        System.out.println("------------清理------------");
   }

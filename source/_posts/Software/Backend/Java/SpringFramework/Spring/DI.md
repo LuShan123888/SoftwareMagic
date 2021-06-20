@@ -234,7 +234,7 @@ private Dog dog;
 - 测试正常
 - 先进行byName查找,失败,再进行byType查找, 成功
 
-### @Autowired与@Resource异同:
+### @Autowired与@Resource区别
 
 - @Autowired与@Resource都可以用来装配bean,都可以写在字段上, 或写在setter方法上
 - @Autowired默认按类型装配(属于Spring规范), 默认情况下必须要求依赖对象必须存在, 如果要允许null 值, 可以设置它的required属性为false, 如:@Autowired(required=false), 如果我们想使用名称装配可以结合@Qualifier注解进行使用
@@ -357,7 +357,7 @@ private Dog dog;
  </property>
 ```
 
-## p命名和c命名注入
+## p命名空间和c命名空间注入
 
 ```java
  public class User {
@@ -541,16 +541,16 @@ public class DaoFactory {  
 }  
 ```
 
-- Spring的IOC配置文件,注意看`<bean name="staticFactoryDao">`指向的class并不是FactoryDao,而是指向静态工厂DaoFactory,并且配置 `factory-method="getFactoryDao"`指定调用哪个工厂方法:
+- Spring的IOC配置文件,注意看`<bean name="springAction">`指向的class并不是FactoryDao,而是指向静态工厂DaoFactory,并且配置 `factory-method="getFactoryDao"`指定调用哪个工厂方法:
 
-```html
+```xml
 <!--配置bean,配置后该类由Spring管理-->  
-    <bean name="springAction" class="com.bless.springdemo.action.SpringAction" >  
-        <!--使用静态工厂的方法注入对象,对应下面的配置文件-->  
-        <property name="factoryDao" ref="factoryDao"></property>
-    </bean>  
-    <!--此处获取对象的方式是从工厂类中获取静态方法-->  
-    <bean name="factoryDao" class="com.bless.springdemo.factory.DaoFactory" factory-method="getFactoryDao"></bean>  
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" >  
+    <!--使用静态工厂的方法注入对象,对应下面的配置文件-->  
+    <property name="factoryDao" ref="factoryDao"></property>
+</bean>  
+<!--此处获取对象的方式是从工厂类中获取静态方法-->  
+<bean name="factoryDao" class="com.bless.springdemo.factory.DaoFactory" factory-method="getFactoryDao"></bean>  
 ```
 
 ##    实例工厂的方法注入
@@ -581,16 +581,16 @@ public class SpringAction {  
 
 - 最后看Spring配置文件:
 
-```html
+```xml
 <!--配置bean,配置后该类由Spring管理-->  
-    <bean name="springAction" class="com.bless.springdemo.action.SpringAction">  
-        <!--使用实例工厂的方法注入对象,对应下面的配置文件-->  
-        <property name="factoryDao" ref="factoryDao"></property>  
-    </bean>  
-      
-    <!--此处获取对象的方式是从工厂类中获取实例方法-->  
-    <bean name="daoFactory" class="com.bless.springdemo.factory.DaoFactory"></bean>  
-    <bean name="factoryDao" factory-bean="daoFactory" factory-method="getFactoryDaoImpl"></bean> 
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">  
+    <!--使用实例工厂的方法注入对象,对应下面的配置文件-->  
+    <property name="factoryDao" ref="factoryDao"></property>  
+</bean>  
+
+<!--此处获取对象的方式是从工厂类中获取实例方法-->  
+<bean name="daoFactory" class="com.bless.springdemo.factory.DaoFactory"></bean>  
+<bean name="factoryDao" factory-bean="daoFactory" factory-method="getFactoryDaoImpl"></bean> 
 ```
 
 ## Bean的作用域

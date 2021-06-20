@@ -11,21 +11,21 @@ categories:
 
 ## Future
 
-- `Future<V>`接口表示一个未来可能会返回的结果，它定义的方法有：
-  - `get()`：获取结果（可能会等待）
-  - `get(long timeout, TimeUnit unit)`：获取结果，但只等待指定的时间
-  - `cancel(boolean mayInterruptIfRunning)`：取消当前任务
-  - `isDone()`：判断任务是否已完成
-- 当我们提交一个`Callable`任务后，我们会同时获得一个`Future`对象，然后，我们在主线程某个时刻调用`Future`对象的`get()`方法，就可以获得异步执行的结果。在调用`get()`时，如果异步任务已经完成，我们就直接获得结果。如果异步任务还没有完成，那么`get()`会阻塞，直到任务完成后才返回结果。
+- `Future<V>`接口表示一个未来可能会返回的结果,它定义的方法有:
+  - `get()`:获取结果(可能会等待)
+  - `get(long timeout, TimeUnit unit)`:获取结果,但只等待指定的时间
+  - `cancel(boolean mayInterruptIfRunning)`:取消当前任务
+  - `isDone()`:判断任务是否已完成
+- 当我们提交一个`Callable`任务后,我们会同时获得一个`Future`对象,然后,我们在主线程某个时刻调用`Future`对象的`get()`方法,就可以获得异步执行的结果,在调用`get()`时,如果异步任务已经完成,我们就直接获得结果,如果异步任务还没有完成,那么`get()`会阻塞,直到任务完成后才返回结果
 
 ```java
 class Task implements Callable<String> {
     public String call() throws Exception {
-        return "Hello"(); 
+        return "Hello"();
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ExecutorService executor = Executors.newFixedThreadPool(4); 
+        ExecutorService executor = Executors.newFixedThreadPool(4);
         // 定义任务:
         Callable<String> task = new Task();
         // 提交任务并获得Future:
@@ -38,13 +38,13 @@ class Task implements Callable<String> {
 
 ## CompletableFuture
 
-- 使用`Future`获得异步执行结果时，要么调用阻塞方法`get()`，要么轮询看`isDone()`是否为`true`，这两种方法都不是很好，因为主线程也会被迫等待。从Java 8开始引入了`CompletableFuture`，它针对`Future`做了改进，可以传入回调对象，当异步任务完成或者发生异常时，自动调用回调对象的回调方法。
-- `CompletableFuture`可以指定异步处理流程：
+- 使用`Future`获得异步执行结果时,要么调用阻塞方法`get()`,要么轮询看`isDone()`是否为`true`,这两种方法都不是很好,因为主线程也会被迫等待,从Java 8开始引入了`CompletableFuture`,它针对`Future`做了改进,可以传入回调对象,当异步任务完成或者发生异常时,自动调用回调对象的回调方法
+- `CompletableFuture`可以指定异步处理流程:
   - `thenAccept()`处理正常结果
   - `exceptional()`处理异常结果
   - `thenApplyAsync()`用于串行化另一个`CompletableFuture`
   - `anyOf()`和`allOf()`用于并行化多个`CompletableFuture`
-- 我们以获取股票价格为例，看看如何使用`CompletableFuture`：
+- 我们以获取股票价格为例,看看如何使用`CompletableFuture`:
 
 ```java
 public class Main {
@@ -60,7 +60,7 @@ public class Main {
             e.printStackTrace();
             return null;
         });
-        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        // 主线程不要立刻结束,否则CompletableFuture默认使用的线程池会立刻关闭:
         Thread.sleep(200);
     }
 
@@ -77,7 +77,7 @@ public class Main {
 }
 ```
 
-- 创建一个`CompletableFuture`是通过`CompletableFuture.supplyAsync()`实现的，它需要一个实现了`Supplier`接口的对象：
+- 创建一个`CompletableFuture`是通过`CompletableFuture.supplyAsync()`实现的,它需要一个实现了`Supplier`接口的对象:
 
 ```java
 public interface Supplier<T> {
@@ -85,8 +85,8 @@ public interface Supplier<T> {
 }
 ```
 
-- 这里我们用lambda语法简化了一下，直接传入`Main::fetchPrice`，因为`Main.fetchPrice()`静态方法的签名符合`Supplier`接口的定义（除了方法名外）。
-- 紧接着，`CompletableFuture`已经被提交给默认的线程池执行了，我们需要定义的是`CompletableFuture`完成时和异常时需要回调的实例。完成时，`CompletableFuture`会调用`Consumer`对象：
+- 这里我们用lambda语法简化了一下,直接传入`Main::fetchPrice`,因为`Main.fetchPrice()`静态方法的签名符合`Supplier`接口的定义(除了方法名外)
+- 紧接着,`CompletableFuture`已经被提交给默认的线程池执行了,我们需要定义的是`CompletableFuture`完成时和异常时需要回调的实例,完成时,`CompletableFuture`会调用`Consumer`对象:
 
 ```java
 public interface Consumer<T> {
@@ -94,7 +94,7 @@ public interface Consumer<T> {
 }
 ```
 
-- 异常时，`CompletableFuture`会调用`Function`对象：
+- 异常时,`CompletableFuture`会调用`Function`对象:
 
 ```java
 public interface Function<T, R> {
@@ -102,11 +102,11 @@ public interface Function<T, R> {
 }
 ```
 
-- 可见`CompletableFuture`的优点是：
-  - 异步任务结束时，会自动回调某个对象的方法
-  - 异步任务出错时，会自动回调某个对象的方法
-  - 主线程设置好回调后，不再关心异步任务的执行
-- 如果只是实现了异步回调机制，我们还看不出`CompletableFuture`相比`Future`的优势。`CompletableFuture`更强大的功能是，多个`CompletableFuture`可以串行执行，例如，定义两个`CompletableFuture`，第一个`CompletableFuture`根据证券名称查询证券代码，第二个`CompletableFuture`根据证券代码查询证券价格，这两个`CompletableFuture`实现串行操作如下：
+- 可见`CompletableFuture`的优点是:
+  - 异步任务结束时,会自动回调某个对象的方法
+  - 异步任务出错时,会自动回调某个对象的方法
+  - 主线程设置好回调后,不再关心异步任务的执行
+- 如果只是实现了异步回调机制,我们还看不出`CompletableFuture`相比`Future`的优势,`CompletableFuture`更强大的功能是,多个`CompletableFuture`可以串行执行,例如,定义两个`CompletableFuture`,第一个`CompletableFuture`根据证券名称查询证券代码,第二个`CompletableFuture`根据证券代码查询证券价格,这两个`CompletableFuture`实现串行操作如下:
 
 ```java
 public class Main {
@@ -123,7 +123,7 @@ public class Main {
         cfFetch.thenAccept((result) -> {
             System.out.println("price: " + result);
         });
-        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        // 主线程不要立刻结束,否则CompletableFuture默认使用的线程池会立刻关闭:
         Thread.sleep(2000);
     }
 
@@ -145,8 +145,8 @@ public class Main {
 }
 ```
 
-- 除了串行执行外，多个`CompletableFuture`还可以并行执行。例如，我们考虑这样的场景：
-- 同时从新浪和网易查询证券代码，只要任意一个返回结果，就进行下一步查询价格，查询价格也同时从新浪和网易查询，只要任意一个返回结果，就完成操作：
+- 除了串行执行外,多个`CompletableFuture`还可以并行执行,例如,我们考虑这样的场景:
+- 同时从新浪和网易查询证券代码,只要任意一个返回结果,就进行下一步查询价格,查询价格也同时从新浪和网易查询,只要任意一个返回结果,就完成操作:
 
 ```java
 public class Main {
@@ -177,7 +177,7 @@ public class Main {
         cfFetch.thenAccept((result) -> {
             System.out.println("price: " + result);
         });
-        // 主线程不要立刻结束，否则CompletableFuture默认使用的线程池会立刻关闭:
+        // 主线程不要立刻结束,否则CompletableFuture默认使用的线程池会立刻关闭:
         Thread.sleep(200);
     }
 
@@ -201,7 +201,7 @@ public class Main {
 }
 ```
 
-- 除了`anyOf()`可以实现“任意个`CompletableFuture`只要一个成功”，`allOf()`可以实现“所有`CompletableFuture`都必须成功”，这些组合操作可以实现非常复杂的异步流程控制。
-- 最后我们注意`CompletableFuture`的命名规则：
-  - `xxx()`：表示该方法将继续在已有的线程中执行
-  - `xxxAsync()`：表示将异步在线程池中执行
+- 除了`anyOf()`可以实现"任意个`CompletableFuture`只要一个成功”,`allOf()`可以实现"所有`CompletableFuture`都必须成功”,这些组合操作可以实现非常复杂的异步流程控制
+- 最后我们注意`CompletableFuture`的命名规则:
+  - `xxx()`:表示该方法将继续在已有的线程中执行
+  - `xxxAsync()`:表示将异步在线程池中执行

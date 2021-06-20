@@ -11,18 +11,18 @@ categories:
 ## user-drag
 
 ```
-user-drag：auto | element | none
+user-drag:auto | element | none
 ```
 
-- 默认值：auto
-- 适用于：所有元素
-- 继承性：有
-- 动画性：否
-- 计算值：指定值
-- 取值：
-  - auto：使用默认的拖拽行为，这种情况只有图片和链接可以被拖拽。
-  - element：整个元素而非它的内容可拖拽。
-  - none：元素不能被拖动。在通过选中后可拖拽。
+- 默认值:auto
+- 适用于:所有元素
+- 继承性:有
+- 动画性:否
+- 计算值:指定值
+- 取值:
+  - auto:使用默认的拖拽行为,这种情况只有图片和链接可以被拖拽
+  - element:整个元素而非它的内容可拖拽
+  - none:元素不能被拖动,在通过选中后可拖拽
 
 **实例**
 
@@ -34,7 +34,7 @@ user-drag：auto | element | none
   <head>
     <meta charset="utf-8">
     <title>css居中对齐</title>
-    <style> 
+    <style>
       div{
         width: 500px;
         height: 500px;

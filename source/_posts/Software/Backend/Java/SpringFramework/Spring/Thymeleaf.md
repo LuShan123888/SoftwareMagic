@@ -190,7 +190,7 @@ public String show3(Model model){
 
 ```html
 <p>
-    你正在观看 <span th:text="'thymeleaf'">template</span> 的字符串常量值.
+    你正在观看 <span th:text="'thymeleaf'">template</span> 的字符串常量值
 </p>
 ```
 

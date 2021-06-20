@@ -11,8 +11,8 @@ categories:
 
 ## transient的作用及使用方法
 
-- 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
-- transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量，则该类需要实现Serializable接口。
+- 一旦变量被transient修饰,变量将不再是对象持久化的一部分,该变量内容在序列化后无法获得访问
+- transient关键字只能修饰变量,而不能修饰方法和类,注意,本地变量是不能被transient关键字修饰的,变量如果是用户自定义类变量,则该类需要实现Serializable接口
 
 ```java
 public class TransientTest {
@@ -59,7 +59,7 @@ public class TransientTest {
 }
 
 class User implements Serializable {
-  private static final long serialVersionUID = 8294180014912103005L;  
+  private static final long serialVersionUID = 8294180014912103005L;
 
   private String username;
   private transient String passwd;
@@ -83,16 +83,16 @@ class User implements Serializable {
 }
 ```
 
--   输出为：
+-   输出为:
 
 ```
-read before Serializable: 
+read before Serializable:
 username: Alexia
 password: 123456
 
-read after Serializable: 
+read after Serializable:
 username: Alexia
 password: null
 ```
 
-- 密码字段为null，说明反序列化时根本没有从文件中获取到信息。
+- 密码字段为null,说明反序列化时根本没有从文件中获取到信息

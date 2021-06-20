@@ -129,8 +129,8 @@ AND title like ‘someTitle’
 </select>
 ```
 
-- `where` 元素只会在子元素返回任何内容的情况下才插入 "WHERE” 子句,而且, 若子句的开头为 "AND” 或 "OR”, *where* 元素也会将它们去除
-- 如果 `where` 元素与你期望的不太一样, 你也可以通过自定义 trim 元素来定制 *where* 元素的功能,比如, 和 *where* 元素等价的自定义 trim 元素为:
+- `where` 元素只会在子元素返回任何内容的情况下才插入 "WHERE” 子句,而且, 若子句的开头为 "AND” 或 "OR”, where元素也会将它们去除
+- 如果 `where` 元素与你期望的不太一样, 你也可以通过自定义 trim 元素来定制 *where* 元素的功能,比如, 和 where元素等价的自定义 trim 元素为:
 
 ```xml
 <trim prefix="WHERE" prefixOverrides="AND |OR ">
