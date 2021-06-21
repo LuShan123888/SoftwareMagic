@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -295,7 +295,7 @@
 <ul>
 <li>在JDK的 <code>java.util.concurrent.atomic</code>包中提供了 <code>AtomicStampedReference</code> 来解决ABA问题,该类的compareAndSet是该类的核心方法,实现如下:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">compareAndSet</span><span class="hljs-params">(V   expectedReference,</span></span><br><span class="hljs-function"><span class="hljs-params">                            V   newReference,</span></span><br><span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">int</span> expectedStamp,</span></span><br><span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">int</span> newStamp)</span> </span>&#123;<br>   Pair&lt;V&gt; current = pair;<br>   <span class="hljs-keyword">return</span><br>       expectedReference == current.reference &amp;&amp;<br>       expectedStamp == current.stamp &amp;&amp;<br>       ((newReference == current.reference &amp;&amp;<br>         newStamp == current.stamp) ||<br>        casPair(current, Pair.of(newReference, newStamp)));<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">compareAndSet</span><span class="hljs-params">(V   expectedReference,</span></span><br><span class="hljs-params"><span class="hljs-function">                            V   newReference,</span></span><br><span class="hljs-params"><span class="hljs-function">                            <span class="hljs-keyword">int</span> expectedStamp,</span></span><br><span class="hljs-params"><span class="hljs-function">                            <span class="hljs-keyword">int</span> newStamp)</span> </span>&#123;<br>   Pair&lt;V&gt; current = pair;<br>   <span class="hljs-keyword">return</span><br>       expectedReference == current.reference &amp;&amp;<br>       expectedStamp == current.stamp &amp;&amp;<br>       ((newReference == current.reference &amp;&amp;<br>         newStamp == current.stamp) ||<br>        casPair(current, Pair.of(newReference, newStamp)));<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>我们可以发现,该类检查了当前引用与当前标志是否与预期相同,如果全部相等,才会以原子方式将该引用和该标志的值设为新的更新值,这样CAS操作中的比较就不依赖于变量的值了</li>
 </ul>
@@ -480,6 +480,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -492,21 +496,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -215,7 +215,7 @@
 <li>示例8-1的程序创建了一个关于科幻小说书籍信息的HTML表格,它说明了如何使用PEAR DB库来连接数据库,执行语句,检查错误和查询结果到HTML,请确保在安装PHP时启用了PEAR,这在Unix/Linux和Windows下有一点不同,PEAR DB代码库是面向对象的,带有类方法(<code>DB::connect()</code>,<code>DB::iserror()</code>)和对象方法(<code>$db-&gt;query()</code>,<code>$q-&gt;fetchInto()</code>)</li>
 </ul>
 <p><strong>示例8-1</strong>:显示书籍信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;&lt;head&gt;&lt;title&gt;Library Books&lt;&#x2F;title&gt;&lt;&#x2F;head&gt;<br>    &lt;body&gt;<br>        &lt;table border&#x3D;1&gt;<br>            &lt;tr&gt;&lt;th&gt;Book&lt;&#x2F;th&gt;Year Published&lt;&#x2F;th&gt;&lt;th&gt;Author&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;<br>    &lt;?php<br>    &#x2F;&#x2F;连接<br>    require_once(&#39;DB.php&#39;);<br>    $db &#x3D; DB::connect(&quot;mysql:&#x2F;&#x2F;librarian:password@local&#x2F;library&quot;);<br>    if(DB::iserror($db))&#123;<br>        die($db-&gt;getMessage());<br>    &#125;<br><br>    &#x2F;&#x2F;执行查询<br>    $sql &#x3D; &quot;SELECT books.title,books.pub_year,authors.name<br> 		FROM books,authors<br> 		WHERE books.authorid&#x3D;authors.authorid<br> 		ORDER BY books.pub_year ASC&quot;;<br>    $q &#x3D; $db-&gt;query($sql);<br>    if(DB::iserror($sql)&#123;<br>        die($q-&gt;getMessage());<br>    &#125;<br>       &#x2F;&#x2F;生成表格<br>       while($q-&gt;fetchInto($row))&#123;<br>    ?&gt;<br>    &lt;tr&gt;&lt;td&gt;&lt;?&#x3D; $row[0] ?&gt;&lt;&#x2F;td&gt;<br>        &lt;td&gt;&lt;?&#x3D; $row[1] ?&gt;&lt;&#x2F;td&gt;<br>        &lt;td&gt;&lt;?&#x3D; $row[2] ?&gt;&lt;&#x2F;td&gt;<br>    &lt;&#x2F;tr&gt;<br>    &lt;?php<br>       &#125;<br>    ?&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;&lt;head&gt;&lt;title&gt;Library Books&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;table border=1&gt;<br>            &lt;tr&gt;&lt;th&gt;Book&lt;/th&gt;Year Published&lt;/th&gt;&lt;th&gt;Author&lt;/th&gt;&lt;/tr&gt;<br>    &lt;?php<br>    //连接<br>    require_once(&#x27;DB.php&#x27;);<br>    $db = DB::connect(&quot;mysql://librarian:password@local/library&quot;);<br>    if(DB::iserror($db))&#123;<br>        die($db-&gt;getMessage());<br>    &#125;<br><br>    //执行查询<br>    $sql = &quot;SELECT books.title,books.pub_year,authors.name<br> 		FROM books,authors<br> 		WHERE books.authorid=authors.authorid<br> 		ORDER BY books.pub_year ASC&quot;;<br>    $q = $db-&gt;query($sql);<br>    if(DB::iserror($sql)&#123;<br>        die($q-&gt;getMessage());<br>    &#125;<br>       //生成表格<br>       while($q-&gt;fetchInto($row))&#123;<br>    ?&gt;<br>    &lt;tr&gt;&lt;td&gt;&lt;?= $row[0] ?&gt;&lt;/td&gt;<br>        &lt;td&gt;&lt;?= $row[1] ?&gt;&lt;/td&gt;<br>        &lt;td&gt;&lt;?= $row[2] ?&gt;&lt;/td&gt;<br>    &lt;/tr&gt;<br>    &lt;?php<br>       &#125;<br>    ?&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="数据源名">数据源名</h2>
 <ul>
 <li>DSN(data source name,数据源名)是一个字符串,它指定数据库的位置,数据库的类型,连接数据库时使用的用户名和密码等信息,在PEAR中DSN的各部分被组合成一个类似于URL的字符串:</li>
@@ -708,6 +708,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -720,21 +724,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

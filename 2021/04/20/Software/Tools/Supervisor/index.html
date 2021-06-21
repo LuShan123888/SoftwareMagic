@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -214,7 +214,7 @@
 <h2 id="介绍">介绍</h2>
 <p>Supervisor是用Python开发的一套通用的进程管理程序,能将一个普通的命令行进程变为后台daemon,并监控进程状态,异常退出时能自动重启,它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动,这样只要在supervisor的配置文件中,把要管理的进程的可执行文件的路径写进去即可,也实现当子进程挂掉的时候,父进程可以准确获取子进程挂掉的信息的,可以选择是否自己启动和报警</p>
 <h2 id="安装">安装</h2>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">yum install supervisor -y<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">yum install supervisor -y<br></code></pre></td></tr></table></figure>
 <h2 id="supervisor-配置说明">supervisor 配置说明</h2>
 <ul>
 <li>配置文件的目录
@@ -233,11 +233,11 @@
 <ul>
 <li>从上面的配置文件<code>[include]-&gt;files</code>配置项可以知道,supervisor会把<code>supervisor.d/</code>下以conf结尾的配置文件都加载进来,那么我们在这个目录下面新建一个自定义配置文件<code>test.conf</code>:</li>
 </ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">[program:test] ;[program:xxx] 这里的xxx是指的项目名字<br>directory = /opt/project  ;程序所在目录<br>command =  java -jar springboot-hello-sample.jar ;程序启动命令<br>autostart=true ;是否跟随supervisord的启动而启动<br>autorestart=true;程序退出后自动重启,可选值:[unexpected,true,false],默认为unexpected,表示进程意外杀死后才重启<br>stopasgroup=true;进程被杀死时,是否向这个进程组发送stop信号,包括子进程<br>killasgroup=true;向进程组发送kill信号,包括子进程<br>stdout_logfile=/var/log/sboot/supervisor.log;该程序日志输出文件,目录需要手动创建<br>stdout_logfile_maxbytes = 50MB;日志大小<br>stdout_logfile_backups  = 100;备份数<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">[program:test] ;[program:xxx] 这里的xxx是指的项目名字<br>directory = /opt/project  ;程序所在目录<br>command =  java -jar springboot-hello-sample.jar ;程序启动命令<br>autostart=true ;是否跟随supervisord的启动而启动<br>autorestart=true;程序退出后自动重启,可选值:[unexpected,true,false],默认为unexpected,表示进程意外杀死后才重启<br>stopasgroup=true;进程被杀死时,是否向这个进程组发送stop信号,包括子进程<br>killasgroup=true;向进程组发送kill信号,包括子进程<br>stdout_logfile=/var/log/sboot/supervisor.log;该程序日志输出文件,目录需要手动创建<br>stdout_logfile_maxbytes = 50MB;日志大小<br>stdout_logfile_backups  = 100;备份数<br></code></pre></td></tr></table></figure>
 <ul>
 <li>重启supervisord,使配置文件生效</li>
 </ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">service supervisord restart<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">service supervisord restart<br></code></pre></td></tr></table></figure>
 <h3 id="管理服务">管理服务</h3>
 <h4 id="命令行">命令行</h4>
 <ul>
@@ -428,6 +428,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -440,21 +444,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

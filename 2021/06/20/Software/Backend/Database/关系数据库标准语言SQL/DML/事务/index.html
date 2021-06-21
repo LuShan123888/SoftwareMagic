@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      1.9k 字
     </span>
   
 
@@ -553,7 +553,7 @@
 <p>需要说明的是,事务隔离级别和数据访问的并发性是对立的,事务隔离级别越高并发性就越差,所以要根据具体的应用来确定合适的事务隔离级别,这个地方没有万能的原则</p>
 <h2 id="基本语法">基本语法</h2>
 <h3 id="改变自动提交模式">改变自动提交模式</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET autocommit &#x3D; 0;   &#x2F;*关闭*&#x2F;<br>SET autocommit &#x3D; 1;   &#x2F;*开启*&#x2F;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET autocommit = 0;   /*关闭*/<br>SET autocommit = 1;   /*开启*/<br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong>:</p>
 <ul>
 <li>MySQL中默认是自动提交</li>
@@ -563,16 +563,16 @@
 <ul>
 <li>标记事务的起始点</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">START TRANSACTION<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">START TRANSACTION<br></code></pre></td></tr></table></figure>
 <h3 id="提交事务">提交事务</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">COMMIT<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">COMMIT<br></code></pre></td></tr></table></figure>
 <h3 id="事务回滚">事务回滚</h3>
 <ul>
 <li>数据回到本次事务的初始状态</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ROLLBACK<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ROLLBACK<br></code></pre></td></tr></table></figure>
 <h3 id="保存点">保存点</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SAVEPOINT 保存点名称 -- 设置一个事务保存点<br>ROLLBACK TO SAVEPOINT 保存点名称 -- 回滚到保存点<br>RELEASE SAVEPOINT 保存点名称 -- 删除保存点<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SAVEPOINT 保存点名称 -- 设置一个事务保存点<br>ROLLBACK TO SAVEPOINT 保存点名称 -- 回滚到保存点<br>RELEASE SAVEPOINT 保存点名称 -- 删除保存点<br></code></pre></td></tr></table></figure>
 <h2 id="实例">实例</h2>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-variable">$dbhost</span> = <span class="hljs-string">&#x27;localhost&#x27;</span>;  <span class="hljs-comment">// mysql服务器主机地址</span><br><span class="hljs-variable">$dbuser</span> = <span class="hljs-string">&#x27;root&#x27;</span>;            <span class="hljs-comment">// mysql用户名</span><br><span class="hljs-variable">$dbpass</span> = <span class="hljs-string">&#x27;123456&#x27;</span>;          <span class="hljs-comment">// mysql用户名密码</span><br><span class="hljs-variable">$conn</span> = mysqli_connect(<span class="hljs-variable">$dbhost</span>, <span class="hljs-variable">$dbuser</span>, <span class="hljs-variable">$dbpass</span>);<br><span class="hljs-keyword">if</span>(! <span class="hljs-variable">$conn</span> )<br>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;连接失败: &#x27;</span> . mysqli_error(<span class="hljs-variable">$conn</span>));<br>&#125;<br><span class="hljs-comment">// 设置编码,防止中文乱码</span><br>mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;set names utf8&quot;</span>);<br>mysqli_select_db( <span class="hljs-variable">$conn</span>, <span class="hljs-string">&#x27;Test&#x27;</span> );<br>mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;SET AUTOCOMMIT=0&quot;</span>); <span class="hljs-comment">// 设置为不自动提交,因为MYSQL默认立即执行</span><br>mysqli_begin_transaction(<span class="hljs-variable">$conn</span>);            <span class="hljs-comment">// 开始事务定义</span><br><br><span class="hljs-keyword">if</span>(!mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;insert into transaction_test (id) values(8)&quot;</span>))<br>&#123;<br>    mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;ROLLBACK&quot;</span>);     <span class="hljs-comment">// 判断当执行失败时回滚</span><br>&#125;<br><br><span class="hljs-keyword">if</span>(!mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;insert into transaction_test (id) values(9)&quot;</span>))<br>&#123;<br>    mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;ROLLBACK&quot;</span>);      <span class="hljs-comment">// 判断执行失败时回滚</span><br>&#125;<br>mysqli_commit(<span class="hljs-variable">$conn</span>);            <span class="hljs-comment">//执行事务</span><br>mysqli_close(<span class="hljs-variable">$conn</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
@@ -746,6 +746,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -758,21 +762,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

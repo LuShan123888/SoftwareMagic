@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -212,7 +212,7 @@
             <div class="markdown-body">
               <h1>Java EE 邮件发送</h1>
 <h2 id="pom-xml">pom.xml</h2>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>     &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;<br>     &lt;artifactId&gt;commons-email&lt;/artifactId&gt;<br>     &lt;version&gt;1.4&lt;/version&gt;<br> &lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>     &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;<br>     &lt;artifactId&gt;commons-email&lt;/artifactId&gt;<br>     &lt;version&gt;<span class="hljs-number">1.4</span>&lt;/version&gt;<br> &lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="MailUtil-java">MailUtil.java</h2>
 <h3 id="网易邮箱">网易邮箱</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.util;<br><br><br><span class="hljs-keyword">import</span> org.apache.commons.mail.HtmlEmail;<br><br><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MailUtil</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String email;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String username;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String password;<br><br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Mail</span><span class="hljs-params">(String username, String password, String email)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.username = username;<br>        <span class="hljs-keyword">this</span>.password= password;<br>        <span class="hljs-keyword">this</span>.email = email;<br><br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br><br>            HtmlEmail mail = <span class="hljs-keyword">new</span> HtmlEmail();<br>            <span class="hljs-comment">// 设置邮箱服务器信息</span><br>            mail.setSslSmtpPort(<span class="hljs-string">&quot;25&quot;</span>);<br>            mail.setHostName(<span class="hljs-string">&quot;smtp.163.com&quot;</span>);<br>            <span class="hljs-comment">// 设置密码验证器</span><br>            mail.setAuthentication(<span class="hljs-string">&quot;LuShan123888@163.com&quot;</span>, <span class="hljs-string">&quot;QVUYCXQRXBDARERD&quot;</span>);<br>            <span class="hljs-comment">// 设置邮件发送者</span><br>            mail.setFrom(<span class="hljs-string">&quot;LuShan123888@163.com&quot;</span>);<br>            <span class="hljs-comment">// 设置邮件接收者</span><br>            mail.addTo(email);<br>            <span class="hljs-comment">// 设置邮件编码</span><br>            mail.setCharset(<span class="hljs-string">&quot;UTF-8&quot;</span>);<br>            <span class="hljs-comment">// 设置邮件主题</span><br>            mail.setSubject(<span class="hljs-string">&quot;Tally&quot;</span>);<br>            <span class="hljs-comment">// 设置邮件内容</span><br>            mail.setHtmlMsg(<span class="hljs-string">&quot;&lt;h1 style=&#x27;color: red&#x27;&gt;&quot;</span> + username + <span class="hljs-string">&quot;注册成功 &lt;/h1&gt;&quot;</span> + <span class="hljs-string">&quot;请保存好密码:&quot;</span>+password);<br>            <span class="hljs-comment">// 设置邮件发送时间</span><br>            mail.setSentDate(<span class="hljs-keyword">new</span> Date());<br>            <span class="hljs-comment">// 发送邮件</span><br>            mail.send();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Mail mail = <span class="hljs-keyword">new</span> Mail(<span class="hljs-string">&quot;test&quot;</span>,<span class="hljs-string">&quot;123123&quot;</span>,<span class="hljs-string">&quot;test@qq.com&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
@@ -389,6 +389,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -401,21 +405,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

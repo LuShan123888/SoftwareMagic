@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-23 11:46" pubdate>
-        2021年4月23日 中午
+      <time datetime="2021-06-21 22:30" pubdate>
+        2021年6月21日 晚上
       </time>
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年4月23日 中午
+                  本文最后更新于：2021年6月21日 晚上
                 
               </p>
             
@@ -213,7 +213,7 @@
               <h1>Mybatis 缓存</h1>
 <h2 id="简介">简介</h2>
 <ul>
-<li>缓存[Cache]概述
+<li>缓存Cache概述
 <ul>
 <li>存在内存中的临时数据</li>
 <li>将用户经常查询的数据放在缓存(内存)中, 用户去查询数据就不用从磁盘上(关系型数据库数据文件)查询, 从缓存中查询, 从而提高查询效率, 解决了高并发系统的性能问题</li>
@@ -236,7 +236,7 @@
 <p>MyBatis包含一个非常强大的查询缓存特性, 它可以非常方便地定制和配置缓存,缓存可以极大的提升查询效率</p>
 </li>
 <li>
-<p>MyBatis系统中默认定义了两级缓存**:一级缓存<strong>和</strong>二级缓存**</p>
+<p>MyBatis系统中默认定义了两级缓存:<strong>一级缓存</strong>和<strong>二级缓存</strong></p>
 </li>
 <li>
 <p>默认情况下, 只有一级缓存开启,(SqlSession级别的缓存, 也称为本地缓存)</p>
@@ -250,9 +250,7 @@
 </ul>
 <h2 id="一级缓存">一级缓存</h2>
 <ul>
-<li>一级缓存也叫本地缓存,本质是一个map</li>
-<li>与数据库同一次会话期间查询到的数据会放在本地缓存中</li>
-<li>以后如果需要获取相同的数据, 直接从缓存中拿, 没必须再去查询数据库</li>
+<li>一级缓存也叫本地缓存,本质是一个map,与数据库同一次会话期间查询到的数据会放在本地缓存中,以后如果需要获取相同的数据, 直接从缓存中拿, 没必须再去查询数据库</li>
 <li>一级缓存是SqlSession级别的缓存, 是一直开启的, 我们关闭不了它</li>
 </ul>
 <h3 id="一级缓存失效的四种情况">一级缓存失效的四种情况</h3>
@@ -260,7 +258,7 @@
 <ol>
 <li>sqlSession不同</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   SqlSession session2 = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session.close();<br>   session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    SqlSession session2 = MybatisUtils.getSession();<br>    UserMapper mapper = session.getMapper(UserMapper.class);<br>    UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>    User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user);<br>    User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user2);<br>    System.out.println(user==user2);<br><br>    session.close();<br>    session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>结果</strong>:发现发送了两条SQL语句</li>
 <li><strong>结论</strong>:每个sqlSession中的缓存相互独立</li>
@@ -268,7 +266,7 @@
 <ol start="2">
 <li>sqlSession相同, 查询条件不同</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   User user2 = mapper2.queryUserById(<span class="hljs-number">2</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    UserMapper mapper = session.getMapper(UserMapper.class);<br>    UserMapper mapper2 = session.getMapper(UserMapper.class);<br><br>    User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user);<br>    User user2 = mapper2.queryUserById(<span class="hljs-number">2</span>);<br>    System.out.println(user2);<br>    System.out.println(user==user2);<br><br>    session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>结果</strong>:发现发送了两条SQL语句</li>
 <li><strong>结论</strong>:当前缓存中, 不存在这个数据</li>
@@ -276,7 +274,7 @@
 <ol start="3">
 <li>sqlSession相同, 两次查询之间执行了增删改操作</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br><br>   HashMap map = <span class="hljs-keyword">new</span> HashMap();<br>   map.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;test&quot;</span>);<br>   map.put(<span class="hljs-string">&quot;id&quot;</span>,<span class="hljs-number">4</span>);<br>   mapper.updateUser(map);<br><br>   User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br><br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    UserMapper mapper = session.getMapper(UserMapper.class);<br><br>    User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user);<br><br>    HashMap map = <span class="hljs-keyword">new</span> HashMap();<br>    map.put(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;test&quot;</span>);<br>    map.put(<span class="hljs-string">&quot;id&quot;</span>,<span class="hljs-number">4</span>);<br>    mapper.updateUser(map);<br><br>    User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user2);<br><br>    System.out.println(user==user2);<br><br>    session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>结果</strong>:查询在中间执行了增删改操作后, 重新执行了</li>
 <li><strong>结论</strong>:因为增删改操作可能会对当前数据产生影响</li>
@@ -284,14 +282,12 @@
 <ol start="4">
 <li>sqlSession相同, 手动清除一级缓存</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br><br>   session.clearCache();<span class="hljs-comment">//手动清除缓存</span><br><br>   User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br><br>   System.out.println(user==user2);<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    UserMapper mapper = session.getMapper(UserMapper.class);<br><br>    User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user);<br><br>    session.clearCache();<span class="hljs-comment">//手动清除缓存</span><br><br>    User user2 = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user2);<br><br>    System.out.println(user==user2);<br><br>    session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="二级缓存">二级缓存</h2>
 <ul>
 <li>二级缓存也叫全局缓存, 一级缓存作用域太低了, 所以诞生了二级缓存</li>
-<li>基于namespace级别的缓存, 一个名称空间, 对应一个二级缓存</li>
-<li>查出的数据都会被默认先放在一级缓存中</li>
-<li>只要开启了二级缓存, 我们在同一个Mapper中的查询, 可以在二级缓存中拿到数据</li>
-<li>只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中</li>
+<li>基于namespace级别的缓存, 一个名称空间, 对应一个二级缓存,只要开启了二级缓存, 我们在同一个Mapper中的查询, 可以在二级缓存中拿到数据</li>
+<li>查出的数据都会被默认先放在一级缓存中,只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中</li>
 </ul>
 <h3 id="使用步骤">使用步骤</h3>
 <ol>
@@ -301,11 +297,11 @@
 <ol start="2">
 <li>在<code>mapper.xml</code>中配置使用二级缓存</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">cache</span>/&gt;</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">cache</span>/&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>这个更高级的配置创建了一个 FIFO 缓存, 每隔 60 秒刷新, 最多可以存储结果对象或列表的 512 个引用, 而且返回的对象被认为是只读的, 因此对它们进行修改可能会在不同线程中的调用者产生冲突</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">&lt;cache<br> eviction=&quot;FIFO&quot;<br> flushInterval=&quot;60000&quot;<br> size=&quot;512&quot;<br> readOnly=&quot;true&quot;/&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">cache</span></span><br><span class="hljs-tag">       <span class="hljs-attr">eviction</span>=<span class="hljs-string">&quot;FIFO&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">flushInterval</span>=<span class="hljs-string">&quot;60000&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;512&quot;</span></span><br><span class="hljs-tag">       <span class="hljs-attr">readOnly</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
 <ol start="3">
 <li>代码测试
 <ul>
@@ -314,7 +310,7 @@
 </ul>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   SqlSession session2 = MybatisUtils.getSession();<br><br>   UserMapper mapper = session.getMapper(UserMapper.class);<br>   UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>   User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user);<br>   session.close();<br><br>   User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>   System.out.println(user2);<br>   System.out.println(user==user2);<br><br>   session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testQueryUserById</span><span class="hljs-params">()</span></span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    SqlSession session2 = MybatisUtils.getSession();<br><br>    UserMapper mapper = session.getMapper(UserMapper.class);<br>    UserMapper mapper2 = session2.getMapper(UserMapper.class);<br><br>    User user = mapper.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user);<br>    session.close();<br><br>    User user2 = mapper2.queryUserById(<span class="hljs-number">1</span>);<br>    System.out.println(user2);<br>    System.out.println(user==user2);<br><br>    session2.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>结果</strong>:只访问了一次数据库, 二级缓存生效</li>
 </ul>
@@ -325,15 +321,15 @@
 <ul>
 <li>pom.xml</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis.caches<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-ehcache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis.caches<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-ehcache<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.1.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>在<code>mapper.xml</code>中使用对应的缓存</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span> = <span class="hljs-string">&quot;org.acme.FooMapper” &gt;</span></span><br><span class="hljs-tag"><span class="hljs-string">   &lt;cache type = &quot;</span><span class="hljs-attr">org.mybatis.caches.ehcache.EhcacheCache</span>” /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span> = <span class="hljs-string">&quot;org.acme.FooMapper&quot;</span> &gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">cache</span> <span class="hljs-attr">type</span> = <span class="hljs-string">&quot;org.mybatis.caches.ehcache.EhcacheCache&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>编写ehcache.xml文件, 如果在加载时未找到/ehcache.xml资源或出现问题, 则将使用默认配置</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ehcache</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">xsi:noNamespaceSchemaLocation</span>=<span class="hljs-string">&quot;http://ehcache.org/ehcache.xsd&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">updateCheck</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br><br>   <span class="hljs-tag">&lt;<span class="hljs-name">diskStore</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;./tmpdir/Tmp_EhCache&quot;</span>/&gt;</span><br><br>   &lt;defaultCache<br>           eternal=&quot;false&quot;<br>           maxElementsInMemory=&quot;10000&quot;<br>           overflowToDisk=&quot;false&quot;<br>           diskPersistent=&quot;false&quot;<br>           timeToIdleSeconds=&quot;1800&quot;<br>           timeToLiveSeconds=&quot;259200&quot;<br>           memoryStoreEvictionPolicy=&quot;LRU&quot;/&gt;<br><br>   &lt;cache<br>           name=&quot;cloud_user&quot;<br>           eternal=&quot;false&quot;<br>           maxElementsInMemory=&quot;5000&quot;<br>           overflowToDisk=&quot;false&quot;<br>           diskPersistent=&quot;false&quot;<br>           timeToIdleSeconds=&quot;1800&quot;<br>           timeToLiveSeconds=&quot;1800&quot;<br>           memoryStoreEvictionPolicy=&quot;LRU&quot;/&gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">ehcache</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ehcache</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:noNamespaceSchemaLocation</span>=<span class="hljs-string">&quot;http://ehcache.org/ehcache.xsd&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">updateCheck</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">diskStore</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;./tmpdir/Tmp_EhCache&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">defaultCache</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;10000&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;259200&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">cache</span></span><br><span class="hljs-tag">           <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cloud_user&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;5000&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ehcache</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>diskStore:为缓存路径, ehcache分为内存和磁盘两级, 此属性定义磁盘的缓存位置,参数解释如下:
 <ul>
@@ -396,9 +392,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/24/Software/Backend/Database/Redis/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                      <a href="/2021/06/21/Software/Backend/Mybatis/%E6%A6%82%E5%BF%B5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis 问题解决</span>
+                        <span class="hidden-mobile">Mybatis 概述</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -406,8 +402,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/23/Software/Backend/Database/Redis/%E9%9B%86%E7%BE%A4/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">Redis 哨兵模式</span>
+                      <a href="/2021/06/21/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式 代理模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -532,6 +528,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -544,21 +544,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

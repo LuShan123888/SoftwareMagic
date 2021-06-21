@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -230,7 +230,7 @@
 <li>在上面一个实例中,this 表示 person 对象</li>
 <li>fullName 方法所属的对象就是 person</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> person = &#123;<br>  firstName: <span class="hljs-string">&quot;John&quot;</span>,<br>  lastName : <span class="hljs-string">&quot;Doe&quot;</span>,<br>  id       : <span class="hljs-number">5566</span>,<br>  fullName : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> person = &#123;<br>  <span class="hljs-attr">firstName</span>: <span class="hljs-string">&quot;John&quot;</span>,<br>  <span class="hljs-attr">lastName</span> : <span class="hljs-string">&quot;Doe&quot;</span>,<br>  <span class="hljs-attr">id</span>       : <span class="hljs-number">5566</span>,<br>  <span class="hljs-attr">fullName</span> : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="单独使用-this">单独使用 this</h2>
 <ul>
 <li>单独使用 this,则它指向全局(Global)对象</li>
@@ -263,7 +263,7 @@
 <li>在 JavaScript 中函数也是对象,对象则有方法,apply 和 call 就是函数对象的方法,这两个方法异常强大,他们允许切换函数执行的上下文环境(context),即 this 绑定的对象</li>
 <li>在下面实例中,当我们使用 person2 作为参数来调用 person1.fullName 方法时, <strong>this</strong> 将指向 person2, 即便它是 person1 的方法:</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> person1 = &#123;<br>  fullName: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">var</span> person2 = &#123;<br>  firstName:<span class="hljs-string">&quot;John&quot;</span>,<br>  lastName: <span class="hljs-string">&quot;Doe&quot;</span>,<br>&#125;<br>person1.fullName.call(person2);  <span class="hljs-comment">// 返回 &quot;John Doe&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> person1 = &#123;<br>  <span class="hljs-attr">fullName</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;<br>&#125;<br><span class="hljs-keyword">var</span> person2 = &#123;<br>  <span class="hljs-attr">firstName</span>:<span class="hljs-string">&quot;John&quot;</span>,<br>  <span class="hljs-attr">lastName</span>: <span class="hljs-string">&quot;Doe&quot;</span>,<br>&#125;<br>person1.fullName.call(person2);  <span class="hljs-comment">// 返回 &quot;John Doe&quot;</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -433,6 +433,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -445,21 +449,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

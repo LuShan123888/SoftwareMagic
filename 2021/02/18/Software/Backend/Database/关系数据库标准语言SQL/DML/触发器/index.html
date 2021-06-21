@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -220,7 +220,7 @@
 <li>触发器又叫作事件-条件-动作(event-condition-action)规则,当特定的系统事件(如对一个表的增,删,改操作,事务的结束等)发生时,对规则的条件进行检查,如果条件成立则执行规则中的动作,否则不执行该动作,规则中的动作体可以很复杂,可以涉及其他表和其他数据库对象,通常是一段SQL存储过程</li>
 <li>SQL使用CREATE TRIGGER命令建立触发器,其一般格式为;</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span><span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*每当触发事件发生时,该触发器被激活*/</span><br>&#123;BEFORE|AAFTER&#125;&lt;触发事件&gt; ON &lt;表名&gt; /*指明触发器激活的时间是在执行触发事件前或后*/<br><span class="hljs-keyword">REFERENCING</span> <span class="hljs-keyword">NEW</span><span class="hljs-operator">|</span><span class="hljs-keyword">OLD</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span><span class="hljs-operator">&lt;</span>变量<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*REFERENCING指出引用的变量*/</span><br>FOR EACH&#123;ROW|STATEMENT&#125; /*定义触发器的类型,指明动作体执行的频率*/<br>[<span class="hljs-keyword">WHEN</span><span class="hljs-operator">&lt;</span>触发条件<span class="hljs-operator">&gt;</span>]<span class="hljs-operator">&lt;</span>触发动作体<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*仅当触发条件为真时才执行触发动作体*/</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span><span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*每当触发事件发生时,该触发器被激活*/</span><br>&#123;BEFORE<span class="hljs-operator">|</span>AAFTER&#125;<span class="hljs-operator">&lt;</span>触发事件<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*指明触发器激活的时间是在执行触发事件前或后*/</span><br><span class="hljs-keyword">REFERENCING</span> <span class="hljs-keyword">NEW</span><span class="hljs-operator">|</span><span class="hljs-keyword">OLD</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span><span class="hljs-operator">&lt;</span>变量<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*REFERENCING指出引用的变量*/</span><br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span>&#123;<span class="hljs-type">ROW</span><span class="hljs-operator">|</span>STATEMENT&#125; <span class="hljs-comment">/*定义触发器的类型,指明动作体执行的频率*/</span><br>[<span class="hljs-keyword">WHEN</span><span class="hljs-operator">&lt;</span>触发条件<span class="hljs-operator">&gt;</span>]<span class="hljs-operator">&lt;</span>触发动作体<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*仅当触发条件为真时才执行触发动作体*/</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>下面对定义触发器的各部分语法进行详细说明:</p>
@@ -470,6 +470,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -482,21 +486,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

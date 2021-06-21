@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -275,7 +275,7 @@
 <li>这种思想 , 从本质上解决了问题 , 程序员不再去管理对象的创建了 , 更多的去关注业务的实现 . 耦合性大大降低 . 这也就是IOC的原型</li>
 <li>使用Spring , 只需要在xml配置文件中进行修改</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;<br>&lt;beans xmlns=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span><br>      xmlns:xsi=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br>      xsi:schemaLocation=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span><br><span class="hljs-string">       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;<br><br>   &lt;bean id=<span class="hljs-string">&quot;MysqlImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.dao.impl.UserDaoMySqlImpl&quot;</span>/&gt;<br>   &lt;bean id=<span class="hljs-string">&quot;OracleImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.dao.impl.UserDaoOracleImpl&quot;</span>/&gt;<br><br>   &lt;bean id=<span class="hljs-string">&quot;ServiceImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.service.impl.UserServiceImpl&quot;</span>&gt;<br>       &lt;!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写--&gt;<br>       &lt;!--引用另外一个bean , 不是用value 而是用 ref--&gt;<br>       &lt;property name=<span class="hljs-string">&quot;userDao&quot;</span> ref=<span class="hljs-string">&quot;OracleImpl&quot;</span>/&gt;<br>   &lt;/bean&gt;<br>&lt;/beans&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;<br>&lt;beans xmlns=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span><br>      xmlns:xsi=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br>      xsi:schemaLocation=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span><br><span class="hljs-string">       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;<br><br>   &lt;bean id=<span class="hljs-string">&quot;MysqlImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.dao.impl.UserDaoMySqlImpl&quot;</span>/&gt;<br>   &lt;bean id=<span class="hljs-string">&quot;OracleImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.dao.impl.UserDaoOracleImpl&quot;</span>/&gt;<br><br>   &lt;bean id=<span class="hljs-string">&quot;ServiceImpl&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.example.service.impl.UserServiceImpl&quot;</span>&gt;<br>       &lt;!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写--&gt;<br>       &lt;!--引用另外一个bean , 不是用value 而是用 ref--&gt;<br>       &lt;property name=<span class="hljs-string">&quot;userDao&quot;</span> ref=<span class="hljs-string">&quot;OracleImpl&quot;</span>/&gt;<br>   &lt;/bean&gt;<br>&lt;/beans&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>测试</li>
 </ul>
@@ -451,6 +451,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -463,21 +467,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

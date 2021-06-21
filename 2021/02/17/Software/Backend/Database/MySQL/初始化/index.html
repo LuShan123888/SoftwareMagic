@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      819 字
+      788 字
     </span>
   
 
@@ -227,11 +227,11 @@
 <li>最后一行冒号后面的部分DOqInortw9/&lt;就是初始密码</li>
 <li>使用随机生产的密码登录到服务端后,必须马上修改密码,不然会报如下错误:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show databases;<br>ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show databases;<br>ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.<br></code></pre></td></tr></table></figure>
 <ul>
 <li>修改密码</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; set password&#x3D;password(&quot;123456&quot;);<br># OR<br>mysql&gt; alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;<br><br>mysql&gt; flush privileges;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; set password=password(&quot;123456&quot;);<br># OR<br>mysql&gt; alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified by &#x27;123456&#x27;;<br><br>mysql&gt; flush privileges;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果在执行set password=password(“123456”);`命令后出现下面的报错:</li>
 </ul>
@@ -269,18 +269,18 @@
 <p>有时候,只是为了自己测试,不想密码设置得那么复杂,比如只想设置root的密码为123456,必须修改两个全局参数:</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; set global validate_password_policy&#x3D;0;<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt;  set global validate_password_length&#x3D;1;<br>Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; set global validate_password_policy=0;<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt;  set global validate_password_length=1;<br>Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
 <ul>
 <li>mysql5.7之后的数据库里mysql.user表里已经没有password这个字段了,password字段改成了authentication_string<br>
 所以修改密码的命令如下:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user  set authentication_string&#x3D;password(&#39;123456&#39;) where user&#x3D;&#39;root&#39;;<br>Query OK, 1 row affected, 1 warning (0.00 sec)<br>Rows matched: 1 Changed: 1 Warnings: 1<br><br>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user  set authentication_string=password(&#x27;123456&#x27;) where user=&#x27;root&#x27;;<br>Query OK, 1 row affected, 1 warning (0.00 sec)<br>Rows matched: 1 Changed: 1 Warnings: 1<br><br>mysql&gt; flush privileges;<br>Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
 <h3 id="编码问题">编码问题</h3>
 <ul>
 <li>修改mysql5.7的编码由latin1为utf8</li>
 </ul>
 <h4 id="默认编码">默认编码</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;show variables like &quot;%collation%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | &#x2F;usr&#x2F;share&#x2F;mysql&#x2F;charsets&#x2F;|<br>+--------------------------+----------------------------+<br>8 rows in&#96; &#96;set&#96; &#96;(0.00 sec)<br><br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br>3 rows in&#96; &#96;set&#96; &#96;(0.01 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;show variables like &quot;%collation%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br>8 rows in` `set` `(0.00 sec)<br><br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br>3 rows in` `set` `(0.01 sec)<br></code></pre></td></tr></table></figure>
 <h4 id="调整操作">调整操作</h4>
 <ul>
 <li>修改配置文件<code>/etc/my.cnf</code></li>
@@ -293,7 +293,7 @@
 <ul>
 <li>查看修改</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;show variables like &quot;%collation%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | utf8            |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | utf8            |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | &#x2F;usr&#x2F;share&#x2F;mysql&#x2F;charsets&#x2F;|<br>+--------------------------+----------------------------+<br>8 rows in&#96; &#96;set&#96; &#96;(0.01 sec)<br><br>+----------------------+-----------------+<br>| Variable_name    | Value      |<br>+----------------------+-----------------+<br>| collation_connection | utf8_general_ci |<br>| collation_database  | utf8_general_ci |<br>| collation_server   | utf8_general_ci |<br>+----------------------+-----------------+<br>3 rows in&#96; &#96;set&#96; &#96;(0.00 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;show variables like &quot;%collation%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | utf8            |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | utf8            |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br>8 rows in` `set` `(0.01 sec)<br><br>+----------------------+-----------------+<br>| Variable_name    | Value      |<br>+----------------------+-----------------+<br>| collation_connection | utf8_general_ci |<br>| collation_database  | utf8_general_ci |<br>| collation_server   | utf8_general_ci |<br>+----------------------+-----------------+<br>3 rows in` `set` `(0.00 sec)<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -462,6 +462,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -474,21 +478,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

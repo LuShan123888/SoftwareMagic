@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -472,14 +472,14 @@
 <li>这时我们要先网卡绑定别名,比如说网卡之前绑定的IP是192.168.1.30,现在将192.168.1.31和192.168.1.32这两个IP都绑定到这个网卡上,那么请求这个两个IP的请求才会到达这台机器</li>
 <li>绑定别名后进行以下配置即可</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nginx">http<br>&#123;<br>	&#123;<br>	   listen:  80;<br>	   server_name:  192.168.1.31;<br>     ...<br>	&#125;<br>	&#123;<br>	   listen:  80;<br>	   server_name:  192.168.1.32;<br>     ...<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">http</span><br>&#123;<br>	&#123;<br>	   listen:  80;<br>	   server_name:  192.168.1.31;<br>     ...<br>	&#125;<br>	&#123;<br>	   listen:  80;<br>	   server_name:  192.168.1.32;<br>     ...<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="location块">location块</h2>
 <ul>
 <li>每个server块中可以包含多个location块,在整个Nginx配置文档中起着重要的作用,而且Nginx服务器在许多功能上的灵活性往往在location指令的配置中体现出来</li>
 <li>location块的主要作用是,基于Nginx服务器接收到的请求字符串(例如,server_name/uri-string),对除虚拟主机名称(也可以是IP别名,后文有详细阐述)之外的字符串(前例中&quot;/uri-string”部分)进行匹配,对特定的请求进行处理,地址定向,数据缓存和应答控制等功能都是在这部分实现,许多第三方模块的配置也是在location块中提供功能</li>
 </ul>
 <h3 id="基本语法-2">基本语法</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx">location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">location</span> [ = | <span class="hljs-regexp">~ |</span> <span class="hljs-regexp">~* |</span><span class="hljs-regexp"> ^~</span> ] uri &#123; ... &#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>其中,uri变量是待匹配的请求字符串,可以是不含正则表达的字符串,如<code>/myserver.php</code>等,也可以是包含有正则表达的字符串,如 <code>.php$</code>等</li>
 <li>其中方括号里的部分,是可选项,用来改变请求字符串与 uri 的匹配方式,在介绍四种标识的含义之前,我们需要先了解不添加此选项时,Nginx服务器是如何在server块中搜索并使用location块的uri和请求字符串匹配的</li>
@@ -832,6 +832,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -844,21 +848,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

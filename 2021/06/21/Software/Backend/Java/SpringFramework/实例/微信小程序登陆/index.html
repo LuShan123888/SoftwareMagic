@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Spring Boot 整合微信小程序登陆 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring Boot 整合微信小程序登陆">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-21 22:30" pubdate>
+        2021年6月21日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring Boot 整合微信小程序登陆</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年6月21日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Spring Boot 整合微信小程序登陆</h1>
+<h2 id="微信小程序登录流程">微信小程序登录流程</h2>
+<ul>
+<li>微信小程序登录流程涉及到三个角色：<strong>小程序、开发者服务器、微信服务器</strong></li>
+<li>三者交互步骤如下</li>
+</ul>
+<blockquote>
+<p>第一步：<code>小程序</code>通过wx.login()获取code<br>
+第二步：<code>小程序</code>通过wx.request()发送code到开发者服务器第三步：<code>开发者服务器</code>接收小程序发送的code，并携带appid、appsecret（这两个需要到微信小程序后台查看）、code发送到<code>微信服务器</code>第四步：<code>微信服务器</code>接收开发者服务器发送的appid、appsecret、code进行校验。校验通过后向<code>开发者服务器</code>发送session_key、openid<br>
+第五步：<code>开发者服务器</code>自己生成一个skey（自定义登录状态）与openid、session_key进行关联，并存到数据库中（mysql、redis等）第六步：<code>开发者服务器</code>返回生成skey（自定义登录状态）到小程序第七步：<code>小程序</code>存储skey（自定义登录状态）到本地第八步：<code>小程序</code>通过wx.request()发起业务请求到<code>开发者服务器</code>，同时携带skey（自定义登录状态）第九步：<code>开发者服务器</code>接收<code>小程序</code>发送的skey（自定义登录状态），查询skey在数据库中是否有对应的openid、session_key<br>
+第十步：<code>开发者服务器</code>返回业务数据到<code>小程序</code></p>
+</blockquote>
+<ul>
+<li>登录流程时序如下:</li>
+</ul>
+<img src="https://upload-images.jianshu.io/upload_images/5336514-96d351a21eb8cbad.png?imageMogr2/auto-orient/strip|imageView2/2/w/710/format/webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
+<h2 id="开发者服务器">开发者服务器</h2>
+<ul>
+<li>项目结构</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621200659.jpg" srcset="/img/loading.gif" lazyload alt="5336514-e0568415537890ba" style="zoom:67%;" />
+<h3 id="pom-xml">pom.xml</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- http请求工具包依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>httpclient<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.5.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.bouncycastle<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>bcprov-jdk16<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.46<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--base64加密解密--&gt;</span><br><span class="hljs-comment">&lt;!--shiro依赖和缓存--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.shiro<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>shiro-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.4.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- fastjson --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.47<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!--简化代码的工具包--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.projectlombok<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>lombok<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">optional</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">optional</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-comment">&lt;!--mybatis-plus的springboot支持--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.baomidou<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.1.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-comment">&lt;!--mysql驱动--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.1.47<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="application-properties">application.properties</h3>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.application.name</span> = <span class="hljs-string">lastwhisper-wxlogin</span><br><span class="hljs-meta">spring.datasource.driver-class-name</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-meta">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://127.0.0.1:3306/wxlogin?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;allowMultiQueries=true&amp;useSSL=false</span><br><span class="hljs-meta">spring.datasource.username</span>=<span class="hljs-string">root</span><br><span class="hljs-meta">spring.datasource.password</span>=<span class="hljs-string">root</span><br></code></pre></td></tr></table></figure>
+<h3 id="小程序用户表">小程序用户表</h3>
+<ul>
+<li>创建一个用户表存储用户的openid等数据。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `<span class="hljs-keyword">user</span>`  (<br>    `open_id` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_unicode_ci <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;open_id&#x27;</span>,<br>    `skey` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_unicode_ci <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;skey&#x27;</span>,<br>    `create_time` <span class="hljs-type">timestamp</span>(<span class="hljs-number">0</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="hljs-string">&#x27;创建时间&#x27;</span>,<br>    `last_visit_time` <span class="hljs-type">timestamp</span>(<span class="hljs-number">0</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="hljs-string">&#x27;最后登录时间&#x27;</span>,<br>    `session_key` <span class="hljs-type">varchar</span>(<span class="hljs-number">100</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_unicode_ci <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;session_key&#x27;</span>,<br>    `city` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;市&#x27;</span>,<br>    `province` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;省&#x27;</span>,<br>    `country` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;国&#x27;</span>,<br>    `avatar_url` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;头像&#x27;</span>,<br>    `gender` tinyint(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;性别&#x27;</span>,<br>    `nick_name` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;网名&#x27;</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (`open_id`) <span class="hljs-keyword">USING</span> BTREE<br>) ENGINE <span class="hljs-operator">=</span> InnoDB <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> <span class="hljs-operator">=</span> utf8 <span class="hljs-keyword">COLLATE</span> <span class="hljs-operator">=</span> utf8_general_ci COMMENT <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;微信用户信息&#x27;</span> ROW_FORMAT <span class="hljs-operator">=</span> <span class="hljs-keyword">Dynamic</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="POJO">POJO</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;<br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.annotation.TableField;<br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.annotation.TableId;<br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.annotation.TableName;<br><span class="hljs-keyword">import</span> lombok.Data;<br><span class="hljs-keyword">import</span> org.springframework.format.annotation.DateTimeFormat;<br><br><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-meta">@TableName(&quot;user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * open_id</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableId(value = &quot;open_id&quot;,type = IdType.INPUT)</span><br>    <span class="hljs-keyword">private</span> String openId;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * skey</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> String skey;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建时间</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;create_time&quot;)</span><br>    <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span><br>    <span class="hljs-keyword">private</span> Date createTime;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 最后登录时间</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;last_visit_time&quot;)</span><br>    <span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span><br>    <span class="hljs-keyword">private</span> Date lastVisitTime;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * session_key</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;session_key&quot;)</span><br>    <span class="hljs-keyword">private</span> String sessionKey;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 市</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;city&quot;)</span><br>    <span class="hljs-keyword">private</span> String city;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 省</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;province&quot;)</span><br>    <span class="hljs-keyword">private</span> String province;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 国</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;country&quot;)</span><br>    <span class="hljs-keyword">private</span> String country;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 头像</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;avatar_url&quot;)</span><br>    <span class="hljs-keyword">private</span> String avatarUrl;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 性别</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;gender&quot;)</span><br>    <span class="hljs-keyword">private</span> Integer gender;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 网名</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@TableField(&quot;nick_name&quot;)</span><br>    <span class="hljs-keyword">private</span> String nickName;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Common">Common</h3>
+<ul>
+<li>封装一些工具类</li>
+</ul>
+<h4 id="GlobalResult">GlobalResult</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> cn.lastwhisper.springbootwx.common;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span>: 自定义响应数据结构</span><br><span class="hljs-comment"> *              这个类是提供给门户，ios，安卓，微信商城用的</span><br><span class="hljs-comment"> *              门户接受此类数据后需要使用本类的方法转换成对于的数据类型格式（类，或者list）</span><br><span class="hljs-comment"> *              其他自行处理</span><br><span class="hljs-comment"> *              200：表示成功</span><br><span class="hljs-comment"> *              500：表示错误，错误信息在msg字段中</span><br><span class="hljs-comment"> *              501：bean验证错误，不管多少个错误都以map形式返回</span><br><span class="hljs-comment"> *              502：拦截器拦截到用户token出错</span><br><span class="hljs-comment"> *              555：异常抛出信息</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlobalResult</span> </span>&#123;<br><br>    <span class="hljs-comment">// 响应业务状态</span><br>    <span class="hljs-keyword">private</span> Integer status;<br><br>    <span class="hljs-comment">// 响应消息</span><br>    <span class="hljs-keyword">private</span> String msg;<br><br>    <span class="hljs-comment">// 响应中的数据</span><br>    <span class="hljs-keyword">private</span> Object data;<br><br>    <span class="hljs-keyword">private</span> String ok;  <span class="hljs-comment">// 不使用</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">build</span><span class="hljs-params">(Integer status, String msg, Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(status, msg, data);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">ok</span><span class="hljs-params">(Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(data);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">ok</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(<span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">errorMsg</span><span class="hljs-params">(String msg)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(<span class="hljs-number">500</span>, msg, <span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">errorMap</span><span class="hljs-params">(Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(<span class="hljs-number">501</span>, <span class="hljs-string">&quot;error&quot;</span>, data);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">errorTokenMsg</span><span class="hljs-params">(String msg)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(<span class="hljs-number">502</span>, msg, <span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GlobalResult <span class="hljs-title">errorException</span><span class="hljs-params">(String msg)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GlobalResult(<span class="hljs-number">555</span>, msg, <span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GlobalResult</span><span class="hljs-params">()</span> </span>&#123;<br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GlobalResult</span><span class="hljs-params">(Integer status, String msg, Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.status = status;<br>        <span class="hljs-keyword">this</span>.msg = msg;<br>        <span class="hljs-keyword">this</span>.data = data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GlobalResult</span><span class="hljs-params">(Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.status = <span class="hljs-number">200</span>;<br>        <span class="hljs-keyword">this</span>.msg = <span class="hljs-string">&quot;OK&quot;</span>;<br>        <span class="hljs-keyword">this</span>.data = data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Boolean <span class="hljs-title">isOK</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.status == <span class="hljs-number">200</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">getStatus</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> status;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setStatus</span><span class="hljs-params">(Integer status)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.status = status;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getMsg</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> msg;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMsg</span><span class="hljs-params">(String msg)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.msg = msg;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getData</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setData</span><span class="hljs-params">(Object data)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.data = data;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getOk</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> ok;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setOk</span><span class="hljs-params">(String ok)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.ok = ok;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="HttpClientUtil">HttpClientUtil</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.http.NameValuePair;<br><span class="hljs-keyword">import</span> org.apache.http.client.entity.UrlEncodedFormEntity;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.CloseableHttpResponse;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.HttpGet;<br><span class="hljs-keyword">import</span> org.apache.http.client.methods.HttpPost;<br><span class="hljs-keyword">import</span> org.apache.http.client.utils.URIBuilder;<br><span class="hljs-keyword">import</span> org.apache.http.entity.ContentType;<br><span class="hljs-keyword">import</span> org.apache.http.entity.StringEntity;<br><span class="hljs-keyword">import</span> org.apache.http.impl.client.CloseableHttpClient;<br><span class="hljs-keyword">import</span> org.apache.http.impl.client.HttpClients;<br><span class="hljs-keyword">import</span> org.apache.http.message.BasicNameValuePair;<br><span class="hljs-keyword">import</span> org.apache.http.util.EntityUtils;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.URI;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HttpClientUtil</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doGet</span><span class="hljs-params">(String url, Map&lt;String, String&gt; param)</span> </span>&#123;<br><br>        <span class="hljs-comment">// 创建Httpclient对象</span><br>        CloseableHttpClient httpclient = HttpClients.createDefault();<br><br>        String resultString = <span class="hljs-string">&quot;&quot;</span>;<br>        CloseableHttpResponse response = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 创建uri</span><br>            URIBuilder builder = <span class="hljs-keyword">new</span> URIBuilder(url);<br>            <span class="hljs-keyword">if</span> (param != <span class="hljs-keyword">null</span>) &#123;<br>                <span class="hljs-keyword">for</span> (String key : param.keySet()) &#123;<br>                    builder.addParameter(key, param.get(key));<br>                &#125;<br>            &#125;<br>            URI uri = builder.build();<br><br>            <span class="hljs-comment">// 创建http GET请求</span><br>            HttpGet httpGet = <span class="hljs-keyword">new</span> HttpGet(uri);<br><br>            <span class="hljs-comment">// 执行请求</span><br>            response = httpclient.execute(httpGet);<br>            <span class="hljs-comment">// 判断返回状态是否为200</span><br>            <span class="hljs-keyword">if</span> (response.getStatusLine().getStatusCode() == <span class="hljs-number">200</span>) &#123;<br>                resultString = EntityUtils.toString(response.getEntity(), <span class="hljs-string">&quot;UTF-8&quot;</span>);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span> (response != <span class="hljs-keyword">null</span>) &#123;<br>                    response.close();<br>                &#125;<br>                httpclient.close();<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> resultString;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doGet</span><span class="hljs-params">(String url)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> doGet(url, <span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doPost</span><span class="hljs-params">(String url, Map&lt;String, String&gt; param)</span> </span>&#123;<br>        <span class="hljs-comment">// 创建Httpclient对象</span><br>        CloseableHttpClient httpClient = HttpClients.createDefault();<br>        CloseableHttpResponse response = <span class="hljs-keyword">null</span>;<br>        String resultString = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 创建Http Post请求</span><br>            HttpPost httpPost = <span class="hljs-keyword">new</span> HttpPost(url);<br>            <span class="hljs-comment">// 创建参数列表</span><br>            <span class="hljs-keyword">if</span> (param != <span class="hljs-keyword">null</span>) &#123;<br>                List&lt;NameValuePair&gt; paramList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>                <span class="hljs-keyword">for</span> (String key : param.keySet()) &#123;<br>                    paramList.add(<span class="hljs-keyword">new</span> BasicNameValuePair(key, param.get(key)));<br>                &#125;<br>                <span class="hljs-comment">// 模拟表单</span><br>                UrlEncodedFormEntity entity = <span class="hljs-keyword">new</span> UrlEncodedFormEntity(paramList);<br>                httpPost.setEntity(entity);<br>            &#125;<br>            <span class="hljs-comment">// 执行http请求</span><br>            response = httpClient.execute(httpPost);<br>            resultString = EntityUtils.toString(response.getEntity(), <span class="hljs-string">&quot;utf-8&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                response.close();<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> resultString;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doPost</span><span class="hljs-params">(String url)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> doPost(url, <span class="hljs-keyword">null</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">doPostJson</span><span class="hljs-params">(String url, String json)</span> </span>&#123;<br>        <span class="hljs-comment">// 创建Httpclient对象</span><br>        CloseableHttpClient httpClient = HttpClients.createDefault();<br>        CloseableHttpResponse response = <span class="hljs-keyword">null</span>;<br>        String resultString = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 创建Http Post请求</span><br>            HttpPost httpPost = <span class="hljs-keyword">new</span> HttpPost(url);<br>            <span class="hljs-comment">// 创建请求内容</span><br>            StringEntity entity = <span class="hljs-keyword">new</span> StringEntity(json, ContentType.APPLICATION_JSON);<br>            httpPost.setEntity(entity);<br>            <span class="hljs-comment">// 执行http请求</span><br>            response = httpClient.execute(httpPost);<br>            resultString = EntityUtils.toString(response.getEntity(), <span class="hljs-string">&quot;utf-8&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                response.close();<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> resultString;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="WechatUtil">WechatUtil</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;<br><span class="hljs-keyword">import</span> org.apache.shiro.codec.Base64;<br><span class="hljs-keyword">import</span> org.bouncycastle.jce.provider.BouncyCastleProvider;<br><br><span class="hljs-keyword">import</span> javax.crypto.Cipher;<br><span class="hljs-keyword">import</span> javax.crypto.spec.IvParameterSpec;<br><span class="hljs-keyword">import</span> javax.crypto.spec.SecretKeySpec;<br><span class="hljs-keyword">import</span> java.security.AlgorithmParameters;<br><span class="hljs-keyword">import</span> java.security.Security;<br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WechatUtil</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> JSONObject <span class="hljs-title">getSessionKeyOrOpenId</span><span class="hljs-params">(String code)</span> </span>&#123;<br>        String requestUrl = <span class="hljs-string">&quot;https://api.weixin.qq.com/sns/jscode2session&quot;</span>;<br>        Map&lt;String, String&gt; requestUrlParam = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        <span class="hljs-comment">// https://mp.weixin.qq.com/wxopen/devprofile?action=get_profile&amp;token=164113089&amp;lang=zh_CN</span><br>        <span class="hljs-comment">//小程序appId</span><br>        requestUrlParam.put(<span class="hljs-string">&quot;appid&quot;</span>, <span class="hljs-string">&quot;小程序appId&quot;</span>);<br>        <span class="hljs-comment">//小程序secret</span><br>        requestUrlParam.put(<span class="hljs-string">&quot;secret&quot;</span>, <span class="hljs-string">&quot;小程序secret&quot;</span>);<br>        <span class="hljs-comment">//小程序端返回的code</span><br>        requestUrlParam.put(<span class="hljs-string">&quot;js_code&quot;</span>, code);<br>        <span class="hljs-comment">//默认参数</span><br>        requestUrlParam.put(<span class="hljs-string">&quot;grant_type&quot;</span>, <span class="hljs-string">&quot;authorization_code&quot;</span>);<br>        <span class="hljs-comment">//发送post请求读取调用微信接口获取openid用户唯一标识</span><br>        JSONObject jsonObject = JSON.parseObject(HttpClientUtil.doPost(requestUrl, requestUrlParam));<br>        <span class="hljs-keyword">return</span> jsonObject;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> JSONObject <span class="hljs-title">getUserInfo</span><span class="hljs-params">(String encryptedData, String sessionKey, String iv)</span> </span>&#123;<br>        <span class="hljs-comment">// 被加密的数据</span><br>        <span class="hljs-keyword">byte</span>[] dataByte = Base64.decode(encryptedData);<br>        <span class="hljs-comment">// 加密秘钥</span><br>        <span class="hljs-keyword">byte</span>[] keyByte = Base64.decode(sessionKey);<br>        <span class="hljs-comment">// 偏移量</span><br>        <span class="hljs-keyword">byte</span>[] ivByte = Base64.decode(iv);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 如果密钥不足16位，那么就补足.  这个if 中的内容很重要</span><br>            <span class="hljs-keyword">int</span> base = <span class="hljs-number">16</span>;<br>            <span class="hljs-keyword">if</span> (keyByte.length % base != <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-keyword">int</span> groups = keyByte.length / base + (keyByte.length % base != <span class="hljs-number">0</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>);<br>                <span class="hljs-keyword">byte</span>[] temp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[groups * base];<br>                Arrays.fill(temp, (<span class="hljs-keyword">byte</span>) <span class="hljs-number">0</span>);<br>                System.arraycopy(keyByte, <span class="hljs-number">0</span>, temp, <span class="hljs-number">0</span>, keyByte.length);<br>                keyByte = temp;<br>            &#125;<br>            <span class="hljs-comment">// 初始化</span><br>            Security.addProvider(<span class="hljs-keyword">new</span> BouncyCastleProvider());<br>            Cipher cipher = Cipher.getInstance(<span class="hljs-string">&quot;AES/CBC/PKCS7Padding&quot;</span>, <span class="hljs-string">&quot;BC&quot;</span>);<br>            SecretKeySpec spec = <span class="hljs-keyword">new</span> SecretKeySpec(keyByte, <span class="hljs-string">&quot;AES&quot;</span>);<br>            AlgorithmParameters parameters = AlgorithmParameters.getInstance(<span class="hljs-string">&quot;AES&quot;</span>);<br>            parameters.init(<span class="hljs-keyword">new</span> IvParameterSpec(ivByte));<br>            cipher.init(Cipher.DECRYPT_MODE, spec, parameters);<span class="hljs-comment">// 初始化</span><br>            <span class="hljs-keyword">byte</span>[] resultByte = cipher.doFinal(dataByte);<br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != resultByte &amp;&amp; resultByte.length &gt; <span class="hljs-number">0</span>) &#123;<br>                String result = <span class="hljs-keyword">new</span> String(resultByte, <span class="hljs-string">&quot;UTF-8&quot;</span>);<br>                <span class="hljs-keyword">return</span> JSON.parseObject(result);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Mapper">Mapper</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> cn.lastwhisper.springbootwx.pojo.User;<br><span class="hljs-keyword">import</span> com.baomidou.mybatisplus.core.mapper.BaseMapper;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserMapper</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseMapper</span>&lt;<span class="hljs-title">User</span>&gt; </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>配置SpringBoot扫描mapper</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> cn.lastwhisper.springbootwx;<br><br><span class="hljs-keyword">import</span> org.mybatis.spring.annotation.MapperScan;<br><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;<br><span class="hljs-meta">@MapperScan(&quot;设置mapper接口的扫描包&quot;)</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringbootwxApplication</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        SpringApplication.run(SpringbootwxApplication.class, args);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Controller">Controller</h3>
+<ul>
+<li>用于接收用户请求，校验签名，并生成skey，存储skey、openid等数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> cn.lastwhisper.springbootwx.common.GlobalResult;<br><span class="hljs-keyword">import</span> cn.lastwhisper.springbootwx.mapper.UserMapper;<br><span class="hljs-keyword">import</span> cn.lastwhisper.springbootwx.pojo.User;<br><span class="hljs-keyword">import</span> cn.lastwhisper.springbootwx.common.WechatUtil;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;<br><span class="hljs-keyword">import</span> org.apache.commons.codec.digest.DigestUtils;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.PostMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestParam;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;<br><br><span class="hljs-keyword">import</span> java.util.Date;<br><span class="hljs-keyword">import</span> java.util.UUID;<br><br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserMapper userMapper;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 微信用户登录详情</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(&quot;wx/login&quot;)</span><br>    <span class="hljs-meta">@ResponseBody</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> GlobalResult <span class="hljs-title">user_login</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;code&quot;, required = false)</span> String code,</span></span><br><span class="hljs-params"><span class="hljs-function">                                   <span class="hljs-meta">@RequestParam(value = &quot;rawData&quot;, required = false)</span> String rawData,</span></span><br><span class="hljs-params"><span class="hljs-function">                                   <span class="hljs-meta">@RequestParam(value = &quot;signature&quot;, required = false)</span> String signature,</span></span><br><span class="hljs-params"><span class="hljs-function">                                   <span class="hljs-meta">@RequestParam(value = &quot;encrypteData&quot;, required = false)</span> String encrypteData,</span></span><br><span class="hljs-params"><span class="hljs-function">                                   <span class="hljs-meta">@RequestParam(value = &quot;iv&quot;, required = false)</span> String iv)</span> </span>&#123;<br>        <span class="hljs-comment">// 用户非敏感信息：rawData</span><br>        <span class="hljs-comment">// 签名：signature</span><br>        JSONObject rawDataJson = JSON.parseObject(rawData);<br>        <span class="hljs-comment">// 1.接收小程序发送的code</span><br>        <span class="hljs-comment">// 2.开发者服务器 登录凭证校验接口 appi + appsecret + code</span><br>        JSONObject SessionKeyOpenId = WechatUtil.getSessionKeyOrOpenId(code);<br>        <span class="hljs-comment">// 3.接收微信接口服务 获取返回的参数</span><br>        String openid = SessionKeyOpenId.getString(<span class="hljs-string">&quot;openid&quot;</span>);<br>        String sessionKey = SessionKeyOpenId.getString(<span class="hljs-string">&quot;session_key&quot;</span>);<br><br>        <span class="hljs-comment">// 4.校验签名 小程序发送的签名signature与服务器端生成的签名signature2 = sha1(rawData + sessionKey)</span><br>        String signature2 = DigestUtils.sha1Hex(rawData + sessionKey);<br>        <span class="hljs-keyword">if</span> (!signature.equals(signature2)) &#123;<br>            <span class="hljs-keyword">return</span> GlobalResult.build(<span class="hljs-number">500</span>, <span class="hljs-string">&quot;签名校验失败&quot;</span>, <span class="hljs-keyword">null</span>);<br>        &#125;<br>        <span class="hljs-comment">// 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；不是的话，更新最新登录时间</span><br>        User user = <span class="hljs-keyword">this</span>.userMapper.selectById(openid);<br>        <span class="hljs-comment">// uuid生成唯一key，用于维护微信小程序用户与服务端的会话</span><br>        String skey = UUID.randomUUID().toString();<br>        <span class="hljs-keyword">if</span> (user == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-comment">// 用户信息入库</span><br>            String nickName = rawDataJson.getString(<span class="hljs-string">&quot;nickName&quot;</span>);<br>            String avatarUrl = rawDataJson.getString(<span class="hljs-string">&quot;avatarUrl&quot;</span>);<br>            String gender = rawDataJson.getString(<span class="hljs-string">&quot;gender&quot;</span>);<br>            String city = rawDataJson.getString(<span class="hljs-string">&quot;city&quot;</span>);<br>            String country = rawDataJson.getString(<span class="hljs-string">&quot;country&quot;</span>);<br>            String province = rawDataJson.getString(<span class="hljs-string">&quot;province&quot;</span>);<br><br>            user = <span class="hljs-keyword">new</span> User();<br>            user.setOpenId(openid);<br>            user.setSkey(skey);<br>            user.setCreateTime(<span class="hljs-keyword">new</span> Date());<br>            user.setLastVisitTime(<span class="hljs-keyword">new</span> Date());<br>            user.setSessionKey(sessionKey);<br>            user.setCity(city);<br>            user.setProvince(province);<br>            user.setCountry(country);<br>            user.setAvatarUrl(avatarUrl);<br>            user.setGender(Integer.parseInt(gender));<br>            user.setNickName(nickName);<br><br>            <span class="hljs-keyword">this</span>.userMapper.insert(user);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 已存在，更新用户登录时间</span><br>            user.setLastVisitTime(<span class="hljs-keyword">new</span> Date());<br>            <span class="hljs-comment">// 重新设置会话skey</span><br>            user.setSkey(skey);<br>            <span class="hljs-keyword">this</span>.userMapper.updateById(user);<br>        &#125;<br>        <span class="hljs-comment">//encrypteData比rowData多了appid和openid</span><br>        <span class="hljs-comment">//JSONObject userInfo = WechatUtil.getUserInfo(encrypteData, sessionKey, iv);</span><br>        <span class="hljs-comment">//6. 把新的skey返回给小程序</span><br>        GlobalResult result = GlobalResult.build(<span class="hljs-number">200</span>, <span class="hljs-keyword">null</span>, skey);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="微信小程序">微信小程序</h2>
+<ul>
+<li>项目结构</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621201634.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="me-wxml">me.wxml</h3>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 登录组件 https://developers.weixin.qq.com/miniprogram/dev/api/wx.getUserInfo.html --&gt;</span>  <br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;!hasUserInfo&#125;&#125;&quot;</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">&quot;getUserInfo&quot;</span> <span class="hljs-attr">bind:getuserinfo</span>=<span class="hljs-string">&quot;onGetUserInfo&quot;</span>&gt;</span>授权登录<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- 登录后使用open-data --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;avatar-container avatar-position&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&#123;&#123;userInfo.avatarUrl&#125;&#125;&quot;</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;hasUserInfo&#125;&#125;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;avatar&quot;</span> /&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">open-data</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;hasUserInfo&#125;&#125;&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;userNickName&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">open-data</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="me-js">me.js</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/me/me.js</span><br>Page(&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 页面的初始数据</span><br><span class="hljs-comment">   */</span><br>    <span class="hljs-attr">data</span>: &#123;<br>        <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">false</span>,<br>        <span class="hljs-attr">userInfo</span>: <span class="hljs-literal">null</span><br>    &#125;,<br><br>    <span class="hljs-attr">onLoad</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-comment">// 页面加载时使用用户授权逻辑，弹出确认的框  </span><br>        <span class="hljs-built_in">this</span>.userAuthorized()<br>    &#125;,<br><br>    <span class="hljs-function"><span class="hljs-title">userAuthorized</span>(<span class="hljs-params"></span>)</span> &#123;<br>        wx.getSetting(&#123;<br>            <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>                <span class="hljs-keyword">if</span> (data.authSetting[<span class="hljs-string">&#x27;scope.userInfo&#x27;</span>]) &#123;<br>                    wx.getUserInfo(&#123;<br>                        <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>                            <span class="hljs-built_in">this</span>.setData(&#123;<br>                                <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">true</span>,<br>                                <span class="hljs-attr">userInfo</span>: data.userInfo<br>                            &#125;)<br>                        &#125;<br>                    &#125;)<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-built_in">this</span>.setData(&#123;<br>                        <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">false</span><br>                    &#125;)<br>                &#125;<br>            &#125;<br>        &#125;)<br>    &#125;,<br><br>    <span class="hljs-function"><span class="hljs-title">onGetUserInfo</span>(<span class="hljs-params">e</span>)</span> &#123;<br>        <span class="hljs-keyword">const</span> userInfo = e.detail.userInfo<br>        <span class="hljs-keyword">if</span> (userInfo) &#123;<br>            <span class="hljs-comment">// 1. 小程序通过wx.login()获取code</span><br>            wx.login(&#123;<br>                <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">login_res</span>) </span>&#123;<br>                    <span class="hljs-comment">//获取用户信息</span><br>                    wx.getUserInfo(&#123;<br>                        <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">info_res</span>) </span>&#123;<br>                            <span class="hljs-comment">// 2. 小程序通过wx.request()发送code到开发者服务器</span><br>                            wx.request(&#123;<br>                                <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;http://localhost:8080/wx/login&#x27;</span>,<br>                                <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>                                <span class="hljs-attr">header</span>: &#123;<br>                                    <span class="hljs-string">&#x27;content-type&#x27;</span>: <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span><br>                                &#125;,<br>                                <span class="hljs-attr">data</span>: &#123;<br>                                    <span class="hljs-attr">code</span>: login_res.code, <span class="hljs-comment">//临时登录凭证</span><br>                                    <span class="hljs-attr">rawData</span>: info_res.rawData, <span class="hljs-comment">//用户非敏感信息</span><br>                                    <span class="hljs-attr">signature</span>: info_res.signature, <span class="hljs-comment">//签名</span><br>                                    <span class="hljs-attr">encrypteData</span>: info_res.encryptedData, <span class="hljs-comment">//用户敏感信息</span><br>                                    <span class="hljs-attr">iv</span>: info_res.iv <span class="hljs-comment">//解密算法的向量</span><br>                                &#125;,<br>                                <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;<br>                                    <span class="hljs-keyword">if</span> (res.data.status == <span class="hljs-number">200</span>) &#123;<br>                                        <span class="hljs-comment">// 7.小程序存储skey（自定义登录状态）到本地</span><br>                                        wx.setStorageSync(<span class="hljs-string">&#x27;userInfo&#x27;</span>, userInfo);<br>                                        wx.setStorageSync(<span class="hljs-string">&#x27;skey&#x27;</span>, res.data.data);<br>                                    &#125; <span class="hljs-keyword">else</span>&#123;<br>                                        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;服务器异常&#x27;</span>);<br>                                    &#125;<br>                                &#125;,<br>                                <span class="hljs-attr">fail</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>&#123;<br>                                    <span class="hljs-comment">//调用服务端登录接口失败</span><br>                                    <span class="hljs-built_in">console</span>.log(error);<br>                                &#125;<br>                            &#125;)<br>                        &#125;<br>                    &#125;)<br>                &#125;<br>            &#125;)<br>            <span class="hljs-built_in">this</span>.setData(&#123;<br>                <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">true</span>,<br>                <span class="hljs-attr">userInfo</span>: userInfo<br>            &#125;)<br>        &#125;<br>    &#125;<br><br>&#125;)<br></code></pre></td></tr></table></figure>
+<h3 id="app-json">app.json</h3>
+<ul>
+<li>设置app.json的pages</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&#123;<br>  <span class="hljs-string">&quot;pages&quot;</span>:[<br>    <span class="hljs-string">&quot;pages/me/me&quot;</span><br>  ],<br>  <span class="hljs-string">&quot;window&quot;</span>:&#123;<br>    <span class="hljs-string">&quot;backgroundTextStyle&quot;</span>:<span class="hljs-string">&quot;light&quot;</span>,<br>    <span class="hljs-string">&quot;navigationBarBackgroundColor&quot;</span>: <span class="hljs-string">&quot;#fff&quot;</span>,<br>    <span class="hljs-string">&quot;navigationBarTitleText&quot;</span>: <span class="hljs-string">&quot;WeChat&quot;</span>,<br>    <span class="hljs-string">&quot;navigationBarTextStyle&quot;</span>:<span class="hljs-string">&quot;black&quot;</span><br>  &#125;,<br>  <span class="hljs-string">&quot;debug&quot;</span>:<span class="hljs-literal">true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="测试">测试</h3>
+<ul>
+<li>启动开发者服务器，启动SpringBoot的main方法</li>
+<li>打开微信小程序开发者工具,清空缓存</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621215752.webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<ul>
+<li>点击授权登录，并允许</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621215826.webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 67%;" />
+<ul>
+<li>授权登录</li>
+<li>登录成功</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621215821.webp" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
+<ul>
+<li>登录成功</li>
+<li>查看数据库，openid、skey以及用户信息等存入了数据库。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621215840.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>用户信息入库</li>
+<li>同时微信小程序将skey等存储到本地，每次发起请求时都可以携带上</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210621215846.webp" srcset="/img/loading.gif" lazyload alt="img"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/21/Software/Backend/Java/JavaSE/JDBC/JDBC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JDBC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/21/Software/Concept/%E9%9D%A2%E8%AF%95%E9%A2%98/">
+                        <span class="hidden-mobile">面试题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

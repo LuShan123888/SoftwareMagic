@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.5k 字
     </span>
   
 
@@ -271,7 +271,7 @@
 <ul>
 <li>将其放入一个文档:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$auth_ok &#x3D; 0;<br>$user &#x3D; $_SERVER[&#39;PHP_AUTH_USER&#39;];<br>$pass &#x3D; $_SERVER[&#39;PHP_AUTH_PW&#39;];<br>if(isset($user) &amp;&amp; isset($pass) &amp;&amp; $user &#x3D;&#x3D;&#x3D; strrev($pass))&#123;<br> $auth_ok &#x3D; 1;<br>&#125;<br>if(!$auth_ok)&#123;<br> header(&#39;WWW-Authenticate: Basic realm&#x3D;&quot;Top Secret Files&quot;&#39;);<br> header(&#39;HTTP&#x2F;1.0 401 Unauthorized&#39;);<br> &#x2F;&#x2F;如果用户点击&quot;Cancel&quot;按钮,就只能看到在此输出的信息<br> exit;<br>&#125;<br>?&gt;<br>&#125;&lt;!-- your password-protected document goes here --&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$auth_ok = 0;<br>$user = $_SERVER[&#x27;PHP_AUTH_USER&#x27;];<br>$pass = $_SERVER[&#x27;PHP_AUTH_PW&#x27;];<br>if(isset($user) &amp;&amp; isset($pass) &amp;&amp; $user === strrev($pass))&#123;<br> $auth_ok = 1;<br>&#125;<br>if(!$auth_ok)&#123;<br> header(&#x27;WWW-Authenticate: Basic realm=&quot;Top Secret Files&quot;&#x27;);<br> header(&#x27;HTTP/1.0 401 Unauthorized&#x27;);<br> //如果用户点击&quot;Cancel&quot;按钮,就只能看到在此输出的信息<br> exit;<br>&#125;<br>?&gt;<br>&#125;&lt;!-- your password-protected document goes here --&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果你要保护的页面不只一个,把以上代码放到一个独立的文件中,然后再每个需要的页面include进来</li>
 <li>如果你的服务器使用CGI版本的PHP,而不是Apache模块方式,以上这些变量无法使用,你需要采用其他形式的认证,例如通过HTML表单来获得用户名和密码</li>
@@ -445,6 +445,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -457,21 +461,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

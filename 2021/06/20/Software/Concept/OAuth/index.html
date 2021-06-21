@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -290,7 +290,7 @@
 <ol start="4">
 <li>B 网站收到请求以后,就会颁发令牌,具体做法是向<code>redirect_uri</code>指定的网址,发送一段 JSON 数据</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br><span class="hljs-attr">&quot;access_token&quot;</span>:<span class="hljs-string">&quot;ACCESS_TOKEN&quot;</span>,<br><span class="hljs-attr">&quot;token_type&quot;</span>:<span class="hljs-string">&quot;bearer&quot;</span>,<br><span class="hljs-attr">&quot;expires_in&quot;</span>:<span class="hljs-number">2592000</span>,<br><span class="hljs-attr">&quot;refresh_token&quot;</span>:<span class="hljs-string">&quot;REFRESH_TOKEN&quot;</span>,<br><span class="hljs-attr">&quot;scope&quot;</span>:<span class="hljs-string">&quot;read&quot;</span>,<br><span class="hljs-attr">&quot;uid&quot;</span>:<span class="hljs-number">100101</span>,<br>&quot;info&quot;:&#123;...&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br><span class="hljs-attr">&quot;access_token&quot;</span>:<span class="hljs-string">&quot;ACCESS_TOKEN&quot;</span>,<br><span class="hljs-attr">&quot;token_type&quot;</span>:<span class="hljs-string">&quot;bearer&quot;</span>,<br><span class="hljs-attr">&quot;expires_in&quot;</span>:<span class="hljs-number">2592000</span>,<br><span class="hljs-attr">&quot;refresh_token&quot;</span>:<span class="hljs-string">&quot;REFRESH_TOKEN&quot;</span>,<br><span class="hljs-attr">&quot;scope&quot;</span>:<span class="hljs-string">&quot;read&quot;</span>,<br><span class="hljs-attr">&quot;uid&quot;</span>:<span class="hljs-number">100101</span>,<br><span class="hljs-attr">&quot;info&quot;</span>:&#123;...&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>access_token</code>:表示访问令牌,必选项</li>
 <li><code>token_type</code>:表示令牌类型,该值大小写不敏感,必选项,可以是bearer类型或mac类型</li>
@@ -502,7 +502,7 @@
 <ul>
 <li>后端使用这个授权码,向 GitHub 请求令牌</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> tokenResponse = <span class="hljs-keyword">await</span> axios(&#123;<br>  method: <span class="hljs-string">&#x27;post&#x27;</span>,<br>  url: <span class="hljs-string">&#x27;https://github.com/login/oauth/access_token?&#x27;</span> +<br>    <span class="hljs-string">`client_id=<span class="hljs-subst">$&#123;clientID&#125;</span>&amp;`</span> +<br>    <span class="hljs-string">`client_secret=<span class="hljs-subst">$&#123;clientSecret&#125;</span>&amp;`</span> +<br>    <span class="hljs-string">`code=<span class="hljs-subst">$&#123;requestToken&#125;</span>`</span>,<br>  headers: &#123;<br>    accept: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> tokenResponse = <span class="hljs-keyword">await</span> axios(&#123;<br>  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;post&#x27;</span>,<br>  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://github.com/login/oauth/access_token?&#x27;</span> +<br>    <span class="hljs-string">`client_id=<span class="hljs-subst">$&#123;clientID&#125;</span>&amp;`</span> +<br>    <span class="hljs-string">`client_secret=<span class="hljs-subst">$&#123;clientSecret&#125;</span>&amp;`</span> +<br>    <span class="hljs-string">`code=<span class="hljs-subst">$&#123;requestToken&#125;</span>`</span>,<br>  <span class="hljs-attr">headers</span>: &#123;<br>    <span class="hljs-attr">accept</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>上面代码中,GitHub 的令牌接口<code>https://github.com/login/oauth/access_token</code>需要提供三个参数
 <ul>
@@ -518,7 +518,7 @@
 <ul>
 <li>有了令牌以后,就可以向 API 请求数据了</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> axios(&#123;<br>  method: <span class="hljs-string">&#x27;get&#x27;</span>,<br>  url: <span class="hljs-string">`https://api.github.com/user`</span>,<br>  headers: &#123;<br>    accept: <span class="hljs-string">&#x27;application/json&#x27;</span>,<br>    Authorization: <span class="hljs-string">`token <span class="hljs-subst">$&#123;accessToken&#125;</span>`</span><br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> axios(&#123;<br>  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span>,<br>  <span class="hljs-attr">url</span>: <span class="hljs-string">`https://api.github.com/user`</span>,<br>  <span class="hljs-attr">headers</span>: &#123;<br>    <span class="hljs-attr">accept</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,<br>    <span class="hljs-attr">Authorization</span>: <span class="hljs-string">`token <span class="hljs-subst">$&#123;accessToken&#125;</span>`</span><br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>上面代码中,GitHub API 的地址是<code>https://api.github.com/user</code>,请求的时候必须在 HTTP 头信息里面带上令牌</li>
 <li>然后,就可以拿到用户数据,得到用户的身份</li>
@@ -688,6 +688,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -700,21 +704,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

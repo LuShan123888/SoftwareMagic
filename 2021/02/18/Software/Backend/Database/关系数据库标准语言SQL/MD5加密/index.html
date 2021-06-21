@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      307 字
+      288 字
     </span>
   
 
@@ -219,27 +219,27 @@
 <ul>
 <li>新建一个表 testmd5</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE &#96;testmd5&#96; (<br> &#96;id&#96; INT(4) NOT NULL,<br> &#96;name&#96; VARCHAR(20) NOT NULL,<br> &#96;pwd&#96; VARCHAR(50) NOT NULL,<br> PRIMARY KEY (&#96;id&#96;)<br>) ENGINE&#x3D;INNODB DEFAULT CHARSET&#x3D;utf8<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `testmd5` (<br> `id` INT(4) NOT NULL,<br> `name` VARCHAR(20) NOT NULL,<br> `pwd` VARCHAR(50) NOT NULL,<br> PRIMARY KEY (`id`)<br>) ENGINE=INNODB DEFAULT CHARSET=utf8<br></code></pre></td></tr></table></figure>
 <ul>
 <li>插入一些数据</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(1,&#39;test1&#39;,&#39;123456&#39;),(2,&#39;test2&#39;,&#39;456789&#39;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(1,&#x27;test1&#x27;,&#x27;123456&#x27;),(2,&#x27;test2&#x27;,&#x27;456789&#x27;)<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果我们要对pwd这一列数据进行加密,语法是:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">update testmd5 set pwd &#x3D; md5(pwd);<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">update testmd5 set pwd = md5(pwd);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果单独对某个用户的密码加密:</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(3,&#39;test3&#39;,&#39;123456&#39;)<br>update testmd5 set pwd &#x3D; md5(pwd) where name &#x3D; &#39;test3&#39;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(3,&#x27;test3&#x27;,&#x27;123456&#x27;)<br>update testmd5 set pwd = md5(pwd) where name = &#x27;test3&#x27;;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>插入新的数据自动加密</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(4,&#39;test4&#39;,md5(&#39;123456&#39;));<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">INSERT INTO testmd5 VALUES(4,&#x27;test4&#x27;,md5(&#x27;123456&#x27;));<br></code></pre></td></tr></table></figure>
 <ul>
 <li>查询登录用户信息(md5对比使用,查看用户输入加密后的密码进行比对)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM testmd5 WHERE &#96;name&#96;&#x3D;&#39;test4&#39; AND pwd&#x3D;MD5(&#39;123456&#39;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM testmd5 WHERE `name`=&#x27;test4&#x27; AND pwd=MD5(&#x27;123456&#x27;);<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -408,6 +408,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -420,21 +424,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

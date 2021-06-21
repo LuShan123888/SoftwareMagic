@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -229,7 +229,7 @@
 <h3 id="更换为中科大源">更换为中科大源</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#更换brew.git</span><br><span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>&quot;</span><br>git remote set-url origin https://mirrors.ustc.edu.cn/brew.git<br><br><span class="hljs-comment">#更换核心软件仓库(homebrew-core.git)</span><br><span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core&quot;</span><br>git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git<br><br><span class="hljs-comment">#更换Home cask软件仓库</span><br><span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>&quot;</span>/Library/Taps/homebrew/homebrew-cask<br>git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git<br><br><span class="hljs-comment">#更换Home Bottles源</span><br><span class="hljs-comment">#长期更换:</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.zshrc<br><span class="hljs-built_in">source</span> ~/.zshrc<br><span class="hljs-comment">#临时更换:</span><br><span class="hljs-built_in">export</span> HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles<br></code></pre></td></tr></table></figure>
 <h2 id="重置默认源">重置默认源</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> brew 程序本身,Homebrew/Linuxbrew 相同</span><br>git -C &quot;$(brew --repo)&quot; remote set-url origin https://github.com/Homebrew/brew.git<br><br><span class="hljs-meta">#</span><span class="bash"> 以下针对 mac OS 系统上的 Homebrew</span><br>git -C &quot;$(brew --repo homebrew/core)&quot; remote set-url origin https://github.com/Homebrew/homebrew-core.git<br>git -C &quot;$(brew --repo homebrew/cask)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask.git<br>git -C &quot;$(brew --repo homebrew/cask-fonts)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask-fonts.git<br>git -C &quot;$(brew --repo homebrew/cask-drivers)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask-drivers.git<br><br><span class="hljs-meta">#</span><span class="bash"> 以下针对 Linux 系统上的 Linuxbrew</span><br>git -C &quot;$(brew --repo homebrew/core)&quot; remote set-url origin https://github.com/Homebrew/linuxbrew-core.git<br><br><span class="hljs-meta">#</span><span class="bash"> 更换后测试工作是否正常</span><br>brew update<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> brew 程序本身,Homebrew/Linuxbrew 相同</span><br>git -C &quot;$(brew --repo)&quot; remote set-url origin https://github.com/Homebrew/brew.git<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 以下针对 mac OS 系统上的 Homebrew</span><br>git -C &quot;$(brew --repo homebrew/core)&quot; remote set-url origin https://github.com/Homebrew/homebrew-core.git<br>git -C &quot;$(brew --repo homebrew/cask)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask.git<br>git -C &quot;$(brew --repo homebrew/cask-fonts)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask-fonts.git<br>git -C &quot;$(brew --repo homebrew/cask-drivers)&quot; remote set-url origin https://github.com/Homebrew/homebrew-cask-drivers.git<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 以下针对 Linux 系统上的 Linuxbrew</span><br>git -C &quot;$(brew --repo homebrew/core)&quot; remote set-url origin https://github.com/Homebrew/linuxbrew-core.git<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 更换后测试工作是否正常</span><br>brew update<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -397,6 +397,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -409,21 +413,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 

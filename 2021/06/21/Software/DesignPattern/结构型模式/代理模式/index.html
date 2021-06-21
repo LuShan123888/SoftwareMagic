@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-20 23:30" pubdate>
-        2021年6月20日 晚上
+      <time datetime="2021-06-21 22:30" pubdate>
+        2021年6月21日 晚上
       </time>
     </span>
   
@@ -161,7 +161,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2k 字
     </span>
   
 
@@ -171,7 +171,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      12
        分钟
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年6月20日 晚上
+                  本文最后更新于：2021年6月21日 晚上
                 
               </p>
             
@@ -328,48 +328,24 @@
 <h4 id="Proxy">Proxy</h4>
 <ul>
 <li>Proxy提供了创建动态代理类和实例的静态方法,它也是由这些方法创建的所有动态代理类的超类</li>
-<li>动态代理类(以下简称为代理类)是一个实现在类创建时在运行时指定的接口列表的类,具有如下所述的行为</li>
+<li>动态代理类(以下简称为代理类)是一个实现在类创建时在运行时指定的接口列表的类,具有如下所述的行为:
+<ul>
 <li>代理接口是由代理类实现的接口,代理实例是代理类的一个实例</li>
 <li>每个代理都有一个关联的处理程序对象,它实现了接口InvocationHandler</li>
 <li>通过其代理接口之一的代理实例上的方法调用将被分派到实例调用处理程序的invoke方法,传递代理实例, <code>java. lang. reflect. Method</code>被调用方法的<code>java. lang. reflect.Method</code>对象以及包含参数的类型Object object的数组</li>
 <li>调用处理程序适当地处理编码方法调用,并且返回的结果将作为方法在代理实例上调用的结果返回</li>
 </ul>
+</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title">newProxyInstance</span><span class="hljs-params">( ClassLoader loader, Class&lt;?&gt; interfaces, InvocationHandler h)</span> <span class="hljs-keyword">throws</span> OllegalArgumentException</span><br></code></pre></td></tr></table></figure>
 <p><strong>参数</strong></p>
 <ul>
-<li><code>loader</code>:类加载器来定义代理类</li>
-<li><code>interfaces</code>:代理类实现的接口列表</li>
-<li><code>h</code>:调度方法调用的调用处理函数</li>
+<li><code>loader</code>: 用哪个类加载器去加载代理对象</li>
+<li><code>interfaces</code>:动态代理类需要实现的接口</li>
+<li><code>h</code>:动态代理方法在执行时，会调用h里面的invoke方法去执行</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//生成代理类</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getProxy</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">return</span> Proxy.newProxyInstance(<span class="hljs-keyword">this</span>.getClass().getClassLoader(),rent.getClass().getInterfaces(),<span class="hljs-keyword">this</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
-<ul>
-<li>抽象角色和真实角色和之前的一样</li>
-<li><code>Rent.java</code> 即抽象角色</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//抽象角色:租房</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Rent</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rent</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>Host.java</code> 即真实角色</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//真实角色: 房东, 房东要出租房子</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Host</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rent</span></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rent</span><span class="hljs-params">()</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;房屋出租&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>ProxyInvocationHandler. java</code> 即代理角色</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyInvocationHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> Rent rent;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setRent</span><span class="hljs-params">(Rent rent)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.rent = rent;<br>  &#125;<br><br>  <span class="hljs-comment">//生成代理类, 重点是第二个参数, 获取要代理的抽象角色,之前都是一个角色, 现在可以代理一类角色</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getProxy</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> Proxy.newProxyInstance(<span class="hljs-keyword">this</span>.getClass().getClassLoader(),rent.getClass().getInterfaces(),<span class="hljs-keyword">this</span>);<br>  &#125;<br><br>  <span class="hljs-comment">// proxy : 代理类</span><br>  <span class="hljs-comment">// method : 代理类的调用处理程序的方法对象</span><br>  <span class="hljs-comment">// 处理代理实例上的方法调用并返回结果</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>    seeHouse();<br>    <span class="hljs-comment">//核心:本质利用反射实现</span><br>    Object result = method.invoke(rent, args);<br>    fare();<br>    <span class="hljs-keyword">return</span> result;<br>  &#125;<br><br>  <span class="hljs-comment">//看房</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">seeHouse</span><span class="hljs-params">()</span></span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;带房客看房&quot;</span>);<br>  &#125;<br>  <span class="hljs-comment">//收中介费</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fare</span><span class="hljs-params">()</span></span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;收中介费&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>Client.java</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//租客</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">//真实角色</span><br>    Host host = <span class="hljs-keyword">new</span> Host();<br>    <span class="hljs-comment">//代理实例的调用处理程序</span><br>    ProxyInvocationHandler pih = <span class="hljs-keyword">new</span> ProxyInvocationHandler();<br>    pih.setRent(host); <span class="hljs-comment">//将真实角色放置进去</span><br>    Rent proxy = (Rent)pih.getProxy(); <span class="hljs-comment">//动态生成对应的代理类</span><br>    proxy.rent();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><strong>核心</strong>:一个动态代理 , 一般代理某一类业务 , 一个动态代理可以代理多个类, 代理的是接口</p>
-<h3 id="深化理解">深化理解</h3>
-<ul>
-<li>编写一个通用的动态代理实现的类,所有的代理对象设置为Object即可</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyInvocationHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;<br>  <span class="hljs-keyword">private</span> Object target;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTarget</span><span class="hljs-params">(Object target)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.target = target;<br>  &#125;<br><br>  <span class="hljs-comment">//生成代理类</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getProxy</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> Proxy.newProxyInstance(<span class="hljs-keyword">this</span>.getClass().getClassLoader(),<br>                                  target.getClass().getInterfaces(),<span class="hljs-keyword">this</span>);<br>  &#125;<br><br>  <span class="hljs-comment">// proxy : 代理类</span><br>  <span class="hljs-comment">// method : 代理类的调用处理程序的方法对象</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>    log(method.getName());<br>    Object result = method.invoke(target, args);<br>    <span class="hljs-keyword">return</span> result;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">log</span><span class="hljs-params">(String methodName)</span></span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;执行了&quot;</span>+methodName+<span class="hljs-string">&quot;方法&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>测试</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">//真实对象</span><br>    UserServiceImpl userService = <span class="hljs-keyword">new</span> UserServiceImpl();<br>    <span class="hljs-comment">//代理对象的调用处理程序</span><br>    ProxyInvocationHandler pih = <span class="hljs-keyword">new</span> ProxyInvocationHandler();<br>    pih.setTarget(userService); <span class="hljs-comment">//设置要代理的对象</span><br>    UserService proxy = (UserService)pih.getProxy(); <span class="hljs-comment">//动态生成代理类</span><br>    proxy.delete();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-comment">// 接口</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Subject</span></span>&#123;<br>        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sayHi</span><span class="hljs-params">()</span></span>;<br>        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sayHello</span><span class="hljs-params">()</span></span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 默认实现类（可以反射生成）</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SubjectImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Subject</span></span>&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sayHi</span><span class="hljs-params">()</span> </span>&#123;<br>            System.out.println(<span class="hljs-string">&quot;hi&quot;</span>);<br>        &#125;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sayHello</span><span class="hljs-params">()</span> </span>&#123;<br>            System.out.println(<span class="hljs-string">&quot;hello&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// jkd动态代理</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyInvocationHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span></span>&#123;<br>        <span class="hljs-keyword">private</span> Subject target;<br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ProxyInvocationHandler</span><span class="hljs-params">(Subject target)</span> </span>&#123;<br>            <span class="hljs-keyword">this</span>.target=target;<br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>            System.out.print(<span class="hljs-string">&quot;say:&quot;</span>);<br>            <span class="hljs-keyword">return</span> method.invoke(target, args);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Subject subject=<span class="hljs-keyword">new</span> SubjectImpl();<br>        Subject subjectProxy=(Subject) Proxy.newProxyInstance(subject.getClass().getClassLoader(), subject.getClass().getInterfaces(), <span class="hljs-keyword">new</span> ProxyInvocationHandler(subject));<br>        subjectProxy.sayHi();<br>        subjectProxy.sayHello();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -401,9 +377,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/20/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2021/06/21/Software/Backend/Mybatis/%E7%BC%93%E5%AD%98/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式 外观模式</span>
+                        <span class="hidden-mobile">Mybatis 缓存</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -411,8 +387,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/20/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">设计模式 装饰模式</span>
+                      <a href="/2021/06/21/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/">
+                        <span class="hidden-mobile">Spring Boot 整合QQ登录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -537,6 +513,10 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
 
 
 
@@ -549,21 +529,6 @@
       typing(title)
       
     })(window, document);
-  </script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
   </script>
 
 
