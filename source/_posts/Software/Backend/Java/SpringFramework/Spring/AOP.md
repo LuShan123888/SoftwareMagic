@@ -46,9 +46,9 @@ AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运�
 
 ```xml
 <dependency>
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-aspects</artifactId>
-  <version>${spring.version}</version>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aspects</artifactId>
+    <version>${spring.version}</version>
 </dependency>
 ```
 
@@ -61,33 +61,33 @@ AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运�
 ```java
 public interface UserService {
 
-  public void add();
-  public void delete();
-  public void update();
-  public void search();
+    public void add();
+    public void delete();
+    public void update();
+    public void search();
 
 }
 public class UserServiceImpl implements UserService{
 
-  @Override
-  public void add() {
-    System.out.println("增加用户");
-  }
+    @Override
+    public void add() {
+        System.out.println("增加用户");
+    }
 
-  @Override
-  public void delete() {
-    System.out.println("删除用户");
-  }
+    @Override
+    public void delete() {
+        System.out.println("删除用户");
+    }
 
-  @Override
-  public void update() {
-    System.out.println("更新用户");
-  }
+    @Override
+    public void update() {
+        System.out.println("更新用户");
+    }
 
-  @Override
-  public void search() {
-    System.out.println("查询用户");
-  }
+    @Override
+    public void search() {
+        System.out.println("查询用户");
+    }
 }
 ```
 
@@ -96,24 +96,24 @@ public class UserServiceImpl implements UserService{
 ```java
 public class BeforeLog implements MethodBeforeAdvice {
 
-  //method : 要执行的目标对象的方法
-  //objects : 被调用的方法的参数
-  //Object : 目标对象
-  @Override
-  public void before(Method method, Object[] objects, Object o) throws Throwable {
-    System.out.println( o.getClass().getName() + "的" + method.getName() + "方法被执行了");
-  }
+    //method : 要执行的目标对象的方法
+    //objects : 被调用的方法的参数
+    //Object : 目标对象
+    @Override
+    public void before(Method method, Object[] objects, Object o) throws Throwable {
+        System.out.println( o.getClass().getName() + "的" + method.getName() + "方法被执行了");
+    }
 }
 
 public class AfterLog implements AfterReturningAdvice {
-  //returnValue 返回值
-  //method被调用的方法
-  //args 被调用的方法的对象的参数
-  //target 被调用的目标对象
-  @Override
-  public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
-    System.out.println("执行了" + target.getClass().getName() +"的"+method.getName()+"方法," +"返回值:"+returnValue);
-  }
+    //returnValue 返回值
+    //method被调用的方法
+    //args 被调用的方法的对象的参数
+    //target 被调用的目标对象
+    @Override
+    public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
+        System.out.println("执行了" + target.getClass().getName() +"的"+method.getName()+"方法," +"返回值:"+returnValue);
+    }
 }
 ```
 
@@ -129,19 +129,19 @@ public class AfterLog implements AfterReturningAdvice {
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-  <!--注册bean-->
-  <bean id="userService" class="com.example.service.UserServiceImpl"/>
-  <bean id="beforeLog" class="com.example.log.BeforeLog"/>
-  <bean id="afterLog" class="com.example.log.AfterLog"/>
+    <!--注册bean-->
+    <bean id="userService" class="com.example.service.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.example.log.BeforeLog"/>
+    <bean id="afterLog" class="com.example.log.AfterLog"/>
 
-  <!--aop的配置-->
-  <aop:config>
-    <!--切入点 expression:表达式匹配要执行的方法-->
-    <aop:pointcut id="pointcut" expression="execution(* com.example.service.UserServiceImpl.*(..))"/>
-    <!--执行环绕; advice-ref执行方法 . pointcut-ref切入点-->
-    <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
-    <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
-  </aop:config>
+    <!--aop的配置-->
+    <aop:config>
+        <!--切入点 expression:表达式匹配要执行的方法-->
+        <aop:pointcut id="pointcut" expression="execution(* com.example.service.UserServiceImpl.*(..))"/>
+        <!--执行环绕; advice-ref执行方法 . pointcut-ref切入点-->
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+    </aop:config>
 
 </beans>
 ```
@@ -150,12 +150,12 @@ public class AfterLog implements AfterReturningAdvice {
 
 ```java
 public class MyTest {
-  @Test
-  public void test(){
-    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-    UserService userService = (UserService) context.getBean("userService");
-    userService.search();
-  }
+    @Test
+    public void test(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        UserService userService = (UserService) context.getBean("userService");
+        userService.search();
+    }
 }
 ```
 
@@ -170,12 +170,12 @@ public class MyTest {
 ```java
 public class DiyPointcut {
 
-  public void before(){
-    System.out.println("---------方法执行前---------");
-  }
-  public void after(){
-    System.out.println("---------方法执行后---------");
-  }
+    public void before(){
+        System.out.println("---------方法执行前---------");
+    }
+    public void after(){
+        System.out.println("---------方法执行后---------");
+    }
 
 }
 ```
@@ -187,11 +187,11 @@ public class DiyPointcut {
 <bean id="diy" class="com.example.config.DiyPointcut"/>
 <!--aop的配置-->
 <aop:config>
-  <aop:aspect ref="diy">
-    <aop:pointcut id="diyPonitcut" expression="execution(* com.example.service.UserServiceImpl.*(..))"/>
-    <aop:before pointcut-ref="diyPonitcut" method="before"/>
-    <aop:after pointcut-ref="diyPonitcut" method="after"/>
-  </aop:aspect>
+    <aop:aspect ref="diy">
+        <aop:pointcut id="diyPonitcut" expression="execution(* com.example.service.UserServiceImpl.*(..))"/>
+        <aop:before pointcut-ref="diyPonitcut" method="before"/>
+        <aop:after pointcut-ref="diyPonitcut" method="after"/>
+    </aop:aspect>
 </aop:config>
 ```
 
@@ -199,12 +199,12 @@ public class DiyPointcut {
 
 ```java
 public class MyTest {
-  @Test
-  public void test(){
-    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-    UserService userService = (UserService) context.getBean("userService");
-    userService.add();
-  }
+    @Test
+    public void test(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        UserService userService = (UserService) context.getBean("userService");
+        userService.add();
+    }
 }
 ```
 
@@ -223,25 +223,25 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class AnnotationPointcut {
-  @Before("execution(* com.example.service.UserServiceImpl.*(..))")
-  public void before(){
-    System.out.println("---------方法执行前---------");
-  }
+    @Before("execution(* com.example.service.UserServiceImpl.*(..))")
+    public void before(){
+        System.out.println("---------方法执行前---------");
+    }
 
-  @After("execution(* com.example.service.UserServiceImpl.*(..))")
-  public void after(){
-    System.out.println("---------方法执行后---------");
-  }
+    @After("execution(* com.example.service.UserServiceImpl.*(..))")
+    public void after(){
+        System.out.println("---------方法执行后---------");
+    }
 
-  @Around("execution(* com.example.service.UserServiceImpl.*(..))")
-  public void around(ProceedingJoinPoint jp) throws Throwable {
-    System.out.println("环绕前");
-    System.out.println("签名:"+jp.getSignature());
-    //执行目标方法proceed
-    Object proceed = jp.proceed();
-    System.out.println("环绕后");
-    System.out.println(proceed);
-  }
+    @Around("execution(* com.example.service.UserServiceImpl.*(..))")
+    public void around(ProceedingJoinPoint jp) throws Throwable {
+        System.out.println("环绕前");
+        System.out.println("签名:"+jp.getSignature());
+        //执行目标方法proceed
+        Object proceed = jp.proceed();
+        System.out.println("环绕后");
+        System.out.println(proceed);
+    }
 }
 ```
 
@@ -267,20 +267,20 @@ public class AnnotationPointcut {
 @Aspect
 @Component
 public class LoggingAspect {
-  // 在执行UserService的每个方法前执行:
-  @Before("execution(public * com.itranswarp.learnjava.service.UserService.*(..))")
-  public void doAccessCheck() {
-    System.err.println("[Before] do access check...");
-  }
+    // 在执行UserService的每个方法前执行:
+    @Before("execution(public * com.itranswarp.learnjava.service.UserService.*(..))")
+    public void doAccessCheck() {
+        System.err.println("[Before] do access check...");
+    }
 
-  // 在执行MailService的每个方法前后执行:
-  @Around("execution(public * com.itranswarp.learnjava.service.MailService.*(..))")
-  public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
-    System.err.println("[Around] start " + pjp.getSignature());
-    Object retVal = pjp.proceed();
-    System.err.println("[Around] done " + pjp.getSignature());
-    return retVal;
-  }
+    // 在执行MailService的每个方法前后执行:
+    @Around("execution(public * com.itranswarp.learnjava.service.MailService.*(..))")
+    public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
+        System.err.println("[Around] start " + pjp.getSignature());
+        Object retVal = pjp.proceed();
+        System.err.println("[Around] done " + pjp.getSignature());
+        return retVal;
+    }
 }
 ```
 
@@ -291,54 +291,59 @@ public class LoggingAspect {
 @ComponentScan
 @EnableAspectJAutoProxy
 public class AppConfig {
-  ...
+    ...
 }
 ```
 
 ### 注解绑定方法
 
-- 我们以一个实际例子演示如何使用注解实现AOP装配,为了监控应用程序的性能,我们定义一个性能监控的注解:
+- 我们以一个实际例子演示如何使用注解实现AOP装配,为了监控应用程序的性能,我们定义一个性能监控的注解
 
 ```java
 @Target(METHOD)
 @Retention(RUNTIME)
 public @interface MetricTime {
-  String value();
+    String value();
 }
 ```
 
-- 在需要被监控的关键方法上标注该注解:
+- 在需要被监控的关键方法上标注该注解
 
 ```java
 @Component
 public class UserService {
-  // 监控register()方法性能:
-  @MetricTime("register")
-  public User register(String email, String password, String name) {
+    // 监控register()方法性能:
+    @MetricTime("register")
+    public User register(String email, String password, String name) {
+        ...
+    }
     ...
-  }
-  ...
 }
 ```
 
-- 然后,我们定义`MetricAspect`:
+- 然后,我们定义`MetricAspect`
 
 ```java
 @Aspect
 @Component
 public class MetricAspect {
-  @Around("@annotation(metricTime)")
-  public Object metric(ProceedingJoinPoint joinPoint, MetricTime metricTime) throws Throwable {
-    String name = metricTime.value();
-    long start = System.currentTimeMillis();
-    try {
-      return joinPoint.proceed();
-    } finally {
-      long t = System.currentTimeMillis() - start;
-      // 写入日志或发送至JMX:
-      System.err.println("[Metrics] " + name + ": " + t + "ms");
+        @Pointcut("@annotation(com.example.annotation.metricTime)")
+    private void pointcut() {
     }
-  }
+
+    
+    @Around("pointcut() && @annotation(metricTime)")
+    public Object metric(ProceedingJoinPoint joinPoint, MetricTime metricTime) throws Throwable {
+        String name = metricTime.value();
+        long start = System.currentTimeMillis();
+        try {
+            return joinPoint.proceed();
+        } finally {
+            long t = System.currentTimeMillis() - start;
+            // 写入日志或发送至JMX:
+            System.err.println("[Metrics] " + name + ": " + t + "ms");
+        }
+    }
 }
 ```
 

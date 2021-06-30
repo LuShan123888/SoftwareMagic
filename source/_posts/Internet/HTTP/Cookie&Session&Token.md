@@ -34,48 +34,7 @@ categories:
 - 无论是客户端还是服务端, 都只能向自己的域或者更高级域设置Cookie,例如 `client.com` 不能向 `server.com` 设置Cookie, 同样 `server.com` 也不能向 `client.com` 设置Cookie
 - 服务端可以设置 `httpOnly: true`, 带有该属性的Cookie客户端无法读取
 - 客户端只会带上与请求同域的Cookie, 例如 `client.com/index.html` 会带上 `client.com` 的Cookie,`server.com/app.js` 会带上 `server.com` 的Cookie, 并且也会带上`httpOnly`的Cookie
-- 但是, 如果是向服务端的ajax请求, 则不会带上Cookie
-
-### 同域/跨域ajax请求的Cookie
-
-- fetch在默认情况下, 不管是同域还是跨域ajax请求都不会带上Cookie, 只有当设置了 `credentials` 时才会带上该ajax请求所在域的Cookie, 服务端需要设置响应头 `Access-Control-Allow-Credentials: true`, 否则浏览器会因为安全限制而报错, 拿不到响应
-- Axios和jQuery在同域ajax请求时会带上Cookie, 跨域请求不会, 跨域请求需要设置 `withCredentials` 和服务端响应头
-
-#### fetch 设置 credentials
-
-> By default, fetch won't send or receive any Cookies from the server, resulting in unauthenticated requests if the site relies on maintaining a user session (to send Cookies, the credentials init option must be set). Since Aug 25, 2017. The spec changed the default credentials policy to same-origin. Firefox changed since 61.0b13.
-
-- 使fetch带上Cookie
-
-```js
-fetch(url, {
-    credentials: "include", // include, same-origin, omit
-})
-```
-
-- include: 跨域ajax带上Cookie
-- same-origin: 仅同域ajax带上Cookie
-- omit: 任何情况都不带Cookie
-
-#### axios 设置 withCredentials
-
-- 使axios带上Cookie
-
-```js
-axios.get('http://server.com', {withCredentials: true})
-```
-
-#### jQuery 设置 withCredentials
-
-```js
-$.ajax({
-  method: 'get',
-  url: 'http://server.com',
-  xhrFields: {
-    withCredentials: true
-  }
-})
-```
+- 但是, 如果是向服务端的ajax请求, 默认不会带上Cookie
 
 ## Session
 
