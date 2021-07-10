@@ -154,21 +154,24 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E5%BF%B5/" target="_self">
-          Java 异常的概念
+        <a href="/2021/06/20/Software/Backend/Distributed/ZooKeeper/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" target="_self">
+          Zookeeper 数据模型
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E5%BC%82%E5%B8%B8%E7%9A%84%E6%A6%82%E5%BF%B5/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Distributed/ZooKeeper/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" target="_self">
           
           
             
           
-          Java 异常的概念
+          Zookeeper 数据模型
 
-异常表示程序运行过程中可能出现的非正常状态,运行时异常表示虚拟机的通常操作中可能遇到的异常,是一种常见运行错误,只要程序设计得没有问题通常就不会发生
-受检异常跟程序运行的上下文环境有关,即使程序设计无误,仍然可能因使用的问题而引发,Java编译器要求方法必须声明抛出可能发生的受检异常,但是并不要求必须声明抛出未被捕获的运行时异常,异常和继承一样,是面向对象程序设计中经常被滥
+在 zookeeper 中,可以说 zookeeper 中的所有存储的数据是由 znode 组成的,节点也称为 znode,并以 key/value 形式存储数据
+整体结构类似于 linux 文件系统的模式以树形结构存储,其中根路径以 / 开头
+
+zookeeper 数据结构
+zookkeeper 提供的名称空间非常类似于标准文件系统,key-value 的形式存储
         </a>
       </p>
 
@@ -189,11 +192,9 @@
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
             
           </div>
         
@@ -208,24 +209,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E6%8E%A5%E5%8F%A3/" target="_self">
-          Java 接口
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
+          JVM 内存分配与回收策略
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
           
           
             
           
-          Java 接口
-Java中不支持多重继承,而是通过接口实现比多重继承更强的功能,Java通过接口使处于不同层次,甚至互不关联的类可以具有相同的行为
-接口定义
+          JVM 内存分配与回收策略
 
-接口由常量和抽象方法组成,由关键字interface引导接口定义,具体语法如下:
+对象的内存分配,就是在堆上分配(也可能经过 JIT 编译后被拆散为标量类型并间接在栈上分配),对象主要分配在新生代的 Eden 区上,少数情况下可能直接分配在老年代,分配规则不固定,取决于当前使用的垃圾收集器组合以及相关的参数配置
+查看详细的 GC 过程需要在运行时加上参数:-XX:+PrintGCDetails
 
-1234[public]interface 接口名 [extends 父接口名列表]&#123;    [public][static][final] 域类
+
+对象优先在 Eden 分配
+
+大多数情况下,对象在
         </a>
       </p>
 
@@ -250,7 +253,7 @@ Java中不支持多重继承,而是通过接口实现比多重继承更强的功
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">抽象类和接口</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -265,23 +268,34 @@ Java中不支持多重继承,而是通过接口实现比多重继承更强的功
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/" target="_self">
-          Java 数据类型与变量
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
+          JVM 内存结构
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
           
           
             
           
-          Java 数据类型与变量
-数据类型
-在程序设计中要使用和处理各种数据,数据按其表示信息的含义和占用空间大小分为不同类型,Java语言的数据类型可以分为简单数据类型和复合数据类型两大类如下图所示:
-graph LR
-A[数据类型]--&gt;B[&quot;简单数据类型&lt;br/&gt;(基本类型)&quot;]
-A--&gt;C[&quot;复合数据类型&lt;br/&gt;(引用)&quot
+          JVM 内存结构
+
+Java 虚拟机的内存空间分为 5 个部分:
+
+程序计数器
+Java 虚拟机栈
+本地方法栈
+堆
+方法区
+
+
+
+
+注意:JDK 1.8 同 JDK 1.7 比,最大的差别就是:元空间(元数据区)取代了永久代,元空间的本质和永久代类似,都是对 JVM 规范中方法区的实现,不过元空间与永久代之间最大的区别在于:元空间并不在虚拟机中,而是使用本地内存
+程序计数器(PC 寄存器)
+
+定义
         </a>
       </p>
 
@@ -306,7 +320,7 @@ A--&gt;C[&quot;复合数据类型&lt;br/&gt;(引用)&quot
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -321,27 +335,27 @@ A--&gt;C[&quot;复合数据类型&lt;br/&gt;(引用)&quot
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
-          Java 表达式与运算符
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
+          JVM 性能调优
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
           
           
             
           
-          Java 表达式与运算符
+          JVM 性能调优
+在高性能硬件上部署程序,目前主要有两种方式:
 
-表达式是由操作数和运算符按一定的语法形式组成的式子,一个常量或一个变量可以看作表达式的特例,其值即该常量或变量的值在表达式中,表示各种不同运算的符号称为运算符,参与运算的数据称为操作数
-组成表达式的运算符有很多种,按操作数的数目来分,有如下3种:
+通过 64 位 JDK 来使用大内存
+使用若干个 32 位虚拟机建立逻辑集群来利用硬件资源
 
-一元运算符
+使用 64 位 JDK 管理大内存
 
-只需要一个运算对象的运算符称为一元运算符 ,例如,++,–,+,-等,如:
-
-12y = -x;		//将x
+堆内存变大后,虽然垃圾收集的频率减少了,但每次垃圾回收的时间变长,如果堆内存为 14 G,那么每次 Full GC 将长达数十秒,如果 Full GC 频繁发生,那么对于一个网站来说是无法忍受的
+对于用
         </a>
       </p>
 
@@ -366,7 +380,7 @@ A--&gt;C[&quot;复合数据类型&lt;br/&gt;(引用)&quot
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F/">数据类型与表达式</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -381,28 +395,24 @@ A--&gt;C[&quot;复合数据类型&lt;br/&gt;(引用)&quot
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Arrays/" target="_self">
-          Java Arrays
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E6%B2%99%E7%AE%B1%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" target="_self">
+          JVM 沙箱安全机制
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Arrays/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E6%B2%99%E7%AE%B1%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/" target="_self">
           
           
             
           
-          Java Arrays
-Arrays
+          JVM 沙箱安全机制
 
-Arrays 是JDK提供的操作数组的工具类, array类提供了动态创建和访问 Java 数组的方法
+沙箱是一个限制程序运行的环境,沙箱机制就是将 Java 代码限定在虚拟机(JVM)特定的运行范围中,并且严格限制代码对本地系统资源访问,通过这样的措施来保证对代码的有效隔离,防止对本地系统造成破坏
+沙箱主要限制系统资源访问,那系统资源包括CPU,内存,文件系统,网络,不同级别的沙箱对这些资源访问的限制也可以不一样
+所有的Java程序运行都可以指定沙箱,可以定制安全策略
 
-Arrays.newInstance()
-
-创建数组
-在Java的反射机制中, 通过数组的 class 对象的getComponentType()方法可以取得一个数组的Class对象,  通过Array.newInstance()可以反射生成数组对象
-
-
+组
         </a>
       </p>
 
@@ -427,7 +437,7 @@ Arrays.newInstance()
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -442,28 +452,37 @@ Arrays.newInstance()
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Iterator&ListIterator/" target="_self">
-          Java Iterator &amp; ListLterator
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
+          Java 类加载与类加载器
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Iterator&ListIterator/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
           
           
             
           
-          Java Iterator &amp; ListLterator
-Iterator
+          Java 类加载与类加载器
+类的生命周期
 
-Iterator是一种抽象的数据访问模型,使用Iterator模式进行迭代的好处有:
+类从被加载到虚拟机内存开始,到卸载出内存为止,它的整个生命周期包括以下 7 个阶段:
 
-对任何集合都采用同一种访问模型
-调用者对集合内部结构一无所知
-集合类返回的Iterator对象知道如何迭代
+加载
+验证
+准备
+解析
+初始化
+使用
+卸载
 
 
-Java提供了标准的迭代器模型,即集合类实现java.util.Iterable接口,返回java.util.It
+
+验证,准备,解析 3 个阶段统称为连接
+
+
+
+加载,验证,准备,初始化和卸载这 5 个阶段的顺序是确定的,类的加载过程必须按照这种顺序按部就班地开始(注意是&quot;开始”,而不是&quot;进行”或&quot;完成
         </a>
       </p>
 
@@ -488,7 +507,7 @@ Java提供了标准的迭代器模型,即集合类实现java.util.Iterable接口
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -503,27 +522,28 @@ Java提供了标准的迭代器模型,即集合类实现java.util.Iterable接口
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0/" target="_self">
-          Java 集合概述
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_self">
+          JVM 类文件结构
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/JVM/%E7%B1%BB%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" target="_self">
           
           
             
           
-          Java 集合概述
-集合框架图
+          JVM 类文件结构
+JVM 的&quot;无关性”
 
-简化图
+谈论 JVM 的无关性,主要有以下两个:
 
-说明
+平台无关性:任何操作系统都能运行 Java 代码
+语言无关性:JVM 能运行除 Java 以外的其他代码
 
-所有集合类都位于java.util包下,Java 的集合类主要由两个接口派生而出:Collection 和 Map,Collection 和 Map 是 Java 集合框架的根接口,这两个接口又包含了一些子接口或实现类
-集合接口:6 个接口(短虚线表示),表示不同集合类型,是集合框架的基础
-抽象类:5 个抽象类(长虚线表示),对集合接口的部分实现
+
+Java 源代码首先需要使用 Javac 编译器编译成 .class 文件,然后由 JVM 执行 .class 文件,从而程序开始运行
+JVM 只认识 .class 文件,它不关心是何种语言生
         </a>
       </p>
 
@@ -548,7 +568,7 @@ Java提供了标准的迭代器模型,即集合类实现java.util.Iterable接口
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/JVM/">JVM</a>
             
           </div>
         
@@ -563,23 +583,24 @@ Java提供了标准的迭代器模型,即集合类实现java.util.Iterable接口
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
-          Java 序列化
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
+          Java 基本数据类型包装类
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
           
           
             
           
-          Java 序列化
+          Java 基本数据类型包装类
 
-Java序列化是将一个对象编码成一个字节流,反序列化将字节流编码转换成一个对象
-对象输入流ObjectInputStream和对象输出流ObjectOutputStream将Java流系统扩充到能输入/输出对象,他们提供的writeObject()和readObject()方法实现了对象的序列化(Serialized)和反序列化(Deserialized)
+为什么需要包装类?
 
-Serializa
+很多人会有疑问,既然Java中为了提高效率,提供了八种基本数据类型,为什么还要提供包装类呢？
+因为Java是一种面向对象语言,很多地方都需要使用对象而不是基本数据类型,比如,在集合类中,我们是无法将int,double等类型放进去的,因为集合的容器要求元素是Object类型
+为了让基本类型也具有对象的特征,就出现了包装类型,它相当于将基本类型&
         </a>
       </p>
 
@@ -604,7 +625,7 @@ Serializa
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">流式输入输出与文件处理</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/">其他核心类</a>
             
           </div>
         
@@ -619,28 +640,26 @@ Serializa
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5/" target="_self">
-          Java 条件选择语句
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Future%E4%B8%8ECompletableFuture/" target="_self">
+          Java Future与CompletableFuture
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Future%E4%B8%8ECompletableFuture/" target="_self">
           
           
             
           
-          Java 条件选择语句
-if语句
-无else的if语句
-其格式如下:
-123if(条件表达式)&#123;	if块;&#125;
-说明
+          Java Future与CompletableFuture
+Future
 
-如果条件表达式的值为真,则执行&quot;if块&quot;部分的语句,否则直接执行后续语句
-用大括号括住要执行一组语句,也称语句块,语句块以&quot;{“表示块的开始,以”}&quot;表示块的结束,如果要执行的if块为单条语句,可以省略大括号
+Future&lt;V&gt;接口表示一个未来可能会返回的结果,它定义的方法有:
 
-**[例3
+get():获取结果(可能会等待)
+get(long timeout, TimeUnit unit):获取结果,但只等待指定的时间
+cancel(boolean mayInterruptIfRunning):取消当前任务
+isDone():
         </a>
       </p>
 
@@ -665,7 +684,7 @@ if语句
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">流程控制语句</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
             
           </div>
         
@@ -680,25 +699,22 @@ if语句
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/" target="_self">
-          Java 类的定义
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/JMM%E4%B8%8Evolatile/" target="_self">
+          Java JMM 与 volatile
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89/" target="_self">
+        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/JMM%E4%B8%8Evolatile/" target="_self">
           
           
             
           
-          Java 类的定义
-类定义包括声明和类体两部分,类定义的语法格式为:
-123[修饰符]class 类名 [extends 父类名][implements 接口列表]&#123;    ... //类体部分&#125;
-说明
+          Java JMM 与 volatile
+JMM
 
-类定义中带方括号&quot;[]&quot;的内容为可选部分
-修饰符有访问控制修饰(如public)和类型修饰(如abstract,final)
-关键字class引导要定义的
+Java虚拟机规范中定义了一种Java内存模型(Java Memory Model,即JMM)来屏蔽掉各种硬件和操作系统的内存访问差异,以实现让Java程序在各种平台下都能达到一致的并发效果,Java内存模型的主要目标就是定义程序中各个变量的访问规则,即在虚拟机中将变量存储到内存和从内存中取出变量这样的细节
+JMM中规定所有的变量都存储在主内存(M
         </a>
       </p>
 
@@ -723,7 +739,7 @@ if语句
             
               <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+              <a href="/categories/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
             
           </div>
         

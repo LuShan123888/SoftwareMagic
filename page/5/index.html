@@ -154,24 +154,91 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/21/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/" target="_self">
-          Spring Boot 整合QQ登录
+        <a href="/2021/06/27/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
+          Redis 事务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/21/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/" target="_self">
+        <a href="/2021/06/27/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
           
           
             
           
-          Spring Boot 整合QQ登录
-网站应用及移动应用接入申请
+          Redis 事务
 
-应用接入前，首先需进行申请https://wiki.connect.qq.com，获得对应的appid与appkey，以保证后续流程中可正确对网站与用户进行验证与授权。
+Redis 事务可以一次执行多个命令, 并且带有以下三个重要的保证
 
+批量操作在发送 EXEC 命令前被放入队列缓存
+收到 EXEC 命令后进入事务执行,事务中任意命令执行失败,其余的命令依然被执行
+在事务执行过程,其他客户端提交的命令请求不会插入到事务执行命令序列中
+
+
+一个事务从开始到执行会经历以下三个阶段:
+
+开始事务
+命令入队
+执行事务
+
+
+
+实例:以下是一个事务的例子
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-27 10:09" pubdate>
+              2021-06-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/27/Software/Backend/Database/Redis/SpringBoot/" target="_self">
+          Redis Spring Boot整合
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/27/Software/Backend/Database/Redis/SpringBoot/" target="_self">
+          
+          
+            
+          
+          Redis Spring Boot整合
 pom.xml
-123456&lt;!-- QQ登录依赖包 --&gt;&lt;dependency&gt;    &lt;groupId&gt;net.gpl
+
+在Spring Boot2.x之后,原来使用的jedis被替换为lettuce
+jedis使用直连server,多线程操作时有安全隐患,可使用jedis pool连接池改善,类似BIO模式
+lettuce底层使用netty实例可以在多个线程中进行共享,不存在线程不安全的情况,可以减少线程数据,类似NIO模式
+
+1234&lt;depende
         </a>
       </p>
 
@@ -179,8 +246,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-21 22:30" pubdate>
-              2021-06-21
+            <time datetime="2021-06-27 10:00" pubdate>
+              2021-06-27
             </time>
           </div>
         
@@ -192,11 +259,9 @@ pom.xml
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -211,196 +276,21 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/21/Software/Backend/Java/JavaSE/JDBC/JDBC/" target="_self">
-          JDBC
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Elasticsearch 初始化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/21/Software/Backend/Java/JavaSE/JDBC/JDBC/" target="_self">
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          JDBC
-
-为支持Java程序的数据库操作功能,Java语言采用了专门的Java数据库编程接口JDBC(Java Database Connectivity),JDBC类库中的类依赖于驱动程序管理器,不同的数据库需要不同的驱动程序,驱动程序管理器的作用是通过JDBC驱动程序建立与数据库的连接
-作为一种有效的数据存储和管理工具,数据库技术得到广泛应用,目前主流的数据库技术是关系数据库,数据以行列的表
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-21 22:30" pubdate>
-              2021-06-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/JDBC/">JDBC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/21/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E9%99%86/" target="_self">
-          Spring Boot 整合微信小程序登陆
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/21/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%99%BB%E9%99%86/" target="_self">
-          
-          
-            
-          
-          Spring Boot 整合微信小程序登陆
-微信小程序登录流程
-
-微信小程序登录流程涉及到三个角色：小程序、开发者服务器、微信服务器
-三者交互步骤如下
-
-
-第一步：小程序通过wx.login()获取code
-第二步：小程序通过wx.request()发送code到开发者服务器第三步：开发者服务器接收小程序发送的code，并携带appid、appsecret（这两个需要到微信小程序后台查看）、cod
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-21 22:30" pubdate>
-              2021-06-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Java/">Java</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/20/Software/System/Linux/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" target="_self">
-          Linux 远程连接
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/20/Software/System/Linux/%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" target="_self">
-          
-          
-            
-          
-          Linux 远程连接
-sftp
-登陆
-1sftp user@ip
-帮助
-1help
-建立连接后, linux shell中的$编程了sftp&gt;,  这也对, 现在执行以下help, 可以看看sftp支持哪些命令
-查看当前目录的路径
-12pwdlpwd
-pwd是看远端服务器的目录, 即sftp服务器默认的当前目录,  lpwd是查看本地目录
-查看当前目录的文件
-12lslls
-ls是看sftp
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:42" pubdate>
-              2021-06-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/System/">System</a>
-            
-              <a href="/categories/Software/System/Linux/">Linux</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/20/Software/Server/Nginx/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Nginx 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Server/Nginx/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Nginx 初始化
-Docker
-1docker run -d --name nginx-1.18 -p 80:80 -v ~/DockerVolumes/nginx1.18/conf:/etc/nginx -v ~/DockerVolumes/nginx1.18/html:/usr/share/nginx/html  nginx:1.18
+          Elasticsearch 初始化
 安装
-1brew install nginx
-管理服务
-
+Docker
+12$ docker network create elastic$ docker run --name es01-test -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; docker.elastic.co/elasticsearch/elasticse
         </a>
       </p>
 
@@ -408,119 +298,8 @@ Docker
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:40" pubdate>
-              2021-06-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/20/Software/Concept/OAuth/" target="_self">
-          OAuth
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Concept/OAuth/" target="_self">
-          
-          
-            
-          
-          OAuth
-OAuth是一种授权机制,数据的所有者告诉系统,同意授权第三方应用进入系统,获取这些数据,系统从而产生一个短期的进入令牌(token),用来代替密码,供第三方应用使用
-令牌和密码
-
-令牌(token)与密码(password)的作用是一样的,都可以进入系统,但是有三点差异
-
-令牌是短期的,到期会自动失效,用户自己无法修改,密码一般长期有效,用户不修改,就不会发生变化
-令牌可以被数据所有
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:40" pubdate>
-              2021-06-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Concept/">Concept</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/20/Software/Backend/Java/SpringFramework/SpringMVC/HandlerInterceptor/" target="_self">
-          Spring MVC 拦截器
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/SpringFramework/SpringMVC/HandlerInterceptor/" target="_self">
-          
-          
-            
-          
-          Spring MVC 拦截器
-概述
-
-Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能
-过滤器
-
-servlet规范中的一部分,任何java web工程都可以使用
-在url-pattern中配置了/*之后,可以对所有要访问的资源进行拦截
-
-
-拦截器
-
-拦截器是Spring MVC框架自己的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:40" pubdate>
-              2021-06-20
+            <time datetime="2021-06-26 18:58" pubdate>
+              2021-06-26
             </time>
           </div>
         
@@ -532,11 +311,9 @@ servlet规范中的一部分,任何java web工程都可以使用
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringFramework/SpringMVC/">SpringMVC</a>
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
             
           </div>
         
@@ -551,23 +328,21 @@ servlet规范中的一部分,任何java web工程都可以使用
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/SpringFramework/Spring/Thymeleaf/" target="_self">
-          Spring 整合Thymeleaf
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/IK%E5%88%86%E8%AF%8D%E5%99%A8/" target="_self">
+          Elasticsearch 中文分词插件IK
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/SpringFramework/Spring/Thymeleaf/" target="_self">
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/IK%E5%88%86%E8%AF%8D%E5%99%A8/" target="_self">
           
           
             
           
-          Spring 整合Thymeleaf
-模板引擎
-模板引擎的作用就是通过一个页面模板,将表达式解析,从后台提取数值并填充到指定的位置,最终生成一个静态页面
+          Elasticsearch 中文分词插件IK
 
-pom.xml
-12345&lt;!--thymeleaf--&gt;&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;ar
+分词:即把一段中文或者别的划分成一个个的关键字，在搜索时候会把信息进行分词，会把数据库中或者索引库中的数据进行分词，然后进行一个匹配操作，默认的中文分词是将每个字看成一个词，这显然是不符合要求的，所以需要安装中文分词器ik来解决这个问题
+IK提供了两个分词算法: ik_smart和ik_max_word，其中 ik smart为最少切分，ik_max
         </a>
       </p>
 
@@ -575,8 +350,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:39" pubdate>
-              2021-06-20
+            <time datetime="2021-06-26 09:35" pubdate>
+              2021-06-26
             </time>
           </div>
         
@@ -588,11 +363,9 @@ pom.xml
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/Java/SpringFramework/Spring/">Spring</a>
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
             
           </div>
         
@@ -607,29 +380,27 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/this&super/" target="_self">
-          Java this&amp;super
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E6%96%87%E6%A1%A3/" target="_self">
+          Elasticsearch 文档
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/this&super/" target="_self">
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E6%96%87%E6%A1%A3/" target="_self">
           
           
             
           
-          Java this&amp;super
-this
+          Elasticsearch 文档
 
-this 是自身的一个对象,代表对象本身,可以理解为:指向对象本身的一个指针
-this 的用法在 Java 中大体可以分为3种:
+Elasticsearch提供单文档API和多文档API，其中API调用分别针对单个文档和多个文档
 
-普通的直接引用
+创建文档
 
-这种就不用讲了,this 相当于是指向当前对象本身
+当使用特定映射对相应索引发出请求时，它有助于在索引中添加或更新JSON文档
+type在Elasticsearch中逐渐被弃用，使用_doc代替指定type
 
-形参与成员名字重名,用 this 来区分
-1234567891011121314151617class Person &#123;  priva
+123456789PUT /users/_doc/1&#123;    &quot;user
         </a>
       </p>
 
@@ -637,8 +408,8 @@ this 的用法在 Java 中大体可以分为3种:
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:39" pubdate>
-              2021-06-20
+            <time datetime="2021-06-26 09:35" pubdate>
+              2021-06-26
             </time>
           </div>
         
@@ -650,11 +421,9 @@ this 的用法在 Java 中大体可以分为3种:
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Backend/Java/JavaSE/%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">类与对象</a>
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
             
           </div>
         
@@ -669,22 +438,23 @@ this 的用法在 Java 中大体可以分为3种:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/20/Internet/TCPIP/TCP%E8%BF%9E%E6%8E%A5/" target="_self">
-          TCP 连接
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E7%B4%A2%E5%BC%95/" target="_self">
+          Elasticsearch 索引
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/20/Internet/TCPIP/TCP%E8%BF%9E%E6%8E%A5/" target="_self">
+        <a href="/2021/06/26/Software/Backend/Distributed/ElasticSearch/%E7%B4%A2%E5%BC%95/" target="_self">
           
           
             
           
-          TCP 连接
+          Elasticsearch 索引
+创建索引
 
-TCP是一种面向连接的单播协议,在发送数据前,通信双方必须在彼此间建立一条连接,所谓的&quot;连接”,其实是客户端和服务器的内存里保存的一份关于对方的信息,如ip地址,端口号等
-TCP可以看成是一种字节流,它会处理IP层或以下的层的丢包,重复以及错误问题,在连接的建立过程中,双方需要交换一些连接的参数,这些参数可以放在TCP头部
-TCP提供了一种可靠,面向连接,字节流,传输层的
+当用户将JSON对象传递到任何索引时，可以自动创建索引，也可以在此之前创建索引
+
+123456789101112131415161718192021222324252627282930313233343536PUT /users&#123;    &quot;mappings&quot;: &#123;        &quot;properties&
         </a>
       </p>
 
@@ -692,8 +462,8 @@ TCP提供了一种可靠,面向连接,字节流,传输层的
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-20 23:38" pubdate>
-              2021-06-20
+            <time datetime="2021-06-26 09:35" pubdate>
+              2021-06-26
             </time>
           </div>
         
@@ -701,9 +471,231 @@ TCP提供了一种可靠,面向连接,字节流,传输层的
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Internet/">Internet</a>
+              <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Internet/TCPIP/">TCPIP</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/24/Software/Backend/Distributed/ElasticSearch/Kibana/" target="_self">
+          Elasticsearch 整合Kibana
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/24/Software/Backend/Distributed/ElasticSearch/Kibana/" target="_self">
+          
+          
+            
+          
+          Elasticsearch 整合Kibana
+安装
+Docker
+1$ docker run --name kib01-test --net elastic -p 5601:5601 -e &quot;ELASTICSEARCH_HOSTS=http://es01-test:9200&quot; docker.elastic.co/kibana/kibana:7.13.2
+使用
+
+浏览器访问htt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-24 23:00" pubdate>
+              2021-06-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/24/Software/Tools/Maven/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Maven 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/24/Software/Tools/Maven/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Maven 初始化
+安装
+1brew install maven
+配置
+
+~/.m2/setting.xml
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;?xml version=&quot;1.0&quot; encoding=&quot;U
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-24 22:34" pubdate>
+              2021-06-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Maven/">Maven</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/24/Software/Tools/Maven/%E6%8F%92%E4%BB%B6/" target="_self">
+          Maven 插件
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/24/Software/Tools/Maven/%E6%8F%92%E4%BB%B6/" target="_self">
+          
+          
+            
+          
+          Maven 插件
+Spring Boot
+spring-boot-maven-plugin插件用来打包,我们只需要在pom.xml中加入以下配置
+12345678&lt;build&gt;  &lt;plugins&gt;    &lt;plugin&gt;      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;      &lt;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-24 22:34" pubdate>
+              2021-06-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Maven/">Maven</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/24/Software/Tools/Maven/%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_self">
+          Maven 命令与生命周期
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/24/Software/Tools/Maven/%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_self">
+          
+          
+            
+          
+          Maven 命令与生命周期
+命令
+clean
+清理项目生产的临时文件,一般是模块下的target目录
+1mvn clean
+compile
+编译源代码,一般编译模块下的src/main/java目录
+1mvn compile
+test
+测试命令,或执行src/test/java/下junit的测试用例
+1mvn test
+package
+项目打包工具,会在模块下的target目录生成jar或war
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-24 22:34" pubdate>
+              2021-06-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Maven/">Maven</a>
             
           </div>
         
