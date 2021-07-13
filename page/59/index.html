@@ -154,26 +154,28 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/mv/" target="_self">
-          Git mv
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/log/" target="_self">
+          Git log
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/mv/" target="_self">
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/log/" target="_self">
           
           
             
           
-          Git mv
+          Git log
 
-使用git命令移动工作区的文件
+查看历史提交
 
-1git mv 旧文件名 新文件名
+ 1git log
 
-上述命令等同于:
+ --decorate:显示所有的引用,包括分支和标签
+ --oneline:简短的显示快照
+--graph:以图形化的方式显示
+--all:显示所有的分支
 
-123ren/mv 旧文件名 新文件名git rm 旧文件名git add 新文件名
 
         </a>
       </p>
@@ -182,7 +184,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 15:28" pubdate>
+            <time datetime="2021-02-19 19:02" pubdate>
               2021-02-19
             </time>
           </div>
@@ -210,34 +212,27 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/add/" target="_self">
-          Git add
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/switch/" target="_self">
+          Git switch
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/add/" target="_self">
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/switch/" target="_self">
           
           
             
           
-          Git add
+          Git switch
 
-用于把工作目录的文件放入暂存区
+switch命令用于切换分支
+git的分支其实就是添加一个指向快照的指针,切换分支除了修改 HEAD 指针的指向,还会改变暂存区域和工作目录的内容
 
-1git add 文件名
+ 1git swtich &lt;分支名&gt;
 
-提交所有变化
+-c:创建并切换分支
 
-1git add -A
 
-提交被修改(modified)和被删除(deleted)文件,不包括新文件(new)
-
-1git add -u
-
-提交新文件(new)和被修改(modified)文件,不包括被删除(deleted)文件
-
-1git add .
         </a>
       </p>
 
@@ -245,7 +240,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-19 14:13" pubdate>
+            <time datetime="2021-02-19 19:00" pubdate>
               2021-02-19
             </time>
           </div>
@@ -273,29 +268,27 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/branch/" target="_self">
-          Git branch
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/rm/" target="_self">
+          Git rm
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/branch/" target="_self">
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/rm/" target="_self">
           
           
             
           
-          Git branch
-查看分支
-12git branchgit branch -a
+          Git rm
 
-加上-a参数可以查看远程分支,远程分支会用红色表示出来(如果你开了颜色支持的话)
+该命令删除的只是工作目录和暂存区域的文件,也就是取消跟踪,在下次提交不纳入版本管理
 
-创建分支
-1git branch 分支名称
-删除分支
-1git branch -d 分支名
-重命名分支
-1git branch -m 新分支名
+1git rm &lt;file_name&gt;
+
+-f: 在当工作目录域暂存区的文件不一样时,仍然删除这两个文件
+--cached:只删除暂存区域的文件,保留工作目录的文件
+-r:删除文件夹及其子目录
+
 
         </a>
       </p>
@@ -304,8 +297,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 13:01" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:59" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -332,52 +325,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Concept/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD/" target="_self">
-          计算机英语
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/restore/" target="_self">
+          Git restore
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Concept/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD/" target="_self">
+        <a href="/2021/02/19/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/restore/" target="_self">
           
           
             
           
-          计算机英语
-专业词汇和发音
+          Git restore
+
+表示将在工作空间但是不在暂存区的文件撤销更改
+
+1git restore &lt;file&gt;
+
+--staged作用是将暂存区的文件从暂存区撤出,但不会更改文件
 
 
-
-单词
-##正确发音
-错误发音
-
-
-
-
-access 🔊
-✅ ['ækses]
-❌ [ək’ses]
-
-
-Adobe 🔊
-✅ [ə’dəʊbi]
-❌ [əˈdub]
-
-
-admin 🔊
-✅ ['ædmɪn]
-❌ [ɜ:d’mɪn]
-
-
-agile 🔊
-✅ ['ædʒaɪl]
-❌ [ə’dʒaɪl]
-
-
-amazon 🔊
-✅ ['æməzən]
-❌ ['əm
         </a>
       </p>
 
@@ -385,8 +352,8 @@ amazon 🔊
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 10:26" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:57" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -396,7 +363,9 @@ amazon 🔊
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Concept/">Concept</a>
+              <a href="/categories/Software/Git/">Git</a>
+            
+              <a href="/categories/Software/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
             
           </div>
         
@@ -411,40 +380,29 @@ amazon 🔊
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Backend/Database/%E6%A6%82%E5%BF%B5/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
-          数据库系统的基本概念
+        <a href="/2021/02/19/Software/Shell/%E6%95%B0%E7%BB%84/" target="_self">
+          Shell 数组
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Backend/Database/%E6%A6%82%E5%BF%B5/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" target="_self">
+        <a href="/2021/02/19/Software/Shell/%E6%95%B0%E7%BB%84/" target="_self">
           
           
             
           
-          数据库系统的基本概念
+          Shell 数组
 
+bash支持一维数组(不支持多维数组),并且没有限定数组的大小
+类似于 C 语言,数组元素的下标由 0 开始编号,获取数组中的元素要利用下标,下标可以是整数或算术表达式,其值应大于或等于 0
 
-数据
-描述事物的符号记录称为数据,数据的含义称为数据的语义,数据与其语义是不可分的
+定义数组
 
+在 Shell 中,用括号来表示数组,数组元素用空格分割开,定义数组的一般形式为:
 
-数据库
-是长期存储在计算机内,有组织的,可共享的大量数据的集合
+1array_name=(value0 value1 value2 value3)
 
-
-数据库管理系统
-是为位于用户与操作系统之间的一层数据管理软件
-
-
-数据库系统
-是由数据库,数据库管理系统(及其应用开发工具),应用程序和数据库管理员组成的存储,管理,处理和维护数据的系统
-
-
-数据库系统的特点
-
-
-数据
+或
         </a>
       </p>
 
@@ -452,8 +410,8 @@ amazon 🔊
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 10:19" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:51" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -463,11 +421,7 @@ amazon 🔊
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/%E6%A6%82%E5%BF%B5/">概念</a>
+              <a href="/categories/Software/Shell/">Shell</a>
             
           </div>
         
@@ -482,23 +436,26 @@ amazon 🔊
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E6%9F%A5%E8%AF%A2/" target="_self">
-          Oracle 查询
+        <a href="/2021/02/19/Software/System/macOS/%E5%BC%80%E5%90%AFHiDPI/" target="_self">
+          macOS HiDPI
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E6%9F%A5%E8%AF%A2/" target="_self">
+        <a href="/2021/02/19/Software/System/macOS/%E5%BC%80%E5%90%AFHiDPI/" target="_self">
           
           
             
           
-          Oracle 查询
-虚表
+          macOS HiDPI
+安装命令
+1bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/master/hidpi.sh)&quot;
+恢复
+命令恢复
+如果还能进系统,就再次运行命令选择选项 3 关闭 HIDPI
+恢复模式
 
-dual 是一个虚表, 虚拟表, 是用来构成 select 的语法规则, oracle 保证 dual 里面永远只有一条记录
-该表只有一行一列, 它和其他表一样, 可以执行插入, 更新, 删除操作, 还可以执行 drop 操作,但是不要去执行 drop 表的操作, 否则会使系统出错
-dual 主要用来选择系统变量或是求一个表达式的值,如果不需要从具体的表来取得表中数据,
+如果使用此脚本后,开机无法进入系统,请到 macos 恢复模式中或
         </a>
       </p>
 
@@ -506,8 +463,8 @@ dual 主要用来选择系统变量或是求一个表达式的值,如果不需�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 10:12" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:51" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -517,11 +474,9 @@ dual 主要用来选择系统变量或是求一个表达式的值,如果不需�
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/System/">System</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
+              <a href="/categories/Software/System/macOS/">macOS</a>
             
           </div>
         
@@ -536,25 +491,27 @@ dual 主要用来选择系统变量或是求一个表达式的值,如果不需�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E5%87%BD%E6%95%B0/" target="_self">
-          Oracle 函数
+        <a href="/2021/02/19/Software/System/Linux/%E5%AE%9D%E5%A1%94%E5%91%BD%E4%BB%A4/" target="_self">
+          Linux 宝塔命令
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Software/Backend/Database/Oracle/%E5%87%BD%E6%95%B0/" target="_self">
+        <a href="/2021/02/19/Software/System/Linux/%E5%AE%9D%E5%A1%94%E5%91%BD%E4%BB%A4/" target="_self">
           
           
             
           
-          Oracle 函数
-nvl (表达式1,表达式2)
-
-如果表达式1为空值,nvl返回值为表达式2的值,否则返回表达式1的值
-该函数的目的是把一个空值(null)转换成一个实际的值,其表达式的值可以是数字型,字符型和日期型,但是表达式1和表达式2的数据类型必须为同一个类型
-
-实例
-12--将薪资与奖金合并为月收入, 如果奖金为null则转换为0select ename,sal,comm,sal+nv
+          Linux 宝塔命令
+管理宝塔
+停止
+1/etc/init.d/bt stop
+启动
+1/etc/init.d/bt start
+重启
+1/etc/init.d/bt restart
+卸载
+1/etc/init.d/bt stop &amp;&amp; chkconfig --del bt &amp;&amp; rm -f /etc/init.d/bt &amp;&amp; rm -rf /www
         </a>
       </p>
 
@@ -562,8 +519,8 @@ nvl (表达式1,表达式2)
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 10:12" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:42" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -573,11 +530,9 @@ nvl (表达式1,表达式2)
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/System/">System</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
+              <a href="/categories/Software/System/Linux/">Linux</a>
             
           </div>
         
@@ -592,75 +547,22 @@ nvl (表达式1,表达式2)
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Internet/WLAN/WiFi%E5%8D%8F%E8%AE%AE/" target="_self">
-          WiFi协议
+        <a href="/2021/02/19/Software/Tools/Proxy/SSR/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          搭建shadowsocksR
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Internet/WLAN/WiFi%E5%8D%8F%E8%AE%AE/" target="_self">
+        <a href="/2021/02/19/Software/Tools/Proxy/SSR/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          WiFi协议
-802.11b
-
-最高速率11Mbps
-调制方式速率(Mbps)DSSS1DSSS2CCK5.5CCK11
-
-
-
-
-调制方式
-速率(Mbps)
-
-
-
-
-DSSS
-1
-
-
-DSSS
-2
-
-
-CCK
-5.5
-
-
-CCK
-11
-
-
-
-802.11a/g
-
-最高速率54Mbps
-
-
-
-
-调制方式
-码率
-速率(Mbps)
-
-
-
-
-BPSK
-1/2
-6
-
-
-BPSK
-3/4
-9
-
-
-QPSK
-1
+          搭建shadowsocksR
+下载一键搭建ssr脚本
+ 1yum -y install wget
+运行搭建ssr脚本代码
+ 1wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; ba
         </a>
       </p>
 
@@ -668,8 +570,8 @@ QPSK
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 10:02" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:27" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -677,9 +579,13 @@ QPSK
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Internet/">Internet</a>
+              <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Internet/WLAN/">WLAN</a>
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Proxy/">Proxy</a>
+            
+              <a href="/categories/Software/Tools/Proxy/SSR/">SSR</a>
             
           </div>
         
@@ -694,43 +600,22 @@ QPSK
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Internet/HTTP/StatusCode/" target="_self">
-          HTTP StatusCode
+        <a href="/2021/02/19/Software/Tools/Proxy/Clash/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Clash 初始化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Internet/HTTP/StatusCode/" target="_self">
+        <a href="/2021/02/19/Software/Tools/Proxy/Clash/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          HTTP StatusCode
-
-
-
-状态码
-原因短语
-代表含义
-HTTP 版本
-
-
-
-
-消息响应
-
-
-
-
-
-100
-Continue (继续)
-客户端应当继续发送请求.这个临时响应是用来通知客户端它的部分请求已经被服务器接收,且仍未被拒绝.客户端应当继续发送请求的剩余部分,或者如果请求已经完成,忽略这个响应.服务器必须在请求完成后向客户端发送一个最终响应.
-HTTP/1.1 可用
-
-
-101
-S
+          Clash 初始化
+安装
+1brew install clashx
+配置文件
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485
         </a>
       </p>
 
@@ -738,8 +623,8 @@ S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 09:57" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:22" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -747,9 +632,13 @@ S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Internet/">Internet</a>
+              <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Internet/HTTP/">HTTP</a>
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Proxy/">Proxy</a>
+            
+              <a href="/categories/Software/Tools/Proxy/Clash/">Clash</a>
             
           </div>
         
@@ -764,21 +653,42 @@ S
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/02/18/Hardware/Perpheral/Keyboard/" target="_self">
-          Keyboard
+        <a href="/2021/02/19/Software/Tools/Office/Word/" target="_self">
+          Office Word
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/02/18/Hardware/Perpheral/Keyboard/" target="_self">
+        <a href="/2021/02/19/Software/Tools/Office/Word/" target="_self">
           
           
             
           
-          Keyboard
+          Office Word
 
-黑轴:黑轴一般是作为游戏用的键盘,使得键盘双击很容易,但是这种键盘的轴设计是整体的,按一个键的时候整个键盘的轴都在下压,所以黑轴的机械键盘在打字的时候稍累,游戏玩家推荐
-青轴:特点是只有当声音响起的时候按键才被触发,因此打字的时候噼里啪啦,无论是指尖还是心理上都得到了极大满足,但是其&quot;抽动性”打字和双击时效果并不是很好,因为触底比&quot;触发”要高,这款特别适合输
+对话框启动器
+有用的屏幕提示
+撤销与恢复
+页面视图,大纲视图,草稿试图,导航窗格
+选定竖块文本
+复制,粘贴,放大和缩小文本的快捷键
+插入符号和日期
+替换,全部替换
+
+将空格替换为空值
+将文档中的空白行删除
+
+
+字体,字号,字形和字符宽度
+特殊效果(文字加底纹或者边框)
+首行缩进和悬挂缩进
+段间距和行距
+制表位
+项目符号和编号
+首字下沉
+格式刷
+页边距,纸张大小,装订线等
+
         </a>
       </p>
 
@@ -786,8 +696,8 @@ S
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-18 09:56" pubdate>
-              2021-02-18
+            <time datetime="2021-02-19 18:19" pubdate>
+              2021-02-19
             </time>
           </div>
         
@@ -795,9 +705,11 @@ S
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Hardware/">Hardware</a>
+              <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Hardware/Perpheral/">Perpheral</a>
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Office/">Office</a>
             
           </div>
         
@@ -810,7 +722,7 @@ S
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/58/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/57/#board">57</a><a class="page-number" href="/page/58/#board">58</a><span class="page-number current">59</span><a class="page-number" href="/page/60/#board">60</a><a class="page-number" href="/page/61/#board">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/71/#board">71</a><a class="extend next" rel="next" href="/page/60/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/58/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/57/#board">57</a><a class="page-number" href="/page/58/#board">58</a><span class="page-number current">59</span><a class="page-number" href="/page/60/#board">60</a><a class="page-number" href="/page/61/#board">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/#board">72</a><a class="extend next" rel="next" href="/page/60/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

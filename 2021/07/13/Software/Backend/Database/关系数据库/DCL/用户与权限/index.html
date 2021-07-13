@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>SQL 用户与权限 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 用户与权限">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-13 21:57" pubdate>
+        2021年7月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 用户与权限</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年7月13日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 用户与权限</h1>
+<h2 id="用户管理">用户管理</h2>
+<h3 id="查看用户">查看用户</h3>
+<ul>
+<li>用户信息表</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM mysql.user<br></code></pre></td></tr></table></figure>
+<h2 id="添加用户">添加用户</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE USER &#x27;用户名&#x27; IDENTIFIED BY [&#x27;PASSWORD&#x27;] [WITH] [DBAA|RESOURCE|CONNECT];<br>CREATE USER test IDENTIFIED BY &#x27;123456&#x27;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>必须拥有mysql数据库的全局CREATE USER权限,或拥有INSERT权限</p>
+</li>
+<li>
+<p>要在纯文本中指定密码,需忽略PASSWORD关键词,要把密码指定为由PASSWORD()函数返回的混编值,需包含关键字PASSWORD</p>
+</li>
+<li>
+<p>只有系统的超级用户才有权创建一个新的数据库用户</p>
+</li>
+<li>
+<p>新创建的数据库用户有三种权限:CONNECT,RESOURCE和DBA</p>
+</li>
+<li>
+<p>CREATE USER命令中如果没有指定创建的新用户的权限,默认该用户拥有CONNECT权限,拥有CONNECT权限的用户不能创建新用户,不能创建模式,也不能创建基本表,只能登录数据库,由数据库管理员或其他用户授予他应有的权限,根据获得的授权情况他可以对数据库对象进行权限范围内的操作</p>
+</li>
+<li>
+<p>拥有RESOURCE权限的用户能创建基本表和视图,成为所创建对象的属主,但不能创建模式,不能创建新的用户,数据库对象的属主可以使用GRANT语句把该对象上的存取权限授予其他用户</p>
+</li>
+<li>
+<p>拥有DBA权限的用户时系统中的超级用户,可以创建新的用户,创建模式,创建基本表和视图等,DBA拥有对所有数据库对象的存取权限,还可以把这些权限授予一般用户</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CREATE USER</th>
+<th>CREATE SCHEMA</th>
+<th>CREATE TABLE</th>
+<th>登录数据库,执行数据查询和操纵</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DBA</td>
+<td>可以</td>
+<td>可以</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>RESOURCE</td>
+<td>不可以</td>
+<td>不可以</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>不可以</td>
+<td>不可以</td>
+<td>不可以</td>
+<td>可以,但必须拥有相应权限</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="重命名用户">重命名用户</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">RENAME USER old_user TO new_user<br>RENAME USER test TO test2<br></code></pre></td></tr></table></figure>
+<h3 id="设置用户名密码">设置用户名密码</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET PASSWORD = PASSWORD(&#x27;密码&#x27;)    -- 为当前用户设置密码<br>SET PASSWORD FOR 用户名 = PASSWORD(&#x27;密码&#x27;)    -- 为指定用户设置密码<br></code></pre></td></tr></table></figure>
+<h3 id="修改密码">修改密码</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user  SET AUTHENTICATION_STRING=PASSWORD(&#x27;123456&#x27;) WHERE USER=&#x27;root&#x27;;<br></code></pre></td></tr></table></figure>
+<h3 id="删除用户">删除用户</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">DROP USER 用户名<br><br>DROP USER test<br></code></pre></td></tr></table></figure>
+<h2 id="权限管理">权限管理</h2>
+<h3 id="查看权限">查看权限</h3>
+<ul>
+<li>查看指定用户的权限</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW GRANTS FOR 用户名<br>SHOW GRANTS FOR root@localhost;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查看当前用户权限</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW GRANTS;<br>SHOW GRANTS FOR CURRENT_USER;<br>SHOW GRANTS FOR CURRENT_USER();<br></code></pre></td></tr></table></figure>
+<h3 id="刷新权限">刷新权限</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">FLUSH PRIVILEGES<br></code></pre></td></tr></table></figure>
+<h3 id="GRANT">GRANT</h3>
+<ul>
+<li>GRANT语句的一般格式为:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">TO</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>[,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]...<br>[<span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION];<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其语义为:将对指定操作对象的指定操作权限授予指定的用户,发出该GRANT语句的可以是数据库管理员,也可以是该数据库对象创建者(即属主owner),还可以是已经拥有该权限的用户,接收权限的用户可以是一个或多个具体用户,也可以是PUBLIC,即全体用户</li>
+<li>如果指定了WITH GRANT OPTION子句,则获得某种权限的用户还可以把这种权限再授予其他的用户,如果没有指定WITH GRANT OPTION子句,则获得某种权限的用户只能使用该权限,不能传播该权限</li>
+<li>SQL标准允许具有WITH GRANT OPTION的用户把相应权限或其子集传递授予其他用户,但不允许循环授权,即被授权者不能把权限再授回给授权者或其祖先</li>
+<li><strong>权限选项</strong>
+<ul>
+<li><code>all privileges</code>: 表示所有权限
+<ul>
+<li><code>*.*</code> :表示所有库的所有表</li>
+<li><code>库名.表名</code> :表示某库下面的某表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>**[例4.1]**把查询Student表的权限授给用户U1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> U1;<br></code></pre></td></tr></table></figure>
+<p>**[例4.2]**把对Student表和Course表的全部操作权限授予用户U2和U3</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES<br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student,Course<br><span class="hljs-keyword">TO</span> U2,U3;<br></code></pre></td></tr></table></figure>
+<p>**[例4.3]**把对表SC的查询权限授予所有用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> PUBLIC;<br></code></pre></td></tr></table></figure>
+<p>**[例4.4]**把查询Student表和修改学生学号的权限授给用户U4</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> UPDATE (Sno),<span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> Student<br><span class="hljs-keyword">TO</span> U4<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这里,实际上要授予U4用户的是对基本表Student的SELECT权限和对属性列Sno的UPDATE权限,对属性列授权时必须明确指出相应的属性列名</li>
+</ul>
+<p>**[例4.5]**把对表SC的INSERT权限授予U5用户,并允许将此权限再授予其他用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U5<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行此SQL语句后,U5不仅拥有了对表SC的INSERT权限,还可以传播此权限,即由U5用户发上述GRANT命令给其他用户,例如U5可以将此权限授予U6(如下例)</li>
+</ul>
+<p><strong>[例4.6]</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U6<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTINO<br></code></pre></td></tr></table></figure>
+<ul>
+<li>同样,U6还可以将此权限授予U7(如下例)</li>
+</ul>
+<p><strong>[例4.7]</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U7;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>因为U6未给U7传播的权限,因此U7不能再传播此权限</li>
+</ul>
+<h3 id="REVOKE">REVOKE</h3>
+<ul>
+<li>授予用户的权限可以由数据库管理员或其他授权者用REVOKE语句收回,REVOKE语句的一般格式为:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>权限<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>对象类型<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>对象名<span class="hljs-operator">&gt;</span>]...<br><span class="hljs-keyword">FROM</span> <span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span> [,<span class="hljs-operator">&lt;</span>用户<span class="hljs-operator">&gt;</span>]...[CASCADE<span class="hljs-operator">|</span>RESTRICT];<br></code></pre></td></tr></table></figure>
+<p>**[例4.8]**把用户U4修改学生学号的权限收回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mssql">REVOKE UPDATE(Sno)<br>ON TABLE Student<br>FROM U4;<br></code></pre></td></tr></table></figure>
+<p>**[例4.9]**收回所有用户对表SC的查询权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">SELECT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> PUBLIC;<br></code></pre></td></tr></table></figure>
+<p>**[例4.10]**把用户U5对SC表的INSERT权限收回</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> U5 CASCADE;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>把用户U5的INSERT权限收回的同时,级联(CASCADE)收回了U6和U7的INSERT权限,否则系统将拒绝执行该命令,因为再例4.6中,U5将对SC表的INSERT权限授予了U6,而U6又将其授予了U7(例4.7)</li>
+</ul>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>这里默认值为CASCADE,有的数据库管理系统默认值为RESTRICR,将自动执行级联操作,如果U6或U7还从其他用户处获得对SC表的INSERT权限,则他们仍具有此权限,系统只收回直接或间接从U5处获得的权限</li>
+<li>SQL提供了非常灵活的授权机制,数据库管理员拥有对数据库中所有对象的所有权限,并可以根据实际情况将不同的权限授予不同的用户</li>
+<li>用户对自己建立的基本表和视图拥有全部的操作权限,并且可以用GRANT语句把其中某些权限授予其他用户,被授予的用户如果有&quot;继续授权&quot;的许可,还可以把获得的权限再授予其他用户</li>
+<li>所有授权出去的权力再必要时又都可以用REVOKE语句收回</li>
+<li>可见,用户可以&quot;自主&quot;地决定将数据的存取权限授予何人,决定是否也将”授权&quot;的权限授予别人,因此称这样的存取控制是自主存取控制</li>
+</ul>
+<h3 id="权限列表">权限列表</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限<br>ALTER    -- 允许使用ALTER TABLE<br>ALTER ROUTINE    -- 更改或取消已存储的子程序<br>CREATE    -- 允许使用CREATE TABLE<br>CREATE ROUTINE    -- 创建已存储的子程序<br>CREATE TEMPORARY TABLES        -- 允许使用CREATE TEMPORARY TABLE<br>CREATE USER        -- 允许使用CREATE USER, DROP USER, RENAME USER和REVOKE ALL PRIVILEGES<br>CREATE VIEW        -- 允许使用CREATE VIEW<br>DELETE    -- 允许使用DELETE<br>DROP    -- 允许使用DROP TABLE<br>EXECUTE        -- 允许用户运行已存储的子程序<br>FILE    -- 允许使用SELECT...INTO OUTFILE和LOAD DATA INFILE<br>INDEX     -- 允许使用CREATE INDEX和DROP INDEX<br>INSERT    -- 允许使用INSERT<br>LOCK TABLES        -- 允许对您拥有SELECT权限的表使用LOCK TABLES<br>PROCESS     -- 允许使用SHOW FULL PROCESSLIST<br>REFERENCES    -- 未被实施<br>RELOAD    -- 允许使用FLUSH<br>REPLICATION CLIENT    -- 允许用户询问从属服务器或主服务器的地址<br>REPLICATION SLAVE    -- 用于复制型从属服务器(从主服务器中读取二进制日志事件)<br>SELECT    -- 允许使用SELECT<br>SHOW DATABASES    -- 显示所有数据库<br>SHOW VIEW    -- 允许使用SHOW CREATE VIEW<br>SHUTDOWN    -- 允许使用mysqladmin shutdown<br>SUPER    -- 允许使用CHANGE MASTER, KILL, PURGE MASTER LOGS和SET GLOBAL语句,mysqladmin debug命令;允许您连接(一次),即使已达到max_connections<br>UPDATE    -- 允许使用UPDATE<br>USAGE    -- &quot;无权限”的同义词<br>GRANT OPTION    -- 允许授予权限<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E5%AE%A1%E8%AE%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL 审计</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%92%E8%89%B2/">
+                        <span class="hidden-mobile">SQL 数据库角色</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
