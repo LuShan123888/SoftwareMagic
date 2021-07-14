@@ -55,21 +55,13 @@ uninstall_oh_my_zsh
 
 ## oh my zsh 目录结构
 
-进入`~/.oh-my-zsh`目录后,看看该目录的结构
-
-```bash
-~ ls ~/.oh-my-zsh
-CONTRIBUTING.md cache           log             templates
-LICENSE.txt     custom          oh-my-zsh.sh    themes
-README.md       lib             plugins         tools
-```
-
-- lib 提供了核心功能的脚本库
-- tools 提供安装,升级等功能的快捷工具
-- plugins 自带插件的存在放位置
-- templates 自带模板的存在放位置
-- themes  自带主题文件的存在放位置
-- custom 个性化配置目录,自安装的插件和主题可放这里
+- 进入`~/.oh-my-zsh`目录后,看看该目录的结构
+    - lib 提供了核心功能的脚本库
+    - tools 提供安装,升级等功能的快捷工具
+    - plugins 自带插件的存在放位置
+    - templates 自带模板的存在放位置
+    - themes  自带主题文件的存在放位置
+    - custom 个性化配置目录,自安装的插件和主题可放这里
 
 ## 配置
 
@@ -78,10 +70,9 @@ README.md       lib             plugins         tools
 
 ## 别名设置
 
-`zsh`不仅可以设置通用别名,还能针对文件类型设置对应的打开程序,比如:
-
-- `alias -s html=vi`,意思就是你在命令行输入 `hello.html`,`zsh`会为你自动打开`vim`并读取`hello.html`
-- `alias -s gz='tar -xzvf'`,表示自动解压后缀为`gz`的压缩包
+- `zsh`不仅可以设置通用别名,还能针对文件类型设置对应的打开程序,比如
+    - `alias -s html=vi`,意思就是你在命令行输入 `hello.html`,`zsh`会为你自动打开`vim`并读取`hello.html`
+    - `alias -s gz='tar -xzvf'`,表示自动解压后缀为`gz`的压缩包
 
 ```bash
 alias cls='clear'
@@ -106,8 +97,30 @@ alias -s bz2='tar -xjvf'
 ## 主题设置
 
 - oh my zsh 提供了数十种主题,相关文件在`~/.oh-my-zsh/themes`目录下
-- `~/.zshrc`里找到ZSH_THEME,默认主题是:ZSH_THEME=”robbyrussell”
-- ZSH_THEME="random"主题设置为随机,这样我们每打开一个窗口,都会随机在默认主题中选择一个,bash
+- `ZSH_THEME="random"`主题设置为随机,这样我们每打开一个窗口,都会随机在默认主题中选择一个
+- 安装powerlevel10k主题
+
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+- `~/.zshrc`
+
+```bash
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+
+- 配置主题
+
+```
+$ p10k configure
+```
+
+- 安装字体
+
+```
+https://aur.archlinux.org/packages/ttf-meslo-nerd-font-powerlevel10k/
+```
 
 ## 插件设置
 
@@ -116,18 +129,29 @@ alias -s bz2='tar -xjvf'
 - 插件也是在`~/.zshrc`里配置,找到`plugins`关键字,就可以加载自己的插件了,系统默认加载`git`,你可以在后面追加内容,如下:
 
 ```undefined
-plugins=(git zsh-autosuggestions autojump zsh-syntax-highlighting)
+plugins=(git
+docker
+docker-compose
+mvn
+node
+npm
+yarn
+sudo
+zsh-syntax-highlighting
+zsh-autosuggestions
+zsh-completions
+autojump)
 ```
 
 - 安装 `zsh-autosuggestions`
 
 ```bash
-git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone git://github.com/zsh-users/zsh-autosuggestions  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 - 安装 `zsh-syntax-highlighting`
 
-```ruby
+```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
@@ -140,5 +164,5 @@ https://github.com/wting/autojump
 - 安装`zsh-completions`
 
 ```
-git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-completions  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
 ```

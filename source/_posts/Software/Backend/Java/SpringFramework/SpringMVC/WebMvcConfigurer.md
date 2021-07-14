@@ -75,7 +75,7 @@ public interface WebMvcConfigurer {
 ```java
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
-@Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**").excludePathPatterns("/emp/toLogin","/emp/login","/js/**","/css/**","/images/**");
     }
@@ -89,11 +89,11 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 - 页面跳转
 
 ```java
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/toLogin").setViewName("login");
+@Override
+public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/toLogin").setViewName("login");
 
-    }
+}
 ```
 
 - 以前要访问一个页面需要先创建个Controller控制类,再写方法跳转到页面
@@ -126,10 +126,10 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
 
 ```java
 @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/my/**").addResourceLocations("file:E:/my/");
+public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/my/**").addResourceLocations("file:E:/my/");
 
-    }
+}
 ```
 
 - `addResourceLocations`:文件放置的目录
@@ -138,11 +138,11 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
 ## configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
 
 ```java
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-        configurer.enable("defaultServletName");
-    }
+@Override
+public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    configurer.enable();
+    configurer.enable("defaultServletName");
+}
 ```
 
 - 此时会注册一个默认的Handler:`DefaultServletHttpRequestHandler`,这个Handler也是用来处理静态文件的,它会尝试映射`/*`
@@ -173,13 +173,13 @@ public void enableContentNegotiation(View... defaultViews) {
 - UrlBasedViewResolverRegistration()
 
 ```java
-    public UrlBasedViewResolverRegistration jsp(String prefix, String suffix) {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix(prefix);
-        resolver.setSuffix(suffix);
-        this.viewResolvers.add(resolver);
-        return new UrlBasedViewResolverRegistration(resolver);
-    }
+public UrlBasedViewResolverRegistration jsp(String prefix, String suffix) {
+    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+    resolver.setPrefix(prefix);
+    resolver.setSuffix(suffix);
+    this.viewResolvers.add(resolver);
+    return new UrlBasedViewResolverRegistration(resolver);
+}
 ```
 
 - 该方法会注册一个内部资源视图解析器`InternalResourceViewResolver`显然访问的所有jsp都是它进行解析的,该方法参数用来指定路径的前缀和文件后缀,如:　　
@@ -193,10 +193,10 @@ registry.jsp("/WEB-INF/jsp/", ".jsp");
 - beanName()
 
 ```java
-    public void beanName() {
-        BeanNameViewResolver resolver = new BeanNameViewResolver();
-        this.viewResolvers.add(resolver);
-    }
+public void beanName() {
+    BeanNameViewResolver resolver = new BeanNameViewResolver();
+    this.viewResolvers.add(resolver);
+}
 ```
 
 - 该方法会注册一个`BeanNameViewResolver`视图解析器,它主要是将视图名称解析成对应的bean
@@ -205,13 +205,13 @@ registry.jsp("/WEB-INF/jsp/", ".jsp");
 -  viewResolver()
 
 ```java
-    public void viewResolver(ViewResolver viewResolver) {
-        if (viewResolver instanceof ContentNegotiatingViewResolver) {
-            throw new BeanInitializationException(
-                    "addViewResolver cannot be used to configure a ContentNegotiatingViewResolver. Please use the method enableContentNegotiation instead.");
-        }
-        this.viewResolvers.add(viewResolver);
+public void viewResolver(ViewResolver viewResolver) {
+    if (viewResolver instanceof ContentNegotiatingViewResolver) {
+        throw new BeanInitializationException(
+            "addViewResolver cannot be used to configure a ContentNegotiatingViewResolver. Please use the method enableContentNegotiation instead.");
     }
+    this.viewResolvers.add(viewResolver);
+}
 ```
 
 - 用来注册各种各样的视图解析器的,包括自己定义的
@@ -221,67 +221,65 @@ registry.jsp("/WEB-INF/jsp/", ".jsp");
 - 上面我们讲了`configureViewResolvers`方法,假如在该方法中我们启用了内容裁决解析器,那么`configureContentNegotiation(ContentNegotiationConfigurer configurer)`这个方法是专门用来配置内容裁决的一些参数的
 
 ```java
- public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-       /* 是否通过请求Url的扩展名来决定media type */
-        configurer.favorPathExtension(true)
-                 /* 不检查Accept请求头 */
-                .ignoreAcceptHeader(true)
-                .parameterName("mediaType")
-                 /* 设置默认的media yype */
-                .defaultContentType(MediaType.TEXT_HTML)
-                 /* 请求以.html结尾的会被当成MediaType.TEXT_HTML*/
-                .mediaType("html", MediaType.TEXT_HTML)
-                /* 请求以.json结尾的会被当成MediaType.APPLICATION_JSON*/
-                .mediaType("json", MediaType.APPLICATION_JSON);
-    }
-
-
+public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    /* 是否通过请求Url的扩展名来决定media type */
+    configurer.favorPathExtension(true)
+        /* 不检查Accept请求头 */
+        .ignoreAcceptHeader(true)
+        .parameterName("mediaType")
+        /* 设置默认的media yype */
+        .defaultContentType(MediaType.TEXT_HTML)
+        /* 请求以.html结尾的会被当成MediaType.TEXT_HTML*/
+        .mediaType("html", MediaType.TEXT_HTML)
+        /* 请求以.json结尾的会被当成MediaType.APPLICATION_JSON*/
+        .mediaType("json", MediaType.APPLICATION_JSON);
+}
 ```
 
 **实例**
 
 ```java
 @EnableWebMvc
-    @Configuration
-    public class MyWebMvcConfigurerAdapte extends WebMvcConfigurerAdapter {
+@Configuration
+public class MyWebMvcConfigurerAdapte extends WebMvcConfigurerAdapter {
 
-        @Override
-        public void configureViewResolvers(ViewResolverRegistry registry) {
-            registry.jsp("/WEB-INF/jsp/", ".jsp");
-            registry.enableContentNegotiation(new MappingJackson2JsonView());
-        }
-
-        @Override
-        public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-            configurer.favorPathExtension(true)
-                    .ignoreAcceptHeader(true)
-                    .parameterName("mediaType")
-                    .defaultContentType(MediaType.TEXT_HTML)
-                    .mediaType("html", MediaType.TEXT_HTML)
-                    .mediaType("json", MediaType.APPLICATION_JSON);
-        }
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.jsp("/WEB-INF/jsp/", ".jsp");
+        registry.enableContentNegotiation(new MappingJackson2JsonView());
     }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(true)
+            .ignoreAcceptHeader(true)
+            .parameterName("mediaType")
+            .defaultContentType(MediaType.TEXT_HTML)
+            .mediaType("html", MediaType.TEXT_HTML)
+            .mediaType("json", MediaType.APPLICATION_JSON);
+    }
+}
 ```
 
 - controller的代码如下:
 
 ```java
-    @Controller
-    public class ExampleController {
-         @RequestMapping("/test")
-         public ModelAndView test() {
-            Map<String, String> map = new HashMap();
-            map.put("test1", "Hello");
-            map.put("test2", "world");
-            return new ModelAndView("test", map);
-        }
+@Controller
+public class ExampleController {
+    @RequestMapping("/test")
+    public ModelAndView test() {
+        Map<String, String> map = new HashMap();
+        map.put("test1", "Hello");
+        map.put("test2", "world");
+        return new ModelAndView("test", map);
     }
+}
 ```
 
 - 在`WEB-INF/jsp`目录下创建一个test.jsp文件,内容随意
 - 现在启动tomcat,在浏览器输入以下链接:http://localhost:8080/test.json,浏览器内容返回如下:
 
-```java
+```json
 {
     "test1":"Hello",
     "test2":"world"

@@ -1,5 +1,5 @@
 ---
-title: Java Comparable &Comparator接口
+title: Java Comparable & Comparator接口
 categories:
 - Software
 - Backend
@@ -7,7 +7,7 @@ categories:
 - JavaSE
 - 泛型与集合
 ---
-# Java Comparable &Comparator接口
+# Java Comparable & Comparator接口
 
 Java提供了`Comparable<T>`与`Comparator<T>`两个接口定义对数组或集合中对象进行排序,实现次接口的对象数组或列表可以通过`Arrays.sort`或`Collections.sort`进行自动排序
 
@@ -93,3 +93,4 @@ mary:25
   John:40
 ```
 
+Ï

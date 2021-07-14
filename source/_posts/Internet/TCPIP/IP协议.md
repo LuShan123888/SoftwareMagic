@@ -6,6 +6,10 @@ categories:
 ---
 # IP协议
 
+## IP数据报的格式
+
+![BB15B9C613CE668AC5CCA95F6A967E9A](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-UCtIPhfpVnv7DuF.png)
+
 ## 分类的IP地址
 
 ![image-20200520145853702](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png)

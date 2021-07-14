@@ -24,12 +24,12 @@ categories:
 ## JDBC驱动程序
 
 - JDBC驱动程序有以下4类
-    - **JDBC-ODBC桥接(JDBC-ODBC Bridge)驱动程序**：Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序,供存取标准的ODBC数据源,然而,Sun公司建议除开发很小的应用程序外,一般不适用这种驱动程序
-    - **JDBC结合本地API桥(JDBC-Native API Bridge)驱动程序**：这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用,Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
+    - **JDBC-ODBC桥接(JDBC-ODBC Bridge)驱动程序**:Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序,供存取标准的ODBC数据源,然而,Sun公司建议除开发很小的应用程序外,一般不适用这种驱动程序
+    - **JDBC结合本地API桥(JDBC-Native API Bridge)驱动程序**:这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用,Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
 
-    - **JDBC结合中间件(JDBC-Middleware)的驱动程序**：这类驱动程序必须在数据库管理系统的服务器上安装中间件,该中间件将JDBC转换为具体数据库系统的本地API调用
+    - **JDBC结合中间件(JDBC-Middleware)的驱动程序**:这类驱动程序必须在数据库管理系统的服务器上安装中间件,该中间件将JDBC转换为具体数据库系统的本地API调用
 
-    - **纯JDBC驱动程序(Pure JDBC)**：这类驱动程序全由Java写出,所有存取数据库的操作直接由JDBC驱动程序完成,它属于专用的驱动程序,要靠数据库厂商提供支持
+    - **纯JDBC驱动程序(Pure JDBC)**:这类驱动程序全由Java写出,所有存取数据库的操作直接由JDBC驱动程序完成,它属于专用的驱动程序,要靠数据库厂商提供支持
 - 从性能上考虑,第3类和第4类驱动程序较理想
 
 ## JDBC API
@@ -50,7 +50,7 @@ String url="jdbc:mysql://localhost:3306?数据库名";
 Connection conn=DriverManager.getConnection(url,数据库用户,密码);
 ```
 
-**注意**:`Class.forName`方法的作用，就是初始化给定的类。而我们给定的 MySQL 的 Driver 类中，它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动。我们也可以直接使用 JDBC 的驱动管理器注册 mysql 驱动，从而代替使用`Class.forName`
+**注意**:`Class.forName`方法的作用,就是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动,我们也可以直接使用 JDBC 的驱动管理器注册 mysql 驱动,从而代替使用`Class.forName`
 
 ### 创建Statement对象
 

@@ -331,7 +331,7 @@ public class MetricAspect {
     private void pointcut() {
     }
 
-    
+
     @Around("pointcut() && @annotation(metricTime)")
     public Object metric(ProceedingJoinPoint joinPoint, MetricTime metricTime) throws Throwable {
         String name = metricTime.value();

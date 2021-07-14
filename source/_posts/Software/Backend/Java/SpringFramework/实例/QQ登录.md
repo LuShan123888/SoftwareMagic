@@ -11,7 +11,7 @@ categories:
 
 ## 网站应用及移动应用接入申请
 
-- 应用接入前，首先需进行申请https://wiki.connect.qq.com，获得对应的appid与appkey，以保证后续流程中可正确对网站与用户进行验证与授权。
+- 应用接入前,首先需进行申请https://wiki.connect.qq.com,获得对应的appid与appkey,以保证后续流程中可正确对网站与用户进行验证与授权
 
 ## pom.xml
 
@@ -96,7 +96,7 @@ public class LoginController {
                     map.put("name",name);
                     map.put("imgUrl",imgUrl);
                 } else {
-                    System.out.println("很抱歉，我们没能正确获取到您的信息，原因是：" + userInfoBean.getMsg());
+                    System.out.println("很抱歉,我们没能正确获取到您的信息,原因是:" + userInfoBean.getMsg());
                 }
             }
         } catch (QQConnectException e) {

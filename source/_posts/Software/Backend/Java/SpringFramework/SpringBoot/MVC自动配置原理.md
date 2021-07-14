@@ -153,15 +153,15 @@ public FormattingConversionService mvcConversionService() {
 ```java
 @ConfigurationProperties(prefix = "spring.mvc")
 public class WebMvcProperties {
-	/**
+    /**
 	 * Date format to use. For instance, `dd/MM/yyyy`.
 	 */
-	private String dateFormat;
+    private String dateFormat;
 
-	public String getDateFormat() {
-	   return this.dateFormat;
+    public String getDateFormat() {
+        return this.dateFormat;
     }
-   // ...
+    // ...
 }
 ```
 
@@ -196,7 +196,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
     private final WebMvcConfigurerComposite configurers = new WebMvcConfigurerComposite();
 
-  // 从容器中获取所有的webmvcConfigurer
+    // 从容器中获取所有的webmvcConfigurer
     @Autowired(required = false)
     public void setConfigurers(List<WebMvcConfigurer> configurers) {
         if (!CollectionUtils.isEmpty(configurers)) {
@@ -248,21 +248,21 @@ public @interface EnableWebMvc {
 
 ```java
 public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
-  // ......
+    // ......
 }
 ```
 
 - 回顾`WebMvcAutoConfiguration`
 
 ```java
-Configuration(proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class })
 // 这个注解的意思是:容器中没有这个组件的时候,这个自动配置类才生效
 @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)
 @AutoConfigureAfter({ DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class,
-    ValidationAutoConfiguration.class })
+                     ValidationAutoConfiguration.class })
 public class WebMvcAutoConfiguration {
 
 }
