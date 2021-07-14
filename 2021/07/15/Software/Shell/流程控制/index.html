@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>Shell 流程控制 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Shell 流程控制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-15 00:26" pubdate>
+        2021年7月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Shell 流程控制</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年7月15日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Shell 流程控制</h1>
+<h2 id="条件判断">条件判断</h2>
+<h3 id="if">if</h3>
+<ul>
+<li>if 语句语法格式:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">if condition<br>then<br>    command1<br>    command2<br>    ...<br>    commandN<br>fi<br></code></pre></td></tr></table></figure>
+<ul>
+<li>写成一行(适用于终端命令提示符):</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">if [ $(ps -ef | grep -c &quot;ssh&quot;) -gt 1 ]; then echo &quot;true&quot;; fi<br></code></pre></td></tr></table></figure>
+<h3 id="if-else">if else</h3>
+<ul>
+<li>if else 语法格式:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">if condition<br>then<br>    command1<br>    command2<br>    ...<br>    commandN<br>else<br>    command<br>fi<br></code></pre></td></tr></table></figure>
+<h3 id="if-else-if-else">if else-if else</h3>
+<ul>
+<li>if else-if else 语法格式:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">if condition1<br>then<br>    command1<br>elif condition2<br>then<br>    command2<br>else<br>    commandN<br>fi<br></code></pre></td></tr></table></figure>
+<ul>
+<li>和Java,PHP等语言不一样,shell的流程控制不可为空,如果else分支没有语句执行,就不要写这个else</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">a=10<br>b=20<br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$a</span> == <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a 等于 b&quot;</span><br><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$a</span> -gt <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a 大于 b&quot;</span><br><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$a</span> -lt <span class="hljs-variable">$b</span> ]<br><span class="hljs-keyword">then</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a 小于 b&quot;</span><br><span class="hljs-keyword">else</span><br>   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;没有符合的条件&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出结果:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">a 小于 b<br></code></pre></td></tr></table></figure>
+<h2 id="for-循环">for 循环</h2>
+<ul>
+<li>for循环一般格式为:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">for var in item1 item2 ... itemN<br>do<br>    command1<br>    command2<br>    ...<br>    commandN<br>done<br></code></pre></td></tr></table></figure>
+<ul>
+<li>写成一行:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">for var in item1 item2 ... itemN; do command1; command2…done;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>当变量值在列表里,for循环即执行一次所有命令,使用变量名获取列表中的当前取值,命令可为任何有效的shell命令和语句,in列表可以包含替换,字符串和文件名</li>
+<li>in列表是可选的,如果不用它,for循环使用命令行的位置参数</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>顺序输出当前列表中的数字</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> loop <span class="hljs-keyword">in</span> 1 2 3 4 5<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The value is: <span class="hljs-variable">$loop</span>&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>for循环另外一种格式</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">for((assignment;condition:next));do<br>    command_1;<br>    command_2;<br>    commond_..;<br>done;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通常情况下 shell 变量调用需要加 $,但是 for 的 (()) 中不需要,下面来看一个例子:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span><br>for((i=1;i&lt;=5;i++));do<br>    echo &quot;这是第 $i 次调用&quot;;<br>done;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:如果要在循环体中进行 for 中的 next 操作,记得变量要加 $,不然程序会变成死循环</li>
+</ul>
+<h2 id="while-语句">while 语句</h2>
+<ul>
+<li>while循环用于不断执行一系列命令,也用于从输入文件中读取数据,命令通常为测试条件,其格式为:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">while condition<br>do<br>    command<br>done<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>int=1<br><span class="hljs-keyword">while</span>(( <span class="hljs-variable">$int</span>&lt;=5 ))<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$int</span><br>    <span class="hljs-built_in">let</span> <span class="hljs-string">&quot;int++&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行脚本,输出:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs">1<br>2<br>3<br>4<br>5<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上实例使用了 Bash let 命令,它用于执行一个或多个表达式,变量计算中不需要加上 $ 来表示变量</li>
+<li>while循环可用于读取键盘信息,下面的例子中,输入信息被设置为变量FILM,按<code>&lt;Ctrl-D&gt;</code>结束循环</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo -n &#x27;输入你最喜欢的网站名: &#x27;<br>while read FILM<br>do<br>    echo &quot;是的!$FILM 是一个好网站&quot;<br>done<br></code></pre></td></tr></table></figure>
+<h2 id="跳出循环">跳出循环</h2>
+<h3 id="break命令">break命令</h3>
+<ul>
+<li>break命令允许跳出所有循环(终止执行后面的所有循环)</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-keyword">while</span> :<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;输入 1 到 5 之间的数字:&quot;</span><br>    <span class="hljs-built_in">read</span> aNum<br>    <span class="hljs-keyword">case</span> <span class="hljs-variable">$aNum</span> <span class="hljs-keyword">in</span><br>        1|2|3|4|5) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;你输入的数字为 <span class="hljs-variable">$aNum</span>!&quot;</span><br>        ;;<br>        *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;你输入的数字不是 1 到 5 之间的! 游戏结束&quot;</span><br>            <span class="hljs-built_in">break</span><br>        ;;<br>    <span class="hljs-keyword">esac</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行以上代码,输出结果为:</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入<span class="hljs-number"> 1 </span>到<span class="hljs-number"> 5 </span>之间的数字:3<br>你输入的数字为 3!<br>输入<span class="hljs-number"> 1 </span>到<span class="hljs-number"> 5 </span>之间的数字:7<br>你输入的数字不是<span class="hljs-number"> 1 </span>到<span class="hljs-number"> 5 </span>之间的! 游戏结束<br></code></pre></td></tr></table></figure>
+<h3 id="continue">continue</h3>
+<ul>
+<li>continue命令与break命令类似,只有一点差别,它不会跳出所有循环,仅仅跳出当前循环</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-keyword">while</span> :<br><span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;输入 1 到 5 之间的数字: &quot;</span><br>    <span class="hljs-built_in">read</span> aNum<br>    <span class="hljs-keyword">case</span> <span class="hljs-variable">$aNum</span> <span class="hljs-keyword">in</span><br>        1|2|3|4|5) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;你输入的数字为 <span class="hljs-variable">$aNum</span>!&quot;</span><br>        ;;<br>        *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;你输入的数字不是 1 到 5 之间的!&quot;</span><br>            <span class="hljs-built_in">continue</span><br>            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;游戏结束&quot;</span><br>        ;;<br>    <span class="hljs-keyword">esac</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<p>运行代码发现,当输入大于5的数字时,该例中的循环不会结束,语句 <strong>echo “游戏结束”</strong> 永远不会被执行</p>
+<h2 id="case">case</h2>
+<ul>
+<li>Shell case语句为多选择语句,可以用case语句匹配一个值与一个模式,如果匹配成功,执行相匹配的命令</li>
+<li>case语句格式如下:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">case 值 in<br>模式1)<br>    command1<br>    command2<br>    ...<br>    commandN<br>    ;;<br>模式2)<br>    command1<br>    command2<br>    ...<br>    commandN<br>    ;;<br>esac<br></code></pre></td></tr></table></figure>
+<ul>
+<li>case工作方式如上所示,取值后面必须为单词in,每一模式必须以右括号结束,取值可以为变量或常数,匹配发现取值符合某一模式后,其间所有命令开始执行直至 ;;</li>
+<li>取值将检测匹配的每一个模式,一旦模式匹配,则执行完匹配模式相应命令后不再继续其他模式,如果无一匹配模式,使用星号 * 捕获该值,再执行后面的命令</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;输入 1 到 4 之间的数字:&#x27;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你输入的数字为:&#x27;</span><br><span class="hljs-built_in">read</span> aNum<br><span class="hljs-keyword">case</span> <span class="hljs-variable">$aNum</span> <span class="hljs-keyword">in</span><br>    1)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你选择了 1&#x27;</span><br>    ;;<br>    2)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你选择了 2&#x27;</span><br>    ;;<br>    3)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你选择了 3&#x27;</span><br>    ;;<br>    4)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你选择了 4&#x27;</span><br>    ;;<br>    *)  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;你没有输入 1 到 4 之间的数字&#x27;</span><br>    ;;<br><span class="hljs-keyword">esac</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>输入不同的内容,会有不同的结果,例如:</li>
+</ul>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入<span class="hljs-number"> 1 </span>到<span class="hljs-number"> 4 </span>之间的数字:<br>你输入的数字为:<br>3<br>你选择了 3<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Shell/">Shell</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/15/Software/Shell/%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Shell 传递参数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/15/Software/Shell/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">
+                        <span class="hidden-mobile">Shell 输入输出</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

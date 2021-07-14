@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  
+  <title>MySQL 主从同步 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SoftwareMagic</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL 主从同步">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-15 00:25" pubdate>
+        2021年7月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL 主从同步</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年7月15日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>MySQL 主从同步</h1>
+<h2 id="主从同步原理">主从同步原理</h2>
+<ul>
+<li>Mysql服务器之间的主从同步是基于二进制日志机制,主服务器使用二进制日志来记录数据库的变动情况,从服务器通过读取和执行该日志文件来保持和主服务器的数据一致</li>
+<li>Slave 会执行以下两个线程读取和执行该日志文件
+<ul>
+<li>Slave_IO:复制master主机 binlog日志文件里的SQL命令到本机的relay-log文件里</li>
+<li>Slave_SQL:执行本机relay-log文件里的SQL语句,实现与Master数据一致</li>
+</ul>
+</li>
+<li>在使用二进制日志时,主服务器的所有操作都会被记录下来,然后从服务器会接收到该日志的一个副本,从服务器可以指定执行该日志中的哪一类事件(譬如只插入数据或者只更新数据),默认会执行日志中的所有语句</li>
+<li>每一个从服务器会记录关于二进制日志的信息:文件名和已经处理过的语句,这样意味着不同的从服务器可以分别执行同一个二进制日志的不同部分,并且从服务器可以随时连接或者中断和服务器的连接</li>
+<li>主服务器和每一个从服务器都必须配置一个唯一的ID号(在my.cnf文件的[mysqld]模块下有一个server-id配置项),另外,每一个从服务器还需要通过CHANGE MASTER TO语句来配置它要连接的主服务器的ip地址,日志文件名称和该日志里面的位置(这些信息存储在主服务器的数据库里)</li>
+</ul>
+<h2 id="配置主从同步">配置主从同步</h2>
+<ol>
+<li>在主服务器上,必须开启二进制日志机制和配置一个独立的ID</li>
+<li>在每一个从服务器上,配置一个唯一的ID,创建一个用来专门复制主服务器数据的账号</li>
+<li>在开始复制进程前,在主服务器上记录二进制文件的位置信息</li>
+<li>如果在开始复制之前,数据库中已经有数据,就必须先创建一个数据快照(可以使用mysqldump导出数据库,或者直接复制数据文件)</li>
+<li>配置从服务器要连接的主服务器的IP地址和登陆授权,二进制日志文件名和位置</li>
+</ol>
+<h3 id="配置主服务器">配置主服务器</h3>
+<ol>
+<li>更改配置文件:主服务器上的<code>my.cnf</code>文件</li>
+</ol>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-section">[mysqld]</span><br><span class="hljs-attr">log-bin</span>=/var/log/mysql/mysql-bin.log<br><span class="hljs-attr">server-id</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">bind-address</span> = <span class="hljs-number">192.168</span>.<span class="hljs-number">33.22</span> <span class="hljs-comment">#your master ip</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建用户,每一个从服务器都需要用到一个账户名和密码来连接主服务器,可以为每一个从服务器都创建一个账户,也可以让全部服务器使用同一个账户,下面就为同一个ip网段的所有从服务器创建一个只能进行主从同步的账户</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">##创建slave1用户,并指定该用户只能在网段<span class="hljs-number">192.168</span><span class="hljs-number">.33</span><span class="hljs-number">.33</span>上登录<br>mysql&gt; <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;slave1&#x27;</span>@<span class="hljs-string">&#x27;192.168.33.33&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;slavepass&#x27;</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br><br>##为slave1赋予<span class="hljs-keyword">REPLICATION</span> SLAVE权限<br>mysql&gt; <span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">REPLICATION</span> SLAVE <span class="hljs-keyword">ON</span> *.* <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;slave1&#x27;</span>@<span class="hljs-string">&#x27;192.168.33.33&#x27;</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>为MYSQL加读锁为了主库与从库的数据保持一致,先为mysql加入读锁,使其变为只读</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> FLUSH TABLES <span class="hljs-keyword">WITH</span> READ LOCK;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
+<ol start="4">
+<li>记录下来MASTER REPLICATION LOG 的位置该信息稍后会用到</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">SHOW</span> MASTER STATUS;<br><span class="hljs-operator">+</span><span class="hljs-comment">------------------+----------+--------------+------------------+-------------------+</span><br><span class="hljs-operator">|</span> File    <span class="hljs-operator">|</span> Position <span class="hljs-operator">|</span> Binlog_Do_DB <span class="hljs-operator">|</span> Binlog_Ignore_DB <span class="hljs-operator">|</span> Executed_Gtid_Set <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">------------------+----------+--------------+------------------+-------------------+</span><br><span class="hljs-operator">|</span> mysql<span class="hljs-operator">-</span>bin<span class="hljs-number">.000001</span> <span class="hljs-operator">|</span>  <span class="hljs-number">613</span> <span class="hljs-operator">|</span>    <span class="hljs-operator">|</span>     <span class="hljs-operator">|</span>     <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">------------------+----------+--------------+------------------+-------------------+</span><br><span class="hljs-number">1</span> <span class="hljs-type">row</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>File的值是当前使用的二进制日志的文件名</li>
+<li>Position是该日志里面的位置信息</li>
+</ul>
+<ol start="5">
+<li>将master DB中现有的数据信息导出</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ mysqldump <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p <span class="hljs-comment">--all-databases --master-data &gt; dbdump.sql</span><br></code></pre></td></tr></table></figure>
+<ol start="6">
+<li>解除master DB的读锁</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> UNLOCK TABLES;<br></code></pre></td></tr></table></figure>
+<ol start="7">
+<li>dbdump.sql文件copy到slave</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">scp dbdump.sql ubuntu<span class="hljs-variable">@192</span><span class="hljs-number">.168</span><span class="hljs-number">.33</span><span class="hljs-number">.33</span>:<span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>ubuntu<br></code></pre></td></tr></table></figure>
+<h3 id="配置从服务器">配置从服务器</h3>
+<ol>
+<li>修改配置文件:从服务器上的<code>my.cnf</code>文件</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">server<span class="hljs-operator">-</span>id <span class="hljs-operator">=</span> <span class="hljs-number">2</span> #master<span class="hljs-operator">-</span>slave结构中,唯一的server<span class="hljs-operator">-</span>id<br>bind<span class="hljs-operator">-</span>address <span class="hljs-operator">=</span> <span class="hljs-number">192.168</span><span class="hljs-number">.33</span><span class="hljs-number">.33</span> #your slave ip<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>重启mysql,以使配置文件生效</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ systemctl restart mysql<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>导入从master DB,导出的dbdump.sql文件,以使master-slave数据一致</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">$ mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p <span class="hljs-operator">&lt;</span> <span class="hljs-operator">/</span>home<span class="hljs-operator">/</span>ubuntu<span class="hljs-operator">/</span>dbdump.sql<br></code></pre></td></tr></table></figure>
+<ol start="4">
+<li>使slave与master建立连接,从而同步</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> STOP SLAVE;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected, <span class="hljs-number">1</span> warning (<span class="hljs-number">0.00</span> sec)<br><br>mysql<span class="hljs-operator">&gt;</span> CHANGE MASTER <span class="hljs-keyword">TO</span><br> <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> MASTER_HOST<span class="hljs-operator">=</span><span class="hljs-string">&#x27;192.168.33.22&#x27;</span>,<br> <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> MASTER_USER<span class="hljs-operator">=</span><span class="hljs-string">&#x27;slave1&#x27;</span>,<br> <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> MASTER_PASSWORD<span class="hljs-operator">=</span><span class="hljs-string">&#x27;slavepass&#x27;</span>,<br> <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> MASTER_LOG_FILE<span class="hljs-operator">=</span><span class="hljs-string">&#x27;mysql-bin.000001&#x27;</span>,<br> <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> MASTER_LOG_POS<span class="hljs-operator">=</span><span class="hljs-number">613</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected, <span class="hljs-number">2</span> warnings (<span class="hljs-number">0.01</span> sec)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>MASTER_LOG_FILE='mysql-bin.000001'</code>与<code>MASTER_LOG_POS=613</code>的值,是从上面的SHOW MASTER STATUS得到的</p>
+</li>
+<li>
+<p>启动主从同步进程</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">START</span> SLAVE;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-keyword">rows</span> affected (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>检查状态</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">mysql &gt; SHOW <span class="hljs-literal">SLAVE</span> STATUS \G<br></code></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/771870-20160309163148225-1200721404.png" srcset="/img/loading.gif" lazyload alt="图片3" style="zoom:50%;" />
+<ul>
+<li>上面的两个进程都显示YES则表示配置成功</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/15/Software/Backend/Distributed/Kafka/Topic/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Kafka Topic</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/15/Software/Backend/Database/MySQL/%E6%97%A5%E5%BF%97/">
+                        <span class="hidden-mobile">MySQL 日志</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -154,33 +154,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/HDFS/" target="_self">
-          Hadoop HDFS
+        <a href="/2021/07/14/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+          SQL 事务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/HDFS/" target="_self">
+        <a href="/2021/07/14/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
           
           
             
           
-          Hadoop HDFS
-Shell 命令
-目录操作
-创建目录
-1hdfs dfs -mkdir &lt;path&gt;
+          SQL 事务
 
-–mkdir:是创建目录的操作
+事务就是将一组SQL语句放在同一批次内去执行
+如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
+MySQL事务处理只支持InnoDB和BDB数据表类型
 
-实例
-1./bin/hdfs dfs -mkdir -p /user/hadoop
+ACID原则
 
-该命令中表示在HDFS中创建一个/user/hadoop目录
--p:表示如果是多级目录,则父目录和子目录一起创建
-
-查看目录
-1hdfs dfs -ls &
+原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过
         </a>
       </p>
 
@@ -188,8 +181,8 @@ Shell 命令
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-14 23:07" pubdate>
+              2021-07-14
             </time>
           </div>
         
@@ -201,9 +194,11 @@ Shell 命令
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Hadoop/">Hadoop</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
             
           </div>
         
@@ -218,24 +213,24 @@ Shell 命令
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          Hadoop 问题解决
+        <a href="/2021/07/13/Software/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+          WordPress 问题解决
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+        <a href="/2021/07/13/Software/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
           
           
             
           
-          Hadoop 问题解决
-启动 Hadoop 时提示 Could not resolve hostname
-问题描述
-如果启动 Hadoop 时遇到输出非常多&quot;ssh: Could not resolve hostname xxx”的异常情况,如下图所示:
+          WordPress 问题解决
+文件权限问题
+修改wp-config.php文件
 
-解决方法
-这个并不是 ssh 的问题,可通过设置 Hadoop 环境变量来解决,首先按键盘的 ctrl + c 中断启动,然后在~/
+对于没有服务器目录操作权限的用户来说,修改wp-config.php文件会比较简单快捷,只需要在wp-config.php文件添加以下代码:
+
+123define(&quot;FS_METHOD&quot;, &quot;direct&quot;);define(&quot;FS_CHMOD_DIR&quot;, 0
         </a>
       </p>
 
@@ -243,8 +238,59 @@ Shell 命令
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/WordPress/">WordPress</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DELIMITER/" target="_self">
+          SQL DELIMITER
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DELIMITER/" target="_self">
+          
+          
+            
+          
+          SQL DELIMITER
+
+delimiter命令指定了mysql解释器命令行的结束符,默认为;
+但一般在存储过程中会有多个分号,我们并不希望一遇到分号就执行命令,因此可以用delimiter命令指定其他结束符来代替;
+这个结束符可以自己定义,常用的是// 和 $$
+
+12345678910111213141516171819202122mysql&gt; delimiter //       
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -256,9 +302,9 @@ Shell 命令
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Hadoop/">Hadoop</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
           </div>
         
@@ -273,23 +319,27 @@ Shell 命令
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Distributed/Kafka/Topic/" target="_self">
-          Kafka Topic
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/MD5%E5%8A%A0%E5%AF%86/" target="_self">
+          SQL MD5
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Distributed/Kafka/Topic/" target="_self">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/MD5%E5%8A%A0%E5%AF%86/" target="_self">
           
           
             
           
-          Kafka Topic
-创建Topic
-1$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test-replicated-topic
+          SQL MD5
+MD5简介
 
---topic:定义 topic 名
---replication-factor:定义副本数,副本数要小于等于br
+MD5即Message-Digest Algorithm 5(信息-摘要算法5),用于确保信息传输完整一致,是计算机广泛使用的杂凑算法之一(又译摘要算法,哈希算法),主流编程语言普遍已有MD5实现,将数据(如汉字)运算为另一固定长度值,是杂凑算法的基础原理,MD5的前身有MD2,MD3和MD4
+
+实现数据加密
+
+新建一个表 testmd5
+
+123456CREATE 
         </a>
       </p>
 
@@ -297,8 +347,8 @@ Shell 命令
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -310,9 +360,9 @@ Shell 命令
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
           </div>
         
@@ -327,20 +377,31 @@ Shell 命令
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Distributed/Kafka/%E9%9B%86%E7%BE%A4/" target="_self">
-          Kafka 集群
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/" target="_self">
+          关系数据库标准语言SQL
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Distributed/Kafka/%E9%9B%86%E7%BE%A4/" target="_self">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/" target="_self">
           
           
             
           
-          Kafka 集群
-创建集群
-1234567891011121314151617$ docker run -d --name kafka1 -p 9093:9092 \--net zookeeper \--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \--env KAFKA_LISTENERS=PLAINTEXT://kafka1:9092 \--env K
+          关系数据库标准语言SQL
+SQL的产生与发展
+目前,没有一个人数据库系统能够支持SQL标准的所有概念和特性,同时,许多软件厂商对SQL基本命令集还进行了不同程度的扩充的和修改,又可以支持标准以外的一些功能特性
+SQL的特点
+
+综合统一
+高度非过程化
+面向集合的操作方式
+以一种语法结构提供多种使用方式
+语言简洁,易学易用
+
+SQL的基本概念
+
+支持SQL的关系数据库管理系统同样支持关系数据库三级模式
         </a>
       </p>
 
@@ -348,8 +409,8 @@ Shell 命令
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -361,9 +422,9 @@ Shell 命令
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
           </div>
         
@@ -378,27 +439,24 @@ Shell 命令
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Hadoop 初始化
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" target="_self">
+          SQL 性能优化策略
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/" target="_self">
           
           
             
           
-          Hadoop 初始化
-绪论
+          SQL 性能优化策略
 
-使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark
-集群共有5台机器, 主机名分别为 h01, h02, h03, h04, h05,其中 h01 为 master, 其他的为 slave
-JDK 1.8
-Scala 2.11.6
-Hadoop 3.2.1
-Hbase 2.1.3
-Sp
+优化表的数据类型,选择合适的数据类型:
+
+原则:更小通常更好,简单就好,所有字段都得有默认值,尽量避免 NULL
+例如:数据库表设计时候更小的占磁盘空间尽可能使用更小的整数类型,(mediumint 就比 int 更合适)
+比如时间字段:datetime 和 timestamp,datetime 占用8个字节,timestamp 占用4个字节,只用了一半,而 timesta
         </a>
       </p>
 
@@ -406,8 +464,8 @@ Sp
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -419,59 +477,9 @@ Sp
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Distributed/Hadoop/">Hadoop</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/12/Software/Concept/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
-          操作系统
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Concept/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_self">
-          
-          
-            
-          
-          操作系统
-进程的状态
-
-就绪(Ready)状态:当进程已分配到除CPU以外的所有必要资源后,只要再获得CPU,便可立即执行,进程这时的状态称为就绪状态,在一个系统中处于就绪状态的进程可能有多个,通常将它们排成一个队列,称为就绪队列
-执行状态:进程已获得CPU,其程序正在执行,在单处理机系统中,只有一个进程处于执行状态,在多处理机系统中,则有多个进程处于执行状态
-阻塞状态:正在执行的进程由于发生某事
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Concept/">Concept</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
           </div>
         
@@ -486,28 +494,22 @@ Sp
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Tools/Zshell/OhMyZsh/" target="_self">
-          Zshell Oh My Zsh
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E5%AE%A1%E8%AE%A1/" target="_self">
+          SQL 审计
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Tools/Zshell/OhMyZsh/" target="_self">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E5%AE%A1%E8%AE%A1/" target="_self">
           
           
             
           
-          Zshell Oh My Zsh
-安装
-手动安装
+          SQL 审计
 
-直接用git从github上面下载包
-
-1git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-备份已有的zshrc, 替换zshrc
-
-12cp ~/.zshrc ~/.zshrc.origcp ~/.oh-my-zsh/templates/zshrc.zsh-t
+AUDIT语句用来设置审计功能,NOAUDIT语句则取消审计功能
+审计一般可以分为用户级审计和系统级审计,用户级审计是任何用户可设置的审计,主要是用户针对自己创建的数据库表或视图进行审计,记录所有用户对这些表或视图的一切成功和(或)不成功的访问要求以及各种类型的SQL操作
+统级审计只能由数据库管理员设置,用以i检测成功或失败的登陆要求,监测授权和收回操作以及其他数据库级权限下的操作
         </a>
       </p>
 
@@ -515,128 +517,8 @@ Sp
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Zshell/">Zshell</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/12/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          ZShell 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          ZShell 初始化
-安装
-
-查看已有的Shell
-
-1cat /etc/shells
-1sudo apt-get install zsh
-
-查看版本
-
-1zsh --version
-
-设为默认shell
-
-1sudo usermod -s /bin/zsh username
-或者
-12chsh -s /bin/zshchsh -s `which zsh`
-
-如果要切换回去bash:
-
-1chsh
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Zshell/">Zshell</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/12/Software/Backend/Java/SpringFramework/SpringBoot/MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86/" target="_self">
-          Spring Boot MVC 自动配置原理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Java/SpringFramework/SpringBoot/MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86/" target="_self">
-          
-          
-            
-          
-          Spring Boot MVC 自动配置原理
-官方文档
-地址:https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration
-
-Spring MVC Auto-configuration
-
-Spring Boot provi
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -648,11 +530,11 @@ Spring Boot provi
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/SpringBoot/">SpringBoot</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
             
           </div>
         
@@ -667,25 +549,26 @@ Spring Boot provi
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/12/Software/Backend/Java/SpringFramework/Spring/%E6%B5%8B%E8%AF%95/" target="_self">
-          Spring 测试
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/" target="_self">
+          SQL 用户与权限
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/12/Software/Backend/Java/SpringFramework/Spring/%E6%B5%8B%E8%AF%95/" target="_self">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/" target="_self">
           
           
             
           
-          Spring 测试
-Junit
-Junit是一个Java语言的单元测试框架,被开发者用于实施对应用程序的单元测试,加快程序编制速度,同时提高编码的质量
-pom.xml
+          SQL 用户与权限
+用户管理
+查看用户
 
-Junit4
+用户信息表
 
-123456&lt;dependency&gt;	&lt;groupId&gt;junit&lt;/groupId&gt;	&lt;artifactId&gt;junit&lt;/artifactId&gt;	&l
+1SELECT * FROM mysql.user
+添加用户
+12CREATE USER &#x27;用户名&#x27; IDENTIFIED BY [&#x27;PASSWORD&#x27;] [WITH] [DBAA|RESOURCE|CONNECT];CREATE USER test IDENTIFIED BY &#x27;123456
         </a>
       </p>
 
@@ -693,8 +576,8 @@ Junit4
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-12 22:28" pubdate>
-              2021-07-12
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
             </time>
           </div>
         
@@ -706,11 +589,126 @@ Junit4
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Java/">Java</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/">SpringFramework</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
             
-              <a href="/categories/Software/Backend/Java/SpringFramework/Spring/">Spring</a>
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%92%E8%89%B2/" target="_self">
+          SQL 数据库角色
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A7%92%E8%89%B2/" target="_self">
+          
+          
+            
+          
+          SQL 数据库角色
+
+数据库角色是被命名的一组与数据库操作相关的权限,角色是权限的集合,因此,可以为一组具有相同权限的用户创建一个角色,使用角色来管理数据库权限可以简化授权的过程
+在SQL中首先用CREATE ROLE语句创建角色,然后用GRANT语句给角色授权,用REVOKE语句收回授予角色的权限
+
+角色的创建
+
+创建角色的SQL语句格式是:
+
+1CREATE ROLE &lt;角色名&gt;
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E8%A7%86%E5%9B%BE/" target="_self">
+          SQL 视图
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/13/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E8%A7%86%E5%9B%BE/" target="_self">
+          
+          
+            
+          
+          SQL 视图
+
+还可以为不同的用户定义不同的视图,把数据对象限制在一定的范围内,也就是说,通过视图机制把要保密的数据对无权存取的用户隐藏起来,从而自动对数据提供一定程度的安全保护
+视图机制间接地实现支持存取谓词的用户权限定义,例如,在某大学中假定王平老师只能检索计算机系学生的信息,系主任张明具有检索和增删改计算机系学生信息的所有权限,这就要求系统能支持&quot;存取谓词&quot;的用户权限定义
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-13 21:57" pubdate>
+              2021-07-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
             
           </div>
         
