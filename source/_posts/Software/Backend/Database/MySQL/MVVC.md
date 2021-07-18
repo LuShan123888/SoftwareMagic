@@ -16,11 +16,11 @@ categories:
 ## MVVC 实现原理
 
 - InnoDB在每行数据都增加三个隐藏字段
-    - `事务ID(DB_TRX_ID)`:用来标识最近一次对本行记录做修改(insert|update)的事务的标识符,即最后一次修改(insert|update)本行记录的事务id,至于delete操作,在innodb看来也不过是一次update操作,更新行中的一个特殊位将行表示为deleted,并非真正删除
     - `DB_ROW_ID`:包含一个随着新行插入而单调递增的行ID,当由innodb自动产生聚集索引时,聚集索引会包括这个行ID的值,否则这个行ID不会出现在任何索引中
-    - `回滚指针(DB_ROLL_PTR)`:指写入回滚段(rollback segment)的 undo log record (撤销日志记录记录),如果一行记录被更新, 则 undo log record 包含 ‘重建该行记录被更新之前内容’ 所必须的信息
+    - `DB_TRX_ID`:用来标识最近一次对本行记录做修改(insert|update)的事务的标识符,即最后一次修改(insert|update)本行记录的事务id,至于delete操作,在innodb看来也不过是一次update操作,更新行中的一个特殊位将行表示为deleted,并非真正删除
+    - `DB_ROLL_PTR`:指写入回滚段(rollback segment)的 undo log record (撤销日志记录记录),如果一行记录被更新, 则 undo log record 包含 ‘重建该行记录被更新之前内容’ 所必须的信息
 
-### MVVC环境下的CRUD
+### MVVC 环境下的CRUD
 
 - **SELECT**:读取创建版本小于或等于当前事务版本号,并且删除版本为空或大于当前事务版本号的记录,这样可以保证在读取之前记录是存在的
 - **INSERT**:将当前事务的版本号保存至行的创建版本号
@@ -30,11 +30,11 @@ categories:
 **插入操作**
 
 - 记录的创建版本号就是事务版本号
-- 比如我插入一条记录, 事务id 假设是1,那么记录如下:也就是说,创建版本号就是事务版本号
+- 比如插入一条记录, 事务id 假设是1,那么记录如下:也就是说,创建版本号就是事务版本号
 
-| id   | name    | DB_ROW_ID | DB_ROLL_PTR |
-| ---- | ------- | --------- | ----------- |
-| 1    | xttblog | 1         |             |
+| id   | name    | DB_ROW_ID | DB_TRX_ID |
+| ---- | ------- | --------- | --------- |
+| 1    | xttblog | 1         |           |
 
 **更新操作**
 
@@ -45,10 +45,10 @@ categories:
 update table set name= 'new_value' where id=1;
 ```
 
-| id   | name        | DB_ROW_ID | DB_ROLL_PTR |
-| ---- | ----------- | --------- | ----------- |
-| 1    | xttblog     | 1         | 2           |
-| 1    | xttblog.com | 2         |             |
+| id   | name        | DB_ROW_ID | DB_TRX_ID |
+| ---- | ----------- | --------- | --------- |
+| 1    | xttblog     | 1         | 2         |
+| 1    | xttblog.com | 2         |           |
 
 **删除操作**
 
@@ -58,9 +58,9 @@ update table set name= 'new_value' where id=1;
 delete from table where id=1;
 ```
 
-| id   | name        | DB_ROW_ID | DB_ROLL_PTR |
-| ---- | ----------- | --------- | ----------- |
-| 1    | xttblog.com | 2         | 3           |
+| id   | name        | DB_ROW_ID | DB_TRX_ID |
+| ---- | ----------- | --------- | --------- |
+| 1    | xttblog.com | 2         | 3         |
 
 **查询操作**
 
