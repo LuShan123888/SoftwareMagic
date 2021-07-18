@@ -9,23 +9,19 @@ categories:
 ---
 #  Java Collection
 
-接口Collection处于Collection API的最高层,在该接口中定义了所有低层接口或类的公共方法,下图给出了Collection API的实现层次,图中省略了AbstractCollection等5个抽象类,省略了Collection接口的子接口Queue
-
-![](https://www.plantuml.com/plantuml/svg/XP91Jjj058RtFiKW5aXUs8u9mgqG2aHO80M46jhzn7xOeundeZVFYcZLAvH3L3q0QyxJzXfzdj340G5UMFh_yVp_DyypSYIH6cNAHYw2FR6ZJA7R4WJLq42qQ1lTTskYXViOnoYNKQMeRcUj0ooi8J0K5RQ99-sqbcQGxcTP5kTAWuiRwGWmljRIqEVBIToBFd9qf-4uC9R3lmM2dsjPbifKOf1uUIcnKaPaNfpAObwXRKqvjjgYMDQAmA-SMrHV6KFg4wqgqp2EAFW5w9S_hVQW0HI30szDb85LocuopePdkNSPlhHBtnzy3z1QkjgWRR6iELClztpWj3kEoABaUKMUxnyEatSEqQVCk3xG86zVw--7Zp_a1-cBY3HvFb2Eb8Xs-PJNPnw-CPJElQbLCJVWd4YZBkWeVlfreRZWASkPXZy_Vls-_nc4eU083GKfQzPUAAP06yNI8a6vRORY1W7O-_lmkFhgNBfwevd4ROMS8CgxpbnlODRvbl65GIp-bznBFFzEZe0l_UhY_mC0)
+- 接口Collection处于Collection API的最高层,在该接口中定义了所有低层接口或类的公共方法,下图给出了Collection API的实现层次
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-939.png)
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-835.png)
-
 ## Collection
 
-Collection接口的定义如下:
+- Collection接口的定义如下
 
 ```java
 public interface Collection<E> extends Iterable<E>
 ```
 
-下表给出了Collection接口的主要方法:
+- 下表给出了Collection接口的主要方法:
 
 | 方法                                     | 描述                           |
 | ---------------------------------------- | ------------------------------ |
@@ -67,26 +63,6 @@ public interface Collection<E> extends Iterable<E>
 - `elem`:数据对象
 - `pos`:操作 位置
 - `start_pos`:起始查找位置
-
-### ArrayList和LinkedList
-
-- 类ArrayList是最常用的列表容器类,类ArrayList内部使用数组存放元素,实现了可变大小的数组,访问元素效率高,当插入元素效率低
-- 类LinkedList是另一个常用的列表容器类,其内部使用双向链表存储元素,插入元素效率高,但访问元素效率低
-- LinkedList的特点是特别区分列表的头位置和尾位置的概念,提供了在头尾增,删和访问元素的方法,例如,方法`addFirst(Object)`在头位置插入元素
-
-**ArrayList和LinkedList的区别**
-
-|                     | ArrayList    | LinkedList           |
-| :------------------ | :----------- | :------------------- |
-| 获取指定元素        | 速度很快     | 需要从头开始查找元素 |
-| 添加元素到末尾      | 速度很快     | 速度很快             |
-| 在指定位置添加/删除 | 需要移动元素 | 不需要移动元素       |
-| 内存占用            | 少           | 较大                 |
-
-- ArrayList 是实现了基于动态数组的数据结构,LinkedList 基于链表的数据结构
-- 对于随机访问 get 和 set,ArrayList 绝对优于 LinkedList,因为 LinkedList 要移动指针
-- 对于新增和删除操作 add 和 remove,LinedList 比较占优势,因为 ArrayList 要移动数据
-- **若只对单条数据插入或删除,ArrayList 的速度反而优于 LinkedList,**但若是批量随机的插入删除数据,LinkedList 的速度大大优于 ArrayList. 因为 ArrayList 每插入一条数据,要移动插入点及之后的所有数据
 
 #### ArrayList
 
@@ -355,6 +331,13 @@ public boolean equals(Object o) {
 - 使用`Objects.equals()`比较两个引用类型是否相等的目的是省去了判断`null`的麻烦,两个引用类型都是`null`时它们也是相等的
 - 如果不调用`List`的`contains()`,`indexOf()`这些方法,那么放入的元素就不需要实现`equals()`方法
 
+### ArrayList/LinkedList比较
+
+- ArrayList内部使用数组存放元素,实现了可变大小的数组,访问元素效率高,当插入元素效率低
+- LinkedList内部使用双向链表存储元素,插入元素效率高,但访问元素效率低
+- 相对于ArrayList,LinkedList的插入,添加,删除操作速度更快,因为当元素被添加到集合任意位置的时候,不需要像数组那样重新计算大小或者是更新索引
+- LinkedList比ArrayList更占内存,因为LinkedList为每一个节点存储了两个引用,一个指向前一个元素,一个指向下一个元素
+
 ## Set
 
 - **Set 是一种不包含重复的元素的无序 Collection,Set 最多有一个 null 元素,**它维持它自己的内部排序,所以随机访问没有任何意义
@@ -472,27 +455,15 @@ public class Main {
 }
 ```
 
-### HashSet,LinkedHashSet,TreeSet 比较
+### HashSet/LinkedHashSet/TreeSet 比较
 
-#### HashSet
-
-- HashSet 有以下特点:
-  - 不能保证元素的排列顺序,顺序有可能发生变化
-  - 不是同步的
-  - 集合元素可以是 null,但只能放入一个 null
-- 当向 HashSet 结合中存入一个元素时,HashSet 会调用该对象的 hashCode() 方法来得到该对象的 hashCode 值,然后根据 hashCode 值来决定该对象在 HashSet 中存储位置,简单的说,**HashSet 集合判断两个元素相等的标准是两个对象通过 equals 方法比较相等,并且两个对象的 hashCode() 方法返回值也相等,**
-
-> **注意**:如果要把一个对象放入 HashSet 中,重写该对象对应类的 equals 方法,也应该重写其 hashCode() 方法,其规则是如果两个对象通过 equals 方法比较返回 true 时,其 hashCode 也应该相同,另外,对象中用作 equals 比较标准的属性,都应该用来计算 hashCode 的值
-
-#### LinkedHashSet
-
-- LinkedHashSet 集合同样是根据元素的 hashCode 值来决定元素的存储位置,但是它同时使用链表维护元素的次序,这样使得元素看起来像是以插入顺序保存的,也就是说,当遍历该集合时候,LinkedHashSet 将会以元素的添加顺序访问集合的元素
-- **LinkedHashSet 在迭代访问 Set 中的全部元素时,性能比 HashSet 好,但是插入时性能稍微逊色于 HashSet,**
-
-#### TreeSet
-
-- TreeSet 是 SortedSet 接口的唯一实现类,TreeSet 可以确保集合元素处于排序状态
-- **TreeSet 判断两个对象不相等的方式是两个对象通过 equals 方法返回 false,或者通过 CompareTo 方法比较没有返回 0,**
+- **HashSet**
+    - HashSet 是由 HashMap 实现的,不保证元素的顺序
+- **LinkedHashSet**
+    - LinkedHashSet 集合同样是根据元素的 hashCode 值来决定元素的存储位置,但是它同时使用链表维护元素的次序,这样使得元素看起来像是以插入顺序保存的,也就是说,当遍历该集合时候,LinkedHashSet 将会以元素的添加顺序访问集合的元素
+    - **LinkedHashSet 在迭代访问 Set 中的全部元素时,性能比 HashSet 好,但是插入时性能稍微逊色于 HashSet**
+- **TreeSet**
+    - TreeSet 是 SortedSet 接口的唯一实现类,TreeSet 可以确保集合元素处于排序状态
 
 ## Queue
 
@@ -504,10 +475,10 @@ public class Main {
   - `boolean add(E)`/`boolean offer(E)`:添加元素到队尾
   - `E remove()`/`E poll()`:获取队首元素并从队列中删除
   - `E element()`/`E peek()`:获取队首元素但并不从队列中删除
-- 对于具体的实现类,有的Queue有最大队列长度限制,有的Queue没有,注意到添加,删除和获取队列元素总是有两个方法,这是因为在添加或获取元素失败时,这两个方法的行为是不同的,我们用一个表格总结如下:
+- 对于具体的实现类,有的Queue有最大队列长度限制,有的Queue没有,注意到添加,删除和获取队列元素总是有两个方法,这是因为在添加或获取元素失败时,这两个方法的行为是不同的
 
 |                    | throw Exception | 返回false或null    |
-| :----------------- | :-------------- | :----------------- |
+| :----------------- | :-------------- | ------------------ |
 | 添加元素到队尾     | add(E e)        | boolean offer(E e) |
 | 取队首元素并删除   | E remove()      | E poll()           |
 | 取队首元素但不删除 | E element()     | E peek()           |
@@ -719,17 +690,8 @@ d2.offerLast("z");
 
 - **注意**:避免把`null`添加到队列
 
-## List,Set,Map的区别
+## List/Set/Map的区别
 
 - List有序存取元素,可以有重复元素
 - Set不能存放重复元素,存入的元素是无序的
 - Map保存键值对映射,映射关系可以是一对一或多对一
-
-## HashMap,Hashtable,HashSet,LinkedHashMap 和 TreeMap 比较
-
-- Hashmap 是一个最常用的 Map,它根据键的 HashCode 值存储数据,根据键可以直接获取它的值,具有很快的访问速度,遍历时,取得数据的顺序是完全随机的,HashMap 最多只允许一条记录的键为Null,允许多条记录的值为 Null
-- Hashtable 与 HashMap 类似,不同的是:它不允许记录的键或者值为空,它支持线程的同步,即任一时刻只有一个线程能写 Hashtable,因此也导致了 Hashtale 在写入时会比较慢
-- HashSet 是一个没有重复元素的集合,它是由 HashMap 实现的,不保证元素的顺序 (这里所说的没有顺序是指:元素插入的顺序与输出的顺序不一致),而且 HashSet 允许使用 null 元素
-- LinkedHashMap 是 HashMap 的一个子类,如果需要输出的顺序和输入的相同,那么用 LinkedHashMap 可以实现,它还可以按读取顺序来排列,像连接池中可以应用
-    - LinkedHashMap 实现与 HashMap 的不同之处在于,后者维护着一个运行于所有条目的双重链表,此链接列表定义了迭代顺序,该迭代顺序可以是插入顺序或者是访问顺序,对于 LinkedHashMap 而言,它继承与 HashMap,底层使用哈希表与双向链表来保存所有元素,其基本操作与父类 HashMap 相似,它通过重写父类相关的方法,来实现自己的链接列表特性
-- TreeMap 实现 SortMap 接口,内部实现是红黑树,能够把它保存的记录根据键排序,默认是按键值的升序排序,也可以指定排序的比较器,当用 Iterator 遍历 TreeMap 时,得到的记录是排过序的,TreeMap 不允许 key 的值为 null,非同步的

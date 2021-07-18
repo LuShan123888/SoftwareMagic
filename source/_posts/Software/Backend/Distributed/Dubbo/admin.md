@@ -11,11 +11,11 @@ categories:
 - Dubbo本身并不是一个服务软件,而是一个jar包,能够帮你的java程序连接到zookeeper,并利用zookeeper消费,提供服务
 - 但是为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin,不过这个监控即使不装也不影响使用
 
-## 下载dubbo-admin
+## 下载
 
-地址 :https://github.com/apache/dubbo-admin/tree/master
+- 地址 :https://github.com/apache/dubbo-admin/tree/master
 
-## 解压进入目录
+## 修改配置
 
 - 修改`dubbo-admin\src\main\resources\application.properties`指定zookeeper地址
 
@@ -32,7 +32,7 @@ spring.guest.password=guest
 dubbo.registry.address=zookeeper://127.0.0.1:2181
 ```
 
-## 打包dubbo-admin
+## 打包
 
 - **注意**:需要在项目目录下
 

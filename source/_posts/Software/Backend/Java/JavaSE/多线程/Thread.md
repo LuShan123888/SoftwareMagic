@@ -132,7 +132,7 @@ class MyThread extends Thread {
 }
 ```
 
-- `main`线程通过调用`t.interrupt()`方法中断`t`线程,但是要注意,`interrupt()`方法仅仅向`t`线程发出了"中断请求”,至于`t`线程是否能立刻响应,要看具体代码,而`t`线程的`while`循环会检测`isInterrupted()`,所以上述代码能正确响应`interrupt()`请求,使得自身立刻结束运行`run()`方法
+- `main`线程通过调用`t.interrupt()`方法中断`t`线程,但是要注意,`interrupt()`方法仅仅向`t`线程发出了中断请求,至于`t`线程是否能立刻响应,要看具体代码,而`t`线程的`while`循环会检测`isInterrupted()`,所以上述代码能正确响应`interrupt()`请求,使得自身立刻结束运行`run()`方法
 - 如果线程处于等待状态,例如,`t.join()`会让`main`线程进入等待状态,此时,如果对`main`线程调用`interrupt()`,`join()`方法会立刻抛出`InterruptedException`,因此,目标线程只要捕获到`join()`方法抛出的`InterruptedException`,就说明有其他线程对其调用了`interrupt()`方法,通常情况下该线程应该立刻结束运行
 
 ```java

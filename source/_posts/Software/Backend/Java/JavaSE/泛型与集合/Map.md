@@ -9,11 +9,15 @@ categories:
 ---
 # Java Map
 
-- 除了Collection接口表示的这种单一对象数据集合,对于**关键字=值**表示的数据集合在CollectionAPI中提供了Map接口
-- 在 Map 中它保证了 key 与 value 之间的一一对应关系,也就是说一个 key 对应一个 value,所以它不能存在相同的 key 值,当然 value 值可以相同
-- Map接口及其子接口的实现层次如下图所示,其中,`K`为关键字对象的数据类型,而`V`类映射值对象的数据类型
+- Java为数据结构中的映射定义了一个接口java.util.Map,此接口主要有四个常用的实现类,分别是HashMap,Hashtable,LinkedHashMap和TreeMap,类继承关系如下图所示
 
-![](https://www.plantuml.com/plantuml/svg/XPBVIiCm58Vl-nGHBmP5cgxRiCeOqs4PE6MuwNriZsrOcfGafQZu2leGuWDuxVEehs6QJQqRQYy2vvVqEr_-39KcKkUK9pafd1RQeZncPG98Pv23LvGvQwQPreNQnrYIoakfpihBKe6C1TV0jHUB74_AMKPuE-Y4OOWZoa3Xd2WD4ayPuVhyP88RwBxIrmm63XS6VkiWyqr9ab2UehPlonCYKyfHQ8j34YzIAKgUZ0GJ4bKPrM1dnaBI6wD1s06ZAS-D3ehD0D9Edot_aHmaQlTiDA4SbfHjVnHsZoAR6lb4LBQ_S-T88VJfjzeFbo_Fm9Oj2vpLsq6Xvw-tYABERjV_PnDDoz2qTnYGgz_wD-6ZlQWNR202V_r03P98AQeLh-dS_UDGwdIUqNZ1GIaKU3MeZrTNvngjed-ySp5uktzwVNXqN1UDYSe-q_VdbpgQ2QaXsLZgeha4QAuTWdcBo_Vu0G00)
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-835.png)
+
+-  **HashMap**:它根据键的hashCode值存储数据,大多数情况下可以直接定位到它的值,因而具有很快的访问速度,但遍历顺序却是不确定的,HashMap最多只允许一条记录的键为null,允许多条记录的值为null,HashMap非线程安全,即任一时刻可以有多个线程同时写HashMap,可能会导致数据的不一致,如果需要满足线程安全,可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力,或者使用ConcurrentHashMap
+-  **Hashtable**:Hashtable是遗留类,很多映射的常用功能与HashMap类似,不同的是它承自Dictionary类,并且是线程安全的,任一时间只有一个线程能写Hashtable,并发性不如ConcurrentHashMap,因为ConcurrentHashMap引入了分段锁,Hashtable不建议在新代码中使用,不需要线程安全的场合可以用HashMap替换,需要线程安全的场合可以用ConcurrentHashMap替换
+-  **LinkedHashMap**:LinkedHashMap是HashMap的一个子类,保存了记录的插入顺序,在用Iterator遍历LinkedHashMap时,先得到的记录肯定是先插入的,也可以在构造时带参数,按照访问次序排序
+-  **TreeMap**:TreeMap实现SortedMap接口,能够把它保存的记录根据键排序,默认是按键值的升序排序,也可以指定排序的比较器,当用Iterator遍历TreeMap时,得到的记录是排过序的,如果使用排序的映射,建议使用TreeMap,在使用TreeMap时,key必须实现Comparable接口或者在构造TreeMap传入自定义的Comparator,否则会在运行时抛出java.lang.ClassCastException类型的异常
+-  **Properties**:Hashtable还有个子类Properties,其关键字和值只能是String类型,经常被用来存储和访问配置信息
 
 - Map是包括了关键字,值以及它们的映射关系的集合,可分别使用如下方法得到
   - `public Set<K> keySet()`:关键字的集合
@@ -27,8 +31,6 @@ categories:
   - `public boolean equals(Object obj)`:判断Map对象与参数对象是否等价 ,两个 Map相等,当且仅当其`entrySet()`得到的集合是一致的
   - `public boolean containsKey(Object key)`:判断在Map中是否存在与键值匹配的映射关系
   - `public boolean contains Values(Object value)`:判断在Map中是否存在与键值匹配的映射关系
-
-- 实现Map接口的类有很多,其中最常用的有HashMap和Hashtable,两者使用上的最大差别是,Hashtable是线程访问安全的,而HashMap需要提供外同步,Hashtable还有个子类Properties,其关键字和值只能是String类型,经常被用来存储和访问配置信息
 
 ## HashMap
 
@@ -48,22 +50,22 @@ categories:
 
 ```java
 public class Map接口的使用 {
-  public static void main(String[] args) {
-    Map<String,String> m = new HashMap<String, String>();
-    m.put("张三","2003011");
-    m.put("李四","2003012");
-    m.put("王五","2003013");
-    m.put("张三","2003001");//添加一个已有相同关键字的元素时将修改元素的键值
-    Set<String> keys = m.keySet();//通过Map对象的keySet()方法得到关键字的集合
-    for (Iterator<String> i = keys.iterator();i.hasNext();){
-      System.out.print(i.next()+",");
+    public static void main(String[] args) {
+        Map<String,String> m = new HashMap<String, String>();
+        m.put("张三","2003011");
+        m.put("李四","2003012");
+        m.put("王五","2003013");
+        m.put("张三","2003001");//添加一个已有相同关键字的元素时将修改元素的键值
+        Set<String> keys = m.keySet();//通过Map对象的keySet()方法得到关键字的集合
+        for (Iterator<String> i = keys.iterator();i.hasNext();){
+            System.out.print(i.next()+",");
+        }
+        System.out.println(m.values());
     }
-    System.out.println(m.values());
-  }
 }
 
 李四,张三,王五
-  [2003012, 2003001, 2003013]
+    [2003012, 2003001, 2003013]
 ```
 
 ## 	LinkedHashMap
@@ -80,34 +82,32 @@ public class Map接口的使用 {
 
 ```java
 public class Map接口的使用 {
-  public static void main(String[] args) {
-    Map<String,String> m = new LinkedHashMap<String, String>();
-    m.put("张三","2003011");
-    m.put("李四","2003012");
-    m.put("王五","2003013");
-    Set<String> keys = m.keySet();
-    for (Iterator<String> i = keys.iterator();i.hasNext();)
-      System.out.print(i.next()+",");
-    System.out.println(m.values());
-  }
+    public static void main(String[] args) {
+        Map<String,String> m = new LinkedHashMap<String, String>();
+        m.put("张三","2003011");
+        m.put("李四","2003012");
+        m.put("王五","2003013");
+        Set<String> keys = m.keySet();
+        for (Iterator<String> i = keys.iterator();i.hasNext();)
+            System.out.print(i.next()+",");
+        System.out.println(m.values());
+    }
 }
 
 张三,李四,王五
-  [2003012, 2003001, 2003013]
+    [2003012, 2003001, 2003013]
 ```
 
-### 定义
+**定义**
 
 - LinkedHashMap继承了HashMap,所以它们有很多相似的地方
 
 ```java
-public class LinkedHashMap<K,V>
-  extends HashMap<K,V>
-  implements Map<K,V>
-{
+public class LinkedHashMap<K,V>  extends HashMap<K,V>  implements Map<K,V>{
+}
 ```
 
-#### 构造方法
+**构造方法**
 
 - LinkedHashMap提供了多个构造方法,我们先看空参的构造方法
 
@@ -714,39 +714,32 @@ Zara's new balance: 4434.34
 - TreeMap 中判断相等的标准是:两个 key 通过`equals()`方法返回为 true,并且通过`compare()`方法比较应该返回为 0
 - 要严格按照`compare()`规范实现比较逻辑,否则,`TreeMap`将不能正常工作,如果使用自定义的类来作为 TreeMap 中的 key 值,且想让 TreeMap 能够良好的工作,则必须重写自定义类中的`equals()`方法
 
-### 使用TreeMap
+### key排序
 
-**key排序**
-
-TreeMap默认是升序的,如果我们需要改变排序方式,则需要使用比较器:Comparator,Comparator可以对集合对象或者数组进行排序的比较器接口,实现该接口的public compare(T o1,To2)方法即可实现排序,如下:
+- TreeMap默认是升序的,如果我们需要改变排序方式,则需要使用比较器:Comparator,Comparator可以对集合对象或者数组进行排序的比较器接口,实现该接口的public compare(T o1,To2)方法即可实现排序,如下:
 
 ```dart
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 public class TreeMapTest {
-  public static void main(String[] args) {
-    Map<String, String> map = new TreeMap<String, String>(
-      new Comparator<String>() {
-        public int compare(String obj1, String obj2) {
-          // 降序排序
-          return obj2.compareTo(obj1);
-        }
-      });
-    map.put("b", "ccccc");
-    map.put("d", "aaaaa");
-    map.put("c", "bbbbb");
-    map.put("a", "ddddd");
+    public static void main(String[] args) {
+        Map<String, String> map = new TreeMap<String, String>(
+            new Comparator<String>() {
+                public int compare(String obj1, String obj2) {
+                    // 降序排序
+                    return obj2.compareTo(obj1);
+                }
+            });
+        map.put("b", "ccccc");
+        map.put("d", "aaaaa");
+        map.put("c", "bbbbb");
+        map.put("a", "ddddd");
 
-    Set<String> keySet = map.keySet();
-    Iterator<String> iter = keySet.iterator();
-    while (iter.hasNext()) {
-      String key = iter.next();
-      System.out.println(key + ":" + map.get(key));
+        Set<String> keySet = map.keySet();
+        Iterator<String> iter = keySet.iterator();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            System.out.println(key + ":" + map.get(key));
+        }
     }
-  }
 }
 ```
 
@@ -764,37 +757,30 @@ a:ddddd
 - 上面例子是对根据TreeMap的key值来进行排序的,但是有时我们需要根据TreeMap的value来进行排序,对value排序我们就需要借助于Collections的`sort(List<T> list, Comparator<? super T> c)`方法,该方法根据指定比较器产生的顺序对指定列表进行排序,但是有一个前提条件,那就是所有的元素都必须能够根据所提供的比较器来进行比较,如下:
 
 ```dart
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 public class TreeMapTest {
-  public static void main(String[] args) {
-    Map<String, String> map = new TreeMap<String, String>();
-    map.put("a", "ddddd");
-    map.put("c", "bbbbb");
-    map.put("d", "aaaaa");
-    map.put("b", "ccccc");
+    public static void main(String[] args) {
+        Map<String, String> map = new TreeMap<String, String>();
+        map.put("a", "ddddd");
+        map.put("c", "bbbbb");
+        map.put("d", "aaaaa");
+        map.put("b", "ccccc");
 
-    //这里将map.entrySet()转换成list
-    List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
-    //然后通过比较器来实现排序
-    Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
-      //升序排序
-      public int compare(Entry<String, String> o1,
-                         Entry<String, String> o2) {
-        return o1.getValue().compareTo(o2.getValue());
-      }
+        //这里将map.entrySet()转换成list
+        List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
+        //然后通过比较器来实现排序
+        Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
+            //升序排序
+            public int compare(Entry<String, String> o1,
+                               Entry<String, String> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
 
-    });
+        });
 
-    for(Map.Entry<String,String> mapping:list){
-      System.out.println(mapping.getKey()+":"+mapping.getValue());
+        for(Map.Entry<String,String> mapping:list){
+            System.out.println(mapping.getKey()+":"+mapping.getValue());
+        }
     }
-  }
 }
 ```
 
@@ -806,388 +792,6 @@ c:bbbbb
 b:ccccc
 a:ddddd
 ```
-
-### 节点
-
-```java
-static final class Entry<K,V> implements Map.Entry<K,V> {
-        K key;
-        V value;
-        Entry<K,V> left;
-        Entry<K,V> right;
-        Entry<K,V> parent;
-        boolean color = BLACK;
-}
-```
-
-- 红黑树的节点是用Entry类表示的,该类包括两个指向左右两个孩子节点的指针left,right,一个指向父亲节点的指针parent,表示当前颜色的变量color,默认为黑色,K泛型的key表示键,V泛型的value表示值
-
-### 插入算法
-
-首先执行二叉搜索树的插入算法,保证左子树的关键字最大不超过x.key,右子树的关键字最小不低于x.key
-
-```java
-Entry<K,V> t = root;
-if (t == null) {
-  @1
-    compare(key, key); // type (and possibly null) check
-
-  root = new Entry<>(key, value, null);
-  size = 1;
-  modCount++;
-  return null;
-}
-@2
-  int cmp;
-Entry<K,V> parent;
-// split comparator and comparable paths
-Comparator<? super K> cpr = comparator;
-if (cpr != null) {
-  do {
-    parent = t;
-    cmp = cpr.compare(key, t.key);
-    if (cmp < 0)
-      t = t.left;
-    else if (cmp > 0)
-      t = t.right;
-    else  @3
-      return t.setValue(value);
-  } while (t != null);
-}
-else {
-  if (key == null)
-    throw new NullPointerException();
-  @SuppressWarnings("unchecked")
-    Comparable<? super K> k = (Comparable<? super K>) key;
-  do {
-    parent = t;
-    cmp = k.compareTo(t.key);
-    if (cmp < 0)
-      t = t.left;
-    else if (cmp > 0)
-      t = t.right;
-    else
-      return t.setValue(value);
-  } while (t != null);
-}
-@4
-  Entry<K,V> e = new Entry<>(key, value, parent);
-if (cmp < 0)
-  parent.left = e;
-else
-  parent.right = e;
-```
-
-- @1 表示根节点为空的情况直接插入到根节点
-- @2 表示根节点非空,通过传入的Comparator或者key自身实现的Comparable来比较key的值,先从根部节点比较
-- @3 如果key的值与比较节点的值相同,直接将value赋给节点返回
-- @4 如果key.value < root.value,接下来比较key与root左子树的值,如果key.value > root.value,接下来比较key与root右子树的值,以此循环,直到要比较的节点为空,将新节点插入该位置
-
-### 插入后的颜色修复
-
-经过二叉搜索树的插入算法,此时树已满足二叉搜索树的条件,接下来在不破坏二叉搜索树性质的条件下对颜色修复使得该树满足红黑树的性质
-
-```java
-private void fixAfterInsertion(Entry<K,V> x) {
-  x.color = RED;
-
-  while (x != null && x != root && x.parent.color == RED) { @1
-    if (parentOf(x) == leftOf(parentOf(parentOf(x)))) {
-      Entry<K,V> y = rightOf(parentOf(parentOf(x)));
-      if (colorOf(y) == RED) { //情况1
-        setColor(parentOf(x), BLACK);
-        setColor(y, BLACK);
-        setColor(parentOf(parentOf(x)), RED);
-        x = parentOf(parentOf(x));
-      } else {
-        if (x == rightOf(parentOf(x))) { //情况2
-          x = parentOf(x);
-          rotateLeft(x);
-        }
-        //情况3
-        setColor(parentOf(x), BLACK);
-        setColor(parentOf(parentOf(x)), RED);
-        rotateRight(parentOf(parentOf(x)));
-      }
-    } else {
-      Entry<K,V> y = leftOf(parentOf(parentOf(x)));
-      if (colorOf(y) == RED) {
-        setColor(parentOf(x), BLACK);
-        setColor(y, BLACK);
-        setColor(parentOf(parentOf(x)), RED);
-        x = parentOf(parentOf(x));
-      } else {
-        if (x == leftOf(parentOf(x))) {
-          x = parentOf(x);
-          rotateRight(x);
-        }
-        setColor(parentOf(x), BLACK);
-        setColor(parentOf(parentOf(x)), RED);
-        rotateLeft(parentOf(parentOf(x)));
-      }
-    }
-  }
-  root.color = BLACK;
-}
-```
-
-- 如果新插入的节点非根节点,并且父亲是红色,因为它自身也是红色,因此违反了性质4,需要调整颜色
-- 下面以**父节点是左孩子**的判断分支分析,父节点是右孩子的状况具有对称性,不重复推导
-
-#### 情况一,叔节点是红色
-
-如果当前节点x的父亲是左节点,并且和叔节点y(父亲的兄弟节点)都是红色,这时候父亲的父亲节点必须是黑色的,否则不满足性质4,将父亲x,p和叔节点y都染成黑色,将父亲的父亲x.p.p节点染成红色,此时插入的节点x,插入节点的父亲节点x.p,叔节点y都满足红黑树性质,但是父亲的父亲节点x.p.p被染成红色后未必还满足红黑树性质,所以将x设置为x.p.p节点,交给下个迭代解决
-
-![5222801-68bc399c25e54a54](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-68bc399c25e54a54.png)
-
-#### 情况二,当前的节点是右孩子,叔节点是黑色
-
-如果x是右孩子,将x设置成x.p,对x左旋
-
-![5222801-7d40ed5b0316cf08](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-7d40ed5b0316cf08.png)
-
-#### 情况三,当前节点是左孩子,叔节点y是黑色
-
-- 将x的父亲节点x.p染成黑色,再将x节点的父亲的父亲x.p.p染成红色
-
-![image-20210428010746640](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010746640.png)
-
-- 将x.p.p右旋
-
-![image-20210428010759930](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-28-image-20210428010759930.png)
-
-- 经过上述步骤的变化现在已经成为一颗符合性质的红黑树
-- 三种情况针对父亲节点是左孩子的情况,父亲是右孩子的情况可以根据三种情况反推
-
-**插入算法小结**
-
-因为一颗有n个节点的红黑树,其高度为lg n,二叉搜索树的插入最多执行O(lg n)的时间,而颜色修复在情况一沿着树上升2层,循环才会重复执行,循环可能执行的总数为O(lg n),一旦进入情况2或3,下面执行的旋转不超过2次,循环就结束了,所以红黑树的插入算法时间是O(lg n)
-
-### 删除算法
-
-```java
-public V remove(Object key) {
-  Entry<K,V> p = getEntry(key);
-  if (p == null)
-    return null;
-
-  V oldValue = p.value;
-  deleteEntry(p);
-  return oldValue;
-}
-```
-
-首先通过getEntry找到与key对应的节点,然后调用deleteEntry方法删除节点:
-
-```java
-private void deleteEntry(Entry<K,V> p) {
-  modCount++;
-  size--;
-
-  // If strictly internal, copy successor's element to p and then make p
-  // point to successor.
-  if (p.left != null && p.right != null) {
-    Entry<K,V> s = successor(p);
-    p.key = s.key;
-    p.value = s.value;
-    p = s;
-  } // p has 2 children
-
-  // Start fixup at replacement node, if it exists.
-  Entry<K,V> replacement = (p.left != null ? p.left : p.right);
-
-  if (replacement != null) {
-    // Link replacement to parent
-    replacement.parent = p.parent;
-    if (p.parent == null)
-      root = replacement;
-    else if (p == p.parent.left)
-      p.parent.left  = replacement;
-    else
-      p.parent.right = replacement;
-
-    // Null out links so they are OK to use by fixAfterDeletion.
-    p.left = p.right = p.parent = null;
-
-    // Fix replacement
-    if (p.color == BLACK)
-      fixAfterDeletion(replacement);
-  } else if (p.parent == null) { // return if we are the only node.
-    root = null;
-  } else { //  No children. Use self as phantom replacement and unlink.
-    if (p.color == BLACK)
-      fixAfterDeletion(p);
-
-    if (p.parent != null) {
-      if (p == p.parent.left)
-        p.parent.left = null;
-      else if (p == p.parent.right)
-        p.parent.right = null;
-      p.parent = null;
-    }
-  }
-}
-```
-
-首先根据二叉搜索树的删除算法删除节点,具体表现为:
-
-1. 如果删除的节点没有子树,直接删除,如果它是黑色的,从哨兵节点开始颜色修复
-2. 如果删除的节点只有一个子树,用它的孩子节点替换它,如果它是黑色的,从它的孩子开始执行颜色修复
-3. 如果删除的节点有双子树,用右子树最小的节点替换它,并对最小节点的右节点执行颜色修复
-
-### 删除后的颜色修复
-
-- 删除节点完毕后,开始执行颜色修复算法,颜色修复只指针替换节点为黑色的,因为路径中少了一个黑色节点破坏了性质5
-- 下面以**修复节点是左孩子分析**,如果该节点是右孩子与它是左孩子具有对称性,不再重复分析
-
-```java
-private void fixAfterDeletion(Entry<K,V> x) {
-  while (x != root && colorOf(x) == BLACK) {
-    if (x == leftOf(parentOf(x))) {
-      Entry<K,V> sib = rightOf(parentOf(x));
-
-      if (colorOf(sib) == RED) { //情况一
-        setColor(sib, BLACK);
-        setColor(parentOf(x), RED);
-        rotateLeft(parentOf(x));
-        sib = rightOf(parentOf(x));
-      }
-
-      if (colorOf(leftOf(sib))  == BLACK &&
-          colorOf(rightOf(sib)) == BLACK) { //情况二
-        setColor(sib, RED);
-        x = parentOf(x);
-      } else {
-        if (colorOf(rightOf(sib)) == BLACK) {//情况三
-          setColor(leftOf(sib), BLACK);
-          setColor(sib, RED);
-          rotateRight(sib);
-          sib = rightOf(parentOf(x));
-        }
-        setColor(sib, colorOf(parentOf(x))); //情况四
-        setColor(parentOf(x), BLACK);
-        setColor(rightOf(sib), BLACK);
-        rotateLeft(parentOf(x));
-        x = root;
-      }
-    } else { // symmetric
-      Entry<K,V> sib = leftOf(parentOf(x));
-
-      if (colorOf(sib) == RED) {
-        setColor(sib, BLACK);
-        setColor(parentOf(x), RED);
-        rotateRight(parentOf(x));
-        sib = leftOf(parentOf(x));
-      }
-
-      if (colorOf(rightOf(sib)) == BLACK &&
-          colorOf(leftOf(sib)) == BLACK) {
-        setColor(sib, RED);
-        x = parentOf(x);
-      } else {
-        if (colorOf(leftOf(sib)) == BLACK) {
-          setColor(rightOf(sib), BLACK);
-          setColor(sib, RED);
-          rotateLeft(sib);
-          sib = leftOf(parentOf(x));
-        }
-        setColor(sib, colorOf(parentOf(x)));
-        setColor(parentOf(x), BLACK);
-        setColor(leftOf(sib), BLACK);
-        rotateRight(parentOf(x));
-        x = root;
-      }
-    }
-  }
-
-  setColor(x, BLACK);
-}
-```
-
-#### 情况一,兄弟sib是红色节点
-
-将兄弟设置黑色,将x的父亲设置为红色,并将x的父亲左旋,设置新的兄弟节点为sib,将情况1转换成情况2或3或4
-
-![5222801-09e94eae29227f07](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-09e94eae29227f07.png)
-
-#### 情况二,兄弟节点sib是黑色的,且sib的两个孩子节点也是黑色的
-
-设置兄弟节点sib为红色,将x设置为x的父亲,完成后sib被抹去一层黑色,以此向上循环达到平衡
-
-![5222801-d38835da660ca5c4](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-d38835da660ca5c4.png)
-
-#### 情况三,兄弟节点sib是黑色的,sib的左孩子是红色,sib的右孩子是黑色
-
-设置sib的左孩子为黑色,设置sib为红色,将sib右旋,重新设置sib为x的兄弟节点
-
-![5222801-6c588b0851c02bab](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-6c588b0851c02bab.png)
-
-#### 情况四,兄弟sib是黑色的,sib的右孩子是红色的
-
-设置sib为父亲的颜色,设置父亲为黑色,设置sib的右孩子为黑色,对父亲左旋,并将x设置为root,这样将情况3转换为情况4
-
-![5222801-278da115ddb782d7](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-5222801-278da115ddb782d7.png)
-
-**删除算法小结**
-
-因为包含n个节点的红黑树高度为O(lg n),因此执行二叉搜索树的删除算法时间效率为O(lg n),在执行删除后的颜色调整时,情况1,3,4执行至多三次旋转便能终止,情况2最多循环数的高度O(lg n),且不会执行旋转,所以红黑树的删除时间为O(lg n)
-
-**实例**
-
-定义了`Student`类,并用分数`score`进行排序,高分在前
-
-```java
-public class Main {
-  public static void main(String[] args) {
-    Map<Student, Integer> map = new TreeMap<>(new Comparator<Student>() {
-      public int compare(Student p1, Student p2) {
-        return p1.score > p2.score ? -1 : 1;
-      }
-    });
-    map.put(new Student("Tom", 77), 1);
-    map.put(new Student("Bob", 66), 2);
-    map.put(new Student("Lily", 99), 3);
-    for (Student key : map.keySet()) {
-      System.out.println(key);
-    }
-    System.out.println(map.get(new Student("Bob", 66))); // null?
-  }
-}
-
-class Student {
-  public String name;
-  public int score;
-  Student(String name, int score) {
-    this.name = name;
-    this.score = score;
-  }
-  public String toString() {
-    return String.format("{%s: score=%d}", name, score);
-  }
-}
-```
-
-- 在`for`循环中,我们确实得到了正确的顺序,但是根据相同的Key:`new Student("Bob", 66)`进行查找时,结果为`null`
-- 在这个例子中,`TreeMap`出现问题,原因其实出在这个`Comparator`上:
-
-```java
-public int compare(Student p1, Student p2) {
-    return p1.score > p2.score ? -1 : 1;
-}
-```
-
-- 在`p1.score`和`p2.score`不相等的时候,它的返回值是正确的,但是,在`p1.score`和`p2.score`相等的时候,它并没有返回`0`,这就是为什么`TreeMap`工作不正常的原因:`TreeMap`在比较两个Key是否相等时,依赖Key的`compareTo()`方法或者`Comparator.compare()`方法,在两个Key相等时,必须返回`0`,因此,修改代码如下:
-
-```java
-public int compare(Student p1, Student p2) {
-  if (p1.score == p2.score) {
-    return 0;
-  }
-  return p1.score > p2.score ? -1 : 1;
-}
-```
-
-- 或者直接借助`Integer.compare(int, int)`也可以返回正确的比较结果
 
 ## EnumMap
 
@@ -1288,15 +892,14 @@ props.load(new FileReader("settings.properties", StandardCharsets.UTF_8));
 
 ## 重写 equals 和 hashCode
 
-正确使用`Map`必须保证:
-
-1. 作为`key`的对象必须正确覆写`equals()`方法,相等的两个`key`实例调用`equals()`必须返回`true`
-2. 作为`key`的对象还必须正确覆写`hashCode()`方法,因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法,它返回一个`int`整数,`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引,继而直接返回`value`,且`hashCode()`方法要严格遵循以下规范:
-   - 如果两个对象相等,则两个对象的`hashCode()`必须相等
-   - 如果两个对象不相等,则两个对象的`hashCode()`尽量不要相等
-4. 即对应两个实例`a`和`b`:
-   - 如果`a`和`b`相等,那么`a.equals(b)`一定为`true`,则`a.hashCode()`必须等于`b.hashCode()`
-   - 如果`a`和`b`不相等,那么`a.equals(b)`一定为`false`,则`a.hashCode()`和`b.hashCode()`尽量不要相等
+- 正确使用`Map`必须保证
+    1. 作为`key`的对象必须正确覆写`equals()`方法,相等的两个`key`实例调用`equals()`必须返回`true`
+    2. 作为`key`的对象还必须正确覆写`hashCode()`方法,因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法,它返回一个`int`整数,`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引,继而直接返回`value`,且`hashCode()`方法要严格遵循以下规范
+        - 如果两个对象相等,则两个对象的`hashCode()`必须相等
+        - 如果两个对象不相等,则两个对象的`hashCode()`尽量不要相等
+- 即对应两个实例`a`和`b`
+    1. 如果`a`和`b`相等,那么`a.equals(b)`一定为`true`,则`a.hashCode()`必须等于`b.hashCode()`
+    2. 如果`a`和`b`不相等,那么`a.equals(b)`一定为`false`,则`a.hashCode()`和`b.hashCode()`尽量不要相等
 
 **注意**:
 
@@ -1364,3 +967,10 @@ int hashCode() {
 >   4. 编写完equals方法后,问自己它是否满足对称性,传递性,一致性
 >   5. 重写equals时总是要重写hashCode
 >   6. 不要将equals方法参数中的Object对象替换为其他的类型,在重写时不要忘掉@Override注解
+
+## HashMap/Hashtable/HashSet/LinkedHashMap/TreeMap 比较
+
+- Hashmap 是一个最常用的 Map,它根据键的 HashCode 值存储数据,HashMap 最多只允许一条记录的键为Null,允许多条记录的值为 Null
+- Hashtable 与 HashMap 类似,不同的是:它不允许记录的键或者值为空,是线程安全的,因此也导致了 Hashtale 的效率偏低
+- LinkedHashMap 是 HashMap 的一个子类,如果需要输出的顺序和输入的相同,那么用 LinkedHashMap 可以实现
+- TreeMap 实现 SortMap 接口,内部实现是红黑树,能够把它保存的记录根据键排序,默认是按键值的升序排序,也可以指定排序的比较器,当用 Iterator 遍历 TreeMap 时,得到的记录是排过序的,TreeMap 不允许 key 的值为 null

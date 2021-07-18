@@ -517,65 +517,39 @@ Future<?> submit(Runnable task);
 
 ## 集合
 
-### List,Set,Map的区别
+### List/Set/Map的区别
 
 - List有序存取元素,可以有重复元素
 - Set不能存放重复元素,存入的元素是无序的
 - Map保存键值对映射,映射关系可以是一对一或多对一
 
-### HashMap,Hashtable,HashSet,LinkedHashMap 和 TreeMap 比较
+### HashMap/Hashtable/HashSet/LinkedHashMap/TreeMap 比较
 
-- Hashmap 是一个最常用的 Map,它根据键的 HashCode 值存储数据,根据键可以直接获取它的值,具有很快的访问速度,遍历时,取得数据的顺序是完全随机的,HashMap 最多只允许一条记录的键为Null,允许多条记录的值为 Null
-- Hashtable 与 HashMap 类似,不同的是:它不允许记录的键或者值为空,它支持线程的同步,即任一时刻只有一个线程能写 Hashtable,因此也导致了 Hashtale 在写入时会比较慢
-- HashSet 是一个没有重复元素的集合,它是由 HashMap 实现的,不保证元素的顺序 (这里所说的没有顺序是指:元素插入的顺序与输出的顺序不一致),而且 HashSet 允许使用 null 元素
-- LinkedHashMap 是 HashMap 的一个子类,如果需要输出的顺序和输入的相同,那么用 LinkedHashMap 可以实现,它还可以按读取顺序来排列,像连接池中可以应用
-    - LinkedHashMap 实现与 HashMap 的不同之处在于,后者维护着一个运行于所有条目的双重链表,此链接列表定义了迭代顺序,该迭代顺序可以是插入顺序或者是访问顺序,对于 LinkedHashMap 而言,它继承与 HashMap,底层使用哈希表与双向链表来保存所有元素,其基本操作与父类 HashMap 相似,它通过重写父类相关的方法,来实现自己的链接列表特性
-- TreeMap 实现 SortMap 接口,内部实现是红黑树,能够把它保存的记录根据键排序,默认是按键值的升序排序,也可以指定排序的比较器,当用 Iterator 遍历 TreeMap 时,得到的记录是排过序的,TreeMap 不允许 key 的值为 null,非同步的
+- Hashmap 是一个最常用的 Map,它根据键的 HashCode 值存储数据,HashMap 最多只允许一条记录的键为Null,允许多条记录的值为 Null
+- Hashtable 与 HashMap 类似,不同的是:它不允许记录的键或者值为空,是线程安全的,因此也导致了 Hashtale 的效率偏低
+- LinkedHashMap 是 HashMap 的一个子类,如果需要输出的顺序和输入的相同,那么用 LinkedHashMap 可以实现
+- TreeMap 实现 SortMap 接口,内部实现是红黑树,能够把它保存的记录根据键排序,默认是按键值的升序排序,也可以指定排序的比较器,当用 Iterator 遍历 TreeMap 时,得到的记录是排过序的,TreeMap 不允许 key 的值为 null
 
-### 请说说快速失败(fail-fast)和安全失败(fail-safe)的区别？
+### HashSet/LinkedHashSet/TreeSet 比较
 
-Iterator的安全失败是基于对底层集合做拷贝,因此,它不受源集合上修改的影响,java.util包下面的所有的集合类都是快速失败的,而java.util.concurrent包下面的所有的类都是安全失败的,快速失败的迭代器会抛出ConcurrentModificationException异常,而安全失败的迭代器永远不会抛出这样的异常
+- **HashSet**
+    - HashSet 是由 HashMap 实现的,不保证元素的顺序
+- **LinkedHashSet**
+    - LinkedHashSet 集合同样是根据元素的 hashCode 值来决定元素的存储位置,但是它同时使用链表维护元素的次序,这样使得元素看起来像是以插入顺序保存的,也就是说,当遍历该集合时候,LinkedHashSet 将会以元素的添加顺序访问集合的元素
+    - **LinkedHashSet 在迭代访问 Set 中的全部元素时,性能比 HashSet 好,但是插入时性能稍微逊色于 HashSet**
+- **TreeSet**
+    - TreeSet 是 SortedSet 接口的唯一实现类,TreeSet 可以确保集合元素处于排序状态
 
-### 红黑树
+### ArrayList/LinkedList 比较
 
-一种二叉查找树,但在每个节点增加一个存储位表示节点的颜色,可以是红或黑(非红即黑),通过对任何一条从根到叶子的路径上各个节点着色的方式的限制,红黑树确保没有一条路径会比其它路径长出两倍,因此,红黑树是一种弱平衡二叉树(由于是弱平衡,可以看到,在相同的节点情况下,AVL树的高度低于红黑树),相对于要求严格的AVL树来说,它的旋转次数少,所以对于搜索,插入,删除操作较多的情况下,我们就用红黑树
-
-
-1. 每个节点要么是红色,要么是黑色
-2. 根节点永远是黑色的
-3. 所有的叶节点都是空节点(即 null),并且是黑色的
-4. 每个红色节点的两个子节点都是黑色,(从每个叶子到根的路径上不会有两个连续的红色节点)
-5. 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点
-
-### 重写 equals 和 hashCode
-
-1. 作为`key`的对象必须正确覆写`equals()`方法,相等的两个`key`实例调用`equals()`必须返回`true`
-2. 作为`key`的对象还必须正确覆写`hashCode()`方法,因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法,它返回一个`int`整数,`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引,继而直接返回`value`,且`hashCode()`方法要严格遵循以下规范:
-   - 如果两个对象相等,则两个对象的`hashCode()`必须相等
-   - 如果两个对象不相等,则两个对象的`hashCode()`尽量不要相等
-3. 即对应两个实例`a`和`b`:
-   - 如果`a`和`b`相等,那么`a.equals(b)`一定为`true`,则`a.hashCode()`必须等于`b.hashCode()`
-   - 如果`a`和`b`不相等,那么`a.equals(b)`一定为`false`,则`a.hashCode()`和`b.hashCode()`尽量不要相等
-
-### TreeMap和TreeSet在排序时如何比较元素？Collections工具类中的sort()方法如何比较元素？
-
-TreeSet要求存放的对象所属的类必须实现Comparable接口,该接口提供了比较元素的compareTo()方法,当插入元素时会回调该方法比较元素的大小,TreeMap要求存放的键值对映射的键必须实现Comparable接口从而根据键对元素进行排序,Collections工具类的sort方法有两种重载的形式,第一种要求传入的待排序容器中存放的对象比较实现Comparable接口以实现元素的比较,第二种不强制性的要求容器中的元素必须可比较,但是要求传入第二个参数,参数是Comparator接口的子类型(需要重写compare方法实现元素的比较),相当于一个临时定义的排序规则,其实就是通过接口注入比较元素大小的算法,也是对回调模式的应用(Java中对函数式编程的支持)
-
-### 阐述ArrayList,Vector,LinkedList的存储性能和特性
-
-ArrayList 和Vector都是使用数组方式存储数据,此数组元素数大于实际存储的数据以便增加和插入元素,它们都允许直接按序号索引元素,但是插入元素要涉及数组元素移动等内存操作,所以索引数据快而插入数据慢,Vector中的方法由于添加了synchronized修饰,因此Vector是线程安全的容器,但性能上较ArrayList差,因此已经是Java中的遗留容器,LinkedList使用双向链表实现存储(将内存中零散的内存单元通过附加的引用关联起来,形成一个可以按序号索引的线性结构,这种链式存储方式与数组的连续存储方式相比,内存的利用率更高),按序号索引数据需要进行前向或后向遍历,但是插入数据时只需要记录本项的前后项即可,所以插入速度较快,Vector属于遗留容器(Java早期的版本中提供的容器,除此之外,Hashtable,Dictionary,BitSet,Stack,Properties都是遗留容器),已经不推荐使用,但是由于ArrayList和LinkedListed都是非线程安全的,如果遇到多个线程操作同一个容器的场景,则可以通过工具类Collections中的synchronizedList方法将其转换成线程安全的容器后再使用(这是对装潢模式的应用,将已有对象传入另一个类的构造器中创建新的对象来增强实现)
-
-### ArrayList和LinkedList的区别
-
-- ArrayList和LinkedList都实现了List接口,他们有以下的不同点:
-- ArrayList是基于索引的数据接口,它的底层是数组,它可以以O(1)时间复杂度对元素进行随机访问,与此对应,LinkedList是以元素列表的形式存储它的数据,每一个元素都和它的前一个和后一个元素链接在一起,在这种情况下,查找某个元素的时间复杂度是O(n)
+- ArrayList内部使用数组存放元素,实现了可变大小的数组,访问元素效率高,当插入元素效率低
+- LinkedList内部使用双向链表存储元素,插入元素效率高,但访问元素效率低
 - 相对于ArrayList,LinkedList的插入,添加,删除操作速度更快,因为当元素被添加到集合任意位置的时候,不需要像数组那样重新计算大小或者是更新索引
 - LinkedList比ArrayList更占内存,因为LinkedList为每一个节点存储了两个引用,一个指向前一个元素,一个指向下一个元素
 
 ### Iterator和ListIterator
 
-- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,
-    每个集合都通过实现Iterable接口中iterator()方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
+- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中iterator()方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
 
 **Iterator和ListIterator的区别**
 
@@ -613,11 +587,42 @@ ArrayList 和Vector都是使用数组方式存储数据,此数组元素数大于
     -   放弃了Segment臃肿的设计,取而代之的是采用Node + CAS + Synchronized来保证并发安全进行实现
     -   使用一个volatile类型的变量baseCount记录元素的个数,当插入新数据或则删除数据时,会通过addCount()方法更新baseCount,通过累加baseCount和CounterCell数组中的数量,即可得到元素的总个数
 
+### poll & offer
+
+|                    | throw Exception | 返回false或null    |
+| :----------------- | :-------------- | ------------------ |
+| 添加元素到队尾     | add(E e)        | boolean offer(E e) |
+| 取队首元素并删除   | E remove()      | E poll()           |
+| 取队首元素但不删除 | E element()     | E peek()           |
+
+### 快速失败(fail-fast)和安全失败(fail-safe)的区别
+
+- Iterator的安全失败是基于对底层集合做拷贝,因此,它不受源集合上修改的影响,java.util包下面的所有的集合类都是快速失败的,而java.util.concurrent包下面的所有的类都是安全失败的,快速失败的迭代器会抛出ConcurrentModificationException异常,而安全失败的迭代器永远不会抛出这样的异常
+
+### 红黑树
+
+一种二叉查找树,但在每个节点增加一个存储位表示节点的颜色,可以是红或黑(非红即黑),通过对任何一条从根到叶子的路径上各个节点着色的方式的限制,红黑树确保没有一条路径会比其它路径长出两倍,因此,红黑树是一种弱平衡二叉树(由于是弱平衡,可以看到,在相同的节点情况下,AVL树的高度低于红黑树),相对于要求严格的AVL树来说,它的旋转次数少,所以对于搜索,插入,删除操作较多的情况下,我们就用红黑树
+
+
+1. 每个节点要么是红色,要么是黑色
+2. 根节点永远是黑色的
+3. 所有的叶节点都是空节点(即 null),并且是黑色的
+4. 每个红色节点的两个子节点都是黑色,(从每个叶子到根的路径上不会有两个连续的红色节点)
+5. 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点
+
+### 重写 equals 和 hashCode
+
+1. 作为`key`的对象必须正确覆写`equals()`方法,相等的两个`key`实例调用`equals()`必须返回`true`
+2. 作为`key`的对象还必须正确覆写`hashCode()`方法,因为通过`key`计算索引的方式就是调用`key`对象的`hashCode()`方法,它返回一个`int`整数,`HashMap`正是通过这个方法直接定位`key`对应的`value`的索引,继而直接返回`value`,且`hashCode()`方法要严格遵循以下规范:
+    - 如果两个对象相等,则两个对象的`hashCode()`必须相等
+    - 如果两个对象不相等,则两个对象的`hashCode()`尽量不要相等
+3. 即对应两个实例`a`和`b`:
+    - 如果`a`和`b`相等,那么`a.equals(b)`一定为`true`,则`a.hashCode()`必须等于`b.hashCode()`
+    - 如果`a`和`b`不相等,那么`a.equals(b)`一定为`false`,则`a.hashCode()`和`b.hashCode()`尽量不要相等
+
 ## 设计模式
 
-### DCL为什么要用volatile关键字？
-
-先看一下DCL(双重检查锁模式)的示例代码:
+### DCL
 
 ```java
 public class Singleton {
@@ -1639,24 +1644,149 @@ Explain + SQL语句
     - 当使用分片时,数据处理较为复杂,比如需要处理多个rdb/aof文件,并且从多个实例和主机备份持久化文件
     - 增加或删除容量也比较复杂,redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的分片是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集**优点**通过利用多台计算机内存,可以构造更大的数据库通过利用多台计算机的多核,允许我们扩展计算能力通过利用多台计算机的网络适配器,可以扩展网络带宽**分片的不足**涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不能对这两个set执行交集操作涉及多个key的redis事务不能使用当使用分片时,数据处理较为复杂,比如需要处理多个rdb/aof文件,并且从多个实例和主机备份持久化文件增加或删除容量也比较复杂,redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的
 
-## RabbitMq
-
-### 怎么防止重复消费
-
-- 可能因为各种原因,导致了生产端发送了多条一样的消息给消费端,但是,消费端也只能消费一条,不会多消费,可以使用`唯一ID + 指纹码机制`防止消息被重复消费
-- 指纹码(就是时间戳 + 业务的一些规则,来保证id + 指纹码在同一时刻是唯一的,不会出现重复)
-  1. 唯一ID + 指纹码机制,利用数据库主键去重
-  2. select count(1) from t_order where id = 唯一ID + 指纹码
-     - 如果不存在,则正常消费,消费完毕后将[唯一ID + 指纹码]写入数据库
-     - 如果存在,则证明消息被消费过,直接丢弃
-
-### Rabbitmq怎么防止消息丢失
-
-将信道设置成confirm模式(发送方确认模式),则所有在信道上发布的消息都会被指派一个唯一的ID,一旦消息被投递到目的队列后,或者消息被写入磁盘后(可持久化的消息),信道会发送一个确认给生产者(包含消息唯一ID)
+## Kafka
 
 ### 为什么选择使用MQ来实现同步
 
 通过使用消息队列,我们可以异步处理请求,从而缓解系统的压力,同样可以达到解耦的效果
+
+### ISR、OSR、AR
+
+- ISR (InSyncRepli): 速率和leader相差低于10秒的follower的集合
+- OSR(OutSyncRepli) : 速率和leader相差大于10秒的follower
+- AR(AllRepli) : 所有分区的follower
+
+## HW、LEO
+
+- HW : 又名高水位,根据同一分区中,最低的LEO所决定
+- LEO : 每个分区的最高offset
+
+### Kafka的使用场景
+
+- 用户追踪:根据用户在web或者app上的操作,将这些操作消息记录到各个topic中,然后消费者通过订阅这些消息做实时的分析,或者记录到HDFS,用于离线分析或数据挖掘
+- 日志收集:通过kafka对各个服务的日志进行收集,再开放给各个consumer
+- 消息系统:缓存消息
+- 运营指标:记录运营监控数据,收集操作应用数据的集中反馈,如报错和报告
+
+### Kafka中是怎么体现消息顺序性的？
+
+- 每个分区内,每条消息都有offset,所以只能在同一分区内有序,但不同的分区无法做到消息顺序性
+
+5.“消费组中的消费者个数如果超过topic的分区，那么就会有消费者消费不到数据”这句话是否正确?
+
+对的,超过分区数的消费者就不会再接收数据
+
+6. 有哪些情形会造成重复消费？或丢失信息?
+
+先处理后提交offset,会造成重读消费
+先提交offset后处理,会造成数据丢失
+
+7.Kafka 分区的目的？
+
+对于kafka集群来说,分区可以做到负载均衡,对于消费者来说,可以提高并发度,提高读取效率
+
+8.Kafka 的高可靠性是怎么实现的?
+
+为了实现高可靠性,kafka使用了订阅的模式,并使用isr和ack应答机制
+能进入isr中的follower和leader之间的速率不会相差10秒
+当ack=0时,producer不等待broker的ack,不管数据有没有写入成功,都不再重复发该数据
+当ack=1时,broker会等到leader写完数据后,就会向producer发送ack,但不会等follower同步数据,如果这时leader挂掉,producer会对新的leader发送新的数据,在old的leader中不同步的数据就会丢失
+当ack=-1或者all时,broker会等到leader和isr中的所有follower都同步完数据,再向producer发送ack,有可能造成数据重复
+
+9.topic的分区数可不可以增加？如果可以怎么增加？如果不可以，那又是为什么？
+
+可以增加
+
+bin/kafka-topics.sh --zookeeper localhost:2181/kafka --alter --topic topic-config --partitions 3
+1
+10.topic的分区数可不可以减少？如果可以怎么减少？如果不可以，那又是为什么？
+
+不可以,先有的分区数据难以处理
+
+11.简述Kafka的日志目录结构？
+
+每一个分区对应一个文件夹,命名为topic-0,topic-1,每个文件夹内有.index和.log文件
+
+12.如何解决消费者速率低的问题?
+
+增加分区数和消费者数
+
+13.Kafka的那些设计让它有如此高的性能？?
+
+1.kafka是分布式的消息队列
+2.对log文件进行了segment,并对segment建立了索引
+3.(对于单节点)使用了顺序读写,速度可以达到600M/s
+4.引用了zero拷贝,在os系统就完成了读写操作
+
+14.kafka启动不起来的原因?
+
+在关闭kafka时,先关了zookeeper,就会导致kafka下一次启动时,会报节点已存在的错误
+只要把zookeeper中的zkdata/version-2的文件夹删除即可
+
+15.聊一聊Kafka Controller的作用？
+
+负责kafka集群的上下线工作,所有topic的副本分区分配和选举leader工作
+
+16.Kafka中有那些地方需要选举？这些地方的选举策略又有哪些？
+
+在ISR中需要选择,选择策略为先到先得
+
+17.失效副本是指什么？有那些应对措施？
+
+失效副本为速率比leader相差大于10秒的follower
+将失效的follower先提出ISR
+等速率接近leader10秒内,再加进ISR
+
+18.Kafka消息是采用Pull模式，还是Push模式？
+
+在producer阶段,是向broker用Push模式
+在consumer阶段,是向broker用Pull模式
+在Pull模式下,consumer可以根据自身速率选择如何拉取数据,避免了低速率的consumer发生崩溃的问题
+但缺点是,consumer要时不时的去询问broker是否有新数据,容易发生死循环,内存溢出
+
+19.Kafka创建Topic时如何将分区放置到不同的Broker中?
+
+首先副本数不能超过broker数
+第一分区是随机从Broker中选择一个,然后其他分区相对于0号分区依次向后移
+第一个分区是从nextReplicaShift决定的,而这个数也是随机产生的
+
+20.Kafka中的事务是怎么实现的?☆☆☆☆☆
+
+kafka事务有两种
+producer事务和consumer事务
+producer事务是为了解决kafka跨分区跨会话问题
+kafka不能跨分区跨会话的主要问题是每次启动的producer的PID都是系统随机给的
+所以为了解决这个问题
+我们就要手动给producer一个全局唯一的id,也就是transaction id 简称TID
+我们将TID和PID进行绑定,在producer带着TID和PID第一次向broker注册时,broker就会记录TID,并生成一个新的组件__transaction_state用来保存TID的事务状态信息
+当producer重启后,就会带着TID和新的PID向broker发起请求,当发现TID一致时
+producer就会获取之前的PID,将覆盖掉新的PID,并获取上一次的事务状态信息,从而继续上次工作
+consumer事务相对于producer事务就弱一点,需要先确保consumer的消费和提交位置为一致且具有事务功能,才能保证数据的完整,不然会造成数据的丢失或重复
+
+21.Kafka中的分区器、序列化器、拦截器是否了解？它们之间的处理顺序是什么？
+
+拦截器>序列化器>分区器
+
+22.Kafka生产者客户端的整体结构是什么样子的？使用了几个线程来处理？分别是什么？
+
+
+使用两个线程:
+main线程和sender线程
+main线程会依次经过拦截器,序列化器,分区器将数据发送到RecourdAccumlator(线程共享变量)
+再由sender线程从RecourdAccumlator中拉取数据发送到kafka broker
+相关参数：
+batch.size：只有数据积累到batch.size之后，sender才会发送数据。
+linger.ms：如果数据迟迟未达到batch.size，sender等待linger.time之后就会发送数据。
+
+23.消费者提交消费位移时提交的是当前消费到的最新消息的offset还是offset+1？
+
+offset + 1
+图示:
+
+生产者发送数据offset是从0开始的
+
+消费者消费的数据offset是从offset+1开始的
+
 
 ## Elasticsearch
 
@@ -1690,6 +1820,62 @@ Explain + SQL语句
     - 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点
 
 ## 算法
+
+### 查找算法
+
+#### 二分查找
+
+二分查找是一种在有序数组中查找某一特定元素的搜索算法,搜素过程从数组的中间元素开始,如果中间元素正好是要查找的元素,则搜素过程结束,如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较,如果在某一步骤数组已经为空,则表示找不到指定的元素,这种搜索算法每一次比较都使搜索范围缩小一半,其时间复杂度是O(logN)
+
+```java
+import java.util.Comparator;
+
+public class MyUtil {
+
+    public static <T extends Comparable<T>> int binarySearch(T[] x, T key) {
+        return binarySearch(x, 0, x.length- 1, key);
+    }
+
+    // 使用循环实现的二分查找
+    public static <T> int binarySearch(T[] x, T key, Comparator<T> comp) {
+        int low = 0;
+        int high = x.length - 1;
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            int cmp = comp.compare(x[mid], key);
+            if (cmp < 0) {
+                low= mid + 1;
+            }
+            else if (cmp > 0) {
+                high= mid - 1;
+            }
+            else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+    // 使用递归实现的二分查找
+    private static<T extends Comparable<T>> int binarySearch(T[] x, int low, int high, T key) {
+        if(low <= high) {
+            int mid = low + ((high -low) >> 1);
+            if(key.compareTo(x[mid])== 0) {
+                return mid;
+            }
+            else if(key.compareTo(x[mid])< 0) {
+                return binarySearch(x,low, mid - 1, key);
+            }
+            else {
+                return binarySearch(x,mid + 1, high, key);
+            }
+        }
+        return -1;
+    }
+}
+```
+
+> **说明**:上面的代码中给出了折半查找的两个版本,一个用递归实现,一个用循环实现,需要注意的是计算中间位置时不应该使用(high+ low) / 2的方式,因为加法运算可能导致整数越界,这里应该使用以下三种方式之一:low + (high - low) / 2或low + (high – low) >> 1或(low + high) >>> 1(>>>是逻辑右移,是不带符号位的右移)
 
 ### 排序算法
 
@@ -2342,7 +2528,7 @@ public class RadixSorter extends Sorter {
 
 ### 为什么先序中序可以决定一颗树
 
-前序和后序在本质上都是将父节点与子结点进行分离,但并没有指明左子树和右子树的能力,因此得到这两个序列只能明确父子关系,而不能确定一个二叉树
+- 前序和后序在本质上都是将父节点与子结点进行分离,但并没有指明左子树和右子树的能力,因此得到这两个序列只能明确父子关系,而不能确定一个二叉树
 
 ### 二叉树遍历
 
@@ -2531,93 +2717,6 @@ public void depthOrderTraverse(TreeNode root) {
   }
 }
 ```
-
-### DCL
-
-```java
-public class LazyMan {
-
-  private LazyMan() {
-    System.out.println(Thread.currentThread().getName());
-  }
-
-  private volatile static LazyMan lazyman;
-
-  public static LazyMan getInstance() {
-    if (lazyman == null) {
-      synchronized (LazyMan.class) {
-        if (lazyman == null) {
-          lazyman = new LazyMan();
-        }
-      }
-    }
-    return lazyman;
-  }
-
-  // 模拟多线程并发
-  public static void main(String[] args) {
-    for (int i = 0; i < 10; i++) {
-      new Thread(() -> {
-        LazyMan.getInstance();
-      }).start();
-    }
-  }
-}
-```
-
-### 二分查找
-
-二分查找是一种在有序数组中查找某一特定元素的搜索算法,搜素过程从数组的中间元素开始,如果中间元素正好是要查找的元素,则搜素过程结束,如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较,如果在某一步骤数组已经为空,则表示找不到指定的元素,这种搜索算法每一次比较都使搜索范围缩小一半,其时间复杂度是O(logN)
-
-```java
-import java.util.Comparator;
-
-public class MyUtil {
-
-    public static <T extends Comparable<T>> int binarySearch(T[] x, T key) {
-        return binarySearch(x, 0, x.length- 1, key);
-    }
-
-    // 使用循环实现的二分查找
-    public static <T> int binarySearch(T[] x, T key, Comparator<T> comp) {
-        int low = 0;
-        int high = x.length - 1;
-        while (low <= high) {
-            int mid = (low + high) >>> 1;
-            int cmp = comp.compare(x[mid], key);
-            if (cmp < 0) {
-                low= mid + 1;
-            }
-            else if (cmp > 0) {
-                high= mid - 1;
-            }
-            else {
-                return mid;
-            }
-        }
-        return -1;
-    }
-
-    // 使用递归实现的二分查找
-    private static<T extends Comparable<T>> int binarySearch(T[] x, int low, int high, T key) {
-        if(low <= high) {
-            int mid = low + ((high -low) >> 1);
-            if(key.compareTo(x[mid])== 0) {
-                return mid;
-            }
-            else if(key.compareTo(x[mid])< 0) {
-                return binarySearch(x,low, mid - 1, key);
-            }
-            else {
-                return binarySearch(x,mid + 1, high, key);
-            }
-        }
-        return -1;
-    }
-}
-```
-
-> **说明**:上面的代码中给出了折半查找的两个版本,一个用递归实现,一个用循环实现,需要注意的是计算中间位置时不应该使用(high+ low) / 2的方式,因为加法运算可能导致整数越界,这里应该使用以下三种方式之一:low + (high - low) / 2或low + (high – low) >> 1或(low + high) >>> 1(>>>是逻辑右移,是不带符号位的右移)
 
 ## 操作系统
 
