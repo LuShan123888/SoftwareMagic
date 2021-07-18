@@ -149,7 +149,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-18 10:08" pubdate>
+      <time datetime="2021-07-18 10:09" pubdate>
         2021年7月18日 上午
       </time>
     </span>
@@ -443,15 +443,17 @@
 </li>
 </ul>
 <blockquote>
-<p><strong>partition.assignment.strategy</strong></p>
-<p>Select between the “range” or “roundrobin” strategy for assigning分配 partitions to consumer streams.</p>
-<p>The <strong>round-robin</strong> partition assignor lays out规划 all the available partitions and all the available consumer threads. It then proceeds to do接着做 a round-robin assignment from partition to consumer thread. If the subscriptions订阅 of all consumer instances are identical完全同样的, then the partitions will be uniformly 均匀地distributed. (i.e.也就是说, the partition ownership counts will be within a delta of exactly one across all consumer threads.) Round-robin assignment is permitted only if:</p>
+<p><strong>partition.assignment.strategy</strong>:Select between the “range” or “roundrobin” strategy for assigning分配 partitions to consumer streams.</p>
+<ul>
+<li>The <strong>round-robin</strong> partition assignor lays out规划 all the available partitions and all the available consumer threads. It then proceeds to do接着做 a round-robin assignment from partition to consumer thread. If the subscriptions订阅 of all consumer instances are identical完全同样的, then the partitions will be uniformly 均匀地distributed. (i.e.也就是说, the partition ownership counts will be within a delta of exactly one across all consumer threads.) Round-robin assignment is permitted only if:
 <ol>
 <li>Every topic has the same number of streams within a consumer instance</li>
 <li>The set of subscribed topics is identical for every consumer instance within the group.</li>
 </ol>
-<p><strong>Range</strong> partitioning works on a per-<strong>topic</strong> basis. For each topic, we lay out the available partitions in numeric order and the consumer threads in lexicographic词典式的 order. We then divide the number of partitions by the total number of consumer streams (threads) to determine the number of partitions to assign to each consumer. If it does not evenly divide, then the first few consumers will have one extra partition.</p>
-<p><strong>DEFAULT</strong>:range</p>
+</li>
+<li><strong>Range</strong> partitioning works on a per-<strong>topic</strong> basis. For each topic, we lay out the available partitions in numeric order and the consumer threads in lexicographic词典式的 order. We then divide the number of partitions by the total number of consumer streams (threads) to determine the number of partitions to assign to each consumer. If it does not evenly divide, then the first few consumers will have one extra partition.</li>
+<li><strong>DEFAULT</strong>:range</li>
+</ul>
 </blockquote>
 <h4 id="Round-Robin">Round Robin</h4>
 <ul>
@@ -592,12 +594,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/07/18/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Thread/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java Thread</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/18/Software/Backend/Distributed/Kafka/API/">
-                        <span class="hidden-mobile">Kafka API</span>
+                      <a href="/2021/07/18/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/">
+                        <span class="hidden-mobile">SQL 事务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

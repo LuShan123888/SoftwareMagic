@@ -149,8 +149,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-20 23:30" pubdate>
-        2021年6月20日 晚上
+      <time datetime="2021-07-18 18:25" pubdate>
+        2021年7月18日 晚上
       </time>
     </span>
   
@@ -205,7 +205,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年6月20日 晚上
+                  本文最后更新于：2021年7月18日 晚上
                 
               </p>
             
@@ -314,7 +314,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        Thread t = <span class="hljs-keyword">new</span> MyThread();<br>        t.start();<br>        Thread.sleep(<span class="hljs-number">1</span>); <span class="hljs-comment">// 暂停1毫秒</span><br>        t.interrupt(); <span class="hljs-comment">// 中断t线程</span><br>        t.join(); <span class="hljs-comment">// 等待t线程结束</span><br>        System.out.println(<span class="hljs-string">&quot;end&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (! isInterrupted()) &#123;<br>            n ++;<br>            System.out.println(n + <span class="hljs-string">&quot; hello!&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>main</code>线程通过调用<code>t.interrupt()</code>方法中断<code>t</code>线程,但是要注意,<code>interrupt()</code>方法仅仅向<code>t</code>线程发出了&quot;中断请求”,至于<code>t</code>线程是否能立刻响应,要看具体代码,而<code>t</code>线程的<code>while</code>循环会检测<code>isInterrupted()</code>,所以上述代码能正确响应<code>interrupt()</code>请求,使得自身立刻结束运行<code>run()</code>方法</li>
+<li><code>main</code>线程通过调用<code>t.interrupt()</code>方法中断<code>t</code>线程,但是要注意,<code>interrupt()</code>方法仅仅向<code>t</code>线程发出了中断请求,至于<code>t</code>线程是否能立刻响应,要看具体代码,而<code>t</code>线程的<code>while</code>循环会检测<code>isInterrupted()</code>,所以上述代码能正确响应<code>interrupt()</code>请求,使得自身立刻结束运行<code>run()</code>方法</li>
 <li>如果线程处于等待状态,例如,<code>t.join()</code>会让<code>main</code>线程进入等待状态,此时,如果对<code>main</code>线程调用<code>interrupt()</code>,<code>join()</code>方法会立刻抛出<code>InterruptedException</code>,因此,目标线程只要捕获到<code>join()</code>方法抛出的<code>InterruptedException</code>,就说明有其他线程对其调用了<code>interrupt()</code>方法,通常情况下该线程应该立刻结束运行</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>  Thread t = <span class="hljs-keyword">new</span> MyThread();<br>  t.start();<br>  Thread.sleep(<span class="hljs-number">1000</span>);<br>  t.interrupt(); <span class="hljs-comment">// 中断t线程</span><br>  t.join(); <span class="hljs-comment">// 等待t线程结束</span><br>  System.out.println(<span class="hljs-string">&quot;end&quot;</span>);<br>&#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    Thread hello = <span class="hljs-keyword">new</span> HelloThread();<br>    hello.start(); <span class="hljs-comment">// 启动hello线程</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      hello.join(); <span class="hljs-comment">// 等待hello线程结束</span><br>    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>      System.out.println(<span class="hljs-string">&quot;interrupted!&quot;</span>);<br>    &#125;<br>    hello.interrupt();<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (!isInterrupted()) &#123;<br>      n++;<br>      System.out.println(n + <span class="hljs-string">&quot; hello!&quot;</span>);<br>      <span class="hljs-keyword">try</span> &#123;<br>        Thread.sleep(<span class="hljs-number">100</span>);<br>      &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>        <span class="hljs-keyword">break</span>;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -414,9 +414,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/JMM%E4%B8%8Evolatile/">
+                      <a href="/2021/07/18/Software/Backend/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Collections/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java JMM 与 volatile</span>
+                        <span class="hidden-mobile">Java  Collections</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +424,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/20/Software/Backend/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ThreadLocal/">
-                        <span class="hidden-mobile">Java ThreadLocal</span>
+                      <a href="/2021/07/18/Software/Backend/Distributed/Kafka/%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">Kafka 概念</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
