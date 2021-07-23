@@ -8,7 +8,7 @@ categories:
 ---
 # MySQL MVVC
 
-- MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control
+- MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control)
 - MVCC是为了实现事务的隔离性,通过版本号,避免同一数据在不同事务间的竞争,可以把它当成基于多版本号的一种乐观锁
 - MVCC的优点:读不加锁,读写不冲突,在读多写少的OLTP应用中,读写不冲突是非常重要的,极大的增加了系统的并发性能
 - MVCC只在 READ COMMITTED 和 REPEATABLE READ 两个隔离级别下工作,其他两个隔离级别够和MVCC不兼容,因为 READ UNCOMMITTED 总是读取最新的数据行,而不是符合当前事务版本的数据行,而 SERIALIZABLE 则会对所有读取的行都加锁
@@ -70,29 +70,14 @@ delete from table where id=1;
 
 ## 快照读和当前读
 
-- **快照读**:读取的是快照版本,也就是历史版本
-- **当前读**:读取的是最新版本
-- 普通的SELECT就是快照读,而UPDATE,DELETE,INSERT,SELECT…LOCK IN SHARE MODE,SELECT…FOR UPDATE是当前读
-
-## 锁定读
-
-- 在一个事务中,标准的SELECT语句是不会加锁,但是有两种情况例外
-
-1. 给记录假设共享锁,这样一来的话,其它事务只能读不能修改,直到当前事务提交
-
-```sql
-SELECT ... LOCK IN SHARE MODE
-```
-
-2. 给索引记录加锁,这种情况下跟UPDATE的加锁情况是一样的
-
-```sql
-SELECT ... FOR UPDATE
-```
-
-## 一致性非锁定读
-
-- Consistent Read(一致性读),InnoDB用多版本来提供查询数据库在某个时间点的快照
-    - 如果隔离级别是REPEATABLE READ,那么在同一个事务中的所有一致性读都读的是事务中第一个这样的读而读到的快照
-    - 如果是READ COMMITTED,那么一个事务中的每一个一致性读都会读到它自己刷新的快照版本
-- Consistent read(一致性读)是READ COMMITTED和REPEATABLE READ隔离级别下普通SELECT语句默认的模式,一致性读不会给它所访问的表加任何形式的锁,因此其它事务可以同时并发的修改它们
+- 通过MVCC机制，虽然让数据变得可重复读，但我们读到的数据可能是历史数据，是不及时的数据，不是数据库当前的数据！这在一些对于数据的时效特别敏感的业务中，就很可能出问题。
+- 对于这种读取历史数据的方式，我们叫它快照读 (snapshot read)，而读取数据库当前版本数据的方式，叫当前读 (current read)。很显然，在MVCC中：
+    - **快照读**：就是select
+        - select * from table ….;
+    - **当前读**：特殊的读操作，插入/更新/删除操作，属于当前读，处理的都是当前的数据，需要加锁。
+        - select * from table where ? lock in share mode;
+        - select * from table where ? for update;
+        - insert;
+        - update ;
+        - delete;
+- 事务的隔离级别实际上都是定义了当前读的级别，MySQL为了减少锁处理（包括等待其它锁）的时间，提升并发能力，引入了快照读的概念，使得select不用加锁。而update、insert这些“当前读”，就需要另外的模块来解决了。

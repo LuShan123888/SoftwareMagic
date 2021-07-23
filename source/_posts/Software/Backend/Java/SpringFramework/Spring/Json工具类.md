@@ -323,33 +323,21 @@ public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomiz
 </dependency>
 ```
 
-### JSONObject
+### JSONObject对象
 
-- 代表 json 对象
 - JSONObject实现了Map接口, 猜想 JSONObject底层操作是由Map实现的
 - JSONObject对应json对象,通过各种形式的`get()`方法可以获取json对象中的数据,也可利用诸如`size()`,`isEmpty()`等方法获取"键:值"对的个数和判断是否为空,其本质是通过实现Map接口并调用接口中的方法完成的
 
-### JSONArray
+### JSONArray对象
 
 - 代表 json 对象数组
 - 内部是有List接口中的方法来完成操作的
 
-### JSON
+### JSON工具类
 
-- 实现JSONObject和JSONArray的转化
-
-**实例**
+- 实现JSON对象,JSON字符串和Bean对象的转化
 
 ```java
-package com.example.controller;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.example.pojo.User;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class FastJsonDemo {
    public static void main(String[] args) {
        //创建一个对象
@@ -382,4 +370,12 @@ public class FastJsonDemo {
        System.out.println("JSON.toJavaObject(jsonObject1, User.class)==>"+to_java_user);
   }
 }
+```
+
+### 序列化
+
+- 序列化时会默认过滤掉空值的键,如果不想过滤掉空值的键需要多传一个参数
+
+```java
+JSON.toJSONString(object, SerializerFeature.WriteMapNullValue);
 ```

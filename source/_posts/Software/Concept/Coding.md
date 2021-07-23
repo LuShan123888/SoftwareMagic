@@ -284,7 +284,7 @@ public static void main(String[]args){
 
 - `Class.forName`方法的作用,就是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动,我们也可以直接使用 JDBC 的驱动管理器注册 mysql 驱动,从而代替使用`Class.forName`
 
-### 锁
+
 
 ## Java EE
 
@@ -382,9 +382,36 @@ public static void main(String[]args){
 
 所谓回调,就是客户程序C调用服务程序S中的某个方法A,然后S又在某个时候反过来调用C中的某个方法B,对于C来说,这个B方法便叫做回调方法框架
 
-### 公平锁与非公平锁
+### 锁
 
-如果一个锁是公平的,那么锁的获取顺序就应该符合请求的绝对时间顺序FIFO,对于非公平锁,只要CAS设置同步状态成功,则表示当前线程获取了锁,而公平锁还需要判断当前节点是否有前驱节点,如果有,则表示有线程比当前线程更早请求获取锁,因此需要等待前驱线程获取并释放锁之后才能继续获取锁
+- **乐观锁与悲观锁**
+
+    - 对于同一个数据的并发操作,悲观锁认为自己在使用数据的时候一定有别的线程来修改数据,因此在获取数据的时候会先加锁,确保数据不会被别的线程修改,Java中,synchronized关键字和Lock的实现类都是悲观锁
+
+    - 而乐观锁认为自己在使用数据时不会有别的线程修改数据,所以不会添加锁,只是在更新数据的时候去判断之前有没有别的线程更新了这个数据,如果这个数据没有被更新,当前线程将自己修改的数据成功写入,如果数据已经被其他线程更新,则根据不同的实现方式执行不同的操作(例如报错或者自动重试)
+
+    - 乐观锁在Java中是通过使用无锁编程来实现,最常采用的是CAS算法,Java原子类中的递增操作就通过CAS自旋实现的
+
+    - **ABA问题**
+
+        - CAS需要在操作值的时候检查内存值是否发生变化,没有发生变化才会更新内存值,但是如果内存值原来是A,后来变成了B,然后又变成了A,那么CAS进行检查时会发现值没有发生变化,但是实际上是有变化的,ABA问题的解决思路就是在变量前面添加版本号,每次变量更新的时候都把版本号加一,这样变化过程就从`A－B－A`变成了`1A－2B－3A`
+
+        - JDK从1.5开始提供了AtomicStampedReference类来解决ABA问题,具体操作封装在compareAndSet()中,compareAndSet()首先检查当前引用和当前标志与预期引用和预期标志是否相等,如果都相等,则以原子方式将引用值和标志的值设置为给定的更新值
+
+- **公平锁与非公平锁**
+
+    - 公平锁是指多个线程按照申请锁的顺序来获取锁,线程直接进入队列中排队,队列中的第一个线程才能获得锁,公平锁的优点是等待锁的线程不会饿死,缺点是整体吞吐效率相对非公平锁要低,等待队列中除第一个线程以外的所有线程都会阻塞,CPU唤醒阻塞线程的开销比非公平锁大
+    - 非公平锁是多个线程加锁时直接尝试获取锁,获取不到才会到等待队列的队尾等待,但如果此时锁刚好可用,那么这个线程可以无需阻塞直接获取到锁,所以非公平锁有可能出现后申请锁的线程先获取锁的场景,非公平锁的优点是可以减少唤起线程的开销,整体的吞吐效率高,因为线程有几率不阻塞直接获得锁,CPU不必唤醒所有线程,缺点是处于等待队列中的线程可能会饿死,或者等很久才会获得锁
+
+- **独享锁与共享锁**
+
+    - 独享锁也叫排他锁,是指该锁一次只能被一个线程所持有,如果线程T对数据A加上排它锁后,则其他线程不能再对A加任何类型的锁,获得排它锁的线程即能读数据又能修改数据,JDK中的synchronized和JUC中Lock的实现类就是互斥锁
+    - 共享锁是指该锁可被多个线程所持有,如果线程T对数据A加上共享锁后,则其他线程只能对A再加共享锁,不能加排它锁,获得共享锁的线程只能读数据,不能修改数据
+    - 独享锁与共享锁也是通过AQS来实现的,通过实现不同的方法,来实现独享或者共享
+
+- **可重入锁与非可重入锁**
+
+    - 可重入锁又名递归锁,是指在同一个线程在外层方法获取锁的时候,再进入该线程的内层方法会自动获取锁(前提锁对象得是同一个对象或者class),不会因为之前已经获取过还没释放而阻塞,Java中ReentrantLock和synchronized都是可重入锁,可重入锁的优点是可以一定程度避免死锁
 
 ### AQS
 
@@ -429,13 +456,25 @@ Java中的锁,可以分为Synchronized,AQS这两类
 - monitor里面有个计数器,初始值是从0开始的,如果一个线程想要获取monitor的所有权,就看看它的计数器是不是0,如果是0的话,那么就说明没人获取锁,那么它就可以获取锁了,然后将计数器+1,也就是执行monitorenter加锁指令,monitorexit减锁指令是跟在程序执行结束和异常里的,如果不是0的话,就会陷入一个堵塞等待的过程,直到为0等待结束
 - synchronized是同步锁,同步块内的代码相当于同一时刻单线程执行,故不存在原子性和指令重排序的问题
 
-**Lock锁与synchronized的区别**
+### Lock
 
 - Lock 能完成synchronized所实现的所有功能
 - Lock可以知道是不是已经获取到锁,而synchronized无法知道
 - Lock是显式锁(手动开启和关闭锁),synchronized是隐式锁,出了作用域自动释放
 - Lock只有代码块锁,synchronized有代码块和方法锁
 - Lock是一个接口,而synchronized是Java中的关键字,synchronized是内置的语言实现,synchronized在发生异常时,会自动释放线程占有的锁,因此不会导致死锁现象发生,而Lock在发生异常时,如果没有主动通过unLock()去释放锁,则很可能造成死锁现象,因此使用Lock时需要在finally块中释放锁
+- Lock可以让等待锁的线程响应中断,而synchronized却不行,使用synchronized时,等待的线程会一直等待下去,不能够响应中断,通过Lock可以知道有没有成功获取锁,而synchronized却无法办到
+
+#### ReentrantLock
+
+- `ReentrantLock`可以替代`synchronized`进行线程同步
+- 必须先获取到锁,再进入`try {...}`代码块,最后使用`finally`保证释放锁
+- 可以使用`tryLock()`尝试获取锁
+
+#### ReadWriteLock
+
+- 使用`ReadWriteLock`可以提高读取效率,读多写少的场景
+- `ReadWriteLock`只允许一个线程写入,允许多个线程在没有写入时同时读取
 
 ### 线程池
 
@@ -550,12 +589,10 @@ Future<?> submit(Runnable task);
 ### Iterator和ListIterator
 
 - Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中iterator()方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
-
-**Iterator和ListIterator的区别**
-
-- Iterator可用来遍历Set和List集合,但是ListIterator只能用来遍历List
-- Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
-- ListIterator实现了Iterator接口,并包含其他的功能,比如:增加元素,替换元素,获取前一个和后一个元素的索引,等等
+- **Iterator和ListIterator的区别**
+    - Iterator可用来遍历Set和List集合,但是ListIterator只能用来遍历List
+    - Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
+    - ListIterator实现了Iterator接口,并包含其他的功能,比如:增加元素,替换元素,获取前一个和后一个元素的索引
 
 ### HashMap
 
@@ -599,17 +636,6 @@ Future<?> submit(Runnable task);
 
 - Iterator的安全失败是基于对底层集合做拷贝,因此,它不受源集合上修改的影响,java.util包下面的所有的集合类都是快速失败的,而java.util.concurrent包下面的所有的类都是安全失败的,快速失败的迭代器会抛出ConcurrentModificationException异常,而安全失败的迭代器永远不会抛出这样的异常
 
-### 红黑树
-
-一种二叉查找树,但在每个节点增加一个存储位表示节点的颜色,可以是红或黑(非红即黑),通过对任何一条从根到叶子的路径上各个节点着色的方式的限制,红黑树确保没有一条路径会比其它路径长出两倍,因此,红黑树是一种弱平衡二叉树(由于是弱平衡,可以看到,在相同的节点情况下,AVL树的高度低于红黑树),相对于要求严格的AVL树来说,它的旋转次数少,所以对于搜索,插入,删除操作较多的情况下,我们就用红黑树
-
-
-1. 每个节点要么是红色,要么是黑色
-2. 根节点永远是黑色的
-3. 所有的叶节点都是空节点(即 null),并且是黑色的
-4. 每个红色节点的两个子节点都是黑色,(从每个叶子到根的路径上不会有两个连续的红色节点)
-5. 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点
-
 ### 重写 equals 和 hashCode
 
 1. 作为`key`的对象必须正确覆写`equals()`方法,相等的两个`key`实例调用`equals()`必须返回`true`
@@ -624,28 +650,29 @@ Future<?> submit(Runnable task);
 
 ### DCL
 
+- DCL使用volatile关键字,是为了禁止指令重排序,避免返回还没完成初始化的singleton对象,导致调用报错,也保证了线程的安全
+
 ```java
 public class Singleton {
-  //Singleton对象属性,加上volatile关键字是为了防止指定重排序,要知道singleton = new Singleton()拆分成cpu指令的话,有足足3个步骤
-  private volatile static Singleton singleton;
+    //Singleton对象属性,加上volatile关键字是为了防止指定重排序,要知道singleton = new Singleton()拆分成cpu指令的话,有足足3个步骤
+    private volatile static Singleton singleton;
 
-  //对外提供的获取实例的方法
-  public static Singleton getInstance() {
-    if (singleton == null) {
-      synchronized (Singleton.class) {
+    //对外提供的获取实例的方法
+    public static Singleton getInstance() {
         if (singleton == null) {
-          singleton = new Singleton();
+            synchronized (Singleton.class) {
+                if (singleton == null) {
+                    singleton = new Singleton();
+                }
+            }
         }
-      }
+        return singleton;
     }
-    return singleton;
-  }
 }
 ```
 
-从代码里可以看到,做了两重的singleton == null的判断,中间还用了synchronized关键字,第一个singleton == null的判断是为了避免线程串行化,如果为空,就进入synchronized代码块中,获取锁后再操作,如果不为空,直接就返回singleton对象了,无需再进行锁竞争和等待了,而第二个singleton == null的判断是为了防止有多个线程同时跳过第一个singleton == null的判断,比如线程一先获取到锁,进入同步代码块中,发现singleton实例还是null,就会做new操作,然后退出同步代码块并释放锁,这时一起跳过第一层singleton == null的判断的还有线程二,这时线程一释放了锁,线程二就会获取到锁,如果没有第二层的singleton == null这个判断挡着,那就会再创建一个singleton实例,就违反了单例的约束了
-
-**总结**:DCL使用volatile关键字,是为了禁止指令重排序,避免返回还没完成初始化的singleton对象,导致调用报错,也保证了线程的安全
+- 第一个singleton == null的判断是为了避免线程串行化,如果为空,就进入synchronized代码块中,获取锁后再操作,如果不为空,直接就返回singleton对象了,无需再进行锁竞争和等待了
+- 第二个singleton == null的判断是为了防止有多个线程同时跳过第一个singleton == null的判断,比如线程一先获取到锁,进入同步代码块中,发现singleton实例还是null,就会做new操作,然后退出同步代码块并释放锁,这时一起跳过第一层singleton == null的判断的还有线程二,这时线程一释放了锁,线程二就会获取到锁,如果没有第二层的singleton == null这个判断挡着,那就会再创建一个singleton实例,就违反了单例的约束了
 
 ## Spring
 
@@ -687,12 +714,12 @@ public class Singleton {
     - @Autowired注解是按照类型(byType)装配依赖对象,当有且仅有一个匹配的Bean时,Spring将其注入@Autowired标注的变量中,如果我们想使用按照名称(byName)来装配,可以结合@Qualifier注解一起使用
     - @Resource默认按照ByName自动注入,@Resource有两个重要的属性:name和type,而Spring将@Resource注解的name属性解析为bean的名字,而type属性则解析为bean的类型,所以,如果使用name属性,则使用byName的自动注入策略,而使用type属性时则使用byType自动注入策略,如果既不制定name也不制定type属性,这时将通过反射机制使用byName自动注入策略
 
-### Bean作用域
+### Bean 作用域
 
 - 在Spring的早期版本中仅有两个作用域:singleton和prototype,前者表示Bean以单例的方式存在,后者表示每次从容器中调用Bean时,都会返回一个新的实例
 - Spring2.x中针对WebApplicationContext新增了3个作用域,分别是:request(每次HTTP请求都会创建一个新的Bean), session(同一个HttpSession共享同一个Beaan,不同的HttpSession使用不同的Bean)和globalSession(同一个全局Session共享一个Bean)
 
-### Bean的生命周期
+### Bean 的生命周期
 
 Spring生命周期流程图
 
@@ -706,11 +733,12 @@ Spring生命周期流程图
     - **ClassPathXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你不需要提供 XML 文件的完整路径,只需正确配置 CLASSPATH 环境变量即可,因为,容器会从 CLASSPATH 中搜索 bean 配置文件
     - **WebXmlApplicationContext**:该容器会在一个 web 应用程序的范围内加载在 XML 文件中已被定义的 bean
 
-### Spring 事务
+### 事务
 
-- 事务属性可以理解成事务的一些基本配置,描述了事务策略如何应用到方法上,事务属性包含了5个方面:传播行为,隔离规则,回滚规则,事务超时,是否只读
-- 并发状态下可能产生:　脏读,不可重复读,幻读的情况,因此我们需要将事务与事务之间隔离,Spring中定义了五种隔离规则:数据库默认,读未提交,读已提交,可重复读,序列化
-- 当事务方法被另一个事务方法调用时,必须指定事务应该如何传播,Spring定义了七种传播行为:默认的事务传播行为是`PROPAGATION_REQUIRED`, 它适合于绝大多数的情况:如果当前没有事务,就新建一个事务,如果已经存在一个事务,则加入到这个事务中,这是最常见的选择
+- **事务属性**:事务的一些基本配置,描述了事务策略如何应用到方法上,事务属性包含了5个方面:传播行为,隔离规则,回滚规则,事务超时,是否只读
+- **隔离级别**:数据库默认,读未提交,读已提交,可重复读,序列化
+- **事务传播行为**:当事务方法被另一个事务方法调用时,必须指定事务应该如何传播,Spring定义了七种传播行为
+    - 默认的事务传播行为是`PROPAGATION_REQUIRED`, 它适合于绝大多数的情况:如果当前没有事务,就新建一个事务,如果已经存在一个事务,则加入到这个事务中
 
 ### Spring MVC的执行流程
 
@@ -727,23 +755,7 @@ Spring生命周期流程图
 11. `DispatcherServlet`利用是土地向对模型数据进行渲染
 12. 最终视图呈现给客户端
 
-### Spring MVC的常用注解
-
-- `@Component`:会被spring容器识别,并转为bean
-- `@Repository`:对Dao实现类进行注解
-- `@Service`:对业务逻辑层进行注解
-- `@Controller`:表明这个类是Spring MVC里的Controller,将其声明为Spring的一个Bean,Dispatch Servlet会自动扫描注解了此注解的类,并将Web请求映射到注解了@RequestMapping的方法上
-- `@RequestMapping`:用来映射Web请求(访问路径和参数),处理类和方法的,它可以注解在类和方法上,注解在方法上的@RequestMapping路径会继承注解在类上的路径
-- `@RequestBody`:可以将整个返回结果以某种格式返回,如json或xml格式
-- `@PathVariable`:用来接收路径参数,如/news/001,可接收001作为参数,此注解放置在参数前
-- `@RequestParam`:用于获取传入参数的值
-- `@RestController`:是一个组合注解,组合了@Controller和@ResponseBody,意味着当只开发一个和页面交互数据的控制的时候,需要使用此注解
-
-### Spring MVC将数据存储到session
-
-一般都是使用Servlet-Api,在处理请求的方法参数列表中,添加一个HTTPSession对象,之后SpringMVC就可以自动注入进来了,在方法体中调用session.setAttribute就可以了
-
-### 过滤器和拦截器的区别
+### 过滤器和拦截器
 
 1. 拦截器是基于java的反射机制的,而过滤器是基于函数回调
 2. 拦截器不依赖servlet容器,过滤器依赖servlet容器
@@ -752,25 +764,14 @@ Spring生命周期流程图
 5. 在action的生命周期中,拦截器可以多次被调用,而过滤器只能在容器初始化时被调用一次
 6. 拦截器可以获取IOC容器中的各个bean,而过滤器就不行,这点很重要,在拦截器里注入一个service,可以调用业务逻辑
 
-### Spring拦截器的执行顺序
+### Spring MVC 拦截器的执行顺序
 
-Springmvc的拦截器实现HandlerInterceptor接口后,会有三个抽象方法需要实现,分别为方法前执行preHandle,方法后postHandle,页面渲染后afterCompletion
+- SpringMVC的拦截器实现HandlerInterceptor接口后,会有三个抽象方法需要实现,分别为方法前执行preHandle,方法后postHandle,页面渲染后afterCompletion
+    - preHandle 按拦截器定义顺序调用
+    - postHandler 按拦截器定义逆序调用,在拦截器链内所有拦截器返成功调用
+    - afterCompletion 按拦截器定义逆序调用, 只有preHandle返回true才调用
 
-1. 当俩个拦截器都实现放行操作时,顺序为preHandle 1,preHandle 2,postHandle 2,postHandle 1,afterCompletion 2,afterCompletion 1
-2. 当第一个拦截器preHandle返回false,也就是对其进行拦截时,第二个拦截器是完全不执行的,第一个拦截器只执行preHandle部分
-3. 当第一个拦截器preHandle返回true,第二个拦截器preHandle返回false,顺序为preHandle 1,preHandle 2,afterCompletion 1
-
-总结:
-
-```
-preHandle 按拦截器定义顺序调用
-postHandler 按拦截器定义逆序调用
-afterCompletion 按拦截器定义逆序调用
-postHandler 在拦截器链内所有拦截器返成功调用
-afterCompletion 只有preHandle返回true才调用
-```
-
-### SpringBootApplication的加载过程
+### Spring Boot Application 的加载过程
 
 ### Spring Security 原理
 
@@ -860,59 +861,57 @@ public interface AuthenticationProvider {
 
 ```java
 public interface UserDetailsService {
-  //根据用户名查到对应的 UserDetails 对象
-  UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    //根据用户名查到对应的 UserDetails 对象
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
 ```
 
 **5.流程**
 
-对于上面概念有什么不明白的地方,在们在接下来的流程中慢慢分析
-
-在运行到 `UsernamePasswordAuthenticationFilter` 过滤器的时候首先是进入其父类 `AbstractAuthenticationProcessingFilter` 的 `doFilter()` 方法中
+- 在运行到 `UsernamePasswordAuthenticationFilter` 过滤器的时候首先是进入其父类 `AbstractAuthenticationProcessingFilter` 的 `doFilter()` 方法中
 
 ```java
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-  throws IOException, ServletException {
-  ...
-    //首先配对是不是配置的身份认证的URI,是则执行下面的认证,不是则跳过
-    if (!requiresAuthentication(request, response)) {
-      chain.doFilter(request, response);
+    throws IOException, ServletException {
+    ...
+        //首先配对是不是配置的身份认证的URI,是则执行下面的认证,不是则跳过
+        if (!requiresAuthentication(request, response)) {
+            chain.doFilter(request, response);
 
-      return;
+            return;
+        }
+    ...
+        Authentication authResult;
+
+    try {
+        //关键方法, 实现认证逻辑并返回 Authentication, 由其子类 UsernamePasswordAuthenticationFilter 实现, 由下面 5.3 详解
+        authResult = attemptAuthentication(request, response);
+        if (authResult == null) {
+            // return immediately as subclass has indicated that it hasn't completed
+            // authentication
+            return;
+        }
+        sessionStrategy.onAuthentication(authResult, request, response);
     }
-  ...
-    Authentication authResult;
+    catch (InternalAuthenticationServiceException failed) {
+        //认证失败调用...由下面 5.1 详解
+        unsuccessfulAuthentication(request, response, failed);
 
-  try {
-    //关键方法, 实现认证逻辑并返回 Authentication, 由其子类 UsernamePasswordAuthenticationFilter 实现, 由下面 5.3 详解
-    authResult = attemptAuthentication(request, response);
-    if (authResult == null) {
-      // return immediately as subclass has indicated that it hasn't completed
-      // authentication
-      return;
+        return;
     }
-    sessionStrategy.onAuthentication(authResult, request, response);
-  }
-  catch (InternalAuthenticationServiceException failed) {
-    //认证失败调用...由下面 5.1 详解
-    unsuccessfulAuthentication(request, response, failed);
+    catch (AuthenticationException failed) {
+        //认证失败调用...由下面 5.1 详解
+        unsuccessfulAuthentication(request, response, failed);
 
-    return;
-  }
-  catch (AuthenticationException failed) {
-    //认证失败调用...由下面 5.1 详解
-    unsuccessfulAuthentication(request, response, failed);
+        return;
+    }
 
-    return;
-  }
-
-  // Authentication success
-  if (continueChainBeforeSuccessfulAuthentication) {
-    chain.doFilter(request, response);
-  }
-  //认证成功调用...由下面 5.2 详解
-  successfulAuthentication(request, response, chain, authResult);
+    // Authentication success
+    if (continueChainBeforeSuccessfulAuthentication) {
+        chain.doFilter(request, response);
+    }
+    //认证成功调用...由下面 5.2 详解
+    successfulAuthentication(request, response, chain, authResult);
 }
 ```
 
@@ -921,12 +920,12 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 ```java
 protected void unsuccessfulAuthentication(HttpServletRequest request,
                                           HttpServletResponse response, AuthenticationException failed)
-  throws IOException, ServletException {
-  SecurityContextHolder.clearContext();
-  ...
-    rememberMeServices.loginFail(request, response);
-  //该 handler 处理失败界面跳转和响应逻辑
-  failureHandler.onAuthenticationFailure(request, response, failed);
+    throws IOException, ServletException {
+    SecurityContextHolder.clearContext();
+    ...
+        rememberMeServices.loginFail(request, response);
+    //该 handler 处理失败界面跳转和响应逻辑
+    failureHandler.onAuthenticationFailure(request, response, failed);
 }
 ```
 
@@ -934,18 +933,18 @@ protected void unsuccessfulAuthentication(HttpServletRequest request,
 
 ```java
 public class SimpleUrlAuthenticationFailureHandler implements
-        AuthenticationFailureHandler {
+    AuthenticationFailureHandler {
     ...
 
-    public void onAuthenticationFailure(HttpServletRequest request,
-            HttpServletResponse response, AuthenticationException exception)
-            throws IOException, ServletException {
+        public void onAuthenticationFailure(HttpServletRequest request,
+                                            HttpServletResponse response, AuthenticationException exception)
+        throws IOException, ServletException {
         //没有配置失败跳转的URL则直接响应错误
         if (defaultFailureUrl == null) {
             logger.debug("No failure URL set, sending 401 Unauthorized error");
 
             response.sendError(HttpStatus.UNAUTHORIZED.value(),
-                HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                               HttpStatus.UNAUTHORIZED.getReasonPhrase());
         }
         else {
             //否则
@@ -956,7 +955,7 @@ public class SimpleUrlAuthenticationFailureHandler implements
                 logger.debug("Forwarding to " + defaultFailureUrl);
 
                 request.getRequestDispatcher(defaultFailureUrl)
-                        .forward(request, response);
+                    .forward(request, response);
             }
             else {
                 logger.debug("Redirecting to " + defaultFailureUrl);
@@ -966,7 +965,7 @@ public class SimpleUrlAuthenticationFailureHandler implements
     }
     //缓存异常,转发则保存在request里面,重定向则保存在session里面
     protected final void saveException(HttpServletRequest request,
-            AuthenticationException exception) {
+                                       AuthenticationException exception) {
         if (forwardToDestination) {
             request.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, exception);
         }
@@ -975,7 +974,7 @@ public class SimpleUrlAuthenticationFailureHandler implements
 
             if (session != null || allowSessionCreation) {
                 request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
-                        exception);
+                                                  exception);
             }
         }
     }
@@ -989,20 +988,20 @@ public class SimpleUrlAuthenticationFailureHandler implements
 ```java
 protected void successfulAuthentication(HttpServletRequest request,
                                         HttpServletResponse response, FilterChain chain, Authentication authResult)
-  throws IOException, ServletException {
-  ...
-    //这里要注意很重要,将认证完成返回的 Authentication 保存到线程对应的 `SecurityContext` 中
-    SecurityContextHolder.getContext().setAuthentication(authResult);
+    throws IOException, ServletException {
+    ...
+        //这里要注意很重要,将认证完成返回的 Authentication 保存到线程对应的 `SecurityContext` 中
+        SecurityContextHolder.getContext().setAuthentication(authResult);
 
-  rememberMeServices.loginSuccess(request, response, authResult);
+    rememberMeServices.loginSuccess(request, response, authResult);
 
-  // Fire event
-  if (this.eventPublisher != null) {
-    eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(
-      authResult, this.getClass()));
-  }
-  //该 handler 就是为了完成页面跳转
-  successHandler.onAuthenticationSuccess(request, response, authResult);
+    // Fire event
+    if (this.eventPublisher != null) {
+        eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(
+            authResult, this.getClass()));
+    }
+    //该 handler 就是为了完成页面跳转
+    successHandler.onAuthenticationSuccess(request, response, authResult);
 }
 ```
 
@@ -1012,45 +1011,45 @@ protected void successfulAuthentication(HttpServletRequest request,
 
 ```java
 public class UsernamePasswordAuthenticationFilter extends
-  AbstractAuthenticationProcessingFilter {
-  ...
-    public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-  public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+    AbstractAuthenticationProcessingFilter {
+    ...
+        public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
+    public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
 
-  private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-  private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-  private boolean postOnly = true;
+    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
+    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
+    private boolean postOnly = true;
 
-  ...
-    //开始身份认证逻辑
-    public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response) throws AuthenticationException {
-    if (postOnly && !request.getMethod().equals("POST")) {
-      throw new AuthenticationServiceException(
-        "Authentication method not supported: " + request.getMethod());
+    ...
+        //开始身份认证逻辑
+        public Authentication attemptAuthentication(HttpServletRequest request,
+                                                    HttpServletResponse response) throws AuthenticationException {
+        if (postOnly && !request.getMethod().equals("POST")) {
+            throw new AuthenticationServiceException(
+                "Authentication method not supported: " + request.getMethod());
+        }
+
+        String username = obtainUsername(request);
+        String password = obtainPassword(request);
+
+        if (username == null) {
+            username = "";
+        }
+
+        if (password == null) {
+            password = "";
+        }
+
+        username = username.trim();
+        //先用前端提交过来的 username 和 password 封装一个简易的 AuthenticationToken
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+            username, password);
+
+        // Allow subclasses to set the "details" property
+        setDetails(request, authRequest);
+        //具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate(..) 方法完成,接着往下看
+        return this.getAuthenticationManager().authenticate(authRequest);
     }
-
-    String username = obtainUsername(request);
-    String password = obtainPassword(request);
-
-    if (username == null) {
-      username = "";
-    }
-
-    if (password == null) {
-      password = "";
-    }
-
-    username = username.trim();
-    //先用前端提交过来的 username 和 password 封装一个简易的 AuthenticationToken
-    UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-      username, password);
-
-    // Allow subclasses to set the "details" property
-    setDetails(request, authRequest);
-    //具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate(..) 方法完成,接着往下看
-    return this.getAuthenticationManager().authenticate(authRequest);
-  }
 }
 ```
 
@@ -1059,191 +1058,191 @@ public class UsernamePasswordAuthenticationFilter extends
 ```java
 public class ProviderManager implements AuthenticationManager, MessageSourceAware,
 InitializingBean {
-  ...
-    private List<AuthenticationProvider> providers = Collections.emptyList();
-  ...
-
-    public Authentication authenticate(Authentication authentication)
-    throws AuthenticationException {
-    ....
-      //遍历所有的 AuthenticationProvider, 找到合适的完成身份验证
-      for (AuthenticationProvider provider : getProviders()) {
-        if (!provider.supports(toTest)) {
-          continue;
-        }
-        ...
-          try {
-            //进行具体的身份验证逻辑, 这里使用到的是 DaoAuthenticationProvider, 具体逻辑记着往下看
-            result = provider.authenticate(authentication);
-
-            if (result != null) {
-              copyDetails(authentication, result);
-              break;
-            }
-          }
-        catch
-          ...
-      }
     ...
-      throw lastException;
-  }
+        private List<AuthenticationProvider> providers = Collections.emptyList();
+    ...
+
+        public Authentication authenticate(Authentication authentication)
+        throws AuthenticationException {
+        ....
+            //遍历所有的 AuthenticationProvider, 找到合适的完成身份验证
+            for (AuthenticationProvider provider : getProviders()) {
+                if (!provider.supports(toTest)) {
+                    continue;
+                }
+                ...
+                    try {
+                        //进行具体的身份验证逻辑, 这里使用到的是 DaoAuthenticationProvider, 具体逻辑记着往下看
+                        result = provider.authenticate(authentication);
+
+                        if (result != null) {
+                            copyDetails(authentication, result);
+                            break;
+                        }
+                    }
+                catch
+                    ...
+            }
+        ...
+            throw lastException;
+    }
 }
 ```
 
-`DaoAuthenticationProvider` 继承自 `AbstractUserDetailsAuthenticationProvider` 实现了 `AuthenticationProvider` 接口
+- `DaoAuthenticationProvider` 继承自 `AbstractUserDetailsAuthenticationProvider` 实现了 `AuthenticationProvider` 接口
 
 ```java
 public abstract class AbstractUserDetailsAuthenticationProvider implements
-  AuthenticationProvider, InitializingBean, MessageSourceAware {
-  ...
-    private UserDetailsChecker preAuthenticationChecks = new DefaultPreAuthenticationChecks();
-  private UserDetailsChecker postAuthenticationChecks = new DefaultPostAuthenticationChecks();
-  ...
-
-    public Authentication authenticate(Authentication authentication)
-    throws AuthenticationException {
+    AuthenticationProvider, InitializingBean, MessageSourceAware {
     ...
-      // 获得提交过来的用户名
-      String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED"
-      : authentication.getName();
-    //根据用户名从缓存中查找 UserDetails
-    boolean cacheWasUsed = true;
-    UserDetails user = this.userCache.getUserFromCache(username);
+        private UserDetailsChecker preAuthenticationChecks = new DefaultPreAuthenticationChecks();
+    private UserDetailsChecker postAuthenticationChecks = new DefaultPostAuthenticationChecks();
+    ...
 
-    if (user == null) {
-      cacheWasUsed = false;
-
-      try {
-        //缓存中没有则通过 retrieveUser(..) 方法查找 (看下面 DaoAuthenticationProvider 的实现)
-        user = retrieveUser(username,
-                            (UsernamePasswordAuthenticationToken) authentication);
-      }
-      catch
+        public Authentication authenticate(Authentication authentication)
+        throws AuthenticationException {
         ...
+            // 获得提交过来的用户名
+            String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED"
+            : authentication.getName();
+        //根据用户名从缓存中查找 UserDetails
+        boolean cacheWasUsed = true;
+        UserDetails user = this.userCache.getUserFromCache(username);
+
+        if (user == null) {
+            cacheWasUsed = false;
+
+            try {
+                //缓存中没有则通过 retrieveUser(..) 方法查找 (看下面 DaoAuthenticationProvider 的实现)
+                user = retrieveUser(username,
+                                    (UsernamePasswordAuthenticationToken) authentication);
+            }
+            catch
+                ...
+        }
+
+        try {
+            //比对前的检查,例如账户以一些状态信息(是否锁定, 过期...)
+            preAuthenticationChecks.check(user);
+            //子类实现比对规则 (看下面 DaoAuthenticationProvider 的实现)
+            additionalAuthenticationChecks(user,
+                                           (UsernamePasswordAuthenticationToken) authentication);
+        }
+        catch (AuthenticationException exception) {
+            if (cacheWasUsed) {
+                // There was a problem, so try again after checking
+                // we're using latest data (i.e. not from the cache)
+                cacheWasUsed = false;
+                user = retrieveUser(username,
+                                    (UsernamePasswordAuthenticationToken) authentication);
+                preAuthenticationChecks.check(user);
+                additionalAuthenticationChecks(user,
+                                               (UsernamePasswordAuthenticationToken) authentication);
+            }
+            else {
+                throw exception;
+            }
+        }
+
+        postAuthenticationChecks.check(user);
+
+        if (!cacheWasUsed) {
+            this.userCache.putUserInCache(user);
+        }
+
+        Object principalToReturn = user;
+
+        if (forcePrincipalAsString) {
+            principalToReturn = user.getUsername();
+        }
+        //根据最终user的一些信息重新生成具体详细的 Authentication 对象并返回
+        return createSuccessAuthentication(principalToReturn, authentication, user);
     }
+    //具体生成还是看子类实现
+    protected Authentication createSuccessAuthentication(Object principal,
+                                                         Authentication authentication, UserDetails user) {
+        // Ensure we return the original credentials the user supplied,
+        // so subsequent attempts are successful even with encoded passwords.
+        // Also ensure we return the original getDetails(), so that future
+        // authentication events after cache expiry contain the details
+        UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
+            principal, authentication.getCredentials(),
+            authoritiesMapper.mapAuthorities(user.getAuthorities()));
+        result.setDetails(authentication.getDetails());
 
-    try {
-      //比对前的检查,例如账户以一些状态信息(是否锁定, 过期...)
-      preAuthenticationChecks.check(user);
-      //子类实现比对规则 (看下面 DaoAuthenticationProvider 的实现)
-      additionalAuthenticationChecks(user,
-                                     (UsernamePasswordAuthenticationToken) authentication);
+        return result;
     }
-    catch (AuthenticationException exception) {
-      if (cacheWasUsed) {
-        // There was a problem, so try again after checking
-        // we're using latest data (i.e. not from the cache)
-        cacheWasUsed = false;
-        user = retrieveUser(username,
-                            (UsernamePasswordAuthenticationToken) authentication);
-        preAuthenticationChecks.check(user);
-        additionalAuthenticationChecks(user,
-                                       (UsernamePasswordAuthenticationToken) authentication);
-      }
-      else {
-        throw exception;
-      }
-    }
-
-    postAuthenticationChecks.check(user);
-
-    if (!cacheWasUsed) {
-      this.userCache.putUserInCache(user);
-    }
-
-    Object principalToReturn = user;
-
-    if (forcePrincipalAsString) {
-      principalToReturn = user.getUsername();
-    }
-    //根据最终user的一些信息重新生成具体详细的 Authentication 对象并返回
-    return createSuccessAuthentication(principalToReturn, authentication, user);
-  }
-  //具体生成还是看子类实现
-  protected Authentication createSuccessAuthentication(Object principal,
-                                                       Authentication authentication, UserDetails user) {
-    // Ensure we return the original credentials the user supplied,
-    // so subsequent attempts are successful even with encoded passwords.
-    // Also ensure we return the original getDetails(), so that future
-    // authentication events after cache expiry contain the details
-    UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
-      principal, authentication.getCredentials(),
-      authoritiesMapper.mapAuthorities(user.getAuthorities()));
-    result.setDetails(authentication.getDetails());
-
-    return result;
-  }
 }
 ```
 
-接下来我们来看下 `DaoAuthenticationProvider` 里面的三个重要的方法,比对方式,获取需要比对的 `UserDetails` 对象以及生产最终返回 `Authentication` 的方法
+- 接下来我们来看下 `DaoAuthenticationProvider` 里面的三个重要的方法,比对方式,获取需要比对的 `UserDetails` 对象以及生产最终返回 `Authentication` 的方法
 
 ```java
 public class DaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
-  ...
-    //密码比对
-    @SuppressWarnings("deprecation")
-    protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  UsernamePasswordAuthenticationToken authentication)
-    throws AuthenticationException {
-    if (authentication.getCredentials() == null) {
-      logger.debug("Authentication failed: no credentials provided");
+    ...
+        //密码比对
+        @SuppressWarnings("deprecation")
+        protected void additionalAuthenticationChecks(UserDetails userDetails,
+                                                      UsernamePasswordAuthenticationToken authentication)
+        throws AuthenticationException {
+        if (authentication.getCredentials() == null) {
+            logger.debug("Authentication failed: no credentials provided");
 
-      throw new BadCredentialsException(messages.getMessage(
-        "AbstractUserDetailsAuthenticationProvider.badCredentials",
-        "Bad credentials"));
+            throw new BadCredentialsException(messages.getMessage(
+                "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                "Bad credentials"));
+        }
+
+        String presentedPassword = authentication.getCredentials().toString();
+        //通过 PasswordEncoder 进行密码比对, 注: 可自定义
+        if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
+            logger.debug("Authentication failed: password does not match stored value");
+
+            throw new BadCredentialsException(messages.getMessage(
+                "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                "Bad credentials"));
+        }
     }
 
-    String presentedPassword = authentication.getCredentials().toString();
-    //通过 PasswordEncoder 进行密码比对, 注: 可自定义
-    if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
-      logger.debug("Authentication failed: password does not match stored value");
+    //通过 UserDetailsService 获取 UserDetails
+    protected final UserDetails retrieveUser(String username,
+                                             UsernamePasswordAuthenticationToken authentication)
+        throws AuthenticationException {
+        prepareTimingAttackProtection();
+        try {
+            //通过 UserDetailsService 获取 UserDetails
+            UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
+            if (loadedUser == null) {
+                throw new InternalAuthenticationServiceException(
+                    "UserDetailsService returned null, which is an interface contract violation");
+            }
+            return loadedUser;
+        }
+        catch (UsernameNotFoundException ex) {
+            mitigateAgainstTimingAttack(authentication);
+            throw ex;
+        }
+        catch (InternalAuthenticationServiceException ex) {
+            throw ex;
+        }
+        catch (Exception ex) {
+            throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
+        }
+    }
 
-      throw new BadCredentialsException(messages.getMessage(
-        "AbstractUserDetailsAuthenticationProvider.badCredentials",
-        "Bad credentials"));
+    //生成身份认证通过后最终返回的 Authentication, 记录认证的身份信息
+    @Override
+    protected Authentication createSuccessAuthentication(Object principal,
+                                                         Authentication authentication, UserDetails user) {
+        boolean upgradeEncoding = this.userDetailsPasswordService != null
+            && this.passwordEncoder.upgradeEncoding(user.getPassword());
+        if (upgradeEncoding) {
+            String presentedPassword = authentication.getCredentials().toString();
+            String newPassword = this.passwordEncoder.encode(presentedPassword);
+            user = this.userDetailsPasswordService.updatePassword(user, newPassword);
+        }
+        return super.createSuccessAuthentication(principal, authentication, user);
     }
-  }
-
-  //通过 UserDetailsService 获取 UserDetails
-  protected final UserDetails retrieveUser(String username,
-                                           UsernamePasswordAuthenticationToken authentication)
-    throws AuthenticationException {
-    prepareTimingAttackProtection();
-    try {
-      //通过 UserDetailsService 获取 UserDetails
-      UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
-      if (loadedUser == null) {
-        throw new InternalAuthenticationServiceException(
-          "UserDetailsService returned null, which is an interface contract violation");
-      }
-      return loadedUser;
-    }
-    catch (UsernameNotFoundException ex) {
-      mitigateAgainstTimingAttack(authentication);
-      throw ex;
-    }
-    catch (InternalAuthenticationServiceException ex) {
-      throw ex;
-    }
-    catch (Exception ex) {
-      throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
-    }
-  }
-
-  //生成身份认证通过后最终返回的 Authentication, 记录认证的身份信息
-  @Override
-  protected Authentication createSuccessAuthentication(Object principal,
-                                                       Authentication authentication, UserDetails user) {
-    boolean upgradeEncoding = this.userDetailsPasswordService != null
-      && this.passwordEncoder.upgradeEncoding(user.getPassword());
-    if (upgradeEncoding) {
-      String presentedPassword = authentication.getCredentials().toString();
-      String newPassword = this.passwordEncoder.encode(presentedPassword);
-      user = this.userDetailsPasswordService.updatePassword(user, newPassword);
-    }
-    return super.createSuccessAuthentication(principal, authentication, user);
-  }
 }
 ```
 
@@ -1273,7 +1272,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 - `#{}`:这种方式是使用的预编译的方式,一个#{}就是一个占位符,相当于jdbc的占位符PrepareStatement,设置值的时候会加上引号
 - `${}`:这种方式是直接拼接的方式,不对数值做预编译,存在sql注入的现象,设置值的时候不会加上引号
 
-### 二级缓存
+### 缓存
 
 - Mybatis中一级缓存是默认开启的,二级缓存默认是不开启的,一级缓存是对于一个sqlSeesion而言,而二级缓存是对于一个nameSpace而言,可以多个SqlSession共享
 - 查出的数据都会被默认先放在一级缓存中,只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中
@@ -1286,13 +1285,6 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 - 第二范式:唯一性,要求记录有唯一标识,即实体的唯一性,即不存在部分依赖
 - 第三范式:消除冗余性,要求任何字段不能由其他字段派生出来,它要求字段没有冗余,即不存在传递依赖
 
-### B 树 与 B+ 树
-
-- B+树的中间节点不保存数据,所以磁盘页能容纳更多节点数据,更矮胖
-- B+树查询必须查找到叶子节点,B树查询有可能在非叶子节点结束,因此B+树的查询更稳定
-- 对于范围查找来说,B+树只需序遍历叶子节点链表即可,B树却需要重复地中序遍历
-- B+树非叶子节点相当于是叶子节点的索引层,叶子节点是 存储关键字数据的数据层,实现了索引与数据的分离
-
 ### druid连接池
 
 1. 强大的监控特性,通过Druid提供的监控功能,可以清楚知道连接池和SQL的工作情况
@@ -1302,12 +1294,11 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 2. 其次,方便扩展,Druid提供了Filter-Chain模式的扩展API,可以自己编写Filter拦截JDBC中的任何方法,可以在上面做任何事情,比如说性能监控,SQL审计,用户名密码加密,日志等等
 3. Druid集合了开源和商业数据库连接池的优秀特性,并结合阿里巴巴大规模苛刻生产环境的使用经验进行优化
 
-### InnoDB和MyISAM的区别
+### 存储引擎
 
 - InnoDB支持事务,MyISAM不支持
 - InnoDB支持行级锁而MyISAM仅仅支持表锁,但是InnoDB可能出现死锁
 - InnoDB的关注点在于:并发写,事务,更大资源,而MyISAM的关注点在于:节省资源,消耗少,简单业务
-- InnoDB比MyISAM更安全,但是MyISAM的效率要比InnoDB高
 - 在MySQL5.7的时候,默认就是InnoDb作为默认的存储引擎了
 
 ### EXPLAIN
@@ -1325,8 +1316,6 @@ Explain + SQL语句
   - **哪些索引被实际使用**
   - 表之间的引用
   - 每张表有多少行被物理查询
-
-### 索引
 
 ### 数据库优化
 
@@ -1347,69 +1336,62 @@ Explain + SQL语句
 - like以通配符开头('%abc...')mysql索引失效会变成全表扫描的操作
 - 字符串不加单引号索引失效(类型转换导致索引失效)
 
-### 锁
-
-- 按锁定对象不同可以分为表级锁和行级锁,按并发事务锁定关系可以分为共享锁和独占锁
-
-**独占锁**
-
-- MyISAM支持表锁,InnoDB支持表锁和行锁,默认行锁
-    - **表级锁**:开锁小,加锁快,不会出现死锁,锁的粒度大,发生锁冲突的概率最高,并发量最低
-    - **行级锁**:开销大,加锁慢,会出现死锁,锁的粒度小,容易发生冲突的概率小,并发度最高,innoDB支持三种行锁定方式
-        - 行锁(Record Lock):锁直接加在索引记录上面(无索引项时演变成表锁)
-        - 间隙锁(Gap Lock):锁定索引记录间隙,确保索引记录的间隙不变,间隙锁是针对事务隔离级别为可重复读或以上级别的
-        - Next-Key Lock:行锁和间隙锁组合起来就是 Next-Key Lock
-- **何时使用行锁,何时产生间隙锁**
-    - 只使用唯一索引查询,并且只锁定一条记录时,innoDB会使用行锁
-    - 只使用唯一索引查询,但是检索条件是范围检索,或者是唯一检索然而检索结果不存在(试图锁住不存在的数据)时,会产生间隙锁
-    - 使用普通索引检索时,不管是何种查询,只要加锁,都会产生间隙锁
-    - 同时使用唯一索引和普通索引时,由于数据行是优先根据普通索引排序,再根据唯一索引排序,所以也会产生间隙锁
-
-**乐观锁**
-
-- 使用数据版本(Version)记录机制实现,这是乐观锁最常用的一种实现方式
-    - 数据版本:即为数据增加一个版本标识,一般是通过为数据库表增加一个数字类型的"version” 字段来实现,当读取数据时,将version字段的值一同读出,数据每更新一次,对此version值加一,当我们提交更新的时候,判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对,如果数据库表当前版本号与第一次取出来的version值相等,则予以更新,否则认为是过期数据
-- 使用时间戳(timestamp),乐观锁定的第二种实现方式和第一种差不多,同样是在需要乐观锁控制的table中增加一个字段,名称无所谓,字段类型使用时间戳(timestamp),和上面的version类似,也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比,如果一致则OK,否则就是版本冲突
-
 ### 事务
+
+- 事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
 
 #### ACID
 
-- 原子性(Atomic):事务中各项操作,要么全做要么全不做,任何一项操作的失败都会导致整个事务的失败
-- 一致性(Consistent):事务结束后系统状态是一致的
-- 隔离性(Isolated):并发执行的事务彼此无法看到对方的中间状态
-- 持久性(Durable):事务完成后所做的改动都会被持久化,即使发生灾难性的失败,通过日志和同步备份可以在故障发生后重建数据
+- **原子性(Atomic)**:整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样
+- **一致性(Consist)**:一个事务可以封装状态改变(除非它是一个只读的),事务必须始终保持系统处于一致的状态,不管在任何给定的时间并发事务有多少,也就是说:如果事务是并发多个,系统也必须如同串行事务一样操作
+- **隔离性(Isolated)**:隔离状态执行事务,使它们好像是系统在给定时间内执行的唯一操作,如果有两个事务,运行在相同的时间内,执行相同的功能,事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统,这种属性有时称为串行化,为了防止事务操作间的混淆,必须串行化或序列化请求,使得在同一时间仅有一个请求用于同一数据
+- **持久性(Durable)**:在事务完成以后,该事务对数据库所作的更改便持久的保存在数据库之中,并不会被回滚
 
 #### 隔离级别
 
 - **并发下遇到的问题**
-
     - **脏读(Dirty Read)**:A事务读取B事务尚未提交的数据并在此基础上操作,而B事务执行回滚,那么A读取到的数据就是脏数据
     - **不可重复读(Unrepeatable Read)**:事务A重新读取前面读取过的数据,发现该数据已经被另一个已提交的事务B修改过了
     - **幻读(Phantom Read)**:事务A重新执行一个查询,返回一系列符合查询条件的行,发现其中插入了被事务B提交的行
     - **第1类丢失更新**:事务A撤销时,把已经提交的事务B的更新数据覆盖了
     - **第2类丢失更新**:事务A覆盖事务B已经提交的数据,造成事务B所做的操作丢失
+    - 不可重复读的和幻读很容易混淆,不可重复读重点在于update和delete，而幻读的重点在于insert,解决不可重复读的问题只需锁住满足条件的行,解决幻读需要锁表
 
-- 数据库通常会通过锁机制来解决数据并发访问问题,直接使用锁是非常麻烦的,为此数据库为用户提供了自动锁机制,只要用户指定会话的事务隔离级别,数据库就会通过分析SQL语句然后为事务访问的资源加上合适的锁,此外,数据库还会维护这些锁通过各种手段提高系统的性能,这些对用户来说都是透明的
-
-- **隔离级别**
-
-    - **未提交读(Read Uncommitted)**:允许脏读,也就是可能读取到其他会话中未提交事务修改的数据
-
-    - **提交读(Read Committed)**:只能读取到已经提交的数据
-    - **可重复读(Repeated Read)**:可重复读,在同一个事务内的查询都是事务开始时刻一致的,InnoDB默认级别,在SQL标准中,该隔离级别消除了不可重复读,但是还存在幻读,Oracle等多数数据库默认都是该级别 (不重复读)
-    - **串行读(Serializable)**:完全串行化的读,每次读都需要获得表级共享锁,读写相互都会阻塞
+- **隔离级别**:数据库为了维护事务的隔离性,数据库通常会通过锁机制来解决数据并发访问问题,直接使用锁是非常麻烦的,为此数据库为用户提供了自动锁机制,只要用户指定会话的事务隔离级别,数据库就会通过分析SQL语句然后为事务访问的资源加上合适的锁
+    - **Read uncommitted**:读未提交，可能出现脏读，不可重复读，幻读
+    - **Read committed**:读提交，可能出现不可重复读，幻读
+    - **Repeatable read**:可重复读，可能出现幻读
+    - **Serializable**:可串行化，同一数据读写都加锁，避免幻读
     - 事务隔离级别和数据访问的并发性是对立的,事务隔离级别越高并发性就越差,所以要根据具体的应用来确定合适的事务隔离级别
 
 - **隔离级别与锁的关系**
+    - **未提交读(Read Uncommitted)**:不加任何锁
+    - **提交读(Read Committed)**:数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加行锁的
+    - **可重复读(Repeatable Read)**:如果检索条件有索引的时候,默认加锁方式是next-key锁,如果检索条件没有索引,更新数据时会锁住整张表,一个间隙被事务加了锁,其他事务是不能在这个间隙插入记录的,这样可以防止不可重读
+    - **可串行化(Serializable)**:读加共享锁，写加排他锁，读写互斥,锁整张表
 
-    - 未提交读(Read Uncommitted):不加任何锁
-    - 提交读(Read Committed):数据的读取都是不加锁的,但是数据的写入,修改和删除是需要加锁的
-    - 可重复读(Repeatable Read):以间隙锁的方式对数据行进行加锁,当InnoDB扫描索引记录的时候,会首先对索引记录加上行锁(Record Lock),再对索引记录两边的间隙加上间隙锁(Gap Lock),加上间隙锁之后,其他事务就不能在这个间隙修改或者插入记录
+#### 编程式事务
 
-#### 手动事务处理
+- Connection提供了事务处理的方法,通过调用setAutoCommit(false)可以设置手动提交事务,当事务完成后用`commit()`显式提交事务如果在事务处理过程中发生异常则通过`rollback()`进行事务回滚
+- 除此之外,从JDBC 3.0中还引入了Savepoint(保存点)的概念,允许通过代码设置保存点并让事务回滚到指定的保存点
 
-- Connection提供了事务处理的方法,通过调用setAutoCommit(false)可以设置手动提交事务,当事务完成后用commit()显式提交事务如果在事务处理过程中发生异常则通过rollback()进行事务回滚,除此之外,从JDBC 3.0中还引入了Savepoint(保存点)的概念,允许通过代码设置保存点并让事务回滚到指定的保存点
+### 锁
+
+- MyISAM支持表锁,InnoDB支持表锁和行锁,默认行锁
+    - **表级锁**:开锁小,加锁快,不会出现死锁,锁的粒度大,发生锁冲突的概率最高,并发量最低
+    - **行级锁**:开销大,加锁慢,会出现死锁,锁的粒度小,容易发生冲突的概率小,并发度最高,innoDB支持三种行锁定方式
+        - 行锁(Record Lock):锁直接加在索引记录上面,无索引项时演变成表锁(因为如果一个条件无法通过索引快速过滤，存储引擎层面就会将所有记录加锁后返回，再由MySQL Server层进行过滤)
+        - 间隙锁(Gap Lock):锁定索引记录间隙,确保索引记录的间隙不变,间隙锁是针对事务隔离级别为可重复读或以上级别的
+        - Next-Key Lock:行锁和间隙锁组合起来就是 Next-Key Lock
+
+### MVCC
+
+- 在InnoDB中，会在每行数据后添加两个额外的隐藏的值来实现MVCC，这两个值一个记录这行数据何时被创建，另外一个记录这行数据何时过期（或者被删除）。 在实际操作中，存储的并不是时间，而是事务的版本号，每开启一个新事务，事务的版本号就会递增。 在可重读Repeatable reads事务隔离级别下：
+    - SELECT时，读取创建版本号<=当前事务版本号，删除版本号为空或>当前事务版本号。
+    - INSERT时，保存当前事务版本号为行的创建版本号
+    - DELETE时，保存当前事务版本号为行的删除版本号
+    - UPDATE时，插入一条新纪录，保存当前事务版本号为行创建版本号，同时保存当前事务版本号到原来删除的行
+- 通过MVCC，虽然每行记录都需要额外的存储空间，更多的行检查工作以及一些额外的维护工作，但可以减少锁的使用，大多数读操作都不用加锁，读数据操作很简单，性能很好，并且也能保证只会读取到符合标准的行，也只锁住必要行。
 
 ### 数据库连接池
 
@@ -1418,8 +1400,6 @@ Explain + SQL语句
 - 池化技术在Java开发中是很常见的,在使用线程时创建线程池的道理与此相同,基于Java的开源数据库连接池主要有:C3P0,Hikari ,DBCP,BoneCP,Druid等
 
 ### SQL语句执行过程
-
-- 首先来看,在 MySQL 数据库中,一条查询语句是如何执行的,索引出现在哪个环节,起到了什么作用
 
 1. 应用程序发现 SQL 到服务端
     - 当执行 SQL 语句时,应用程序会连接到相应的数据库服务器,然后服务器对 SQL 进行处理
@@ -1434,23 +1414,73 @@ Explain + SQL语句
 4. 将查询结果返回客户端
     - 最后,数据库服务器将查询结果返回给客户端,(如果查询可以缓存,MySQL 也会将结果放到查询缓存中)
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-4383d050326b869fde80b6e5b937a2fe-20210423010306492.png)
-
-### 数据库主键为什么要用递增的序列？UUID为什么不适合做主键？
+### 数据库主键为什么要用递增的序列而不是UUID
 
 - 顺序的ID占用的空间比随机ID占用的空间小
 - 原因是数据库主键和索引索引使用B+树的数据结构进行存储,顺序ID数据存储在最后一个节点的最后的位置,前面的节点数据都是满的
 - 随机ID存储时可能会出现节点分裂,导致节点多了,但是每个节点的数据量少了,存储到文件系统中时,无论节点中数据是不是满的都会占用一页的空间,所以所导致空间占用较大
 
+### 慢查询优化基本步骤
+
+1. 先运行看看是否真的很慢，注意设置SQL_NO_CACHE
+2. where条件单表查，锁定最小返回记录表。这句话的意思是把查询语句的where都应用到表中返回的记录数最小的表开始查起，单表每个字段分别查询，看哪个字段的区分度最高
+3. explain查看执行计划，是否与2预期一致（从锁定记录较少的表开始查询）
+4. order by limit 形式的sql语句让排序的表优先查
+5. 了解业务方使用场景
+6. 加索引时参照建索引的几大原则
+7. 观察结果，不符合预期继续从头分析
+
 ### 分表策略
 
-- 水平拆分行,行数据拆分到不同表中,垂直拆分列,表数据拆分到不同表中
-- **垂直拆分**:单表大数据量依然存在性能瓶颈,垂直拆分就是要把表按模块划分到不同数据库表中,相对于垂直切分更进一步的是服务化改造,说得简单就是要把原来强耦合的系统拆分成多个弱耦合的服务,通过服务间的调用来满足业务需求看,因此表拆出来后要通过服务的形式暴露出去,而不是直接调用不同模块的表
-- **水平拆分**:上面谈到垂直切分只是把表按模块划分到不同数据库,但没有解决单表大数据量的问题,而水平切分就是要把一个表按照某种规则把数据划分到不同表或数据库里,例如像计费系统,通过按时间来划分表就比较合适,因为系统都是处理某一时间段的数据,而像SaaS应用,通过按用户维度来划分数据比较合适,因为用户与用户之间的隔离的,一般不存在处理多个用户数据的情况,简单的按user_id范围来水平切分
+- **垂直拆分**:表数据拆分到不同表中,单表大数据量依然存在性能瓶颈,垂直拆分就是要把表按模块划分到不同数据库表中,相对于垂直切分更进一步的是服务化改造,说得简单就是要把原来强耦合的系统拆分成多个弱耦合的服务,通过服务间的调用来满足业务需求看,因此表拆出来后要通过服务的形式暴露出去,而不是直接调用不同模块的表
+- **水平拆分**:行数据拆分到不同表中,上面谈到垂直切分只是把表按模块划分到不同数据库,但没有解决单表大数据量的问题,而水平切分就是要把一个表按照某种规则把数据划分到不同表或数据库里,例如像计费系统,通过按时间来划分表就比较合适,因为系统都是处理某一时间段的数据,而像SaaS应用,通过按用户维度来划分数据比较合适,因为用户与用户之间的隔离的,一般不存在处理多个用户数据的情况,简单的按user_id范围来水平切分
+
+### 日志
+
+- Mysql 有4种类型的日志:Error Log,Genaral Query Log,Binary Log 和 Slow Query Log
+- **Error Log**:记录Mysql运行过程中的Error,Warning,Note等信息,系统出错或者某条记录出问题可以查看Error日志
+- **General Query Log**:记录mysql的日常日志,包括查询,修改,更新等的每条sql
+- **Binary Log**:二进制日志,包含一些事件,这些事件描述了数据库的改动,如建表,数据改动等,主要用于备份恢复,回滚操作等
+    - **STATMENT**:每一条会修改数据的sql都会记录到master的binlog中,slave在复制的时候sql进程会解析成和原来master端执行多相同的sql再执行
+    - **ROW**:日志中会记录成每一行数据被修改的形式,然后在slave端再对相同的数据进行修改,只记录要修改的数据,只有value,不会有sql多表关联的情况
+    - **MIXED**:MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式,也就是在 statement 和 row 之间选择一种
+- **Slow Query Log**:记录Mysql 慢查询的日志
 
 ### 主从同步
 
-### 日志
+- Mysql服务器之间的主从同步是基于二进制日志机制,主服务器使用二进制日志来记录数据库的变动情况,从服务器通过读取和执行该日志文件来保持和主服务器的数据一致
+- Slave 会执行以下两个线程读取和执行该日志文件
+    - `Slave_IO`:复制master主机 binlog日志文件里的SQL命令到本机的relay-log文件里
+    - `Slave_SQL`:执行本机relay-log文件里的SQL语句,实现与Master数据一致
+
+### 索引
+
+- 在MySQL中主要有四类索引：主键索引、唯一索引、常规索引、和全文索引。
+- **主键索引**: 唯一标识数据库表中的每条记录,每个表都应该有一个主键，并且每个表只能有一个主键
+- **唯一索引**:不允许出现相同的值,避免同一个表中某数据列中的值重复
+- **普通索引**:快速定位特定数据,不会去约束索引的字段的行为
+- **全文索引**:快速定位特定数据,全文搜索通过 `MATCH()` 函数完成
+- **联合索引**:两个或更多个列上的索引被称作联合索引。利用索引中的附加列，可以缩小搜索的范围，但使用一个具有两列的索引 不同于使用两个单独的索引。
+- **最左前缀匹配原则**
+    - 在MySQL建立联合索引时会遵守最左前缀匹配原则，在检索数据时从联合索引的最左边开始匹配
+    - 当B+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性
+- **聚簇索引和非聚簇索引**:索引的存储顺序和数据的存储顺序是否是关系的,有关就是聚簇索引,无关就是非聚簇索引
+    - **聚簇索引**:Innodb的主键索引,非叶子节点存储的是索引指针,叶子节点存储的是既有索引也有数据
+    - **非聚簇索引**:MyISAM的默认索引,B+Tree的叶子节点存储的是数据存放的地址,而不是具体的数据,因此,索引存储顺序和数据存储关系毫无关联,另外Inndob里的辅助索引也是非聚簇索引
+- **辅助索引与覆盖索引**
+    - **辅助索引**:如果不是主键索引,就称为辅助索引或者二级索引,主键索引的叶子节点存储了完整的数据行,而非主键索引的叶子节点存储的则是主键索引值,通过非主键索引查询数据时,会先查找到主键索引,然后再到主键索引上去查找对应的数据
+    - **覆盖索引**:如果需要查询的字段被包含在辅助索引节点中,那么可以直接获得我们所需要的信息,按照这种思想Innodb针对使用辅助索引的查询场景做了优化,称为**覆盖索引**
+
+### B+树
+
+- B+树是一种特殊的搜索树,InnoDB 存储引擎默认的底层的数据结构
+    - **性质**
+        - 非叶子节点相当于是叶子节点的索引层,叶子节点是存储关键字数据的数据层,搜索只在叶子节点命中,树的查询效率稳定
+        - 所有的叶子结点中包含了全部关键字的信息,及指向含这些关键字记录的指针,且叶子结点本身依关键字的大小自小而大顺序链接,B+树只需要去遍历叶子节点就可以实现整棵树的遍历
+    - B+树的出度(树的分叉数)
+        - 不管是内存中的数据还是磁盘中的数据,操作系统都是按页(一页的大小通常是 4kb,这个值可以通过`getconfig(PAGE_SIZE)`命令查看)来读取的,一次只会读取一页的数据
+        - 如果要读取的数据量超过了一页的大小,就会触发多次 IO 操作,所以在选择 m 大小的时候,要尽量让每个节点的大小等于一个页的大小
+        - 一般实际应用中,出度是非常大的数字,通常超过 100,树的高度(h)非常小,通常不超过 3
 
 ## Redis
 
@@ -1646,151 +1676,114 @@ Explain + SQL语句
 
 ## Kafka
 
-### 为什么选择使用MQ来实现同步
+### 为什么选择使用MQ
 
-通过使用消息队列,我们可以异步处理请求,从而缓解系统的压力,同样可以达到解耦的效果
+- 通过使用消息队列,我们可以异步处理请求,从而缓解系统的压力,同样可以达到削峰解耦的目的
+
+### Kafka的使用场景
+
+- **用户追踪**:根据用户在web或者app上的操作,将这些操作消息记录到各个topic中,然后消费者通过订阅这些消息做实时的分析,或者记录到HDFS,用于离线分析或数据挖掘
+- **日志收集**:通过kafka对各个服务的日志进行收集,再开放给各个consumer
+- **消息系统**:缓存消息
+- **运营指标**:记录运营监控数据,收集操作应用数据的集中反馈,如报错和报告
+
+### 消息有序性
+
+- 每个分区内,每条消息都有offset,所以只能在同一分区内有序,但不同的分区无法做到消息顺序性
+
+### Kafka效率高的原因
+
+1. kafka是分布式的消息队列
+
+2. 对log文件进行了segment,并对segment建立了索引
+
+3. 顺序写磁盘
+
+    - Kafka 的 producer 生产数据,要写入到 log 文件中,写的过程是一直追加到文件末端,为顺序写,官网有数据表明,同样的磁盘,顺序写能到 600M/s,而随机写只有 100K/s,这与磁盘的机械机构有关,顺序写之所以快,是因为其省去了大量磁头寻址的时间
+
+    零复制技术
+
+    - IO操作不用经过User space,直接由kernel space 与 NIC 交互
+    - NIC(Network Interface Controller)网络接口控制器
+
+### Kafka 的高可靠性
+
+- 为了实现高可靠性,kafka使用了订阅的模式,并使用isr和ack应答机制
+- **ISR**:能进入isr中的follower和leader之间的速率不会相差10秒
+- **ACK**
+    - 当ack=0时,producer不等待broker的ack,不管数据有没有写入成功,都不再重复发该数据
+    - 当ack=1时,broker会等到leader写完数据后,就会向producer发送ack,但不会等follower同步数据,如果这时leader挂掉,producer会对新的leader发送新的数据,在old的leader中不同步的数据就会丢失
+    - 当ack=-1或者all时,broker会等到leader和isr中的所有follower都同步完数据,再向producer发送ack,有可能造成数据重复
+
+### 文件存储
+
+- partition位于一个文件夹下, 该文件夹的命名规则为:topic 名称+分区序号,例如,first 这个 topic 有三个分区,则其对应的文件夹为 first-0,first-1,first-2
+- 由于生产者生产的消息会不断追加到 log 文件末尾,为防止 log 文件过大导致数据定位效率低下,Kafka 采取了**分片**和**索引**机制,将每个 partition 分为多个 segment
+- 每个 segment对应两个文件,即`.index`文件和`.log`文件
 
 ### ISR、OSR、AR
 
 - ISR (InSyncRepli): 速率和leader相差低于10秒的follower的集合
 - OSR(OutSyncRepli) : 速率和leader相差大于10秒的follower
+    - 将失效的follower踢出ISR
+    - 等速率接近leader10秒内,再加进ISR
 - AR(AllRepli) : 所有分区的follower
 
-## HW、LEO
+### HW、LEO
 
 - HW : 又名高水位,根据同一分区中,最低的LEO所决定
 - LEO : 每个分区的最高offset
 
-### Kafka的使用场景
+### 重复消费&丢失信息
 
-- 用户追踪:根据用户在web或者app上的操作,将这些操作消息记录到各个topic中,然后消费者通过订阅这些消息做实时的分析,或者记录到HDFS,用于离线分析或数据挖掘
-- 日志收集:通过kafka对各个服务的日志进行收集,再开放给各个consumer
-- 消息系统:缓存消息
-- 运营指标:记录运营监控数据,收集操作应用数据的集中反馈,如报错和报告
+- 先处理后提交offset,会造成重读消费
+- 先提交offset后处理,会造成数据丢失
 
-### Kafka中是怎么体现消息顺序性的？
+### 消费方式
 
-- 每个分区内,每条消息都有offset,所以只能在同一分区内有序,但不同的分区无法做到消息顺序性
+- 在producer阶段,是向broker用Push模式
+- 在consumer阶段,是向broker用Pull模式
+- 在Pull模式下,consumer可以根据自身速率选择如何拉取数据,避免了低速率的consumer发生崩溃的问题,但缺点是,consumer要时不时的去询问broker是否有新数据,容易发生死循环,内存溢出 
 
-5.“消费组中的消费者个数如果超过topic的分区，那么就会有消费者消费不到数据”这句话是否正确?
+### Controller的作用
 
-对的,超过分区数的消费者就不会再接收数据
+- 负责kafka集群的上下线工作,所有topic的副本分区分配和选举leader工作
+- **选举**:在ISR中需要选择,选择策略为先到先得 
 
-6. 有哪些情形会造成重复消费？或丢失信息?
+### 分区
 
-先处理后提交offset,会造成重读消费
-先提交offset后处理,会造成数据丢失
+- 对于kafka集群来说,分区可以做到负载均衡,对于消费者来说,可以提高并发度,提高读取效率
+- 在同一消费者组中,超过分区数的消费者就不会再接收数据
+- **创建Topic分配分区**
+    - 首先副本数不能超过broker数
+    - 第一分区是随机从Broker中选择一个,然后其他分区相对于0号分区依次向后移
+- **topic修改分区数**
+    - 可以增加,不可以减少,先有的分区数据难以处理
+- **分区策略**
+    - Roudn Robin:先将每个topic的每个partition排序,然后以轮询的方式分配所有的分区给每个consumer
+    - Range重分配策略:先计算各个consumer将会承载的分区数量,然后将指定数量的分区分配给该consumer
 
-7.Kafka 分区的目的？
+### 事务
 
-对于kafka集群来说,分区可以做到负载均衡,对于消费者来说,可以提高并发度,提高读取效率
+- kafka事务有两种:producer事务和consumer事务
+- producer事务是为了解决kafka跨分区跨会话问题
+    - kafka不能跨分区跨会话的主要问题是每次启动的producer的PID都是系统随机给的,所以为了解决这个问题,我们就要手动给producer一个全局唯一的id,也就是transaction id 简称TID
+    - 我们将TID和PID进行绑定,在producer带着TID和PID第一次向broker注册时,broker就会记录TID,并生成一个新的组件`__transaction_state`用来保存TID的事务状态信息,当producer重启后,就会带着TID和新的PID向broker发起请求,当发现TID一致时,producer就会获取之前的PID,将覆盖掉新的PID,并获取上一次的事务状态信息,从而继续上次工作
+- consumer事务相对于producer事务就弱一点,需要先确保consumer的消费和提交位置为一致且具有事务功能,才能保证数据的完整,不然会造成数据的丢失或重复 
 
-8.Kafka 的高可靠性是怎么实现的?
+### 生产者客户端的整体结构
 
-为了实现高可靠性,kafka使用了订阅的模式,并使用isr和ack应答机制
-能进入isr中的follower和leader之间的速率不会相差10秒
-当ack=0时,producer不等待broker的ack,不管数据有没有写入成功,都不再重复发该数据
-当ack=1时,broker会等到leader写完数据后,就会向producer发送ack,但不会等follower同步数据,如果这时leader挂掉,producer会对新的leader发送新的数据,在old的leader中不同步的数据就会丢失
-当ack=-1或者all时,broker会等到leader和isr中的所有follower都同步完数据,再向producer发送ack,有可能造成数据重复
-
-9.topic的分区数可不可以增加？如果可以怎么增加？如果不可以，那又是为什么？
-
-可以增加
-
-bin/kafka-topics.sh --zookeeper localhost:2181/kafka --alter --topic topic-config --partitions 3
-1
-10.topic的分区数可不可以减少？如果可以怎么减少？如果不可以，那又是为什么？
-
-不可以,先有的分区数据难以处理
-
-11.简述Kafka的日志目录结构？
-
-每一个分区对应一个文件夹,命名为topic-0,topic-1,每个文件夹内有.index和.log文件
-
-12.如何解决消费者速率低的问题?
-
-增加分区数和消费者数
-
-13.Kafka的那些设计让它有如此高的性能？?
-
-1.kafka是分布式的消息队列
-2.对log文件进行了segment,并对segment建立了索引
-3.(对于单节点)使用了顺序读写,速度可以达到600M/s
-4.引用了zero拷贝,在os系统就完成了读写操作
-
-14.kafka启动不起来的原因?
-
-在关闭kafka时,先关了zookeeper,就会导致kafka下一次启动时,会报节点已存在的错误
-只要把zookeeper中的zkdata/version-2的文件夹删除即可
-
-15.聊一聊Kafka Controller的作用？
-
-负责kafka集群的上下线工作,所有topic的副本分区分配和选举leader工作
-
-16.Kafka中有那些地方需要选举？这些地方的选举策略又有哪些？
-
-在ISR中需要选择,选择策略为先到先得
-
-17.失效副本是指什么？有那些应对措施？
-
-失效副本为速率比leader相差大于10秒的follower
-将失效的follower先提出ISR
-等速率接近leader10秒内,再加进ISR
-
-18.Kafka消息是采用Pull模式，还是Push模式？
-
-在producer阶段,是向broker用Push模式
-在consumer阶段,是向broker用Pull模式
-在Pull模式下,consumer可以根据自身速率选择如何拉取数据,避免了低速率的consumer发生崩溃的问题
-但缺点是,consumer要时不时的去询问broker是否有新数据,容易发生死循环,内存溢出
-
-19.Kafka创建Topic时如何将分区放置到不同的Broker中?
-
-首先副本数不能超过broker数
-第一分区是随机从Broker中选择一个,然后其他分区相对于0号分区依次向后移
-第一个分区是从nextReplicaShift决定的,而这个数也是随机产生的
-
-20.Kafka中的事务是怎么实现的?☆☆☆☆☆
-
-kafka事务有两种
-producer事务和consumer事务
-producer事务是为了解决kafka跨分区跨会话问题
-kafka不能跨分区跨会话的主要问题是每次启动的producer的PID都是系统随机给的
-所以为了解决这个问题
-我们就要手动给producer一个全局唯一的id,也就是transaction id 简称TID
-我们将TID和PID进行绑定,在producer带着TID和PID第一次向broker注册时,broker就会记录TID,并生成一个新的组件__transaction_state用来保存TID的事务状态信息
-当producer重启后,就会带着TID和新的PID向broker发起请求,当发现TID一致时
-producer就会获取之前的PID,将覆盖掉新的PID,并获取上一次的事务状态信息,从而继续上次工作
-consumer事务相对于producer事务就弱一点,需要先确保consumer的消费和提交位置为一致且具有事务功能,才能保证数据的完整,不然会造成数据的丢失或重复
-
-21.Kafka中的分区器、序列化器、拦截器是否了解？它们之间的处理顺序是什么？
-
-拦截器>序列化器>分区器
-
-22.Kafka生产者客户端的整体结构是什么样子的？使用了几个线程来处理？分别是什么？
-
-
-使用两个线程:
-main线程和sender线程
-main线程会依次经过拦截器,序列化器,分区器将数据发送到RecourdAccumlator(线程共享变量)
-再由sender线程从RecourdAccumlator中拉取数据发送到kafka broker
-相关参数：
-batch.size：只有数据积累到batch.size之后，sender才会发送数据。
-linger.ms：如果数据迟迟未达到batch.size，sender等待linger.time之后就会发送数据。
-
-23.消费者提交消费位移时提交的是当前消费到的最新消息的offset还是offset+1？
-
-offset + 1
-图示:
-
-生产者发送数据offset是从0开始的
-
-消费者消费的数据offset是从offset+1开始的
+- Kafka 的 Producer 发送消息采用的是异步发送的方式,在消息发送的过程中,涉及到了两个线程:main 线程和 sender 线程,以及一个线程共享变量: RecordAccumulator
+    - main 线程将消息发送给 RecordAccumulator
+    - sender 线程不断从 RecordAccumulator 中拉取消息发送到 Kafka broker
+- **相关参数**
+    - batch.size：只有数据积累到batch.size之后，sender才会发送数据
+    - linger.ms：如果数据迟迟未达到batch.size，sender等待linger.time之后就会发送数据
 
 
 ## Elasticsearch
 
-### 高亮你们是怎么做的
+### 高亮
 
 - SpringBoot整合Elasticsearch有一个searchSourceBuilder,通过链式调用一个highlighter方法,传入一个HighlightBuilder对象并设置好查询的列和高亮的标签
 - 之后调用RestHighLevelClient对象的Search方法之后返回一个SearchResponse对象,之后可以调用response.getHits().getHits();获得击中的结果数组,数组中每一个对象除了包含原始内容还包含了一个高亮结果集,是一个Map集合
@@ -1812,12 +1805,14 @@ offset + 1
 
 ### 红黑树
 
-- **性质**
-    - 根节点是黑色
-    - 每个节点都只能是红色或者黑色
-    - 每个叶节点(NIL节点,空节点)是黑色的
-    - 如果一个节点是红色的,则它两个子节点都是黑色的,也就是说在一条路径上不能出现两个红色的节点
-    - 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点
+一种二叉查找树,但在每个节点增加一个存储位表示节点的颜色,可以是红或黑(非红即黑),通过对任何一条从根到叶子的路径上各个节点着色的方式的限制,红黑树确保没有一条路径会比其它路径长出两倍,因此,红黑树是一种弱平衡二叉树(由于是弱平衡,可以看到,在相同的节点情况下,AVL树的高度低于红黑树),相对于要求严格的AVL树来说,它的旋转次数少,所以对于搜索,插入,删除操作较多的情况下,我们就用红黑树
+
+
+1. 每个节点要么是红色,要么是黑色
+2. 根节点永远是黑色的
+3. 所有的叶节点都是空节点(即 null),并且是黑色的
+4. 每个红色节点的两个子节点都是黑色,(从每个叶子到根的路径上不会有两个连续的红色节点)
+5. 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点
 
 ## 算法
 
@@ -2526,10 +2521,6 @@ public class RadixSorter extends Sorter {
 | 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(n+k)     | 稳定   |
 | 基数排序     | O(N*M)         | O(N*M)         | O(N*M)         | O(M)       | 稳定   |
 
-### 为什么先序中序可以决定一颗树
-
-- 前序和后序在本质上都是将父节点与子结点进行分离,但并没有指明左子树和右子树的能力,因此得到这两个序列只能明确父子关系,而不能确定一个二叉树
-
 ### 二叉树遍历
 
 - 前序遍历:根结点 ---> 左子树 ---> 右子树
@@ -2537,67 +2528,57 @@ public class RadixSorter extends Sorter {
 - 后序遍历:左子树 ---> 右子树 ---> 根结点
 - 层次遍历:只需按层次遍历即可
 
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-image-20210423144633672.png" alt="image-20210423144633672" style="zoom:50%;" />
+#### 前序遍历
 
-- 前序遍历:1  2  4  5  7  8  3  6
-- 中序遍历:4  2  7  5  8  1  3  6
-- 后序遍历:4  7  8  5  2  6  3  1
-- 层次遍历:1  2  3  4  5  6  7  8
-
-一,前序遍历
-
-1)根据上文提到的遍历思路:根结点 ---> 左子树 ---> 右子树,很容易写出递归版本:
+- 递归实现
 
 ```java
 public void preOrderTraverse1(TreeNode root) {
-  if (root != null) {
-    System.out.print(root.val+"  ");
-    preOrderTraverse1(root.left);
-    preOrderTraverse1(root.right);
-  }
+    if (root != null) {
+        System.out.print(root.val+"  ");
+        preOrderTraverse1(root.left);
+        preOrderTraverse1(root.right);
+    }
 }
 ```
 
-2)现在讨论非递归的版本:
-根据前序遍历的顺序,优先访问根结点,然后在访问左子树和右子树,所以,对于任意结点node,第一部分即直接访问之,之后在判断左子树是否为空,不为空时即重复上面的步骤,直到其为空,若为空,则需要访问右子树,注意,在访问过左孩子之后,需要反过来访问其右孩子,所以,需要栈这种数据结构的支持,对于任意一个结点node,具体步骤如下:
-
-a)访问之,并把结点node入栈,当前结点置为左孩子
-
-b)判断结点node是否为空,若为空,则取出栈顶结点并出栈,将右孩子置为当前结点,否则重复a)步直到当前结点为空或者栈为空(可以发现栈中的结点就是为了访问右孩子才存储的)
-
-代码如下:
+- 非递归的实现
+- 根据前序遍历的顺序,优先访问根结点,然后在访问左子树和右子树,所以,对于任意结点node,第一部分即直接访问之,之后在判断左子树是否为空,不为空时即重复上面的步骤,直到其为空,若为空,则需要访问右子树,注意,在访问过左孩子之后,需要反过来访问其右孩子,所以,需要栈这种数据结构的支持,对于任意一个结点node,具体步骤如下:
+    1. 访问之,并把结点node入栈,当前结点置为左孩子
+    2. 判断结点node是否为空,若为空,则取出栈顶结点并出栈,将右孩子置为当前结点,否则重复a)步直到当前结点为空或者栈为空(可以发现栈中的结点就是为了访问右孩子才存储的)
 
 ```java
 public void preOrderTraverse2(TreeNode root) {
-  LinkedList<TreeNode> stack = new LinkedList<>();
-  TreeNode pNode = root;
-  while (pNode != null || !stack.isEmpty()) {
-    if (pNode != null) {
-      System.out.print(pNode.val+"  ");
-      stack.push(pNode);
-      pNode = pNode.left;
-    } else { //pNode == null && !stack.isEmpty()
-      TreeNode node = stack.pop();
-      pNode = node.right;
+    LinkedList<TreeNode> stack = new LinkedList<>();
+    TreeNode pNode = root;
+    while (pNode != null || !stack.isEmpty()) {
+        if (pNode != null) {
+            System.out.print(pNode.val+"  ");
+            stack.push(pNode);
+            pNode = pNode.left;
+        } else { //pNode == null && !stack.isEmpty()
+            TreeNode node = stack.pop();
+            pNode = node.right;
+        }
     }
-  }
 }
 ```
 
-二,中序遍历
-1)根据上文提到的遍历思路:左子树 ---> 根结点 ---> 右子树,很容易写出递归版本:
+#### 中序遍历
+
+- 递归实现
 
 ```java
 public void inOrderTraverse1(TreeNode root) {
-  if (root != null) {
-    inOrderTraverse1(root.left);
-    System.out.print(root.val+"  ");
-    inOrderTraverse1(root.right);
-  }
+    if (root != null) {
+        inOrderTraverse1(root.left);
+        System.out.print(root.val+"  ");
+        inOrderTraverse1(root.right);
+    }
 }
 ```
 
-2)非递归实现,有了上面前序的解释,中序也就比较简单了,相同的道理,只不过访问的顺序移到出栈时,代码如下:
+- 非递归实现,有了上面前序的解释,中序也就比较简单了,相同的道理,只不过访问的顺序移到出栈时
 
 ```java
 public void inOrderTraverse2(TreeNode root) {
@@ -2616,9 +2597,9 @@ public void inOrderTraverse2(TreeNode root) {
 }
 ```
 
-三,后序遍历
+#### 后序遍历
 
-1)根据上文提到的遍历思路:左子树 ---> 右子树 ---> 根结点,很容易写出递归版本:
+- 递归实现
 
 ```java
 public void postOrderTraverse1(TreeNode root) {
@@ -2630,93 +2611,73 @@ public void postOrderTraverse1(TreeNode root) {
 }
 ```
 
-2)非递归的代码,暂且不写
+- 非递归实现
 
 ```java
+public static void postTraverse(TreeNode node) {
+    if (node == null)
+        return;
+    Deque<TreeNode> s = new LinkedList<>();
 
-    public static void postTraverse(TreeNode node) {
-        if (node == null)
-            return;
-        Deque<TreeNode> s = new LinkedList<>();
+    TreeNode curNode; //当前访问的结点
+    TreeNode lastVisitNode; //上次访问的结点
+    curNode = node;
+    lastVisitNode = null;
 
-        TreeNode curNode; //当前访问的结点
-        TreeNode lastVisitNode; //上次访问的结点
-        curNode = node;
-        lastVisitNode = null;
-
-        //把currentNode移到左子树的最下边
-        while (curNode != null) {
+    //把currentNode移到左子树的最下边
+    while (curNode != null) {
+        s.push(curNode);
+        curNode = curNode.left;
+    }
+    while (!s.isEmpty()) {
+        curNode = s.pop();  //弹出栈顶元素
+        //一个根节点被访问的前提是:无右子树或右子树已被访问过
+        if (curNode.right != null && curNode.right != lastVisitNode) {
+            //根节点再次入栈
             s.push(curNode);
-            curNode = curNode.left;
-        }
-        while (!s.isEmpty()) {
-            curNode = s.pop();  //弹出栈顶元素
-            //一个根节点被访问的前提是:无右子树或右子树已被访问过
-            if (curNode.right != null && curNode.right != lastVisitNode) {
-                //根节点再次入栈
+            //进入右子树,且可肯定右子树一定不为空
+            curNode = curNode.right;
+            while (curNode != null) {
+                //再走到右子树的最左边
                 s.push(curNode);
-                //进入右子树,且可肯定右子树一定不为空
-                curNode = curNode.right;
-                while (curNode != null) {
-                    //再走到右子树的最左边
-                    s.push(curNode);
-                    curNode = curNode.left;
-                }
-            } else {
-                //访问
-                System.out.print(curNode.val + "  ");
-                //修改最近被访问的节点
-                lastVisitNode = curNode;
+                curNode = curNode.left;
             }
-        } //while
+        } else {
+            //访问
+            System.out.print(curNode.val + "  ");
+            //修改最近被访问的节点
+            lastVisitNode = curNode;
+        }
+    } //while
 ```
 
-四,层次遍历
+#### 层次遍历
 
-层次遍历的代码比较简单,只需要一个队列即可,先在队列中加入根结点,之后对于任意一个结点来说,在其出队列的时候,访问之,同时如果左孩子和右孩子有不为空的,入队列,代码如下:
+- 层次遍历的代码比较简单,只需要一个队列即可,先在队列中加入根结点,之后对于任意一个结点来说,在其出队列的时候,访问之,同时如果左孩子和右孩子有不为空的,入队列
 
 ```java
 public void levelTraverse(TreeNode root) {
-  if (root == null) {
-    return;
-  }
-  LinkedList<TreeNode> queue = new LinkedList<>();
-  queue.offer(root);
-  while (!queue.isEmpty()) {
-    TreeNode node = queue.poll();
-    System.out.print(node.val+"  ");
-    if (node.left != null) {
-      queue.offer(node.left);
+    if (root == null) {
+        return;
     }
-    if (node.right != null) {
-      queue.offer(node.right);
+    LinkedList<TreeNode> queue = new LinkedList<>();
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+        TreeNode node = queue.poll();
+        System.out.print(node.val+"  ");
+        if (node.left != null) {
+            queue.offer(node.left);
+        }
+        if (node.right != null) {
+            queue.offer(node.right);
+        }
     }
-  }
 }
 ```
 
-五,深度优先遍历
-其实深度遍历就是上面的前序,中序和后序,但是为了保证与广度优先遍历相照应,也写在这,代码也比较好理解,其实就是前序遍历,代码如下:
+#### 为什么先序中序可以决定一颗树
 
-```java
-public void depthOrderTraverse(TreeNode root) {
-  if (root == null) {
-    return;
-  }
-  LinkedList<TreeNode> stack = new LinkedList<>();
-  stack.push(root);
-  while (!stack.isEmpty()) {
-    TreeNode node = stack.pop();
-    System.out.print(node.val+"  ");
-    if (node.right != null) {
-      stack.push(node.right);
-    }
-    if (node.left != null) {
-      stack.push(node.left);
-    }
-  }
-}
-```
+- 前序和后序在本质上都是将父节点与子结点进行分离,但并没有指明左子树和右子树的能力,因此得到这两个序列只能明确父子关系,而不能确定一个二叉树
 
 ## 操作系统
 
@@ -2799,12 +2760,15 @@ public void depthOrderTraverse(TreeNode root) {
 #### 死锁
 
 -  两个或多个进程被**无限期地阻塞,相互等待**的一种状态
-    -   **互斥条件**:一个资源每次只能被一个进程使用
+    -   **互斥**:一个资源每次只能被一个进程使用
     -   **请求与保持**:一个进程因请求资源而阻塞时,对已获得的资源保持不放
-    -   **不剥夺条件**:进程已获得的资源,在末使用完之前,不能强行剥夺
-    -   **循环等待条件**:若干进程之间形成一种头尾相接的循环等待资源关系
+    -   **不可剥夺**:进程已获得的资源,在末使用完之前,不能强行剥夺
+    -   **循环等待**:若干进程之间形成一种头尾相接的循环等待资源关系
 -  这四个条件是死锁的必要条件,只要系统发生死锁,这些条件必然成立,而只要上述条件之一不成立,则死锁解除
--  **预防死锁**:执行获取锁的顺序,并强制要求线程按照指定的顺序获取锁
+-  **预防死锁**:
+    -  静态资源分配法:在进程运行之初,一次性请求所有需要的资源,破坏了请求和保持条件
+    -  资源顺序分配法:规定每个线程必须按顺序请求资源,同类资源一次性申请完,破坏了循环等待条件
+    -  剥夺控制法:破坏了不可剥夺条件
 
 #### 并发与并行
 
@@ -2838,10 +2802,12 @@ public void depthOrderTraverse(TreeNode root) {
 
 ### 中断和轮询
 
-- 对I/O设备的程序轮询的方式,是早期的计算机系统对I/O设备的一种管理方式,它定时对各种设备轮流询问一遍有无处理要求,轮流询问之后,有要求的,则加以处理,在处理I/O设备的要求之后,处理机返回继续工作,尽管轮询需要时间,但轮询要比I/O设备的速度要快得多,所以一般不会发生不能及时处理的问题,当然,再快的处理机,能处理的输入输出设备的数量也是有一定限度的,而且,程序轮询毕竟占据了CPU相当一部分处理时间,因此,程序**轮询**是一种**效率较低**的方式,在现代计算机系统中已很少应用
-- 中断是指在计算机执行期间,系统内发生任何非寻常的或非预期的急需处理事件,使得CPU**暂时中断**当前正在执行的程序而转去执行相应的事件处理程序,待**处理完毕后又返回**原来被中断处继续执行或调度新的进程执行的过程
-- **轮询**:效率低,等待时间很长,CPU利用率不高
-- **中断**:容易遗漏一些问题,CPU利用率高
+- **轮询**:
+    - 轮询(Polling)I／O方式或程序控制I／O方式，是让CPU以一定的周期按次序查询每一个外设，看它是否有数据输入或输出的要求，若有，则进行相应的输入／输出服务；若无，或I／O处理完完毕，CPU就接着查询下一个外设。
+    - 效率低,等待时间很长,CPU利用率不高
+- **中断**: 
+    - 程序中断通常简称中断，是指CPU在正常运行程序的过程中，由于预选安排或发生了各种随机的内部或外部事件，使CPU中断正在运行的程序，而转到为相应的服务程序去处理，这个过程称为程序中断。
+    - 提高 CPU 的效率，只有当服务对象向 CPU 发出中断申请时 才去为它服务。这样，就可以利用中断功能同时为多个对象服务，从而大大提高了 CPU 的工作效率
 
 ### 通道
 

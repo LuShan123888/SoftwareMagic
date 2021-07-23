@@ -4,7 +4,7 @@ categories:
 - Software
 - Backend
 - Database
-- 关系数据库
+- 概念
 ---
 # 关系数据库标准语言SQL
 
