@@ -34,19 +34,8 @@ categories:
 
 ## HashMap
 
-- HashMap以哈希表数据结构实现,查找对象时通过哈希函数计算其位置,它是为快速查询而设计的,其内部定义了一个 hash 表数组`Entry[] table`,元素会通过哈希转换函数将元素的哈希地址转换成数组中存放的索引,如果有冲突,则使用散列链表的形式将所有相同哈希地址的元素串起来,可以通过查看`HashMap.Entry`的源码它是一个单链表结构
+- HashMap以Hash表数据结构实现,查找对象时通过Hash函数计算其位置,它是为快速查询而设计的,其内部定义了一个 Hash表数组`Entry[] table`,元素会通过Hash函数将元素的Hash值转换成数组中存放的索引,如果有冲突,则使用链表的形式将所有相同Hash值的元素串起来,可以通过查看`HashMap.Entry`的源码它是一个单链表结构
 - HashMap 是线程不安全的,不是同步的
-- JDK 1.7 采用头插法来添加链表元素,存在链表成环的问题,1.8 中做了优化,采用尾插法来添加链表元素
-
-> **Hash冲突处理**
->
-> - 冲突处理分为以下四种方式:
->   - **开放地址法**:出现冲突后按照一定算法查找一个空位置存放
->     - **线性探测再散列**:线性探测方法就是线性探测空白单元,当数据通过哈希函数计算应该放在700这个位置,但是700这个位置已经有数据了,那么接下来就应该查看701位置是否空闲,再查看702位置,依次类推
->     - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推,**二次探测的步数是原始位置相隔的步数的平方**
->     - **再哈希法**:出现冲突后采用其他的哈希函数计算,直到不再冲突为止
->   - **链地址法(拉链法)**:不同与前两种方法,他是在出现冲突的地方存储一个链表,所有的同义词记录都存在其中
->   - **建立公共溢出区**:建立公共溢出区的基本思想是:假设哈希函数的值域是[1,m-1],则设向量HashTable[0...m-1]为基本表,每个分量存放一个记录,另外设向量OverTable[0...v]为溢出表,所有关键字和基本表中关键字为同义词的记录,不管它们由哈希函数得到的哈希地址是什么,一旦发生冲突,都填入溢出表
 
 ```java
 public class Map接口的使用 {
@@ -71,13 +60,13 @@ public class Map接口的使用 {
 ## 	LinkedHashMap
 
 - LinkedHashMap 是 HashMap 的一个子类,它保留插入的顺序,如果需要输出的顺序和输入时的相同,那么就选用 LinkedHashMap
-- **LinkedHashMap 是 Map 接口的哈希表和链接列表实现,具有可预知的迭代顺序,**此实现提供所有可选的映射操作,并允许使用 null 值和 null 键,此类不保证映射的顺序,特别是它不保证该顺序恒久不变
+- **LinkedHashMap 是 Map 接口的Hash表和链接列表实现,具有可预知的迭代顺序,**此实现提供所有可选的映射操作,并允许使用 null 值和 null 键,此类不保证映射的顺序,特别是它不保证该顺序不变
 - LinkedHashMap 实现与 HashMap 的不同之处在于,前者维护着一个运行于所有条目的双重链接列表,此链接列表定义了迭代顺序,该迭代顺序可以是插入顺序或者是访问顺序
 - 根据链表中元素的顺序可以分为:按插入顺序的链表,和按访问顺序 (调用 get 方法) 的链表,默认是按插入顺序排序,如果是访问顺序,那put和get操作已存在的Entry时,都会把Entry移动到双向链表的表尾(其实是先删除再插入)
 
 > **注意**:
 >
-> - 此实现不是同步的,如果多个线程同时访问链接的哈希映射,而其中至少一个线程从结构上修改了该映射,则它必须保持外部同步
+> - 此实现不是同步的,如果多个线程同时访问链接的Hash映射,而其中至少一个线程从结构上修改了该映射,则它必须保持外部同步
 > - 由于 LinkedHashMap 需要维护元素的插入顺序,因此性能略低于 HashMap 的性能,但在迭代访问 Map 里的全部元素时将有很好的性能,因为它以链表来维护内部顺序
 
 ```java
@@ -606,7 +595,7 @@ private void remove() {
 ## Hashtable
 
 - Hashtable是原始的java.util的一部分,是一个Dictionary具体的实现,然而,Java 2 重构的Hashtable实现了Map接口,因此,Hashtable现在集成到了集合框架中,它和HashMap类很相似,但是它支持同步,所有的读写等操作都进行了锁(`synchronized`)保护,在多线程环境下没有安全问题,但是锁保护也是有代价的,会对读写的效率产生较大影响
-- 像HashMap一样,Hashtable在哈希表中存储键/值对,当使用一个哈希表,要指定用作键的对象,以及要链接到该键的值,然后,该键经过哈希处理,所得到的散列码被用作存储在该表中值的索引,但是HashTable 的 key,value 都不可为 null
+- 像HashMap一样,Hashtable在Hash表中存储键/值对,当使用一个Hash表,要指定用作键的对象,以及要链接到该键的值,然后,该键经过Hash处理,所得到的Hash值被用作存储在该表中值的索引,但是HashTable 的 key,value 都不可为 null
 - HashTable类中,保存实际数据的,依然是`Entry`对象,其数据结构与HashMap是相同的
 
 > **Hashtable定义了四个构造方法**
@@ -617,46 +606,46 @@ private void remove() {
 > Hashtable()
 > ```
 >
-> - 创建指定大小的哈希表
+> - 创建指定大小的Hashtable
 >
 > ```java
 > Hashtable(int size)
 > ```
 >
-> - 创建一个指定大小的哈希表,并且通过fillRatio指定填充比例
+> - 创建一个指定大小的Hashtable,并且通过fillRatio指定填充比例
 >
 > ```java
 > Hashtable(int size,float fillRatio)
 > ```
 >
-> - 填充比例必须介于0.0和1.0之间,它决定了哈希表在重新调整大小之前的充满程度
+> - 填充比例必须介于0.0和1.0之间,它决定了Hashtable在重新调整大小之前的充满程度
 >
-> - 创建一个以M中元素为初始化元素的哈希表
+> - 创建一个以M中元素为初始化元素的Hashtable
 >
 > ```java
 > Hashtable(Map m)
 > ```
 >
-> - 哈希表的容量被设置为M的两倍
+> - Hashtable的容量被设置为M的两倍
 
 - Hashtable中除了从Map接口中定义的方法外,还定义了以下方法:
 
 | 序号 | 方法描述                                                     |
 | :--- | :----------------------------------------------------------- |
-| 1    | **void clear( )**  将此哈希表清空,使其不包含任何键,|
-| 2    | **Object clone( )** 创建此哈希表的浅表副本,|
-| 3    | **boolean contains(Object value)**  测试此映射表中是否存在与指定值关联的键,|
-| 4    | **boolean containsKey(Object key)** 测试指定对象是否为此哈希表中的键,|
-| 5    | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值,则返回 true,|
-| 6    | **Enumeration elements( )** 返回此哈希表中的值的枚举,|
-| 7    | **Object get(Object key)**  返回指定键所映射到的值,如果此映射不包含此键的映射,则返回 null. 更确切地讲,如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射,则此方法返回 v,否则,返回 null,|
-| 8    | **boolean isEmpty( )** 测试此哈希表是否没有键映射到值,|
-| 9    | **Enumeration keys( )**  返回此哈希表中的键的枚举,|
-| 10   | **Object put(Object key, Object value)** 将指定 key 映射到此哈希表中的指定 value,|
-| 11   | **void rehash( )** 增加此哈希表的容量并在内部对其进行重组,以便更有效地容纳和访问其元素,|
-| 12   | **Object remove(Object key)** 从哈希表中移除该键及其相应的值,|
-| 13   | **int size( )**  返回此哈希表中的键的数量,|
-| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式,其形式为 ASCII 字符 ", "(逗号加空格)分隔开的,括在括号中的一组条目,|
+| 1    | **void clear( )**  将此Hashtable清空,使其不包含任何键        |
+| 2    | **Object clone( )** 创建此Hashtable的浅表副本                |
+| 3    | **boolean contains(Object value)**  测试此Hashtable中是否存在与指定值关联的键 |
+| 4    | **boolean containsKey(Object key)** 测试指定对象是否为此Hashtable中的键 |
+| 5    | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值,则返回 true |
+| 6    | **Enumeration elements( )** 返回此Hashtable中的值的枚举      |
+| 7    | **Object get(Object key)**  返回指定键所映射到的值,如果此映射不包含此键的映射,则返回 null. 更确切地讲,如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射,则此方法返回 v,否则,返回 null |
+| 8    | **boolean isEmpty( )** 测试此Hashtable是否没有键映射到值     |
+| 9    | **Enumeration keys( )**  返回此Hashtable中的键的枚举         |
+| 10   | **Object put(Object key, Object value)** 将指定 key 映射到此Hashtable中的指定 value |
+| 11   | **void rehash( )** 增加此Hashtable的容量并在内部对其进行重组,以便更有效地容纳和访问其元素 |
+| 12   | **Object remove(Object key)** 从Hashtable中移除该键及其相应的值 |
+| 13   | **int size( )**  返回此Hashtable中的键的数量                 |
+| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式,其形式为 ASCII 字符 ", "(逗号加空格)分隔开的,括在括号中的一组条目 |
 
 **实例**
 

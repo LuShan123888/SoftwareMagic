@@ -46,7 +46,7 @@ categories:
 
 ### High-Level Overview 高级概述
 
-在概念层,Shiro 架构包含三个主要的理念:Subject,SecurityManager和 Realm,下面的图展示了这些组件如何相互作用,我们将在下面依次对其进行描述
+- 在概念层,Shiro 架构包含三个主要的理念:Subject,SecurityManager和 Realm,下面的图展示了这些组件如何相互作用,我们将在下面依次对其进行描述
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-ShiroBasicArchitecture.png)
 
@@ -54,7 +54,7 @@ categories:
 - SecurityManager:管理所有Subject,SecurityManager 是 Shiro 架构的核心,配合内部安全组件共同组成安全伞
 - Realms:用于进行权限信息的验证,由我们自己实现,Realm 本质上是一个特定的安全 DAO,它封装与数据源连接的细节,得到Shiro 所需的相关的数据,在配置 Shiro 的时候,你必须指定至少一个Realm 来实现认证(authentication)和/或授权(authorization)
 
-我们需要实现Realms的Authentication 和 Authorization,其中 Authentication 是用来验证用户身份,Authorization 是授权访问控制,用于对用户进行的操作授权,证明该用户是否允许进行当前操作,如访问某个链接,某个资源文件等
+- 我们需要实现Realms的Authentication 和 Authorization,其中 Authentication 是用来验证用户身份,Authorization 是授权访问控制,用于对用户进行的操作授权,证明该用户是否允许进行当前操作,如访问某个链接,某个资源文件等
 
 ## 运行原理
 
@@ -66,7 +66,7 @@ categories:
 4. Authrizer:授权器,或者访问控制器,它用来决定主体是否有权限进行相应的操作,即控制着用户能访问应用中的哪些功能
 5. Realm:可以有1个或多个 Realm,可以认为是安全实体数据源,即用于获取安全实体的,它可以是 JDBC 实现,也可以是 LDAP 实现,或者内存实现等
 6. SessionManager:如果写过 Servlet 就应该知道 Session 的概念,Session 需要有人去管理它的生命周期,这个组件就是 SessionManager,而 Shiro 并不仅仅可以用在 Web 环境,也可以用在如普通的 JavaSE 环境
-7. SessionDAO:DAO 大家都用过,数据访问对象,用于会话的 CRUD,我们可以自定义 SessionDAO 的实现,控制 session 存储的位置,如通过 JDBC 写到数据库或通过 jedis 写入 redis 中,另外 SessionDAO 中可以使用 Cache 进行缓存,以提高性能
+7. SessionDAO:数据访问对象,用于会话的 CRUD,我们可以自定义 SessionDAO 的实现,控制 session 存储的位置,如通过 JDBC 写到数据库或通过 jedis 写入 redis 中,另外 SessionDAO 中可以使用 Cache 进行缓存,以提高性能
 8. CacheManager:缓存管理器,它来管理如用户,角色,权限等的缓存的,因为这些数据基本上很少去改变,放到缓存中后可以提高访问的性能
 9. Cryptography:密码模块,Shiro 提高了一些常见的加密组件用于如密码加密/解密的
 
@@ -137,7 +137,7 @@ public class SysPermission {
 }
 ```
 
-**注意**:当要使用RESTful风格返回给前台JSON数据的时候,这里有一提个关于多对多无限循环的we,比如当我们想要返回给前台一个用户信息时,由于一个用户拥有多个角色,一个角色又拥有多个权限,而权限跟角色也是多对多的关系,也就是造成了 查用户→查角色→查权限→查角色→查用户…这样的无限循环,导致传输错误,所以我们根据这样的逻辑在每一个实体类返回JSON时使用了一个`@JsonIgnoreProperties`注解,来排除自身的无限引用的过程,也就是打断这样的无限循环
+-  **注意**:当要使用RESTful风格返回给前台JSON数据的时候,比如当我们想要返回给前台一个用户信息时,由于一个用户拥有多个角色,一个角色又拥有多个权限,而权限跟角色也是多对多的关系,也就是造成了 查用户→查角色→查权限→查角色→查用户…这样的无限循环,导致传输错误,所以我们根据这样的逻辑在每一个实体类返回JSON时使用了一个`@JsonIgnoreProperties`注解,来排除自身的无限引用的过程,也就是打断这样的无限循环
 
 ### 插入数据
 
@@ -219,7 +219,6 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
-
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -229,7 +228,6 @@ public class ShiroConfig {
     /**
      * 凭证匹配器
      *(由于密码校验交给Shiro的SimpleAuthenticationInfo进行处理了)
-     *
      * @return
      */
     @Bean
@@ -247,7 +245,6 @@ public class ShiroConfig {
         return myShiroRealm;
     }
 
-
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -258,7 +255,6 @@ public class ShiroConfig {
     /**
      * 开启shiro aop注解支持
      * 使用代理方式;所以需要开启代码支持;
-     *
      * @param securityManager
      * @return
      */
@@ -284,12 +280,12 @@ public class ShiroConfig {
 }
 ```
 
-- Filter Chain定义说明:
+### 过滤器
+
+- Filter Chain定义说明
     - 一个URL可以配置多个Filter,使用逗号分隔
     - 当设置多个过滤器时,全部验证通过,才视为通过
     - 部分过滤器可指定参数,如perms,roles
-
-### 过滤器
 
 | 过滤器简称 |                        对应的 Java 类                        |
 | :--------: | :----------------------------------------------------------: |
@@ -315,7 +311,7 @@ public class ShiroConfig {
 - `user`:表示该 uri 需要认证或通过记住我认证才能访问
 - `logout`:表示注销,可以当作固定配置
 
-**注意**:
+**注意**
 
 - anon,authcBasic,auchc,user 是认证过滤器
 - perms,roles,ssl,rest,port 是授权过滤器
@@ -323,21 +319,6 @@ public class ShiroConfig {
 ## ShiroController
 
 ```java
-package com.example.controller;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 @Controller
 public class ShiroController {
 
@@ -359,65 +340,63 @@ public class ShiroController {
     public String add() {
         return "user/add";
     }
-
-    @RequiresRoles( "admin )
-                   @RequiresPermissions("userInfo:update")
-                   @GetMapping("/user/update")
-                   public String update() {
-                       return "user/update";
-                   }
-
-
-                   @RequestMapping("/login")
-                   public String login(String username, String password, Model model) {
-                       //获取当前的用户
-                       Subject currentUser = SecurityUtils.getSubject();
-                       //封装用户的登录数据
-                       UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-                       try {
-                           //执行登录的方法
-                           currentUser.login(token);
-                           //开启记住登录状态功能
-                           token.setRememberMe(true);
-                           //用户名不存在
-                       } catch (UnknownAccountException e) {
-                           model.addAttribute("msg", "用户名错误");
-                           return "login";
-                           //密码不存在
-                       } catch (IncorrectCredentialsException e) {
-                           model.addAttribute("msg", "密码错误");
-                           return "login";
-                           //账户被锁定
-                       } catch (LockedAccountException e) {
-                           System.out.println("用户名 " + token.getPrincipal() + " 被锁定 !");
-                           return "login";
-                       }
-                       // 认证成功后
-                       if (currentUser.isAuthenticated()) {
-                           System.out.println("用户 " + currentUser.getPrincipal() + " 登陆成功!");
-                           //测试角色
-                           System.out.println("是否拥有 manager 角色:" + currentUser.hasRole("manager"));
-                           //测试权限
-                           System.out.println("是否拥有 user:create 权限" + currentUser.isPermitted("user:create"));
-                       }
-                       return "index";
-                   }
+    @RequiresRoles( "admin")
+    @RequiresPermissions("userInfo:update")
+    @GetMapping("/user/update")
+    public String update() {
+        return "user/update";
+    }
 
 
-                   @RequestMapping("/403")
-                   @ResponseBody
-                   public String unauthorized() {
-                       return "未经授权无法访问此页面";
-                   }
+    @RequestMapping("/login")
+    public String login(String username, String password, Model model) {
+        //获取当前的用户
+        Subject currentUser = SecurityUtils.getSubject();
+        //封装用户的登录数据
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            //执行登录的方法
+            currentUser.login(token);
+            //开启记住登录状态功能
+            token.setRememberMe(true);
+            //用户名不存在
+        } catch (UnknownAccountException e) {
+            model.addAttribute("msg", "用户名错误");
+            return "login";
+            //密码不存在
+        } catch (IncorrectCredentialsException e) {
+            model.addAttribute("msg", "密码错误");
+            return "login";
+            //账户被锁定
+        } catch (LockedAccountException e) {
+            System.out.println("用户名 " + token.getPrincipal() + " 被锁定 !");
+            return "login";
+        }
+        // 认证成功后
+        if (currentUser.isAuthenticated()) {
+            System.out.println("用户 " + currentUser.getPrincipal() + " 登陆成功!");
+            //测试角色
+            System.out.println("是否拥有 manager 角色:" + currentUser.hasRole("manager"));
+            //测试权限
+            System.out.println("是否拥有 user:create 权限" + currentUser.isPermitted("user:create"));
+        }
+        return "index";
+    }
 
-                   @RequestMapping("/logout")
-                   @ResponseBody
-                   public String logout() {
-                       Subject currentUser = SecurityUtils.getSubject();
-                       currentUser.logout();
-                       return "注销成功";
-                   }
-                   }
+    @RequestMapping("/403")
+    @ResponseBody
+    public String unauthorized() {
+        return "未经授权无法访问此页面";
+    }
+
+    @RequestMapping("/logout")
+    @ResponseBody
+    public String logout() {
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.logout();
+        return "注销成功";
+    }
+}
 ```
 
 ### 使用注解进行用户进行授权校验

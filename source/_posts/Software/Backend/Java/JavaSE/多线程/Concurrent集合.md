@@ -38,29 +38,29 @@ Collections.synchronizedSet(new HashSet<>());
 import java.util.concurrent.CopyOnWriteArrayList;
 // java.util.ConcurrentModificationException 并发修改异常!
 public class ListTest {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    List<String> list = new CopyOnWriteArrayList<>();
-    for (int i = 1; i <= 10; i++) {
-      new Thread(()->{
-        list.add(UUID.randomUUID().toString().substring(0,5));
-        System.out.println(list);
-      },String.valueOf(i)).start();
+        List<String> list = new CopyOnWriteArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            new Thread(()->{
+                list.add(UUID.randomUUID().toString().substring(0,5));
+                System.out.println(list);
+            },String.valueOf(i)).start();
+        }
     }
-  }
 }
 ```
 
 ```java
 public class SetTest {
-  public static void main(String[] args) {
-    Set<String> set = new CopyOnWriteArraySet<>();
-    for (int i = 1; i <=30 ; i++) {
-      new Thread(()->{
-        set.add(UUID.randomUUID().toString().substring(0,5));
-        System.out.println(set); },String.valueOf(i)).start();
+    public static void main(String[] args) {
+        Set<String> set = new CopyOnWriteArraySet<>();
+        for (int i = 1; i <=30 ; i++) {
+            new Thread(()->{
+                set.add(UUID.randomUUID().toString().substring(0,5));
+                System.out.println(set); },String.valueOf(i)).start();
+        }
     }
-  }
 }
 ```
 
@@ -70,30 +70,16 @@ public class SetTest {
 
 -   JDK1.7
 
-    -   采用Segment + HashEntry的方式进行实现的,Segment 类继承于 ReentrantLock 类,从而使得 Segment 对象能充当锁的角色,每个 Segment 对象用来守护其(成员对象 table 中)包含的若干个桶
-    -   size的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:
+    -   ConcurrentHashMap 和 HashMap 实现上类似，最主要的差别是 ConcurrentHashMap 采用了分段锁（Segment）,它继承自重入锁 ReentrantLock，每个分段锁维护着几个桶（HashEntry），多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）。
+    -   在 HashEntry 类中:key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型
+    -   在ConcurrentHashMap 中,如果产生Hash碰撞,将采用**拉链法**来处理,即把碰撞的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反
+    -   size()的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:
         1.  如果前后两次计算结果相同,则说明计算出来的元素个数是准确的
         2.  如果前后两次计算结果都不同,则给每个Segment进行加锁,再计算一次元素的个数
-
-    -   ConcurrentHashMap 类中包含两个静态内部类 HashEntry 和 Segment,HashEntry 用来封装映射表的键 / 值对,Segment 用来充当锁的角色,每个 Segment 对象守护整个散列映射表的若干个桶,每个桶是由若干个 HashEntry 对象链接起来的链表,一个 ConcurrentHashMap 实例中包含由若干个 Segment 对象组成的数组,HashEntry 用来封装散列映射表中的键值对,在 HashEntry 类中,key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型
-    -   在ConcurrentHashMap 中,在散列时如果产生"碰撞”,将采用"分离链接法”来处理"碰撞”:把"碰撞”的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反
-
+    
 -   JDK1.8
 
-    -   放弃了Segment臃肿的设计,取而代之的是采用Node + CAS + Synchronized来保证并发安全进行实现
-    -   使用一个volatile类型的变量baseCount记录元素的个数,当插入新数据或则删除数据时,会通过addCount()方法更新baseCount,通过累加baseCount和CounterCell数组中的数量,即可得到元素的总个数
-
-```java
-public class MapTest {
-  public static void main(String[] args) {
-    for (int i = 1; i <=30; i++) {
-      new Thread(()->{
-        map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring( 0,5));
-        System.out.println(map); },String.valueOf(i)).start();
-    }
-  }
-}
-```
+    -   放弃了 Segment 臃肿的设计,使用了 CAS 操作来支持更高的并发度，在 CAS 操作失败时使用内置锁 synchronized,在链表过长时会转换为红黑树
 
 ## BlockingQueue
 
@@ -107,30 +93,30 @@ public class MapTest {
 
 ```java
 public static void test() throws InterruptedException {
-  ArrayBlockingQueue blockingQueue = new ArrayBlockingQueue<>(3);
-  blockingQueue.put("a");
-  blockingQueue.put("b");
-  blockingQueue.put("c");
-  blockingQueue.put("d"); // 队列没有位置了,一直阻塞
-  System.out.println(blockingQueue.take());
-  System.out.println(blockingQueue.take());
-  System.out.println(blockingQueue.take());
-  System.out.println(blockingQueue.take()); // 队列为空,一直阻塞
+    ArrayBlockingQueue blockingQueue = new ArrayBlockingQueue<>(3);
+    blockingQueue.put("a");
+    blockingQueue.put("b");
+    blockingQueue.put("c");
+    blockingQueue.put("d"); // 队列没有位置了,一直阻塞
+    System.out.println(blockingQueue.take());
+    System.out.println(blockingQueue.take());
+    System.out.println(blockingQueue.take());
+    System.out.println(blockingQueue.take()); // 队列为空,一直阻塞
 }
 ```
 
 ```java
 public static void test() throws InterruptedException {
-  ArrayBlockingQueue blockingQueue = new ArrayBlockingQueue<>(3);
-  blockingQueue.offer("a");
-  blockingQueue.offer("b");
-  blockingQueue.offer("c");
-  blockingQueue.offer("d",2,TimeUnit.SECONDS); // 等待超过2秒就退出
-  System.out.println("===============");
-  System.out.println(blockingQueue.poll());
-  System.out.println(blockingQueue.poll());
-  System.out.println(blockingQueue.poll());
-  blockingQueue.poll(2,TimeUnit.SECONDS); // 等待超过2秒就退出
+    ArrayBlockingQueue blockingQueue = new ArrayBlockingQueue<>(3);
+    blockingQueue.offer("a");
+    blockingQueue.offer("b");
+    blockingQueue.offer("c");
+    blockingQueue.offer("d",2,TimeUnit.SECONDS); // 等待超过2秒就退出
+    System.out.println("===============");
+    System.out.println(blockingQueue.poll());
+    System.out.println(blockingQueue.poll());
+    System.out.println(blockingQueue.poll());
+    blockingQueue.poll(2,TimeUnit.SECONDS); // 等待超过2秒就退出
 }
 ```
 
@@ -143,38 +129,38 @@ public static void test() throws InterruptedException {
 
 ```java
 public class LinkedBlockingQueueDemo1 {
-  private static Queue<String> queue = new LinkedBlockingQueue<String>();
-  public static void main(String[] args) {
-    // 同时启动两个线程对queue进行操作!
-    new MyThread("ta").start();
-    new MyThread("tb").start();
-  }
-
-  private static void printAll() {
-    String value;
-    Iterator iter = queue.iterator();
-    while(iter.hasNext()) {
-      value = (String)iter.next();
-      System.out.print(value+", ");
-    }
-    System.out.println();
-  }
-
-  private static class MyThread extends Thread {
-    MyThread(String name) {
-      super(name);
+    private static Queue<String> queue = new LinkedBlockingQueue<String>();
+    public static void main(String[] args) {
+        // 同时启动两个线程对queue进行操作!
+        new MyThread("ta").start();
+        new MyThread("tb").start();
     }
 
-    @Override
-    public void run() {
-      int i = 0;
-      while (i++ < 6) {
-        String val = Thread.currentThread().getName()+i;
-        queue.add(val);
-        printAll();
-      }
+    private static void printAll() {
+        String value;
+        Iterator iter = queue.iterator();
+        while(iter.hasNext()) {
+            value = (String)iter.next();
+            System.out.print(value+", ");
+        }
+        System.out.println();
     }
-}
+
+    private static class MyThread extends Thread {
+        MyThread(String name) {
+            super(name);
+        }
+
+        @Override
+        public void run() {
+            int i = 0;
+            while (i++ < 6) {
+                String val = Thread.currentThread().getName()+i;
+                queue.add(val);
+                printAll();
+            }
+        }
+    }
 ```
 
 ### SynchronousQueue
@@ -185,62 +171,62 @@ public class LinkedBlockingQueueDemo1 {
 ```java
 public class SynchronousQueueExample {
 
-  static class SynchronousQueueProducer implements Runnable {
-    protected BlockingQueue<String> blockingQueue;
-    final Random random = new Random();
+    static class SynchronousQueueProducer implements Runnable {
+        protected BlockingQueue<String> blockingQueue;
+        final Random random = new Random();
 
-    public SynchronousQueueProducer(BlockingQueue<String> queue) {
-      this.blockingQueue = queue;
-    }
-
-    @Override
-    public void run() {
-      while (true) {
-        try {
-          String data = UUID.randomUUID().toString();
-          System.out.println("Put: " + data);
-          blockingQueue.put(data);
-          Thread.sleep(1000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+        public SynchronousQueueProducer(BlockingQueue<String> queue) {
+            this.blockingQueue = queue;
         }
-      }
-    }
 
-  }
-
-  static class SynchronousQueueConsumer implements Runnable {
-    protected BlockingQueue<String> blockingQueue;
-    public SynchronousQueueConsumer(BlockingQueue<String> queue) {
-      this.blockingQueue = queue;
-    }
-
-    @Override
-    public void run() {
-      while (true) {
-        try {
-          String data = blockingQueue.take();
-          System.out.println(Thread.currentThread().getName()
-                             + " take(): " + data);
-          Thread.sleep(2000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    String data = UUID.randomUUID().toString();
+                    System.out.println("Put: " + data);
+                    blockingQueue.put(data);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-      }
-    }
-  }
 
-  public static void main(String[] args) {
-    final BlockingQueue<String> synchronousQueue = new SynchronousQueue<String>();
-    SynchronousQueueProducer queueProducer = new SynchronousQueueProducer(
-      synchronousQueue);
-    new Thread(queueProducer).start();
-    SynchronousQueueConsumer queueConsumer1 = new SynchronousQueueConsumer(
-      synchronousQueue);
-    new Thread(queueConsumer1).start();
-    SynchronousQueueConsumer queueConsumer2 = new SynchronousQueueConsumer(
-      synchronousQueue);
-    new Thread(queueConsumer2).start();
-  }
+    }
+
+    static class SynchronousQueueConsumer implements Runnable {
+        protected BlockingQueue<String> blockingQueue;
+        public SynchronousQueueConsumer(BlockingQueue<String> queue) {
+            this.blockingQueue = queue;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    String data = blockingQueue.take();
+                    System.out.println(Thread.currentThread().getName()
+                                       + " take(): " + data);
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        final BlockingQueue<String> synchronousQueue = new SynchronousQueue<String>();
+        SynchronousQueueProducer queueProducer = new SynchronousQueueProducer(
+            synchronousQueue);
+        new Thread(queueProducer).start();
+        SynchronousQueueConsumer queueConsumer1 = new SynchronousQueueConsumer(
+            synchronousQueue);
+        new Thread(queueConsumer1).start();
+        SynchronousQueueConsumer queueConsumer2 = new SynchronousQueueConsumer(
+            synchronousQueue);
+        new Thread(queueConsumer2).start();
+    }
 }
 ```

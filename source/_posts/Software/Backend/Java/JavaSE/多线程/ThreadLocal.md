@@ -21,16 +21,16 @@ categories:
 ## ThreadLocal实现原理
 
 - 首先 ThreadLocal 是一个泛型类,保证可以接受任何类型的对象
-- 因为一个线程内可以存在多个 ThreadLocal 对象,所以其实是 ThreadLocal 内部维护了一个 Map,这个 Map 不是直接使用的 HashMap,而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类,而我们使用的 get(),set() 方法其实都是调用了这个ThreadLocalMap类对应的 get(),set() 方法,例如下面的 set 方法:
+- 因为一个线程内可以存在多个 ThreadLocal 对象,所以其实是 ThreadLocal 内部维护了一个 Map,这个 Map 不是直接使用的 HashMap,而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类,而我们使用的 get(),set() 方法其实都是调用了这个ThreadLocalMap类对应的`get()`,`set()`方法,例如下面的 set 方法:
 
 ```java
 public void set(T value) {
-  Thread t = Thread.currentThread();
-  ThreadLocalMap map = getMap(t);
-  if (map != null)
-    map.set(this, value);
-  else
-    createMap(t, value);
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t);
+    if (map != null)
+        map.set(this, value);
+    else
+        createMap(t, value);
 }
 ```
 
@@ -39,17 +39,17 @@ public void set(T value) {
 
 ```java
 public T get() {
-  Thread t = Thread.currentThread();
-  ThreadLocalMap map = getMap(t);
-  if (map != null)
-    return (T)map.get(this);
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t);
+    if (map != null)
+        return (T)map.get(this);
 
-  // Maps are constructed lazily.  if the map for this thread
-  // doesn't exist, create it, with this ThreadLocal and its
-  // initial value as its only entry.
-  T value = initialValue();
-  createMap(t, value);
-  return value;
+    // Maps are constructed lazily.  if the map for this thread
+    // doesn't exist, create it, with this ThreadLocal and its
+    // initial value as its only entry.
+    T value = initialValue();
+    createMap(t, value);
+    return value;
 }
 ```
 
@@ -57,7 +57,7 @@ public T get() {
 
 ```java
 void createMap(Thread t, T firstValue) {
-  t.threadLocals = new ThreadLocalMap(this, firstValue);
+    t.threadLocals = new ThreadLocalMap(this, firstValue);
 }
 ```
 
@@ -66,7 +66,7 @@ void createMap(Thread t, T firstValue) {
 
 ```java
 static class ThreadLocalMap {
-  ........
+    ........
 }
 ```
 
@@ -75,13 +75,13 @@ static class ThreadLocalMap {
 
 ```java
 static class Entry extends WeakReference<ThreadLocal<?>> {
-  /** The value associated with this ThreadLocal. */
-  Object value;
+    /** The value associated with this ThreadLocal. */
+    Object value;
 
-  Entry(ThreadLocal<?> k, Object v) {
-    super(k);
-    value = v;
-  }
+    Entry(ThreadLocal<?> k, Object v) {
+        super(k);
+        value = v;
+    }
 }
 ```
 
@@ -94,7 +94,7 @@ private final int threadLocalHashCode = nextHashCode();
 private static AtomicInteger nextHashCode = new AtomicInteger();
 private static final int HASH_INCREMENT = 0x61c88647;
 private static int nextHashCode() {
-      return nextHashCode.getAndAdd(HASH_INCREMENT);
+    return nextHashCode.getAndAdd(HASH_INCREMENT);
 }
 ```
 
@@ -108,18 +108,18 @@ private static int nextHashCode() {
 
 ```java
 public class Son implements Cloneable{
-  public static void main(String[] args){
-    Thread t = new Thread(new Runnable(){
-      public void run(){
-        ThreadLocal<Son> threadLocal1 = new ThreadLocal<>();
-        threadLocal1.set(new Son());
-        System.out.println(threadLocal1.get());
-        ThreadLocal<Son> threadLocal2 = new ThreadLocal<>();
-        threadLocal2.set(new Son());
-        System.out.println(threadLocal2.get());
-      }});
-    t.start();
-  }
+    public static void main(String[] args){
+        Thread t = new Thread(new Runnable(){
+            public void run(){
+                ThreadLocal<Son> threadLocal1 = new ThreadLocal<>();
+                threadLocal1.set(new Son());
+                System.out.println(threadLocal1.get());
+                ThreadLocal<Son> threadLocal2 = new ThreadLocal<>();
+                threadLocal2.set(new Son());
+                System.out.println(threadLocal2.get());
+            }});
+        t.start();
+    }
 }
 ```
 
@@ -139,15 +139,15 @@ public class Son implements Cloneable{
 
      但是光这样还是不够的,上面的设计思路依赖一个前提条件:要调用ThreadLocalMap的getEntry函数或者set函数,这当然是不可能任何情况都成立的,所以很多情况下需要使用者手动调用ThreadLocal的remove函数,手动删除不再需要的ThreadLocal,防止内存泄露,所以JDK建议将ThreadLocal变量定义成private static的,这样的话ThreadLocal的生命周期就更长,由于一直存在ThreadLocal的强引用,所以ThreadLocal也就不会被回收,也就能保证任何时候都能根据ThreadLocal的弱引用访问到Entry的value值,然后remove它,防止内存泄露
 
-- 建议回收自定义的ThreadLocal变量,尤其在线程池场景下,线程经常会被复用,如果不清理自定义的 ThreadLocal变量,可能会影响后续业务逻辑和造成内存泄露等问题,尽量在代理中使用try-finally块进行回收:
+- 建议回收自定义的ThreadLocal变量,尤其在线程池场景下,线程经常会被复用,如果不清理自定义的 ThreadLocal变量,可能会影响后续业务逻辑和造成内存泄露等问题,尽量在代码中使用try-finally块进行回收:
 
 ```java
 objectThreadLocal.set(userInfo);
 try {
-  // ...
+    // ...
 }
 finally {
-  objectThreadLocal.remove();
+    objectThreadLocal.remove();
 }
 ```
 
@@ -167,35 +167,35 @@ finally {
 private static final ThreadLocal threadSession = new ThreadLocal();
 
 public static Session getSession() throws InfrastructureException {
-  Session s = (Session) threadSession.get();
-  try {
-    if (s == null) {
-      s = getSessionFactory().openSession();
-      threadSession.set(s);
+    Session s = (Session) threadSession.get();
+    try {
+        if (s == null) {
+            s = getSessionFactory().openSession();
+            threadSession.set(s);
+        }
+    } catch (HibernateException ex) {
+        throw new InfrastructureException(ex);
     }
-  } catch (HibernateException ex) {
-    throw new InfrastructureException(ex);
-  }
-  return s;
+    return s;
 }
 ```
 
 **解决线程安全的问题**
 
-比如Java7中的SimpleDateFormat不是线程安全的,可以用ThreadLocal来解决这个问题:
+- 比如Java7中的SimpleDateFormat不是线程安全的,可以用ThreadLocal来解决这个问题:
 
 ```java
 public class DateUtil {
-  private static ThreadLocal<SimpleDateFormat> format1 = new ThreadLocal<SimpleDateFormat>() {
-    @Override
-    protected SimpleDateFormat initialValue() {
-      return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    }
-  };
+    private static ThreadLocal<SimpleDateFormat> format1 = new ThreadLocal<SimpleDateFormat>() {
+        @Override
+        protected SimpleDateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+    };
 
-  public static String formatDate(Date date) {
-    return format1.get().format(date);
-  }
+    public static String formatDate(Date date) {
+        return format1.get().format(date);
+    }
 }
 ```
 
@@ -203,7 +203,7 @@ public class DateUtil {
 
 ## ThreadLocalRandom
 
-ThreadLocalRandom使用ThreadLocal的原理,让每个线程内持有一个本地的种子变量,该种子变量只有在使用随机数时候才会被初始化,多线程下计算新种子时候是根据自己线程内维护的种子变量进行更新,从而避免了竞争
+- ThreadLocalRandom使用ThreadLocal的原理,让每个线程内持有一个本地的种子变量,该种子变量只有在使用随机数时候才会被初始化,多线程下计算新种子时候是根据自己线程内维护的种子变量进行更新,从而避免了竞争
 
 ```java
 ThreadLocalRandom.current().nextInt(100)

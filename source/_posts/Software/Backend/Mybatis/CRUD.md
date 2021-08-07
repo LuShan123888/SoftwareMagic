@@ -17,9 +17,9 @@ categories:
 
 ## select
 
-### 实例
+**实例**
 
-#### 根据id查询用户
+### 根据id查询用户
 
 1. 在UserMapper中添加对应方法
 
@@ -53,7 +53,7 @@ public void tsetSelectUserById() {
 }
 ```
 
-#### 根据密码和名字查询用户(使用Map)
+### 根据密码和名字查询用户(使用Map)
 
 1. 在接口方法中, 参数直接传递Map
 
@@ -163,9 +163,9 @@ public void testUserByRowBounds(int currentPage, int pageSize) {
 
 ## insert
 
-### 实例
+**实例**
 
-#### 给数据库增加一个用户
+### 给数据库增加一个用户
 
 1. 在UserMapper接口中添加对应的方法
 
@@ -201,9 +201,9 @@ public void testAddUser() {
 
 ## update
 
-### 实例
+**实例**
 
-#### 修改用户的信息
+### 修改用户的信息
 
 1. 编写接口方法
 
@@ -238,9 +238,9 @@ public void testUpdateUser() {
 
 ## delete
 
-### 实例
+**实例**
 
-#### 根据id删除一个用户
+### 根据id删除一个用户
 
 1. 编写接口方法
 
@@ -271,3 +271,17 @@ public void testDeleteUser() {
 }
 ```
 
+## #与$的区别
+
+- `#{} `的作用主要是替换预编译语句(PrepareStatement)中的占位符,可以防止SQL注入攻击
+
+```sql
+INSERT INTO user (name) VALUES (#{name});
+INSERT INTO user (name) VALUES (?);
+```
+
+- `${}` 的作用是直接进行字符串替换
+
+```mysql
+INSERT INTO user (name) VALUES ('${name}');INSERT INTO user (name) VALUES ('test');
+```

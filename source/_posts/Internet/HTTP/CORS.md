@@ -6,7 +6,7 @@ categories:
 ---
 # HTTP CORS
 
-- CORS是一个W3C标准,全称是"跨域资源共享"(Cross-origin resource sharing),它允许浏览器向跨源服务器,发出`XMLHttpRequest`请求,从而克服了AJAX只能同源使用的限制
+- CORS是一个W3C标准,全称是跨域资源共享(Cross-origin resource sharing),它允许浏览器向跨源服务器,发出`XMLHttpRequest`请求,从而克服了AJAX只能同源使用的限制
 - CORS需要浏览器和服务器同时支持,目前,所有浏览器都支持该功能,IE浏览器不能低于IE10
 - 整个CORS通信过程,都是浏览器自动完成,不需要用户参与,对于开发者来说,CORS通信与同源的AJAX通信没有差别,代码完全一样,浏览器一旦发现AJAX请求跨源,就会自动添加一些附加的头信息,有时还会多出一次附加的请求,但用户不会有感觉
 - 因此,实现CORS通信的关键是服务器,只要服务器实现了CORS接口,就可以跨源通信
@@ -48,7 +48,8 @@ User-Agent: Mozilla/5.0...
 ```
 
 - 上面的头信息中,`Origin`字段用来说明,本次请求来自哪个源(协议 + 域名 + 端口),服务器根据这个值,决定是否同意这次请求
-- 如果`Origin`指定的源,不在许可范围内,服务器会返回一个正常的HTTP回应,浏览器发现,这个回应的头信息没有包含`Access-Control-Allow-Origin`字段(详见下文),就知道出错了,从而抛出一个错误,被`XMLHttpRequest`的`onerror`回调函数捕获,注意,这种错误无法通过状态码识别,因为HTTP回应的状态码有可能是200
+- 如果`Origin`指定的源,不在许可范围内,服务器会返回一个正常的HTTP回应,浏览器发现,这个回应的头信息没有包含`Access-Control-Allow-Origin`字段(详见下文),就知道出错了,从而抛出一个错误,被`XMLHttpRequest`的`onerror`回调函数捕获
+- **注意**:这种错误无法通过状态码识别,因为HTTP回应的状态码有可能是200
 - 如果`Origin`指定的域名在许可范围内,服务器返回的响应,会多出几个头信息字段
 
 ```http

@@ -13,8 +13,7 @@ categories:
 
 - `Iterator`是一种抽象的数据访问模型,使用`Iterator`模式进行迭代的好处有:
   - 对任何集合都采用同一种访问模型
-  - 调用者对集合内部结构一无所知
-  - 集合类返回的`Iterator`对象知道如何迭代
+  - 调用者不用了解集合的内部结构
 - Java提供了标准的迭代器模型,即集合类实现`java.util.Iterable`接口,返回`java.util.Iterator`实例
 - Iterator接口定义的方法介绍如下:
   - `boolean hasNext()`:判断容器中是否存在下一个可访问元素

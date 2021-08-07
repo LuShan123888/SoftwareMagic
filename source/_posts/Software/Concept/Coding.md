@@ -172,6 +172,10 @@ categories:
 
 ## Java SE
 
+### 基本数据类型和大小
+
+- boolean(1) = byte(1) < short(2) = char(2) < int(4) = float(4) < long(8) = double(8)
+
 ### int和Integer的区别
 
 - int是基本数据类型,Integer是他的包装类
@@ -179,20 +183,21 @@ categories:
 - Integer默认是null,int默认是0
 - Integer变量必须实例化后才能使用,而int变量不需要
 
-### 基本数据类型和大小
-
-- boolean(1) = byte(1) < short(2) = char(2) < int(4) = float(4) < long(8) = double(8)
-
 ### 接口和抽象类的区别
 
-1. 接口中所有的方法隐含的都是抽象的,而抽象类则可以同时包含抽象和非抽象的方法
-2. 类可以实现很多个接口,但是只能继承一个抽象类
-3. Java接口中声明的变量默认都是final的,抽象类可以包含非final的变量
-4. Java接口中的成员函数默认是public的,抽象类的成员函数可以是private,protected或者是public
-5. 抽象类和接口都不能够实例化,但可以定义抽象类和接口类型的引用
-6. 一个类如果继承了某个抽象类或者实现了某个接口都需要对其中的抽象方法全部进行实现,否则该类仍然需要被声明为抽象类
-7. 接口比抽象类更加抽象,因为抽象类中可以定义构造器,可以有抽象方法和具体方法,而接口中不能定义构造器而且其中的方法全部都是抽象方法
-8. 抽象类中的成员可以是private,默认,protected,public的,而接口中的成员全都是public的,抽象类中可以定义成员变量,而接口中定义的成员变量实际上都是常量,有抽象方法的类必须被声明为抽象类,而抽象类未必要有抽象方法
+1. 类可以实现很多个接口,但是只能继承一个抽象类
+2. 接口中所有的方法隐含的都是抽象的除了default方法,而抽象类则可以同时包含抽象和非抽象的方法
+3. 接口中声明的变量默认都是public final的,抽象类可以包含非public final的变量
+4. 抽象类是对实体类的抽象,接口是对行为的抽象
+
+### 访问控制
+
+| 控制等级  | 同一类中   | 同一包中   | 不同包的子类中 | 其他       |
+| --------- | ---------- | ---------- | -------------- | ---------- |
+| private   | 可直接访问 |            |                |            |
+| 默认      | 可直接访问 | 可直接访问 |                |            |
+| protected | 可直接访问 | 可直接访问 | 可直接访问     |            |
+| public    | 可直接访问 | 可直接访问 | 可直接访问     | 可直接访问 |
 
 ### 异常
 
@@ -245,7 +250,7 @@ public static void main(String[]args){
 -   **equals(Object obj)**:指示某个其他对象是否与此对象"相等”
 -   **finalize()**:当垃圾回收器确定不存在对该对象的更多引用时,由对象的垃圾回收器调用此方法
 -   **getClass()**:返回一个对象的运行时类
--   **hashCode()**:返回该对象的哈希码值
+-   **hashCode()**:返回该对象的Hash值
 -   **notify()**:唤醒在此对象监视器上等待的单个线程
 -   **notifyAll()**:唤醒在此对象监视器上等待的所有线程
 -   **toString()**:返回该对象的字符串表示
@@ -351,26 +356,38 @@ public static void main(String[]args){
 - 实现Runnable接口
 - 实现Callable接口
 
-### 线程有关的方法
+### 多线程有关的方法
 
-- `Thread.sleep(long millis)`:一定是当前线程调用此方法,当前线程进入TIMED_WAITING状态,但不释放对象锁,millis后线程自动苏醒进入就绪状态
+- `Thread.sleep(long millis)`:一定是当前线程调用此方法,当前线程进入`TIMED_WAITING`状态,但不释放对象锁,millis后线程自动苏醒进入就绪状态
 - `Thread.yield()`:一定是当前线程调用此方法,当前线程放弃获取的CPU时间片,但不释放锁资源,由运行状态变为就绪状态,让OS再次选择线程
 - `thread.join()/thread.join(long millis)`:当前线程里调用其它线程t的join方法,当前线程进入`WAITING/TIMED_WAITING`状态,当前线程不会释放已经持有的对象锁,线程t执行完毕或者millis时间到,当前线程一般情况下进入RUNNABLE状态,也有可能进入BLOCKED状态(因为join是基于wait实现的)
-- `obj.wait()`:当前线程调用对象的wait()方法,当前线程释放对象锁,进入等待队列,依靠notify()/notifyAll()唤醒或者wait(long timeout) timeout时间到自动唤醒
+- `thread.interrupt()`:标记线程为中断状态，不过不会中断正在运行的线程
+- `thread.isInterrupted()`:测试线程是否已经中断。该方法由对象调用
+- `obj.wait()`:当前线程调用对象的`wait()`方法,当前线程释放对象锁,进入等待队列,依靠`notify()/notifyAll()`唤醒或者`wait(long timeout)` timeout时间到自动唤醒
+    - `ObjectSynchronizer::wait`方法通过object的对象中找到ObjectMonitor对象调用方法`void ObjectMonitor::wait(jlong millis, bool interruptible, TRAPS) `
+    - 通过`ObjectMonitor::AddWaiter`调用把新建立的`ObjectWaiter`对象放入到`_WaitSet`的队列的末尾中然后在`ObjectMonitor::exit`释放锁,接着 `thread_ParkEvent->park`也就是wait
 - `obj.notify()`:唤醒在此对象监视器上等待的单个线程,选择是任意性的
-- `notifyAll()`:唤醒在此对象监视器上等待的所有线程
+- `obj.notifyAll()`:唤醒在此对象监视器上等待的所有线程
 
-### wait方法的底层原理
+### 停止线程
 
-- `ObjectSynchronizer::wait`方法通过object的对象中找到ObjectMonitor对象调用方法`void ObjectMonitor::wait(jlong millis, bool interruptible, TRAPS) `
-- 通过`ObjectMonitor::AddWaiter`调用把新建立的`ObjectWaiter`对象放入到`_WaitSet`的队列的末尾中然后在`ObjectMonitor::exit`释放锁,接着 `thread_ParkEvent->park`也就是wait
+- **stop()停止**:   线程调用stop()方法会被暴力停止,方法已弃用。该方法会有不好的后果：
+    1. 强制让线程停止有可能使一些清理性的工作得不到完成。
+    2. 对锁定的对象进行了**解锁**，导致数据得不到同步的处理，出现数据不一致的问题（比如一个方法加上了synchronized，并在其中进行了一个长时间的处理，而在处理结束之前该线程进行了`stop()`,则未完成的数据将没有进行到同步的处理）
+- **异常法停止**: 线程调用interrupt()方法后，在线程的run方法中判断当前对象的interrupted状态，如果是中断状态则抛出异常，达到中断线程的效果。
+- **在沉睡中停止**:先将线程sleep，然后调用interrupt标记中断状态，interrupt会将阻塞状态的线程中断。会抛出中断异常，达到停止线程的效果
 
 ### CAS
 
--  CAS,是Compare and Swap的简称,在这个机制中有三个核心的参数:
-- 主内存中存放的共享变量的值:V(一般情况下这个V是内存的地址值,通过这个地址可以获得内存中的值)
-- 工作内存中共享变量的副本值,也叫预期值:A
-- 需要将共享变量更新到的最新值:B
+-  CAS,是Compare and Swap的简称,在这个机制中有三个核心的参数
+    - 主内存中存放的共享变量的值:V(一般情况下这个V是内存的地址值,通过这个地址可以获得内存中的值)
+    - 工作内存中共享变量的副本值,也叫预期值:A
+    - 需要将共享变量更新到的最新值:B
+- 如果内存中的值与预期值一样,则更新为最新值
+-  **ABA问题**
+    - CAS需要在操作值的时候检查内存值是否发生变化,没有发生变化才会更新内存值,但是如果内存值原来是A,后来变成了B,然后又变成了A,那么CAS进行检查时会发现值没有发生变化,但是实际上是有变化的,ABA问题的解决思路就是在变量前面添加版本号,每次变量更新的时候都把版本号加一,这样变化过程就从`A－B－A`变成了`1A－2B－3A`
+
+    - JDK从1.5开始提供了AtomicStampedReference类来解决ABA问题,具体操作封装在compareAndSet()中,compareAndSet()首先检查当前引用和当前标志与预期引用和预期标志是否相等,如果都相等,则以原子方式将引用值和标志的值设置为给定的更新值
 
 ### cyclicbarrier与countdownlatch区别
 
@@ -380,48 +397,7 @@ public static void main(String[]args){
 
 ### 多线程回调
 
-所谓回调,就是客户程序C调用服务程序S中的某个方法A,然后S又在某个时候反过来调用C中的某个方法B,对于C来说,这个B方法便叫做回调方法框架
-
-### 锁
-
-- **乐观锁与悲观锁**
-
-    - 对于同一个数据的并发操作,悲观锁认为自己在使用数据的时候一定有别的线程来修改数据,因此在获取数据的时候会先加锁,确保数据不会被别的线程修改,Java中,synchronized关键字和Lock的实现类都是悲观锁
-
-    - 而乐观锁认为自己在使用数据时不会有别的线程修改数据,所以不会添加锁,只是在更新数据的时候去判断之前有没有别的线程更新了这个数据,如果这个数据没有被更新,当前线程将自己修改的数据成功写入,如果数据已经被其他线程更新,则根据不同的实现方式执行不同的操作(例如报错或者自动重试)
-
-    - 乐观锁在Java中是通过使用无锁编程来实现,最常采用的是CAS算法,Java原子类中的递增操作就通过CAS自旋实现的
-
-    - **ABA问题**
-
-        - CAS需要在操作值的时候检查内存值是否发生变化,没有发生变化才会更新内存值,但是如果内存值原来是A,后来变成了B,然后又变成了A,那么CAS进行检查时会发现值没有发生变化,但是实际上是有变化的,ABA问题的解决思路就是在变量前面添加版本号,每次变量更新的时候都把版本号加一,这样变化过程就从`A－B－A`变成了`1A－2B－3A`
-
-        - JDK从1.5开始提供了AtomicStampedReference类来解决ABA问题,具体操作封装在compareAndSet()中,compareAndSet()首先检查当前引用和当前标志与预期引用和预期标志是否相等,如果都相等,则以原子方式将引用值和标志的值设置为给定的更新值
-
-- **公平锁与非公平锁**
-
-    - 公平锁是指多个线程按照申请锁的顺序来获取锁,线程直接进入队列中排队,队列中的第一个线程才能获得锁,公平锁的优点是等待锁的线程不会饿死,缺点是整体吞吐效率相对非公平锁要低,等待队列中除第一个线程以外的所有线程都会阻塞,CPU唤醒阻塞线程的开销比非公平锁大
-    - 非公平锁是多个线程加锁时直接尝试获取锁,获取不到才会到等待队列的队尾等待,但如果此时锁刚好可用,那么这个线程可以无需阻塞直接获取到锁,所以非公平锁有可能出现后申请锁的线程先获取锁的场景,非公平锁的优点是可以减少唤起线程的开销,整体的吞吐效率高,因为线程有几率不阻塞直接获得锁,CPU不必唤醒所有线程,缺点是处于等待队列中的线程可能会饿死,或者等很久才会获得锁
-
-- **独享锁与共享锁**
-
-    - 独享锁也叫排他锁,是指该锁一次只能被一个线程所持有,如果线程T对数据A加上排它锁后,则其他线程不能再对A加任何类型的锁,获得排它锁的线程即能读数据又能修改数据,JDK中的synchronized和JUC中Lock的实现类就是互斥锁
-    - 共享锁是指该锁可被多个线程所持有,如果线程T对数据A加上共享锁后,则其他线程只能对A再加共享锁,不能加排它锁,获得共享锁的线程只能读数据,不能修改数据
-    - 独享锁与共享锁也是通过AQS来实现的,通过实现不同的方法,来实现独享或者共享
-
-- **可重入锁与非可重入锁**
-
-    - 可重入锁又名递归锁,是指在同一个线程在外层方法获取锁的时候,再进入该线程的内层方法会自动获取锁(前提锁对象得是同一个对象或者class),不会因为之前已经获取过还没释放而阻塞,Java中ReentrantLock和synchronized都是可重入锁,可重入锁的优点是可以一定程度避免死锁
-
-### AQS
-
-Java中的锁,可以分为Synchronized,AQS这两类
-
-- Synchronized是隐式锁,通过内部对象Monitor(监控器锁)实现,具体是由JVM中C++代码实现,它有一个同步队列,一个等待队列
-- AQS是显示锁,通过CAS,LockSurpport,CLH 双向链表实现,是由java代码实现,它有一个同步队列,多个等待队列,当使用Condition的时候,调用condition的await方法,将会使当前线程进入等待队列,等待队列的唤醒是调用condition的signal方法,而AQS可以设置多个Condition,也就有了多个等待队列
-- AQS的同步队列和等待队列如下图:
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-20-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2hlbmc1MjE4,size_16,color_FFFFFF,t_70.png)
+- 所谓回调,就是客户程序C调用服务程序S中的某个方法A,然后S又在某个时候反过来调用C中的某个方法B,对于C来说,这个B方法便叫做回调方法框架
 
 ### 原子性,可见性,有序性
 
@@ -449,29 +425,103 @@ Java中的锁,可以分为Synchronized,AQS这两类
 - **有序性**:`volatile`是通过编译器在生成字节码时,在指令序列中添加**内存屏障**来禁止指令重排序的
 - 当对volatile变量执行写操作后,JMM会把工作内存中的最新变量值强制刷新到主内存写操作会导致其他线程中的缓存无效这样,其他线程使用缓存时,发现本地工作内存中此变量无效,便从主内存中获取,这样获取到的变量便是最新的值,实现了线程的可见性
 
-### synchronize
+### 锁
 
-- synchronize是java中的关键字,可以用来修饰实例方法,静态方法,还有代码块,主要有三种作用:可以确保原子性,可见性,有序性
+- **乐观锁与悲观锁**
+
+    - 对于同一个数据的并发操作,悲观锁认为自己在使用数据的时候一定有别的线程来修改数据,因此在获取数据的时候会先加锁,确保数据不会被别的线程修改,Java中,synchronized关键字和Lock的实现类都是悲观锁
+
+    - 而乐观锁认为自己在使用数据时不会有别的线程修改数据,所以不会添加锁,只是在更新数据的时候去判断之前有没有别的线程更新了这个数据,如果这个数据没有被更新,当前线程将自己修改的数据成功写入,如果数据已经被其他线程更新,则根据不同的实现方式执行不同的操作(例如报错或者自动重试)
+
+    - 乐观锁在Java中是通过使用无锁编程来实现,最常采用的是CAS算法,Java原子类中的递增操作就通过CAS自旋实现的
+
+- **公平锁与非公平锁**
+
+    - 公平锁是指多个线程按照申请锁的顺序来获取锁,线程直接进入队列中排队,队列中的第一个线程才能获得锁,公平锁的优点是等待锁的线程不会饿死,缺点是整体吞吐效率相对非公平锁要低,等待队列中除第一个线程以外的所有线程都会阻塞,CPU唤醒阻塞线程的开销比非公平锁大
+    - 非公平锁是多个线程加锁时直接尝试获取锁,获取不到才会到等待队列的队尾等待,但如果此时锁刚好可用,那么这个线程可以无需阻塞直接获取到锁,所以非公平锁有可能出现后申请锁的线程先获取锁的场景,非公平锁的优点是可以减少唤起线程的开销,整体的吞吐效率高,因为线程有几率不阻塞直接获得锁,CPU不必唤醒所有线程,缺点是处于等待队列中的线程可能会饿死,或者等很久才会获得锁
+
+- **独享锁与共享锁**
+
+    - 独享锁也叫排他锁,是指该锁一次只能被一个线程所持有,如果线程T对数据A加上排它锁后,则其他线程不能再对A加任何类型的锁,获得排它锁的线程即能读数据又能修改数据,JDK中的synchronized和JUC中Lock的实现类就是互斥锁
+    - 共享锁是指该锁可被多个线程所持有,如果线程T对数据A加上共享锁后,则其他线程只能对A再加共享锁,不能加排它锁,获得共享锁的线程只能读数据,不能修改数据
+    - 独享锁与共享锁也是通过AQS来实现的,通过实现不同的方法,来实现独享或者共享
+
+- **可重入锁与非可重入锁**
+
+    - 可重入锁又名递归锁,是指在同一个线程在外层方法获取锁的时候,再进入该线程的内层方法会自动获取锁(前提锁对象得是同一个对象或者class),不会因为之前已经获取过还没释放而阻塞,Java中ReentrantLock和synchronized都是可重入锁,可重入锁的优点是可以一定程度避免死锁
+
+#### 死锁
+
+- **避免死锁**
+    1. 避免一个线程同时获得多个锁
+    2. 避免一个线程在锁内部占有多个资源,尽量保证每个锁只占用一个资源
+    3. 尝试使用定时锁,使用`lock.tryLock ( timeOut )` ,当超时等待时当前线程不会堵塞
+    4. 线程获取锁的顺序要一致,即严格按照先获取`lockA`,再获取`lockB`的顺序
+- **解决死锁**
+    1. 使用`jps -l`定位进程号
+    2. 使用`jstack`进程号,找到死锁问题并解决
+
+#### synchronize
+
+- synchronize可以用来修饰实例方法,静态方法,还有代码块,主要有三种作用:可以确保原子性,可见性,有序性
 - synchronized的底层原理是跟monitor有关,也就是视图器锁,每个对象都有一个关联的monitor,当Synchronize获得monitor对象的所有权后会进行两个指令:加锁指令跟减锁指令
-- monitor里面有个计数器,初始值是从0开始的,如果一个线程想要获取monitor的所有权,就看看它的计数器是不是0,如果是0的话,那么就说明没人获取锁,那么它就可以获取锁了,然后将计数器+1,也就是执行monitorenter加锁指令,monitorexit减锁指令是跟在程序执行结束和异常里的,如果不是0的话,就会陷入一个堵塞等待的过程,直到为0等待结束
-- synchronized是同步锁,同步块内的代码相当于同一时刻单线程执行,故不存在原子性和指令重排序的问题
+- monitor里面有个计数器,初始值是从0开始的,如果一个线程想要获取monitor的所有权,就查看它计数器是不是0
+    - 如果是0的话,那么就说明没人获取锁,那么它就可以获取锁了,然后将计数器+1,也就是执行monitorenter加锁指令,monitorexit减锁指令是跟在程序执行结束和异常里的
+    - 如果不是0的话,就会陷入一个堵塞等待的过程,直到为0等待结束
+- synchronized是独占锁,同步块内的代码相当于同一时刻单线程执行,故不存在原子性和指令重排序的问题
 
-### Lock
+#### AQS
 
-- Lock 能完成synchronized所实现的所有功能
-- Lock可以知道是不是已经获取到锁,而synchronized无法知道
-- Lock是显式锁(手动开启和关闭锁),synchronized是隐式锁,出了作用域自动释放
+- AQS核心思想是，如果被请求的共享资源空闲，那么就将当前请求资源的线程设置为有效的工作线程，将共享资源设置为锁定状态；如果共享资源被占用，就需要一定的阻塞等待唤醒机制来保证锁分配。这个机制主要用的是CLH队列的变体实现的，将暂时获取不到锁的线程加入到队列中。
+- AQS使用一个Volatile的int类型的成员变量来表示同步状态，通过内置的FIFO队列来完成资源获取的排队工作，通过CAS完成对State值的修改。
+    1. State初始化的时候为0，表示没有任何线程持有锁。
+    2. 当有线程持有该锁时，值就会在原来的基础上+1，同一个线程多次获得锁是，就会多次+1，这里就是可重入的概念。
+    3. 解锁也是对这个字段-1，一直到0，此线程对锁释放。
+- **加锁**
+    - 通过ReentrantLock的加锁方法Lock进行加锁操作。
+    - 会调用到内部类Sync的Lock方法，由于Sync#lock是抽象方法，根据ReentrantLock初始化选择的公平锁和非公平锁，执行相关内部类的Lock方法，本质上都会执行AQS的Acquire方法。
+    - AQS的Acquire方法会执行tryAcquire方法，但是由于tryAcquire需要自定义同步器实现，因此执行了ReentrantLock中的tryAcquire方法，由于ReentrantLock是通过公平锁和非公平锁内部类实现的tryAcquire方法，因此会根据锁类型不同，执行不同的tryAcquire。
+    - tryAcquire是获取锁逻辑，获取失败后，会执行框架AQS的后续逻辑，跟ReentrantLock自定义同步器无关。
+- **解锁**
+    - 通过ReentrantLock的解锁方法Unlock进行解锁。
+    - Unlock会调用内部类Sync的Release方法，该方法继承于AQS。
+    - Release中会调用tryRelease方法，tryRelease需要自定义同步器实现，tryRelease只在ReentrantLock中的Sync实现，因此可以看出，释放锁的过程，并不区分是否为公平锁。
+    - 释放成功后，所有处理由AQS框架完成，与自定义同步器无关。
+
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-20-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpc2hlbmc1MjE4,size_16,color_FFFFFF,t_70.png)
+
+> Q：某个线程获取锁失败的后续流程是什么呢？
+>
+> A：存在某种排队等候机制，线程继续等待，仍然保留获取锁的可能，获取锁流程仍在继续。
+>
+> Q：既然说到了排队等候机制，那么就一定会有某种队列形成，这样的队列是什么数据结构呢？
+>
+> A：是CLH变体的FIFO双端队列。
+>
+> Q：如果处于排队等候机制中的线程一直无法获取锁，需要一直等待么？还是有别的策略来解决这一问题？
+>
+> A：线程所在节点的状态会变成取消状态，取消状态的节点会从队列中释放
+>
+> Q：Lock函数通过Acquire方法进行加锁，但是具体是如何加锁的呢？
+>
+> A：AQS的Acquire会调用tryAcquire方法，tryAcquire由各个自定义同步器实现，通过tryAcquire完成加锁过程。
+
+#### Lock
+
+- Lock是一个接口,而synchronized是Java中的关键字,Lock 能完成synchronized所实现的所有功能
+- synchronized在发生异常时,会自动释放线程占有的锁,因此不会导致死锁现象发生,而Lock在发生异常时,如果没有主动通过`unLock()`去释放锁,则很可能造成死锁现象,因此使用Lock时需要在finally块中释放锁
+- Lock是显式锁(需要手动开启和关闭锁),synchronized是隐式锁,出了作用域自动释放
 - Lock只有代码块锁,synchronized有代码块和方法锁
-- Lock是一个接口,而synchronized是Java中的关键字,synchronized是内置的语言实现,synchronized在发生异常时,会自动释放线程占有的锁,因此不会导致死锁现象发生,而Lock在发生异常时,如果没有主动通过unLock()去释放锁,则很可能造成死锁现象,因此使用Lock时需要在finally块中释放锁
-- Lock可以让等待锁的线程响应中断,而synchronized却不行,使用synchronized时,等待的线程会一直等待下去,不能够响应中断,通过Lock可以知道有没有成功获取锁,而synchronized却无法办到
+- Lock可以知道是不是已经获取到锁,而synchronized无法知道
+- Lock可以让等待锁的线程响应中断,而synchronized却不行,使用synchronized时,等待的线程会一直等待下去,不能够响应中断
 
-#### ReentrantLock
+##### ReentrantLock
 
 - `ReentrantLock`可以替代`synchronized`进行线程同步
 - 必须先获取到锁,再进入`try {...}`代码块,最后使用`finally`保证释放锁
 - 可以使用`tryLock()`尝试获取锁
 
-#### ReadWriteLock
+##### ReadWriteLock
 
 - 使用`ReadWriteLock`可以提高读取效率,读多写少的场景
 - `ReadWriteLock`只允许一个线程写入,允许多个线程在没有写入时同时读取
@@ -540,19 +590,71 @@ Future<?> submit(Runnable task);
 
 ### ThreadLocal
 
-### 多线程按顺序执行
+- ThreadLocal的作用是提供线程内的局部变量,这种变量在线程的生命周期内起作用
+- 因为一个线程内可以存在多个 ThreadLocal 对象,所以其实是 ThreadLocal 内部维护了一个 Map,这个Map的key是 ThreadLocal 类的实例对象,value为用户的值,ThreadLocalMap 是Thread的成员变量
+- **内存泄漏问题**
+    - 实际上 ThreadLocalMap 中使用的 key 为 ThreadLocal 的弱引用,弱引用的特点是,如果这个对象只存在弱引用,那么在下一次垃圾回收的时候必然会被清理掉,这样一来 ThreadLocalMap中使用这个 ThreadLocal 的 key 也会被清理掉,但是,value 是强引用,不会被清理,这样一来就会出现 key 为 null 的 value
+    - ThreadLocalMap实现中已经考虑了这种情况,在调用 set(),get(),remove() 方法的时候,会清理掉 key 为 null 的记录,如果说会出现内存泄漏,那只有在出现了 key 为 null 的记录后,没有手动调用 remove() 方法,并且之后也不再调用 get(),set(),remove() 
+    - 所以尽量在代码中使用finally块进行回收
+
+### 多线程循环打印ABC
+
+- 3个线程A,B,C分别打印三个字母，每个线程循环10次，首先同步，如果不满足打印条件，则调用wait()函数一直等待；之后打印字母，更新state，调用notifyAll()，进入下一次循环。
+
+```java
+public class PrintABC {
+    private static final int PRINT_A = 0;
+    private static final int PRINT_B = 1;
+    private static final int PRINT_C = 2;
+
+    private static class MyThread extends Thread {
+        int which; // 0：打印A；1：打印B；2：打印C
+        static volatile int state; // 线程共有，判断所有的打印状态
+        static final Object t = new Object();
+
+        public MyThread(int which) {
+            this.which = which;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                synchronized (t) {
+                    while (state % 3 != which) {
+                        try {
+                            t.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    System.out.print(toABC(which)); // 执行到这里，表明满足条件，打印
+                    state++;
+                    t.notifyAll(); // 调用notifyAll方法
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new MyThread(PRINT_A).start();
+        new MyThread(PRINT_B).start();
+        new MyThread(PRINT_C).start();
+    }
+
+    private static char toABC(int which) {
+        return (char) ('A' + which);
+    }
+}
+```
+
+
 
 ### 如何实现主线程等待子线程执行完后再继续执行？
 
-1. 可以使用join方法,在主线程内部调用子线程.join方法
+1. 可以使用`join()`方法,在主线程内部调用子线程`join()`方法
 2. CountDownLatch实现
-    - await()方法阻塞当前线程,直到计数器等于0
-    - countDown()方法将计数器减一
-
-### 解决死锁
-
-1.  使用`jps -l`定位进程号
-2.  使用`jstack`进程号,找到死锁问题并解决
+    - `await()`方法阻塞当前线程,直到计数器等于0
+    - `countDown()`方法将计数器减一
 
 ## 集合
 
@@ -588,7 +690,10 @@ Future<?> submit(Runnable task);
 
 ### Iterator和ListIterator
 
-- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中iterator()方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
+- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中`iterator()`方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
+- **优点**
+    - 对任何集合都采用同一种访问模型
+    - 调用者不用了解集合的内部结构
 - **Iterator和ListIterator的区别**
     - Iterator可用来遍历Set和List集合,但是ListIterator只能用来遍历List
     - Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
@@ -596,14 +701,13 @@ Future<?> submit(Runnable task);
 
 ### HashMap
 
-- HashMap基于哈希表的Map接口实现,是以key-value存锗形式存在,即主要用来存放键值对,HashMap的实现不是同步的,这意味着它不是线程安全的,它的key,value都可以为null,此外,HashMap中的映射不是有序的
-- jdk1.8之前HashMap由数组+链表组成的,数组是HashMap的主体,链表则是主要为了解决哈希冲突(两个对象调用的hashCode方法计算的哈希值一致导致计算的教组索引值相同)而存在的("拉链法”解决冲突)
-- jdk1.8以后在解决哈希冲突时有了较大的变化,当链表长度大于阈值(或者红黑树的边界值,默认为8)并且当前数组的长度大于64时,此时此索引位置上的所有数据改为使用红黑树存储
-- **补充**:将链表转换成红黑树前会判断,即便阈值大于8,但是数组长度小于64,此时并不会将链表变为红黑树,而是选择逬行数组扩容
-- 这样做的目的是因为数组比较小,尽量避开红黑树结构,这种情况下变为红黑树结构,反而会降低效率,因为红黑树需要逬行左旋,右旋,变色这些操作来保持平衡,同时数组长度小于64时,搜索时间相对要快些,所以结上所述为了提高性能和减少搜索时间,底层阈值大于8并且数组长度大于64时,链表才转换为红黑树,具体可以参考 **treeifyBin() 方法,**
-- 当然虽然增了红黑树作为底层数据结构,结构变得复杂了,但是阈值大于8并且数组长度大于64时,链表转换为红黑树时,效率也变的更高
-- 使用HashMap,如果key是自定义的类,就必须重写hashcode()和equals()
-- **HashMap的扩容机制**:HashMap底层是数组,在第一次put的时候会初始化,发生第一次扩容到16,它有一个负载因子是0.75,下一次扩容的时候就是当前数组大小*0.75,扩大容量为原来的2倍
+- HashMap基于Hash表的Map接口实现,主要用来存放键值对
+- HashMap通过Hash函数定位元素的存放位置,所以HashMap并不是有序的,使用拉链法解决Hash冲突,在JDK1.8之后,当 HashEntry 的长度大于8并且当前table数组的长度大于64时,将链表改为使用红黑树存储
+    - **补充**:将链表转换成红黑树前会判断,即便阈值大于8,但是数组长度小于64,此时并不会将链表变为红黑树,而是选择逬行数组扩容
+    - 这样做的目的是因为数组比较小,尽量避开红黑树结构,这种情况下变为红黑树结构,反而会降低效率,因为红黑树需要逬行左旋,右旋,变色这些操作来保持平衡,同时数组长度小于64时,搜索时间相对要快些
+- 由于HashMap的插入查询等操作需要用到`hashcode()`和`equals()`,所以如果key是自定义的类,就必须重写这两个方法
+- HashMap的扩容一个耗时的操作,在第一次`put()`的时候会初始化,发生第一次`resize()`到16,默认负载因子是0.75,当容量达到`size*Load Factor`时就会扩大容量为原来的2倍,所以如果我们知道大概的数据量,应该使用对应的构造方法直接初始化指定容量的HashMap
+- HashMap的不是线程安全的,如果需要使用线程安全的Map集合,可以通过Collections类的synchronizedMap方法包装一下,或者直接使用JUC包下的ConcurrentHashMap
 
 ### ConcurrentHashMap
 
@@ -611,18 +715,16 @@ Future<?> submit(Runnable task);
 
 -   JDK1.7
 
-    -   采用Segment + HashEntry的方式进行实现的,Segment 类继承于 ReentrantLock 类,从而使得 Segment 对象能充当锁的角色,每个 Segment 对象用来守护其(成员对象 table 中)包含的若干个桶
-    -   size的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:
+    -   ConcurrentHashMap 和 HashMap 实现上类似，最主要的差别是 ConcurrentHashMap 采用了分段锁（Segment）,它继承自重入锁 ReentrantLock，每个分段锁维护着几个桶（HashEntry），多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）。
+    -   在 HashEntry 类中:key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型
+    -   在ConcurrentHashMap 中,如果产生Hash冲突,将采用**拉链法**来处理,即把碰撞的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反
+    -   size()的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:
         1.  如果前后两次计算结果相同,则说明计算出来的元素个数是准确的
         2.  如果前后两次计算结果都不同,则给每个Segment进行加锁,再计算一次元素的个数
 
-    -   ConcurrentHashMap 类中包含两个静态内部类 HashEntry 和 Segment,HashEntry 用来封装映射表的键 / 值对,Segment 用来充当锁的角色,每个 Segment 对象守护整个散列映射表的若干个桶,每个桶是由若干个 HashEntry 对象链接起来的链表,一个 ConcurrentHashMap 实例中包含由若干个 Segment 对象组成的数组,HashEntry 用来封装散列映射表中的键值对,在 HashEntry 类中,key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型
-    -   在ConcurrentHashMap 中,在散列时如果产生"碰撞”,将采用"分离链接法”来处理"碰撞”:把"碰撞”的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反
-
 -   JDK1.8
 
-    -   放弃了Segment臃肿的设计,取而代之的是采用Node + CAS + Synchronized来保证并发安全进行实现
-    -   使用一个volatile类型的变量baseCount记录元素的个数,当插入新数据或则删除数据时,会通过addCount()方法更新baseCount,通过累加baseCount和CounterCell数组中的数量,即可得到元素的总个数
+    -   放弃了 Segment 臃肿的设计,使用了 CAS 操作来支持更高的并发度，在 CAS 操作失败时使用内置锁 synchronized,在链表过长时会转换为红黑树
 
 ### poll & offer
 
@@ -632,9 +734,10 @@ Future<?> submit(Runnable task);
 | 取队首元素并删除   | E remove()      | E poll()           |
 | 取队首元素但不删除 | E element()     | E peek()           |
 
-### 快速失败(fail-fast)和安全失败(fail-safe)的区别
+### 快速失败(fail-fast)和安全失败(fail-safe)
 
-- Iterator的安全失败是基于对底层集合做拷贝,因此,它不受源集合上修改的影响,java.util包下面的所有的集合类都是快速失败的,而java.util.concurrent包下面的所有的类都是安全失败的,快速失败的迭代器会抛出ConcurrentModificationException异常,而安全失败的迭代器永远不会抛出这样的异常
+- Iterator的安全失败是基于对底层集合做拷贝,因此,它不受源集合上修改的影响,java.util包下面的所有的集合类都是快速失败的
+- JUC包下面的所有的类都是安全失败的,快速失败的迭代器会抛出ConcurrentModificationException异常,而安全失败的迭代器永远不会抛出这样的异常
 
 ### 重写 equals 和 hashCode
 
@@ -696,10 +799,10 @@ public class Singleton {
 
 - **IoC的原理**
 
-    1. 定义用来描述bean的配置的Java类或配置文件
-    2. 解析bean的配置,将bean的配置信息转换为的BeanDefinition对象保存在内存中,spring中采用HashMap进行对象存储,其中会用到一些xml解析技术
+    1. 实例化后的对象被封装在BeanWrapper对象中，并且此时对象仍然是一个原生的状态，并没有进行依赖注入。 
+    2. 紧接着，Spring根据BeanDefinition中的信息进行依赖注入。 
+    3. 并且通过BeanWrapper提供的设置属性的接口完成依赖注入
 
-    - 遍历存放BeanDefinition的HashMap对象,逐条取出BeanDefinition对象,获取bean的配置信息,利用Java的反射机制实例化对象,将实例化后的对象保存在另外一个Map中
 
 ### DI
 
@@ -709,10 +812,9 @@ public class Singleton {
     - p命名空间和c命名空间注入
     - 构造器注入
     - 自动装配
-    - 工厂模式的方法注入
 - @Autowired 和@Resource区别
-    - @Autowired注解是按照类型(byType)装配依赖对象,当有且仅有一个匹配的Bean时,Spring将其注入@Autowired标注的变量中,如果我们想使用按照名称(byName)来装配,可以结合@Qualifier注解一起使用
-    - @Resource默认按照ByName自动注入,@Resource有两个重要的属性:name和type,而Spring将@Resource注解的name属性解析为bean的名字,而type属性则解析为bean的类型,所以,如果使用name属性,则使用byName的自动注入策略,而使用type属性时则使用byType自动注入策略,如果既不制定name也不制定type属性,这时将通过反射机制使用byName自动注入策略
+    - @Autowired默认按类型装配(属于Spring规范),如果我们想使用名称装配可以结合@Qualifier注解进行使用
+    - @Resource默认按照名称进行装配(属于J2EE规范), 名称可以通过name属性进行指定,而使用type属性时则使用byType自动注入策略
 
 ### Bean 作用域
 
@@ -721,9 +823,31 @@ public class Singleton {
 
 ### Bean 的生命周期
 
-Spring生命周期流程图
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-308572_1537967995043_4D7CF33471A392D943F00167D1C86C10.png)
+1. 实例化Bean
+    - 对于BeanFactory容器，当客户向容器请求一个尚未初始化的bean时，或初始化bean的时候需要注入另一个尚未初始化的依赖时，容器就会调用createBean进行实例化。 
+    - 对于ApplicationContext容器，当容器启动结束后，便实例化所有的bean。 容器通过获取BeanDefinition对象中的信息进行实例化。并且这一步仅仅是简单的实例化，并未进行依赖注入。 实例化对象被包装在BeanWrapper对象中，BeanWrapper提供了设置对象属性的接口，从而避免了使用反射机制设置属性。
+2. 设置对象属性（依赖注入）
+    - 实例化后的对象被封装在BeanWrapper对象中，并且此时对象仍然是一个原生的状态，并没有进行依赖注入。 
+    - 紧接着，Spring根据BeanDefinition中的信息进行依赖注入。 
+    - 并且通过BeanWrapper提供的设置属性的接口完成依赖注入。
+3. 注入Aware接口
+    - 紧接着，Spring会检测该对象是否实现了xxxAware接口，并将相关的xxxAware实例注入给bean。
+        - 实现BeanFactoryAware 主要目的是为了获取Spring容器，如Bean通过Spring容器发布事件等
+        - 实现BeanNameAware清主要是为了通过Bean的引用来获得Bean的ID，一般业务中是很少有用到Bean的ID的
+        - 实现ApplicationContextAware接口，作用与BeanFactory类似都是为了获取Spring容器
+4. BeanPostProcessor
+    - 当经过上述几个步骤后，bean对象已经被正确构造，但如果你想要对象被使用前再进行一些自定义的处理，就可以通过BeanPostProcessor接口实现。
+    - `postProcessBeforeInitialzation( Object bean, String beanName ) `:当前正在初始化的bean对象会被传递进来，我们就可以对这个bean作任何处理,这个函数会先于InitialzationBean执行，因此称为前置处理。 所有Aware接口的注入就是在这一步完成的。
+5. InitializingBean与init-method
+    - 当BeanPostProcessor的前置处理完成后就会进入本阶段。 InitializingBean接口只有一个函数：`afterPropertiesSet()`
+    - 这一阶段也可以在bean正式构造完成前增加我们自定义的逻辑，但它与前置处理不同，由于该函数并不会把当前bean对象传进来，因此在这一步没办法处理对象本身，只能增加一些额外的逻辑。 
+    - 若要使用它，我们需要让bean实现该接口，并把要增加的逻辑写在该函数中。然后Spring会在前置处理完成后检测当前bean是否实现了该接口，并执行afterPropertiesSet函数。
+    - 当然，Spring为了降低对客户代码的侵入性，给bean的配置提供了init-method属性，该属性指定了在这一阶段需要执行的函数名。Spring便会在初始化阶段执行我们设置的函数。init-method本质上仍然使用了InitializingBean接口。
+6. BeanPostProcessor
+    - 与第4步类似,如果需要在初始化之后执行一些自定义的处理,就可以通过BeanPostProcessor接口实现。
+    - `postProcessAfterInitialzation( Object bean, String beanName ) `当前正在初始化的bean对象会被传递进来，我们就可以对这个bean作任何处理,这个函数会在InitialzationBean完成后执行，因此称为后置处理。
+7. DisposableBean和destroy-method
+    - 和init-method一样，通过给destroy-method指定函数，就可以在bean销毁前执行指定的逻辑。
 
 ### Spring ApplicationContext 容器
 
@@ -767,484 +891,46 @@ Spring生命周期流程图
 ### Spring MVC 拦截器的执行顺序
 
 - SpringMVC的拦截器实现HandlerInterceptor接口后,会有三个抽象方法需要实现,分别为方法前执行preHandle,方法后postHandle,页面渲染后afterCompletion
-    - preHandle 按拦截器定义顺序调用
-    - postHandler 按拦截器定义逆序调用,在拦截器链内所有拦截器返成功调用
-    - afterCompletion 按拦截器定义逆序调用, 只有preHandle返回true才调用
+    - **preHandle**:按拦截器定义顺序调用
+    - **postHandler**:按拦截器定义逆序调用,在拦截器链内所有拦截器返成功调用
+    - **afterCompletion**:按拦截器定义逆序调用, 只有preHandle返回true才调用
 
-### Spring Boot Application 的加载过程
+### Spring Security
 
-### Spring Security 原理
-
-**过滤器**
+#### 过滤器
 
 - Spring Security 基本都是通过过滤器来完成配置的身份认证,权限认证以及登出
 - Spring Security 在 Servlet 的过滤链(filter chain)中注册了一个过滤器 `FilterChainProxy`,它会把请求代理到 Spring Security 自己维护的多个过滤链,每个过滤链会匹配一些 URL,如果匹配则执行对应的过滤器,过滤链是有顺序的,一个请求只会执行第一条匹配的过滤链,Spring Security 的配置本质上就是新增,删除,修改过滤器
-- 默认情况下系统帮我们注入的这 15 个过滤器,分别对应配置不同的需求,接下来我们重点是分析下 `UsernamePasswordAuthenticationFilter` 这个过滤器,他是用来使用用户名和密码登录认证的过滤器,但是很多情况下我们的登录不止是简单的用户名和密码,又可能是用到第三方授权登录,这个时候我们就需要使用自定义过滤器,当然这里不做详细说明,只是说下自定义过滤器怎么注入
-
-```java
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-
-  http.addFilterAfter(...);
-  ...
-}
-```
-
-**身份认证流程**
-
-在开始身份认证流程之前我们需要了解下几个基本概念
-
-**SecurityContextHolder**
-
-`SecurityContextHolder` 存储 `SecurityContext` 对象,`SecurityContextHolder` 是一个存储代理,有三种存储模式分别是:
-
-- MODE_THREADLOCAL:SecurityContext 存储在线程中
-- MODE_INHERITABLETHREADLOCAL:`SecurityContext` 存储在线程中,但子线程可以获取到父线程中的 `SecurityContext`
-- MODE_GLOBAL:`SecurityContext` 在所有线程中都相同
-
-`SecurityContextHolder` 默认使用 MODE_THREADLOCAL 模式,`SecurityContext` 存储在当前线程中,调用 `SecurityContextHolder` 时不需要显示的参数传递,在当前线程中可以直接获取到 `SecurityContextHolder` 对象
-
-```java
-//获取当前线程里面认证的对象
-SecurityContext context = SecurityContextHolder.getContext();
-Authentication authentication = context.getAuthentication();
-
-//保存认证对象 (一般用于自定义认证成功保存认证对象)
-SecurityContextHolder.getContext().setAuthentication(authResult);
-
-//清空认证对象 (一般用于自定义登出清空认证对象)
-SecurityContextHolder.clearContext();
-```
-
-**2.Authentication**
-
-`Authentication` 即验证,表明当前用户是谁,什么是验证,比如一组用户名和密码就是验证,当然错误的用户名和密码也是验证,只不过 Spring Security 会校验失败
-
-`Authentication` 接口
-
-```java
-public interface Authentication extends Principal, Serializable {
-  //获取用户权限,一般情况下获取到的是用户的角色信息
-  Collection<? extends GrantedAuthority> getAuthorities();
-  //获取证明用户认证的信息,通常情况下获取到的是密码等信息,不过登录成功就会被移除
-  Object getCredentials();
-  //获取用户的额外信息,比如 IP 地址,经纬度等
-  Object getDetails();
-  //获取用户身份信息,在未认证的情况下获取到的是用户名,在已认证的情况下获取到的是 UserDetails (暂时理解为,当前应用用户对象的扩展)
-  Object getPrincipal();
-  //获取当前 Authentication 是否已认证
-  boolean isAuthenticated();
-  //设置当前 Authentication 是否已认证
-  void setAuthenticated(boolean isAuthenticated);
-}
-```
-
-**3.AuthenticationManager ProviderManager AuthenticationProvider**
-
-其实这三者很好区分,`AuthenticationManager` 主要就是为了完成身份认证流程,`ProviderManager`是 `AuthenticationManager` 接口的具体实现类,`ProviderManager` 里面有个记录 `AuthenticationProvider` 对象的集合属性 `providers`,`AuthenticationProvider` 接口类里有两个方法
-
-```java
-public interface AuthenticationProvider {
-  //实现具体的身份认证逻辑,认证失败抛出对应的异常
-  Authentication authenticate(Authentication authentication)
-    throws AuthenticationException;
-  //该认证类是否支持该 Authentication 的认证
-  boolean supports(Class<?> authentication);
-}
-```
-
-接下来就是遍历 `ProviderManager` 里面的 `providers` 集合,找到和合适的 `AuthenticationProvider`完成身份认证
-
-**4.UserDetailsService UserDetails**
-
-在 `UserDetailsService` 接口中只有一个简单的方法
-
-```java
-public interface UserDetailsService {
-    //根据用户名查到对应的 UserDetails 对象
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-}
-```
-
-**5.流程**
-
-- 在运行到 `UsernamePasswordAuthenticationFilter` 过滤器的时候首先是进入其父类 `AbstractAuthenticationProcessingFilter` 的 `doFilter()` 方法中
-
-```java
-public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-    throws IOException, ServletException {
-    ...
-        //首先配对是不是配置的身份认证的URI,是则执行下面的认证,不是则跳过
-        if (!requiresAuthentication(request, response)) {
-            chain.doFilter(request, response);
-
-            return;
-        }
-    ...
-        Authentication authResult;
-
-    try {
-        //关键方法, 实现认证逻辑并返回 Authentication, 由其子类 UsernamePasswordAuthenticationFilter 实现, 由下面 5.3 详解
-        authResult = attemptAuthentication(request, response);
-        if (authResult == null) {
-            // return immediately as subclass has indicated that it hasn't completed
-            // authentication
-            return;
-        }
-        sessionStrategy.onAuthentication(authResult, request, response);
-    }
-    catch (InternalAuthenticationServiceException failed) {
-        //认证失败调用...由下面 5.1 详解
-        unsuccessfulAuthentication(request, response, failed);
-
-        return;
-    }
-    catch (AuthenticationException failed) {
-        //认证失败调用...由下面 5.1 详解
-        unsuccessfulAuthentication(request, response, failed);
-
-        return;
-    }
-
-    // Authentication success
-    if (continueChainBeforeSuccessfulAuthentication) {
-        chain.doFilter(request, response);
-    }
-    //认证成功调用...由下面 5.2 详解
-    successfulAuthentication(request, response, chain, authResult);
-}
-```
-
-**5.1 认证失败处理逻辑**
-
-```java
-protected void unsuccessfulAuthentication(HttpServletRequest request,
-                                          HttpServletResponse response, AuthenticationException failed)
-    throws IOException, ServletException {
-    SecurityContextHolder.clearContext();
-    ...
-        rememberMeServices.loginFail(request, response);
-    //该 handler 处理失败界面跳转和响应逻辑
-    failureHandler.onAuthenticationFailure(request, response, failed);
-}
-```
-
-这里默认配置的失败处理 handler 是 `SimpleUrlAuthenticationFailureHandler`,**可自定义**
-
-```java
-public class SimpleUrlAuthenticationFailureHandler implements
-    AuthenticationFailureHandler {
-    ...
-
-        public void onAuthenticationFailure(HttpServletRequest request,
-                                            HttpServletResponse response, AuthenticationException exception)
-        throws IOException, ServletException {
-        //没有配置失败跳转的URL则直接响应错误
-        if (defaultFailureUrl == null) {
-            logger.debug("No failure URL set, sending 401 Unauthorized error");
-
-            response.sendError(HttpStatus.UNAUTHORIZED.value(),
-                               HttpStatus.UNAUTHORIZED.getReasonPhrase());
-        }
-        else {
-            //否则
-            //缓存异常
-            saveException(request, exception);
-            //根据配置的异常页面是重定向还是转发进行不同方式跳转
-            if (forwardToDestination) {
-                logger.debug("Forwarding to " + defaultFailureUrl);
-
-                request.getRequestDispatcher(defaultFailureUrl)
-                    .forward(request, response);
-            }
-            else {
-                logger.debug("Redirecting to " + defaultFailureUrl);
-                redirectStrategy.sendRedirect(request, response, defaultFailureUrl);
-            }
-        }
-    }
-    //缓存异常,转发则保存在request里面,重定向则保存在session里面
-    protected final void saveException(HttpServletRequest request,
-                                       AuthenticationException exception) {
-        if (forwardToDestination) {
-            request.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, exception);
-        }
-        else {
-            HttpSession session = request.getSession(false);
-
-            if (session != null || allowSessionCreation) {
-                request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
-                                                  exception);
-            }
-        }
-    }
-}
-```
-
-**这里做下小拓展:用系统的错误处理handler,指定认证失败跳转的URL,在MVC里面对应的URL方法里面可以通过key从`request`或`session`里面拿到错误信息,反馈给前端**
-
-**5.2 认证成功处理逻辑**
-
-```java
-protected void successfulAuthentication(HttpServletRequest request,
-                                        HttpServletResponse response, FilterChain chain, Authentication authResult)
-    throws IOException, ServletException {
-    ...
-        //这里要注意很重要,将认证完成返回的 Authentication 保存到线程对应的 `SecurityContext` 中
-        SecurityContextHolder.getContext().setAuthentication(authResult);
-
-    rememberMeServices.loginSuccess(request, response, authResult);
-
-    // Fire event
-    if (this.eventPublisher != null) {
-        eventPublisher.publishEvent(new InteractiveAuthenticationSuccessEvent(
-            authResult, this.getClass()));
-    }
-    //该 handler 就是为了完成页面跳转
-    successHandler.onAuthenticationSuccess(request, response, authResult);
-}
-```
-
-这里默认配置的成功处理 handler 是 `SavedRequestAwareAuthenticationSuccessHandler`,里面的代码就不做具体展开了,反正是跳转到指定的认证成功之后的界面,**可自定义**
-
-**5.3 身份认证详情**
-
-```java
-public class UsernamePasswordAuthenticationFilter extends
-    AbstractAuthenticationProcessingFilter {
-    ...
-        public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
-    public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
-
-    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-    private boolean postOnly = true;
-
-    ...
-        //开始身份认证逻辑
-        public Authentication attemptAuthentication(HttpServletRequest request,
-                                                    HttpServletResponse response) throws AuthenticationException {
-        if (postOnly && !request.getMethod().equals("POST")) {
-            throw new AuthenticationServiceException(
-                "Authentication method not supported: " + request.getMethod());
-        }
-
-        String username = obtainUsername(request);
-        String password = obtainPassword(request);
-
-        if (username == null) {
-            username = "";
-        }
-
-        if (password == null) {
-            password = "";
-        }
-
-        username = username.trim();
-        //先用前端提交过来的 username 和 password 封装一个简易的 AuthenticationToken
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-            username, password);
-
-        // Allow subclasses to set the "details" property
-        setDetails(request, authRequest);
-        //具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate(..) 方法完成,接着往下看
-        return this.getAuthenticationManager().authenticate(authRequest);
-    }
-}
-```
-
-由源码断点跟踪得知,最终解析是由 `AuthenticationManager` 接口实现类 `ProviderManager` 来完成
-
-```java
-public class ProviderManager implements AuthenticationManager, MessageSourceAware,
-InitializingBean {
-    ...
-        private List<AuthenticationProvider> providers = Collections.emptyList();
-    ...
-
-        public Authentication authenticate(Authentication authentication)
-        throws AuthenticationException {
-        ....
-            //遍历所有的 AuthenticationProvider, 找到合适的完成身份验证
-            for (AuthenticationProvider provider : getProviders()) {
-                if (!provider.supports(toTest)) {
-                    continue;
-                }
-                ...
-                    try {
-                        //进行具体的身份验证逻辑, 这里使用到的是 DaoAuthenticationProvider, 具体逻辑记着往下看
-                        result = provider.authenticate(authentication);
-
-                        if (result != null) {
-                            copyDetails(authentication, result);
-                            break;
-                        }
-                    }
-                catch
-                    ...
-            }
-        ...
-            throw lastException;
-    }
-}
-```
-
-- `DaoAuthenticationProvider` 继承自 `AbstractUserDetailsAuthenticationProvider` 实现了 `AuthenticationProvider` 接口
-
-```java
-public abstract class AbstractUserDetailsAuthenticationProvider implements
-    AuthenticationProvider, InitializingBean, MessageSourceAware {
-    ...
-        private UserDetailsChecker preAuthenticationChecks = new DefaultPreAuthenticationChecks();
-    private UserDetailsChecker postAuthenticationChecks = new DefaultPostAuthenticationChecks();
-    ...
-
-        public Authentication authenticate(Authentication authentication)
-        throws AuthenticationException {
-        ...
-            // 获得提交过来的用户名
-            String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED"
-            : authentication.getName();
-        //根据用户名从缓存中查找 UserDetails
-        boolean cacheWasUsed = true;
-        UserDetails user = this.userCache.getUserFromCache(username);
-
-        if (user == null) {
-            cacheWasUsed = false;
-
-            try {
-                //缓存中没有则通过 retrieveUser(..) 方法查找 (看下面 DaoAuthenticationProvider 的实现)
-                user = retrieveUser(username,
-                                    (UsernamePasswordAuthenticationToken) authentication);
-            }
-            catch
-                ...
-        }
-
-        try {
-            //比对前的检查,例如账户以一些状态信息(是否锁定, 过期...)
-            preAuthenticationChecks.check(user);
-            //子类实现比对规则 (看下面 DaoAuthenticationProvider 的实现)
-            additionalAuthenticationChecks(user,
-                                           (UsernamePasswordAuthenticationToken) authentication);
-        }
-        catch (AuthenticationException exception) {
-            if (cacheWasUsed) {
-                // There was a problem, so try again after checking
-                // we're using latest data (i.e. not from the cache)
-                cacheWasUsed = false;
-                user = retrieveUser(username,
-                                    (UsernamePasswordAuthenticationToken) authentication);
-                preAuthenticationChecks.check(user);
-                additionalAuthenticationChecks(user,
-                                               (UsernamePasswordAuthenticationToken) authentication);
-            }
-            else {
-                throw exception;
-            }
-        }
-
-        postAuthenticationChecks.check(user);
-
-        if (!cacheWasUsed) {
-            this.userCache.putUserInCache(user);
-        }
-
-        Object principalToReturn = user;
-
-        if (forcePrincipalAsString) {
-            principalToReturn = user.getUsername();
-        }
-        //根据最终user的一些信息重新生成具体详细的 Authentication 对象并返回
-        return createSuccessAuthentication(principalToReturn, authentication, user);
-    }
-    //具体生成还是看子类实现
-    protected Authentication createSuccessAuthentication(Object principal,
-                                                         Authentication authentication, UserDetails user) {
-        // Ensure we return the original credentials the user supplied,
-        // so subsequent attempts are successful even with encoded passwords.
-        // Also ensure we return the original getDetails(), so that future
-        // authentication events after cache expiry contain the details
-        UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
-            principal, authentication.getCredentials(),
-            authoritiesMapper.mapAuthorities(user.getAuthorities()));
-        result.setDetails(authentication.getDetails());
-
-        return result;
-    }
-}
-```
-
-- 接下来我们来看下 `DaoAuthenticationProvider` 里面的三个重要的方法,比对方式,获取需要比对的 `UserDetails` 对象以及生产最终返回 `Authentication` 的方法
-
-```java
-public class DaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
-    ...
-        //密码比对
-        @SuppressWarnings("deprecation")
-        protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                      UsernamePasswordAuthenticationToken authentication)
-        throws AuthenticationException {
-        if (authentication.getCredentials() == null) {
-            logger.debug("Authentication failed: no credentials provided");
-
-            throw new BadCredentialsException(messages.getMessage(
-                "AbstractUserDetailsAuthenticationProvider.badCredentials",
-                "Bad credentials"));
-        }
-
-        String presentedPassword = authentication.getCredentials().toString();
-        //通过 PasswordEncoder 进行密码比对, 注: 可自定义
-        if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
-            logger.debug("Authentication failed: password does not match stored value");
-
-            throw new BadCredentialsException(messages.getMessage(
-                "AbstractUserDetailsAuthenticationProvider.badCredentials",
-                "Bad credentials"));
-        }
-    }
-
-    //通过 UserDetailsService 获取 UserDetails
-    protected final UserDetails retrieveUser(String username,
-                                             UsernamePasswordAuthenticationToken authentication)
-        throws AuthenticationException {
-        prepareTimingAttackProtection();
-        try {
-            //通过 UserDetailsService 获取 UserDetails
-            UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
-            if (loadedUser == null) {
-                throw new InternalAuthenticationServiceException(
-                    "UserDetailsService returned null, which is an interface contract violation");
-            }
-            return loadedUser;
-        }
-        catch (UsernameNotFoundException ex) {
-            mitigateAgainstTimingAttack(authentication);
-            throw ex;
-        }
-        catch (InternalAuthenticationServiceException ex) {
-            throw ex;
-        }
-        catch (Exception ex) {
-            throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
-        }
-    }
-
-    //生成身份认证通过后最终返回的 Authentication, 记录认证的身份信息
-    @Override
-    protected Authentication createSuccessAuthentication(Object principal,
-                                                         Authentication authentication, UserDetails user) {
-        boolean upgradeEncoding = this.userDetailsPasswordService != null
-            && this.passwordEncoder.upgradeEncoding(user.getPassword());
-        if (upgradeEncoding) {
-            String presentedPassword = authentication.getCredentials().toString();
-            String newPassword = this.passwordEncoder.encode(presentedPassword);
-            user = this.userDetailsPasswordService.updatePassword(user, newPassword);
-        }
-        return super.createSuccessAuthentication(principal, authentication, user);
-    }
-}
-```
+- 默认情况下系统帮我们注入的这 15 个过滤器,分别对应配置不同的需求,例如 `UsernamePasswordAuthenticationFilter` 是用来使用用户名和密码登录认证的过滤器,但是很多情况下登录不止是简单的用户名和密码,又可能是用到第三方授权登录,这个时候我们就需要使用自定义过滤器
+
+#### 核心类
+
+- **SecurityContextHolder**:`SecurityContextHolder` 存储 `SecurityContext` 对象,`SecurityContextHolder` 是一个存储代理,有三种存储模式分别是:
+    - `MODE_THREADLOCAL:SecurityContext`:存储在线程中
+    - `MODE_INHERITABLETHREADLOCAL`:`SecurityContext` 存储在线程中,但子线程可以获取到父线程中的 `SecurityContext`
+    - `MODE_GLOBAL`:`SecurityContext` 在所有线程中都相同
+    - `SecurityContextHolder` 默认使用 MODE_THREADLOCAL 模式,`SecurityContext` 存储在当前线程中,调用 `SecurityContextHolder` 时不需要显示的参数传递,在当前线程中可以直接获取到 `SecurityContextHolder` 对象
+- **Authentication**:`Authentication` 即验证,表明当前用户是谁,什么是验证,比如一组用户名和密码就是验证,当然错误的用户名和密码也是验证,只不过 Spring Security 会校验失败
+- **AuthenticationManager/ProviderManager/AuthenticationProvider**
+    - 其实这三者很好区分,`AuthenticationManager` 主要就是为了完成身份认证流程,`ProviderManager`是 `AuthenticationManager` 接口的具体实现类,`ProviderManager` 里面有个记录 `AuthenticationProvider` 对象的集合属性 `providers`
+    - 接下来就是遍历 `ProviderManager` 里面的 `providers` 集合,找到和合适的 `AuthenticationProvider`完成身份认证
+- **UserDetailsService/UserDetails**:在 `UserDetailsService` 接口中只有一个简单的方法
+
+### 身份认证流程
+
+1. 在运行到 `UsernamePasswordAuthenticationFilter` 过滤器的时候首先是进入其父类 `AbstractAuthenticationProcessingFilter` 的 `doFilter()` 方法中
+    - 判断请求的url是否与配置的一致
+    - 调用子类的`attemptAuthentication()`方法
+    - 根据返回值走认证成功或认证失败的handler(可以配置自定义的handler)
+2. `AbstractAuthenticationProcessingFilter`调用`UsernamePasswordAuthenticationFilter`的`attemptAuthentication()`方法完成身份认证
+    -  从request中拿到username和password
+    - 将username与password封装成一个`UsernamePasswordAuthenticationToken`对象并传入对应provider的`authenticate()`方法中
+3. 通过 `AuthenticationManager` 接口实现类 `ProviderManager` 来遍历得到Provider,调用对应的`authenticate()`方法
+    - Provider可自定义配置注入
+4. 调用Provider的`authenticate()`方法,并返回`Authentication`对象
+    - 其中可调用`UserDetailsService`的`loadUserByUsername()`方法返回`UserDetails`对象
+    - 根据UserDetails判断用户的状态,或者注入其他的属性,例如权限
+    - 通过UserDetails中的属性组装新的AuthenticationToken,并返回
 
 ## Mybatis
 
@@ -1285,7 +971,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 - 第二范式:唯一性,要求记录有唯一标识,即实体的唯一性,即不存在部分依赖
 - 第三范式:消除冗余性,要求任何字段不能由其他字段派生出来,它要求字段没有冗余,即不存在传递依赖
 
-### druid连接池
+### Druid连接池
 
 1. 强大的监控特性,通过Druid提供的监控功能,可以清楚知道连接池和SQL的工作情况
    1.  监控SQL的执行时间,ResultSet持有时间,返回行数,更新行数,错误次数,错误堆栈信息;
@@ -1324,17 +1010,6 @@ Explain + SQL语句
 - 选择表合适存储引擎
 - 对查询进行优化,应尽量避免全表扫描,首先应考虑在 WHERE 及 ORDER BY 涉及的列上建立索引
 - 避免索引失效
-
-### 索引优化
-
-- 使用复合索引的效果会大于使用单个字段索引
-- 查询条件时要按照索引中的定义顺序进行匹配,如果索引了多列,要遵守最左前缀法则,指的是查询从索引的最左前列开始并且不跳过索引中的列
-- 不在索引列上做任何操作(计算,函数,(自动or手动)类型转换),会导致索引失效而转向全表扫描
-- 存储引擎不能使用索引中范围条件右边的列,范围查询的列在定义索引的时候,应该放在最后面
-- mysql 在使用不等于(!= 或者<>)的时候无法使用索引会导致全表扫描
-- is not null 也无法使用索引,但是is null是可以使用索引的
-- like以通配符开头('%abc...')mysql索引失效会变成全表扫描的操作
-- 字符串不加单引号索引失效(类型转换导致索引失效)
 
 ### 事务
 
@@ -1462,14 +1137,24 @@ Explain + SQL语句
 - **全文索引**:快速定位特定数据,全文搜索通过 `MATCH()` 函数完成
 - **联合索引**:两个或更多个列上的索引被称作联合索引。利用索引中的附加列，可以缩小搜索的范围，但使用一个具有两列的索引 不同于使用两个单独的索引。
 - **最左前缀匹配原则**
-    - 在MySQL建立联合索引时会遵守最左前缀匹配原则，在检索数据时从联合索引的最左边开始匹配
-    - 当B+树的数据项是复合的数据结构，比如(name,age,sex)的时候，b+数是按照从左到右的顺序来建立搜索树的，比如当(张三,20,F)这样的数据来检索的时候，b+树会优先比较name来确定下一步的所搜方向，如果name相同再依次比较age和sex，最后得到检索的数据；但当(20,F)这样的没有name的数据来的时候，b+树就不知道下一步该查哪个节点，因为建立搜索树的时候name就是第一个比较因子，必须要先根据name来搜索才能知道下一步去哪里查询。比如当(张三,F)这样的数据来检索时，b+树可以用name来指定搜索方向，但下一个字段age的缺失，所以只能把名字等于张三的数据都找到，然后再匹配性别是F的数据了， 这个是非常重要的性质，即索引的最左匹配特性
+    - 在MySQL建立联合索引时会遵守最左前缀匹配原则，即查询从索引的最左列开始并且不能跳过索引中的列,如果遇到索引失效的情况,则右边的索引列全部转为全表查询
+    - 这是因为索引的底层数据结构B+树的数据结构决定的，B+树是按照从左到右的顺序来建立叶子节点的，B+树会优先比较第一个字段来确定下一步的所搜方向，如果第一个字段相同再依次比较第二和第三个字段，最后得到检索的数据
 - **聚簇索引和非聚簇索引**:索引的存储顺序和数据的存储顺序是否是关系的,有关就是聚簇索引,无关就是非聚簇索引
     - **聚簇索引**:Innodb的主键索引,非叶子节点存储的是索引指针,叶子节点存储的是既有索引也有数据
     - **非聚簇索引**:MyISAM的默认索引,B+Tree的叶子节点存储的是数据存放的地址,而不是具体的数据,因此,索引存储顺序和数据存储关系毫无关联,另外Inndob里的辅助索引也是非聚簇索引
 - **辅助索引与覆盖索引**
     - **辅助索引**:如果不是主键索引,就称为辅助索引或者二级索引,主键索引的叶子节点存储了完整的数据行,而非主键索引的叶子节点存储的则是主键索引值,通过非主键索引查询数据时,会先查找到主键索引,然后再到主键索引上去查找对应的数据
     - **覆盖索引**:如果需要查询的字段被包含在辅助索引节点中,那么可以直接获得我们所需要的信息,按照这种思想Innodb针对使用辅助索引的查询场景做了优化,称为**覆盖索引**
+
+### 索引优化
+
+- 如果是联合索引,要遵守最左前缀法则,指的是查询从索引的最左前列开始并且不跳过索引中的列
+- 不要在索引列上做任何操作(计算,函数,自动或手动类型转换),会导致索引失效而转向全表扫描
+- 联合索引范围条件右边的索引列会失效,范围查询的列在定义索引的时候,应该放在最后面
+- MySQL 在使用不等于(!= 或者<>)的时候无法使用索引会导致全表扫描
+- IS NOT NULL 也无法使用索引,但是IS NULL是可以使用索引的
+- LIKE以通配符开头`'%abc...'`的索引失效会变成全表扫描的操作
+- 字符串不加单引号索引失效(类型转换导致索引失效)
 
 ### B+树
 
@@ -1554,11 +1239,11 @@ Explain + SQL语句
 
 ### 数据类型
 
-- **String 字符串**:字符串类型是 Redis 最基础的数据结构,首先键都是字符串类型,而且 其他几种数据结构都是在字符串类型基础上构建的,我们常使用的 set key value 命令就是字符串,常用在缓存,计数,共享Session,限速等
-- **Hash 哈希**:在Redis中,哈希类型是指键值本身又是一个键值对结构,哈希可以用来存放用户信息,比如实现购物车
-- **List 列表(双向链表)**:列表(list)类型是用来存储多个有序的字符串,可以做简单的消息队列的功能
-- **Set 集合**:集合(set)类型也是用来保存多个的字符串元素,但和列表类型不一 样的是,集合中不允许有重复元素,并且集合中的元素是无序的,不能通过索引下标获取元素,利用 Set 的交集,并集,差集等操作,可以计算共同喜好,全部的喜好,自己独有的喜好等功能
-- **Sorted Set 有序集合(跳表实现)**:Sorted Set 多了一个权重参数 Score,集合中的元素能够按 Score 进行排列,可以做排行榜应用,取 TOP N 操作
+- **String**:字符串类型是 Redis 最基础的数据结构,首先键都是字符串类型,而且 其他几种数据结构都是在字符串类型基础上构建的,我们常使用的 set key value 命令就是字符串,常用在缓存,计数,共享Session,限速等
+- **Hash**:在Redis中,Hash类型是指键值本身又是一个键值对结构,Hash可以用来存放用户信息,比如实现购物车
+- **List**:列表(list)类型是用来存储多个有序的字符串,可以做简单的消息队列的功能
+- **Set**:集合(set)类型也是用来保存多个的字符串元素,但和列表类型不一 样的是,集合中不允许有重复元素,并且集合中的元素是无序的,不能通过索引下标获取元素,利用 Set 的交集,并集,差集等操作,可以计算共同喜好,全部的喜好,自己独有的喜好等功能
+- **Sorted Set**:Sorted Set 多了一个权重参数 Score,集合中的元素能够按 Score 进行排列,可以做排行榜应用,取 TOP N 操作
 
 ### 持久化技术
 
@@ -1599,28 +1284,47 @@ Explain + SQL语句
 
 ###  删除策略
 
-- 不会,有三种不同的删除策略
-    1. 立即删除,在设置键的过期时间时,创建一个定时器,当过期时间达到时,立即执行删除操作
-    2. 惰性删除,key过期的时候不删除,每次从数据库获取key的时候去检查是否过期,若过期,则删除,返回null
-    3. 定时删除,每隔一段时间,对全部的键进行检查,删除里面的过期键
+1. 立即删除,在设置键的过期时间时,创建一个定时器,当过期时间达到时,立即执行删除操作
+2. 惰性删除,key过期的时候不删除,每次从数据库获取key的时候去检查是否过期,若过期,则删除,返回null
+3. 定时删除,每隔一段时间,对全部的键进行检查,删除里面的过期键
 
 ### Redis 和 Mysql 数据库数据如何保持一致性
 
 - **先写数据库再删缓存**
+
     1. 先更新数据库
     2. 再删除缓存
+
+    - 先删缓存可能导致读操作更新旧的缓存数据,导致数据库与Redis数据不一致
+
+    - 更新缓存可能会因为执行顺序与访问顺序不一致导致数据库与Redis数据不一致,而删除缓存不会
+
 - **缓存延时双删**
+  
+    - 先操作数据库再操作缓存,也会导致数据不一致,因为不是原子性操作
+    - 可能会遇到缓存失效导致读操作更新旧的缓存数据,所以需要延时等待读操作结束再删除缓存
+    
     1. 先删除缓存
     2. 再更新数据库
     3. 休眠一会(读业务逻辑数据的耗时 + 几百毫秒)
     4. 再次删除缓存
+    
+    - 第一次删除缓存的目的在于当最后一次延时删除缓存失败的情况发生,至少一致性策略只会退化成先删缓存再更新数据的策略
+    - 为了确保读请求结束,写请求第二次删除读请求可能带来的缓存脏数据,只有休眠那一会(比如就那1秒),可能有脏数据,一般业务也会接受的
+    
 - **删除缓存重试机制**
+  
+    - 不管是延时双删还是Cache-Aside的先操作数据库再删除缓存,都可能会存在第二步的删除缓存失败,导致的数据不一致问题
+    - 可以引入删除缓存重试机制,如果删除失败就多删除几次,保证删除缓存成功
+    
     1. 写请求更新数据库
     2. 缓存因为某些原因,删除失败
     3. 把删除失败的key放到消息队列
     4. 消费消息队列的消息,获取要删除的key
     5. 重试删除缓存操作
+    
 - **读取binlog异步删除缓存**
+
     - 一旦MySQL中产生了新的写入,更新,删除等操作,就可以把binlog相关的消息通过消息队列推送至Redis,Redis再根据binlog中的记录,对Redis进行更新
     - 这种同步机制类似于MySQL的主从备份机制,可以结合使用阿里的canal对MySQL的binlog进行订阅
 
@@ -1788,31 +1492,104 @@ Explain + SQL语句
 - SpringBoot整合Elasticsearch有一个searchSourceBuilder,通过链式调用一个highlighter方法,传入一个HighlightBuilder对象并设置好查询的列和高亮的标签
 - 之后调用RestHighLevelClient对象的Search方法之后返回一个SearchResponse对象,之后可以调用response.getHits().getHits();获得击中的结果数组,数组中每一个对象除了包含原始内容还包含了一个高亮结果集,是一个Map集合
 
+## 分布式与微服务
+
+- 随着互联网的发展,网站应用的规模不断扩大,常规的垂直应用架构已无法应对,分布式服务架构势在必行
+- 分布式系统是由一组通过网络进行通信,为了完成共同的任务而协调工作的计算机节点组成的系统,其目的是**利用更多的机器,处理更多的数据**
+- **微服务**是一种开发软件的架构和组织方法，其中软件由通过明确定义的API 进行通信的小型独立服务组成。服务之间通过接口来进行交互,接口契约不变的情况下可独立变化
+
+### CAP 理论
+
+- CAP 理论指出对于一个分布式计算系统来说,不可能同时满足以下三点
+    - **一致性**:一致性指的是多个数据副本是否能保持一致的特性，在一致性的条件下，系统在执行数据更新操作之后能够从一致性状态转移到另一个一致性状态,对系统的一个数据更新成功之后，如果所有用户都能够读取到最新的值，该系统就被认为具有强一致性。
+    - **可用性**:在可用性条件下，要求系统提供的服务一直处于可用的状态，对于用户的每一个操作请求总是能够在有限的时间内返回结果。
+    - **分区容错性**:网络分区指分布式系统中的节点被划分为多个区域，每个区域内部可以通信，但是区域之间无法通信。在分区容忍性条件下，分布式系统在遇到任何网络分区故障的时候，仍然需要能对外提供一致性和可用性的服务，除非是整个网络环境都发生了故障。
+-  **权衡**
+    - 在分布式系统中，分区容忍性必不可少，因为需要总是假设网络是不可靠的。因此，CAP 理论实际上是要在可用性和一致性之间做权衡。
+    - 可用性和一致性往往是冲突的，很难使它们同时满足。在多个节点之间进行数据同步时，
+        - 为了保证一致性（CP），不能访问未同步完成的节点，也就失去了部分可用性；
+        - 为了保证可用性（AP），允许读取所有节点的数据，但是数据可能不一致。
+    - Zookeeper 保证的是 CP,对比 Spring Cloud 系统中的注册中心 eruka 实现的是 AP
+
+### BASE 理论
+
+- BASE 是 Basically Available(基本可用),Soft-state(软状态) 和 Eventually Consistent(最终一致性) 三个短语的缩写
+- BASE 理论是对 CAP 中一致性和可用性权衡的结果，它的核心思想是：即使无法做到强一致性，但每个应用都可以根据自身业务特点，采用适当的方式来使系统达到最终一致性。
+    - **基本可用**:指分布式系统在出现故障的时候，保证核心可用，允许损失部分可用性。例如，电商在做促销时，为了保证购物系统的稳定性，部分消费者可能会被引导到一个降级的页面。
+    - **软状态**:指允许系统中的数据存在中间状态，并认为该中间状态不会影响系统整体可用性，即允许系统不同节点的数据副本之间进行同步的过程存在时延。
+    - **最终一致性**:
+        - 最终一致性强调的是系统中所有的数据副本，在经过一段时间的同步后，最终能达到一致的状态。
+        - ACID 要求强一致性，通常运用在传统的数据库系统上。而 BASE 要求最终一致性，通过牺牲强一致性来达到可用性，通常运用在大型分布式系统中。
+        - 在实际的分布式场景中，不同业务单元和组件对一致性的要求是不同的，因此 ACID 和 BASE 往往会结合在一起使用。
+
+### RPC
+
+- RPC(Remote Procedure Call)是指远程过程调用,是一种进程间通信方式,是一种技术的思想,而不是规范,它允许程序调用另一个地址空间(通常是共享网络的另一台机器上)的过程或函数,而不用程序员显式编码这个远程调用的细节
+
+### Dubbo
+
+- Apache Dubbo 是一款高性能,轻量级的开源Java RPC框架,它提供了三大核心能力:面向接口的远程方法调用,智能容错和负载均衡,以及服务自动注册和发现
+- **服务提供者**(Provider):暴露服务的服务提供方,服务提供者在启动时,向注册中心注册自己提供的服务
+- **服务消费者**(Consumer):调用远程服务的服务消费方,服务消费者在启动时,向注册中心订阅自己所需的服务,服务消费者,从提供者地址列表中,基于软负载均衡算法,选一台提供者进行调用,如果调用失败,再选另一台调用
+- **注册中心**(Registry):注册中心返回服务提供者地址列表给消费者,如果有变更,注册中心将基于长连接推送变更数据给消费者
+- **监控中心**(Monitor):服务消费者和提供者,在内存中累计调用次数和调用时间,定时每分钟发送一次统计数据到监控中心
+- **调用关系说明**
+    1.  服务容器负责启动,加载,运行服务提供者
+    2.  服务提供者在启动时,向注册中心注册自己提供的服务
+    3.  服务消费者在启动时,向注册中心订阅自己所需的服务
+    4.  注册中心返回服务提供者地址列表给消费者,如果有变更,注册中心将基于长连接推送变更数据给消费者
+    5.  服务消费者,从提供者地址列表中,基于软负载均衡算法,选一台提供者进行调用,如果调用失败,再选另一台调用
+    6.  服务消费者和提供者,在内存中累计调用次数和调用时间,定时每分钟发送一次统计数据到监控中心
+
+### 分布式事务
+
+- **两阶段提交**（Two-phase Commit，2PC）:通过引入协调者（Coordinator）来协调参与者的行为，并最终决定这些参与者是否要真正执行事务。
+    - 第一阶段（prepare）：协调者询问参与者事务是否执行成功，参与者发回事务执行结果。询问可以看成一种投票，需要参与者都同意才能执行。
+    - 第二阶段 (commit/rollback)：如果事务在每个参与者上都执行成功，事务协调者发送通知让参与者提交事务；否则，协调者发送通知让参与者回滚事务。需要注意的是，在准备阶段，参与者执行了事务，但是还未提交。只有在提交阶段接收到协调者发来的通知后，才进行提交或者回滚。
+    - **存在的问题**
+        - **同步阻塞**:所有事务参与者在等待其它参与者响应的时候都处于同步阻塞等待状态，无法进行其它操作。
+        - **单点问题**:协调者在 2PC 中起到非常大的作用，发生故障将会造成很大影响。特别是在提交阶段发生故障，所有参与者会一直同步阻塞等待，无法完成其它操作。
+        - **数据不一致**:在提交阶段，如果协调者只发送了部分 Commit 消息，此时网络发生异常，那么只有部分参与者接收到 Commit 消息，也就是说只有部分参与者提交了事务，使得系统数据不一致。
+        - **太过保守**:任意一个节点失败就会导致整个事务失败，没有完善的容错机制。
+- **本地消息表**:本地消息表与业务数据表处于同一个数据库中，这样就能利用本地事务来保证在对这两个表的操作满足事务特性，并且使用了消息队列来保证最终一致性。
+    1. 在分布式事务操作的一方完成写业务数据的操作之后向本地消息表发送一个消息，本地事务能保证这个消息一定会被写入本地消息表中。
+    2. 之后将本地消息表中的消息转发到消息队列中，如果转发成功则将消息从本地消息表中删除，否则继续重新转发。
+    3. 在分布式事务操作的另一方从消息队列中读取一个消息，并执行消息中的操作。
+
+### 一致性Hash
+
+- 将Hash空间 [0, 2n-1] 看成一个Hash环，每个服务器节点都配置到Hash环上。每个数据对象通过Hash取模得到Hash值之后，存放到Hash环中顺时针方向第一个大于等于该Hash值的节点上。
+- 一致性Hash在增加或者删除节点时只会影响到Hash环中相邻的节点，例如新增节点 X，只需要将它前一个节点 C 上的数据重新进行分布即可，对于节点 A、B、D 都没有影响。
+- **虚拟节点**
+    - 上面描述的一致性Hash存在数据分布不均匀的问题，节点存储的数据量有可能会存在很大的不同。
+    - 数据不均匀主要是因为节点在Hash环上分布的不均匀，这种情况在节点数量很少的情况下尤其明显。
+    - 解决方式是通过增加虚拟节点，然后将虚拟节点映射到真实节点上。虚拟节点的数量比真实节点来得多，那么虚拟节点在Hash环上分布的均匀性就会比原来的真实节点好，从而使得数据分布也更加均匀。
+
 ## 其他
 
 ### Maven 命令
 
-- clean:清理项目生产的临时文件,一般是模块下的target目录
-- compile:编译源代码,一般编译模块下的src/main/java目录
-- test:测试命令,或执行src/test/java/下junit的测试用例
-- package:项目打包工具,会在模块下的target目录生成jar或war等文件
-- install:将打包的jar/war文件复制到你的本地仓库中,供其他模块使用
-- deploy:将打包的文件发布到远程参考,提供其他人员进行下载依赖
-- site:生成项目相关信息的网站
-- dependency:打印出项目的整个依赖树
+- **clean**:清理项目生产的临时文件,一般是模块下的target目录
+- **compile**:编译源代码,一般编译模块下的src/main/java目录
+- **test**:测试命令,或执行src/test/java/下junit的测试用例
+- **package**:项目打包工具,会在模块下的target目录生成jar或war等文件
+- **install**:将打包的jar/war文件复制到你的本地仓库中,供其他模块使用
+- **deploy**:将打包的文件发布到远程参考,提供其他人员进行下载依赖
+- **site**:生成项目相关信息的网站
+- **dependency**:打印出项目的整个依赖树
 
 ## 数据结构
 
 ### 红黑树
 
-一种二叉查找树,但在每个节点增加一个存储位表示节点的颜色,可以是红或黑(非红即黑),通过对任何一条从根到叶子的路径上各个节点着色的方式的限制,红黑树确保没有一条路径会比其它路径长出两倍,因此,红黑树是一种弱平衡二叉树(由于是弱平衡,可以看到,在相同的节点情况下,AVL树的高度低于红黑树),相对于要求严格的AVL树来说,它的旋转次数少,所以对于搜索,插入,删除操作较多的情况下,我们就用红黑树
-
-
-1. 每个节点要么是红色,要么是黑色
-2. 根节点永远是黑色的
-3. 所有的叶节点都是空节点(即 null),并且是黑色的
-4. 每个红色节点的两个子节点都是黑色,(从每个叶子到根的路径上不会有两个连续的红色节点)
-5. 从任一节点到其子树中每个叶子节点的路径都包含相同数量的黑色节点
+- 平衡二叉树(AVL)为了追求高度平衡,需要通过平衡处理使得左右子树的高度差必须小于等于1,高度平衡带来的好处是能够提供更高的搜索效率,其最坏的查找时间复杂度都是O(logN),但是由于需要维持这份高度平衡,所付出的代价就是当对树种结点进行插入和删除时,需要经过多次旋转实现复衡,这导致AVL的插入和删除效率并不高,而红黑树能够兼顾搜索和插入删除的效率
+- **性质**
+    1. 每个结点要么是红的要么是黑的
+    2. 根结点是黑的
+    4. 父子节点之间不能出现两个连续的红节点,即如果一个结点是红的,那么它的两个子节点都是黑的
+    5. 对于任意结点而言,其到叶结点树尾端NIL指针的每条路径都包含相同数目的黑结点
+    5. 每个叶结点(叶结点即指树尾端NIL指针或NULL结点)都是黑的
+- 红黑树通过将结点进行红黑着色,使得原本高度平衡的树结构被稍微打乱,平衡程度降低,红黑树不追求完全平衡,只要求达到部分平衡,这是一种折中的方案,大大提高了结点删除和插入的效率
 
 ## 算法
 
@@ -1820,7 +1597,10 @@ Explain + SQL语句
 
 #### 二分查找
 
-二分查找是一种在有序数组中查找某一特定元素的搜索算法,搜素过程从数组的中间元素开始,如果中间元素正好是要查找的元素,则搜素过程结束,如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较,如果在某一步骤数组已经为空,则表示找不到指定的元素,这种搜索算法每一次比较都使搜索范围缩小一半,其时间复杂度是O(logN)
+- 二分查找是一种在有序数组中查找某一特定元素的搜索算法,搜素过程从数组的中间元素开始
+- 如果中间元素正好是要查找的元素,则搜素过程结束
+- 如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较
+- 如果在某一步骤数组已经为空,则表示找不到指定的元素,这种搜索算法每一次比较都使搜索范围缩小一半,其时间复杂度是O(logN)
 
 ```java
 import java.util.Comparator;
@@ -1876,7 +1656,7 @@ public class MyUtil {
 
 #### 冒泡排序
 
-- 冒泡排序是一种简单的排序算法,它重复地走访过要排序的数列,一次比较两个元素,如果它们的顺序错误就把它们交换过来,走访数列的工作是重复地进行直到没有再需要交换,也就是说该数列已经排序完成,这个算法的名字由来是因为越小的元素会经由交换慢慢"浮”到数列的顶端
+- 冒泡排序是一种简单的排序算法,它重复地走访过要排序的数列,一次比较两个元素,如果它们的顺序错误就把它们交换过来,走访数列的工作是重复地进行直到没有再需要交换,也就是说该数列已经排序完成,这个算法的名字由来是因为越小的元素会经由交换慢慢浮到数列的顶端
 - **算法描述**
     1. 比较相邻的元素,如果第一个比第二个大,就交换它们两个
     2. 对每一对相邻元素作同样的工作,从开始第一对到结尾的最后一对,这样在最后的元素应该会是最大的数
@@ -1902,7 +1682,7 @@ public static void bubbleSort(int[] arr) {
 
 - **稳定性**:在相邻元素相等时,它们并不会交换位置,所以,冒泡排序是稳定排序
 - **适用场景**:冒泡排序思路简单,代码也简单,特别适合小数据的排序,但是,由于算法复杂度较高,在数据量大的时候不适合使用
-- **代码优化**:在数据完全有序的时候展现出最优时间复杂度,为O(n),其他情况下,几乎总是O( n2 ),因此,算法在数据基本有序的情况下,性能最好
+- **代码优化**:在数据完全有序的时候展现出最优时间复杂度,为O(n),其他情况下,几乎总是O( n^2^ ),因此,算法在数据基本有序的情况下,性能最好
     要使算法在最佳情况下有O(n)复杂度,需要做一些改进,增加一个`swap`的标志,当前一轮没有进行交换时,说明数组已经有序,没有必要再进行下一轮的循环了,直接退出
 
 ```java
@@ -1964,19 +1744,18 @@ public static void selectionSort(int[] arr) {
 - 插入排序是一种简单直观的排序算法,它的工作原理是通过构建有序序列,对于未排序数据,在已排序序列中从后向前扫描,找到相应位置并插入
 - **算法描述**
     1. 把待排序的数组分成已排序和未排序两部分,初始的时候把第一个元素认为是已排好序的
-    2. 从第二个元素
-    3. 开始,在已排好序的子数组中寻找到该元素合适的位置并插入该位置
+    2. 从第二个元素开始,在已排好序的子数组中寻找到该元素合适的位置并插入该位置
     4. 重复上述过程直到最后一个元素被插入有序子数组中
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123205.gif" alt="img" style="zoom:50%;" />
 
 ```java
 public static void insertionSort(int[] arr){
-    for (int i=1; i<arr.length; ++i){
+    for (int i = 1; i < arr.length; ++i){
         int value = arr[i];
-        int position=i;
-        while (position>0 && arr[position-1]>value){
-            arr[position] = arr[position-1];
+        int position = i;
+        while (position > 0 && arr[position-1] > value){
+            arr[position] = arr[position - 1];
             position--;
         }
         arr[position] = value;
@@ -1985,96 +1764,54 @@ public static void insertionSort(int[] arr){
 ```
 
 - **稳定性**:由于只需要找到不大于当前数的位置而并不需要交换,因此,直接插入排序是稳定的排序方法
-- **适用场景**:插入排序由于O( n2 )的复杂度,在数组较大的时候不适用,但是,在数据比较少的时候,是一个不错的选择,一般做为快速排序的扩充,例如,在STL的sort算法和stdlib的qsort算法中,都将插入排序作为快速排序的补充,用于少量元素的排序,又如,在JDK 7 java.util.Arrays所用的sort方法的实现中,当待排数组长度小于47时,会使用插入排序
-
-#### 归并排序
-
-- 归并排序是建立在归并操作上的一种有效的排序算法,该算法是采用分治法的一个非常典型的应用,将已有序的子序列合并,得到完全有序的序列,即先使每个子序列有序,再使子序列段间有序,若将两个有序表合并成一个有序表,称为2-路归并
-- **算法描述**
-    - 递归法(Top-down)
-        1. 申请空间,使其大小为两个已经排序序列之和,该空间用来存放合并后的序列
-        2. 设定两个指针,最初位置分别为两个已经排序序列的起始位置
-        3. 比较两个指针所指向的元素,选择相对小的元素放入到合并空间,并移动指针到下一位置
-        4. 重复步骤3直到某一指针到达序列尾
-        5. 将另一序列剩下的所有元素直接复制到合并序列尾
-    - 迭代法(Bottom-up)
-        1. 将序列每相邻两个数字进行归并操作,形成ceil(n/2)个序列,排序后每个序列包含两/一个元素
-        2. 若此时序列数不是1个则将上述序列再次归并,形成ceil(n/4)个序列,每个序列包含四/三个元素
-        3. 重复步骤2,直到所有元素排序完毕,即序列数为1
-
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123213.gif" alt="img" style="zoom:50%;" />
-
-```java
-public static void mergeSort(int[] arr){
-    int[] temp =new int[arr.length];
-    internalMergeSort(arr, temp, 0, arr.length-1);
-}
-private static void internalMergeSort(int[] arr, int[] temp, int left, int right){
-    //当left==right的时,已经不需要再划分了
-    if (left<right){
-        int middle = (left+right)/2;
-        internalMergeSort(arr, temp, left, middle);          //左子数组
-        internalMergeSort(arr, temp, middle+1, right);       //右子数组
-        mergeSortedArray(arr, temp, left, middle, right);    //合并两个子数组
-    }
-}
-// 合并两个有序子序列
-private static void mergeSortedArray(int arr[], int temp[], int left, int middle, int right){
-    int i=left;
-    int j=middle+1;
-    int k=0;
-    while (i<=middle && j<=right){
-        temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
-    }
-    while (i <=middle){
-        temp[k++] = arr[i++];
-    }
-    while ( j<=right){
-        temp[k++] = arr[j++];
-    }
-    //把数据复制回原数组
-    for (i=0; i<k; ++i){
-        arr[left+i] = temp[i];
-    }
-}
-```
-
-- **稳定性**:因为我们在遇到相等的数据的时候必然是按顺序"抄写”到辅助数组上的,所以,归并排序同样是稳定算法
-- **适用场景**:归并排序在数据量比较大的时候也有较为出色的表现(效率上),但是,其空间复杂度O(n)使得在数据量特别大的时候(例如,1千万数据)几乎不可接受,而且,考虑到有的机器内存本身就比较小,因此,采用归并排序一定要注意
+- **适用场景**:插入排序由于O( n^2^ )的复杂度,在数组较大的时候不适用,但是,在数据比较少的时候,是一个不错的选择,一般做为快速排序的扩充,例如,在STL的sort算法和stdlib的qsort算法中,都将插入排序作为快速排序的补充,用于少量元素的排序,又如,在JDK 7的`java.util.Arrays`所用的`sort()`方法的实现中,当待排数组长度小于47时,会使用插入排序
 
 #### 快速排序
 
 - 快速排序是一个知名度极高的排序算法,其对于大数据的优秀排序性能和相同复杂度算法中相对简单的实现使它注定得到比其他算法更多的宠爱
 - **算法描述**
-    1. 从数列中挑出一个元素,称为"基准"(pivot)
+    1. 从数列中挑出一个元素,称为**基准**(pivot)
     2. 重新排序数列,所有比基准值小的元素摆放在基准前面,所有比基准值大的元素摆在基准后面(相同的数可以到任何一边),在这个分区结束之后,该基准就处于数列的中间位置,这个称为分区(partition)操作
     3. 递归地(recursively)把小于基准值元素的子数列和大于基准值元素的子数列排序
 
 ![v2-c411339b79f92499dcb7b5](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123302.gif)
 
 ```java
-public static void quickSort(int[] arr){
-    qsort(arr, 0, arr.length-1);
-}
-private static void qsort(int[] arr, int low, int high){
-    if (low >= high)
-        return;
-    int pivot = partition(arr, low, high);        //将数组分为两部分
-    qsort(arr, low, pivot-1);                   //递归排序左子数组
-    qsort(arr, pivot+1, high);                  //递归排序右子数组
-}
-private static int partition(int[] arr, int low, int high){
-    int pivot = arr[low];     //基准
-    while (low < high){
-        while (low < high && arr[high] >= pivot) --high;
-        arr[low]=arr[high];             //交换比基准大的记录到左端
-        while (low < high && arr[low] <= pivot) ++low;
-        arr[high] = arr[low];           //交换比基准小的记录到右端
+public class Solution {
+
+    int[] quickSelect(int[] arr, int l, int r) {
+        if (l < r) {
+            int q = randomPartition(arr, l, r);
+            quickSelect(arr, l, q - 1);
+            quickSelect(arr, q + 1, r);
+        }
+        return arr;
     }
-    //扫描完成,基准到位
-    arr[low] = pivot;
-    //返回的是基准的位置
-    return low;
+
+    public int randomPartition(int[] a, int l, int r) {
+        int i = random.nextInt(r - l + 1) + l;
+        swap(a, i, l);
+        return partition(a, l, r);
+    }
+
+    int partition(int[] arr, int l, int r) {
+        int pivot = l;
+        int index = pivot + 1;
+        for (int i = index; i <= r; i++) {
+            if (arr[i] < arr[pivot]) {
+                swap(arr, i, index);
+                index++;
+            }
+        }
+        swap(arr, pivot, index - 1);
+        return index - 1;
+    }
+
+    void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
 ```
 
@@ -2083,86 +1820,36 @@ private static int partition(int[] arr, int low, int high){
 
 #### 堆排序
 
-堆排序(Heapsort)是指利用堆积树(堆)这种数据结构所设计的一种排序算法,它是选择排序的一种,可以利用数组的特点快速定位指定索引的元素,堆排序就是把最大堆堆顶的最大数取出,将剩余的堆继续调整为最大堆,再次将堆顶的最大数取出,这个过程持续到剩余数只有一个时结束
-
-**堆的概念**
-
-堆是一种特殊的完全二叉树(complete binary tree),完全二叉树的一个"优秀”的性质是,除了最底层之外,每一层都是满的,这使得堆可以利用数组来表示(普通的一般的二叉树通常用链表作为基本容器表示),每一个结点对应数组中的一个元素
-如下图,是一个堆和数组的相互关系:
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123311.jpeg)
-
-
-对于给定的某个结点的下标 i,可以很容易的计算出这个结点的父结点,孩子结点的下标:
-
-- Parent(i) = floor(i/2),i 的父节点下标
-- Left(i) = 2i,i 的左子节点下标
-- Right(i) = 2i + 1,i 的右子节点下标
-
-二叉堆一般分为两种:最大堆和最小堆
-**最大堆**
-最大堆中的最大元素值出现在根结点(堆顶)
-堆中每个父节点的元素值都大于等于其孩子结点(如果存在)
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123316.jpeg)
-
-**最小堆**
-最小堆中的最小元素值出现在根结点(堆顶)
-堆中每个父节点的元素值都小于等于其孩子结点(如果存在)
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123319.jpeg)
-
-**堆排序原理**
-
-堆排序就是把最大堆堆顶的最大数取出,将剩余的堆继续调整为最大堆,再次将堆顶的最大数取出,这个过程持续到剩余数只有一个时结束,在堆中定义以下几种操作:
-
-- 最大堆调整(Max-Heapify):将堆的末端子节点作调整,使得子节点永远小于父节点
-- 创建最大堆(Build-Max-Heap):将堆所有数据重新排序,使其成为最大堆
-- 堆排序(Heap-Sort):移除位在第一个数据的根节点,并做最大堆调整的递归运算 继续进行下面的讨论前,需要注意的一个问题是:数组都是 Zero-Based,这就意味着我们的堆数据结构模型要发生改变
-
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123329.jpeg)
 
+- 堆排序就是把最大堆堆顶的最大数取出,将剩余的堆继续调整为最大堆,再次将堆顶的最大数取出,这个过程持续到剩余数只有一个时结束,在堆中定义以下几种操作
+    - 最大堆调整(Max-Heapify):将堆的末端子节点作调整,使得子节点永远小于父节点
+    - 创建最大堆(Build-Max-Heap):将堆所有数据重新排序,使其成为最大堆
+    - 堆排序(Heap-Sort):移除位在第一个数据的根节点,并做最大堆调整的递归运算
+    
+- 由于数组都是 Zero-Based,这就意味着我们的堆数据结构模型要发生改变,相应的,几个计算公式也要作出相应调整
 
-相应的,几个计算公式也要作出相应调整:
+    - Parent(i) = floor((i-1)/2),i 的父节点下标
+    - Left(i) = 2i + 1,i 的左子节点下标
+    - Right(i) = 2(i + 1),i 的右子节点下标
 
-- Parent(i) = floor((i-1)/2),i 的父节点下标
-- Left(i) = 2i + 1,i 的左子节点下标
-- Right(i) = 2(i + 1),i 的右子节点下标
+- **堆的建立和维护**
+    1. 给定一个无序数组,如何建立为堆？
+        - 常规方法是从第一个非叶子结点向下筛选,直到根元素筛选完毕,这个方法叫筛选法,需要循环筛选n/2个元素
+        - 但我们还可以借鉴插入排序的思路,我们可以视第一个元素为一个堆,然后不断向其中添加新元素,这个方法叫做插入法,需要循环插入(n-1)个元素
+        
+    2. 删除堆顶元素后,如何调整数组成为新堆？
 
-**堆的建立和维护**
+        - 删除后的调整,是把最后一个元素放到堆顶,自上而下比较,插入是把新元素放在末尾,自下而上比较
 
-堆可以支持多种操作,但现在我们关心的只有两个问题:
+        - 假定我们已经有一个现成的最小堆,现在我们删除了根元素,但并没有移动别的元素,根元素空了,但其它元素还保持着堆的性质,我们可以把**最后一个元素**(代号A)移动到根元素的位置,如果不是特殊情况,则堆的性质被破坏,但这仅仅是由于A小于其某个子元素,于是,我们可以把A和这个子元素调换位置,如果A大于其所有子元素,则堆调整好了,否则,重复上述过程,A元素在树形结构中不断下沉,直到合适的位置,数组重新恢复堆的性质,上述过程一般称为筛选,方向显然是自上而下
+        - 插入一个新元素也是如此,不同的是,我们把新元素放在**末尾**,然后和其父节点做比较,即自下而上筛选
 
-1. 给定一个无序数组,如何建立为堆？
-2. 删除堆顶元素后,如何调整数组成为新堆？
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-c66a7e83189427b6a5a5c378f73c17ca_b.gif" alt="img" style="zoom:150%;" />
 
-先看第二个问题,假定我们已经有一个现成的大根堆,现在我们删除了根元素,但并没有移动别的元素,想想发生了什么:根元素空了,但其它元素还保持着堆的性质,我们可以把**最后一个元素**(代号A)移动到根元素的位置,如果不是特殊情况,则堆的性质被破坏,但这仅仅是由于A小于其某个子元素,于是,我们可以把A和这个子元素调换位置,如果A大于其所有子元素,则堆调整好了,否则,重复上述过程,A元素在树形结构中不断"下沉”,直到合适的位置,数组重新恢复堆的性质,上述过程一般称为"筛选”,方向显然是自上而下
-
-> 删除后的调整,是把最后一个元素放到堆顶,自上而下比较
-
-删除一个元素是如此,插入一个新元素也是如此,不同的是,我们把新元素放在**末尾**,然后和其父节点做比较,即自下而上筛选
-
-> 插入是把新元素放在末尾,自下而上比较
-
-那么,第一个问题怎么解决呢？
-
-常规方法是从第一个非叶子结点向下筛选,直到根元素筛选完毕,这个方法叫"筛选法”,需要循环筛选n/2个元素
-
-但我们还可以借鉴"插入排序”的思路,我们可以视第一个元素为一个堆,然后不断向其中添加新元素,这个方法叫做"插入法”,需要循环插入(n-1)个元素
-
-由于筛选法和插入法的方式不同,所以,相同的数据,它们建立的堆一般不同,大致了解堆之后,堆排序就是水到渠成的事情了
-
-**动图演示**
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-c66a7e83189427b6a5a5c378f73c17ca_b.gif)
-
-**算法描述**
-
-我们需要一个升序的序列,怎么办呢？我们可以建立一个最小堆,然后每次输出根元素,但是,这个方法需要额外的空间(否则将造成大量的元素移动,其复杂度会飙升到O(n2)),如果我们需要就地排序(即不允许有O(n)空间复杂度),怎么办？
-
-有办法,我们可以建立最大堆,然后我们倒着输出,在最后一个位置输出最大值,次末位置输出次大值……由于每次输出的最大元素会腾出第一个空间,因此,我们恰好可以放置这样的元素而不需要额外空间,很漂亮的想法,是不是？
-
-**算法实现**
+- **算法描述**
+- 可以建立一个最小堆,然后每次输出根元素,但是,这个方法需要额外的空间(否则将造成大量的元素移动,其复杂度会飙升到O(n^2^)
+- 可以建立最大堆,然后我们倒着输出,在最后一个位置输出最大值,次末位置输出次大值,由于每次输出的最大元素会腾出第一个空间
 
 ```java
 public class ArrayHeap {
@@ -2226,26 +1913,17 @@ public class ArrayHeap {
 
 #### 希尔排序
 
-在希尔排序出现之前,计算机界普遍存在"排序算法不可能突破O(n2)”的观点,希尔排序是第一个突破O(n2)的排序算法,它是简单插入排序的改进版,希尔排序的提出,主要基于以下两点:
-
-1. 插入排序算法在数组基本有序的情况下,可以近似达到O(n)复杂度,效率极高
-2. 但插入排序每次只能将数据移动一位,在数组较大且基本无序的情况下性能会迅速恶化
-
-**算法描述**
-
-先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序,具体算法描述:
-
-- 选择一个增量序列t1,t2,…,tk,其中ti>tj,tk=1
-- 按增量序列个数k,对序列进行 k 趟排序
-- 每趟排序,根据对应的增量ti,将待排序列分割成若干长度为m 的子序列,分别对各子表进行直接插入排序,仅增量因子为1 时,整个序列作为一个表来处理,表长度即为整个序列的长度
-
-**动图演示**
+- 在希尔排序出现之前,计算机界普遍存在排序算法不可能突破O(n^2^)的观点,希尔排序是第一个突破O(n^2^)的排序算法,它是简单插入排序的改进版,希尔排序的提出,主要基于以下两点:
+    1. 插入排序算法在数组基本有序的情况下,可以近似达到O(n)复杂度,效率极高
+    2. 但插入排序每次只能将数据移动一位,在数组较大且基本无序的情况下性能会迅速恶化
+- **算法描述**:先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序,具体算法描述:
+    - 选择一个增量序列`t1,t2,...,tk`,其中`ti>tj`,`tk=1`
+    - 按增量序列个数k,对序列进行 k 趟排序
+    - 每趟排序,根据对应的增量ti,将待排序列分割成若干长度为m 的子序列,分别对各子表进行直接插入排序,仅增量因子为1 时,整个序列作为一个表来处理,表长度即为整个序列的长度
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123335.gif)
 
-**算法实现**
-
-Donald Shell增量
+- Donald Shell增量
 
 ```java
 public static void shellSort(int[] arr){
@@ -2262,7 +1940,7 @@ public static void shellSort(int[] arr){
 }
 ```
 
-O(n3/2) by Knuth
+- O(n^3/2^) by Knuth
 
 ```java
 public static void shellSort2(int[] arr){
@@ -2283,101 +1961,129 @@ public static void shellSort2(int[] arr){
 }
 ```
 
-**希尔排序的增量**
+- **希尔排序的增量**:希尔排序的增量数列可以任取,需要的唯一条件是最后一个一定为1(因为要保证按1有序),但是,不同的数列选取会对算法的性能造成极大的影响,上面的代码演示了两种增量
+- **注意**:增量序列中每两个元素最好不要出现1以外的公因子(很显然,按4有序的数列再去按2排序意义并不大),下面是一些常见的增量序列
+    - 第一种增量是最初Donald Shell提出的增量,即折半降低直到1,据研究,使用希尔增量,其时间复杂度还是O(n^2^)
+    - 第二种增量Hibbard:{1, 3, ..., 2k-1},该增量序列的时间复杂度大约是O(n^3/2^)
+    - 第三种增量Sedgewick增量:(1, 5, 19, 41, 109,...),其生成序列或者是`9*4i* *- 9*2i + 1`或者是`4i - 3*2i + 1`
+- **稳定性**:我们都知道插入排序是稳定算法,但是,Shell排序是一个多次插入的过程,在一次插入中我们能确保不移动相同元素的顺序,但在多次的插入中,相同元素完全有可能在不同的插入轮次被移动,最后稳定性被破坏,因此,Shell排序不是一个稳定的算法
+- **适用场景**:Shell排序虽然快,但是毕竟是插入排序,其数量级并没有快速排序O(nLogN)快,在大量数据面前,Shell排序不是一个好的算法,但是,中小型规模的数据完全可以使用它
 
-希尔排序的增量数列可以任取,需要的唯一条件是最后一个一定为1(因为要保证按1有序),但是,不同的数列选取会对算法的性能造成极大的影响,上面的代码演示了两种增量
-切记:增量序列中每两个元素最好不要出现1以外的公因子!(很显然,按4有序的数列再去按2排序意义并不大)
-下面是一些常见的增量序列
-\- 第一种增量是最初Donald Shell提出的增量,即折半降低直到1,据研究,使用希尔增量,其时间复杂度还是O(n2)
+#### 归并排序
 
-第二种增量Hibbard:{1, 3, ..., 2k-1},该增量序列的时间复杂度大约是O(n1.5)
+- 归并排序是建立在归并操作上的一种有效的排序算法,该算法是采用分治法的一个非常典型的应用,将已有序的子序列合并,得到完全有序的序列,即先使每个子序列有序,再使子序列段间有序,若将两个有序表合并成一个有序表,称为2路归并
+- **算法描述**
+    - 递归法(Top-down)
+        1. 申请空间,使其大小为两个已经排序序列之和,该空间用来存放合并后的序列
+        2. 设定两个指针,最初位置分别为两个已经排序序列的起始位置
+        3. 比较两个指针所指向的元素,选择相对小的元素放入到合并空间,并移动指针到下一位置
+        4. 重复步骤3直到某一指针到达序列尾
+        5. 将另一序列剩下的所有元素直接复制到合并序列尾
+    - 迭代法(Bottom-up)
+        1. 将序列每相邻两个数字进行归并操作,形成ceil(n/2)个序列,排序后每个序列包含两/一个元素
+        2. 若此时序列数不是1个则将上述序列再次归并,形成ceil(n/4)个序列,每个序列包含四/三个元素
+        3. 重复步骤2,直到所有元素排序完毕,即序列数为1
 
-第三种增量Sedgewick增量:(1, 5, 19, 41, 109,...),其生成序列或者是9*4i* *- 9*2i + 1或者是4i - 3*2i + 1
-
-**稳定性**
-
-我们都知道插入排序是稳定算法,但是,Shell排序是一个多次插入的过程,在一次插入中我们能确保不移动相同元素的顺序,但在多次的插入中,相同元素完全有可能在不同的插入轮次被移动,最后稳定性被破坏,因此,Shell排序不是一个稳定的算法
-
-**适用场景**
-
-Shell排序虽然快,但是毕竟是插入排序,其数量级并没有后起之秀--快速排序O(n㏒n)快,在大量数据面前,Shell排序不是一个好的算法,但是,中小型规模的数据完全可以使用它
-
-#### **计数排序**
-
-计数排序不是基于比较的排序算法,其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中,作为一种线性时间复杂度的排序,计数排序要求输入的数据必须是有确定范围的整数
-
-**算法描述**
-
-1. 找出待排序的数组中最大和最小的元素
-2. 统计数组中每个值为i的元素出现的次数,存入数组C的第i项
-3. 对所有的计数累加(从C中的第一个元素开始,每一项和前一项相加)
-4. 反向填充目标数组:将每个元素i放在新数组的第C(i)项,每放一个元素就将C(i)减去1
-
-**动图演示**
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-3c7ddb59df2d21b287e42a7b908409cb_b.gif)
-
-**算法实现**
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123213.gif)
 
 ```java
-public static void countSort(int[] a, int max, int min) {
-     int[] b = new int[a.length];//存储数组
-     int[] count = new int[max - min + 1];//计数数组
-
-     for (int num = min; num <= max; num++) {
-        //初始化各元素值为0,数组下标从0开始因此减min
-        count[num - min] = 0;
-     }
-
-     for (int i = 0; i < a.length; i++) {
-        int num = a[i];
-        count[num - min]++;//每出现一个值,计数数组对应元素的值+1
-     }
-
-     for (int num = min + 1; num <= max; num++) {
-        //加总数组元素的值为计数数组对应元素及左边所有元素的值的总和
-        count[num - min] += sum[num - min - 1]
-     }
-
-     for (int i = 0; i < a.length; i++) {
-          int num = a[i];//源数组第i位的值
-          int index = count[num - min] - 1;//加总数组中对应元素的下标
-          b[index] = num;//将该值存入存储数组对应下标中
-          count[num - min]--;//加总数组中,该值的总和减少1
-     }
-
-     //将存储数组的值一一替换给源数组
-     for(int i=0;i<a.length;i++){
-         a[i] = b[i];
-     }
+public static void mergeSort(int[] arr){
+    int[] temp =new int[arr.length];
+    internalMergeSort(arr, temp, 0, arr.length-1);
+}
+private static void internalMergeSort(int[] arr, int[] temp, int left, int right){
+    //当left==right的时,已经不需要再划分了
+    if (left<right){
+        int middle = (left+right)/2;
+        internalMergeSort(arr, temp, left, middle);          //左子数组
+        internalMergeSort(arr, temp, middle+1, right);       //右子数组
+        mergeSortedArray(arr, temp, left, middle, right);    //合并两个子数组
+    }
+}
+// 合并两个有序子序列
+private static void mergeSortedArray(int arr[], int temp[], int left, int middle, int right){
+    int i=left;
+    int j=middle+1;
+    int k=0;
+    while (i<=middle && j<=right){
+        temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+    }
+    while (i <=middle){
+        temp[k++] = arr[i++];
+    }
+    while ( j<=right){
+        temp[k++] = arr[j++];
+    }
+    //把数据复制回原数组
+    for (i=0; i<k; ++i){
+        arr[left+i] = temp[i];
+    }
 }
 ```
 
-**稳定性**
+- **稳定性**:因为我们在遇到相等的数据的时候必然是按顺序抄写到辅助数组上的,所以,归并排序同样是稳定算法
+- **适用场景**:归并排序在数据量比较大的时候也有较为出色的表现(效率上),但是,其空间复杂度O(n)使得在数据量特别大的时候(例如,1千万数据)几乎不可接受,而且,考虑到有的机器内存本身就比较小,因此,采用归并排序一定要注意
 
-最后给 b 数组赋值是倒着遍历的,而且放进去一个就将C数组对应的值(表示前面有多少元素小于或等于A[i])减去一,如果有相同的数x1,x2,那么相对位置后面那个元素x2放在(比如下标为4的位置),相对位置前面那个元素x1下次进循环就会被放在x2前面的位置3,从而保证了稳定性
+#### 计数排序
 
-**适用场景**
+- 计数排序不是基于比较的排序算法,其核心在于将输入的数据值转化为键存储在额外开辟的数组空间中,作为一种线性时间复杂度的排序,计数排序要求输入的数据必须是有确定范围的整数
+- **算法描述**
+    1. 找出待排序的数组中最大和最小的元素
+    2. 统计数组中每个值为i的元素出现的次数,存入数组C的第i项
+    3. 对所有的计数累加(从C中的第一个元素开始,每一项和前一项相加)
+    4. 反向填充目标数组:将每个元素i放在新数组的第C(i)项,每放一个元素就将C(i)减去1
 
-排序目标要能够映射到整数域,其最大值最小值应当容易辨别,例如高中生考试的总分数,显然用0-750就OK啦,又比如一群人的年龄,用个0-150应该就可以了,再不济就用0-200喽,另外,计数排序需要占用大量空间,它比较适用于数据比较集中的情况
+![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-3c7ddb59df2d21b287e42a7b908409cb_b.gif)
 
-#### **桶排序**
+```java
+public static void countSort(int[] a, int max, int min) {
+    int[] b = new int[a.length];//存储数组
+    int[] count = new int[max - min + 1];//计数数组
 
-桶排序又叫箱排序,是计数排序的升级版,它的工作原理是将数组分到有限数量的桶子里,然后对每个桶子再分别排序(有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序),最后将各个桶中的数据有序的合并起来
+    for (int num = min; num <= max; num++) {
+        //初始化各元素值为0,数组下标从0开始因此减min
+        count[num - min] = 0;
+    }
 
-> 计数排序是桶排序的一种特殊情况,可以把计数排序当成每个桶里只有一个元素的情况,网络中很多博文写的桶排序实际上都是计数排序,并非标准的桶排序,要注意辨别
+    for (int i = 0; i < a.length; i++) {
+        int num = a[i];
+        count[num - min]++;//每出现一个值,计数数组对应元素的值+1
+    }
 
-**算法描述**
+    for (int num = min + 1; num <= max; num++) {
+        //加总数组元素的值为计数数组对应元素及左边所有元素的值的总和
+        count[num - min] += sum[num - min - 1]
+    }
 
-1. 找出待排序数组中的最大值max,最小值min
-2. 我们使用 动态数组ArrayList 作为桶,桶里放的元素也用 ArrayList 存储,桶的数量为(max-min)/arr.length+1
-3. 遍历数组 arr,计算每个元素 arr[i] 放的桶
-4. 每个桶各自排序
-5. 遍历桶数组,把排序好的元素放进输出数组
+    for (int i = 0; i < a.length; i++) {
+        int num = a[i];//源数组第i位的值
+        int index = count[num - min] - 1;//加总数组中对应元素的下标
+        b[index] = num;//将该值存入存储数组对应下标中
+        count[num - min]--;//加总数组中,该值的总和减少1
+    }
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-465190477b7fb90d17aef27c2a213368_720w.jpg)
+    //将存储数组的值一一替换给源数组
+    for(int i=0;i<a.length;i++){
+        a[i] = b[i];
+    }
+}
+```
 
-**算法实现**
+- **稳定性**:最后给 b 数组赋值是倒着遍历的,而且放进去一个就将C数组对应的值(表示前面有多少元素小于或等于A[i])减去一,如果有相同的数x1,x2,那么相对位置后面那个元素x2放在(比如下标为4的位置),相对位置前面那个元素x1下次进循环就会被放在x2前面的位置3,从而保证了稳定性
+- **适用场景**:排序目标要能够映射到整数域,其最大值最小值应当容易辨别,例如高中生考试的总分数,显然用0-750就OK啦,又比如一群人的年龄,用个0-150应该就可以了,再不济就用0-200喽,另外,计数排序需要占用大量空间,它比较适用于数据比较集中的情况
+
+#### 桶排序
+
+- 桶排序又叫箱排序,是计数排序的升级版,它的工作原理是将数组分到有限数量的桶子里,然后对每个桶子再分别排序(有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序),最后将各个桶中的数据有序的合并起来
+- 计数排序是桶排序的一种特殊情况,可以把计数排序当成每个桶里只有一个元素的情况
+- **算法描述**
+    1. 找出待排序数组中的最大值max,最小值min
+    2. 我们使用 动态数组ArrayList 作为桶,桶里放的元素也用 ArrayList 存储,桶的数量为(max-min)/arr.length+1
+    3. 遍历数组 arr,计算每个元素 arr[i] 放的桶
+    4. 每个桶各自排序
+    5. 遍历桶数组,把排序好的元素放进输出数组
+
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-465190477b7fb90d17aef27c2a213368_720w.jpg" alt="img" style="zoom: 67%;" />
 
 ```java
 public static void bucketSort(int[] arr){
@@ -2406,106 +2112,92 @@ public static void bucketSort(int[] arr){
 }
 ```
 
-**稳定性**
+- **稳定性**:可以看出,在分桶和从桶依次输出的过程是稳定的,但是,由于我们在对每个桶进行排序时使用了其他算法,所以,桶排序的稳定性依赖于这一步,如果我们使用了快排,显然,算法是不稳定的
+- **适用场景**:桶排序可用于最大最小值相差较大的数据情况,但桶排序要求数据的分布必须均匀,否则可能导致数据都集中到一个桶中,比如[104,150,123,132,20000], 这种数据会导致前4个数都集中到同一个桶中,导致桶排序失效
 
-可以看出,在分桶和从桶依次输出的过程是稳定的,但是,由于我们在对每个桶进行排序时使用了其他算法,所以,桶排序的稳定性依赖于这一步,如果我们使用了快排,显然,算法是不稳定的
+#### 基数排序
 
-**适用场景**
-
-桶排序可用于最大最小值相差较大的数据情况,但桶排序要求数据的分布必须均匀,否则可能导致数据都集中到一个桶中,比如[104,150,123,132,20000], 这种数据会导致前4个数都集中到同一个桶中,导致桶排序失效
-
-#### **基数排序**
-
-基数排序(Radix Sort)是桶排序的扩展,它的基本思想是:将整数按位数切割成不同的数字,然后按每个位数分别比较
+- 基数排序(Radix Sort)是桶排序的扩展,它的基本思想是:将整数按位数切割成不同的数字,然后按每个位数分别比较
 排序过程:将所有待比较数值(正整数)统一为同样的数位长度,数位较短的数前面补零,然后,从最低位开始,依次进行一次排序,这样从最低位排序一直到最高位排序完成以后, 数列就变成一个有序序列
+- **算法描述**
+  1. 取得数组中的最大数,并取得位数
+  2. arr为原始数组,从最低位开始取每个位组成radix数组
+  3. 对radix进行计数排序(利用计数排序适用于小范围数的特点)
 
-**算法描述**
-
-1. 取得数组中的最大数,并取得位数
-2. arr为原始数组,从最低位开始取每个位组成radix数组
-3. 对radix进行计数排序(利用计数排序适用于小范围数的特点)
-
-**动图**
-
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-3a6f1e5059386523ed941f0d6c3a136e_b.gif)
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-3a6f1e5059386523ed941f0d6c3a136e_b.gif" alt="img" style="zoom:50%;" />
 
 **算法实现**
 
 ```java
 public abstract class Sorter {
-     public abstract void sort(int[] array);
+    public abstract void sort(int[] array);
 }
 
 public class RadixSorter extends Sorter {
 
-     private int radix;
+    private int radix;
 
-     public RadixSorter() {
-          radix = 10;
-     }
+    public RadixSorter() {
+        radix = 10;
+    }
 
-     @Override
-     public void sort(int[] array) {
-          // 数组的第一维表示可能的余数0-radix,第二维表示array中的等于该余数的元素
-          // 如:十进制123的个位为3,则bucket[3][] = {123}
-          int[][] bucket = new int[radix][array.length];
-          int distance = getDistance(array); // 表示最大的数有多少位
-          int temp = 1;
-          int round = 1; // 控制键值排序依据在哪一位
-          while (round <= distance) {
-               // 用来计数:数组counter[i]用来表示该位是i的数的个数
-               int[] counter = new int[radix];
-               // 将array中元素分布填充到bucket中,并进行计数
-               for (int i = 0; i < array.length; i++) {
-                    int which = (array[i] / temp) % radix;
-                    bucket[which][counter[which]] = array[i];
-                    counter[which]++;
-               }
-               int index = 0;
-               // 根据bucket中收集到的array中的元素,根据统计计数,在array中重新排列
-               for (int i = 0; i < radix; i++) {
-                    if (counter[i] != 0)
-                         for (int j = 0; j < counter[i]; j++) {
-                              array[index] = bucket[i][j];
-                              index++;
-                         }
-                    counter[i] = 0;
-               }
-               temp *= radix;
-               round++;
-          }
-     }
+    @Override
+    public void sort(int[] array) {
+        // 数组的第一维表示可能的余数0-radix,第二维表示array中的等于该余数的元素
+        // 如:十进制123的个位为3,则bucket[3][] = {123}
+        int[][] bucket = new int[radix][array.length];
+        int distance = getDistance(array); // 表示最大的数有多少位
+        int temp = 1;
+        int round = 1; // 控制键值排序依据在哪一位
+        while (round <= distance) {
+            // 用来计数:数组counter[i]用来表示该位是i的数的个数
+            int[] counter = new int[radix];
+            // 将array中元素分布填充到bucket中,并进行计数
+            for (int i = 0; i < array.length; i++) {
+                int which = (array[i] / temp) % radix;
+                bucket[which][counter[which]] = array[i];
+                counter[which]++;
+            }
+            int index = 0;
+            // 根据bucket中收集到的array中的元素,根据统计计数,在array中重新排列
+            for (int i = 0; i < radix; i++) {
+                if (counter[i] != 0)
+                    for (int j = 0; j < counter[i]; j++) {
+                        array[index] = bucket[i][j];
+                        index++;
+                    }
+                counter[i] = 0;
+            }
+            temp *= radix;
+            round++;
+        }
+    }
 
-     private int getDistance(int[] array) {
-          int max = computeMax(array);
-          int digits = 0;
-          int temp = max / radix;
-          while(temp != 0) {
-               digits++;
-               temp = temp / radix;
-          }
-          return digits + 1;
-     }
+    private int getDistance(int[] array) {
+        int max = computeMax(array);
+        int digits = 0;
+        int temp = max / radix;
+        while(temp != 0) {
+            digits++;
+            temp = temp / radix;
+        }
+        return digits + 1;
+    }
 
-     private int computeMax(int[] array) {
-          int max = array[0];
-          for(int i=1; i<array.length; i++) {
-               if(array[i]>max) {
-                    max = array[i];
-               }
-          }
-          return max;
-     }
+    private int computeMax(int[] array) {
+        int max = array[0];
+        for(int i=1; i<array.length; i++) {
+            if(array[i]>max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
 }
 ```
 
-**稳定性**
-
-通过上面的排序过程,我们可以看到,每一轮映射和收集操作,都保持从左到右的顺序进行,如果出现相同的元素,则保持他们在原始数组中的顺序,可见,基数排序是一种稳定的排序
-
-**适用场景**
-
-基数排序要求较高,元素必须是整数,整数时长度10W以上,最大值100W以下效率较好,但是基数排序比其他排序好在可以适用字符串,或者其他需要根据多个条件进行排序的场景,例如日期,先排序日,再排序月,最后排序年,其它排序算法可是做不了的
+- **稳定性**:通过上面的排序过程,我们可以看到,每一轮映射和收集操作,都保持从左到右的顺序进行,如果出现相同的元素,则保持他们在原始数组中的顺序,可见,基数排序是一种稳定的排序
+- **适用场景**:基数排序要求较高,元素必须是整数,整数时长度10W以上,最大值100W以下效率较好,但是基数排序比其他排序好在可以适用字符串,或者其他需要根据多个条件进行排序的场景,例如日期,先排序日,再排序月,最后排序年,其它排序算法可是做不了的
 
 #### 总结
 
@@ -2516,7 +2208,7 @@ public class RadixSorter extends Sorter {
 | 直接插入排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
 | 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(nlogn)   | 不稳定 |
 | 堆排序       | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(1)       | 不稳定 |
-| 希尔排序     | O(nlogn)       | O(ns)          | O(n)           | O(1)       | 不稳定 |
+| 希尔排序     | O(nlogn)       | O(n)           | O(n)           | O(1)       | 不稳定 |
 | 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
 | 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(n+k)     | 稳定   |
 | 基数排序     | O(N*M)         | O(N*M)         | O(N*M)         | O(M)       | 稳定   |
@@ -2681,6 +2373,13 @@ public void levelTraverse(TreeNode root) {
 
 ## 操作系统
 
+### 原码/反码/补码
+
+- 为了简化计算机集成电路的设计,根据运算法则减去一个正数等于加上一个负数, 即: 1-1 = 1 + (-1) = 0 , 所以机器可以只有加法而没有减法,这样计算机运算的设计就更简单了
+- 如果用原码表示, 让符号位也参与计算，显然对于减法来说， 结果是不正确的。这也就是为何计算机内部不使用原码表示一个数。
+- 为了解决原码做减法的问题, 出现了反码,发现用反码计算减法, 结果的真值部分是正确的,而唯一的问题其实就出现在"0"这个特殊的数值上。 虽然人们理解上+0和-0是一样的， 但是0带符号是没有任何意义的。 而且会有[0000 0000]原和[1000 0000]原两个编码表示0。
+- 于是补码的出现,，解决了0的符号以及两个编码的问题,使用补码，不仅仅修复了0的符号以及存在两个编码的问题， 而且还能够多表示一个最低数。这就是为什么8位二进制，使用原码或反码表示的范围为[-127, +127]，而使用补码表示的范围为[-128, 127]。
+
 ### 进程与线程
 
 - 进程是资源分配的基本单位,是程序关于某个数据集合上的一次运行活动
@@ -2766,9 +2465,9 @@ public void levelTraverse(TreeNode root) {
     -   **循环等待**:若干进程之间形成一种头尾相接的循环等待资源关系
 -  这四个条件是死锁的必要条件,只要系统发生死锁,这些条件必然成立,而只要上述条件之一不成立,则死锁解除
 -  **预防死锁**:
-    -  静态资源分配法:在进程运行之初,一次性请求所有需要的资源,破坏了请求和保持条件
-    -  资源顺序分配法:规定每个线程必须按顺序请求资源,同类资源一次性申请完,破坏了循环等待条件
-    -  剥夺控制法:破坏了不可剥夺条件
+    -  **静态资源分配法**:在进程运行之初,一次性请求所有需要的资源,破坏了请求和保持条件
+    -  **资源顺序分配法**:规定每个线程必须按顺序请求资源,同类资源一次性申请完,破坏了循环等待条件
+    -  **剥夺控制法**:破坏了不可剥夺条件
 
 #### 并发与并行
 

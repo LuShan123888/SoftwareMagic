@@ -31,7 +31,7 @@ public interface Collection<E> extends Iterable<E>
 | boolean contains(Object obj)             | 判断某一个对象是否在收集中存在 |
 | boolean containsAll(Collection<?> c)     | 判断一组对象是否在收集中存在   |
 | boolean equals(Object obj)               | 判断收集与对象是否相等         |
-| int hashCode()                           | 获取收集的哈希码               |
+| int hashCode()                           | 获取集合的Hash值               |
 | boolean isEmpty()                        | 收集是否为空                   |
 | Iterator<E> iterator()                   | 获取收集的Iterator接口实例     |
 | boolean remove(Object obj)               | 删除指定对象                   |
@@ -378,7 +378,7 @@ public class TestSet {
 ### HashSet
 
 - HashSet 是一个没有重复元素的集合,它是由 HashMap 实现的,不保证元素的顺序 (这里所说的没有顺序是指:元素插入的顺序与输出的顺序不一致),而且 HashSet 允许使用 null 元素
-- HashSet 是非同步的,如果多个线程同时访问一个哈希 set,而其中至少一个线程修改了该 set,那么它必须保持外部同步
+- HashSet 是非同步的,如果多个线程同时访问一个HashSet,而其中至少一个线程修改了该 Set,那么它必须保持外部同步
 - HashSet 按 Hash 算法来存储集合的元素,因此具有很好的存取和查找性能
 - HashSet 的实现方式大致如下,通过一个 HashMap 存储元素,元素是存放在 HashMap 的 Key 中,而 Value 统一使用一个名为PRESENT的 Object 对象
 - **HashSet 使用和理解中容易出现的误区**
@@ -403,14 +403,14 @@ public class Main {
 
 **保证唯一性**
 
-- `HashSet`是调用的`HashMap`的`put()`方法,而`put()`方法中有这么一行逻辑,如果`哈希值`和`key`都一样,就会直接拿新值覆盖旧值,而`HashSet`就是利用这个特性来保证唯一性
+- `HashSet`是调用的`HashMap`的`put()`方法,而`put()`方法中有这么一行逻辑,如果`Hash值`和`key`都一样,就会直接拿新值覆盖旧值,而`HashSet`就是利用这个特性来保证唯一性
 
 ```java
  if (p.hash == hash && ((k = p.key) == key || (key != null && key.equals(k))))
      e = p;
 ```
 
-- 所以在存放对象的时候需要重写`hashCode()`和`equals()`方法,因为就是用这两个方法来判断唯一性的,否则就会出现下面这样的情况,创建两个属性一样的对象,放入`HashSet`中会发现重复了,那是因为创建两个对象肯定哈希值是不一样的,所以需要自己重写`hashCode()`和`equals()`
+- 所以在存放对象的时候需要重写`hashCode()`和`equals()`方法,因为就是用这两个方法来判断唯一性的,否则就会出现下面这样的情况,创建两个属性一样的对象,放入`HashSet`中会发现重复了,那是因为创建两个对象肯定Hash值是不一样的,所以需要自己重写`hashCode()`和`equals()`
 
 ### LinkedHashSet
 
