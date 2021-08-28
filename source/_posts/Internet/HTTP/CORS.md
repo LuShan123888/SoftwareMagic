@@ -94,7 +94,7 @@ xhr.withCredentials = false;
 
 - 非简单请求是那种对服务器有特殊要求的请求,比如请求方法是`PUT`或`DELETE`,或者`Content-Type`字段的类型
 - 是`application/json`
-- 非简单请求的CORS请求,会在正式通信之前,增加一次HTTP查询请求,称为**预检**请求(preflight)
+- 非简单请求的CORS请求,会在正式通信之前,增加一次HTTP查询请求,称为预检请求(preflight)
 - 浏览器先询问服务器,当前网页所在的域名是否在服务器的许可名单之中,以及可以使用哪些HTTP动词和头信息字段,只有得到肯定答复,浏览器才会发出正式的`XMLHttpRequest`请求,否则就报错
 - 下面是一段浏览器的JavaScript脚本
 
@@ -196,7 +196,7 @@ Content-Type: text/html; charset=utf-8
 
 - 上面头信息中,`Access-Control-Allow-Origin`字段是每次回应都必定包含的
 
-## 与JSONP的比较
+## 与JSONP的log比较
 
 - CORS与JSONP的使用目的相同,但是比JSONP更强大
-- JSONP只支持`GET`请求,CORS支持所有类型的HTTP请求,JSONP的优势在于支持老式浏览器,以及可以向不支持CORS的网站请求数据
+- JSONP只支持`GET`请求,CORS支持所有类型的HTTP请求,JSONP的优势在于支持老式浏览器,以及可以向不支持CORS的网站请求数据FFF
