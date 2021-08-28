@@ -26,7 +26,7 @@ yarn install
  hexo new [layout] <title>
 ```
 
-新建一篇文章,如果没有设置 `layout` 的话,默认使用 [_config.yml](https://hexo.io/zh-cn/docs/configuration) 中的 `default_layout` 参数代替,如果标题包含空格的话,请使用引号括起来
+- 新建一篇文章,如果没有设置 `layout` 的话,默认使用 `_config.yml`中的 `default_layout` 参数代替,如果标题包含空格的话,请使用引号括起来
 
 ```
 hexo new "post title with whitespace"
@@ -38,13 +38,13 @@ hexo new "post title with whitespace"
 | `-r`, `--replace` | 如果存在同名文章,将其替换                    |
 | `-s`, `--slug`    | 文章的 Slug,作为新文章的文件名和发布后的 URL |
 
-默认情况下,Hexo 会使用文章的标题来决定文章文件的路径,对于独立页面来说,Hexo 会创建一个以标题为名字的目录,并在目录中放置一个 `index.md` 文件,你可以使用 `--path` 参数来覆盖上述行为,自行决定文件的目录:
+- 默认情况下,Hexo 会使用文章的标题来决定文章文件的路径,对于独立页面来说,Hexo 会创建一个以标题为名字的目录,并在目录中放置一个 `index.md` 文件,你可以使用 `--path` 参数来覆盖上述行为,自行决定文件的目录:
 
 ```
 hexo new page --path about/me "About me"
 ```
 
-以上命令会创建一个 `source/about/me.md` 文件,同时 Front Matter 中的 title 为 `"About me"`
+- 以上命令会创建一个 `source/about/me.md` 文件,同时 Front Matter 中的 title 为 `"About me"`
 
 ## 生成静态文件
 
@@ -68,7 +68,7 @@ hexo g
 hexo --draft
 ```
 
-显示 `source/_drafts` 文件夹中的草稿文章
+- 显示 `source/_drafts` 文件夹中的草稿文章
 
 ## 发表草稿
 
@@ -82,7 +82,7 @@ hexo publish [layout] <filename>
 hexo server
 ```
 
-默认情况下,访问网址为:`http://localhost:4000/`
+- 默认情况下,访问网址为:`http://localhost:4000/`
 
 | 选项             | 描述                           |
 | :--------------- | :----------------------------- |
@@ -141,7 +141,7 @@ hexo version
 hexo --safe
 ```
 
-在安全模式下,不会载入插件和脚本,当您在安装新插件遭遇问题时,可以尝试以安全模式重新执行
+- 在安全模式下,不会载入插件和脚本,当您在安装新插件遭遇问题时,可以尝试以安全模式重新执行
 
 ### 调试模式
 
@@ -149,7 +149,7 @@ hexo --safe
 hexo --debug
 ```
 
-在终端中显示调试信息并记录到 `debug.log`,当您碰到问题时,可以尝试用调试模式重新执行一次,并 [提交调试信息到 GitHub](https://github.com/hexojs/hexo/issues/new)
+- 在终端中显示调试信息并记录到 `debug.log`,当您碰到问题时,可以尝试用调试模式重新执行一次,并 [提交调试信息到 GitHub](https://github.com/hexojs/hexo/issues/new)
 
 ### 简洁模式
 
@@ -157,7 +157,7 @@ hexo --debug
 hexo --silent
 ```
 
-隐藏终端信息
+- 隐藏终端信息
 
 ## 自定义配置文件的路径
 
@@ -394,7 +394,7 @@ yarn add --save hexo-theme-fluid
 
 ### 指定主题
 
-修改`_config.yml`
+- 修改`_config.yml`
 
 ```
 theme: fluid  # 指定主题
@@ -404,7 +404,7 @@ language: zh-CN  # 指定语言,会影响主题显示的语言,按需修改
 
 ### 主题配置
 
-`_config.fluid.yml`
+- `_config.fluid.yml`
 
 ```yaml
 #---------------------------

@@ -8,7 +8,7 @@ categories:
 ---
 # Kafka Eagle
 
-- Kafka Eagle是开源可视化和管理软件。它允许您查询、可视化、提醒和探索您的指标，无论它们存储在哪里。简单地说，它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具。
+- Kafka Eagle是开源可视化和管理软件,它允许您查询,可视化,提醒和探索您的指标,无论它们存储在哪里,简单地说,它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
 
 ## 初始化
 
@@ -99,7 +99,7 @@ cluster1.kafka.eagle.sasl.protocol=SASL_PLAINTEXT
 cluster1.kafka.eagle.sasl.mechanism=PLAIN
 cluster1.kafka.eagle.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="kafka-eagle";
 
-#cluster2 在此没有用到，将其注释掉
+#cluster2 在此没有用到,将其注释掉
 #cluster2.kafka.eagle.sasl.enable=false
 #cluster2.kafka.eagle.sasl.protocol=SASL_PLAINTEXT
 #cluster2.kafka.eagle.sasl.mechanism=PLAIN
@@ -118,9 +118,9 @@ kafka.eagle.password=123456
 ## 运行
 
 1. 运行ZooKeeper
-2. 运行Kafka集群，另外运行kafka server前，需设置JMX_PORT，否则Kafka Eagle 后台提示连接失败。执行命令行`$ set JMX_PORT=9999 & kafka-server-start.bat config\server.properties start`设置JMX_PORT且运行Kafkaserver
-3. `$ %KE_HOME%\bin\ke.sh`，运行Kafka Eagle
-4. 打开浏览器，在地址栏输入`http://localhost:8048/ke/`，然后在登录页面，输入在配置文件`%KE_HOME%\conf\system-config.properties`设置的账号与密码
-5. 登录成功，便可进入Kafka Eagle
+2. 运行Kafka集群,另外运行kafka server前,需设置JMX_PORT,否则Kafka Eagle 后台提示连接失败,执行命令行`$ set JMX_PORT=9999 & kafka-server-start.bat config\server.properties start`设置JMX_PORT且运行Kafkaserver
+3. `$ %KE_HOME%\bin\ke.sh`,运行Kafka Eagle
+4. 打开浏览器,在地址栏输入`http://localhost:8048/ke/`,然后在登录页面,输入在配置文件`%KE_HOME%\conf\system-config.properties`设置的账号与密码
+5. 登录成功,便可进入Kafka Eagle
 
 ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-22.png)

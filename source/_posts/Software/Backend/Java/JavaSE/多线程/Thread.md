@@ -52,9 +52,9 @@ public Thread(ThreadGroup group,String name);
 | setName(String name) | 赋予线程一个名字                                             |
 | getName()            | 取得代表线程名字的字符串                                     |
 | stop()               | 停止线程的执行                                               |
-| interrupt()          | 标记线程为中断状态，不过不会中断正在运行的线程               |
-| interrupted()        | 测试当前线程是否已经中断。该方法为静态方法，调用后会返回boolean值。不过调用之后会改变线程的状态，如果是中断状态调用的，调用之后会清除线程的中断状态 |
-| isInterrupted()      | 测试线程是否已经中断。该方法由对象调用                       |
+| interrupt()          | 标记线程为中断状态,不过不会中断正在运行的线程               |
+| interrupted()        | 测试当前线程是否已经中断,该方法为静态方法,调用后会返回boolean值,不过调用之后会改变线程的状态,如果是中断状态调用的,调用之后会清除线程的中断状态 |
+| isInterrupted()      | 测试线程是否已经中断,该方法由对象调用                       |
 
 - Thread类封装了线程的行为,继承Thread类须重写`run()`方法实现线程的任务,注意,程序中不要直接调用此方法,而是调用线程对象的`start()`方法启动线程,让其进入可调度状态,线程获得调度时将自动执行`run()`方法
 
@@ -111,13 +111,13 @@ Slow: Sun Jan 12 11:50:30 CST 2020
 
 ### stop()停止
 
--    线程调用stop()方法会被暴力停止,方法已弃用。该方法会有不好的后果：
-    1. 强制让线程停止有可能使一些清理性的工作得不到完成。
-    2. 对锁定的对象进行了**解锁**，导致数据得不到同步的处理，出现数据不一致的问题（比如一个方法加上了synchronized，并在其中进行了一个长时间的处理，而在处理结束之前该线程进行了`stop()`,则未完成的数据将没有进行到同步的处理）
+-    线程调用stop()方法会被暴力停止,方法已弃用,该方法会有不好的后果:
+    1. 强制让线程停止有可能使一些清理性的工作得不到完成
+    2. 对锁定的对象进行了**解锁**,导致数据得不到同步的处理,出现数据不一致的问题(比如一个方法加上了synchronized,并在其中进行了一个长时间的处理,而在处理结束之前该线程进行了`stop()`,则未完成的数据将没有进行到同步的处理)
 
 ### 异常法停止
 
--  线程调用interrupt()方法后，在线程的run方法中判断当前对象的interrupted状态，如果是中断状态则抛出异常，达到中断线程的效果。
+-  线程调用interrupt()方法后,在线程的run方法中判断当前对象的interrupted状态,如果是中断状态则抛出异常,达到中断线程的效果
 
 ```java
 public class MyThread extends Thread {
@@ -126,15 +126,15 @@ public class MyThread extends Thread {
         try {
             for(int i=0; i<500000; i++){
                 if(this.interrupted()) {
-                    System.out.println("线程已经终止， for循环不再执行");
+                    System.out.println("线程已经终止,for循环不再执行");
                         throw new InterruptedException();
                 }
                 System.out.println("i="+(i+1));
             }
 
-            System.out.println("这是for循环外面的语句，也会被执行");
+            System.out.println("这是for循环外面的语句,也会被执行");
         } catch (InterruptedException e) {
-            System.out.println("进入MyThread.java类中的catch了。。。");
+            System.out.println("进入MyThread.java类中的catch了,,,");
             e.printStackTrace();
         }
     }
@@ -155,7 +155,7 @@ public class Run {
 
 ### 在沉睡中停止
 
-- 先将线程sleep，然后调用interrupt标记中断状态，interrupt会将阻塞状态的线程中断。会抛出中断异常，达到停止线程的效果
+- 先将线程sleep,然后调用interrupt标记中断状态,interrupt会将阻塞状态的线程中断,会抛出中断异常,达到停止线程的效果
 
 ```java
 public class MyThread extends Thread {
@@ -166,7 +166,7 @@ public class MyThread extends Thread {
             Thread.sleep(5000);
             System.out.println("run-----------end");
         } catch (InterruptedException e) {
-            System.out.println("在沉睡中被停止！进入catch，线程的是否处于停止状态：" + this.isInterrupted());
+            System.out.println("在沉睡中被停止!进入catch,线程的是否处于停止状态:" + this.isInterrupted());
             e.printStackTrace();
         }
     }
@@ -176,7 +176,7 @@ public class MyThread extends Thread {
             MyThread myThread = new MyThread();
             myThread.start();
             Thread.sleep(2000);
-            System.out.println("状态："+MyThread.interrupted());
+            System.out.println("状态:"+MyThread.interrupted());
             myThread.interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -185,7 +185,7 @@ public class MyThread extends Thread {
 }
 ```
 
-- 线程先调用interrupt标记中断状态，然后线程再睡眠。会抛出中断异常，达到停止线程的效果
+- 线程先调用interrupt标记中断状态,然后线程再睡眠,会抛出中断异常,达到停止线程的效果
 
 ```java
 public class MyThread1 extends Thread {
@@ -196,12 +196,12 @@ public class MyThread1 extends Thread {
                 System.out.println("i = " + (i+1));
             }
             System.out.println("run begin");
-            //interrupt是做一个中断标记，当时不会去中断正在运行的线程，当该线程处于阻塞状态时就会进行中断
-            //因此，先进行interrupt后，再遇到sleep阻塞时，才会进行中断
+            //interrupt是做一个中断标记,当时不会去中断正在运行的线程,当该线程处于阻塞状态时就会进行中断
+            //因此,先进行interrupt后,再遇到sleep阻塞时,才会进行中断
             Thread.sleep(200000);
             System.out.println("run end");
         } catch (InterruptedException e) {
-            System.out.println("先停止，再遇到了sleep！ 进入catch！");
+            System.out.println("先停止,再遇到了sleep!进入catch!");
             e.printStackTrace();
         }
     }
@@ -255,7 +255,7 @@ class TestSleep implements Runnable {
 
 ## 线程让步
 
-- **yield():**一定是当前线程调用此方法,当前线程放弃获取的CPU时间片,但不释放锁资源,由运行状态变为就绪状态,让OS再次选择线程
+- **yield()**:一定是当前线程调用此方法,当前线程放弃获取的CPU时间片,但不释放锁资源,由运行状态变为就绪状态,让OS再次选择线程
 
 ```java
 class TestYield implements Runnable {

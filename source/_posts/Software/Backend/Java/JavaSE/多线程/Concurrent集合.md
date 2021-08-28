@@ -70,16 +70,16 @@ public class SetTest {
 
 -   JDK1.7
 
-    -   ConcurrentHashMap 和 HashMap 实现上类似，最主要的差别是 ConcurrentHashMap 采用了分段锁（Segment）,它继承自重入锁 ReentrantLock，每个分段锁维护着几个桶（HashEntry），多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）。
+    -   ConcurrentHashMap 和 HashMap 实现上类似,最主要的差别是 ConcurrentHashMap 采用了分段锁(Segment),它继承自重入锁 ReentrantLock,每个分段锁维护着几个桶(HashEntry),多个线程可以同时访问不同分段锁上的桶,从而使其并发度更高(并发度就是 Segment 的个数)
     -   在 HashEntry 类中:key,hash 和 next 域都被声明为 final 型,value 域被声明为 volatile 型
     -   在ConcurrentHashMap 中,如果产生Hash碰撞,将采用**拉链法**来处理,即把碰撞的 HashEntry 对象链接成一个链表,由于 HashEntry 的 next 域为 final 型,所以新节点只能在链表的表头处插入,由于只能在表头插入,所以链表中节点的顺序和插入的顺序相反
     -   size()的计算是先采用不加锁的方式,连续计算元素的个数,最多计算3次:
         1.  如果前后两次计算结果相同,则说明计算出来的元素个数是准确的
         2.  如果前后两次计算结果都不同,则给每个Segment进行加锁,再计算一次元素的个数
-    
+
 -   JDK1.8
 
-    -   放弃了 Segment 臃肿的设计,使用了 CAS 操作来支持更高的并发度，在 CAS 操作失败时使用内置锁 synchronized,在链表过长时会转换为红黑树
+    -   放弃了 Segment 臃肿的设计,使用了 CAS 操作来支持更高的并发度,在 CAS 操作失败时使用内置锁 synchronized,在链表过长时会转换为红黑树
 
 ## BlockingQueue
 
