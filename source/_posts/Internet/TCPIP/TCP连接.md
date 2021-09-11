@@ -12,7 +12,7 @@ categories:
 
 ## TCP头部
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-8f5725f163d7f6390a75f3a2d337bc1c_1440w.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-12-v2-8f5725f163d7f6390a75f3a2d337bc1c_1440w.jpg)
 
 - 源端口和目的端口在TCP层确定双方进程,序列号表示的是报文段数据中的第一个字节号,ACK表示确认号,该确认号的发送方期待接收的下一个序列号,即最后被成功接收的数据字节序列号加1,这个字段只有在ACK位被启用的时候才有效
 - 当新建一个连接时,从客户端发送到服务端的第一个报文段的SYN位被启用,这称为SYN报文段,这时序列号字段包含了在本次连接的这个方向上要使用的第一个序列号,即初始序列号ISN,之后发送的数据是ISN加1,因此SYN位字段会消耗一个序列号,这意味着使用重传进行可靠传输,而不消耗序列号的ACK则不是

@@ -11,7 +11,7 @@ categories:
 - Docker Machine 管理的虚拟主机可以是机上的,也可以是云供应商,如阿里云,腾讯云,AWS,或 DigitalOcean
 - 使用 docker-machine 命令,您可以启动,检查,停止和重新启动托管主机,也可以升级 Docker 客户端和守护程序,以及配置 Docker 客户端与您的主机进行通信
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-14-2021-02-14-machine.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-14-2021-02-14-machine.png)
 
 ## 安装
 

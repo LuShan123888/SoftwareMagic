@@ -54,4 +54,4 @@ java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
 
 - 访问 http://localhost:7001/,这时候我们需要输入登录账户和密码默认为`root:root`
 
-![image-20201118124849858](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-image-20201118124849858.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-image-20201118124849858.png)

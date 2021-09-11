@@ -23,7 +23,7 @@ git reset --soft HEAD~[~...]
 
 假设不想保留添加了一个 style.css 文件的提交 9e78i,而且也不想保留添加了一个 index.js 文件的提交 035cc,但是,又想要保留新添加的 style.css 和 index.js 文件!这是软重置的一个完美用例
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-BZY9n3d4hTvziXu.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-BZY9n3d4hTvziXu.gif)
 
 输入 git status 后,会看到仍然可以访问在之前的提交上做过的所有修改,这很好,这意味着可以修复这些文件的内容,之后再重新提交它们!
 
@@ -39,7 +39,7 @@ git reset --hard HEAD~[~...]
 
 有时候并不想保留特定提交引入的修改,不同于软重置,应该再也无需访问它们,Git 应该直接将整体状态直接重置到特定提交之前的状态:这甚至包括在工作目录中和暂存文件上的修改
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-kzpT9Smq8v3QZRb.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-kzpT9Smq8v3QZRb.gif)
 
 Git 丢弃了 9e78i 和 035cc 引入的修改,并将状态重置到了 ec5be 的状态
 

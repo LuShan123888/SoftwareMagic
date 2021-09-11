@@ -16,7 +16,7 @@ categories:
 git rebase  <branch_name>
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6b8427b4baf6cdfb08b852ab1cdb4941.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6b8427b4baf6cdfb08b852ab1cdb4941.gif)
 
 - 上面这个例子展示了在 master 分支上的变基,但是,在更大型的项目中,通常不需要这样的操作,因为rebase在为复制的提交创建新的hash时会修改项目的历史记录
 - 如果在开发一个 feature 分支并且 master 分支已经更新过,那么变基就很好用,可以在你的分支上获取所有更新,这能防止未来出现合并冲突
@@ -48,11 +48,11 @@ git rebase  <branch_name>
 
 - drop:移除该提交
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-7189da3226d1fdedeb6a297fbc2b1177.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-7189da3226d1fdedeb6a297fbc2b1177.gif)
 
 如果你想把多个提交融合到一起以便得到清晰的提交历史,那也没有问题!
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-758ead2cd3914cadc4d822053ad1089a.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-758ead2cd3914cadc4d822053ad1089a.gif)
 
 交互式变基能为你在 rebase 时提供大量控制,甚至可以控制当前的活动分支
 
@@ -80,18 +80,18 @@ git rebase --continue
 
 当项目中存在多个分支,有时候我们需要将某一个分支中的一段提交同时应用到其他分支中,就像下图:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-808-20201210114029897.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-808-20201210114029897.png)
 
 
 希望将develop分支中的C~E部分复制到master分支中,这时就可以通过rebase命令来实现(如果只是复制某一两个提交到其他分支,建议使用更简单的命令:`git cherry-pick`)
 在实际模拟中,创建了master和develop两个分支:
 **master分支**:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-443.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-443.png)
 
 **develop分支**:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-455.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-455.png)
 
 使用命令的形式为:
 
@@ -109,15 +109,15 @@ git  rebase   90bc0045b^   5de0da9f2   --onto master
 因为`[startpoint]` `[endpoint]`指定的是一个前开后闭的区间,为了让这个区间包含C提交,将区间起始点向后退了一步
 运行完成后查看当前分支的日志:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-488.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-488.png)
 
 可以看到,C~E部分的提交内容已经复制到了G的后面了,看一下当前分支的状态:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-439.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-439.png)
 
 当前HEAD处于游离状态,实际上,此时所有分支的状态应该是这样:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-755.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-755.png)
 
 
 
@@ -128,4 +128,4 @@ git checkout master
 git reset --hard  0c72e64
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-689.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-689.png)

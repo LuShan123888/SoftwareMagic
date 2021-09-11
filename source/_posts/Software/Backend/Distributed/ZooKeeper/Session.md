@@ -30,7 +30,7 @@ categories:
 
 - zookeeper 的 leader 服务器再运行期间定时进行会话超时检查,时间间隔是 ExpirationInterval,单位是毫秒,默认值是 tickTime,每隔 tickTime 进行一次会话超时检查
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-14-session02.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-14-session02.png)
 
 - ExpirationTime 的计算方式:
 

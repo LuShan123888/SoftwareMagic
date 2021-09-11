@@ -123,4 +123,4 @@ kafka.eagle.password=123456
 4. 打开浏览器,在地址栏输入`http://localhost:8048/ke/`,然后在登录页面,输入在配置文件`%KE_HOME%\conf\system-config.properties`设置的账号与密码
 5. 登录成功,便可进入Kafka Eagle
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-22.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-22.png)

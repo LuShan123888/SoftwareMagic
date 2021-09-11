@@ -15,7 +15,7 @@ categories:
     - `public final Class getClass()`:返回对象的所属类,而且利用Class类提供的`getName()`方法可获取对象的类名称
     - `protected void finalize()`:该方法在Java垃圾回收程序删除对象前自动执行,一个对象没有任何一个引用变量指向它时,Java垃圾回收程序将自动释放对象空间,finalize()方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作,这个方法是由垃圾收集器在销毁对象时调用的,通过重写finalize()方法可以整理系统资源或者执行其他清理工作
 
-**[例6-5]**给Point类添加`equals()`方法
+**[例6-5]**:给Point类添加`equals()`方法
 
 ```java
 public class Point {

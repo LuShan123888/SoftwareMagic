@@ -58,7 +58,7 @@ public class WatcherDemo implements Watcher {
 
 - 此时启动 zookeeper 命令行终端,查看并且删除`watcher`节点:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092813.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092813.png)
 
 - IDE 控制台输出,触发了节点删除事件:
 

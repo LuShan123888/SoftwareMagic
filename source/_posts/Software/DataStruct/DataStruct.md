@@ -86,7 +86,7 @@ categories:
 
 - 将当前结点S的左孩子旋转为当前结点父结点E的右孩子,同时将父结点E旋转为当前结点S的左孩子
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640-20200617182831758.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640-20200617182831758.gif)
 
 #### 右旋
 
@@ -96,7 +96,7 @@ categories:
 
 - 将当前结点S的左孩子E的右孩子旋转为当前结点S的左孩子,同时将当前结点S旋转为左孩子E的右孩子
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640.gif)
 
 ### 红黑树
 

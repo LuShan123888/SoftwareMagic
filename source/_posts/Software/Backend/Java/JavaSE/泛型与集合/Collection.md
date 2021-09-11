@@ -11,7 +11,7 @@ categories:
 
 - 接口Collection处于Collection API的最高层,在该接口中定义了所有低层接口或类的公共方法,下图给出了Collection API的实现层次
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-939.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-22-939.png)
 
 ## Collection
 
@@ -42,7 +42,7 @@ public interface Collection<E> extends Iterable<E>
 
 ## List
 
-![image-20210321213904818](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-21-image-20210321213904818.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-21-image-20210321213904818.png)
 
 - **List 集合代表一个有序集合,集合中每个元素都有其对应的顺序索引,List 集合允许使用重复元素,可以通过索引来访问指定位置的集合元素,**
 - List 接口继承于 Collection 接口,它可以定义一个允许重复的有序集合,因为 List 中的元素是有序的,所以我们可以通过使用索引(元素在 List 中的位置,类似于数组下标)来访问 List 中的元素,这类似于 Java 的数组
@@ -71,7 +71,7 @@ public interface Collection<E> extends Iterable<E>
 - `size()`,`isEmpty()`,`get()`,`set()`,`iterator()`和`listIterator()`操作都以固定时间运行,`add()`操作以分摊的固定时间运行,也就是说,添加 n 个元素需要 O(n) 时间(由于要考虑到扩容,所以这不只是添加元素会带来分摊固定时间开销那样简单)
 - **ArrayList 擅长于随机访问,同时 ArrayList 是非同步的,**
 
-**[例14-4]**ArrayList的使用
+**[例14-4]**:ArrayList的使用
 
 ```java
 import java.util.*;
@@ -118,7 +118,7 @@ public class ArrayList的使用 {
 List list = Collections.synchronizedList(new LinkedList(...));
 ```
 
-**[例14-5]**ArrayList和LinkedLink的使用测试
+**[例14-5]**:ArrayList和LinkedLink的使用测试
 
 ```java
 import java.util.*;
@@ -164,7 +164,7 @@ public Vector<E>(int initCapacity, int capacityIncrement);
   - `void removeAllElements()`:清除向量序列所有元素
   - `void clear()`:清除向量序列所有元素
 
-**[例14-6]**测试向量的大小及容量变化
+**[例14-6]**:测试向量的大小及容量变化
 
 ```java
 import java.util.Vector;
@@ -349,7 +349,7 @@ public boolean equals(Object o) {
   - 将元素从`Set<E>`删除:`boolean remove(Object e)`
   - 判断是否包含元素:`boolean contains(Object e)`
 
-**[例14-3]**Set接口的使用
+**[例14-3]**:Set接口的使用
 
 ```java
 public class TestSet {

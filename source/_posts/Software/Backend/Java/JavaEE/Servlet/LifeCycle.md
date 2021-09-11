@@ -86,4 +86,4 @@ public void doPost(HttpServletRequest request,
     - Servlet 容器在调用 service() 方法之前加载 Servlet
     - 然后 Servlet 容器处理由多个线程产生的多个请求,每个线程执行一个单一的 Servlet 实例的 service() 方法
 
-![Servlet 生命周期](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-Servlet-LifeCycle.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-Servlet-LifeCycle.jpg)

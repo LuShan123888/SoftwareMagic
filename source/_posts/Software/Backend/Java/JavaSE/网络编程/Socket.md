@@ -33,9 +33,9 @@ Java提供了Socket类和ServerSocket类分别用于Client端的Server端的Sock
     2. 在客户端建立Socket类,与某服务器的指定端口进行连接,服务a器监听到连接请求后,就可在两者之间建立连接
     3. 连接建立之后,就可以取得相应的输入/输出流进行通信,一方的输出流发送的数据将被另一方的输入流读取
 
-![Component-Page-1](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg)
 
-**[例16-1]**下面是一个简单的Socket通信演示程序
+**[例16-1]**:下面是一个简单的Socket通信演示程序
 
 **客户方程序**
 
@@ -89,7 +89,7 @@ class Server {
 
 ## 实例
 
-### **[例16-2]**一个简单的多用户聊天程序
+### **[例16-2]**:一个简单的多用户聊天程序
 
 #### 聊天客户端程序
 

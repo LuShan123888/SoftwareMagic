@@ -38,4 +38,4 @@ server {
 
 - 配置完成后,先用bin/nginx –t来测试下配置是否有误,正确无误的话,重启nginx,就可以使 `https://www.domain.com` 来访问了
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bvCJaYQ3tKo7RZs.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bvCJaYQ3tKo7RZs.png)

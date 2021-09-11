@@ -14,7 +14,7 @@ categories:
 ## Hash冲突
 
 - 由于Hash算法被计算的数据是无限的,而计算后的结果范围有限,因此总会存在不同的数据经过计算后得到的值相同,这就是Hash冲突
-- 冲突处理分为以下四种方式:
+- 冲突处理分为以下几种方式:
     - **开放地址法**:出现冲突后按照一定算法查找一个空位置存放
         - **线性探测再散列**:线性探测方法就是线性探测空白单元,当数据通过Hash函数计算应该放在700这个位置,但是700这个位置已经有数据了,那么接下来就应该查看701位置是否空闲,再查看702位置,依次类推
         - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推,**二次探测的步数是原始位置相隔的步数的平方**
@@ -229,7 +229,7 @@ void transfer(Entry[] newTable) {
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-b2330062.png" alt="img" style="zoom:50%;" />
 
-- 下面我们讲解下JDK1.8做了哪些优化,经过观测可以发现,我们使用的是2次幂的扩展(指长度扩为原来2倍),所以,元素的位置要么是在原位置,要么是在原位置再移动2次幂的位置,看下图可以明白这句话的意思,n为table的长度,图(a)表示扩容前的key1和key2两种key确定索引位置的示例,图(b)表示扩容后key1和key2两种key确定索引位置的示例,其中hash1是key1对应的Hash与高位运算结果
+- 下面我们讲解下JDK1.8做了哪些优化,经过观测可以发现,我们使用的是2次幂的扩展(指长度扩为原来2倍),所以元素的位置要么是在原位置,要么是在原位置再移动2次幂的位置,看下图可以明白这句话的意思,n为table的长度,图(a)表示扩容前的key1和key2两种key确定索引位置的示例,图(b)表示扩容后key1和key2两种key确定索引位置的示例,其中hash1是key1对应的Hash与高位运算结果
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-4d8022db.png" alt="img" style="zoom:50%;" />
 
@@ -458,7 +458,7 @@ public static void main(String[] args) {
 
 - 在测试中会查找不同的值,然后度量花费的时间,为了计算getKey的平均时间,我们遍历所有的get方法,计算总的时间,除以key的数量,计算一个平均值,主要用来比较,绝对值可能会受很多环境因素的影响,结果如下:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-377effbf.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-377effbf.png)
 
 - 通过观测测试结果可知,JDK1.8的性能要高于JDK1.7 15%以上,在某些size的区域上,甚至高于100%,由于Hash算法较均匀,JDK1.8引入的红黑树效果不明显,下面我们看看Hash不均匀的的情况
 
@@ -480,7 +480,7 @@ class Key implements Comparable<Key> {
 
 - 仍然执行main方法,得出的结果如下表所示:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-bd20c215.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-bd20c215.png)
 
 - 从表中结果中可知,随着size的变大,JDK1.7的花费时间是增长的趋势,而JDK1.8是明显的降低趋势,并且呈现对数增长稳定,当一个链表太长的时候,HashMap会动态的将它替换成一个红黑树,这话的话会将时间复杂度从O(n)降为O(logn),hash算法均匀和不均匀所花费的时间明显也不相同,这两种情况的相对比较,可以说明一个好的hash算法的重要性
 

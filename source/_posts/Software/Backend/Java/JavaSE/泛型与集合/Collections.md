@@ -26,7 +26,7 @@ Java还提供了一个包装类java.util.Collections,它包含有针对Collectio
 - `frequency(Collection<?> c,Object o)`:返回指定收集中等于指定对象的元素数
 - `disjoint(Collection<?> c1,Collection<?> c2)`:如果两个指定收集中没有相同的元素,则返回true,否则返回false
 
-**[例14-7]**列表元素的排序测试
+**[例14-7]**:列表元素的排序测试
 
 ```java
 import java.util.*;

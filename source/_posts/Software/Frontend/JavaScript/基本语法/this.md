@@ -37,7 +37,7 @@ var person = {
 ## 单独使用 this
 
 - 单独使用 this,则它指向全局(Global)对象
-- 在浏览器中,window 就是该全局对象为 [**object Window**]:
+- 在浏览器中,window 就是该全局对象为**Object Window**
 
 ```js
 var x = this;
@@ -55,7 +55,7 @@ var x = this;
 ### 默认
 
 - 在函数中,函数的所属者默认绑定到 this 上
-- 在浏览器中,window 就是该全局对象为 [**object Window**]:
+- 在浏览器中,window 就是该全局对象为**Object Window**
 
 ```js
 function myFunction() {

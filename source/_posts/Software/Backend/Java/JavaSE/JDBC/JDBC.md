@@ -71,7 +71,7 @@ ResultSet rs = stmt.executeQuery("SELECT a,b,c FROM Table2");
     - `executeUpdate()`方法执行INSERT,UPDATE或DELETE语句以及SQL DDL(数据定义语言)语句,例如CREATE TABLE和DROP TABLE,INSERT,UPDATE或DELETE语句的效果是修改数据库表格中若干行的指定数据项内容,`executeUpdate()`的返回值是一个整数,是受影响的行数(即更新计数),对于CREATE TABLE或DROP TABLE等不涉及操作记录的语句,`executeUpdate()`的返回值总为零
     - `execute()`方法用于执行返回多个结果集,多个更新计数或二者组合的语句,Statement对象将由Java垃圾收集程序自动关闭,而作为一种好的编程风格,应在不需要Statement对象时显式地关闭它们,这将立即释放DBMS资源
 
-**[例17-1]**创建数据表
+**[例17-1]**:创建数据表
 
 ```java
 import java.sql.Connection;
@@ -138,7 +138,7 @@ ps.setString(1,"china");
   - `void setNull(int parameterIndex,int sqlType)`:将指定参数设置为SQL NULL
   - `void setObject(int parameterIndex,Object x)`:用给定对象设置指定参数的值
 
-**[例17-5]**采用PreparedStatement实现数据写入
+**[例17-5]**:采用PreparedStatement实现数据写入
 
 ```java
 public class 用PreparedStatement类实现SQL操作{
@@ -211,7 +211,7 @@ String s = rs.getString(2);
     - `Object getObject(String name)`:将指定名称的列的内容返回为Object
 - 使用哪个方法获取相应的字段值取决于数据库表格中数据字段的类型
 
-**[例17-2]**查询老师信息表
+**[例17-2]**:查询老师信息表
 
 ```java
 import java.sql.*;
@@ -282,7 +282,7 @@ Statement createStatement(int resultSetType,int resultSetConcurrency)
     - `int getRow()`:返回当前游标所处行号,行号从1开始编号,如果结果集没有行,返回为空
     - `boolean absolute(int row)`:将游标段到参数row指定的行,如果row为负数,表示倒数行号,例如,`absolute(-1)`表示最后一行,`absolute(1)`和`first()`效果相同
 
-**[例17-3]**游标的移动
+**[例17-3]**:游标的移动
 
 ```java
 import java.sql.*;
@@ -325,7 +325,7 @@ public class 数据库查询{
 
 - 将数据插入数据表格中要使用INSERT语句,以下例子按数据表的字段顺序及数据格式拼接出SQL字符串,使用Statement对象的`executeUpdate()`方法执行SQL语句实现数据写入
 
-**[例17-4]**执行INSERT语句实现数据写入
+**[例17-4]**:执行INSERT语句实现数据写入
 
 ```java
 import java.sql.*;

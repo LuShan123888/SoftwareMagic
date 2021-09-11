@@ -74,7 +74,7 @@ Base64的原理比较简单,每当我们使用Base64时都会先定义一个类�
 
 以下图的表格为示例,我们具体分析一下整个过程
 
-![在这里插入图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9oZWxsby5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.jpeg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9oZWxsby5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.jpeg)
 
 - 第一步:"M”,"a”,"n"对应的ASCII码值分别为77,97,110,对应的二进制值是01001101,01100001,01101110,如图第二三行所示,由此组成一个24位的二进制字符串
 - 第二步:如图红色框,将24位每6位二进制位一组分成四组
@@ -85,7 +85,7 @@ Base64的原理比较简单,每当我们使用Base64时都会先定义一个类�
 
 上面是按照三个字节来举例说明的,如果字节数不足三个,那么该如何处理？
 
-![在这里插入图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9oZWxsby5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9oZWxsby5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.png)
 
 - 两个字节:两个字节共16个二进制位,依旧按照规则进行分组,此时总共16个二进制位,每6个一组,则第三组缺少2位,用0补齐,得到三个Base64编码,第四组完全没有数据则用"=”补上,因此,上图中"BC”转换之后为"QKM=”
 - 一个字节:一个字节共8个二进制位,依旧按照规则进行分组,此时共8个二进制位,每6个一组,则第二组缺少4位,用0补齐,得到两个Base64编码,而后面两组没有对应数据,都用"=”补上,因此,上图中"A”转换之后为"QQ==”
@@ -295,5 +295,5 @@ getFile(file) {
 
 - 上传成功,通过ID查出文件表中的FileData就可以回显了
 
-![在这里插入图片描述](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-20201118161439441-20201127195628893.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-20201118161439441-20201127195628893.png)
 

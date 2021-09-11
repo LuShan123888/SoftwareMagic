@@ -199,8 +199,8 @@ public class ConsumerServerApplicationTests {
 
 **控制台**
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138639.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138639.png)
 
 **监控中心 **
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138762.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-640-20201118153138762.png)

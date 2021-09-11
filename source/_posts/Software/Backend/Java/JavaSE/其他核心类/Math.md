@@ -27,7 +27,7 @@ double log(double d)|	求d的自然对数
 double exp(double x)|	求e的x次幂(ex)
 double pow(double a,double b)|	求a的b次幂
 
-**[例2-5]**输入圆的半径,计算圆面积,输出结果精确到小数点后3位
+**[例2-5]**:输入圆的半径,计算圆面积,输出结果精确到小数点后3位
 
 ```java
 import javax.swing.*;

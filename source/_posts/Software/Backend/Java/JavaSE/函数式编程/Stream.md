@@ -262,7 +262,7 @@ System.out.println("合并字符串: " + mergedString);
 - Collectors.summingLong()
 - Collectors.summingDouble()
 
-![sum](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220911037-2007965978.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220911037-2007965978.jpg)
 
 ```java
 applestore.stream().collect(summingInt(Apple::getWeight()))
@@ -277,7 +277,7 @@ applestore.stream().collect(summingInt(Apple::getWeight()))
 - Collectors.averagingKLong()
 - Collectors.averagingDouble()
 
-![average](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220927770-127840192.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200716220927770-127840192.jpg)
 
 ```java
 applestore.stream().collect(aceragingInt(Apple::getWeight())
@@ -301,7 +301,7 @@ public void reduce() {
 }
 ```
 
-![reducing](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717080958680-295486211.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717080958680-295486211.jpg)
 
 #### 计数
 
@@ -312,7 +312,7 @@ public void reduce() {
 
 - Collectors.groupingBy()
 - 分组与SQL 中的 **GROUP BY** 十分类似,所以`groupingBy()`的所有参数中有一个参数是 Collector接口,这样就能够和求和/求平均值/归约 一起使用
-    ![groupingBy](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg)
+    ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg)
 - 传入参数的接口是 Function 接口,实现这个接口可以是实现从 A 类型到 B 类型的转换
 - 其中有一个方法可以传入参数 `Supplier mapFactory`,这个可以通过自定义 Map工厂,来创建自定义的分组 Map
 
@@ -343,7 +343,7 @@ System.out.println("平均数 : " + stats.getAverage());
 Java8引入了三个原始类型特化流接口:IntStream,LongStream,DoubleStream,分别将流中的元素特化为 int,long,double
 普通对象流和原始类型特化流之间可以相互转化
 
-![stream-map](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-30-1730512-20200717202104577-1160921711.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-30-1730512-20200717202104577-1160921711.jpg)
 
 - 其中 IntStream 和 LongStream 可以调用 asDoubleStream 变为 DoubleStream,但是这是单向的转化方法
 - `IntStream.boxed()`可以得到`Stream<Integer>`,这个也是一个单向方法,支持数值流转换回对象流,LongStream 和 DoubleStream 也有类似的方法

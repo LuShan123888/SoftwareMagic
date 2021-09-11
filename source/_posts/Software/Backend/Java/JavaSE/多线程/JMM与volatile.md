@@ -20,7 +20,7 @@ categories:
     1. 线程A把本地内存A中更新过的共享变量刷新到主内存中去
     2. 线程B到主内存中去读取线程A之前已更新过的共享变量
 
-![image-20210611095441923](C:\Users\lushan11\AppData\Roaming\Typora\typora-user-images\image-20210611095441923.png)
+![](C:\Users\lushan11\AppData\Roaming\Typora\typora-user-images\image-20210611095441923.png)
 
 - 关于主内存与工作内存之间的具体交互协议,即一个变量如何从主内存拷贝到工作内存,如何从工作内存同步到主内存之间的实现细节,Java内存模型定义了以下八种操作来完成:
     1. **lock(锁定)**:作用于主内存的变量,把一个变量标识为一条线程独占状态

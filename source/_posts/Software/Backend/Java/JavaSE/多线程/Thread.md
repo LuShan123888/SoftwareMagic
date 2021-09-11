@@ -62,7 +62,7 @@ public Thread(ThreadGroup group,String name);
 
 ### 继承Thread类实现多线程
 
-**[例12-1]**直接继承Thread类实现多线程
+**[例12-1]**:直接继承Thread类实现多线程
 
 ```java
 import java.util.*;

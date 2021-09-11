@@ -16,7 +16,7 @@ categories:
 - main 线程将消息发送给 RecordAccumulator
 - sender 线程不断从 RecordAccumulator 中拉取消息发送到 Kafka broker
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-19.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-19.png)
 
 - **batch.size**:只有数据积累到 batch.size 之后,sender 才会发送数据
 - **linger.time**:如果数据迟迟未达到 batch.size,sender 等待 linger.time 之后就会发送数据
@@ -121,7 +121,7 @@ public class CallBackProducer {
 
 - ProducerRecord类有许多构造函数,其中一个参数partition可指定分区
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-20.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-20.png)
 
 #### 自定义分区器
 
@@ -499,4 +499,4 @@ public class InterceptorProducer {
 
 **测试**
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-21.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-21.png)

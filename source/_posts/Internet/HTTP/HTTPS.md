@@ -24,7 +24,7 @@ categories:
 5. **传输加密后的信息**:这部分信息是服务段用会话密钥加密后的信息,可以在客户端被还原
 6. **客户端解密信息**:客户端用之前生成的会话密钥解密服务段传过来的信息,于是获取了解密后的内容,整个过程第三方即使监听到了数据,也束手无策
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210707095707.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210707095707.gif)
 
 > **对称加密与非对称加密**
 >

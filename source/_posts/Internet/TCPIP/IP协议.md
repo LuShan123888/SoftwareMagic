@@ -8,13 +8,13 @@ categories:
 
 ## IP数据报的格式
 
-![BB15B9C613CE668AC5CCA95F6A967E9A](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-UCtIPhfpVnv7DuF.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-UCtIPhfpVnv7DuF.png)
 
 ## 分类的IP地址
 
-![image-20200520145853702](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png)
 
-![image-20200520145902844](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-la9Hrsd8OPA1Jk6.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-la9Hrsd8OPA1Jk6.png)
 
 - IP地址根据网络号和主机号来分,分为A,B,C三类及特殊地址D,E,  全0和全1的都保留不用
     - A类:(1.0.0.0-126.0.0.0)(默认子网掩码:255.0.0.0或 0xFF000000)第一个字节为网络号,后三个字节为主机号,该类IP地址的最前面为"0”,所以地址的网络号取值于1~126之间,一般用于大型网络

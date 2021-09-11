@@ -242,7 +242,7 @@ class SpringbootDataJdbcApplicationTests {
 
 **输出结果** :可见配置参数已经生效
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-19-640-20201115141125551.jpeg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-19-640-20201115141125551.jpeg)
 
 ## 配置Druid数据源监控
 

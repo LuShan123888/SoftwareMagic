@@ -17,7 +17,7 @@ git fetch <远程主机名>
 
 通过在这个远程分支上执行 git fetch,就可在本地获取这些修改,这不会以任何方式影响你的本地分支:fetch 只是单纯地下载新的数据而已
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-hVziLcuZmjHIS5D.gif)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-hVziLcuZmjHIS5D.gif)
 
 现在我们可以看到自上次推送以来的所有修改了,这些新数据也已经在本地了,可以决定用这些新数据做什么了
 

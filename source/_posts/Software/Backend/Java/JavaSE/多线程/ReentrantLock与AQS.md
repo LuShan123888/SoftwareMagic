@@ -107,7 +107,7 @@ static final class FairSync extends Sync {
 - CLH:Craig,Landin and Hagersten队列,是单向链表,AQS中的队列是CLH变体的虚拟双向队列(FIFO),AQS是通过将每条请求共享资源的线程封装成一个节点来实现锁的分配
 - 主要原理图如下:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/7132e4cef44c26f62835b197b239147b18062.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/7132e4cef44c26f62835b197b239147b18062.png)
 
 - AQS使用一个Volatile的int类型的成员变量来表示同步状态,通过内置的FIFO队列来完成资源获取的排队工作,通过CAS完成对State值的修改
 
@@ -115,7 +115,7 @@ static final class FairSync extends Sync {
 
 - 先来看下AQS中最基本的数据结构——Node,Node即为上面CLH变体队列中的节点
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/960271cf2b5c8a185eed23e98b72c75538637.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/960271cf2b5c8a185eed23e98b72c75538637.png)
 
 - 解释一下几个方法和属性值的含义:
 
@@ -165,9 +165,9 @@ private volatile int state;
 
 - 这几个方法都是Final修饰的,说明子类中无法重写它们,我们可以通过修改State字段表示的同步状态来实现多线程的独占模式和共享模式(加锁过程)
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/27605d483e8935da683a93be015713f331378.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/27605d483e8935da683a93be015713f331378.png)
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/3f1e1a44f5b7d77000ba4f9476189b2e32806.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/3f1e1a44f5b7d77000ba4f9476189b2e32806.png)
 
 - 对于我们自定义的同步工具,需要自定义获取同步状态和释放状态的方式,也就是AQS架构图中的第一层:API层
 
@@ -186,11 +186,11 @@ private volatile int state;
 - 一般来说,自定义同步器要么是独占方式,要么是共享方式,它们也只需实现`tryAcquire-tryRelease`,`tryAcquireShared-tryReleaseShared`中的一种即可,AQS也支持自定义同步器同时实现独占和共享两种方式,如ReentrantReadWriteLock,ReentrantLock是独占锁,所以实现了`tryAcquire-tryRelease`
 - 以非公平锁为例,这里主要阐述一下非公平锁与AQS之间方法的关联之处,具体每一处核心方法的作用会在文章后面详细进行阐述
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/b8b53a70984668bc68653efe9531573e78636.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/b8b53a70984668bc68653efe9531573e78636.png)
 
 - 为了帮助大家理解ReentrantLock和AQS之间方法的交互过程,以非公平锁为例,我们将加锁和解锁的交互流程单独拎出来强调一下,以便于对后续内容的理解
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/7aadb272069d871bdee8bf3a218eed8136919.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/7aadb272069d871bdee8bf3a218eed8136919.png)
 
 - **加锁**
     - 通过ReentrantLock的加锁方法Lock进行加锁操作
@@ -204,7 +204,7 @@ private volatile int state;
     - 释放成功后,所有处理由AQS框架完成,与自定义同步器无关
 - 通过上面的描述,大概可以总结出ReentrantLock加锁解锁时API层核心方法的映射关系
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/f30c631c8ebbf820d3e8fcb6eee3c0ef18748.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/f30c631c8ebbf820d3e8fcb6eee3c0ef18748.png)
 
 ### 通过ReentrantLock理解AQS
 
@@ -332,7 +332,7 @@ private Node enq(final Node node) {
     2. 线程2申请锁,但是锁被线程1占有
     3. 如果再有线程要获取锁,依次在队列中往后排队即可
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/e9e385c3c68f62c67c8d62ab0adb613921117.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/e9e385c3c68f62c67c8d62ab0adb613921117.png)
 
 - 回到上边的代码,`hasQueuedPredecessors`是公平锁加锁时判断等待队列中是否存在有效节点的方法,如果返回False,说明当前线程可以争取共享资源,如果返回True,说明队列中存在有效节点,当前线程必须加入到等待队列中
 
@@ -468,11 +468,11 @@ private final boolean parkAndCheckInterrupt() {
 
 - 上述方法的流程图如下:
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/c124b76dcbefb9bdc778458064703d1135485.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/c124b76dcbefb9bdc778458064703d1135485.png)
 
 - 从上图可以看出,跳出当前循环的条件是当"前置节点是头结点,且当前线程获取锁成功”,为了防止因死循环导致CPU资源被浪费,我们会判断前置节点的状态来决定是否要将当前线程挂起,具体挂起流程用流程图表示如下(shouldParkAfterFailedAcquire流程):
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/9af16e2481ad85f38ca322a225ae737535740.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/9af16e2481ad85f38ca322a225ae737535740.png)
 
 - 从队列中释放节点的疑虑打消了,那么又有新问题了:
     1. shouldParkAfterFailedAcquire中取消节点是怎么生成的呢？什么时候会把一个节点的waitStatus设置为-1？
@@ -554,15 +554,15 @@ private void cancelAcquire(Node node) {
 
 1. 当前节点是尾节点
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/b845211ced57561c24f79d56194949e822049.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/b845211ced57561c24f79d56194949e822049.png)
 
 2. 当前节点是Head的后继节点
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/ab89bfec875846e5028a4f8fead32b7117975.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/ab89bfec875846e5028a4f8fead32b7117975.png)
 
 3. 当前节点不是Head的后继节点,也不是尾节点
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/45d0d9e4a6897eddadc4397cf53d6cd522452.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/45d0d9e4a6897eddadc4397cf53d6cd522452.png)
 
 通过上面的流程,我们对于CANCELLED节点状态的产生和变化已经有了大致的了解,但是为什么所有的变化都是对Next指针进行了操作,而没有对Prev指针进行操作呢？什么情况下会对Prev指针进行操作？
 

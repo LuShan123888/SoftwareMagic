@@ -42,7 +42,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 
 采用 Flex 布局的元素,称为 Flex 容器(flex container),简称"容器",它的所有子元素自动成为容器成员,称为 Flex 项目(flex item),简称"项目"
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071004-20200915182614997.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071004-20200915182614997.png)
 
 - 容器默认存在两根轴:水平的主轴(main axis)和垂直的交叉轴(cross axis),主轴的开始位置(与边框的交叉点)叫做`main start`,结束位置叫做`main end`;交叉轴的开始位置叫做`cross start`,结束位置叫做`cross end`
 - 项目默认沿主轴排列,单个项目占据的主轴空间叫做`main size`,占据的交叉轴空间叫做`cross size`
@@ -68,7 +68,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
  }
  ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071005-20200915151014384-20200915182614999.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071005-20200915151014384-20200915182614999.png)
 
 它可能有4个值
 
@@ -81,7 +81,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 
 默认情况下,项目都排在一条线(又称"轴线")上,`flex-wrap`属性定义,如果一条轴线排不下,如何换行
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071006-20200915151014353-20200915182614992.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071006-20200915151014353-20200915182614992.png)
 
 ```css
 .box{
@@ -93,15 +93,15 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 
 - `nowrap`(默认):不换行
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071007-20200915151014438-20200915182615059.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071007-20200915151014438-20200915182615059.png)
 
 - `wrap`:换行,第一行在上方
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071008-20200915151014429-20200915182615038.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071008-20200915151014429-20200915182615038.jpg)
 
 - `wrap-reverse`:换行,第一行在下方
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071009-20200915151014399-20200915182615048.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071009-20200915151014399-20200915182615048.jpg)
 
 ###  flex-flow
 
@@ -123,7 +123,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071010-20200915151014384-20200915182615066.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071010-20200915151014384-20200915182615066.png)
 
 它可能取5个值,具体对齐方式与轴的方向有关,下面假设主轴为从左到右
 
@@ -143,7 +143,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071011-20200915151014795-20200915182615059.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071011-20200915151014795-20200915182615059.png)
 
 它可能取5个值,具体的对齐方式与交叉轴的方向有关,下面假设交叉轴从上到下
 
@@ -163,7 +163,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071012-20200915151014758-20200915182615075.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071012-20200915151014758-20200915182615075.png)
 
 该属性可能取6个值
 
@@ -184,7 +184,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071016-20200915182615119.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071016-20200915182615119.png)
 
 该属性可能取6个值,除了auto,其他都与align-items属性完全一致
 
@@ -209,7 +209,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071013-20200915182615109.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071013-20200915182615109.png)
 
 ###  flex-grow属性
 
@@ -221,7 +221,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071014-20200915182615129.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071014-20200915182615129.png)
 
 如果所有项目的`flex-grow`属性都为1,则它们将等分剩余空间(如果有的话),如果一个项目的`flex-grow`属性为2,其他项目都为1,则前者占据的剩余空间将比其他项多一倍
 
@@ -235,7 +235,7 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 }
 ```
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071015-20200915182615143.jpg)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071015-20200915182615143.jpg)
 
 - 如果所有项目的`flex-shrink`属性都为1,当空间不足时,都将等比例缩小,如果一个项目的`flex-shrink`属性为0,其他项目都为1,则空间不足时,前者不缩小
 - 负值对该属性无效

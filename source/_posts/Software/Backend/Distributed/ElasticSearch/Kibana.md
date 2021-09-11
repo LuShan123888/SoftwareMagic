@@ -24,5 +24,5 @@ docker.elastic.co/kibana/kibana:7.13.2
 - 浏览器访问http://localhost:5061
 - 通过Dev Tools可以使用Console查询
 
-![image-20210714093855919](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20210714093855919.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20210714093855919.png)
 

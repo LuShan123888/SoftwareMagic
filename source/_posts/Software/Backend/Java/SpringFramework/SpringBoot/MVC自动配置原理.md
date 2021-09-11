@@ -119,16 +119,16 @@ private static class MyViewResolver implements ViewResolver{
 - 查看我们自定义的视图解析器是否起作用
 - 给`DispatcherServlet`中的`doDispatch`方法加个断点进行调试一下,因为所有的请求都会走到这个方法中
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436625.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436625.png)
 
 - 启动项目,然后随便访问一个页面,看一下Debug信息
 - 找到this
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436779.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436779.png)
 
 - 找到视图解析器,看到自定义的视图解析器名
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436757.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436757.png)
 
 ## Formatter
 

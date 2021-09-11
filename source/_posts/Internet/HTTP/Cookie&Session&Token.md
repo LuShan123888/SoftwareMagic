@@ -52,10 +52,10 @@ categories:
 
 #### Tomcat中的Session创建
 
-- ManagerBase是所有session管理工具类的基类,它是一个抽象类,所有具体实现session管理功能的类都要继承这个类,该类有一个受保护的方法,该方法就是创建sessionId值的方法:
+- ManagerBase是所有session管理工具类的父类,它是一个抽象类,所有具体实现session管理功能的类都要继承这个类,该类有一个受保护的方法,该方法就是创建sessionId值的方法:
 - tomcat的session的id值生成的机制是一个随机数加时间加上jvm的id值,jvm的id值会根据服务器的硬件信息计算得来,因此不同jvm的id值都是唯一的
 - StandardManager类是tomcat容器里默认的session管理实现类,它会将session的信息存储到web容器所在服务器的内存里
-- PersistentManagerBase也是继承ManagerBase类,它是所有持久化存储session信息的基类,PersistentManager继承了PersistentManagerBase,但是这个类只是多了一个静态变量和一个getName方法,目前看来意义不大,对于持久化存储session,tomcat还提供了StoreBase的抽象类,它是所有持久化存储session的基类,另外tomcat还给出了文件存储FileStore和数据存储JDBCStore两个实现
+- PersistentManagerBase也是继承ManagerBase类,它是所有持久化存储session信息的父类,PersistentManager继承了PersistentManagerBase,但是这个类只是多了一个静态变量和一个getName方法,目前看来意义不大,对于持久化存储session,tomcat还提供了StoreBase的抽象类,它是所有持久化存储session的父类,另外tomcat还给出了文件存储FileStore和数据存储JDBCStore两个实现
 
 ### 分布式架构下 session 共享方案
 
@@ -161,7 +161,7 @@ upstream backserver {
   - 服务器重启 session 不丢失(不过也要注意 session 在 Redis 中的刷新/失效机制)
   - 不仅可以跨服务器 session 共享,甚至可以跨平台(例如网页端和 APP 端)
 
-![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331214312505.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331214312505.png)
 
 **实例**Spring提供了一个解决方案:Spring-Session用来解决两个服务之间Session共享的问题
 
@@ -274,7 +274,7 @@ public class RedisSessionInitializer extends AbstractHttpSessionApplicationIniti
 >
 >
 >
-> ![img](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331211754249.png)
+> ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331211754249.png)
 >
 >
 >

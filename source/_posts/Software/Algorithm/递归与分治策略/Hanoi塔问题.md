@@ -9,11 +9,10 @@ categories:
 
 ## 问题描述
 
-设a, b, c是三个塔座, 开始时, 在塔座a上有一叠共n个圆盘, 这些圆盘自下而上, 由大到小地叠放在一起,各圆盘从小到大编号为1, 2, 3,...,n, 先要求将塔座a上的这一叠圆盘移到塔座b上, 并仍按同样顺序叠置, 在移动圆盘时应遵守一下移动规则:
-
-- 每次只能移动一个圆盘
-- 任何时刻都不允许将降大的圆盘压在较小的圆盘之上
-- 在满足上述规则的前提下, 可将圆盘移至a, b, c任一塔座上
+- 设a, b, c是三个塔座, 开始时, 在塔座a上有一叠共n个圆盘, 这些圆盘自下而上, 由大到小地叠放在一起,各圆盘从小到大编号为1, 2, 3,...,n, 先要求将塔座a上的这一叠圆盘移到塔座b上, 并仍按同样顺序叠置, 在移动圆盘时应遵守一下移动规则:
+    1. 每次只能移动一个圆盘
+    2. 任何时刻都不允许将降大的圆盘压在较小的圆盘之上
+    3. 在满足上述规则的前提下, 可将圆盘移至a, b, c任一塔座上
 
 ## 算法分析
 
@@ -33,54 +32,55 @@ categories:
 ```java
 import java.util.Stack;
 
-public class hanoi {
-    public static Stack<Integer> a = new Stack<>();
-    public static Stack<Integer> b = new Stack<>();
-    public static Stack<Integer> c = new Stack<>();
-    public static int count = 0;
-
+public class Test {
     public static void main(String[] args) {
+        Stack<Integer> a = new Stack<>();
+        Stack<Integer> b = new Stack<>();
+        Stack<Integer> c = new Stack<>();
         int n = 5;
         for (int i = n; i > 0; i--) {
             a.push(i);
         }
         System.out.println("hanoi a init: " + a);
-        hanoi(n, a, b, c);
-        System.out.println("----------move------------");
-        System.out.println("hanoi a" + a);
-        System.out.println("hanoi b" + b);
-        System.out.println("hanoi c" + c);
+        Solution solution = new Solution();
+        int count = solution.hanoi(n, a, b, c);
+        solution.printStack(a, b, c);
         System.out.println("-----------end------------");
         System.out.println("共移动:" + count + "次");
     }
+}
 
-    public static void hanoi(int n, Stack<Integer> x, Stack<Integer> y, Stack<Integer> z) {
+class Solution {
+    int count = 0;
+
+    public int hanoi(int n, Stack<Integer> a, Stack<Integer> b, Stack<Integer> c) {
         if (n > 0) {
-            hanoi(n - 1, x, z, y);
-            System.out.println("----------move------------");
-            System.out.println("hanoi a" + a);
-            System.out.println("hanoi b" + b);
-            System.out.println("hanoi c" + c);
-            move(x, y);
-            hanoi(n - 1, z, y, x);
+            hanoi(n - 1, a, c, b);
+            printStack(a, b, c);
+            move(a, b);
+            hanoi(n - 1, c, b, a);
         }
+        return count;
     }
 
-    public static void move(Stack<Integer> a, Stack<Integer> b) {
+    public void move(Stack<Integer> a, Stack<Integer> b) {
         Integer temp;
         temp = a.pop();
         b.push(temp);
         count += 1;
     }
 
+    public void printStack(Stack<Integer> x, Stack<Integer> y, Stack<Integer> z) {
+        System.out.println("----------move------------");
+        System.out.println("hanoi a" + x);
+        System.out.println("hanoi b" + y);
+        System.out.println("hanoi c" + z);
+    }
+ 
 }
 ```
 
-- `hanoi(int n, Stack<Integer> x, Stack<Integer> y, Stack<Integer> z) `:将塔座x上自下而上, 由大到小叠放在一起的n个圆盘依移动规则移至塔座y上并仍按同样顺序叠放, 在移动过程中, 以塔座z作为辅助塔座
-    - `int n`:要移动的第n个圆盘
-    - `Stack<Integer> x`:塔座x
-    - `Stack<Integer> y`:塔座y
-    - `Stack<Integer> z`:塔座z
+- `hanoi(int n, Stack<Integer> a, Stack<Integer> b, Stack<Integer> c) `:将塔座a上自下而上, 由大到小叠放在一起的n个圆盘依移动规则移至塔座b上并仍按同样顺序叠放, 在移动过程中, 以塔座c作为辅助塔座
 - `move(Stack<Integer> a, Stack<Integer> b)`:将塔座a最上层的圆盘移至塔座b上
     - `Stack<Integer> a`:塔座a
     - `Stack<Integer> b`:塔座b

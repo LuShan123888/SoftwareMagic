@@ -28,7 +28,7 @@ categories:
     - `InputStream openStream()`:打开与URL的连接,返回来自连接的输入流
     - `Object getContent()`:获得URL的内容
 
-**[例16-5]**通过流操作读取URL访问结果
+**[例16-5]**:通过流操作读取URL访问结果
 
 - 以下程序读取网上某个URL的访问结果,将结果数据写入到某个文本文件中或者在显示屏上显示,取决于运行程序时是否提供写入的文件
 - 运行程序时第1个参数指定URL地址,第2个参数可以省去,如果有该参数则表示存放结果的文件名
@@ -83,7 +83,7 @@ class GetURL {
     - `InputStream getInputStream()`:返回来自连接的输入流
     - `OutputStream getOutputStream()`:返回写往连接的输出流
 
-**[例16-6]**下载指定的URL文件
+**[例16-6]**:下载指定的URL文件
 
 ```java
 import java.io.*;

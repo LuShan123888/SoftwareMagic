@@ -11,7 +11,7 @@ categories:
 - git subtree与git submodule不同,它不增加任何像`.gitmodule`这样的新的元数据文件
 - git subtree对于项目中的其他成员透明,意味着可以不知道git subtree的存在
 
-![image](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-04-1460000012002154.png)
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-04-1460000012002154.png)
 
 ## 在父仓库中新增子仓库
 
