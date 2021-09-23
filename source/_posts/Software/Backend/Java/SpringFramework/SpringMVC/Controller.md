@@ -278,7 +278,7 @@ public class JsonXMLUtils {
 
 ### @RequestPart
 
-- ,请求的Content-Type需要为`form-data`
+- 请求的Content-Type需要为`form-data`
 - 该注解的参数处理器用到的是`RequestPartMethodArgumentResolver`
 
 ```java

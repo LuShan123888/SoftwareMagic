@@ -351,46 +351,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 自定义登录成功处理器
      */
-    @Autowired
+    @Resource
     private UserLoginSuccessHandler userLoginSuccessHandler;
     /**
      * 自定义登录失败处理器
      */
-    @Autowired
+    @Resource
     private UserLoginFailureHandler userLoginFailureHandler;
     /**
      * 自定义注销成功处理器
      */
-    @Autowired
+    @Resource
     private UserLogoutSuccessHandler userLogoutSuccessHandler;
     /**
      * 自定义暂无权限处理器
      */
-    @Autowired
+    @Resource
     private UserAuthAccessDeniedHandler userAuthAccessDeniedHandler;
     /**
      * 自定义未登录的处理器
      */
-    @Autowired
+    @Resource
     private UserAuthenticationEntryPointHandler userAuthenticationEntryPointHandler;
     /**
      * 自定义登录逻辑验证器
      */
-    @Autowired
+    @Resource
     private UserAuthenticationProvider userAuthenticationProvider;
 
     /**
      * 加密方式
      */
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     /**
      * 注入自定义PermissionEvaluator
      */
     @Bean
-    public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler(){
+    public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler() {
         DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
         handler.setPermissionEvaluator(new UserPermissionEvaluator());
         return handler;
@@ -400,13 +401,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 配置登录验证逻辑
      */
     @Override
-    protected void configure(AuthenticationManagerBuilder auth){
+    protected void configure(AuthenticationManagerBuilder auth) {
         //这里可启用我们自己的登陆验证逻辑
         auth.authenticationProvider(userAuthenticationProvider);
     }
+
     /**
      * 配置security的控制逻辑
-     * @Param  http 请求
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -419,9 +420,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // 配置未登录自定义处理类
             .httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
             .and()
+            .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+            .and()
             // 配置登录地址
             .formLogin()
-            .loginProcessingUrl("/login/userLogin")
+            .loginProcessingUrl("/user/login")
             // 配置登录成功自定义处理类
             .successHandler(userLoginSuccessHandler)
             // 配置登录失败自定义处理类
@@ -429,7 +432,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             // 配置登出地址
             .logout()
-            .logoutUrl("/login/userLogout")
+            .logoutUrl("/user/logout")
             // 配置用户登出自定义处理类
             .logoutSuccessHandler(userLogoutSuccessHandler)
             .and()
@@ -449,6 +452,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilter(new JWTAuthenticationTokenFilter(authenticationManager()));
     }
 }
+
 ```
 
 ## 整合Thymeleaf

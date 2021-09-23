@@ -74,29 +74,44 @@ categories:
 ```yaml
 spring:
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tally-test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-
-    #Druid 数据源配置
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-
-    filters: stat,wall,log4j
-    maxPoolPreparedStatementPerConnectionSize: 20
-    useGlobalDataSourceStat: true
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    druid:
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 添加IP白名单
+      # allow:
+      # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+      # deny:
+      web-stat-filter:
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略过滤格式
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 ```
 
 - filters:配置监控统计拦截
@@ -213,37 +228,6 @@ public class DruidConfig {
 
 - `@ConfigurationProperties(prefix = "spring.datasource")`:将全局配置文件中前缀为`spring.datasource`的属性值注入到 `com.alibaba.druid.pool.DruidDataSource`的同名参数中
 
-## 测试
-
-```java
-@SpringBootTest
-class SpringbootDataJdbcApplicationTests {
-
-    @Autowired
-    DataSource dataSource;
-
-    @Test
-    public void contextLoads() throws SQLException {
-        //查看默认数据源
-        System.out.println(dataSource.getClass());
-        //获得连接
-        Connection connection =   dataSource.getConnection();
-        System.out.println(connection);
-
-        DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-        System.out.println("druidDataSource 数据源最大连接数:" + druidDataSource.getMaxActive());
-        System.out.println("druidDataSource 数据源初始化连接数:" + druidDataSource.getInitialSize());
-
-        //关闭连接
-        connection.close();
-    }
-}
-```
-
-**输出结果** :可见配置参数已经生效
-
-![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-19-640-20201115141125551.jpeg)
-
 ## 配置Druid数据源监控
 
 - Druid 数据源具有监控的功能,并提供了一个 web 界面方便用户查看
@@ -252,20 +236,19 @@ class SpringbootDataJdbcApplicationTests {
 
 ```java
 @Bean
-public ServletRegistrationBean statViewServlet() {
-    ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+public ServletRegistrationBean servletRegistrationBean() {
+    //注意，请求时 /druid/*
+    ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+    Map<String, String> initParm = new HashMap<>();
+    //登陆页面账户与密码
+    initParm.put(ResourceServlet.PARAM_NAME_USERNAME, "root");
+    initParm.put(ResourceServlet.PARAM_NAME_PASSWORD, "123456");
+    //监控后台 允许ip
+    initParm.put(ResourceServlet.PARAM_NAME_ALLOW, "");
+    //黑名单
+    initParm.put(ResourceServlet.PARAM_NAME_DENY, "192.168.0.1");
 
-    // 这些参数
-    Map<String, String> initParams = new HashMap<>();
-    initParams.put("loginUsername", "admin");
-    initParams.put("loginPassword", "123456");
-
-
-    initParams.put("allow", "");
-    //deny:Druid 后台拒绝谁访问
-    /
-
-    bean.setInitParameters(initParams);
+    bean.setInitParameters(initParm);
     return bean;
 }
 ```
@@ -281,22 +264,22 @@ public ServletRegistrationBean statViewServlet() {
 
 **测试**:访问http://localhost:8080/druid/login.html
 
-### 配置Druid web监控 filter过滤器
+## 配置Druid web监控 filter过滤器
 
 - `WebStatFilter`:用于配置Web和Druid数据源之间的管理关联监控统计
 
 ```java
 @Bean
 public FilterRegistrationBean webStatFilter() {
-    FilterRegistrationBean bean = new FilterRegistrationBean();
+    FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
     bean.setFilter(new WebStatFilter());
 
+    Map<String, String> initPrams = new HashMap<>();
+    initPrams.put(WebStatFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.css,/druid/*");
+    bean.setInitParameters(initPrams);
 
-    Map<String, String> initParams = new HashMap<>();
-    initParams.put("exclusions", "*.js,*.css,/druid/*,/jdbc/*");
-    bean.setInitParameters(initParams);
-
-    bean.setUrlPatterns(Arrays.asList("/*"));
+    //设置拦截器请求
+    bean.setUrlPatterns(Arrays.asList("/"));
     return bean;
 }
 ```

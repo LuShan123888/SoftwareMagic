@@ -45,38 +45,49 @@ public class SwaggerConfig {
 }
 ```
 
-### Docket
+#### Docket
 
 - Swagger实例Bean是Docket,所以通过配置Docket实例来配置Swaggger
 
 ```java
-@Bean //配置docket以配置Swagger具体参数
+@Bean
 public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2);
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.example.controller"))
+        .apis(RequestHandlerSelectors.any())
+        .apis(RequestHandlerSelectors.none())
+        .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+        .apis(RequestHandlerSelectors.withMethodAnnotation(GetMapping.class))
+        .build();
+}
+
+@Bean
+public Docket docket() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.example.swagger.controller"))
+        .paths(PathSelectors.ant("/test/**"))
+        .build();
 }
 ```
 
-### apiInfo()配置文档信息
+- `select()`:配置扫描接口
+- `RequestHandlerSelectors`:配置如何扫描接口
+    - `basePackage(final String basePackage)`:根据包路径扫描接口
+    - `any()`:扫描所有,项目中的所有接口都会被扫描到
+    - `none()`:不扫描接口
+    - `withMethodAnnotation(final Class<? extends Annotation> annotation)`:通过方法上的注解扫描,如`withMethodAnnotation(GetMapping.class)`只扫描get请求
+    - `withClassAnnotation(final Class<? extends Annotation> annotation)`:通过类上的注解扫描,如`withClassAnnotation(Controller.class)`只扫描有controller注解的类中的接口
+- `PathSelectors`:配置路径过滤
+    - `any()`:任何请求都扫描
+    - `none()`:任何请求都不扫描
+    - `regex(final String pathRegex)`:通过正则表达式控制
+    - `ant(final String antPattern)`:通过ant()控制
+
+#### apiInfo()配置文档信息
 
 ```java
-@Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo());
-}
-//配置文档信息
-private ApiInfo apiInfo() {
-    Contact contact = new Contact("联系人名字", "http://xxx.xxx.com/联系人访问链接", "联系人邮箱");
-    return new ApiInfoBuilder(
-        "标题",
-        "描述",
-        "版本",
-        "http://terms.service.url/组织链接",
-        contact, // 联系人信息
-        "许可",
-        "许可链接",
-        new ArrayList<>()// 扩展
-    );
-}
 private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
         .title("标题")
@@ -91,70 +102,9 @@ private ApiInfo apiInfo() {
 }
 ```
 
-### 配置接口扫描
-
-- `select()`:配置扫描接口
-- `RequestHandlerSelectors`:配置如何扫描接口
-
-```java
-@Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .select()
-        .apis(RequestHandlerSelectors.basePackage("com.example.controller"))
-        .apis(RequestHandlerSelectors.any())
-        .apis(RequestHandlerSelectors.none())
-        .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-        .apis(RequestHandlerSelectors.withMethodAnnotation(GetMapping.class))
-        .build();
-}
-```
-
-- `RequestHandlerSelectors`的方法
-    - `any()`:扫描所有,项目中的所有接口都会被扫描到
-    - `none()`:不扫描接口
-    - `withMethodAnnotation(final Class<? extends Annotation> annotation)`:通过方法上的注解扫描,如`withMethodAnnotation(GetMapping.class)`只扫描get请求
-    - `withClassAnnotation(final Class<? extends Annotation> annotation)`:通过类上的注解扫描,如`withClassAnnotation(Controller.class)`只扫描有controller注解的类中的接口
-    - `basePackage(final String basePackage)`:根据包路径扫描接口
-
-#### 路径过滤
-
-- `paths()`:配置路径过滤
-- 只扫描请求以`/test`开头的接口
-
-```java
-@Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .select()
-        .apis(RequestHandlerSelectors.basePackage("com.example.swagger.controller"))
-        .paths(PathSelectors.ant("/test/**"))
-        .build();
-}
-```
-
-- `PathSelectors`的方法
-    - `any()`:任何请求都扫描
-    - `none()`:任何请求都不扫描
-    - `regex(final String pathRegex)`:通过正则表达式控制
-    - `ant(final String antPattern)`:通过ant()控制
-
-### Swagger 开关
+#### Swagger 开关
 
 - 通过`enable()`方法配置是否启用swagger
-
-```java
-@Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .enable(false)
-        .build();
-}
-```
-
-#### 动态配置Swagger开关
-
-- 当项目处于test,dev环境时显示swagger,处于prod时不显示
 
 ```java
 @Bean
@@ -176,7 +126,9 @@ public Docket docket(Environment environment) {
 }
 ```
 
-### 配置API分组
+- 当项目处于test,dev环境时显示swagger,处于prod时不显示
+
+#### 配置API分组
 
 - 通过`groupName()`方法即可配置分组
 - 如果没有配置分组,默认是default
@@ -189,8 +141,6 @@ public Docket docket(Environment environment) {
         .build();
 }
 ```
-
-#### 同时配置多个分组
 
 - 配置多个分组只需要配置多个docket即可
 
@@ -221,9 +171,9 @@ public Docket docket3(){
 
 #### @Api()
 
-- 用于类:表示标识这个类是swagger的资源
-- tags:表示说明
-- value:也是说明,可以使用tags替代
+- 用于类,表示标识这个类是swagger的资源
+    - **tags**:表示说明	
+    - **value**:也是说明,可以使用tags替代
 - **注意**:tags如果有多个值,会生成多个list
 
 ```java
@@ -236,10 +186,10 @@ public class UserController {
 
 #### @ApiOperation()
 
-- 用于方法:表示一个http请求的操作
-- value:用于方法描述
-- notes:用于提示内容
-- tags:可以重新分组(视情况而用)
+- 用于方法,表示一个http请求的操作
+    - **value**:用于方法描述	
+    - **notes**:用于提示内容
+    - **tags**:可以重新分组(视情况而用)
 
 ```java
 public class UserController {
@@ -252,10 +202,10 @@ public class UserController {
 
 #### @ApiParam()
 
-- 用于方法,参数,字段说明:表示对参数的添加元数据(说明或是否必填等)
-- name:参数名
-- value:参数说明
-- required:是否必填
+- 用于方法,参数,字段说明,表示对参数的添加元数据(说明或是否必填等)
+    - **name**:参数名
+    - **value**:参数说明
+    - **required**:是否必填
 
 ```java
 public class UserController {
@@ -269,9 +219,9 @@ public class UserController {
 
 #### @ApiModel()
 
-- 用于类 :表示对类进行说明,用于参数用实体类接收
-- value:表示对象名
-- description:描述
+- 用于类,表示对类进行说明,用于参数用实体类接收
+    - **value**:表示对象名
+    - **description**:描述
 
 ```java
 @ApiModel(value="user对象",description="用户对象user")
@@ -292,12 +242,12 @@ public class User implements Serializable{
 #### @ApiModelProperty()
 
 - 用于方法,字段:表示对model属性的说明或者数据操作更改
-- value:字段说明
-- name:重写属性名字
-- dataType:重写属性类型
-- required:是否必填
-- example:举例说明
-- hidden:隐藏
+    - **value**:字段说明
+    - **name**:重写属性名字
+    - **dataType**:重写属性类型
+    - **required**:是否必填
+    - **example**:举例说明
+    - **hidden**:隐藏
 
 ```java
 public class User implements Serializable{
@@ -327,12 +277,12 @@ public class User implements Serializable{
 
 #### @ApiImplicitParams()
 
--  用于方法:包含多个 @ApiImplicitParam
-- name:参数名
-- value:参数说明
-- dataType:数据类型
-- paramType:参数类型
-- example:举例说明
+-  用于方法,包含多个 @ApiImplicitParam
+    - **name**:参数名
+    - **value**:参数说明
+    - **dataType**:数据类型
+    - **paramType**:参数类型
+    - **example**:举例说明
 
 ```java
 @ApiOperation("查询测试")
@@ -346,7 +296,38 @@ public void select(){
 }
 ```
 
-### 第三方UI
+### Swagger-UI
+
+- 首先需要屏蔽以下路径的过滤拦截
+
+```
+/swagger**/**
+/webjars/**
+/v2/**
+```
+
+- 然后需要配置静态资源映射
+
+```java
+@Configuration
+@EnableWebMvc
+public class WebMvcConfig implements WebMvcConfigurer {
+    /**
+     * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 解决静态资源无法访问
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        // 解决swagger无法访问
+        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        // 解决swagger的js文件无法访问
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+    }
+}
+
+```
 
 #### 默认
 
