@@ -1,8 +1,8 @@
 ---
 title: JWT
 categories:
-- Internet
-- HTTP
+- Software
+- Backend
 ---
 # JWT
 
@@ -116,3 +116,9 @@ String userId=claims.getId();
 String authority = claims.get("authorities").toString();
 ```
 
+## JWT 续签
+
+- 认证后，返回 accessToken 与 refreshToken，前者为鉴权Token，后者为续签Token
+- accessToken 失效时间应该设置较短，比如10分钟，refreshToken 失效时间可以长一点，比如 7 天
+- 请求时先用 accessToken，当accessToken 失效时，用 refreshToken 生成一个新的 accessToken（刷新 token）并自动续期
+- 最好在 accessToken 在失效前主动 refreshToken

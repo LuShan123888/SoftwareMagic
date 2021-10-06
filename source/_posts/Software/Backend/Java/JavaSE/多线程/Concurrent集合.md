@@ -66,7 +66,7 @@ public class SetTest {
 
 ## ConcurrentHashMap
 
--   Concurrenthashmap是线程安全的
+-   ConcurrentHashmap是线程安全的
 
 -   JDK1.7
 

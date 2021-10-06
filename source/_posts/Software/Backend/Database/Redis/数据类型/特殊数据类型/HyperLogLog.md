@@ -5,7 +5,7 @@ categories:
 - Backend
 - Database
 - Redis
-- Value
+- 数据类型
 - 特殊数据类型
 ---
 # Redis HyperLogLog

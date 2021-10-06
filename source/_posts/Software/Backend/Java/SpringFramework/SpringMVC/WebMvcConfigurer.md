@@ -12,22 +12,6 @@ categories:
 WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式,采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制,基于java-based方式的spring mvc配置,需要创建一个**配置**类并实现`WebMvcConfigurer` 接口,`WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象(增加了一些默认实现),但在在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃,官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
 
 ```java
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
-package org.springframework.web.servlet.config.annotation;
-
-import java.util.List;
-import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.validation.MessageCodesResolver;
-import org.springframework.validation.Validator;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-
 public interface WebMvcConfigurer {
     void configurePathMatch(PathMatchConfigurer var1);
 

@@ -1,8 +1,8 @@
 ---
 title: OAuth
 categories:
-- Internet
-- HTTP
+- Software
+- Backend
 ---
 # OAuth
 

@@ -1,20 +1,20 @@
 ---
-title: Redis 分片
+title: Redis Cluster
 categories:
 - Software
 - Backend
 - Database
 - Redis
-- 集群
+- 高可用
 ---
-# Redis 分片
+# Redis Cluster
 
-- 分片是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集
+- Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集
 - **优点**
     - 通过利用多台计算机内存,可以构造更大的数据库
     - 通过利用多台计算机的多核,允许我们扩展计算能力
     - 通过利用多台计算机的网络适配器,可以扩展网络带宽
-- **分片的不足**
+- **Cluster 的不足**
     - 涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不能对这两个set执行交集操作
     - 涉及多个key的redis事务不能使用
     - 当使用分片时,数据处理较为复杂,比如需要处理多个rdb/aof文件,并且从多个实例和主机备份持久化文件

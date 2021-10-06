@@ -50,7 +50,7 @@ String url="jdbc:mysql://localhost:3306?数据库名";
 Connection conn=DriverManager.getConnection(url,数据库用户,密码);
 ```
 
-**注意**:`Class.forName`方法的作用,就是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动,我们也可以直接使用 JDBC 的驱动管理器注册 mysql 驱动,从而代替使用`Class.forName`
+**注意**:`Class.forName`方法的作用,就是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动,我们也可以直接使用 JDBC 的驱动管理器注册 MySQL 驱动,从而代替使用`Class.forName`
 
 ### 创建Statement对象
 
