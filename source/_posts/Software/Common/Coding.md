@@ -286,32 +286,14 @@ public static void main(String[]args){
 
 ### ArrayList/LinkedList 比较
 
-- ArrayList内部使用数组存放元素,实现了可变大小的数组,访问元素效率高,当插入元素效率低
-- LinkedList内部使用双向链表存储元素,插入元素效率高,但访问元素效率低
-- 相对于ArrayList,LinkedList的插入,添加,删除操作速度更快,因为当元素被添加到集合任意位置的时候,不需要像数组那样重新计算大小或者是更新索引
-- LinkedList比ArrayList更占内存,因为LinkedList为每一个节点存储了两个引用,一个指向前一个元素,一个指向下一个元素
-
-### Iterator和ListIterator
-
-- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中`iterator()`方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
-- **优点**
-    - 对任何集合都采用同一种访问模型
-    - 调用者不用了解集合的内部结构
-- **Iterator和ListIterator的区别**
-    - Iterator可用来遍历Set和List集合,但是ListIterator只能用来遍历List
-    - Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
-    - ListIterator实现了Iterator接口,并包含其他的功能,比如:增加元素,替换元素,获取前一个和后一个元素的索引
-
-### Hash冲突
-
-- 由于Hash算法被计算的数据是无限的,而计算后的结果范围有限,因此总会存在不同的数据经过计算后得到的值相同,这就是Hash冲突
-- 冲突处理分为以下几种方式:
-    - **开放地址法**:出现冲突后按照一定算法查找一个空位置存放
-        - **线性探测再散列**:线性探测方法就是线性探测空白单元,当数据通过Hash函数计算应该放在700这个位置,但是700这个位置已经有数据了,那么接下来就应该查看701位置是否空闲,再查看702位置,依次类推
-        - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推,**二次探测的步数是原始位置相隔的步数的平方**
-        - **再哈希法**:出现冲突后采用其他的Hash函数计算,直到不再冲突为止
-    - **链地址法(拉链法)**:不同与前两种方法,他是在出现冲突的地方存储一个链表,所有的同义词记录都存在其中
-    - **建立公共溢出区**:建立公共溢出区的基本思想是:假设Hash函数的值域是[1,m-1],则设向量HashTable[0...m-1]为基本表,每个分量存放一个记录,另外设向量OverTable[0...v]为溢出表,所有关键字和基本表中关键字为同义词的记录,不管它们由Hash函数得到的Hash值是什么,一旦发生冲突,都填入溢出表
+- **数据结构**
+    - ArrayList内部使用数组存放元素,实现了可变大小的数组,访问元素效率高,当插入元素效率低
+    - LinkedList内部使用双向链表存储元素,插入元素效率高,但访问元素效率低
+- **时间复杂度**：相对于ArrayList,LinkedList的插入,添加,删除操作速度更快,因为当元素被添加到集合任意位置的时候,不需要像数组那样重新计算大小或者是更新索引
+    - ArrayList:查找时间复杂度O(1),增删时间复杂度O(n/2)
+    - LinkedList:查找时间复杂度O(n/4),增删时间复杂度O(n/4)
+- **空间复杂度**：LinkedList比ArrayList更占内存,因为LinkedList为每一个节点存储了两个引用,一个指向前一个元素,一个指向下一个元素
+- **ArrayList扩容机制**：相当于在没指定initialCapacity时就是会使用延迟分配对象数组空间，当第一次插入元素时才分配10（默认）个对象空间。假如有20个数据需要添加，那么会分别在第一次的时候，将ArrayList的容量变为10，之后扩容会按照1.5倍增长。也就是当添加第11个数据的时候，Arraylist继续扩容变为10*1.5=15，当添加第16个数据时，继续扩容变为15 * 1.5 =22个
 
 ### HashMap
 
@@ -326,6 +308,17 @@ public static void main(String[]args){
     - HashMap的扩容一个耗时的操作,在第一次`put()`的时候会初始化,发生第一次`resize()`到16,默认负载因子是0.75,当容量达到`size*Load Factor`时就会扩大容量为原来的2倍,所以如果我们知道大概的数据量,应该使用对应的构造方法直接初始化指定容量的HashMap
     - 扩容长度扩为原来2倍,所以元素的位置要么是在原位置,要么是在原位置再移动2次幂的位置，因此,我们在扩充HashMap的时候,不需要像JDK1.7的实现那样重新计算hash,只需要看看原来的hash值新增的那个bit是1还是0就好了
 - **非线程安全**：HashMap的不是线程安全的,如果需要使用线程安全的Map集合,可以通过Collections类的synchronizedMap方法包装一下,或者直接使用JUC包下的ConcurrentHashMap
+
+### Hash冲突
+
+- 由于Hash算法被计算的数据是无限的,而计算后的结果范围有限,因此总会存在不同的数据经过计算后得到的值相同,这就是Hash冲突
+- 冲突处理分为以下几种方式:
+    - **开放地址法**:出现冲突后按照一定算法查找一个空位置存放
+        - **线性探测再散列**:线性探测方法就是线性探测空白单元,当数据通过Hash函数计算应该放在700这个位置,但是700这个位置已经有数据了,那么接下来就应该查看701位置是否空闲,再查看702位置,依次类推
+        - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推,**二次探测的步数是原始位置相隔的步数的平方**
+        - **再哈希法**:出现冲突后采用其他的Hash函数计算,直到不再冲突为止
+    - **链地址法(拉链法)**:不同与前两种方法,他是在出现冲突的地方存储一个链表,所有的同义词记录都存在其中
+    - **建立公共溢出区**:建立公共溢出区的基本思想是:假设Hash函数的值域是[1,m-1],则设向量HashTable[0...m-1]为基本表,每个分量存放一个记录,另外设向量OverTable[0...v]为溢出表,所有关键字和基本表中关键字为同义词的记录,不管它们由Hash函数得到的Hash值是什么,一旦发生冲突,都填入溢出表
 
 ### ConcurrentHashMap
 
@@ -371,6 +364,17 @@ public static void main(String[]args){
 
 - CopyOnWriteArrayList 是 ArrayList 的线程安全变体，其中通过创建底层数组的新副本来实现所有可变操作（添加，设置等）。
 - CopyOnWriteArrayList 支持无锁并发读，在写操作时，将原容器拷贝一份，写操作则作用在新副本上，需要加锁。此过程中若有读操作则会作用在原容器上，将原容器引用指向新副本，切换过程使用volatile保证切换过程对读线程立即可见
+
+### Iterator和ListIterator
+
+- Iterator提供了统一遍历操作集合元素的统一接口, Collection接口实现Iterable接口,每个集合都通过实现Iterable接口中`iterator()`方法返回Iterator接口的实例, 然后对集合的元素进行迭代操作
+- **优点**
+    - 对任何集合都采用同一种访问模型
+    - 调用者不用了解集合的内部结构
+- **Iterator和ListIterator的区别**
+    - Iterator可用来遍历Set和List集合,但是ListIterator只能用来遍历List
+    - Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
+    - ListIterator实现了Iterator接口,并包含其他的功能,比如:增加元素,替换元素,获取前一个和后一个元素的索引
 
 ## 多线程
 
@@ -1672,27 +1676,21 @@ EXPLAIN + SQL语句
 ### Bean 的生命周期
 
 1. 实例化Bean
-    - 对于BeanFactory容器,当客户向容器请求一个尚未初始化的bean时,或初始化bean的时候需要注入另一个尚未初始化的依赖时,容器就会调用createBean进行实例化
-    - 对于ApplicationContext容器,当容器启动结束后,便实例化所有的bean,容器通过获取BeanDefinition对象中的信息进行实例化,并且这一步仅仅是简单的实例化,并未进行依赖注入,实例化对象被包装在BeanWrapper对象中,BeanWrapper提供了设置对象属性的接口,从而避免了使用反射机制设置属性
-2. 设置对象属性(依赖注入)
+    - 对于ApplicationContext容器:容器通过获取BeanDefinition对象中的信息进行简单的实例化,并且这一步仅仅是简单的实例化
     - 实例化后的对象被封装在BeanWrapper对象中,并且此时对象仍然是一个原生的状态,并没有进行依赖注入
-    - 紧接着,Spring根据BeanDefinition中的信息进行依赖注入
-    - 并且通过BeanWrapper提供的设置属性的接口完成依赖注入
-3. 注入Aware接口
-    - 紧接着,Spring会检测该对象是否实现了xxxAware接口,并将相关的xxxAware实例注入给bean
-        - 实现BeanFactoryAware 主要目的是为了获取Spring容器,如Bean通过Spring容器发布事件等
-        - 实现BeanNameAware清主要是为了通过Bean的引用来获得Bean的ID,一般业务中是很少有用到Bean的ID的
-        - 实现ApplicationContextAware接口,作用与BeanFactory类似都是为了获取Spring容器
+2. 设置对象属性(依赖注入)：Spring根据BeanDefinition中的信息，并且通过BeanWrapper提供的设置属性的接口完成依赖注入
+3. 注入Aware接口：紧接着,Spring会检测该对象是否实现了xxxAware接口,并将相关的xxxAware实例注入给bean
+    - 实现BeanFactoryAware 主要目的是为了获取Spring容器,如Bean通过Spring容器发布事件等
+    - 实现BeanNameAware清主要是为了通过Bean的引用来获得Bean的ID,一般业务中是很少有用到Bean的ID的
+    - 实现ApplicationContextAware接口,作用与BeanFactory类似都是为了获取Spring容器
 4. BeanPostProcessor
     - 当经过上述几个步骤后,bean对象已经被正确构造,但如果你想要对象被使用前再进行一些自定义的处理,就可以通过BeanPostProcessor接口实现
     - `postProcessBeforeInitialzation( Object bean, String beanName ) `:当前正在初始化的bean对象会被传递进来,我们就可以对这个bean作任何处理,这个函数会先于InitialzationBean执行,因此称为前置处理,所有Aware接口的注入就是在这一步完成的
 5. InitializingBean与init-method
-    - 当BeanPostProcessor的前置处理完成后就会进入本阶段,InitializingBean接口只有一个函数:`afterPropertiesSet()`
-    - 这一阶段也可以在bean正式构造完成前增加我们自定义的逻辑,但它与前置处理不同,由于该函数并不会把当前bean对象传进来,因此在这一步没办法处理对象本身,只能增加一些额外的逻辑
-    - 若要使用它,我们需要让bean实现该接口,并把要增加的逻辑写在该函数中,然后Spring会在前置处理完成后检测当前bean是否实现了该接口,并执行afterPropertiesSet函数
-    - 当然,Spring为了降低对客户代码的侵入性,给bean的配置提供了init-method属性,该属性指定了在这一阶段需要执行的函数名,Spring便会在初始化阶段执行我们设置的函数,init-method本质上仍然使用了InitializingBean接口
+    - 当BeanPostProcessor的前置处理完成后就会进入本阶段,InitializingBean接口只有一个函数:`afterPropertiesSet()`，这一阶段也可以在bean正式构造完成前增加我们自定义的逻辑,但它与前置处理不同,由于该函数并不会把当前bean对象传进来,因此在这一步没办法处理对象本身,只能增加一些额外的逻辑
+    - 若要使用它,我们需要让bean实现该接口,并把要增加的逻辑写在该函数中,然后Spring会在前置处理完成后检测当前bean是否实现了该接口,并执行afterPropertiesSet函数，当然,Spring为了降低对代码的侵入性,给bean的配置提供了init-method属性,该属性指定了在这一阶段需要执行的函数名,Spring便会在初始化阶段执行我们设置的函数,init-method本质上仍然使用了InitializingBean接口
 6. BeanPostProcessor
-    - 与第4步类似,如果需要在初始化之后执行一些自定义的处理,就可以通过BeanPostProcessor接口实现
+    - 与前置处理类似,如果需要在初始化之后执行一些自定义的处理,就可以通过BeanPostProcessor接口实现
     - `postProcessAfterInitialzation( Object bean, String beanName ) `当前正在初始化的bean对象会被传递进来,我们就可以对这个bean作任何处理,这个函数会在InitialzationBean完成后执行,因此称为后置处理
 7. DisposableBean和destroy-method
     - 和init-method一样,通过给destroy-method指定函数,就可以在bean销毁前执行指定的逻辑
@@ -1835,7 +1833,7 @@ EXPLAIN + SQL语句
 ### BitMap
 
 - BitMap算法的核心思想是用bit数组来记录0-1两种状态，然后再将具体数据映射到这个比特数组的具体位置，这个比特位设置成0表示数据不存在，设置成1表示数据存在。
-- BitMap算在在大量数据查询、去重等应用场景中使用的比较多，这个算法具有比较高的空间利用率。
+- BitMap算在在大量数据查询、去重等应用场景中使用的比较多，这个算法具有比较高的空间利用率
 
 ## 算法
 
@@ -1843,60 +1841,25 @@ EXPLAIN + SQL语句
 
 #### 二分查找
 
-- 二分查找是一种在有序数组中查找某一特定元素的搜索算法,搜素过程从数组的中间元素开始
-- 如果中间元素正好是要查找的元素,则搜素过程结束
-- 如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较
-- 如果在某一步骤数组已经为空,则表示找不到指定的元素,这种搜索算法每一次比较都使搜索范围缩小一半,其时间复杂度是O(logN)
+- 二分查找是一种在有序数组中查找某一特定元素的搜索算法
+- 搜素过程从数组的中间元素开始，如果中间元素正好是要查找的元素,则搜素过程结束，如果某一特定元素大于或者小于中间元素,则在数组大于或小于中间元素的那一半中查找,而且跟开始一样从中间元素开始比较
 
 ```java
-import java.util.Comparator;
-
-public class MyUtil {
-
-    public static <T extends Comparable<T>> int binarySearch(T[] x, T key) {
-        return binarySearch(x, 0, x.length- 1, key);
-    }
-
-    // 使用循环实现的二分查找
-    public static <T> int binarySearch(T[] x, T key, Comparator<T> comp) {
-        int low = 0;
-        int high = x.length - 1;
-        while (low <= high) {
-            int mid = (low + high) >>> 1;
-            int cmp = comp.compare(x[mid], key);
-            if (cmp < 0) {
-                low= mid + 1;
-            }
-            else if (cmp > 0) {
-                high= mid - 1;
-            }
-            else {
-                return mid;
-            }
+public int search(int[] nums, int target) {
+    int left = 0, right = nums.length - 1;
+    while (left <= right) {
+        int mid = (right + left) >>> 1;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
         }
-        return -1;
     }
-
-    // 使用递归实现的二分查找
-    private static<T extends Comparable<T>> int binarySearch(T[] x, int low, int high, T key) {
-        if(low <= high) {
-            int mid = low + ((high -low) >> 1);
-            if(key.compareTo(x[mid])== 0) {
-                return mid;
-            }
-            else if(key.compareTo(x[mid])< 0) {
-                return binarySearch(x,low, mid - 1, key);
-            }
-            else {
-                return binarySearch(x,mid + 1, high, key);
-            }
-        }
-        return -1;
-    }
+    return -1;
 }
 ```
-
-> **说明**:上面的代码中给出了折半查找的两个版本,一个用递归实现,一个用循环实现,需要注意的是计算中间位置时不应该使用(high+ low) / 2的方式,因为加法运算可能导致整数越界,这里应该使用以下三种方式之一:`low + (high - low) / 2`或`low + (high – low) >> 1`或`(low + high) >>> 1`(>>>是逻辑右移,是不带符号位的右移)
 
 ### 排序算法
 
@@ -2067,91 +2030,54 @@ private void swap(int[] nums, int i, int j) {
 
 #### 堆排序
 
-![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123329.jpeg)
-
-- 堆排序就是把最大堆堆顶的最大数取出,将剩余的堆继续调整为最大堆,再次将堆顶的最大数取出,这个过程持续到剩余数只有一个时结束,在堆中定义以下几种操作
-    - 最大堆调整(Max-Heapify):将堆的末端子节点作调整,使得子节点永远小于父节点
-    - 创建最大堆(Build-Max-Heap):将堆所有数据重新排序,使其成为最大堆
-    - 堆排序(Heap-Sort):移除位在第一个数据的根节点,并做最大堆调整的递归运算
-
-- 由于数组都是 Zero-Based,这就意味着我们的堆数据结构模型要发生改变,相应的,几个计算公式也要作出相应调整
-
-    - Parent(i) = floor((i-1)/2),i 的父节点下标
-    - Left(i) = 2i + 1,i 的左子节点下标
-    - Right(i) = 2(i + 1),i 的右子节点下标
-
-- **堆的建立和维护**
-    1. 给定一个无序数组,如何建立为堆？
-        - 常规方法是从第一个非叶子结点向下筛选,直到根元素筛选完毕,这个方法叫筛选法,需要循环筛选n/2个元素
-        - 但我们还可以借鉴插入排序的思路,我们可以视第一个元素为一个堆,然后不断向其中添加新元素,这个方法叫做插入法,需要循环插入(n-1)个元素
-
-    2. 删除堆顶元素后,如何调整数组成为新堆？
-
-        - 删除后的调整,是把最后一个元素放到堆顶,自上而下比较,插入是把新元素放在末尾,自下而上比较
-
-        - 假定我们已经有一个现成的最小堆,现在我们删除了根元素,但并没有移动别的元素,根元素空了,但其它元素还保持着堆的性质,我们可以把**最后一个元素**(代号A)移动到根元素的位置,如果不是特殊情况,则堆的性质被破坏,但这仅仅是由于A小于其某个子元素,于是,我们可以把A和这个子元素调换位置,如果A大于其所有子元素,则堆调整好了,否则,重复上述过程,A元素在树形结构中不断下沉,直到合适的位置,数组重新恢复堆的性质,上述过程一般称为筛选,方向显然是自上而下
-        - 插入一个新元素也是如此,不同的是,我们把新元素放在**末尾**,然后和其父节点做比较,即自下而上筛选
+- **基本思想**：将待排序序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点。将其与末尾元素进行交换，此时末尾就为最大值。然后将剩余n-1个元素重新构造成一个堆，这样会得到n个元素的次小值。如此反复执行，便能得到一个有序序列了
+- **算法描述**
+    1. 将无需序列构建成一个堆，根据升序降序需求选择大顶堆或小顶堆
+    2. 将堆顶元素与末尾元素交换，将最大元素**沉**到数组末端
+    3. 重新调整结构，使其满足堆定义，然后继续交换堆顶元素与当前末尾元素，反复执行调整+交换步骤，直到整个序列有序
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-c66a7e83189427b6a5a5c378f73c17ca_b.gif" alt="img" style="zoom:150%;" />
 
-- **算法描述**
-- 可以建立一个最小堆,然后每次输出根元素,但是,这个方法需要额外的空间(否则将造成大量的元素移动,其复杂度会飙升到O(n^2^)
-- 可以建立最大堆,然后我们倒着输出,在最后一个位置输出最大值,次末位置输出次大值,由于每次输出的最大元素会腾出第一个空间
-
 ```java
-public class ArrayHeap {
-    private int[] arr;
-    public ArrayHeap(int[] arr) {
-        this.arr = arr;
+public static void sort(int[] arr) {
+    //1.构建大顶堆
+    for (int i = arr.length / 2 - 1; i >= 0; i--) {
+        //从第一个非叶子结点从下至上，从右至左调整结构
+        adjustHeap(arr, i, arr.length);
     }
-    private int getParentIndex(int child) {
-        return (child - 1) / 2;
+    //2.调整堆结构+交换堆顶元素与末尾元素
+    for (int j = arr.length - 1; j > 0; j--) {
+        swap(arr, 0, j);//将堆顶元素与末尾元素进行交换
+        adjustHeap(arr, 0, j);//重新对堆进行调整
     }
-    private int getLeftChildIndex(int parent) {
-        return 2 * parent + 1;
-    }
-    private void swap(int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-    /**
-     * 调整堆
-     */
-    private void adjustHeap(int i, int len) {
-        int left, right, j;
-        left = getLeftChildIndex(i);
-        while (left <= len) {
-            right = left + 1;
-            j = left;
-            if (j < len && arr[left] < arr[right]) {
-                j++;
-            }
-            if (arr[i] < arr[j]) {
-                swap(array, i, j);
-                i = j;
-                left = getLeftChildIndex(i);
-            } else {
-                break; // 停止筛选
-            }
-        }
-    }
-    /**
-     * 堆排序
-     * */
-    public void sort() {
-        int last = arr.length - 1;
-        // 初始化最大堆
-        for (int i = getParentIndex(last); i >= 0; --i) {
-            adjustHeap(i, last);
-        }
-        // 堆调整
-        while (last >= 0) {
-            swap(0, last--);
-            adjustHeap(0, last);
-        }
-    }
+}
 
+/**
+     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
+     */
+public static void adjustHeap(int[] arr, int i, int length) {
+    int temp = arr[i];//先取出当前元素i
+    for (int k = i * 2 + 1; k < length; k = k * 2 + 1) {//从i结点的左子结点开始，也就是2i+1处开始
+        if (k + 1 < length && arr[k] < arr[k + 1]) {//如果左子结点小于右子结点，k指向右子结点
+            k++;
+        }
+        if (arr[k] > temp) {//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）
+            arr[i] = arr[k];
+            i = k;
+        } else {
+            break;
+        }
+    }
+    arr[i] = temp;//将temp值放到最终的位置
+}
+
+/**
+     * 交换元素
+     */
+public static void swap(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
 }
 ```
 
@@ -3365,6 +3291,20 @@ public void levelTraverse(TreeNode root) {
     - 上面描述的一致性Hash存在数据分布不均匀的问题,节点存储的数据量有可能会存在很大的不同
     - 数据不均匀主要是因为节点在Hash环上分布的不均匀,这种情况在节点数量很少的情况下尤其明显
     - 解决方式是通过增加虚拟节点,然后将虚拟节点映射到真实节点上,虚拟节点的数量比真实节点来得多,那么虚拟节点在Hash环上分布的均匀性就会比原来的真实节点好,从而使得数据分布也更加均匀
+
+### 链路追踪
+
+- 链路追踪是分布式系统下的一个概念，将一次分布式请求还原成调用链路，将一次分布式请求的调用情况集中展示，比如，各个服务节点上的耗时、请求具体到达哪台机器上、每个服务节点的请求状态等等。
+- **作用**
+    1. 自动采取数据
+    2. 分析数据，产生完整调用链：有了请求的完整调用链，问题有很大概率可复现
+    3. 数据可视化：每个组件的性能可视化，能帮助我们很好地定位系统的瓶颈，及时找出问题所在
+- **分布式调用链标准（OpenTracing）**：OpenTracing 是一个轻量级的标准化层，它位于应用程序/类库和追踪或日志分析程序之间。它的出现是为了解决不同的分布式追踪系统 API 不兼容的问题。
+    - OpenTracing 的数据模型，主要有以下三个：
+        - **Trace**:一个完整请求链路
+        - **Span**:一次调用过程（需要有开始时间和结束时间）
+        - **SpanContext**:Trace 的全局上下文信息，如里面有traceId
+    - 例如，一次下单的完整请求就是一个 Trace。TraceId是这个请求的全局标识。内部的每一次调用就称为一个 Span，每个 Span 都要带上全局的 TraceId，这样才可把全局 TraceId 与每个调用关联起来。这个 TraceId 是通过 SpanContext 传输的，既然要传输，显然都要遵循协议来调用。
 
 ## 设计模式
 
