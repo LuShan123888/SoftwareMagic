@@ -163,24 +163,31 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/" target="_self">
-          Vim 命令模式
+        <a href="/Software/Tools/Vim/%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F/" target="_self">
+          Vim 插入模式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/Vim/%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F/" target="_self">
+        <a href="/Software/Tools/Vim/%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          Vim 命令模式
-Vim编辑方式的主要用途是在被编辑的文件中移动光标的位置,一旦光标移到到所要的位置,就可以进行剪切和粘贴正文块,删除正文和插入新的正文,当完成所有的编辑工作后,需要保存编辑器结果,退出编辑程序回到终端,可以发出ZZ命令,连续按两次大写的Z键
-移动光标
-如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能
+          Vim 插入模式
+进入插入模式
+在编辑模式下正确定位光标之后,可用以下命令切换到插入模式:
 
-k:上移
-j
+i:在光标左侧插入正文
+a:在光标右侧插入正文
+o:在光标所在行的下一行增添新行
+O:在光标所在行的上一行增添新行
+I:在光标所在行的开头插入
+A:在光标所在行的末尾插入
+
+退出插入模式
+退出插入模式的方法是,按 ESC 键或组合键 Ctrl+[ ,退出插入模式之后,将会进入编辑模式
+
         </a>
       </p>
 
@@ -216,20 +223,24 @@ j
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/WordPress/%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D/" target="_self">
-          WordPress 修改域名
+        <a href="/Software/Tools/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+          WordPress 问题解决
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/WordPress/%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D/" target="_self">
+        <a href="/Software/Tools/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
           
           
             
           
-          WordPress 修改域名
-修改数据库
-1234567UPDATE wp_options SET option_value = replace(option_value, &#x27;原域名&#x27;, &#x27;新域名&#x27;) WHERE option_name = &#x27;home&#x27; OR option_name = &#x27;siteurl&#x27;;UPDAT
+          WordPress 问题解决
+文件权限问题
+修改wp-config.php文件
+
+对于没有服务器目录操作权限的用户来说,修改wp-config.php文件会比较简单快捷,只需要在wp-config.php文件添加以下代码:
+
+123define(&quot;FS_METHOD&quot;, &quot;direct&quot;);define(&quot;FS_CHMOD_DIR&quot;, 0
         </a>
       </p>
 
@@ -328,24 +339,20 @@ j
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          WordPress 问题解决
+        <a href="/Software/Tools/WordPress/%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D/" target="_self">
+          WordPress 修改域名
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/WordPress/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+        <a href="/Software/Tools/WordPress/%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D/" target="_self">
           
           
             
           
-          WordPress 问题解决
-文件权限问题
-修改wp-config.php文件
-
-对于没有服务器目录操作权限的用户来说,修改wp-config.php文件会比较简单快捷,只需要在wp-config.php文件添加以下代码:
-
-123define(&quot;FS_METHOD&quot;, &quot;direct&quot;);define(&quot;FS_CHMOD_DIR&quot;, 0
+          WordPress 修改域名
+修改数据库
+1234567UPDATE wp_options SET option_value = replace(option_value, &#x27;原域名&#x27;, &#x27;新域名&#x27;) WHERE option_name = &#x27;home&#x27; OR option_name = &#x27;siteurl&#x27;;UPDAT
         </a>
       </p>
 
@@ -505,6 +512,68 @@ j
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/Software/Tools/VSCode/" target="_self">
+          VS Code
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/VSCode/" target="_self">
+          
+          
+            
+          
+          VS Code
+解决VScode在Mac上滚动掉帧的问题
+
+打开命令板
+
+1Ctrl+Shift+P/ CMD+Shift+P / F1
+
+添加配置项
+
+1Preferences: Configure Runtime Arguments
+
+添加
+
+1disable-hardware-acceleration&quot;: true
+
+
+重启
+此时应用启动时默认关闭硬件加速,等同于code --di
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-02 17:54" pubdate>
+              2021-12-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/Software/Tools/Supervisor/" target="_self">
           Supervisor
         </a>
@@ -573,68 +642,6 @@ Supervisor是用Python开发的一套通用的进程管理程序,能将一个普
 关闭自动更新
 
 Pref
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 17:54" pubdate>
-              2021-12-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Tools/VSCode/" target="_self">
-          VS Code
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Tools/VSCode/" target="_self">
-          
-          
-            
-          
-          VS Code
-解决VScode在Mac上滚动掉帧的问题
-
-打开命令板
-
-1Ctrl+Shift+P/ CMD+Shift+P / F1
-
-添加配置项
-
-1Preferences: Configure Runtime Arguments
-
-添加
-
-1disable-hardware-acceleration&quot;: true
-
-
-重启
-此时应用启动时默认关闭硬件加速,等同于code --di
         </a>
       </p>
 
