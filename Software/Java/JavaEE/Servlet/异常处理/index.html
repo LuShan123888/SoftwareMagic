@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Servlet 异常处理  当一个 Servlet 抛出一个异常时,Web 容器在使用了 exception-type 元素的 web.xml 中搜索与抛出异常类型相匹配的配置 您必须在 web.xml 中使用 error-page 元素来指定对特定异常 或 HTTP 状态码 作出相应的 Servlet 调用  web.xml 配置  假设,有一个 ErrorHandler 的 Servlet 在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet 异常处理">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Java/JavaEE/Servlet/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Servlet 异常处理  当一个 Servlet 抛出一个异常时,Web 容器在使用了 exception-type 元素的 web.xml 中搜索与抛出异常类型相匹配的配置 您必须在 web.xml 中使用 error-page 元素来指定对特定异常 或 HTTP 状态码 作出相应的 Servlet 调用  web.xml 配置  假设,有一个 ErrorHandler 的 Servlet 在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-2D17F23F-86D0-43A4-88DF-75617B708B4B.jpg">
+<meta property="article:published_time" content="2021-12-02T09:54:29.282Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.282Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-2D17F23F-86D0-43A4-88DF-75617B708B4B.jpg">
+  
+  <title>Servlet 异常处理 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Servlet 异常处理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Servlet 异常处理</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Servlet 异常处理</h1>
+<ul>
+<li>当一个 Servlet 抛出一个异常时,Web 容器在使用了 exception-type 元素的 <strong>web.xml</strong> 中搜索与抛出异常类型相匹配的配置</li>
+<li>您必须在 web.xml 中使用 <strong>error-page</strong> 元素来指定对特定<strong>异常</strong> 或 HTTP <strong>状态码</strong> 作出相应的 Servlet 调用</li>
+</ul>
+<h2 id="web-xml-配置">web.xml 配置</h2>
+<ul>
+<li>假设,有一个 <em>ErrorHandler</em> 的 Servlet 在任何已定义的异常或错误出现时被调用,以下将是在 web.xml 中创建的项</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- servlet 定义 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><span class="hljs-comment">&lt;!-- servlet 映射 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- error-code 相关的错误页面 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">error-code</span>&gt;</span>404<span class="hljs-tag">&lt;/<span class="hljs-name">error-code</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">error-code</span>&gt;</span>403<span class="hljs-tag">&lt;/<span class="hljs-name">error-code</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- exception-type 相关的错误页面 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exception-type</span>&gt;</span><br>          javax.servlet.ServletException<br>    &lt;/exception-type &gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exception-type</span>&gt;</span>java.io.IOException&lt;/exception-type &gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果您想对所有的异常有一个通用的错误处理程序,那么应该定义下面的 error-page,而不是为每个异常定义单独的 error-page 元素:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exception-type</span>&gt;</span>java.lang.Throwable&lt;/exception-type &gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>以下是关于上面的 web.xml 异常处理要注意的点:
+<ul>
+<li>Servlet ErrorHandler 与其他的 Servlet 的定义方式一样,且在 web.xml 中进行配置</li>
+<li>如果有错误状态代码出现,不管为 404(Not Found 未找到)或 403(Forbidden 禁止),则会调用 ErrorHandler 的 Servlet</li>
+<li>如果 Web 应用程序抛出 <em>ServletException</em> 或 <em>IOException</em>,那么 Web 容器会调用 ErrorHandler 的 Servlet</li>
+<li>您可以定义不同的错误处理程序来处理不同类型的错误或异常,上面的实例是非常通用的,希望您能通过实例理解基本的概念</li>
+</ul>
+</li>
+</ul>
+<h2 id="请求属性-错误-异常">请求属性 - 错误/异常</h2>
+<p>以下是错误处理的 Servlet 可以访问的请求属性列表,用来分析错误/异常的性质</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">属性 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>javax.servlet.error.status_code</strong> 该属性给出状态码,状态码可被存储,并在存储为 java.lang.Integer 数据类型后可被分析,</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>javax.servlet.error.exception_type</strong> 该属性给出异常类型的信息,异常类型可被存储,并在存储为 java.lang.Class 数据类型后可被分析,</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>javax.servlet.error.message</strong> 该属性给出确切错误消息的信息,信息可被存储,并在存储为 java.lang.String 数据类型后可被分析,</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>javax.servlet.error.request_uri</strong> 该属性给出有关 URL 调用 Servlet 的信息,信息可被存储,并在存储为 java.lang.String 数据类型后可被分析,</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>javax.servlet.error.exception</strong> 该属性给出异常产生的信息,信息可被存储,并在存储为 java.lang.Throwable 数据类型后可被分析,</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>javax.servlet.error.servlet_name</strong> 该属性给出 Servlet 的名称,名称可被存储,并在存储为 java.lang.String 数据类型后可被分析,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Servlet-错误处理程序实例">Servlet 错误处理程序实例</h2>
+<ul>
+<li>以下是 Servlet 实例,将应对任何您所定义的错误或异常发生时的错误处理程序</li>
+<li>本实例让您对 Servlet 中的异常处理有基本的了解,您可以使用相同的概念编写更复杂的异常处理应用程序:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//导入必需的 java 库</span><br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> javax.servlet.*;<br><span class="hljs-keyword">import</span> javax.servlet.http.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-comment">//扩展 HttpServlet 类</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ErrorHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br><br>    <span class="hljs-comment">// 处理 GET 方法请求的方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>        Throwable throwable = (Throwable)<br>        request.getAttribute(<span class="hljs-string">&quot;javax.servlet.error.exception&quot;</span>);<br>        Integer statusCode = (Integer)<br>        request.getAttribute(<span class="hljs-string">&quot;javax.servlet.error.status_code&quot;</span>);<br>        String servletName = (String)<br>        request.getAttribute(<span class="hljs-string">&quot;javax.servlet.error.servlet_name&quot;</span>);<br>        <span class="hljs-keyword">if</span> (servletName == <span class="hljs-keyword">null</span>)&#123;<br>            servletName = <span class="hljs-string">&quot;Unknown&quot;</span>;<br>        &#125;<br>        String requestUri = (String)<br>        request.getAttribute(<span class="hljs-string">&quot;javax.servlet.error.request_uri&quot;</span>);<br>        <span class="hljs-keyword">if</span> (requestUri == <span class="hljs-keyword">null</span>)&#123;<br>            requestUri = <span class="hljs-string">&quot;Unknown&quot;</span>;<br>        &#125;<br>        <span class="hljs-comment">// 设置响应内容类型</span><br>        response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br><br>        PrintWriter out = response.getWriter();<br>        String title = <span class="hljs-string">&quot;Error/Exception 信息&quot;</span>;<br><br>        String docType = <span class="hljs-string">&quot;&lt;!DOCTYPE html&gt;\n&quot;</span>;<br>        out.println(docType +<br>            <span class="hljs-string">&quot;&lt;html&gt;\n&quot;</span> +<br>             <span class="hljs-string">&quot;&lt;head&gt;&lt;title&gt;&quot;</span> + title + <span class="hljs-string">&quot;&lt;/title&gt;&lt;/head&gt;\n&quot;</span> +<br>             <span class="hljs-string">&quot;&lt;body bgcolor=\&quot;#f0f0f0\&quot;&gt;\n&quot;</span>);<br>           out.println(<span class="hljs-string">&quot;&lt;h1&gt;异常信息实例演示&lt;/h1&gt;&quot;</span>);<br>           <span class="hljs-keyword">if</span> (throwable == <span class="hljs-keyword">null</span> &amp;&amp; statusCode == <span class="hljs-keyword">null</span>)&#123;<br>              out.println(<span class="hljs-string">&quot;&lt;h2&gt;错误信息丢失&lt;/h2&gt;&quot;</span>);<br>              out.println(<span class="hljs-string">&quot;请返回 &lt;a href=\&quot;&quot;</span> +<br>            response.encodeURL(<span class="hljs-string">&quot;http://localhost:8080/&quot;</span>) +<br>                <span class="hljs-string">&quot;\&quot;&gt;主页&lt;/a&gt;,&quot;</span>);<br>           &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (statusCode != <span class="hljs-keyword">null</span>) &#123;<br>              out.println(<span class="hljs-string">&quot;错误代码 : &quot;</span> + statusCode);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>               out.println(<span class="hljs-string">&quot;&lt;h2&gt;错误信息&lt;/h2&gt;&quot;</span>);<br>              out.println(<span class="hljs-string">&quot;Servlet Name : &quot;</span> + servletName +<br>                              <span class="hljs-string">&quot;&lt;/br&gt;&lt;/br&gt;&quot;</span>);<br>              out.println(<span class="hljs-string">&quot;异常类型 : &quot;</span> +<br>                              throwable.getClass( ).getName( ) +<br>                              <span class="hljs-string">&quot;&lt;/br&gt;&lt;/br&gt;&quot;</span>);<br>              out.println(<span class="hljs-string">&quot;请求 URI: &quot;</span> + requestUri +<br>                              <span class="hljs-string">&quot;&lt;br&gt;&lt;br&gt;&quot;</span>);<br>              out.println(<span class="hljs-string">&quot;异常信息: &quot;</span> +<br>                                  throwable.getMessage( ));<br>           &#125;<br>           out.println(<span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>);<br>           out.println(<span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">// 处理 POST 方法请求的方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest request,</span></span><br><span class="hljs-params"><span class="hljs-function">                      HttpServletResponse response)</span></span><br><span class="hljs-function">       <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        doGet(request, response);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以通常的方式编译 <strong>ErrorHandler.java</strong>,把您的类文件放入<code>&lt;Tomcat-installation-directory&gt;/webapps/ROOT/WEB-INF/classes </code>中</li>
+<li>让我们在 web.xml 文件中添加如下配置来处理异常:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>com.example.test.ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><span class="hljs-comment">&lt;!-- servlet mappings --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/TomcatTest/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">error-code</span>&gt;</span>404<span class="hljs-tag">&lt;/<span class="hljs-name">error-code</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/TomcatTest/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">error-page</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">exception-type</span>&gt;</span>java.lang.Throwable&lt;/exception-type &gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/ErrorHandler<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">error-page</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>现在,尝试使用一个会产生异常的 Servlet,或者输入一个错误的 URL,这将触发 Web 容器调用 <strong>ErrorHandler</strong> 的 Servlet,并显示适当的消息,例如,如果您输入了一个错误的 URL(如:<a target="_blank" rel="noopener" href="http://localhost:8080/TomcatTest/UnKonwPage">http://localhost:8080/TomcatTest/UnKonwPage</a>),那么它将显示下面的结果:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-2D17F23F-86D0-43A4-88DF-75617B708B4B.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/JavaEE/">JavaEE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/JavaEE/Servlet/">Servlet</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E9%AA%8C%E8%AF%81%E7%A0%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Servlet 验证码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Java/JavaEE/Servlet/%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE/">
+                        <span class="hidden-mobile">Servlet接受数据</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

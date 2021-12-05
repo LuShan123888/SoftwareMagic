@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java 枚举  Java 枚举是一个特殊的类,一般表示一组常量,比如一年的 4 个季节,一个年的 12 个月份,一个星期的 7 天,方向有东南西北等 Java 枚举类使用 enum 关键字来定义,各个常量使用逗号, 来分割 例如定义一个颜色的枚举类  1234enum Color&amp;#123;  RED, GREEN, BLUE;&amp;#125;  以上枚举类 Color 颜色常量有 RED, GRE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 枚举">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E6%9E%9A%E4%B8%BE/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java 枚举  Java 枚举是一个特殊的类,一般表示一组常量,比如一年的 4 个季节,一个年的 12 个月份,一个星期的 7 天,方向有东南西北等 Java 枚举类使用 enum 关键字来定义,各个常量使用逗号, 来分割 例如定义一个颜色的枚举类  1234enum Color&amp;#123;  RED, GREEN, BLUE;&amp;#125;  以上枚举类 Color 颜色常量有 RED, GRE">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.284Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.284Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Java 枚举 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 枚举">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 枚举</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Java 枚举</h1>
+<ul>
+<li>Java 枚举是一个特殊的类,一般表示一组常量,比如一年的 4 个季节,一个年的 12 个月份,一个星期的 7 天,方向有东南西北等</li>
+<li>Java 枚举类使用 enum 关键字来定义,各个常量使用逗号<code>,</code> 来分割</li>
+<li>例如定义一个颜色的枚举类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span><br><span class="hljs-class"></span>&#123;<br>  RED, GREEN, BLUE;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上枚举类 Color 颜色常量有 RED, GREEN, BLUE,分别表示红色,绿色,蓝色</li>
+<li>使用实例:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span><br><span class="hljs-class"></span>&#123;<br>  RED, GREEN, BLUE;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span><br><span class="hljs-class"></span>&#123;<br>  <span class="hljs-comment">// 执行输出结果</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span><br><span class="hljs-function">  </span>&#123;<br>    Color c1 = Color.RED;<br>    System.out.println(c1);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行以上代码输出结果为:</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">RED</span><br></code></pre></td></tr></table></figure>
+<h2 id="enum类型">enum类型</h2>
+<ul>
+<li>Java使用<code>enum</code>定义枚举类型,它被编译器编译为<code>final class Xxx extends Enum &#123;…&#125;</code></li>
+<li>定义的<code>enum</code>类型总是继承自<code>java.lang.Enum</code>,且无法被继承</li>
+<li>只能定义出<code>enum</code>的实例,而无法通过<code>new</code>操作符创建<code>enum</code>的实例</li>
+<li>定义的每个实例都是引用类型的唯一实例</li>
+</ul>
+<p>例如,我们定义的<code>Color</code>枚举类:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span> </span>&#123;<br>    RED, GREEN, BLUE;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>编译器编译出的<code>class</code>大概就像这样:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Color</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Enum</span> </span>&#123; <span class="hljs-comment">// 继承自Enum,标记为final class</span><br>  <span class="hljs-comment">// 每个实例均为全局唯一:</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Color RED = <span class="hljs-keyword">new</span> Color();<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Color GREEN = <span class="hljs-keyword">new</span> Color();<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Color BLUE = <span class="hljs-keyword">new</span> Color();<br>  <span class="hljs-comment">// private构造方法,确保外部无法调用new操作符:</span><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Color</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>所以,编译后的<code>enum</code>类和普通<code>class</code>并没有任何区别,但是我们自己无法按定义普通<code>class</code>那样来定义<code>enum</code>,必须使用<code>enum</code>关键字,这是Java语法规定的</p>
+<h2 id="迭代枚举元素">迭代枚举元素</h2>
+<ul>
+<li>可以使用 for 语句来迭代枚举元素:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span><br><span class="hljs-class"></span>&#123;<br>  RED, GREEN, BLUE;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (Color myVar : Color.values()) &#123;<br>      System.out.println(myVar);<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行以上代码输出结果为:</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">RED</span><br><span class="hljs-attribute">GREEN</span><br><span class="hljs-attribute">BLUE</span><br></code></pre></td></tr></table></figure>
+<h2 id="在-switch-中使用枚举类">在 switch 中使用枚举类</h2>
+<ul>
+<li>枚举类常应用于 switch 语句中:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span><br><span class="hljs-class"></span>&#123;<br>  RED, GREEN, BLUE;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClass</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Color myVar = Color.BLUE;<br>    <span class="hljs-keyword">switch</span>(myVar) &#123;<br>      <span class="hljs-keyword">case</span> RED:<br>        System.out.println(<span class="hljs-string">&quot;红色&quot;</span>);<br>        <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> GREEN:<br>        System.out.println(<span class="hljs-string">&quot;绿色&quot;</span>);<br>        <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> BLUE:<br>        System.out.println(<span class="hljs-string">&quot;蓝色&quot;</span>);<br>        <span class="hljs-keyword">break</span>;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行以上代码输出结果为:</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">蓝色<br></code></pre></td></tr></table></figure>
+<h3 id="values-ordinal-和-valueOf-方法">values(), ordinal() 和 valueOf() 方法</h3>
+<ul>
+<li>enum 定义的枚举类默认继承了 <code>java.lang.Enum</code> 类,并实现了 <code>java.lang.Seriablizable</code> 和 <code>java.lang.Comparable</code> 两个接口</li>
+<li><code>values()</code>, <code>ordinal()</code> 和 <code>valueOf()</code> 方法位于 <code>java.lang.Enum</code> 类中:
+<ul>
+<li><code>values()</code> 返回枚举类中所有的值</li>
+<li><code>name()</code>获取常量定义的字符串,注意不要使用<code>toString()</code></li>
+<li><code>ordinal()</code>方法可以找到每个枚举常量的索引,就像数组索引一样</li>
+<li><code>valueOf()</code>方法返回指定字符串值的枚举常量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span><br><span class="hljs-class"></span>&#123;<br>  RED, GREEN, BLUE;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span><br><span class="hljs-class"></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span><br><span class="hljs-function">  </span>&#123;<br>    <span class="hljs-comment">// 调用 values()</span><br>    Color[] arr = Color.values();<br>    <span class="hljs-comment">// 迭代枚举</span><br>    <span class="hljs-keyword">for</span> (Color col : arr)<br>    &#123;<br>      <span class="hljs-comment">// 查看索引</span><br>      System.out.println(col + <span class="hljs-string">&quot; at index &quot;</span> + col.ordinal());<br>    &#125;<br>    <span class="hljs-comment">// 使用 valueOf() 返回枚举常量,不存在的会报错 IllegalArgumentException</span><br>    System.out.println(Color.valueOf(<span class="hljs-string">&quot;RED&quot;</span>));<br>    <span class="hljs-comment">// System.out.println(Color.valueOf(&quot;WHITE&quot;));</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>执行以上代码输出结果为:</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">RED <span class="hljs-built_in">at</span> index <span class="hljs-number">0</span><br>GREEN <span class="hljs-built_in">at</span> index <span class="hljs-number">1</span><br><span class="hljs-keyword">BLUE </span><span class="hljs-built_in">at</span> index <span class="hljs-number">2</span><br>RED<br></code></pre></td></tr></table></figure>
+<h2 id="枚举类成员">枚举类成员</h2>
+<ul>
+<li>枚举跟普通类一样可以用自己的变量,方法和构造函数,构造函数只能使用 private 访问修饰符,所以外部无法调用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">ResponseCode</span> </span>&#123;<br><br>  <span class="hljs-comment">// 公共请求信息</span><br>  SUCCESS(<span class="hljs-number">200</span>, <span class="hljs-string">&quot;请求成功&quot;</span>),<br>  TABLE_SUCCESS(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;请求成功&quot;</span>),<br>  FAIL(<span class="hljs-number">500</span>, <span class="hljs-string">&quot;请求失败,请联系超级管理员&quot;</span>),<br>  PARAMETER_MISSING(<span class="hljs-number">600</span>,<span class="hljs-string">&quot;参数缺失&quot;</span>),<br>  UNAUTHORIZED(<span class="hljs-number">401</span>,<span class="hljs-string">&quot;未授权&quot;</span>),<br>  REQUEST_ERROR(<span class="hljs-number">400</span>,<span class="hljs-string">&quot;请求错误&quot;</span>),<br><br>  <span class="hljs-comment">//用户信息</span><br>  <span class="hljs-comment">//5000100 - 5000200</span><br>  USERNAME_REPEAT(<span class="hljs-number">5000100</span>,<span class="hljs-string">&quot;用户名已存在&quot;</span>),<br>  PHONE_REPEAT(<span class="hljs-number">5000101</span>,<span class="hljs-string">&quot;手机号已存在&quot;</span>),<br>  EMAIL_REPEAT(<span class="hljs-number">5000102</span>,<span class="hljs-string">&quot;邮箱已存在&quot;</span>),<br>  USER_NOTEXIST(<span class="hljs-number">5000104</span>,<span class="hljs-string">&quot;用户不存在&quot;</span>),<br>  <span class="hljs-comment">//用户-角色</span><br>  <span class="hljs-comment">//5000201 - 5000300</span><br>  USER_ROLE_NO_CLEAR(<span class="hljs-number">5000201</span>,<span class="hljs-string">&quot;该角色存在用户关联,无法删除&quot;</span>),<br>  USER_ROLE_NO_UPDATE(<span class="hljs-number">5000202</span>,<span class="hljs-string">&quot;该用户已经是管理员,无法修改&quot;</span>),<br><br>  <span class="hljs-comment">//数据库查询</span><br>  <span class="hljs-comment">//5000301-5000401</span><br>  NOT_EXIST_PAGE_NUMBER(<span class="hljs-number">5000301</span>,<span class="hljs-string">&quot;不存在的分页数&quot;</span>);<br><br>  <span class="hljs-keyword">private</span> Integer code;<br>  <span class="hljs-keyword">private</span> String message;<br><br>  <span class="hljs-comment">// 构造方法,默认为private</span><br>  ResponseCode(Integer code, String message) &#123;<br>    <span class="hljs-keyword">this</span>.code = code;<br>    <span class="hljs-keyword">this</span>.message = message;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> Integer <span class="hljs-title">getCode</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> code;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCode</span><span class="hljs-params">(Integer code)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.code = code;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getMessage</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> message;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMessage</span><span class="hljs-params">(String message)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.message = message;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">getMessage</span><span class="hljs-params">(String name)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (ResponseCode item : ResponseCode.values()) &#123;<br>      <span class="hljs-keyword">if</span> (item.name().equals(name)) &#123;<br>        <span class="hljs-keyword">return</span> item.message;<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Integer <span class="hljs-title">getCode</span><span class="hljs-params">(String name)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (ResponseCode item : ResponseCode.values()) &#123;<br>      <span class="hljs-keyword">if</span> (item.name().equals(name)) &#123;<br>        <span class="hljs-keyword">return</span> item.code;<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>枚举既可以包含具体方法,也可以包含抽象方法,如果枚举类具有<strong>抽象方法</strong>,则枚举类的每个实例都必须实现它</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Color</span></span>&#123;<br>  RED&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getColor</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//枚举对象实现抽象方法</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;红色&quot;</span>;<br>    &#125;<br>  &#125;,<br>  GREEN&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getColor</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//枚举对象实现抽象方法</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;绿色&quot;</span>;<br>    &#125;<br>  &#125;,<br>  BLUE&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getColor</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">//枚举对象实现抽象方法</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;蓝色&quot;</span>;<br>    &#125;<br>  &#125;;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getColor</span><span class="hljs-params">()</span></span>;<span class="hljs-comment">//定义抽象方法</span><br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (Color c:Color.values())&#123;<br>      System.out.print(c.getColor() + <span class="hljs-string">&quot;,&quot;</span>);<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/">其他核心类</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 时间与日期</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E8%AE%B0%E5%BD%95%E7%B1%BB/">
+                        <span class="hidden-mobile">Java 记录类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

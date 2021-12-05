@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Sass At-Rules @Functions Functions allow you to define complex operations on SassScript values that you can re-use throughout your stylesheet. They make it easy to abstract out common formulas and beh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sass At-Rules">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Frontend/Sass/At-Rules/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Sass At-Rules @Functions Functions allow you to define complex operations on SassScript values that you can re-use throughout your stylesheet. They make it easy to abstract out common formulas and beh">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.277Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.277Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Sass At-Rules - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Sass At-Rules">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Sass At-Rules</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Sass At-Rules</h1>
+<h2 id="Functions">@Functions</h2>
+<p>Functions allow you to define complex operations on <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values">SassScript values</a> that you can re-use throughout your stylesheet. They make it easy to abstract out common formulas and behaviors in a readable way.</p>
+<p>Functions are defined using the <code>@function</code> at-rule, which is written <code>@function &lt;name&gt;(&lt;arguments...&gt;) &#123; ... &#125;</code>. A function’s name can be any Sass identifier. It can only contain <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/syntax/structure#universal-statements">universal statements</a>, as well as the <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/function#return"><code>@return</code> at-rule</a> which indicates the value to use as the result of the function call. Functions are called using the normal CSS function syntax.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@function</span> pow(<span class="hljs-variable">$base</span>, <span class="hljs-variable">$exponent</span>) &#123;<br>  <span class="hljs-variable">$result</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-keyword">@for</span> $_ from <span class="hljs-number">1</span> through <span class="hljs-variable">$exponent</span> &#123;<br>    <span class="hljs-variable">$result</span>: <span class="hljs-variable">$result</span> * <span class="hljs-variable">$base</span>;<br>  &#125;<br>  <span class="hljs-keyword">@return</span> <span class="hljs-variable">$result</span>;<br>&#125;<br><br><span class="hljs-selector-class">.sidebar</span> &#123;<br>  <span class="hljs-attribute">float</span>: left;<br>  <span class="hljs-attribute">margin-left</span>: pow(<span class="hljs-number">4</span>, <span class="hljs-number">3</span>) * <span class="hljs-number">1px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>CSS OUTPUT</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.sidebar</span> &#123;<br>  <span class="hljs-attribute">float</span>: left;<br>  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">64px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>Function names, like all Sass identifiers, treat hyphens and underscores as identical. This means that <code>scale-color</code> and <code>scale_color</code> both refer to the same function. This is a historical holdover from the very early days of Sass, when it <em>only</em> allowed underscores in identifier names. Once Sass added support for hyphens to match CSS’s syntax, the two were made equivalent to make migration easier.</p>
+<p><strong>⚠️ Heads up!</strong></p>
+<p>While it’s technically possible for functions to have side-effects like setting <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/variables#scope">global variables</a>, this is strongly discouraged. Use <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/mixin">mixins</a> for side-effects, and use functions just to compute values.</p>
+<h2 id="Arguments">Arguments</h2>
+<p>Arguments allow functions’ behavior to be customized each time they’re called. The arguments are specified in the <code>@function</code> rule after the function’s name, as a list of variable names surrounded by parentheses. The function must be called with the same number of arguments in the form of <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/syntax/structure#expressions">SassScript expressions</a>. The values of these expression are available within the function’s body as the corresponding variables.</p>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>Argument lists can also have trailing commas! This can makes it easier to avoid syntax errors when refactoring your stylesheets.</p>
+<h3 id="Optional-Arguments">Optional Arguments</h3>
+<p>Normally, every argument a function declares must be passed when that function is included. However, you can make an argument optional by defining a <em>default value</em> which will be used if that arguments isn’t passed. Default values use the same syntax as <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/variables">variable declarations</a>: the variable name, followed by a colon and a <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/syntax/structure#expressions">SassScript expression</a>. This makes it easy to define flexible function APIs that can be used in simple or complex ways.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@function</span> invert(<span class="hljs-variable">$color</span>, <span class="hljs-variable">$amount</span>: <span class="hljs-number">100%</span>) &#123;<br>  <span class="hljs-variable">$inverse</span>: change-color(<span class="hljs-variable">$color</span>, <span class="hljs-variable">$hue</span>: hue(<span class="hljs-variable">$color</span>) + <span class="hljs-number">180</span>);<br>  <span class="hljs-keyword">@return</span> mix(<span class="hljs-variable">$inverse</span>, <span class="hljs-variable">$color</span>, <span class="hljs-variable">$amount</span>);<br>&#125;<br><br><span class="hljs-variable">$primary-color</span>: <span class="hljs-number">#036</span>;<br><span class="hljs-selector-class">.header</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: invert(<span class="hljs-variable">$primary-color</span>, <span class="hljs-number">80%</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>CSS OUTPUT</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.header</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#523314</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>Default values can be any SassScript expression, and they can even refer to earlier arguments!</p>
+<h3 id="Keyword-Arguments">Keyword Arguments</h3>
+<p>When a function is called, arguments can be passed by name in addition to passing them by their position in the argument list. This is especially useful for functions with multiple optional arguments, or with <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/booleans">boolean</a> arguments whose meanings aren’t obvious without a name to go with them. Keyword arguments use the same syntax as <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/variables">variable declarations</a> and <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/function#optional-arguments">optional arguments</a>.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-variable">$primary-color</span>: <span class="hljs-number">#036</span>;<br><span class="hljs-selector-class">.banner</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-variable">$primary-color</span>;<br>  <span class="hljs-attribute">color</span>: scale-color(<span class="hljs-variable">$primary-color</span>, <span class="hljs-variable">$lightness</span>: +<span class="hljs-number">40%</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>CSS OUTPUT</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.banner</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#036</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#0a85ff</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>⚠️ Heads up!</strong></p>
+<p>Because <em>any</em> argument can be passed by name, be careful when renaming a function’s arguments… it might break your users! It can be helpful to keep the old name around as an <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/function#optional-arguments">optional argument</a> for a while and printing a <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/warn">warning</a> if anyone passes it, so they know to migrate to the new argument.</p>
+<h3 id="Taking-Arbitrary-Arguments">Taking Arbitrary Arguments</h3>
+<p>Sometimes it’s useful for a function to be able to take any number of arguments. If the last argument in a <code>@function</code>declaration ends in <code>...</code>, then all extra arguments to that function are passed to that argument as a <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/lists">list</a>. This argument is known as an <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/lists#argument-lists">argument list</a>.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@function</span> sum(<span class="hljs-variable">$numbers</span>...) &#123;<br>  <span class="hljs-variable">$sum</span>: <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">@each</span> <span class="hljs-variable">$number</span> in <span class="hljs-variable">$numbers</span> &#123;<br>    <span class="hljs-variable">$sum</span>: <span class="hljs-variable">$sum</span> + <span class="hljs-variable">$number</span>;<br>  &#125;<br>  <span class="hljs-keyword">@return</span> <span class="hljs-variable">$sum</span>;<br>&#125;<br><br><span class="hljs-selector-class">.micro</span> &#123;<br>  <span class="hljs-attribute">width</span>: sum(<span class="hljs-number">50px</span>, <span class="hljs-number">30px</span>, <span class="hljs-number">100px</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>CSS OUTPUT</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.micro</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">180px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Taking-Arbitrary-Keyword-Arguments">Taking Arbitrary Keyword Arguments</h3>
+<p>Argument lists can also be used to take arbitrary keyword arguments. The <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/modules/meta#keywords"><code>meta.keywords()</code> function</a> takes an argument list and returns any extra keywords that were passed to the function as a <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/maps">map</a> from argument names (not including <code>$</code>) to those arguments’ values.</p>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>If you don’t ever pass an argument list to the <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/modules/meta#keywords"><code>meta.keywords()</code> function</a>, that argument list won’t allow extra keyword arguments. This helps callers of your function make sure they haven’t accidentally misspelled any argument names.</p>
+<h3 id="Passing-Arbitrary-Arguments">Passing Arbitrary Arguments</h3>
+<p>Just like argument lists allow functions to take arbitrary positional or keyword arguments, the same syntax can be used to <em>pass</em> positional and keyword arguments to a function. If you pass a list followed by <code>...</code> as the last argument of a function call, its elements will be treated as additional positional arguments. Similarly, a map followed by <code>...</code> will be treated as additional keyword arguments. You can even pass both at once!</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-variable">$widths</span>: <span class="hljs-number">50px</span>, <span class="hljs-number">30px</span>, <span class="hljs-number">100px</span>;<br><span class="hljs-selector-class">.micro</span> &#123;<br>  <span class="hljs-attribute">width</span>: min(<span class="hljs-variable">$widths</span>...);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>CSS OUTPUT</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.micro</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">30px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>Because an <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/lists#argument-lists">argument list</a> keeps track of both positional and keyword arguments, you use it to pass both at once to another function. That makes it super easy to define an alias for a function!</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@function</span> fg(<span class="hljs-variable">$args</span>...) &#123;<br>  <span class="hljs-keyword">@warn</span> <span class="hljs-string">&quot;The fg() function is deprecated. Call foreground() instead.&quot;</span>;<br>  <span class="hljs-keyword">@return</span> foreground(<span class="hljs-variable">$args</span>...);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="return">@return</h2>
+<p>The <code>@return</code> at-rule indicates the value to use as the result of calling a function. It’s only allowed within a <code>@function</code>body, and each <code>@function</code> must end with a <code>@return</code>.</p>
+<p>When a <code>@return</code> is encountered, it immediately ends the function and returns its result. Returning early can be useful for handling edge-cases or cases where a more efficient algorithm is available without wrapping the entire function in an <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/control/if#else"><code>@else</code> block</a>.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;sass:string&quot;</span>;<br><br><span class="hljs-keyword">@function</span> str-insert(<span class="hljs-variable">$string</span>, <span class="hljs-variable">$insert</span>, <span class="hljs-variable">$index</span>) &#123;<br>  <span class="hljs-comment">// Avoid making new strings if we don&#x27;t need to.</span><br>  <span class="hljs-keyword">@if</span> string.length(<span class="hljs-variable">$string</span>) == <span class="hljs-number">0</span> &#123;<br>    <span class="hljs-keyword">@return</span> <span class="hljs-variable">$insert</span>;<br>  &#125;<br><br>  <span class="hljs-variable">$before</span>: string.slice(<span class="hljs-variable">$string</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$index</span>);<br>  <span class="hljs-variable">$after</span>: string.slice(<span class="hljs-variable">$string</span>, <span class="hljs-variable">$index</span>);<br>  <span class="hljs-keyword">@return</span> <span class="hljs-variable">$before</span> + <span class="hljs-variable">$insert</span> + <span class="hljs-variable">$after</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Other-Functions">Other Functions</h2>
+<p>In addition to user-defined function, Sass provides a substantial <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/modules">core library</a> of built-in functions that are always available to use. Sass implementations also make it possible to define <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/js-api#functions">custom functions</a> in the host language. And of course, you can always call <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/function#plain-css-functions">plain CSS functions</a> (even ones with <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/syntax/special-functions">weird syntax</a>).</p>
+<h3 id="Plain-CSS-Functions">Plain CSS Functions</h3>
+<p>Any function call that’s not either a user-defined or <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/modules">built-in</a> function is compiled to a plain CSS function (unless it uses <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/at-rules/function#arguments">Sass argument syntax</a>). The arguments will be compiled to CSS and included as-is in the function call. This ensures that Sass supports all CSS functions without needing to release new versions every time a new one is added.</p>
+<p><strong>SCSS SYNTAX</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-keyword">@debug</span> var(--main-bg-color); <span class="hljs-comment">// var(--main-bg-color)</span><br><br><span class="hljs-variable">$primary</span>: <span class="hljs-number">#f2ece4</span>;<br><span class="hljs-variable">$accent</span>: <span class="hljs-number">#e1d7d2</span>;<br><span class="hljs-keyword">@debug</span> radial-gradient(<span class="hljs-variable">$primary</span>, <span class="hljs-variable">$accent</span>); <span class="hljs-comment">// radial-gradient(#f2ece4, #e1d7d2)</span><br></code></pre></td></tr></table></figure>
+<p><strong>⚠️ Heads up!</strong></p>
+<p>Because any unknown function will be compiled to CSS, it’s easy to miss when you typo a function name. Consider running a <a target="_blank" rel="noopener" href="https://stylelint.io/">CSS linter</a> on your stylesheet’s output to be notified when this happens!</p>
+<p><strong>💡 Fun fact</strong>:</p>
+<p>Some CSS functions, like <code>calc()</code> and <code>element()</code> have unusual syntax. Sass <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/syntax/special-functions">parses these functions specially</a> as <a target="_blank" rel="noopener" href="https://sass-lang.com/documentation/values/strings#unquoted">unquoted strings</a>.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/">Frontend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Frontend/Sass/">Sass</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Frontend/Node.js/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Node.js 基本概念</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Frontend/Sass/Extend&amp;Inheritance/">
+                        <span class="hidden-mobile">Sass Extend&Inheritance</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

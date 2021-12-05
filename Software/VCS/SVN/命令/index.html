@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="SVN 命令 checkout&#x2F;co  用来完整下载版本库中的全部内容  1$ svn checkout svn:&#x2F;&#x2F;ip&#x2F;svn&#x2F;project_repo --username&#x3D;username .&#x2F;  以上命令将产生如下结果:  12345$ svn checkout svn:&#x2F;&#x2F;192.168.0.1&#x2F;helloworld --username&#x3D;user01 .&#x2F;A    helloworl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN 命令">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/VCS/SVN/%E5%91%BD%E4%BB%A4/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="SVN 命令 checkout&#x2F;co  用来完整下载版本库中的全部内容  1$ svn checkout svn:&#x2F;&#x2F;ip&#x2F;svn&#x2F;project_repo --username&#x3D;username .&#x2F;  以上命令将产生如下结果:  12345$ svn checkout svn:&#x2F;&#x2F;192.168.0.1&#x2F;helloworld --username&#x3D;user01 .&#x2F;A    helloworl">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.308Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.308Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>SVN 命令 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SVN 命令">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SVN 命令</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SVN 命令</h1>
+<h2 id="checkout-co">checkout/co</h2>
+<ul>
+<li>用来完整下载版本库中的全部内容</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> svn checkout svn://ip/svn/project_repo --username=username ./</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>以上命令将产生如下结果:</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ svn checkout svn:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">0.1</span><span class="hljs-regexp">/helloworld --username=user01 ./</span><br>A    helloworld/trunk<br>A    helloworld/branches<br>A    helloworld/tags<br>Checked out revision <span class="hljs-number">1</span>.<br></code></pre></td></tr></table></figure>
+<ul>
+<li>检出成功后在当前目录下生成名为helloworld的工作副本</li>
+<li>版本控制相关操作都需要在工作副本目录下执行,例如:提交,更新等等这样的操作</li>
+<li>为了保证工作副本能够正常和服务器进行交互,请不要删除或修改.svn目录中的内容</li>
+</ul>
+<h2 id="status">status</h2>
+<ul>
+<li>查看工作副本的状态</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>svn status<br>?			hello.txt<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果状态为 <code>?</code> ,则说明它还未加到版本控制中</li>
+<li>如果状态为<code>A</code>,则说明它已经加到版本控制中</li>
+</ul>
+<h2 id="add">add</h2>
+<ul>
+<li>添加文件到版本库</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ svn <span class="hljs-builtin-name">add</span> hello.txt<br></code></pre></td></tr></table></figure>
+<ul>
+<li>此时 <code>hello.txt</code> 的状态为 <code>A</code>,意味着这个文件已经被成功地添加到了版本控制中</li>
+</ul>
+<h2 id="commit-ci">commit/ci</h2>
+<ul>
+<li>提交修改到版本库中</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>svn commit -m <span class="hljs-string">&quot;message&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>commit -m</code>:注释信息,如果你忽略了<code>-m</code>选项,SVN会打开一个可以输入多行的文本编辑器来让你输入提交信息</li>
+</ul>
+<h2 id="log">log</h2>
+<ul>
+<li>用来展示svn版本的版本作者,日期,路径等信息</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> svn <span class="hljs-built_in">log</span><br><span class="hljs-symbol">$</span> svn <span class="hljs-built_in">log</span> -r 开始版本号:结束版本号<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>-r</code>:如果只希望查看特定的某两个版本之间的信息,可以携带 <code>-r 开始版本:结束版本</code> 参数</li>
+</ul>
+<h2 id="list">list</h2>
+<ul>
+<li>在不下载文件到本地目录的情况下来查看版本库中的文件:</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ svn list http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">0.1</span>/helloworld<br>README<br>branches/<br>clients/<br>tags/<br></code></pre></td></tr></table></figure>
+<h2 id="cat">cat</h2>
+<ul>
+<li>显示在该版本号下的该文件内容</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> svn <span class="hljs-built_in">cat</span> <span class="hljs-literal">-r</span> 版本号 rule.txt<br></code></pre></td></tr></table></figure>
+<h2 id="diff">diff</h2>
+<ul>
+<li>用来检查历史修改的详情</li>
+</ul>
+<p><strong>检查本地修改</strong></p>
+<ul>
+<li>如果用 svn diff,不带任何参数,它将会比较你的工作文件与缓存在<code>.svn</code>的原始拷贝</li>
+</ul>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs diff">$ svn diff<br><span class="hljs-comment">Index: rules.txt</span><br><span class="hljs-comment">===================================================================</span><br><span class="hljs-comment">--- rules.txt (revision 3)</span><br><span class="hljs-comment">+++ rules.txt (working copy)</span><br><span class="hljs-meta">@@ -1,4 +1,5 @@</span><br>Be kind to others<br>Freedom = Responsibility<br>Everything in moderation<br><span class="hljs-deletion">-Chew with your mouth open</span><br></code></pre></td></tr></table></figure>
+<p><strong>比较工作拷贝和版本库</strong></p>
+<ul>
+<li>比较你的工作拷贝和版本库中版本号为 3 的文件 rule.txt</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> svn <span class="hljs-built_in">diff</span> <span class="hljs-literal">-r</span> <span class="hljs-number">3</span> rule.txt<br></code></pre></td></tr></table></figure>
+<p><strong>比较版本库与版本库</strong></p>
+<ul>
+<li>通过 -r(revision) 传递两个通过冒号分开的版本号,这两个版本会进行比较</li>
+<li>比较 svn 工作版本中版本号2和3的这个文件的变化</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> svn <span class="hljs-built_in">diff</span> <span class="hljs-literal">-r</span> <span class="hljs-number">2</span>:<span class="hljs-number">3</span> rule.txt<br></code></pre></td></tr></table></figure>
+<h2 id="update-up">update/up</h2>
+<ul>
+<li>把服务器端文件所产生的所有修改下载到本地</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>svn up<br></code></pre></td></tr></table></figure>
+<h2 id="revert">revert</h2>
+<ul>
+<li>撤销任何文件或目录里的局部更改</li>
+</ul>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs coq">$ svn <span class="hljs-built_in">revert</span> 文件名<br>$ svn <span class="hljs-built_in">revert</span> -R 目录名<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<ul>
+<li>对文件 readme 进行修改,查看文件状态</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>svn status<br>M       readme<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这时发现修改错误,要撤销修改,通过revert回归到未修改状态</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>svn revert readme<br>Reverted <span class="hljs-string">&#x27;readme&#x27;</span><br></code></pre></td></tr></table></figure>
+<h2 id="merge">merge</h2>
+<ul>
+<li>对于已经提交的修改,我们需要使用 <code>merge</code> 命令撤销旧版本里的所有更改然后提交一个新版本,同时需要携带 <code>-r</code> 参数</li>
+</ul>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">$ svn <span class="hljs-keyword">merge</span> -<span class="hljs-keyword">r</span> 最新版本号:目标版本号 目录名或文件名<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<ul>
+<li>首先,找到仓库的当前版本,现在是版本 22,我们要撤销回之前的版本,比如版本 21</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">svn</span> merge -r <span class="hljs-number">22</span>:<span class="hljs-number">21</span> readme<br></code></pre></td></tr></table></figure>
+<h2 id="copy">copy</h2>
+<ul>
+<li>拷贝工作副本的一个文件或目录到版本库</li>
+</ul>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">svn <span class="hljs-keyword">copy</span> SRC DST<br></code></pre></td></tr></table></figure>
+<ul>
+<li>拷贝工作拷贝的一个文件或目录到版本库,<code>SRC</code>和<code>DST</code>既可以是工作拷贝(WC)路径也可以是URL:
+<ul>
+<li>WC -&gt; WC:拷贝并且预定一个添加的项目(包含历史)</li>
+<li>WC -&gt; URL:将WC或URL的拷贝立即提交</li>
+<li>URL -&gt; WC:检出URL到WC,并且加入到添加计划</li>
+<li>URL -&gt; URL:完全的服务器端拷贝,通常用在分支和标签</li>
+</ul>
+</li>
+<li><strong>注意</strong>:你只可以在单个版本库中拷贝文件,Subversion还不支持跨版本库的拷贝</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/VCS/">VCS</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/VCS/SVN/">SVN</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/VCS/SVN/%E7%AE%80%E4%BB%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SVN 简介</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/restore/">
+                        <span class="hidden-mobile">Git restore</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

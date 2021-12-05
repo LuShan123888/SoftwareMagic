@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Redis 底层数据结构 动态字符串SDS  SDS是simple dynamic string的缩写。redis中所有场景中出现的字符串，基本都是由SDS来实现的  所有非数字的key。例如set msg &quot;hello world&quot; 中的key msg 字符串数据类型的值。例如&#96;&#96; set msg “hello world”中的msg的值”hello wolrd” 非字符串数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 底层数据结构">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Redis 底层数据结构 动态字符串SDS  SDS是simple dynamic string的缩写。redis中所有场景中出现的字符串，基本都是由SDS来实现的  所有非数字的key。例如set msg &quot;hello world&quot; 中的key msg 字符串数据类型的值。例如&#96;&#96; set msg “hello world”中的msg的值”hello wolrd” 非字符串数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925213747383.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925213926408.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925215827279.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925215918462.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925222303238.png">
+<meta property="og:image" content="https://softwaremagic.lushan.tk/Library/Application%20Support/typora-user-images/image-20210925222728048.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-object_ptr.png">
+<meta property="article:published_time" content="2021-12-02T09:54:29.243Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.243Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925213747383.png">
+  
+  <title>Redis 底层数据结构 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis 底层数据结构">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis 底层数据结构</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Redis 底层数据结构</h1>
+<h2 id="动态字符串SDS">动态字符串SDS</h2>
+<ul>
+<li>SDS是<strong>simple dynamic string</strong>的缩写。redis中所有场景中出现的字符串，基本都是由SDS来实现的
+<ul>
+<li>所有非数字的key。例如<code>set msg &quot;hello world&quot;</code> 中的key msg</li>
+<li>字符串数据类型的值。例如`` set msg “hello world”中的msg的值”hello wolrd”</li>
+<li>非字符串数据类型中的“字符串值”。例如<code>RPUSH fruits &quot;apple&quot; &quot;banana&quot; &quot;cherry&quot;</code>中的”apple” “banana” “cherry”</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925213747383.png" srcset="/img/loading.gif" lazyload alt="image-20210925213747383" style="zoom:50%;" />
+<ul>
+<li><strong>数据结构</strong>
+<ul>
+<li><strong>free</strong>:还剩多少空间</li>
+<li><strong>len</strong>:字符串长度</li>
+<li><strong>buf</strong>:存放的字符数组</li>
+</ul>
+</li>
+<li><strong>空间预分配</strong>：为减少修改字符串带来的内存重分配次数，sds采用了<strong>一次管够</strong>的策略
+<ul>
+<li>若修改之后sds长度小于1MB,则多分配现有len长度的空间</li>
+<li>若修改之后sds长度大于等于1MB，则扩充除了满足修改之后的长度外，额外多1MB空间</li>
+</ul>
+</li>
+<li><strong>惰性空间释放</strong>：为避免缩短字符串时候的内存重分配操作，sds在数据减少时，并不立刻释放空间。</li>
+</ul>
+<h2 id="int">int</h2>
+<ul>
+<li>redis中存放的各种数字的数据类型，包括故意加引号的数字</li>
+</ul>
+<h2 id="双向链表">双向链表</h2>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925213926408.png" srcset="/img/loading.gif" lazyload alt="image-20210925213926408" style="zoom:50%;" />
+<ul>
+<li>每个节点<code>listNode</code>可以通过<code>prev</code>和<code>next</code>指针分布指向前一个节点和后一个节点组成双端链表，同时每个链表还会有一个<code>list</code>结构为链表提供表头指针<code>head</code>、表尾指针<code>tail</code>、以及链表长度计数器<code>len</code>，还有三个用于实现多态链表的类型特定函数
+<ul>
+<li><code>dup</code>：用于复制链表节点所保存的值</li>
+<li><code>free</code>：用于释放链表节点所保存的值</li>
+<li><code>match</code>：用于对比链表节点所保存的值和另一个输入值是否相等</li>
+</ul>
+</li>
+</ul>
+<h2 id="压缩列表ziplist">压缩列表ziplist</h2>
+<ul>
+<li>redis的列表键和哈希键的底层实现之一。此数据结构是为了节约内存而开发的。和各种语言的数组类似，它是由连续的内存块组成的，这样一来，由于内存是连续的，就减少了很多内存碎片和指针的内存占用，进而节约了内存。
+<ul>
+<li><code>zlbytes</code>：记录整个压缩列表占用的内存字节数，在压缩列表内存重分配，或者计算<code>zlend</code>的位置时使用</li>
+<li><code>zltail</code>：记录压缩列表表尾节点距离压缩列表的起始地址有多少字节，通过该偏移量，可以不用遍历整个压缩列表就可以确定表尾节点的地址</li>
+<li><code>zllen</code>：记录压缩列表包含的节点数量，但该属性值小于UINT16_MAX（65535）时，该值就是压缩列表的节点数量，否则需要遍历整个压缩列表才能计算出真实的节点数量</li>
+<li><code>entryX</code>：压缩列表的节点</li>
+<li><code>zlend</code>：特殊值0xFF（十进制255），用于标记压缩列表的末端</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925215827279.png" srcset="/img/loading.gif" lazyload alt="image-20210925215827279" style="zoom:50%;" />
+<ul>
+<li>每个压缩列表节点可以保存一个字节数字或者一个整数值，结构如下
+<ul>
+<li><code>previous_entry_length</code>：记录压缩列表前一个字节的长度</li>
+<li><code>encoding</code>：节点的encoding保存的是节点的content的内容类型</li>
+<li><code>content</code>：content区域用于保存节点的内容，节点内容类型和长度由encoding决定</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925215918462.png" srcset="/img/loading.gif" lazyload alt="image-20210925215918462" style="zoom:50%;" />
+<ul>
+<li><strong>元素的遍历</strong>
+<ol>
+<li>先找到列表尾部元素</li>
+<li>然后再根据ziplist节点元素中的<code>previous_entry_length</code>属性，来逐个遍历</li>
+</ol>
+</li>
+<li><strong>连锁更新</strong>
+<ul>
+<li><code>entry</code>元素的结构，有一个<code>previous_entry_length</code>字段，它的长度要么都是1个字节，要么都是5个字节
+<ul>
+<li>前一节点的长度小于254字节，则<code>previous_entry_length</code>长度为1字节</li>
+<li>前一节点的长度大于254字节，则<code>previous_entry_length</code>长度为5字节</li>
+</ul>
+</li>
+<li>假设现在存在一组压缩列表，长度都在250字节至253字节之间，突然新增一新节点<code>new</code>长度大于等于254字节，会从后往前将原有的所有entry的长度都变长，程序需要不断的对压缩列表进行空间重分配工作，直到结束。</li>
+<li>除了增加操作，删除操作也有可能带来“连锁更新”。</li>
+</ul>
+</li>
+</ul>
+<h2 id="intset">intset</h2>
+<ul>
+<li>整数集合（intset）是Redis用于保存整数值的集合抽象数据结构，可以保存类型为int16_t、int32_t、int64_t的整数值，并且保证集合中不会出现重复元素</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-image-20210925222303238.png" srcset="/img/loading.gif" lazyload alt="image-20210925222303238" style="zoom:50%;" />
+<h2 id="跳表">跳表</h2>
+<ul>
+<li>跳跃表其实可以把它理解为<strong>多层的链表</strong>，它有如下的性质：
+<ul>
+<li><strong>多层</strong>的结构组成，每层是一个<strong>有序的链表</strong></li>
+<li>最底层（level 1）的链表包含所有的元素</li>
+<li>跳跃表的查找次数近似于层数，时间复杂度为O(logn)，插入、删除也为 O(logn)</li>
+<li>跳跃表是一种随机化的数据结构，跳跃表维持结构平衡的成本是比较低的，完全是依靠随机，相比二叉查找树，在多次插入删除后，需要Rebalance来重新调整结构平衡</li>
+</ul>
+</li>
+<li><strong>上浮元素</strong>：每隔随机元素，把它放到上一层的链表当中，组成多层链表结构</li>
+</ul>
+<img src="../../../../../../../Library/Application%20Support/typora-user-images/image-20210925222728048.png" srcset="/img/loading.gif" lazyload alt="image-20210925222728048" style="zoom:50%;" />
+<ul>
+<li><strong>查找元素</strong>：从上层开始查找，大数向右找到头，小数向左找到头，例如我要查找<code>17</code>，查询的顺序是：13 -&gt; 46  -&gt; 22 -&gt; 17；如果是查找<code>35</code>，则是 13 -&gt; 46 -&gt; 22 -&gt; 46 -&gt; 35；如果是<code>54</code>，则是 13 -&gt; 46 -&gt; 54</li>
+<li><strong>添加元素</strong>：是通过抛硬币的方式来决定该元素会出现到多少层，也就是说它会有 1/2的概率出现第二层、1/4 的概率出现在第三层，以此类推
+<ul>
+<li>假设我们已经有了上述例子的一个跳跃表了，现在往里面添加一个元素<code>18</code>，通过抛硬币的方式来决定它会出现的层数，是正面就继续，反面就停止，假如我抛了2次硬币，第一次为正面，第二次为反面</li>
+</ul>
+</li>
+<li><strong>删除元素</strong>：跳跃表的删除很简单，只要先找到要删除的节点，然后顺藤摸瓜删除每一层相同的节点就好了</li>
+</ul>
+<h2 id="Redis五种数据结构的实现">Redis五种数据结构的实现</h2>
+<h3 id="Redis对象">Redis对象</h3>
+<ul>
+<li>Redis中并没有直接使用以上所说的各种数据结构来实现键值数据库，而是基于一种对象，对象底层再间接的引用上文所说的具体的数据结构</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-09-25-object_ptr.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 67%;" />
+<h3 id="字符串">字符串</h3>
+<ul>
+<li><strong>int</strong>：数字的时候</li>
+<li><strong>raw</strong>：长字符串（长度大于39个字节）</li>
+<li><strong>embstr</strong>：短字符串（长度小于39个字节）</li>
+<li><strong>注意</strong>：embstr和raw都是由SDS动态字符串构成的。唯一区别是：raw 是分配内存的时候，RedisObject 和 SDS 各分配一块内存，而embstr是 RedisObject 和 SDS 在同一块内存中</li>
+</ul>
+<h3 id="list">list</h3>
+<ul>
+<li><strong>ziplist</strong>：列表对象所有字符串元素长度都小于64个字节且元素数量小于512</li>
+<li><strong>双向链表</strong>：不满足ziplist条件的其他情况</li>
+</ul>
+<h3 id="hash">hash</h3>
+<ul>
+<li><strong>ziplist</strong>：元素数量小于512且所有元素长度小于64字节</li>
+<li><strong>哈希表</strong>：不满足ziplist条件的其他情况</li>
+</ul>
+<h3 id="set">set</h3>
+<ul>
+<li><strong>inset</strong>：所有元素都是整数且元素数量小于512</li>
+<li><strong>哈希表</strong>：不满足inset条件的的其他情况</li>
+</ul>
+<h3 id="zset">zset</h3>
+<ul>
+<li><strong>ziplist</strong>：元素数量小于128且所有元素长度小于64</li>
+<li><strong>跳表</strong>：不满足ziplist条件的其他情况</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Redis/">Redis</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Backend/Database/Redis/%E8%AE%A4%E8%AF%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis 认证</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/GEO/">
+                        <span class="hidden-mobile">Redis GEO</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

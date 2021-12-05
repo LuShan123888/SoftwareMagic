@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Elasticsearch Java High Level REST Client 初始化 1234RestHighLevelClient restHighLevelClient &#x3D; new RestHighLevelClient(    RestClient.builder(        new HttpHost(&quot;localhost&quot;, 9200, &quot;http&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch Java High Level REST Client">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Distributed/ElasticSearch/JavaHighLevelRESTClient/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Elasticsearch Java High Level REST Client 初始化 1234RestHighLevelClient restHighLevelClient &#x3D; new RestHighLevelClient(    RestClient.builder(        new HttpHost(&quot;localhost&quot;, 9200, &quot;http&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.249Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.249Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Elasticsearch Java High Level REST Client - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Elasticsearch Java High Level REST Client">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Elasticsearch Java High Level REST Client</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Elasticsearch Java High Level REST Client</h1>
+<h2 id="初始化">初始化</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">RestHighLevelClient restHighLevelClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>    RestClient.builder(<br>        <span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>),<br>        <span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9201</span>, <span class="hljs-string">&quot;http&quot;</span>)));<br></code></pre></td></tr></table></figure>
+<h2 id="关闭连接">关闭连接</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">restHighLevelClient.close();<br></code></pre></td></tr></table></figure>
+<h2 id="索引API">索引API</h2>
+<h3 id="创建索引">创建索引</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建索引请求</span><br>CreateIndexRequest request = <span class="hljs-keyword">new</span> CreateIndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>);<br><span class="hljs-comment">// 客服端执行请求IndicesClient,请求后返回响应</span><br>CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<h3 id="判断索引是否存在">判断索引是否存在</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">GetIndexRequest request = <span class="hljs-keyword">new</span> GetIndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>);<br><span class="hljs-keyword">boolean</span> response = restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<h3 id="查询索引">查询索引</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">GetIndexRequest request = <span class="hljs-keyword">new</span> GetIndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>);<br>GetIndexResponse response = restHighLevelClient.indices().get(request, RequestOptions.DEFAULT);<br></code></pre></td></tr></table></figure>
+<h3 id="删除索引">删除索引</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">DeleteIndexRequest request = <span class="hljs-keyword">new</span> DeleteIndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>);<br>AcknowledgedResponse response = restHighLevelClient.indices().delete(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<h2 id="文档API">文档API</h2>
+<h3 id="创建文档">创建文档</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建请求</span><br>IndexRequest request= <span class="hljs-keyword">new</span> IndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>);<br><span class="hljs-comment">// 配置请求</span><br>request.id(<span class="hljs-string">&quot;1&quot;</span>);<br>request.timeout(TimeValue.timeValueSeconds(<span class="hljs-number">1</span>));<br>request.source(JSON.toJSONString(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;user1&quot;</span>, <span class="hljs-number">20</span>)), XContentType.JSON);<br><span class="hljs-comment">// 发送请求,获取响应的结果</span><br>IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;CREATED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="判断文档是否存在">判断文档是否存在</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">GetRequest request= <span class="hljs-keyword">new</span> GetRequest(<span class="hljs-string">&quot;test_index&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);<br><span class="hljs-keyword">boolean</span> response = restHighLevelClient.exists(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<h3 id="查询文档">查询文档</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">GetRequest request= <span class="hljs-keyword">new</span> GetRequest(<span class="hljs-string">&quot;test_index&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);<br>GetResponse response = restHighLevelClient.get(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;exists&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;fields&quot;</span>:&#123;&#125;,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;source&quot;</span>:&#123;<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;user1&quot;</span>,<span class="hljs-attr">&quot;age&quot;</span>:<span class="hljs-number">20</span>&#125;,<span class="hljs-attr">&quot;sourceAsBytes&quot;</span>:<span class="hljs-string">&quot;eyJhZ2UiOjIwLCJuYW1lIjoidXNlcjEifQ==&quot;</span>,<span class="hljs-attr">&quot;sourceAsBytesRef&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>&#125;,<span class="hljs-attr">&quot;sourceAsMap&quot;</span>:&#123;<span class="hljs-attr">&quot;$ref&quot;</span>:<span class="hljs-string">&quot;$.source&quot;</span>&#125;,<span class="hljs-attr">&quot;sourceAsString&quot;</span>:<span class="hljs-string">&quot;&#123;\&quot;age\&quot;:20,\&quot;name\&quot;:\&quot;user1\&quot;&#125;&quot;</span>,<span class="hljs-attr">&quot;sourceEmpty&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;sourceInternal&quot;</span>:&#123;<span class="hljs-attr">&quot;$ref&quot;</span>:<span class="hljs-string">&quot;$.sourceAsBytesRef&quot;</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="更新文档">更新文档</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">UpdateRequest request= <span class="hljs-keyword">new</span> UpdateRequest(<span class="hljs-string">&quot;test_index&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);<br>request.doc(JSON.toJSONString(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;Test&quot;</span>, <span class="hljs-number">30</span>)), XContentType.JSON);<br>UpdateResponse  response= restHighLevelClient.update(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;UPDATED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">2</span>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="删除文档">删除文档</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">DeleteRequest request= <span class="hljs-keyword">new</span> DeleteRequest(<span class="hljs-string">&quot;test_index&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);<br>DeleteResponse response= restHighLevelClient.delete(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;DELETED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">3</span>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="批量操作文档">批量操作文档</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java">BulkRequest request= <span class="hljs-keyword">new</span> BulkRequest();<br>       request.timeout(<span class="hljs-string">&quot;10s&quot;</span>);<br>       ArrayList&lt;User&gt; userList= <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>       userList.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test1&quot;</span>, <span class="hljs-number">20</span>));<br>       userList.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test2&quot;</span>, <span class="hljs-number">21</span>));<br>       userList.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;test3&quot;</span>, <span class="hljs-number">22</span>));<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; userList.size(); i++) &#123;<br>           <span class="hljs-comment">// 批量添加请求</span><br>           request.add(<span class="hljs-keyword">new</span> IndexRequest(<span class="hljs-string">&quot;test_index&quot;</span>)<br>                   .id(<span class="hljs-string">&quot;&quot;</span> + (i + <span class="hljs-number">1</span>))<br>                   .source(JSON.toJSONString(userList.get(i)), XContentType.JSON)<br>           );<br>       &#125;<br>       BulkResponse response= restHighLevelClient.bulk(request, RequestOptions.DEFAULT);<br>       System.out.println(JSON.toJSONString(response));<br>   &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;ingestTook&quot;</span>:&#123;<span class="hljs-attr">&quot;days&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;daysFrac&quot;</span>:<span class="hljs-number">-1.1574074074074074E-8</span>,<span class="hljs-attr">&quot;hours&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;hoursFrac&quot;</span>:<span class="hljs-number">-2.7777777777777776E-7</span>,<span class="hljs-attr">&quot;micros&quot;</span>:<span class="hljs-number">-1000</span>,<span class="hljs-attr">&quot;microsFrac&quot;</span>:<span class="hljs-number">-1000.0</span>,<span class="hljs-attr">&quot;millis&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;millisFrac&quot;</span>:<span class="hljs-number">-1.0</span>,<span class="hljs-attr">&quot;minutes&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;minutesFrac&quot;</span>:<span class="hljs-number">-1.6666666666666667E-5</span>,<span class="hljs-attr">&quot;nanos&quot;</span>:<span class="hljs-number">-1000000</span>,<span class="hljs-attr">&quot;seconds&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;secondsFrac&quot;</span>:<span class="hljs-number">-0.001</span>,<span class="hljs-attr">&quot;stringRep&quot;</span>:<span class="hljs-string">&quot;-1&quot;</span>&#125;,<span class="hljs-attr">&quot;ingestTookInMillis&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;items&quot;</span>:[&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;itemId&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;opType&quot;</span>:<span class="hljs-string">&quot;INDEX&quot;</span>,<span class="hljs-attr">&quot;response&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;CREATED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">3</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;2&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;itemId&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;opType&quot;</span>:<span class="hljs-string">&quot;INDEX&quot;</span>,<span class="hljs-attr">&quot;response&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;2&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;CREATED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">4</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;,&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;3&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;itemId&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-attr">&quot;opType&quot;</span>:<span class="hljs-string">&quot;INDEX&quot;</span>,<span class="hljs-attr">&quot;response&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;3&quot;</span>,<span class="hljs-attr">&quot;index&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;result&quot;</span>:<span class="hljs-string">&quot;CREATED&quot;</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">5</span>,<span class="hljs-attr">&quot;shardId&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-number">-1</span>,<span class="hljs-attr">&quot;index&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>,<span class="hljs-attr">&quot;uUID&quot;</span>:<span class="hljs-string">&quot;_na_&quot;</span>&#125;,<span class="hljs-attr">&quot;indexName&quot;</span>:<span class="hljs-string">&quot;test_index&quot;</span>&#125;,<span class="hljs-attr">&quot;shardInfo&quot;</span>:&#123;<span class="hljs-attr">&quot;failed&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;failures&quot;</span>:[],<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">2</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">1</span>&#125;],<span class="hljs-attr">&quot;took&quot;</span>:&#123;<span class="hljs-attr">&quot;days&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;daysFrac&quot;</span>:<span class="hljs-number">1.7476851851851853E-6</span>,<span class="hljs-attr">&quot;hours&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;hoursFrac&quot;</span>:<span class="hljs-number">4.194444444444445E-5</span>,<span class="hljs-attr">&quot;micros&quot;</span>:<span class="hljs-number">151000</span>,<span class="hljs-attr">&quot;microsFrac&quot;</span>:<span class="hljs-number">151000.0</span>,<span class="hljs-attr">&quot;millis&quot;</span>:<span class="hljs-number">151</span>,<span class="hljs-attr">&quot;millisFrac&quot;</span>:<span class="hljs-number">151.0</span>,<span class="hljs-attr">&quot;minutes&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;minutesFrac&quot;</span>:<span class="hljs-number">0.0025166666666666666</span>,<span class="hljs-attr">&quot;nanos&quot;</span>:<span class="hljs-number">151000000</span>,<span class="hljs-attr">&quot;seconds&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;secondsFrac&quot;</span>:<span class="hljs-number">0.151</span>,<span class="hljs-attr">&quot;stringRep&quot;</span>:<span class="hljs-string">&quot;151ms&quot;</span>&#125;&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="搜索API">搜索API</h2>
+<h3 id="match">match</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建查询请求</span><br>SearchRequest request = <span class="hljs-keyword">new</span> SearchRequest();<br><span class="hljs-comment">// 构建查询条件</span><br>MatchQueryBuilder query = QueryBuilders.matchQuery(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;test1&quot;</span>);<br>SearchSourceBuilder searchSourceBuilder = <span class="hljs-keyword">new</span> SearchSourceBuilder();<br>searchSourceBuilder.from(<span class="hljs-number">0</span>);<br>searchSourceBuilder.size(<span class="hljs-number">2</span>);<br>searchSourceBuilder.query(query);<br>request.source(searchSourceBuilder);<br><span class="hljs-comment">// 执行查询</span><br>SearchResponse response= restHighLevelClient.search(request, RequestOptions.DEFAULT);<br>System.out.println(JSON.toJSONString(response));<br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<span class="hljs-attr">&quot;clusters&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;skipped&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;successful&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;total&quot;</span>:<span class="hljs-number">0</span>&#125;,<span class="hljs-attr">&quot;failedShards&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;hits&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;hits&quot;</span>:[&#123;<span class="hljs-attr">&quot;fields&quot;</span>:&#123;&#125;,<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;highlightFields&quot;</span>:&#123;<span class="hljs-attr">&quot;$ref&quot;</span>:<span class="hljs-string">&quot;$.hits.hits[0].fields&quot;</span>&#125;,<span class="hljs-attr">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<span class="hljs-attr">&quot;matchedQueries&quot;</span>:[],<span class="hljs-attr">&quot;primaryTerm&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;rawSortValues&quot;</span>:[],<span class="hljs-attr">&quot;score&quot;</span>:<span class="hljs-number">0.9808291</span>,<span class="hljs-attr">&quot;seqNo&quot;</span>:<span class="hljs-number">-2</span>,<span class="hljs-attr">&quot;sortValues&quot;</span>:[],<span class="hljs-attr">&quot;sourceAsMap&quot;</span>:&#123;<span class="hljs-attr">&quot;name&quot;</span>:<span class="hljs-string">&quot;test1&quot;</span>,<span class="hljs-attr">&quot;age&quot;</span>:<span class="hljs-number">20</span>&#125;,<span class="hljs-attr">&quot;sourceAsString&quot;</span>:<span class="hljs-string">&quot;&#123;\&quot;age\&quot;:20,\&quot;name\&quot;:\&quot;test1\&quot;&#125;&quot;</span>,<span class="hljs-attr">&quot;sourceRef&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>&#125;,<span class="hljs-attr">&quot;type&quot;</span>:<span class="hljs-string">&quot;_doc&quot;</span>,<span class="hljs-attr">&quot;version&quot;</span>:<span class="hljs-number">-1</span>&#125;],<span class="hljs-attr">&quot;maxScore&quot;</span>:<span class="hljs-number">0.9808291</span>,<span class="hljs-attr">&quot;totalHits&quot;</span>:&#123;<span class="hljs-attr">&quot;relation&quot;</span>:<span class="hljs-string">&quot;EQUAL_TO&quot;</span>,<span class="hljs-attr">&quot;value&quot;</span>:<span class="hljs-number">1</span>&#125;&#125;,<span class="hljs-attr">&quot;internalResponse&quot;</span>:&#123;<span class="hljs-attr">&quot;fragment&quot;</span>:<span class="hljs-literal">true</span>,<span class="hljs-attr">&quot;numReducePhases&quot;</span>:<span class="hljs-number">1</span>&#125;,<span class="hljs-attr">&quot;numReducePhases&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">&quot;profileResults&quot;</span>:&#123;<span class="hljs-attr">&quot;$ref&quot;</span>:<span class="hljs-string">&quot;$.hits.hits[0].fields&quot;</span>&#125;,<span class="hljs-attr">&quot;shardFailures&quot;</span>:[],<span class="hljs-attr">&quot;skippedShards&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;successfulShards&quot;</span>:<span class="hljs-number">2</span>,<span class="hljs-attr">&quot;timedOut&quot;</span>:<span class="hljs-literal">false</span>,<span class="hljs-attr">&quot;took&quot;</span>:&#123;<span class="hljs-attr">&quot;days&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;daysFrac&quot;</span>:<span class="hljs-number">6.458333333333333E-6</span>,<span class="hljs-attr">&quot;hours&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;hoursFrac&quot;</span>:<span class="hljs-number">1.55E-4</span>,<span class="hljs-attr">&quot;micros&quot;</span>:<span class="hljs-number">558000</span>,<span class="hljs-attr">&quot;microsFrac&quot;</span>:<span class="hljs-number">558000.0</span>,<span class="hljs-attr">&quot;millis&quot;</span>:<span class="hljs-number">558</span>,<span class="hljs-attr">&quot;millisFrac&quot;</span>:<span class="hljs-number">558.0</span>,<span class="hljs-attr">&quot;minutes&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;minutesFrac&quot;</span>:<span class="hljs-number">0.0093</span>,<span class="hljs-attr">&quot;nanos&quot;</span>:<span class="hljs-number">558000000</span>,<span class="hljs-attr">&quot;seconds&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">&quot;secondsFrac&quot;</span>:<span class="hljs-number">0.558</span>,<span class="hljs-attr">&quot;stringRep&quot;</span>:<span class="hljs-string">&quot;558ms&quot;</span>&#125;,<span class="hljs-attr">&quot;totalShards&quot;</span>:<span class="hljs-number">2</span>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Distributed/">Distributed</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Backend/Distributed/ElasticSearch/Kibana/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Elasticsearch 整合Kibana</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Distributed/ElasticSearch/SpringBoot/">
+                        <span class="hidden-mobile">Elasticsearch 整合Spring Boot</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

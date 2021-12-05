@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行  ACID原则  原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样 一致性(Consist):一个事务可以封装状态改变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 事务">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行  ACID原则  原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样 一致性(Consist):一个事务可以封装状态改变">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.246Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.247Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>SQL 事务 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 事务">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 事务</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>SQL 事务</h1>
+<ul>
+<li>事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行</li>
+</ul>
+<h2 id="ACID原则">ACID原则</h2>
+<ul>
+<li><strong>原子性(Atomic)</strong>:整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样</li>
+<li><strong>一致性(Consist)</strong>:一个事务可以封装状态改变(除非它是一个只读的),事务必须始终保持系统处于一致的状态,不管在任何给定的时间并发事务有多少,也就是说:如果事务是并发多个,系统也必须如同串行事务一样操作</li>
+<li><strong>隔离性(Isolated)</strong>:隔离状态执行事务,使它们好像是系统在给定时间内执行的唯一操作,如果有两个事务,运行在相同的时间内,执行相同的功能,事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统,这种属性有时称为串行化,为了防止事务操作间的混淆,必须串行化或序列化请求,使得在同一时间仅有一个请求用于同一数据</li>
+<li><strong>持久性(Durable)</strong>:在事务完成以后,该事务对数据库所作的更改便持久的保存在数据库之中,并不会被回滚</li>
+</ul>
+<h2 id="并发下的问题">并发下的问题</h2>
+<ul>
+<li>只有存在并发数据访问时才需要事务,当多个事务访问同一数据时,可能会存在5类问题,包括3类数据读取问题(脏读,不可重复读和幻读)和2类数据更新问题(第1类丢失更新和第2类丢失更新)</li>
+</ul>
+<p><strong>脏读(Dirty Read)</strong></p>
+<ul>
+<li>A事务读取B事务尚未提交的数据并在此基础上操作,而B事务执行回滚,那么A读取到的数据就是脏数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>转账事务A</th>
+<th>取款事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>取出500元余额修改为500元</td>
+</tr>
+<tr>
+<td>T5</td>
+<td>查询账户余额为500元(脏读)</td>
+<td></td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>撤销事务余额恢复为1000元</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>汇入100元把余额修改为600元</td>
+<td></td>
+</tr>
+<tr>
+<td>T8</td>
+<td>提交事务</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>不可重复读(Unrepeatable Read)</strong></p>
+<ul>
+<li>事务A重新读取前面读取过的数据,发现该数据已经被另一个已提交的事务B修改过了</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>转账事务A</th>
+<th>取款事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>查询账户余额为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>取出100元修改余额为900元</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>查询账户余额为900元(不可重复读)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>幻读(Phantom Read)</strong></p>
+<ul>
+<li>事务A重新执行一个查询,返回一系列符合查询条件的行,发现其中插入了被事务B提交的行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>统计金额事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td>统计总存款为10000元</td>
+<td></td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>新增一个存款账户存入100元</td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>T6</td>
+<td>再次统计总存款为10100元(幻读)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第1类丢失更新</strong></p>
+<ul>
+<li>事务A撤销时,把已经提交的事务B的更新数据覆盖了</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>取款事务A</th>
+<th>转账事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>查询账户余额为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>汇入100元修改余额为1100元</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>取出100元将余额修改为900元</td>
+<td></td>
+</tr>
+<tr>
+<td>T8</td>
+<td>撤销事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T9</td>
+<td>余额恢复为1000元(丢失更新)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第2类丢失更新</strong></p>
+<ul>
+<li>事务A覆盖事务B已经提交的数据,造成事务B所做的操作丢失</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>转账事务A</th>
+<th>取款事务B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td></td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>开始事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>查询账户余额为1000元</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>查询账户余额为1000元</td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>取出100元将余额修改为900元</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>T7</td>
+<td>汇入100元将余额修改为1100元</td>
+<td></td>
+</tr>
+<tr>
+<td>T8</td>
+<td>提交事务</td>
+<td></td>
+</tr>
+<tr>
+<td>T9</td>
+<td>查询账户余额为1100元(丢失更新)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="事务隔离级别">事务隔离级别</h2>
+<ul>
+<li>数据库为了维护事务的隔离性,数据库通常会通过锁机制来解决数据并发访问问题,直接使用锁是非常麻烦的,为此数据库为用户提供了自动锁机制,只要用户指定会话的事务隔离级别,数据库就会通过分析SQL语句然后为事务访问的资源加上合适的锁</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>第一类丢失更新</th>
+<th>第二类丢失更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>READ UNCOMMITED</td>
+<td>允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>READ COMMITTED</td>
+<td>不允许</td>
+<td>允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>允许</td>
+</tr>
+<tr>
+<td>REPEATABLE READ</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+<tr>
+<td>SERIALIZABLE</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+<td>不允许</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>需要说明的是,事务隔离级别和数据访问的并发性是对立的,事务隔离级别越高并发性就越差,所以要根据具体的应用来确定合适的事务隔离级别</li>
+</ul>
+<h3 id="查看事务隔离级别">查看事务隔离级别</h3>
+<ul>
+<li>在 MySQL 中,可以通过<code>show variables like '%tx_isolation%'</code>或<code>select @@tx_isolation;</code>语句来查看当前事务隔离级别</li>
+<li>查看当前事务隔离级别的 SQL 语句和运行结果如下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &#x27;%tx_isolation%&#x27;;<br>+---------------+-----------------+<br>| Variable_name | Value           |<br>+---------------+-----------------+<br>| tx_isolation  | REPEATABLE-READ |<br>+---------------+-----------------+<br>1 row in set, 1 warning (0.17 sec)<br>mysql&gt; select @@tx_isolation;<br>+-----------------+<br>| @@tx_isolation  |<br>+-----------------+<br>| REPEATABLE-READ |<br>+-----------------+<br>1 row in set, 1 warning (0.00 sec)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>结果显示,目前 MySQL 的事务隔离级别是 REPEATABLE-READ</li>
+<li>另外,还可以使用下列语句分别查询全局和会话的事务隔离级别:</li>
+</ul>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-keyword">SELECT</span> @<span class="hljs-symbol">@global</span>.tx_isolation<span class="hljs-comment">;</span><br><span class="hljs-keyword">SELECT</span> @<span class="hljs-symbol">@session</span>.tx_isolation<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>注意</strong>:在MySQL 8.0.3 中,<code>tx_isolation </code>变量被<code>transaction_isolation</code>变量替换了,在 MySQL 8.0.3 版本中查询事务隔离级别,只要把上述查询语句中的 <code>tx_isolation</code>变量替换成<code>transaction_isolation</code>变量即可</li>
+</ul>
+<h3 id="修改事务隔离级别">修改事务隔离级别</h3>
+<ul>
+<li>MySQL 提供了 SET TRANSACTION 语句,该语句可以改变单个会话或全局的事务隔离级别,语法格式如下:</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> [SESSION <span class="hljs-operator">|</span> <span class="hljs-keyword">GLOBAL</span>] TRANSACTION ISOLATION LEVEL &#123;READ UNCOMMITTED <span class="hljs-operator">|</span> READ COMMITTED <span class="hljs-operator">|</span> REPEATABLE READ <span class="hljs-operator">|</span> SERIALIZABLE&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>SESSION</strong>:表示修改的事务隔离级别将应用于当前 session 内的所有事务</p>
+</li>
+<li>
+<p><strong>GLOBAL</strong>:表示修改的事务隔离级别将应用于所有 session(全局)中的所有事务,且当前已经存在的 session 不受影响</p>
+</li>
+<li>
+<p>如果省略 SESSION 和 GLOBAL,表示修改的事务隔离级别将应用于当前 session 内的下一个还未开始的事务</p>
+</li>
+<li>
+<p>使用 SET TRANSACTION 语句分别修改 session 和全局的事务隔离级别SQL 语句和运行结果如下:</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt;  select @@session.tx_isolation;<br>+------------------------+<br>| @@session.tx_isolation |<br>+------------------------+<br>| SERIALIZABLE           |<br>+------------------------+<br>1 row in set, 1 warning (0.00 sec)<br><br>mysql&gt; SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt;  select @@global.tx_isolation;<br>+-----------------------+<br>| @@global.tx_isolation |<br>+-----------------------+<br>| REPEATABLE-READ       |<br>+-----------------------+<br>1 row in set, 1 warning (0.00 sec)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>还可以使用 set tx_isolation 命令直接修改当前 session 的事务隔离级别,SQL 语句和运行结果如下:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; set tx_isolation=&#x27;READ-COMMITTED&#x27;;<br>Query OK, 0 rows affected, 1 warning (0.00 sec)<br><br>mysql&gt; select @@session.tx_isolation;<br>+------------------------+<br>| @@session.tx_isolation |<br>+------------------------+<br>| READ-COMMITTED         |<br>+------------------------+<br>1 row in set, 1 warning (0.00 sec)<br></code></pre></td></tr></table></figure>
+<h2 id="编程式事务">编程式事务</h2>
+<h3 id="改变自动提交模式">改变自动提交模式</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET autocommit = 0;   /*关闭*/<br>SET autocommit = 1;   /*开启*/<br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>MySQL中默认是自动提交</li>
+<li>使用事务时应先关闭自动提交</li>
+</ul>
+<h3 id="开始个事务">开始个事务</h3>
+<ul>
+<li>标记事务的起始点</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">START TRANSACTION<br></code></pre></td></tr></table></figure>
+<h3 id="提交事务">提交事务</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">COMMIT<br></code></pre></td></tr></table></figure>
+<h3 id="事务回滚">事务回滚</h3>
+<ul>
+<li>数据回到本次事务的初始状态</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ROLLBACK<br></code></pre></td></tr></table></figure>
+<h3 id="保存点">保存点</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SAVEPOINT 保存点名称 -- 设置一个事务保存点<br>ROLLBACK TO SAVEPOINT 保存点名称 -- 回滚到保存点<br>RELEASE SAVEPOINT 保存点名称 -- 删除保存点<br></code></pre></td></tr></table></figure>
+<h3 id="实例">实例</h3>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-variable">$dbhost</span> = <span class="hljs-string">&#x27;localhost&#x27;</span>;  <span class="hljs-comment">// MySQL服务器主机地址</span><br><span class="hljs-variable">$dbuser</span> = <span class="hljs-string">&#x27;root&#x27;</span>;            <span class="hljs-comment">// MySQL用户名</span><br><span class="hljs-variable">$dbpass</span> = <span class="hljs-string">&#x27;123456&#x27;</span>;          <span class="hljs-comment">// MySQL用户名密码</span><br><span class="hljs-variable">$conn</span> = mysqli_connect(<span class="hljs-variable">$dbhost</span>, <span class="hljs-variable">$dbuser</span>, <span class="hljs-variable">$dbpass</span>);<br><span class="hljs-keyword">if</span>(! <span class="hljs-variable">$conn</span> )<br>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;连接失败: &#x27;</span> . mysqli_error(<span class="hljs-variable">$conn</span>));<br>&#125;<br><span class="hljs-comment">// 设置编码,防止中文乱码</span><br>mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;set names utf8&quot;</span>);<br>mysqli_select_db( <span class="hljs-variable">$conn</span>, <span class="hljs-string">&#x27;Test&#x27;</span> );<br>mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;SET AUTOCOMMIT=0&quot;</span>); <span class="hljs-comment">// 设置为不自动提交,因为MYSQL默认立即执行</span><br>mysqli_begin_transaction(<span class="hljs-variable">$conn</span>);            <span class="hljs-comment">// 开始事务定义</span><br><br><span class="hljs-keyword">if</span>(!mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;insert into transaction_test (id) values(8)&quot;</span>))<br>&#123;<br>    mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;ROLLBACK&quot;</span>);     <span class="hljs-comment">// 判断当执行失败时回滚</span><br>&#125;<br><br><span class="hljs-keyword">if</span>(!mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;insert into transaction_test (id) values(9)&quot;</span>))<br>&#123;<br>    mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-string">&quot;ROLLBACK&quot;</span>);      <span class="hljs-comment">// 判断执行失败时回滚</span><br>&#125;<br>mysqli_commit(<span class="hljs-variable">$conn</span>);            <span class="hljs-comment">//执行事务</span><br>mysqli_close(<span class="hljs-variable">$conn</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E7%A9%BA%E5%80%BC%E7%9A%84%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL 空值的处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%9F%BA%E4%BA%8E%E6%B4%BE%E7%94%9F%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">SQL 基于派生表的查询</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

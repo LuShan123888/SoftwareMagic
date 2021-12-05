@@ -1,0 +1,576 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到,所以用PHP处理表单是十分容易的,尽管如此,表单处理还是有很多技巧的,本节将进行介绍  方法(Method)  如前所述,客户端可以用两种HTTP方法向服务器传送表单数据:GET和POST,采用哪种方法是由某个表单标签()中的method属性所指定的,理论上说在HTML中method是不区分大小写的,但是实际上有些浏览器要求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 表单处理">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/PHP/Web/%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到,所以用PHP处理表单是十分容易的,尽管如此,表单处理还是有很多技巧的,本节将进行介绍  方法(Method)  如前所述,客户端可以用两种HTTP方法向服务器传送表单数据:GET和POST,采用哪种方法是由某个表单标签()中的method属性所指定的,理论上说在HTML中method是不区分大小写的,但是实际上有些浏览器要求">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-02T09:54:29.293Z">
+<meta property="article:modified_time" content="2021-12-02T09:54:29.293Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>PHP 表单处理 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 表单处理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-02 17:54" pubdate>
+        2021年12月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      16k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 表单处理</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月2日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>PHP 表单处理</h1>
+<ul>
+<li>因为表单变量可以通过<code>$_GET</code>和<code>$_POST</code>数组得到,所以用PHP处理表单是十分容易的,尽管如此,表单处理还是有很多技巧的,本节将进行介绍</li>
+</ul>
+<h2 id="方法-Method">方法(Method)</h2>
+<ul>
+<li>如前所述,客户端可以用两种HTTP方法向服务器传送表单数据:GET和POST,采用哪种方法是由某个表单标签(<form>)中的method属性所指定的,理论上说在HTML中method是不区分大小写的,但是实际上有些浏览器要求method为大写</li>
+<li>一个GET请求把表单的参数编码成URL形式,这称也查询字符串(query string):</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">/path/to/chunkify.php?word+despocable&amp;length=3<br></code></pre></td></tr></table></figure>
+<ul>
+<li>一个POST请求则通过HTTP请求的主体来传递表单参数,不需要考虑URL</li>
+<li>GET和POST方法的最明显区别在于URL行,因为GET请求的所有表单参数都编码在URL中,用户可以把一个GET请求加入浏览器收藏夹,而对POST请求却无法这样做</li>
+<li>GET和POST请求之间的最大不同是相当微妙的,HTTP规范指明GET请求是幂等的(idempotent),也就是说,一个对于一个特定URL的GET请求(包含表单参数),与对应于这一特定URL的两个或多个GET请求是一样的,因此,Web浏览器可以把GET请求得到的响应页面缓存起来,这是因为不管页面被请求了多少次,响应页面都是不变的,正因为幂等性,GET请求只适用于那些响应页面永不改变的情况,例如将一个单词分解成小块,或者对数字进行乘法运算</li>
+<li>POST请求不具幂等性,这意味着它们无法被缓存,在每次刷新页面时,都会重新连接服务器,显示或者刷新页面时,你可能会看到浏览器提示:“Repost form data?(重新发送表单数据)”,所以POST适用于响应内容可能会随时间改变的情况,例如:显示购物车的内容,或者在一个论坛中显示当前主题</li>
+<li>现实中,幂等性常常被忽略,目前浏览器的缓存功能都很差,并且&quot;刷新&quot;按钮很容易用户点到,所以程序员通常只考虑是否想将参数显示在浏览器的URL地址栏上,如果不想显示,就用POST方法,但你要记住,在服务器的响应页面可能会变化的情况下(例如下订单或者更新数据库),不要使用GET方法</li>
+<li>一个请求所用的方法类型可以用<code>$_SERVER['REQUEST_METHOD']</code>来获知,如:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;GET&#x27;</span>)&#123;<br>    <span class="hljs-comment">//处理一个GET请求</span><br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;You may only GET this page.&quot;</span>);<br>    <span class="hljs-comment">//你只能用GET方法请求这个页面</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="参数">参数</h2>
+<ul>
+<li>在PHP程序中我们可使用<code>$_POST</code>,<code>$_GET</code>和<code>$_FILES</code>数组来访问表单的参数,数组的键名时表单参数的名称,数组元素的值是表单参数的值,因为句点&quot;.&quot;在HTML的表单字段命名中是合法的,但是在PHP的变量命名中是不合法的,所以在数组中字符名中的句点被转换成了下划线<code>_</code></li>
+<li>下例展示了一个能将用户提供的字符串分块的表单,表单包含两个字段,一个用来放字符串,名为&quot;word&quot;,另一个存放块的大小,名为&quot;number&quot;</li>
+</ul>
+<p><strong>示例7-1</strong>:字符串分块表单页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Chunkify Form&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;form action=&quot;chunkify.php&quot; method=&quot;POST&quot;&gt;<br>            Enter a word:&lt;input type=&quot;text&quot; name=&quot;word&quot;/&gt;&lt;br/&gt;<br>            How long should the chunks be?<br>            &lt;input type=&quot;text&quot; name=&quot;number&quot;/&gt;&lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; value=&quot;Chunkify!&quot;&gt;<br>        &lt;/form&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>示例7-2列出了chunkify.php的PHP代码,也就是上例7-1中提交所用到的PHP脚本,这段代码把表单参数的值存入变量并使用,在php.ini中有一个选项register_globals,如果设置为On则可以自动为表单参数生成变量,但是我们通常不这么做,因为这样会影响程序的安全性</li>
+</ul>
+<p><strong>示例7-2</strong>:字符串分块程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Chunked Word&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        $word = $_POST[&#x27;word&#x27;];<br>        $number = $_POST[&#x27;number&#x27;];<br>        $chunks = ceil(strlen($word)/$number);<br>        echo &quot;The $number-letter chunks of &#x27;$word&#x27; are:&lt;br/&gt;\n&quot;;<br>        for($i = 0;$i &lt; $chunks;$++)&#123;<br>            $chunk = substr($word,$i*$number,$number);<br>            printf(&quot;%d: %s&lt;br/&gt;\n&quot;,$i+1,$chunks);<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="对参数进行自动引号处理">对参数进行自动引号处理</h3>
+<ul>
+<li>默认情况下php.ini中的<code>magic_quotes_gpc()</code>选项启用,该选项指示PHP在所有cookie数据以及GET和POST参数上自动调用<code>addslashes()</code>函数,这使得在数据库查询中使用表单参数变得简单,但同时也对那些没有在数据库查询中使用的表单参数造成了麻烦,因为只需要在单引号,双引号,反斜杠和空字节等前面添加上反斜杠以进行转义(编写PHP程序时依赖<code>magic_quotes_gpc</code>将导致很多问题,所以在新版的PHP所带的php.ini中<code>magic_qutoes_gpc</code>默认设置为不启用,而不是本书所说的默认为启用,在PHP6中,本特性将被彻底移出)</li>
+<li>例如,如果你在文本框总输入&quot;O’Reilly&quot;并点击按钮,你就会发现被分块的字符串其实是&quot;O’Reilly&quot;,这就说明<code>magic_quotes_gpc</code>在工作</li>
+<li>为了处理用户输入的字符串,可以禁用php.ini中的<code>magic_quotes_gpc</code>选项或者对$_GET,$_POST和$_COOKIES使用<code>stripslashes()</code>函数,正确使用字符串的方法如下:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>]) : <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>];<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果要处理大量字符串,为此定义一个函数是聪明的做法:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">raw_param</span>(<span class="hljs-params"><span class="hljs-variable">$name</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> ini_get(<span class="hljs-string">&#x27;magic_quotes_gpc&#x27;</span>) ? stripslashes(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>]) : <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;word&#x27;</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>你可以这样调用该函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = raw_param(<span class="hljs-string">&#x27;word&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p><strong>提示</strong>:在本章后面的例子中,假设你的php.ini中的<code>magic_quotes_gpc</code>选项是不启用的,如果你已经启用,你需要改写示例中的代码,对所有参数使用<code>stripslashes()</code>函数</p>
+<h2 id="自处理页面">自处理页面</h2>
+<ul>
+<li>一个PHP页面能同时用来生成表单和处理表单,如果示例7-3中页面是用GET方法请求的,它将打印一个接收华氏温度的表单,如果是用POST方法调用的,它将计算并显示相应的摄氏温度</li>
+</ul>
+<p><strong>示例7-3</strong>:自处理温度转换页面(temp.php)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Temperature Conversion&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        if($_SERVER[&#x27;REQUEST_METHOD&#x27;] == &#x27;GET&#x27;)&#123;<br>        ?&gt;<br>        &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;POST&quot;&gt;<br>            Fahrenheit temperature:<br>            &lt;input type=&quot;text&quot; name=&quot;fahrenheit&quot; /&gt;&lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;Convert to Celsius!&quot;/&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>        &#125;else if($_SERVER[&#x27;REQUEST_METHOD&#x27;] == &#x27;POST&#x27;)&#123;<br>            $fahr = $_POST[&#x27;fahrenheit&#x27;];<br>            $celsius = ($fahr - 32)*5/9;<br>            printf(&quot;%.2fF is %.2fC&quot;,$fahr,$celsius);<br>        &#125;else&#123;<br>            die(&quot;This script only works with GET and POST requests.&quot;);<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>另一个决定显示表单还是处理表单的方法时,是看是否已经提供了其中的一个参数,这使得你能编写一个使用GET方法提交值的自处理页面,示例7-4显示温度转换程序的新版本,这个程序用是否提供了某个参数来决定做什么</li>
+</ul>
+<p><strong>示例7-4</strong>:使用GET方法进行温度转换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Temperature Conversion&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        $fahr = $_GET[&#x27;fahrenheit&#x27;];<br>        if(is_null($fahr))&#123;<br>        ?&gt;<br>        &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method= &quot;GET&quot;&gt;<br>            Fahrenheit temperature:<br>            &lt;input type=&quot;text&quot; name=&quot;fahrenheit&quot;/&gt;&lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;Convert to Celsius!&quot;/&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>        &#125;else&#123;<br>            $celsius = ($fahr-32)*5/9;<br>            printf(&quot;%.2fF is %.2fC&quot;,$fahr,$celsius);<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在上例中,我们把表单参数复制到了<code>$fahr</code>中,如果我们没有给出那个参数,$fahr的内容为NULL,所以我们可用<code>is_null()</code>函数判断是要显示表单还是处理表单数据</li>
+</ul>
+<h2 id="粘性表单">粘性表单</h2>
+<ul>
+<li>很多网站使用一种称为&quot;粘性表单&quot;(sticky form)的技术,用这种技术,一个查询表单的默认值就是先前查询的值,例如:如果你在Google(<a target="_blank" rel="noopener" href="http://www.google.com">http://www.google.com</a>)上查询&quot;Programming PHP&quot;,则在结果页面的顶端的另一个查询文本框中,包含了先前的查询关键字:“Programming PHP”,如果要将查询的文字改为&quot;Programming PHP from O’Reilly&quot;,你只要简单地在后面补充即可</li>
+<li>这种&quot;粘性&quot;行为很容易实现,示例7-5展示了基于示例7-4的温度转换程序,使用了新的粘性特性,基本的原理是在创建HTML字段时使用提交的表单值作为默认值</li>
+</ul>
+<p><strong>示例7-5</strong>:使用粘性表单的温度转换程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Temperature Conversion&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        $fahr = $_GET[&#x27;fahrenheit&#x27;];<br>        ?&gt;<br>        &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>            Fahrenheit temperature:<br>            &lt;input type=&quot;text&quot; name=&quot;fahrenheit&quot; value=&quot;&lt;?php echo $fahr ?&gt;&quot; /&gt;<br>            &lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;Convert to Celsius!&quot; /&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>    if(!is_null($fahr))&#123;<br>        $celsius = ($fahr - 32)*5/9;<br>        printf(&quot;%.2fF is %.2fC&quot;,$fahr,$celsius);<br>    &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="多值参数">多值参数</h2>
+<ul>
+<li>用HTML中的select标签创建选择列表,允许用户进行多重选择,为了确保PHP识别浏览器传递来的多重值,你需要在HTML表单的字段名后加上&quot;[]&quot;,如:</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;languages[]&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;c&quot;</span>&gt;</span>C<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;c++&quot;</span>&gt;</span>C++<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;php&quot;</span>&gt;</span>PHP<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;perl&quot;</span>&gt;</span>Perl<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>现在,当用户提交表单时,<code>$_GET[‘languages’]</code>包含一个数组而不是一个字符串,这个数组包含用户所选择的值</li>
+<li>下例演示了多种选择,表单为用户提供了一系列个性特征,当用户提交表单时,他可以得到有关他的个性的描述信息(不怎么有趣)</li>
+</ul>
+<p><strong>示例7-6</strong>:用选择框进行多重选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>&lt;head&gt;&lt;title&gt;Personality&lt;/title&gt;&lt;/head&gt;<br>	&lt;body&gt;<br> &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>  Select your personality attributes:&lt;br/&gt;<br>  &lt;select name=&quot;attributes[]&quot; multiple&gt;<br>      &lt;option value=&quot;perky&quot;&gt;Perky&lt;/option&gt;<br>      &lt;option value=&quot;morose&quot;&gt;Morose&lt;/option&gt;<br>      &lt;option value=&quot;thinking&quot;&gt;Thinking&lt;/option&gt;<br>      &lt;option value=&quot;feeling&quot;&gt;Feeling&lt;/option&gt;<br>      &lt;option value=&quot;thrifty&quot;&gt;Spend-thrift&lt;/option&gt;<br>      &lt;opiton value=&quot;prodigal&quot;&gt;Shopper&lt;/option&gt;<br> &lt;/select&gt;<br> &lt;br/&gt;<br> &lt;input type=&quot;submit&quot; name=&quot;s&quot; value=&quot;Record my personality!&quot; /&gt;<br> &lt;/form&gt;<br> &lt;?php<br>     if(array_key_exists(&#x27;s&#x27;,$_GET))&#123;<br>         $description = join(&quot; &quot;,$_GET[&#x27;attributes&#x27;]);<br>         echo &quot;You have a $description personality.&quot;;<br>     &#125;<br> ?&gt;<br> &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在上例中,提交按钮有一个名称&quot;s&quot;,我们检查这个参数是否存在,来判断是否需要产生个性信息的描述</li>
+<li>对于可以返回多重值的表单字段可以使用同样的技术, 下例是个人信息表单的新版,使用了复选框(check box)而不是选择框(select box),注意只是HTML发生了改变----那些处理表单的PHP代码无须改变,因为它不需要知道多重值是来自于复选框还是选择框</li>
+</ul>
+<p><strong>示例7-7</strong>:使用复选框的多重选择</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Personality&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;form action=&quot;&lt;?php $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>            Select your personality attributes:&lt;br/&gt;<br>            Perky&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;perky&quot; /&gt;&lt;br/&gt;<br>            Morose&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;morose&quot; /&gt;&lt;br/&gt;<br>            Thinking&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;thinking&quot; /&gt;&lt;br/&gt;<br>            Feeling&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;feeling&quot; /&gt;&lt;br/&gt;<br>            Spend-thrift&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;thrifty&quot; /&gt;&lt;br/&gt;<br>            Shopper&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;prodigal&quot; /&gt;&lt;br/&gt;<br>            &lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;s&quot; value=&quot;Record my Personality!&quot; /&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>    if(arrat_key_exists(&#x27;s&#x27;,$_GET))&#123;<br>        $description = join(&quot; &quot;,$GET[&#x27;attributes&#x27;]);<br>        echo &quot;You have a $description personality.&quot;;<br>    &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="粘性多值参数">粘性多值参数</h2>
+<ul>
+<li>现在你可能想知道:是否可以让一个多重选择的表单也具有粘性?答案是可以,但是不太容易,你需要检查表单中的每一个可能值是否是提交值之一,例如:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">Perky: &lt;input type=&quot;checkbox&quot; name=&quot;attributues[]&quot; value=&quot;perky&quot;<br>              &lt;?= if(is_array($_GET[&#x27;attributes&#x27;]) and in_array(&#x27;perky&#x27;,$_GET[&#x27;attributes&#x27;]))&#123;<br>    &quot;checked&quot;;<br>&#125;<br>              ?&gt; /&gt;&lt;br/&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>你可以在每一个复选框上使用该技术,但那是重复性的操作,且容易出错,更简单的方法是编写一个函数为可能值生成HTML和对 提交值的一个副本进行操作,示例7-8展示了多重选择的新版本,使表单具有粘性,尽管这个表单和示例7-7中的看起来一样,但是生成表单的方法发生了本质上的改变</li>
+</ul>
+<p><strong>示例7-8</strong>:粘性多值复选框</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Personality&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        //如果存在,则获取表单值<br>        $attrs = $_GET[&#x27;attributes&#x27;];<br>        if(!is_array($attrs))&#123; $attrs = array(); &#125;<br>        //创建具有相同名称的HTML复选框<br>        function make_checkboxes($name,$query,$option)&#123;<br>            foreach($options as $value =&gt; $label)&#123;<br>                printf(&#x27;%s &lt;input type=&quot;checkbox&quot; name=&quot;%s[]&quot; value=&quot;%s&quot; &#x27;,$label,$name,$value);<br>                if(in_array($value,$query))&#123;<br>                    echo &quot;checked&quot;:<br>                &#125;<br>                echo &quot;/&gt;&lt;br/&gt;\n&quot;;<br>            &#125;<br>        &#125;<br>        //复选框的值和标签列表<br>        $personality_attributes = array(<br>            &#x27;perky&#x27; =&gt; &#x27;Perky&#x27;,<br>            &#x27;morose&#x27;=&gt; &#x27;Morose&#x27;,<br>            &#x27;thinking&#x27; =&gt; &#x27;Thinking&#x27;,<br>            &#x27;feeling&#x27; =&gt; &#x27;Feeling&#x27;,<br>            &#x27;thrifty&#x27; =&gt; &#x27;Spend-thrift&#x27;,<br>            &#x27;prodigal&#x27; =&gt; &#x27;Shopper&#x27;<br>        );<br>        ?&gt;<br>        &lt;form action=&quot;&lt;?php $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>            Select your personality attributes:&lt;br/&gt;<br>            &lt;?php make_checkboxes(&#x27;attribures&#x27;,$attrs,$personality_attributes); ?&gt;<br>            &lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;s&quot; value=&quot;Record my Personality!&quot; /&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>        if(arrat_key_exists(&#x27;s&#x27;,$_GET))&#123;<br>            $description = join(&quot; &quot;,$GET[&#x27;attributes&#x27;]);<br>            echo &quot;You have a $description personality.&quot;;<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这段代码的核心是<code>make_checkboxes()</code>函数,它有3个参数:复选框组的名称,默认值数值和将值映射到描述的数组,复选框的选项列表在$personality_attributes数组中</li>
+</ul>
+<h2 id="文件上传">文件上传</h2>
+<ul>
+<li>处理文件上传(现在大部分浏览器都支持该操作)可用$_FILES数组,你可以使用各种验证和文件上传函数,你可以控制谁允许上传,上传的文件如何处理</li>
+<li>下面的代码显示了一个用于上传文件的表单,文件上传由当前页面处理</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;form enctype=&quot;multipart/form-data&quot; action=&quot;&lt;?=$_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;POST&quot;&gt;<br>    &lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot; value=&quot;10240&quot;&gt;<br>    File name:&lt;input name=&quot;toProcess&quot; type=&quot;Upload&quot;&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上传文件最大的问题在于上传一个太大的无法处理的文件,PHP有两种方法避免出现这种情况,PHP有两种办法避免出现这种情况:一个硬性限制和一个软性限制</li>
+<li>php.ini中的<code>upload_max_filesize</code>选项可以硬性指定上传文件的大小上限(默认为2M),如果你的表单在任何文字字符参数提交前提交了一个名为<code>MAX_FILE_SEZE</code>的参数,则PHP将使用那个值作为文件大小的软限制,例如,在上面例子中,文件大小的上限为10KB,PHP将忽略大于<code>upload_max_filesize</code>的<code>MAX_FILE_SEZE</code>参数</li>
+<li><code>$_FILES</code>数组中的每个元素也都是一个数组,带有上传文件的信息,键名为:</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>name</strong>:浏览器提供的文件名,我们很难使用该值,因为客户端机器上的文件名约定有可能和Web服务器的不同(比如,如果客户机为Windows系统,文件名可能为&quot;D:\PHOTOS|ME.JPG&quot;,而服务器为Unix系统,那么这个文件路径没什么意义)</li>
+<li><strong>type</strong>:上传文件的MIME类型</li>
+<li><strong>size</strong>:上传文件的大小(以字节为单位),如果用户试图上传一个过大的文件,它的大小将被置为0</li>
+<li><strong>tmp_name</strong>:上传文件在服务器中的临时文件名,如果用户试图上传一个过大的文件,它的大小将为置为0</li>
+</ul>
+</blockquote>
+<ul>
+<li>检测一个文件是否已将成功上传的正确方法是使用<code>io_uploaded_file()</code>函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(is_uploaded_file(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>])&#123;<br> <span class="hljs-comment">//上传成功</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上传的文件被存储在服务器的默认临时文件夹中,该目录由php.ini中的<code>upload_tmp_dir</code>选项指定,可使用<code>move_uploaded_file()</code>函数来移动临时文件</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">move_uploaded_files(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;toProcess&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>],<span class="hljs-string">&quot;path/to/put/file/<span class="hljs-subst">$file</span>&quot;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>调用<code>move_uploaded_file()</code>会自动检测文件是否为一个上传的文件,当PHP脚本执行完毕,任何由该脚本上传的文件会从临时文件夹中删除</li>
+</ul>
+<h2 id="表单验证">表单验证</h2>
+<ul>
+<li>但你允许输入数据时,你通常需要在使用和存储这些数据之前进行验证,有多种验证用户数据的方法,首先是在客户端使用JavaScript,但是用户可以禁用JavaScript,甚至使用一个不支持JavaScript的浏览器,所以用这个方法还不够</li>
+<li>更安全的选择是使用PHP来完成验证工作,下例展示了一个带有表单的自处理页面,这个页面允许用户输入一个媒体项,表单的三个元素----名称,媒体类型和文件名是必须输入的,如果用户没有输入其中一项,页面将重新显示,并详细地指出错在哪里,表单字段的值将由用户的输入确定,最后,作为对用户的提醒,当用户更正表单时,提交按钮上的文字从&quot;Create&quot;变成了&quot;Continue&quot;</li>
+</ul>
+<p><strong>示例7-9</strong>:表单验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$name = $_POST[&#x27;name&#x27;];<br>$media_type = $_POST[&#x27;media_type&#x27;];<br>$filename = $_POST[&#x27;filename&#x27;];<br>$caption = $_POST[&#x27;caption&#x27;];<br><br>$tried = ($POST[&#x27;tried&#x27;] == &#x27;yes&#x27;);<br><br>if($tried)&#123;<br>    $validated = (!empty($name)&amp;&amp;!empty($media_type)&amp;&amp;!empty($filename));<br>    if(!$validated)&#123;<br>?&gt;<br>&lt;p&gt;<br>    The name,media type, and filename are required fields. Please fill them out to continue.<br>&lt;/p&gt;<br>&lt;?php<br>    &#125;<br>&#125;<br>if($tried &amp;&amp; $validated)&#123;<br>    echo &#x27;&lt;p&gt;The item has been created.&lt;/p&gt;&#x27;;<br>&#125;<br>//媒体类型是否被选中? 是则输出&quot;selected&quot;<br>function media_selected($type)&#123;<br>    global $media_type;<br>    if($media_type == $type)&#123;echo &quot;selected&quot;;&#125;<br>&#125;<br>?&gt;<br>&lt;form action=&quot;&lt;?= $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;POST&quot;&gt;<br>    Name:&lt;input type=&quot;checkbox&quot; name=&quot;status&quot; value=&quot;active&quot;<br>                &lt;?php if($status == &#x27;active&#x27;)&#123;echo &#x27;checked&#x27;;&#125; ?&gt; /&gt;Active&lt;br/&gt;<br>    Media:&lt;select name=&quot;media_type&quot;&gt;<br>    &lt;option value=&quot;&quot;&gt;Choose one&lt;/option&gt;<br>    &lt;option value=&quot;picture&quot; &lt;?php media_selected(&#x27;picture&#x27;) ?&gt; /&gt;Picture&lt;/option&gt;<br>    &lt;option value=&quot;audio&quot; &lt;?php media_selected(&#x27;audio&#x27;) ?&gt; /&gt;Picture&lt;/option&gt;<br>&lt;option value=&quot;movie&quot; &lt;?php media_selected(&#x27;movie&#x27;) ?&gt; /&gt;Picture&lt;/option&gt;<br>&lt;/select&gt;&lt;br/&gt;<br>File:&lt;input type=&quot;text&quot; name=&quot;filename&quot; value=&quot;&lt;?= $filename ?&gt;&quot; /&gt;&lt;br/&gt;<br>Caption:&lt;texarea name=&quot;caption&quot;&gt;&lt;? $caption ?&gt;&lt;/textrea&gt;&lt;br/&gt;<br>&lt;input type=&quot;hidden&quot; name&quot;tried&quot; value=&quot;yes&quot; /&gt;<br>&lt;input type=&quot;submit&quot; value=&quot;&lt;?php echo $tried ? &#x27;Continue&#x27; : &#x27;Create&#x27;; ?&gt;&quot; /&gt;<br>&lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在这个例子中,验证只是简单地检查值是否已经提供,当$name,$type,$filename都不为空时,我们将$validated设置为true,其他可能的验证包括:检查E-mail地址是否合法,确认提供的文件名是否是本地的,确认文件是否存在</li>
+<li>例如,年龄字段的验证是看输入的是否为一个正整数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$age</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;age&#x27;</span>];<br><span class="hljs-variable">$valid_age</span> = strspn(<span class="hljs-variable">$age</span>,<span class="hljs-string">&quot;1234567890&quot;</span>) == strlen(<span class="hljs-variable">$age</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过调用<code>strspn()</code>取得字符串中最靠前的数字,一个非负整数仅由数字组成,所以判断年龄是否合法是看它是否全由数字组成,我们也可以用正则表达式进行检查:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$valid_age</span> = preg_match(<span class="hljs-string">&#x27;/^\d+$/&#x27;</span>,<span class="hljs-variable">$age</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>验证E-mail地址是一个很困难的工作,没有现存的方法来检查一个字符串是否满足合法E-mail地址的要求,然而你可以要求用户输入E-mail地址两次(在不同的文本框中),也可以用如下的方法防止用户输入&quot;me&quot;或者&quot;me@aol&quot;这样的E-mail地址:要求所有输入的字符串都包含一个@符号,并且其中有一个点号,你也可以检查不想向其发送E-mail的域(如whitehouse.gov或竞争对手),例如:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$email1</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email1&#x27;</span>]);<br><span class="hljs-variable">$email2</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email2&#x27;</span>]);<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$email1</span> !== <span class="hljs-variable">$email2</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email addresses didn&#x27;t match&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&#x27;/@.+\..+$/&#x27;</span>,<span class="hljs-variable">$email1</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email address is invalid&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(strpos(<span class="hljs-variable">$email</span>,<span class="hljs-string">&quot;Whitehorse.gov&quot;</span>))&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;I will not send mail to the White House&quot;</span>):<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>表单字段验证是基本的字符串操作,在本例中,我们使用了正则表达式和字符串函数来保证用户所输入的字符串符号我们的要求</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/PHP/Web/">Web</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/PHP/Web/%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E5%A4%B4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 设置响应头</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/PHP/Web/%E7%BB%B4%E6%8C%81%E7%8A%B6%E6%80%81/">
+                        <span class="hidden-mobile">PHP 维持状态</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
