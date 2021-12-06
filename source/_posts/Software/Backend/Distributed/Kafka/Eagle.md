@@ -12,10 +12,6 @@ categories:
 
 ## 初始化
 
-### 下载
-
-- 地址:https://www.oschina.net/action/GoToLink?url=http%3A%2F%2Fdownload.kafka-eagle.org%2F
-
 ### 解压并配置环境变量
 
 ```bash

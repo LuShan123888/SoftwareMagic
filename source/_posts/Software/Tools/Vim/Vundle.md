@@ -25,8 +25,6 @@ categories:
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
-- 默认安装在`~/.vim/bundle/vundle`下
-
 ## 配置说明
 
 - 插件有三种类型:
@@ -105,16 +103,9 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 - 将想要安装的插件,按照地址填写方法,将地址填写在vundle#begin和vundle#end之间就可以
 - 保存之后,有两种方法安装插件
 
-1. 运行 vim ,再运行 :PluginInstall
-
 ```
-vim
- :PluginInstall
-```
-
-2. 通过命令行直接安装 :vim +PluginInstall +qall
-
-```
+:PluginInstall
+# 或
 vim +PluginInstall +qall
 ```
 
@@ -131,7 +122,4 @@ vim +PluginInstall +qall
 - 更新插件`:PluginUpdate`
 - 列出所有插件`:PluginList`
 - 查找插件`:PluginSearch`
-- 当然,这些插件都是拜Vim本身的插件支持特性所赐,Vim为了支持丰富的第三方插件,自身定义了一套简单的脚本开发语言,供程序员自行开发自己所需要的插件,插件开发介绍可以参考:
-    - 《Writing Vim Plugins》:
-        http://stevelosh.com/blog/2011/09/writing-vim-plugins/
 

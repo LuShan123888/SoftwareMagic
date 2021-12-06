@@ -1,5 +1,5 @@
 #! /bin/bash
-baseDir=~/Code/Project/SoftwareMagic/source/_posts; # 根目录
+baseDir=~/Code/SoftwareMagic/source/_posts; # 根目录
 function front_matter(){
     for file in `ls $1` #注意此处这是两个反引号，表示运行系统命令
     do
@@ -30,9 +30,9 @@ function front_matter(){
 } 
 
 # 替换post文件夹
-rm -rf ~/Code/Project/SoftwareMagic/source/_posts/*
-cp -rfp ~/Documents/Notes/Software ~/Code/Project/SoftwareMagic/source/_posts/Software
-cp -rfp ~/Documents/Notes/Hardware ~/Code/Project/SoftwareMagic/source/_posts/Hardware
-cp -rfp ~/Documents/Notes/Internet ~/Code/Project/SoftwareMagic/source/_posts/Internet
+rm -rf ~/Code/SoftwareMagic/source/_posts/*
+cp -rfp ~/Documents/Notes/Software ~/Code/SoftwareMagic/source/_posts/Software
+cp -rfp ~/Documents/Notes/Hardware ~/Code/SoftwareMagic/source/_posts/Hardware
+cp -rfp ~/Documents/Notes/Internet ~/Code/SoftwareMagic/source/_posts/Internet
 
 front_matter $baseDir;

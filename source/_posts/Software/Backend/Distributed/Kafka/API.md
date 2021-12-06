@@ -42,37 +42,32 @@ categories:
 - ProducerRecord:每条数据都要封装成一个 ProducerRecord 对象
 
 ```java
-import java.util.Properties;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-
 public class CustomProducer {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        // kafka 集群,broker-list
-        props.put("bootstrap.servers", "kafka:9092");
-        //可用ProducerConfig.ACKS_CONFIG 代替 "acks"
-        //props.put(ProducerConfig.ACKS_CONFIG, "all");
-        props.put("acks", "all");
-        // 重试次数
-        props.put("retries", 1);
-        // 批次大小
-        props.put("batch.size", 16384);
-        // 等待时间
-        props.put("linger.ms", 1);
-        // RecordAccumulator 缓冲区大小
-        props.put("buffer.memory", 33554432);
-        // 序列化配置
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        // 基于上述配置创建生产者对象
-        Producer<String, String> producer = new KafkaProducer<>(props);
-        for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("test", "test-" + Integer.toString(i),"test-" + Integer.toString(i)));
-        }
-        producer.close();
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    // kafka 集群,broker-list
+    props.put("bootstrap.servers", "kafka:9092");
+    //可用ProducerConfig.ACKS_CONFIG 代替 "acks"
+    //props.put(ProducerConfig.ACKS_CONFIG, "all");
+    props.put("acks", "all");
+    // 重试次数
+    props.put("retries", 1);
+    // 批次大小
+    props.put("batch.size", 16384);
+    // 等待时间
+    props.put("linger.ms", 1);
+    // RecordAccumulator 缓冲区大小
+    props.put("buffer.memory", 33554432);
+    // 序列化配置
+    props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    // 基于上述配置创建生产者对象
+    Producer<String, String> producer = new KafkaProducer<>(props);
+    for (int i = 0; i < 100; i++) {
+      producer.send(new ProducerRecord<>("test-topic", "test-" + i, "test-" + i));
     }
+    producer.close();
+  }
 }
 ```
 
@@ -82,40 +77,33 @@ public class CustomProducer {
 - **注意**:消息发送失败会自动重试,不需要我们在回调函数中手动重试
 
 ```java
-import java.util.Properties;
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
-
 public class CallBackProducer {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "kafka:9092");
-        props.put("acks", "all");
-        props.put("retries", 1);
-        props.put("batch.size", 16384);
-        props.put("linger.ms", 1);
-        props.put("buffer.memory", 33554432);
-        props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        Producer<String, String> producer = new KafkaProducer<>(props);
-        for (int i = 0; i < 100; i++) {
-            producer.send(new ProducerRecord<String, String>("test","test" + Integer.toString(i)), new Callback() {
-                //回调函数,该方法会在 Producer 收到 ack 时调用,为异步调用
-                @Override
-                public void onCompletion(RecordMetadata metadata, Exception exception) {
-                    if (exception == null) {
-                        System.out.println(metadata.partition() + " - " + metadata.offset());
-                    } else {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    props.put("bootstrap.servers", "kafka:9092");
+    props.put("acks", "all");
+    props.put("retries", 1);
+    props.put("batch.size", 16384);
+    props.put("linger.ms", 1);
+    props.put("buffer.memory", 33554432);
+    props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
+    props.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
+    Producer<String, String> producer = new KafkaProducer<>(props);
+    for (int i = 0; i < 100; i++) {
+      producer.send(new ProducerRecord<String, String>("test-topic","test-" + i, new Callback() {
+        //回调函数,该方法会在 Producer 收到 ack 时调用,为异步调用
+        @Override
+        public void onCompletion(RecordMetadata metadata, Exception exception) {
+          if (exception == null) {
+            System.out.println(metadata.partition() + " - " + metadata.offset());
+          } else {
+            exception.printStackTrace();
+          }
         }
-        producer.close();
+      });
     }
+    producer.close();
+  }
 }
 ```
 
@@ -126,25 +114,22 @@ public class CallBackProducer {
 #### 自定义分区器
 
 ```java
-import org.apache.kafka.clients.producer.Partitioner;
-import org.apache.kafka.common.Cluster;
-
 public class MyPartitioner implements Partitioner {
-    @Override
-    public void configure(Map<String, ?> configs) {
-        // TODO Auto-generated method stub
-    }
+  @Override
+  public void configure(Map<String, ?> configs) {
+    // TODO Auto-generated method stub
+  }
 
-    @Override
-    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+  @Override
+  public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-    @Override
-    public void close() {
-        // TODO Auto-generated method stub
-    }
+  @Override
+  public void close() {
+    // TODO Auto-generated method stub
+  }
 }
 ```
 
@@ -165,12 +150,12 @@ Producer<String, String> producer = new KafkaProducer<>(props);
 ```java
 Producer<String, String> producer = new KafkaProducer<>(props);
 for (int i = 0; i < 100; i++) {
-    producer.send(new ProducerRecord<String, String>("test",  "test - 1"), new Callback() {
-        @Override
-        public void onCompletion(RecordMetadata metadata, Exception exception) {
-            ...
-        }
-    }).get();
+  producer.send(new ProducerRecord<String, String>("test",  "test - " + i), new Callback() {
+    @Override
+    public void onCompletion(RecordMetadata metadata, Exception exception) {
+      ...
+    }
+  }).get();
 }
 ```
 
@@ -186,31 +171,25 @@ for (int i = 0; i < 100; i++) {
     - **auto.commit.interval.ms**:自动提交 offset 的时间间隔
 
 ```java
-import java.util.Arrays;
-import java.util.Properties;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-
 public class CustomConsumer {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "kafka:9092");
-        props.put("group.id", "test-group");
-        props.put("enable.auto.commit", "true");
-        props.put("auto.commit.interval.ms", "1000");
-        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        // 订阅主题 test
-        consumer.subscribe(Arrays.asList("test"));
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-            }
-        }
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    props.put("bootstrap.servers", "kafka:9092");
+    props.put("group.id", "test-group");
+    props.put("enable.auto.commit", "true");
+    props.put("auto.commit.interval.ms", "1000");
+    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    // 订阅主题 test-topic
+    consumer.subscribe(Arrays.asList("test-topic"));
+    while (true) {
+      ConsumerRecords<String, String> records = consumer.poll(100);
+      for (ConsumerRecord<String, String> record : records) {
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+      }
     }
+  }
 }
 ```
 
@@ -269,22 +248,22 @@ props.put("auto.commit.interval.ms", "1000");
 
 ```java
 public class SyncCommitOffset {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        //关闭自动提交 offset
-        props.put("enable.auto.commit", "false");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("first"));
-        while (true) {
-            //消费者拉取数据
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("offset = %d, key = %s, value= %s%n", record.offset(), record.key(), record.value());
-            }
-            //同步提交,当前线程会阻塞直到 offset 提交成功
-            consumer.commitSync();
-        }
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    //关闭自动提交 offset
+    props.put("enable.auto.commit", "false");
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    consumer.subscribe(Arrays.asList("first"));
+    while (true) {
+      //消费者拉取数据
+      ConsumerRecords<String, String> records = consumer.poll(100);
+      for (ConsumerRecord<String, String> record : records) {
+        System.out.printf("offset = %d, key = %s, value= %s%n", record.offset(), record.key(), record.value());
+      }
+      //同步提交,当前线程会阻塞直到 offset 提交成功
+      consumer.commitSync();
     }
+  }
 }
 ```
 
@@ -294,28 +273,28 @@ public class SyncCommitOffset {
 
 ```java
 public class AsyncCommitOffset {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        //关闭自动提交
-        props.put("enable.auto.commit", "false");
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Arrays.asList("first"));
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-            }
-            // 异步提交
-            consumer.commitAsync(new OffsetCommitCallback() {
-                @Override
-                public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
-                    if (exception != null) {
-                        System.err.println("Commit failed for" + offsets);
-                    }
-                }
-            });
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    //关闭自动提交
+    props.put("enable.auto.commit", "false");
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    consumer.subscribe(Arrays.asList("first"));
+    while (true) {
+      ConsumerRecords<String, String> records = consumer.poll(100);
+      for (ConsumerRecord<String, String> record : records) {
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+      }
+      // 异步提交
+      consumer.commitAsync(new OffsetCommitCallback() {
+        @Override
+        public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+          if (exception != null) {
+            System.err.println("Commit failed for" + offsets);
+          }
         }
+      });
     }
+  }
 }
 ```
 
@@ -333,50 +312,50 @@ public class AsyncCommitOffset {
 
 ```java
 public class CustomSaveOffset {
-    private static Map<TopicPartition, Long> currentOffset = new HashMap<>();
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        // 关闭自动提交 offset
-        props.put("enable.auto.commit", "false");
-        // 创建一个消费者
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        // 消费者订阅主题
-        consumer.subscribe(Arrays.asList("first"),  new ConsumerRebalanceListener() {
-            // 该方法会在 Rebalance 之前调用
-            @Override
-            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
-                commitOffset(currentOffset);
-            }
+  private static Map<TopicPartition, Long> currentOffset = new HashMap<>();
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    // 关闭自动提交 offset
+    props.put("enable.auto.commit", "false");
+    // 创建一个消费者
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    // 消费者订阅主题
+    consumer.subscribe(Arrays.asList("first"),  new ConsumerRebalanceListener() {
+      // 该方法会在 Rebalance 之前调用
+      @Override
+      public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+        commitOffset(currentOffset);
+      }
 
-            // 该方法会在 Rebalance 之后调用
-            @Override
-            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
-                currentOffset.clear();
-                for (TopicPartition partition : partitions) {
-                    consumer.seek(partition, getOffset(partition));// 定位到最近提交的 offset 位置继续消费
-                }
-            }
-        });
-
-        while (true) {
-            ConsumerRecords<String, String> records = consumer.poll(100);// 消费者拉取数据
-            for (ConsumerRecord<String, String> record : records) {
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-                currentOffset.put(new TopicPartition(record.topic(), record.partition()), record.offset());
-            }
-            commitOffset(currentOffset);// 异步提交
+      // 该方法会在 Rebalance 之后调用
+      @Override
+      public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+        currentOffset.clear();
+        for (TopicPartition partition : partitions) {
+          consumer.seek(partition, getOffset(partition));// 定位到最近提交的 offset 位置继续消费
         }
-    }
+      }
+    });
 
-    // 获取某分区的最新 offset
-    private static long getOffset(TopicPartition partition) {
-        // TODO
+    while (true) {
+      ConsumerRecords<String, String> records = consumer.poll(100);// 消费者拉取数据
+      for (ConsumerRecord<String, String> record : records) {
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+        currentOffset.put(new TopicPartition(record.topic(), record.partition()), record.offset());
+      }
+      commitOffset(currentOffset);// 异步提交
     }
+  }
 
-    // 提交该消费者所有分区的 offset
-    private static void commitOffset(Map<TopicPartition, Long> currentOffset) {
-        // TODO
-    }
+  // 获取某分区的最新 offset
+  private static long getOffset(TopicPartition partition) {
+    // TODO
+  }
+
+  // 提交该消费者所有分区的 offset
+  private static void commitOffset(Map<TopicPartition, Long> currentOffset) {
+    // TODO
+  }
 }
 ```
 
@@ -407,24 +386,24 @@ public class CustomSaveOffset {
 
 ```java
 public class TimeInterceptor implements ProducerInterceptor<String, String> {
-    @Override
-    public void configure(Map<String, ?> configs) {
-    }
+  @Override
+  public void configure(Map<String, ?> configs) {
+  }
 
-    @Override
-    public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
-        // 创建一个新的 record,把时间戳写入消息体的最前部
-        return new ProducerRecord(record.topic(), record.partition(), record.timestamp(), record.key(), "TimeInterceptor: " + System.currentTimeMillis() + "," + record.value().toString());
-    }
+  @Override
+  public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
+    // 创建一个新的 record,把时间戳写入消息体的最前部
+    return new ProducerRecord(record.topic(), record.partition(), record.timestamp(), record.key(), "TimeInterceptor: " + System.currentTimeMillis() + "," + record.value().toString());
+  }
 
-    @Override
-    public void close() {
-    }
+  @Override
+  public void close() {
+  }
 
-    @Override
-    public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
-        // TODO Auto-generated method stub
-    }
+  @Override
+  public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
+    // TODO Auto-generated method stub
+  }
 }
 ```
 
@@ -435,35 +414,35 @@ public class TimeInterceptor implements ProducerInterceptor<String, String> {
 ```java
 public class CounterInterceptor implements ProducerInterceptor<String, String>{
 
-    private int errorCounter = 0;
-    private int successCounter = 0;
+  private int errorCounter = 0;
+  private int successCounter = 0;
 
-    @Override
-    public void configure(Map<String, ?> configs) {
-        // TODO Auto-generated method stub
-    }
+  @Override
+  public void configure(Map<String, ?> configs) {
+    // TODO Auto-generated method stub
+  }
 
-    @Override
-    public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
-        return record;
-    }
+  @Override
+  public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
+    return record;
+  }
 
-    @Override
-    public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
-        // 统计成功和失败的次数
-        if (exception == null) {
-            successCounter++;
-        } else {
-            errorCounter++;
-        }
+  @Override
+  public void onAcknowledgement(RecordMetadata metadata, Exception exception) {
+    // 统计成功和失败的次数
+    if (exception == null) {
+      successCounter++;
+    } else {
+      errorCounter++;
     }
+  }
 
-    @Override
-    public void close() {
-        // 保存结果
-        System.out.println("Successful sent: " + successCounter);
-        System.out.println("Failed sent: " + errorCounter);
-    }
+  @Override
+  public void close() {
+    // 保存结果
+    System.out.println("Successful sent: " + successCounter);
+    System.out.println("Failed sent: " + errorCounter);
+  }
 }
 ```
 
@@ -471,29 +450,29 @@ public class CounterInterceptor implements ProducerInterceptor<String, String>{
 
 ```java
 public class InterceptorProducer {
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
-        props.put("acks", "all");
-        props.put("retries", 3);
-        props.put("batch.size", 16384);
-        props.put("linger.ms", 1);
-        props.put("buffer.memory", 33554432);
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        // 构建拦截链
-        List<String> interceptors = new ArrayList<>();
-        interceptors.add("com.lun.kafka.interceptor.TimeInterceptor");
-        interceptors.add("com.lun.kafka.interceptor.CounterInterceptor");
-        props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, interceptors);
+  public static void main(String[] args) {
+    Properties props = new Properties();
+    props.put("bootstrap.servers", "kafka:9092");
+    props.put("acks", "all");
+    props.put("retries", 3);
+    props.put("batch.size", 16384);
+    props.put("linger.ms", 1);
+    props.put("buffer.memory", 33554432);
+    props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    // 构建拦截链
+    List<String> interceptors = new ArrayList<>();
+    interceptors.add("com.lun.kafka.interceptor.TimeInterceptor");
+    interceptors.add("com.lun.kafka.interceptor.CounterInterceptor");
+    props.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, interceptors);
 
-        Producer<String, String> producer = new KafkaProducer<>(props);
-        for (int i = 0; i < 10; i++) {
-            ProducerRecord<String, String> record = new ProducerRecord<>("test-topic", "message" + i);
-            producer.send(record);
-        }
-        producer.close();
+    Producer<String, String> producer = new KafkaProducer<>(props);
+    for (int i = 0; i < 10; i++) {
+      ProducerRecord<String, String> record = new ProducerRecord<>("test-topic", "message" + i);
+      producer.send(record);
     }
+    producer.close();
+  }
 }
 ```
 

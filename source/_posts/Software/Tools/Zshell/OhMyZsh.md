@@ -27,7 +27,7 @@ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 3. 使用脚本安装
 
 ```shell
-cd oh-my-zsh/tools
+cd .oh-my-zsh/tools
 ./install.sh
 ```
 
@@ -102,6 +102,8 @@ alias -s bz2='tar -xjvf'
 
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+# 或
+brew install powerlevel10k
 ```
 
 - `~/.zshrc`

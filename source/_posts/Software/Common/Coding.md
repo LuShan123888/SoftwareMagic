@@ -34,6 +34,33 @@ System.out.println(i2 == i4); // true:包装类和基本类型比较时自动拆
 System.out.println(i3 == i4); // 同i1 == i4
 ```
 
+### 自动拆箱装箱
+
+**自动装箱与自动拆箱的实现原理**
+
+```java
+public static void main(String[]args){
+  Integer integer=1; //装箱
+  int i=integer; //拆箱
+}
+```
+
+- 对以上代码进行反编译后可以得到以下代码:
+
+```java
+public static void main(String[]args){
+  Integer integer=Integer.valueOf(1);
+  int i=integer.intValue();
+}
+```
+
+**哪些地方会自动拆装箱**
+
+1. 将基本数据类型放入集合类
+2. 包装类型和基本类型的大小比较:包装类与基本数据类型进行比较运算,是先将包装类进行拆箱成基本数据类型,然后进行比较的
+3. 包装类型的运算:两个包装类型之间的运算,会被自动拆箱成基本类型进行
+4. 三目运算符的使用:当第二,第三位操作数分别为基本类型和对象时,其中的对象就会拆箱为基本类型进行操作
+
 ### 接口和抽象类的区别
 
 1. 类可以实现很多个接口,但是只能继承一个抽象类
@@ -67,8 +94,8 @@ System.out.println(i3 == i4); // 同i1 == i4
 ### 多态
 
 - 指允许不同类的对象对同一函数做出响应。即同一函数可以根据发送对象的不同而采用多种不同的行为方式
-- 实现多态的技术称为：动态绑定（dynamic binding），是指在执行期间判断所引用对象的实际类型，根据其实际的类型调用其相应的方法。
-- 多态的作用：消除类型之间的耦合关系。
+- 实现多态的技术称为：动态绑定（dynamic binding），是指在执行期间判断所引用对象的实际类型，根据其实际的类型调用其相应的方法
+- 方法重载（overload）实现的是编译时的多态性（也称为前绑定），而方法重写（override）实现的是运行时的多态性（也称为后绑定）
 - **多态存在的三个必要条件**
     - 继承
     - 重写
@@ -100,8 +127,7 @@ System.out.println(i3 == i4); // 同i1 == i4
 
 ### try-catch-finally 中的 return
 
-- 当try和catch中有return时，finally仍然会执行
-- finally是在return后面的**表达式运算**之后执行的
+- 当try和catch中有return时，finally仍然会执行,finally是在return后面的**表达式运算**之后执行的
 - try语句在返回前，将其他所有的操作执行完，保留好要返回的值，而后转入执行finally中的语句，而后分为以下三种情况：
     1. 如果finally中有return语句，则会将try中的return语句**覆盖**掉，直接执行finally中的return语句，得到返回值，这样便无法得到try之前保留好的返回值
     2. 如果finally中没有return语句，也没有改变要返回值，则执行完finally中的语句后，会接着执行try中的return语句，返回之前保留的值。
@@ -126,33 +152,6 @@ String str2 = "bb"; //检查字符串常量池的
 
 - 如果在拷贝这个对象的时候,只对基本数据类型进行了拷贝,而对引用数据类型只是进行了引用的传递,而没有真实的创建一个新的对象,则认为是浅拷贝
 - 反之,在对引用数据类型进行拷贝的时候,创建了一个新的对象,并且复制其内的成员变量,则认为是深拷贝
-
-### 自动拆箱装箱
-
-**自动装箱与自动拆箱的实现原理**
-
-```java
-public static void main(String[]args){
-  Integer integer=1; //装箱
-  int i=integer; //拆箱
-}
-```
-
-- 对以上代码进行反编译后可以得到以下代码:
-
-```java
-public static void main(String[]args){
-  Integer integer=Integer.valueOf(1);
-  int i=integer.intValue();
-}
-```
-
-**哪些地方会自动拆装箱**
-
-1. 将基本数据类型放入集合类
-2. 包装类型和基本类型的大小比较:包装类与基本数据类型进行比较运算,是先将包装类进行拆箱成基本数据类型,然后进行比较的
-3. 包装类型的运算:两个包装类型之间的运算,会被自动拆箱成基本类型进行
-4. 三目运算符的使用:当第二,第三位操作数分别为基本类型和对象时,其中的对象就会拆箱为基本类型进行操作
 
 ### Object类的方法
 
@@ -245,19 +244,19 @@ public static void main(String[]args){
 
 ### 通过反射创建对象
 
-1. 通过类对象调用newInstance()方法,例如:String.class.newInstance()
-2. 通过类对象的getConstructor()或getDeclaredConstructor()方法获得构造器(Constructor)对象并调用其newInstance()方法创建对象,例如:String.class.getConstructor(String.class).newInstance("Hello");
+1. 通过类对象调用newInstance()方法,例如:`String.class.newInstance()`
+2. 通过类对象的getConstructor()或getDeclaredConstructor()方法获得构造器(Constructor)对象并调用其newInstance()方法创建对象,例如:`String.class.getConstructor(String.class).newInstance("Hello");`
 
 ### 通过反射获取和设置对象私有字段的值
 
-1. 通过类对象的getDeclaredField()方法字段(Field)对象
-2. 再通过字段对象的setAccessible(true)将其设置为可以访问
+1. 通过类对象的`getDeclaredField()`方法字段(Field)对象
+2. 再通过字段对象的`setAccessible(true)`将其设置为可以访问
 3. 通过get/set方法来获取/设置字段的值了
 
 ### 通过反射调用对象的方法
 
-1. 通过类对象的getMethod()方法获得方法对象
-2. 调用方法对象的invoke()方法
+1. 通过类对象的`getMethod()`方法获得方法对象
+2. 调用方法对象的`invoke()`方法
 
 ## 集合
 
@@ -421,7 +420,7 @@ public static void main(String[]args){
 - **stop()停止**:   线程调用stop()方法会被暴力停止,方法已弃用,该方法会有不好的后果:
     1. 强制让线程停止有可能使一些清理性的工作得不到完成
     2. 对锁定的对象进行了**解锁**,导致数据得不到同步的处理,出现数据不一致的问题(比如一个方法加上了synchronized,并在其中进行了一个长时间的处理,而在处理结束之前该线程进行了`stop()`,则未完成的数据将没有进行到同步的处理)
-- **异常法停止**: 线程调用interrupt()方法后,在线程的run方法中判断当前对象的interrupted状态,如果是中断状态则抛出异常,达到中断线程的效果
+- **异常法停止**: 线程调用`interrupt()`方法后,在线程的run方法中判断当前对象的interrupted状态,如果是中断状态则抛出异常,达到中断线程的效果
 - **在沉睡中停止**:先将线程sleep,然后调用interrupt标记中断状态,interrupt会将阻塞状态的线程中断,会抛出中断异常,达到停止线程的效果
 
 ### CAS
@@ -810,23 +809,6 @@ public class PrintABC {
 - **老年代空间不足**:老年代空间只有在新生代对象转入以及创建为大对象,大数组时才会出现不足的现象,抛出`java.lang.OutOfMemoryError: Java heap space`,为避免以上两种状况引起的Full GC,调优时应尽量做到让对象在Minor GC阶段被回收,让对象在新生代多存活一段时间及不要创建过大的对象及数组
 - **方法区空间不足**:Permanet Generation中存放的为一些class的信息,常量,静态变量等数据,当系统中要加载的类,反射的类和调用的方法较多时,Permanet Generation可能会被占满,在未配置为采用CMS GC的情况下也会执行Full GC,如果经过Full GC仍然回收不了,那么JVM会抛出如下错误信息:`java.lang.OutOfMemoryError: PermGen space`,为避免Perm Gen占满造成Full GC现象,可采用的方法为增大Perm Gen空间或转为使用CMS GC
 
-#### 垃圾收集器
-
-- **CMS 垃圾收集器**：以获取最短回收停顿时间为目标的收集器(追求低停顿),它在垃圾收集时使得用户线程和 GC 线程并发执行,因此在垃圾收集过程中用户也不会感到明显的卡顿
-    - 初始标记:Stop The World,仅使用一条初始标记线程对所有与 GC Roots 直接关联的对象进行标记
-    - 并发标记:使用**多条**标记线程,与用户线程并发执行,此过程进行可达性分析,标记出所有废弃对象,速度很慢
-    - 重新标记:Stop The World,使用多条标记线程并发执行,将刚才并发标记过程中新出现的废弃对象标记出来
-    - 并发清除:只使用一条 GC 线程,与用户线程并发执行,清除刚才标记的对象,这个过程非常耗时
-- **G1 通用垃圾收集器**：一款面向服务端应用的垃圾收集器,它没有新生代和老年代的概念,而是将堆划分为一块块独立的 Region,当要进行垃圾收集时,首先估计每个 Region 中垃圾的数量,每次都从垃圾回收价值最大的 Region 开始回收,因此可以获得最大的回收效率
-    - 从整体上看,G1 是基于"标记-整理”算法实现的收集器,从局部(两个 Region 之间)上看是基于"标记-复制”算法实现的,这意味着运行期间不会产生内存空间碎片
-    - 可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收
-    - 如果不计算维护 Remembered Set 的操作,G1 收集器的工作过程分为以下几个步骤:
-        - 初始标记:Stop The World,仅使用一条初始标记线程对所有与 GC Roots 直接关联的对象进行标记
-        - 并发标记:使用**一条**标记线程与用户线程并发执行,此过程进行可达性分析,速度很慢
-        - 最终标记:Stop The World,使用多条标记线程并发执行
-        - 筛选回收:回收废弃对象,此时也要 Stop The World,并使用多条筛选回收线程并发执行
-- STW：由于程序一直在跑的话，可能会一直增加新的对象，导致永远都标记不完。当Stop The World （以下简称 STW）时，对象间的引用是不会发生变化的，可以轻松完成标记。
-
 #### 标记算法
 
 - 若一个对象不被任何对象或变量引用,那么它就是无效对象,需要被回收
@@ -885,6 +867,23 @@ public class PrintABC {
 - **软引用**:软引用是一种相对强引用弱化一些的引用,可以让对象豁免一些垃圾收集,只有当 JVM 认为内存不足时,才会去试图回收软引用指向的对象,JVM 会确保在抛出`OutOfMemoryError`之前,清理软引用指向的对象,软引用通常用来**实现内存敏感的缓存**,如果还有空闲内存,就可以暂时保留缓存,当内存不足时清理掉,这样就保证了使用缓存的同时,不会耗尽内存
 - **弱引用**:弱引用的**强度比软引用更弱**一些,当 JVM 进行垃圾回收时,**无论内存是否充足,都会回收**只被弱引用关联的对象
 - **虚引用**:虚引用也称幽灵引用或者幻影引用,它是**最弱**的一种引用关系,一个对象是否有虚引用的存在,完全不会对其生存时间构成影响,它仅仅是提供了一种确保对象被 finalize 以后,做某些事情的机制,比如,通常用来做所谓的 Post-Mortem 清理机制
+
+#### 垃圾收集器
+
+- **CMS 垃圾收集器**：以获取最短回收停顿时间为目标的收集器(追求低停顿),它在垃圾收集时使得用户线程和 GC 线程并发执行,因此在垃圾收集过程中用户也不会感到明显的卡顿
+    - 初始标记:Stop The World,仅使用一条初始标记线程对所有与 GC Roots 直接关联的对象进行标记
+    - 并发标记:使用**多条**标记线程,与用户线程并发执行,此过程进行可达性分析,标记出所有废弃对象,速度很慢
+    - 重新标记:Stop The World,使用多条标记线程并发执行,将刚才并发标记过程中新出现的废弃对象标记出来
+    - 并发清除:只使用一条 GC 线程,与用户线程并发执行,清除刚才标记的对象,这个过程非常耗时
+- **G1 通用垃圾收集器**：一款面向服务端应用的垃圾收集器,它没有新生代和老年代的概念,而是将堆划分为一块块独立的 Region,当要进行垃圾收集时,首先估计每个 Region 中垃圾的数量,每次都从垃圾回收价值最大的 Region 开始回收,因此可以获得最大的回收效率
+    - 从整体上看,G1 是基于"标记-整理”算法实现的收集器,从局部(两个 Region 之间)上看是基于"标记-复制”算法实现的,这意味着运行期间不会产生内存空间碎片
+    - 可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收
+    - 如果不计算维护 Remembered Set 的操作,G1 收集器的工作过程分为以下几个步骤:
+        - 初始标记:Stop The World,仅使用一条初始标记线程对所有与 GC Roots 直接关联的对象进行标记
+        - 并发标记:使用**一条**标记线程与用户线程并发执行,此过程进行可达性分析,速度很慢
+        - 最终标记:Stop The World,使用多条标记线程并发执行
+        - 筛选回收:回收废弃对象,此时也要 Stop The World,并使用多条筛选回收线程并发执行
+- STW：由于程序一直在跑的话，可能会一直增加新的对象，导致永远都标记不完。当Stop The World （以下简称 STW）时，对象间的引用是不会发生变化的，可以轻松完成标记。
 
 ### OOM 问题
 
@@ -1009,7 +1008,7 @@ public class UsingRandom {
 >- **当前读**：特殊的读操作，插入/更新/删除操作，属于当前读，需要加锁。
 >    - ` select * from table where ? lock in share mode;`
 >    - `select * from table where ? for update; `
->    - `insert into table values (…);`
+>    - `insert  into table values (…);`
 >    - `update table set ? where ?;`
 >    - `delete from table where ?;`
 
@@ -1848,7 +1847,7 @@ EXPLAIN + SQL语句
 public int search(int[] nums, int target) {
     int left = 0, right = nums.length - 1;
     while (left <= right) {
-        int mid = (right + left) >>> 1;
+        int mid = low + (high - low) >>> 1;
         if (nums[mid] == target) {
             return mid;
         } else if (nums[mid] < target) {
@@ -2398,33 +2397,42 @@ public class RadixSorter extends Sorter {
 - 递归实现
 
 ```java
-public void preOrderTraverse1(TreeNode root) {
-    if (root != null) {
-        System.out.print(root.val+"  ");
-        preOrderTraverse1(root.left);
-        preOrderTraverse1(root.right);
+public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<Integer>();
+    preorder(root, res);
+    return res;
+}
+
+public void preorder(TreeNode root, List<Integer> res) {
+    if (root == null) {
+        return;
     }
+    res.add(root.val);
+    preorder(root.left, res);
+    preorder(root.right, res);
 }
 ```
 
 - 非递归的实现
-    1. 访问之,并把结点node入栈,当前结点置为左孩子
-    2. 判断结点node是否为空,若为空,则取出栈顶结点并出栈,将右孩子置为当前结点,否则重复上一步直到当前结点为空或者栈为空(可以发现栈中的结点就是为了访问右孩子才存储的)
 
 ```java
-public void preOrderTraverse2(TreeNode root) {
-    LinkedList<TreeNode> stack = new LinkedList<>();
-    TreeNode pNode = root;
-    while (pNode != null || !stack.isEmpty()) {
-        if (pNode != null) {
-            System.out.print(pNode.val+"  ");
-            stack.push(pNode);
-            pNode = pNode.left;
-        } else { //pNode == null && !stack.isEmpty()
-            TreeNode node = stack.pop();
-            pNode = node.right;
-        }
+public List<Integer> preorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    if (root == null) {
+        return result;
     }
+    Deque<TreeNode> stack = new LinkedList<>();
+    TreeNode node = root;
+    while (!stack.isEmpty() || node != null) {
+        while (node != null) {
+            result.add(node.val);
+            stack.push(node);
+            node = node.left;
+        }
+        node = stack.pop();
+        node = node.right;
+    }
+    return result;
 }
 ```
 
@@ -2433,31 +2441,42 @@ public void preOrderTraverse2(TreeNode root) {
 - 递归实现
 
 ```java
-public void inOrderTraverse1(TreeNode root) {
-    if (root != null) {
-        inOrderTraverse1(root.left);
-        System.out.print(root.val+"  ");
-        inOrderTraverse1(root.right);
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> res = new ArrayList<Integer>();
+    inorder(root, res);
+    return res;
+}
+
+public void inorder(TreeNode root, List<Integer> res) {
+    if (root == null) {
+        return;
     }
+    inorder(root.left, res);
+    res.add(root.val);
+    inorder(root.right, res);
 }
 ```
 
-- 非递归实现,相同的道理,只不过访问的顺序移到出栈时
+- 非递归实现
 
 ```java
-public void inOrderTraverse2(TreeNode root) {
-    LinkedList<TreeNode> stack = new LinkedList<>();
-    TreeNode pNode = root;
-    while (pNode != null || !stack.isEmpty()) {
-        if (pNode != null) {
-            stack.push(pNode);
-            pNode = pNode.left;
-        } else { //pNode == null && !stack.isEmpty()
-            TreeNode node = stack.pop();
-            System.out.print(node.val+"  ");
-            pNode = node.right;
-        }
+public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    if (root == null) {
+        return result;
     }
+    Deque<TreeNode> stack = new LinkedList<>();
+    TreeNode node = root;
+    while (!stack.isEmpty()||node!=null){
+        while (node!=null){
+            stack.push(node);
+            node = node.left;
+        }
+        node = stack.pop();
+        result.add(node.val);
+        node = node.right;
+    }
+    return result;
 }
 ```
 
@@ -2466,53 +2485,52 @@ public void inOrderTraverse2(TreeNode root) {
 - 递归实现
 
 ```java
-public void postOrderTraverse1(TreeNode root) {
-  if (root != null) {
-    postOrderTraverse1(root.left);
-    postOrderTraverse1(root.right);
-    System.out.print(root.val+"  ");
-  }
-}
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        postorder(root, res);
+        return res;
+    }
+
+    public void postorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        postorder(root.left, res);
+        postorder(root.right, res);
+        res.add(root.val);
+    }
 ```
 
 - 非递归实现
 
 ```java
-public static void postTraverse(TreeNode node) {
-    if (node == null)
-        return;
-    Deque<TreeNode> s = new LinkedList<>();
-
-    TreeNode curNode; //当前访问的结点
-    TreeNode lastVisitNode; //上次访问的结点
-    curNode = node;
-    lastVisitNode = null;
-
-    //把currentNode移到左子树的最下边
-    while (curNode != null) {
-        s.push(curNode);
-        curNode = curNode.left;
+public List<Integer> postorderTraversal(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    if (root == null) {
+        return result;
     }
-    while (!s.isEmpty()) {
-        curNode = s.pop();  //弹出栈顶元素
-        //一个根节点被访问的前提是:无右子树或右子树已被访问过
-        if (curNode.right != null && curNode.right != lastVisitNode) {
-            //根节点再次入栈
-            s.push(curNode);
-            //进入右子树,且可肯定右子树一定不为空
-            curNode = curNode.right;
-            while (curNode != null) {
-                //再走到右子树的最左边
-                s.push(curNode);
-                curNode = curNode.left;
-            }
-        } else {
-            //访问
-            System.out.print(curNode.val + "  ");
-            //修改最近被访问的节点
-            lastVisitNode = curNode;
+    Deque<TreeNode> stack = new LinkedList<>();
+    TreeNode node = root;
+    TreeNode prev = null;
+    while (!stack.isEmpty() || node != null) {
+        while (node != null) {
+            stack.push(node);
+            node = node.left;
         }
-    } //while
+        node = stack.pop();
+        // 当无右子节点,或右子节点被遍历过,遍历父节点
+        if (node.right == null || node.right == prev) {
+            result.add(node.val);
+            prev = node;
+            // 遍历父节点后说明子树以遍历完成,无需重新dfs
+            node = null;
+        } else {
+            stack.push(node);
+            node = node.right;
+        }
+    }
+    return result;
+}
 ```
 
 #### 层次遍历
@@ -2520,22 +2538,29 @@ public static void postTraverse(TreeNode node) {
 - 层次遍历的代码比较简单,只需要一个队列即可,先在队列中加入根结点,之后对于任意一个结点来说,在其出队列的时候,访问之,同时如果左孩子和右孩子有不为空的,入队列
 
 ```java
-public void levelTraverse(TreeNode root) {
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> result = new ArrayList<>();
     if (root == null) {
-        return;
+        return result;
     }
-    LinkedList<TreeNode> queue = new LinkedList<>();
+    Queue<TreeNode> queue = new LinkedList<>();
     queue.offer(root);
     while (!queue.isEmpty()) {
-        TreeNode node = queue.poll();
-        System.out.print(node.val+"  ");
-        if (node.left != null) {
-            queue.offer(node.left);
+        List<Integer> level = new ArrayList<>();
+        int currentLevelSize = queue.size();
+        for (int i = 1; i <= currentLevelSize; i++) {
+            TreeNode node = queue.poll();
+            level.add(node.val);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
         }
-        if (node.right != null) {
-            queue.offer(node.right);
-        }
+        result.add(level);
     }
+    return result;
 }
 ```
 
@@ -2593,7 +2618,7 @@ public void levelTraverse(TreeNode root) {
 -  **有名管道 (namedpipe)** :有名管道也是半双工的通信方式,但是它允许无亲缘关系进程间的通信
 -  **信号量(semophore )**:信号量是一个计数器,可以用来控制多个进程对共享资源的访问,它常作为一种锁机制,防止某进程正在访问共享资源时,其他进程也访问该资源,因此,主要作为进程间以及同一进程内不同线程之间的同步手段
 -  **消息队列( messagequeue )** :消息队列是由消息的链表,存放在内核中并由消息队列标识符标识,消息队列克服了信号传递信息少,管道只能承载无格式字节流以及缓冲区大小受限等缺点
--  **信号 (sinal )** :信号是一种比较复杂的通信方式,用于通知接收进程某个事件已经发生
+-  **信号 (signal )** :信号是一种比较复杂的通信方式,用于通知接收进程某个事件已经发生
 -  **共享内存(shared memory )** :共享内存就是映射一段能被其他进程所访问的内存,这段共享内存由一个进程创建,但多个进程都可以访问,共享内存是最快的 IPC 方式,它是针对其他进程间通信方式运行效率低而专门设计的,它往往与其他通信机制,如信号量,配合使用,来实现进程间的同步和通信
 -  **套接字(socket )** :套接口也是一种进程间通信机制,与其他通信机制不同的是,它可用于不同及其间的进程通信
 
@@ -2639,7 +2664,7 @@ public void levelTraverse(TreeNode root) {
     - 效率低,等待时间很长,CPU利用率不高
 - **中断**:
     - 程序中断通常简称中断,是指CPU在正常运行程序的过程中,由于预选安排或发生了各种随机的内部或外部事件,使CPU中断正在运行的程序,而转到为相应的服务程序去处理,这个过程称为程序中断
-    - 提高 CPU 的效率,只有当服务对象向 CPU 发出中断申请时 才去为它服务,这样,就可以利用中断功能同时为多个对象服务,从而大大提高了 CPU 的工作效率
+    - 提高 CPU 的效率,只有当服务对象向 CPU 发出中断申请时才去为它服务,这样,就可以利用中断功能同时为多个对象服务,从而大大提高了 CPU 的工作效率
 
 ##### 并发与并行
 
@@ -2671,7 +2696,7 @@ public void levelTraverse(TreeNode root) {
     -  **资源顺序分配法**:规定每个线程必须按顺序请求资源,同类资源一次性申请完,破坏了循环等待条件
     -  **剥夺控制法**:破坏了不可剥夺条件
 
-##### 临界区
+#### 临界区
 
 - 每个进程中访问临界资源的那段程序称为临界区,每次只准许一个进程进入临界区,进入后不允许其他进程进入
 - 任何时候,**处于临界区内的进程不可多于一个**,如已有进程进入自己的临界区,则其它所有试图进入临界区的进程必须等待
@@ -2918,7 +2943,7 @@ public void levelTraverse(TreeNode root) {
 - **epoll**
     - 可理解为**event poll**，epoll会把哪个流发生哪种I/O事件通知我们。所以epoll是事件驱动（每个事件关联fd）的，此时我们对这些流的操作都是有意义的。复杂度也降低到了O(1)。
     - select和poll都只提供了一个函数——select或者poll函数。而epoll提供了三个函数，epoll_create是创建一个epoll句柄；epoll_ctl是注册要监听的事件类型；epoll_wait则是等待事件的产生。
-    - epoll的解决方案不像select或poll一样每次都把当前进程轮流加入fd对应的设备等待队列中，而只在epoll_ctl时把当前进程挂一遍（这一遍必不可少）并为每个fd指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的fd加入一个就绪链表。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd
+    - epoll的解决方案不像select或poll一样每次都把当前进程轮流加入fd对应的设备等待队列中，而只在epoll_ctl时把当前进程挂载一遍并为每个fd指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的fd加入一个就绪链表。epoll_wait的工作实际上就是在这个就绪链表中查看有没有就绪的fd
     - 在epoll_ctl函数中。每次注册新的事件到epoll句柄中时（在epoll_ctl中指定EPOLL_CTL_ADD），会把所有的fd拷贝进内核，而不是在epoll_wait的时候重复拷贝。epoll保证了每个fd在整个过程中只会拷贝一次。
 - **文件描述符**：在形式上是一个非负整数,实际上是一个索引值,指向文件描述符表的一条记录
 
@@ -3071,8 +3096,8 @@ public void levelTraverse(TreeNode root) {
 
 **对称加密与非对称加密**
 
-- **对称加密**:指的就是加,解密使用的同是一串密钥,所以被称做对称加密,对称加密只有一个密钥作为私钥,常见的对称加密算法:DES,AES等
-- **非对称加密**:指的是加,解密使用不同的密钥,一把作为公开的公钥,另一把作为私钥,公钥加密的信息,只有私钥才能解密,反之,私钥加密的信息,只有公钥才能解密
+- **对称加密**:指的就是加解密使用的同是一串密钥,所以被称做对称加密,对称加密只有一个密钥作为私钥,常见的对称加密算法:DES,AES等
+- **非对称加密**:指的是加解密使用不同的密钥,一把作为公开的公钥,另一把作为私钥,公钥加密的信息,只有私钥才能解密,反之,私钥加密的信息,只有公钥才能解密
 
 #### HTTP长连接短连接
 
@@ -3137,7 +3162,7 @@ public void levelTraverse(TreeNode root) {
 
 #### 分类的IP地址
 
-![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png)
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-G9oiYI8saleWEfn.png" style="zoom:50%;" />
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-la9Hrsd8OPA1Jk6.png)
 
@@ -3337,7 +3362,29 @@ public void levelTraverse(TreeNode root) {
     - 职责链模式
     - 访问者模式
 
-### DCL
+### 单例模式
+
+#### 静态内部类式
+
+- 使用静态内部类解决了线程安全问题,并实现了延时加载
+
+```java
+public class Holder {
+    private Holder() {
+
+    }
+
+    public static Holder getInstance() {
+        return InnerClass.HOLDER;
+    }
+
+    public static class InnerClass {
+        private static final Holder HOLDER = new Holder();
+    }
+}
+```
+
+#### DCL
 
 - DCL使用volatile关键字,是为了禁止指令重排序,避免返回还没完成初始化的singleton对象,导致调用报错,也保证了线程的安全
 
