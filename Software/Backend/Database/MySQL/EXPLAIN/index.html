@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL EXPLAIN  EXPLAIN可以帮助开发人员分析SQL问题,EXPLAIN显示了MySQL如何使用索引来处理查询语句以及连接表,可以帮助选择更好的索引和写出更优化的查询语句 MySQL在执行一条查询之前,会对发出的每条SQL进行分析,决定是否使用索引或全表扫描  1Explain + SQL语句  id  id值越大优先级越高,越先被执行 id如果相同,可以认为是一组,从上往下顺序">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-31T06:11:19.000Z">
-<meta property="article:modified_time" content="2021-10-31T06:11:19.000Z">
+<meta property="article:published_time" content="2021-12-06T13:28:56.000Z">
+<meta property="article:modified_time" content="2021-12-06T13:28:56.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-31 14:11" pubdate>
-        2021年10月31日 下午
+      <time datetime="2021-12-06 21:28" pubdate>
+        2021年12月6日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -214,7 +214,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月31日 下午
+                  本文最后更新于：2021年12月6日 晚上
                 
               </p>
             
@@ -267,14 +267,15 @@
 </li>
 <li><strong>ref</strong>:表示上述表的连接匹配条件,即哪些列或常量被用于查找索引列上的值</li>
 <li><strong>rows</strong>:表示MySQL根据表统计信息及索引选用情况,估算的找到所需的记录所需要读取的行数</li>
-<li><strong>Extra</strong>:该列包含MySQL解决查询的详细信息,有以下几种情况:
+<li><strong>extra</strong>:该列包含MySQL解决查询的详细信息,有以下几种情况
 <ul>
-<li>Using where:列数据是从仅仅使用了索引中的信息而没有读取实际的行动的表返回的,这发生在对表的全部的请求列都是同一个索引的部分的时候,表示mysql服务器将在存储引擎检索行后再进行过滤</li>
-<li>Using temporary:表示MySQL需要使用临时表来存储结果集,常见于排序和分组查询</li>
-<li>Using filesort:MySQL中无法利用索引完成的排序操作称为文件排序</li>
-<li>Using join buffer:改值强调了在获取连接条件时没有使用索引,并且需要连接缓冲区来存储中间结果,如果出现了这个值,那应该注意,根据查询的具体情况可能需要添加索引来改进能</li>
-<li>Impossible where:这个值强调了where语句会导致没有符合条件的行</li>
-<li>Select tables optimized away:这个值意味着仅通过使用索引,优化器可能仅从聚合函数结果中返回一行</li>
+<li>Using where:不用读取表中所有信息，仅通过索引就可以获取所需数据，这发生在对表的全部的请求列都是同一个索引的部分的时候，表示mysql服务器将在存储引擎检索行后再进行过滤</li>
+<li>Using temporary：表示MySQL需要使用临时表来存储结果集，常见于排序和分组查询</li>
+<li>Using filesort：当Query中包含 order by 操作，而且无法利用索引完成的排序操作称为“文件排序”</li>
+<li>Using join buffer：改值强调了在获取连接条件时没有使用索引，并且需要连接缓冲区来存储中间结果。如果出现了这个值，那应该注意，根据查询的具体情况可能需要添加索引来改进能。</li>
+<li>Impossible where：这个值强调了where语句会导致没有符合条件的行（通过收集统计信息不可能存在结果）</li>
+<li>Select tables optimized away：这个值意味着仅通过使用索引，优化器可能仅从聚合函数结果中返回一行</li>
+<li>No tables used：Query语句中使用from dual 或不含任何from子句</li>
 </ul>
 </li>
 </ul>
@@ -311,9 +312,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AD%96%E7%95%A5/">
+                      <a href="/Software/VCS/Git/gitignore/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 性能优化策略</span>
+                        <span class="hidden-mobile">Git gitignore</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -321,8 +322,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/DELIMITER/">
-                        <span class="hidden-mobile">MySQL DELIMITER</span>
+                      <a href="/Software/Backend/Distributed/Kafka/API/">
+                        <span class="hidden-mobile">Kafka API</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
