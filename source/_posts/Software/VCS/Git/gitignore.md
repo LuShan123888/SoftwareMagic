@@ -60,14 +60,16 @@ Git会告诉我们,`.gitignore`的第3行规则忽略了该文件,于是我们�
 .DS_Store
 node_modules/
 dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-tests/**/coverage/
+target/
+out/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!.mvn/wrapper/maven-wrapper.jar
+
 
 # Editor directories and files
 .idea
+.mvn
 .vscode
 *.suo
 *.ntvs*
@@ -75,8 +77,5 @@ tests/**/coverage/
 *.sln
 *.iml
 
-#java
-target/
-out/
 ```
 

@@ -8,7 +8,7 @@ categories:
 ---
 # Spring MVC WebMvcConfigurer
 
-WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式,采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制,基于java-based方式的spring mvc配置,需要创建一个**配置**类并实现`WebMvcConfigurer` 接口,`WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象(增加了一些默认实现),但在在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃,官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
+WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式,采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制,基于java-based方式的Spring MVC配置,需要创建一个**配置**类并实现`WebMvcConfigurer` 接口,`WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象(增加了一些默认实现),但在在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃,官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
 
 ```java
 public interface WebMvcConfigurer {

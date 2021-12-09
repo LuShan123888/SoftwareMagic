@@ -33,19 +33,19 @@ categories:
 
 ```java
 public class Test {
-    public static void main(String[] args) throws Exception {
-        CuratorFramework curatorFramework= CuratorFrameworkFactory.
-            builder().connectString("127.0.0.1:2181").
-            sessionTimeoutMs(4000).retryPolicy(new
-                                               ExponentialBackoffRetry(1000,3)).
-            namespace("").build();
-        curatorFramework.start();
-        Stat stat=new Stat();
-        //查询节点数据
-        byte[] bytes = curatorFramework.getData().storingStatIn(stat).forPath("/test");
-        System.out.println(new String(bytes));
-        curatorFramework.close();
-    }
+  public static void main(String[] args) throws Exception {
+    CuratorFramework curatorFramework= CuratorFrameworkFactory.
+      builder().connectString("127.0.0.1:2181").
+      sessionTimeoutMs(4000)
+      .retryPolicy(new ExponentialBackoffRetry(1000,3))
+      .namespace("").build();
+    curatorFramework.start();
+    Stat stat=new Stat();
+    //查询节点数据
+    byte[] bytes = curatorFramework.getData().storingStatIn(stat).forPath("/test");
+    System.out.println(new String(bytes));
+    curatorFramework.close();
+  }
 }
 ```
 

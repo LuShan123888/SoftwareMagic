@@ -181,7 +181,7 @@ spring:
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-    <!-- 配置druid监控spring jdbc -->
+    <!-- 配置druid监控Springjdbc -->
 	<bean id="druid-stat-interceptor"
 		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 	</bean>

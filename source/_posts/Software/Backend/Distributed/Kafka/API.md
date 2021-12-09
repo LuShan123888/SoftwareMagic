@@ -145,7 +145,7 @@ Producer<String, String> producer = new KafkaProducer<>(props);
 ### 同步发送
 
 - 同步发送的意思就是,一条消息发送之后,会阻塞当前线程,直至返回 ack
-- 由于 send 方法返回的是一个 Future 对象,根据 Futrue 对象的特点,我们也可以实现同步发送的效果,只需在调用 Future 对象的 get 方发即可
+- 由于 send 方法返回的是一个 Future 对象,根据 Futrue 对象的特点,我们也可以实现同步发送的效果,只需在调用 Future 对象的 get 方法即可
 
 ```java
 Producer<String, String> producer = new KafkaProducer<>(props);
@@ -182,7 +182,7 @@ public class CustomConsumer {
     props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     // 订阅主题 test-topic
-    consumer.subscribe(Arrays.asList("test-topic"));
+    consumer.subscribe(Collections.singletonList("test-topic"));
     while (true) {
       ConsumerRecords<String, String> records = consumer.poll(100);
       for (ConsumerRecord<String, String> record : records) {
@@ -253,7 +253,7 @@ public class SyncCommitOffset {
     //关闭自动提交 offset
     props.put("enable.auto.commit", "false");
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-    consumer.subscribe(Arrays.asList("first"));
+    consumer.subscribe(Collections.singletonList("test-topic"));
     while (true) {
       //消费者拉取数据
       ConsumerRecords<String, String> records = consumer.poll(100);
@@ -278,7 +278,7 @@ public class AsyncCommitOffset {
     //关闭自动提交
     props.put("enable.auto.commit", "false");
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-    consumer.subscribe(Arrays.asList("first"));
+    consumer.subscribe(Collections.singletonList("test-topic"));
     while (true) {
       ConsumerRecords<String, String> records = consumer.poll(100);
       for (ConsumerRecord<String, String> record : records) {

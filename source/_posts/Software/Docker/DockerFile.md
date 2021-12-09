@@ -1,10 +1,10 @@
 ---
-title: DockerFile
+title: Docker DockerFile
 categories:
 - Software
 - Docker
 ---
-# DockerFile
+# Docker DockerFile
 
 - Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
 
@@ -19,25 +19,48 @@ FROM nginx
 RUN echo '这是一个本地构建的nginx镜像' > /usr/share/nginx/html/index.html
 ```
 
+### COPY
+
+- 复制指令,从上下文目录中复制文件或者目录到容器里指定路径
+
+```dockerfile
+COPY [--chown=<user>:<group>] <源路径1>...  <目标路径>
+COPY [--chown=<user>:<group>] ["<源路径1>",...  "<目标路径>"]
+```
+
+- **[--chown=<user>:<group>]**:可选参数,用户改变复制到容器内文件的拥有者和属组
+- **<源路径>**:源文件或者源目录,这里可以是通配符表达式,其通配符规则要满足 Go 的 filepath.Match 规则
+
+```dockerfile
+COPY hom* /mydir/
+COPY hom?.txt /mydir/
+```
+
+- **<目标路径>**:容器内的指定路径,该路径不用事先建好,路径不存在的话,会自动创建
+- 可以使用 COPY 命令把前一阶段构建的产物拷贝到另一个镜像中
+
+```dockerfile
+COPY --from=0 /source/dubbo-admin-$version/docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+```
+
+### ADD
+
+- ADD 指令和 COPY 的使用格式一致(同样需求下,官方推荐使用 COPY),功能也类似,不同之处如下:
+- ADD 的优点:在执行 <源文件> 为 tar 压缩文件的话,压缩格式为 gzip, bzip2 以及 xz 的情况下,会自动复制并解压到 <目标路径>
+- ADD 的缺点:在不解压的前提下,无法复制 tar 压缩文件,会令镜像构建缓存失效,从而可能会令镜像构建变得比较缓慢,具体是否使用,可以根据是否需要自动解压来决定
+
 ### RUN
 
-- 用于执行后面跟着的命令行命令,有以下俩种格式:
-- shell 格式:
+- RUN 执行命令并创建新的镜像层，RUN 只影响如何构建镜像，所以镜像中不保留 RUN 命令
 
-```dockerfile
-RUN <命令行命令>
-# <命令行命令> 等同于,在终端操作的 shell 命令
+```shell
+# shell 格式:
+RUN <shell 命令>
+# exec 格式:
+RUN ["<可执行文件或命令>","<param1>","<param2>",...]
 ```
 
-- exec 格式:
-
-```dockerfile
-RUN ["可执行文件", "参数1", "参数2"]
-# 例如:
-# RUN ["./test.php", "dev", "offline"] 等价于 RUN ./test.php dev offline
-```
-
-**注意**:Dockerfile 的指令每执行一次都会在 docker 上新建一层,所以过多无意义的层,会造成镜像膨胀过大,例如:
+- **注意**:Dockerfile 的指令每执行一次都会在 docker 上新建一层,所以过多无意义的层,会造成镜像膨胀过大,例如:
 
 ```dockerfile
 FROM centos
@@ -57,90 +80,87 @@ RUN yum install wget \
 
 - 如上,以 **&&** 符号连接命令,这样执行后,只会创建 1 层镜像
 
-### COPY
+### ENTRYPOINT
 
-- 复制指令,从上下文目录中复制文件或者目录到容器里指定路径
-
-```dockerfile
-COPY [--chown=<user>:<group>] <源路径1>...  <目标路径>
-COPY [--chown=<user>:<group>] ["<源路径1>",...  "<目标路径>"]
-```
-
-- **[--chown=<user>:<group>]**:可选参数,用户改变复制到容器内文件的拥有者和属组
-- **<源路径>**:源文件或者源目录,这里可以是通配符表达式,其通配符规则要满足 Go 的 filepath.Match 规则,例如:
+- ENTRYPOINT 配置容器启动时运行的命令
+- 如果运行容器时使用了`--entrypoint`选项,此选项的参数可当作要运行的程序覆盖 ENTRYPOINT 指令指定的程序
+- **注意**:如果 Dockerfile 中如果存在多个 ENTRYPOINT 指令,仅最后一个生效
 
 ```dockerfile
-COPY hom* /mydir/
-COPY hom?.txt /mydir/
+# shell 格式:
+ENTRYPOINT <shell 命令>
+# exec 格式:
+ENTRYPOINT ["<可执行文件或命令>","<param1>","<param2>",...]
 ```
 
-- **<目标路径>**:容器内的指定路径,该路径不用事先建好,路径不存在的话,会自动创建
+#### 附加参数
 
-### ADD
+- exec格式的 ENTRYPOINT 能接收 CMD 或 `dock run <image>` 后的参数作为附加参数，相当于是往这个数组中附加元素。
 
-- ADD 指令和 COPY 的使用格式一致(同样需求下,官方推荐使用 COPY),功能也类似,不同之处如下:
-- ADD 的优点:在执行 <源文件> 为 tar 压缩文件的话,压缩格式为 gzip, bzip2 以及 xz 的情况下,会自动复制并解压到 <目标路径>
-- ADD 的缺点:在不解压的前提下,无法复制 tar 压缩文件,会令镜像构建缓存失效,从而可能会令镜像构建变得比较缓慢,具体是否使用,可以根据是否需要自动解压来决定
+**实例**
+
+- 假设已通过 Dockerfile 构建了 nginx:test 镜像:
+
+```dockerfile
+FROM nginx
+ENTRYPOINT ["nginx", "-c"] # 定参
+CMD ["/etc/nginx/nginx.conf"] # 变参
+```
+
+1. ENTRYPOINT 接收 CMD 的参数
+
+```dockerfile
+$ docker run nginx:test
+$ nginx -c /etc/nginx/nginx.conf
+```
+
+2. ENTRYPOINT 接收  `dock run <image>` 后的参数
+
+```dockerfile
+$ docker run  nginx:test /etc/nginx/new.conf
+$ nginx -c /etc/nginx/new.conf
+```
+
+-  CMD 在运行容器时被 `docker run <image>` 后的命令覆盖
+
+#### 环境变量替换
+
+- exec格式无法通过环境变量进行替换，原因是变量替换操作实际是由 "/bin/sh" 能完成的，shell 格式总是由 "/bin/sh -c" 启动的。如果 exec 格式的 ENTRYPOINT 也希望能解析变量，就得依样写成
+
+```
+ENTRYPOINT ["/bin/sh", "-c", "<param1>","<param2>",...]
+```
+
+##### 增强型 shell 格式
+
+- 这里补充一种 ENTRYPOINT 的声明格式，它实质是 shell 格式，为而把它单独列出来关键就在于 shell 的 `exec` 命令。此 `exec` 非前面 exec 格式中的 exec, 而是一个结结实实的 shell 命令。
+
+```shell
+ENTRYPOINT exec command param1 param2 ...
+```
+
+- 它仍然是 shell 格式，所以 inspect 镜像后看到的 ENTRYPOINT 是
+
+```shell
+ENTRYPOINT ["/bin/sh", "-c" "exec java $JAVA_OPTS -jar /app.jar"]
+```
+
+- 然而加了 `exec` 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell，而是用要被执行命令替换当前的 shell 进程，并且将老进程的环境清理掉，exec 后的命令不再是 shell 的子进程序，而且 exec 命令后的其它命令将不再执行。从执行效果上可以看到 exec 会把当前的 shell 关闭掉，直接启动它后面的命令。
+- 虽然它与之后的命令(如上 `exec java $JAVA_OPTS -jar /app.jar`）还是作为 "/bin/sh" 的第二个参数，但 `exec` 来了个金蝉脱壳，让这里的 `java` 进程得已作为一个 PID 1 的超级进程，进行使得这个 java 进程可以收到 SIGTERM 信号。或者理解 `exec` 为 "/bin/sh" 的子进程，但是借助于 `exec` 让它后面的进程启动在最顶端。
+- 另外，由于通过 "/bin/sh" 的搭桥，命令中的变量(如 $JAVA_OPTS) 也会被正确解析，因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式。
+- **注意**：exec 只会启动后面的第一个命令，`exec ls; top` 或 `exec ls && top` 只会执行 `ls` 命令。
+
+
 
 ### CMD
 
-- 类似于 RUN 指令,用于运行程序,但二者运行的时间点不同:
-    - CMD 在docker run 时运行
-    - RUN 是在 docker build
-- **作用**:为启动的容器指定默认要运行的程序,程序运行结束,容器也就结束,CMD 指令指定的程序可被 docker run 命令行参数中指定要运行的程序所覆盖
+- CMD 设置容器启动后默认执行的命令及其参数，但 CMD 能够在启动容器时被覆盖。
 - **注意**:如果 Dockerfile 中如果存在多个 CMD 指令,仅最后一个生效
 
 ```dockerfile
 CMD <shell 命令>
 CMD ["<可执行文件或命令>","<param1>","<param2>",...]
 CMD ["<param1>","<param2>",...]  # 该写法是为 ENTRYPOINT 指令指定的程序提供默认参数
-```
-
-- 推荐使用第二种格式,执行过程比较明确,第一种格式实际上在运行的过程中也会自动转换成第二种格式运行,并且默认可执行文件是 sh
-
-### ENTRYPOINT
-
-- 类似于 CMD 指令,但其不会被 docker run 的命令行参数指定的指令所覆盖,而且这些命令行参数会被当作参数送给 ENTRYPOINT 指令指定的程序
-- 但是, 如果运行 docker run 时使用了 --entrypoint 选项,此选项的参数可当作要运行的程序覆盖 ENTRYPOINT 指令指定的程序
-- **优点**:在执行 docker run 的时候可以指定 ENTRYPOINT 运行所需的参数
-- **注意**:如果 Dockerfile 中如果存在多个 ENTRYPOINT 指令,仅最后一个生效
-
-```dockerfile
-ENTRYPOINT ["<executeable>","<param1>","<param2>",...]
-```
-
-- 可以搭配 CMD 命令使用:一般是变参才会使用 CMD ,这里的 CMD 等于是在给 ENTRYPOINT 传参,以下示例会提到
-- 假设已通过 Dockerfile 构建了 nginx:test 镜像:
-
-```dockerfile
-FROM nginx
-
-ENTRYPOINT ["nginx", "-c"] # 定参
-CMD ["/etc/nginx/nginx.conf"] # 变参
-```
-
-1. 不传参运行
-
-```dockerfile
-$ docker run  nginx:test
-```
-
-- 容器内会默认运行以下命令,启动主进程
-
-```shell
-$ nginx -c /etc/nginx/nginx.conf
-```
-
-2. 传参运行
-
-```dockerfile
-$ docker run  nginx:test -c /etc/nginx/new.conf
-```
-
-- 容器内会默认运行以下命令,启动主进程(/etc/nginx/new.conf:假设容器内已有此文件)
-
-```shell
-$ nginx -c /etc/nginx/new.conf
 ```
 
 ### ENV
@@ -163,7 +183,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 ### ARG
 
-- 构建参数,与 ENV 作用一至,不过作用域不一样,ARG 设置的环境变量仅对 Dockerfile 内有效,也就是说只有 docker build 的过程中有效,构建好的镜像内不存在此环境变量
+- 构建参数,与 ENV 作用相同,不过作用域不一样,ARG 设置的环境变量仅对 Dockerfile 内有效,也就是说只有 docker build 的过程中有效,构建好的镜像内不存在此环境变量
 - 构建命令 docker build 中可以用 `--build-arg <参数名>=<值>` 来覆盖
 
 ```dockerfile
@@ -330,24 +350,24 @@ IMAGE             CREATED           CREATED BY                                  
 
 ## Dockerfile实例
 
-### 整合Spring Boot
+### Spring Boot 项目
 
 ```dockerfile
-FROM java:8
+FROM openjdk:8
 MAINTAINER Cian LuShan123888@Gmail.com
-COPY *.jar /test.jar
-CMD ["--server.port=8080"]
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/test.jar"]
+WORKDIR /
+COPY *.jar app.jar
+ENV JAVA_OPTS ""
+ENTRYPOINT exec java $JAVA_OPTS -jar /app.jar"
 ```
 
-### 整合Tomcat
+### SSM 项目
 
 ```dockerfile
 FROM tomcat:8.0.41-jre8
 MAINTAINER Cian LuShan123888@Gmail.com
-EXPOSE 8080
-COPY ./target/Tally-1.0.war /usr/local/tomcat/webapps/
+WORKDIR /usr/local/tomcat/webapps
+COPY *.war app.war
 ENTRYPOINT ["catalina.sh", "run"]
 ```
 
