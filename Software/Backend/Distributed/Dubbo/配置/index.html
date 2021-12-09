@@ -1,0 +1,2287 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#0a5fff">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Dubbo 配置  配置覆盖关系  方法级优先，接口级次之，全局配置再次之 如果级别一样，则消费方优先，提供方次之。   其中，服务提供方配置，通过URL经由注册中心传递给消费方。  dubbo:application  应用信息配置。对应的配置类：org.apache.dubbo.config.ApplicationConfig     属性 对应URL参数 类型 是否必填 缺省值 作用 描述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo 配置">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Dubbo 配置  配置覆盖关系  方法级优先，接口级次之，全局配置再次之 如果级别一样，则消费方优先，提供方次之。   其中，服务提供方配置，通过URL经由注册中心传递给消费方。  dubbo:application  应用信息配置。对应的配置类：org.apache.dubbo.config.ApplicationConfig     属性 对应URL参数 类型 是否必填 缺省值 作用 描述">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-08T13:20:34.000Z">
+<meta property="article:modified_time" content="2021-12-08T13:20:34.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Dubbo 配置 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Dubbo 配置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-08 21:20" pubdate>
+        2021年12月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Dubbo 配置</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年12月8日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1>Dubbo 配置</h1>
+<ul>
+<li><strong>配置覆盖关系</strong>
+<ul>
+<li>方法级优先，接口级次之，全局配置再次之</li>
+<li>如果级别一样，则消费方优先，提供方次之。</li>
+</ul>
+</li>
+<li>其中，服务提供方配置，通过URL经由注册中心传递给消费方。</li>
+</ul>
+<h2 id="dubbo-application">dubbo:application</h2>
+<ul>
+<li>应用信息配置。对应的配置类：<code>org.apache.dubbo.config.ApplicationConfig</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>application</td>
+<td>string</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>服务治理</td>
+<td>当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样，此参数不是匹配条件，你当前项目叫什么名字就填什么，和提供者消费者角色无关，比如：kylin应用调用了morgan应用的服务，则kylin项目配成kylin，morgan项目配成morgan，可能kylin也提供其它服务给别人使用，但kylin项目永远配成kylin，这样注册中心将显示kylin依赖于morgan</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>version</td>
+<td>application.version</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>当前应用的版本</td>
+<td>2.2.0以上版本</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>应用负责人，用于服务治理，请填写负责人公司邮箱前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>organization</td>
+<td>organization</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>组织名称(BU或部门)，用于注册中心区分服务来源，此配置项建议不要使用autoconfig，直接写死在配置中，比如china,intl,itu,crm,asc,dw,aliexpress等</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>architecture</td>
+<td>architecture</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>用于服务分层对应的架构。如，intl、china。不同的架构使用不同的分层。</td>
+<td>2.0.7以上版本</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>environment</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>应用环境，如：develop/test/product，不同环境使用不同的缺省值，以及作为只用于开发测试功能的限制条件</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>compiler</td>
+<td>compiler</td>
+<td>string</td>
+<td>可选</td>
+<td>javassist</td>
+<td>性能优化</td>
+<td>Java字节码编译器，用于动态类的生成，可选：jdk或javassist</td>
+<td>2.1.0以上版本</td>
+</tr>
+<tr>
+<td>logger</td>
+<td>logger</td>
+<td>string</td>
+<td>可选</td>
+<td>slf4j</td>
+<td>性能优化</td>
+<td>日志输出方式，可选：slf4j,jcl,log4j,log4j2,jdk</td>
+<td>2.2.0以上版本</td>
+</tr>
+<tr>
+<td>metadata-type</td>
+<td>metadata-type</td>
+<td>String</td>
+<td>可选</td>
+<td>local</td>
+<td>服务治理</td>
+<td>metadata 传递方式，是以 Provider 视角而言的，Consumer 侧配置无效，可选值有： remote - Provider 把 metadata 放到远端注册中心，Consumer 从注册中心获取 local - Provider 把 metadata 放在本地，Consumer 从 Provider 处直接获取</td>
+<td>2.7.6以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-registry">dubbo:registry</h2>
+<ul>
+<li>注册中心配置。对应的配置类： <code>org.apache.dubbo.config.RegistryConfig</code>。同时如果有多个不同的注册中心，可以声明多个 <code>&lt;dubbo:registry&gt;</code> 标签，并在 <code>&lt;dubbo:service&gt;</code> 或 <code>&lt;dubbo:reference&gt;</code> 的 <code>registry</code> 属性指定使用的注册中心。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>配置关联</td>
+<td>注册中心引用BeanId，可以在&lt;dubbo:service registry=“”&gt;或&lt;dubbo:reference registry=“”&gt;中引用此ID</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>address</td>
+<td><a href="host:port">host:port</a></td>
+<td>string</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>服务发现</td>
+<td>注册中心服务器地址，如果地址没有端口缺省为9090，同一集群内的多个地址用逗号分隔，如：ip:port,ip:port，不同集群的注册中心，请配置多个<a href="dubbo:registry">dubbo:registry</a>标签</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td><protocol></td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>服务发现</td>
+<td>注册中心地址协议，支持<code>dubbo</code>, <code>multicast</code>, <code>zookeeper</code>, <code>redis</code>, <code>consul(2.7.1)</code>, <code>sofa(2.7.2)</code>, <code>etcd(2.7.2)</code>, <code>nacos(2.7.2)</code>等协议</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>port</td>
+<td><port></td>
+<td>int</td>
+<td>可选</td>
+<td>9090</td>
+<td>服务发现</td>
+<td>注册中心缺省端口，当address没有带端口时使用此端口做为缺省值</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>username</td>
+<td><username></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>登录注册中心用户名，如果注册中心不需要验证可不填</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>password</td>
+<td><password></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>登录注册中心密码，如果注册中心不需要验证可不填</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>transport</td>
+<td>registry.transporter</td>
+<td>string</td>
+<td>可选</td>
+<td>netty</td>
+<td>性能调优</td>
+<td>网络传输方式，可选mina,netty</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>registry.timeout</td>
+<td>int</td>
+<td>可选</td>
+<td>5000</td>
+<td>性能调优</td>
+<td>注册中心请求超时时间(毫秒)</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>session</td>
+<td>registry.session</td>
+<td>int</td>
+<td>可选</td>
+<td>60000</td>
+<td>性能调优</td>
+<td>注册中心会话超时时间(毫秒)，用于检测提供者非正常断线后的脏数据，比如用心跳检测的实现，此时间就是心跳间隔，不同注册中心实现不一样。</td>
+<td>2.1.0以上版本</td>
+</tr>
+<tr>
+<td>file</td>
+<td>registry.file</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>使用文件缓存注册中心地址列表及服务提供者列表，应用重启时将基于此文件恢复，注意：两个注册中心不能使用同一文件存储</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>wait</td>
+<td>registry.wait</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>停止时等待通知完成时间(毫秒)</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>check</td>
+<td>check</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>注册中心不存在时，是否报错</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>register</td>
+<td>register</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>是否向此注册中心注册服务，如果设为false，将只订阅，不注册</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>subscribe</td>
+<td>subscribe</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>是否向此注册中心订阅服务，如果设为false，将只注册，不订阅</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>dynamic</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>服务是否动态注册，如果设为false，注册后将显示为disable状态，需人工启用，并且服务提供者停止时，也不会自动取消注册，需人工禁用。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>group</td>
+<td>group</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>服务治理</td>
+<td>服务注册分组，跨组的服务不会相互影响，也无法相互调用，适用于环境隔离。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>simplified</td>
+<td>simplified</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>注册到注册中心的URL是否采用精简模式的（与低版本兼容）</td>
+<td>2.7.0以上版本</td>
+</tr>
+<tr>
+<td>extra-keys</td>
+<td>extraKeys</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>在simplified=true时，extraKeys允许你在默认参数外将额外的key放到URL中，格式：“interface,key1,key2”。</td>
+<td>2.7.0以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-protocol">dubbo:protocol</h2>
+<ul>
+<li>服务提供者协议配置。对应的配置类： <code>org.apache.dubbo.config.ProtocolConfig</code>。同时，如果需要支持多协议，可以声明多个 <code>&lt;dubbo:protocol&gt;</code> 标签，并在 <code>&lt;dubbo:service&gt;</code> 中通过 <code>protocol</code> 属性指定使用的协议。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>配置关联</td>
+<td>协议BeanId，可以在&lt;dubbo:service protocol=“”&gt;中引用此ID，如果ID不填，缺省和name属性值一样，重复则在name后加序号。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>name</td>
+<td><protocol></td>
+<td>string</td>
+<td><strong>必填</strong></td>
+<td>dubbo</td>
+<td>性能调优</td>
+<td>协议名称</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>port</td>
+<td><port></td>
+<td>int</td>
+<td>可选</td>
+<td>dubbo协议缺省端口为20880，rmi协议缺省端口为1099，http和hessian协议缺省端口为80；如果<strong>没有</strong>配置port，则自动采用默认端口，如果配置为**-1**，则会分配一个没有被占用的端口。Dubbo 2.4.0+，分配的端口在协议缺省端口的基础上增长，确保端口段可控。</td>
+<td>服务发现</td>
+<td>服务端口</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>host</td>
+<td><host></td>
+<td>string</td>
+<td>可选</td>
+<td>自动查找本机IP</td>
+<td>服务发现</td>
+<td>-服务主机名，多网卡选择或指定VIP及域名时使用，为空则自动查找本机IP，-建议不要配置，让Dubbo自动获取本机IP</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>threadpool</td>
+<td>threadpool</td>
+<td>string</td>
+<td>可选</td>
+<td>fixed</td>
+<td>性能调优</td>
+<td>线程池类型，可选：fixed/cached</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>threads</td>
+<td>threads</td>
+<td>int</td>
+<td>可选</td>
+<td>200</td>
+<td>性能调优</td>
+<td>服务线程池大小(固定大小)</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>iothreads</td>
+<td>threads</td>
+<td>int</td>
+<td>可选</td>
+<td>cpu个数+1</td>
+<td>性能调优</td>
+<td>io线程池大小(固定大小)</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>accepts</td>
+<td>accepts</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>服务提供方最大可接受连接数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>payload</td>
+<td>payload</td>
+<td>int</td>
+<td>可选</td>
+<td>8388608(=8M)</td>
+<td>性能调优</td>
+<td>请求及响应数据包大小限制，单位：字节</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>codec</td>
+<td>codec</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>性能调优</td>
+<td>协议编码方式</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>serialization</td>
+<td>serialization</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为hessian2，rmi协议缺省为java，http协议缺省为json</td>
+<td>性能调优</td>
+<td>协议序列化方式，当协议支持多种序列化方式时使用，比如：dubbo协议的dubbo,hessian2,java,compactedjava，以及http协议的json等</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>accesslog</td>
+<td>accesslog</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>设为true，将向logger中输出访问日志，也可填写访问日志文件路径，直接把访问日志输出到指定文件</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>path</td>
+<td><path></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>提供者上下文路径，为服务path的前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>transporter</td>
+<td>transporter</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为netty</td>
+<td>性能调优</td>
+<td>协议的服务端和客户端实现类型，比如：dubbo协议的mina,netty等，可以分拆为server和client配置</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>server</td>
+<td>server</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为netty，http协议缺省为servlet</td>
+<td>性能调优</td>
+<td>协议的服务器端实现类型，比如：dubbo协议的mina,netty等，http协议的jetty,servlet等</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>client</td>
+<td>client</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为netty</td>
+<td>性能调优</td>
+<td>协议的客户端实现类型，比如：dubbo协议的mina,netty等</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>dispatcher</td>
+<td>dispatcher</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为all</td>
+<td>性能调优</td>
+<td>协议的消息派发方式，用于指定线程模型，比如：dubbo协议的all, direct, message, execution, connection等</td>
+<td>2.1.0以上版本</td>
+</tr>
+<tr>
+<td>queues</td>
+<td>queues</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>线程池队列大小，当线程池满时，排队等待执行的队列大小，建议不要设置，当线程池满时应立即失败，重试其它服务提供机器，而不是排队，除非有特殊需求。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>charset</td>
+<td>string</td>
+<td>可选</td>
+<td>UTF-8</td>
+<td>性能调优</td>
+<td>序列化编码</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>buffer</td>
+<td>buffer</td>
+<td>int</td>
+<td>可选</td>
+<td>8192</td>
+<td>性能调优</td>
+<td>网络读写缓冲区大小</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>heartbeat</td>
+<td>heartbeat</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>心跳间隔，对于长连接，当物理层断开时，比如拔网线，TCP的FIN消息来不及发送，对方收不到断开事件，此时需要心跳来帮助检查连接是否已断开</td>
+<td>2.0.10以上版本</td>
+</tr>
+<tr>
+<td>telnet</td>
+<td>telnet</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>所支持的telnet命令，多个命令用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>register</td>
+<td>register</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>该协议的服务是否注册到注册中心</td>
+<td>2.0.8以上版本</td>
+</tr>
+<tr>
+<td>contextpath</td>
+<td>contextpath</td>
+<td>String</td>
+<td>可选</td>
+<td>缺省为空串</td>
+<td>服务治理</td>
+<td></td>
+<td>2.0.6以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-service">dubbo:service</h2>
+<ul>
+<li>服务提供者暴露服务配置。对应的配置类：<code>org.apache.dubbo.config.ServiceConfig</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>interface</td>
+<td></td>
+<td>class</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>服务发现</td>
+<td>服务接口名</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>ref</td>
+<td></td>
+<td>object</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>服务发现</td>
+<td>服务对象实现引用</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>version</td>
+<td>version</td>
+<td>string</td>
+<td>可选</td>
+<td>0.0.0</td>
+<td>服务发现</td>
+<td>服务版本，建议使用两位数字版本，如：1.0，通常在接口不兼容时版本号才需要升级</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>group</td>
+<td>group</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>服务分组，当一个接口有多个实现，可以用分组区分</td>
+<td>1.0.7以上版本</td>
+</tr>
+<tr>
+<td>path</td>
+<td><path></td>
+<td>string</td>
+<td>可选</td>
+<td>缺省为接口名</td>
+<td>服务发现</td>
+<td>服务路径 (注意：1.0不支持自定义路径，总是使用接口名，如果有1.0调2.0，配置服务路径可能不兼容)</td>
+<td>1.0.12以上版本</td>
+</tr>
+<tr>
+<td>delay</td>
+<td>delay</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>延迟注册服务时间(毫秒) ，设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
+<td>1.0.14以上版本</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>timeout</td>
+<td>int</td>
+<td>可选</td>
+<td>1000</td>
+<td>性能调优</td>
+<td>远程服务调用超时时间(毫秒)</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>retries</td>
+<td>retries</td>
+<td>int</td>
+<td>可选</td>
+<td>2</td>
+<td>性能调优</td>
+<td>远程服务调用重试次数，不包括第一次调用，不需要重试请设为0</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>connections</td>
+<td>connections</td>
+<td>int</td>
+<td>可选</td>
+<td>100</td>
+<td>性能调优</td>
+<td>对每个提供者的最大连接数，rmi、http、hessian等短连接协议表示限制连接数，dubbo等长连接协表示建立的长连接个数</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>loadbalance</td>
+<td>loadbalance</td>
+<td>string</td>
+<td>可选</td>
+<td>random</td>
+<td>性能调优</td>
+<td>负载均衡策略，可选值：random,roundrobin,leastactive，分别表示：随机，轮询，最少活跃调用</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>async</td>
+<td>async</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>性能调优</td>
+<td>是否缺省异步执行，不可靠异步，只是忽略返回值，不阻塞执行线程</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>local</td>
+<td>local</td>
+<td>class/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，表示使用缺省代理类名，即：接口名 + Local后缀，已废弃，请使用stub</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>stub</td>
+<td>class/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，表示使用缺省代理类名，即：接口名 + Stub后缀，服务接口客户端本地代理类名，用于在客户端执行本地逻辑，如本地缓存等，该本地代理类的构造函数必须允许传入远程代理对象，构造函数如：public XxxServiceStub(XxxService xxxService)</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>mock</td>
+<td>mock</td>
+<td>class/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，表示使用缺省Mock类名，即：接口名 + Mock后缀，服务接口调用失败Mock实现类，该Mock类必须有一个无参构造函数，与Local的区别在于，Local总是被执行，而Mock只在出现非业务异常(比如超时，网络异常等)时执行，Local在远程调用之前执行，Mock在远程调用后执行。</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>token</td>
+<td>token</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>令牌验证，为空表示不开启，如果为true，表示随机生成动态令牌，否则使用静态令牌，令牌的作用是防止消费者绕过注册中心直接访问，保证注册中心的授权功能有效，如果使用点对点调用，需关闭令牌功能</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>registry</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>缺省向所有registry注册</td>
+<td>配置关联</td>
+<td>向指定注册中心注册，在多个注册中心时使用，值为<a href="dubbo:registry">dubbo:registry</a>的id属性，多个注册中心ID用逗号分隔，如果不想将该服务注册到任何registry，可将值设为N/A</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>provider</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>缺省使用第一个provider配置</td>
+<td>配置关联</td>
+<td>指定provider，值为<a href="dubbo:provider">dubbo:provider</a>的id属性</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>deprecated</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>服务是否过时，如果设为true，消费方引用时将打印服务过时警告error日志</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>dynamic</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>服务是否动态注册，如果设为false，注册后将显示后disable状态，需人工启用，并且服务提供者停止时，也不会自动取消册，需人工禁用。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>accesslog</td>
+<td>accesslog</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，将向logger中输出访问日志，也可填写访问日志文件路径，直接把访问日志输出到指定文件</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务负责人，用于服务治理，请填写负责人公司邮箱前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>document</td>
+<td>document</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务文档URL</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>weight</td>
+<td>int</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务权重</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>executes</td>
+<td>executes</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>服务提供者每服务每方法最大可并行执行请求数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>proxy</td>
+<td>proxy</td>
+<td>string</td>
+<td>可选</td>
+<td>javassist</td>
+<td>性能调优</td>
+<td>生成动态代理方式，可选：jdk/javassist</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>cluster</td>
+<td>string</td>
+<td>可选</td>
+<td>failover</td>
+<td>性能调优</td>
+<td>集群方式，可选：failover/failfast/failsafe/failback/forking</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>service.filter</td>
+<td>string</td>
+<td>可选</td>
+<td>default</td>
+<td>性能调优</td>
+<td>服务提供方远程调用过程拦截器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>listener</td>
+<td>exporter.listener</td>
+<td>string</td>
+<td>可选</td>
+<td>default</td>
+<td>性能调优</td>
+<td>服务提供方导出服务监听器名称，多个名称用逗号分隔</td>
+<td></td>
+</tr>
+<tr>
+<td>protocol</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>配置关联</td>
+<td>使用指定的协议暴露服务，在多协议时使用，值为<a href="dubbo:protocol">dubbo:protocol</a>的id属性，多个协议ID用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>layer</td>
+<td>layer</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务提供者所在的分层。如：biz、dao、intl:web、china:acton。</td>
+<td>2.0.7以上版本</td>
+</tr>
+<tr>
+<td>register</td>
+<td>register</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>该协议的服务是否注册到注册中心</td>
+<td>2.0.8以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-reference">dubbo:reference</h2>
+<ul>
+<li>服务消费者引用服务配置。对应的配置类： <code>org.apache.dubbo.config.ReferenceConfig</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>string</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>配置关联</td>
+<td>服务引用BeanId</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>interface</td>
+<td></td>
+<td>class</td>
+<td><strong>必填</strong></td>
+<td></td>
+<td>服务发现</td>
+<td>服务接口名</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>version</td>
+<td>version</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>服务版本，与服务提供者的版本一致</td>
+<td>1.0.0以上版本</td>
+</tr>
+<tr>
+<td>group</td>
+<td>group</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>服务分组，当一个接口有多个实现，可以用分组区分，必需和服务提供方一致</td>
+<td>1.0.7以上版本</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>timeout</td>
+<td>long</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的timeout</td>
+<td>性能调优</td>
+<td>服务方法调用超时时间(毫秒)</td>
+<td>1.0.5以上版本</td>
+</tr>
+<tr>
+<td>retries</td>
+<td>retries</td>
+<td>int</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的retries</td>
+<td>性能调优</td>
+<td>远程服务调用重试次数，不包括第一次调用，不需要重试请设为0</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>connections</td>
+<td>connections</td>
+<td>int</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的connections</td>
+<td>性能调优</td>
+<td>对每个提供者的最大连接数，rmi、http、hessian等短连接协议表示限制连接数，dubbo等长连接协表示建立的长连接个数</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>loadbalance</td>
+<td>loadbalance</td>
+<td>string</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的loadbalance</td>
+<td>性能调优</td>
+<td>负载均衡策略，可选值：random,roundrobin,leastactive，分别表示：随机，轮询，最少活跃调用</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>async</td>
+<td>async</td>
+<td>boolean</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的async</td>
+<td>性能调优</td>
+<td>是否异步执行，不可靠异步，只是忽略返回值，不阻塞执行线程</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>generic</td>
+<td>generic</td>
+<td>boolean</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的generic</td>
+<td>服务治理</td>
+<td>是否缺省泛化接口，如果为泛化接口，将返回GenericService</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>check</td>
+<td>check</td>
+<td>boolean</td>
+<td>可选</td>
+<td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的check</td>
+<td>服务治理</td>
+<td>启动时检查提供者是否存在，true报错，false忽略</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>url</td>
+<td>url</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>点对点直连服务提供者地址，将绕过注册中心</td>
+<td>1.0.6以上版本</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>stub</td>
+<td>class/boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务接口客户端本地代理类名，用于在客户端执行本地逻辑，如本地缓存等，该本地代理类的构造函数必须允许传入远程代理对象，构造函数如：public XxxServiceLocal(XxxService xxxService)</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>mock</td>
+<td>mock</td>
+<td>class/boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务接口调用失败Mock实现类名，该Mock类必须有一个无参构造函数，与Local的区别在于，Local总是被执行，而Mock只在出现非业务异常(比如超时，网络异常等)时执行，Local在远程调用之前执行，Mock在远程调用后执行。</td>
+<td>Dubbo1.0.13及其以上版本支持</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>cache</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>以调用参数为key，缓存返回结果，可选：lru, threadlocal, jcache等</td>
+<td>Dubbo2.1.0及其以上版本支持</td>
+</tr>
+<tr>
+<td>validation</td>
+<td>validation</td>
+<td>boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>是否启用JSR303标准注解验证，如果启用，将对方法参数上的注解进行校验</td>
+<td>Dubbo2.1.0及其以上版本支持</td>
+</tr>
+<tr>
+<td>proxy</td>
+<td>proxy</td>
+<td>boolean</td>
+<td>可选</td>
+<td>javassist</td>
+<td>性能调优</td>
+<td>选择动态代理实现策略，可选：javassist, jdk</td>
+<td>2.0.2以上版本</td>
+</tr>
+<tr>
+<td>client</td>
+<td>client</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>客户端传输类型设置，如Dubbo协议的netty或mina。</td>
+<td>Dubbo2.0.0以上版本支持</td>
+</tr>
+<tr>
+<td>registry</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>缺省将从所有注册中心获服务列表后合并结果</td>
+<td>配置关联</td>
+<td>从指定注册中心注册获取服务列表，在多个注册中心时使用，值为<a href="dubbo:registry">dubbo:registry</a>的id属性，多个注册中心ID用逗号分隔</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>调用服务负责人，用于服务治理，请填写负责人公司邮箱前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>actives</td>
+<td>actives</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>每服务消费者每服务每方法最大并发调用数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>cluster</td>
+<td>string</td>
+<td>可选</td>
+<td>failover</td>
+<td>性能调优</td>
+<td>集群方式，可选：failover/failfast/failsafe/failback/forking</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>reference.filter</td>
+<td>string</td>
+<td>可选</td>
+<td>default</td>
+<td>性能调优</td>
+<td>服务消费方远程调用过程拦截器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>listener</td>
+<td>invoker.listener</td>
+<td>string</td>
+<td>可选</td>
+<td>default</td>
+<td>性能调优</td>
+<td>服务消费方引用服务监听器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>layer</td>
+<td>layer</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务调用者所在的分层。如：biz、dao、intl:web、china:acton。</td>
+<td>2.0.7以上版本</td>
+</tr>
+<tr>
+<td>init</td>
+<td>init</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>性能调优</td>
+<td>是否在afterPropertiesSet()时饥饿初始化引用，否则等到有人注入或引用该实例时再初始化。</td>
+<td>2.0.10以上版本</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>protocol</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>只调用指定协议的服务提供方，其它协议忽略。</td>
+<td>2.2.0以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-provider">dubbo:provider</h2>
+<ul>
+<li>服务提供者缺省值配置。对应的配置类： <code>org.apache.dubbo.config.ProviderConfig</code>。同时该标签为 <code>&lt;dubbo:service&gt;</code> 和 <code>&lt;dubbo:protocol&gt;</code> 标签的缺省值设置。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>配置关联</td>
+<td>协议BeanId，可以在&lt;dubbo:service proivder=“”&gt;中引用此ID</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td><protocol></td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>性能调优</td>
+<td>协议名称</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>host</td>
+<td><host></td>
+<td>string</td>
+<td>可选</td>
+<td>自动查找本机IP</td>
+<td>服务发现</td>
+<td>服务主机名，多网卡选择或指定VIP及域名时使用，为空则自动查找本机IP，建议不要配置，让Dubbo自动获取本机IP</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>threads</td>
+<td>threads</td>
+<td>int</td>
+<td>可选</td>
+<td>200</td>
+<td>性能调优</td>
+<td>服务线程池大小(固定大小)</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>payload</td>
+<td>payload</td>
+<td>int</td>
+<td>可选</td>
+<td>8388608(=8M)</td>
+<td>性能调优</td>
+<td>请求及响应数据包大小限制，单位：字节</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>path</td>
+<td><path></td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>提供者上下文路径，为服务path的前缀</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>server</td>
+<td>server</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为netty，http协议缺省为servlet</td>
+<td>性能调优</td>
+<td>协议的服务器端实现类型，比如：dubbo协议的mina,netty等，http协议的jetty,servlet等</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>client</td>
+<td>client</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为netty</td>
+<td>性能调优</td>
+<td>协议的客户端实现类型，比如：dubbo协议的mina,netty等</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>codec</td>
+<td>codec</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo</td>
+<td>性能调优</td>
+<td>协议编码方式</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>serialization</td>
+<td>serialization</td>
+<td>string</td>
+<td>可选</td>
+<td>dubbo协议缺省为hessian2，rmi协议缺省为java，http协议缺省为json</td>
+<td>性能调优</td>
+<td>协议序列化方式，当协议支持多种序列化方式时使用，比如：dubbo协议的dubbo,hessian2,java,compactedjava，以及http协议的json,xml等</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>default</td>
+<td></td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>配置关联</td>
+<td>是否为缺省协议，用于多协议</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>service.filter</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务提供方远程调用过程拦截器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>listener</td>
+<td>exporter.listener</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务提供方导出服务监听器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>threadpool</td>
+<td>threadpool</td>
+<td>string</td>
+<td>可选</td>
+<td>fixed</td>
+<td>性能调优</td>
+<td>线程池类型，可选：fixed/cached/limit(2.5.3以上)/eager(2.6.x以上)</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>accepts</td>
+<td>accepts</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>服务提供者最大可接受连接数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>version</td>
+<td>version</td>
+<td>string</td>
+<td>可选</td>
+<td>0.0.0</td>
+<td>服务发现</td>
+<td>服务版本，建议使用两位数字版本，如：1.0，通常在接口不兼容时版本号才需要升级</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>group</td>
+<td>group</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务发现</td>
+<td>服务分组，当一个接口有多个实现，可以用分组区分</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>delay</td>
+<td>delay</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>延迟注册服务时间(毫秒)- ，设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>default.timeout</td>
+<td>int</td>
+<td>可选</td>
+<td>1000</td>
+<td>性能调优</td>
+<td>远程服务调用超时时间(毫秒)</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>retries</td>
+<td>default.retries</td>
+<td>int</td>
+<td>可选</td>
+<td>2</td>
+<td>性能调优</td>
+<td>远程服务调用重试次数，不包括第一次调用，不需要重试请设为0</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>connections</td>
+<td>default.connections</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>对每个提供者的最大连接数，rmi、http、hessian等短连接协议表示限制连接数，dubbo等长连接协表示建立的长连接个数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>loadbalance</td>
+<td>default.loadbalance</td>
+<td>string</td>
+<td>可选</td>
+<td>random</td>
+<td>性能调优</td>
+<td>负载均衡策略，可选值：random,roundrobin,leastactive，分别表示：随机，轮询，最少活跃调用</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>async</td>
+<td>default.async</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>性能调优</td>
+<td>是否缺省异步执行，不可靠异步，只是忽略返回值，不阻塞执行线程</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>stub</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，表示使用缺省代理类名，即：接口名 + Local后缀。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>mock</td>
+<td>mock</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，表示使用缺省Mock类名，即：接口名 + Mock后缀。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>token</td>
+<td>token</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>令牌验证，为空表示不开启，如果为true，表示随机生成动态令牌</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>registry</td>
+<td>registry</td>
+<td>string</td>
+<td>可选</td>
+<td>缺省向所有registry注册</td>
+<td>配置关联</td>
+<td>向指定注册中心注册，在多个注册中心时使用，值为<a href="dubbo:registry">dubbo:registry</a>的id属性，多个注册中心ID用逗号分隔，如果不想将该服务注册到任何registry，可将值设为N/A</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>dynamic</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>服务是否动态注册，如果设为false，注册后将显示后disable状态，需人工启用，并且服务提供者停止时，也不会自动取消册，需人工禁用。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>accesslog</td>
+<td>accesslog</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>设为true，将向logger中输出访问日志，也可填写访问日志文件路径，直接把访问日志输出到指定文件</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务负责人，用于服务治理，请填写负责人公司邮箱前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>document</td>
+<td>document</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务文档URL</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>weight</td>
+<td>int</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务权重</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>executes</td>
+<td>executes</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>服务提供者每服务每方法最大可并行执行请求数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>actives</td>
+<td>default.actives</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>每服务消费者每服务每方法最大并发调用数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>proxy</td>
+<td>proxy</td>
+<td>string</td>
+<td>可选</td>
+<td>javassist</td>
+<td>性能调优</td>
+<td>生成动态代理方式，可选：jdk/javassist</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>default.cluster</td>
+<td>string</td>
+<td>可选</td>
+<td>failover</td>
+<td>性能调优</td>
+<td>集群方式，可选：failover/failfast/failsafe/failback/forking</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>deprecated</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>服务是否过时，如果设为true，消费方引用时将打印服务过时警告error日志</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>queues</td>
+<td>queues</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>线程池队列大小，当线程池满时，排队等待执行的队列大小，建议不要设置，当线程池满时应立即失败，重试其它服务提供机器，而不是排队，除非有特殊需求。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>charset</td>
+<td>string</td>
+<td>可选</td>
+<td>UTF-8</td>
+<td>性能调优</td>
+<td>序列化编码</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>buffer</td>
+<td>buffer</td>
+<td>int</td>
+<td>可选</td>
+<td>8192</td>
+<td>性能调优</td>
+<td>网络读写缓冲区大小</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>iothreads</td>
+<td>iothreads</td>
+<td>int</td>
+<td>可选</td>
+<td>CPU + 1</td>
+<td>性能调优</td>
+<td>IO线程池，接收网络读写中断，以及序列化和反序列化，不处理业务，业务线程池参见threads配置，此线程池和CPU相关，不建议配置。</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>telnet</td>
+<td>telnet</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>所支持的telnet命令，多个命令用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td><a href="dubbo:service">dubbo:service</a></td>
+<td>contextpath</td>
+<td>contextpath</td>
+<td>String</td>
+<td>可选</td>
+<td>缺省为空串</td>
+<td>服务治理</td>
+<td></td>
+</tr>
+<tr>
+<td>layer</td>
+<td>layer</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务提供者所在的分层。如：biz、dao、intl:web、china:acton。</td>
+<td>2.0.7以上版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dubbo-consumer">dubbo:consumer</h2>
+<ul>
+<li>服务消费者缺省值配置。配置类： <code>org.apache.dubbo.config.ConsumerConfig</code> 。同时该标签为 <code>&lt;dubbo:reference&gt;</code> 标签的缺省值设置。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>对应URL参数</th>
+<th>类型</th>
+<th>是否必填</th>
+<th>缺省值</th>
+<th>作用</th>
+<th>描述</th>
+<th>兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>timeout</td>
+<td>default.timeout</td>
+<td>int</td>
+<td>可选</td>
+<td>1000</td>
+<td>性能调优</td>
+<td>远程服务调用超时时间(毫秒)</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>retries</td>
+<td>default.retries</td>
+<td>int</td>
+<td>可选</td>
+<td>2</td>
+<td>性能调优</td>
+<td>远程服务调用重试次数，不包括第一次调用，不需要重试请设为0,仅在cluster为failback/failover时有效</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>loadbalance</td>
+<td>default.loadbalance</td>
+<td>string</td>
+<td>可选</td>
+<td>random</td>
+<td>性能调优</td>
+<td>负载均衡策略，可选值：random,roundrobin,leastactive，分别表示：随机，轮询，最少活跃调用</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>async</td>
+<td>default.async</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>性能调优</td>
+<td>是否缺省异步执行，不可靠异步，只是忽略返回值，不阻塞执行线程</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>connections</td>
+<td>default.connections</td>
+<td>int</td>
+<td>可选</td>
+<td>100</td>
+<td>性能调优</td>
+<td>每个服务对每个提供者的最大连接数，rmi、http、hessian等短连接协议支持此配置，dubbo协议长连接不支持此配置</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>generic</td>
+<td>generic</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>服务治理</td>
+<td>是否缺省泛化接口，如果为泛化接口，将返回GenericService</td>
+<td>2.0.0以上版本</td>
+</tr>
+<tr>
+<td>check</td>
+<td>check</td>
+<td>boolean</td>
+<td>可选</td>
+<td>true</td>
+<td>服务治理</td>
+<td>启动时检查提供者是否存在，true报错，false忽略</td>
+<td>1.0.16以上版本</td>
+</tr>
+<tr>
+<td>proxy</td>
+<td>proxy</td>
+<td>string</td>
+<td>可选</td>
+<td>javassist</td>
+<td>性能调优</td>
+<td>生成动态代理方式，可选：jdk/javassist</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>owner</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>调用服务负责人，用于服务治理，请填写负责人公司邮箱前缀</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>actives</td>
+<td>default.actives</td>
+<td>int</td>
+<td>可选</td>
+<td>0</td>
+<td>性能调优</td>
+<td>每服务消费者每服务每方法最大并发调用数</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>default.cluster</td>
+<td>string</td>
+<td>可选</td>
+<td>failover</td>
+<td>性能调优</td>
+<td>集群方式，可选：failover/failfast/failsafe/failback/forking</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>reference.filter</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务消费方远程调用过程拦截器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>listener</td>
+<td>invoker.listener</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>性能调优</td>
+<td>服务消费方引用服务监听器名称，多个名称用逗号分隔</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>registry</td>
+<td></td>
+<td>string</td>
+<td>可选</td>
+<td>缺省向所有registry注册</td>
+<td>配置关联</td>
+<td>向指定注册中心注册，在多个注册中心时使用，值为<a href="dubbo:registry">dubbo:registry</a>的id属性，多个注册中心ID用逗号分隔，如果不想将该服务注册到任何registry，可将值设为N/A</td>
+<td>2.0.5以上版本</td>
+</tr>
+<tr>
+<td>layer</td>
+<td>layer</td>
+<td>string</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>服务调用者所在的分层。如：biz、dao、intl:web、china:acton。</td>
+<td>2.0.7以上版本</td>
+</tr>
+<tr>
+<td>init</td>
+<td>init</td>
+<td>boolean</td>
+<td>可选</td>
+<td>false</td>
+<td>性能调优</td>
+<td>是否在afterPropertiesSet()时饥饿初始化引用，否则等到有人注入或引用该实例时再初始化。</td>
+<td>2.0.10以上版本</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>cache</td>
+<td>string/boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>以调用参数为key，缓存返回结果，可选：lru, threadlocal, jcache等</td>
+<td>Dubbo2.1.0及其以上版本支持</td>
+</tr>
+<tr>
+<td>validation</td>
+<td>validation</td>
+<td>boolean</td>
+<td>可选</td>
+<td></td>
+<td>服务治理</td>
+<td>是否启用JSR303标准注解验证，如果启用，将对方法参数上的注解进行校验</td>
+<td>Dubbo2.1.0及其以上版本支持</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/">Backend</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Distributed/">Distributed</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Dubbo 概念</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Distributed/Dubbo/%E7%9B%B4%E8%BF%9E%E6%8F%90%E4%BE%9B%E8%80%85/">
+                        <span class="hidden-mobile">Dubbo 直连提供者</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

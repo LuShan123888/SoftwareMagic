@@ -163,8 +163,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%8E%9F%E7%90%86/" target="_self">
+          Dubbo 原理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%8E%9F%E7%90%86/" target="_self">
+          
+          
+            
+          
+          Dubbo 原理
+RPC 原理
+
+
+一次完整的RPC调用流程(同步调用)如下：
+
+
+服务消费方(client)调用以本地调用方式调用服务
+client stub 接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体
+client stub 找到服务地址，并将消息发送到服务端
+server stub 收到消息后进行解码
+server stub 根据解码结果调用本地的服务
+本地服务执行并将结果
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-09 10:12" pubdate>
+              2021-12-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/%E9%AB%98%E5%8F%AF%E7%94%A8/" target="_self">
+          Dubbo 高可用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/%E9%AB%98%E5%8F%AF%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          Dubbo 高可用
+宕机时的处理
+
+监控中心宕掉不影响使用，只是丢失部分采样数据
+数据库宕掉后，注册中心仍能通过缓存提供服务列表查询，但不能注册新服务
+注册中心对等集群，任意一台宕掉后，将自动切换到另一台
+注册中心全部宕掉后，服务提供者和服务消费者仍能通过本地缓存通讯
+服务提供者无状态，任意一台宕掉后，不影响使用
+服务提供者全部宕掉后，服务消费者应用将无法使用，并无限次重连等待服务提供者恢复
+
+负
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-09 00:01" pubdate>
+              2021-12-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/Software/Backend/Distributed/Dubbo/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Spring Boot 整合 Dubbo
+          Dubbo 初始化
         </a>
       </h1>
 
@@ -174,10 +294,10 @@
           
             
           
-          Spring Boot 整合 Dubbo
+          Dubbo 初始化
 定义接口依赖包
-12345public interface UserService &#123;    List&lt;UserAddress&gt; getUserAddressList(String userId);    &#125;
-12345678910111213@Data@AllArgsConstructorpublic class User
+12345public interface UserService &#123;    List&lt;UserAddress&gt; getUserAddressList(String userId);&#125;
+12345678910111213@Data@AllArgsConstructorpublic class UserAddress impleme
         </a>
       </p>
 
@@ -185,8 +305,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 21:43" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 23:57" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -215,26 +335,19 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
-          Dubbo admin
+        <a href="/Software/Backend/SpringFramework/SpringMVC/WebMvcConfigurer/" target="_self">
+          Spring MVC WebMvcConfigurer
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
+        <a href="/Software/Backend/SpringFramework/SpringMVC/WebMvcConfigurer/" target="_self">
           
           
             
           
-          Dubbo admin
-
-为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin
-
-修改配置
-
-修改./dubbo-admin-server/src/main/resources/application.properties
-
-12345678910111213# centers in dubbo2.7, if you want to add param
+          Spring MVC WebMvcConfigurer
+WebMvcConfigurer配置类其实是Spring内部的一种配置方式,采用JavaBean的形式来代替传统的xml配置文件形式进行针对框架个性化定制,基于java-based方式的Spring MVC配置,需要创建一个配置类并实现WebMvcConfigurer 接口,WebMvcConfigurerAdapter 抽象类是对WebMv
         </a>
       </p>
 
@@ -242,8 +355,117 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 11:05" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 22:50" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81/" target="_self">
+          Spring 数据验证
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81/" target="_self">
+          
+          
+            
+          
+          Spring 数据验证
+
+Java API规范 (JSR303) 定义了Bean校验的标准validation-api,但没有提供实现,hibernate validation是对这个规范的实现,并增加了校验注解如@Email,@Length等,Spring Validation是对hibernate validation的二次封装,用于支持Springmvc参数自动校验
+
+JSR-303
+
+
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 22:50" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/%E6%9C%AC%E5%9C%B0%E5%AD%98%E6%A0%B9/" target="_self">
+          Dubbo 本地存根
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/%E6%9C%AC%E5%9C%B0%E5%AD%98%E6%A0%B9/" target="_self">
+          
+          
+            
+          
+          Dubbo 本地存根
+
+在 Dubbo 中利用本地存根在客户端执行部分逻辑
+远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub （Stub 必须有可传入 Pr
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 22:49" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -272,24 +494,24 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Hadoop 初始化
+        <a href="/Software/Backend/SpringFramework/Spring/Druid/" target="_self">
+          Spring 整合Druid
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Backend/SpringFramework/Spring/Druid/" target="_self">
           
           
             
           
-          Hadoop 初始化
-绪论
+          Spring 整合Druid
+Druid 简介
 
-使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark
-集群共有5台机器, 主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave
-JDK 1.8
-Scala 2.11
+Java程序很大一部分要操作数据库,为了提高性能操作数据库的时候,又不得不使用数据库连接池
+Druid 是阿里巴巴开源平台上一个数据库连接池实现,结合了 C3P0,DBCP 等 DB 池的优点,同时加入了日志监控
+Druid 可以很好的监控 DB 池连接和 SQL 的执行情况,天生就是针对监控而生的 DB 连接池
+Druid已经在阿里巴巴部署了超过
         </a>
       </p>
 
@@ -297,8 +519,60 @@ Scala 2.11
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 11:00" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 22:49" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%90%AF%E5%8A%A8%E6%97%B6%E6%A3%80%E6%9F%A5/" target="_self">
+          Dubbo 启动时检查
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%90%AF%E5%8A%A8%E6%97%B6%E6%A3%80%E6%9F%A5/" target="_self">
+          
+          
+            
+          
+          Dubbo 启动时检查
+
+Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check=&quot;true&quot;。可以通过 check=&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。
+另外，如果你的 Spring 容器是懒加载的，或者通过
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 22:49" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -312,7 +586,7 @@ Scala 2.11
             
               <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Distributed/Hadoop/">Hadoop</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -327,22 +601,23 @@ Scala 2.11
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/System/Linux/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Linux 初始化
+        <a href="/Internet/HTTP/Cookie&amp;Session&amp;Token/" target="_self">
+          HTTP Cookie&amp;Session&amp;Token
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/System/Linux/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Internet/HTTP/Cookie&amp;Session&amp;Token/" target="_self">
           
           
             
           
-          Linux 初始化
-CentOS
-1$ docker run -d --name centos -h centos centos:7 /sbin/init
-包含桌面环境和 vnc 服务
-1234$ docker run -d -name centos_vnc \--hostname centos_vnc  \--user 0 -p 6911:6901 \consol/centos-xfce-vnc
+          HTTP Cookie&amp;Session&amp;Token
+Cookie
+
+Cookie是一个非常具体的东西,指的就是浏览器里面能永久存储的一种数据,仅仅是浏览器实现的一种数据存储功能
+Cookie由服务器生成,发送给浏览器,浏览器把Cookie以键值对形式保存到某个目录下的文本文件内,下一次请求同一网站时会把该Cookie发送给服务器
+由于Cookie是存在客户端上的,所以浏览器加入了一
         </a>
       </p>
 
@@ -350,8 +625,8 @@ CentOS
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 11:00" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 22:49" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -359,11 +634,9 @@ CentOS
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Software/">Software</a>
+              <a href="/categories/Internet/">Internet</a>
             
-              <a href="/categories/Software/System/">System</a>
-            
-              <a href="/categories/Software/System/Linux/">Linux</a>
+              <a href="/categories/Internet/HTTP/">HTTP</a>
             
           </div>
         
@@ -378,28 +651,26 @@ CentOS
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
-          Docker 网络
+        <a href="/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/" target="_self">
+          Dubbo 概念
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
+        <a href="/Software/Backend/Distributed/Dubbo/%E6%A6%82%E5%BF%B5/" target="_self">
           
           
             
           
-          Docker 网络
+          Dubbo 概念
 
-docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
-所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
-Docker中的所有的网络接口都是虚拟的
+Apache Dubbo |ˈdʌbəʊ| 是一款高性能,轻量级的开源Java RPC框架,它提供了三大核心能力:面向接口的远程方法调用,智能容错和负载均衡,以及服务自动注册和发现
+Dubbo官网 http://dubbo.apache.org/zh-cn/index.html
 
-port
+Dubbo 组成
 
-快捷地查看端口的绑定情况
 
-1$ dock
+服务提供者(Provider):暴露服务的服务提供方,服务提供者在启动时,向
         </a>
       </p>
 
@@ -407,109 +678,8 @@ port
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 11:00" pubdate>
-              2021-12-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Docker/">Docker</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Server/Tomcat/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Tomcat 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Server/Tomcat/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Tomcat 初始化
-安装和卸载
-Docker
-123456$ docker run -d -p 8888:8080 \--name tomcat \--hostname tomcat \-v /Users/cian/DockerVolumes/tomcat-8.0.41/webapps:/usr/local/tomcat/webapps \-v /Users/cian/DockerVolumes
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 10:58" pubdate>
-              2021-12-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Tomcat/">Tomcat</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
-          Kafka Eagle
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
-          
-          
-            
-          
-          Kafka Eagle
-
-Kafka Eagle是开源可视化和管理软件,它允许您查询,可视化,提醒和探索您的指标,无论它们存储在哪里,简单地说,它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
-
-Docker
-启动镜像
-123456$ docker run -d \-p 8048:8048 \--net zookeeper \--name kafka-eagle \--hostnam
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 10:54" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 21:24" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -523,171 +693,7 @@ Docker
             
               <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Docker/DockerFile/" target="_self">
-          DockerFile
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Docker/DockerFile/" target="_self">
-          
-          
-            
-          
-          DockerFile
-
-Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
-
-Dockerfile文件指令
-FROM
-
-定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx
-
-12FROM nginxRUN echo &#x27;这是一个本地构建的nginx镜像&#x27; &gt; /usr
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 10:42" pubdate>
-              2021-12-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Docker/">Docker</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
-          ZooKeeper 分布式锁
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
-          
-          
-            
-          
-          ZooKeeper 分布式锁
-
-分布式锁是控制分布式系统之间同步访问共享资源的一种方式
-下面介绍 zookeeper 如何实现分布式锁,讲解排他锁和共享锁两类分布式锁
-
-排他锁
-
-排他锁(Exclusive Locks),又被称为写锁或独占锁,如果事务T1对数据对象O1加上排他锁,那么整个加锁期间,只允许事务T1对O1进行读取和更新操作,其他任何事务都不能进行读或写
-
-1/exclusive_lo
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 00:10" pubdate>
-              2021-12-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Kafka 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Kafka 初始化
-安装
-Docker
-12345678910111213$ docker run -d \-p 9092:9092 \--name kafka \--net zookeeper \--hostname kafka \--env JMX_PORT=9999 \--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \--env KAFKA_LIST
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 00:09" pubdate>
-              2021-12-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -700,7 +706,7 @@ Docker
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/#board">73</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/#board">75</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

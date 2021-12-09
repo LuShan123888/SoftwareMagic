@@ -163,24 +163,42 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
-          ZooKeeper Curator
+        <a href="/Software/Backend/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/" target="_self">
+          Dubbo 配置
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
+        <a href="/Software/Backend/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/" target="_self">
           
           
             
           
-          ZooKeeper Curator
+          Dubbo 配置
 
-Curator 是 Netflix 公司开源的一套 zookeeper 客户端框架,解决了很多 Zookeeper 客户端非常底层的细节开发工作,包括连接重连,反复注册 Watcher 和 NodeExistsException 异常等
-Curator 包含了几个包:
+配置覆盖关系
 
-curator-framework:对 zookeeper 的底层 api 的一些封装
-c
+方法级优先，接口级次之，全局配置再次之
+如果级别一样，则消费方优先，提供方次之。
+
+
+其中，服务提供方配置，通过URL经由注册中心传递给消费方。
+
+dubbo:application
+
+应用信息配置。对应的配置类：org.apache.dubbo.config.ApplicationConfig
+
+
+
+
+属性
+对应URL参数
+类型
+是否必填
+缺省值
+作用
+描述
+
         </a>
       </p>
 
@@ -188,8 +206,8 @@ c
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 23:30" pubdate>
-              2021-12-06
+            <time datetime="2021-12-08 21:20" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -203,7 +221,7 @@ c
             
               <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -218,28 +236,26 @@ c
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/VCS/Git/gitignore/" target="_self">
-          Git gitignore
+        <a href="/Software/Backend/Distributed/Dubbo/%E7%9B%B4%E8%BF%9E%E6%8F%90%E4%BE%9B%E8%80%85/" target="_self">
+          Dubbo 直连提供者
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/VCS/Git/gitignore/" target="_self">
+        <a href="/Software/Backend/Distributed/Dubbo/%E7%9B%B4%E8%BF%9E%E6%8F%90%E4%BE%9B%E8%80%85/" target="_self">
           
           
             
           
-          Git gitignore
-匹配规则
+          Dubbo 直连提供者
 
-以斜杠/开头表示目录
-以星号*通配多个字符
-以问号?通配单个字符
-以方括号[]包含单个字符的匹配列表
-以叹号!表示不忽略(跟踪)匹配到的文件或目录
+Dubbo 中点对点的直连方式
+在开发及测试环境下，经常需要绕过注册中心，只测试指定服务提供者，这时候可能需要点对点直连，点对点直连方式，将以服务接口为单位，忽略注册中心的提供者列表，A 接口配置点对点，不影响 B 接口从注册中心获取列表。
 
-此外,git 对于 .ignore 配置文件是按行从上到下进行规则匹配的,意味着如果前面的规则匹配的范围更大,则后面的规则将不会生效
-123456.a       # 忽略所有 .a 结尾的文件!lib.a  
+
+通过 XML 配置
+
+如果是线上需求需要点对点，可在 &lt;dubbo:reference&gt; 中配置 url 指向提供者
         </a>
       </p>
 
@@ -247,65 +263,8 @@ c
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 22:47" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/VCS/">VCS</a>
-            
-              <a href="/categories/Software/VCS/Git/">Git</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
-          MySQL EXPLAIN
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
-          
-          
-            
-          
-          MySQL EXPLAIN
-
-EXPLAIN可以帮助开发人员分析SQL问题,EXPLAIN显示了MySQL如何使用索引来处理查询语句以及连接表,可以帮助选择更好的索引和写出更优化的查询语句
-MySQL在执行一条查询之前,会对发出的每条SQL进行分析,决定是否使用索引或全表扫描
-
-1Explain + SQL语句
-
-id
-
-id值越大优先级越高,越先被执行
-id如果相同,可以认为是一组,从上往下顺序
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 21:28" pubdate>
-              2021-12-06
+            <time datetime="2021-12-08 21:16" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -317,9 +276,9 @@ id如果相同,可以认为是一组,从上往下顺序
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -334,24 +293,28 @@ id如果相同,可以认为是一组,从上往下顺序
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
-          Kafka API
+        <a href="/Software/Common/Coding/" target="_self">
+          Coding
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
+        <a href="/Software/Common/Coding/" target="_self">
           
           
             
           
-          Kafka API
-Producer API
-API生产者流程
+          Coding
+Java SE
+基本数据类型和大小
 
-Kafka 的 Producer 发送消息采用的是异步发送的方式,在消息发送的过程中,涉及到了两个线程:main 线程和 sender 线程,以及一个线程共享变量: RecordAccumulator
-main 线程将消息发送给 RecordAccumulator
-sender 线程不断从 RecordAccumulator 中拉取
+boolean(1) = byte(1) &lt; short(2) = char(2) &lt; int(4) = float(4) &lt; long(8) = double(8)
+
+int 和 Integer的区别
+
+int是基本数据类型,Integer是他的包装类
+Integer保存的是对象的引用,int保存的变量值
+Integer默认是
         </a>
       </p>
 
@@ -359,8 +322,392 @@ sender 线程不断从 RecordAccumulator 中拉取
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 14:10" pubdate>
-              2021-12-06
+            <time datetime="2021-12-08 21:10" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Common/">Common</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%A4%9A%E7%89%88%E6%9C%AC/" target="_self">
+          Dubbo 多版本
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%A4%9A%E7%89%88%E6%9C%AC/" target="_self">
+          
+          
+            
+          
+          Dubbo 多版本
+
+在 Dubbo 中为同一个服务配置多个版本
+当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+可以按照以下的步骤进行版本迁移：
+
+在低压力时间段，先升级一半提供者为新版本
+再将所有消费者升级为新版本
+然后将剩下的一半提供者升级为新版本
+
+
+老版本服务提供者配置：
+
+1&lt;dubbo:service interface=&quot;com.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 18:00" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Docker/DockerFile/" target="_self">
+          Docker DockerFile
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Docker/DockerFile/" target="_self">
+          
+          
+            
+          
+          Docker DockerFile
+
+Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
+
+Dockerfile文件指令
+FROM
+
+定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx
+
+12FROM nginxRUN echo &#x27;这是一个本地构建的nginx镜像&#x27; &g
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:53" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Docker/">Docker</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Docker/Portainer/" target="_self">
+          Docker Portainer
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Docker/Portainer/" target="_self">
+          
+          
+            
+          
+          Docker Portainer
+
+Portainer是一个可视化的容器镜像的图形管理工具,利用Portainer可以轻松构建,管理和维护Docker环境
+
+安装
+1234567$ docker run -d \-p 9443:9443 \--name portainer \--hostname portainer \-v /var/run/docker.sock:/var/run/docker.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:40" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Docker/">Docker</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
+          Dubbo admin
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
+          
+          
+            
+          
+          Dubbo admin
+
+为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin
+
+Docker
+创建数据库
+
+创建名为dubbo_admin的Schema
+执行SQL语句./dubbo-admin-server/src/main/resources/schema.sql
+
+12345678910CREATE TABLE IF NOT EXISTS `m
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:26" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Alibaba Sentinel 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Alibaba Sentinel 初始化
+Docker
+启动容器
+12345$ docker run -d \-e JAVA_OPTS=&quot;-Dserver.port=8085 -Dcsp.sentinel.dashboard.server=localhost:8085 -Dproject.name=sentinel-dashboard&quot; \-p 8085:8085 \--nam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:25" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Sentinel/">Sentinel</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Shell/set%E5%91%BD%E4%BB%A4/" target="_self">
+          Shell set命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Shell/set%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          
+            
+          
+          Shell set命令
+
+set指令能设置所使用shell的执行方式，可依照不同的需求来做设置。
+
+语法
+1set [+-abCdefhHklmnpPtuvx]
+
+-a 　标示已修改的变量，以供输出至环境变量。
+-b 　使被中止的后台程序立刻回报执行状态。
+-C 　转向所产生的文件无法覆盖已存在的文件。
+-d 　Shell预设会用杂凑表记忆使用过的指令，以加速指令的执行。使用-d参数可取消。
+-e
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 15:18" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Shell/">Shell</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
+          Kafka Eagle
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
+          
+          
+            
+          
+          Kafka Eagle
+
+Kafka Eagle是开源可视化和管理软件,它允许您查询,可视化,提醒和探索您的指标,无论它们存储在哪里,简单地说,它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
+
+Docker
+启动容器
+123456$ docker run -d \-p 8048:8048 \--net zookeeper \--name kafka-eagle \--hostnam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 14:39" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -383,347 +730,11 @@ sender 线程不断从 RecordAccumulator 中拉取
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          Spring 日志
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          
-          
-            
-          
-          Spring 日志
-Logback
-
-Spring Boot默认使用的日志框架
-
-日志级别
-
-日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL
-
-Trace:是追踪,程序每推进一步就可以写个trace输出,所以trace应该会很多
-Debug:指出细粒度信息事件对调试应用程序是非常有帮助的
-Info:消息在粗粒
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 13:35" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          MySQL 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          MySQL 初始化
-Docker
-12345678$ docker run -d \-p 3306:3306 \--name mysql \--hostname mysql \-v ~/DockerVolumes/mysql/data:/var/lib/mysql \-v ~/DockerVolumes/mysql/conf:/etc/mysql \-e MYSQL_ROOT_PASSWORD=1
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 00:29" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          ZooKeeper 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          ZooKeeper 初始化
-安装
-Docker
-123456789$ docker network create zookeeper$ docker run -d \-p 2181:2181 \--name zookeeper \--net  zookeeper \--hostname zookeeper \-v ~/DockerVolumes/zookeeper/data:/data \-v ~
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 00:19" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Elasticsearch 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Elasticsearch 初始化
-安装
-Docker
-12345678910$ docker network create elastic$ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \--net elastic \--hostname elasticsearch \-e &quot;http.cors.enabled=t
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-05 17:56" pubdate>
-              2021-12-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          MySQL 问题解决
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          
-          
-            
-          
-          MySQL 问题解决
-MySQL数据库存入Date时显示不正常的问题
-
-由于JDBC参数Timezone与Mysql系统时区不一致导致的
-
-1. 后端使用UTC时间，返回前端时根据时区转化
-
-修改数据库连接配置
-
-1jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-
-在返回前端对象的时间字段上加上注解
-
-1234567@ApiModelProp
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-05 17:45" pubdate>
-              2021-12-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/" target="_self">
-          SQL 用户与权限
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/" target="_self">
-          
-          
-            
-          
-          SQL 用户与权限
-用户管理
-查看用户
-
-用户信息表
-
-1SELECT * FROM mysql.user
-添加用户
-12CREATE USER &#x27;用户名&#x27; IDENTIFIED BY [&#x27;PASSWORD&#x27;] [WITH] [DBAA|RESOURCE|CONNECT];CREATE USER test IDENTIFIED BY &#x27;123456
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-05 17:15" pubdate>
-              2021-12-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/">DCL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/#board">73</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/#board">75</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

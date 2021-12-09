@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Dubbo admin  为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin  修改配置  修改.&#x2F;dubbo-admin-server&#x2F;src&#x2F;main&#x2F;resources&#x2F;application.properties  12345678910111213# centers in dubbo2.7, if you want to add param">
+  <meta name="description" content="Dubbo admin  为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin  Docker 创建数据库  创建名为dubbo_admin的Schema 执行SQL语句.&#x2F;dubbo-admin-server&#x2F;src&#x2F;main&#x2F;resources&#x2F;schema.sql  12345678910CREATE TABLE IF NOT EXISTS &#96;m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo admin">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Distributed/Dubbo/admin/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Dubbo admin  为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin  修改配置  修改.&#x2F;dubbo-admin-server&#x2F;src&#x2F;main&#x2F;resources&#x2F;application.properties  12345678910111213# centers in dubbo2.7, if you want to add param">
+<meta property="og:description" content="Dubbo admin  为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin  Docker 创建数据库  创建名为dubbo_admin的Schema 执行SQL语句.&#x2F;dubbo-admin-server&#x2F;src&#x2F;main&#x2F;resources&#x2F;schema.sql  12345678910CREATE TABLE IF NOT EXISTS &#96;m">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-07T03:05:29.000Z">
-<meta property="article:modified_time" content="2021-12-07T03:05:29.000Z">
+<meta property="article:published_time" content="2021-12-08T08:26:46.000Z">
+<meta property="article:modified_time" content="2021-12-08T08:26:46.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-07 11:05" pubdate>
-        2021年12月7日 上午
+      <time datetime="2021-12-08 16:26" pubdate>
+        2021年12月8日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      2.5k 字
     </span>
   
 
@@ -214,7 +214,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年12月7日 上午
+                  本文最后更新于：2021年12月8日 下午
                 
               </p>
             
@@ -223,34 +223,32 @@
 <ul>
 <li>为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin</li>
 </ul>
-<h2 id="修改配置">修改配置</h2>
-<ul>
-<li>修改<code>./dubbo-admin-server/src/main/resources/application.properties</code></li>
-</ul>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># centers in dubbo2.7, if you want to add parameters, please add them to the url</span><br><span class="hljs-meta">admin.registry.address</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><span class="hljs-meta">admin.config-center</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><span class="hljs-meta">admin.metadata-report.address</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><br><span class="hljs-meta">admin.root.user.name</span>=<span class="hljs-string">root</span><br><span class="hljs-meta">admin.root.user.password</span>=<span class="hljs-string">123456</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># mysql</span><br><span class="hljs-meta">spring.datasource.driver-class-name</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-meta">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://mysql:3306/dubbo_admin?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=10000&amp;autoReconnect=true</span><br><span class="hljs-meta">spring.datasource.username</span>=<span class="hljs-string">root</span><br><span class="hljs-meta">spring.datasource.password</span>=<span class="hljs-string">123456</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>修改<code>./dubbo-admin-server/pom.xml</code></li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- the mysql db driver need user put it in /opt-libs path --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.25<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>provided<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="Docker">Docker</h2>
-<ol>
-<li>创建Dockerfile（需将下文配置文件存放至当前目录）</li>
-</ol>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> maven:<span class="hljs-number">3</span>-openjdk-<span class="hljs-number">8</span><br><span class="hljs-keyword">ARG</span> version<br><span class="hljs-keyword">RUN</span><span class="bash"> mkdir /<span class="hljs-built_in">source</span> &amp;&amp; wget https://github.com/apache/dubbo-admin/archive/<span class="hljs-variable">$version</span>.zip &amp;&amp; unzip -q <span class="hljs-variable">$version</span>.zip -d /<span class="hljs-built_in">source</span></span><br><span class="hljs-keyword">COPY</span><span class="bash"> application.properties /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-server/src/main/resources/application.properties</span><br><span class="hljs-keyword">COPY</span><span class="bash"> pom.xml /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-server/pom.xml</span><br><span class="hljs-keyword">WORKDIR</span><span class="bash"> /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span></span><br><span class="hljs-keyword">RUN</span><span class="bash"> mvn --batch-mode clean package -Dmaven.test.skip=<span class="hljs-literal">true</span></span><br><br><span class="hljs-keyword">FROM</span> openjdk:<span class="hljs-number">8</span>-jre<br><span class="hljs-keyword">ARG</span> version<br><span class="hljs-keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y tini</span><br><span class="hljs-keyword">COPY</span><span class="bash"> --from=0 /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-distribution/target/dubbo-admin-<span class="hljs-variable">$version</span>.jar /app.jar</span><br><span class="hljs-keyword">COPY</span><span class="bash"> --from=0 /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/docker/entrypoint.sh /usr/<span class="hljs-built_in">local</span>/bin/entrypoint.sh</span><br><br><span class="hljs-keyword">ENV</span> JAVA_OPTS <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">&quot;tini&quot;</span>, <span class="hljs-string">&quot;--&quot;</span>, <span class="hljs-string">&quot;/usr/local/bin/entrypoint.sh&quot;</span>]</span><br><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">8080</span><br><br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>构建Docker镜像</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker build -t lushan123888/dubbo-admin:0.4.0 --build-arg version=0.4.0 .</span><br></code></pre></td></tr></table></figure>
-<ol start="3">
-<li>启动Docker容器</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d \</span><br><span class="bash">-p 8080:8080 \</span><br><span class="bash">--name dubbo-admin \</span><br><span class="bash">--net zookeeper \</span><br><span class="bash">--hostname dubbo-admin \</span><br><span class="bash">lushan123888/dubbo-admin:0.4.0</span><br></code></pre></td></tr></table></figure>
-<h2 id="创建数据库">创建数据库</h2>
+<h3 id="创建数据库">创建数据库</h3>
 <ol>
 <li>创建名为<code>dubbo_admin</code>的Schema</li>
 <li>执行SQL语句<code>./dubbo-admin-server/src/main/resources/schema.sql</code></li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE IF NOT EXISTS `mock_rule` (<br>    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT &#x27;主键&#x27;,<br>    `service_name` varchar(255) DEFAULT NULL COMMENT &#x27;服务名&#x27;,<br>    `method_name` varchar(255) DEFAULT NULL COMMENT &#x27;方法名&#x27;,<br>    `rule` text COMMENT &#x27;规则&#x27;,<br>    `enable` tinyint(1) NOT NULL DEFAULT &#x27;1&#x27;,<br>    `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#x27;创建时间&#x27;,<br>    `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT &#x27;更新时间&#x27;,<br>    PRIMARY KEY (`id`)<br>);<br></code></pre></td></tr></table></figure>
+<h3 id="启动容器">启动容器</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d \</span><br><span class="bash">-p 8025:8080 \</span><br><span class="bash">--name dubbo-admin \</span><br><span class="bash">--net zookeeper \</span><br><span class="bash">--hostname dubbo-admin \</span><br><span class="bash">lushan123888/dubbo-admin:0.4.0</span><br></code></pre></td></tr></table></figure>
+<h3 id="构建Docker镜像">构建Docker镜像</h3>
+<ol>
+<li>修改<code>./dubbo-admin-server/src/main/resources/application.properties</code></li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># centers in dubbo2.7, if you want to add parameters, please add them to the url</span><br><span class="hljs-meta">admin.registry.address</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><span class="hljs-meta">admin.config-center</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><span class="hljs-meta">admin.metadata-report.address</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><br><span class="hljs-meta">admin.root.user.name</span>=<span class="hljs-string">root</span><br><span class="hljs-meta">admin.root.user.password</span>=<span class="hljs-string">123456</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"># mysql</span><br><span class="hljs-meta">spring.datasource.driver-class-name</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-meta">spring.datasource.url</span>=<span class="hljs-string">jdbc:mysql://mysql:3306/dubbo_admin?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=10000&amp;autoReconnect=true</span><br><span class="hljs-meta">spring.datasource.username</span>=<span class="hljs-string">root</span><br><span class="hljs-meta">spring.datasource.password</span>=<span class="hljs-string">123456</span><br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>修改<code>./dubbo-admin-server/pom.xml</code></li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- the mysql db driver need user put it in /opt-libs path --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.25<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>provided<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>创建Dockerfile（需将下文配置文件存放至当前目录）</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> maven:<span class="hljs-number">3</span>-openjdk-<span class="hljs-number">8</span><br><span class="hljs-keyword">ARG</span> version<br><span class="hljs-keyword">RUN</span><span class="bash"> mkdir /<span class="hljs-built_in">source</span> &amp;&amp; wget https://github.com/apache/dubbo-admin/archive/<span class="hljs-variable">$version</span>.zip &amp;&amp; unzip -q <span class="hljs-variable">$version</span>.zip -d /<span class="hljs-built_in">source</span></span><br><span class="hljs-keyword">COPY</span><span class="bash"> application.properties /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-server/src/main/resources/application.properties</span><br><span class="hljs-keyword">COPY</span><span class="bash"> pom.xml /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-server/pom.xml</span><br><span class="hljs-keyword">WORKDIR</span><span class="bash"> /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span></span><br><span class="hljs-keyword">RUN</span><span class="bash"> mvn --batch-mode clean package -Dmaven.test.skip=<span class="hljs-literal">true</span></span><br><br><span class="hljs-keyword">FROM</span> openjdk:<span class="hljs-number">8</span>-jre<br><span class="hljs-keyword">ARG</span> version<br><span class="hljs-keyword">COPY</span><span class="bash"> --from=0 /<span class="hljs-built_in">source</span>/dubbo-admin-<span class="hljs-variable">$version</span>/dubbo-admin-distribution/target/dubbo-admin-<span class="hljs-variable">$version</span>.jar /app.jar</span><br><span class="hljs-keyword">ENV</span> JAVA_OPTS <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> <span class="hljs-built_in">exec</span> java <span class="hljs-variable">$JAVA_OPTS</span> -Djava.security.egd=file:/dev/./urandom -jar /app.jar</span><br></code></pre></td></tr></table></figure>
+<ol start="4">
+<li>构建Docker镜像</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker build -t lushan123888/dubbo-admin:0.4.0 --build-arg version=0.4.0 .</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -284,9 +282,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/Dubbo/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                      <a href="/Software/Docker/Portainer/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot 整合 Dubbo</span>
+                        <span class="hidden-mobile">Docker Portainer</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -294,8 +292,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/">
-                        <span class="hidden-mobile">Hadoop 初始化</span>
+                      <a href="/Software/Backend/Distributed/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">Alibaba Sentinel 初始化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

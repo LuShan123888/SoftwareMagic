@@ -163,22 +163,27 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Docker/%E9%95%9C%E5%83%8F/" target="_self">
-          Docker 镜像
+        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
+          ZooKeeper 分布式锁
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Docker/%E9%95%9C%E5%83%8F/" target="_self">
+        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
           
           
             
           
-          Docker 镜像
-镜像加载原理
-UnionFS (联合文件系统)
+          ZooKeeper 分布式锁
 
-Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系统,它支持对文件系统的修改作为一次提交来一层层的叠加,同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem), Union文件系统是Docker镜像
+分布式锁是控制分布式系统之间同步访问共享资源的一种方式
+下面介绍 zookeeper 如何实现分布式锁,讲解排他锁和共享锁两类分布式锁
+
+排他锁
+
+排他锁(Exclusive Locks),又被称为写锁或独占锁,如果事务T1对数据对象O1加上排他锁,那么整个加锁期间,只允许事务T1对O1进行读取和更新操作,其他任何事务都不能进行读或写
+
+1/exclusive_lo
         </a>
       </p>
 
@@ -186,8 +191,8 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 20:47" pubdate>
-              2021-12-02
+            <time datetime="2021-12-07 00:10" pubdate>
+              2021-12-07
             </time>
           </div>
         
@@ -197,7 +202,11 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Docker/">Docker</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
             
           </div>
         
@@ -212,28 +221,21 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Frontend/Yarn/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Yarn 初始化
+        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Kafka 初始化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Frontend/Yarn/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          Yarn 初始化
+          Kafka 初始化
 安装
-1npm install -g yarn
-
-查看版本号
-
-1yarn --version
-换源
-1yarn config set registry https://registry.npm.taobao.org #配置国内镜像-淘宝镜像
-设置代理
-12yarn config set proxy http://username:password@server:portyarn
+Docker
+12345678910111213$ docker run -d \-p 9092:9092 \--name kafka \--net zookeeper \--hostname kafka \--env JMX_PORT=9999 \--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \--env KAFKA_LIST
         </a>
       </p>
 
@@ -241,8 +243,8 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 17:32" pubdate>
-              2021-12-02
+            <time datetime="2021-12-07 00:09" pubdate>
+              2021-12-07
             </time>
           </div>
         
@@ -252,9 +254,11 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Frontend/">Frontend</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Frontend/Yarn/">Yarn</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
             
           </div>
         
@@ -269,32 +273,24 @@ Union文件系统(UnionFS)是一种分层,轻量级并且高性能的文件系�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/Vim/Vundle/" target="_self">
-          Vim Vundle
+        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
+          ZooKeeper Curator
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/Vim/Vundle/" target="_self">
+        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
           
           
             
           
-          Vim Vundle
-简介
+          ZooKeeper Curator
 
-在.vimrc中跟踪和管理插件
-安装特定格式的插件(a.k.a. scripts/bundle)
-更新特定格式插件
-通过插件名称搜索Vim scripts中的插件
-清理未使用的插件
-可以通过单一按键完成以上操作,详见interactive mode
-Vundle 自动完成
-管理已安装插件的runtime path
-安装和更新后,重新生成帮助标签
+Curator 是 Netflix 公司开源的一套 zookeeper 客户端框架,解决了很多 Zookeeper 客户端非常底层的细节开发工作,包括连接重连,反复注册 Watcher 和 NodeExistsException 异常等
+Curator 包含了几个包:
 
-安装vundle
-1
+curator-framework:对 zookeeper 的底层 api 的一些封装
+c
         </a>
       </p>
 
@@ -302,8 +298,8 @@ Vundle 自动完成
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 17:02" pubdate>
-              2021-12-02
+            <time datetime="2021-12-06 23:30" pubdate>
+              2021-12-06
             </time>
           </div>
         
@@ -313,9 +309,11 @@ Vundle 自动完成
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/Vim/">Vim</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
             
           </div>
         
@@ -330,25 +328,28 @@ Vundle 自动完成
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/Vim/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Vim 初始化
+        <a href="/Software/VCS/Git/gitignore/" target="_self">
+          Git gitignore
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/Vim/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/VCS/Git/gitignore/" target="_self">
           
           
             
           
-          Vim 初始化
-安装
-123sudo apt-get install vim# ORsudo yum install vim
-配置文件
+          Git gitignore
+匹配规则
 
-~/.vimrc
+以斜杠/开头表示目录
+以星号*通配多个字符
+以问号?通配单个字符
+以方括号[]包含单个字符的匹配列表
+以叹号!表示不忽略(跟踪)匹配到的文件或目录
 
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465
+此外,git 对于 .ignore 配置文件是按行从上到下进行规则匹配的,意味着如果前面的规则匹配的范围更大,则后面的规则将不会生效
+123456.a       # 忽略所有 .a 结尾的文件!lib.a  
         </a>
       </p>
 
@@ -356,241 +357,8 @@ Vundle 自动完成
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 17:02" pubdate>
-              2021-12-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Vim/">Vim</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          ZShell 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          ZShell 初始化
-安装
-
-查看已有的Shell
-
-1cat /etc/shells
-1sudo apt-get install zsh
-
-查看版本
-
-1zsh --version
-
-设为默认shell
-
-1sudo usermod -s /bin/zsh username
-或者
-12chsh -s /bin/zshchsh -s `which zsh`
-
-如果要切换回去bash:
-
-1chsh
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 16:37" pubdate>
-              2021-12-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Zshell/">Zshell</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Tools/Zshell/OhMyZsh/" target="_self">
-          Zshell Oh My Zsh
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Tools/Zshell/OhMyZsh/" target="_self">
-          
-          
-            
-          
-          Zshell Oh My Zsh
-安装
-手动安装
-
-直接用git从github上面下载包
-
-1git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-备份已有的zshrc, 替换zshrc
-
-12cp ~/.zshrc ~/.zshrc.origcp ~/.oh-my-zsh/templates/zshrc.zsh-t
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 16:28" pubdate>
-              2021-12-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Zshell/">Zshell</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Tools/Maven/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Maven 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Tools/Maven/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Maven 初始化
-安装
-1brew install maven
-配置
-
-~/.m2/setting.xml
-
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152&lt;?xml version=&quot;1.0&quot; encoding=&quot;U
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 16:23" pubdate>
-              2021-12-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Tools/">Tools</a>
-            
-              <a href="/categories/Software/Tools/Maven/">Maven</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/VCS/Git/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Git 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/VCS/Git/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Git 初始化
-安装
-123sudo yum install git# ORsudo apt-get install git
-配置
-查看配置信息
-1git config --list
-设置用户名和邮箱
-12git config --global user.name &quot;用户名&quot;git config --global user.email &quot;邮箱&quot;
-查看当前的用
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 14:55" pubdate>
-              2021-12-02
+            <time datetime="2021-12-06 22:47" pubdate>
+              2021-12-06
             </time>
           </div>
         
@@ -617,32 +385,28 @@ Vundle 自动完成
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/SSH/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          SSH 初始化
+        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
+          MySQL EXPLAIN
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/SSH/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
           
           
             
           
-          SSH 初始化
-安装ssh
-CentOS
-1sudo yum install sshd
-Ubuntu
+          MySQL EXPLAIN
 
-安装 SSH
+EXPLAIN可以帮助开发人员分析SQL问题,EXPLAIN显示了MySQL如何使用索引来处理查询语句以及连接表,可以帮助选择更好的索引和写出更优化的查询语句
+MySQL在执行一条查询之前,会对发出的每条SQL进行分析,决定是否使用索引或全表扫描
 
-1apt-get install openssh-server
+1Explain + SQL语句
 
-安装 SSH 的客户端
+id
 
-1apt-get install openssh-client
-进程管理
-123service ssh start/stop/restart# ORservice sshd start/s
+id值越大优先级越高,越先被执行
+id如果相同,可以认为是一组,从上往下顺序
         </a>
       </p>
 
@@ -650,8 +414,8 @@ Ubuntu
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 14:40" pubdate>
-              2021-12-02
+            <time datetime="2021-12-06 21:28" pubdate>
+              2021-12-06
             </time>
           </div>
         
@@ -661,9 +425,11 @@ Ubuntu
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Tools/">Tools</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Tools/SSH/">SSH</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
             
           </div>
         
@@ -678,21 +444,24 @@ Ubuntu
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/System/Linux/%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/" target="_self">
-          Linux 安装软件
+        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
+          Kafka API
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/System/Linux/%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/" target="_self">
+        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
           
           
             
           
-          Linux 安装软件
-rpm
-语法
-1rpm [-acdhilqRsv][-b&lt;完成阶段&gt;&lt;套间档&gt;+][-e&lt;套件挡&gt;][-f&lt;文件&gt;+][-i&lt;套件档&gt;][-p&lt;套件档&gt;＋][-U&lt;套件档&gt;][-vv][--addsign&lt;套件档&gt;+][--allfiles][--allmatches][--bad
+          Kafka API
+Producer API
+API生产者流程
+
+Kafka 的 Producer 发送消息采用的是异步发送的方式,在消息发送的过程中,涉及到了两个线程:main 线程和 sender 线程,以及一个线程共享变量: RecordAccumulator
+main 线程将消息发送给 RecordAccumulator
+sender 线程不断从 RecordAccumulator 中拉取
         </a>
       </p>
 
@@ -700,8 +469,8 @@ rpm
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-02 14:36" pubdate>
-              2021-12-02
+            <time datetime="2021-12-06 14:10" pubdate>
+              2021-12-06
             </time>
           </div>
         
@@ -711,9 +480,226 @@ rpm
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/System/">System</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/System/Linux/">Linux</a>
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
+          Spring 日志
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
+          
+          
+            
+          
+          Spring 日志
+Logback
+
+Spring Boot默认使用的日志框架
+
+日志级别
+
+日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL
+
+Trace:是追踪,程序每推进一步就可以写个trace输出,所以trace应该会很多
+Debug:指出细粒度信息事件对调试应用程序是非常有帮助的
+Info:消息在粗粒
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-06 13:35" pubdate>
+              2021-12-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          MySQL 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          MySQL 初始化
+Docker
+12345678$ docker run -d \-p 3306:3306 \--name mysql \--hostname mysql \-v ~/DockerVolumes/mysql/data:/var/lib/mysql \-v ~/DockerVolumes/mysql/conf:/etc/mysql \-e MYSQL_ROOT_PASSWORD=1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-06 00:29" pubdate>
+              2021-12-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          ZooKeeper 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          ZooKeeper 初始化
+安装
+Docker
+123456789$ docker network create zookeeper$ docker run -d \-p 2181:2181 \--name zookeeper \--net  zookeeper \--hostname zookeeper \-v ~/DockerVolumes/zookeeper/data:/data \-v ~
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-06 00:19" pubdate>
+              2021-12-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Elasticsearch 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Elasticsearch 初始化
+安装
+Docker
+12345678910$ docker network create elastic$ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \--net elastic \--hostname elasticsearch \-e &quot;http.cors.enabled=t
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-05 17:56" pubdate>
+              2021-12-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
             
           </div>
         
@@ -726,7 +712,7 @@ rpm
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/#board">73</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/75/#board">75</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
