@@ -163,27 +163,31 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
-          ZooKeeper 分布式锁
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%A4%9A%E7%89%88%E6%9C%AC/" target="_self">
+          Dubbo 多版本
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" target="_self">
+        <a href="/Software/Backend/Distributed/Dubbo/%E5%A4%9A%E7%89%88%E6%9C%AC/" target="_self">
           
           
             
           
-          ZooKeeper 分布式锁
+          Dubbo 多版本
 
-分布式锁是控制分布式系统之间同步访问共享资源的一种方式
-下面介绍 zookeeper 如何实现分布式锁,讲解排他锁和共享锁两类分布式锁
+在 Dubbo 中为同一个服务配置多个版本
+当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+可以按照以下的步骤进行版本迁移：
 
-排他锁
+在低压力时间段，先升级一半提供者为新版本
+再将所有消费者升级为新版本
+然后将剩下的一半提供者升级为新版本
 
-排他锁(Exclusive Locks),又被称为写锁或独占锁,如果事务T1对数据对象O1加上排他锁,那么整个加锁期间,只允许事务T1对O1进行读取和更新操作,其他任何事务都不能进行读或写
 
-1/exclusive_lo
+老版本服务提供者配置：
+
+1&lt;dubbo:service interface=&quot;com.
         </a>
       </p>
 
@@ -191,8 +195,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 00:10" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 18:00" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -206,7 +210,7 @@
             
               <a href="/categories/Software/Backend/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -221,21 +225,27 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Kafka 初始化
+        <a href="/Software/Docker/DockerFile/" target="_self">
+          Docker DockerFile
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Kafka/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Docker/DockerFile/" target="_self">
           
           
             
           
-          Kafka 初始化
-安装
-Docker
-12345678910111213$ docker run -d \-p 9092:9092 \--name kafka \--net zookeeper \--hostname kafka \--env JMX_PORT=9999 \--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \--env KAFKA_LIST
+          Docker DockerFile
+
+Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明
+
+Dockerfile文件指令
+FROM
+
+定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx
+
+12FROM nginxRUN echo &#x27;这是一个本地构建的nginx镜像&#x27; &g
         </a>
       </p>
 
@@ -243,8 +253,276 @@ Docker
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-07 00:09" pubdate>
-              2021-12-07
+            <time datetime="2021-12-08 16:53" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Docker/">Docker</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Docker/Portainer/" target="_self">
+          Docker Portainer
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Docker/Portainer/" target="_self">
+          
+          
+            
+          
+          Docker Portainer
+
+Portainer是一个可视化的容器镜像的图形管理工具,利用Portainer可以轻松构建,管理和维护Docker环境
+
+安装
+1234567$ docker run -d \-p 9443:9443 \--name portainer \--hostname portainer \-v /var/run/docker.sock:/var/run/docker.
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:40" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Docker/">Docker</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
+          Dubbo admin
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Dubbo/admin/" target="_self">
+          
+          
+            
+          
+          Dubbo admin
+
+为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin
+
+Docker
+创建数据库
+
+创建名为dubbo_admin的Schema
+执行SQL语句./dubbo-admin-server/src/main/resources/schema.sql
+
+12345678910CREATE TABLE IF NOT EXISTS `m
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:26" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Alibaba Sentinel 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Alibaba Sentinel 初始化
+Docker
+启动容器
+12345$ docker run -d \-e JAVA_OPTS=&quot;-Dserver.port=8085 -Dcsp.sentinel.dashboard.server=localhost:8085 -Dproject.name=sentinel-dashboard&quot; \-p 8085:8085 \--nam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 16:25" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/Backend/Distributed/Sentinel/">Sentinel</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Shell/set%E5%91%BD%E4%BB%A4/" target="_self">
+          Shell set命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Shell/set%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          
+            
+          
+          Shell set命令
+
+set指令能设置所使用shell的执行方式，可依照不同的需求来做设置。
+
+语法
+1set [+-abCdefhHklmnpPtuvx]
+
+-a 　标示已修改的变量，以供输出至环境变量。
+-b 　使被中止的后台程序立刻回报执行状态。
+-C 　转向所产生的文件无法覆盖已存在的文件。
+-d 　Shell预设会用杂凑表记忆使用过的指令，以加速指令的执行。使用-d参数可取消。
+-e
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 15:18" pubdate>
+              2021-12-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Shell/">Shell</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
+          Kafka Eagle
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/Kafka/Eagle/" target="_self">
+          
+          
+            
+          
+          Kafka Eagle
+
+Kafka Eagle是开源可视化和管理软件,它允许您查询,可视化,提醒和探索您的指标,无论它们存储在哪里,简单地说,它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
+
+Docker
+启动容器
+123456$ docker run -d \-p 8048:8048 \--net zookeeper \--name kafka-eagle \--hostnam
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-08 14:39" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -273,24 +551,34 @@ Docker
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
-          ZooKeeper Curator
+        <a href="/Software/Tools/Hexo/%E5%91%BD%E4%BB%A4/" target="_self">
+          Hexo 命令
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/Curator/" target="_self">
+        <a href="/Software/Tools/Hexo/%E5%91%BD%E4%BB%A4/" target="_self">
           
           
             
           
-          ZooKeeper Curator
+          Hexo 命令
+新建文章
+1hexo new [layout] &lt;title&gt;
 
-Curator 是 Netflix 公司开源的一套 zookeeper 客户端框架,解决了很多 Zookeeper 客户端非常底层的细节开发工作,包括连接重连,反复注册 Watcher 和 NodeExistsException 异常等
-Curator 包含了几个包:
+新建一篇文章,如果没有设置 layout 的话,默认使用 _config.yml中的 default_layout 参数代替,如果标题包含空格的话,请使用引号括起来
 
-curator-framework:对 zookeeper 的底层 api 的一些封装
-c
+1hexo new &quot;post title with whitespace&quot;
+
+
+
+参数
+描述
+
+
+
+
+-p, --p
         </a>
       </p>
 
@@ -298,8 +586,8 @@ c
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 23:30" pubdate>
-              2021-12-06
+            <time datetime="2021-12-08 14:20" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -309,11 +597,9 @@ c
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
+              <a href="/categories/Software/Tools/Hexo/">Hexo</a>
             
           </div>
         
@@ -328,303 +614,30 @@ c
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/VCS/Git/gitignore/" target="_self">
-          Git gitignore
+        <a href="/Software/Tools/Hexo/%E4%B8%BB%E9%A2%98/" target="_self">
+          Hexo 主题
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/VCS/Git/gitignore/" target="_self">
+        <a href="/Software/Tools/Hexo/%E4%B8%BB%E9%A2%98/" target="_self">
           
           
             
           
-          Git gitignore
-匹配规则
-
-以斜杠/开头表示目录
-以星号*通配多个字符
-以问号?通配单个字符
-以方括号[]包含单个字符的匹配列表
-以叹号!表示不忽略(跟踪)匹配到的文件或目录
-
-此外,git 对于 .ignore 配置文件是按行从上到下进行规则匹配的,意味着如果前面的规则匹配的范围更大,则后面的规则将不会生效
-123456.a       # 忽略所有 .a 结尾的文件!lib.a  
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 22:47" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/VCS/">VCS</a>
-            
-              <a href="/categories/Software/VCS/Git/">Git</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
-          MySQL EXPLAIN
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/EXPLAIN/" target="_self">
-          
-          
-            
-          
-          MySQL EXPLAIN
-
-EXPLAIN可以帮助开发人员分析SQL问题,EXPLAIN显示了MySQL如何使用索引来处理查询语句以及连接表,可以帮助选择更好的索引和写出更优化的查询语句
-MySQL在执行一条查询之前,会对发出的每条SQL进行分析,决定是否使用索引或全表扫描
-
-1Explain + SQL语句
-
-id
-
-id值越大优先级越高,越先被执行
-id如果相同,可以认为是一组,从上往下顺序
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 21:28" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
-          Kafka API
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/Kafka/API/" target="_self">
-          
-          
-            
-          
-          Kafka API
-Producer API
-API生产者流程
-
-Kafka 的 Producer 发送消息采用的是异步发送的方式,在消息发送的过程中,涉及到了两个线程:main 线程和 sender 线程,以及一个线程共享变量: RecordAccumulator
-main 线程将消息发送给 RecordAccumulator
-sender 线程不断从 RecordAccumulator 中拉取
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 14:10" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/Kafka/">Kafka</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          Spring 日志
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          
-          
-            
-          
-          Spring 日志
-Logback
-
-Spring Boot默认使用的日志框架
-
-日志级别
-
-日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL
-
-Trace:是追踪,程序每推进一步就可以写个trace输出,所以trace应该会很多
-Debug:指出细粒度信息事件对调试应用程序是非常有帮助的
-Info:消息在粗粒
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 13:35" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          MySQL 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          MySQL 初始化
-Docker
-12345678$ docker run -d \-p 3306:3306 \--name mysql \--hostname mysql \-v ~/DockerVolumes/mysql/data:/var/lib/mysql \-v ~/DockerVolumes/mysql/conf:/etc/mysql \-e MYSQL_ROOT_PASSWORD=1
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 00:29" pubdate>
-              2021-12-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          ZooKeeper 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ZooKeeper/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          ZooKeeper 初始化
+          Hexo 主题
 安装
-Docker
-123456789$ docker network create zookeeper$ docker run -d \-p 2181:2181 \--name zookeeper \--net  zookeeper \--hostname zookeeper \-v ~/DockerVolumes/zookeeper/data:/data \-v ~
+1yarn add --save hexo-theme-fluid
+指定主题
+
+修改_config.yml
+
+123theme: fluid  # 指定主题language: zh-CN  # 指定语言,会影响主题显示的语言,按需修改
+主题配置
+
+_config.fluid.yml
+
+1234567891011121314151617181920212223242526272
         </a>
       </p>
 
@@ -632,8 +645,8 @@ Docker
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-06 00:19" pubdate>
-              2021-12-06
+            <time datetime="2021-12-08 14:20" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -643,11 +656,9 @@ Docker
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ZooKeeper/">ZooKeeper</a>
+              <a href="/categories/Software/Tools/Hexo/">Hexo</a>
             
           </div>
         
@@ -662,21 +673,31 @@ Docker
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Elasticsearch 初始化
+        <a href="/Software/Tools/Hexo/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+          Hexo 问题解决
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Tools/Hexo/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
           
           
             
           
-          Elasticsearch 初始化
-安装
-Docker
-12345678910$ docker network create elastic$ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \--net elastic \--hostname elasticsearch \-e &quot;http.cors.enabled=t
+          Hexo 问题解决
+更换Markdown渲染引擎
+
+删除原本渲染引擎
+
+1yarn remove hexo-renderer-marked --save
+
+安装Markdown-it渲染引擎
+
+1yarn add git+https://github.com/hexojs/hexo-renderer-markdown-it.git --save
+
+配置_config.yml
+
+1234567891
         </a>
       </p>
 
@@ -684,8 +705,8 @@ Docker
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-05 17:56" pubdate>
-              2021-12-05
+            <time datetime="2021-12-08 14:20" pubdate>
+              2021-12-08
             </time>
           </div>
         
@@ -695,11 +716,9 @@ Docker
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-              <a href="/categories/Software/Backend/Distributed/ElasticSearch/">ElasticSearch</a>
+              <a href="/categories/Software/Tools/Hexo/">Hexo</a>
             
           </div>
         

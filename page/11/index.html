@@ -163,37 +163,22 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Java/JavaSE/JVM/HotSpot/" target="_self">
-          JVM HotSpot
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
+          Redis 高可用问题
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Java/JavaSE/JVM/HotSpot/" target="_self">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
           
           
             
           
-          JVM HotSpot
-HotSpot 虚拟机对象
-对象的内存布局
+          Redis 高可用问题
+缓存穿透
 
-
-
-在 HotSpot 虚拟机中,对象的内存布局分为以下 3 块区域:
-
-
-对象头(Header)
-对象头记录了对象在运行过程中所需要使用的一些数据:
-
-Hash值
-GC 分代年龄
-锁状态标志
-线程持有的锁
-偏向线程 ID
-偏向时间戳
-
-对象头可能包含类型指针,通过该指针能确定对象属于哪个类,如果对象是一个数组,那么对象头还会包
+缓存穿透是指用户请求的数据在缓存中不存在即没有命中,同时在数据库中也不存在,导致用户每次请求该数据都要去数据库中查询一遍,如果有恶意攻击者不断请求系统中不存在的数据,会导致短时间大量请求落在数据库上,造成数据库压力过大,甚至导致数据库承受不住而宕机崩溃
+缓存穿透的关键在于在Redis中查不到key值,它和缓存击穿的根本区别在于传进来的key在Redis中是不存在
         </a>
       </p>
 
@@ -201,8 +186,8 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-21 22:15" pubdate>
-              2021-09-21
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
             </time>
           </div>
         
@@ -212,11 +197,11 @@ GC 分代年龄
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Java/">Java</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Java/JavaSE/">JavaSE</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
           </div>
         
@@ -231,22 +216,27 @@ GC 分代年龄
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Common/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" target="_self">
-          编程思想
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
+          Redis 哨兵模式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Common/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" target="_self">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          编程思想
-面向对象编程
+          Redis 哨兵模式
 
-对象所带有的数据被称为对象的属性(property),对象所带有的功能函数被称为对象的方法(method),当你定义一个类时,你可以定义类的属性名称,并写出类方法的相应代码
-如果你使用了类封装的方法, 调试和维护程序会变得容易很多,封装的思路是:一个类提供特定的类方法给其他要使用这个类的代码来调用,外部的代码不能直接访问对象的数据,这样调试就变得简单了,因为你知道要在类里
+哨兵模式能够后台监控主机是否故障,如果故障了则自动将从节点转换为主节点
+原理
+
+哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例,让 Redis服务器返回其运行状态
+当哨兵监测到主节点宕机,会自动将从节点切换成主节点,然后通过发布订阅模式通知其他的从节点,修改配置文件并切换主节点
+当主节点恢复连接后,原主节点自动转换为从节点,现主节点不变
+
+
         </a>
       </p>
 
@@ -254,8 +244,241 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-21 01:43" pubdate>
-              2021-09-21
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" target="_self">
+          Redis 主从复制
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" target="_self">
+          
+          
+            
+          
+          Redis 主从复制
+概念
+
+主从复制,是指将一台Redis服务器的数据,复制到其他的Redis服务器,前者称为主节点(master/leader) ,后者称为从节点(slave/follower)
+默认情况下,每台Redis服务器都是主节点,且一个主节点可以有0或多个从节点,但一个从节点只能有一个主节点,数据的复制是单向的,只能由主节点到从节点
+作用
+
+数据冗余:主从复制实现了数据的热备份,是持
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/Cluster/" target="_self">
+          Redis Cluster
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/Cluster/" target="_self">
+          
+          
+            
+          
+          Redis Cluster
+
+Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集
+优点
+
+通过利用多台计算机内存,可以构造更大的数据库
+通过利用多台计算机的多核,允许我们扩展计算能力
+通过利用多台计算机的网络适配器,可以扩展网络带宽
+
+
+Cluster 的不足
+
+涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+          SQL 事务
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+          
+          
+            
+          
+          SQL 事务
+
+事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
+
+ACID原则
+
+原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样
+一致性(Consist):一个事务可以封装状态改变
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Common/%E5%B9%82%E7%AD%89%E6%80%A7/" target="_self">
+          幂等性
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Common/%E5%B9%82%E7%AD%89%E6%80%A7/" target="_self">
+          
+          
+            
+          
+          幂等性
+
+幂等是一个数学与计算机学概念,在数学中某一元运算为幂等时,其作用在任一元素两次后会和其作用一次的结果相同,在计算机中编程中,一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同
+在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同,幂等函数,或幂等方法,是指可以使用相同参数重复执行,并能获得相同结果的函数,这些函数不会影响系统状态,也不用担心重复执
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
             </time>
           </div>
         
@@ -280,29 +503,21 @@ GC 分代年龄
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Frontend/Vue/Axios/" target="_self">
-          Vue 整合Axios
+        <a href="/Software/Java/JavaSE/JDBC/JDBC/" target="_self">
+          JDBC
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Frontend/Vue/Axios/" target="_self">
+        <a href="/Software/Java/JavaSE/JDBC/JDBC/" target="_self">
           
           
             
           
-          Vue 整合Axios
-安装
-1yarn add  axios vue-axios
-配置
+          JDBC
 
-/main.js
-
-1234import axios from &#x27;axios&#x27;import VueAxios from &#x27;vue-axios&#x27;Vue.use(VueAxios, axios)
-
-在组件中使用
-
-12345678910111213141516171819
+为支持Java程序的数据库操作功能,Java语言采用了专门的Java数据库编程接口JDBC(Java Database Connectivity),JDBC类库中的类依赖于驱动程序管理器,不同的数据库需要不同的驱动程序,驱动程序管理器的作用是通过JDBC驱动程序建立与数据库的连接
+作为一种有效的数据存储和管理工具,数据库技术得到广泛应用,目前主流的数据库技术是关系数据库,数据以行列的表
         </a>
       </p>
 
@@ -310,61 +525,8 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-19 13:08" pubdate>
-              2021-09-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Frontend/">Frontend</a>
-            
-              <a href="/categories/Software/Frontend/Vue/">Vue</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E6%B3%9B%E5%9E%8B/" target="_self">
-          Java 泛型
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/%E6%B3%9B%E5%9E%8B/" target="_self">
-          
-          
-            
-          
-          Java 泛型
-泛型简介
-
-泛型是Java语言的新特性,泛型的本质是参数化类型,也就是说,程序中的数据类型被指定为一个参数,泛型可以用在类,接口和方法的创建中,分别称为泛型类,泛型接口,泛型方法,下面给出了一个简单的使用泛型的例子,其中,&lt;&gt;之间定义形式类型参数
-
-[例14-1]:泛型的简单使用示例
-12345678910111213141516171819202122232425cl
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-17 19:17" pubdate>
-              2021-09-17
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
             </time>
           </div>
         
@@ -378,7 +540,7 @@ GC 分代年龄
             
               <a href="/categories/Software/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
+              <a href="/categories/Software/Java/JavaSE/JDBC/">JDBC</a>
             
           </div>
         
@@ -393,24 +555,57 @@ GC 分代年龄
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/Spring/SpringSecurity/" target="_self">
-          Spring 整合 Spring  Security
+        <a href="/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0/" target="_self">
+          Redis 用户签到
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/SpringSecurity/" target="_self">
+        <a href="/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0/" target="_self">
           
           
             
           
-          Spring 整合 Spring  Security
-简介
+          Redis 用户签到
+MySQL
 
-Spring Security 是针对Spring项目的安全框架,也是Spring Boot底层安全模块默认的技术选型,可以实现强大的Web安全控制,对于安全控制,仅需要引入 spring-boot-starter-security 模块,进行少量的配置,即可实现强大的安全管理
-Spring Security的两个主要目标
+如果使用关系型数据库来实现签到功能,核心表(user_sign)如下:
 
-认证(Au
+
+
+
+字段名
+描述
+
+
+
+
+id
+数据表主键(AUTO_INCREMENT)
+
+
+user_id
+用户ID
+
+
+sign_date
+签到日期(如 2021-03-09)
+
+
+amount
+连续签到天数
+
+
+
+
+
+签到:插入一条记录,并更新连续签到天数
+
+
+查询:根据签到日期查询
+
+
+统计:
         </a>
       </p>
 
@@ -418,8 +613,8 @@ Spring Security的两个主要目标
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-16 01:26" pubdate>
-              2021-09-16
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
             </time>
           </div>
         
@@ -431,65 +626,11 @@ Spring Security的两个主要目标
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Java/JavaSE/JVM/VMOptions/" target="_self">
-          JVM VM Options
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Java/JavaSE/JVM/VMOptions/" target="_self">
-          
-          
-            
-          
-          JVM VM Options
-
--Xms:设置初始化内存分配大小,默认本机内存的1/64
--Xmx:设置最大分配内存,默认本机内存的1/4
--XX:+HeapDumpOnOutOfMemoryError生成oomDump文件
--Xmn — 堆中新生代的大小
--XX:-DisableExplicitGC — 让System.gc()不产生任何作用
--XX:+PrintGCDetails — 打印GC
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-14 20:06" pubdate>
-              2021-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Java/">Java</a>
-            
-              <a href="/categories/Software/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/">实例</a>
             
           </div>
         
@@ -504,34 +645,25 @@ Spring Security的两个主要目标
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
-          JVM 内存结构
+        <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
+          Redis 底层数据结构
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
+        <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
           
           
             
           
-          JVM 内存结构
+          Redis 底层数据结构
+动态字符串SDS
 
-Java 虚拟机的内存空间分为 5 个部分:
+SDS是simple dynamic string的缩写。redis中所有场景中出现的字符串，基本都是由SDS来实现的
 
-程序计数器
-Java 虚拟机栈
-本地方法栈
-堆
-方法区
-
-
-
-
-注意:JDK 1.8 同 JDK 1.7 比,最大的差别就是:元空间(元数据区)取代了永久代,元空间的本质和永久代类似,都是对 JVM 规范中方法区的实现,不过元空间与永久代之间最大的区别在于:元空间并不在虚拟机中,而是使用本地内存
-程序计数器(PC 寄存器)
-
-定义
+所有非数字的key。例如set msg &quot;hello world&quot; 中的key msg
+字符串数据类型的值。例如`` set msg “hello world”中的msg的值”hello wolrd”
+非字符串数
         </a>
       </p>
 
@@ -539,67 +671,8 @@ Java 虚拟机栈
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-14 20:06" pubdate>
-              2021-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Java/">Java</a>
-            
-              <a href="/categories/Software/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Java/JavaSE/JVM/">JVM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/Swagger/" target="_self">
-          Spring 整合Swagger
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/Swagger/" target="_self">
-          
-          
-            
-          
-          Spring 整合Swagger
-简介
-
-号称世界上最流行的API框架
-Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
-直接运行,在线测试API
-支持多种语言(如:Java,PHP等)
-官网:https://swagger.io/
-
-pom.xml
-123456789101112&lt;!-- https://mvnrepository.com/artifact
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-13 23:06" pubdate>
-              2021-09-13
+            <time datetime="2021-09-25 22:37" pubdate>
+              2021-09-25
             </time>
           </div>
         
@@ -611,68 +684,11 @@ pom.xml
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringMVC/Controller/" target="_self">
-          Spring MVC 控制器
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringMVC/Controller/" target="_self">
-          
-          
-            
-          
-          Spring MVC 控制器
-
-控制器复杂提供访问应用程序的行为,通常通过接口定义或注解定义两种方法实现
-控制器负责解析用户的请求并将其转换为一个模型
-在Spring MVC中一个控制器类可以包含多个方法
-在Spring MVC中,对于Controller的配置方式有很多种
-
-创建Controller
-实现Controller接口
-
-Controller是一个接口,在org.springframe
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-13 22:37" pubdate>
-              2021-09-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
+              <a href="/categories/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
             
           </div>
         
@@ -687,25 +703,23 @@ Controller是一个接口,在org.springframe
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" target="_self">
-          Mybatis Plus 条件构造器
+        <a href="/Software/Backend/Mybatis/%E6%97%A5%E5%BF%97/" target="_self">
+          Mybatis 日志
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8/" target="_self">
+        <a href="/Software/Backend/Mybatis/%E6%97%A5%E5%BF%97/" target="_self">
           
           
             
           
-          Mybatis Plus 条件构造器
+          Mybatis 日志
+日志工厂
 
-说明
-
-以下出现的第一个入参boolean condition表示该条件是否加入最后生成的sql中
-以下代码块内的多个方法均为从上往下补全个别boolean类型的入参,默认为true
-以下出现的泛型Param均为Wrapper的子类实例(均具有AbstractWrapper的所有方法)
-以下方法在入参中出现的R为泛型,在普通wrapper中是String,在
+如果一个数据库相关的操作出现了问题, 我们可以根据输出的SQL语句快速排查问题
+对于以往的开发过程, 我们会经常使用到debug模式来调节, 跟踪我们的代码执行过程,但是现在使用Mybatis是基于接口, 配置文件的源代码执行过程,因此, 我们必须选择日志工具来作为我们开发, 调节程序的工具
+Mybatis内置的日志工厂提供日志功能, 具体的日志实现有以下几种工具
         </a>
       </p>
 
@@ -713,8 +727,8 @@ Controller是一个接口,在org.springframe
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-13 22:02" pubdate>
-              2021-09-13
+            <time datetime="2021-09-25 20:58" pubdate>
+              2021-09-25
             </time>
           </div>
         
@@ -727,8 +741,6 @@ Controller是一个接口,在org.springframe
               <a href="/categories/Software/Backend/">Backend</a>
             
               <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
             
           </div>
         
