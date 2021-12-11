@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java Atomic  使用java.util.concurrent.atomic提供的原子操作可以简化多线程编程:  原子操作实现了无锁的线程安全 适用于计数器,累加器等   Atomic类是通过无锁(lock-free)的方式实现的线程安全(thread-safe)访问,它的主要原理是利用了CAS:Compare and Set 以AtomicInteger为例,它提供的主要操作有:  增加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Atomic">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Atomic/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java Atomic  使用java.util.concurrent.atomic提供的原子操作可以简化多线程编程:  原子操作实现了无锁的线程安全 适用于计数器,累加器等   Atomic类是通过无锁(lock-free)的方式实现的线程安全(thread-safe)访问,它的主要原理是利用了CAS:Compare and Set 以AtomicInteger为例,它提供的主要操作有:  增加">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-12-6e8b1fe5d5993d17a4c5b69bb72ac51d89826.png">
+<meta property="article:published_time" content="2021-06-20T15:31:10.000Z">
+<meta property="article:modified_time" content="2021-06-20T15:31:10.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-12-6e8b1fe5d5993d17a4c5b69bb72ac51d89826.png">
+  
+  <title>Java Atomic - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Atomic">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-20 23:31" pubdate>
+        2021年6月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Atomic</h1>
+            
+            <div class="markdown-body">
+              <h1>Java Atomic</h1>
+<ul>
+<li>使用<code>java.util.concurrent.atomic</code>提供的原子操作可以简化多线程编程:
+<ul>
+<li>原子操作实现了无锁的线程安全</li>
+<li>适用于计数器,累加器等</li>
+</ul>
+</li>
+<li>Atomic类是通过无锁(lock-free)的方式实现的线程安全(thread-safe)访问,它的主要原理是利用了CAS:Compare and Set</li>
+<li>以<code>AtomicInteger</code>为例,它提供的主要操作有:
+<ul>
+<li>增加值并返回新值:<code>int addAndGet(int delta)</code></li>
+<li>加1后返回新值:<code>int incrementAndGet()</code></li>
+<li>获取当前值:<code>int get()</code></li>
+<li>用CAS方式设置:<code>int compareAndSet(int expect, int update)</code></li>
+</ul>
+</li>
+<li>如果我们自己通过CAS编写<code>incrementAndGet()</code>,它大概长这样:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">incrementAndGet</span><span class="hljs-params">(AtomicInteger <span class="hljs-keyword">var</span>)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> prev, next;<br>    <span class="hljs-keyword">do</span> &#123;<br>        prev = <span class="hljs-keyword">var</span>.get();<br>        next = prev + <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">while</span> ( ! <span class="hljs-keyword">var</span>.compareAndSet(prev, next));<br>    <span class="hljs-keyword">return</span> next;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过CAS操作并配合<code>do ... while</code>循环,形成了自旋锁,即使其他线程修改了<code>AtomicInteger</code>的值,最终的结果也是正确的</li>
+<li>我们利用<code>AtomicLong</code>可以编写一个多线程安全的全局唯一ID生成器:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IdGenerator</span> </span>&#123;<br>    AtomicLong <span class="hljs-keyword">var</span> = <span class="hljs-keyword">new</span> AtomicLong(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getNextId</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">var</span>.incrementAndGet();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在高度竞争的情况下,还可以使用Java 8提供的<code>LongAdder</code>和<code>LongAccumulator</code></li>
+</ul>
+<h2 id="CAS">CAS</h2>
+<ul>
+<li>CAS 全称是(Compare and Swap),即比较并交换,它是一种原子操作,同时 CAS 是一种乐观锁</li>
+<li>java.util.concurrent 包很多功能都是建立在 CAS 之上,如 ReenterLock 内部的 AQS,各种原子类,其底层都用 CAS来实现原子操作</li>
+<li>在这个机制中有三个核心的参数:
+<ul>
+<li>主内存中存放的共享变量的值:V(一般情况下这个V是内存的地址值,通过这个地址可以获得内存中的值)</li>
+<li>工作内存中共享变量的副本值,也叫预期值:A</li>
+<li>需要将共享变量更新到的最新值:B</li>
+</ul>
+</li>
+<li>当且仅当预期值 A 和内存值 V 相同时,将内存值修改为 B 并返回 true,否则什么都不做,并返回 false</li>
+</ul>
+<h3 id="CAS的Java实现">CAS的Java实现</h3>
+<blockquote>
+<p>CAS是一条CPU的原子指令(cmpxchg指令),不会造成所谓的数据不一致问题,Unsafe提供的CAS方法(如compareAndSwapXXX)底层实现即为CPU指令cmpxchg</p>
+</blockquote>
+<ul>
+<li>这里我们可以看一下Java的原子类AtomicLong.getAndIncrement()的实现,来理解一下CAS这一乐观锁(JDK 1.8)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicLong</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Number</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1927816293512124184L</span>;<br><br>    <span class="hljs-comment">// setup to use Unsafe.compareAndSwapLong for updates</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> valueOffset;<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            valueOffset = unsafe.objectFieldOffset<br>                (AtomicLong.class.getDeclaredField(<span class="hljs-string">&quot;value&quot;</span>));<br>        &#125; <span class="hljs-keyword">catch</span> (Exception ex) &#123; <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(ex); &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">long</span> value;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其中,valueOffset表示该变量在内存偏移地址,alueOffset的值在AtomicInteger初始化时,在静态代码块中通过Unsafe的objectFieldOffset方法获取,在AtomicInteger中提供的线程安全方法中,通过字段valueOffset的值可以定位到AtomicInteger对象中value的内存地址,从而可以根据CAS实现对value字段的原子操作</li>
+<li>看一下其中的两个典型的方法:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">compareAndSet</span><span class="hljs-params">(<span class="hljs-keyword">long</span> expect, <span class="hljs-keyword">long</span> update)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> unsafe.compareAndSwapLong(<span class="hljs-keyword">this</span>, valueOffset, expect, update);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getAndIncrement</span><span class="hljs-params">()</span> </span>&#123;<br>   <span class="hljs-keyword">return</span> unsafe.getAndAddLong(<span class="hljs-keyword">this</span>, valueOffset, <span class="hljs-number">1L</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意下面的图对valueOffset的标记含义,它是用来从baseAddress来检索具体的value的地址的偏移量</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-12-6e8b1fe5d5993d17a4c5b69bb72ac51d89826.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<ul>
+<li>看一下 <code>Unsafe.getAndAddLong()</code> 的实现:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getAndAddLong</span><span class="hljs-params">(Object var1, <span class="hljs-keyword">long</span> var2, <span class="hljs-keyword">long</span> var4)</span> </span>&#123;<br>   <span class="hljs-keyword">long</span> var6;<br>   <span class="hljs-keyword">do</span> &#123;<br>       var6 = <span class="hljs-keyword">this</span>.getLongVolatile(var1, var2); <span class="hljs-comment">// 不断读取volatile的值</span><br>   &#125; <span class="hljs-keyword">while</span>(!<span class="hljs-keyword">this</span>.compareAndSwapLong(var1, var2, var6, var6 + var4)); <span class="hljs-comment">// 不断循环直到满足条件</span><br>   <span class="hljs-keyword">return</span> var6;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以看到这个是一个非阻塞算法,非阻塞算法通常叫作乐观算法,因为它们继续操作的假设是不会有干扰,如果发现干扰,就会回退并重试</li>
+</ul>
+<blockquote>
+<p>这里需要注意使用了 <code>volatile</code> 原语保证了可见性,volatile变量的读操作,会强制使CPU缓存失效,强制从内存读取变量,因为并没有使用锁,只能通过其他机制保证内存的可见性问题</p>
+</blockquote>
+<h3 id="ABA问题">ABA问题</h3>
+<ul>
+<li>ABA问题是指在CAS操作时,其他线程将变量值A改为了B,但是又被改回了A,等到本线程使用期望值A与当前变量进行比较时,发现变量A没有变,于是CAS就将A值进行 了交换操作,但是实际上该值已经被其他线程改变过,这里就是产生ABA问题的关键,因为获取和比较是两个独立的操作,在获取数据之后和比较之前由于CPU对线程的调度问题,可能会发生很多事情,也就是这里的ABA</li>
+</ul>
+<blockquote>
+<p>比如我们常见的两个线程同时执行一个业务逻辑,如果不通过锁加以控制,同时判断 某个条件是合理的,然后都去执行某一个操作,可能会对业务有一定的影响,如货物超发或者计数值为负数等,而ABA问题只不过是其中的一个特例,一个线程执行完之后恰好结果和没有变更之前的值是一样的,但是A完成了一次业务逻辑,B在某种情况下需要对这件事情加以感知来控制自身的业务是否仍照旧就执行</p>
+</blockquote>
+<h4 id="原子引用解决ABA问题">原子引用解决ABA问题</h4>
+<ul>
+<li>既然不能加独占锁,那么只能通过乐观锁的机制来做了,即增加版本号:每次变量更新的时候把变量的版本号加1,那么A-B-A就会变成A(v1)-B(v2)-A(v3),只要变量被某一线程修改过,该变量对应的版本号就会发生递增变化,从而解决了ABA问题</li>
+</ul>
+<blockquote>
+<p>独占锁的替代就是乐观锁,即通过版本号控制,形成逻辑上的独占效果</p>
+</blockquote>
+<ul>
+<li>在JDK的 <code>java.util.concurrent.atomic</code>包中提供了 <code>AtomicStampedReference</code> 来解决ABA问题,该类的compareAndSet是该类的核心方法,实现如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">compareAndSet</span><span class="hljs-params">(V   expectedReference,</span></span><br><span class="hljs-params"><span class="hljs-function">                            V   newReference,</span></span><br><span class="hljs-params"><span class="hljs-function">                            <span class="hljs-keyword">int</span> expectedStamp,</span></span><br><span class="hljs-params"><span class="hljs-function">                            <span class="hljs-keyword">int</span> newStamp)</span> </span>&#123;<br>   Pair&lt;V&gt; current = pair;<br>   <span class="hljs-keyword">return</span><br>       expectedReference == current.reference &amp;&amp;<br>       expectedStamp == current.stamp &amp;&amp;<br>       ((newReference == current.reference &amp;&amp;<br>         newStamp == current.stamp) ||<br>        casPair(current, Pair.of(newReference, newStamp)));<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们可以发现,该类检查了当前引用与当前标志是否与预期相同,如果全部相等,才会以原子方式将该引用和该标志的值设为新的更新值,这样CAS操作中的比较就不依赖于变量的值了</li>
+</ul>
+<h4 id="ABA影响业务的例子">ABA影响业务的例子</h4>
+<ul>
+<li>这个还是比较难的,如果你没理解可能还是会局限于数字变化这种模糊的例子,如果真能结合业务或者实际的场景才算真的理解</li>
+<li>假设,现有一个用单向链表实现的堆栈,栈顶为A,这时线程T1已经知道A.next为B,然后希望用CAS将栈顶替换为B:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">head.compareAndSet(A,B);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在T1执行上面这条指令之前,线程T2介入,将A,B出栈,再push D,C,A,而对象B此时处于游离状态</li>
+<li>此时轮到线程T1执行CAS操作,检测发现栈顶仍为A,所以CAS成功,栈顶变为B,但实际上B.next为null,所以此时链表处于断裂的状态,即B是游离的,C和D是一起的,但不是栈顶元素,栈顶元素是B,但是B已经是栈里的唯一元素了,所以就造成了数据的丢失!</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/VCS/SVN/%E5%86%B2%E7%AA%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SVN 冲突</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Internet/HTTP/Cookie&amp;LocalStorage&amp;SessionStorage/">
+                        <span class="hidden-mobile">HTTP Cookie&LocalStorage&SessionStorage</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

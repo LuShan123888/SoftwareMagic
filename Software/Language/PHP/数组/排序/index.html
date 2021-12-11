@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="PHP 数组排序  排序(sorting)改变了数组中元素的键名来反映新顺序,例如,可以使用排序来按从大到小排列一个得分清单,按字母表排列一个名字清单或根据用户提交的消息多少来排列一组用户 PHP提供三种对数组排序的方法:按键排序,不改变键的按值排序,按值排序并改变键,每种排序方式都可以按升序,降序或用户定义函数的顺序排序  一次排序一个数组  PHP提供的数组排序函数如下表所示:     效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 数组排序">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E6%8E%92%E5%BA%8F/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="PHP 数组排序  排序(sorting)改变了数组中元素的键名来反映新顺序,例如,可以使用排序来按从大到小排列一个得分清单,按字母表排列一个名字清单或根据用户提交的消息多少来排列一组用户 PHP提供三种对数组排序的方法:按键排序,不改变键的按值排序,按值排序并改变键,每种排序方式都可以按升序,降序或用户定义函数的顺序排序  一次排序一个数组  PHP提供的数组排序函数如下表所示:     效果">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T07:45:26.000Z">
+<meta property="article:modified_time" content="2021-02-21T07:45:26.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>PHP 数组排序 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 数组排序">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 15:45" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 数组排序</h1>
+            
+            <div class="markdown-body">
+              <h1>PHP 数组排序</h1>
+<ul>
+<li>排序(sorting)改变了数组中元素的键名来反映新顺序,例如,可以使用排序来按从大到小排列一个得分清单,按字母表排列一个名字清单或根据用户提交的消息多少来排列一组用户</li>
+<li>PHP提供三种对数组排序的方法:按键排序,不改变键的按值排序,按值排序并改变键,每种排序方式都可以按升序,降序或用户定义函数的顺序排序</li>
+</ul>
+<h2 id="一次排序一个数组">一次排序一个数组</h2>
+<ul>
+<li>PHP提供的数组排序函数如下表所示:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>效果</th>
+<th>升序</th>
+<th>降序</th>
+<th>用户定义的顺序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按值排序数组,然后从0开始重新分配索引</td>
+<td>sort()</td>
+<td>rsort()</td>
+<td>usort()</td>
+</tr>
+<tr>
+<td>按值排序</td>
+<td>asort()</td>
+<td>arsort()</td>
+<td>uasort()</td>
+</tr>
+<tr>
+<td>按键排序</td>
+<td>ksort()</td>
+<td>krsort()</td>
+<td>uksort()</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>因为<code>sort()</code>,<code>rsort()</code>和<code>usort()</code>函数分配新的数字键来表示顺序,所以这些函数适用于索引数组(排列有序且连续),当需要回答像&quot;前10名的分数是多少?&quot;和&quot;按字母排序的第三个人是谁?&quot;这样的问题时,这些函数时很有用的,其他排序函数也可以用于索引数组,但是你只能使用诸如foreach和next这样的遍历函数来访问排列好的顺序</li>
+<li>要把名字按字母表升序排列,可以这样做:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$names</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;cath&#x27;</span>,<span class="hljs-string">&#x27;angela&#x27;</span>,<span class="hljs-string">&#x27;brad&#x27;</span>,<span class="hljs-string">&#x27;dave&#x27;</span>);<br>sort(<span class="hljs-variable">$name</span>);	<span class="hljs-comment">//$name现在为&#x27;angela&#x27;,&#x27;brad&#x27;,&#x27;cath&#x27;,&#x27;dave&#x27;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>要按字母表降序得到它们,用<code>rsort()</code>代替<code>sort()</code>即可</li>
+<li>假设有一个映射用户名到登录时间分钟数的关联数组,可以使用<code>arsort()</code>来显示表格的前3列,如下所示;</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$login</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;njt&#x27;</span> =&gt; <span class="hljs-number">415</span>,<br>               <span class="hljs-string">&#x27;kt&#x27;</span> =&gt; <span class="hljs-number">492</span>,<br>               <span class="hljs-string">&#x27;rl&#x27;</span> =&gt; <span class="hljs-number">652</span>,<br>               <span class="hljs-string">&#x27;jht&#x27;</span> =&gt; <span class="hljs-number">441</span>,<br>               <span class="hljs-string">&#x27;jj&#x27;</span> =&gt; <span class="hljs-number">441</span>,<br>               <span class="hljs-string">&#x27;wt&#x27;</span> =&gt; <span class="hljs-number">402</span>);<br>arsort(<span class="hljs-variable">$logins</span>);<br><span class="hljs-variable">$num_printed</span> = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">echo</span> (<span class="hljs-string">&quot;&lt;table&gt;\n&quot;</span>);<br><span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$logins</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$user</span> =&gt; <span class="hljs-variable">$time</span>)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;tr&gt;&lt;td&gt;<span class="hljs-subst">$user</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-subst">$time</span>&lt;/td&gt;&lt;/tr&gt;\n&quot;</span>);<br>    <span class="hljs-keyword">if</span>(++<span class="hljs-variable">$num_printed</span> == <span class="hljs-number">3</span>)&#123;<br>        <span class="hljs-keyword">break</span>;		<span class="hljs-comment">//在第三个后停止</span><br>    &#125;<br>&#125;<br><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;/table&gt;\n);</span><br><span class="hljs-string"></span><br><span class="hljs-string">&lt;table&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;rl&lt;/td&gt;&lt;td&gt;652&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;kt&lt;/td&gt;&lt;td&gt;492&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;jht&lt;/td&gt;&lt;td&gt;441&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;/table&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果想要表格按用户名的升序显示,使用<code>ksort()</code>:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$login</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;njt&#x27;</span> =&gt; <span class="hljs-number">415</span>,<br>               <span class="hljs-string">&#x27;kt&#x27;</span> =&gt; <span class="hljs-number">492</span>,<br>               <span class="hljs-string">&#x27;rl&#x27;</span> =&gt; <span class="hljs-number">652</span>,<br>               <span class="hljs-string">&#x27;jht&#x27;</span> =&gt; <span class="hljs-number">441</span>,<br>               <span class="hljs-string">&#x27;jj&#x27;</span> =&gt; <span class="hljs-number">441</span>,<br>               <span class="hljs-string">&#x27;wt&#x27;</span> =&gt; <span class="hljs-number">402</span>);<br>ksort(<span class="hljs-variable">$logins</span>);<br><span class="hljs-variable">$num_printed</span> = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">echo</span> (<span class="hljs-string">&quot;&lt;table&gt;\n&quot;</span>);<br><span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$logins</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$user</span> =&gt; <span class="hljs-variable">$time</span>)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;tr&gt;&lt;td&gt;<span class="hljs-subst">$user</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-subst">$time</span>&lt;/td&gt;&lt;/tr&gt;\n&quot;</span>);<br>&#125;<br><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;/table&gt;\n);</span><br><span class="hljs-string"></span><br><span class="hljs-string">&lt;table&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;jht&lt;/td&gt;&lt;td&gt;441&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;jj&lt;/td&gt;&lt;td&gt;441&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;kt&lt;/td&gt;&lt;td&gt;492&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;njt&lt;/td&gt;&lt;td&gt;415&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;rl&lt;/td&gt;&lt;td&gt;652&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;tr&gt;&lt;td&gt;wt&lt;/td&gt;&lt;td&gt;402&lt;/td&gt;&lt;/tr&gt;</span><br><span class="hljs-string">&lt;/table&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果使用&quot;用户自定义顺序&quot;,你需要提供一个 函数,该函数接收两个值并返回指定排序数组中两个值的顺序,如果第一个值时函数返回1,如果第一个值小于第二个值则返回-1,如果两个值对于用户定义的顺序相等,则返回0</li>
+<li>下例在相同的数据上尝试使用不同的排序函数</li>
+</ul>
+<p><strong>示例5-3</strong>:数组排序</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">user_sort</span>(<span class="hljs-params"><span class="hljs-variable">$a</span>,<span class="hljs-variable">$b</span></span>)</span>&#123;<br>    <span class="hljs-comment">//smarts is all-important,so sort it first</span><br>    <span class="hljs-comment">//smarts是首要的,所以先对它排序</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$b</span> == <span class="hljs-string">&#x27;smarts&#x27;</span>)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-variable">$a</span> == <span class="hljs-string">&#x27;smarts&#x27;</span>)&#123;<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span>(<span class="hljs-variable">$a</span> == <span class="hljs-variable">$b</span>) ? <span class="hljs-number">0</span> : ((<span class="hljs-variable">$a</span> &lt; <span class="hljs-variable">$b</span>) ? -<span class="hljs-number">1</span> : <span class="hljs-number">1</span>);<br>&#125;<br><span class="hljs-variable">$values</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;name&#x27;</span> =&gt; <span class="hljs-string">&#x27;Buzz Lightyear&#x27;</span>,<br>                <span class="hljs-string">&#x27;email_address&#x27;</span> =&gt; <span class="hljs-string">&#x27;buzz@starcommand.gal&#x27;</span>,<br>                <span class="hljs-string">&#x27;age&#x27;</span> =&gt; <span class="hljs-number">32</span>,<br>                <span class="hljs-string">&#x27;smarta&#x27;</span> =&gt; <span class="hljs-string">&#x27;some&#x27;</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$submitted</span>)&#123;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$sort_type</span> == <span class="hljs-string">&#x27;usort&#x27;</span>||<span class="hljs-variable">$sort_type</span> == <span class="hljs-string">&#x27;uksort&#x27;</span>||<span class="hljs-variable">$sort_type</span> == <span class="hljs-string">&#x27;uasort&#x27;</span>)&#123;<br>        <span class="hljs-variable">$sort_type</span>(<span class="hljs-variable">$values</span>);<br>    &#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br>    &lt;form action=<span class="hljs-string">&quot;index.php&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>&gt;<br>    &lt;p&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;sort&quot;</span> checked=<span class="hljs-string">&quot;checked&quot;</span>/&gt;Standard sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;rsort&quot;</span> /&gt;Reverse sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;usort&quot;</span> /&gt;User-defined sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;ksort&quot;</span> /&gt;Key sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;krsort&quot;</span> /&gt;Reverse key sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;uksort&quot;</span> /&gt;User-defined key sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;asort&quot;</span> /&gt;Value sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;arsort&quot;</span> /&gt;Value Reverse sort&lt;br/&gt;<br>    &lt;input type=<span class="hljs-string">&quot;radio&quot;</span> name=<span class="hljs-string">&quot;sort_type&quot;</span> value=<span class="hljs-string">&quot;uasort&quot;</span> /&gt;User-defined Value sort&lt;br/&gt;<br>    &lt;/p&gt;<br>    &lt;p align=<span class="hljs-string">&quot;center&quot;</span>&gt;<br>    &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;Sort&quot;</span> name=<span class="hljs-string">&quot;submitted&quot;</span>/&gt;<br>    &lt;/p&gt;<br>    &lt;p&gt;<br>    Values<span class="hljs-meta">&lt;?=</span><span class="hljs-variable">$submitted</span> ? <span class="hljs-string">&quot;sorted by <span class="hljs-subst">$sort_type</span>&quot;</span> : <span class="hljs-string">&quot;unsorted&quot;</span>;<span class="hljs-meta">?&gt;</span>:<br>&lt;/p&gt;<br>    &lt;ul&gt;<br>    <span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$values</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$key</span> =&gt; <span class="hljs-variable">$value</span>)&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;li&gt;&lt;b&gt;<span class="hljs-subst">$key</span>&lt;/b&gt;:<span class="hljs-subst">$value</span>&lt;/li&gt;&quot;</span>;<br>    &#125;<br><span class="hljs-meta">?&gt;</span><br>    &lt;/ul&gt;<br>    &lt;/form&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="按自然顺序排序">按自然顺序排序</h2>
+<ul>
+<li>PHP的内置排序函数可以正确排序字符串和数组,但是不能对含有数字的字符串正确排序,例如,如果有文件名:ex10php,ex5.php和ex1.php,一般的排序函数会把它们按这样排序:ex1.php,ex10.php,ex5.php,要对含有数字的字符串正确排序,应使用<code>natsort()</code>和<code>natcasesort()</code>函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$output</span> = natsort(input);<br><span class="hljs-variable">$output</span> = natcasesort(input);<br></code></pre></td></tr></table></figure>
+<h2 id="一次对多个数组排序">一次对多个数组排序</h2>
+<ul>
+<li><code>array_multisort()</code>函数可以一次对多个索引数组排序:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">array_multisort(array1[,array2,...]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>函数接收一系列数组并排序(通过<code>SORT_ASC</code>或<code>SORT_DESC常</code>量确定),函数对所有数组的元素重新排序并分配新的索引,这类似于关系型数据库中的结合(join)操作</li>
+<li>假设有许多人,并且每个人有若干条数据:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$names</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Tom&#x27;</span>,<span class="hljs-string">&#x27;Dick&#x27;</span>,<span class="hljs-string">&#x27;Harriet&#x27;</span>,<span class="hljs-string">&#x27;Brenda&#x27;</span>,<span class="hljs-string">&#x27;Joe&#x27;</span>);<br><span class="hljs-variable">$ages</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">25</span>,<span class="hljs-number">35</span>,<span class="hljs-number">29</span>,<span class="hljs-number">35</span>,<span class="hljs-number">35</span>);<br><span class="hljs-variable">$zips</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">80522</span>,<span class="hljs-string">&#x27;02140&#x27;</span>,<span class="hljs-number">90210</span>,<span class="hljs-number">64141</span>,<span class="hljs-number">80522</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>每个数组的第一个元素描述一个单独的记录----关于Tom的所有信息,类似的,第二个元素组成另一个记录----关于Dick的所有信息,<code>array_multisort()</code>函数重新排序数组的元素,并保留记录,也就是说,如果Dick在$names数组排序后是第一位,Dick的其余信息也将在其他数组的第一位(注意我们需要将Dick的邮政编码加上引号来防止它被当作一个八进制常量)</li>
+<li>下面先按年龄升序排列记录,然后按邮政编码降序排序记录:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">array_multisort(<span class="hljs-variable">$ages</span>,SORT_ASC,<span class="hljs-variable">$zips</span>,SORT_DESC,<span class="hljs-variable">$names</span>,SORT_ASC);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们需要在函数调用中包含<code>$names</code>来确保Dick的姓名,年龄及邮政编码在一起,排序结果如下:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;table&gt;\n&quot;</span>);<br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>;<span class="hljs-variable">$i</span> &lt; count(<span class="hljs-variable">$names</span>);<span class="hljs-variable">$i</span>++)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;tr&gt;&lt;td&gt;<span class="hljs-subst">$ages</span>[<span class="hljs-subst">$i</span>]&lt;/td&gt;&lt;td&gt;<span class="hljs-subst">$zips</span>[<span class="hljs-subst">$i</span>]&lt;/td&gt;&lt;td&gt;<span class="hljs-subst">$names</span>[<span class="hljs-subst">$i</span>]&lt;/td&gt;\n&quot;</span>);<br>&#125;<br><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;&lt;/table&gt;\n&quot;</span>);<br><br>&lt;table&gt;<br>    &lt;tr&gt;&lt;td&gt;<span class="hljs-number">25</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-number">80522</span>&lt;/td&gt;&lt;td&gt;Tom&lt;/td&gt;<br>    &lt;tr&gt;&lt;td&gt;<span class="hljs-number">29</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-number">90210</span>&lt;/td&gt;&lt;td&gt;Harriet&lt;/td&gt;<br>    &lt;tr&gt;&lt;td&gt;<span class="hljs-number">35</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-number">80522</span>&lt;/td&gt;&lt;td&gt;Joe&lt;/td&gt;<br>    &lt;tr&gt;&lt;td&gt;<span class="hljs-number">35</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-number">64141</span>&lt;/td&gt;&lt;td&gt;Brenda&lt;/td&gt;<br>    &lt;tr&gt;&lt;td&gt;<span class="hljs-number">35</span>&lt;/td&gt;&lt;td&gt;<span class="hljs-number">02140</span>&lt;/td&gt;&lt;td&gt;Dick&lt;/td&gt;<br>    &lt;/table&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="翻转数组">翻转数组</h2>
+<ul>
+<li><code>array_reverse()</code>函数翻转数组中元素的内部顺序:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$reveresed</span> = array_reverse(<span class="hljs-keyword">array</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>数字索引从0开始重新编号,字符串索引则不受影响,一般来说,用翻转顺序的排序函数比排序后再翻转数组顺序好</li>
+<li><code>array_flip()</code>函数返回数组,它翻转了每个元素的键-值对的顺序(键值互换):</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$flipped</span> = array_flip(<span class="hljs-keyword">array</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>也就是说,数组中的每个元素来说,如果它的键值是合法的键,则该元素的值将变成为它的键并且该元素的键成为它的值</li>
+<li>例如,如果有一个数组映射用户名到主目录,可以使用<code>array_flip()</code>来创建一个映射主目录到用户名的数组:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$u2h</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;gnat&#x27;</span> =&gt; <span class="hljs-string">&#x27;/home/staff/nathan&#x27;</span>,<br>             <span class="hljs-string">&#x27;rasmus&#x27;</span> =&gt; <span class="hljs-string">&#x27;/home/elite/rasmus&#x27;</span>,<br>             <span class="hljs-string">&#x27;petermac&#x27;</span> =&gt; <span class="hljs-string">&#x27;/home/staff/petermac&#x27;</span>,<br>             <span class="hljs-string">&#x27;ktatroe&#x27;</span> =&gt; <span class="hljs-string">&#x27;/home/staff/kevin&#x27;</span>);<br><span class="hljs-variable">$h2u</span> = array_flip(<span class="hljs-variable">$u2h</span>);<br><span class="hljs-variable">$user</span> = <span class="hljs-variable">$h2u</span>[<span class="hljs-string">&#x27;/home/staff/kevin&#x27;</span>];<span class="hljs-comment">//$user现在为&#x27;ktatroe&#x27;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果元素的值既不是字符串也不是整数,则该元素被留在结果数组中,新数组中元素的键名在原始数组的值中(但只有当原始数组的元素值都唯一,互不相等才行,如果原数组中有几个元素的值相等,则互换后最后一个键名将作为它的值,所有其他键名的都将丢失)</li>
+</ul>
+<h2 id="随机顺序">随机顺序</h2>
+<ul>
+<li>要按随机顺序遍历数组的元素,可以使用<code>shuffle()</code>函数,所有存在的键无论是字符串还是数字,都将被从零开始的连续整数代替</li>
+<li>下面是如何随机排序星期中的日期:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$days</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Monday&#x27;</span>,<span class="hljs-string">&#x27;Tuesday&#x27;</span>,<span class="hljs-string">&#x27;Wednesday&#x27;</span>,<span class="hljs-string">&#x27;Thursday&#x27;</span>,<span class="hljs-string">&#x27;Friday&#x27;</span>,<span class="hljs-string">&#x27;Saturday&#x27;</span>,<span class="hljs-string">&#x27;Sunday&#x27;</span>);<br>shuffle(<span class="hljs-variable">$days</span>);<br>print_r(<span class="hljs-variable">$days</span>);<br><br><span class="hljs-keyword">Array</span><br>    (<br>    [<span class="hljs-number">0</span>] =&gt; Tuesday<br>    [<span class="hljs-number">1</span>] =&gt; Thursday<br>    [<span class="hljs-number">2</span>] =&gt; Monday<br>    [<span class="hljs-number">3</span>] =&gt; Friday<br>    [<span class="hljs-number">4</span>] =&gt; Wednesday<br>    [<span class="hljs-number">5</span>] =&gt; Saturday<br>    [<span class="hljs-number">6</span>] =&gt; Sunday<br>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>很显然,你执行<code>shuffle()</code>后的顺序发可能和例子输出不一样,除非你对从一个数组中可以不重复地取出多个随机元素感兴趣,否则使用<code>rand()</code>来取得一个索引会更有效率(但<code>rand()</code>取得索引可能会重复)</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 遍历数组</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84/">
+                        <span class="hidden-mobile">PHP 初始化数组</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

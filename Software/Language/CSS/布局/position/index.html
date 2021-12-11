@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="CSS position top 属性定义及使用说明 top 属性规定元素的顶部边缘,该属性定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移 对于相对定义元素,如果 top 和 bottom 都是 auto,其计算值则都是 0;如果其中之一为 auto,则取另一个值的相反数;如果二者都不是 auto,bottom 将取 top 值的相反数 注意:如果 “position” 属性的值为 “">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS position">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/CSS/%E5%B8%83%E5%B1%80/position/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="CSS position top 属性定义及使用说明 top 属性规定元素的顶部边缘,该属性定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移 对于相对定义元素,如果 top 和 bottom 都是 auto,其计算值则都是 0;如果其中之一为 auto,则取另一个值的相反数;如果二者都不是 auto,bottom 将取 top 值的相反数 注意:如果 “position” 属性的值为 “">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T06:52:15.000Z">
+<meta property="article:modified_time" content="2021-02-23T06:52:15.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>CSS position - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CSS position">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 14:52" pubdate>
+        2021年2月23日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CSS position</h1>
+            
+            <div class="markdown-body">
+              <h1>CSS position</h1>
+<h2 id="top">top</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>top 属性规定元素的顶部边缘,该属性定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移</p>
+<p>对于相对定义元素,如果 top 和 bottom 都是 auto,其计算值则都是 0;如果其中之一为 auto,则取另一个值的相反数;如果二者都不是 auto,bottom 将取 top 值的相反数</p>
+<p><strong>注意</strong>:如果 “position” 属性的值为 “static”,那么设置 “top” 属性不会产生任何效果</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">默认值,通过浏览器计算上边缘的位置,</td>
+</tr>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">设置以包含元素的百分比计的上边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">使用 px,cm 等单位设置元素的上边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 top 属性的值,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="left">left</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>left 属性规定元素的左边缘,该属性定义了定位元素左外边距边界与其包含块左边界之间的偏移</p>
+<p>如果 “position” 属性的值为 “static”,那么设置 “left” 属性不会产生任何效果</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">默认值,通过浏览器计算左边缘的位置,</td>
+</tr>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">设置以包含元素的百分比计的左边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">使用 px,cm 等单位设置元素的左边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 left 属性的值,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="right">right</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>对于 static 元素,为 auto;对于长度值,则为相应的绝对长度;对于百分比数值,为指定值;否则为 auto, 对于相对定义元素,left 的计算值始终等于 right</p>
+<p>right 属性规定元素的右边缘,该属性定义了定位元素右外边距边界与其包含块右边界之间的偏移</p>
+<p><strong>注意</strong>:如果 “position” 属性的值为 “static”,那么设置 “right” 属性不会产生任何效果</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">默认值,通过浏览器计算右边缘的位置,</td>
+</tr>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">设置以包含元素的百分比计的右边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">使用 px,cm 等单位设置元素的右边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 right 属性的值,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bottom">bottom</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>对于绝对定位元素,bottom属性设置单位高于/低于包含它的元素的底边</p>
+<p>对于相对定位元素,bottom属性设置单位高于/低于其正常位置的元素的底边</p>
+<p><strong>注意</strong>:如果&quot;position:static&quot;,底部的属性没有任何效果</p>
+<p><strong>说明</strong>:对于 static 元素,为 auto;对于长度值,则为相应的绝对长度;对于百分比数值,为指定值;否则为 auto, 对于相对定义元素,如果 bottom 和 top 都是 auto,其计算值则都是 0;如果其中之一为 auto,则取另一个值的相反数;如果二者都不是 auto,bottom 将取 top 值的相反数</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">默认值,通过浏览器计算底部的位置,</td>
+</tr>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">设置以包含元素的百分比计的底边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">使用 px,cm 等单位设置元素的底边位置,可使用负值,</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 bottom 属性的值,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="z-index">z-index</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>z-index 属性指定一个元素的堆叠顺序</p>
+<p>拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面</p>
+<p><strong>注意</strong>😒-index 进行定位元素(position:absolute, position:relative, or position:fixed)</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">auto</td>
+<td style="text-align:left">默认,堆叠顺序与父元素相等,</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>number</em></td>
+<td style="text-align:left">设置元素的堆叠顺序,</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 z-index 属性的值,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="position">position</h2>
+<p><strong>属性定义及使用说明</strong></p>
+<p>position属性指定一个元素(静态的,相对的,绝对或固定)的定位方法的类型</p>
+<p><strong>属性值</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-positioning.html#position-absolute">absolute</a></td>
+<td style="text-align:left">生成绝对定位的元素,相对于 static 定位以外的第一个父元素进行定位,元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定,</td>
+</tr>
+<tr>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-positioning.html#position-fixed">fixed</a></td>
+<td style="text-align:left">生成固定定位的元素,相对于浏览器窗口进行定位,元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定,</td>
+</tr>
+<tr>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-positioning.html#position-relative">relative</a></td>
+<td style="text-align:left">生成相对定位的元素,相对于其正常位置进行定位,因此,“left:20” 会向元素的 LEFT 位置添加 20 像素,</td>
+</tr>
+<tr>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-positioning.html#position-static">static</a></td>
+<td style="text-align:left">默认值,没有定位,元素出现在正常的流中(忽略 top, bottom, left, right 或者 z-index 声明),</td>
+</tr>
+<tr>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-positioning.html#position-sticky">sticky</a></td>
+<td style="text-align:left">粘性定位,该定位基于用户滚动的位置,它的行为就像 position:relative; 而当页面滚动超出目标区域时,它的表现就像 position:fixed;,它会固定在目标位置,<strong>注意</strong>:Internet Explorer, Edge 15 及更早 IE 版本不支持 sticky 定位, Safari 需要使用 -webkit- prefix (查看以下实例),</td>
+</tr>
+<tr>
+<td style="text-align:left">inherit</td>
+<td style="text-align:left">规定应该从父元素继承 position 属性的值,</td>
+</tr>
+<tr>
+<td style="text-align:left">initial</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/CSS/">CSS</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/CSS/%E5%B8%83%E5%B1%80/">布局</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/CSS/%E5%B8%83%E5%B1%80/float&amp;clear/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSS float&clear</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/CSS/%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7/border/">
+                        <span class="hidden-mobile">CSS border</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Servlet Cookie 处理  Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie 识别返回用户包括三个步骤:  服务器脚本向浏览器发送一组 Cookie,例如:姓名,年龄或识别号码等 浏览器将这些信息存储在本地计算机上,以备将来使用 当下一次浏览器向 Web 服务器发送任何请求时,浏览器会把这些 Cookie 信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet Cookie 处理">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/Java/JavaEE/Servlet/Cookie/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Servlet Cookie 处理  Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie 识别返回用户包括三个步骤:  服务器脚本向浏览器发送一组 Cookie,例如:姓名,年龄或识别号码等 浏览器将这些信息存储在本地计算机上,以备将来使用 当下一次浏览器向 Web 服务器发送任何请求时,浏览器会把这些 Cookie 信">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-19D5A4A6-2673-46E6-A9E2-0745D379350A.jpg">
+<meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
+<meta property="article:modified_time" content="2021-08-30T13:26:39.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg">
+  
+  <title>Servlet Cookie 处理 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Servlet Cookie 处理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-30 21:26" pubdate>
+        2021年8月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Servlet Cookie 处理</h1>
+            
+            <div class="markdown-body">
+              <h1>Servlet Cookie 处理</h1>
+<ul>
+<li>Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie</li>
+<li>识别返回用户包括三个步骤:
+<ul>
+<li>服务器脚本向浏览器发送一组 Cookie,例如:姓名,年龄或识别号码等</li>
+<li>浏览器将这些信息存储在本地计算机上,以备将来使用</li>
+<li>当下一次浏览器向 Web 服务器发送任何请求时,浏览器会把这些 Cookie 信息发送到服务器,服务器将使用这些信息来识别用户</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Servlet Cookie 处理需要对中文进行编码与解码,方法如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String   str   =   java.net.URLEncoder.encode(<span class="hljs-string">&quot;中文&quot;</span>,<span class="hljs-string">&quot;UTF-8&quot;</span>);            <span class="hljs-comment">//编码</span><br>String   str   =   java.net.URLDecoder.decode(<span class="hljs-string">&quot;编码后的字符串&quot;</span>,<span class="hljs-string">&quot;UTF-8&quot;</span>);   <span class="hljs-comment">// 解码</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="Cookie-剖析">Cookie 剖析</h2>
+<ul>
+<li>Cookie 通常设置在 HTTP 头信息中(虽然 JavaScript 也可以直接在浏览器上设置一个 Cookie),设置 Cookie 的 Servlet 会发送如下的头信息:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK<br>Date: Fri, <span class="hljs-number">04</span> Feb <span class="hljs-number">2000</span> <span class="hljs-number">21</span>:<span class="hljs-number">03</span>:<span class="hljs-number">38</span> GMT<br>Server: Apache/<span class="hljs-number">1.3</span><span class="hljs-number">.9</span> (UNIX) PHP/<span class="hljs-number">4.</span>0b3<br>Set-Cookie: name=xyz; expires=Friday, <span class="hljs-number">04</span>-Feb-<span class="hljs-number">07</span> <span class="hljs-number">22</span>:<span class="hljs-number">03</span>:<span class="hljs-number">38</span> GMT;<br>                 path=/; domain=test.com<br>Connection: close<br>Content-Type: text/html<br></code></pre></td></tr></table></figure>
+<ul>
+<li>正如您所看到的,Set-Cookie 头包含了一个名称值对,一个 GMT 日期,一个路径和一个域,名称和值会被 URL 编码,expires 字段是一个指令,告诉浏览器在给定的时间和日期之后&quot;忘记&quot;该 Cookie</li>
+<li>如果浏览器被配置为存储 Cookie,它将会保留此信息直到到期日期,如果用户的浏览器指向任何匹配该 Cookie 的路径和域的页面,它会重新发送 Cookie 到服务器,浏览器的头信息可能如下所示:</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/</span> <span class="hljs-meta">HTTP/1.0</span><br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>Keep-Alive<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/4.6 (X11; I; Linux 2.2.6-15apmac ppc)<br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>zink.demon.co.uk:1126<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>image/gif, */*<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en<br><span class="hljs-attribute">Accept-Charset</span><span class="hljs-punctuation">: </span>iso-8859-1,*,utf-8<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>name=xyz<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Servlet 就能够通过请求方法 <em>request.getCookies()</em> 访问 Cookie,该方法将返回一个 <em>Cookie</em> 对象的数组</li>
+</ul>
+<h2 id="Servlet-Cookie-方法">Servlet Cookie 方法</h2>
+<ul>
+<li>以下是在 Servlet 中操作 Cookie 时可使用的有用的方法列表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">方法 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><strong>public void setDomain(String pattern)</strong> 该方法设置 cookie 适用的域,例如 <a target="_blank" rel="noopener" href="http://test.com">test.com</a>,</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><strong>public String getDomain()</strong> 该方法获取 cookie 适用的域,例如 <a target="_blank" rel="noopener" href="http://test.com">test.com</a>,</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><strong>public void setMaxAge(int expiry)</strong> 该方法设置 cookie 过期的时间(以秒为单位),如果不这样设置,cookie 只会在当前 session 会话中持续有效,</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><strong>public int getMaxAge()</strong> 该方法返回 cookie 的最大生存周期(以秒为单位),默认情况下,-1 表示 cookie 将持续下去,直到浏览器关闭,</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><strong>public String getName()</strong> 该方法返回 cookie 的名称,名称在创建后不能改变,</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><strong>public void setValue(String newValue)</strong> 该方法设置与 cookie 关联的值,</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left"><strong>public String getValue()</strong> 该方法获取与 cookie 关联的值,</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left"><strong>public void setPath(String uri)</strong> 该方法设置 cookie 适用的路径,如果您不指定路径,与当前页面相同目录下的(包括子目录下的)所有 URL 都会返回 cookie,</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left"><strong>public String getPath()</strong> 该方法获取 cookie 适用的路径,</td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left"><strong>public void setSecure(boolean flag)</strong> 该方法设置布尔值,表示 cookie 是否应该只在加密的(即 SSL)连接上发送,</td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left"><strong>public void setComment(String purpose)</strong> 设置cookie的注释,该注释在浏览器向用户呈现 cookie 时非常有用,</td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left"><strong>public String getComment()</strong> 获取 cookie 的注释,如果 cookie 没有注释 则返回 null,</td>
+</tr>
+</tbody>
+</table>
+<h2 id="通过-Servlet-设置-Cookie">通过 Servlet 设置 Cookie</h2>
+<p>通过 Servlet 设置 Cookie 包括三个步骤:</p>
+<ul>
+<li><strong>创建一个 Cookie 对象</strong>:您可以调用带有 cookie 名称和 cookie 值的 Cookie 构造函数,cookie 名称和 cookie 值都是字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Cookie cookie = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">&quot;key&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>请记住,无论是名字还是值,都不应该包含空格或以下任何字符:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">[ ] ( ) = , <span class="hljs-string">&quot; / ? @ : ;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>设置最大生存周期</strong>:您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间(以秒为单位),下面将设置一个最长有效期为 24 小时的 cookie</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">cookie.setMaxAge(<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">24</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>发送 Cookie 到 HTTP 响应头</strong>:您可以使用<code>response.addCookie</code>来添加 HTTP 响应头中的 Cookie,如下所示:</li>
+</ul>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">response.add<span class="hljs-constructor">Cookie(<span class="hljs-params">cookie</span>)</span>;<br></code></pre></td></tr></table></figure>
+<h2 id="实例">实例</h2>
+<ul>
+<li>让我们修改我们的 <a target="_blank" rel="noopener" href="https://www.runoob.com/servlet/servlet-form-data.html">表单数据实例</a>,为名字和姓氏设置 Cookie</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.test.test;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> java.net.URLEncoder;<br><br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.Cookie;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Servlet implementation class HelloServlet</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(&quot;/HelloForm&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloForm</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#HttpServlet()</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HelloForm</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>();<br>        <span class="hljs-comment">// TODO Auto-generated constructor stub</span><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-comment">// 为名字和姓氏创建 Cookie</span><br>        Cookie name = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">&quot;name&quot;</span>, URLEncoder.encode(request.getParameter(<span class="hljs-string">&quot;name&quot;</span>), <span class="hljs-string">&quot;UTF-8&quot;</span>)); <span class="hljs-comment">// 中文转码</span><br>        Cookie url = <span class="hljs-keyword">new</span> Cookie(<span class="hljs-string">&quot;url&quot;</span>, request.getParameter(<span class="hljs-string">&quot;url&quot;</span>));<br><br>        <span class="hljs-comment">// 为两个 Cookie 设置过期日期为 24 小时后</span><br>        name.setMaxAge(<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">24</span>);<br>        url.setMaxAge(<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">24</span>);<br><br>        <span class="hljs-comment">// 在响应头中添加两个 Cookie</span><br>        response.addCookie( name );<br>        response.addCookie( url );<br><br>        <span class="hljs-comment">// 设置响应内容类型</span><br>        response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br><br>        PrintWriter out = response.getWriter();<br>        String title = <span class="hljs-string">&quot;设置 Cookie 实例&quot;</span>;<br>        String docType = <span class="hljs-string">&quot;&lt;!DOCTYPE html&gt;\n&quot;</span>;<br>        out.println(docType +<br>                <span class="hljs-string">&quot;&lt;html&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;head&gt;&lt;title&gt;&quot;</span> + title + <span class="hljs-string">&quot;&lt;/title&gt;&lt;/head&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;body bgcolor=\&quot;#f0f0f0\&quot;&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;h1 align=\&quot;center\&quot;&gt;&quot;</span> + title + <span class="hljs-string">&quot;&lt;/h1&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;ul&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;  &lt;li&gt;&lt;b&gt;站点名:&lt;/b&gt;:&quot;</span><br>                + request.getParameter(<span class="hljs-string">&quot;name&quot;</span>) + <span class="hljs-string">&quot;\n&lt;/li&gt;&quot;</span> +<br>                <span class="hljs-string">&quot;  &lt;li&gt;&lt;b&gt;站点 URL:&lt;/b&gt;:&quot;</span><br>                + request.getParameter(<span class="hljs-string">&quot;url&quot;</span>) + <span class="hljs-string">&quot;\n&lt;/li&gt;&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;/ul&gt;\n&quot;</span> +<br>                <span class="hljs-string">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span>);<br>        &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        <span class="hljs-comment">// TODO Auto-generated method stub</span><br>        doGet(request, response);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="通过-Servlet-读取-Cookie">通过 Servlet 读取 Cookie</h2>
+<ul>
+<li>要读取 Cookie,您需要通过调用 <em>HttpServletRequest</em> 的 <strong>getCookies( )</strong> 方法创建一个 <em>javax.servlet.http.Cookie</em> 对象的数组,然后循环遍历数组,并使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值</li>
+</ul>
+<h2 id="实例-2">实例</h2>
+<ul>
+<li>让我们读取上面的实例中设置的 Cookie</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.test.test;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><span class="hljs-keyword">import</span> java.net.URLDecoder;<br><br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.Cookie;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Servlet implementation class ReadCookies</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(&quot;/ReadCookies&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReadCookies</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#HttpServlet()</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ReadCookies</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>();<br>        <span class="hljs-comment">// TODO Auto-generated constructor stub</span><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>        Cookie cookie = <span class="hljs-keyword">null</span>;<br>        Cookie[] cookies = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-comment">// 获取与该域相关的 Cookie 的数组</span><br>        cookies = request.getCookies();<br><br>         <span class="hljs-comment">// 设置响应内容类型</span><br>         response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br><br>         PrintWriter out = response.getWriter();<br>         String title = <span class="hljs-string">&quot;Delete Cookie Example&quot;</span>;<br>         String docType = <span class="hljs-string">&quot;&lt;!DOCTYPE html&gt;\n&quot;</span>;<br>         out.println(docType +<br>                   <span class="hljs-string">&quot;&lt;html&gt;\n&quot;</span> +<br>                   <span class="hljs-string">&quot;&lt;head&gt;&lt;title&gt;&quot;</span> + title + <span class="hljs-string">&quot;&lt;/title&gt;&lt;/head&gt;\n&quot;</span> +<br>                   <span class="hljs-string">&quot;&lt;body bgcolor=\&quot;#f0f0f0\&quot;&gt;\n&quot;</span> );<br>          <span class="hljs-keyword">if</span>( cookies != <span class="hljs-keyword">null</span> )&#123;<br>            out.println(<span class="hljs-string">&quot;&lt;h2&gt;Cookie 名称和值&lt;/h2&gt;&quot;</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; cookies.length; i++)&#123;<br>               cookie = cookies[i];<br>               <span class="hljs-keyword">if</span>((cookie.getName( )).compareTo(<span class="hljs-string">&quot;name&quot;</span>) == <span class="hljs-number">0</span> )&#123;<br>                    cookie.setMaxAge(<span class="hljs-number">0</span>);<br>                    response.addCookie(cookie);<br>                    out.print(<span class="hljs-string">&quot;已删除的 cookie:&quot;</span> +<br>                                 cookie.getName( ) + <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span>);<br>               &#125;<br>               out.print(<span class="hljs-string">&quot;名称:&quot;</span> + cookie.getName( ) + <span class="hljs-string">&quot;,&quot;</span>);<br>               out.print(<span class="hljs-string">&quot;值:&quot;</span> +  URLDecoder.decode(cookie.getValue(), <span class="hljs-string">&quot;utf-8&quot;</span>) +<span class="hljs-string">&quot; &lt;br/&gt;&quot;</span>);<br>            &#125;<br>         &#125;<span class="hljs-keyword">else</span>&#123;<br>             out.println(<br>               <span class="hljs-string">&quot;&lt;h2 class=\&quot;tutheader\&quot;&gt;No Cookie founds&lt;/h2&gt;&quot;</span>);<br>         &#125;<br>         out.println(<span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>);<br>         out.println(<span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>);<br>        &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        <span class="hljs-comment">// TODO Auto-generated method stub</span><br>        doGet(request, response);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编译上面的 Servlet <strong>ReadCookies</strong>,并在 web.xml 文件中创建适当的条目,尝试运行 <em><a target="_blank" rel="noopener" href="http://localhost:8080/TomcatTest/ReadCookies">http://localhost:8080/TomcatTest/ReadCookies</a></em>,将显示如下结果:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="通过-Servlet-删除-Cookie">通过 Servlet 删除 Cookie</h2>
+<ul>
+<li>删除 Cookie 是非常简单的,如果您想删除一个 cookie,那么您只需要按照以下三个步骤进行:
+<ul>
+<li>读取一个现有的 cookie,并把它存储在 Cookie 对象中</li>
+<li>使用 <strong>setMaxAge()</strong> 方法设置 cookie 的年龄为零,来删除现有的 cookie</li>
+<li>把这个 cookie 添加到响应头</li>
+</ul>
+</li>
+</ul>
+<h2 id="实例-3">实例</h2>
+<p>下面的例子将删除现有的名为 <code>url</code> 的 cookie,当您下次运行 ReadCookies 的 Servlet 时,它会返回 url 为 null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.test.test;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.PrintWriter;<br><br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.Cookie;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Servlet implementation class DeleteCookies</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(&quot;/DeleteCookies&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DeleteCookies</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#HttpServlet()</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DeleteCookies</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>();<br>        <span class="hljs-comment">// TODO Auto-generated constructor stub</span><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>        Cookie cookie = <span class="hljs-keyword">null</span>;<br>        Cookie[] cookies = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-comment">// 获取与该域相关的 Cookie 的数组</span><br>        cookies = request.getCookies();<br><br>            <span class="hljs-comment">// 设置响应内容类型</span><br>        response.setContentType(<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span>);<br><br>        PrintWriter out = response.getWriter();<br>        String title = <span class="hljs-string">&quot;删除 Cookie 实例&quot;</span>;<br>        String docType = <span class="hljs-string">&quot;&lt;!DOCTYPE html&gt;\n&quot;</span>;<br>        out.println(docType +<br>                  <span class="hljs-string">&quot;&lt;html&gt;\n&quot;</span> +<br>                  <span class="hljs-string">&quot;&lt;head&gt;&lt;title&gt;&quot;</span> + title + <span class="hljs-string">&quot;&lt;/title&gt;&lt;/head&gt;\n&quot;</span> +<br>                  <span class="hljs-string">&quot;&lt;body bgcolor=\&quot;#f0f0f0\&quot;&gt;\n&quot;</span> );<br>         <span class="hljs-keyword">if</span>( cookies != <span class="hljs-keyword">null</span> )&#123;<br>           out.println(<span class="hljs-string">&quot;&lt;h2&gt;Cookie 名称和值&lt;/h2&gt;&quot;</span>);<br>           <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; cookies.length; i++)&#123;<br>              cookie = cookies[i];<br>              <span class="hljs-keyword">if</span>((cookie.getName( )).compareTo(<span class="hljs-string">&quot;url&quot;</span>) == <span class="hljs-number">0</span> )&#123;<br>                   cookie.setMaxAge(<span class="hljs-number">0</span>);<br>                   response.addCookie(cookie);<br>                   out.print(<span class="hljs-string">&quot;已删除的 cookie:&quot;</span> +<br>                                cookie.getName( ) + <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span>);<br>              &#125;<br>              out.print(<span class="hljs-string">&quot;名称:&quot;</span> + cookie.getName( ) + <span class="hljs-string">&quot;,&quot;</span>);<br>              out.print(<span class="hljs-string">&quot;值:&quot;</span> + cookie.getValue( )+<span class="hljs-string">&quot; &lt;br/&gt;&quot;</span>);<br>           &#125;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            out.println(<br>              <span class="hljs-string">&quot;&lt;h2 class=\&quot;tutheader\&quot;&gt;No Cookie founds&lt;/h2&gt;&quot;</span>);<br>        &#125;<br>        out.println(<span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>);<br>        out.println(<span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>);<br>        &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        <span class="hljs-comment">// TODO Auto-generated method stub</span><br>        doGet(request, response);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编译上面的 Servlet <strong>DeleteCookies</strong>,并在 web.xml 文件中创建适当的条目,现在运行 <em><a target="_blank" rel="noopener" href="http://localhost:8080/TomcatTest/DeleteCookies">http://localhost:8080/TomcatTest/DeleteCookies</a></em>,将显示如下结果:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-19D5A4A6-2673-46E6-A9E2-0745D379350A.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaEE/">JavaEE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaEE/Servlet/">Servlet</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/subtree/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git subtree</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaEE/Servlet/Session%E8%B7%9F%E8%B8%AA/">
+                        <span class="hidden-mobile">Servlet Session 跟踪</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#0a5fff">
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
@@ -23,30 +23,30 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL MVVC  MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control) MVCC是为了实现事务的隔离性,通过版本号,避免同一数据在不同事务间的竞争,可以把它当成基于多版本号的一种乐观锁 MVCC的优点:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-28T07:31:10.000Z">
-<meta property="article:modified_time" content="2021-08-28T07:31:10.000Z">
+<meta property="article:published_time" content="2021-12-09T15:09:52.000Z">
+<meta property="article:modified_time" content="2021-12-09T15:09:52.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
   
   <title>MySQL MVVC - SoftwareMagic</title>
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
 
 
@@ -66,7 +66,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-28 15:31" pubdate>
-        2021年8月28日 下午
+      <time datetime="2021-12-09 23:09" pubdate>
+        2021年12月9日 晚上
       </time>
     </span>
   
@@ -212,12 +212,6 @@
             <!-- SEO header -->
             <h1 style="display: none">MySQL MVVC</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：2021年8月28日 下午
-                
-              </p>
-            
             <div class="markdown-body">
               <h1>MySQL MVVC</h1>
 <ul>
@@ -231,17 +225,22 @@
 <li>InnoDB在每行数据都增加三个隐藏字段
 <ul>
 <li><code>DB_ROW_ID</code>:包含一个随着新行插入而单调递增的行ID,当由innodb自动产生聚集索引时,聚集索引会包括这个行ID的值,否则这个行ID不会出现在任何索引中</li>
-<li><code>DB_TRX_ID</code>:用来标识最近一次对本行记录做修改(insert|update)的事务的标识符,即最后一次修改(insert|update)本行记录的事务id,至于delete操作,在innodb看来也不过是一次update操作,更新行中的一个特殊位将行表示为deleted,并非真正删除</li>
-<li><code>DB_ROLL_PTR</code>:指写入回滚段(rollback segment)的 undo log record (撤销日志记录记录),如果一行记录被更新, 则 undo log record 包含 ‘重建该行记录被更新之前内容’ 所必须的信息</li>
+<li><code>DB_TRX_ID</code>（创建版本号）:用来标识最近一次对本行记录做修改的事务ID</li>
+<li><code>DB_ROLL_PTR</code>（删除版本号）:指向写入回滚段(rollback segment)的 undo log record，如果一行记录被更新, 则 undo log record 包含该行记录被更新之前内容</li>
 </ul>
 </li>
 </ul>
 <h3 id="MVVC-环境下的CRUD">MVVC 环境下的CRUD</h3>
 <ul>
-<li><strong>SELECT</strong>:读取创建版本小于或等于当前事务版本号,并且删除版本为空或大于当前事务版本号的记录,这样可以保证在读取之前记录是存在的</li>
-<li><strong>INSERT</strong>:将当前事务的版本号保存至行的创建版本号</li>
-<li><strong>UPDATE</strong>:新插入一行,并以当前事务的版本号作为新行的创建版本号,同时将原记录行的删除版本号设置为当前事务版本号</li>
-<li><strong>DELETE</strong>:将当前事务的版本号保存至行的删除版本号</li>
+<li><strong>SELECT</strong>：读取创建版本号&lt;=当前事务版本号，删除版本号为空，或者是删除版本号大于当前事务版本号的的数据
+<ul>
+<li>InnoDB 只查找创建版本小于当前事务版本号的数据行，这样可以确保事务读取的行，要么是在事务开始前已经存在的，要么是事务自身插入或者修改过的。</li>
+<li>行的删除版本要么未定义，要么大于当前事务版本号，这可以确保事务读取到的行在事务开始之前未被删除。</li>
+</ul>
+</li>
+<li><strong>INSERT</strong>：保存当前事务的版本号为创建版本号。</li>
+<li><strong>UPDATE</strong>：插入一条新的记录，保存当前的版本号为创建版本号，同时当前版本号保存为原来数据的删除版本号。</li>
+<li><strong>DELETE</strong>：保存当前版本号为删除版本号。</li>
 </ul>
 <p><strong>插入操作</strong></p>
 <ul>
@@ -271,7 +270,7 @@
 <li>采用的是先标记旧的那行记录为已删除,并且删除版本号是事务版本号,然后插入一行新的记录的方式</li>
 <li>比如,针对上面那行记录,事务Id为2 要把name字段更新</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">update <span class="hljs-keyword">table</span> <span class="hljs-keyword">set</span> name<span class="hljs-operator">=</span> <span class="hljs-string">&#x27;new_value&#x27;</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">update <span class="hljs-keyword">table</span> <span class="hljs-keyword">set</span> name<span class="hljs-operator">=</span> <span class="hljs-string">&#x27;xttblog.com&#x27;</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -340,11 +339,11 @@
 </li>
 <li><strong>当前读</strong>:特殊的读操作,插入/更新/删除操作,属于当前读,处理的都是当前的数据,需要加锁
 <ul>
-<li>select * from table where ? lock in share mode;</li>
-<li>select * from table where ? for update;</li>
-<li>insert;</li>
-<li>update ;</li>
-<li>delete;</li>
+<li><code>select * from table where ? lock in share mode;</code></li>
+<li><code>select * from table where ? for update;</code></li>
+<li><code>insert;</code></li>
+<li><code>update ;</code></li>
+<li><code>delete;</code></li>
 </ul>
 </li>
 </ul>
@@ -384,9 +383,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Frontend/JavaScript/%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                      <a href="/Software/Common/Coding/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaScript 模块化</span>
+                        <span class="hidden-mobile">Coding</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -394,8 +393,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E6%9E%9A%E4%B8%BE/">
-                        <span class="hidden-mobile">Java 枚举</span>
+                      <a href="/Software/Backend/Database/MySQL/%E9%94%81/">
+                        <span class="hidden-mobile">MySQL 锁</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -405,6 +404,15 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
             
           </article>
         </div>
@@ -462,7 +470,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    
   </div>
   
 
@@ -474,8 +482,8 @@
 
   <!-- SCRIPTS -->
   
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":100})
@@ -486,8 +494,8 @@
   </script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
 <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
 
@@ -509,16 +517,16 @@
 
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
   
   
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
   
   
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
   
   
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
   
 
 
@@ -526,7 +534,7 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;
@@ -544,6 +552,13 @@
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 

@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java Joda-Time  在Java中处理日期和时间是很常见的需求,基础的工具类就是我们熟悉的Date和Calendar,然而这些工具类的api使用并不是很方便和强大,于是就诞生了Joda-Time这个专门处理日期时间的库  pom.xml 12345&lt;dependency&gt;    &lt;groupId&gt;joda-time&lt;&#x2F;groupId&gt;    &lt;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Joda-Time">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Joda-Time/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java Joda-Time  在Java中处理日期和时间是很常见的需求,基础的工具类就是我们熟悉的Date和Calendar,然而这些工具类的api使用并不是很方便和强大,于是就诞生了Joda-Time这个专门处理日期时间的库  pom.xml 12345&lt;dependency&gt;    &lt;groupId&gt;joda-time&lt;&#x2F;groupId&gt;    &lt;a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-19T14:17:23.000Z">
+<meta property="article:modified_time" content="2021-02-19T14:17:23.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Java Joda-Time - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Joda-Time">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-19 22:17" pubdate>
+        2021年2月19日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Joda-Time</h1>
+            
+            <div class="markdown-body">
+              <h1>Java Joda-Time</h1>
+<ul>
+<li>在Java中处理日期和时间是很常见的需求,基础的工具类就是我们熟悉的Date和Calendar,然而这些工具类的api使用并不是很方便和强大,于是就诞生了<a target="_blank" rel="noopener" href="http://www.joda.org/joda-time/">Joda-Time</a>这个专门处理日期时间的库</li>
+</ul>
+<h2 id="pom-xml">pom.xml</h2>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>joda-time<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>joda-time<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.9.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="核心类介绍">核心类介绍</h2>
+<ul>
+<li><strong>Instant</strong>:用来表示时间轴上一个瞬时的点,比较适合用来表示一个事件发生的时间戳,不用去关心它使用的日历系统或者是所在的时区</li>
+<li><strong>DateTime</strong>:用来替换JDK的Calendar类,用来处理那些时区信息比较重要的场景</li>
+<li><strong>LocalDate</strong>:表示一个本地的日期,而不包含时间部分(没有时区信息),比较适合表示出生日期这样的类型,因为不关心这一天中的时间部分</li>
+<li><strong>LocalTime</strong>:表示一个本地的时间,而不包含日期部分(没有时区信息),适合表示一个商店的每天开门/关门时间,因为不用关心日期部分</li>
+<li><strong>LocalDateTime</strong>:表示一个本地的日期－时间(没有时区信息)</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>:上述核心类均为不可变的类,表明了正如Java的String类型一样,其对象是不可变的,即,不论对它进行怎样的改变操作,返回的对象都是新对象</p>
+</blockquote>
+<h2 id="DateTime类">DateTime类</h2>
+<h3 id="构造方法">构造方法</h3>
+<ul>
+<li>DateTime有很多构造方法,这是为了使用者能够很方便的由各种表示日期时间的对象构造出DateTime实例</li>
+<li><code>DateTime()</code>:这个无参的构造方法会创建一个在当前系统所在时区的当前时间,精确到毫秒</li>
+<li><code>DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute)</code>:这个构造方法方便快速地构造一个指定的时间,这里精确到秒,类似地其它构造方法也可以传入毫秒</li>
+<li><code>DateTime(long instant)</code>:这个构造方法创建出来的实例,是通过一个long类型的时间戳,它表示这个时间戳距<code>1970-01-01T00:00:00Z</code>的毫秒数,使用默认的时区</li>
+<li><code>DateTime(Object instant)</code>:这个构造方法可以通过一个Object对象构造一个实例,这个Object对象可以是这些类型:<code>ReadableInstant</code>, <code>String</code>, <code>Calendar</code>和<code>Date</code>,其中String的格式需要是<code>ISO8601</code>格式,详见:<a target="_blank" rel="noopener" href="https://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html">ISODateTimeFormat.dateTimeParser()</a></li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> dateTime1 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>();<br>System.out.println(dateTime1); <span class="hljs-comment">// out: 2016-02-26T16:02:57.582+08:00</span><br><span class="hljs-built_in">DateTime</span> dateTime2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-number">2016</span>,<span class="hljs-number">2</span>,<span class="hljs-number">14</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>System.out.println(dateTime2); <span class="hljs-comment">// out: 2016-02-14T00:00:00.000+08:00</span><br><span class="hljs-built_in">DateTime</span> dateTime3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-number">1456473917004</span>L);<br>System.out.println(dateTime3); <span class="hljs-comment">// out: 2016-02-26T16:05:17.004+08:00</span><br><span class="hljs-built_in">DateTime</span> dateTime4 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-keyword">new</span> Date());<br>System.out.println(dateTime4); <span class="hljs-comment">// out: 2016-02-26T16:07:59.970+08:00</span><br><span class="hljs-built_in">DateTime</span> dateTime5 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-string">&quot;2016-02-15T00:00:00.000+08:00&quot;</span>);<br>System.out.println(dateTime5); <span class="hljs-comment">// out: 2016-02-15T00:00:00.000+08:00</span><br></code></pre></td></tr></table></figure>
+<h3 id="设置日期时间">设置日期时间</h3>
+<ul>
+<li>以with开头的方法用来设置DateTime实例到某个时间,例如:withYear</li>
+<li>因为DateTime是不可变对象,所以没有提供setter方法可供使用,with方法也没有改变原有的对象,而是返回了设置后的一个副本对象</li>
+<li>下面这个例子,将2000-02-29的年份设置为1997,值得注意的是,因为1997年没有2月29日,所以自动转为了28日</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> dateTime2000Year = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-number">2000</span>,<span class="hljs-number">2</span>,<span class="hljs-number">29</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>System.out.println(dateTime2000Year); <span class="hljs-comment">// out: 2000-02-29T00:00:00.000+08:00</span><br><span class="hljs-built_in">DateTime</span> dateTime1997Year = dateTime2000Year.withYear(<span class="hljs-number">1997</span>);<br>System.out.println(dateTime1997Year); <span class="hljs-comment">// out: 1997-02-28T00:00:00.000+08:00</span><br></code></pre></td></tr></table></figure>
+<h3 id="加减日期时间">加减日期时间</h3>
+<ul>
+<li>以plus/minus开头的方法用来返回在DateTime实例上增加或减少一段时间后的实例,比如:plusDay, minusMonths</li>
+<li>下面的例子:在当前的时刻加1天,得到了明天这个时刻的时间,在当前的时刻减1个月,得到了上个月这个时刻的时间</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>();<br>System.out.println(now); <span class="hljs-comment">// out: 2016-02-26T16:27:58.818+08:00</span><br><span class="hljs-built_in">DateTime</span> tomorrow = now.plusDays(<span class="hljs-number">1</span>);<br>System.out.println(tomorrow); <span class="hljs-comment">// out: 2016-02-27T16:27:58.818+08:00</span><br><span class="hljs-built_in">DateTime</span> lastMonth = now.minusMonths(<span class="hljs-number">1</span>);<br>System.out.println(lastMonth); <span class="hljs-comment">// out: 2016-01-26T16:27:58.818+08:00</span><br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>:在增减时间的时候,想象成自己在翻日历,所有的计算都将符合历法,由Joda-Time自动完成,不会出现非法的日期(比如:3月31日加一个月后,并不会出现4月31日)</p>
+<h3 id="返回Property">返回Property</h3>
+<ul>
+<li>Property是DateTime中的属性,保存了一些有用的信息</li>
+<li>可以通过不同Property中get开头的方法获取一些有用的信息</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(); <span class="hljs-comment">// 2016-02-26T16:51:28.749+08:00</span><br>now.monthOfYear().getAsText(); <span class="hljs-comment">// February</span><br>now.monthOfYear().getAsText(Locale.KOREAN); <span class="hljs-comment">// 2월</span><br>now.dayOfWeek().getAsShortText(); <span class="hljs-comment">// Fri</span><br>now.dayOfWeek().getAsShortText(Locale.CHINESE); <span class="hljs-comment">// 星期五</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>有时我们需要对一个DateTime的某些属性进行置0操作,比如得到当天的0点时刻</li>
+<li>那么就需要用到Property中round开头的方法(例如:roundFloorCopy)如下面的例子所示:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> now = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(); <span class="hljs-comment">// 2016-02-26T16:51:28.749+08:00</span><br>now.dayOfWeek().roundCeilingCopy(); <span class="hljs-comment">// 2016-02-27T00:00:00.000+08:00</span><br>now.dayOfWeek().roundFloorCopy(); <span class="hljs-comment">// 2016-02-26T00:00:00.000+08:00</span><br>now.minuteOfDay().roundFloorCopy(); <span class="hljs-comment">// 2016-02-26T16:51:00.000+08:00</span><br>now.secondOfMinute().roundFloorCopy(); <span class="hljs-comment">// 2016-02-26T16:51:28.000+08:00</span><br></code></pre></td></tr></table></figure>
+<h2 id="日历系统和时区">日历系统和时区</h2>
+<ul>
+<li>Joda-Time默认使用的是ISO的日历系统,而ISO的日历系统是世界上公历的事实标准,然而,值得注意的是,ISO日历系统在表示1583年之前的历史时间是不精确的</li>
+<li>Joda-Time默认使用的是JDK的时区设置,如果需要的话,这个默认值是可以被覆盖的</li>
+<li>Joda-Time使用可插拔的机制来设计日历系统,而JDK则是使用子类的设计,比如GregorianCalendar,下面的代码,通过调用一个工厂方法获得Chronology的实现:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Chronology coptic = CopticChronology.getInstance();<br></code></pre></td></tr></table></figure>
+<ul>
+<li>时区是作为Chronology的一部分来被实现的,下面的代码获得一个Joda-Time Chronology在东京的时区:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">DateTimeZone zone = DateTimeZone.forID(<span class="hljs-string">&quot;Asia/Tokyo&quot;</span>);<br>Chronology gregorianJuian = GJChronology.getInstance(zone);<br></code></pre></td></tr></table></figure>
+<h2 id="时间段">时间段</h2>
+<ul>
+<li>Joda-Time为时间段的表示提供了支持</li>
+<li><strong>Interval</strong>:它保存了一个开始时刻和一个结束时刻,因此能够表示一段时间,并进行这段时间的相应操作</li>
+<li><strong>Period</strong>:它保存了一段时间,比如:6个月,3天,7小时这样的概念,可以直接创建Period,或者从Interval对象构建</li>
+<li><strong>Duration</strong>:它保存了一个精确的毫秒数,同样地,可以直接创建Duration,也可以从Interval对象构建</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>虽然,这三个类都用来表示时间段,但是在用途上来说还是有一些差别,请看下面的例子:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">DateTime</span> dt = <span class="hljs-keyword">new</span> <span class="hljs-built_in">DateTime</span>(<span class="hljs-number">2005</span>, <span class="hljs-number">3</span>, <span class="hljs-number">26</span>, <span class="hljs-number">12</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br><span class="hljs-built_in">DateTime</span> plusPeriod = dt.plus(Period.days(<span class="hljs-number">1</span>));<br><span class="hljs-built_in">DateTime</span> plusDuration = dt.plus(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Duration</span>(<span class="hljs-number">24</span>L*<span class="hljs-number">60</span>L*<span class="hljs-number">60</span>L*<span class="hljs-number">1000</span>L));<br></code></pre></td></tr></table></figure>
+<ul>
+<li>因为当时那个地区执行夏令时的原因,在添加一个Period的时候会添加23个小时,而添加一个Duration,则会精确地添加24个小时,而不考虑历法</li>
+<li>所以,Period和Duration的差别不但体现在精度上,也同样体现在语义上,因为,有时候按照有些地区的历法 <strong>1天</strong> 不等于 <strong>24小时</strong></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 生成随机数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Database/%E6%A6%82%E5%BF%B5/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">
+                        <span class="hidden-mobile">数据模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

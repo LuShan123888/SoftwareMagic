@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="PHP 访问数据库  在PHP中有两种访问数据库的方法,第一种是使用特定的数据库扩展,另一种是使用不依赖于数据库的PEAR BD库,两种方法各有优劣(其实更准确地说,第二种应该为使用数据库抽象层代码库,PEAR::DB只是其中一种,常见的还有PEAR::MDB2,ADOBE,PDO等) 如果使用特定的数据库扩展,则你的程序代码和所使用的数据库联系密切,因数据库而异,MySQL扩展的函数名,参数,错">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 访问数据库">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Language/PHP/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="PHP 访问数据库  在PHP中有两种访问数据库的方法,第一种是使用特定的数据库扩展,另一种是使用不依赖于数据库的PEAR BD库,两种方法各有优劣(其实更准确地说,第二种应该为使用数据库抽象层代码库,PEAR::DB只是其中一种,常见的还有PEAR::MDB2,ADOBE,PDO等) 如果使用特定的数据库扩展,则你的程序代码和所使用的数据库联系密切,因数据库而异,MySQL扩展的函数名,参数,错">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T07:05:05.000Z">
+<meta property="article:modified_time" content="2021-02-21T07:05:05.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>PHP 访问数据库 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 访问数据库">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 15:05" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 访问数据库</h1>
+            
+            <div class="markdown-body">
+              <h1>PHP 访问数据库</h1>
+<ul>
+<li>在PHP中有两种访问数据库的方法,第一种是使用特定的数据库扩展,另一种是使用不依赖于数据库的PEAR BD库,两种方法各有优劣(其实更准确地说,第二种应该为使用数据库抽象层代码库,PEAR::DB只是其中一种,常见的还有PEAR::MDB2,ADOBE,PDO等)</li>
+<li>如果使用特定的数据库扩展,则你的程序代码和所使用的数据库联系密切,因数据库而异,MySQL扩展的函数名,参数,错误处理等都和其他数据库扩展完全不同,如果想要把数据库从MySQL迁移到PostgreSQL,将会引起代码的重大改动,PEAR DB隐藏了各种数据库特有的功能,在数据库系统间迁移只需要简单地改动一行程序代码</li>
+<li>抽象层(如PEAR的DB库)的可移植性是有一定代价的,有些特定的数据库特性(例如,查找自动赋值的唯一行标识符的值)可能无法使用,使用PEAR DB的代码也比使用特定数据库扩展的代码执行速度慢</li>
+<li>注意抽象层(如PEAR DB)并不能保证你的SQL语句可以完全地被移植,如果你的程序使用了任何非通用(non-generic)的SQL,则在进行数据库迁移时需要对SQL语句做一些改动,对于大型应用程序,应该考虑编写一个功能抽象层,即对于程序所支持的每个数据库,都应当编写一系列函数来实现不同的数据库操作,如<code>get_user_record()</code>,<code>insert_user_record()</code>和任何你需要的函数,同时还有一些配置选项来设置程序要连接到的数据库类型,这种方法让你使用所选择的数据库,而不用考虑抽象层的性能损失和限制,当然这需要一些时间来打草稿</li>
+<li>对于一个简单的应用程序,我们选择PEAR DB而不是特定的数据库扩展,不仅仅是因为迁移性而是为了易于使用,速度和特性的损失不足以迫使我们使用特定的数据库扩展(对于小项目而言有时速度并不是很重要,也用不到什么特殊的特性),本章的大部分示例代码将使用PEAR DB抽象类</li>
+<li>对于大多数数据库,需要选用何时的数据库驱动来重新编译PHP,无论你是否使用PEAR DB都必须这样做,在PHP源代码包所带的配置命令帮助信息会告诉你如何用各种数据库支持来编译PHP,例如:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>配置命令</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>–with-mysql[=DIR]</td>
+<td>Include MySQL support. DIR is the MySQL base directory. if unspecified, the bundled MySQL library will be used. (包含MySQL支持,DIR是MySQL的安装目录,如果没有指定,将会使用捆绑的MySQL库)</td>
+</tr>
+<tr>
+<td>–with–oci8[=DIR]</td>
+<td>Include Oracle-oci8 support. Default DIR is ORACLE_HOME,.(包含Oracle-oci8支持,默认DIR是ORACLE_HOME)</td>
+</tr>
+<tr>
+<td>–with-ibm-db2[=DIR]</td>
+<td>Include IBM DB2 support. DIR is the DB2 base install directory, defaults to /home/db2inst1/sqlib.(包含IBM DB2支持,DIR是DB2的基本安装目录,默认为/home/db2inst1/sqlib</td>
+</tr>
+<tr>
+<td>–with-pgsql-[=DIR]</td>
+<td>Include PostgreSQL support, DIR is the PostgreSQL base install directory, defaults to usr/local/pgsql.(包含{pstgreSQL支持, DIR是PostgreSQL的基本安装目录,默认为/usr/local/pgsql)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>不能将自己的系统没有的数据库客户端库编译进PHP,例如,如果没有安装Oracle客户端代码库,就不能在编译PHP时使用Oracle数据库选项</li>
+<li>可以使用<code>phpinfo()</code>函数来检查在你的PHP中是否安装了某种数据库,例如,如果在配置报告种看到了有关MySQL的部分,就可以知道你的PHP已经可以支持MySQL数据库,在PHP5中新出现了一种名为&quot;SQLite&quot;的小型数据库,如期名称所示,SQLite是一个轻量级的数据库工具,这个数据库产品在PHP5中出现,并且称成为默认的数据库工具(以前是MySQL),在PHP中仍然可以使用MySQL,但是需要做一些简单的设置来启用它,PHP5默认绑定SQLite,所以如果你想找一个轻量级的小巧的数据库工具,可以选用SQLite</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 数组抽象的数据集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E5%AF%B9%E8%B1%A1/%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95/">
+                        <span class="hidden-mobile">PHP 访问对象属性和方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
