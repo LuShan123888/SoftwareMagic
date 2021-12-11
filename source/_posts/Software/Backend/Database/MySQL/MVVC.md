@@ -17,15 +17,17 @@ categories:
 
 - InnoDB在每行数据都增加三个隐藏字段
     - `DB_ROW_ID`:包含一个随着新行插入而单调递增的行ID,当由innodb自动产生聚集索引时,聚集索引会包括这个行ID的值,否则这个行ID不会出现在任何索引中
-    - `DB_TRX_ID`:用来标识最近一次对本行记录做修改(insert|update)的事务的标识符,即最后一次修改(insert|update)本行记录的事务id,至于delete操作,在innodb看来也不过是一次update操作,更新行中的一个特殊位将行表示为deleted,并非真正删除
-    - `DB_ROLL_PTR`:指写入回滚段(rollback segment)的 undo log record (撤销日志记录记录),如果一行记录被更新, 则 undo log record 包含 ‘重建该行记录被更新之前内容’ 所必须的信息
+    - `DB_TRX_ID`（创建版本号）:用来标识最近一次对本行记录做修改的事务ID
+    - `DB_ROLL_PTR`（删除版本号）:指向写入回滚段(rollback segment)的 undo log record，如果一行记录被更新, 则 undo log record 包含该行记录被更新之前内容
 
 ### MVVC 环境下的CRUD
 
-- **SELECT**:读取创建版本小于或等于当前事务版本号,并且删除版本为空或大于当前事务版本号的记录,这样可以保证在读取之前记录是存在的
-- **INSERT**:将当前事务的版本号保存至行的创建版本号
-- **UPDATE**:新插入一行,并以当前事务的版本号作为新行的创建版本号,同时将原记录行的删除版本号设置为当前事务版本号
-- **DELETE**:将当前事务的版本号保存至行的删除版本号
+- **SELECT**：读取创建版本号<=当前事务版本号，删除版本号为空，或者是删除版本号大于当前事务版本号的的数据
+    - InnoDB 只查找创建版本小于当前事务版本号的数据行，这样可以确保事务读取的行，要么是在事务开始前已经存在的，要么是事务自身插入或者修改过的。
+    - 行的删除版本要么未定义，要么大于当前事务版本号，这可以确保事务读取到的行在事务开始之前未被删除。
+- **INSERT**：保存当前事务的版本号为创建版本号。
+- **UPDATE**：插入一条新的记录，保存当前的版本号为创建版本号，同时当前版本号保存为原来数据的删除版本号。
+- **DELETE**：保存当前版本号为删除版本号。
 
 **插入操作**
 
@@ -42,7 +44,7 @@ categories:
 - 比如,针对上面那行记录,事务Id为2 要把name字段更新
 
 ```sql
-update table set name= 'new_value' where id=1;
+update table set name= 'xttblog.com' where id=1;
 ```
 
 | id   | name        | DB_ROW_ID | DB_TRX_ID |
@@ -75,9 +77,9 @@ delete from table where id=1;
     - **快照读**:就是select
         - select * from table….;
     - **当前读**:特殊的读操作,插入/更新/删除操作,属于当前读,处理的都是当前的数据,需要加锁
-        - select * from table where ? lock in share mode;
-        - select * from table where ? for update;
-        - insert;
-        - update ;
-        - delete;
+        - `select * from table where ? lock in share mode;`
+        - `select * from table where ? for update;`
+        - `insert;`
+        - `update ;`
+        - `delete;`
 - 事务的隔离级别实际上都是定义了当前读的级别,MySQL为了减少锁处理(包括等待其它锁)的时间,提升并发能力,引入了快照读的概念,使得select不用加锁,而update,insert这些"当前读”,就需要另外的模块来解决了

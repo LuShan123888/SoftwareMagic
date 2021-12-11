@@ -31,13 +31,13 @@ categories:
 
 ## Docker搭建分片集群
 
-### 配置redis集群docker虚拟网卡
+### 配置Redis集群docker虚拟网卡
 
 ```bash
-$ docker network create redis_cluster --subnet 172.38.0.0/16
+$ docker network create redis_cluster
 ```
 
-### redis节点配置文件
+### Redis节点配置文件
 
 ```bash
 for id in $(seq 1 6);
@@ -58,7 +58,7 @@ EOF
 done
 ```
 
-### 启动redis集群容器
+### 启动Redis集群容器
 
 ```bash
 for id in $(seq 1 6);
@@ -71,7 +71,7 @@ docker run-d   --name redis_cluster-${id} -p 637${id}:6379 -p 1637${id}:16379  \
 done
 ```
 
-### 创建redis集群
+### 创建Redis集群
 
 ```bash
 $ docker exec -it redis_cluster-1 /bin/bash
@@ -82,7 +82,7 @@ $redis-cli --cluster create \
 172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1
 ```
 
-### 连接集群
+### 连接Redis集群
 
 ```
 $ docker exec -it redis_cluster-1 /bin/bash
@@ -90,7 +90,7 @@ $ docker exec -it redis_cluster-1 /bin/bash
 $ redis-cli -c   #-c表示集群
 ```
 
-### 查看集群信息
+### 查看Redis集群信息
 
 #### 集群配置
 

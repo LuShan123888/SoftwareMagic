@@ -7,7 +7,7 @@ categories:
 ---
 # macOS HiDPI
 
-## 安装命令
+## 安装
 
 ```shell
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/master/hidpi.sh)"
@@ -17,7 +17,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/mast
 
 ### 命令恢复
 
-如果还能进系统,就再次运行命令选择选项 3 关闭 HIDPI
+- 如果还能进系统,就再次运行命令选择选项 3 关闭 HIDPI
 
 ### 恢复模式
 
@@ -27,10 +27,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/mast
 **快捷恢复**
 
 ```shell
-ls /Volumes/
-cd /Volumes/你的系统盘/System/Library/Displays/Contents/Resources/Overrides/HIDPI
+$ ls /Volumes/
+$ cd /Volumes/你的系统盘/System/Library/Displays/Contents/Resources/Overrides/HIDPI
 
-./disable
+$ ./disable
 ```
 
 **手动恢复**
@@ -40,12 +40,11 @@ cd /Volumes/你的系统盘/System/Library/Displays/Contents/Resources/Overrides
 - 具体命令如下:
 
 ```shell
-ls /Volumes/
-cd /Volumes/你的系统盘/System/Library/Displays/Contents/Resources/Overrides
-EDID=($(ioreg -lw0 | grep -i "IODisplayEDID" | sed -e "/[^<]*</s///" -e "s/\>//"))
-Vid=($(echo $EDID | cut -c18-20))
-rm -rf ./DisplayVendorID-$Vid
-cp -r ./HIDPI/backup/* ./
+$ ls /Volumes/
+$ cd /Volumes/你的系统盘/System/Library/Displays/Contents/Resources/Overrides
+$ EDID=($(ioreg -lw0 | grep -i "IODisplayEDID" | sed -e "/[^<]*</s///" -e "s/\>//"))
+$ Vid=($(echo $EDID | cut -c18-20))
+$ rm -rf ./DisplayVendorID-$Vid
+$ cp -r ./HIDPI/backup/* ./
 ```
-
 

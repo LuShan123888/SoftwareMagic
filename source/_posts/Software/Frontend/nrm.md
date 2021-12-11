@@ -19,7 +19,7 @@ categories:
 ## 安装
 
 ```shell
-yarn global add nrm
+npm install -g nrm
 ```
 
 ## 列出可用的源
