@@ -35,19 +35,17 @@ categories:
 5. 在我们的 starter模块中导入 autoconfigure 的依赖
 
 ```xml
-    <dependency>
-        <groupId>com.test</groupId>
-        <artifactId>test-spring-boot-starter-autoconfigure</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+<dependency>
+    <groupId>com.test</groupId>
+    <artifactId>test-spring-boot-starter-autoconfigure</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
 ```
 
 6. 将 autoconfigure 项目下多余的文件都删掉,`Pom.xml`中只留下一个`spring-boot-starter`,这是所有的启动器基本配置
 7. 编写一个自定义的服务类
 
 ```java
-package com.test;
-
 public class HelloService {
 
     HelloProperties helloProperties;
@@ -70,9 +68,6 @@ public class HelloService {
 8. 编写HelloProperties配置类
 
 ```java
-package com.test;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 // 前缀 test.hello
 @ConfigurationProperties(prefix = "test.hello")
@@ -102,14 +97,6 @@ public class HelloProperties {
 9. 编写自定义的自动配置类并注入bean,测试
 
 ```java
-package com.test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 @Configuration
 @ConditionalOnWebApplication //web应用生效
 @EnableConfigurationProperties(HelloProperties.class)
@@ -158,8 +145,6 @@ mvn install
 2. 编写一个 HelloController  进行测试我们自己的写的接口
 
 ```java
-package com.test.controller;
-
 @RestController
 public class HelloController {
 
