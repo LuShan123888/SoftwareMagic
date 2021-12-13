@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="创建基础Spring MVC程序 pom.xml 12345&lt;dependency&gt;  &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;  &lt;artifactId&gt;spring-webmvc&lt;&#x2F;artifactId&gt;  &lt;version&gt;5.2.0.RELEASE&lt;&#x2F;version&gt;&amp;l">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-18T11:54:46.000Z">
-<meta property="article:modified_time" content="2021-06-18T11:54:46.000Z">
+<meta property="article:published_time" content="2021-12-13T07:33:56.000Z">
+<meta property="article:modified_time" content="2021-12-13T07:33:56.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-18 19:54" pubdate>
-        2021年6月18日 晚上
+      <time datetime="2021-12-13 15:33" pubdate>
+        2021年12月13日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.1k 字
+      7.7k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      24 分钟
     </span>
   
 
@@ -229,7 +229,7 @@
 <ul>
 <li>编写Controller(Handler)</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.controller;<br><br><span class="hljs-keyword">import</span> org.springframework.web.servlet.ModelAndView;<br><span class="hljs-keyword">import</span> org.springframework.web.servlet.mvc.Controller;<br><br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><br><span class="hljs-comment">//注意:这里我们先导入Controller接口</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Controller</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title">handleRequest</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">//ModelAndView 模型和视图</span><br>    ModelAndView mv = <span class="hljs-keyword">new</span> ModelAndView();<br><br>    <span class="hljs-comment">//封装对象,放在ModelAndView中,Model</span><br>    mv.addObject(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;HelloSpring MVC!&quot;</span>);<br>    <span class="hljs-comment">//封装要跳转的视图,放在ModelAndView中</span><br>    mv.setViewName(<span class="hljs-string">&quot;hello&quot;</span>); <span class="hljs-comment">//: /WEB-INF/jsp/hello.jsp</span><br>    <span class="hljs-keyword">return</span> mv;<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//注意:这里我们先导入Controller接口</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Controller</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title">handleRequest</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">//ModelAndView 模型和视图</span><br>    ModelAndView mv = <span class="hljs-keyword">new</span> ModelAndView();<br><br>    <span class="hljs-comment">//封装对象,放在ModelAndView中,Model</span><br>    mv.addObject(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;HelloSpring MVC!&quot;</span>);<br>    <span class="hljs-comment">//封装要跳转的视图,放在ModelAndView中</span><br>    mv.setViewName(<span class="hljs-string">&quot;hello&quot;</span>); <span class="hljs-comment">//: /WEB-INF/jsp/hello.jsp</span><br>    <span class="hljs-keyword">return</span> mv;<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>注册bean</li>
 </ul>
@@ -258,7 +258,7 @@
 <li><strong>注意</strong>:在视图解析器中我们把所有的视图都存放在<code>/WEB-INF/</code>目录下,这样可以保证视图安全,因为这个目录下的文件,客户端不能直接访问</li>
 <li>创建<code>Controller</code></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">package com.example.controller;<br><br><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;<br><span class="hljs-keyword">import</span> org.springframework.ui.Model;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><br>@Controller<br>@RequestMapping(<span class="hljs-string">&quot;/HelloController&quot;</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> </span>&#123;<br><br>  <span class="hljs-comment">//真实访问地址 : 项目名/HelloController/hello</span><br>  @RequestMapping(<span class="hljs-string">&quot;/hello&quot;</span>)<br>  public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">sayHello</span>(<span class="hljs-params">Model model</span>)</span>&#123;<br>    <span class="hljs-comment">//向模型中添加属性msg与值,可以在JSP页面中取出并渲染</span><br>    model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;hello,Spring MVC&quot;</span>);<br>    <span class="hljs-comment">//web-inf/jsp/hello.jsp</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js">@Controller<br>@RequestMapping(<span class="hljs-string">&quot;/HelloController&quot;</span>)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> </span>&#123;<br><br>  <span class="hljs-comment">//真实访问地址 : 项目名/HelloController/hello</span><br>  @RequestMapping(<span class="hljs-string">&quot;/hello&quot;</span>)<br>  public <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">sayHello</span>(<span class="hljs-params">Model model</span>)</span>&#123;<br>    <span class="hljs-comment">//向模型中添加属性msg与值,可以在JSP页面中取出并渲染</span><br>    model.addAttribute(<span class="hljs-string">&quot;msg&quot;</span>,<span class="hljs-string">&quot;hello,Spring MVC&quot;</span>);<br>    <span class="hljs-comment">//web-inf/jsp/hello.jsp</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong></p>
 <ul>
 <li><code>@Controller</code>是为了让Spring IOC容器初始化时自动扫描到;</li>
@@ -299,9 +299,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E9%A1%B5%E9%9D%A2%E5%9B%BD%E9%99%85%E5%8C%96/">
+                      <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot 页面国际化</span>
+                        <span class="hidden-mobile">Spring Boot 整合QQ登录</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -309,8 +309,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">
-                        <span class="hidden-mobile">Servlet 文件上传与下载</span>
+                      <a href="/Software/Backend/Distributed/Dubbo/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">Dubbo 初始化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

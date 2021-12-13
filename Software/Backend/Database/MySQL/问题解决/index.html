@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题  由于JDBC参数Timezone与Mysql系统时区不一致导致的  1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiModelProp">
+  <meta name="description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiMod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题  由于JDBC参数Timezone与Mysql系统时区不一致导致的  1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiModelProp">
+<meta property="og:description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiMod">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-05T09:45:31.000Z">
-<meta property="article:modified_time" content="2021-12-05T09:45:31.000Z">
+<meta property="article:published_time" content="2021-12-12T13:53:05.000Z">
+<meta property="article:modified_time" content="2021-12-12T13:53:05.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-05 17:45" pubdate>
-        2021年12月5日 下午
+      <time datetime="2021-12-12 21:53" pubdate>
+        2021年12月12日 晚上
       </time>
     </span>
   
@@ -215,9 +215,8 @@
             <div class="markdown-body">
               <h1>MySQL 问题解决</h1>
 <h2 id="MySQL数据库存入Date时显示不正常的问题">MySQL数据库存入Date时显示不正常的问题</h2>
-<ul>
-<li>由于JDBC参数Timezone与Mysql系统时区不一致导致的</li>
-</ul>
+<p><strong>原因</strong>：由于JDBC参数Timezone与Mysql系统时区不一致导致的</p>
+<p><strong>解决方法</strong></p>
 <p><strong>1. 后端使用UTC时间，返回前端时根据时区转化</strong></p>
 <ol>
 <li>修改数据库连接配置</li>
@@ -237,56 +236,41 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">jdbc:mysql:<span class="hljs-comment">//localhost:3306/test?serverTimezone=Asia/Shanghai</span><br></code></pre></td></tr></table></figure>
 <h2 id="Host-is-blocked">Host is blocked</h2>
-<p><strong>报错信息</strong></p>
-<ul>
-<li>Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</li>
-</ul>
-<p><strong>解决方法</strong></p>
-<ul>
-<li>刷新ip缓存记录</li>
-</ul>
+<p><strong>报错信息</strong>：Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</p>
+<p><strong>解决方法</strong>：刷新ip缓存记录</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">FLUSH HOSTS;<br></code></pre></td></tr></table></figure>
 <h2 id="数据库连接失败">数据库连接失败</h2>
-<h3 id="取消使用SSL"><strong>取消使用SSL</strong></h3>
+<p><strong>解决方法</strong></p>
+<ul>
+<li><strong>取消使用SSL</strong></li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">jdbc:mysql:<span class="hljs-comment">//127.0.0.1:3306/数据库名称?useSSL=false</span><br></code></pre></td></tr></table></figure>
-<h3 id="修改密码认证方式"><strong>修改密码认证方式</strong></h3>
+<ul>
+<li><strong>修改密码认证方式</strong></li>
+</ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER USER &#x27;数据库用户名&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;WP数据库密码&#x27;;<br><br>#密码时效<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE NEVER; # 密码永不过期<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE DEFAULT; # 默认<br>ALTER USER `test`@`localhost` PASSWORD EXPIRE;#立即过期<br><br>#认证模式<br>ALTER USER &#x27;test&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED WITH mysql_native_password # 修改密码为默认认证模式<br>        BY &#x27;123456&#x27;;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH caching_sha2_password;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH sha256_password;<br><br># 刷新MySQL的系统权限相关表<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h3 id="远程数据库连接失败">远程数据库连接失败</h3>
-<p><strong>报错信息</strong></p>
-<ul>
-<li>Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</li>
-</ul>
+<p><strong>报错信息</strong>：Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</p>
 <p><strong>解决方法</strong></p>
-<ul>
+<ol>
 <li>编辑<code>mysqld.cnf</code></li>
-</ul>
+</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">[mysqld]<br># bind-address = 127.0.0.1 # 只允许本机连接<br></code></pre></td></tr></table></figure>
-<ul>
+<ol start="2">
 <li>查询用户登录权限</li>
-</ul>
+</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; use mysql;<br>mysql&gt; select host,user from mysql.user;  # 查询user表<br>  +-----------+---------------+<br>  | host      | user          |<br>  +-----------+---------------+<br>  | localhost        | root          |<br>  | localhost | mysql.session |<br>  | localhost | mysql.sys     |<br>  +-----------+---------------+<br>  5 rows in set (0.00 sec)<br></code></pre></td></tr></table></figure>
-<ul>
+<ol start="3">
 <li>如果要登录的用户的 host 不是<code>%</code>则需要修改</li>
-</ul>
+</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;<br>  Query OK, 0 rows affected, 1 warning (0.00 sec)<br><br>mysql&gt; FLUSH PRIVILEGES; # 刷新权限<br>  Query OK, 0 rows affected (0.00 sec)  <br></code></pre></td></tr></table></figure>
 <h2 id="数据库中文乱码">数据库中文乱码</h2>
-<ul>
-<li>修改默认字符集</li>
-</ul>
+<p><strong>解决方法</strong>：修改默认字符集</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW VARIABLES WHERE Variable_name LIKE &#x27;character_set_%&#x27;;<br>SET character_set_database = utf8mb4;<br>SET character_set_results = utf8mb4;<br>SET character_set_system = utf8mb4;<br></code></pre></td></tr></table></figure>
 <h2 id="同时执行多条sql语句报错">同时执行多条sql语句报错</h2>
-<p><strong>报错信息</strong></p>
-<ul>
-<li>java.sql.SQLException: sql injection violation, multi-statement not allow</li>
-</ul>
-<p><strong>原因</strong></p>
-<ul>
-<li>需要设置过滤器 <strong>WallFilter</strong> 的配置: <strong>WallConfig</strong> 的参数 <strong>multiStatementAllow</strong> 为true,默认情况下false不允许批量操作</li>
-</ul>
-<p><strong>解决方法</strong></p>
-<ul>
-<li>配置druid连接池,实现同时执行多条语句</li>
-</ul>
+<p><strong>报错信息</strong>：java.sql.SQLException: sql injection violation, multi-statement not allow</p>
+<p><strong>原因</strong>：需要设置过滤器 <strong>WallFilter</strong> 的配置: <strong>WallConfig</strong> 的参数 <strong>multiStatementAllow</strong> 为true,默认情况下false不允许批量操作</p>
+<p><strong>解决方法</strong>：配置druid连接池,实现同时执行多条语句</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.ejudata.platform.config;<br><br><span class="hljs-keyword">import</span> com.alibaba.druid.filter.Filter;<br><span class="hljs-keyword">import</span> com.alibaba.druid.pool.DruidDataSource;<br><span class="hljs-keyword">import</span> com.alibaba.druid.wall.WallConfig;<br><span class="hljs-keyword">import</span> com.alibaba.druid.wall.WallFilter;<br><span class="hljs-keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><br><span class="hljs-keyword">import</span> javax.sql.DataSource;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DruidConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">druidDataSource</span><span class="hljs-params">()</span> </span>&#123;<br>        DruidDataSource druidDataSource = <span class="hljs-keyword">new</span> DruidDataSource();<br>        List&lt;Filter&gt; filterList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        filterList.add(wallFilter());<br>        druidDataSource.setProxyFilters(filterList);<br>        <span class="hljs-keyword">return</span> druidDataSource;<br><br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallFilter <span class="hljs-title">wallFilter</span><span class="hljs-params">()</span> </span>&#123;<br>        WallFilter wallFilter = <span class="hljs-keyword">new</span> WallFilter();<br>        wallFilter.setConfig(wallConfig());<br>        <span class="hljs-keyword">return</span> wallFilter;<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallConfig <span class="hljs-title">wallConfig</span><span class="hljs-params">()</span> </span>&#123;<br>        WallConfig config = <span class="hljs-keyword">new</span> WallConfig();<br>        config.setMultiStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许一次执行多条语句</span><br>        config.setNoneBaseStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许非基本语句的其他语句</span><br>        <span class="hljs-keyword">return</span> config;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
@@ -321,9 +305,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                      <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Elasticsearch 初始化</span>
+                        <span class="hidden-mobile">Spring 日志</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -331,8 +315,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DCL/%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90/">
-                        <span class="hidden-mobile">SQL 用户与权限</span>
+                      <a href="/Software/System/macOS/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">macOS 问题解决</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
