@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiMod">
+  <meta name="description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在application.properties配置文件增加以下配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在返回前端对象的时间字段上加上注解  1234567@ApiMod">
+<meta property="og:description" content="MySQL 问题解决 MySQL数据库存入Date时显示不正常的问题 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在application.properties配置文件增加以下配置">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-12T13:53:05.000Z">
-<meta property="article:modified_time" content="2021-12-12T13:53:05.000Z">
+<meta property="article:published_time" content="2021-12-14T06:38:54.000Z">
+<meta property="article:modified_time" content="2021-12-14T06:38:54.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-12 21:53" pubdate>
-        2021年12月12日 晚上
+      <time datetime="2021-12-14 14:38" pubdate>
+        2021年12月14日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      3.4k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分钟
+      10 分钟
     </span>
   
 
@@ -223,10 +223,10 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">jdbc:mysql:<span class="hljs-comment">//localhost:3306/test?serverTimezone=UTC</span><br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>在返回前端对象的时间字段上加上注解</li>
+<li>在<code>application.properties</code>配置文件增加以下配置</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ApiModelProperty(value = &quot;创建时间&quot;, name = &quot;createTime&quot;)</span><br><span class="hljs-meta">@JsonFormat(timezone = &quot;GMT+8&quot;, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="hljs-keyword">private</span> Date createTime;<br><br><span class="hljs-meta">@ApiModelProperty(value = &quot;更新时间&quot;, name = &quot;updateTime&quot;)</span><br><span class="hljs-meta">@JsonFormat(timezone = &quot;GMT+8&quot;, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="hljs-keyword">private</span> Date updateTime;<br></code></pre></td></tr></table></figure>
-<p><strong>2. 后端使用本地时间</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.jackson.time-zone</span>=<span class="hljs-string">GMT+8</span><br></code></pre></td></tr></table></figure>
+<p><strong>2. 后端使用本地时间，前端直接显示</strong>,</p>
 <ol>
 <li>修改配置文件<code>/etc/mysql/my.cnf</code></li>
 </ol>
@@ -249,7 +249,7 @@
 <li><strong>修改密码认证方式</strong></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs mysql">ALTER USER &#x27;数据库用户名&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;WP数据库密码&#x27;;<br><br>#密码时效<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE NEVER; # 密码永不过期<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE DEFAULT; # 默认<br>ALTER USER `test`@`localhost` PASSWORD EXPIRE;#立即过期<br><br>#认证模式<br>ALTER USER &#x27;test&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED WITH mysql_native_password # 修改密码为默认认证模式<br>        BY &#x27;123456&#x27;;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH caching_sha2_password;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH sha256_password;<br><br># 刷新MySQL的系统权限相关表<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
-<h3 id="远程数据库连接失败">远程数据库连接失败</h3>
+<h2 id="数据库拒绝连接">数据库拒绝连接</h2>
 <p><strong>报错信息</strong>：Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</p>
 <p><strong>解决方法</strong></p>
 <ol>
@@ -264,6 +264,10 @@
 <li>如果要登录的用户的 host 不是<code>%</code>则需要修改</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;<br>  Query OK, 0 rows affected, 1 warning (0.00 sec)<br><br>mysql&gt; FLUSH PRIVILEGES; # 刷新权限<br>  Query OK, 0 rows affected (0.00 sec)  <br></code></pre></td></tr></table></figure>
+<h2 id="数据库连接公钥不可用">数据库连接公钥不可用</h2>
+<p><strong>报错</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
+<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥；可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者AllowPublicKeyRetrieval=True参数以允许客户端从服务器获取公钥；但是需要注意的是 AllowPublicKeyRetrieval=True可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
+<p><strong>解决方法</strong>：在连接url后面添加<code>allowPublicKeyRetrieval=true</code></p>
 <h2 id="数据库中文乱码">数据库中文乱码</h2>
 <p><strong>解决方法</strong>：修改默认字符集</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SHOW VARIABLES WHERE Variable_name LIKE &#x27;character_set_%&#x27;;<br>SET character_set_database = utf8mb4;<br>SET character_set_results = utf8mb4;<br>SET character_set_system = utf8mb4;<br></code></pre></td></tr></table></figure>
@@ -271,7 +275,7 @@
 <p><strong>报错信息</strong>：java.sql.SQLException: sql injection violation, multi-statement not allow</p>
 <p><strong>原因</strong>：需要设置过滤器 <strong>WallFilter</strong> 的配置: <strong>WallConfig</strong> 的参数 <strong>multiStatementAllow</strong> 为true,默认情况下false不允许批量操作</p>
 <p><strong>解决方法</strong>：配置druid连接池,实现同时执行多条语句</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.ejudata.platform.config;<br><br><span class="hljs-keyword">import</span> com.alibaba.druid.filter.Filter;<br><span class="hljs-keyword">import</span> com.alibaba.druid.pool.DruidDataSource;<br><span class="hljs-keyword">import</span> com.alibaba.druid.wall.WallConfig;<br><span class="hljs-keyword">import</span> com.alibaba.druid.wall.WallFilter;<br><span class="hljs-keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><br><span class="hljs-keyword">import</span> javax.sql.DataSource;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DruidConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">druidDataSource</span><span class="hljs-params">()</span> </span>&#123;<br>        DruidDataSource druidDataSource = <span class="hljs-keyword">new</span> DruidDataSource();<br>        List&lt;Filter&gt; filterList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        filterList.add(wallFilter());<br>        druidDataSource.setProxyFilters(filterList);<br>        <span class="hljs-keyword">return</span> druidDataSource;<br><br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallFilter <span class="hljs-title">wallFilter</span><span class="hljs-params">()</span> </span>&#123;<br>        WallFilter wallFilter = <span class="hljs-keyword">new</span> WallFilter();<br>        wallFilter.setConfig(wallConfig());<br>        <span class="hljs-keyword">return</span> wallFilter;<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallConfig <span class="hljs-title">wallConfig</span><span class="hljs-params">()</span> </span>&#123;<br>        WallConfig config = <span class="hljs-keyword">new</span> WallConfig();<br>        config.setMultiStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许一次执行多条语句</span><br>        config.setNoneBaseStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许非基本语句的其他语句</span><br>        <span class="hljs-keyword">return</span> config;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DruidConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">druidDataSource</span><span class="hljs-params">()</span> </span>&#123;<br>        DruidDataSource druidDataSource = <span class="hljs-keyword">new</span> DruidDataSource();<br>        List&lt;Filter&gt; filterList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        filterList.add(wallFilter());<br>        druidDataSource.setProxyFilters(filterList);<br>        <span class="hljs-keyword">return</span> druidDataSource;<br><br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallFilter <span class="hljs-title">wallFilter</span><span class="hljs-params">()</span> </span>&#123;<br>        WallFilter wallFilter = <span class="hljs-keyword">new</span> WallFilter();<br>        wallFilter.setConfig(wallConfig());<br>        <span class="hljs-keyword">return</span> wallFilter;<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> WallConfig <span class="hljs-title">wallConfig</span><span class="hljs-params">()</span> </span>&#123;<br>        WallConfig config = <span class="hljs-keyword">new</span> WallConfig();<br>        config.setMultiStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许一次执行多条语句</span><br>        config.setNoneBaseStatementAllow(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//允许非基本语句的其他语句</span><br>        <span class="hljs-keyword">return</span> config;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -305,9 +309,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/">
+                      <a href="/Software/Backend/SpringFramework/Spring/%E6%B5%8B%E8%AF%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 日志</span>
+                        <span class="hidden-mobile">Spring 测试</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -315,8 +319,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/System/macOS/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-                        <span class="hidden-mobile">macOS 问题解决</span>
+                      <a href="/Internet/HTTP/Cookie&amp;Session&amp;Token/">
+                        <span class="hidden-mobile">HTTP Cookie&Session&Token</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
