@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Spring MVC 静态资源处理 静态资源映射规则  SpringBoot中,Spring MVC的web配置都在WebMvcAutoConfiguration这个配置类里面 WebMvcAutoConfigurationAdapter中有很多配置方法  addResourceHandlers添加资源处理    123456789101112131415161718192021222324@Ov">
+  <meta name="description" content="Spring MVC 静态资源处理 静态资源映射规则  SpringBoot中,Spring MVC的web配置都在WebMvcAutoConfiguration这个配置类里面 addResourceHandlers添加资源处理  123456789101112131415161718192021222324@Overridepublic void addResourceHandlers(Reso">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring MVC 静态资源处理">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Spring MVC 静态资源处理 静态资源映射规则  SpringBoot中,Spring MVC的web配置都在WebMvcAutoConfiguration这个配置类里面 WebMvcAutoConfigurationAdapter中有很多配置方法  addResourceHandlers添加资源处理    123456789101112131415161718192021222324@Ov">
+<meta property="og:description" content="Spring MVC 静态资源处理 静态资源映射规则  SpringBoot中,Spring MVC的web配置都在WebMvcAutoConfiguration这个配置类里面 addResourceHandlers添加资源处理  123456789101112131415161718192021222324@Overridepublic void addResourceHandlers(Reso">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-15-640-20201115212727167.png">
-<meta property="article:published_time" content="2021-12-13T07:36:08.000Z">
-<meta property="article:modified_time" content="2021-12-13T07:36:08.000Z">
+<meta property="article:published_time" content="2021-12-15T10:50:00.000Z">
+<meta property="article:modified_time" content="2021-12-15T10:50:00.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -163,8 +163,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-13 15:36" pubdate>
-        2021年12月13日 下午
+      <time datetime="2021-12-15 18:50" pubdate>
+        2021年12月15日 晚上
       </time>
     </span>
   
@@ -183,7 +183,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13 分钟
+      12 分钟
     </span>
   
 
@@ -219,11 +219,7 @@
 <h2 id="静态资源映射规则">静态资源映射规则</h2>
 <ul>
 <li>SpringBoot中,Spring MVC的web配置都在<code>WebMvcAutoConfiguration</code>这个配置类里面</li>
-<li><code>WebMvcAutoConfigurationAdapter</code>中有很多配置方法
-<ul>
 <li><code>addResourceHandlers</code>添加资源处理</li>
-</ul>
-</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addResourceHandlers</span><span class="hljs-params">(ResourceHandlerRegistry registry)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.resourceProperties.isAddMappings()) &#123;<br>        <span class="hljs-comment">// 已禁用默认资源处理</span><br>        logger.debug(<span class="hljs-string">&quot;Default resource handling disabled&quot;</span>);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">// 缓存控制</span><br>    Duration cachePeriod = <span class="hljs-keyword">this</span>.resourceProperties.getCache().getPeriod();<br>    CacheControl cacheControl = <span class="hljs-keyword">this</span>.resourceProperties.getCache().getCachecontrol().toHttpCacheControl();<br>    <span class="hljs-comment">// webjars配置</span><br>    <span class="hljs-keyword">if</span> (!registry.hasMappingForPattern(<span class="hljs-string">&quot;/webjars/**&quot;</span>)) &#123;<br>        customizeResourceHandlerRegistration(registry.addResourceHandler(<span class="hljs-string">&quot;/webjars/**&quot;</span>)<br>                                             .addResourceLocations(<span class="hljs-string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>)<br>                                             .setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));<br>    &#125;<br>    <span class="hljs-comment">// 静态资源配置</span><br>    String staticPathPattern = <span class="hljs-keyword">this</span>.mvcProperties.getStaticPathPattern();<br>    <span class="hljs-keyword">if</span> (!registry.hasMappingForPattern(staticPathPattern)) &#123;<br>        customizeResourceHandlerRegistration(registry.addResourceHandler(staticPathPattern)<br>                                             .addResourceLocations(getResourceLocations(<span class="hljs-keyword">this</span>.resourceProperties.getStaticLocations()))<br>                                             .setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="webjars">webjars</h3>
@@ -322,18 +318,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Maven/%E6%8F%92%E4%BB%B6/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Maven 插件</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E8%B7%A8%E5%9F%9F/">
-                        <span class="hidden-mobile">Spring MVC 跨域</span>
+                      <a href="/Software/Backend/SpringFramework/SpringMVC/HandleAdaptor/">
+                        <span class="hidden-mobile">Spring MVC 处理器适配器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
