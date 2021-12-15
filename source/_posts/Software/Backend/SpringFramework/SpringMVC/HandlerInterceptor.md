@@ -24,33 +24,25 @@ categories:
 - 自定义拦截器,必须实现 HandlerInterceptor 接口
 
 ```java
-package com.example.interceptor;
-
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class MyInterceptor implements HandlerInterceptor {
 
-   //在请求处理的方法之前执行
-   //如果返回true执行下一个拦截器
-   //如果返回false就不执行下一个拦截器
-   public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-       System.out.println("------------处理前------------");
-       return true;
-  }
+    //在请求处理的方法之前执行
+    //如果返回true执行下一个拦截器
+    //如果返回false就不执行下一个拦截器
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        System.out.println("------------处理前------------");
+        return true;
+    }
 
-   //在请求处理方法执行之后执行
-   public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-       System.out.println("------------处理后------------");
-  }
+    //在请求处理方法执行之后执行
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        System.out.println("------------处理后------------");
+    }
 
-   //在dispatcherServlet处理后执行,做清理工作
-   public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-       System.out.println("------------清理------------");
-  }
+    //在dispatcherServlet处理后执行,做清理工作
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+        System.out.println("------------清理------------");
+    }
 }
 ```
 
@@ -61,14 +53,14 @@ public class MyInterceptor implements HandlerInterceptor {
 ```xml
 <!--关于拦截器的配置-->
 <mvc:interceptors>
-   <mvc:interceptor>
-       <!--/** 包括路径及其子路径-->
-       <!--/admin/* 拦截的是/admin/add等等这种 , /admin/add/user不会被拦截-->
-       <!--/admin/** 拦截的是/admin/下的所有-->
-       <mvc:mapping path="/**"/>
-       <!--bean配置的就是拦截器-->
-       <bean class="com.example.interceptor.MyInterceptor"/>
-   </mvc:interceptor>
+    <mvc:interceptor>
+        <!--/** 包括路径及其子路径-->
+        <!--/admin/* 拦截的是/admin/add等等这种 , /admin/add/user不会被拦截-->
+        <!--/admin/** 拦截的是/admin/下的所有-->
+        <mvc:mapping path="/**"/>
+        <!--bean配置的就是拦截器-->
+        <bean class="com.example.interceptor.MyInterceptor"/>
+    </mvc:interceptor>
 
     <!--可以通过这种配置方式指定拦截器的映射类, 但是默认拦截所有请求-->
     <bean name="handlerInterceptor1" class="com.briup.web.interceptor.MyInterceptor1"/>
@@ -85,13 +77,6 @@ public class MyInterceptor implements HandlerInterceptor {
 **SpringBoot**
 
 ```java
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 @Configuration
 public class DemoMvcConfig implements WebMvcConfigurer {
     @Override
@@ -118,20 +103,20 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-   <title>Title</title>
-</head>
+    <head>
+        <title>Title</title>
+    </head>
 
-<h1>登录页面</h1>
-<hr>
+    <h1>登录页面</h1>
+    <hr>
 
-<body>
-<form action="${pageContext.request.contextPath}/user/login">
-  用户名:<input type="text" name="username"> <br>
-  密码:<input type="password" name="pwd"> <br>
-   <input type="submit" value="提交">
-</form>
-</body>
+    <body>
+        <form action="${pageContext.request.contextPath}/user/login">
+            用户名:<input type="text" name="username"> <br>
+            密码:<input type="password" name="pwd"> <br>
+            <input type="submit" value="提交">
+        </form>
+    </body>
 </html>
 ```
 
@@ -140,106 +125,88 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 ```jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-   <title>Title</title>
-</head>
-<body>
+    <head>
+        <title>Title</title>
+    </head>
+    <body>
 
-<h1>登录成功页面</h1>
-<hr>
+        <h1>登录成功页面</h1>
+        <hr>
 
-${user}
-<a href="${pageContext.request.contextPath}/user/logout">注销</a>
-</body>
+        ${user}
+        <a href="${pageContext.request.contextPath}/user/logout">注销</a>
+    </body>
 </html>
 ```
 
 3. 编写一个Controller处理请求
 
 ```java
-package com.example.controller;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-   //跳转到登陆页面
-   @RequestMapping("/jumplogin")
-   public String jumpLogin() throws Exception {
-       return "login";
-  }
+    //跳转到登陆页面
+    @RequestMapping("/jumplogin")
+    public String jumpLogin() throws Exception {
+        return "login";
+    }
 
-   //跳转到成功页面
-   @RequestMapping("/jumpSuccess")
-   public String jumpSuccess() throws Exception {
-       return "success";
-  }
+    //跳转到成功页面
+    @RequestMapping("/jumpSuccess")
+    public String jumpSuccess() throws Exception {
+        return "success";
+    }
 
-   //登陆提交
-   @RequestMapping("/login")
-   public String login(HttpSession session, String username, String pwd) throwsException {
-       // 向session记录用户身份信息
-       System.out.println("接收前端==="+username);
-       session.setAttribute("user", username);
-       return "success";
-  }
+    //登陆提交
+    @RequestMapping("/login")
+    public String login(HttpSession session, String username, String pwd) throwsException {
+        // 向session记录用户身份信息
+        System.out.println("接收前端==="+username);
+        session.setAttribute("user", username);
+        return "success";
+    }
 
-   //退出登陆
-   @RequestMapping("logout")
-   public String logout(HttpSession session) throws Exception {
-       // session 过期
-       session.invalidate();
-       return "login";
-  }
+    //退出登陆
+    @RequestMapping("logout")
+    public String logout(HttpSession session) throws Exception {
+        // session 过期
+        session.invalidate();
+        return "login";
+    }
 }
 ```
 5. 编写用户登录拦截器
 
 ```java
-package com.example.interceptor;
-
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-
 public class LoginInterceptor implements HandlerInterceptor {
 
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
-       // 如果是登陆页面则放行
-       System.out.println("url: " + request.getRequestURI());
-       if (request.getRequestURI().contains("login")) {
-           return true;
-      }
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
+        // 如果是登陆页面则放行
+        System.out.println("url: " + request.getRequestURI());
+        if (request.getRequestURI().contains("login")) {
+            return true;
+        }
 
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-       // 如果用户已登陆也放行
-       if(session.getAttribute("user") != null) {
-           return true;
-      }
+        // 如果用户已登陆也放行
+        if(session.getAttribute("user") != null) {
+            return true;
+        }
 
-       // 用户没有登陆跳转到登陆页面
-       request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-       return false;
-  }
+        // 用户没有登陆跳转到登陆页面
+        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        return false;
+    }
 
-   public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
-  }
+    }
 
-   public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 
-  }
+    }
 }
 ```
 
@@ -248,10 +215,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 ```xml
 <!--关于拦截器的配置-->
 <mvc:interceptors>
-   <mvc:interceptor>
-       <mvc:mapping path="/**"/>
-       <bean id="loginInterceptor" class="com.example.interceptor.LoginInterceptor"/>
-   </mvc:interceptor>
+    <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean id="loginInterceptor" class="com.example.interceptor.LoginInterceptor"/>
+    </mvc:interceptor>
 </mvc:interceptors>
 ```
 

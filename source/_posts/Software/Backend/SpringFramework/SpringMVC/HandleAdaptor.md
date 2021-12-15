@@ -16,31 +16,30 @@ categories:
 ```java
 public class SimpleControllerHandlerAdapter implements HandlerAdapter {
 
-	@Override
-	public boolean supports(Object handler) {
-        	//判断待执行的类是不是Controller的实现类
-		return (handler instanceof Controller);
-	}
+    @Override
+    public boolean supports(Object handler) {
+        //判断待执行的类是不是Controller的实现类
+        return (handler instanceof Controller);
+    }
 
-	@Override
-	@Nullable
-	public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+    @Override
+    @Nullable
+    public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
+        throws Exception {
 
-        	//调用Controller实现类的handleRequest方法
-		return ((Controller) handler).handleRequest(request, response);
-	}
+        //调用Controller实现类的handleRequest方法
+        return ((Controller) handler).handleRequest(request, response);
+    }
 
-	@Override
-	public long getLastModified(HttpServletRequest request, Object handler) {
-		if (handler instanceof LastModified) {
-			return ((LastModified) handler).getLastModified(request);
-		}
-		return -1L;
-	}
+    @Override
+    public long getLastModified(HttpServletRequest request, Object handler) {
+        if (handler instanceof LastModified) {
+            return ((LastModified) handler).getLastModified(request);
+        }
+        return -1L;
+    }
 
 }
-
 ```
 
 ## 自定义handlerAdaptor
@@ -57,7 +56,7 @@ public class MyHandlerAdapter implements HandlerAdapter {
     @Override
     @Nullable
     public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+        throws Exception {
         //配置编码格式
         request.setCharacterEncoding("UTF-8");
         //打印
@@ -102,9 +101,9 @@ public class DefinedController implements MyController {
 - 注入配置文件
 
 ```xml
-      <!--自定义处理适配器-->
-    <bean class="com.example.MyHandlerAdapter"/>
-        <!-- 注册Controller -->
-        <bean name="/mycontroller" class="com.example.DefinedController"/>
+<!--自定义处理适配器-->
+<bean class="com.example.MyHandlerAdapter"/>
+<!-- 注册Controller -->
+<bean name="/mycontroller" class="com.example.DefinedController"/>
 ```
 

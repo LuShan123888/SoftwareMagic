@@ -107,7 +107,7 @@ public String json3() throws JsonProcessingException {
 ```
 
 - **注意**:默认日期格式会变成一个数字,Jackson 默认是会把时间转成timestamps形式是1970年1月1日到当前日期的毫秒数
-- **解决方案**:取消timestamps形式 , 自定义时间格式
+- 自定义时间格式
 
 ```java
 @RequestMapping("/json4")
@@ -129,47 +129,11 @@ public String json4() throws JsonProcessingException {
 }
 ```
 
-### 抽取工具类
-
-```java
-package com.example.utils;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import java.text.SimpleDateFormat;
-
-public class JsonUtils {
-
-   public static String getJson(Object object) {
-       return getJson(object,"yyyy-MM-dd HH:mm:ss");
-  }
-
-   public static String getJson(Object object,String dateFormat) {
-       ObjectMapper mapper = new ObjectMapper();
-       //不使用时间差的方式
-       mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-       //自定义日期格式对象
-       SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-       //指定日期格式
-       mapper.setDateFormat(sdf);
-       try {
-           return mapper.writeValueAsString(object);
-      } catch (JsonProcessingException e) {
-           e.printStackTrace();
-      }
-       return null;
-  }
-}
-```
-
 ### 序列化与反序列化配置
 
 #### @JsonFormat
 
 - 使该属性按指定格式序列化与反序列化时间属性
-- pattern与`SimpleDateFormat`的用法一致
 - **注意**:当前端传来json串, 后台需要用@ReuqestBody接收, @JsonFormat才能实现反序列化
 
 ```java
@@ -191,13 +155,15 @@ public class UserDto2 {
 }
 ```
 
-#### @JsonProperty
+- **pattern**:与`SimpleDateFormat`的用法一致
+- **timezone**:时区
+- 可以使用如下全局配置代替,优先级较字段注释更低
 
--  用于属性或set/get方法上,该属性序列化后可重命名
-
-```java
-@JsonProperty("username")
-private String name;
+```yml
+spring:
+	jackson:
+		data-format: yyyy-MM-dd HH:mm:ss
+		time-zone: GMT+8
 ```
 
 #### @JsonIgnore
@@ -208,6 +174,30 @@ private String name;
 @JsonIgnore
 private String orgName;
 ```
+
+#### @JsonProperty
+
+-  用于属性或set/get方法上,该属性序列化后可重命名
+
+```java
+@JsonProperty("username")
+private String name;
+```
+
+#### @JsonInclude
+
+- 在某些策略下，加了该注解的字段不去序列化该字段
+
+```java
+@JsonInclude(JsonInclude.Include.NON_NULL)
+private String username;
+```
+
+- ALWAYS:默认策略，任何情况都执行序列化
+- NON_NULL:null不会序列化
+- NON_ABSENT:null不会序列化，但如果类型是AtomicReference，依然会被序列化
+- NON_EMPTY:null、集合数组等没有内容、空字符串等，都不会被序列化
+- NON_DEFAULT:如果字段是默认值，就不会被序列化  
 
 #### @JsonSerialize
 
@@ -251,14 +241,14 @@ public class UserSerializer extends JsonSerializer<User> {
         gen.writeNumberField("grade", Double.parseDouble(decimalFormat.format(value.getGrade())));
         gen.writeEndObject();
 
-/*      //报错 Exception in thread "main" com.fasterxml.jackson.core.JsonGenerationException: Can not write a field name, expecting a value
+        /*      //报错 Exception in thread "main" com.fasterxml.jackson.core.JsonGenerationException: Can not write a field name, expecting a value
         //gen.writeStartObject();
         gen.writeNumberField("grade", Double.parseDouble(decimalFormat.format(value.getGrade())));
         //gen.writeEndObject();
         //gen.writeStartObject();gen.writeEndObject();必须要写
         */
     }
-
+}
 ```
 
 #### @JsonDeserialize

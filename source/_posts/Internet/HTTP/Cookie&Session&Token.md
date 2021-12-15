@@ -55,22 +55,22 @@ categories:
 - ManagerBase是所有session管理工具类的父类,它是一个抽象类,所有具体实现session管理功能的类都要继承这个类,该类有一个受保护的方法,该方法就是创建sessionId值的方法:
 - tomcat的session的id值生成的机制是一个随机数加时间加上jvm的id值,jvm的id值会根据服务器的硬件信息计算得来,因此不同jvm的id值都是唯一的
 - StandardManager类是tomcat容器里默认的session管理实现类,它会将session的信息存储到web容器所在服务器的内存里
-- PersistentManagerBase也是继承ManagerBase类,它是所有持久化存储session信息的父类,PersistentManager继承了PersistentManagerBase,但是这个类只是多了一个静态变量和一个getName方法,目前看来意义不大,对于持久化存储session,tomcat还提供了StoreBase的抽象类,它是所有持久化存储session的父类,另外tomcat还给出了文件存储FileStore和数据存储JDBCStore两个实现
+- PersistentManagerBase也是继承ManagerBase类,它是所有持久化存储session信息的父类,PersistentManager继承了PersistentManagerBase,但是这个类只是多了一个静态变量和一个getName方法,目前看来意义不大,对于持久化存储session,tomcat还提供了StoreBase的抽象类,它是所有持久化存储Session的父类,另外tomcat还给出了文件存储FileStore和数据存储JDBCStore两个实现
 
-### 分布式架构下 session 共享方案
+### 分布式架构下 Session 共享方案
 
-- session是有状态的,一般存于服务器内存或硬盘中,当服务器采用分布式或集群时,session就会面对负载均衡问题
+- Session是有状态的,一般存于服务器内存或硬盘中,当服务器采用分布式或集群时,session就会面对负载均衡问题
 - 服务器集群Session共享的问题,在客户端与服务器通讯会话保持过程中,Session记录整个通讯的会话基本信息,但是在集群环境中,假设客户端第一次访问服务A,服务A响应返回了一个sessionId并且存入了本地Cookie中,第二次不访问服务A了,转去访问服务B,因为客户端中的Cookie中已经存有了sessionId,所以访问服务B的时候,会将sessionId加入到请求头中,而服务B因为通过sessionId没有找到相对应的数据,因此它就会创建一个新的sessionId并且响应返回给客户端,这样就造成了不能共享Session的问题
 
-#### session 复制
+#### Session 复制
 
-- 任何一个服务器上的 session 发生改变(增删改),该节点会把这个 session 的所有内容序列化,然后广播给所有其它节点,不管其他服务器需不需要 session,以此来保证 session 同步
-- **优点**:可容错,各个服务器间 session 能够实时响应
-- **缺点**:会对网络负荷造成一定压力,如果 session 量大的话可能会造成网络堵塞,拖慢服务器性能
+- 任何一个服务器上的 Session 发生改变(增删改),该节点会把这个 Session 的所有内容序列化,然后广播给所有其它节点,不管其他服务器需不需要 Session,以此来保证 Session 同步
+- **优点**:可容错,各个服务器间 Session 能够实时响应
+- **缺点**:会对网络负荷造成一定压力,如果 Session 量大的话可能会造成网络堵塞,拖慢服务器性能
 
 #### 粘性 session /IP 绑定策略
 
-- 配置ip_hash,请求随机绑定一个服务器,而且绑定后一个ip地址就固定访问一个服务器了,可以解决session共享问题
+- 配置ip_hash,请求随机绑定一个服务器,而且绑定后一个ip地址就固定访问一个服务器了,可以解决Session共享问题
 - 但是该服务器挂了,会出现数据丢失,而且配置了IP绑定就不支持Nginx的负载均衡了
 
 ```nginx

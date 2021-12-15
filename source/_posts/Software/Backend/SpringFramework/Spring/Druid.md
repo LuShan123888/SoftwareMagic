@@ -10,12 +10,9 @@ categories:
 
 ## Druid 简介
 
-- Java程序很大一部分要操作数据库,为了提高性能操作数据库的时候,又不得不使用数据库连接池
 - Druid 是阿里巴巴开源平台上一个数据库连接池实现,结合了 C3P0,DBCP 等 DB 池的优点,同时加入了日志监控
 - Druid 可以很好的监控 DB 池连接和 SQL 的执行情况,天生就是针对监控而生的 DB 连接池
-- Druid已经在阿里巴巴部署了超过600个应用,经过一年多生产环境大规模部署的严苛考验
 - Spring Boot 2.0 以上默认使用 Hikari 数据源,可以说 Hikari 与 Driud 都是当前 Java Web 上最优秀的数据源
-- Github地址:https://github.com/alibaba/druid/
 
 ### 基本配置参数
 
@@ -122,82 +119,82 @@ spring:
 
 ```xml
 <!-- 配置数据源 -->
-	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
-		<property name="url" value="${jdbc_url}" />
-		<property name="username" value="${jdbc_username}" />
-		<property name="password" value="${jdbc_password}" />
+<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+      init-method="init" destroy-method="close">
+    <property name="url" value="${jdbc_url}" />
+    <property name="username" value="${jdbc_username}" />
+    <property name="password" value="${jdbc_password}" />
 
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="0" />
-		<!-- 连接池最大使用连接数量 -->
-		<property name="maxActive" value="180" />
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="0" />
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="60000" />
+    <!-- 初始化连接大小 -->
+    <property name="initialSize" value="0" />
+    <!-- 连接池最大使用连接数量 -->
+    <property name="maxActive" value="180" />
+    <!-- 连接池最小空闲 -->
+    <property name="minIdle" value="0" />
+    <!-- 获取连接最大等待时间 -->
+    <property name="maxWait" value="60000" />
 
-		<!-- <property name="poolPreparedStatements" value="true" /> <property
-			name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
+    <!-- <property name="poolPreparedStatements" value="true" /> <property
+   name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
 
-		<property name="validationQuery" value="${validationQuery}" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<property name="testWhileIdle" value="true" />
+    <property name="validationQuery" value="${validationQuery}" />
+    <property name="testOnBorrow" value="false" />
+    <property name="testOnReturn" value="false" />
+    <property name="testWhileIdle" value="true" />
 
-		<!-- 配置间隔多久才进行一次检测,检测需要关闭的空闲连接,单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<!-- 配置一个连接在池中最小生存的时间,单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="25200000" />
+    <!-- 配置间隔多久才进行一次检测,检测需要关闭的空闲连接,单位是毫秒 -->
+    <property name="timeBetweenEvictionRunsMillis" value="60000" />
+    <!-- 配置一个连接在池中最小生存的时间,单位是毫秒 -->
+    <property name="minEvictableIdleTimeMillis" value="25200000" />
 
-		<!-- 打开removeAbandoned功能 -->
-		<property name="removeAbandoned" value="true" />
-		<!-- 1800秒,也就是30分钟 -->
-		<property name="removeAbandonedTimeout" value="1800" />
-		<!-- 关闭abanded连接时输出错误日志 -->
-		<property name="logAbandoned" value="true" />
+    <!-- 打开removeAbandoned功能 -->
+    <property name="removeAbandoned" value="true" />
+    <!-- 1800秒,也就是30分钟 -->
+    <property name="removeAbandonedTimeout" value="1800" />
+    <!-- 关闭abanded连接时输出错误日志 -->
+    <property name="logAbandoned" value="true" />
 
-		<!-- 监控数据库 -->
-		<!-- <property name="filters" value="stat" /> -->
-		<property name="filters" value="mergeStat" />
-	</bean>
+    <!-- 监控数据库 -->
+    <!-- <property name="filters" value="stat" /> -->
+    <property name="filters" value="mergeStat" />
+</bean>
 
-	<!-- myBatis文件 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="configLocation" value="classpath:spring/mybatis-page.xml" />
-		<property name="mapperLocations" value="classpath:mapping/*.xml" />
-	</bean>
+<!-- myBatis文件 -->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+    <property name="configLocation" value="classpath:spring/mybatis-page.xml" />
+    <property name="mapperLocations" value="classpath:mapping/*.xml" />
+</bean>
 
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.lantaiyuan.ebus.custom.dao,com.lantaiyuan.ebus.realtime.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	</bean>
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.lantaiyuan.ebus.custom.dao,com.lantaiyuan.ebus.realtime.dao" />
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+</bean>
 
-	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+<!-- 配置事务管理器 -->
+<bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+</bean>
 
-    <!-- 配置druid监控Springjdbc -->
-	<bean id="druid-stat-interceptor"
-		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
-	</bean>
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-		scope="prototype">
-		<property name="patterns">
-			<list>
-				<value>com.lantaiyuan.ebus.custom.service.*</value>
-			</list>
-		</property>
-	</bean>
-	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor"
-			pointcut-ref="druid-stat-pointcut" />
-	</aop:config>
-	<aop:aspectj-autoproxy proxy-target-class="true" />
+<!-- 配置druid监控Springjdbc -->
+<bean id="druid-stat-interceptor"
+      class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+</bean>
+<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+      scope="prototype">
+    <property name="patterns">
+        <list>
+            <value>com.lantaiyuan.ebus.custom.service.*</value>
+        </list>
+    </property>
+</bean>
+<aop:config>
+    <aop:advisor advice-ref="druid-stat-interceptor"
+                 pointcut-ref="druid-stat-pointcut" />
+</aop:config>
+<aop:aspectj-autoproxy proxy-target-class="true" />
 ```
 
 ## 绑定全局配置文件
@@ -206,13 +203,6 @@ spring:
 - 绑定全局配置文件中的 druid 数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
 
 ```java
-import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
-
 @Configuration
 public class DruidConfig {
 
