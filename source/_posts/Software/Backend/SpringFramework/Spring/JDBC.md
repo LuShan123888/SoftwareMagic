@@ -12,8 +12,6 @@ categories:
 
 - 对于数据访问层,无论是 SQL(关系型数据库) 还是 NOSQL(非关系型数据库),Spring Boot 底层都是采用 Spring Data 的方式进行统一处理
 - Spring Boot 底层都是采用 Spring Data 的方式进行统一处理各种数据库,Spring Data 也是 Spring 中与 Spring Boot,Spring Cloud 等齐名的知名项目
-- Sping Data 官网:https://spring.io/projects/spring-data
-- 数据库相关的启动器:可以参考官方文档:https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#using-boot-starter
 
 ## 整合JDBC
 
@@ -24,13 +22,13 @@ categories:
 
 ```xml
 <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-jdbc</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-jdbc</artifactId>
 </dependency>
 <dependency>
-  <groupId>mysql</groupId>
-  <artifactId>mysql-connector-java</artifactId>
-  <scope>runtime</scope>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
 </dependency>
 ```
 
@@ -48,23 +46,22 @@ spring:
 4. 测试
 
 ```java
-@SpringBootTest
-class SpringbootDataJdbcApplicationTests {
+public class SpringbootDataJdbcApplicationTests {
 
-  //DI注入数据源
-  @Autowired
-  DataSource dataSource;
+    //DI注入数据源
+    @Autowired
+    DataSource dataSource;
 
-  @Test
-  public void contextLoads() throws SQLException {
-    //看一下默认数据源
-    System.out.println(dataSource.getClass());
-    //获得连接
-    Connection connection =   dataSource.getConnection();
-    System.out.println(connection);
-    //关闭连接
-    connection.close();
-  }
+    @Test
+    public void contextLoads() throws SQLException {
+        //看一下默认数据源
+        System.out.println(dataSource.getClass());
+        //获得连接
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+        //关闭连接
+        connection.close();
+    }
 }
 ```
 
@@ -73,11 +70,11 @@ class SpringbootDataJdbcApplicationTests {
 
 ```java
 @Import(
-  {Hikari.class, Tomcat.class, Dbcp2.class, Generic.class, DataSourceJmxConfiguration.class}
+    {Hikari.class, Tomcat.class, Dbcp2.class, Generic.class, DataSourceJmxConfiguration.class}
 )
 protected static class PooledDataSourceConfiguration {
-  protected PooledDataSourceConfiguration() {
-  }
+    protected PooledDataSourceConfiguration() {
+    }
 }
 ```
 
@@ -85,7 +82,7 @@ protected static class PooledDataSourceConfiguration {
 - `HikariDataSource`: 号称 Java WEB 当前速度最快的数据源,相比于传统的 C3P0,DBCP,Tomcat jdbc 等连接池更加优秀
 - 可以使用`spring.datasource.type`指定自定义的数据源类型,值为要使用的连接池实现的完全限定名
 
-## JDBCTemplate
+## JDBC Template
 
 - 有了数据源`com.zaxxer.hikari.HikariDataSource`,然后可以拿到数据库连接`java.sql.Connection`有了连接,就可以使用原生的 JDBC 语句来操作数据库
 - 即使不使用第三方第数据库操作框架,如 MyBatis等,Spring 本身也对原生的JDBC 做了轻量级的封装,即JdbcTemplate
@@ -105,17 +102,6 @@ protected static class PooledDataSourceConfiguration {
 - 编写一个Controller,注入 jdbcTemplate,编写测试方法进行访问测试
 
 ```java
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/jdbc")
 public class JdbcController {

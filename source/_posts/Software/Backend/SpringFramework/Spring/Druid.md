@@ -8,13 +8,11 @@ categories:
 ---
 # Spring 整合Druid
 
-## Druid 简介
-
 - Druid 是阿里巴巴开源平台上一个数据库连接池实现,结合了 C3P0,DBCP 等 DB 池的优点,同时加入了日志监控
 - Druid 可以很好的监控 DB 池连接和 SQL 的执行情况,天生就是针对监控而生的 DB 连接池
 - Spring Boot 2.0 以上默认使用 Hikari 数据源,可以说 Hikari 与 Driud 都是当前 Java Web 上最优秀的数据源
 
-### 基本配置参数
+基本配置参数
 
 - `com.alibaba.druid.pool.DruidDataSource `
 
@@ -45,60 +43,62 @@ categories:
 | filters                       |                    | 属性类型是字符串,通过别名的方式配置扩展插件,常用的插件有:监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall |
 | proxyFilters                  |                    | 类型是List<com.alibaba.druid.filter.Filter>,如果同时配置了filters和proxyFilters,是组合关系,并非替换关系 |
 
-## 配置数据源
-
-### pom.xml
-
-```xml
-<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>druid</artifactId>
-    <version>1.1.21</version>
-</dependency>
-<dependency>
-    <groupId>log4j</groupId>
-    <artifactId>log4j</artifactId>
-    <version>1.2.17</version>
-</dependency>
-```
-
-## 配置文件
+## 配置
 
 ### Spring Boot
 
+- pom.xml
+
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+    <version>1.2.8</version>
+</dependency>
+```
+
+- 配置文件
+
 ```yaml
 spring:
+  application:
+    name: tally
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tally-test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/tally_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+    #druid 数据源专有配置
+    # 初始化大小，最小，最大
     druid:
-      # 下面为连接池的补充设置，应用到上面所有数据源中
-      # 初始化大小，最小，最大
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
+      initialSize: 5
+      minIdle: 5
+      maxActive: 200
       # 配置获取连接等待超时的时间
-      max-wait: 60000
+      maxWait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      time-between-eviction-runs-millis: 60000
+      timeBetweenEvictionRunsMillis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1 FROM DUAL
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      # 打开PSCache，并且指定每个连接上PSCache的大小
-      pool-prepared-statements: true
-      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-      max-pool-prepared-statement-per-connection-size: 20
+      minEvictableIdleTimeMillis: 300000
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validationQuery: SELECT 1 FROM DUAL
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      testWhileIdle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      testOnBorrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      testOnReturn: false
+      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      poolPreparedStatements: true
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
+      max-pool-prepared-statement-per-connection-size: 50
+      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
       filters: stat,wall
-      use-global-data-source-stat: true
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
       # 添加IP白名单
       # allow:
       # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
@@ -116,6 +116,18 @@ spring:
     - wall:防御sql注入
 
 ### Spring
+
+- pom.xml
+
+```xml
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.21</version>
+</dependency>
+```
+
+- 配置文件
 
 ```xml
 <!-- 配置数据源 -->
@@ -173,17 +185,14 @@ spring:
 </bean>
 
 <!-- 配置事务管理器 -->
-<bean id="transactionManager"
-      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
 </bean>
 
 <!-- 配置druid监控Springjdbc -->
-<bean id="druid-stat-interceptor"
-      class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
 </bean>
-<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
-      scope="prototype">
+<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
     <property name="patterns">
         <list>
             <value>com.lantaiyuan.ebus.custom.service.*</value>
@@ -191,16 +200,12 @@ spring:
     </property>
 </bean>
 <aop:config>
-    <aop:advisor advice-ref="druid-stat-interceptor"
-                 pointcut-ref="druid-stat-pointcut" />
+    <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 </aop:config>
 <aop:aspectj-autoproxy proxy-target-class="true" />
 ```
 
-## 绑定全局配置文件
-
-- 将自定义的 Druid数据源添加到容器中,不再让 Spring Boot 自动创建
-- 绑定全局配置文件中的 druid 数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
+- Spring Boot 默认是不注入这些属性值的，需要自己绑定数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
 
 ```java
 @Configuration
@@ -224,21 +229,24 @@ public class DruidConfig {
 - 内置 Servlet 容器时没有web.xml文件,所以使用 Spring Boot 的注册 Servlet 方式
 
 ```java
-@Bean
-public ServletRegistrationBean servletRegistrationBean() {
-    //注意，请求时 /druid/*
-    ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
-    Map<String, String> initParm = new HashMap<>();
-    //登陆页面账户与密码
-    initParm.put(ResourceServlet.PARAM_NAME_USERNAME, "root");
-    initParm.put(ResourceServlet.PARAM_NAME_PASSWORD, "123456");
-    //监控后台 允许ip
-    initParm.put(ResourceServlet.PARAM_NAME_ALLOW, "");
-    //黑名单
-    initParm.put(ResourceServlet.PARAM_NAME_DENY, "192.168.0.1");
+@Configuration
+public class DruidConfig {
+    @Bean
+    public ServletRegistrationBean servletRegistrationBean() {
+        //注意，请求时 /druid/*
+        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        Map<String, String> initParm = new HashMap<>();
+        //登陆页面账户与密码
+        initParm.put(ResourceServlet.PARAM_NAME_USERNAME, "root");
+        initParm.put(ResourceServlet.PARAM_NAME_PASSWORD, "123456");
+        //监控后台 允许ip
+        initParm.put(ResourceServlet.PARAM_NAME_ALLOW, "");
+        //黑名单
+        initParm.put(ResourceServlet.PARAM_NAME_DENY, "192.168.0.1");
 
-    bean.setInitParameters(initParm);
-    return bean;
+        bean.setInitParameters(initParm);
+        return bean;
+    }
 }
 ```
 
@@ -258,18 +266,21 @@ public ServletRegistrationBean servletRegistrationBean() {
 - `WebStatFilter`:用于配置Web和Druid数据源之间的管理关联监控统计
 
 ```java
-@Bean
-public FilterRegistrationBean webStatFilter() {
-    FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
-    bean.setFilter(new WebStatFilter());
+@Configuration
+public class DruidConfig {
+    @Bean
+    public FilterRegistrationBean webStatFilter() {
+        FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
+        bean.setFilter(new WebStatFilter());
 
-    Map<String, String> initPrams = new HashMap<>();
-    initPrams.put(WebStatFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.css,/druid/*");
-    bean.setInitParameters(initPrams);
+        Map<String, String> initPrams = new HashMap<>();
+        initPrams.put(WebStatFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.css,/druid/*");
+        bean.setInitParameters(initPrams);
 
-    //设置拦截器请求
-    bean.setUrlPatterns(Arrays.asList("/"));
-    return bean;
+        //设置拦截器请求
+        bean.setUrlPatterns(Arrays.asList("/"));
+        return bean;
+    }
 }
 ```
 

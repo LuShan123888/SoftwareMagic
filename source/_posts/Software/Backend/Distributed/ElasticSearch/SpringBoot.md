@@ -43,14 +43,12 @@ public class ElasticsearchClientConfig {
 ## 测试
 
 ```java
-@SpringBootTest
-@RunWith(SpringRunner.class)
 public class ElasticsearchClientTest {
     @Autowired
     private RestHighLevelClient restHighLevelClient;
 
     @Test
-    public void ClientTest() throws IOException {
+    void ClientTest() throws IOException {
         CreateIndexRequest test_index = new CreateIndexRequest("test_index");
         CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(test_index, RequestOptions.DEFAULT);
         System.out.println(JSON.toJSONString(createIndexResponse));

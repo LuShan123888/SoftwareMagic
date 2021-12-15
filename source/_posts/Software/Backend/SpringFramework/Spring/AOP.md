@@ -10,7 +10,7 @@ categories:
 
 ## AOP 概述
 
-AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术,AOP是OOP的延续, 是软件开发中的一个热点, 也是Spring框架中的一个重要内容, 是函数式编程的一种衍生范型,利用AOP可以对业务逻辑的各个部分进行隔离, 从而使得业务逻辑各部分之间的耦合度降低, 提高程序的可重用性, 同时提高了开发的效率
+- AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术,AOP是OOP的延续, 是软件开发中的一个热点, 也是Spring框架中的一个重要内容, 是函数式编程的一种衍生范型,利用AOP可以对业务逻辑的各个部分进行隔离, 从而使得业务逻辑各部分之间的耦合度降低, 提高程序的可重用性, 同时提高了开发的效率
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-10-31-640-20201031204745305.png)
 
@@ -41,9 +41,16 @@ AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运�
   - 返回通知(@AfterReturning):在目标方法成功执行之后调用通知
   - 异常通知(@AfterThrowing):在目标方法抛出异常之后调用通知
 
-## pom.xml
+## Spring
+
+### pom.xml
 
 ```xml
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>${spring.version}</version>
+</dependency>
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-aspects</artifactId>
@@ -53,7 +60,7 @@ AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运�
 
 - 上述依赖会自动引入AspectJ,使用AspectJ实现AOP比较方便,因为它的定义比较简单
 
-## 通过 Spring API 实现AOP
+### 通过 Spring API 实现AOP
 
 - 首先编写业务接口和实现类
 
@@ -66,6 +73,7 @@ public interface UserService {
     public void search();
 
 }
+@Service
 public class UserServiceImpl implements UserService{
 
     @Override
@@ -93,6 +101,7 @@ public class UserServiceImpl implements UserService{
 - 编写增强类 ,一个为前置增强, 另一个为后置增强
 
 ```java
+@Component
 public class BeforeLog implements MethodBeforeAdvice {
 
     //method : 要执行的目标对象的方法
@@ -103,7 +112,7 @@ public class BeforeLog implements MethodBeforeAdvice {
         System.out.println( o.getClass().getName() + "的" + method.getName() + "方法被执行了");
     }
 }
-
+@Component
 public class AfterLog implements AfterReturningAdvice {
     //returnValue 返回值
     //method被调用的方法
@@ -127,12 +136,6 @@ public class AfterLog implements AfterReturningAdvice {
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
-
-    <!--注册bean-->
-    <bean id="userService" class="com.example.service.UserServiceImpl"/>
-    <bean id="beforeLog" class="com.example.log.BeforeLog"/>
-    <bean id="afterLog" class="com.example.log.AfterLog"/>
-
     <!--aop的配置-->
     <aop:config>
         <!--切入点 expression:表达式匹配要执行的方法-->
@@ -150,7 +153,7 @@ public class AfterLog implements AfterReturningAdvice {
 ```java
 public class MyTest {
     @Test
-    public void test(){
+    void test(){
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         UserService userService = (UserService) context.getBean("userService");
         userService.search();
@@ -161,12 +164,13 @@ public class MyTest {
 - Spring的Aop就是将公共的业务 (日志 , 安全等) 和领域业务结合起来
 - 当执行领域业务时,将会把公共业务加进来,实现公共业务的重复利用,领域业务更纯粹,其本质还是动态代理
 
-## 自定义类来实现AOP
+### 自定义类来实现AOP
 
 - 目标业务类不变依旧是userServiceImpl
 - 编写自定义切入类
 
 ```java
+@Component
 public class DiyPointcut {
 
     public void before(){
@@ -182,8 +186,6 @@ public class DiyPointcut {
 - 在Spring配置文件中配置
 
 ```xml
-<!--注册bean-->
-<bean id="diy" class="com.example.config.DiyPointcut"/>
 <!--aop的配置-->
 <aop:config>
     <aop:aspect ref="diy">
@@ -199,7 +201,7 @@ public class DiyPointcut {
 ```java
 public class MyTest {
     @Test
-    public void test(){
+    void test(){
         ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         UserService userService = (UserService) context.getBean("userService");
         userService.add();
@@ -207,20 +209,13 @@ public class MyTest {
 }
 ```
 
-## 使用注解实现AOP
+### 使用注解实现AOP
 
 - 编写一个注解实现的增强类
 
 ```java
-package com.example.config;
-
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-
 @Aspect
+@Component
 public class AnnotationPointcut {
     @Before("execution(* com.example.service.UserServiceImpl.*(..))")
     public void before(){
@@ -244,23 +239,29 @@ public class AnnotationPointcut {
 }
 ```
 
-- 在Spring配置文件中, 注册bean, 并增加支持注解的配置
+- 在Spring配置文件中增加支持注解的配置，或者在主启动类上添加一个@EnableAspectJAutoProxy注解，有了这个配置才能支持@Aspect等相关的一系列AOP注解的功能
 
 ```xml
-<bean id="annotationPointcut" class="com.example.config.AnnotationPointcut"/>
 <aop:aspectj-autoproxy/>
 ```
 
 - **aspectj-autoproxy**
-  - 通过aop命名空间的`<aop:aspectj-autoproxy />`声明自动为Spring容器中那些配置`@aspect`切面的bean创建代理, 织入切面
-  - Spring 在内部依旧采用`AnnotationAwareAspectJAutoProxyCreator`进行自动代理的创建工作, 但具体实现的细节已经被`<aop:aspectj-autoproxy />`隐藏起来了
-  - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性, 默认为false, 表示使用jdk动态代理织入增强, 当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时, 表示使用CGLib动态代理技术织入增强,不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口, 则Spring将自动使用CGLib动态代理
+    - 通过aop命名空间的`<aop:aspectj-autoproxy />`声明自动为Spring容器中那些配置`@aspect`切面的bean创建代理, 织入切面
+    - Spring 在内部依旧采用`AnnotationAwareAspectJAutoProxyCreator`进行自动代理的创建工作, 但具体实现的细节已经被`<aop:aspectj-autoproxy />`隐藏起来了
+    - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性, 默认为false, 表示使用jdk动态代理织入增强, 当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时, 表示使用CGLib动态代理技术织入增强,不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口, 则Spring将自动使用CGLib动态代理
 
-## 在 Spring Boot 中使用 AOP
+## Spring Boot
+
+### pom.xml
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
 
 ### 表达式绑定方法
-
-- 标记`@Component`和`@Aspect`注解
 
 ```java
 @Aspect
@@ -280,17 +281,6 @@ public class LoggingAspect {
         System.err.println("[Around] done " + pjp.getSignature());
         return retVal;
     }
-}
-```
-
-- 在`@Configuration`类上标注`@EnableAspectJAutoProxy`
-
-```java
-@Configuration
-@ComponentScan
-@EnableAspectJAutoProxy
-public class AppConfig {
-    ...
 }
 ```
 
@@ -353,4 +343,3 @@ public class MetricAspect {
 Welcome, Bob!
 [Metrics] register: 16ms
 ```
-
