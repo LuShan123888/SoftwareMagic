@@ -21,22 +21,22 @@ categories:
 
 ## IoC实例
 
-- UserDao接口
+- UserMapper接口
 
 ```java
-public interface UserDao {
-   public void getUser();
+public interface UserMapper {
+    public void getUser();
 }
 ```
 
-- Dao的实现类
+- Mapper的实现类
 
 ```java
-public class UserDaoMySqlImpl implements UserDao {
-   @Override
-   public void getUser() {
-       System.out.println("MySql获取用户数据");
-  }
+public class UserMapperMySqlImpl implements UserMapper {
+    @Override
+    public void getUser() {
+        System.out.println("MySql获取用户数据");
+    }
 }
 ```
 
@@ -44,7 +44,7 @@ public class UserDaoMySqlImpl implements UserDao {
 
 ```java
 public interface UserService {
-   public void getUser();
+    public void getUser();
 }
 ```
 
@@ -52,12 +52,12 @@ public interface UserService {
 
 ```java
 public class UserServiceImpl implements UserService {
-   private UserDao userDao = new UserDaoMySqlImpl();
+    private UserMapper userMapper = new UserMapperMySqlImpl();
 
-   @Override
-   public void getUser() {
-       userDao.getUser();
-  }
+    @Override
+    public void getUser() {
+        userMapper.getUser();
+    }
 }
 ```
 
@@ -66,20 +66,20 @@ public class UserServiceImpl implements UserService {
 ```java
 @Test
 public void test(){
-   UserService service = new UserServiceImpl();
-   service.getUser();
+    UserService service = new UserServiceImpl();
+    service.getUser();
 }
 ```
 
 - 这是原来的方式 , 现在修改一下
-- 把Userdao的实现类增加一个
+- 把UserMapper的实现类增加一个
 
 ```java
-public class UserDaoOracleImpl implements UserDao {
-   @Override
-   public void getUser() {
-       System.out.println("Oracle获取用户数据");
-  }
+public class UserMapperOracleImpl implements UserMapper {
+    @Override
+    public void getUser() {
+        System.out.println("Oracle获取用户数据");
+    }
 }
 ```
 
@@ -87,16 +87,16 @@ public class UserDaoOracleImpl implements UserDao {
 
 ```java
 public class UserServiceImpl implements UserService {
-   private UserDao userDao = new UserDaoOracleImpl();
+    private UserMapper userMapper = new UserMapperOracleImpl();
 
-   @Override
-   public void getUser() {
-       userDao.getUser();
-  }
+    @Override
+    public void getUser() {
+        userMapper.getUser();
+    }
 }
 ```
 
-- 那么要使用其他的Dao , 又需要去service实现类里面修改对应的实现
+- 那么要使用其他的Mapper , 又需要去service实现类里面修改对应的实现
 - 这种设计的耦合性太高了, 牵一发而动全身
 
 **解决方法**
@@ -105,16 +105,16 @@ public class UserServiceImpl implements UserService {
 
 ```java
 public class UserServiceImpl implements UserService {
-   private UserDao userDao;
-    // 利用set实现注入不同的Dao
-   public void setUserDao(UserDao userDao) {
-       this.userDao = userDao;
-  }
+    private UserMapper userMapper;
+    // 利用set实现注入不同的Mapper
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
-   @Override
-   public void getUser() {
-       userDao.getUser();
-  }
+    @Override
+    public void getUser() {
+        userMapper.getUser();
+    }
 }
 ```
 
@@ -123,13 +123,13 @@ public class UserServiceImpl implements UserService {
 ```java
 @Test
 public void test(){
-   UserService service = new UserServiceImpl();
-   //用Mysql实现
-    service.setUserDao( new UserDaoMySqlImpl() );
+    UserService service = new UserServiceImpl();
+    //用Mysql实现
+    service.setUserMapper( new UserMapperMySqlImpl() );
     service.getUser();
-   //用Oracle实现
-   service.setUserDao( new UserDaoOracleImpl() );
-   service.getUser();
+    //用Oracle实现
+    service.setUserMapper( new UserMapperOracleImpl() );
+    service.getUser();
 }
 ```
 
@@ -137,21 +137,21 @@ public void test(){
 - 这种思想 , 从本质上解决了问题 , 程序员不再去管理对象的创建了 , 更多的去关注业务的实现 . 耦合性大大降低 . 这也就是IOC的原型
 - 使用Spring , 只需要在xml配置文件中进行修改
 
-```java
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <bean id="MysqlImpl" class="com.example.dao.impl.UserDaoMySqlImpl"/>
-   <bean id="OracleImpl" class="com.example.dao.impl.UserDaoOracleImpl"/>
+    <bean id="MysqlImpl" class="com.example.mapper.impl.UserMapperMySqlImpl"/>
+    <bean id="OracleImpl" class="com.example.mapper.impl.UserMapperOracleImpl"/>
 
-   <bean id="ServiceImpl" class="com.example.service.impl.UserServiceImpl">
-       <!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写-->
-       <!--引用另外一个bean , 不是用value 而是用 ref-->
-       <property name="userDao" ref="OracleImpl"/>
-   </bean>
+    <bean id="ServiceImpl" class="com.example.service.impl.UserServiceImpl">
+        <!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写-->
+        <!--引用另外一个bean , 不是用value 而是用 ref-->
+        <property name="userMapper" ref="OracleImpl"/>
+    </bean>
 </beans>
 ```
 
@@ -160,9 +160,9 @@ public void test(){
 ```java
 @Test
 public void test2(){
-   ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-   UserService service = (UserServiceImpl) context.getBean("ServiceImpl");
-   service.getUser();
+    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+    UserService service = (UserServiceImpl) context.getBean("ServiceImpl");
+    service.getUser();
 }
 ```
 

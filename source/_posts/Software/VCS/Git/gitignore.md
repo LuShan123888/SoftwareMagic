@@ -29,13 +29,13 @@ doc/.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
 ## 强制添加到Git
 
 ```shell
-git add -f App.class
+$ git add -f App.class
 ```
 
 ## .gitignore忽略规则查看
 
 ```shell
-git check-ignore -v App.class
+$ git check-ignore -v App.class
 .gitignore:3:*.class	App.class
 ```
 
@@ -43,11 +43,13 @@ Git会告诉我们,`.gitignore`的第3行规则忽略了该文件,于是我们�
 
 ## 使用配置文件
 
+- 使用如下命令指定配置文件位置
+
 ```
- git config --global core.excludesfile "%USERPROFILE%\.gitignore"
+$ git config --global core.excludesfile "~/.gitignore"
 ```
 
-- `~/.gitconfig`
+- 或者修改`~/.gitconfig`
 
 ```toml
 [core]

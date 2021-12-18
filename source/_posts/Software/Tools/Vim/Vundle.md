@@ -7,17 +7,7 @@ categories:
 ---
 # Vim Vundle
 
-## 简介
-
-- 在.vimrc中跟踪和管理插件
-- 安装特定格式的插件(a.k.a. scripts/bundle)
-- 更新特定格式插件
-- 通过插件名称搜索Vim scripts中的插件
-- 清理未使用的插件
-- 可以通过单一按键完成以上操作,详见interactive mode
-- Vundle 自动完成
-- 管理已安装插件的runtime path
-- 安装和更新后,重新生成帮助标签
+- 在`.vimrc`中跟踪和管理插件
 
 ## 安装vundle
 
@@ -38,18 +28,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ## 配置vundle插件:
 
-- 可以在终端通过vim打开`~/.vimrc`文件
-
-```
-$vim ~/.vimrc
-```
-
-- 也可以直接在目录中打开(快捷键ctrl+H显示隐藏文件)
-- 将以下加在`~/.vimrc`文件中,加入之后保存之后就可以使用vundle了
-
-### 添加的配置信息(样例)
-
-- **注意**:以后安装新插件就直接编辑vimrc,添加plugin就行了,在这里我们添加的plugin只是例子,你可以不安装这些插件,换上自己需要安装的插件
+- 将以下加在`~/.vimrc`文件中
 
 ```
 set nocompatible              " 去除VI一致性,必须要添加
@@ -98,7 +77,7 @@ filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和
 " 将你自己对非插件片段放在这行之后
 ```
 
-## 安装需要的插件
+## 安装插件
 
 - 将想要安装的插件,按照地址填写方法,将地址填写在vundle#begin和vundle#end之间就可以
 - 保存之后,有两种方法安装插件
@@ -111,13 +90,12 @@ vim +PluginInstall +qall
 
 - 安装完成之后,插件就可以使用
 
-### 移除不需要的插件
+### 移除插件
 
-- 编辑.vimrc文件移除的你要移除的插件所对应的plugin那一行
-- 保存退出当前的vim
+- 编辑`.vimrc`文件移除对应的plugin
 - 重新打开vim,输入命令`:PluginClean`
 
-### 其他常用命令
+### 其他命令
 
 - 更新插件`:PluginUpdate`
 - 列出所有插件`:PluginList`

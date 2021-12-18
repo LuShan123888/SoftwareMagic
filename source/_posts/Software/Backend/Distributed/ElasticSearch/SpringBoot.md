@@ -11,9 +11,6 @@ categories:
 ## pom.xml
 
 ```xml
-<properties>
-    <elasticsearch.version>7.13.2</elasticsearch.version>
-</properties>
 <dependency>
     <groupId>org.elasticsearch.client</groupId>
     <artifactId>elasticsearch-rest-high-level-client</artifactId>

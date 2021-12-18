@@ -1,13 +1,15 @@
 ---
-title: IDEA快捷键
+title: IDEA
 categories:
 - Software
 - Tools
-- IDEA
+- IDE
 ---
-# IDEA快捷键
+# IDEA
 
-## Editing(编辑)
+## 快捷键
+
+### Editing(编辑)
 
 快捷键|作用
 ---|---
@@ -50,7 +52,7 @@ Command + 加号 / Command + 减号	|展开 / 折叠代码块
 Command + Shift + 加号	|展开所以代码块
 Command + Shift + 减号	|折叠所有代码块
 Command + W	|关闭活动的编辑器选项卡
-## Search / Replace(查询/替换)
+### Search / Replace(查询/替换)
 
 快捷键|	作用
 ---|---
@@ -63,14 +65,14 @@ Command + Shift + F	|全局查找(根据路径)
 Command + Shift + R	|全局替换(根据路径)
 Command + Shift + S	|查询结构(Ultimate Edition 版专用,需要在 Keymap 中设置)
 Command + Shift + M	|替换结构(Ultimate Edition 版专用,需要在 Keymap 中设置)
-## Usage Search(使用查询)
+### Usage Search(使用查询)
 
 快捷键	|作用
 ---|---
 Option + F7 / Command + F7|	在文件中查找用法 / 在类中查找用法
 Command + Shift + F7	|在文件中突出显示的用法
 Command + Option + F7|	显示用法
-## Compile and Run(编译和运行)
+### Compile and Run(编译和运行)
 
 快捷键|	作用
 ---|---
@@ -81,7 +83,7 @@ Control + Option + D|	弹出 Debug 的可选择菜单
 Control + R	|运行
 Control + D|	调试
 Control + Shift + R, Control + Shift + D|	从编辑器运行上下文环境配置
-## Debugging(调试)
+### Debugging(调试)
 
 快捷键|	作用
 ---|---
@@ -94,7 +96,7 @@ Option + F8	|计算表达式(可以更改变量值使其生效)
 Command + Option + R|	恢复程序运行,如果该断点下面代码还有断点则停在下一个断点上
 Command + F8	|切换断点(若光标当前行有断点则取消断点,没有则加上断点)
 Command + Shift + F8|	查看断点信息
-## Navigation(导航)
+### Navigation(导航)
 
 快捷键|	作用
 ---|---
@@ -130,7 +132,7 @@ F3	|选中文件 / 文件夹 / 代码行,添加 / 取消书签
 Option + F3	|选中文件 / 文件夹/代码行,使用助记符添加 / 取消书签
 Control + 0...Control + 9|	定位到对应数值的书签位置
 Command + F3	|显示所有书签
-## Refactoring(重构)
+### Refactoring(重构)
 
 快捷键|作用
 ---|---
@@ -146,7 +148,7 @@ Command + Option + F|	提取字段
 Command + Option + C|	提取常量
 Command + Option + P|	提取参数
 
-## VCS / Local History(版本控制 / 本地历史记录)
+### VCS / Local History(版本控制 / 本地历史记录)
 
 快捷键	|作用
 ---|---
@@ -154,13 +156,13 @@ Command + K	|提交代码到版本控制器
 Command + T	|从版本控制器更新代码
 Option + Shift + C	|查看最近的变更记录
 Control + C|	快速弹出版本控制器操作面板
-## Live Templates(动态代码模板)
+### Live Templates(动态代码模板)
 
 快捷键	|作用
 ---|---
 Command + Option + J	|弹出模板选择窗口,将选定的代码使用动态模板包住
 Command + J|	插入自定义动态代码模板
-## General(通用)
+### General(通用)
 
 快捷键|	作用
 ---|--

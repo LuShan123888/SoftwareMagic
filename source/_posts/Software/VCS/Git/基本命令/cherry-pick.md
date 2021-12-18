@@ -8,10 +8,10 @@ categories:
 ---
 # Git cherry-pick
 
-- 当一个特定分支包含活动分支需要的某个提交时,对那个提交执行 cherry-pick,对一个提交执行 cherry-pick 时,会在活动分支上创建一个新的提交,其中包含由拣选出来的提交所引入的修改
+**选择一个commit,合并进当前分支**
 
 ```shell
-git cherry-pick 版本号
+ $ git cherry-pick [commit]
 ```
 
 - 假设 dev 分支上的提交 76d12 为 index.js 文件添加了一项修改,而希望将其整合到 master 分支中,但并不想要整个 dev 分支,而只需要这个提交

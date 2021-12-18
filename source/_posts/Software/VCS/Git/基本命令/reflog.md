@@ -11,7 +11,7 @@ categories:
 - reflog是一个非常有用的命令,可以展示已经执行过的所有动作的日志,包括合并,重置,还原,基本上包含对分支所做的任何修改
 
 ```shell
-git reflog commit-id/HEAD@{number}
+git reflog <commit-id>
 ```
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-I2AefJEHuZ5BCbo.gif)

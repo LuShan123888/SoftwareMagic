@@ -16,34 +16,24 @@ categories:
 
 ```xml
 <!--指定注解扫描包-->
-<context:component-scan base-package="com.test.pojo"/>
+<context:component-scan base-package="com.example.entity"/>
 ```
 
 2. 在指定包下编写类, 增加注解
 
 ```java
 @Component("user")
-// 相当于配置文件中 <bean id="user" class="当前注解的类"/>
 public class User {
     public String name = "test";
 }
 ```
 
-3. 测试
-
-```java
-@Test
-public void test(){
-    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
-    User user = (User) applicationContext.getBean("user");
-    System.out.println(user.name);
-}
-```
+- 相当于配置文件中`<bean id="user" class="当前注解的类"/>`
 
 - **@Component三个衍生注解**:为了更好的进行分层, Spring可以使用其它三个注解, 功能一样, 目前使用哪一个功能都一样
-    - **@Controller**:web层
-    - **@Service**:service层
-    - **@Repository**:dao层
+    - **@Controller**:Web层
+    - **@Service**:Service层
+    - **@Repository**:Dao层
 - 写上这些注解, 就相当于将这个类交给Spring管理装配了
 
 ### @Configuration&@Bean&@Import
@@ -51,15 +41,6 @@ public void test(){
 - JavaConfig 原来是 Spring 的一个子项目, 它通过 Java 类的方式提供 Bean 的定义信息, 在 Spring4 的版本,  JavaConfig 已正式成为 Spring4 的核心功能
 
 **实例**
-
-1. 编写一个实体类Dog
-
-```java
-@Component  //将这个类标注为Spring的一个组件, 放到容器中!
-public class Dog {
-    public String name = "dog";
-}
-```
 
 2. 新建一个config配置包, 编写一个MyConfig配置类
 
@@ -73,24 +54,17 @@ public class MyConfig {
 }
 ```
 
-3. 测试
-
-```java
-@Test
-public void test2(){
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyConfig.class);
-    Dog dog = (Dog) applicationContext.getBean("dog");
-    System.out.println(dog.name);
-}
-```
-
 **导入其他配置**
 
 1. 编写一个配置类
 
 ```java
 @Configuration  //代表这是一个配置类
-public class MyConfig2 {
+public class MyConfig {
+    @Bean
+    public Dog dog(){
+        return new Dog();
+    }
 }
 ```
 
@@ -98,12 +72,8 @@ public class MyConfig2 {
 
 ```java
 @Configuration
-@Import(MyConfig2.class)  //导入合并其他配置类, 类似于配置文件中的 inculde 标签
-public class MyConfig {
-    @Bean
-    public Dog dog(){
-        return new Dog();
-    }
+@Import(MyConfig.class)  //导入合并其他配置类, 类似于配置文件中的 inculde 标签
+public class MyConfig2 {
 }
 ```
 
@@ -124,35 +94,17 @@ public class MyConfig {
 - 通过将@Autowired注解放在构造器上来完成构造器注入,默认构造器参数通过类型自动装配,如下所示:
 
 ```java
-package cn.javass.spring.chapter12;  
-import org.springframework.beans.factory.annotation.Autowired;  
-public class TestBean11 {  
-    private String message;  
-    @Autowired //构造器注入  
-    private TestBean11(String message) {  
+@Data
+public class TestBean {  
+    
+    private String message;
+    
+    @Autowired
+    private TestBean(String message) {  
         this.message = message;  
     }  
-    //省略message的getter和setter  
 }  
 ```
-
-- 在Spring配置文件添加如下Bean配置:
-
-```html
-<bean id="testBean" class="cn.javass.spring.chapter12.TestBean11"/>
-```
-
-- 测试
-
-```java
-@Test  
-public void testAutowiredForConstructor() {  
-    TestBean11 testBean11 = ctx.getBean("testBean11", TestBean11.class);  
-    Assert.assertEquals("hello", testBean11.getMessage());  
-}  
-```
-
-- 在Spring配置文件中没有对"testBean”进行构造器注入和setter注入配置,而是通过在构造器上添加@ Autowired来完成根据参数类型完成构造器注入
 
 #### 字段注入
 
@@ -161,29 +113,12 @@ public void testAutowiredForConstructor() {  
 - 使用字段自动注入可以省略setter方法
 
 ```java
-package cn.javass.spring.chapter12;  
-import org.springframework.beans.factory.annotation.Autowired;  
-public class TestBean12 {  
+@Data
+public class TestBean { 
+    
     @Autowired //字段注入  
     private String message;  
-    //省略getter和setter  
 } 
-```
-
-- 在Spring配置文件添加如下Bean配置:
-
-```html
-<bean id="testBean12" class="cn.javass.spring.chapter12.TestBean12"/>
-```
-
-- 测试
-
-```java
-@Test  
-public void testAutowiredForField() {  
-    TestBean12 testBean12 = ctx.getBean("testBean12", TestBean12.class);  
-    Assert.assertEquals("hello", testBean12.getMessage());  
-}  
 ```
 
 #### 方法参数注入
@@ -194,61 +129,32 @@ public void testAutowiredForField() {  
 - 方法注入不支持静态类型方法的注入
 
 ```java
-package cn.javass.spring.chapter12;  
-import org.springframework.beans.factory.annotation.Autowired;  
-public class TestBean13 {  
+@Data
+public class TestBean {  
+
     private String message;  
+
     @Autowired //setter方法注入  
     public void setMessage(String message) {  
         this.message = message;  
-    }  
-    public String getMessage() {  
-        return message;  
-    }  
+    }
 }  
 ```
 
 ```java
-package cn.javass.spring.chapter12;  
-//省略import  
-public class TestBean14 {  
+@Data
+public class TestBean {  
+
     private String message;  
+    
     private List<String> list;  
-    @Autowired(required = true) //任意一个或多个参数方法注入  
+
+    @Autowired //任意一个或多个参数方法注入  
     private void initMessage(String message, ArrayList<String> list) {  
         this.message = message;  
         this.list = list;  
     }  
-    //省略getter和setter  
-}  
-```
-
-- 在Spring配置文件添加如下Bean配置:
-
-```html
-<bean id="testBean13" class="cn.javass.spring.chapter12.TestBean13"/>  
-<bean id="testBean14" class="cn.javass.spring.chapter12.TestBean14"/>  
-<bean id="list" class="java.util.ArrayList">  
-    <constructor-arg index="0">  
-        <list>  
-            <ref bean="message"/>  
-            <ref bean="message"/>  
-        </list>  
-    </constructor-arg>          
-</bean>  
-```
-
-- 测试
-
-```java
-@Test  
-public void testAutowiredForMethod() {  
-    TestBean13 testBean13 = ctx.getBean("testBean13", TestBean13.class);  
-    Assert.assertEquals("hello", testBean13.getMessage());  
-
-    TestBean14 testBean14 = ctx.getBean("testBean14", TestBean14.class);  
-    Assert.assertEquals("hello", testBean14.getMessage());  
-    Assert.assertEquals(ctx.getBean("list", List.class), testBean14.getList());  
+    
 }  
 ```
 
@@ -259,30 +165,21 @@ public void testAutowiredForMethod() {  
 
 **测试**
 
-- 配置文件修改内容, 保证类型存在对象,且名字不为类的默认名字
-
-```xml
-<bean id="dog1" class="com.example.pojo.Dog"/>
-<bean id="dog2" class="com.example.pojo.Dog"/>
-<bean id="cat1" class="com.example.pojo.Cat"/>
-<bean id="cat2" class="com.example.pojo.Cat"/>
-```
-
-- 没有加Qualifier测试, 直接报错
-- 在属性上添加Qualifier注解
-
 ```java
+@Autowired
+@Qualifier(value = "cat1")
+private Cat cat;
+
 @Autowired
 @Qualifier(value = "cat2")
 private Cat cat;
-@Autowired
-@Qualifier(value = "dog2")
-private Dog dog;
 ```
 
 ### @Resource
 
-- @Resource(属于J2EE规范), 默认按照名称进行装配, 名称可以通过name属性进行指定,如果没有指定name属性, 当注解写在字段上时, 默认取字段名进行按照名称查找, 如果注解写在setter方法上默认取属性名进行装配,当找不到与名称匹配的bean时才按照类型进行装配,但是需要注意的是, 如果name属性一旦指定, 就只会按照名称进行装配
+- @Resource(属于J2EE规范), 默认按照名称进行装配
+- 名称可以通过name属性进行指定,如果没有指定name属性, 当注解写在字段上时, 默认取字段名进行按照名称查找, 如果注解写在setter方法上默认取属性名进行装配,当找不到与名称匹配的bean时才按照类型进行装配
+- **注意**：如果name属性一旦指定, 就只会按照名称进行装配
 
 **测试**
 
@@ -290,43 +187,15 @@ private Dog dog;
 
 ```java
 public class User {
-    //如果允许对象为null, 设置required = false,默认为true
+    
     @Resource(name = "cat2")
     private Cat cat;
+    
     @Resource
     private Dog dog;
-    private String str;
+    
 }
 ```
-
-- beans.xml
-
-```xml
-<bean id="dog" class="com.example.pojo.Dog"/>
-<bean id="cat1" class="com.example.pojo.Cat"/>
-<bean id="cat2" class="com.example.pojo.Cat"/>
-
-<bean id="user" class="com.example.pojo.User"/>
-```
-
-- 测试正常
-- beans.xml ,删掉cat2
-
-```xml
-<bean id="dog" class="com.example.pojo.Dog"/>
-<bean id="cat1" class="com.example.pojo.Cat"/>
-```
-
-- 实体类上只保留注解
-
-```java
-@Resource
-private Cat cat;
-@Resource
-private Dog dog;
-```
-
-- 测试正常,先进行byName查找,失败,再进行byType查找
 
 ### @Value
 
@@ -334,25 +203,27 @@ private Dog dog;
 
 ```java
 @Component("user")
-// 相当于配置文件中 <bean id="user" class="当前注解的类"/>
 public class User {
+    
     @Value("test")
-    // 相当于配置文件中 <property name="name" value="test"/>
     public String name;
 }
 ```
 
+- 相当于配置文件中`<property name="name" value="test"/>`
 - 除了字面量,也可以使用其他表达式获得值
 
 ```java
 @Component
 public class User {
+    
     @Value("${user.name}") //从配置文件中取值
     private String name;
     @Value("#{9*2}")  // #{SPEL} Spring表达式
     private int age;
     @Value("男")  // 字面量
     private String sex;
+    
 }
 ```
 
@@ -372,13 +243,13 @@ public class User {
 #### Bean注入
 
 ```xml
-<bean id="addr" class="com.example.pojo.Address">
-    <property name="address" value="重庆"/>
-</bean>
-
-<bean id="student" class="com.example.pojo.Student">
+<bean id="student" class="com.example.entity.Student">
     <property name="name" value="小明"/>
     <property name="address" ref="addr"/>
+</bean>
+
+<bean id="addr" class="com.example.entity.Address">
+    <property name="address" value="重庆"/>
 </bean>
 ```
 
@@ -387,26 +258,15 @@ public class User {
 - `value`:表示属性的值
 
 ```xml
-<bean id="student" class="com.example.pojo.Student">
+<bean id="student" class="com.example.entity.Student">
     <property name="name" value="小明"/>
 </bean>
-```
-
-- 测试
-
-```java
-@Test
-public void test01(){
-    ApplicationContext context = newClassPathXmlApplicationContext("applicationContext.xml");
-    Student student = (Student) context.getBean("student");
-    System.out.println(student.getName());
-}
 ```
 
 #### 数组注入
 
 ```xml
-<bean id="student" class="com.example.pojo.Student">
+<bean id="student" class="com.example.entity.Student">
     <property name="name" value="小明"/>
     <property name="address" ref="addr"/>
     <property name="books">
@@ -442,7 +302,7 @@ public void test01(){
 </property>
 ```
 
-#### set注入
+#### Set注入
 
 ```xml
 <property name="games">
@@ -475,25 +335,12 @@ public void test01(){
 ### p命名空间和c命名空间注入
 
 ```java
+@Data
 public class User {
+    
     private String name;
+    
     private int age;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "name='" + name + '\'' +
-            ", age=" + age +
-            '}';
-    }
 }
 ```
 
@@ -501,14 +348,14 @@ public class User {
 
 - 需要在头文件中加入约束文件
 
-```
+```xml
 xmlns:p="http://www.springframework.org/schema/p"
 ```
 
 - P(属性: properties)命名空间 , 属性依然要设置set方法
 
 ```xml
-<bean id="user" class="com.example.pojo.User" p:name="test" p:age="18"/>
+<bean id="user" class="com.example.entity.User" p:name="test" p:age="18"/>
 ```
 
 #### C命名空间注入
@@ -523,29 +370,28 @@ xmlns:p="http://www.springframework.org/schema/p"
 - 需要加上有参构造器
 
 ```xml
-<bean id="user" class="com.example.pojo.User" c:name="test" c:age="18"/>
+<bean id="user" class="com.example.entity.User" c:name="test" c:age="18"/>
 ```
 
 ### 构造器注入
 
 - 构造器注入是指带有参数的构造函数注入
 - `<constructor-arg>`:bean中有参构造函数的形式参数
-    - `ref`:引用其他的bean
 
-#### 根据index参数下标设置
+#### 根据参数index设置
 
 ```html
-<bean id="userT" class="com.example.pojo.UserT">
-    <!-- index指构造方法 , 下标从0开始 -->
+<bean id="userT" class="com.example.entity.User">
     <constructor-arg index="0" ref="name"/>
 </bean>
 ```
 
+- index指构造方法参数index , 下标从0开始
+
 #### 根据参数名字设置
 
 ```xml
-<bean id="userT" class="com.example.pojo.UserT">
-    <!-- name指参数名 -->
+<bean id="userT" class="com.example.entity.User">
     <constructor-arg name="name" ref="name"/>
 </bean>
 ```
@@ -553,19 +399,13 @@ xmlns:p="http://www.springframework.org/schema/p"
 #### 根据参数类型设置
 
 ```xml
-<bean id="userT" class="com.example.pojo.UserT">
+<bean id="userT" class="com.example.entity.User">
     <constructor-arg type="java.lang.String" ref="name"/>
 </bean>
 ```
 
 ### 自动装配
 
-- 在Spring中,支持 5 自动装配模式
-    - **no**: 缺省情况下,自动配置是通过"ref”属性手动设定
-    - **byName**:根据属性名称自动装配,如果一个bean的名称和其他bean属性的名称是一样的,将会自装配它
-    - **byType**:按数据类型自动装配,如果一个bean的数据类型是用其它bean属性的数据类型,兼容并自动装配它
-    - **constructor**:在构造函数参数的byType方式
-    - **autodetect**;如果找到默认的构造函数,使用"自动装配用构造”; 否则,使用"按类型自动装配”
 - Spring的自动装配的步骤
     - 组件扫描(component scanning):Spring会自动发现应用上下文中所创建的bean
     - 自动装配(autowiring):Spring自动满足bean之间的依赖,也就是我们说的IoC/DI
@@ -576,8 +416,15 @@ xmlns:p="http://www.springframework.org/schema/p"
 - `<beans>`标签可以定义 `default-autowire-candidate="false"`属性让它和它包含的所有 `bean` 都不做为候选`bean`
 
 ```xml
-<bean id="customer" class="com.yiibai.common.Customer" autowire="byName" />
+<bean id="customer" class="com.example.entity.Customer" autowire="byName" />
 ```
+
+- **autowire**:在Spring中,支持 5 自动装配模式
+    - **no**: 缺省情况下,自动配置是通过"ref”属性手动设定
+    - **byName**:根据属性名称自动装配,如果一个bean的名称和其他bean属性的名称是一样的,将会自装配它
+    - **byType**:按数据类型自动装配,如果一个bean的数据类型是用其它bean属性的数据类型,兼容并自动装配它
+    - **constructor**:在构造函数参数的byType方式
+    - **autodetect**;如果找到默认的构造函数,使用"自动装配用构造”; 否则,使用"按类型自动装配”
 
 #### byType
 
@@ -587,10 +434,9 @@ xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Type自动装配注入 -->
-    <bean id="userServerId" class="serviceImpl.UserServiceImpl" autowire="byType"/>
-    <!-- id可以与bean的属性名可以一样  -->
-    <bean id="userDaoId" class="daoImpl.UserDaoImpl"></bean>
+    <bean id="userService" class="com.service.serviceImpl.UserServiceImpl" autowire="byType"/>
+    <!-- id可以与bean的属性名不一样  -->
+    <bean id="userMapper" class="com.service.mapper.UserMapperImpl"></bean>
 </beans>
 ```
 
@@ -602,10 +448,9 @@ xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Name 自动装配注入 -->
-    <bean id="userServerId" class="serviceImpl.UserServiceImpl" autowire="byName"/>
+    <bean id="userService" class="com.service.serviceImpl.UserServiceImpl" autowire="byName"/>
     <!-- id必须与bean的属性名一样 -->
-    <bean id="userDao" class="daoImpl.UserDaoImpl"></bean>
+    <bean id="userMapper" class="com.service.mapper.UserMapperImpl"></bean>
 </beans>
 ```
 
@@ -619,64 +464,61 @@ xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Constructor  构造自动装配 -->
-    <bean id="dogId" class="serviceImpl.DogServiceImpl" autowire="constructor"/>
-    <!-- id可以与bean的属性名可以一样  -->
-    <bean id="dogDaos" class="daoImpl.DogDaoImpl"></bean>
+    <bean id="userService" class="com.service.serviceImpl.UserServiceImpl" autowire="constructor"/>
+    <!-- id可以与bean的属性名可以不一样  -->
+    <bean id="userMapper" class="com.service.mapper.UserMapperImpl"></bean>
 </beans>
 ```
 
 ### 静态工厂的方法注入
 
 - 静态工厂顾名思义,就是通过调用静态工厂的方法来获取自己需要的对象
-- 为了让Spring管理所有对象,我们不能直接通过"工程类.静态方法()"来获取对象,而是依然通过spring注入的形式获取:
+- 为了让Spring管理所有对象,我们不能直接通过`工程类.静态方法()`来获取对象,而是依然通过spring注入的形式获取:
 
 ```java
-package com.bless.springdemo.factory;  
+public class UserMapperFactory {  
 
-public class DaoFactory {  
-    //静态工厂  
-    public static final FactoryDao getFactoryDao(){  
-        return new FacotryDao();  
+    public static final UserMapper getUserMapper(){  
+        return new UserMapper();  
     }  
-}  
+
+}
 ```
 
 - 需要注入一个FactoryDao对象,看起来跟setter注入一模一样,但是xml会有很大差别:
 
 ```java
-public class SpringAction {  
-    //注入对象  
-    private FactoryDao factoryDao;  
+public class UserServiceImpl {  
+    
+    private UserMapper userMapper;  
 
-    //注入对象的set方法  
-    public void setFactoryDao(FactoryDao factoryDao) {  
-        this.factoryDao = factoryDao;  
+    public void setUserMapper(UserMapper userMapper) {  
+        this.userMapper = userMapper;  
     }  
-}  
+    
+}
 ```
 
-- Spring的IOC配置文件,注意看`<bean name="springAction">`指向的class并不是FactoryDao,而是指向静态工厂DaoFactory,并且配置 `factory-method="getFactoryDao"`指定调用哪个工厂方法:
+- **注意**:`<bean name="userService">`指向的class并不是userMapper,而是指向静态工厂UserMapperFactory,并且配置 `factory-method`指定调用哪个工厂方法
 
 ```xml
-<!--配置bean,配置后该类由Spring管理-->  
-<bean name="springAction" class="com.bless.springdemo.action.SpringAction" >  
+<bean name="userService" class="com.example.service.serviceImpl.UserServiceImpl" >  
     <!--使用静态工厂的方法注入对象,对应下面的配置文件-->  
-    <property name="factoryDao" ref="factoryDao"></property>
+    <property name="userMapper" ref="UserMapperFactory"/>
 </bean>  
 <!--此处获取对象的方式是从工厂类中获取静态方法-->  
-<bean name="factoryDao" class="com.bless.springdemo.factory.DaoFactory" factory-method="getFactoryDao"></bean>  
+<bean name="UserMapperFactory" class="com.example.mapper.UserMapperFactory" factory-method="getUserMapper"/>
 ```
 
 ###    实例工厂的方法注入
 
-- 实例工厂的意思是获取对象实例的方法不是静态的,所以需要首先new工厂类,再调用普通的实例方法:
+- 实例工厂的意思是获取对象实例的方法不是静态的,所以需要首先new工厂类,再调用普通的实例方法
 
 ```java
-public class DaoFactory {  
-    //实例工厂  
-    public FactoryDao getFactoryDao(){  
-        return new FactoryDao();  
+public class UserMapperFactory {
+    
+    public UserMapper getUserMapper(){  
+        return new UserMapper();  
     }  
 }  
 ```
@@ -684,28 +526,27 @@ public class DaoFactory {  
 - 需要通过实例工厂类创建FactoryDao对象:
 
 ```java
-public class SpringAction {  
-    //注入对象  
-    private FactoryDao factoryDao;  
+public class UserServiceImpl {  
 
-    public void setFactoryDao(FactoryDao factoryDao) {  
-        this.factoryDao = factoryDao;  
-    }  
+    private UserMapper userMapper;  
+
+    public void setUserMapper(UserMapper userMapper) {  
+        this.userMapper = userMapper;  
+    }
 } 
 ```
 
-- 最后看Spring配置文件:
+- Spring配置文件
 
 ```xml
-<!--配置bean,配置后该类由Spring管理-->  
-<bean name="springAction" class="com.bless.springdemo.action.SpringAction">  
+<bean name="userService" class="com.example.service.serviceImpl.UserServiceImpl">  
     <!--使用实例工厂的方法注入对象,对应下面的配置文件-->  
-    <property name="factoryDao" ref="factoryDao"></property>  
+    <property name="userMapper" ref="userMapper"/>
 </bean>  
 
 <!--此处获取对象的方式是从工厂类中获取实例方法-->  
-<bean name="daoFactory" class="com.bless.springdemo.factory.DaoFactory"></bean>  
-<bean name="factoryDao" factory-bean="daoFactory" factory-method="getFactoryDaoImpl"></bean> 
+<bean name="userMapperFactory" class="com.example.mapper.UserMapperFactory"/>
+<bean name="userMapper" factory-bean="userMapperFactory" factory-method="getUserMapper"/>
 ```
 
 ## Bean的作用域
@@ -725,27 +566,28 @@ public class SpringAction {  
 - 当一个bean的作用域为Singleton,那么Spring IoC容器中只会存在一个共享的bean实例,并且所有对bean的请求,只要id与该bean定义相匹配,则只会返回bean的同一实例,Singleton是单例类型,就是在创建起容器时就同时自动创建了一个bean的对象,不管你是否使用,他都存在了,每次获取到的对象都是同一个对象,注意,Singleton作用域是Spring中的缺省作用域,要在XML中将bean定义成singleton,可以这样配置:
 
 ```xml
- <bean id="ServiceImpl" class="cn.csdn.service.ServiceImpl" scope="singleton">
+<bean id="user" class="com.example.entity.User" scope="singleton">
 ```
 
 ```java
 @Test
-public void test03(){
+public void test(){
     ApplicationContext context = newClassPathXmlApplicationContext("applicationContext.xml");
-    User user = (User) context.getBean("user");
+    User user1 = (User) context.getBean("user");
     User user2 = (User) context.getBean("user");
-    System.out.println(user==user2);
+    System.out.println(user1 == user2);
 }
 ```
 
 ### Prototype
 
-- 当一个bean的作用域为Prototype,表示一个bean定义对应多个对象实例,Prototype作用域的bean会导致在每次对该bean请求(将其注入到另一个bean中,或者以程序的方式调用容器的getBean()方法)时都会创建一个新的bean实例,Prototype是原型类型,它在我们创建容器的时候并没有实例化,而是当我们获取bean的时候才会去创建一个对象,而且我们每次获取到的对象都不是同一个对象,根据经验,对有状态的bean应该使用prototype作用域,而对无状态的bean则应该使用singleton作用域,在XML中将bean定义成prototype,可以这样配置:
+- 当一个bean的作用域为Prototype,表示一个bean定义对应多个对象实例,Prototype作用域的bean会导致在每次对该bean请求(将其注入到另一个bean中,或者以程序的方式调用容器的getBean()方法)时都会创建一个新的bean实例
+- Prototype是原型类型,它在我们创建容器的时候并没有实例化,而是当我们获取bean的时候才会去创建一个对象,而且我们每次获取到的对象都不是同一个对象,根据经验,对有状态的bean应该使用prototype作用域,而对无状态的bean则应该使用singleton作用域
 
 ```xml
-<bean id="account" class="com.foo.DefaultAccount" scope="prototype"/>
+<bean id="user" class="com.example.entity.User" scope="prototype"/>
 // 或者
-<bean id="account" class="com.foo.DefaultAccount" singleton="false"/>
+<bean id="user" class="com.example.entity.User" singleton="false"/>
 ```
 
 ### Request
@@ -753,7 +595,7 @@ public void test03(){
 - 当一个bean的作用域为Request,表示在一次HTTP请求中,一个bean定义对应一个实例,即每个HTTP请求都会有各自的bean实例,它们依据某个bean定义创建而成,该作用域仅在基于web的Spring ApplicationContext情形下有效,考虑下面bean定义:
 
 ```xml
-<bean id="loginAction" class=cn.csdn.LoginAction" scope="request"/>
+<bean id="loginAction" class="com.example.servlet.loginAction" scope="request"/>
 ```
 
 - 针对每次HTTP请求,Spring容器会根据loginAction bean的定义创建一个全新的LoginAction bean实例,且该loginAction bean实例仅在当前HTTP request内有效,因此可以根据需要放心的更改所建实例的内部状态,而其他请求中根据loginAction bean定义创建的实例,将不会看到这些特定于某个请求的状态变化,当处理请求结束,request作用域的bean实例将被销毁
@@ -763,7 +605,7 @@ public void test03(){
 - 当一个bean的作用域为Session,表示在一个HTTP Session中,一个bean定义对应一个实例,该作用域仅在基于web的Spring ApplicationContext情形下有效,考虑下面bean定义:
 
 ```xml
-<bean id="userPreferences" class="com.foo.UserPreferences" scope="session"/>
+<bean id="userPreferences" class="com.example.servlet.userPreferences" scope="session"/>
 ```
 
 - 针对某个HTTP Session,Spring容器会根据userPreferences bean定义创建一个全新的userPreferences bean实例,且该userPreferences bean仅在当前HTTP Session内有效,与request作用域一样,可以根据需要放心的更改所创建实例的内部状态,而别的HTTP Session中根据userPreferences创建的实例,将不会看到这些特定于某个HTTP Session的状态变化,当HTTP Session最终被废弃的时候,在该HTTP Session作用域内的bean也会被废弃掉
@@ -772,12 +614,13 @@ public void test03(){
 
 - 使用注解配置Bean的作用域
     - **singleton**:默认的, Spring会采用单例模式创建这个对象,关闭工厂, 所有的对象都会销毁
-    - **prototype**:多例模式,关闭工厂, 所有的对象不会销毁,内部的垃圾回收机制会回收
+    - **prototype**:原型模式,关闭工厂, 所有的对象不会销毁,内部的垃圾回收机制会回收
 
 ```java
 @Controller("user")
 @Scope("prototype")
 public class User {
+    
     @Value("test")
     public String name;
 }

@@ -80,9 +80,6 @@ fatal: ambiguous argument 'HEAD^2': unknown revision or path not in the working 
 ## ~ 与 ^ 的关系
 
 - `~` 获取第一个祖先提交,`^` 可以获取第一个父提交, 其实第一个祖先提交就是第一个父提交,反之亦然, 因此,当 n 为 1 时,`~` 和 `^` 其实是等价的, 譬如:`HEAD~~~` 和 `HEAD^^^` 是等价的
-- 引用 [kernel.org](https://www.kernel.org/pub/software/scm/git/docs/git-rev-parse.html) 中非常形象的一段话:
-
-> Here is an illustration, by Jon Loeliger. Both commit nodes B and C are parents of commit node A. Parent commits are ordered left-to-right
 
 ```
 G   H   I   J

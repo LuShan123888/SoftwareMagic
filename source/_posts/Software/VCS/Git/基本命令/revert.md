@@ -8,10 +8,10 @@ categories:
 ---
 # Git revert
 
-- 通过对特定的提交执行还原操作,创建一个包含已还原修改的新提交
+- 新建一个commit,用来撤销指定commit,后者的所有变化都将被前者抵消,并且应用到当前分支
 
 ```shell
-git revert 版本号
+$ git revert [commit]
 ```
 
 - 假设 ec5be 添加了一个 index.js 文件,但之后我们发现其实我们再也不需要由这个提交引入的修改了,那就还原 ec5be 提交吧!

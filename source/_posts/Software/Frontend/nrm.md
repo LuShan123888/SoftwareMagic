@@ -19,7 +19,7 @@ categories:
 ## 安装
 
 ```shell
-npm install -g nrm
+$ npm install -g nrm
 ```
 
 ## 列出可用的源
@@ -36,7 +36,7 @@ nrm ls
   pt ----- http://registry.npmjs.pt/
 ```
 
-## 切换
+## 切换源
 
 ```
 nrm use taobao

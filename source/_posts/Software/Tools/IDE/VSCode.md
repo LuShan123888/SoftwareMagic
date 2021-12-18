@@ -3,6 +3,7 @@ title: VS Code
 categories:
 - Software
 - Tools
+- IDE
 ---
 # VS Code
 

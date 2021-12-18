@@ -8,8 +8,6 @@ categories:
 ---
 # Spring 整合 Shiro
 
-## Shiro 简介
-
 - Apache Shiro 是一个功能强大,灵活的,开源的安全框架,它可以干净利落地处理身份验证,授权,企业会话管理和加密
 - Apache Shiro 的首要目标是易于使用和理解,安全通常很复杂,甚至让人感到很痛苦,但是 Shiro 却不是这样子的,一个好的安全框架应该屏蔽复杂性,向外暴露简单,直观的 API,来简化开发人员实现应用程序安全所花费的时间和精力
 - Shiro 能做什么呢？
@@ -23,7 +21,7 @@ categories:
     - 等等——都集成到一个有凝聚力的易于使用的 API
 - Shiro 致力在所有应用环境下实现上述功能,小到命令行应用程序,大到企业应用中,而且不需要借助第三方框架,容器,应用服务器等,当然 Shiro 的目的是尽量的融入到这样的应用环境中去,但也可以在它们之外的任何环境下开箱即用
 
-## Apache Shiro Features 特性
+## Shiro 特性
 
 - Apache Shiro 是一个全面的,蕴含丰富功能的安全框架,下图为描述 Shiro 功能的框架图:
 
@@ -43,7 +41,7 @@ categories:
     - Remember Me:跨 session 记录用户的身份,只有在强制需要时才需要登录
 - **注意**:Shiro 不会去维护用户,维护权限,这些需要我们自己去设计/提供,然后通过相应的接口注入给 Shiro
 
-### High-Level Overview 高级概述
+## High-Level Overview 高级概述
 
 - 在概念层,Shiro 架构包含三个主要的理念:Subject,SecurityManager和 Realm,下面的图展示了这些组件如何相互作用,我们将在下面依次对其进行描述
 
@@ -72,16 +70,11 @@ categories:
 ## pom.xml
 
 ```xml
-    <dependency>
-        <groupId>org.apache.shiro</groupId>
-        <artifactId>shiro-core</artifactId>
-        <version>1.4.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.shiro</groupId>
-        <artifactId>shiro-spring</artifactId>
-        <version>1.4.0</version>
-    </dependency>
+<dependency>
+    <groupId>org.apache.shiro</groupId>
+    <artifactId>shiro-spring</artifactId>
+    <version>1.4.0</version>
+</dependency>
 ```
 
 ## 实体类
@@ -89,6 +82,7 @@ categories:
 ### 用户信息
 
 ```java
+@Data
 public class UserInfo {
     private Long id; // 主键
     private String username; // 登录账户,唯一
@@ -97,14 +91,13 @@ public class UserInfo {
     private String salt; // 加密密码的盐
     @JsonIgnoreProperties(value = {"userInfos"})
     private List<SysRole> roles; // 一个用户具有多个角色
-
-    /** getter and setter */
 }
 ```
 
 ### 角色信息
 
 ```java
+@Data
 public class SysRole {
     private Long id; // 主键
     private String name; // 角色名称,如 admin/user
@@ -116,14 +109,13 @@ public class SysRole {
     @JsonIgnoreProperties(value = {"roles"})
     private List<UserInfo> userInfos;// 一个角色对应多个用户
 
-    /** getter and setter */
 }
 ```
 
 ### 权限信息
 
 ```java
-
+@Data
 public class SysPermission {
     private Long id; // 主键
     private String name; // 权限名称,如 user:select
@@ -132,24 +124,10 @@ public class SysPermission {
     @JsonIgnoreProperties(value = {"permissions"})
     private List<SysRole> roles; // 一个权限可以被多个角色使用
 
-    /** getter and setter */
 }
 ```
 
 -  **注意**:当要使用RESTful风格返回给前台JSON数据的时候,比如当我们想要返回给前台一个用户信息时,由于一个用户拥有多个角色,一个角色又拥有多个权限,而权限跟角色也是多对多的关系,也就是造成了 查用户→查角色→查权限→查角色→查用户…这样的无限循环,导致传输错误,所以我们根据这样的逻辑在每一个实体类返回JSON时使用了一个`@JsonIgnoreProperties`注解,来排除自身的无限引用的过程,也就是打断这样的无限循环
-
-### 插入数据
-
-```sql
-INSERT INTO `user_info` (`id`,`name`,`password`,`salt`,`username`) VALUES (1, '管理员','951cd60dec2104024949d2e0b2af45ae', 'xbNIxrQfn6COSYn1/GdloA==', 'wmyskxz');
-INSERT INTO `sys_permission` (`id`,`description`,`name`,`url`) VALUES (1,'查询用户','userInfo:view','/userList');
-INSERT INTO `sys_permission` (`id`,`description`,`name`,`url`) VALUES (2,'增加用户','userInfo:add','/userAdd');
-INSERT INTO `sys_permission` (`id`,`description`,`name`,`url`) VALUES (3,'删除用户','userInfo:delete','/userDelete');
-INSERT INTO `sys_role` (`id`,`description`,`name`) VALUES (1,'管理员','admin');
-INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,1);
-INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (2,1);
-INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (1,1);
-```
 
 ## MyShiroRealm
 
@@ -200,6 +178,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 ```java
 @Configuration
 public class ShiroConfig {
+
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         System.out.println("ShiroConfiguration.shirFilter()");
@@ -211,16 +190,16 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         // 配置退出过滤器
         filterChainDefinitionMap.put("/logout", "logout");
-        // <!-- 过滤链定义,从上向下顺序执行,一般将/**放在最为下边 -->
-        // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
+        // 过滤链定义,从上向下顺序执行,一般将/**放在最为下边
         filterChainDefinitionMap.put("/**", "authc");
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        
+        // 登陆Url，如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
@@ -332,13 +311,13 @@ public class ShiroController {
         return "login";
     }
 
-
     @RequiresRoles( "admin" )
     @RequiresPermissions("userInfo:add")
     @GetMapping("/user/add")
     public String add() {
         return "user/add";
     }
+    
     @RequiresRoles( "admin")
     @RequiresPermissions("userInfo:update")
     @GetMapping("/user/update")
@@ -398,7 +377,7 @@ public class ShiroController {
 }
 ```
 
-### 使用注解进行用户进行授权校验
+## 注解
 
 - 在使用 Shiro 的注解之前,请确保项目中已经添加支持 AOP 功能的相关jar包
 
@@ -417,7 +396,6 @@ public String delete() {
 @RequiresUser
 public Map<String,Object> getLogout(){
     //TODO
-}
 }
 ```
 

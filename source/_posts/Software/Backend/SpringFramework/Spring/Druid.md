@@ -115,6 +115,23 @@ spring:
     - log4j:日志记录
     - wall:防御sql注入
 
+- Spring Boot 默认是不注入这些属性值的，需要自己绑定数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
+
+```java
+@Configuration
+public class DruidConfig {
+
+    @ConfigurationProperties(prefix = "spring.datasource")
+    @Bean
+    public DataSource druidDataSource() {
+        return new DruidDataSource();
+    }
+
+}
+```
+
+- `@ConfigurationProperties(prefix = "spring.datasource")`:将全局配置文件中前缀为`spring.datasource`的属性值注入到 `com.alibaba.druid.pool.DruidDataSource`的同名参数中
+
 ### Spring
 
 - pom.xml
@@ -204,23 +221,6 @@ spring:
 </aop:config>
 <aop:aspectj-autoproxy proxy-target-class="true" />
 ```
-
-- Spring Boot 默认是不注入这些属性值的，需要自己绑定数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
-
-```java
-@Configuration
-public class DruidConfig {
-
-    @ConfigurationProperties(prefix = "spring.datasource")
-    @Bean
-    public DataSource druidDataSource() {
-        return new DruidDataSource();
-    }
-
-}
-```
-
-- `@ConfigurationProperties(prefix = "spring.datasource")`:将全局配置文件中前缀为`spring.datasource`的属性值注入到 `com.alibaba.druid.pool.DruidDataSource`的同名参数中
 
 ## 配置Druid数据源监控
 

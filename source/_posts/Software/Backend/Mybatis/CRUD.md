@@ -35,7 +35,7 @@ public interface UserMapper {
 2. 在UserMapper.xml中添加Select语句
 
 ```xml
-<select id="selectUserById" resultType="com.example.pojo.User">
+<select id="selectUserById" resultType="com.example.entity.User">
 select * from user where id = #{id}
 </select>
 ```
@@ -64,7 +64,7 @@ User selectUserByNP2(Map<String,Object> map);
 2. 编写sql语句的时候, 需要传递参数类型, 参数类型为map
 
 ```xml
-<select id="selectUserByNP2" parameterType="map"cresultType="com.example.pojo.User">
+<select id="selectUserByNP2" parameterType="map"cresultType="com.example.entity.User">
   select * from user where name = #{username} and pwd = #{pwd}
 </select>
 ```
@@ -177,7 +177,7 @@ int addUser(User user);
 2. 在UserMapper.xml中添加insert语句
 
 ```xml
-<insert id="addUser" parameterType="com.example.pojo.User">
+<insert id="addUser" parameterType="com.example.entity.User">
     insert into user (id,name,pwd) values (#{id},#{name},#{pwd})
 </insert>
 ```
@@ -215,7 +215,7 @@ int updateUser(User user);
 2. 编写对应的配置文件SQL
 
 ```xml
-<update id="updateUser" parameterType="com.example.pojo.User">
+<update id="updateUser" parameterType="com.example.entity.User">
   update user set name=#{name},pwd=#{pwd} where id = #{id}
 </update>
 ```

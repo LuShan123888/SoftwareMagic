@@ -8,25 +8,18 @@ categories:
 ---
 # Git add
 
-- 用于把工作目录的文件放入暂存区
+**添加工作目录的文件放入暂存区**
 
 ```shell
-git add 文件名
+git add [file1] [file2] ...
 ```
 
-- 提交所有变化
+- `-A`:提交所有变化
+- `-P`:添加每个变化前,都会要求确认,对于同一个文件的多处变化,可以实现分次提交
 
-```shell
-git add -A
-```
 
-- 提交被修改(modified)和被删除(deleted)文件,不包括新文件(new)
 
-```shell
-git add -u
-```
-
-- 提交新文件(new)和被修改(modified)文件,不包括被删除(deleted)文件
+**添加所有工作目录的文件放入暂存区**
 
 ```shell
 git add .

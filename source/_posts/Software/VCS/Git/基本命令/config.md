@@ -1,43 +1,37 @@
 ---
-title: Git 初始化
+title: Git config
 categories:
 - Software
 - VCS
 - Git
+- 基本命令
 ---
-# Git 初始化
+# Git config
 
-## 安装
+- Git的配置文件为`~/.gitconfig`,它可以在用户主目录下(全局配置),也可以在项目目录下(项目配置)
 
-```shell
-sudo yum install git
-# OR
-sudo apt-get install git
-```
+ ```bash
+$ git config 
+ ```
 
-## 配置
+- `--list`:显示当前的Git配置
+- `--global`:编辑全局配置
 
-### 查看配置信息
-
-```shell
-git config --list
-```
-
-### 设置用户名和邮箱
+**设置用户名和邮箱**
 
 ```shell
 git config --global user.name "用户名"
 git config --global user.email "邮箱"
 ```
 
-### 查看当前的用户名和邮箱
+**查看当前的用户名和邮箱**
 
 ```shell
 git config --global user.name
 git config --global user.email
 ```
 
-### 保存用户名和密码
+**保存用户名和密码**
 
 ```shell
 git config crendential.helper store
@@ -52,9 +46,9 @@ git config crendential.helper store
 git config --global credential.helper 'store --file ~/.my-credentials'
 ```
 
-### 代理
+## 代理
 
-#### HTTP 代理
+### HTTP 代理
 
 **走 HTTP 代理**
 
@@ -70,28 +64,16 @@ git config --global http.proxy "socks5://127.0.0.1:7890"
 git config --global https.proxy "socks5://127.0.0.1:7890"
 ```
 
-**取消设置**
+**取消代理**
 
 ```
 git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-**只对github.com代理**
+### SSH 代理
 
-```shell
-git config --global http://github.com.proxy socks5://127.0.0.1:1080
-```
-
-**取消github.com代理**
-
-```shell
-git config --global --unset http://github.com.proxy
-```
-
-#### SSH 代理
-
-- 修改 `~/.ssh/config` 文件(不存在则新建):
+- 修改 `~/.ssh/config` 文件
 
 ```
 # 必须是 github.com

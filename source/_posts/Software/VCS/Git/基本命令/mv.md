@@ -8,16 +8,16 @@ categories:
 ---
 # Git mv
 
-- 使用git命令移动工作区的文件
+- 改名文件,并且将这个改名放入暂存区
 
 ```shell
-git mv 旧文件名 新文件名
+$ git mv [file-original] [file-renamed]
 ```
 
 - 上述命令等同于:
 
 ```shell
-ren/mv 旧文件名 新文件名
+rename/mv 旧文件名 新文件名
 git rm 旧文件名
 git add 新文件名
 ```

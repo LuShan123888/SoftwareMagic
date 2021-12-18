@@ -8,7 +8,7 @@ categories:
 ---
 # Git status
 
-- 查看当前工作区与暂存区的状态
+**显示有变更的文件**
 
  ```shell
  git status

@@ -331,8 +331,8 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 
 ```xml
 <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-security</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 ```
 
@@ -454,117 +454,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ```
 
-## 整合Thymeleaf
+## 问题解决
 
-### pom.xml
+### Spring Security 登陆与登出路径出现跨域问题
 
-```xml
-<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
-<dependency>
-    <groupId>org.thymeleaf.extras</groupId>
-    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-    <version>3.0.4.RELEASE</version>
-</dependency>
-```
+**原因**：登陆与登出路径由Spring Security直接接管，并不受Spring MVC 的跨域配置
 
-### 导入命名空间
-
-```
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-```
-
-### 导航栏根据登录状态改变
-
-- `sec:authorize="isAuthenticated()"`:判断是否认证登录
-
-```html
-<!--登录注销-->
-<div class="right menu">
-
-    <!--如果未登录-->
-    <div sec:authorize="!isAuthenticated()">
-        <a class="item" th:href="@{/login}">
-            <i class="address card icon"></i> 登录
-        </a>
-    </div>
-
-    <!--如果已登录-->
-    <div sec:authorize="isAuthenticated()">
-        <a class="item">
-            <i class="address card icon"></i>
-            用户名:<span sec:authentication="principal.username"></span>
-            角色:<span sec:authentication="principal.authorities"></span>
-        </a>
-    </div>
-
-    <div sec:authorize="isAuthenticated()">
-        <a class="item" th:href="@{/logout}">
-            <i class="address card icon"></i> 注销
-        </a>
-    </div>
-</div>
-```
-
-### 记住登录状态
-
-- 开启后发现登录页多了一个Remember me 选项,勾选后登录即可记住登录状态
-- 默认生成名为`remember-me`的cookie,保留14天
-- 当注销时Spring Security会自动删除`remember-me`
+**解决方法**：使用CorsConfigurationSource进行跨域配置
 
 ```java
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    http.rememberMe();
+@Bean
+CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowCredentials(true);
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8000"));
+    configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
+    // 如果所有的属性不全部配置，一定要执行该方法
+    configuration.applyPermitDefaultValues();
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
 }
-```
-
-### 定制登录页
-
-1. 在登录页配置后面指定`loginpage`
-    - login.html 配置提交请求及方式,方式必须为post:
-
-```java
-http.formLogin().loginPage("/toLogin");
-```
-
-2. 配置接收登录的用户名和密码的参数与表单提交的url
-
-- 用户名和密码参数与表单中的input的name属性对应
-
-```java
-http.formLogin()
-    .usernameParameter("username")
-    .passwordParameter("password")
-    .loginPage("/toLogin")
-    .loginProcessingUrl("/login");
-```
-
-3. 定制rememberMe的参数
-
-```java
-http.rememberMe().rememberMeParameter("remember");
-```
-
-4. 编写前端表单
-
-```html
-<form th:action="@{/login}" method="post">
-    <div class="field">
-        <label>Username</label>
-        <div class="ui left icon input">
-            <input type="text" placeholder="Username" name="username">
-            <i class="user icon"></i>
-        </div>
-    </div>
-    <div class="field">
-        <label>Password</label>
-        <div class="ui left icon input">
-            <input type="password" name="password">
-            <i class="lock icon"></i>
-        </div>
-    </div>
-    <input type="submit" class="ui blue submit button"/>
-    <input type="checkbox" name="remember"> 记住我
-</form>
 ```
 

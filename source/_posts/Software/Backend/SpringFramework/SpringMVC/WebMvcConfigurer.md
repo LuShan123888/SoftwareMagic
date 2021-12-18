@@ -1,12 +1,12 @@
 ---
-title: Spring MVC WebMvcConfigurer
+## Spring MVC WebMvcConfigurer
 categories:
 - Software
 - Backend
 - SpringFramework
 - SpringMVC
 ---
-# Spring MVC WebMvcConfigurer
+## Spring MVC WebMvcConfigurer
 
 - WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式,采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制,基于java-based方式的Spring MVC配置,需要创建一个配置类并实现`WebMvcConfigurer` 接口
 - `WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象(增加了一些默认实现),但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃,官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
@@ -51,19 +51,32 @@ public interface WebMvcConfigurer {
 }
 ```
 
-## addInterceptors(InterceptorRegistry registry)
-
-- 拦截器配置
-- 此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter
+- 通常我们使用注解@EnableWebMvc在一个@Configuration注解的配置类上，用于对Spring MVC进行配置。用法如下所示 :
 
 ```java
 @Configuration
-public class MyWebMvcConfigurer implements WebMvcConfigurer {
+@EnableWebMvc
+public class WebMvcConfig implements WebMvcConfigurer {
+    // 根据需求，重写 WebMvcConfigurer 接口所定义的各个方法从而定制Spring MVC
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**").excludePathPatterns("/emp/toLogin","/emp/login","/js/**","/css/**","/images/**");
+    public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
+        // ... 
     }
+
+    // ...
 }
+```
+## addInterceptors
+
+- 拦截器配置，此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter
+
+```java
+@Override
+public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new MyInterceptor())
+        .addPathPatterns("/**").excludePathPatterns("/login","/logout","/js/**","/css/**","/images/**");
+}
+
 ```
 
 - `addPathPatterns("/**")`对所有请求都拦截,但是排除了`/toLogin`和`/login`请求的拦截
@@ -76,50 +89,29 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 @Override
 public void addViewControllers(ViewControllerRegistry registry) {
     registry.addViewController("/toLogin").setViewName("login");
-
 }
 ```
 
-- 以前要访问一个页面需要先创建个Controller控制类,再写方法跳转到页面
-- 在这里配置后就不需要那么麻烦了,直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了
-- 值的指出的是,在这里重写`addViewControllers`方法,并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`(在此方法中,Spring Boot将"/”映射至index.html),这也就意味着我们自己的配置和Spring Boot的自动配置同时有效,这也是我们推荐添加自己的MVC配置的方式
+- 以前要访问一个页面需要先创建个Controller控制类,再写方法跳转到页面，在这里配置后就不需要那么麻烦了,直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了
+- **注意**：在这里重写`addViewControllers`方法,并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`(在此方法中,Spring Boot将`/`映射至index.html),这也就意味着我们自己的配置和Spring Boot的自动配置同时有效,这也是推荐添加自己的MVC配置的方式
 
 ## addResourceHandlers
 
 - 自定义资源映射
 - **注意**:如果继承WebMvcConfigurationSupport类实现配置时必须要重写该方法
-- 比如,我们想自定义静态资源映射目录的话,只需重写addResourceHandlers方法即可
-
-```java
-@Configuration
-public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
-    /**
-     * 配置静态访问资源
-     * @param registry
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/my/**").addResourceLocations("classpath:/my/");
-
-    }
-}
-```
-
-- 通过addResourceHandler添加映射路径,然后通过addResourceLocations来指定路径,我们访问自定义my文件夹中的elephant.jpg 图片的地址为 http://localhost:8080/my/elephant.jpg
-- 如果你想指定外部的目录也很简单,直接addResourceLocations指定即可,代码如下:
 
 ```java
 @Override
 public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/my/**").addResourceLocations("file:E:/my/");
-
+    registry.addResourceHandler("/img/**").addResourceLocations("/usr/local/img/");
 }
 ```
 
+- 通过addResourceHandler添加映射路径,然后通过addResourceLocations来指定路径,我们访问自定义文件夹中的elephant.jpg 图片的地址为 http://localhost:8080/img/elephant.jpg
 - `addResourceLocations`:文件放置的目录
 - `addResoureHandler`:对外暴露的访问路径
 
-## configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
+## configureDefaultServletHandling
 
 ```java
 @Override
@@ -131,22 +123,20 @@ public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf
 
 - 此时会注册一个默认的Handler:`DefaultServletHttpRequestHandler`,这个Handler也是用来处理静态文件的,它会尝试映射`/*`
 
-- 当DispatcherServelt映射`/`时(`/`和`/*`是有区别的),并且没有找到合适的Handler来处理请求时,就会交给
-
-    `DefaultServletHttpRequestHandler`来处理
+- 当DispatcherServelt映射`/`时(`/`和`/*`是有区别的),并且没有找到合适的Handler来处理请求时,就会交给`DefaultServletHttpRequestHandler`来处理
 
 - **注意**:这里的静态资源是放置在web根目录下,而非`WEB-INF`下
 
 - 例如:在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录(webroot)下的文件可以直接访问的,但是由于`DispatcherServlet`配置了映射路径是:`/`,它几乎把所有的请求都拦截了,从而导致`1.png`访问不到,这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题,其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性(根目录下的文件可以直接访问),`DefaultServletHttpRequestHandler`是帮助回归这个特性的
 
-## configureViewResolvers(ViewResolverRegistry registry)
+## configureViewResolvers
 
 - 从方法名称我们就能看出这个方法是用来配置视图解析器的,该方法的参数`ViewResolverRegistry`是一个注册器,用来注册你想自定义的视图解析器等,`ViewResolverRegistry`常用的几个方法:
 
-- enableContentNegotiation()
-    - 启用内容裁决视图解析器
+- enableContentNegotiation():启用内容裁决视图解析器
 
 ```java
+@Override
 public void enableContentNegotiation(View... defaultViews) {
     initContentNegotiatingViewResolver(defaultViews);
 }
@@ -154,9 +144,10 @@ public void enableContentNegotiation(View... defaultViews) {
 
 - 该方法会创建一个内容裁决解析器`ContentNegotiatingViewResolver`,该解析器不进行具体视图的解析,而是管理你注册的所有视图解析器,所有的视图会先经过它进行解析,然后由它来决定具体使用哪个解析器进行解析,具体的映射规则是根据请求的media types来决定的
 
-- UrlBasedViewResolverRegistration()
+- UrlBasedViewResolverRegistration
 
 ```java
+@Override
 public UrlBasedViewResolverRegistration jsp(String prefix, String suffix) {
     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
     resolver.setPrefix(prefix);
@@ -174,7 +165,8 @@ registry.jsp("/WEB-INF/jsp/", ".jsp");
 
 - 对于以上配置,假如返回的视图名称是example,它会返回`/WEB-INF/jsp/example.jsp`给前端,找不到则报404,　　
 
-- beanName()
+
+## beanName
 
 ```java
 public void beanName() {
@@ -186,9 +178,11 @@ public void beanName() {
 - 该方法会注册一个`BeanNameViewResolver`视图解析器,它主要是将视图名称解析成对应的bean
 - 假如返回的视图名称是example,它会到spring容器中找有没有一个叫example的bean,并且这个bean是View.class类型的？如果有,返回这个bean,　　
 
--  viewResolver()
+
+## viewResolver
 
 ```java
+@Override
 public void viewResolver(ViewResolver viewResolver) {
     if (viewResolver instanceof ContentNegotiatingViewResolver) {
         throw new BeanInitializationException(
@@ -200,11 +194,12 @@ public void viewResolver(ViewResolver viewResolver) {
 
 - 用来注册各种各样的视图解析器的,包括自己定义的
 
-## configureContentNegotiation(ContentNegotiationConfigurer configurer)
+## configureContentNegotiation
 
 - 上面我们讲了`configureViewResolvers`方法,假如在该方法中我们启用了内容裁决解析器,那么`configureContentNegotiation(ContentNegotiationConfigurer configurer)`这个方法是专门用来配置内容裁决的一些参数的
 
 ```java
+@Override
 public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
     /* 是否通过请求Url的扩展名来决定media type */
     configurer.favorPathExtension(true)
@@ -223,25 +218,20 @@ public void configureContentNegotiation(ContentNegotiationConfigurer configurer)
 **实例**
 
 ```java
-@EnableWebMvc
-@Configuration
-public class MyWebMvcConfigurerAdapte extends WebMvcConfigurerAdapter {
+@Override
+public void configureViewResolvers(ViewResolverRegistry registry) {
+    registry.jsp("/WEB-INF/jsp/", ".jsp");
+    registry.enableContentNegotiation(new MappingJackson2JsonView());
+}
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/WEB-INF/jsp/", ".jsp");
-        registry.enableContentNegotiation(new MappingJackson2JsonView());
-    }
-
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.favorPathExtension(true)
-            .ignoreAcceptHeader(true)
-            .parameterName("mediaType")
-            .defaultContentType(MediaType.TEXT_HTML)
-            .mediaType("html", MediaType.TEXT_HTML)
-            .mediaType("json", MediaType.APPLICATION_JSON);
-    }
+@Override
+public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+    configurer.favorPathExtension(true)
+        .ignoreAcceptHeader(true)
+        .parameterName("mediaType")
+        .defaultContentType(MediaType.TEXT_HTML)
+        .mediaType("html", MediaType.TEXT_HTML)
+        .mediaType("json", MediaType.APPLICATION_JSON);
 }
 ```
 

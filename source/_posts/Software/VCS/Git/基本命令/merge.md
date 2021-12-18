@@ -8,21 +8,22 @@ categories:
 ---
 # Git merge
 
+**合并指定分支到当前分支**
+
 ```shell
-git merge 分支名
+git merge [branch]
 ```
 
 ## Fast-forward (—ff)
 
-在当前分支相比于要合并的分支没有额外的提交(commit)时,可以执行 fast-forward 合并,Git 很懒,首先会尝试执行最简单的选项:fast-forward,这类合并不会创建新的提交,而是会将正在合并的分支上的提交直接合并到当前分支
+- 在当前分支相比于要合并的分支没有额外的提交(commit)时,可以执行 fast-forward 合并,Git 很懒,首先会尝试执行最简单的选项:fast-forward,这类合并不会创建新的提交,而是会将正在合并的分支上的提交直接合并到当前分支
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-0a0431c992211561f14ee66f1cf0ea89.gif)
 
 ## No-fast-foward (—no-ff)
 
-如果当前分支相比于想要合并的分支没有任何提交,那当然很好,但很遗憾现实情况很少如此!如果在当前分支上提交想要合并的分支不具备的改变,那么 git 将会执行 no-fast-forward 合并
-
-使用 no-fast-forward 合并时,Git 会在当前活动分支上创建新的 merging commit,这个提交的父提交(parent commit)即指向这个活动分支,也指向想要合并的分支
+- 如果当前分支相比于想要合并的分支没有任何提交,那当然很好,但很遗憾现实情况很少如此!如果在当前分支上提交想要合并的分支不具备的改变,那么 git 将会执行 no-fast-forward 合并
+- 使用 no-fast-forward 合并时,Git 会在当前活动分支上创建新的 merging commit,这个提交的父提交(parent commit)即指向这个活动分支,也指向想要合并的分支
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-d5be0dfa20f8a7c57f99f2b48b521bda.gif)
 

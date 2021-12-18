@@ -15,7 +15,6 @@ categories:
 ## pom.xml
 
 ```xml
-<!-- QQ登录依赖包 -->
 <dependency>
     <groupId>net.gplatform</groupId>
     <artifactId>Sdk4J</artifactId>

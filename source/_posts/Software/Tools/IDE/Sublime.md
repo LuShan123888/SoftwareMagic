@@ -3,6 +3,7 @@ title: Sublime
 categories:
 - Software
 - Tools
+- IDE
 ---
 # Sublime
 
@@ -29,3 +30,4 @@ $ subl .../error.log
 ```
 
 3. 重启Submine Text
+

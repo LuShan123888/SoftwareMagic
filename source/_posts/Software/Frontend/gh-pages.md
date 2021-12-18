@@ -11,10 +11,12 @@ categories:
 ## 安装
 
 ```bash
-yarn add gh-pages --save-dev
+$ yarn add gh-pages --save-dev
 ```
 
-## 配置package.json
+## 配置
+
+- `./package.json`
 
 ```json
 "scripts": {
@@ -27,6 +29,6 @@ yarn add gh-pages --save-dev
 ## 使用
 
 ```bash
-yarn deploy
+$ yarn deploy
 ```
 

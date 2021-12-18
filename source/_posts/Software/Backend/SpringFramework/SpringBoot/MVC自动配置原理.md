@@ -227,13 +227,10 @@ public void addViewControllers(ViewControllerRegistry registry) {
 
 ## 全面接管Spring MVC
 
-- 全面接管即:SpringBoot对SpringMVC的自动配置不需要了,所有都是自己去配置
-- 只需在配置类中要加一个`@EnableWebMvc`
+- 在配置类中添加`@EnableWebMvc`注解，放弃SpringBoot对SpringMVC的自动配置,转为自己配置
 - **不推荐使用全面接管SpringMVC**
 
-**分析源码**
-
-`@EnableWebMvc`为什么会使自动配置失效
+**分析源码**：`@EnableWebMvc`为什么会使自动配置失效
 
 - 查看`@EnableWebMvc`发现它是导入了一个类`DelegatingWebMvcConfiguration`
 

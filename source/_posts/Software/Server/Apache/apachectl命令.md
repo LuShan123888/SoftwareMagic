@@ -11,7 +11,7 @@ categories:
 - apachectl是slackware内附Apache HTTP服务器的script文件,可供管理员控制服务器,但在其他Linux的Apache HTTP服务器不一定有这个文件
 
 ```bash
-apachectl [configtest][fullstatus][graceful][help][restart][start][status][stop]
+$ apachectl [configtest][fullstatus][graceful][help][restart][start][status][stop]
 ```
 
 **参数**:
