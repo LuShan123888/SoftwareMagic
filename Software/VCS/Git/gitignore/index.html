@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Git gitignore 匹配规则  以斜杠&#x2F;开头表示目录 以星号*通配多个字符 以问号?通配单个字符 以方括号[]包含单个字符的匹配列表 以叹号!表示不忽略(跟踪)匹配到的文件或目录  此外,git 对于 .ignore 配置文件是按行从上到下进行规则匹配的,意味着如果前面的规则匹配的范围更大,则后面的规则将不会生效 123456.a       # 忽略所有 .a 结尾的文件!lib.a">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-06T14:47:33.000Z">
-<meta property="article:modified_time" content="2021-12-06T14:47:33.000Z">
+<meta property="article:published_time" content="2021-12-18T09:08:00.000Z">
+<meta property="article:modified_time" content="2021-12-18T09:08:00.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-06 22:47" pubdate>
-        2021年12月6日 晚上
+      <time datetime="2021-12-18 17:08" pubdate>
+        2021年12月18日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      843 字
+      852 字
     </span>
   
 
@@ -225,14 +225,17 @@
 <p>此外,git 对于 .ignore 配置文件是按行从上到下进行规则匹配的,意味着如果前面的规则匹配的范围更大,则后面的规则将不会生效</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">.a       # 忽略所有 .a 结尾的文件<br>!lib.a    # 但 lib.a 除外<br>/TODO     # 仅仅忽略项目根目录下的 TODO 文件,不包括 subdir/TODO<br>build/    # 忽略 build/ 目录下的所有文件<br>doc/.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt<br>/fd1/* #忽略根目录下的 /fd1/ 目录的全部内容<br></code></pre></td></tr></table></figure>
 <h2 id="强制添加到Git">强制添加到Git</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git add -f App.class<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git add -f App.class</span><br></code></pre></td></tr></table></figure>
 <h2 id="gitignore忽略规则查看">.gitignore忽略规则查看</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git check-ignore -v App.class<br>.gitignore:3:*.class	App.class<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git check-ignore -v App.class</span><br>.gitignore:3:*.class	App.class<br></code></pre></td></tr></table></figure>
 <p>Git会告诉我们,<code>.gitignore</code>的第3行规则忽略了该文件,于是我们就可以知道应该修订哪个规则</p>
 <h2 id="使用配置文件">使用配置文件</h2>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs verilog">git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> core<span class="hljs-variable">.excludesfile</span> <span class="hljs-string">&quot;%USERPROFILE%\.gitignore&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>~/.gitconfig</code></li>
+<li>使用如下命令指定配置文件位置</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs verilog">$ git <span class="hljs-keyword">config</span> --<span class="hljs-keyword">global</span> core<span class="hljs-variable">.excludesfile</span> <span class="hljs-string">&quot;~/.gitignore&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>或者修改<code>~/.gitconfig</code></li>
 </ul>
 <figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-section">[core]</span><br>	<span class="hljs-attr">excludesfile</span> = /Users/cian/.gitignore_global<br></code></pre></td></tr></table></figure>
 <ul>
@@ -270,9 +273,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/ZooKeeper/Curator/">
+                      <a href="/Software/Frontend/Yarn/%E5%88%9D%E5%A7%8B%E5%8C%96/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ZooKeeper Curator</span>
+                        <span class="hidden-mobile">Yarn 初始化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -280,8 +283,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/EXPLAIN/">
-                        <span class="hidden-mobile">MySQL EXPLAIN</span>
+                      <a href="/Software/Tools/Zshell/OhMyZsh/">
+                        <span class="hidden-mobile">Zshell Oh My Zsh</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

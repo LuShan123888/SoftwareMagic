@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Zsh 配置  zsh 的配置主要集中在~&#x2F;.zshrc  别名设置  zsh不仅可以设置通用别名,还能针对文件类型设置对应的打开程序,比如  alias -s html&#x3D;vi,意思就是你在命令行输入 hello.html,zsh会为你自动打开vim并读取hello.html alias -s gz&#x3D;&#39;tar -xzvf&#39;,表示自动解压后缀为gz的压缩包    123456789101112131">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SoftwareMagic">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Tools/Zshell/%E9%85%8D%E7%BD%AE/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Zsh 配置  zsh 的配置主要集中在~&#x2F;.zshrc  别名设置  zsh不仅可以设置通用别名,还能针对文件类型设置对应的打开程序,比如  alias -s html&#x3D;vi,意思就是你在命令行输入 hello.html,zsh会为你自动打开vim并读取hello.html alias -s gz&#x3D;&#39;tar -xzvf&#39;,表示自动解压后缀为gz的压缩包    123456789101112131">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-18T09:36:12.000Z">
+<meta property="article:modified_time" content="2021-12-18T09:36:12.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-18 17:36" pubdate>
+        2021年12月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="Zsh-配置">Zsh 配置</h2>
+<ul>
+<li>zsh 的配置主要集中在<code>~/.zshrc</code></li>
+</ul>
+<h2 id="别名设置">别名设置</h2>
+<ul>
+<li><code>zsh</code>不仅可以设置通用别名,还能针对文件类型设置对应的打开程序,比如
+<ul>
+<li><code>alias -s html=vi</code>,意思就是你在命令行输入 <code>hello.html</code>,<code>zsh</code>会为你自动打开<code>vim</code>并读取<code>hello.html</code></li>
+<li><code>alias -s gz='tar -xzvf'</code>,表示自动解压后缀为<code>gz</code>的压缩包</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">alias</span> cls=<span class="hljs-string">&#x27;clear&#x27;</span><br><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -l&#x27;</span><br><span class="hljs-built_in">alias</span> la=<span class="hljs-string">&#x27;ls -a&#x27;</span><br><span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span><br><span class="hljs-built_in">alias</span> javac=<span class="hljs-string">&quot;javac -J-Dfile.encoding=utf8&quot;</span><br><span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&quot;grep --color=auto&quot;</span><br><span class="hljs-built_in">alias</span> -s html=vi   <span class="hljs-comment"># 在命令行直接输入后缀为 html 的文件名,会在 vim 中打开</span><br><span class="hljs-built_in">alias</span> -s rb=vi     <span class="hljs-comment"># 在命令行直接输入 ruby 文件,会在 vim 中打开</span><br><span class="hljs-built_in">alias</span> -s py=vi       <span class="hljs-comment"># 在命令行直接输入 python 文件,会用 vim 中打开,以下类似</span><br><span class="hljs-built_in">alias</span> -s js=vi<br><span class="hljs-built_in">alias</span> -s c=vi<br><span class="hljs-built_in">alias</span> -s java=vi<br><span class="hljs-built_in">alias</span> -s txt=vi<br><span class="hljs-built_in">alias</span> -s gz=<span class="hljs-string">&#x27;tar -xzvf&#x27;</span><br><span class="hljs-built_in">alias</span> -s tgz=<span class="hljs-string">&#x27;tar -xzvf&#x27;</span><br><span class="hljs-built_in">alias</span> -s zip=<span class="hljs-string">&#x27;unzip&#x27;</span><br><span class="hljs-built_in">alias</span> -s bz2=<span class="hljs-string">&#x27;tar -xjvf&#x27;</span><br></code></pre></td></tr></table></figure>
+<h2 id="主题设置">主题设置</h2>
+<ul>
+<li>oh my zsh 提供了数十种主题,相关文件在<code>~/.oh-my-zsh/themes</code>目录下</li>
+<li><code>ZSH_THEME=&quot;random&quot;</code>主题设置为随机,这样我们每打开一个窗口,都会随机在默认主题中选择一个</li>
+<li>安装powerlevel10k主题</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> --depth=1 https://github.com/romkatv/powerlevel10k.git <span class="hljs-variable">$&#123;ZSH_CUSTOM:-<span class="hljs-variable">$HOME</span>/.oh-my-zsh/custom&#125;</span>/themes/powerlevel10k<br><span class="hljs-comment"># 或</span><br>brew install powerlevel10k<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>~/.zshrc</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ZSH_THEME=<span class="hljs-string">&quot;powerlevel10k/powerlevel10k&quot;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>配置主题</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>p10k configure<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装字体</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>aur.archlinux.org<span class="hljs-regexp">/packages/</span>ttf-meslo-nerd-font-powerlevel10k/<br></code></pre></td></tr></table></figure>
+<h2 id="插件设置">插件设置</h2>
+<ul>
+<li><code>oh my zsh</code>项目提供了完善的插件体系,相关的文件在<code>~/.oh-my-zsh/plugins</code>目录下,默认提供了100多种</li>
+<li>想了解每个插件的功能,只要打开相关目录下的 <code>zsh</code> 文件</li>
+<li>插件也是在<code>~/.zshrc</code>里配置,找到<code>plugins</code>关键字,就可以加载自己的插件了,系统默认加载<code>git</code>,你可以在后面追加内容,如下:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs undefined">plugins=(git<br>docker<br>docker-compose<br>mvn<br>node<br>npm<br>yarn<br>sudo<br>zsh-syntax-highlighting<br>zsh-autosuggestions<br>zsh-completions<br>autojump)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装 <code>zsh-autosuggestions</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git://github.com/zsh-users/zsh-autosuggestions  <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装 <code>zsh-syntax-highlighting</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装<code>autojump</code></li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">https://github.com/wting/autojump<br></code></pre></td></tr></table></figure>
+<ul>
+<li>安装<code>zsh-completions</code></li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/zsh-users/</span>zsh-completions  <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span><span class="hljs-regexp">/plugins/</span>zsh-completions<br></code></pre></td></tr></table></figure>
+<h2 id="vicmd">vicmd</h2>
+<ul>
+<li>在shell中使用vim操作</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> vicmd</span><br>bindkey -v<br>bindkey -M vicmd &quot;i&quot; vi-insert<br>bindkey -M vicmd &quot;I&quot; vi-insert-bol<br>bindkey -M vicmd &quot;h&quot; vi-backward-char<br>bindkey -M vicmd &quot;l&quot; vi-forward-char<br>bindkey -M vicmd &quot;H&quot; vi-beginning-of-line<br>bindkey -M vicmd &quot;L&quot; vi-end-of-line<br>bindkey -M vicmd &quot;j&quot; down-line-or-history<br>bindkey -M vicmd &quot;k&quot; up-line-or-history<br>bindkey -M vicmd &quot;u&quot; undo<br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-built_in">bindkey</span> -M vicmd <span class="hljs-string">&quot;-&quot;</span> vi-rev-repeat-search</span><br>bindkey -M vicmd &quot;=&quot; vi-repeat-search<br><br>function zle-keymap-select &#123;<br>	if [[ $&#123;KEYMAP&#125; == vicmd ]] || [[ $1 = &#x27;block&#x27; ]]; then<br>		echo -ne &#x27;\e[1 q&#x27;<br>	elif [[ $&#123;KEYMAP&#125; == main ]] || [[ $&#123;KEYMAP&#125; == viins ]] || [[ $&#123;KEYMAP&#125; = &#x27;&#x27; ]] || [[ $1 = &#x27;beam&#x27; ]]; then<br>		echo -ne &#x27;\e[5 q&#x27;<br>  fi<br>&#125;<br>zle -N zle-keymap-select<br></code></pre></td></tr></table></figure>
+<h2 id="代理配置">代理配置</h2>
+<h2 id="手动配置">手动配置</h2>
+<ul>
+<li>在Terminal中的输入</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890<br></code></pre></td></tr></table></figure>
+<h2 id="自动配置">自动配置</h2>
+<ul>
+<li>需要将环境变量写入终端的配置当中</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">开启代理</span><br>function proxy_on()&#123;<br>  export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890<br>  echo -e &quot;proxy on&quot;;<br>&#125;<br><span class="hljs-meta">#</span><span class="bash"> 关闭代理</span><br>function proxy_off()&#123;<br>  unset  https_proxy http_proxy all_proxy;<br>  echo -e &quot;proxy off&quot;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="检查代理">检查代理</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl ip.gs<br>curl ipinfo.io<br>wget https://www.dropbox.com -v -O /dev/null<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/">Tools</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/Zshell/">Zshell</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/VCS/SVN/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SVN 初始化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">Elasticsearch 初始化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Vim 正常模式 (Normal-mode) 移动光标 如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能  k:上移 j:下移 h:左移 l:右移  上面这４个键将光标位置每次移动一行或一个字符 ,Vim还提供稍大范围移动光标的命令  ctrl+f:在文件中前移一页(相当于 page down) ctrl+b:在文件中后移一页(相当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 正常模式 (Normal-mode)">
+<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Tools/Vim/%E6%AD%A3%E5%B8%B8%E6%A8%A1%E5%BC%8F/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Vim 正常模式 (Normal-mode) 移动光标 如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能  k:上移 j:下移 h:左移 l:右移  上面这４个键将光标位置每次移动一行或一个字符 ,Vim还提供稍大范围移动光标的命令  ctrl+f:在文件中前移一页(相当于 page down) ctrl+b:在文件中后移一页(相当">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-SGCZTOFPLiKJBbc.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-1nPx4GvcuQzIold.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-J7kTn8DXWozqjfs.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-gKZu1hJlUxb5trS.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-EKfyOGoMxiVXjes.png">
+<meta property="article:published_time" content="2021-12-18T08:34:22.000Z">
+<meta property="article:modified_time" content="2021-12-18T08:34:22.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-SGCZTOFPLiKJBbc.png">
+  
+  <title>Vim 正常模式 (Normal-mode) - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vim 正常模式 (Normal-mode)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-18 16:34" pubdate>
+        2021年12月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vim 正常模式 (Normal-mode)</h1>
+            
+            <div class="markdown-body">
+              <h1>Vim 正常模式 (Normal-mode)</h1>
+<h2 id="移动光标">移动光标</h2>
+<p>如果键盘上有上,下,左,右箭头的导航键,就由这些键来完成光标的移动,另外,可以用下面的键完成同样的 按字符移动功能</p>
+<ul>
+<li>k:上移</li>
+<li>j:下移</li>
+<li>h:左移</li>
+<li>l:右移</li>
+</ul>
+<p>上面这４个键将光标位置每次移动一行或一个字符 ,Vim还提供稍大范围移动光标的命令</p>
+<ul>
+<li>ctrl+f:在文件中前移一页(相当于 page down)</li>
+<li>ctrl+b:在文件中后移一页(相当于 page up)</li>
+</ul>
+<h3 id="更大范围的移动">更大范围的移动</h3>
+<ul>
+<li>*:当光标停留在一个单词上,* 键会在文件内搜索该单词,并跳转到下一处</li>
+<li>#:当光标停留在一个单词上,# 在文件内搜索该单词,并跳转到上一处</li>
+<li>(/):移动到 前/后 句 的开始</li>
+<li>{/}:跳转到 当前/下一个 段落 的开始</li>
+<li>g_:到本行最后一个不是 blank 字符的位置</li>
+<li>fa:到下一个为 a   的字符处,你也可以fs到下一个为s的字符</li>
+<li>t,:到逗号前的第一个字符,逗号可以变成其它字符</li>
+<li>3fa:在当前行查找第三个出现的a</li>
+<li>F/T:和 f 和 t 一样,只不过是相反方向</li>
+<li>gg:将光标定位到文件第一行起始位置</li>
+<li>G:将光标定位到文件最后一行起始位置</li>
+<li>NG或Ngg:将光标定位到第 N 行的起始位置</li>
+</ul>
+<p>在屏幕中找到需要的一页时,可以用下面的命令快速移动光标</p>
+<ul>
+<li>H:将光标移到屏幕上的起始行(或最上行)</li>
+<li>M:将光标移到屏幕中间</li>
+<li>L:将光标移到屏幕最后一行</li>
+</ul>
+<p>同样需要注意字母的大小写,H和L命令还可以加数字,如2H表示将光标移到屏幕的第２行,3L表示将光标移到屏幕的倒数第3行</p>
+<h3 id="行内移动">行内移动</h3>
+<p>当将光标移到所要的行时,行内移动,光标可以用下面的命令来实现</p>
+<ul>
+<li>w:右移光标到下一个字的开头</li>
+<li>e:右移光标到一个字的末尾</li>
+<li>b:左移光标到前一个字的开头</li>
+<li>0:数字０,左移光标到本行的开始</li>
+<li>$:右移光标,到本行的末尾</li>
+<li>^:移动光标,到本行的第一个非空字符:</li>
+</ul>
+<h3 id="移动历史光标位置">移动历史光标位置:</h3>
+<ul>
+<li>
+<p>Control+o:回到之前光标的位置</p>
+</li>
+<li>
+<p>Control+i:回到之后光标的位置</p>
+</li>
+</ul>
+<h2 id="搜索匹配">搜索匹配</h2>
+<ul>
+<li>和许多先进的编辑器一样,Vim提供了强大的字符串搜索功能,要查找文件中指定字或短语出现的位置,可以用Vim直接进行搜索,而不必以手工方式进行</li>
+<li><strong>搜索方法</strong>
+<ul>
+<li>键入字符/,后面跟以要搜索的字符串,然后按回车键</li>
+</ul>
+</li>
+<li>编辑程序执行正向搜索(即朝文件末尾方向),并在找到指定字符串后,将光标停到该字符串的开头,键入n命令可以继续执行搜索,找出这一字符串下次出现的位置,用字符?取代/,可以实现反向搜索(朝文件开头方向),例如
+<ul>
+<li>/str1正向搜索字符串 str1</li>
+<li>n继续搜索,找出 str1 字符串下次出现的位置</li>
+<li>N继续搜索,找出 str1 字符串上一次出现的位置</li>
+<li>?str2反向搜索字符串 str2</li>
+</ul>
+</li>
+<li>无论搜索方向如何,当到达文件末尾或开头时,搜索工作会循环到文件的另一端并继续执行</li>
+<li>Vim中执行搜索匹配最强大的地方是结合正则表达式 来搜索,后续将会介绍</li>
+</ul>
+<h2 id="替换和删除">替换和删除</h2>
+<p>Vim常规的删除命令是 d, x (前者删除行,后者删除字符 ),结合Vim的其他特性可以实现基础的删除功能,将光标定位于文件内指定位置后,可以用其他字符来替换光标所指向的字符,或从当前光标位置删除一个或多个字符或一行,多行,例如</p>
+<ul>
+<li>rc:用 c 替换光标所指向的当前字符</li>
+<li>nrc:用 c 替换光标所指向的前 n 个字符</li>
+<li>5rA:用 A 替换光标所指向的前 5 个字符</li>
+<li>x:删除光标所指向的当前字符</li>
+<li>nx:删除光标所指向的前 n 个字符</li>
+<li>3x:删除光标所指向的前 3 个字符</li>
+<li>dw:删除光标右侧的字</li>
+<li>ndw:删除光标右侧的 n 个字</li>
+<li>3dw:删除光标右侧的 3 个字</li>
+<li>db:删除光标左侧的字</li>
+<li>ndb:删除光标左侧的 n 个字</li>
+<li>5db:删除光标左侧的 5 个字</li>
+<li>dd:删除光标所在行,并去除空隙</li>
+<li>ndd:删除(剪切) n 行内容,并去除空隙</li>
+<li>3dd:删除(剪切) 3 行内容,并去除空隙</li>
+</ul>
+<p>其他常用的删除命令有</p>
+<ul>
+<li>d$:从当前光标起删除字符直到行的结束</li>
+<li>d0:从当前光标起删除字符直到行的开始</li>
+<li>J:删除本行的回车符(CR),并和下一行合并</li>
+</ul>
+<p>Vim常规的替换命令有c和s,结合Vim的其他特性可以实现基础的替换功能,不过替换命令执行以后,通常会由编辑模式进入插入模式</p>
+<ul>
+<li>s:用输入的正文替换光标所指向的字符</li>
+<li>S:删除当前行,并进入插入模式</li>
+<li>ns:用输入的正文替换光标右侧 n 个字符</li>
+<li>nS:删除当前行在内的 n 行,并进入插入模式</li>
+<li>cw:用输入的正文替换光标右侧的字</li>
+<li>cW:用输入的正文替换从光标到行尾的所有字符(同 c$ )</li>
+<li>ncw:用输入的正文替换光标右侧的 n 个字</li>
+<li>cb:用输入的正文替换光标左侧的字</li>
+<li>ncb:用输入的正文替换光标左侧的 n 个字</li>
+<li>cd:用输入的正文替换光标的所在行</li>
+<li>ncd:用输入的正文替换光标下面的 n 行</li>
+<li>c$:用输入的正文替换从光标开始到本行末尾的所有字符</li>
+<li>c0:用输入的正文替换从本行开头到光标的所有字符</li>
+</ul>
+<h3 id="删除单个单词">删除单个单词</h3>
+<p>要删除最后一个单词,有以下几种选择:</p>
+<ul>
+<li>
+<p>先用’b’命令把光标先移动到”l”上,然后执行dw删除整个单词.按键3个</p>
+</li>
+<li>
+<p>执行反向删除命令’db’(会剩余最后的”e”字符),再执行’x’删除单个字符.按键3个</p>
+</li>
+<li>
+<p>直接执行daw,删除单词并会删除一个空格,光标停留在下一个单词末尾上.按键3个</p>
+</li>
+</ul>
+<h2 id="复制粘贴">复制粘贴</h2>
+<p>从正文中删除的内容(如字符,字或行)并没有真正丢失,而是被剪切并复制到了一个内存缓冲区中,用户可将其粘贴到正文中的指定位置,完成这一操作的命令是</p>
+<ul>
+<li>p:小写字母p,将缓冲区的内容粘贴到光标的后面</li>
+<li>P:大写字母P,将缓冲区的内容粘贴到光标的前面</li>
+</ul>
+<p>如果缓冲区的内容是字符或字,直接粘贴在光标的前面或后面,如果缓冲区的内容为整行正文,执行上述粘贴命令将会粘贴在当前光标所在行的上一行或下一行</p>
+<p>注意上述两个命令中字母的大小写,Vim编辑器经常以一对大,小写字母(如p和P)来提供一对相似的功能,通常,小写命令在光标的后面进行操作,大写命令在光标的前面进行操作</p>
+<p>有时需要复制一段正文到新位置,同时保留原有位置的内容,这种情况下,首先应当把指定内容复制(而不是剪切)到内存缓冲区,完成这一操作的命令是</p>
+<ul>
+<li>yy:复制当前行到内存缓冲区</li>
+<li>nyy:复制 n 行内容到内存缓冲区</li>
+<li>5yy:复制 5 行内容到内存缓冲区</li>
+<li>&quot;+y:复制 1 行到操作系统的粘贴板</li>
+<li>&quot;+nyy:复制 n 行到操作系统的粘贴板</li>
+</ul>
+<h3 id="寄存器">寄存器</h3>
+<ul>
+<li>复制:<code>&quot;ayy</code></li>
+<li>粘贴:<code>&quot;ap</code></li>
+<li>添加:<code>&quot;Ayy</code></li>
+</ul>
+<h2 id="撤销和重复">撤销和重复</h2>
+<p>在编辑文档的过程中,为消除某个错误的编辑命令造成的后果,可以用撤消命令,另外,如果用户希望在新的光标位置重复前面执行过的编辑命令,可用重复命令</p>
+<ul>
+<li>u:撤消前一条命令的结果</li>
+<li>ctrl+r:撤销被撤销的命令</li>
+<li>.:重复最后一条修改正文的命令</li>
+</ul>
+<h2 id="自增与自减">自增与自减</h2>
+<h4 id="自增1">自增1</h4>
+<p><code>Control+A</code></p>
+<h4 id="自减1">自减1</h4>
+<p><code>Control+S</code></p>
+<h2 id="Text-Object">Text-Object</h2>
+<h3 id="文本对象的类型">文本对象的类型</h3>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cos">iw .<span class="hljs-built_in">..inner</span> word<br>aw .<span class="hljs-built_in">..a</span> word<br>iW .<span class="hljs-built_in">..inner</span> WORD<br>aW .<span class="hljs-built_in">..a</span> WORD<br>is .<span class="hljs-built_in">..inner</span> sentence<br><span class="hljs-keyword">as</span> .<span class="hljs-built_in">..a</span> sentence<br>ip .<span class="hljs-built_in">..inner</span> paragraph<br>ap .<span class="hljs-built_in">..a</span> paragraph<br>it .<span class="hljs-built_in">..inner</span> tag<br>at .<span class="hljs-built_in">..a</span> tag<br>i( or i) .<span class="hljs-built_in">..inner</span> block<br>a( or a) .<span class="hljs-built_in">..a</span> block<br>i&lt; or i&gt; .<span class="hljs-built_in">..inner</span> block<br>a&lt; or a&gt; .<span class="hljs-built_in">..a</span> block<br>i&#123; or i&#125; .<span class="hljs-built_in">..inner</span> block<br>a&#123; or a&#125; .<span class="hljs-built_in">..a</span> block<br>i[ or i] .<span class="hljs-built_in">..inner</span> block<br>a[ or a] .<span class="hljs-built_in">..a</span> block<br>i<span class="hljs-string">&quot; ...inner block</span><br><span class="hljs-string">a&quot;</span> .<span class="hljs-built_in">..a</span> block<br>i` .<span class="hljs-built_in">..inner</span> block<br>a` .<span class="hljs-built_in">..a</span> block<br></code></pre></td></tr></table></figure>
+<h3 id="文本对象的作用范围">文本对象的作用范围</h3>
+<p>以下实例中的红色 [ ] 表示作用范围:</p>
+<p><code>iw</code>表示<strong>inner word</strong>,如果键入<code>viw</code>命令,那么首先<code>v</code>将进入选择模式,然后<code>iw</code>将选中当前单词</p>
+<p><code>aw</code>表示<strong>a word</strong>,它不但会选中当前单词,还会包含当前单词之后的空格</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs inform7">iw	This <span class="hljs-keyword">is</span> a <span class="hljs-comment">[test]</span> sentence.<br>aw	This <span class="hljs-keyword">is</span> a <span class="hljs-comment">[test ]</span>sentence.<br>iW	This <span class="hljs-keyword">is</span> a <span class="hljs-comment">[...test...]</span> sentence.<br>aW	This <span class="hljs-keyword">is</span> a <span class="hljs-comment">[...test... ]</span>sentence.<br><span class="hljs-keyword">is</span>	...sentence. <span class="hljs-comment">[This is a sentence.]</span> This...<br>as	...sentence. <span class="hljs-comment">[This is a sentence. ]</span>This...<br>ip	End <span class="hljs-keyword">of</span> previous paragraph. <span class="hljs-comment">[This is a paragraph. It has two sentences.]</span><br>							The next.<br>ap	End <span class="hljs-keyword">of</span> previous paragraph. <span class="hljs-comment">[This is a paragraph. It has two sentences.</span><br><span class="hljs-comment">								]</span>The next.<br>i( or i)	1 * (<span class="hljs-comment">[2 + 3]</span>)<br>a( or a)	1 * <span class="hljs-comment">[(2 + 3)]</span><br>i&lt; or i&gt;	The &lt;<span class="hljs-comment">[tag]</span>&gt;<br>a&lt; or i&gt;	The <span class="hljs-comment">[&lt;tag&gt;]</span><br>i&#123; or i&#125;	some &#123;<span class="hljs-comment">[ code block ]</span>&#125;<br>a&#123; or a&#125;	some <span class="hljs-comment">[&#123; code block &#125;]</span><br>i<span class="hljs-comment">[ or i]</span>	some <span class="hljs-comment">[<span class="hljs-comment">[ code block ]</span>]</span><br>a<span class="hljs-comment">[ or a]</span>	some <span class="hljs-comment">[<span class="hljs-comment">[ code block ]</span>]</span><br>i<span class="hljs-string">&quot;	The &quot;</span><span class="hljs-comment">[best]</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">a&quot;</span>	The<span class="hljs-comment">[ &quot;best”]</span><br>i`	The `<span class="hljs-comment">[best]</span>`<br>a`	The<span class="hljs-comment">[ `best`]</span><br></code></pre></td></tr></table></figure>
+<h3 id="文本对象的应用实例">文本对象的应用实例</h3>
+<p>使用<code>ci)</code>命令,可以删除括号内的所有内容,但保留括号本身,而<code>ca)</code>命令,则可以删除括号内的所有内容,以及括号本身</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-SGCZTOFPLiKJBbc.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在某个开括号上,点击<code>%</code>键,光标将可以自动移动到相对应的闭括号上,通过与编辑命令组合,<code>c%</code>可以实现与<code>ca)</code>相同的功能,使用<code>%</code>命令,必须将光标放在括号之上;而使用<code>a)</code>命令,则光标可以在括号之上或括号内的任何位置,而且<code>%</code>命令,也是无法实现用<code>i)</code>命令效果的</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-1nPx4GvcuQzIold.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用<code>cit</code>命令,你甚至不用将光标移动到Tag之内,就可以快速修改其中的内容</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-J7kTn8DXWozqjfs.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用<code>ci&quot;</code>命令,可以快速修改当前行内第一个双引号其中的内容</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-gKZu1hJlUxb5trS.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用<code>ci'</code>命令,可以快速修改当前行内第一个单引号其中的内容</p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-EKfyOGoMxiVXjes.png" srcset="/img/loading.gif" lazyload alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/">Tools</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Tools/Vim/">Vim</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/add/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git add</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Tools/Vim/%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">Vim 可视模式 (Visual-mode)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

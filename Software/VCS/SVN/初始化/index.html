@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SVN 初始化 安装 1yum install -y subversion 查看版本 1svn --version 创建版本库 创建版本库目录 1mkdir -p &#x2F;var&#x2F;svn&#x2F;repository 在版本库目录下创建具体项目目录 1mkdir helloworld 初始化版本库 1svnadmin create &#x2F;var&#x2F;svn&#x2F;repository&#x2F;helloworld  版本库目录下会新">
+  <meta name="description" content="SVN 初始化 安装 1$ yum install -y subversion 查看版本 1$ svn --version 创建版本库 创建版本库目录 1mkdir -p &#x2F;var&#x2F;svn&#x2F;repository 在版本库目录下创建具体项目目录 1mkdir helloworld 初始化版本库 1svnadmin create &#x2F;var&#x2F;svn&#x2F;repository&#x2F;helloworld  版本库目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVN 初始化">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/VCS/SVN/%E5%88%9D%E5%A7%8B%E5%8C%96/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SVN 初始化 安装 1yum install -y subversion 查看版本 1svn --version 创建版本库 创建版本库目录 1mkdir -p &#x2F;var&#x2F;svn&#x2F;repository 在版本库目录下创建具体项目目录 1mkdir helloworld 初始化版本库 1svnadmin create &#x2F;var&#x2F;svn&#x2F;repository&#x2F;helloworld  版本库目录下会新">
+<meta property="og:description" content="SVN 初始化 安装 1$ yum install -y subversion 查看版本 1$ svn --version 创建版本库 创建版本库目录 1mkdir -p &#x2F;var&#x2F;svn&#x2F;repository 在版本库目录下创建具体项目目录 1mkdir helloworld 初始化版本库 1svnadmin create &#x2F;var&#x2F;svn&#x2F;repository&#x2F;helloworld  版本库目">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-20T15:36:14.000Z">
-<meta property="article:modified_time" content="2021-06-20T15:36:14.000Z">
+<meta property="article:published_time" content="2021-12-18T09:37:55.000Z">
+<meta property="article:modified_time" content="2021-12-18T09:37:55.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-20 23:36" pubdate>
-        2021年6月20日 晚上
+      <time datetime="2021-12-18 17:37" pubdate>
+        2021年12月18日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      700 字
+      460 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      1 分钟
     </span>
   
 
@@ -215,9 +215,9 @@
             <div class="markdown-body">
               <h1>SVN 初始化</h1>
 <h2 id="安装">安装</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y subversion<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> yum install -y subversion</span><br></code></pre></td></tr></table></figure>
 <p><strong>查看版本</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">svn --version<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> svn --version</span><br></code></pre></td></tr></table></figure>
 <h2 id="创建版本库">创建版本库</h2>
 <p><strong>创建版本库目录</strong></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -p <span class="hljs-regexp">/var/</span>svn/repository<br></code></pre></td></tr></table></figure>
@@ -233,35 +233,6 @@
 <li><code>hooks</code>:放置hook脚本文件的目录</li>
 <li><code>locks</code>:用来放置subversion见艰苦锁定数据的目录,用来追踪存取文件库的客户端</li>
 </ul>
-</li>
-</ul>
-<h2 id="配置SVNserve服务">配置SVNserve服务</h2>
-<h3 id="修改服务配置">修改服务配置</h3>
-<ul>
-<li>将创建的版本库交给SVN服务管理</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/sysconfig/svnserve<br></code></pre></td></tr></table></figure>
-<ul>
-<li>修改启动选项</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">OPTIONS</span>=<span class="hljs-string">&quot;-r /var/svn/repository&quot;</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>
-<p><strong>-r</strong>:版本库的目录</p>
-<ul>
-<li>
-<p>由于<code>-r</code>配置方式的不一样,SVN启动就可以有两种不同的访问方式</p>
-</li>
-<li>
-<p>直接指定到版本库(称之为单库svnserve方式)</p>
-</li>
-<li>
-<p>指定到版本库的上级目录(称之为多库svnserve方式)</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>–listen-port</strong>:指定SVN监听端口,不加此参数,SVN默认监听3690</p>
 </li>
 </ul>
 <h3 id="查看SVN服务">查看SVN服务</h3>
@@ -303,9 +274,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/VCS/SVN/%E7%AE%80%E4%BB%8B/">
+                      <a href="/Software/VCS/SVN/%E9%85%8D%E7%BD%AE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SVN 简介</span>
+                        <span class="hidden-mobile">SVN 配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -313,8 +284,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Shell/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">
-                        <span class="hidden-mobile">Shell 算术运算</span>
+                      <a href="/Software/Tools/Zshell/%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

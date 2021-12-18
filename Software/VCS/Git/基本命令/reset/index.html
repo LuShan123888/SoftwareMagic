@@ -16,21 +16,18 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Git reset  git reset能让让我们可以控制 HEAD 应该指向的位置  软重置 1git reset --soft HEAD~[~...]   移动HEAD的指向,将其指向上一个快照   不修改暂存区域和工作目录   软重置会将 HEAD 移至指定的提交(或与 HEAD 相比的提交的索引),而不会移除该提交之后加入的修改! 假设不想保留添加了一个 style.css 文件的提交 9">
+  <meta name="description" content="Git reset  重置当前分支的HEAD为指定commit  1$ git reset [commit]  --soft:不修改暂存区域和工作目录 --hard:重置暂存区与工作区,与上一次commit保持一致 --mixed:重置暂存区,但工作区不变  重置暂存区的指定文件,与上一次commit保持一致,但工作区不变 1$ git reset [file]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git reset">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reset/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Git reset  git reset能让让我们可以控制 HEAD 应该指向的位置  软重置 1git reset --soft HEAD~[~...]   移动HEAD的指向,将其指向上一个快照   不修改暂存区域和工作目录   软重置会将 HEAD 移至指定的提交(或与 HEAD 相比的提交的索引),而不会移除该提交之后加入的修改! 假设不想保留添加了一个 style.css 文件的提交 9">
+<meta property="og:description" content="Git reset  重置当前分支的HEAD为指定commit  1$ git reset [commit]  --soft:不修改暂存区域和工作目录 --hard:重置暂存区与工作区,与上一次commit保持一致 --mixed:重置暂存区,但工作区不变  重置暂存区的指定文件,与上一次commit保持一致,但工作区不变 1$ git reset [file]">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-BZY9n3d4hTvziXu.gif">
-<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-kzpT9Smq8v3QZRb.gif">
-<meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2021-08-30T13:26:39.000Z">
+<meta property="article:published_time" content="2021-12-18T11:28:20.000Z">
+<meta property="article:modified_time" content="2021-12-18T11:28:20.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-BZY9n3d4hTvziXu.gif">
   
   <title>Git reset - SoftwareMagic</title>
 
@@ -164,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-30 21:26" pubdate>
-        2021年8月30日 晚上
+      <time datetime="2021-12-18 19:28" pubdate>
+        2021年12月18日 晚上
       </time>
     </span>
   
@@ -175,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      739 字
+      164 字
     </span>
   
 
@@ -184,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      1 分钟
     </span>
   
 
@@ -218,51 +215,16 @@
             <div class="markdown-body">
               <h1>Git reset</h1>
 <ul>
-<li>git reset能让让我们可以控制 HEAD 应该指向的位置</li>
+<li>重置当前分支的HEAD为指定commit</li>
 </ul>
-<h2 id="软重置">软重置</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reset --soft HEAD~[~...]<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reset [commit]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>
-<p>移动HEAD的指向,将其指向上一个快照</p>
-</li>
-<li>
-<p>不修改暂存区域和工作目录</p>
-</li>
+<li><code>--soft</code>:不修改暂存区域和工作目录</li>
+<li><code>--hard</code>:重置暂存区与工作区,与上一次commit保持一致</li>
+<li><code>--mixed</code>:重置暂存区,但工作区不变</li>
 </ul>
-<p>软重置会将 HEAD 移至指定的提交(或与 HEAD 相比的提交的索引),而不会移除该提交之后加入的修改!</p>
-<p>假设不想保留添加了一个 style.css 文件的提交 9e78i,而且也不想保留添加了一个 index.js 文件的提交 035cc,但是,又想要保留新添加的 style.css 和 index.js 文件!这是软重置的一个完美用例</p>
-<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-BZY9n3d4hTvziXu.gif" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>输入 git status 后,会看到仍然可以访问在之前的提交上做过的所有修改,这很好,这意味着可以修复这些文件的内容,之后再重新提交它们!</p>
-<h2 id="硬重置">硬重置</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reset --hard HEAD~[~...]<br></code></pre></td></tr></table></figure>
-<ul>
-<li>移动过HEAD的指向,将其指向上一个快照</li>
-<li>将HEAD移动后指向的快照回滚到暂存区域</li>
-<li>将暂存区域的文件还原到工作目录</li>
-</ul>
-<p>有时候并不想保留特定提交引入的修改,不同于软重置,应该再也无需访问它们,Git 应该直接将整体状态直接重置到特定提交之前的状态:这甚至包括在工作目录中和暂存文件上的修改</p>
-<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-kzpT9Smq8v3QZRb.gif" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>Git 丢弃了 9e78i 和 035cc 引入的修改,并将状态重置到了 ec5be 的状态</p>
-<h2 id="–mixed">–mixed</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reset --mixed HEAD~[~...]<br></code></pre></td></tr></table></figure>
-<ul>
-<li>移动HEAD的指向,将其指向上一个快照</li>
-<li>将HEAD移动后指向的快照回滚到暂存区域</li>
-<li>可在HEAD~后加数字选择返回指定数目的快照</li>
-</ul>
-<h2 id="根据版本快照ID号reset">根据版本快照ID号reset</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reset 版本快照的ID号(前5位即可)<br></code></pre></td></tr></table></figure>
-<ul>
-<li>回滚指定快照</li>
-<li>不仅可以往回滚,还可以往前滚</li>
-</ul>
-<h2 id="reset文件">reset文件</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git reset HEAD~[~...]/版本快照的ID号(前5位即可) 文件名/路径<br></code></pre></td></tr></table></figure>
-<ul>
-<li>回滚指定文件</li>
-<li>只有mixed</li>
-</ul>
+<p><strong>重置暂存区的指定文件,与上一次commit保持一致,但工作区不变</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> git reset [file]</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -296,9 +258,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/rebase/">
+                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/fetch/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git rebase</span>
+                        <span class="hidden-mobile">Git Fetch</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -306,8 +268,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reflog/">
-                        <span class="hidden-mobile">Git reflog</span>
+                      <a href="/Software/VCS/Git/HEAD/">
+                        <span class="hidden-mobile">Git HEAD</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

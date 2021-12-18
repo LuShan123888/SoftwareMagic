@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Mybatis 配置文件  mybatis-config.xml 系统核心配置文件 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息  configuration(配置) properties(属性) settings(设置) typeAliases(类型别名) typeHandlers(类型处理器) objectFactory(对象工厂) plugins(插件)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-02T13:57:05.000Z">
-<meta property="article:modified_time" content="2021-08-02T13:57:05.000Z">
+<meta property="article:published_time" content="2021-12-16T15:38:58.000Z">
+<meta property="article:modified_time" content="2021-12-16T15:38:58.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-02 21:57" pubdate>
-        2021年8月2日 晚上
+      <time datetime="2021-12-16 23:38" pubdate>
+        2021年12月16日 晚上
       </time>
     </span>
   
@@ -321,14 +321,14 @@
 <ul>
 <li>类型别名是为 Java 类型设置一个短的名字,它只和 XML 配置有关, 存在的意义仅在于用来减少类完全限定名的冗余</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--配置别名,注意顺序--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">typeAlias</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.pojo.User&quot;</span> <span class="hljs-attr">alias</span>=<span class="hljs-string">&quot;User&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--配置别名,注意顺序--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">typeAlias</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">alias</span>=<span class="hljs-string">&quot;User&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>当这样配置时, <code>User</code>可以用在任何使用<code>com.example.pojo.User</code>的地方</li>
+<li>当这样配置时, <code>User</code>可以用在任何使用<code>com.example.entity.User</code>的地方</li>
 <li>也可以指定一个包名, MyBatis 会在包名下面搜索需要的 Java Bean, 比如:</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.pojo&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.entity&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>每一个在包 <code>com.example.pojo</code> 中的 Java Bean, 在没有注解的情况下, 会使用 Bean 的首字母小写的非限定类名来作为它的别名</li>
+<li>每一个在包 <code>com.example.entity</code> 中的 Java Bean, 在没有注解的情况下, 会使用 Bean 的首字母小写的非限定类名来作为它的别名</li>
 <li>若有注解, 则别名为其注解值,见下面的例子:</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Alias(&quot;user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -379,9 +379,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Mybatis/%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84/">
+                      <a href="/Software/Backend/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mybatis 结果映射</span>
+                        <span class="hidden-mobile">Dubbo 配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -389,8 +389,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Mybatis/MybatisPlus/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
-                        <span class="hidden-mobile">Mybatis Plus 代码生成器</span>
+                      <a href="/Software/Backend/Mybatis/CRUD/">
+                        <span class="hidden-mobile">Mybatis CRUD操作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
