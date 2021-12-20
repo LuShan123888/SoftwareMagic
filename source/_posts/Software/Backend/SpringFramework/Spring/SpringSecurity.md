@@ -347,31 +347,37 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) //开启权限注解,默认是关闭的
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     /**
      * 自定义登录成功处理器
      */
     @Resource
     private UserLoginSuccessHandler userLoginSuccessHandler;
+
     /**
      * 自定义登录失败处理器
      */
     @Resource
     private UserLoginFailureHandler userLoginFailureHandler;
+
     /**
      * 自定义注销成功处理器
      */
     @Resource
     private UserLogoutSuccessHandler userLogoutSuccessHandler;
+
     /**
      * 自定义暂无权限处理器
      */
     @Resource
     private UserAuthAccessDeniedHandler userAuthAccessDeniedHandler;
+
     /**
      * 自定义未登录的处理器
      */
     @Resource
     private UserAuthenticationEntryPointHandler userAuthenticationEntryPointHandler;
+
     /**
      * 自定义登录逻辑验证器
      */
@@ -406,43 +412,60 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 跨域配置
+     */
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        // 如果所有的属性不全部配置，一定要执行该方法
+        configuration.applyPermitDefaultValues();
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    /**
      * 配置security的控制逻辑
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            // 不进行权限验证的请求或资源(从配置文件中读取)
-            .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()
-            // 其他的需要登陆后才能访问
-            .anyRequest().authenticated()
-            .and()
-            // 配置未登录自定义处理类
-            .httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
-            .and()
-            .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPointHandler)
-            .and()
-            // 配置登录地址
-            .formLogin()
-            .loginProcessingUrl("/user/login")
-            // 配置登录成功自定义处理类
-            .successHandler(userLoginSuccessHandler)
-            // 配置登录失败自定义处理类
-            .failureHandler(userLoginFailureHandler)
-            .and()
-            // 配置登出地址
-            .logout()
-            .logoutUrl("/user/logout")
-            // 配置用户登出自定义处理类
-            .logoutSuccessHandler(userLogoutSuccessHandler)
-            .and()
-            // 配置没有权限自定义处理类
-            .exceptionHandling().accessDeniedHandler(userAuthAccessDeniedHandler)
-            .and()
-            // 开启跨域
-            .cors()
-            .and()
-            // 取消跨站请求伪造防护
-            .csrf().disable();
+                // 不进行权限验证的请求或资源(从配置文件中读取)
+                .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()
+                // 其他的需要登陆后才能访问
+                .anyRequest().authenticated()
+                .and()
+                // 配置未登录自定义处理类
+                .httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+                .and()
+                .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+                .and()
+                // 配置登录地址
+                .formLogin()
+                .loginProcessingUrl("/account/signIn")
+                // 配置登录成功自定义处理类
+                .successHandler(userLoginSuccessHandler)
+                // 配置登录失败自定义处理类
+                .failureHandler(userLoginFailureHandler)
+                .and()
+                // 配置登出地址
+                .logout()
+                .logoutUrl("/account/signOut")
+                // 配置用户登出自定义处理类
+                .logoutSuccessHandler(userLogoutSuccessHandler)
+                .and()
+                // 配置没有权限自定义处理类
+                .exceptionHandling().accessDeniedHandler(userAuthAccessDeniedHandler)
+                .and()
+                // 开启跨域
+                .cors()
+                .and()
+                // 取消跨站请求伪造防护
+                .csrf().disable();
         // 基于Token不需要session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // 禁用缓存
@@ -450,8 +473,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 添加JWT过滤器
         http.addFilter(new JWTAuthenticationTokenFilter(authenticationManager()));
     }
-}
 
+}
 ```
 
 ## 问题解决
