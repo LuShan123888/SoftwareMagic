@@ -1,12 +1,12 @@
 ---
-title: git stash
+title: Git stash
 categories:
 - Software
 - VCS
 - Git
 - 基本命令
 ---
-# git stash
+# Git stash
 
 - 保存当前工作进度,会把暂存区和工作区的改动保存起来
 
@@ -23,7 +23,7 @@ $ git stash save 'message' #添加一些注释
 $ git stash list
 ```
 
-## pop
+## pop 
 
 - 通过git stash pop命令恢复进度后,会删除当前进度
 

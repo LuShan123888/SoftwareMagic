@@ -220,6 +220,30 @@ String str2 = "bb"; //检查字符串常量池的
 
 - `Class.forName`方法的作用是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动
 
+### 反射
+
+#### 获得一个类的类对象
+
+1. 类名.class,例如:String.class
+2. 对象.getClass(),例如:"hello".getClass()
+3. Class.forName(),例如:Class.forName("java.lang.String")
+
+#### 通过反射创建对象
+
+1. 通过类对象调用newInstance()方法,例如:`String.class.newInstance()`
+2. 通过类对象的getConstructor()或getDeclaredConstructor()方法获得构造器(Constructor)对象并调用其newInstance()方法创建对象,例如:`String.class.getConstructor(String.class).newInstance("Hello");`
+
+#### 通过反射获取和设置对象私有字段的值
+
+1. 通过类对象的`getDeclaredField()`方法字段(Field)对象
+2. 再通过字段对象的`setAccessible(true)`将其设置为可以访问
+3. 通过get/set方法来获取/设置字段的值了
+
+#### 通过反射调用对象的方法
+
+1. 通过类对象的`getMethod()`方法获得方法对象
+2. 调用方法对象的`invoke()`方法
+
 ## Java EE
 
 ### forward与redirect
@@ -231,32 +255,8 @@ String str2 = "bb"; //检查字符串常量池的
 
 1. cookie数据存放在客户的浏览器上,session数据放在服务器上
 2. cookie不是很安全,别人可以分析存放在本地的cookie并进行cookie欺骗,考虑到安全应当使用session
-4. 单个cookie保存的数据不能超过4K,很多浏览器都限制一个站点最多保存20个cookie
-5. 可以考虑将登陆信息等重要信息存放为session,其他信息如果需要保留,可以放在cookie中
-
-## 反射
-
-### 获得一个类的类对象
-
-1. 类名.class,例如:String.class
-2. 对象.getClass(),例如:"hello".getClass()
-3. Class.forName(),例如:Class.forName("java.lang.String")
-
-### 通过反射创建对象
-
-1. 通过类对象调用newInstance()方法,例如:`String.class.newInstance()`
-2. 通过类对象的getConstructor()或getDeclaredConstructor()方法获得构造器(Constructor)对象并调用其newInstance()方法创建对象,例如:`String.class.getConstructor(String.class).newInstance("Hello");`
-
-### 通过反射获取和设置对象私有字段的值
-
-1. 通过类对象的`getDeclaredField()`方法字段(Field)对象
-2. 再通过字段对象的`setAccessible(true)`将其设置为可以访问
-3. 通过get/set方法来获取/设置字段的值了
-
-### 通过反射调用对象的方法
-
-1. 通过类对象的`getMethod()`方法获得方法对象
-2. 调用方法对象的`invoke()`方法
+3. 单个cookie保存的数据不能超过4K,很多浏览器都限制一个站点最多保存20个cookie
+4. 可以考虑将登陆信息等重要信息存放为session,其他信息如果需要保留,可以放在cookie中
 
 ## 集合
 
@@ -3493,6 +3493,14 @@ public class Singleton {
 - **方案3**：采用局部淘汰法。选取前n个元素并排序，然后逐个遍历剩余的元素，如果这个元素比前n个元素中最大的要小，那么把这个最大的元素移除，并利用插入排序的思想，插入到前n个元素中。复杂度为O(总数据量*n)。
 
 ## 其他
+
+### Maven依赖加载规则
+
+- Maven 解析 pom.xml 文件时，同一个 jar 包只会保留一个，如果面对多个版本的jar包则使用一下规则处理
+
+1. **依赖路径最短优先原则**：一个项目Demo依赖了两个jar包，其中A-B-C-X(1.0) ， A-D-X(2.0)。由于X(2.0)路径最短，所以项目使用的是X(2.0)
+2. **pom文件中申明顺序优先**：当路径长度相同时，maven会根据pom文件声明的顺序加载，如果先声明了B，后声明了C，那就最后的依赖就会是X(1.0)
+3. **覆写优先**：子pom内声明的优先于父pom中的依赖
 
 ### 幂等性
 

@@ -1,12 +1,12 @@
 ---
-title: Git Push命令
+title: Git push
 categories:
 - Software
 - VCS
 - Git
 - 基本命令
 ---
-# Git Push命令
+# Git push
 
 **推送分支**
 
