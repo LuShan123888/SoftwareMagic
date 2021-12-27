@@ -163,27 +163,134 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
-          Redis 哨兵模式
+        <a href="/Software/Backend/Database/MySQL/%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/" target="_self">
+          MySQL 主从同步
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
+        <a href="/Software/Backend/Database/MySQL/%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/" target="_self">
           
           
             
           
-          Redis 哨兵模式
+          MySQL 主从同步
+主从同步原理
 
-哨兵模式能够后台监控主机是否故障,如果故障了则自动将从节点转换为主节点
-原理
+Mysql服务器之间的主从同步是基于二进制日志机制,主服务器使用二进制日志来记录数据库的变动情况,从服务器通过读取和执行该日志文件来保持和主服务器的数据一致
+Slave 会执行以下两个线程读取和执行该日志文件
 
-哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例,让 Redis服务器返回其运行状态
-当哨兵监测到主节点宕机,会自动将从节点切换成主节点,然后通过发布订阅模式通知其他的从节点,修改配置文件并切换主节点
-当主节点恢复连接后,原主节点自动转换为从节点,现主节点不变
+Slave_IO:复制master主机 binlog日志文件里的SQL命令到本机的relay-log文件里
+Slave_SQL:执行本机relay-l
+        </a>
+      </p>
 
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/MySQL/%E6%97%A5%E5%BF%97/" target="_self">
+          MySQL 日志
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/MySQL/%E6%97%A5%E5%BF%97/" target="_self">
+          
+          
+            
+          
+          MySQL 日志
+
+Mysql 有4种类型的日志:Error Log,Genaral Query Log,Binary Log 和 Slow Query Log
+
+Error Log
+
+记录Mysql运行过程中的Error,Warning,Note等信息,系统出错或者某条记录出问题可以查看Error日志
+Mysql的错误日志默认以$&#123;hostname&#125;.err存放在Mysql的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
+          Redis 高可用问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98/" target="_self">
+          
+          
+            
+          
+          Redis 高可用问题
+缓存穿透
+
+缓存穿透是指用户请求的数据在缓存中不存在即没有命中,同时在数据库中也不存在,导致用户每次请求该数据都要去数据库中查询一遍,如果有恶意攻击者不断请求系统中不存在的数据,会导致短时间大量请求落在数据库上,造成数据库压力过大,甚至导致数据库承受不住而宕机崩溃
+缓存穿透的关键在于在Redis中查不到key值,它和缓存击穿的根本区别在于传进来的key在Redis中是不存在
         </a>
       </p>
 
@@ -208,7 +315,63 @@
             
               <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
-              <a href="/categories/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+          SQL 事务
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+          
+          
+            
+          
+          SQL 事务
+
+事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
+
+ACID原则
+
+原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样
+一致性(Consist):一个事务可以封装状态改变
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-01 22:56" pubdate>
+              2021-10-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+            
+              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
             
           </div>
         
@@ -281,25 +444,27 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
-          SQL 事务
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
+          Redis 哨兵模式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/" target="_self">
+        <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          SQL 事务
+          Redis 哨兵模式
 
-事务就是将一组SQL语句放在同一批次内去执行,如果一个SQL语句出错,则该批次内的所有SQL都将被取消执行
+哨兵模式能够后台监控主机是否故障,如果故障了则自动将从节点转换为主节点
+原理
 
-ACID原则
+哨兵通过发送命令,等待 Redis服务器响应,从而监控运行的多个 Redis实例,让 Redis服务器返回其运行状态
+当哨兵监测到主节点宕机,会自动将从节点切换成主节点,然后通过发布订阅模式通知其他的从节点,修改配置文件并切换主节点
+当主节点恢复连接后,原主节点自动转换为从节点,现主节点不变
 
-原子性(Atomic):整个事务中的所有操作,要么全部完成,要么全部不完成,不可能停滞在中间某个环节,事务在执行过程中发生错误,会被回滚(ROLLBACK)到事务开始前的状态,就像这个事务从来没有执行过一样
-一致性(Consist):一个事务可以封装状态改变
+
         </a>
       </p>
 
@@ -322,9 +487,9 @@ ACID原则
             
               <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
             
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
+              <a href="/categories/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a>
             
           </div>
         
@@ -469,64 +634,6 @@ amount
               <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
             
               <a href="/categories/Software/Language/Java/JavaSE/JDBC/">JDBC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
-          Redis 底层数据结构
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
-          
-          
-            
-          
-          Redis 底层数据结构
-动态字符串SDS
-
-SDS是simple dynamic string的缩写。redis中所有场景中出现的字符串，基本都是由SDS来实现的
-
-所有非数字的key。例如set msg &quot;hello world&quot; 中的key msg
-字符串数据类型的值。例如`` set msg “hello world”中的msg的值”hello wolrd”
-非字符串数
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-25 22:37" pubdate>
-              2021-09-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
-            
-              <a href="/categories/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
             
           </div>
         
@@ -1219,115 +1326,6 @@ ASSIGN_ID
           Java 访问控制修饰符
 
 访问控制符是一组限定类,域或方法是否可以被程序其他部分访问和调用的修饰符,Java用来修饰类的访问控制符只有public,表示类对外&quot;开放&quot;,类定义时也可以无访问修饰,则表示类只限于同一包中访问使用,修饰属性和方法的访问修饰符有public,protected和private3种,还有一种是无修饰符的默认情况,外界能访问某个类的成员的条件是:先要能访
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 13:41" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">继承与多态</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E7%BB%A7%E6%89%BF/" target="_self">
-          Java 继承
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E7%BB%A7%E6%89%BF/" target="_self">
-          
-          
-            
-          
-          Java 继承
-
-继承是存在于面对对象程序中两个类之间的一种关系,被继承的类称为父类或超类,而继承父类的类称为子类,父类实际上是所有子类的公共域和公共方法的集合,而每个子类则是父类的特殊化,是对公共域和方法在功能,内涵方面的拓展和延伸,继承可使程序结构清晰,降低编码和维护的工作量
-定义类时通过extends关键字指明其要继承的直接父类,子类对象除了可以访问子类中直接定义的成员外,也可访问父类的所有
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-11 13:41" pubdate>
-              2021-09-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/">继承与多态</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/Object%E7%B1%BB/" target="_self">
-          Java Object类
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/Object%E7%B1%BB/" target="_self">
-          
-          
-            
-          
-          Java Object类
-
-Object类是所有Java类的最终祖先,如果类定义时不包含关键字extends,则编译将自动认为该类直接继承Object类,Object是一个具体类,它可以创建对象,Object类包含了所有Java类的公共属性和方法,以下给出了几个常用方法:
-
-public boolean equals(Object obj):该方法本意用于两个对象的&quot;深度&quot;比较
         </a>
       </p>
 
