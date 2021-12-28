@@ -1,10 +1,10 @@
 ---
-title: Intel
+title: Intel CPU 架构与代号
 categories:
 - Hardware
 - CPU
 ---
-# Intel
+# Intel CPU 架构与代号
 
 ## CPU 架构
 
@@ -20,7 +20,7 @@ categories:
 8|Coffe Lake|	14nm++	|1151|	H310 H370 B360 Z370 Z390
 9|	Ice Lake|	10nm+|	1151|	H310 H370 B360 Z370 Z390
 
-## CPU 后缀
+## CPU 代号后缀
 
 |  后缀  |          意义           |
 | :----: | :---------------------: |
