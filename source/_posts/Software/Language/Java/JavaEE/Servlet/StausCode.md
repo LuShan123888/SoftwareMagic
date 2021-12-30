@@ -93,15 +93,7 @@ HeaderN: ...
 下面的例子把 407 错误代码发送到客户端浏览器,浏览器会显示 "Need authentication!!!" 消息
 
 ```java
-// 导入必需的 java 库
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.*;
-import javax.servlet.annotation.WebServlet;
-
 @WebServlet("/showError")
-// 扩展 HttpServlet 类
 public class showError extends HttpServlet {
 
   // 处理 GET 方法请求的方法

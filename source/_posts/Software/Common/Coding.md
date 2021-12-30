@@ -1904,17 +1904,30 @@ public int search(int[] nums, int target) {
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123345.gif)
 
 ```java
-public static void bubbleSort(int[] arr) {
-    int temp = 0;
-    for (int i = arr.length - 1; i > 0; i--) { // 每次需要排序的长度
-        for (int j = 0; j < i; j++) { // 从第一个元素到第i个元素
-            if (arr[j] > arr[j + 1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+public class Solution {
+
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().bubbleSort(nums);
+        System.out.println("排序后:" + Arrays.toString(nums));
+    }
+
+    public void bubbleSort(int[] nums) {
+        int temp = 0;
+        // 每次需要排序的长度
+        for (int i = nums.length - 1; i > 0; i--) {
+            // 从第一个元素到第i个元素
+            for (int j = 0; j < i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
             }
         }
     }
+
 }
 ```
 
@@ -1924,23 +1937,36 @@ public static void bubbleSort(int[] arr) {
     要使算法在最佳情况下有O(n)复杂度,需要做一些改进,增加一个`swap`的标志,当前一轮没有进行交换时,说明数组已经有序,没有必要再进行下一轮的循环了,直接退出
 
 ```java
-public static void bubbleSort(int[] arr) {
-    int temp = 0;
-    boolean swap;
-    for (int i = arr.length - 1; i > 0; i--) { // 每次需要排序的长度
-        swap=false;
-        for (int j = 0; j < i; j++) { // 从第一个元素到第i个元素
-            if (arr[j] > arr[j + 1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-                swap=true;
+public class Solution {
+
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().bubbleSort(nums);
+        System.out.println("排序后:" + Arrays.toString(nums));
+    }
+
+    public void bubbleSort(int[] nums) {
+        int temp;
+        boolean swap;
+        // 每次需要排序的长度
+        for (int i = nums.length - 1; i > 0; i--) {
+            swap = false;
+            // 从第一个元素到第i个元素
+            for (int j = 0; j < i; j++) {
+                if (nums[j] > nums[j + 1]) {
+                    temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                    swap = true;
+                }
+            }
+            if (!swap) {
+                break;
             }
         }
-        if (swap==false){
-            break;
-        }
     }
+
 }
 ```
 
@@ -1955,22 +1981,33 @@ public static void bubbleSort(int[] arr) {
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123157.gif)
 
 ```java
-public static void selectionSort(int[] arr) {
-    int temp, min = 0;
-    for (int i = 0; i < arr.length - 1; i++) {
-        min = i;
-        // 循环查找最小值
-        for (int j = i + 1; j < arr.length; j++) {
-            if (arr[min] > arr[j]) {
-                min = j;
+public class Solution {
+
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().selectionSort(nums);
+        System.out.println("排序后:" + Arrays.toString(nums));
+    }
+
+    public void selectionSort(int[] nums) {
+        int temp, min = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            min = i;
+            // 循环查找最小值
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[min] > nums[j]) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                temp = nums[i];
+                nums[i] = nums[min];
+                nums[min] = temp;
             }
         }
-        if (min != i) {
-            temp = arr[i];
-            arr[i] = arr[min];
-            arr[min] = temp;
-        }
     }
+
 }
 ```
 
@@ -1988,16 +2025,27 @@ public static void selectionSort(int[] arr) {
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123205.gif" alt="img" style="zoom:50%;" />
 
 ```java
-public static void insertionSort(int[] arr){
-    for (int i = 1; i < arr.length; ++i){
-        int value = arr[i];
-        int position = i;
-        while (position > 0 && arr[position-1] > value){
-            arr[position] = arr[position - 1];
-            position--;
-        }
-        arr[position] = value;
+public class Solution {
+
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().insertionSort(nums);
+        System.out.println("排序后:" + Arrays.toString(nums));
     }
+
+    public void insertionSort(int[] nums) {
+        for (int i = 1; i < nums.length; ++i) {
+            int value = nums[i];
+            int position = i;
+            while (position > 0 && nums[position - 1] > value) {
+                nums[position] = nums[position - 1];
+                position--;
+            }
+            nums[position] = value;
+        }
+    }
+
 }
 ```
 
@@ -2015,47 +2063,127 @@ public static void insertionSort(int[] arr){
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123302.gif)
 
 ```java
-public int[] sortArray(int[] nums) {
-    randomizedQuicksort(nums, 0, nums.length - 1);
-    return nums;
-}
+public class Solution {
 
-public void randomizedQuicksort(int[] nums, int l, int r) {
-    if (l < r) {
-        int pos = randomizedPartition(nums, l, r);
-        randomizedQuicksort(nums, l, pos - 1);
-        randomizedQuicksort(nums, pos + 1, r);
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().quickSort(nums, 0, nums.length - 1);
+        System.out.println("排序后:" + Arrays.toString(nums));
     }
-}
 
-public int randomizedPartition(int[] nums, int l, int r) {
-    int i = new Random().nextInt(r - l + 1) + l; // 随机选一个作为基准
-    swap(nums, r, i);
-    return partition(nums, l, r);
-}
-
-public int partition(int[] nums, int l, int r) {
-    int pivot = nums[r];
-    int i = l;
-    for (int j = l; j <= r - 1; ++j) {
-        if (nums[j] <= pivot) {
-            swap(nums, i, j);
-            i++;
+    public void quickSort(int[] nums, int start, int end) {
+        if (start < end) {
+            int p = randomPartition(nums, start, end);
+            quickSort(nums, start, p - 1);
+            quickSort(nums, p + 1, end);
         }
     }
-    swap(nums, i, r);
-    return i;
-}
 
-private void swap(int[] nums, int i, int j) {
-    int temp = nums[i];
-    nums[i] = nums[j];
-    nums[j] = temp;
+    public int randomPartition(int[] nums, int start, int end) {
+        Random random = new Random();
+        int i = random.nextInt(end - start + 1) + start;
+        swap(nums, end, i);
+        return partition(nums, start, end);
+    }
+
+    public int partition(int[] nums, int start, int end) {
+        int pivot = nums[end];
+        int index = start;
+        for (int i = start; i < end; i++) {
+            if (nums[i] < pivot) {
+                swap(nums, i, index);
+                index++;
+            }
+        }
+        swap(nums, index, end);
+        return index;
+    }
+
+    public void swap(int[] nums, int i1, int i2) {
+        int temp = nums[i1];
+        nums[i1] = nums[i2];
+        nums[i2] = temp;
+    }
 }
 ```
 
 - **稳定性**:快速排序并不是稳定的,这是因为我们无法保证相等的数据按顺序被扫描到和按顺序存放
 - **适用场景**:快速排序在大多数情况下都是适用的,尤其在数据量大的时候性能优越性更加明显,但是在必要的时候,需要考虑下优化以提高其在最坏情况下的性能
+
+#### 归并排序
+
+- 归并排序是建立在归并操作上的一种有效的排序算法,该算法是采用分治法的一个非常典型的应用,将已有序的子序列合并,得到完全有序的序列,即先使每个子序列有序,再使子序列段间有序,若将两个有序表合并成一个有序表,称为2路归并
+- **算法描述**
+    - 递归法(Top-down)
+        1. 申请空间,使其大小为两个已经排序序列之和,该空间用来存放合并后的序列
+        2. 设定两个指针,最初位置分别为两个已经排序序列的起始位置
+        3. 比较两个指针所指向的元素,选择相对小的元素放入到合并空间,并移动指针到下一位置
+        4. 重复步骤3直到某一指针到达序列尾
+        5. 将另一序列剩下的所有元素直接复制到合并序列尾
+    - 迭代法(Bottom-up)
+        1. 将序列每相邻两个数字进行归并操作,形成ceil(n/2)个序列,排序后每个序列包含两/一个元素
+        2. 若此时序列数不是1个则将上述序列再次归并,形成ceil(n/4)个序列,每个序列包含四/三个元素
+        3. 重复步骤2,直到所有元素排序完毕,即序列数为1
+
+![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123213.gif)
+
+```java
+public class Solution {
+
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().mergeSort(nums, 0, nums.length - 1);
+        System.out.println("排序后:" + Arrays.toString(nums));
+    }
+
+    public void mergeSort(int[] nums, int left, int right) {
+        int[] tmp = new int[nums.length];
+        if (left < right) {
+            int i = (left + right) >> 1;
+            //对前半部分排序
+            mergeSort(nums, left, i);
+            //对后半部分排序
+            mergeSort(nums, i + 1, right);
+            //合并到数组b
+            merge(nums, tmp, left, i, right);
+        }
+    }
+
+    public void merge(int[] nums, int[] tmp, int l, int m, int r) {
+        int i = l;
+        int j = m + 1;
+        int k = l;
+        // nums[l:m]与nums[m+1,r]中的元素两两比较,把小的放在前面,大的放在后面
+        while (i <= m && j <= r) {
+            if (nums[i] <= nums[j]) {
+                tmp[k++] = nums[i++];
+            } else {
+                tmp[k++] = nums[j++];
+            }
+        }
+        // 当nums[l:m]或nums[m+1,r]的某一个中的全部元素已经全部放入tmp[]中后,将另一个接在tmp[]的最后
+        if (i > m) {
+            for (int q = j; q <= r; q++) {
+                tmp[k++] = nums[q];
+            }
+        } else {
+            for (int q = i; q <= m; q++) {
+                tmp[k++] = nums[q];
+            }
+        }
+        // 复制回数组nums
+        for (int x = l; x <= r; x++) {
+            nums[x] = tmp[x];
+        }
+    }
+
+}
+```
+
+- **稳定性**:因为我们在遇到相等的数据的时候必然是按顺序抄写到辅助数组上的,所以,归并排序同样是稳定算法
+- **适用场景**:归并排序在数据量比较大的时候也有较为出色的表现(效率上),但是,其空间复杂度O(n)使得在数据量特别大的时候(例如,1千万数据)几乎不可接受,而且,考虑到有的机器内存本身就比较小,因此,采用归并排序一定要注意
 
 #### 堆排序
 
@@ -2068,45 +2196,59 @@ private void swap(int[] nums, int i, int j) {
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/v2-c66a7e83189427b6a5a5c378f73c17ca_b.gif" alt="img" style="zoom:150%;" />
 
 ```java
-public static void sort(int[] arr) {
-    //1.构建大顶堆
-    for (int i = arr.length / 2 - 1; i >= 0; i--) {
-        //从第一个非叶子结点从下至上，从右至左调整结构
-        adjustHeap(arr, i, arr.length);
-    }
-    //2.调整堆结构+交换堆顶元素与末尾元素
-    for (int j = arr.length - 1; j > 0; j--) {
-        swap(arr, 0, j);//将堆顶元素与末尾元素进行交换
-        adjustHeap(arr, 0, j);//重新对堆进行调整
-    }
-}
+public class Solution {
 
-/**
-     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）
-     */
-public static void adjustHeap(int[] arr, int i, int length) {
-    int temp = arr[i];//先取出当前元素i
-    for (int k = i * 2 + 1; k < length; k = k * 2 + 1) {//从i结点的左子结点开始，也就是2i+1处开始
-        if (k + 1 < length && arr[k] < arr[k + 1]) {//如果左子结点小于右子结点，k指向右子结点
-            k++;
+    public static void main(String[] args) {
+        int[] nums = {1, 4, 3, 9, 7, 6};
+        System.out.println("排序前:" + Arrays.toString(nums));
+        new Solution().heapSort(nums);
+        System.out.println("排序后:" + Arrays.toString(nums));
+    }
+
+    public void heapSort(int[] nums) {
+        int len = nums.length - 1;
+        // 从第一个非叶子结点从下至上，从右至左调整大顶堆
+        for (int i = len / 2; i >= 0; i--) {
+            adjustHeap(nums, i, len);
         }
-        if (arr[k] > temp) {//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）
-            arr[i] = arr[k];
-            i = k;
-        } else {
-            break;
+        // 调整堆结构+交换堆顶元素与末尾元素
+        for (int i = len; i >= 1; i--) {
+            // 将堆顶元素与末尾元素进行交换
+            swap(nums, 0, i);
+            adjustHeap(nums, 0, i - 1);
         }
     }
-    arr[i] = temp;//将temp值放到最终的位置
-}
 
-/**
-     * 交换元素
-     */
-public static void swap(int[] arr, int a, int b) {
-    int temp = arr[a];
-    arr[a] = arr[b];
-    arr[b] = temp;
+    public void adjustHeap(int[] nums, int i, int len) {
+        while ((i << 1) + 1 <= len) {
+            int lson = (i << 1) + 1;
+            int rson = (i << 1) + 2;
+            int large;
+            // 找出父节点与左右子节点中值最大的
+            if (lson <= len && nums[lson] > nums[i]) {
+                large = lson;
+            } else {
+                large = i;
+            }
+            if (rson <= len && nums[rson] > nums[large]) {
+                large = rson;
+            }
+            // 如果最大的不是父节点，则进行交换
+            if (large != i) {
+                swap(nums, i, large);
+                i = large;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
 }
 ```
 
@@ -2170,61 +2312,6 @@ public static void shellSort2(int[] arr){
     - 第三种增量Sedgewick增量:(1, 5, 19, 41, 109,...),其生成序列或者是`9*4i* *- 9*2i + 1`或者是`4i - 3*2i + 1`
 - **稳定性**:我们都知道插入排序是稳定算法,但是,Shell排序是一个多次插入的过程,在一次插入中我们能确保不移动相同元素的顺序,但在多次的插入中,相同元素完全有可能在不同的插入轮次被移动,最后稳定性被破坏,因此,Shell排序不是一个稳定的算法
 - **适用场景**:Shell排序虽然快,但是毕竟是插入排序,其数量级并没有快速排序O(nLogN)快,在大量数据面前,Shell排序不是一个好的算法,但是,中小型规模的数据完全可以使用它
-
-#### 归并排序
-
-- 归并排序是建立在归并操作上的一种有效的排序算法,该算法是采用分治法的一个非常典型的应用,将已有序的子序列合并,得到完全有序的序列,即先使每个子序列有序,再使子序列段间有序,若将两个有序表合并成一个有序表,称为2路归并
-- **算法描述**
-    - 递归法(Top-down)
-        1. 申请空间,使其大小为两个已经排序序列之和,该空间用来存放合并后的序列
-        2. 设定两个指针,最初位置分别为两个已经排序序列的起始位置
-        3. 比较两个指针所指向的元素,选择相对小的元素放入到合并空间,并移动指针到下一位置
-        4. 重复步骤3直到某一指针到达序列尾
-        5. 将另一序列剩下的所有元素直接复制到合并序列尾
-    - 迭代法(Bottom-up)
-        1. 将序列每相邻两个数字进行归并操作,形成ceil(n/2)个序列,排序后每个序列包含两/一个元素
-        2. 若此时序列数不是1个则将上述序列再次归并,形成ceil(n/4)个序列,每个序列包含四/三个元素
-        3. 重复步骤2,直到所有元素排序完毕,即序列数为1
-
-![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123213.gif)
-
-```java
-public static void mergeSort(int[] arr){
-    int[] temp =new int[arr.length];
-    internalMergeSort(arr, temp, 0, arr.length-1);
-}
-private static void internalMergeSort(int[] arr, int[] temp, int left, int right){
-    //当left==right的时,已经不需要再划分了
-    if (left<right){
-        int middle = (left+right)/2;
-        internalMergeSort(arr, temp, left, middle);          //左子数组
-        internalMergeSort(arr, temp, middle+1, right);       //右子数组
-        mergeSortedArray(arr, temp, left, middle, right);    //合并两个子数组
-    }
-}
-// 合并两个有序子序列
-private static void mergeSortedArray(int arr[], int temp[], int left, int middle, int right){
-    int i=left;
-    int j=middle+1;
-    int k=0;
-    while (i<=middle && j<=right){
-        temp[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
-    }
-    while (i <=middle){
-        temp[k++] = arr[i++];
-    }
-    while ( j<=right){
-        temp[k++] = arr[j++];
-    }
-    //把数据复制回原数组
-    for (i=0; i<k; ++i){
-        arr[left+i] = temp[i];
-    }
-}
-```
-
-- **稳定性**:因为我们在遇到相等的数据的时候必然是按顺序抄写到辅助数组上的,所以,归并排序同样是稳定算法
-- **适用场景**:归并排序在数据量比较大的时候也有较为出色的表现(效率上),但是,其空间复杂度O(n)使得在数据量特别大的时候(例如,1千万数据)几乎不可接受,而且,考虑到有的机器内存本身就比较小,因此,采用归并排序一定要注意
 
 #### 计数排序
 
@@ -2409,9 +2496,9 @@ public class RadixSorter extends Sorter {
 | 直接选择排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 不稳定 |
 | 直接插入排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
 | 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(nlogn)   | 不稳定 |
+| 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
 | 堆排序       | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(1)       | 不稳定 |
 | 希尔排序     | O(nlogn)       | O(n)           | O(n)           | O(1)       | 不稳定 |
-| 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
 | 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(n+k)     | 稳定   |
 | 基数排序     | O(N*M)         | O(N*M)         | O(N*M)         | O(M)       | 稳定   |
 
@@ -3542,6 +3629,6 @@ public class Singleton {
 
 ### 加密算法
 
-- 对称性**加密算法**：AES、DES、3DES
-- 非对称性**算法**：RSA、DSA、ECC
-- 散列**算法**（签名**算法**）：MD5、SHA1、HMAC
+- 对称性加密算法：AES、DES、3DES
+- 非对称性算法：RSA、DSA、ECC
+- 哈希算法（签名算法）：MD5、SHA1、HMAC

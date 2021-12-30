@@ -30,9 +30,8 @@ categories:
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-08-Flowchart-4823333.svg)
 
 ```java
-import java.util.Stack;
+public class Solution {
 
-public class Test {
     public static void main(String[] args) {
         Stack<Integer> a = new Stack<>();
         Stack<Integer> b = new Stack<>();
@@ -48,9 +47,7 @@ public class Test {
         System.out.println("-----------end------------");
         System.out.println("共移动:" + count + "次");
     }
-}
 
-class Solution {
     int count = 0;
 
     public int hanoi(int n, Stack<Integer> a, Stack<Integer> b, Stack<Integer> c) {
@@ -76,7 +73,7 @@ class Solution {
         System.out.println("hanoi b" + y);
         System.out.println("hanoi c" + z);
     }
- 
+
 }
 ```
 

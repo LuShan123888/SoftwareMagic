@@ -55,20 +55,7 @@ categories:
 - 一旦我们有一个枚举,我们可以以标准方式循环枚举,使用 `hasMoreElements()` 方法来确定何时停止,使用 `nextElement()`方法来获取每个参数的名称
 
 ```java
-//导入必需的 java 库
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @WebServlet("/DisplayHeader")
-
-//扩展 HttpServlet 类
 public class DisplayHeader extends HttpServlet {
 
     // 处理 GET 方法请求的方法

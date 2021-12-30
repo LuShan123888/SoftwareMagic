@@ -38,11 +38,6 @@ java.util.Locale request.getLocale()
 - 本实例演示了如何显示某个请求的语言和相关的国家:
 
 ```java
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.Locale;
-
 public class GetLocale extends HttpServlet{
 
   public void doGet(HttpServletRequest request,
@@ -77,11 +72,6 @@ public class GetLocale extends HttpServlet{
 - 第二点是使用 HTML 实体显示所有的特殊字符,例如,"&#241;" 表示 "ñ","&#161;" 表示 "¡",如下所示:
 
 ```jsp
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.Locale;
-
 public class DisplaySpanish extends HttpServlet{
 
   public void doGet(HttpServletRequest request,
@@ -112,13 +102,6 @@ public class DisplaySpanish extends HttpServlet{
 - 您可以使用 `java.text.DateFormat` 类及其静态方法 `getDateTimeInstance()` 来格式化特定于区域设置的日期和时间,下面的实例演示了如何格式化特定于某个给定的区域设置的日期:
 
 ```java
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.Locale;
-import java.text.DateFormat;
-import java.util.Date;
-
 public class DateLocale extends HttpServlet{
 
   public void doGet(HttpServletRequest request,
@@ -152,13 +135,6 @@ public class DateLocale extends HttpServlet{
 您可以使用 `java.text.NumberFormat` 类及其静态方法 `getCurrencyInstance()` 来格式化数字(比如 long 类型或 double 类型)为特定于区域设置的货币,下面的实例演示了如何格式化特定于某个给定的区域设置的货币:
 
 ```java
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.Locale;
-import java.text.NumberFormat;
-import java.util.Date;
-
 public class CurrencyLocale extends HttpServlet{
 
   public void doGet(HttpServletRequest request,
@@ -190,13 +166,6 @@ public class CurrencyLocale extends HttpServlet{
 您可以使用 `java.text.NumberFormat` 类及其静态方法 `getPercentInstance()` 来格式化特定于区域设置的百分比,下面的实例演示了如何格式化特定于某个给定的区域设置的百分比:
 
 ```java
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.Locale;
-import java.text.NumberFormat;
-import java.util.Date;
-
 public class PercentageLocale extends HttpServlet{
 
   public void doGet(HttpServletRequest request,

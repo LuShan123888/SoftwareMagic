@@ -105,13 +105,8 @@ Base64的原理比较简单,每当我们使用Base64时都会先定义一个类�
 最后,我们用一段Java代码来验证一下上面的转换结果
 
 ```java
-package com.secbro2.blog.utils;
-
 import sun.misc.BASE64Encoder;
 
-/**
- * @author zzs
- */
 public class Base64Utils {
 
 	public static void main(String[] args) {
@@ -163,15 +158,6 @@ public SysResult saveOne(@RequestBody SysFile sysFile) {
 - 实体类,FileData用于存储base64数据
 
 ```java
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -74,11 +74,6 @@ ResultSet rs = stmt.executeQuery("SELECT a,b,c FROM Table2");
 **[例17-1]**:创建数据表
 
 ```java
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class JDBC {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         //创建数据表
@@ -214,7 +209,6 @@ String s = rs.getString(2);
 **[例17-2]**:查询老师信息表
 
 ```java
-import java.sql.*;
 public class 数据库查询 {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/Classroom_Management";
@@ -285,8 +279,6 @@ Statement createStatement(int resultSetType,int resultSetConcurrency)
 **[例17-3]**:游标的移动
 
 ```java
-import java.sql.*;
-import java.util.*;
 public class 数据库查询{
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/Classroom_Management";
@@ -328,7 +320,6 @@ public class 数据库查询{
 **[例17-4]**:执行INSERT语句实现数据写入
 
 ```java
-import java.sql.*;
 public class 数据库的更新{
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/Classroom_Management";

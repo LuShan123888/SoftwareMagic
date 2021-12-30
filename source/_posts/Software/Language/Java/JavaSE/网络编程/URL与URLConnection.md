@@ -34,12 +34,6 @@ categories:
 - 运行程序时第1个参数指定URL地址,第2个参数可以省去,如果有该参数则表示存放结果的文件名
 
 ```java
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-
 class GetURL {
     public static void main(String[] args) {
         InputStream in = null;
@@ -86,8 +80,6 @@ class GetURL {
 **[例16-6]**:下载指定的URL文件
 
 ```java
-import java.io.*;
-import java.net.*;
 class downloadFile {
     public static void main(String[] args) {
         try {

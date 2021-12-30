@@ -71,22 +71,7 @@ HeaderN: ...
 您已经在前面的实例中看到 `setContentType()` 方法,下面的实例也使用了同样的方法,此外,我们会用 `setIntHeader()` 方法来设置 **Refresh** 头
 
 ```java
-//导入必需的 java 库
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @WebServlet("/Refresh")
-
-//扩展 HttpServlet 类
 public class Refresh extends HttpServlet {
 
     // 处理 GET 方法请求的方法

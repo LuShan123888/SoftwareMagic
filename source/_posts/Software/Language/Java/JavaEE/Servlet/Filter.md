@@ -70,12 +70,6 @@ public void  init(FilterConfig config) throws ServletException {
 - 以下是 Servlet 过滤器的实例,将输出网站名称和地址,本实例让您对 Servlet 过滤器有基本的了解,您可以使用相同的概念编写更复杂的过滤器应用程序:
 
 ```java
-package com.test.test;
-
-//导入必需的 java 库
-import javax.servlet.*;
-import java.util.*;
-
 //实现 Filter 类
 public class LogFilter implements Filter  {
     public void  init(FilterConfig config) throws ServletException {
@@ -102,20 +96,7 @@ public class LogFilter implements Filter  {
 这边使用前文提到的 DisplayHeader.java 为例子:
 
 ```java
-//导入必需的 java 库
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @WebServlet("/DisplayHeader")
-
-//扩展 HttpServlet 类
 public class DisplayHeader extends HttpServlet {
 
     // 处理 GET 方法请求的方法

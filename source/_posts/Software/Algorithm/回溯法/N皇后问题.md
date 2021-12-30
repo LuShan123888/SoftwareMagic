@@ -29,9 +29,8 @@ categories:
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-21-Flowchart-8545082.png)
 
 ```java
-import java.util.*;
-
 public class test {
+    
     public static void main(String[] args) {
         int n = 4;
         int[] queens = new int[n];

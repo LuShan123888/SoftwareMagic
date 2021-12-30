@@ -30,8 +30,6 @@ double pow(double a,double b)|	求a的b次幂
 **[例2-5]**:输入圆的半径,计算圆面积,输出结果精确到小数点后3位
 
 ```java
-import javax.swing.*;
-import java.lang.Math;
 public class 常用的数学方法 {
     public static void main(String[] args) {
         String s = JOptionPane.showInputDialog("请输入圆的半径: ");

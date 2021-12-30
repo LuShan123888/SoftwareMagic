@@ -183,7 +183,6 @@ deleteall 'student','95001'
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
-import java.io.IOException;
 
 public class ExampleForHbase{
     public static Configuration configuration;

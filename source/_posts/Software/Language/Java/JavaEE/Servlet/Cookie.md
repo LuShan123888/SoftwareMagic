@@ -105,22 +105,6 @@ response.addCookie(cookie);
 - 让我们修改我们的 [表单数据实例](https://www.runoob.com/servlet/servlet-form-data.html),为名字和姓氏设置 Cookie
 
 ```java
-package com.test.test;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * Servlet implementation class HelloServlet
- */
 @WebServlet("/HelloForm")
 public class HelloForm extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -190,22 +174,6 @@ public class HelloForm extends HttpServlet {
 - 让我们读取上面的实例中设置的 Cookie
 
 ```java
-package com.test.test;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * Servlet implementation class ReadCookies
- */
 @WebServlet("/ReadCookies")
 public class ReadCookies extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -285,21 +253,6 @@ public class ReadCookies extends HttpServlet {
 下面的例子将删除现有的名为 `url` 的 cookie,当您下次运行 ReadCookies 的 Servlet 时,它会返回 url 为 null
 
 ```java
-package com.test.test;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-/**
- * Servlet implementation class DeleteCookies
- */
 @WebServlet("/DeleteCookies")
 public class DeleteCookies extends HttpServlet {
     private static final long serialVersionUID = 1L;
