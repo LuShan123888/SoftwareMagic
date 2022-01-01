@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 锁 两段锁  数据库遵循的是两段锁协议，将事务分成两个阶段，加锁阶段和解锁阶段（所以叫两段锁） 加锁阶段：在该阶段可以进行加锁操作。在对任何数据进行读操作之前要申请并获得S锁（共享锁，其它事务可以继续加共享锁，但不能加排它锁），在进行写操作之前要申请并获得X锁（排它锁，其它事务不能再获得任何锁）。加锁不成功，则事务进入等待状态，直到加锁成功才继续执行。 解锁阶段：当事务释放了一个封锁以">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-09T14:46:07.000Z">
-<meta property="article:modified_time" content="2021-12-09T14:46:07.000Z">
+<meta property="article:published_time" content="2021-12-31T13:58:29.000Z">
+<meta property="article:modified_time" content="2021-12-31T13:58:29.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-09 22:46" pubdate>
-        2021年12月9日 晚上
+      <time datetime="2021-12-31 21:58" pubdate>
+        2021年12月31日 晚上
       </time>
     </span>
   
@@ -229,19 +229,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">begin；</td>
+<td style="text-align:left">begin;</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">insert into test ……</td>
+<td style="text-align:left">insert into test …</td>
 <td style="text-align:left">加insert对应的锁</td>
 </tr>
 <tr>
-<td style="text-align:left">update test set…</td>
+<td style="text-align:left">update test set …</td>
 <td style="text-align:left">加update对应的锁</td>
 </tr>
 <tr>
-<td style="text-align:left">delete from test ….</td>
+<td style="text-align:left">delete from test …</td>
 <td style="text-align:left">加delete对应的锁</td>
 </tr>
 <tr>
@@ -276,7 +276,8 @@
 </ul>
 </li>
 <li>意向共享锁和意向排它锁是数据库主动加的，不需要我们手动处理</li>
-<li>对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及数据集加排他锁（X)；对于普通SELECT语句，InnoDB不会加任何锁，事务可以通过以下语句显示给记录集加共享锁或排他锁。
+<li>对于UPDATE、DELETE和INSERT语句，InnoDB会自动给涉及数据集加排他锁（X)</li>
+<li>对于普通SELECT语句，InnoDB不会加任何锁，事务可以通过以下语句显示给记录集加共享锁或排他锁。
 <ul>
 <li>共享锁（S）：<code>SELECT * FROM table_name WHERE … LOCK IN SHARE MODE</code></li>
 <li>排他锁（X)：<code>SELECT * FROM table_name WHERE … FOR UPDATE</code></li>
@@ -316,9 +317,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/MVVC/">
+                      <a href="/Software/Backend/Distributed/Raft%E9%80%89%E4%B8%BE%E7%AE%97%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL MVVC</span>
+                        <span class="hidden-mobile">Raft 选举算法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -326,8 +327,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/Cluster/">
-                        <span class="hidden-mobile">Redis Cluster</span>
+                      <a href="/Software/Backend/Maven/%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4/">
+                        <span class="hidden-mobile">Maven 依赖范围（Dependency scope）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

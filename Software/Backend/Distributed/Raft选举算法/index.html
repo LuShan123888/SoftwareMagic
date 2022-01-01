@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Raft 选举算法  Raft算法是分布式系统开发首选的共识算法。 主要在分布式集群架构下进行领导者（主节点）的确认。比如现在流行的组件Etcd、Consul、Nacos、RocketMQ、RedisSentinel底层都是采用Raft算法来确认集群中的主节点，再通过主节点向其他节点下发指令。 Raft算法是通过一切以领导者为准的方式，实现一系列值的共识和各节点日志的一致。  Raft 角色  跟">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-06T16:35:07.000Z">
-<meta property="article:modified_time" content="2021-10-06T16:35:07.000Z">
+<meta property="article:published_time" content="2021-12-31T14:07:40.000Z">
+<meta property="article:modified_time" content="2021-12-31T14:07:40.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-07 00:35" pubdate>
-        2021年10月7日 凌晨
+      <time datetime="2021-12-31 22:07" pubdate>
+        2021年12月31日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.4k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      4 分钟
     </span>
   
 
@@ -227,32 +227,33 @@
 </ul>
 <h2 id="Raft-选举过程">Raft 选举过程</h2>
 <ol>
-<li><strong>初始状态</strong>
-<ul>
-<li>初始状态下，集群中所有节点都是跟随者的状态，任期（Term）都为0</li>
-<li>Raft算法实现了随机超时时间的特性，每个节点等待领导者节点心跳信息的超时时间间隔是随机的。比如A节点等待超时的时间间隔150ms，B节点200ms，C节点300ms。那么a先超时，最先因为没有等到领导者的心跳信息，发生超时</li>
-</ul>
+<li>
+<p><strong>初始状态</strong>：初始状态下，集群中所有节点都是跟随者的状态，任期（Term）都为0</p>
 </li>
-<li><strong>发起投票</strong>
-<ul>
-<li>当A节点的超时时间到了后，A节点成为候选者，并增加自己的任期编号，Term值从0更新为1，并给自己投了一票。</li>
-<li>NodeA：Term=1,VoteCount=1</li>
-<li>NodeB：Term=0</li>
-<li>NodeC：Term=0</li>
-</ul>
+<li>
+<p><strong>发起投票</strong>：Raft算法中每个节点等待领导者节点心跳信息的超时时间间隔是随机的。如果NodeA因为没有等到领导者的心跳信息先超时，则A节点成为候选者，并增加自己的任期编号，Term值从0更新为1，并给自己投了一票。</p>
 </li>
-<li><strong>成为领导者的简化过程</strong>
-<ul>
-<li>节点A成为候选者后，向其他节点发送请求投票RPC信息，请它们选举自己为领导者。</li>
-</ul>
-<ol start="2">
-<li>节点B和节点C接收到节点A发送的请求投票信息后，在编号为1的这届任期内，还没有进行过投票，就把选票投给节点A，并增加自己的任期编号。</li>
-<li>节点A收到了大多数节点（n/2+1)的投票，从候选者成为本届任期内的新的领导者。</li>
-<li>节点A作为领导者，固定的时间间隔给节点B和节点C发送心跳信息，告诉节点B和C，我是领导者，组织其他跟随者发起新的选举。</li>
-<li>节点B和节点C发送响应信息给节点A，告诉节点A我是正常的。</li>
+<li>
+<p><strong>成为领导者</strong></p>
+<ol>
+<li>
+<p>节点A成为候选者后，向其他节点发送请求投票RPC信息，请它们选举自己为领导者。</p>
+</li>
+<li>
+<p>节点B和节点C接收到节点A发送的请求投票信息后，在编号为1的这届任期内，还没有进行过投票，就把选票投给节点A，并增加自己的任期编号。</p>
+</li>
+<li>
+<p>节点A收到了大多数节点（n/2+1)的投票，从候选者成为本届任期内的新的领导者。</p>
+</li>
 </ol>
 </li>
-<li>领导者的任期
+<li>
+<p><strong>与其他节点通讯</strong>：节点A作为领导者，固定的时间间隔给节点B和节点C发送心跳信息，告诉节点B和C，我是领导者，节点B和节点C发送响应信息给节点A，告诉节点A我是正常的。</p>
+</li>
+</ol>
+<h2 id="选举中遇到的问题">选举中遇到的问题</h2>
+<ol>
+<li><strong>领导者的任期</strong>
 <ul>
 <li><strong>自动增加</strong>：跟随者在等待领导者心跳信息超时后，推荐自己为候选人，会增加自己的任期号，节点A任期为0，推举自己为候选人时，任期编号增加为1。</li>
 <li><strong>更新为较大值</strong>：当节点发现自己的任期编号比其他节点小时，会更新到较大的编号值。比如节点A的任期为1，请求投票，投票消息中包含了节点A的任期编号，且编号为1，节点B收到消息后，会将自己的任期编号更新为1。</li>
@@ -262,7 +263,7 @@
 </ul>
 </li>
 <li><strong>防止多个节点同时发起投票</strong>：为了防止多个节点同时发起投票，会给每个节点分配一个随机的选举超时时间。这个时间内，节点不能成为候选者，只能等到超时。比如上述例子，节点A先超时，先成为了候选者。这种巧妙的设计，在大多数情况下只有一个服务器节点先发起选举，而不是同时发起选举，减少了因选票瓜分导致选举失败的情况。</li>
-<li><strong>触发新的一轮选举</strong>：如果领导者节点出现故障，则会触发新的一轮选举</li>
+<li><strong>领导者节点下线</strong>：如果领导者节点出现故障，则会触发新的一轮选举</li>
 </ol>
 
             </div>
@@ -295,9 +296,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E8%BD%BD/">
+                      <a href="/Internet/HTTP/CRSF%E6%94%BB%E5%87%BB/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java 重写与重载</span>
+                        <span class="hidden-mobile">HTTP CSRF 攻击</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -305,8 +306,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Common/JWT/">
-                        <span class="hidden-mobile">JWT</span>
+                      <a href="/Software/Backend/Database/MySQL/%E9%94%81/">
+                        <span class="hidden-mobile">MySQL 锁</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

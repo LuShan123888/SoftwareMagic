@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Redis Cluster  Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集 优点  通过利用多台计算机内存,可以构造更大的数据库 通过利用多台计算机的多核,允许我们扩展计算能力 通过利用多台计算机的网络适配器,可以扩展网络带宽   Cluster 的不足  涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不">
+  <meta name="description" content="Redis Cluster  Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集 优点  通过利用多台计算机内存,可以构造更大的数据库 通过利用多台计算机的多核,允许我们扩展计算能力 通过利用多台计算机的网络适配器,可以扩展网络带宽   Cluster 的不足  涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的Redis实例上时,你就不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis Cluster">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/Cluster/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Redis Cluster  Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集 优点  通过利用多台计算机内存,可以构造更大的数据库 通过利用多台计算机的多核,允许我们扩展计算能力 通过利用多台计算机的网络适配器,可以扩展网络带宽   Cluster 的不足  涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不">
+<meta property="og:description" content="Redis Cluster  Cluster 是分割数据到多个Redis实例的处理过程,因此每个实例只保存key的一个子集 优点  通过利用多台计算机内存,可以构造更大的数据库 通过利用多台计算机的多核,允许我们扩展计算能力 通过利用多台计算机的网络适配器,可以扩展网络带宽   Cluster 的不足  涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的Redis实例上时,你就不">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423112023008.png">
-<meta property="article:published_time" content="2021-12-09T10:00:25.000Z">
-<meta property="article:modified_time" content="2021-12-09T10:00:25.000Z">
+<meta property="article:published_time" content="2021-12-31T16:00:10.000Z">
+<meta property="article:modified_time" content="2021-12-31T16:00:10.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -163,8 +163,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-09 18:00" pubdate>
-        2021年12月9日 晚上
+      <time datetime="2022-01-01 00:00" pubdate>
+        2022年1月1日 凌晨
       </time>
     </span>
   
@@ -227,10 +227,10 @@
 </li>
 <li><strong>Cluster 的不足</strong>
 <ul>
-<li>涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不能对这两个set执行交集操作</li>
-<li>涉及多个key的redis事务不能使用</li>
+<li>涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的Redis实例上时,你就不能对这两个set执行交集操作</li>
+<li>涉及多个key的Redis事务不能使用</li>
 <li>当使用分片时,数据处理较为复杂,比如需要处理多个rdb/aof文件,并且从多个实例和主机备份持久化文件</li>
-<li>增加或删除容量也比较复杂,redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的</li>
+<li>增加或删除容量也比较复杂,Redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的</li>
 </ul>
 </li>
 </ul>
@@ -263,7 +263,7 @@
 <ul>
 <li>高可用测试</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; <span class="hljs-built_in">set</span> msg <span class="hljs-string">&quot;hello,I like your blog!&quot;</span> <span class="hljs-comment"># 设置值</span><br>-&gt; Redirected to slot [6257] located at 172.38.0.12:6379<br>OK<br>172.38.0.12:6379&gt; get msg <span class="hljs-comment">#取值</span><br><span class="hljs-string">&quot;hello,I like your blog!&quot;</span><br><br><span class="hljs-comment"># 用docker stop模拟存储msg值的redis主机宕机</span><br>$ docker ps<br>CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                              NAMES<br>705e41851450        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6376-&gt;6379/tcp, 0.0.0.0:16376-&gt;16379/tcp   redis-6<br>89844e29f714        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6375-&gt;6379/tcp, 0.0.0.0:16375-&gt;16379/tcp   redis-5<br>8f1ead5ca10a        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6374-&gt;6379/tcp, 0.0.0.0:16374-&gt;16379/tcp   redis-4<br>f77c5d93a97a        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   21 minutes ago      Up 21 minutes       0.0.0.0:6373-&gt;6379/tcp, 0.0.0.0:16373-&gt;16379/tcp   redis-3<br>cc2a93a6b4dd        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   21 minutes ago      Up 21 minutes       0.0.0.0:6372-&gt;6379/tcp, 0.0.0.0:16372-&gt;16379/tcp   redis-2<br>6c9c3b813129        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   26 minutes ago      Up 26 minutes       0.0.0.0:6371-&gt;6379/tcp, 0.0.0.0:16371-&gt;16379/tcp   redis-1<br>$ docker stop redis-2<br>redis-2<br><br><span class="hljs-comment"># 重新进入集群交互界面,并尝试获取msg消息</span><br>/data <span class="hljs-comment"># exit</span><br>$ docker <span class="hljs-built_in">exec</span> -it redis-1 /bin/sh<br>/data <span class="hljs-comment"># redis-cli -c</span><br>127.0.0.1:6379&gt; get ms<br>-&gt; Redirected to slot [13186] located at 172.38.0.13:6379<br>(nil)<br>172.38.0.13:6379&gt; get msg<br>-&gt; Redirected to slot [6257] located at 172.38.0.16:6379 <span class="hljs-comment"># 此时由备用机返回msg</span><br><span class="hljs-string">&quot;hello,I like your blog!&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash">127.0.0.1:6379&gt; <span class="hljs-built_in">set</span> msg <span class="hljs-string">&quot;hello,I like your blog!&quot;</span> <span class="hljs-comment"># 设置值</span><br>-&gt; Redirected to slot [6257] located at 172.38.0.12:6379<br>OK<br>172.38.0.12:6379&gt; get msg <span class="hljs-comment">#取值</span><br><span class="hljs-string">&quot;hello,I like your blog!&quot;</span><br><br><span class="hljs-comment"># 用docker stop模拟存储msg值的Redis主机宕机</span><br>$ docker ps<br>CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                              NAMES<br>705e41851450        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6376-&gt;6379/tcp, 0.0.0.0:16376-&gt;16379/tcp   redis-6<br>89844e29f714        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6375-&gt;6379/tcp, 0.0.0.0:16375-&gt;16379/tcp   redis-5<br>8f1ead5ca10a        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   20 minutes ago      Up 20 minutes       0.0.0.0:6374-&gt;6379/tcp, 0.0.0.0:16374-&gt;16379/tcp   redis-4<br>f77c5d93a97a        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   21 minutes ago      Up 21 minutes       0.0.0.0:6373-&gt;6379/tcp, 0.0.0.0:16373-&gt;16379/tcp   redis-3<br>cc2a93a6b4dd        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   21 minutes ago      Up 21 minutes       0.0.0.0:6372-&gt;6379/tcp, 0.0.0.0:16372-&gt;16379/tcp   redis-2<br>6c9c3b813129        redis:5.0.9-alpine3.11   <span class="hljs-string">&quot;docker-entrypoint.s...&quot;</span>   26 minutes ago      Up 26 minutes       0.0.0.0:6371-&gt;6379/tcp, 0.0.0.0:16371-&gt;16379/tcp   redis-1<br>$ docker stop redis-2<br>redis-2<br><br><span class="hljs-comment"># 重新进入集群交互界面,并尝试获取msg消息</span><br>/data <span class="hljs-comment"># exit</span><br>$ docker <span class="hljs-built_in">exec</span> -it redis-1 /bin/sh<br>/data <span class="hljs-comment"># redis-cli -c</span><br>127.0.0.1:6379&gt; get ms<br>-&gt; Redirected to slot [13186] located at 172.38.0.13:6379<br>(nil)<br>172.38.0.13:6379&gt; get msg<br>-&gt; Redirected to slot [6257] located at 172.38.0.16:6379 <span class="hljs-comment"># 此时由备用机返回msg</span><br><span class="hljs-string">&quot;hello,I like your blog!&quot;</span><br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -298,9 +298,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E9%94%81/">
+                      <a href="/Software/Backend/Database/Redis/%E9%AB%98%E5%8F%AF%E7%94%A8/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 锁</span>
+                        <span class="hidden-mobile">Redis 主从复制</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -308,8 +308,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Ops/Prometheus/%E5%8E%9F%E7%90%86/">
-                        <span class="hidden-mobile">Prometheus 原理</span>
+                      <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/">
+                        <span class="hidden-mobile">Redis HyperLogLog</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

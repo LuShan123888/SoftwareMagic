@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Redis 管理服务 启动redis  Redis 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+  <meta name="description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis 管理服务">
 <meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Redis 管理服务 启动redis  Redis 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+<meta property="og:description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-19T13:33:29.000Z">
-<meta property="article:modified_time" content="2021-02-19T13:33:29.000Z">
+<meta property="article:published_time" content="2021-12-31T15:56:22.000Z">
+<meta property="article:modified_time" content="2021-12-31T15:56:22.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-19 21:33" pubdate>
-        2021年2月19日 晚上
+      <time datetime="2021-12-31 23:56" pubdate>
+        2021年12月31日 晚上
       </time>
     </span>
   
@@ -214,7 +214,7 @@
             
             <div class="markdown-body">
               <h1>Redis 管理服务</h1>
-<h2 id="启动redis">启动redis</h2>
+<h2 id="启动Redis">启动Redis</h2>
 <ul>
 <li>Redis 通过监听一个 TCP 端口或者 Unix socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:
 <ul>
@@ -226,39 +226,39 @@
 </ul>
 <h3 id="redis-server">redis-server</h3>
 <ul>
-<li>使用默认配置文件启动redis</li>
+<li>使用默认配置文件启动Redis</li>
 </ul>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">redis-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>指定配置文件启动redis</li>
+<li>指定配置文件启动Redis</li>
 </ul>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">redis-<span class="hljs-keyword">server</span> 配置文件位置<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server 配置文件位置</span><br></code></pre></td></tr></table></figure>
 <h3 id="最大连接数">最大连接数</h3>
 <ul>
 <li>在 Redis2.4 中,最大连接数是被直接硬编码在代码里面的,而在2.6版本中这个值变成可配置的</li>
 <li>maxclients 的默认值是 10000,你也可以在 redis.conf 中对这个值进行修改</li>
 </ul>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino">config get maxclients<br><br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;maxclients&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;10000&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> config get maxclients</span><br>1) &quot;maxclients&quot;<br>2) &quot;10000&quot;<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
 <li>以下实例我们在服务启动时设置最大连接数为 100000:</li>
 </ul>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">redis-<span class="hljs-keyword">server</span> <span class="hljs-comment">--maxclients 100000</span><br></code></pre></td></tr></table></figure>
-<h2 id="连接redis">连接redis</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server --maxclients 100000</span><br></code></pre></td></tr></table></figure>
+<h2 id="连接Redis">连接Redis</h2>
 <h3 id="redis-cli">redis-cli</h3>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">redis-<span class="hljs-keyword">cli</span><br><br>redis-<span class="hljs-keyword">cli</span> -h host -p port -a password<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli</span><br><span class="hljs-meta">$</span><span class="bash"> redis-cli -h host -p port -a password</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
-<li>连接本地的 redis 服务</li>
+<li>连接本地的 Redis 服务</li>
 </ul>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">redis</span>-cli<br><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt;<br><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; PING<br><br><span class="hljs-attribute">PONG</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli</span><br>redis 127.0.0.1:6379&gt;<br>redis 127.0.0.1:6379&gt; PING<br><br>PONG<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以下实例演示了如何连接到主机为 127.0.0.1,端口为 6379 ,密码为 mypass 的 redis 服务上</li>
+<li>以下实例演示了如何连接到主机为 127.0.0.1,端口为 6379 ,密码为 mypass 的 Redis 服务上</li>
 </ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-variable">$redis</span>-cli -h <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">6379</span> -<span class="hljs-selector-tag">a</span> <span class="hljs-string">&quot;mypass&quot;</span><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>&gt;<br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>&gt; PING<br><br>PONG<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli -h 127.0.0.1 -p 6379 -a <span class="hljs-string">&quot;mypass&quot;</span></span><br>redis 127.0.0.1:6379&gt;<br>redis 127.0.0.1:6379&gt; PING<br><br>PONG<br></code></pre></td></tr></table></figure>
 <h2 id="Redis-服务器命令">Redis 服务器命令</h2>
 <ul>
-<li>下表列出了 redis 服务器的相关命令:</li>
+<li>下表列出了 Redis 服务器的相关命令:</li>
 </ul>
 <table>
 <thead>
@@ -270,127 +270,127 @@
 <tbody>
 <tr>
 <td style="text-align:left">1</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-bgrewriteaof.html">BGREWRITEAOF</a>  异步执行一个 AOF(AppendOnly File) 文件重写操作</td>
+<td style="text-align:left">BGREWRITEAOF  异步执行一个 AOF(AppendOnly File) 文件重写操作</td>
 </tr>
 <tr>
 <td style="text-align:left">2</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-bgsave.html">BGSAVE</a>  在后台异步保存当前数据库的数据到磁盘</td>
+<td style="text-align:left">BGSAVE  在后台异步保存当前数据库的数据到磁盘</td>
 </tr>
 <tr>
 <td style="text-align:left">3</td>
-<td style="text-align:left">[CLIENT KILL <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-client-kill.html">ip:port] [ID client-id]</a>  关闭客户端连接</td>
+<td style="text-align:left">CLIENT KILL [ip:port] [ID client-id]  关闭客户端连接</td>
 </tr>
 <tr>
 <td style="text-align:left">4</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-client-list.html">CLIENT LIST</a>  获取连接到服务器的客户端连接列表</td>
+<td style="text-align:left">CLIENT LIST  获取连接到服务器的客户端连接列表</td>
 </tr>
 <tr>
 <td style="text-align:left">5</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-client-getname.html">CLIENT GETNAME</a>  获取连接的名称</td>
+<td style="text-align:left">CLIENT GETNAME  获取连接的名称</td>
 </tr>
 <tr>
 <td style="text-align:left">6</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-client-pause.html">CLIENT PAUSE timeout</a>  在指定时间内终止运行来自客户端的命令</td>
+<td style="text-align:left">CLIENT PAUSE timeout  在指定时间内终止运行来自客户端的命令</td>
 </tr>
 <tr>
 <td style="text-align:left">7</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-client-setname.html">CLIENT SETNAME connection-name</a>  设置当前连接的名称</td>
+<td style="text-align:left">CLIENT SETNAME connection-name  设置当前连接的名称</td>
 </tr>
 <tr>
 <td style="text-align:left">8</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-cluster-slots.html">CLUSTER SLOTS</a>  获取集群节点的映射数组</td>
+<td style="text-align:left">CLUSTER SLOTS  获取集群节点的映射数组</td>
 </tr>
 <tr>
 <td style="text-align:left">9</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-command.html">COMMAND</a>  获取 Redis 命令详情数组</td>
+<td style="text-align:left">COMMAND  获取 Redis 命令详情数组</td>
 </tr>
 <tr>
 <td style="text-align:left">10</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-command-count.html">COMMAND COUNT</a>  获取 Redis 命令总数</td>
+<td style="text-align:left">COMMAND COUNT  获取 Redis 命令总数</td>
 </tr>
 <tr>
 <td style="text-align:left">11</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-command-getkeys.html">COMMAND GETKEYS</a>  获取给定命令的所有键</td>
+<td style="text-align:left">COMMAND GETKEYS  获取给定命令的所有键</td>
 </tr>
 <tr>
 <td style="text-align:left">12</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-time.html">TIME</a>  返回当前服务器时间</td>
+<td style="text-align:left">TIME  返回当前服务器时间</td>
 </tr>
 <tr>
 <td style="text-align:left">13</td>
-<td style="text-align:left">[COMMAND INFO command-name <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-command-info.html">command-name …]</a>  获取指定 Redis 命令描述的数组</td>
+<td style="text-align:left">[COMMAND INFO command-name command-name …]  获取指定 Redis 命令描述的数组</td>
 </tr>
 <tr>
 <td style="text-align:left">14</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-config-get.html">CONFIG GET parameter</a>  获取指定配置参数的值</td>
+<td style="text-align:left">CONFIG GET parameter  获取指定配置参数的值</td>
 </tr>
 <tr>
 <td style="text-align:left">15</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-config-rewrite.html">CONFIG REWRITE</a>  对启动 Redis 服务器时所指定的 redis.conf 配置文件进行改写</td>
+<td style="text-align:left">CONFIG REWRITE  对启动 Redis 服务器时所指定的 redis.conf 配置文件进行改写</td>
 </tr>
 <tr>
 <td style="text-align:left">16</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-config-set.html">CONFIG SET parameter value</a>  修改 redis 配置参数,无需重启</td>
+<td style="text-align:left">CONFIG SET parameter value  修改 redis 配置参数,无需重启</td>
 </tr>
 <tr>
 <td style="text-align:left">17</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-config-resetstat.html">CONFIG RESETSTAT</a>  重置 INFO 命令中的某些统计数据</td>
+<td style="text-align:left">CONFIG RESETSTAT  重置 INFO 命令中的某些统计数据</td>
 </tr>
 <tr>
 <td style="text-align:left">18</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-dbsize.html">DBSIZE</a>  返回当前数据库的 key 的数量</td>
+<td style="text-align:left">DBSIZE  返回当前数据库的 key 的数量</td>
 </tr>
 <tr>
 <td style="text-align:left">19</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-debug-object.html">DEBUG OBJECT key</a>  获取 key 的调试信息</td>
+<td style="text-align:left">DEBUG OBJECT key  获取 key 的调试信息</td>
 </tr>
 <tr>
 <td style="text-align:left">20</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-debug-segfault.html">DEBUG SEGFAULT</a>  让 Redis 服务崩溃</td>
+<td style="text-align:left">DEBUG SEGFAULT  让 Redis 服务崩溃</td>
 </tr>
 <tr>
 <td style="text-align:left">21</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-flushall.html">FLUSHALL</a>  删除所有数据库的所有key</td>
+<td style="text-align:left">FLUSHALL  删除所有数据库的所有key</td>
 </tr>
 <tr>
 <td style="text-align:left">22</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-flushdb.html">FLUSHDB</a>  删除当前数据库的所有key</td>
+<td style="text-align:left">FLUSHDB  删除当前数据库的所有key</td>
 </tr>
 <tr>
 <td style="text-align:left">23</td>
-<td style="text-align:left">[INFO <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-info.html">section]</a>  获取 Redis 服务器的各种信息和统计数值</td>
+<td style="text-align:left">[INFO section]  获取 Redis 服务器的各种信息和统计数值</td>
 </tr>
 <tr>
 <td style="text-align:left">24</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-lastsave.html">LASTSAVE</a>  返回最近一次 Redis 成功将数据保存到磁盘上的时间,以 UNIX 时间戳格式表示</td>
+<td style="text-align:left">LASTSAVE  返回最近一次 Redis 成功将数据保存到磁盘上的时间,以 UNIX 时间戳格式表示</td>
 </tr>
 <tr>
 <td style="text-align:left">25</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-monitor.html">MONITOR</a>  实时打印出 Redis 服务器接收到的命令,调试用</td>
+<td style="text-align:left">MONITOR  实时打印出 Redis 服务器接收到的命令,调试用</td>
 </tr>
 <tr>
 <td style="text-align:left">26</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-role.html">ROLE</a>  返回主从实例所属的角色</td>
+<td style="text-align:left">ROLE  返回主从实例所属的角色</td>
 </tr>
 <tr>
 <td style="text-align:left">27</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-save.html">SAVE</a>  同步保存数据到硬盘</td>
+<td style="text-align:left">SAVE  同步保存数据到硬盘</td>
 </tr>
 <tr>
 <td style="text-align:left">28</td>
-<td style="text-align:left">[SHUTDOWN <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-shutdown.html">NOSAVE] [SAVE]</a>  异步保存数据到硬盘,并关闭服务器</td>
+<td style="text-align:left">SHUTDOWN [NOSAVE] [SAVE]  异步保存数据到硬盘,并关闭服务器</td>
 </tr>
 <tr>
 <td style="text-align:left">29</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-slaveof.html">SLAVEOF host port</a>  将当前服务器转变为指定服务器的从属服务器(slave server)</td>
+<td style="text-align:left">SLAVEOF host port  将当前服务器转变为指定服务器的从属服务器(slave server)</td>
 </tr>
 <tr>
 <td style="text-align:left">30</td>
-<td style="text-align:left">[SLOWLOG subcommand <a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-showlog.html">argument]</a>  管理 redis 的慢日志</td>
+<td style="text-align:left">[SLOWLOG subcommand argument]  管理 redis 的慢日志</td>
 </tr>
 <tr>
 <td style="text-align:left">31</td>
-<td style="text-align:left"><a target="_blank" rel="noopener" href="https://www.runoob.com/redis/server-sync.html">SYNC</a>  用于复制功能(replication)的内部命令</td>
+<td style="text-align:left">SYNC  用于复制功能(replication)的内部命令</td>
 </tr>
 </tbody>
 </table>
@@ -427,9 +427,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/%E6%A6%82%E5%BF%B5/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">
+                      <a href="/Software/Backend/Database/Redis/%E8%AE%A4%E8%AF%81/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数据模型</span>
+                        <span class="hidden-mobile">Redis 认证</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -437,8 +437,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/String/">
-                        <span class="hidden-mobile">Redis String</span>
+                      <a href="/Software/Backend/Database/Redis/%E6%B5%8B%E8%AF%95/">
+                        <span class="hidden-mobile">Redis 测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
