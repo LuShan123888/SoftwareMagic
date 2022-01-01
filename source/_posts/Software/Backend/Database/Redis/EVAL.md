@@ -9,7 +9,7 @@ categories:
 # Redis EVAL命令
 
 - Redis Eval 命令使用 Lua 解释器执行脚本
-- redis Eval 命令基本语法如下:
+- Redis Eval 命令基本语法如下:
 
 ```
 redis 127.0.0.1:6379> EVAL script numkeys key [key ...] arg [arg ...]

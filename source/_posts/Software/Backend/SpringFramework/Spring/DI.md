@@ -96,9 +96,9 @@ public class MyConfig2 {
 ```java
 @Data
 public class TestBean {  
-    
+
     private String message;
-    
+
     @Autowired
     private TestBean(String message) {  
         this.message = message;  
@@ -115,7 +115,7 @@ public class TestBean {  
 ```java
 @Data
 public class TestBean { 
-    
+
     @Autowired //字段注入  
     private String message;  
 } 
@@ -146,7 +146,7 @@ public class TestBean {  
 public class TestBean {  
 
     private String message;  
-    
+
     private List<String> list;  
 
     @Autowired //任意一个或多个参数方法注入  
@@ -154,7 +154,7 @@ public class TestBean {  
         this.message = message;  
         this.list = list;  
     }  
-    
+
 }  
 ```
 
@@ -187,13 +187,13 @@ private Cat cat;
 
 ```java
 public class User {
-    
+
     @Resource(name = "cat2")
     private Cat cat;
-    
+
     @Resource
     private Dog dog;
-    
+
 }
 ```
 
@@ -204,7 +204,7 @@ public class User {
 ```java
 @Component("user")
 public class User {
-    
+
     @Value("test")
     public String name;
 }
@@ -216,14 +216,14 @@ public class User {
 ```java
 @Component
 public class User {
-    
+
     @Value("${user.name}") //从配置文件中取值
     private String name;
     @Value("#{9*2}")  // #{SPEL} Spring表达式
     private int age;
     @Value("男")  // 字面量
     private String sex;
-    
+
 }
 ```
 
@@ -337,9 +337,9 @@ public class User {
 ```java
 @Data
 public class User {
-    
+
     private String name;
-    
+
     private int age;
 }
 ```
@@ -489,13 +489,13 @@ public class UserMapperFactory {  
 
 ```java
 public class UserServiceImpl {  
-    
+
     private UserMapper userMapper;  
 
     public void setUserMapper(UserMapper userMapper) {  
         this.userMapper = userMapper;  
     }  
-    
+
 }
 ```
 
@@ -516,7 +516,7 @@ public class UserServiceImpl {  
 
 ```java
 public class UserMapperFactory {
-    
+
     public UserMapper getUserMapper(){  
         return new UserMapper();  
     }  
@@ -620,7 +620,7 @@ public void test(){
 @Controller("user")
 @Scope("prototype")
 public class User {
-    
+
     @Value("test")
     public String name;
 }

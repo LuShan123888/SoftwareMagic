@@ -178,9 +178,9 @@ container_name: my-web-container
 #### depends_on
 
 - 设置依赖关系
-- `docker-compose up`:以依赖性顺序启动服务,在以下示例中,先启动db和redis,才会启动 web
-- `docker-compose up SERVICE`:自动包含 SERVICE 的依赖项,在以下示例中,docker-compose up web 还将创建并启动 db 和 redis
-- `docker-compose stop`:按依赖关系顺序停止服务,在以下示例中,web 在 db 和 redis 之前停止
+- `docker-compose up`:以依赖性顺序启动服务,在以下示例中,先启动db和Redis,才会启动 web
+- `docker-compose up SERVICE`:自动包含 SERVICE 的依赖项,在以下示例中,docker-compose up web 还将创建并启动 DB 和 Redis
+- `docker-compose stop`:按依赖关系顺序停止服务,在以下示例中,web 在 DB 和 Redis 之前停止
 
 ```yaml
 version: "3.7"
@@ -196,7 +196,7 @@ services:
     image: postgres
 ```
 
-- **注意**:web服务不会等待redis,db完全启动之后才启动
+- **注意**:web服务不会等待Redis,db完全启动之后才启动
 
 #### deploy
 
@@ -235,7 +235,7 @@ services:
     - **replicated**:复制服务,复制指定服务到集群的机器上
     - **global**:全局服务,服务将部署至集群的每个节点
 - **replicas:mode** 为 replicated 时,需要使用此参数配置具体运行的节点数量
-- **resources**:配置服务器资源使用的限制,例如上例子,配置 redis 集群运行需要的 cpu 的百分比 和 内存的占用,避免占用资源过高出现异常
+- **resources**:配置服务器资源使用的限制,例如上例子,配置 Redis 集群运行需要的 cpu 的百分比 和 内存的占用,避免占用资源过高出现异常
 - **restart_policy**:配置如何在退出容器时重新启动容器
     - condition:可选 none,on-failure 或者 any(默认值:any)
     - delay:设置多久之后重启(默认值:0)

@@ -10,24 +10,54 @@ categories:
 
 ## 连接Redis
 
-### Ping
-
-```java
-Jedis jedis = new Jedis("127.0.0.1",6379);
-System.out.println("连接成功");
-//查看服务是否运行
-System.out.println("服务正在运行: "+jedis.ping());
-```
-
-### Connect
+### Jedis
 
 ```java
 Jedis jedis = new Jedis("127.0.0.1", 6379);
-//验证密码,如果没有设置密码这段代码省略
-//        jedis.auth("password");
+// jedis.auth("password"); //如果服务器需要密码, 验证密码
+jedis.select(0)；//选择0号数据库
 jedis.connect(); //连接
 jedis.disconnect(); //断开连接
 jedis.flushAll(); //清空所有的key
+```
+
+### JedisPool
+
+- 每次连接需要创建一个连接、执行完后就关闭，非常浪费资源，所以使用jedispool（连接池）连接 
+
+```java
+//  创建连接池配置对象
+JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+jedisPoolConfig.setMaxTotal(8);
+jedisPoolConfig.setMaxIdle(8);
+// 创建连接池对象
+JedisPool jedisPool = new JedisPool(jedisPoolConfig, "localhost", 6379);
+// 从连接池中获取一个Jedis对象
+Jedis jedis = jedisPool.getResource();
+// 把连接归还到连接池
+jedis.close();
+// 释放连接池对象
+jedisPool.close();
+```
+
+### 测试Redis
+
+```java
+Jedis jedis = new Jedis("127.0.0.1",6379);
+//查看服务是否运行
+System.out.println("服务正在运行: "+jedis.ping());
+//获取客户端信息
+System.out.println(jedis.getClient());
+//清空Redis数据库,相当于执行FLUSHALL命令
+System.out.println(jedis.flushAll());
+//查看Redis信息，相当于执行INFO命令
+System.out.println(jedis.info());
+//获取数据库中key的数量，相当于执行DBSIZE命令
+System.out.println(jedis.dbSize());
+//获取数据库名字
+System.out.println(jedis.getDB());
+//返回当前Redis服务器的时间，相当于执行TIME命令
+System.out.println(jedis.time());
 ```
 
 ## 数据类型
@@ -137,7 +167,7 @@ System.out.println(jedis.sort("sortedList"));
 System.out.println("sortedList排序后:"+jedis.lrange("sortedList", 0, -1));
 ```
 
-### set
+### Set
 
 ```java
 Jedis jedis = new Jedis("127.0.0.1", 6379);
@@ -208,7 +238,7 @@ System.out.println("获取hash中的值:"+jedis.hmget("hash","key3","key4"));
 ## 事务
 
 ```java
-//创建客户端连接服务端,redis服务端需要被开启
+//创建客户端连接服务端,Redis服务端需要被开启
 Jedis jedis = new Jedis("127.0.0.1", 6379);
 jedis.flushDB();
 
@@ -219,7 +249,7 @@ jsonObject.put("name", "java");
 Transaction multi = jedis.multi();
 String result = jsonObject.toJSONString();
 try{
-    //向redis存入一条数据
+    //向Redis存入一条数据
     multi.set("json", result);
     //再存入一条数据
     multi.set("json2", result);
@@ -240,3 +270,36 @@ try{
 
 ```
 
+## jedisCluster
+
+- jedisCluster专门用来连接Redis Cluster集群 
+
+### 连接Cluster集群
+
+```java
+//创建jedisCluster对象，有一个参数 nodes是Set类型，Set包含若干个HostAndPort对象
+Set<HostAndPort> nodes = new HashSet<>();
+nodes.add(new HostAndPort("127.0.0.1",7001));
+nodes.add(new HostAndPort("127.0.0.1",7002));
+nodes.add(new HostAndPort("127.0.0.1",7003));
+nodes.add(new HostAndPort("127.0.0.1",7004));
+nodes.add(new HostAndPort("127.0.0.1",7005));
+nodes.add(new HostAndPort("127.0.0.1",7006));
+JedisCluster jedisCluster = new JedisCluster(nodes);
+```
+
+### 获取指定分片
+
+```java
+// 使用jedisCluster获取集群节点集合
+Map<String, JedisPool> clusterNodes = jedisCluster.getClusterNodes();
+// 获取某个集群节点的连接池
+JedisPool jedisPool = clusterNodes.get(k);
+// 获取Jedis实例
+Jedis connection = jedisPool.getResource();
+// 操作对于分片
+String str = connection.get("test");
+System.out.println(str);
+//关闭连接池
+jedisCluster.close();
+```

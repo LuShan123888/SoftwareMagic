@@ -30,7 +30,7 @@ categories:
 
 ```java
 public class test {
-    
+
     public static void main(String[] args) {
         int n = 4;
         int[] queens = new int[n];

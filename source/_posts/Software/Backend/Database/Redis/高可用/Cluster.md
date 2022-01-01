@@ -15,10 +15,10 @@ categories:
     - 通过利用多台计算机的多核,允许我们扩展计算能力
     - 通过利用多台计算机的网络适配器,可以扩展网络带宽
 - **Cluster 的不足**
-    - 涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的redis实例上时,你就不能对这两个set执行交集操作
-    - 涉及多个key的redis事务不能使用
+    - 涉及多个key的操作通常是不被支持的,例如,当两个set映射到不同的Redis实例上时,你就不能对这两个set执行交集操作
+    - 涉及多个key的Redis事务不能使用
     - 当使用分片时,数据处理较为复杂,比如需要处理多个rdb/aof文件,并且从多个实例和主机备份持久化文件
-    - 增加或删除容量也比较复杂,redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的
+    - 增加或删除容量也比较复杂,Redis集群大多数支持在运行时增加,删除节点的透明数据平衡的能力,但是类似于客户端分片,代理等其他系统则不支持这项特性,然而,一种叫做presharding的技术对此是有帮助的
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-1-20210423112023008.png)
 
@@ -137,7 +137,7 @@ OK
 172.38.0.12:6379> get msg #取值
 "hello,I like your blog!"
 
-# 用docker stop模拟存储msg值的redis主机宕机
+# 用docker stop模拟存储msg值的Redis主机宕机
 $ docker ps
 CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                              NAMES
 705e41851450        redis:5.0.9-alpine3.11   "docker-entrypoint.s..."   20 minutes ago      Up 20 minutes       0.0.0.0:6376->6379/tcp, 0.0.0.0:16376->16379/tcp   redis-6

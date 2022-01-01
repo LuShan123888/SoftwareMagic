@@ -11,7 +11,7 @@ categories:
 - Git的配置文件为`~/.gitconfig`,它可以在用户主目录下(全局配置),也可以在项目目录下(项目配置)
 
  ```bash
-$ git config 
+$ git config
  ```
 
 - `--list`:显示当前的Git配置

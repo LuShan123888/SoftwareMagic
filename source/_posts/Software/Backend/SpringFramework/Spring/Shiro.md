@@ -63,7 +63,7 @@ categories:
 4. Authrizer:授权器,或者访问控制器,它用来决定主体是否有权限进行相应的操作,即控制着用户能访问应用中的哪些功能
 5. Realm:可以有1个或多个 Realm,可以认为是安全实体数据源,即用于获取安全实体的,它可以是 JDBC 实现,也可以是 LDAP 实现,或者内存实现等
 6. SessionManager:如果写过 Servlet 就应该知道 Session 的概念,Session 需要有人去管理它的生命周期,这个组件就是 SessionManager,而 Shiro 并不仅仅可以用在 Web 环境,也可以用在如普通的 JavaSE 环境
-7. SessionDAO:数据访问对象,用于会话的 CRUD,我们可以自定义 SessionDAO 的实现,控制 session 存储的位置,如通过 JDBC 写到数据库或通过 jedis 写入 redis 中,另外 SessionDAO 中可以使用 Cache 进行缓存,以提高性能
+7. SessionDAO:数据访问对象,用于会话的 CRUD,我们可以自定义 SessionDAO 的实现,控制 session 存储的位置,如通过 JDBC 写到数据库或通过 jedis 写入 Redis 中,另外 SessionDAO 中可以使用 Cache 进行缓存,以提高性能
 8. CacheManager:缓存管理器,它来管理如用户,角色,权限等的缓存的,因为这些数据基本上很少去改变,放到缓存中后可以提高访问的性能
 9. Cryptography:密码模块,Shiro 提高了一些常见的加密组件用于如密码加密/解密的
 
@@ -193,7 +193,7 @@ public class ShiroConfig {
         // 过滤链定义,从上向下顺序执行,一般将/**放在最为下边
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        
+
         // 登陆Url，如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
@@ -317,7 +317,7 @@ public class ShiroController {
     public String add() {
         return "user/add";
     }
-    
+
     @RequiresRoles( "admin")
     @RequiresPermissions("userInfo:update")
     @GetMapping("/user/update")

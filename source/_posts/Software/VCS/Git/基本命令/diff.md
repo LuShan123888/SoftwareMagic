@@ -11,7 +11,7 @@ categories:
 **显示暂存区和工作区的差异**
 
 ```shell
-$ git diff 
+$ git diff
 ```
 
 - `--cached`:使用暂存区与其他版本比较,如果未指定其他版本,比较暂存区和上一次提交(commit)的差异

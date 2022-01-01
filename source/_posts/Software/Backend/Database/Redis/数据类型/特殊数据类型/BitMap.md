@@ -420,7 +420,7 @@ long qdCount = redis.bitcount(cacheKey);复制代码
 
 #### 使用场景二:统计活跃用户
 
-- 使用时间作为cacheKey,然后用户ID为offset,如果当日活跃过就设置为1 那么我该如果计算某几天/月/年的活跃用户呢(暂且约定,统计时间内只有有一天在线就称为活跃),有请下一个redis的命令 命令 BITOP operation destkey key [key ...] 说明:对一个或多个保存二进制位的字符串 key 进行位元操作,并将结果保存到 destkey 上, 说明:BITOP 命令支持 AND , OR , NOT , XOR 这四种操作中的任意一种参数
+- 使用时间作为cacheKey,然后用户ID为offset,如果当日活跃过就设置为1 那么我该如果计算某几天/月/年的活跃用户呢(暂且约定,统计时间内只有有一天在线就称为活跃),有请下一个Redis的命令 命令 BITOP operation destkey key [key ...] 说明:对一个或多个保存二进制位的字符串 key 进行位元操作,并将结果保存到 destkey 上, 说明:BITOP 命令支持 AND , OR , NOT , XOR 这四种操作中的任意一种参数
 
 ```
 Map<String,List<Integer>>dateActiveuser = new HashMap<>();
@@ -453,7 +453,7 @@ dateActiveuser.put("2017-01-14",temp05List);
 
 String date[] = {"2017-01-10","2017-01-11","2017-01-12","2017-01-13","2017-01-14"};
 
-//测试数据放入redis中
+//测试数据放入Redis中
 for (int i=0;i<date.length;i++){
     for (int j=0;j<dateActiveuser.get(date[i]).size();j++){
         redis.setbit(date[i], dateActiveuser.get(date[i]).get(j), "1");

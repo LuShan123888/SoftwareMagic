@@ -43,7 +43,7 @@ redis 127.0.0.1:6379> PFCOUNT testkey
 
 ## Redis HyperLogLog 命令
 
-- 下表列出了 redis HyperLogLog 的基本命令:
+- 下表列出了 Redis HyperLogLog 的基本命令:
 
 | 序号 | 命令及描述                                                   |
 | :--- | :----------------------------------------------------------- |

@@ -23,7 +23,7 @@ $ git stash save 'message' #添加一些注释
 $ git stash list
 ```
 
-## pop 
+## pop
 
 - 通过git stash pop命令恢复进度后,会删除当前进度
 

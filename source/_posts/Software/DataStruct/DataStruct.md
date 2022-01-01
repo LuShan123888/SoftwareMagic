@@ -32,7 +32,7 @@ categories:
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-640-20200617183436621.jpeg" alt="img" style="zoom: 67%;" />
 
-- 跳表通过增加的多级索引能够实现高效的动态插入和删除,其效率和红黑树和平衡二叉树不相上下,目前redis和levelDB都有用到跳表
+- 跳表通过增加的多级索引能够实现高效的动态插入和删除,其效率和红黑树和平衡二叉树不相上下,目前Redis和levelDB都有用到跳表
 - 从上图可以看出,索引级的指针域除了指向下一个索引位置的指针,还有一个down指针指向低一级的链表位置,这样才能实现跳跃查询的目的
 
 ## 栈

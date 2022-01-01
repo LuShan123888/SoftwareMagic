@@ -20,7 +20,7 @@ categories:
 git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 
-- 要取回`origin`主机的`next`分支,与本地的`master`分支合并,需要写成下面这样 
+- 要取回`origin`主机的`next`分支,与本地的`master`分支合并,需要写成下面这样
 
 ```shell
 git pull origin next:master

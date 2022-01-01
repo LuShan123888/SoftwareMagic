@@ -196,7 +196,7 @@ private String username;
 - NON_NULL:null不会序列化
 - NON_ABSENT:null不会序列化，但如果类型是AtomicReference，依然会被序列化
 - NON_EMPTY:null、集合数组等没有内容、空字符串等，都不会被序列化
-- NON_DEFAULT:如果字段是默认值，就不会被序列化  
+- NON_DEFAULT:如果字段是默认值，就不会被序列化
 
 #### @JsonSerialize
 

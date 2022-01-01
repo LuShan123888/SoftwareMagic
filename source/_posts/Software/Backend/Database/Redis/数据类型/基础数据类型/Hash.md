@@ -27,11 +27,11 @@ OK
 8) "23000"
 ```
 
-- 在以上实例中,我们设置了 redis 的一些描述信息(name, description, likes, visitors) 到Hash表的 **testKey** 中
+- 在以上实例中,我们设置了 Redis 的一些描述信息(name, description, likes, visitors) 到Hash表的 **testKey** 中
 
 ## Redis Hash命令
 
-- 下表列出了 redis Hash基本的相关命令:
+- 下表列出了 Redis Hash基本的相关命令:
 
 | 序号 | 命令及描述                                                   |
 | :--- | :----------------------------------------------------------- |

@@ -47,7 +47,7 @@ categories:
 
 - 那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的,不同语言实现的应用程序有不同创建Session的方法
 - 当客户端第一次请求服务端,当server端程序调用`HttpServletRequest.getSession(true)`这样的语句时的时候,服务器会为客户端创建一个session,并将通过特殊算法算出一个session的ID,用来标识该session对象
-- Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中),也可以持久化到file,数据库,memcache,redis等,客户端只保存sessionid到Cookie中,而不会保存session
+- Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中),也可以持久化到file,数据库,memcache,Redis等,客户端只保存sessionid到Cookie中,而不会保存session
 - 浏览器的关闭并不会导致Session的删除,只有当超时,程序调用`HttpSession.invalidate()`以及服务端程序关闭才会删除
 
 #### Tomcat中的Session创建
@@ -177,7 +177,7 @@ upstream backserver {
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
-<!-- Spring Session 与redis应用基本环境配置,需要开启redis后才可以使用,不然启动Spring boot会报错 -->
+<!-- Spring Session 与Redis应用基本环境配置,需要开启Redis后才可以使用,不然启动Spring boot会报错 -->
 <dependency>
   <groupId>org.springframework.session</groupId>
   <artifactId>spring-session-data-redis</artifactId>
@@ -192,7 +192,7 @@ upstream backserver {
 </dependency>
 ```
 
-- **修改application.properties全局配置文件(本地要开启redis服务)**
+- **修改application.properties全局配置文件(本地要开启Redis服务)**
 
 ```properties
 spring.redis.database=0
@@ -210,7 +210,7 @@ spring.redis.timeout=10000
 
 ```java
 /**
- * 这个类用配置redis服务器的连接
+ * 这个类用配置Redis服务器的连接
  * maxInactiveIntervalInSeconds为SpringSession的过期时间(单位:秒)
  */
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
