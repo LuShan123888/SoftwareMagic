@@ -37,14 +37,14 @@ System.out.println("Hello"); // 输出Hello并换行
 
 ```java
 public class Main {
-  public static void main(String[] args)     {
-    StringWriter buffer = new StringWriter();
-    try (PrintWriter pw = new PrintWriter(buffer)) {
-      pw.println("Hello");
-      pw.println(12345);
-      pw.println(true);
+    public static void main(String[] args)     {
+        StringWriter buffer = new StringWriter();
+        try (PrintWriter pw = new PrintWriter(buffer)) {
+            pw.println("Hello");
+            pw.println(12345);
+            pw.println(true);
+        }
+        System.out.println(buffer.toString());
     }
-    System.out.println(buffer.toString());
-  }
 }
 ```
