@@ -19,7 +19,7 @@
   <meta name="description" content="Redis 分布式锁  我们在系统中修改已有数据时,需要先读取,然后进行修改保存,此时很容易遇到并发问题,由于修改和保存不是原子操作,在并发场景下,部分对数据的操作可能会丢失,在单服务器系统我们常用本地锁来避免并发带来的问题,然而,当服务采用集群方式部署时,本地锁无法在多个服务器之间生效,这时候保证数据的一致性就需要分布式锁来实现 Redis 以其高性能著称,但使用其实现分布式锁来解决并发仍存在一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis 分布式锁">
-<meta property="og:url" content="https://softwaremagic.lushan.tk/Software/Backend/Database/Redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Backend/Database/Redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Redis 分布式锁  我们在系统中修改已有数据时,需要先读取,然后进行修改保存,此时很容易遇到并发问题,由于修改和保存不是原子操作,在并发场景下,部分对数据的操作可能会丢失,在单服务器系统我们常用本地锁来避免并发带来的问题,然而,当服务采用集群方式部署时,本地锁无法在多个服务器之间生效,这时候保证数据的一致性就需要分布式锁来实现 Redis 以其高性能著称,但使用其实现分布式锁来解决并发仍存在一">
 <meta property="og:locale" content="zh_CN">
@@ -74,7 +74,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tk","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
