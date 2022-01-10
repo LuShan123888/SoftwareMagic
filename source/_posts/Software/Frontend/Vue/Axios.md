@@ -10,10 +10,10 @@ categories:
 ## 安装
 
 ```bash
-yarn add  axios vue-axios
+$ yarn add axios vue-axios
 ```
 
-## 配置
+## 使用
 
 - `/main.js`
 
