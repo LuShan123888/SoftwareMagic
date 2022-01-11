@@ -420,7 +420,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:8000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        // 如果所有的属性不全部配置，一定要执行该方法
+        // 如果所有的属性不全部配置，需要执行该方法
         configuration.applyPermitDefaultValues();
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -476,28 +476,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 ```
-
-## 问题解决
-
-### Spring Security 登陆与登出路径出现跨域问题
-
-**原因**：登陆与登出路径由Spring Security直接接管，并不受Spring MVC 的跨域配置
-
-**解决方法**：使用CorsConfigurationSource进行跨域配置
-
-```java
-@Bean
-CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowCredentials(true);
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8000"));
-    configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
-    // 如果所有的属性不全部配置，一定要执行该方法
-    configuration.applyPermitDefaultValues();
-
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
-}
-```
-

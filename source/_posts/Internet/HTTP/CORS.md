@@ -79,7 +79,7 @@ var xhr = new XMLHttpRequest();
 xhr.withCredentials = true;
 ```
 
-- 否则,即使服务器同意发送Cookie,浏览器也不会发送,或者,服务器要求设置Cookie,浏览器也不会处理
+- 否则,即使服务器同意发送Cookie,浏览器也不会发送,或者服务器要求设置Cookie,浏览器也不会处理
 - 但是,如果省略`withCredentials`设置,有的浏览器还是会一起发送Cookie,这时,可以显式关闭`withCredentials`
 
 ```javascript
@@ -187,7 +187,7 @@ User-Agent: Mozilla/5.0...
 ```
 
 - 上面头信息的`Origin`字段是浏览器自动添加的
-- 下面是服务器正常的回应
+- 下面是服务器正常的响应
 
 ```http
 Access-Control-Allow-Origin: http://api.bob.com
@@ -199,4 +199,4 @@ Content-Type: text/html; charset=utf-8
 ## 与JSONP的log比较
 
 - CORS与JSONP的使用目的相同,但是比JSONP更强大
-- JSONP只支持`GET`请求,CORS支持所有类型的HTTP请求,JSONP的优势在于支持老式浏览器,以及可以向不支持CORS的网站请求数据FFF
+- JSONP只支持`GET`请求,CORS支持所有类型的HTTP请求,JSONP的优势在于支持老式浏览器,以及可以向不支持CORS的网站请求数据
