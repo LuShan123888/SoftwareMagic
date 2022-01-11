@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/logo.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -72,7 +72,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
   </script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
   <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
@@ -152,7 +152,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/img/background.jpg') no-repeat center center;
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -241,15 +241,15 @@
 <ul>
 <li>继续以电商系统为例,在微服务体系架构下,我们的支付与订单都是作为单独的系统存在,订单的支付状态依赖支付系统的通知,假设一个场景:我们的支付系统收到来自第三方支付的通知,告知某个订单支付成功,接收通知接口需要同步调用订单服务变更订单状态接口,更新订单状态为成功,流程图如下,从图中可以看出有两次调用,第三方支付调用支付服务,以及支付服务调用订单服务,这两步调用都可能出现调用超时的情况,此处如果没有分布式事务的保证,就会出现用户订单实际支付情况与最终用户看到的订单支付情况不一致的情况</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-notify-message.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-notify-message.png" srcset="/images/loading.gif" lazyload alt=""></p>
 <h2 id="分布式事务的解决方案">分布式事务的解决方案</h2>
 <h3 id="两阶段提交-XA">两阶段提交/XA</h3>
 <ul>
 <li>两阶段提交(Two-phase Commit,2PC),通过引入协调者(Coordinator)来协调参与者的行为,并最终决定这些参与者是否要真正执行事务</li>
 <li>目前支付宝使用两阶段提交思想实现了分布式事务服务 (Distributed Transaction Service, DTS),它是一个分布式事务框架,用来保障在大规模分布式环境下事务的最终一致性,具体可参考支付宝官方文档:<a target="_blank" rel="noopener" href="https://tech.antfin.com/docs/2/46887">https://tech.antfin.com/docs/2/46887</a></li>
 </ul>
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-44d33643-1004-43a3-b99a-4d688a08d0a1.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-d2ae9932-e2b1-4191-8ee9-e573f36d3895.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-44d33643-1004-43a3-b99a-4d688a08d0a1.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-d2ae9932-e2b1-4191-8ee9-e573f36d3895.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
 <li><strong>流程</strong>
 <ul>
@@ -288,7 +288,7 @@
 <ul>
 <li>本地消息表与业务数据表处于同一个数据库中,这样就能利用本地事务来保证在对这两个表的操作满足事务特性,并且使用了消息队列来保证最终一致性</li>
 </ul>
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-476329d4-e2ef-4f7b-8ac9-a52a6f784600-20210725182331988.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-476329d4-e2ef-4f7b-8ac9-a52a6f784600-20210725182331988.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom: 50%;" />
 <ul>
 <li><strong>流程</strong>
 <ol>
@@ -317,7 +317,7 @@
 <ul>
 <li>目前市面上支持该方案的 MQ 只有阿里的 RocketMQ, 该方案应用场景也比较多,比如用户注册成功后发送邮件,电商系统给用户发送优惠券等需要保证最终一致性的场景</li>
 </ul>
-<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-mq-message.jpg" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-25-mq-message.jpg" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ul>
 <li>大致流程如下:
 <ol>
@@ -382,8 +382,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Algorithm/%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86/">
-                        <span class="hidden-mobile">计算方法 数值积分</span>
+                      <a href="/Software/Ops/Docker/Machine/">
+                        <span class="hidden-mobile">Docker Machine</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
