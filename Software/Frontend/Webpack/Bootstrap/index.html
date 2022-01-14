@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Webpack 整合Bootstrap 安装 1yarn add  jquery popper.js bootstrap 配置  index.js  12import &amp;#x27;bootstrap&amp;#x27;import &quot;.&#x2F;styles&#x2F;index.scss&quot;  index.scss  12@import &quot;style&quot;;@import &quot;~">
+  <meta name="description" content="Webpack 整合Bootstrap 安装 1$ yarn add jquery popper.js bootstrap 配置  index.js  12import &amp;#x27;bootstrap&amp;#x27;import &quot;.&#x2F;styles&#x2F;index.scss&quot;  index.scss  12@import &quot;style&quot;;@import &quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webpack 整合Bootstrap">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Frontend/Webpack/Bootstrap/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Webpack 整合Bootstrap 安装 1yarn add  jquery popper.js bootstrap 配置  index.js  12import &amp;#x27;bootstrap&amp;#x27;import &quot;.&#x2F;styles&#x2F;index.scss&quot;  index.scss  12@import &quot;style&quot;;@import &quot;~">
+<meta property="og:description" content="Webpack 整合Bootstrap 安装 1$ yarn add jquery popper.js bootstrap 配置  index.js  12import &amp;#x27;bootstrap&amp;#x27;import &quot;.&#x2F;styles&#x2F;index.scss&quot;  index.scss  12@import &quot;style&quot;;@import &quot;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-12T07:32:15.000Z">
-<meta property="article:modified_time" content="2021-03-12T07:32:15.000Z">
+<meta property="article:published_time" content="2022-01-11T15:40:36.000Z">
+<meta property="article:modified_time" content="2022-01-11T15:40:36.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-12 15:32" pubdate>
-        2021年3月12日 下午
+      <time datetime="2022-01-11 23:40" pubdate>
+        2022年1月11日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      860 字
+      920 字
     </span>
   
 
@@ -215,7 +215,7 @@
             <div class="markdown-body">
               <h1>Webpack 整合Bootstrap</h1>
 <h2 id="安装">安装</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yarn add  jquery popper.js bootstrap<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ yarn add jquery popper.js bootstrap<br></code></pre></td></tr></table></figure>
 <h2 id="配置">配置</h2>
 <ul>
 <li><code>index.js</code></li>
@@ -228,7 +228,7 @@
 <ul>
 <li><code>webpack.config.js</code></li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>)<br><br>...<br>&#123;<br>    <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(scss)$/</span>,<br>    use: [&#123;<br>        <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-comment">// inject CSS to page</span><br>    &#125;, &#123;<br>        <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;css-loader&#x27;</span>, <span class="hljs-comment">// translates CSS into CommonJS modules</span><br>    &#125;, &#123;<br>        <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;postcss-loader&#x27;</span>, <span class="hljs-comment">// Run post css actions</span><br>        <span class="hljs-attr">options</span>: &#123;<br>            <span class="hljs-attr">plugins</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; <span class="hljs-comment">// post css plugins, can be exported to postcss.config.js</span><br>                <span class="hljs-keyword">return</span> [<br>                    <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;autoprefixer&#x27;</span>)<br>                ];<br>            &#125;<br>        &#125;<br>    &#125;, &#123;<br>        <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;sass-loader&#x27;</span> <span class="hljs-comment">// compiles SASS to CSS</span><br>    &#125;]<br>&#125;,<br>    ...<br><span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-keyword">new</span> webpack.ProvidePlugin(&#123;<br>        <span class="hljs-attr">$</span>: <span class="hljs-string">&#x27;jquery&#x27;</span>,<br>        <span class="hljs-attr">jQuery</span>: <span class="hljs-string">&#x27;jquery&#x27;</span><br>    &#125;)<br>]<br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>)<br><br><span class="hljs-built_in">module</span>.exports = &#123;<br>    <span class="hljs-attr">module</span>: &#123;<br>        <span class="hljs-attr">rules</span>: [<br>            &#123;<br>                <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(scss)$/</span>,<br>                use: [&#123;<br>                    <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-comment">// inject CSS to page</span><br>                &#125;, &#123;<br>                    <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;css-loader&#x27;</span>, <span class="hljs-comment">// translates CSS into CommonJS modules</span><br>                &#125;, &#123;<br>                    <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;postcss-loader&#x27;</span>, <span class="hljs-comment">// Run post css actions</span><br>                    <span class="hljs-attr">options</span>: &#123;<br>                        <span class="hljs-attr">plugins</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; <span class="hljs-comment">// post css plugins, can be exported to postcss.config.js</span><br>                            <span class="hljs-keyword">return</span> [<br>                                <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;autoprefixer&#x27;</span>)<br>                            ];<br>                        &#125;<br>                    &#125;<br>                &#125;, &#123;<br>                    <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;sass-loader&#x27;</span> <span class="hljs-comment">// compiles SASS to CSS</span><br>                &#125;]<br>            &#125;,<br>        ],<br>        <span class="hljs-attr">plugins</span>: [<br>            <span class="hljs-keyword">new</span> webpack.ProvidePlugin(&#123;<br>                <span class="hljs-attr">$</span>: <span class="hljs-string">&#x27;jquery&#x27;</span>,<br>                <span class="hljs-attr">jQuery</span>: <span class="hljs-string">&#x27;jquery&#x27;</span><br>            &#125;)<br>        ]<br>    &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -260,9 +260,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Frontend/Webpack/FontAwesome/">
+                      <a href="/Software/Frontend/Vue/Vue-CLI/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Webpack 整合 Font Awesom5</span>
+                        <span class="hidden-mobile">Vue Vue-CLI</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -270,8 +270,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Frontend/NPM/package.json/">
-                        <span class="hidden-mobile">NPM package.json</span>
+                      <a href="/Software/Frontend/Webpack/FontAwesome/">
+                        <span class="hidden-mobile">Webpack 整合 Font Awesome</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

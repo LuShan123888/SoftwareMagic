@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在application.properties配置文件增加以下配置  1spring.jack">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-11T05:56:05.000Z">
-<meta property="article:modified_time" content="2022-01-11T05:56:05.000Z">
+<meta property="article:published_time" content="2022-01-12T06:43:48.000Z">
+<meta property="article:modified_time" content="2022-01-12T06:43:48.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-11 13:56" pubdate>
-        2022年1月11日 下午
+      <time datetime="2022-01-12 14:43" pubdate>
+        2022年1月12日 下午
       </time>
     </span>
   
@@ -264,9 +264,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;<br>  Query OK, 0 rows affected, 1 warning (0.00 sec)<br><br>mysql&gt; FLUSH PRIVILEGES; # 刷新权限<br>  Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
 <p><strong>报错信息</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
-<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥；可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者AllowPublicKeyRetrieval=True参数以允许客户端从服务器获取公钥；但是需要注意的是 AllowPublicKeyRetrieval=True可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
+<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥；可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥；但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
 <p><strong>解决方法</strong>：在连接url后面添加<code>allowPublicKeyRetrieval=true</code></p>
-<p>同时执行多条sql语句报错</p>
+<h2 id="同时执行多条sql语句报错">同时执行多条sql语句报错</h2>
 <p><strong>报错信息</strong>：java.sql.SQLException: sql injection violation, multi-statement not allow</p>
 <p><strong>原因</strong>：需要设置过滤器 <strong>WallFilter</strong> 的配置: <strong>WallConfig</strong> 的参数 <strong>multiStatementAllow</strong> 为true,默认情况下false不允许批量操作</p>
 <p><strong>解决方法</strong>：配置druid连接池,实现同时执行多条语句</p>
@@ -321,9 +321,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                      <a href="/Software/Backend/SpringFramework/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 初始化</span>
+                        <span class="hidden-mobile">Spring 配置文件</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -331,8 +331,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Maven/%E6%8F%92%E4%BB%B6/">
-                        <span class="hidden-mobile">Maven 插件</span>
+                      <a href="/Software/Backend/SpringFramework/Spring/Druid/">
+                        <span class="hidden-mobile">Spring 整合Druid</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
