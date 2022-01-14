@@ -213,13 +213,10 @@ private void addTokenCookieAndHeader(HttpServletRequest httpRequest, HttpServlet
 
 CSRF Token的防护策略分为三个步骤:
 
-1. **将CSRF Token输出到页面中**:
+1. **将CSRF Token输出到页面中**:首先,用户打开页面的时候,服务器需要给这个用户生成一个Token,该Token通过加密算法对数据进行加密,一般Token都包括随机字符串和时间戳的组合,显然在提交时Token不能再放在Cookie中了,否则又会被攻击者冒用,因此,为了安全起见Token最好还是存在服务器的Session中,之后在每次页面加载时,使用JS遍历整个DOM树,对于DOM中所有的a和form标签后加入Token,这样可以解决大部分的请求,但是对于在页面加载之后动态生成的HTML代码,这种方法就没有作用,还需要程序员在编码时手动添加Token,如果是前后端分离的项目该方法也无法使用
 
-    首先,用户打开页面的时候,服务器需要给这个用户生成一个Token,该Token通过加密算法对数据进行加密,一般Token都包括随机字符串和时间戳的组合,显然在提交时Token不能再放在Cookie中了,否则又会被攻击者冒用,因此,为了安全起见Token最好还是存在服务器的Session中,之后在每次页面加载时,使用JS遍历整个DOM树,对于DOM中所有的a和form标签后加入Token,这样可以解决大部分的请求,但是对于在页面加载之后动态生成的HTML代码,这种方法就没有作用,还需要程序员在编码时手动添加Token,如果是前后端分离的项目该方法也无法使用
+2. **页面提交的请求携带这个Token**:对于GET请求,Token将附在请求地址之后,这样URL 就变成 [http://url?csrftoken=tokenvalue,](http://url/?csrftoken=tokenvalue,) 而对于 POST 请求来说,要在 form 的最后加上:
 
-2. **页面提交的请求携带这个Token**:
-
-    对于GET请求,Token将附在请求地址之后,这样URL 就变成 [http://url?csrftoken=tokenvalue,](http://url/?csrftoken=tokenvalue,) 而对于 POST 请求来说,要在 form 的最后加上:
 
 ```html
   <input type=”hidden” name=”csrftoken” value=”tokenvalue”/>

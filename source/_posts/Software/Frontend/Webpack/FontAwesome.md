@@ -1,19 +1,19 @@
 ---
-title: Webpack 整合 Font Awesom5
+title: Webpack 整合 Font Awesome
 categories:
 - Software
 - Frontend
 - Webpack
 ---
-# Webpack 整合 Font Awesom5
+# Webpack 整合 Font Awesome
 
 ## 安装
 
 ```bash
-yarn add @fortawesome/fontawesome
-yarn add @fortawesome/fontawesome-free-solid
-yarn add @fortawesome/fontawesome-free-regular
-yarn add @fortawesome/fontawesome-free-brands
+$ yarn add @fortawesome/fontawesome
+$ yarn add @fortawesome/fontawesome-free-solid
+$ yarn add @fortawesome/fontawesome-free-regular
+$ yarn add @fortawesome/fontawesome-free-brands
 ```
 
 ## 配置

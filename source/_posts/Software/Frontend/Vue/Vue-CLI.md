@@ -83,7 +83,7 @@ module.exports = {
   outputDir: 'dist',
 
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录
-  assetsDir: 'assets',
+  assetsDir: 'static',
 
   // eslint-loader 是否在保存的时候检查
   lintOnSave: false,
@@ -91,6 +91,7 @@ module.exports = {
   //Webpack配置
   configureWebpack: {
     plugins: [
+        // 引入Jquery
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery'
@@ -117,7 +118,7 @@ module.exports = {
         target: 'http://localhost:8080',
         changeOrigin: true, // 开启跨域
         pathRewrite: { // 重写/api路径
-          '^/api': '/'
+          '^/api': '/' // 重映射路径
         }
       }
     }
@@ -125,25 +126,5 @@ module.exports = {
   transpileDependencies: [
     'vuetify'
   ]
-}
-```
-
-## 代理配置
-
-- vue.config.js
-
-```js
-module.exports = {
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8080', 
-                changeOrigin: true, // 是否支持跨域
-                pathRewrite: {
-                    '^/api': '' // 重映射路径
-                }
-            }
-        }
-    }
 }
 ```

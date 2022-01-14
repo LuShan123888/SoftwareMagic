@@ -10,7 +10,7 @@ categories:
 ## 安装
 
 ```bash
-yarn add  jquery popper.js bootstrap
+$ yarn add jquery popper.js bootstrap
 ```
 
 ## 配置
@@ -34,31 +34,35 @@ import "./styles/index.scss"
 ```js
 const webpack = require('webpack')
 
-...
-{
-    test: /\.(scss)$/,
-    use: [{
-        loader: 'style-loader', // inject CSS to page
-    }, {
-        loader: 'css-loader', // translates CSS into CommonJS modules
-    }, {
-        loader: 'postcss-loader', // Run post css actions
-        options: {
-            plugins: function () { // post css plugins, can be exported to postcss.config.js
-                return [
-                    require('autoprefixer')
-                ];
-            }
-        }
-    }, {
-        loader: 'sass-loader' // compiles SASS to CSS
-    }]
-},
-    ...
-plugins: [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery'
-    })
-]
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.(scss)$/,
+                use: [{
+                    loader: 'style-loader', // inject CSS to page
+                }, {
+                    loader: 'css-loader', // translates CSS into CommonJS modules
+                }, {
+                    loader: 'postcss-loader', // Run post css actions
+                    options: {
+                        plugins: function () { // post css plugins, can be exported to postcss.config.js
+                            return [
+                                require('autoprefixer')
+                            ];
+                        }
+                    }
+                }, {
+                    loader: 'sass-loader' // compiles SASS to CSS
+                }]
+            },
+        ],
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery'
+            })
+        ]
+    },
+};
 ```

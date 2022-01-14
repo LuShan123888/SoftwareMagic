@@ -37,7 +37,7 @@ plugins: [
 **安装**
 
 ```bash
-yarn add -D html-webpack-plugin
+$ yarn add -D html-webpack-plugin
 ```
 
 **配置**

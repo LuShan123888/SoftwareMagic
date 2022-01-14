@@ -12,7 +12,7 @@ categories:
 ### 安装
 
 ```bash
-yarn add -D webpack-dev-server
+$ yarn add -D webpack-dev-server
 ```
 
 ### 配置

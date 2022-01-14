@@ -10,7 +10,7 @@ categories:
 ## 安装
 
 ```bash
-yarn add  vue vue-loader vue-style-loader vue-template-compiler
+$ yarn add  vue vue-loader vue-style-loader vue-template-compiler
 ```
 
 ## 配置
