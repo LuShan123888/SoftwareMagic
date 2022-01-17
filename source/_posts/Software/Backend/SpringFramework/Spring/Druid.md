@@ -61,20 +61,9 @@ categories:
 
 ```yaml
 spring:
-  application:
-    name: tally
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tally_test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
-    #druid 数据源专有配置
-    # 初始化大小，最小，最大
     druid:
-      initialSize: 5
-      minIdle: 5
-      maxActive: 200
       # 配置获取连接等待超时的时间
       maxWait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
@@ -93,44 +82,33 @@ spring:
       poolPreparedStatements: true
       # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
       max-pool-prepared-statement-per-connection-size: 50
-      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+      #配置监控统计拦截的filters，stat:监控统计、log4j:日志记录、wall:防御sql注入
       filters: stat,wall
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-      # 添加IP白名单
-      # allow:
-      # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
-      # deny:
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        allow:
       web-stat-filter:
-        # 添加过滤规则
+        enabled: true
+        exclusions: "*.js,*.css,/druid/*"
         url-pattern: /*
-        # 忽略过滤格式
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      filter:
+        wall:
+          config:
+            # 允许一次执行多条语句
+            multi-statement-allow: true
+            # 允许非基本语句的其他语句
+            none-base-statement-allow: true
 ```
 
 - filters:配置监控统计拦截
     - stat:监控统计
     - log4j:日志记录
     - wall:防御sql注入
-
-- Spring Boot 默认是不注入这些属性值的，需要自己绑定数据源属性到`com.alibaba.druid.pool.DruidDataSource`从而让它们生效
-
-```java
-@Configuration
-public class DruidConfig {
-
-    @ConfigurationProperties(prefix = "spring.datasource")
-    @Bean
-    public DataSource druidDataSource() {
-        return new DruidDataSource();
-    }
-
-}
-```
-
-- `@ConfigurationProperties(prefix = "spring.datasource")`:将全局配置文件中前缀为`spring.datasource`的属性值注入到 `com.alibaba.druid.pool.DruidDataSource`的同名参数中
 
 ### Spring
 
@@ -224,26 +202,26 @@ public class DruidConfig {
 
 ## 配置Druid数据源监控
 
-- Druid 数据源具有监控的功能,并提供了一个 web 界面方便用户查看
-- 配置 Druid 监控管理后台的Servlet
-- 内置 Servlet 容器时没有web.xml文件,所以使用 Spring Boot 的注册 Servlet 方式
+- Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。这个StatViewServlet的用途包括：
+    - 提供监控信息展示的html页面
+    - 提供监控信息的JSON API
+        注意：使用StatViewServlet，建议使用druid 0.2.6以上版本。
 
 ```java
 @Configuration
 public class DruidConfig {
     @Bean
-    public ServletRegistrationBean servletRegistrationBean() {
-        //注意，请求时 /druid/*
-        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+    public ServletRegistrationBean<StatViewServlet> servletRegistrationBean() {
+        // 访问地址
+        ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         Map<String, String> initParm = new HashMap<>();
         //登陆页面账户与密码
         initParm.put(ResourceServlet.PARAM_NAME_USERNAME, "root");
         initParm.put(ResourceServlet.PARAM_NAME_PASSWORD, "123456");
-        //监控后台 允许ip
+        // ip白名单
         initParm.put(ResourceServlet.PARAM_NAME_ALLOW, "");
-        //黑名单
+        // ip黑名单
         initParm.put(ResourceServlet.PARAM_NAME_DENY, "192.168.0.1");
-
         bean.setInitParameters(initParm);
         return bean;
     }
@@ -261,24 +239,24 @@ public class DruidConfig {
 
 **测试**:访问http://localhost:8080/druid/login.html
 
-## 配置Druid web监控 filter过滤器
+## 配置Druid web监控过滤器
 
-- `WebStatFilter`:用于配置Web和Druid数据源之间的管理关联监控统计
+- WebStatFilter用于采集web-jdbc关联监控的数据
 
 ```java
 @Configuration
 public class DruidConfig {
     @Bean
-    public FilterRegistrationBean webStatFilter() {
+    public FilterRegistrationBean<Filter> webStatFilter() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
         bean.setFilter(new WebStatFilter());
-
-        Map<String, String> initPrams = new HashMap<>();
+        Map<String, String> initPrams = Maps.newHashMap();
+        // 排除监控路径
         initPrams.put(WebStatFilter.PARAM_NAME_EXCLUSIONS, "*.js,*.css,/druid/*");
         bean.setInitParameters(initPrams);
 
-        //设置拦截器请求
-        bean.setUrlPatterns(Arrays.asList("/"));
+        // 设置拦截请求地址
+        bean.setUrlPatterns(Collections.singletonList("/*"));
         return bean;
     }
 }
@@ -286,3 +264,45 @@ public class DruidConfig {
 
 - `exclusions`:设置哪些请求进行过滤排除掉,从而不进行统计
 - `setUrlPatterns`:`/*`表示过滤所有请求
+
+## 问题解决
+
+### Mapper中同时执行多条sql语句报错
+
+**报错信息**：java.sql.SQLException: sql injection violation, multi-statement not allow
+
+**原因**：需要设置过滤器 **WallFilter** 的配置: **WallConfig** 的参数 **multiStatementAllow** 为true,默认情况下false不允许批量操作
+
+**解决方法**：配置druid连接池,实现同时执行多条语句
+
+```java
+@Configuration
+public class DruidConfig {
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource druidDataSource() {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        List<Filter> filterList = new ArrayList<>();
+        filterList.add(wallFilter());
+        druidDataSource.setProxyFilters(filterList);
+        return druidDataSource;
+
+    }
+
+    @Bean
+    public WallFilter wallFilter() {
+        WallFilter wallFilter = new WallFilter();
+        wallFilter.setConfig(wallConfig());
+        return wallFilter;
+    }
+
+    @Bean
+    public WallConfig wallConfig() {
+        WallConfig config = new WallConfig();
+        config.setMultiStatementAllow(true);//允许一次执行多条语句
+        config.setNoneBaseStatementAllow(true);//允许非基本语句的其他语句
+        return config;
+    }
+}
+```

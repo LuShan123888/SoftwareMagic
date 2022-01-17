@@ -11,7 +11,7 @@ categories:
 ## 导入MD5.js
 
 ```js
-    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
 ```
 
 ## 字符串转MD5

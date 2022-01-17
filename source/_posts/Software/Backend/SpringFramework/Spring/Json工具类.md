@@ -156,7 +156,7 @@ public class UserDto2 {
 
 - **pattern**:与`SimpleDateFormat`的用法一致
 - **timezone**:时区
-- 可以使用如下全局配置代替,优先级较字段注释更低
+- 如果日期字段为Date可以使用如下全局配置代替,优先级较字段注释更低
 
 ```yml
 spring:

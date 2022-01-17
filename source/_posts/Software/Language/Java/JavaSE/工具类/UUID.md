@@ -1,5 +1,5 @@
 ---
-title: Java 生成随机数
+title: Java UUID
 categories:
 - Software
 - Language
@@ -7,7 +7,7 @@ categories:
 - JavaSE
 - 工具类
 ---
-# Java 生成随机数
+# Java UUID
 
 ## UUID.randomUUID
 
@@ -25,20 +25,3 @@ public class IDUtil {
     }
 }
 ```
-
-## Math.random
-
-- 返回介于[0,1)之间的一个随机数
-
-**实例**
-
-- 返回指定范围的整数
-
-```java
-public class RandomUtil{
-    public static int getRandom(int max,int min){
-        return min + (int)(Math.random() * (max-min+1));
-    }
-}
-```
-

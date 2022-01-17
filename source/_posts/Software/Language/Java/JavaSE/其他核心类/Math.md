@@ -30,7 +30,7 @@ double pow(double a,double b)|	求a的b次幂
 **[例2-5]**:输入圆的半径,计算圆面积,输出结果精确到小数点后3位
 
 ```java
-public class 常用的数学方法 {
+public class Test {
     public static void main(String[] args) {
         String s = JOptionPane.showInputDialog("请输入圆的半径: ");
         double r = Double.parseDouble(s);
@@ -43,4 +43,3 @@ public class 常用的数学方法 {
 **Math.round(11.5) 等于多少？Math.round(-11.5)等于多少？**
 
 - Math.round(11.5)的返回值是12,Math.round(-11.5)的返回值是-11,四舍五入的原理是在参数上加0.5然后进行下取整
-

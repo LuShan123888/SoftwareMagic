@@ -51,21 +51,6 @@ public interface WebMvcConfigurer {
 }
 ```
 
-- 通常我们使用注解@EnableWebMvc在一个@Configuration注解的配置类上，用于对Spring MVC进行配置。用法如下所示 :
-
-```java
-@Configuration
-@EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer {
-    // 根据需求，重写 WebMvcConfigurer 接口所定义的各个方法从而定制Spring MVC
-    @Override
-    public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {
-        // ...
-    }
-
-    // ...
-}
-```
 ## addInterceptors
 
 - 拦截器配置，此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter

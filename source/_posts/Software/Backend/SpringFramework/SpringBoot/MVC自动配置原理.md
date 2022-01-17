@@ -8,9 +8,7 @@ categories:
 ---
 # Spring Boot MVC 自动配置原理
 
-## 官方文档
-
-**地址**:https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration
+- 官方文档地址：https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration
 
 > **Spring MVC Auto-configuration**
 >

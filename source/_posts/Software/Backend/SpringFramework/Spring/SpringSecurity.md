@@ -353,36 +353,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Resource
     private UserLoginSuccessHandler userLoginSuccessHandler;
-
     /**
      * 自定义登录失败处理器
      */
     @Resource
     private UserLoginFailureHandler userLoginFailureHandler;
-
     /**
-     * 自定义注销成功处理器
+     * 自定义登出成功处理器
      */
     @Resource
     private UserLogoutSuccessHandler userLogoutSuccessHandler;
-
     /**
-     * 自定义暂无权限处理器
+     * 自定义鉴权失败处理器
      */
     @Resource
     private UserAuthAccessDeniedHandler userAuthAccessDeniedHandler;
-
     /**
-     * 自定义未登录的处理器
+     * 自定义认证失败的处理器
      */
     @Resource
     private UserAuthenticationEntryPointHandler userAuthenticationEntryPointHandler;
-
     /**
-     * 自定义登录逻辑验证器
+     * 自定义登录认证提供者
      */
     @Resource
     private UserAuthenticationProvider userAuthenticationProvider;
+    /**
+     * 自定义鉴权投票者
+     */
+    @Resource
+    private UserAccessDecisionVoter userAccessDecisionVoter;
+
 
     /**
      * 加密方式
@@ -393,21 +394,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 注入自定义PermissionEvaluator
-     */
-    @Bean
-    public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler() {
-        DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
-        handler.setPermissionEvaluator(new UserPermissionEvaluator());
-        return handler;
-    }
-
-    /**
      * 配置登录验证逻辑
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
-        //这里可启用我们自己的登陆验证逻辑
         auth.authenticationProvider(userAuthenticationProvider);
     }
 
@@ -417,12 +407,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8000"));
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        // 如果所有的属性不全部配置，需要执行该方法
         configuration.applyPermitDefaultValues();
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
@@ -436,42 +423,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // 不进行权限验证的请求或资源(从配置文件中读取)
                 .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()
-                // 其他的需要登陆后才能访问
-                .anyRequest().authenticated()
-                .and()
-                // 配置未登录自定义处理类
-                .httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
-                .and()
-                .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+                // 其他的需要认证后才能访问
+                .anyRequest()
+                .authenticated()
+                // 自定义accessDecisionManager
+                .accessDecisionManager(accessDecisionManager())
+                // 配置自定义认证失败的处理器
+                .and().httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+                .and().exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPointHandler)
                 .and()
                 // 配置登录地址
                 .formLogin()
                 .loginProcessingUrl("/account/signIn")
-                // 配置登录成功自定义处理类
+                // 配置自定义登录成功处理器
                 .successHandler(userLoginSuccessHandler)
-                // 配置登录失败自定义处理类
+                // 配置自定义登录失败处理器
                 .failureHandler(userLoginFailureHandler)
                 .and()
                 // 配置登出地址
                 .logout()
                 .logoutUrl("/account/signOut")
-                // 配置用户登出自定义处理类
+                // 配置自定义登出成功处理器
                 .logoutSuccessHandler(userLogoutSuccessHandler)
-                .and()
-                // 配置没有权限自定义处理类
-                .exceptionHandling().accessDeniedHandler(userAuthAccessDeniedHandler)
-                .and()
+                // 配置自定义鉴权失败处理器
+                .and().exceptionHandling().accessDeniedHandler(userAuthAccessDeniedHandler)
                 // 开启跨域
-                .cors()
-                .and()
-                // 取消跨站请求伪造防护
-                .csrf().disable();
-        // 基于Token不需要session
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // 禁用缓存
-        http.headers().cacheControl();
+                .and().cors()
+                // 允许跨域iframe
+                .and().headers().frameOptions().disable()
+                // 基于Token不需要session
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                // 禁用缓存
+                .and().headers().cacheControl();
+        // 取消跨站请求伪造防护
+        http.csrf().disable();
         // 添加JWT过滤器
         http.addFilter(new JWTAuthenticationTokenFilter(authenticationManager()));
+
+    }
+
+    @Bean
+    public AccessDecisionManager accessDecisionManager() {
+        List<AccessDecisionVoter<?>> decisionVoters
+                = Arrays.asList(
+                new WebExpressionVoter(),
+                userAccessDecisionVoter,
+                new AuthenticatedVoter());
+        return new UnanimousBased(decisionVoters);
     }
 
 }

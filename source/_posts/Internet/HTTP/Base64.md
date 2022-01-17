@@ -183,9 +183,6 @@ public class SysFile {
     private String FileData;
 
     /**创建时间*/
-    /* 将表单提交的日期格式改为数据库中的格式*/
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @JsonProperty("CreateTime")
     private Date CreateTime;
 }

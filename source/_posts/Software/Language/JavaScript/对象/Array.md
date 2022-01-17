@@ -101,10 +101,10 @@ array.indexOf(item,start)
 
 **参数值**
 
-| 参数    | 描述                                                         |
-| :------ | :----------------------------------------------------------- |
-| *item*  | 必须,查找的元素,|
-| *start* | 可选的整数参数,规定在数组中开始检索的位置,它的合法取值是 0 到 stringObject.length - 1,如省略该参数,则将从字符串的首字符开始检索,|
+| 参数  | 描述                                                         |
+| :---- | :----------------------------------------------------------- |
+| item  | 必须,查找的元素,                                             |
+| start | 可选的整数参数,规定在数组中开始检索的位置,它的合法取值是 0 到 stringObject.length - 1,如省略该参数,则将从字符串的首字符开始检索, |
 
 **返回值**
 
@@ -134,11 +134,11 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 
 **参数**
 
-| 参数                  | 描述                                                         |
-| :-------------------- | :----------------------------------------------------------- |
-| *index*               | 必需,规定从何处添加/删除元素,该参数是开始插入和(或)删除的数组元素的下标,必须是数字,|
-| *howmany*             | 可选,规定应该删除多少元素,必须是数字,但可以是 "0",如果未规定此参数,则删除从 index 开始到原数组结尾的所有元素,|
-| *item1*, ..., *itemX* | 可选,要添加到数组的新元素                                   |
+| 参数              | 描述                                                         |
+| :---------------- | :----------------------------------------------------------- |
+| index             | 必需,规定从何处添加/删除元素,该参数是开始插入和(或)删除的数组元素的下标,必须是数字, |
+| howmany           | 可选,规定应该删除多少元素,必须是数字,但可以是 "0",如果未规定此参数,则删除从 index 开始到原数组结尾的所有元素, |
+| item1, ..., itemX | 可选,要添加到数组的新元素                                    |
 
 **返回值**
 
@@ -159,7 +159,7 @@ Banana,Orange,Lemon,Kiwi,Mango
 
 ### toFixed()
 
-toFixed() 方法可把 Number 四舍五入为指定小数位数的数字
+- toFixed() 方法可把 Number 四舍五入为指定小数位数的数字
 
 **语法**
 
@@ -210,29 +210,16 @@ Array.prototype.myUcase=function(){
 
 - 有一个字符串数组,希望转为int数组,并乘以2
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>数组方法的扩展</title>
-</head>
-<body>
-    <script>
-        let arr = ['1', '20', '-5', '3'];
-        console.log(arr)
-        var newarr = arr.map(function (value) {
-            return parseInt(value) * 2;
-        });
-        // 箭头函数简化
-        var newarr = arr.map(value => parseInt(value) * 2);
-        console.log("原数组:", arr);
-        console.log("map的newarr数组:", newarr); // 2 40 -10 6
-    </script>
-</body>
-</html>
+```js
+let arr = ['1', '20', '-5', '3'];
+console.log(arr)
+var newarr = arr.map(function (value) {
+return parseInt(value) * 2;
+});
+// 箭头函数简化
+var newarr = arr.map(value => parseInt(value) * 2);
+console.log("原数组:", arr);
+console.log("map的newarr数组:", newarr); // 2 40 -10 6
 ```
 
 ### reduce()
@@ -243,26 +230,13 @@ reduce(function(a,b),初始值)
 
 - `reduce()`会从左到右依次把数组中的元素用`function(a,b)`处理,并把处理的结果作为下次`function(a,b)`的第一个参数,如果是第一次,会把前两个元素作为计算参数,或者把用户指定的初始值作为起始参数
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>数组方法的扩展</title>
-</head>
-<body>
-    <script>
-        let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        // 原始写法
-        var result = arr2.reduce(function(a,b){
-            return a+b;
-        })
-        // 箭头函数简化
-        var result = arr2.reduce((a, b) => a + b);
-        console.log(result);
-    </script>
-</body>
-</html>
+```js
+let arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// 原始写法
+var result = arr2.reduce(function(a,b){
+return a+b;
+})
+// 箭头函数简化
+var result = arr2.reduce((a, b) => a + b);
+console.log(result);
 ```

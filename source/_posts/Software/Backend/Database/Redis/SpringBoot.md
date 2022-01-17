@@ -21,10 +21,9 @@ categories:
 </dependency>
 ```
 
-## 配置文件(RedisProperties.java)
+## 配置
 
-- Spring Boot所有的配置类,都有一个自动配置类
-- 自动配置类都会绑定一个properties配置文件
+### application.yml
 
 ```yaml
 spring:
@@ -42,79 +41,12 @@ spring:
       shutdown-timeout: 0ms
 ```
 
-## 使用Redis
-
-### RedisTemplate
-
-**methods**
-
-- `opsForValue`:操作字符串
-
-```java
-redisTemplate.opsForValue().set("myKey","myValue");
-System.out.println(redisTemplate.opsForValue().get("myKey"));
-```
-
-- `opsForList`
-- `opsForSet`
-- `opsForHash`
-- `opsForZset`
-- `opsForGeo`
-- `opsForHyperLogLog`
-- `getConnectionFactory`:获取连接
-
-```java
-RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();
-connection.flushDb();
-connection.close();
-```
-
-### 将对象作为value
-
-- 实体类需要实现`Serializable`接口
-
-```java
-public class User implements Serializable {
-    private String name;
-    private int age;
-
-    public User() {
-    }
-
-    public User(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-}
-```
-
-```java
-redisTemplate.opsForValue().set("myKey",new User());
-```
-
 ### 自定义RedisTemplate
 
 ```java
 @Configuration
 public class RedisConfig {
     @Bean
-    @SuppressWarnings("all")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
         template.setConnectionFactory(factory);
@@ -126,7 +58,6 @@ public class RedisConfig {
         jackson2JsonRedisSerializer.setObjectMapper(om);
         //String的序列化配置
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-
         // key采用String的序列化方式
         template.setKeySerializer(stringRedisSerializer);
         // hash的key也采用String的序列化方式
@@ -142,20 +73,53 @@ public class RedisConfig {
 }
 ```
 
-- 注入使用即可,会自动链接到`RedisConfig.java`
+##
+
+## 使用Redis
+
+### RedisTemplate
+
+**methods**
+
+- `opsForValue`:操作字符串
 
 ```java
-@Autowired
-private RedisTemplate<String,Object> redisTemplate;
+public class Test {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Test
+    public void redisTest()  {
+        redisTemplate.opsForValue().set("myKey","myValue");
+        System.out.println(redisTemplate.opsForValue().get("myKey"));
+    }
+}
+```
+
+- `opsForList`
+- `opsForSet`
+- `opsForHash`
+- `opsForZset`
+- `opsForGeo`
+- `opsForHyperLogLog`
+- `getConnectionFactory`
+
+### 将对象作为value
+
+- 实体类需要实现`Serializable`接口
+
+```java
+redisTemplate.opsForValue().set("myKey",new User());
 ```
 
 ## Redis工具类
 
 ```java
 @Component
-public final class RedisUtil {
+public class RedisUtil {
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     // =============================common============================
@@ -188,7 +152,6 @@ public final class RedisUtil {
         return redisTemplate.getExpire(key, TimeUnit.SECONDS);
     }
 
-
     /**
      * 判断key是否存在
      *
@@ -204,23 +167,20 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 删除缓存
      *
      * @param key 可以传一个值 或多个
      */
-    @SuppressWarnings("unchecked")
     public void del(String... key) {
         if (key != null && key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete(CollectionUtils.arrayToList(key));
+                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
             }
         }
     }
-
 
     // ============================String=============================
 
@@ -241,7 +201,6 @@ public final class RedisUtil {
      * @param value 值
      * @return true成功 false失败
      */
-
     public boolean set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
@@ -252,7 +211,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 普通缓存放入并设置时间
      *
@@ -261,7 +219,6 @@ public final class RedisUtil {
      * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
-
     public boolean set(String key, Object value, long time) {
         try {
             if (time > 0) {
@@ -343,7 +300,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * HashSet 并设置时间
      *
@@ -406,7 +362,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 删除hash表中的值
      *
@@ -416,7 +371,6 @@ public final class RedisUtil {
     public void hdel(String key, Object... item) {
         redisTemplate.opsForHash().delete(key, item);
     }
-
 
     /**
      * 判断hash表中是否有该项的值
@@ -429,7 +383,6 @@ public final class RedisUtil {
         return redisTemplate.opsForHash().hasKey(key, item);
     }
 
-
     /**
      * hash递增 如果不存在,就会创建一个 并把新增后的值返回
      *
@@ -441,7 +394,6 @@ public final class RedisUtil {
         return redisTemplate.opsForHash().increment(key, item, by);
     }
 
-
     /**
      * hash递减
      *
@@ -452,7 +404,6 @@ public final class RedisUtil {
     public double hdecr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, -by);
     }
-
 
     // ============================set=============================
 
@@ -470,7 +421,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 根据value从一个set中查询,是否存在
      *
@@ -487,7 +437,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 将数据放入set缓存
      *
@@ -503,7 +452,6 @@ public final class RedisUtil {
             return 0;
         }
     }
-
 
     /**
      * 将set数据放入缓存
@@ -525,7 +473,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 获取set缓存的长度
      *
@@ -540,7 +487,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 移除值为value的
      *
@@ -548,7 +494,6 @@ public final class RedisUtil {
      * @param values 值 可以是多个
      * @return 移除的个数
      */
-
     public long setRemove(String key, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().remove(key, values);
@@ -577,7 +522,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 获取list缓存的长度
      *
@@ -591,7 +535,6 @@ public final class RedisUtil {
             return 0;
         }
     }
-
 
     /**
      * 通过索引 获取list中的值
@@ -608,7 +551,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 将list放入缓存
      *
@@ -624,7 +566,6 @@ public final class RedisUtil {
             return false;
         }
     }
-
 
     /**
      * 将list放入缓存
@@ -646,7 +587,6 @@ public final class RedisUtil {
 
     }
 
-
     /**
      * 将list放入缓存
      *
@@ -664,7 +604,6 @@ public final class RedisUtil {
         }
 
     }
-
 
     /**
      * 将list放入缓存
@@ -686,7 +625,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 根据索引修改list中的某条数据
      *
@@ -695,7 +633,6 @@ public final class RedisUtil {
      * @param value 值
      * @return
      */
-
     public boolean lUpdateIndex(String key, long index, Object value) {
         try {
             redisTemplate.opsForList().set(key, index, value);
@@ -706,7 +643,6 @@ public final class RedisUtil {
         }
     }
 
-
     /**
      * 移除N个值为value
      *
@@ -715,7 +651,6 @@ public final class RedisUtil {
      * @param value 值
      * @return 移除的个数
      */
-
     public long lRemove(String key, long count, Object value) {
         try {
             Long remove = redisTemplate.opsForList().remove(key, count, value);
