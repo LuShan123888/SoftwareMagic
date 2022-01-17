@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Spring MVC WebMvcConfigurer  WebMvcConfigurer配置类其实是Spring内部的一种配置方式,采用JavaBean的形式来代替传统的xml配置文件形式进行针对框架个性化定制,基于java-based方式的Spring MVC配置,需要创建一个配置类并实现WebMvcConfigurer 接口 WebMvcConfigurerAdapter 抽象类是对WebM">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-31T13:55:59.000Z">
-<meta property="article:modified_time" content="2021-12-31T13:55:59.000Z">
+<meta property="article:published_time" content="2022-01-17T12:53:04.000Z">
+<meta property="article:modified_time" content="2022-01-17T12:53:04.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-31 21:55" pubdate>
-        2021年12月31日 晚上
+      <time datetime="2022-01-17 20:53" pubdate>
+        2022年1月17日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.2k 字
+      7.8k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      24 分钟
     </span>
   
 
@@ -219,10 +219,6 @@
 <li><code>WebMvcConfigurerAdapter</code> 抽象类是对<code>WebMvcConfigurer</code>接口的简单抽象(增加了一些默认实现),但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃,官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configurePathMatch</span><span class="hljs-params">(PathMatchConfigurer var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureContentNegotiation</span><span class="hljs-params">(ContentNegotiationConfigurer var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureAsyncSupport</span><span class="hljs-params">(AsyncSupportConfigurer var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureDefaultServletHandling</span><span class="hljs-params">(DefaultServletHandlerConfigurer var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addFormatters</span><span class="hljs-params">(FormatterRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addResourceHandlers</span><span class="hljs-params">(ResourceHandlerRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addCorsMappings</span><span class="hljs-params">(CorsRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addViewControllers</span><span class="hljs-params">(ViewControllerRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureViewResolvers</span><span class="hljs-params">(ViewResolverRegistry var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addArgumentResolvers</span><span class="hljs-params">(List&lt;HandlerMethodArgumentResolver&gt; var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addReturnValueHandlers</span><span class="hljs-params">(List&lt;HandlerMethodReturnValueHandler&gt; var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureMessageConverters</span><span class="hljs-params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">extendMessageConverters</span><span class="hljs-params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">configureHandlerExceptionResolvers</span><span class="hljs-params">(List&lt;HandlerExceptionResolver&gt; var1)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">extendHandlerExceptionResolvers</span><span class="hljs-params">(List&lt;HandlerExceptionResolver&gt; var1)</span></span>;<br><br>    <span class="hljs-function">Validator <span class="hljs-title">getValidator</span><span class="hljs-params">()</span></span>;<br><br>    <span class="hljs-function">MessageCodesResolver <span class="hljs-title">getMessageCodesResolver</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>通常我们使用注解@EnableWebMvc在一个@Configuration注解的配置类上，用于对Spring MVC进行配置。用法如下所示 :</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebMvc</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebMvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br>    <span class="hljs-comment">// 根据需求，重写 WebMvcConfigurer 接口所定义的各个方法从而定制Spring MVC</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configureDefaultServletHandling</span><span class="hljs-params">(<span class="hljs-keyword">final</span> DefaultServletHandlerConfigurer configurer)</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br><br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="addInterceptors">addInterceptors</h2>
 <ul>
 <li>拦截器配置，此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter</li>
@@ -368,9 +364,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/SpringBoot/%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%8E%9F%E7%90%86/">
+                      <a href="/Software/Backend/SpringFramework/Spring/JSON%E5%B7%A5%E5%85%B7%E7%B1%BB/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot 概述与原理</span>
+                        <span class="hidden-mobile">Spring 整合 JSON 工具类</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -378,8 +374,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/stash/">
-                        <span class="hidden-mobile">Git stash</span>
+                      <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">Spring MVC 静态资源处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

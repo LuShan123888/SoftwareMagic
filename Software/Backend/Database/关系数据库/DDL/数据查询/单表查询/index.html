@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 单表查询 选择表中的若干列  选择表中的全部或部分列即关系代数的投影运算  查询指定列  在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列  [例3.16]:查询全体学生的学号与姓名 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的:从Student表中取出一个元">
+  <meta name="description" content="SQL 单表查询 查询指定列  在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列  [例3.16]:查询全体学生的学号与姓名 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的:从Student表中取出一个元组,取出该元组在属性Sno和Sname上的值,形成一个新的元组作为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 单表查询">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 单表查询 选择表中的若干列  选择表中的全部或部分列即关系代数的投影运算  查询指定列  在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列  [例3.16]:查询全体学生的学号与姓名 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的:从Student表中取出一个元">
+<meta property="og:description" content="SQL 单表查询 查询指定列  在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列  [例3.16]:查询全体学生的学号与姓名 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的:从Student表中取出一个元组,取出该元组在属性Sno和Sname上的值,形成一个新的元组作为">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-11T05:39:40.000Z">
-<meta property="article:modified_time" content="2021-09-11T05:39:40.000Z">
+<meta property="article:published_time" content="2022-01-17T06:27:53.000Z">
+<meta property="article:modified_time" content="2022-01-17T06:27:53.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 13:39" pubdate>
-        2021年9月11日 下午
+      <time datetime="2022-01-17 14:27" pubdate>
+        2022年1月17日 下午
       </time>
     </span>
   
@@ -214,10 +214,6 @@
             
             <div class="markdown-body">
               <h1>SQL 单表查询</h1>
-<h2 id="选择表中的若干列">选择表中的若干列</h2>
-<ul>
-<li>选择表中的全部或部分列即关系代数的投影运算</li>
-</ul>
 <h2 id="查询指定列">查询指定列</h2>
 <ul>
 <li>在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的<code>&lt;目标列表达式&gt;</code>中指定要查询的属性列</li>
@@ -234,17 +230,6 @@
 <ul>
 <li><code>&lt;目标列表达式&gt;</code>中各个列的先后顺序 可以与表中的顺序不一致,用户可以根据应用的需要改变列的显示顺序,本例中先列出姓名,再列出学号和所在系</li>
 </ul>
-<h2 id="查询限制">查询限制</h2>
-<ul>
-<li>在使用数据库过程中,常会遇到查询或者导出某个数据表或者查询集的前几条或者后几条记录,LIMIT可以很好的满足需求</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span>  LIMIT [<span class="hljs-keyword">offset</span>,] <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">OFFSET</span> <span class="hljs-keyword">offset</span>;<br></code></pre></td></tr></table></figure>
-<p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15<br><br>#为了检索从某一个偏移量到记录集的结束所有的记录行, 可以指定第二个参数为 -1:<br>SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last<br><br>#如果只给定一个参数, 它表示返回最大的记录行数目:<br>SELECT * FROM table LIMIT 5; //检索前 5 个记录行<br></code></pre></td></tr></table></figure>
-<ul>
-<li>另一种表示方法</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; SELECT * FROM orange LIMIT 2 OFFSET 3;//查询4-5两条记录<br>#等价于<br>mysql&gt; SELECT * FROM orange  LIMIT 3,2;<br></code></pre></td></tr></table></figure>
 <h2 id="查询全部列">查询全部列</h2>
 <ul>
 <li>将表中的所有属性列都选出来有两种方法,一种方法就是在SELECT关键字后列出所有列名;如果列的显示顺序与其在基表中的顺序相同,也可以简单地将&lt;目标列表达式&gt;指定为<code>*</code></li>
@@ -255,7 +240,18 @@
 <li>等价于</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Sname,Ssex,Sage,Sdept<br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure>
-<h2 id="查询经过计算的值">查询经过计算的值</h2>
+<h2 id="LIMIT">LIMIT</h2>
+<ul>
+<li>在使用数据库过程中,常会遇到查询或者导出某个数据表或者查询集的前几条或者后几条记录,LIMIT可以很好的满足需求</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span>  LIMIT [<span class="hljs-keyword">offset</span>,] <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">OFFSET</span> <span class="hljs-keyword">offset</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15<br><br>#为了检索从某一个偏移量到记录集的结束所有的记录行, 可以指定第二个参数为 -1:<br>SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last<br><br>#如果只给定一个参数, 它表示返回最大的记录行数目:<br>SELECT * FROM table LIMIT 5; //检索前 5 个记录行<br></code></pre></td></tr></table></figure>
+<ul>
+<li>另一种表示方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; SELECT * FROM orange LIMIT 2 OFFSET 3;//查询4-5两条记录<br>#等价于<br>mysql&gt; SELECT * FROM orange  LIMIT 3,2;<br></code></pre></td></tr></table></figure>
+<p>查询经过计算的值</p>
 <ul>
 <li>SELECT子句的<code>&lt;目标列表达式&gt;</code>不仅可以是表中的属性列,也可以是表达式</li>
 </ul>
@@ -377,17 +373,12 @@
 </tr>
 </tbody>
 </table>
-<h2 id="选择表中的若干元组">选择表中的若干元组</h2>
-<h2 id="消除取值重复的行">消除取值重复的行</h2>
+<h2 id="DISTINCT">DISTINCT</h2>
 <ul>
 <li>两个本来并不完全相同的元组在投影到指定的某些列上后,可能会变成相同的行,可以用DISTINCT消除它们</li>
 <li>如果没有指定DISTINCT关键词,则默认为ALL,既保留结果表中取值重复的行</li>
 </ul>
 <p><strong>[例3.21]</strong>:查询选修了课程的学生学号</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>执行上面的SELECT语句否结果为</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -434,15 +425,7 @@
 </tr>
 </tbody>
 </table>
-<ul>
-<li>如果没有指定DISTINCT关键词,则默认为ALL,即保留结果表中取值重复的行</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>等价于</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ALL</span>,Sno<br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure>
-<h2 id="查询满足条件的元组">查询满足条件的元组</h2>
+<h2 id="WHERE">WHERE</h2>
 <ul>
 <li>查询满足指定条件的元组可以通过WHERE子句实现</li>
 </ul>
@@ -581,7 +564,7 @@
 <ul>
 <li>将排除&quot;老1”到&quot;老4”,寻找&quot;老5”,&quot;老6”,…</li>
 </ul>
-<h2 id="涉及空值的查询">涉及空值的查询</h2>
+<h3 id="涉及空值的查询">涉及空值的查询</h3>
 <p><strong>[例3.36]</strong>:某些学生选修课程后没有参加考试,所以有选课记录,但没有考试成绩,查询缺少成绩的学生的学号和相应的课程号</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<span class="hljs-comment">/*分数Grade是空值*/</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -589,7 +572,7 @@
 </ul>
 <p><strong>[例3.37]</strong>:查所有有成绩的学生学号和课程号</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
-<h2 id="多重条件查询">多重条件查询</h2>
+<h3 id="多重条件查询">多重条件查询</h3>
 <ul>
 <li>逻辑运算符AND和OR可用来连接多个查询条件,AND的优先级高于OR,但用户可以用括号改变优先级</li>
 </ul>
@@ -599,7 +582,7 @@
 <li>在例3.27中的IN谓词实际上是多个OR运算符的缩写,因此该例中的查询也可以用OR运算符写成如下等价形式:</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Ssex<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CS&#x27;</span> <span class="hljs-keyword">OR</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;MA&#x27;</span> <span class="hljs-keyword">OR</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;IS&#x27;</span>;<br></code></pre></td></tr></table></figure>
-<h2 id="ORDER-BY子句">ORDER BY子句</h2>
+<h2 id="ORDER-BY">ORDER BY</h2>
 <ul>
 <li>用户可以用ORDER BY子句对查询结果按照一个或多个属性列的<code>升序(ASC)</code>或<code>降序(DESC)</code>排序,默认值为升序</li>
 </ul>
@@ -613,65 +596,7 @@
 <ul>
 <li>在SQL SERVER中NULL为最小值</li>
 </ul>
-<h2 id="聚集函数">聚集函数</h2>
-<ul>
-<li>为了进一步方便用户,增强检索功能,SQL提供了许多聚集函数,主要有:</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">查询语句</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">COUNT(*)</td>
-<td style="text-align:center">统计元组个数</td>
-</tr>
-<tr>
-<td style="text-align:center">COUNT([DISTINCTALL]&lt;列名&gt;)</td>
-<td style="text-align:center">统计一列中值的个数</td>
-</tr>
-<tr>
-<td style="text-align:center">SUM([DISTINCTALL]&lt;列名&gt;)</td>
-<td style="text-align:center">统计一列中值的总和</td>
-</tr>
-<tr>
-<td style="text-align:center">AVG([DISTINCTALL]&lt;列名&gt;)</td>
-<td style="text-align:center">计算一列值的平均值(此列必须是数值型)</td>
-</tr>
-<tr>
-<td style="text-align:center">MAX([DISTINCTALL]&lt;列名&gt;)</td>
-<td style="text-align:center">求一列值中的最大值</td>
-</tr>
-<tr>
-<td style="text-align:center">MIN([DISTINCTALL]&lt;列名&gt;)</td>
-<td style="text-align:center">求一列值中的最小值</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>如果指定DISTINCT短语,则表示在计算时要取消指定列中的重复值,如果不指定DISTINCT短语或指定ALL短语(ALL为默认值),则表示不取消重复值</li>
-</ul>
-<p><strong>[例3.41]</strong>:查询学生总人数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure>
-<p><strong>[例3.42]</strong>:查询选修了课程的学生人数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> Sno)<br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>学生每选修一门课,在SC中都有一条相应记录,一个学生要选修多门课程,为避免重复计算学生人数,必须在COUNT函数中用DISTINCT短语</li>
-</ul>
-<p><strong>[例3.43]</strong>:计算选修1号课程的学生平均成绩</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
-<p><strong>[例3.44]</strong>:查询选修1号课程的学生最高分数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
-<p><strong>[例3.45]</strong>:查询学生201215012选修课程的总学分数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SUM</span>(Ccredit)<br><span class="hljs-keyword">FROM</span> SC,Course<br><span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;201215012&#x27;</span> <span class="hljs-keyword">AND</span> SC.Cno<span class="hljs-operator">=</span>Course.Cno;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>当聚集函数遇到空值时,除<code>COUNT(*)</code>外,都跳过空值而只处理非空值,COUNT(*)是对元组进行计数,某个元组的一个或部分列取空值不影响COUNT的统计结果</li>
-<li>WHERE子句中是不能用聚集函数作为条件表达式的,聚集函数只能用于SELECT子句和GROUP BY中的HAVING子句</li>
-</ul>
-<h2 id="GROUP-BY子句">GROUP BY子句</h2>
+<h2 id="GROUP-BY">GROUP BY</h2>
 <ul>
 <li>GROUP BY子句将查询结果按某一列或多列的值分组,值相等的为一组</li>
 <li>对查询结果分组的目的是为了细化聚集函数的作用对象,如果未对查询结果分组,聚集函数将作用于整个查询结果,分组后聚集函数将作用于每一个组,即每一组都有一个函数值</li>
@@ -715,21 +640,87 @@
 <ul>
 <li>如果分组后还要按一定的条件对这些组进行筛选,最终只输出满足指定条件的组,则可以使用HAVING短语指定筛选条件</li>
 </ul>
-<p><strong>[例3.47]</strong>:查询选修了三门以上课程的学生学号</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno<br></code></pre></td></tr></table></figure>
+<p><strong>[例3.48]</strong>:查询平均成绩大于等于90分的学生学号和平均成绩</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno<br><span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里先用GROUP BY子句按Sno进行分组,再用聚集函数COUNT对每一组计数;HAVING短语给出了选择组的条件,只有满足条件的组才会选出来</li>
+<li>这里先用GROUP BY子句按Sno进行分组,再用聚集函数AVG对每一组求平均;HAVING短语给出了选择组的条件,只有满足条件的组才会选出来</li>
 <li>WHERE子句与HAVING短语的区别在于作用对象不同,WHERE子句作用于基本表或视图,从中选择满足条件的元组,HAVING短语作用于组,从中选择满足条件的组</li>
 </ul>
-<p><strong>[例3.48]</strong>:查询平均成绩大于等于90分的学生学号和平均成绩</p>
+<h3 id="聚集函数">聚集函数</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">查询语句</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">COUNT()</td>
+<td style="text-align:center">统计元组个数</td>
+</tr>
+<tr>
+<td style="text-align:center">COUNT([DISTINCT/ALL]&lt;列名&gt;)</td>
+<td style="text-align:center">统计一列中值的个数</td>
+</tr>
+<tr>
+<td style="text-align:center">SUM([DISTINCT/ALL]&lt;列名&gt;)</td>
+<td style="text-align:center">统计一列中值的总和</td>
+</tr>
+<tr>
+<td style="text-align:center">AVG([DISTINCT/ALL]&lt;列名&gt;)</td>
+<td style="text-align:center">计算一列值的平均值(此列必须是数值型)</td>
+</tr>
+<tr>
+<td style="text-align:center">MAX([DISTINCT/ALL]&lt;列名&gt;)</td>
+<td style="text-align:center">求一列值中的最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">MIN([DISTINCT/ALL]&lt;列名&gt;)</td>
+<td style="text-align:center">求一列值中的最小值</td>
+</tr>
+<tr>
+<td style="text-align:center">GROUP_CONCAT()</td>
+<td style="text-align:center">将组中的字符串连接成为具有各种选项的单个字符串</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>下面的语句是不对的:</li>
+<li>如果指定DISTINCT短语,则表示在计算时要取消指定列中的重复值,如果不指定DISTINCT短语或指定ALL短语(ALL为默认值),则表示不取消重复值</li>
+<li>WHERE子句中是不能用聚集函数作为条件表达式的,聚集函数只能用于SELECT子句和GROUP BY中的HAVING子句</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno;<br></code></pre></td></tr></table></figure>
+<p><strong>[例3.41]</strong>:查询学生总人数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>因为WHERE子句中是不能用聚集函数作为条件表达式的,正确的查询语句应该是:</li>
+<li>当聚集函数遇到空值时,除<code>COUNT(*)</code>外,都跳过空值而只处理非空值,<code>COUNT(*)</code>是对元组进行计数,某个元组的一个或部分列取空值不影响COUNT的统计结果</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno<br><span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>[例3.42]</strong>:查询选修了课程的学生人数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> Sno)<br><span class="hljs-keyword">FROM</span> SC;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>学生每选修一门课,在SC中都有一条相应记录,一个学生要选修多门课程,为避免重复计算学生人数,必须在COUNT函数中用DISTINCT短语</li>
+</ul>
+<p><strong>[例3.43]</strong>:计算选修1号课程的学生平均成绩</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>[例3.44]</strong>:查询选修1号课程的学生最高分数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p><strong>[例3.45]</strong>:查询学生201215012选修课程的总学分数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">SUM</span>(Ccredit)<br><span class="hljs-keyword">FROM</span> SC,Course<br><span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;201215012&#x27;</span> <span class="hljs-keyword">AND</span> SC.Cno<span class="hljs-operator">=</span>Course.Cno;<br></code></pre></td></tr></table></figure>
+<p><strong>GROUP_CONCAT()</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <br>    GROUP_CONCAT(<span class="hljs-keyword">DISTINCT</span> country<br>                 <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> country<br>                 SEPARATOR <span class="hljs-string">&#x27;;&#x27;</span>)<br><span class="hljs-keyword">FROM</span> CountryTable<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>DISTINCT子句用于在连接分组之前消除组中的重复值</p>
+</li>
+<li>
+<p>ORDER BY子句允许您在连接之前按升序或降序排序值。 默认情况下，它按升序排序值。 如果要按降序对值进行排序，则需要明确指定<code>DESC</code>选项。</p>
+</li>
+<li>
+<p><code>SEPARATOR</code>指定在组中的值之间插入的文字值。如果不指定分隔符，则<code>GROUP_CONCAT</code>函数使用逗号(<code>，</code>)作为默认分隔符。</p>
+</li>
+<li>
+<p><code>GROUP_CONCAT</code>函数忽略<code>NULL</code>值，如果找不到匹配的行，或者所有参数都为<code>NULL</code>值，则返回<code>NULL</code>。</p>
+</li>
+</ul>
 
             </div>
             <hr>
@@ -767,9 +758,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2/">
+                      <a href="/Software/Backend/SpringFramework/SpringBoot/MVC%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 嵌套查询</span>
+                        <span class="hidden-mobile">Spring Boot MVC 自动配置原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -777,8 +768,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E7%A9%BA%E5%80%BC%E7%9A%84%E5%A4%84%E7%90%86/">
-                        <span class="hidden-mobile">SQL 空值的处理</span>
+                      <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%9F%BA%E4%BA%8E%E6%B4%BE%E7%94%9F%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">SQL 基于派生表的查询</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
