@@ -163,6 +163,530 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/Software/Backend/Database/Redis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" target="_self">
+          Redis 配置文件
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" target="_self">
+          
+          
+            
+          
+          Redis 配置文件
+
+Redis 的配置文件位于 Redis 安装目录下,文件名为 redis.conf
+
+查看配置
+
+可以通过 CONFIG 命令或配置文件查看配置项
+
+1redis 127.0.0.1:6379&gt; CONFIG GET CONFIG_SETTING_NAME
+实例
+1234redis 127.0.0.1:6379&gt; CONFIG GET loglevel1) &q
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:56" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E8%AE%A4%E8%AF%81/" target="_self">
+          Redis 认证
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E8%AE%A4%E8%AF%81/" target="_self">
+          
+          
+            
+          
+          Redis 认证
+
+我们可以通过 Redis 的配置文件设置密码参数,这样客户端连接到 Redis 服务就需要密码验证,这样可以让你的 Redis 服务更安全
+
+配置
+
+可以通过以下命令查看是否设置了密码验证:
+
+123127.0.0.1:6379&gt; CONFIG get requirepass1) &quot;requirepass&quot;2) &quot;&quot;
+
+默认情况下 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:56" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E6%B5%8B%E8%AF%95/" target="_self">
+          Redis 测试
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E6%B5%8B%E8%AF%95/" target="_self">
+          
+          
+            
+          
+          Redis 测试
+ping
+
+使用客户端向 Redis 服务器发送一个 PING ,如果服务器运作正常的话,会返回一个 PONG
+通常用于测试与服务器的连接是否仍然生效,或者用于测量延迟值
+
+1redis 127.0.0.1:6379&gt; PING
+实例
+123456789# 客户端和服务器连接正常redis 127.0.0.1:6379&gt; PINGPONG# 客户端和服务器连接不正常(
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:54" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E6%8C%81%E4%B9%85%E5%8C%96/" target="_self">
+          Redis 持久化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E6%8C%81%E4%B9%85%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Redis 持久化
+RDB(Redis Database)
+机制
+
+在指定的时间间隔内将内存中的数据集快照写入磁盘,也就是Snapshot快照,它恢复时是将快照文件直接读到内存里
+Redis会单独创建(fork)一个子进程来进行持久化,会先将数据写入到一个临时文件中,待持久化过程都结束了,再用这个临时文件替换上次持久化好的文件
+整个过程中,主进程是不进行任何IO操作的,这就确保了极高的性能
+如果需
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:54" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" target="_self">
+          Redis 发布订阅
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" target="_self">
+          
+          
+            
+          
+          Redis 发布订阅
+
+Redis 发布订阅 (pub/sub) 是一种消息通信模式:发送者 (pub) 发送消息,订阅者 (sub) 接收消息
+Redis 客户端可以订阅任意数量的频道
+下图展示了频道 channel1 , 以及订阅这个频道的三个客户端——client2 , client5 和 client1 之间的关系:
+
+
+
+当有新消息通过 PUBLISH 命令发送给频道 channel1 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:53" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/" target="_self">
+          Redis 双写一致性
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/" target="_self">
+          
+          
+            
+          
+          Redis 双写一致性
+一致性
+
+一致性就是数据保持一致,在分布式系统中,可以理解为多个节点中数据的值是一致的
+
+强一致性:这种一致性级别是最符合用户直觉的,它要求系统写入什么,读出来的也会是什么,用户体验好,但实现起来往往对系统的性能影响大
+弱一致性:这种一致性级别约束了系统在写入成功后,不承诺立即可以读到写入的值,也不承诺多久之后数据能够达到一致,但会尽可能地保证到某个时间级别(比如秒级别)后
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:53" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
+          Redis 事务
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
+          
+          
+            
+          
+          Redis 事务
+
+Redis 事务可以一次执行多个命令, 并且带有以下三个重要的保证
+
+批量操作在发送 EXEC 命令前被放入队列缓存
+收到 EXEC 命令后进入事务执行,事务中任意命令执行失败,其余的命令依然被执行
+在事务执行过程,其他客户端提交的命令请求不会插入到事务执行命令序列中
+
+
+一个事务从开始到执行会经历以下三个阶段:
+
+开始事务
+命令入队
+执行事务
+
+
+
+实例:以下是一个事务的例子
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:53" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/Key/" target="_self">
+          Redis key
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/Key/" target="_self">
+          
+          
+            
+          
+          Redis key
+
+Redis的键key只能为字符串
+Redis 键命令用于管理 Redis 的键
+
+1redis 127.0.0.1:6379&gt; COMMAND KEY_NAME
+实例
+1234redis 127.0.0.1:6379&gt; SET testkey redisOKredis 127.0.0.1:6379&gt; DEL testkey(integer) 1
+
+在以上实例
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:53" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Database/Redis/EVAL/" target="_self">
+          Redis EVAL命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Database/Redis/EVAL/" target="_self">
+          
+          
+            
+          
+          Redis EVAL命令
+
+Redis Eval 命令使用 Lua 解释器执行脚本
+Redis Eval 命令基本语法如下:
+
+1redis 127.0.0.1:6379&gt; EVAL script numkeys key [key ...] arg [arg ...]
+
+script:参数是一段 Lua 5.1 脚本程序,脚本不必(也不应该)定义为一个 Lua 函数
+numkeys:用于指定
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-31 23:52" pubdate>
+              2021-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/Database/">Database</a>
+            
+              <a href="/categories/Software/Backend/Database/Redis/">Redis</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/Internet/HTTP/Cookie&amp;Session&amp;Token/" target="_self">
           HTTP Cookie&amp;Session&amp;Token
         </a>
@@ -532,60 +1056,6 @@ test(测试依赖范围):使用此依赖范围的Maven依赖，只对于测试cl
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98/" target="_self">
-          矩阵连乘问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98/" target="_self">
-          
-          
-            
-          
-          矩阵连乘问题
-问题描述
-
-矩阵连乘积的最优计算次序问题, 即对于给定的相继n个矩阵{A1,A2,A3,…,An}(其中, 矩阵Ai的维数为为pi-1 x pi,i=1,2,…,n),如何确定计算矩阵连乘积A1,A2,A3,…,An的计算次序(完全加括号方式), 使得依此次序计算矩阵连乘积需要的数乘次数最少
-
-矩阵乘法
-
-矩阵A和B可乘的条件是矩阵A的列数等于矩阵B的行数, 若A是一个p x q矩阵
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/" target="_self">
           最长公共子序列问题
         </a>
@@ -642,25 +1112,25 @@ test(测试依赖范围):使用此依赖范围的Maven依赖，只对于测试cl
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/N%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/" target="_self">
-          N皇后问题
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98/" target="_self">
+          矩阵连乘问题
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/N%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/" target="_self">
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98/" target="_self">
           
           
             
           
-          N皇后问题
+          矩阵连乘问题
 问题描述
 
-在n x n格的棋盘上防止彼此不受攻击的n个皇后,按照国际象棋的规则,皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子,n后问题等价于在n x n格的棋盘上放置n格皇后,任何2个皇后不放在同一行或同一列或同一斜线上
+矩阵连乘积的最优计算次序问题, 即对于给定的相继n个矩阵{A1,A2,A3,…,An}(其中, 矩阵Ai的维数为为pi-1 x pi,i=1,2,…,n),如何确定计算矩阵连乘积A1,A2,A3,…,An的计算次序(完全加括号方式), 使得依此次序计算矩阵连乘积需要的数乘次数最少
 
-算法设计
+矩阵乘法
 
-为了判断一个位置所在的列和两条斜线上是否已经有皇后,使用三个集合columns,diagonals1和diagonals2 分别记录每一列以及
+矩阵A和B可乘的条件是矩阵A的列数等于矩阵B的行数, 若A是一个p x q矩阵
         </a>
       </p>
 
@@ -681,120 +1151,7 @@ test(测试依赖范围):使用此依赖范围的Maven依赖，只对于测试cl
             
               <a href="/categories/Software/Algorithm/">Algorithm</a>
             
-              <a href="/categories/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/">回溯法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/%E6%97%85%E8%A1%8C%E5%94%AE%E8%B4%A7%E5%91%98%E9%97%AE%E9%A2%98/" target="_self">
-          旅行售货员问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/%E6%97%85%E8%A1%8C%E5%94%AE%E8%B4%A7%E5%91%98%E9%97%AE%E9%A2%98/" target="_self">
-          
-          
-            
-          
-          旅行售货员问题
-问题描述
-
-给定一组城市和每对城市之间的距离,访问每个城市一次,然后返回起点,求最短的可能路线
-
-
-算法设计
-
-将城市0(假设为第0个节点)作为起点和终点,由于路线是循环的,所以我们可以把任何一点作为起点
-以DFS(Depth-First-Search)方式开始从源到相邻节点的遍历
-计算每次遍历的距离,跟踪最小距离,并不断更新最小距离存储值,以最低距离返回结果
-
-代码实现
-1234
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E5%9B%9E%E6%BA%AF%E6%B3%95/">回溯法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%9C%80%E4%BC%98%E8%A3%85%E8%BD%BD/" target="_self">
-          最优装载问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%9C%80%E4%BC%98%E8%A3%85%E8%BD%BD/" target="_self">
-          
-          
-            
-          
-          最优装载问题
-问题描述
-
-有一批集装箱要装上一艘载重量为c的轮船,其中集装箱i的重量为wi,最优装载问题要求在装载体积不受限制的情况下,将尽可能多的集装箱装上轮船
-
-代码实现
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849public class Loading &#
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+              <a href="/categories/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
             
           </div>
         
@@ -906,351 +1263,6 @@ Dijkstra算法是解决单源最短路径问题的一个贪心算法,其基本�
               <a href="/categories/Software/Algorithm/">Algorithm</a>
             
               <a href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%9C%80%E7%9F%AD%E5%B9%B3%E5%9D%87%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/" target="_self">
-          最短平均等待时间问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%9C%80%E7%9F%AD%E5%B9%B3%E5%9D%87%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/" target="_self">
-          
-          
-            
-          
-          最短平均等待时间问题
-问题描述
-
-设有n个顾客同时等待同一项服务,顾客i需要的服务时间为ti(1&lt;=i&lt;=n),应如何安排n个顾客的服务次序才能使平均等待时间达到最小？平均等待时间是n个顾客等待服务时间的总和除以n
-
-代码实现
-流程图
-
-123456789101112131415161718192021222324252627282930313233343536373839404142
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%B4%BB%E5%8A%A8%E5%AE%89%E6%8E%92%E9%97%AE%E9%A2%98/" target="_self">
-          活动安排问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%B4%BB%E5%8A%A8%E5%AE%89%E6%8E%92%E9%97%AE%E9%A2%98/" target="_self">
-          
-          
-            
-          
-          活动安排问题
-问题描述
-
-设有n个活动的集合E={1, 2, 3, …, n},其中每个活动都要求使用同一资源,如演讲会场的,而在同一时间内只有一个活动能使用这一资源,每个活动i都有一个要求使用该资源的起始时间si和一个结束时间fi,且si&lt;fi,如果选择了活动i,则它在半开时间区间[si,fi)内占用资源,若区间[si,fi)与区间[sj,fj)不相交,则称活动i与活动j是相容的,也就是说
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
-          背包问题
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" target="_self">
-          
-          
-            
-          
-          背包问题
-0-1 背包问题
-问题描述
-
-给定n种物品和一个背包,物品i的重量是wi,其价值为vi,背包的容量为c,问应如何选择装入背包的中的物品,使得装入背包中的物品的总价值最大
-在选择装入背包的物品时,对每种物品i只有两种选择,即装入背包或不装入背包,不能将物品i装入背包多次,也不能只装入部分的物品i
-
-代码实现
-流程图
-
-123456789101112131415161718192021222
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Algorithm/">Algorithm</a>
-            
-              <a href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/System/Linux/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Linux 初始化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/System/Linux/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
-          
-            
-          
-          Linux 初始化
-CentOS
-1$ docker run -d --name centos -h centos centos:7 /sbin/init
-包含桌面环境和 vnc 服务
-1234$ docker run -d -name centos_vnc \--hostname centos_vnc  \--user 0 -p 6911:6901 \consol/centos-xfce-vnc
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/System/">System</a>
-            
-              <a href="/categories/Software/System/Linux/">Linux</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/MySQL/%E5%A4%87%E4%BB%BD/" target="_self">
-          MySQL 备份
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/%E5%A4%87%E4%BB%BD/" target="_self">
-          
-          
-            
-          
-          MySQL 备份
-
-数据库备份必要性
-
-保证重要数据不丢失
-数据转移
-
-
-数据库备份方法
-
-mysqldump备份工具
-数据库管理工具,如SQLyog
-直接拷贝数据库文件和相关配置文件
-
-
-
-mysqldump
-
-转储数据库
-搜集数据库进行备份
-将数据转移到另一个SQL服务器,不一定是MySQL服务器
-
-导出
-导出一张表
-123mysqldump -u用户名 -p密码 库名 表名 &gt; 文件名
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/config/" target="_self">
-          Git config
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/config/" target="_self">
-          
-          
-            
-          
-          Git config
-
-Git的配置文件为~/.gitconfig,它可以在用户主目录下(全局配置),也可以在项目目录下(项目配置)
-
- 1$ git config
-
---list:显示当前的Git配置
---global:编辑全局配置
-
-设置用户名和邮箱
-12git config --global user.name &quot;用户名&quot;git config --global user.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-31 21:56" pubdate>
-              2021-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/VCS/">VCS</a>
-            
-              <a href="/categories/Software/VCS/Git/">Git</a>
-            
-              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
             
           </div>
         

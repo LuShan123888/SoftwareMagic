@@ -29,8 +29,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-serial.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-parnew.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-cms.png">
-<meta property="article:published_time" content="2021-09-21T14:15:29.000Z">
-<meta property="article:modified_time" content="2021-09-21T14:15:29.000Z">
+<meta property="article:published_time" content="2022-01-22T15:29:41.000Z">
+<meta property="article:modified_time" content="2022-01-22T15:29:41.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -168,8 +168,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-21 22:15" pubdate>
-        2021年9月21日 晚上
+      <time datetime="2022-01-22 23:29" pubdate>
+        2022年1月22日 晚上
       </time>
     </span>
   
@@ -292,7 +292,7 @@
 </ul>
 <h2 id="HotSpot-垃圾收集器">HotSpot 垃圾收集器</h2>
 <p>HotSpot 虚拟机提供了多种垃圾收集器,每种收集器都有各自的特点,虽然我们要对各个收集器进行比较,但并非为了挑选出一个最好的收集器,我们选择的只是对具体应用最合适的收集器</p>
-<h3 id="新生代垃圾收集器">新生代垃圾收集器</h3>
+<h3 id="年轻代垃圾收集器">年轻代垃圾收集器</h3>
 <h4 id="Serial-垃圾收集器-单线程">Serial 垃圾收集器(单线程)</h4>
 <ul>
 <li>只开启<strong>一条</strong> GC 线程进行垃圾回收,并且在垃圾收集过程中停止一切用户线程(Stop The World)</li>
@@ -308,7 +308,7 @@
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-parnew.png" srcset="/images/loading.gif" lazyload alt=""></p>
 <h4 id="Parallel-Scavenge-垃圾收集器-多线程">Parallel Scavenge 垃圾收集器(多线程)</h4>
 <ul>
-<li>Parallel Scavenge 和 ParNew 一样,都是多线程,新生代垃圾收集器,但是两者有巨大的不同点:
+<li>Parallel Scavenge 和 ParNew 一样,都是多线程,年轻代垃圾收集器,但是两者有巨大的不同点:
 <ul>
 <li>Parallel Scavenge:追求 CPU 吞吐量,能够在较短时间内完成指定任务,因此适合没有交互的后台计算</li>
 <li>ParNew:追求降低用户停顿时间,适合交互式应用</li>
@@ -318,12 +318,12 @@
 <li>追求高吞吐量,可以通过减少 GC 执行实际工作的时间,然而,仅仅偶尔运行 GC 意味着每当 GC 运行时将有许多工作要做,因为在此期间积累在堆中的对象数量很高,单个 GC 需要花更多的时间来完成,从而导致更高的暂停时间,而考虑到低暂停时间,最好频繁运行 GC 以便更快速完成,反过来又导致吞吐量下降</li>
 <li>通过参数<code>-XX:GCTimeRadio</code>设置垃圾回收时间占总 CPU 时间的百分比</li>
 <li>通过参数<code>-XX:MaxGCPauseMillis</code>设置垃圾处理过程最久停顿时间</li>
-<li>通过命令<code>-XX:+UseAdaptiveSizePolicy</code>开启自适应策略,我们只要设置好堆的大小和 MaxGCPauseMillis 或 GCTimeRadio,收集器会自动调整新生代的大小,Eden 和 Survivor 的比例,对象进入老年代的年龄,以最大程度上接近我们设置的 MaxGCPauseMillis 或 GCTimeRadio</li>
+<li>通过命令<code>-XX:+UseAdaptiveSizePolicy</code>开启自适应策略,我们只要设置好堆的大小和 MaxGCPauseMillis 或 GCTimeRadio,收集器会自动调整年轻代的大小,Eden 和 Survivor 的比例,对象进入老年代的年龄,以最大程度上接近我们设置的 MaxGCPauseMillis 或 GCTimeRadio</li>
 </ul>
 <h3 id="老年代垃圾收集器">老年代垃圾收集器</h3>
 <h4 id="Serial-Old-垃圾收集器-单线程">Serial Old 垃圾收集器(单线程)</h4>
 <ul>
-<li>Serial Old 收集器是 Serial 的老年代版本,都是单线程收集器,只启用一条 GC 线程,都适合客户端应用,它们唯一的区别就是:Serial Old 工作在老年代,使用&quot;标记-整理”算法,Serial 工作在新生代,使用“标记-复制”算法</li>
+<li>Serial Old 收集器是 Serial 的老年代版本,都是单线程收集器,只启用一条 GC 线程,都适合客户端应用,它们唯一的区别就是:Serial Old 工作在老年代,使用&quot;标记-整理”算法,Serial 工作在年轻代,使用“标记-复制”算法</li>
 </ul>
 <h4 id="Parallel-Old-垃圾收集器-多线程">Parallel Old 垃圾收集器(多线程)</h4>
 <ul>
@@ -355,7 +355,7 @@
 <h3 id="G1-通用垃圾收集器">G1 通用垃圾收集器</h3>
 <ul>
 <li>
-<p>G1 是一款面向服务端应用的垃圾收集器,它没有新生代和老年代的概念,而是将堆划分为一块块独立的 Region,当要进行垃圾收集时,首先估计每个 Region 中垃圾的数量,每次都从垃圾回收价值最大的 Region 开始回收,因此可以获得最大的回收效率</p>
+<p>G1 是一款面向服务端应用的垃圾收集器,它没有年轻代和老年代的概念,而是将堆划分为一块块独立的 Region,当要进行垃圾收集时,首先估计每个 Region 中垃圾的数量,每次都从垃圾回收价值最大的 Region 开始回收,因此可以获得最大的回收效率</p>
 </li>
 <li>
 <p>从整体上看,G1 是基于&quot;标记-整理”算法实现的收集器,从局部(两个 Region 之间)上看是基于&quot;标记-复制”算法实现的,这意味着运行期间不会产生内存空间碎片</p>
@@ -413,9 +413,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/">
+                      <a href="/Software/Common/Coding/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM 性能调优</span>
+                        <span class="hidden-mobile">Coding</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -423,8 +423,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Common/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">
-                        <span class="hidden-mobile">编程思想</span>
+                      <a href="/Software/Language/Java/JavaSE/JVM/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AD%96%E7%95%A5%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">JVM 垃圾收集策略与算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

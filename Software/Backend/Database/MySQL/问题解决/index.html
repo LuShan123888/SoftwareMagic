@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在application.properties配置文件增加以下配置  1spring.jack">
+  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法 1. 后端使用UTC时间，返回前端时根据时区转化  修改数据库连接配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC  在application.properties配置文件增加以下配置  1spring.jack">
+<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-17T14:13:09.000Z">
-<meta property="article:modified_time" content="2022-01-17T14:13:09.000Z">
+<meta property="article:published_time" content="2022-01-18T05:11:16.000Z">
+<meta property="article:modified_time" content="2022-01-18T05:11:16.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-17 22:13" pubdate>
-        2022年1月17日 晚上
+      <time datetime="2022-01-18 13:11" pubdate>
+        2022年1月18日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      3.4k 字
     </span>
   
 
@@ -217,24 +217,18 @@
 <h2 id="Date显示不正常">Date显示不正常</h2>
 <p><strong>原因</strong>：由于JDBC参数Timezone与Mysql系统时区不一致导致的</p>
 <p><strong>解决方法</strong></p>
-<p><strong>1. 后端使用UTC时间，返回前端时根据时区转化</strong></p>
 <ol>
-<li>修改数据库连接配置</li>
+<li>修改serverTimezone配置</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">jdbc:mysql:<span class="hljs-comment">//localhost:3306/test?serverTimezone=UTC</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span><span class="hljs-regexp">/test?serverTimezone=Asia/</span>Shanghai<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>在<code>application.properties</code>配置文件增加以下配置</li>
+<li>在<code>application.properties</code>配置文件增加JSON时区配置</li>
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.jackson.time-zone</span>=<span class="hljs-string">GMT+8</span><br></code></pre></td></tr></table></figure>
-<p><strong>2. 后端使用本地时间，前端直接显示</strong>,</p>
-<ol>
-<li>修改配置文件<code>/etc/mysql/my.cnf</code></li>
+<ol start="3">
+<li>如果需要使用数据库关于时间的函数,需要修改配置文件<code>/etc/mysql/my.cnf</code></li>
 </ol>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">default</span>-<span class="hljs-type">time</span>-<span class="hljs-type">zone</span> = &quot;+08:00&quot;<br></code></pre></td></tr></table></figure>
-<ol start="2">
-<li>修改数据库连接配置</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">jdbc:mysql:<span class="hljs-comment">//localhost:3306/test?serverTimezone=Asia/Shanghai</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">default-time-zone</span> = <span class="hljs-string">&quot;+08:00&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="Host-is-blocked">Host is blocked</h2>
 <p><strong>报错信息</strong>：Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</p>
 <p><strong>解决方法</strong>：刷新ip缓存记录</p>
@@ -313,9 +307,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/Spring/Druid/">
+                      <a href="/Software/Backend/SpringFramework/Spring/%E7%BC%93%E5%AD%98/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 整合Druid</span>
+                        <span class="hidden-mobile">Spring 缓存</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -323,8 +317,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Excel%E5%A4%84%E7%90%86/">
-                        <span class="hidden-mobile">Java Excel处理</span>
+                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Joda-Time/">
+                        <span class="hidden-mobile">Java Joda-Time</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
