@@ -10,26 +10,16 @@ categories:
 
 ## 简介
 
-- 号称世界上最流行的API框架
-- Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
-- 直接运行,在线测试API
-- 支持多种语言(如:Java,PHP等)
+- 号称世界上最流行的API框架，Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
 - 官网:https://swagger.io/
 
 ## pom.xml
 
 ```xml
-<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 <dependency>
     <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger2</artifactId>
-    <version>2.9.2</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger-ui</artifactId>
-    <version>2.9.2</version>
+    <artifactId>springfox-boot-starter</artifactId>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -38,35 +28,51 @@ categories:
 ### 配置类
 
 ```java
-@Configuration //配置类
-@EnableSwagger2// 开启Swagger2的自动配置
+@Configuration
+@EnableOpenApi
 public class SwaggerConfig {
+
+    @Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.OAS_30)
+            .apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.*.*"))
+            .paths(PathSelectors.any())
+            .build()
+            .securitySchemes(securitySchemes());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+            .title("基于Swagger构建的Rest API文档")
+            .version("3.0")
+            .build();
+    }
+
+    private List<SecurityScheme> securitySchemes() {
+        return CollUtil.newArrayList(new ApiKey("Authorization", "Authorization", "header"));
+    }
+
 }
 ```
 
-#### Docket
+### Docket
 
 - Swagger实例Bean是Docket,所以通过配置Docket实例来配置Swaggger
 
 ```java
 @Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2)
+public Docket createRestApi() {
+    return new Docket(DocumentationType.OAS_30)
         .select()
         .apis(RequestHandlerSelectors.basePackage("com.example.controller"))
         .apis(RequestHandlerSelectors.any())
         .apis(RequestHandlerSelectors.none())
         .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
         .apis(RequestHandlerSelectors.withMethodAnnotation(GetMapping.class))
-        .build();
-}
-
-@Bean
-public Docket docket() {
-    return new Docket(DocumentationType.SWAGGER_2)
-        .select()
-        .apis(RequestHandlerSelectors.basePackage("com.example.swagger.controller"))
-        .paths(PathSelectors.ant("/test/**"))
+        .paths(PathSelectors.any())
+        .groupName("group1")
         .build();
 }
 ```
@@ -83,8 +89,12 @@ public Docket docket() {
     - `none()`:任何请求都不扫描
     - `regex(final String pathRegex)`:通过正则表达式控制
     - `ant(final String antPattern)`:通过ant()控制
+- `enable()`：配置是否启用swagger
+- `groupName()`：配置分组，如果没有配置分组,默认是default，配置多个分组只需要配置多个docket即可
 
-#### apiInfo()配置文档信息
+### apiInfo()
+
+- 文档信息
 
 ```java
 private ApiInfo apiInfo() {
@@ -101,64 +111,17 @@ private ApiInfo apiInfo() {
 }
 ```
 
-#### Swagger 开关
+### securitySchemes()
 
-- 通过`enable()`方法配置是否启用swagger
+- 安全模式
 
 ```java
-@Bean
-public Docket docket(Environment environment) {
-    // 设置要显示swagger的环境
-    Profiles of = Profiles.of("dev", "test");
-    // 判断当前是否处于该环境
-    // 通过 enable() 接收此参数判断是否要显示
-    boolean b = environment.acceptsProfiles(of);
-
-    return new Docket(DocumentationType.SWAGGER_2)
-        .apiInfo(apiInfo())
-        .enable(b) //配置是否启用Swagger,如果是false,在浏览器将无法访问
-        .select()// 通过.select()方法,去配置扫描接口,RequestHandlerSelectors配置如何扫描接口
-        .apis(RequestHandlerSelectors.basePackage("com.example.swagger.controller"))
-        // 配置如何通过path过滤,即这里只扫描请求以/example开头的接口
-        .paths(PathSelectors.ant("/example/**"))
-        .build();
+private List<SecurityScheme> securitySchemes() {
+    return CollUtil.newArrayList(new ApiKey("Authorization", "Authorization", "header"));
 }
 ```
 
-- 当项目处于test,dev环境时显示swagger,处于prod时不显示
-
-#### 配置API分组
-
-- 通过`groupName()`方法即可配置分组
-- 如果没有配置分组,默认是default
-
-```java
-@Bean
-public Docket docket(Environment environment) {
-    return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
-        .groupName("group1")
-        .build();
-}
-```
-
-- 配置多个分组只需要配置多个docket即可
-
-```java
-@Bean
-public Docket docket1(){
-    return new Docket(DocumentationType.SWAGGER_2).groupName("group1").build();
-}
-@Bean
-public Docket docket2(){
-    return new Docket(DocumentationType.SWAGGER_2).groupName("group2").build();
-}
-@Bean
-public Docket docket3(){
-    return new Docket(DocumentationType.SWAGGER_2).groupName("group3").build();
-}
-```
-
-### 常用注解
+## 常用注解
 
 | Swagger注解                                            | 简单说明                                             |
 | ------------------------------------------------------ | ---------------------------------------------------- |
@@ -295,14 +258,14 @@ public void select(){
 }
 ```
 
-### Swagger-UI
+## Swagger-UI
 
 - 首先需要屏蔽以下路径的过滤拦截
 
 ```
 /swagger**/**
 /webjars/**
-/v2/**
+/v3/**
 ```
 
 - 然后需要配置静态资源映射
@@ -310,21 +273,17 @@ public void select(){
 ```java
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    /**
-     * 防止@EnableMvc把默认的静态资源路径覆盖了，手动设置的方式
-     */
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 解决swagger无法访问
-        registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/", "/static", "/public");
-        // 解决swagger的js文件无法访问
+        registry.addResourceHandler("/swagger-ui/").addResourceLocations("classpath:/META-INF/resources/", "/static", "/public");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
 
 ```
 
-#### 默认
+### 默认
 
 - 地址:http://localhost:8080/swagger-ui.html
 
@@ -336,7 +295,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 </dependency>
 ```
 
-#### bootstrap-ui
+### bootstrap-ui
 
 - 地址:http://localhost:8080/doc.html
 
@@ -349,7 +308,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 </dependency>
 ```
 
-#### Layui-ui
+### Layui-ui
 
 - 地址:http://localhost:8080/docs.html
 
