@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-18T05:11:16.000Z">
-<meta property="article:modified_time" content="2022-01-18T05:11:16.000Z">
+<meta property="article:published_time" content="2022-02-07T09:38:35.000Z">
+<meta property="article:modified_time" content="2022-02-07T09:38:35.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-18 13:11" pubdate>
-        2022年1月18日 下午
+      <time datetime="2022-02-07 17:38" pubdate>
+        2022年2月7日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      3k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      9 分钟
     </span>
   
 
@@ -240,7 +240,7 @@
 <ul>
 <li><strong>修改密码认证方式</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql"># 修改密码<br>ALTER USER &#x27;数据库用户名&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;数据库密码&#x27;;<br><br># 修改密码时效<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE NEVER; # 密码永不过期<br>ALTER USER &#x27;root&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED BY &#x27;passowrd&#x27; PASSWORD<br>    EXPIRE DEFAULT; # 默认<br>ALTER USER `test`@`localhost` PASSWORD <br>	EXPIRE;#立即过期<br><br># 修改认证模式<br>ALTER USER &#x27;test&#x27;@&#x27;127.0.0.1&#x27;<br>    IDENTIFIED WITH mysql_native_password # 修改密码为默认认证模式<br>    BY &#x27;数据库密码&#x27;;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH caching_sha2_password;<br>ALTER USER `test`@`localhost` IDENTIFIED WITH sha256_password;<br><br># 刷新MySQL的系统权限相关表<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET `plugin`=&#x27;mysql_native_password&#x27; WHERE user=&#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="拒绝连接">拒绝连接</h2>
 <p><strong>报错信息</strong>：Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</p>
 <p><strong>解决方法</strong></p>
@@ -249,13 +249,9 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">[mysqld]<br># bind-address = 127.0.0.1 # 只允许本机连接<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>查询用户登录权限</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; use mysql;<br>mysql&gt; select host,user from mysql.user;  # 查询user表<br>  +-----------+---------------+<br>  | host      | user          |<br>  +-----------+---------------+<br>  | localhost        | root          |<br>  | localhost | mysql.session |<br>  | localhost | mysql.sys     |<br>  +-----------+---------------+<br>  5 rows in set (0.00 sec)<br></code></pre></td></tr></table></figure>
-<ol start="3">
 <li>如果要登录的用户的 host 不是<code>%</code>则需要修改</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; update mysql.user set host = &#x27;%&#x27; where user = &#x27;root&#x27;;<br>  Query OK, 0 rows affected, 1 warning (0.00 sec)<br><br>mysql&gt; FLUSH PRIVILEGES; # 刷新权限<br>  Query OK, 0 rows affected (0.00 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET host = &#x27;%&#x27; WHERE user = &#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
 <p><strong>报错信息</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
 <p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥；可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥；但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
@@ -274,6 +270,40 @@
 <li>重启服务</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart mysqld.service<br></code></pre></td></tr></table></figure>
+<h2 id="password-方法报错">password()方法报错</h2>
+<p><strong>报错信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements<br></code></pre></td></tr></table></figure>
+<p><strong>原因</strong>：密码安全策略<code>validate_password_policy</code>,<code>validate_password_policy</code>可以取0,1,2三个值:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Value</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0 or LOW</td>
+<td style="text-align:center">Length</td>
+</tr>
+<tr>
+<td style="text-align:center">1 or MEDIUM</td>
+<td style="text-align:center">Length; numeric, lowercase/uppercase, and special characters</td>
+</tr>
+<tr>
+<td style="text-align:center">2 or STRONG</td>
+<td style="text-align:center">Length; numeric, lowercase/uppercase, and special characters; dictionary</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>默认的数值是1,符合长度,且必须含有数字,小写或大写字母,特殊字符,所以初始密码必须符合长度,且必须含有数字,小写或大写字母,特殊字符</li>
+</ul>
+<p><strong>解决方法</strong></p>
+<ul>
+<li>有时候,只是为了自己测试,不想密码设置得那么复杂,比如只想设置root的密码为123456,必须修改两个全局参数:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET GLOBAL validate_password_policy=0;<br>SET GLOBAL validate_password_length=1;<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -307,9 +337,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/Spring/%E7%BC%93%E5%AD%98/">
+                      <a href="/Software/Ops/Sentinel/%E5%88%9D%E5%A7%8B%E5%8C%96/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 缓存</span>
+                        <span class="hidden-mobile">Alibaba Sentinel 初始化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -317,8 +347,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Joda-Time/">
-                        <span class="hidden-mobile">Java Joda-Time</span>
+                      <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                        <span class="hidden-mobile">MySQL 初始化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

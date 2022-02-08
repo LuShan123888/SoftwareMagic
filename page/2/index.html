@@ -163,29 +163,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
-          MySQL 问题解决
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
+          JVM 内存分配与回收策略
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" target="_self">
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
           
           
             
           
-          MySQL 问题解决
-Date显示不正常
-原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的
-解决方法
+          JVM 内存分配与回收策略
 
-修改serverTimezone配置
+对象的内存分配,就是在堆上分配(也可能经过 JIT 编译后被拆散为标量类型并间接在栈上分配),对象主要分配在年轻代的 Eden 区上,少数情况下可能直接分配在老年代,分配规则不固定,取决于当前使用的垃圾收集器组合以及相关的参数配置
+查看详细的 GC 过程需要在运行时加上参数:-XX:+PrintGCDetails
 
-1jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai
 
-在application.properties配置文件增加JSON时区配置
+对象优先在 Eden 分配
 
-1spring.jackso
+大多数情况下,对象在
         </a>
       </p>
 
@@ -193,7 +190,414 @@ Date显示不正常
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-18 13:11" pubdate>
+            <time datetime="2022-01-22 22:49" pubdate>
+              2022-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Java/">Java</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
+          JVM 内存结构
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" target="_self">
+          
+          
+            
+          
+          JVM 内存结构
+
+Java 虚拟机的内存空间分为 5 个部分:
+
+程序计数器
+Java 虚拟机栈
+本地方法栈
+堆
+方法区
+
+
+
+
+注意:JDK 1.8 同 JDK 1.7 比,最大的差别就是:元空间(元数据区)取代了永久代,元空间的本质和永久代类似,都是对 JVM 规范中方法区的实现,不过元空间与永久代之间最大的区别在于:元空间并不在虚拟机中,而是使用本地内存
+程序计数器(PC 寄存器)
+
+定义
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-22 22:49" pubdate>
+              2022-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Java/">Java</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
+          JVM 性能调优
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
+          
+          
+            
+          
+          JVM 性能调优
+在高性能硬件上部署程序,目前主要有两种方式:
+
+通过 64 位 JDK 来使用大内存
+使用若干个 32 位虚拟机建立逻辑集群来利用硬件资源
+
+使用 64 位 JDK 管理大内存
+
+堆内存变大后,虽然垃圾收集的频率减少了,但每次垃圾回收的时间变长,如果堆内存为 14 G,那么每次 Full GC 将长达数十秒,如果 Full GC 频繁发生,那么对于一个网站来说是无法忍受的
+对于用
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-22 22:49" pubdate>
+              2022-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Java/">Java</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%80%BC%E4%BC%A0%E9%80%92%E4%B8%8E%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
+          Java 值传递与引用传递
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/JVM/%E5%80%BC%E4%BC%A0%E9%80%92%E4%B8%8E%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
+          
+          
+            
+          
+          Java 值传递与引用传递
+
+Java参数传递分为值传递和引用传递,基本类型是值传递,封装的对象时引用传递
+
+值传递
+1234567891011public class Demo&#123;    public static void main(String[] args) &#123;        boolean flag = false;        test(flag);        
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-22 22:33" pubdate>
+              2022-01-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Java/">Java</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/SpringFramework/Spring/Swagger/" target="_self">
+          Spring 整合Swagger
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/SpringFramework/Spring/Swagger/" target="_self">
+          
+          
+            
+          
+          Spring 整合Swagger
+简介
+
+号称世界上最流行的API框架，Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
+官网:https://swagger.io/
+
+pom.xml
+12345&lt;dependency&gt;    &lt;groupId&gt;io.springfox&lt;/groupId&gt;    &lt;artifactId&g
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-21 21:14" pubdate>
+              2022-01-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/" target="_self">
+          Java 时间与日期
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/" target="_self">
+          
+          
+            
+          
+          Java 时间与日期
+Date类
+
+在Java中日期用代表毫微秒的一个长整数进行存储表示,也就是日期时间相对格林威治时间(GMT)1970年1月1日零点整过去的毫微秒数,日期的构造方法如下:
+
+Date():创建一个代表当前时间的日期对象
+Date(long date):根据毫微秒值创建日期对象
+
+
+执行日期对象的toString()方法将按星期,月,日,小时,分,秒,年的默认顺序输出相关信息,例
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-19 13:42" pubdate>
+              2022-01-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Java/">Java</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+            
+              <a href="/categories/Software/Language/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/">其他核心类</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Frontend/NPM/package.json/" target="_self">
+          NPM package.json
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Frontend/NPM/package.json/" target="_self">
+          
+          
+            
+          
+          NPM package.json
+
+package.json 位于模块的目录下,用于定义包的属性
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869&#123;  &quot;name&qu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-18 18:28" pubdate>
+              2022-01-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Frontend/">Frontend</a>
+            
+              <a href="/categories/Software/Frontend/NPM/">NPM</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/SpringFramework/Spring/%E7%BC%93%E5%AD%98/" target="_self">
+          Spring 缓存
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/SpringFramework/Spring/%E7%BC%93%E5%AD%98/" target="_self">
+          
+          
+            
+          
+          Spring 缓存
+
+从3.1开始，Spring引入了对Cache的支持
+
+配置
+pom.xml
+1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-18 13:45" pubdate>
               2022-01-18
             </time>
           </div>
@@ -206,9 +610,9 @@ Date显示不正常
             
               <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Backend/Database/">Database</a>
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
             
-              <a href="/categories/Software/Backend/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
             
           </div>
         
@@ -885,428 +1289,6 @@ Spring Boot prov
               <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
             
               <a href="/categories/Software/Backend/SpringFramework/SpringBoot/">SpringBoot</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2/" target="_self">
-          SQL 单表查询
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2/" target="_self">
-          
-          
-            
-          
-          SQL 单表查询
-查询指定列
-
-在很多情况下,用户只对表中的一部分属性列感兴趣,这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列
-
-[例3.16]:查询全体学生的学号与姓名
-12SELECT Sno,SnameFROM Student;
-
-
-该语句的执行过程可以是这样的:从Student表中取出一个元组,取出该元组在属性Sno和Sname上的值,形成一个新的元组作为
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:27" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%9F%BA%E4%BA%8E%E6%B4%BE%E7%94%9F%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2/" target="_self">
-          SQL 基于派生表的查询
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%9F%BA%E4%BA%8E%E6%B4%BE%E7%94%9F%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2/" target="_self">
-          
-          
-            
-          
-          SQL 基于派生表的查询
-
-子查询不仅可以出现在WHERE子句中,还可以出现在FROM子句中,这时子查询生成的临时派生表(derived table)成为主查询的查询对象,例如,例3.57找出每个学生超过他自己选修课程平均成绩的课程号,也可以用如下的查询完成:
-
-123456SELECT Sno,CnoFROM SC,(SELECT Sno,Avg(Grade)         FROM SC  
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:15" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2/" target="_self">
-          SQL 嵌套查询
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2/" target="_self">
-          
-          
-            
-          
-          SQL 嵌套查询
-
-在SQL语言中,一个SELECT-FROM-WHERE语句称为一个查询块,将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询(nested query)例如:
-
-123456SELECT Sname    --外层查询或父查询FROM StudentWHERE Sno IN	(SELECT Sno  --内层查询或子查询     FROM S
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:15" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Database/">Database</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
-            
-              <a href="/categories/Software/Backend/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/Array/" target="_self">
-          JavaScript Array对象
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/Array/" target="_self">
-          
-          
-            
-          
-          JavaScript Array对象
-
-数组对象是使用单独的变量名来存储一系列的值
-数组可以用一个变量名存储所有的值,并且可以用变量名访问任何一个值
-数组中的每个元素都有自己的的ID,以便它可以很容易地被访问到
-
-创建数组
-
-创建一个数组,有三种方法
-下面的代码定义了一个名为 myCars的数组对象:
-
-常规方式
-1234var myCars=new Array();myCars[0]=&quot
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:12" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/">对象</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/String/" target="_self">
-          JavaScript String对象
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/String/" target="_self">
-          
-          
-            
-          
-          JavaScript String对象
-
-JavaScript 字符串用于存储和处理文本
-
-创建String对象
-
-String 对象用于处理文本(字符串)
-String 对象创建方法: new String()
-
-1var txt = new String(&quot;string&quot;);
-
-或者更简单方式:
-
-1var txt = &quot;string&quot;;
-String特
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:11" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/">对象</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E5%87%BD%E6%95%B0/" target="_self">
-          JavaScript 函数
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E5%87%BD%E6%95%B0/" target="_self">
-          
-          
-            
-          
-          JavaScript 函数
-函数定义
-
-JavaScript 使用关键字 function 定义函数
-函数可以通过声明定义,也可以是一个表达式
-
-函数声明
-
-函数声明后不会立即执行,会在我们需要的时候调用到
-
-123function functionName(parameters) &#123;    &#125;
-实例
-123function myFunction(a, b) &#123;   
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:09" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">基本语法</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          JavaScript 数据类型
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          
-          
-            
-          
-          JavaScript 数据类型
-
-值类型(基本类型):字符串(String),数字(Number),布尔(Boolean),对空(Null),未定义(Undefined),Symbol
-引用数据类型:对象(Object),数组(Array),函数(Function)
-
-
-注:Symbol 是 ES6 引入了一种新的原始数据类型,表示独一无二的值
-
-JavaScript 拥有动态类型
-
-JavaSc
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-17 14:07" pubdate>
-              2022-01-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/JavaScript/">JavaScript</a>
-            
-              <a href="/categories/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">基本语法</a>
-            
-              <a href="/categories/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
             
           </div>
         
