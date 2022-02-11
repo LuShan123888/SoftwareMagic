@@ -40,8 +40,8 @@ System.out.println(i3 == i4); // 同 i1 == i4
 
 ```java
 public static void main(String[]args){
-  Integer integer=1; //装箱
-  int i=integer; //拆箱
+  Integer integer=1; // 装箱
+  int i=integer; // 拆箱
 }
 ```
 
