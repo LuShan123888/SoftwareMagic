@@ -163,38 +163,26 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
-          Spring 定时任务
+        <a href="/Software/Backend/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
+          Spring 异步任务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
+        <a href="/Software/Backend/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
           
           
             
           
-          Spring 定时任务
+          Spring 异步任务
+异步任务
+异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功
+@Async
 
-项目开发中经常需要执行一些定时任务,比如需要在每天凌晨的时候,分析一次前一天的日志信息
-Spring为我们提供了异步执行任务调度的方式,提供了两个接口
+在异步方法上添加@Async注解,告诉Spring这是一个异步方法
+假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况
 
-TaskExecutor接口
-TaskScheduler接口
-
-
-两个注解
-
-@EnableScheduling
-@Scheduled
-
-
-
-开启定时任务功能
-
-在主程序上增加@EnableScheduling注解
-
-1
+123456789@Asyncpublic void hello()&#123;  try &#1
         </a>
       </p>
 
@@ -232,26 +220,38 @@ TaskScheduler接口
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
-          Spring 异步任务
+        <a href="/Software/Backend/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
+          Spring 定时任务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
+        <a href="/Software/Backend/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
           
           
             
           
-          Spring 异步任务
-异步任务
-异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功
-@Async
+          Spring 定时任务
 
-在异步方法上添加@Async注解,告诉Spring这是一个异步方法
-假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况
+项目开发中经常需要执行一些定时任务,比如需要在每天凌晨的时候,分析一次前一天的日志信息
+Spring为我们提供了异步执行任务调度的方式,提供了两个接口
 
-123456789@Asyncpublic void hello()&#123;  try &#1
+TaskExecutor接口
+TaskScheduler接口
+
+
+两个注解
+
+@EnableScheduling
+@Scheduled
+
+
+
+开启定时任务功能
+
+在主程序上增加@EnableScheduling注解
+
+1
         </a>
       </p>
 
@@ -404,26 +404,27 @@ lambda 表达式的语法格式如下:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
-          Java 方法引用
+        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
+          Java 函数式接口
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
+        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
           
           
             
           
-          Java 方法引用
+          Java 函数式接口
 
-方法引用通过方法的名字来指向一个方法
-如果除了方法名外,方法参数一致,返回类型相同,因此,我们说两者的方法签名一致,可以直接把方法名作为Lambda表达式传入
-方法引用使用一对冒号::
+函数式接口(Functional Interface)就是一个有且仅有一个抽象方法,但是可以有多个非抽象方法的接口
+函数式接口用注解@FunctionalInterface标注
+FunctionalInterface允许传入:
 
-实例
-
-因为Comparator&lt;String&gt;接口定义的方法是int compare(String, String),和静态方法int cmp(String, String)相
+接口的实现类(传统写法,代码较繁琐)
+Lambda表达式(只需列出参数名,由编译器推断类型)
+符合方法签名的静态方法
+符合方法签名的实例方法(实例
         </a>
       </p>
 
@@ -463,27 +464,26 @@ lambda 表达式的语法格式如下:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
-          Java 函数式接口
+        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
+          Java 方法引用
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
           
           
             
           
-          Java 函数式接口
+          Java 方法引用
 
-函数式接口(Functional Interface)就是一个有且仅有一个抽象方法,但是可以有多个非抽象方法的接口
-函数式接口用注解@FunctionalInterface标注
-FunctionalInterface允许传入:
+方法引用通过方法的名字来指向一个方法
+如果除了方法名外,方法参数一致,返回类型相同,因此,我们说两者的方法签名一致,可以直接把方法名作为Lambda表达式传入
+方法引用使用一对冒号::
 
-接口的实现类(传统写法,代码较繁琐)
-Lambda表达式(只需列出参数名,由编译器推断类型)
-符合方法签名的静态方法
-符合方法签名的实例方法(实例
+实例
+
+因为Comparator&lt;String&gt;接口定义的方法是int compare(String, String),和静态方法int cmp(String, String)相
         </a>
       </p>
 
@@ -1231,46 +1231,27 @@ Tmux为了防止与全局快捷键冲突
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/CSS/%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7/list/" target="_self">
-          CSS list
+        <a href="/Software/Backend/Database/Oracle/%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90/" target="_self">
+          Oracle 概念与组成
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/CSS/%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7/list/" target="_self">
+        <a href="/Software/Backend/Database/Oracle/%E6%A6%82%E5%BF%B5%E4%B8%8E%E7%BB%84%E6%88%90/" target="_self">
           
           
             
           
-          CSS list
-list-style-image
-属性定义及使用说明
-list-style-image 属性使用图像来替换列表项的标记
-注意:请始终规定一个 “list-style-type” 属性以防图像不可用
-属性值
+          Oracle 概念与组成
 
+数据库
 
+Oracle数据库是数据的物理存储,这就包括(数据文件ORA或者DBF, 控制文件, 联机日志, 参数文件)
+其实Oracle数据库的概念和其它数据库不一样, 这里的数据库是一个操作系统只有一个库,可以看作是Oracle就只有一个大数据库
 
-值
-描述
+实例
 
-
-
-
-URL
-图像的路径,
-
-
-none
-默认,无图形被显示,
-
-
-inherit
-规定应该从父元素继承 list-style-image 属性的值,
-
-
-
-
+一个Oracle实例(Oracle Instance)有一系列的后台进程(Backguound Processe
         </a>
       </p>
 
@@ -1289,11 +1270,11 @@ inherit
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Language/">Language</a>
+              <a href="/categories/Software/Backend/">Backend</a>
             
-              <a href="/categories/Software/Language/CSS/">CSS</a>
+              <a href="/categories/Software/Backend/Database/">Database</a>
             
-              <a href="/categories/Software/Language/CSS/%E6%A0%B7%E5%BC%8F%E5%B1%9E%E6%80%A7/">样式属性</a>
+              <a href="/categories/Software/Backend/Database/Oracle/">Oracle</a>
             
           </div>
         
@@ -1308,26 +1289,27 @@ inherit
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Database/Oracle/rownum&amp;rowid/" target="_self">
-          Oracle rownum&amp;rowid
+        <a href="/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/" target="_self">
+          Oracle 表连接
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Database/Oracle/rownum&amp;rowid/" target="_self">
+        <a href="/Software/Backend/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/" target="_self">
           
           
             
           
-          Oracle rownum&amp;rowid
+          Oracle 表连接
+概述
 
-分页的核心就是计算每页多少记录和总页数以及第几页,每一页的数据则只需计算起始的记录和结束记录即可
+即查询的时候同时需要多张表(特别是存在外键关系的), 此时需要多张表之间的值进行连接
+目前 SQL 标准提出过两种连接查询, 第一种是较早的 SQL92 标准, 第二种是目前使用广泛的较新的 SQL99 标准
+92 形式简单, 但编写较为冗长, 99 不仅在底层得到优化, 而且形式看上去更加一目了然, 逻辑性更强, 一般建议使用 99 标准
 
-rownum
+92语法
 
-rownum 不是一个真实存在的列, 它是用于从查询返回的行的编号, 返回的第一行分配的是 1, 第二行是 2, 依此类推, 这个伪字段可以用于限制查询返回的总行数
-
-1select * from emp where rownum &
+多张表需要全
         </a>
       </p>
 
