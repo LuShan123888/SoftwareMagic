@@ -184,13 +184,13 @@ class Client extends Thread {
     int id; //客户的标识
     DataOutputStream dos;//去往客户的输出流
     DataInputStream din;//来自客户的输入流
-
+    
     public Client(int id, DataOutputStream dos, DataInputStream din) {
         this.id = id;
         this.dos = dos;
         this.din = din;
     }
-
+    
     public void run() {//循环读取客户数据转发给其他客户
         //循环将数据发送给所有客户(包括自己)的Socket通道
         while (true) {
@@ -233,7 +233,6 @@ class Client {
         Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), 9000);
         //创建一个输出流
         OutputStream outputStream = socket.getOutputStream();
-
         //读取文件
         FileInputStream fileInputStream = new FileInputStream("test.txt");
         //写出文件
@@ -244,7 +243,6 @@ class Client {
         }
         //通知服务器,文件传输完成
         socket.shutdownOutput();
-
         //确定服务器接收完成
         InputStream inputStream = socket.getInputStream();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -254,7 +252,6 @@ class Client {
             byteArrayOutputStream.write(buffer2, 0, length2);
         }
         System.out.println(byteArrayOutputStream);
-
         //关闭资源
         fileInputStream.close();
         outputStream.close();
@@ -269,7 +266,6 @@ class Server {
         ServerSocket serverSocket = new ServerSocket(9000);
         //监听客服端的连接
         Socket socket = serverSocket.accept();//阻塞式监听,会一直等待客户端连接
-
         //获取输入流
         InputStream inputStream = socket.getInputStream();
         //文件输出
@@ -279,12 +275,9 @@ class Server {
         while ((length = inputStream.read(buffer)) != -1) {
             fileOutputStream.write(buffer, 0, length);
         }
-
         //通知客服端接收完成
         OutputStream os = socket.getOutputStream();
         os.write("Receive successful!".getBytes());
-
-
         //关闭资源
         fileOutputStream.close();
         inputStream.close();

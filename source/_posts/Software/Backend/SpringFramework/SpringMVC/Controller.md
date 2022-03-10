@@ -46,7 +46,7 @@ public interface Controller {
 - Spring可以使用扫描机制来找到应用程序中所有基于注解的控制器类,为了保证Spring能找到你的控制器,需要在配置文件中声明组件扫描
 
 ```xml
-<!-- 自动扫描指定的包,下面所有注解类交给IOC容器管理 -->
+<!-- 自动扫描指定的包,下面所有注解类交给IoC容器管理 -->
 <context:component-scan base-package="com.example.controller"/>
 ```
 

@@ -17,8 +17,12 @@ categories:
 ## AOP 概念
 
 - AOP实现的关键在于AOP框架自动创建的AOP代理,AOP代理主要分为静态代理和动态代理,静态代理的代表为AspectJ,而动态代理则以Spring AOP为代表
-  - 通常使用AspectJ的编译时增强实现AOP,AspectJ是静态代理的增强,所谓的静态代理就是AOP框架会在编译阶段生成AOP代理类,因此也称为编译时增强
-  - Spring AOP中的动态代理主要有两种方式,JDK动态代理和CGLIB动态代理,JDK动态代理通过反射来接收被代理的类,并且要求被代理的类必须实现一个接口,JDK动态代理的核心是InvocationHandler接口和Proxy类
+  - AspectJ是静态代理的增强,所谓的静态代理就是AOP框架会在编译阶段生成AOP代理类,因此也称为编译时增强
+  - Spring AOP 基于动态代理，主要有两种方式
+      - JDK动态代理:通过反射来接收被代理的类，并且要求被代理的类必须实现InvocationHandler接口。JDK动态代理的核心是
+          InvocationHandler接口和Proxy类。
+      - CGLIB (Code Generation Library)，是一个代码生成的类库，可以在运行时动态的生成某个类的子类，注意，CGLIB是通过继承
+          的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的，诸如private的方法也是不可以作为切面的
 - 在AOP编程中,我们经常会遇到下面的概念:
   - Joinpoint:连接点,即定义在应用程序流程的何处插入切面的执行
   - Pointcut:切入点,即一组连接点的集合

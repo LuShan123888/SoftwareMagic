@@ -1,10 +1,10 @@
 ---
-title: Coding
+title: Programming
 categories:
 - Software
 - Common
 ---
-# Coding
+# Programming
 
 ## Java SE
 
@@ -64,8 +64,8 @@ public static void main(String[]args){
 ### 接口和抽象类的区别
 
 1. 类可以实现很多个接口,但是只能继承一个抽象类
-2. 接口中所有的方法隐含的都是抽象的除了 default 方法,而抽象类则可以同时包含抽象和非抽象的方法
-3. 接口中声明的变量默认都是 public final 的,抽象类可以包含非 public final 的变量
+2. 接口中所有的方法隐含public abstract除了 default 方法,而抽象类则可以同时包含抽象和非抽象的方法
+3. 接口中声明的变量默认隐含 public final 的,抽象类可以包含非 public final 的变量
 4. 抽象类是对实体类的抽象,接口是对行为的抽象
 
 ### 访问控制
@@ -216,10 +216,6 @@ String str2 = "bb"; //检查字符串常量池的
 - PreparedStatement 中的 SQL 语句是可以带参数的,避免了用字符串连接拼接 SQL 语句的麻烦和不安全
 - 当批量处理 SQL 或频繁执行相同的查询时,PreparedStatement 有明显的性能上的优势,由于数据库可以将编译优化后的 SQL 语句缓存起来,下次执行相同结构的语句时就会很快 (不用再次编译和生成执行计划)
 
-### JDBC 中 Class.forName 的作用
-
-- `Class.forName`方法的作用是初始化给定的类,而我们给定的 MySQL 的 Driver 类中,它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动
-
 ### 反射
 
 #### 获得一个类的类对象
@@ -338,7 +334,7 @@ String str2 = "bb"; //检查字符串常量池的
 
 ### poll & offer
 
-|                    | throw Exception | 返回 false 或 null    |
+|                    | throw Exception | 返回 false 或 null |
 | :----------------- | :-------------- | ------------------ |
 | 添加元素到队尾     | add(E e)        | boolean offer(E e) |
 | 取队首元素并删除   | E remove()      | E poll()           |
@@ -484,7 +480,7 @@ String str2 = "bb"; //检查字符串常量池的
 - **公平锁与非公平锁**
     - 公平锁是指多个线程按照申请锁的顺序来获取锁,线程直接进入队列中排队,队列中的第一个线程才能获得锁,公平锁的优点是等待锁的线程不会饿死,缺点是整体吞吐效率相对非公平锁要低,等待队列中除第一个线程以外的所有线程都会阻塞,CPU 唤醒阻塞线程的开销比非公平锁大
     - 非公平锁是多个线程加锁时直接尝试获取锁,获取不到才会到等待队列的队尾等待,但如果此时锁刚好可用,那么这个线程可以无需阻塞直接获取到锁,所以非公平锁有可能出现后申请锁的线程先获取锁的场景,非公平锁的优点是可以减少唤起线程的开销,整体的吞吐效率高,因为线程有几率不阻塞直接获得锁,CPU 不必唤醒所有线程,缺点是处于等待队列中的线程可能会饿死,或者等很久才会获得锁
-    
+
 - **独享锁与共享锁**
 
     - 独享锁也叫排他锁,是指该锁一次只能被一个线程所持有,如果线程 T 对数据 A 加上排它锁后,则其他线程不能再对 A 加任何类型的锁,获得排它锁的线程即能读数据又能修改数据,JDK 中的 synchronized 和 JUC 中 Lock 的实现类就是互斥锁
@@ -610,19 +606,16 @@ String str2 = "bb"; //检查字符串常量池的
 
 **execute 提交的方式**
 
-execute 提交的方式只能提交一个 Runnable 的对象,且该方法的返回值是 void,也即是提交后如果线程运行后,和主线程就脱离了关系了,当然可以设置一些变量来获取到线程的运行结果,并且当线程的执行过程中抛出了异常通常来说主线程也无法获取到异常的信息的,只有通过 ThreadFactory 主动设置线程的异常处理类才能感知到提交的线程中的异常信息
+- execute 提交的方式只能提交一个 Runnable 的对象,且该方法的返回值是 void,也即是提交后如果线程运行后,和主线程就脱离了关系了,当然可以设置一些变量来获取到线程的运行结果,并且当线程的执行过程中抛出了异常通常来说主线程也无法获取到异常的信息的,只有通过 ThreadFactory 主动设置线程的异常处理类才能感知到提交的线程中的异常信息
 
-**submit 提交的方式**
-
-- submit 提交的方式有如下三种情况
+**submit 提交的方式**:submit 提交的方式有如下三种情况
 
 ```java
 <T> Future<T> submit(Callable<T> task);
 ```
 
 - 这种提交的方式是提交一个实现了 Callable 接口的对象,这种提交的方式会返回一个 Future 对象,这个 Future 对象代表这线程的执行结果
-- 当主线程调用 Future 的 get 方法的时候会获取到从线程中返回的结果数据
-- 如果在线程的执行过程中发生了异常,get 会获取到异常的信息
+- 当主线程调用 Future 的 get 方法的时候会获取到从线程中返回的结果数据,如果在线程的执行过程中发生了异常,get 会获取到异常的信息
 
 ```java
 Future<?> submit(Runnable task);
@@ -649,51 +642,89 @@ Future<?> submit(Runnable task);
 
 - 3 个线程 A,B,C 分别打印三个字母,每个线程循环 10 次,首先同步,如果不满足打印条件,则调用 wait() 函数一直等待,之后打印字母,更新 state,调用`notifyAll()`,进入下一次循环
 
+### synchronized对象加锁
+
+- 利用一个计数来除线程个数得到余数从而控制线程输出，并且利用synchronized、一个Object的wait()和notify()方法来对线程的阻塞和唤醒
+
 ```java
-public class PrintABC {
-    private static final int PRINT_A = 0;
-    private static final int PRINT_B = 1;
-    private static final int PRINT_C = 2;
+public class MyThread implements Runnable {
 
-    private static class MyThread extends Thread {
-        int which; // 0:打印 A,1:打印 B,2:打印 C
-        static volatile int state; // 线程共有,判断所有的打印状态
-        static final Object t = new Object();
+    int which; // 0:打印 A,1:打印 B,2:打印 C
+    static final Integer MAX_COUNT = 10;
+    static volatile int state = 0; // 线程共有,判断所有的打印状态
+    static final Object t = new Object();
 
-        public MyThread(int which) {
-            this.which = which;
-        }
-
-        @Override
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                synchronized (t) {
-                    while (state % 3 != which) {
-                        try {
-                            t.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+    @Override
+    public void run() {
+        for (int i = 0; i < MAX_COUNT; i++) {
+            synchronized (t) {
+                while (state % 3 != this.which) {
+                    try {
+                        t.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    System.out.print(toABC(which)); // 执行到这里,表明满足条件,打印
-                    state++;
-                    t.notifyAll(); // 调用 notifyAll 方法
                 }
+                System.out.print((char)'A'+ which); // 执行到这里,表明满足条件,打印
+                state++;
+                t.notifyAll(); // 调用 notifyAll 方法
             }
         }
     }
+}
 
-    public static void main(String[] args) {
-        new MyThread(PRINT_A).start();
-        new MyThread(PRINT_B).start();
-        new MyThread(PRINT_C).start();
-    }
+```
 
-    private static char toABC(int which) {
-        return (char) ('A' + which);
+#### volatile静态变量控制
+
+- 将某个变量设置为静态，这样线程本身也共享该变量，则可以对其操作。但要注意给这个静态变量加上volatile字段，这个字段可以帮助多线程中的可见性。
+
+```java
+public class StaticVarThread implements Runnable {
+
+    int which; // 0:打印 A,1:打印 B,2:打印 C
+    private static volatile Integer currentCount = 0;
+    private static final Integer MAX_COUNT = 6;
+
+    @Override
+    public void run() {
+        while (currentCount < MAX_COUNT) {
+            try {
+                while (currentCount % 3 == this.which && currentCount < MAX_COUNT) {
+                    System.out.print((char)'A'+ which); // 执行到这里,表明满足条件,打印
+                    currentCount++;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 ```
+
+### 线程共享类对象：依靠AtomicInteger是线程安全的
+
+- 将 AtomicInteger currentCount 作为线程共享
+
+```java
+public class AtomicIntegerThread implements Runnable {
+    private AtomicInteger currentCount = new AtomicInteger(0);
+    private static final Integer MAX_COUNT = 6;
+    int which;
+
+    @Override
+    public void run() {
+        while (currentCount.get() < MAX_COUNT) {
+            if (currentCount.get() % 3 == this.which) {
+                System.out.print((char)'A'+ which); // 执行到这里,表明满足条件,打印
+                currentCount.getAndIncrement();
+            }
+        }
+    }
+}
+```
+
+
 
 ### 如何实现主线程等待子线程执行完后再继续执行？
 
@@ -889,7 +920,7 @@ public class PrintABC {
 
 ### OOM 问题
 
-- 最常见的 OOM 情况有以下三种:
+- 最常见的 OOM 情况:
     1. `java.lang.OutOfMemoryError: Java heap space`:Java 堆内存溢出,此种情况最常见,一般由于内存泄露或者堆的大小设置不当引起,对于内存泄露,需要通过内存监控软件查找程序中的泄露代码,而堆大小可以通过虚拟机参数`-Xms`,`-Xmx`等修改
     2. `java.lang.OutOfMemoryError: PermGen space`:Java 永久代溢出,即方法区溢出了,一般出现于大量 Class 或者 jsp 页面,或者采用 cglib 等反射机制的情况,因为上述情况会产生大量的 Class 信息存储于方法区,此种情况可以通过更改方法区的大小来解决,使用类似`-XX:PermSize=64m -XX:MaxPermSize=256m`的形式修改,另外,过多的常量尤其是字符串也会导致方法区溢出
 - **OOM 问题解决**
@@ -943,13 +974,25 @@ public class UsingRandom {
 - `-XX:+PrintGCDetails`:打印 GC 的细节
 - `-XX:InitialTenuringThreshold/-XX:MaxTenuringThreshold`:设置老年代阀值的初始值和最大值
 
+### JVM 工具
+
+- **jps**:查看所有的jvm进程，包括进程ID，进程启动的路径等
+- **jstat**:jstat利用JVM内建的指令对Java应用程序的资源和性能进行实时的命令行的监控，包括了对进程的classloader，compiler，gc情况，也可以用来监视VM内存内的各种堆和非堆的大小及其内存使用量，以及加载类的数量
+- **jstack**:观察jvm中当前所有线程的运行情况和线程当前状态。
+    - 如果Java程序崩溃生成core文件，jstack工具可以用来获得core文件的java stack和native stack的信息，从而可以轻松地知道java程序是如何崩溃和在程序何处发生问题。
+    - jstack工具还可以附属到正在运行的java程序中，看到当时运行的java程序的java stack和native stack的信息, 如果现在运行的java程序呈现hung的状态，jstack是非常有用的。
+- **jmap**:监视进程运行中的jvm物理内存的占用情况，该进程内存内，所有对象的情况，例如产生了哪些对象，对象数量
+    - 如果系统崩溃了，jmap 可以从core文件或进程中获得内存的具体匹配情况，包括Heap size, Perm size等等
+- **jinfo**:观察进程运行环境参数，包括Java System属性和JVM命令行参数
+    - 如果系统崩溃了，jinfo可以从core文件里面知道崩溃的Java应用程序的配置信息。
+
 ## MySQL
 
 ### 数据库建表三大范式
 
 1. **原子性**：要求属性具有原子性,不可再分解
-2. **唯一性**：要求记录有唯一标识,即实体的唯一性,即不存在部分依赖
-3. **消除冗余性**：要求任何字段不能由其他字段派生出来,它要求字段没有冗余,即不存在传递依赖
+2. **唯一性**：表必须有主键，主键可以是单个属性或者几个属性的组合，非主属性必须完全依赖而不能部分依赖主键
+3. **消除冗余性**：属性必须直接依赖主键，而不能间接依赖主键,即不存在传递依赖
 
 ### 存储引擎
 
@@ -1073,6 +1116,8 @@ public class UsingRandom {
 
 ### 索引
 
+#### 索引分类
+
 - 在 MySQL 中主要有四类索引:主键索引,唯一索引,常规索引,和全文索引
 - **主键索引**: 唯一标识数据库表中的每条记录,每个表都应该有一个主键,并且每个表只能有一个主键
 - **唯一索引**:不允许出现相同的值,避免同一个表中某数据列中的值重复
@@ -1133,6 +1178,11 @@ EXPLAIN + SQL 语句
 
 - **垂直拆分**:表数据拆分到不同表中,单表大数据量依然存在性能瓶颈,垂直拆分就是要把表按模块划分到不同数据库表中,相对于垂直切分更进一步的是服务化改造,说得简单就是要把原来强耦合的系统拆分成多个弱耦合的服务,通过服务间的调用来满足业务需求看,因此表拆出来后要通过服务的形式暴露出去,而不是直接调用不同模块的表
 - **水平拆分**:行数据拆分到不同表中,上面谈到垂直切分只是把表按模块划分到不同数据库,但没有解决单表大数据量的问题,而水平切分就是要把一个表按照某种规则把数据划分到不同表或数据库里,例如像计费系统,通过按时间来划分表就比较合适,因为系统都是处理某一时间段的数据,而像 SaaS 应用,通过按用户维度来划分数据比较合适,因为用户与用户之间的隔离的,一般不存在处理多个用户数据的情况,简单的按 user_id 范围来水平切分
+
+### 自适应Hash索引
+
+- 只要符合Hash数据结构的特点，比如不用范围查询，而是等值的查询特别多，InnoDB引擎就会自动建立Hash索引
+- hash索引底层的数据结构是散列表（Hash表），虽然不支持区间查询，不能进行排序，like查询等，但是比较适合等值查询。其数据特点就是比较适合在内存中使用，自适应Hash索引存在于InnoDB架构中的缓存中（不存在于磁盘架构中）。
 
 #### 数据库主键的选择
 
@@ -1215,6 +1265,11 @@ EXPLAIN + SQL 语句
     - `Slave_IO`:复制 master 主机 binlog 日志文件里的 SQL 命令到本机的 relay-log 文件里
     - `Slave_SQL`:执行本机 relay-log 文件里的 SQL 语句,实现与 Master 数据一致
 - 在使用二进制日志时,主服务器的所有操作都会被记录下来,然后从服务器会接收到该日志的一个副本 RelayLog,从服务器可以指定执行该日志中的哪一类事件 (例如只插入数据或者只更新数据),默认会执行日志中的所有语句
+- **同步策略**
+    - 异步复制：MySQL默认的复制即是异步的，主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，这样就会有一个问题，主如果crash掉了，此时主上已经提交的事务可能并没有传到从库上，如果此时，强行将从提升为主，可能导致新主上的数据不完整。
+    - 全同步复制：指当主库执行完一个事务，所有的从库都执行了该事务才返回给客户端。因为需要等待所有从库执行完该事务才能返回，所以全同步复制的性能必然会收到严重的影响。
+    - 半同步复制：是介于全同步复制与全异步复制之间的一种，主库只需要等待至少一个从库节点收到并且 Flush Binlog 到 Relay Log 文件即可，主库不需要等待所有从库给主库反馈。同时，这里只是一个收到的反馈，而不是已经完全完成并且提交的反馈，如此，节省了很多时间。
+
 
 ### 分布式锁
 
@@ -1361,6 +1416,8 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 
 ### 数据类型
 
+#### 基本数据类型
+
 - **String**:字符串类型是 Redis 最基础的数据结构,首先键都是字符串类型,而且 其他几种数据结构都是在字符串类型基础上构建的,我们常使用的 set key value 命令就是字符串,常用在缓存,计数,共享 Session,限速等
     - **int**：数字的时候
     - **raw**：长字符串（长度大于 39 个字节）
@@ -1382,6 +1439,9 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 - **Sorted Set**:Sorted Set 多了一个权重参数 Score,集合中的元素能够按 Score 进行排列,可以做排行榜应用,取 TOP N 操作
     - **ziplist**：元素数量小于 128 且所有元素长度小于 64
     - **跳表**：不满足 ziplist 条件的其他情况
+
+
+#### 底层数据结构
 
 - **SDS（动态字符串）**
 
@@ -1737,16 +1797,16 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 ### AOP
 
 - AOP 指面向切面编程,用于处理系统中分布于各个模块的横切关注点,把那些与业务无关,但是却为业务模块所共同调用的逻辑部分封装起来,从而使得业务逻辑各部分之间的耦合度降低, 提高程序的可重用性, 同时提高了开发的效率
-- AOP 实现的关键在于 AOP 框架自动创建的 AOP 代理,AOP 代理主要分为静态代理和动态代理,静态代理的代表为 AspectJ,而动态代理则以 Spring AOP 为代表
-    - AspectJ 是静态代理的增强,所谓的静态代理就是 AOP 框架会在编译阶段生成 AOP 代理类,因此也称为编译时增强
+- Spring AOP 基于动态代理，主要有两种方式
+    - JDK动态代理:通过反射来接收被代理的类，并且要求被代理的类必须实现InvocationHandler接口。JDK动态代理的核心是
+        InvocationHandler接口和Proxy类。
+    - CGLIB (Code Generation Library)，是一个代码生成的类库，可以在运行时动态的生成某个类的子类，注意，CGLIB是通过继承
+        的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的，诸如private的方法也是不可以作为切面的
 
-    - Spring AOP 中的动态代理主要有两种方式,JDK 动态代理和 CGLIB 动态代理,JDK 动态代理通过反射来接收被代理的类,并且要求被代理的类必须实现一个接口,JDK 动态代理的核心是 InvocationHandler 接口和 Proxy 类
+- Spring AOP 中的代理使用的默认策略
 
-    - Spring AOP 中的代理使用的默认策略
-
-        - 如果目标对象实现类接口,则默认采用 JDK 动态代理
-        - 如果目标对象没有实现接口,则采用 CGLIB 进行动态代理
-
+    - 如果目标对象实现类接口,则默认采用 JDK 动态代理
+    - 如果目标对象没有实现接口,则采用 CGLIB 进行动态代理
 - 在 AOP 编程中,我们经常会遇到下面的概念:
     - Joinpoint:连接点,即定义在应用程序流程的何处插入切面的执行
     - Pointcut:切入点,即一组连接点的集合
@@ -1754,6 +1814,12 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
     - Introduction:引介,特殊的增强,指为一个已有的 Java 对象动态地增加新的接口
     - Weaving:织入,将增强添加到目标类具体连接点上的过程
     - Aspect:切面:由切点和增强 (引介) 组成,包括了对横切关注功能的定义,已包括了对连接点的定义
+- AOP对应的注解如下
+    - 前置通知(@Before):在目标方法调用之前调用通知
+    - 后置通知(@After):在目标方法完成之后调用通知
+    - 环绕通知(@Around):在被通知的方法调用之前和调用之后执行自定义的方法
+    - 返回通知(@AfterReturning):在目标方法成功执行之后调用通知
+    - 异常通知(@AfterThrowing):在目标方法抛出异常之后调用通知
 
 ### IoC
 
@@ -1763,8 +1829,40 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 
     1. 实例化后的对象被封装在 BeanWrapper 对象中,并且此时对象仍然是一个原生的状态,并没有进行依赖注入
     2. 紧接着,Spring 根据 BeanDefinition 中的信息进行依赖注入
-    3. 并且通过 BeanWrapper 提供的设置属性的接口完成依赖注入
+    3. 并且通过 BeanWrapper 提供的设置属性的接口完成依
 
+### IoC 容器
+
+- **BeanFactory**:是一个工厂类，它是一个负责生产和管理bean的工厂。在Spring中，BeanFactory是IoC容器的核心接口，它的职责包括：实例化、定位、配置应用程序中的对象及建立这些对象间的依赖。
+    - **延迟实例化**:
+    - 在启动IoC容器的时候不会去实例化Bean，只有在使用到某个Bean时(即调用getBean0方法获取时)，才对该Bean进行加载实例化
+    - - 因为容器启动的时候不用实例化Bean，所以应用启动的时候占用资源较少，程序启动较快，适合对资源要求较高的应用
+        - 系统运行的速度相对来说慢一些，井且有可能会出现空指针异常的情况
+        -  不能提前发现一些存在的Spring的配置问题。如果Bean的某一个属性没有注入，当BeanFacotry加载后，直至第一次使用调用getBean方法时才会抛出异常
+- **ApplicationContext** :是 BeanFactory 的子类,因为古老的 BeanFactory 无法满足不断更新的的需求,于是 ApplicationContext 就基本上代替了 BeanFactory 的工作
+    - **非延迟实例化**
+        - 在启动IoC容器的时候会预先加载单例Bean，也可以通过设置bean的属性lazy-init =true来让Bean延迟实例化
+        - 在容器启动时，可以发现Spring中存在的一些配置问题，即方便检查所依赖属性是否注入等
+        - 因为在容器启动的时候会预加载单例Bean，这是一个比较耗时的操作，所以当应用程序配置Bean较多时，将会导致应用程序启动较慢，即在启动阶段会有较大的系统开销
+    - ApplicationContext继承自ListableBeanFactory接口,而ListableBeanFactory又继承自BeanFactory,所以ApplicationContext具有BeanFactory所支持的所有功能,当然ApplicationContext还提供了一些额外的功能
+        - ApplicationContext继承自MessageSource,因此ApplicationContext为应用提供118n 国际化消息访问的功能
+        - ApplicationContext继承自ApplicationEventPublisher,使得容器拥有发布应用上下文事件的功能,包括容器启动事件、关闭
+            事件等.实现了 ApplicationListener 事件监听接口的 Bean 可以接收到容器事件,并对事件进行响应处理
+        -  ApplicationContext间接继承自ResourceLoader,提供了统一的资源文件访问方式
+            - **FileSystemXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你需要提供给构造器 XML 文件的完整路径
+            - **ClassPathXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你不需要提供 XML 文件的完整路径,只需正确配置 CLASSPATH 环境变量即可,因为,容器会从 CLASSPATH 中搜索 bean 配置文件
+            - **WebXmlApplicationContext**:该容器会在一个 web 应用程序的范围内加载在 XML 文件中已被定义的 bean
+        - 与BeanFactory需要手动注册BeanPostProcessor/BeanFactoryPostProcessor不同,ApplicationContext则是自动注册BeanPostProcessor/BeanFactoryPostProcessor
+
+### FactoryBean
+
+- FactoryBean是一个接口，它是一个Bean。FactoryBean并不是一个简单的Bean，而是一个能生产或者修饰对象生成的工厂Bean，
+    它最大的一个作用是：可以让我们自定义Bean的创建过程
+- **接口方法**
+    - getobject():返回的对象实例
+    - getobjectType():返回的对象实例的类型
+    - isSingleton():指定返回的对象实例时是单例还是非单例.true是单例,false是非单例
+- **注意**：当在loC容器中的Bean实现了FactoryBean后，通过getBean("beanName")获取到的Bean对象并不是FactoryBean的实现类对象，而是这个实现类中的getobject()方法返回的对象。而通过getBean( "&" + "beanName")获取到的才是FactoryBean的实现类对象
 
 ### DI
 
@@ -1805,20 +1903,14 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 7. DisposableBean 和 destroy-method
     - 和 init-method 一样,通过给 destroy-method 指定函数,就可以在 bean 销毁前执行指定的逻辑
 
-### Spring ApplicationContext 容器
-
-- **Application Context** :是 BeanFactory 的子类,因为古老的 BeanFactory 无法满足不断更新的 spring 的需求,于是 ApplicationContext 就基本上代替了 BeanFactory 的工作,它可以加载配置文件中定义的 bean,将所有的 bean 集中在一起,当有请求的时候分配 bean
-- 最常被使用的 ApplicationContext 接口实现:
-    - **FileSystemXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你需要提供给构造器 XML 文件的完整路径
-    - **ClassPathXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你不需要提供 XML 文件的完整路径,只需正确配置 CLASSPATH 环境变量即可,因为,容器会从 CLASSPATH 中搜索 bean 配置文件
-    - **WebXmlApplicationContext**:该容器会在一个 web 应用程序的范围内加载在 XML 文件中已被定义的 bean
-
-### 事务
+### 声明式事务
 
 - **事务属性**:事务的一些基本配置,描述了事务策略如何应用到方法上,事务属性包含了 5 个方面:传播行为,隔离规则,回滚规则,事务超时,是否只读
 - **隔离级别**:数据库默认,读未提交,读已提交,可重复读,序列化
 - **事务传播行为**:当事务方法被另一个事务方法调用时,必须指定事务应该如何传播,Spring 定义了七种传播行为
     - 默认的事务传播行为是`PROPAGATION_REQUIRED`, 它适合于绝大多数的情况:如果当前没有事务,就新建一个事务,如果已经存在一个事务,则加入到这个事务中
+
+## Spring MVC
 
 ### Spring MVC 的执行流程
 
@@ -1842,7 +1934,7 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 3. 拦截器只能对 action 请求起作用,而过滤器则可以对几乎所有的请求起作用
 4. 拦截器可以访问 action 上下文,值栈里的对象,而过滤器不能访问
 5. 在 action 的生命周期中,拦截器可以多次被调用,而过滤器只能在容器初始化时被调用一次
-6. 拦截器可以获取 IOC 容器中的各个 bean,而过滤器就不行,这点很重要,在拦截器里注入一个 service,可以调用业务逻辑
+6. 拦截器可以获取 IoC 容器中的各个 bean,而过滤器就不行,这点很重要,在拦截器里注入一个 service,可以调用业务逻辑
 
 ### Spring MVC 拦截器的执行顺序
 
@@ -1859,7 +1951,7 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
     - 调用时间:DispatcherServlet 进行视图的渲染之后
     - 注意事项:多用于清理资源
 
-### Spring Security
+## Spring Security
 
 #### 过滤器
 
@@ -1880,7 +1972,7 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
     - 接下来就是遍历 `ProviderManager` 里面的 `providers` 集合,找到和合适的 `AuthenticationProvider`完成身份认证
 - **UserDetailsService/UserDetails**:在 `UserDetailsService` 接口中只有一个简单的方法
 
-### 身份认证流程
+#### 身份认证流程
 
 1. 在运行到 `UsernamePasswordAuthenticationFilter` 过滤器的时候首先是进入其父类 `AbstractAuthenticationProcessingFilter` 的 `doFilter()` 方法中
     - 判断请求的 url 是否与配置的一致
@@ -1898,8 +1990,6 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 
 ## Mybatis
 
-### MyBatis 核心类
-
 ### Mybatis 的执行过程
 
 1. 读取 MyBatis 的核心配置文件
@@ -1910,7 +2000,7 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 
 ### Mybatis 的 Mapper 只有接口没有实现类却能工作的原因
 
-1. 获取已知的加载过的 Mapper 中获取出 MapperProxyFactory,Mapper 代理工厂是通过 Class.forName 反射生成 namespace 的对应接口的反射对象并将生成的对象传入 MapperProxyFactory 的构造函数,最后存入 knownMappers 集合
+1. 获取已知的加载过的 Mapper 中获取出 MapperProxyFactory,MapperProxyFactory Class.forName 反射生成 namespace 的对应接口的反射对象并将生成的对象传入 MapperProxyFactory 的构造函数,最后存入 knownMappers 集合
 2. 代理工厂生成动态代理返回,调用 MapperProxyFactory 的 newInstance 方法封装 InvocationHandler 的实现类 MapperProxy,最后并返回代理类
 
 ### 命名空间
@@ -2498,14 +2588,15 @@ public class RadixSorter extends Sorter {
 | 排序算法     | 平均时间复杂度 | 最坏时间复杂度 | 最好时间复杂度 | 空间复杂度 | 稳定性 |
 | ------------ | -------------- | -------------- | -------------- | ---------- | ------ |
 | 冒泡排序     | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
-| 直接选择排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 不稳定 |
+| 直接选择排序 | O(n²)          | O(n²)          | O(n²)          | O(1)       | 不稳定 |
 | 直接插入排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
-| 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(nlogn)   | 不稳定 |
+| 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(logn)    | 不稳定 |
 | 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
 | 堆排序       | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(1)       | 不稳定 |
-| 希尔排序     | O(nlogn)       | O(n)           | O(n)           | O(1)       | 不稳定 |
-| 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(n+k)     | 稳定   |
-| 基数排序     | O(N*M)         | O(N*M)         | O(N*M)         | O(M)       | 稳定   |
+| 希尔排序     | O(nlogn)       | O((nlog²n)     | O((nlog²n)     | O(1)       | 不稳定 |
+| 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(k)       | 稳定   |
+| 桶排序       | O(n+k)         | O(n+k)         | O(n²)          | O(n+k)     | 稳定   |
+| 基数排序     | O(n*k)         | O(n*k)         | O(n*k)         | O(n+k)     | 稳定   |
 
 ### 二叉树遍历
 
@@ -2706,13 +2797,13 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 - 进程是操作系统资源分配的基本单位,是程序关于某个数据集合上的一次运行活动
 - 线程是进程的一个实体,是 CPU 调度的基本单位,一个进程可以包含多个线程,它可与同属一个进程的其他的线程共享进程所拥有的全部资源,线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源 (如程序计数器,一组寄存器和栈)
 - 进程之间的切换会有较大的开销而线程之间切换的开销小
-    - 每当切换进程时,必须要考虑保存当前进程的状态,状态包括存放在内存中的程序的代码和数据,它的栈,通用目的寄存器的内容,程序计数器,环境变量以及打开的文件描述符的集合,这个状态叫做上下文 (Context)
+    - 每当切换进程时,必须要保存当前进程的状态,其中包括存放在内存中的程序的代码和数据,它的栈,通用目的寄存器的内容,程序计数器,环境变量以及打开的文件描述符的集合,这个状态也叫做上下文 (Context)
     - 同样线程有自己的上下文,包括唯一的整数线程 ID,栈,栈指针,程序计数器,通用目的寄存器和条件码,可以理解为线程上下文是进程上下文的子集
 
 #### 上下文切换
 
 - 对于单核单线程 CPU 而言,在某一时刻只能执行一条 CPU 指令,上下文切换 (Context Switch) 是一种将 CPU 资源从一个进程分配给另一个进程的机制
-- 在切换的过程中,操作系统需要先存储当前进程的状态 (包括内存空间的指针,当前执行完的指令等等),再读入下一个进程的状态,然后执行此进程
+- 在切换的过程中,操作系统先把前一个任务的CPU上下文保存起来，然后加载新任务的上下文到这些寄存器和程序计数器，最后再跳转到程序计数器所指的新位置，运行新任务。
 - 从用户角度看,计算机能够并行运行多个进程,这恰恰是操作系统通过快速上下文切换造成的结果
 
 #### 线程同步
@@ -2742,7 +2833,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 - **消息队列 ( messagequeue )** :消息队列是由消息的链表,存放在内核中并由消息队列标识符标识,消息队列克服了信号传递信息少,管道只能承载无格式字节流以及缓冲区大小受限等缺点
 - **信号 (signal )** :信号是一种比较复杂的通信方式,用于通知接收进程某个事件已经发生
 - **共享内存 (shared memory )** :共享内存就是映射一段能被其他进程所访问的内存,这段共享内存由一个进程创建,但多个进程都可以访问,共享内存是最快的 IPC 方式,它是针对其他进程间通信方式运行效率低而专门设计的,它往往与其他通信机制,如信号量,配合使用,来实现进程间的同步和通信
-- **套接字 (socket )** :套接口也是一种进程间通信机制,与其他通信机制不同的是,它可用于不同及其间的进程通信
+- **套接字 (Socket )** :套接口也是一种进程间通信机制,与其他通信机制不同的是,它可用于不同及其间的进程通信
 
 #### 进程的状态
 
@@ -2825,8 +2916,8 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 
 #### 用户态和内核态
 
-- 由于需要限制不同的程序之间的访问能力, 防止他们获取别的程序的内存数据, 或者获取外围设备的数据, 并发送到网络, CPU 划分出两个权限等级 --**用户态** 和 **内核态**
-- **内核态**:CPU 可以访问内存所有数据, 包括外围设备, 例如硬盘, 网卡. CPU 也可以将自己从一个程序切换到另一个程序
+- 由于需要限制不同的程序之间的访问能力, 防止他们获取别的程序的内存数据, 或者获取外围设备的数据, 并发送到网络, CPU 划分出两个权限等级，即**用户态**和**内核态**
+- **内核态**:CPU 可以访问内存所有数据, 包括外围设备, 例如硬盘, 网卡等。CPU 也可以将自己从一个程序切换到另一个程序
 - **用户态**:只能受限的访问内存, 且不允许访问外围设备,占用 CPU 的能力被剥夺, CPU 资源可以被其他程序获取
 - **用户态与内核态的切换**:所有用户程序都是运行在用户态的, 但是有时候程序确实需要做一些内核态的事情, 例如从硬盘读取数据, 或者从键盘获取输入等,这是需要切换至内核态
 - **系统调用**:这是处于用户态的进程主动请求切换到内核态的一种方式,用户态的进程通过系统调用申请使用操作系统提供的系统调用服务例程来处理任务,在 CPU 中的实现称之为**陷阱指令**(Trap Instruction)
@@ -2942,7 +3033,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
         - 比较容易实现几个进程对同一程序副本的共享使用
     - **缺点**:是需要附加的硬件支持,增加了机器成本,而且实现存储管理的软件算法比较复杂
 
-### 文件管理
+### IO管理
 
 #### 位图
 
@@ -2951,8 +3042,8 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 
 #### 文件描述符
 
-- 一个 Linux 进程启动后，会在内核空间中创建一个 PCB 控制块，PCB 内部有一个文件描述符表（File descriptor table），记录着当前进程所有可用的文件描述符，也即当前进程所有打开的文件。
-- 除了文件描述符表，系统还需要维护另外两张表：
+- **文件描述符**：在形式上是一个非负整数,实际上是一个索引值,指向文件描述符表的一条记录
+- 一个 Linux 进程启动后，会在内核空间中创建一个 PCB 控制块，PCB 内部有一个文件描述符表（File descriptor table），记录着当前进程所有可用的文件描述符，也即当前进程所有打开的文件。除了文件描述符表，系统还需要维护另外两张表：
     - 打开文件表（Open file table）
     - i-node 表（i-node table）
 - 文件描述符表每个进程都有一个，打开文件表和 i-node 表整个系统只有一个，它们三者之间的关系如下图所示
@@ -3021,8 +3112,6 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 - **扫描算法 (SCAN) 电梯调度**:扫描算法不仅考虑到欲访问的磁道与当前磁道的距离,更优先考虑的是磁头的当前移动方向
 - **循环扫描算法 (CSCAN)**:循环扫描算法是对扫描算法的改进,如果对磁道的访问请求是均匀分布的,当磁头到达磁盘的一端,并反向运动时落在磁头之后的访问请求相对较少,这是由于这些磁道刚被处理,而磁盘另一端的请求密度相当高,且这些访问请求等待的时间较长,为了解决这种情况,循环扫描算法规定磁头单向移动,例如,只自里向外移动,当磁头移到最外的被访问磁道时,磁头立即返回到最里的欲访磁道,即将最小磁道号紧接着最大磁道号构成循环,进行扫描
 
-### IO 管理
-
 #### 通道
 
 - 通道是一个独立于 CPU 的 I/O 处理机,它控制 I/O 设备与内存直接进行数据交换,通道有自己的通道指令,这些通道指令由 CPU 启动,并在操作结束时向 CPU 发中断信号
@@ -3054,18 +3143,67 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 - select，poll，epoll 都是 IO 多路复用的机制。I/O 多路复用就通过一种机制，可以监视多个文件描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。
 - select，poll，epoll 本质上都是同步 I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步 I/O 则无需自己负责进行读写，异步 I/O 的实现会负责把数据从内核拷贝到用户空间。
 - **select**
-    - select 本质上是通过轮询文件描述符并进行下一步处理。效率较低，仅知道有 I/O 事件发生，却不知是哪几个流，只会无差异轮询所有流，找出能读数据或写数据的流进行操作。同时处理的流越多，无差别轮询时间越长
+    - select 本质上是通过轮询文件描述符并进行下一步处理。效率较低，仅知道有 I/O 事件发生，却不知是哪几个流，只会无差异轮询所有流，找出能读数据或写数据的流进行操作。同时处理的流越多，无差别轮询时间越长,效率低
     - 每次调用 select，都需要把 fd 集合从用户态拷贝到内核态，这个开销在 fd 很多时会很大
     - 同时每次调用 select 都需要在内核遍历传递进来的所有 fd，这个开销在 fd 很多时也很大
-    - select 支持的文件描述符数量太小了，默认是 1024
+    - fd_set 数据结构最大容纳fd的数目有限制，32位机默认1024，64位机默认2048
 - **poll**
-    - poll 的实现和 select 非常相似，只是描述 fd 集合的方式不同，poll 使用 pollfd 结构而不是 select 的 fd_set 结构，其他的都差不多,管理多个描述符也是进行轮询，根据描述符的状态进行处理，但是 poll 没有最大文件描述符数量的限制。
+    - poll 的实现和 select 非常相似，只是描述 fd 集合的方式不同，poll 使用 pollfd 链表结构而不是 select 的 fd_set 结构
+    - poll 管理多个描述符也是进行轮询，根据描述符的状态进行处理，但是 poll 没有最大文件描述符数量的限制，而且不需要重置原数据。
 - **epoll**
     - 可理解为**event poll**，epoll 会把哪个流发生哪种 I/O 事件通知我们。所以 epoll 是事件驱动（每个事件关联 fd）的，此时我们对这些流的操作都是有意义的。复杂度也降低到了 O(1)。
-    - select 和 poll 都只提供了一个函数——select 或者 poll 函数。而 epoll 提供了三个函数，epoll_create 是创建一个 epoll 句柄；epoll_ctl 是注册要监听的事件类型；epoll_wait 则是等待事件的产生。
-    - epoll 的解决方案不像 select 或 poll 一样每次都把当前进程轮流加入 fd 对应的设备等待队列中，而只在 epoll_ctl 时把当前进程挂载一遍并为每个 fd 指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的 fd 加入一个就绪链表。epoll_wait 的工作实际上就是在这个就绪链表中查看有没有就绪的 fd
-    - 在 epoll_ctl 函数中。每次注册新的事件到 epoll 句柄中时（在 epoll_ctl 中指定 EPOLL_CTL_ADD），会把所有的 fd 拷贝进内核，而不是在 epoll_wait 的时候重复拷贝。epoll 保证了每个 fd 在整个过程中只会拷贝一次。
+    - select 和 poll 都只提供了一个函数——select 或者 poll 函数。而 epoll 提供了三个函数：
+        - epoll_create：创建一个epoll实例（红黑树rbr和就绪链表rdlist)
+        - epoll_ctl：对红黑树操作，注册要监听的事件类型
+        - epoll_wait：等待事件的产生，检查这个就绪链表中有没有就绪的 fd，如果有则返回
+    - epoll 的解决方案不像 select 或 poll 一样每次都把当前进程轮流加入 fd 对应的设备等待队列中，而只在 epoll_ctl 时把当前进程挂载一遍并为每个 fd 指定一个回调函数，当设备就绪，唤醒等待队列上的等待者时，就会调用这个回调函数，而这个回调函数会把就绪的 fd 加入一个就绪链表。
+    - 在 epoll_ctl 函数中。每次注册新的事件到 epoll 实例中时（在 epoll_ctl 中指定 EPOLL_CTL_ADD），会把所有的 fd 拷贝进内核，而不是在 epoll_wait 的时候重复拷贝。epoll 保证了每个 fd 在整个过程中只会拷贝一次。
 - **文件描述符**：在形式上是一个非负整数,实际上是一个索引值,指向文件描述符表的一条记录
+
+#### 零拷贝
+
+- **零拷贝**是指计算机执行IO操作时，CPU不需要将数据从一个存储区域复制到另一个存储区域，从而可以减少上下文切换以及CPU的拷贝时间。它是一种`I/O`操作优化技术。零拷贝实现有多种方式，包含以下三种
+- **mmap**:mmap 利用用了虚拟内存的特点，将内核中的读缓冲区与用户空间的缓冲区进行映射，所有的IO都在内核中完成，从而减少数据拷贝次数
+    - `mmap+write`实现的零拷贝流程如下：
+        1. 用户进程通过`mmap方法`向操作系统内核发起IO调用，**上下文从用户态切换为内核态**。
+        2. CPU利用DMA控制器，把数据从硬盘中拷贝到内核缓冲区。
+        3. **上下文从内核态切换回用户态**，mmap方法返回。
+        4. 用户进程通过`write`方法向操作系统内核发起IO调用，**上下文从用户态切换为内核态**。
+        5. CPU将内核缓冲区的数据拷贝到的Socket缓冲区。
+        6. CPU利用DMA控制器，把数据从Socket缓冲区拷贝到网卡，**上下文从内核态切换回用户态**，write调用返回。
+    - 可以发现，`mmap+write`实现的零拷贝，I/O发生了**4**次用户空间与内核空间的上下文切换，以及3次数据拷贝。其中3次数据拷贝中，包括了**2次DMA拷贝和1次CPU拷贝**。
+- **sendfile**:sendfile表示在两个文件描述符之间传输数据，它是在**操作系统内核**中操作的，**避免了数据从内核缓冲区和用户缓冲区之间的拷贝操作**，因此可以使用它来实现零拷贝。
+    - sendfile实现的零拷贝流程如下：
+        1. 用户进程发起sendfile系统调用，**上下文（切换1）从用户态转向内核态**
+        2. DMA控制器，把数据从硬盘中拷贝到内核缓冲区。
+        3. CPU将读缓冲区中数据拷贝到Socket缓冲区
+        4. DMA控制器，异步把数据从Socket缓冲区拷贝到网卡，
+        5. **上下文（切换2）从内核态切换回用户态**，sendfile调用返回。
+    - 可以发现，`sendfile`实现的零拷贝，I/O发生了**2**次用户空间与内核空间的上下文切换，以及3次数据拷贝。其中3次数据拷贝中，包括了**2次DMA拷贝和1次CPU拷贝**。
+- 带有DMA收集拷贝功能的sendfile
+    - linux 2.4版本之后，对`sendfile`做了优化升级，引入SG-DMA技术，其实就是对DMA拷贝加入了`scatter/gather`操作，它可以直接从内核空间缓冲区中将数据读取到网卡。使用这个特点实现零拷贝，还可以多省去**一次CPU拷贝**。
+    - sendfile+DMA scatter/gather实现的零拷贝流程如下：
+        1. 用户进程发起sendfile系统调用，**上下文（切换1）从用户态转向内核态**
+        2. DMA控制器，把数据从硬盘中拷贝到内核缓冲区。
+        3. CPU把内核缓冲区中的**文件描述符信息**（包括内核缓冲区的内存地址和偏移量）发送到Socket缓冲区
+        4. DMA控制器根据文件描述符信息，直接把数据从内核缓冲区拷贝到网卡
+        5. **上下文（切换2）从内核态切换回用户态**，sendfile调用返回。
+    - 可以发现，`sendfile+DMA scatter/gather`实现的零拷贝，I/O发生了**2**次用户空间与内核空间的上下文切换，以及2次数据拷贝。其中2次数据拷贝都是**DMA拷贝**。这就是真正的 **零拷贝（Zero-copy)** 技术，全程都没有通过CPU来搬运数据，所有的数据都是通过DMA来进行传输的。
+
+#### DMA
+
+- DMA，英文全称是**Direct Memory Access**，即直接内存访问。**DMA**本质上是一块主板上独立的芯片，允许外设设备和内存存储器之间直接进行IO数据传输，其过程**不需要CPU的参与**。
+
+![Image](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/640-20220303001600489.png)
+
+- **流程**
+    1. 用户应用进程调用read函数，向操作系统发起IO调用，进入阻塞状态，等待数据返回
+    2. CPU收到指令后，对DMA控制器发起指令调度
+    3. DMA收到IO请求后，将请求发送给磁盘
+    4. 磁盘将数据放入磁盘控制缓冲区，并通知DMA
+    5. DMA将数据从磁盘控制器缓冲区拷贝到内核缓冲区
+    6. DMA向CPU发出数据读完的信号，把工作交换给CPU，由CPU负责将数据从内核缓冲区拷贝到用户缓冲区
+    7. 用户应用进程由内核态切换回用户态，解除阻塞状态
 
 ## 计算机网络
 
@@ -3192,31 +3330,30 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 
 ### HTTP 协议
 
-#### HTTP 与 HTTPS 的区别
+#### HTTP 版本
 
-- HTTPS协议需要到CA申请证书,一般免费证书较少,因而需要一定费用
-- HTTP是超文本传输协议,信息是明文传输,HTTPS则是具有安全性的SSL加密传输协议
-- HTTP和HTTPS使用的是完全不同的连接方式,用的端口也不一样,前者是80,后者是443
-- HTTP 页面响应速度比 HTTPS 快,主要是因为 HTTP 使用 TCP 三次握手建立连接,客户端和服务器需要交换 3 个包,而 HTTPS除了 TCP 的三个包,还要加上 SSL握手需要的 9 个包,所以一共是 12 个包
-
-#### HTTPS 基本工作原理
-
-1. 客户端使用 HTTPS 的 URL 访问服务器,要求与服务器建立 SSL 连接，向服务端发送一个随机数（Client random）和客户端支持的加密方法,比如 RSA 公钥加密
-2. 服务器收到客户端请求后,回复一种客户端支持的加密方法,一个随机数（Server random）和SSL证书（其中包括非对称加密的公钥）
-3. 浏览器通过内置的CA公钥解密证书，并通过数字签名验证收到的证书没有被篡改，随后校验证书是否过期，证书中包含的网址是否与当前访问网址一致等等。验证通过后客户端利用服务端的公钥及加密方法对新的随机数（Premaster secret）进行加密并发送给服务器
-4. 服务端通过私钥解密出Premaster secret，利用同时利用 Client random,Server random通过一定的算法生成会话密钥（session key）
-4. 此后双方通过会话密钥的对称加密进行通信
-
-#### HTTPS 连接中的三个随机数的作用
-
-- 对于客户端：当其生成了**Pre-master secret**之后，会结合原来的A、B随机数，用DH算法计算出一个**master secret**，紧接着根据这个**master secret**推导出**hash secret**和**session secret**。
-- 对于服务端：当其解密获得了**Pre-master secret**之后，会结合原来的A、B随机数，用DH算法计算出一个**master secret**，紧接着根据这个**master secret**推导出**hash secret**和**session secret**。
-- 在客户端和服务端的**master secret**是依据三个随机数推导出来的，它是不会在网络上传输的，只有双方知道，不会有第三者知道。同时，客户端推导出来的**session secret**和**hash secret**与服务端也是完全一样的。
-- 那么现在双方如果开始使用对称算法加密来进行通讯，使用哪个作为共享的密钥呢？过程是这样子的：
-- 双方使用对称加密算法进行加密，用**hash secret**对HTTP报文做一次运算生成一个MAC，附在HTTP报文的后面，然后用**session-secret**加密所有数据（HTTP+MAC），然后发送。
-- 接收方则先用**session-secret**解密数据，然后得到HTTP+MAC，再用相同的算法计算出自己的MAC，如果两个MAC相等，证明数据没有被篡改。
-
-> MAC(Message Authentication Code)称为报文摘要，能够查知报文是否遭到篡改，从而保护报文的完整性。
+- **HTTP 1.0**
+    - 无状态，无连接
+    - 短连接：每次发送请求都要重新建立tcp请求，即三次握手，非常浪费性能
+    - 无host头域，也就是http请求头里的host
+    - 不允许断点续传，而且不能只传输对象的一部分，要求传输整个对象
+- **HTTP 1.1**
+    - 长连接，流水线，使用connection:keep-alive使用长连接
+    - 请求管道化
+    - 增加缓存处理(新的字段如cache-control)
+    - 增加Host字段，支持断点传输等
+- **HTTP 2.0**
+    - 二进制分帧
+    - 多路复用(或连接共享)，使用多个stream，每个stream又分帧传输，使得一个tcp连接能够处理多个http请求
+    - 头部压缩，双方各自维护一个header的索引表，使得不需要直接发送值，通过发送key缩减头部大小
+    - 服务器推送(Sever push)
+- **HTTP 3.0**
+    - 基于google的QUIC协议，而quic协议是使用udp实现的；
+    - 减少了tcp三次握手时间，以及tls握手时间；
+    - 解决了http 2.0中前一个stream丢包导致后一个stream被阻塞的问题；
+    - 优化了重传策略，重传包和原包的编号不同，降低后续重传计算的消耗；
+    - 连接迁移，不再用tcp四元组确定一个连接，而是用一个64位随机数来确定这个连接；
+    - 更合适的流量控制。
 
 #### HTTP 长连接短连接
 
@@ -3227,9 +3364,18 @@ public List<List<Integer>> levelOrder(TreeNode root) {
     - 由于 Web 服务器不保存发送请求的 Web 浏览器进程的任何信息,因此 HTTP 协议属于无状态协议 (Stateless Protocol)
 - **长连接**的操作步骤是:
     - 建立连接——数据传输...(保持连接)...数据传输——关闭连接
-    - 多用于操作频繁,点对点的通讯,而且连接数不能太多情况,,每个 TCP 连接都需要三步握手,这需要时间,如果每个操作都是先连接,再操作的话那么处理速度会降低很多,所以每个操作完后都不断开,下次处理时直接发送数据包就 OK 了,不用建立 TCP 连接,例如:数据库的连接用长连接,如果用短连接频繁的通信会造成 socket 错误,而且频繁的 socket 创建也是对资源的浪费
+    - 多用于操作频繁,点对点的通讯,而且连接数不能太多情况,,每个 TCP 连接都需要三步握手,这需要时间,如果每个操作都是先连接,再操作的话那么处理速度会降低很多,所以每个操作完后都不断开,下次处理时直接发送数据包就 OK 了,不用建立 TCP 连接,例如:数据库的连接用长连接,如果用短连接频繁的通信会造成 Socket 错误,而且频繁的 Socket 创建也是对资源的浪费
     - 从`HTTP/1.1`起,默认都开启了 Keep-Alive,保持连接特性,简单地说,当一个网页打开完成后,客户端和服务器之间用于传输 HTTP 数据的 TCP 连接不会关闭,如果客户端再次访问这个服务器上的网页,会继续使用这一条已经建立的连接
     - `Keep-Alive`不会永久保持连接,它有一个保持时间,可以在不同的服务器软件 (如 Apache) 中设定这个时间
+
+### 断点续传
+
+- HTTP 1.1 默认支持断点续传。 
+- **Range**:用于客户端到服务端的请求，可以通过改字段指定下载文件的某一段大小及其单位，字节偏移从 0 开始。
+- **If-Range**:用于客户端到服务端的请求，用于判断实体是否发生改变，必须与 Range 配合使用。若实体未被修改，则响应所缺少的那部分；否则，响应整个新的实体。
+- **Accept-Ranges**:用于 server 到 client 的应答，client 通过该自段判断 server 是否支持断点续传。
+- **Content-Ranges**:用于 sever 到 client 的应答，与 Accept-Ranges 在同一个报文内，通过该字段指定了返回的文件资源的字节范围。
+- **状态码**：断点续传，如果返回文件的一部分，则使用 HTTP 206 状态码；如果返回整个文件，则使用 HTTP 200 响应码。
 
 #### 常见状态码
 
@@ -3255,6 +3401,48 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 - **历史记录**:GET 请求参数会被完整保留在浏览历史记录里,而 POST 中的参数不会被保留
 - **编码方式**:GET 请求只能进行 URL 编码,而 POST 支持多种编码方式
 - **对参数的数据类型**:GET 只接受 ASCII 字符,而 POST 没有限制
+
+### HTTPS 协议
+
+#### HTTP 与 HTTPS 的区别
+
+- HTTPS协议需要到CA申请证书,一般免费证书较少,因而需要一定费用
+- HTTP是超文本传输协议,信息是明文传输,HTTPS则是具有安全性的SSL加密传输协议
+- HTTP和HTTPS使用的是完全不同的连接方式,用的端口也不一样,前者是80,后者是443
+- HTTP 页面响应速度比 HTTPS 快,主要是因为 HTTP 使用 TCP 三次握手建立连接,客户端和服务器需要交换 3 个包,而 HTTPS除了 TCP 的三个包,还要加上 SSL握手需要的 9 个包,所以一共是 12 个包
+
+#### HTTPS 基本工作原理
+
+1. 客户端使用 HTTPS 的 URL 访问服务器,要求与服务器建立 SSL 连接，向服务端发送一个随机数（Client random）和客户端支持的加密方法,比如 RSA 公钥加密
+2. 服务器收到客户端请求后,回复一种客户端支持的加密方法,一个随机数（Server random）和SSL证书（其中包括非对称加密的公钥）
+3. 浏览器通过内置的CA公钥解密证书，并通过数字签名验证收到的证书没有被篡改，随后校验证书是否过期，证书中包含的网址是否与当前访问网址一致等等。验证通过后客户端利用服务端的公钥及加密方法对新的随机数（Premaster secret）进行加密并发送给服务器
+4. 服务端通过私钥解密出Premaster secret，利用同时利用 Client random,Server random通过一定的算法生成会话密钥（session key）
+5. 此后双方通过会话密钥的对称加密进行通信
+
+#### HTTPS 连接中的三个随机数的作用
+
+- 对于客户端：当其生成了**Pre-master secret**之后，会结合原来的A、B随机数，用DH算法计算出一个**master secret**，紧接着根据这个**master secret**推导出**hash secret**和**session secret**。
+- 对于服务端：当其解密获得了**Pre-master secret**之后，会结合原来的A、B随机数，用DH算法计算出一个**master secret**，紧接着根据这个**master secret**推导出**hash secret**和**session secret**。
+- 在客户端和服务端的**master secret**是依据三个随机数推导出来的，它是不会在网络上传输的，只有双方知道，不会有第三者知道。同时，客户端推导出来的**session secret**和**hash secret**与服务端也是完全一样的。
+- 那么现在双方如果开始使用对称算法加密来进行通讯，使用哪个作为共享的密钥呢？过程是这样子的：
+- 双方使用对称加密算法进行加密，用**hash secret**对HTTP报文做一次运算生成一个MAC，附在HTTP报文的后面，然后用**session-secret**加密所有数据（HTTP+MAC），然后发送。
+- 接收方则先用**session-secret**解密数据，然后得到HTTP+MAC，再用相同的算法计算出自己的MAC，如果两个MAC相等，证明数据没有被篡改。
+
+> MAC(Message Authentication Code)称为报文摘要，能够查知报文是否遭到篡改，从而保护报文的完整性。
+
+#### 中间人攻击
+
+- 中间人攻击 (Man-in-the-MiddleAttack，简称“MITM*攻击*”) 是指攻击者与通讯的两端分别创建独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容
+- **数字签名**：用私钥对某个文件的散列值进行签名就像一个人亲手在信件最后签上了自己的名字一样，证明这份文件 / 这段消息确实来自私钥的拥有者。在通信中，双方每次在写完消息之后，计算消息的散列值，并用自己的私钥加密生成数字签名，附在报文后面，接收者在收到消息和数字签名之后，先计算散列值，再使用对方的公钥解密数字签名中的散列值，进行对比，如果一致，就可以确保该消息确实是来自于对方，并且没有被篡改过。
+- **数字证书认证机构**：如果中间人在会话建立阶段把双方交换的真实公钥替换成自己的公钥了，那么中间人还是可以篡改消息的内容而双方并不知情。为了解决这个问题，需要找一个通信双方都信任的第三方来为双方确认身份。这就像大家都相信公证处，公证处拿着自己的公章为每一封信件都盖上了自己的章，证明这封信确实是由本人发出的，这样就算中间人可以替换掉通信双方消息的签名，也无法替换掉公证处的公章。这个公章，在二进制的世界里，就是数字证书，公证处就是 CA（数字证书认证机构）。
+- **数字证书**：申请人将一些必要信息（包括公钥、姓名、电子邮件、有效期）等提供给 CA，CA 在通过各种手段确认申请人确实是他所声称的人之后，用自己的私钥对申请人所提供信息计算散列值进行加密，形成数字签名，附在证书最后，再将数字证书颁发给申请人，申请人就可以使用 CA 的证书向别人证明他自己的身份了。对方收到数字证书之后，只需要用 CA 的公钥解密证书最后的签名得到加密之前的散列值，再计算数字证书中信息的散列值，将两者进行对比，只要散列值一致，就证明这张数字证书是有效且未被篡改过的。
+- **中间人攻击过程**
+    1. 客户端发送请求到服务端，请求被中间人截获
+    2. 服务器向客户端发送公钥
+    3. 中间人截获公钥，保留在自己手上。然后自己生成一个伪造的公钥，发给客户端
+    4. 客户端收到伪造的公钥后，生成加密值发给服务器
+    5. 中间人获得加密值，用自己的私钥解密获得真秘钥。同时生成假的加密值，发给服务器
+    6. 服务器用私钥解密获得假密钥。然后加密数据传输给客户端
 
 ### ARP 协议
 
@@ -3348,28 +3536,14 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 7. 浏览器得到响应内容,进行解析与渲染,并显示
 8. 断开连接 (四次挥手)
 
-### 断点续传
+### Socket
 
-- HTTP 1.1 默认支持断点续传。 
-- **Range**:用于客户端到服务端的请求，可以通过改字段指定下载文件的某一段大小及其单位，字节偏移从 0 开始。
-- **If-Range**:用于客户端到服务端的请求，用于判断实体是否发生改变，必须与 Range 配合使用。若实体未被修改，则响应所缺少的那部分；否则，响应整个新的实体。
-- **Accept-Ranges**:用于 server 到 client 的应答，client 通过该自段判断 server 是否支持断点续传。
-- **Content-Ranges**:用于 sever 到 client 的应答，与 Accept-Ranges 在同一个报文内，通过该字段指定了返回的文件资源的字节范围。
-- **状态码**：断点续传，如果返回文件的一部分，则使用 HTTP 206 状态码；如果返回整个文件，则使用 HTTP 200 响应码。
-
-### 中间人攻击
-
-- 中间人攻击 (Man-in-the-MiddleAttack，简称“MITM*攻击*”) 是指攻击者与通讯的两端分别创建独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容
-- **数字签名**：用私钥对某个文件的散列值进行签名就像一个人亲手在信件最后签上了自己的名字一样，证明这份文件 / 这段消息确实来自私钥的拥有者。在通信中，双方每次在写完消息之后，计算消息的散列值，并用自己的私钥加密生成数字签名，附在报文后面，接收者在收到消息和数字签名之后，先计算散列值，再使用对方的公钥解密数字签名中的散列值，进行对比，如果一致，就可以确保该消息确实是来自于对方，并且没有被篡改过。
-- **数字证书认证机构**：如果中间人在会话建立阶段把双方交换的真实公钥替换成自己的公钥了，那么中间人还是可以篡改消息的内容而双方并不知情。为了解决这个问题，需要找一个通信双方都信任的第三方来为双方确认身份。这就像大家都相信公证处，公证处拿着自己的公章为每一封信件都盖上了自己的章，证明这封信确实是由本人发出的，这样就算中间人可以替换掉通信双方消息的签名，也无法替换掉公证处的公章。这个公章，在二进制的世界里，就是数字证书，公证处就是 CA（数字证书认证机构）。
-- **数字证书**：申请人将一些必要信息（包括公钥、姓名、电子邮件、有效期）等提供给 CA，CA 在通过各种手段确认申请人确实是他所声称的人之后，用自己的私钥对申请人所提供信息计算散列值进行加密，形成数字签名，附在证书最后，再将数字证书颁发给申请人，申请人就可以使用 CA 的证书向别人证明他自己的身份了。对方收到数字证书之后，只需要用 CA 的公钥解密证书最后的签名得到加密之前的散列值，再计算数字证书中信息的散列值，将两者进行对比，只要散列值一致，就证明这张数字证书是有效且未被篡改过的。
-- **中间人攻击过程**
-    1. 客户端发送请求到服务端，请求被中间人截获
-    2. 服务器向客户端发送公钥
-    3. 中间人截获公钥，保留在自己手上。然后自己生成一个伪造的公钥，发给客户端
-    4. 客户端收到伪造的公钥后，生成加密值发给服务器
-    5. 中间人获得加密值，用自己的私钥解密获得真秘钥。同时生成假的加密值，发给服务器
-    6. 服务器用私钥解密获得假密钥。然后加密数据传输给客户端
+- Socket是在应用层和传输层之间的一个抽象层，它把TCP/IP层复杂的操作抽象为几个简单的接口供应用层调用已实现进程在网络中通信。
+- Socket起源于UNIX，在Unix一切皆文件哲学的思想下，Socket是一种"打开—读/写—关闭"模式的实现，服务器和客户端各自维护一个"文件"，在建立连接打开后，可以向自己文件写入内容供对方读取或者读取对方内容，通讯结束时关闭文件。
+- Socket通信的基本过程
+    1. 在服务器端创建一个ServerSocket对象,通过执行`accept()`方法监听客户连接,这将使线程处于等待状态
+    2. 在客户端建立Socket类,与某服务器的指定端口进行连接,服务a器监听到连接请求后,就可在两者之间建立连接
+    3. 连接建立之后,就可以取得相应的输入/输出流进行通信,一方的输出流发送的数据将被另一方的输入流读取
 
 ## 分布式与微服务
 
@@ -3463,8 +3637,8 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 
     1. 节点 A 成为候选者后，向其他节点发送请求投票 RPC 信息，请它们选举自己为领导者。
 
-    2.  节点 B 和节点 C 接收到节点 A 发送的请求投票信息后，在编号为 1 的这届任期内，还没有进行过投票，就把选票投给节点 A，并增加自己的任期编号。
-    3.  节点 A 收到了大多数节点（n/2+1) 的投票，从候选者成为本届任期内的新的领导者。
+    2. 节点 B 和节点 C 接收到节点 A 发送的请求投票信息后，在编号为 1 的这届任期内，还没有进行过投票，就把选票投给节点 A，并增加自己的任期编号。
+    3. 节点 A 收到了大多数节点（n/2+1) 的投票，从候选者成为本届任期内的新的领导者。
 
 4. **与其他节点通讯**：节点 A 作为领导者，固定的时间间隔给节点 B 和节点 C 发送心跳信息，告诉节点 B 和 C，我是领导者，节点 B 和节点 C 发送响应信息给节点 A，告诉节点 A 我是正常的。
 

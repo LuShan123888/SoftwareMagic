@@ -10,7 +10,7 @@ categories:
 
 ## 导入MD5.js
 
-```js
+```html
 <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.16.0/js/md5.min.js"></script>
 ```
 
