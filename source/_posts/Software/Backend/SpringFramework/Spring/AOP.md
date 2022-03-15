@@ -252,7 +252,7 @@ public class AnnotationPointcut {
 - **aspectj-autoproxy**
     - 通过aop命名空间的`<aop:aspectj-autoproxy />`声明自动为Spring容器中那些配置`@aspect`切面的bean创建代理, 织入切面
     - Spring 在内部依旧采用`AnnotationAwareAspectJAutoProxyCreator`进行自动代理的创建工作, 但具体实现的细节已经被`<aop:aspectj-autoproxy />`隐藏起来了
-    - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性, 默认为false, 表示使用jdk动态代理织入增强, 当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时, 表示使用CGLib动态代理技术织入增强,不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口, 则Spring将自动使用CGLib动态代理
+    - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性, 默认为false, 表示使用JDK动态代理织入增强, 当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时, 表示使用CGLib动态代理技术织入增强,不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口, 则Spring将自动使用CGLib动态代理
 
 ## Spring Boot
 

@@ -96,9 +96,10 @@ public static void main(String[]args){
 - 指允许不同类的对象对同一函数做出响应。即同一函数可以根据发送对象的不同而采用多种不同的行为方式
 - 实现多态的技术称为：动态绑定（dynamic binding），是指在执行期间判断所引用对象的实际类型，根据其实际的类型调用其相应的方法
 - 方法重载（overload）实现的是编译时的多态性（也称为前绑定），而方法重写（override）实现的是运行时的多态性（也称为后绑定）
+- 多态的好处：可以使程序有良好的扩展，并可以对所有类的对象进行通用处理。
 - **多态存在的三个必要条件**
     - 继承
-    - 重写
+    - 子类重写父类方法
     - 父类引用指向子类对象
 - **多态的实现方式**
     - 重写
@@ -1825,20 +1826,14 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
 
 - 控制反转,是把传统上由程序代码直接操控的对象的调用权交给容器,由容器来创建对象并管理对象之间的依赖关系,DI 是对 IoC 更准确的描述,即由容器动态的将某种依赖关系注入到组件之中
 
-- **IoC 的原理**
-
-    1. 实例化后的对象被封装在 BeanWrapper 对象中,并且此时对象仍然是一个原生的状态,并没有进行依赖注入
-    2. 紧接着,Spring 根据 BeanDefinition 中的信息进行依赖注入
-    3. 并且通过 BeanWrapper 提供的设置属性的接口完成依
-
-### IoC 容器
+#### IoC 容器
 
 - **BeanFactory**:是一个工厂类，它是一个负责生产和管理bean的工厂。在Spring中，BeanFactory是IoC容器的核心接口，它的职责包括：实例化、定位、配置应用程序中的对象及建立这些对象间的依赖。
     - **延迟实例化**:
     - 在启动IoC容器的时候不会去实例化Bean，只有在使用到某个Bean时(即调用getBean0方法获取时)，才对该Bean进行加载实例化
-    - - 因为容器启动的时候不用实例化Bean，所以应用启动的时候占用资源较少，程序启动较快，适合对资源要求较高的应用
-        - 系统运行的速度相对来说慢一些，井且有可能会出现空指针异常的情况
-        -  不能提前发现一些存在的Spring的配置问题。如果Bean的某一个属性没有注入，当BeanFacotry加载后，直至第一次使用调用getBean方法时才会抛出异常
+    - 因为容器启动的时候不用实例化Bean，所以应用启动的时候占用资源较少，程序启动较快，适合对资源要求较高的应用
+      - 系统运行的速度相对来说慢一些，井且有可能会出现空指针异常的情况
+      -  不能提前发现一些存在的Spring的配置问题。如果Bean的某一个属性没有注入，当BeanFacotry加载后，直至第一次使用调用getBean方法时才会抛出异常
 - **ApplicationContext** :是 BeanFactory 的子类,因为古老的 BeanFactory 无法满足不断更新的的需求,于是 ApplicationContext 就基本上代替了 BeanFactory 的工作
     - **非延迟实例化**
         - 在启动IoC容器的时候会预先加载单例Bean，也可以通过设置bean的属性lazy-init =true来让Bean延迟实例化
@@ -1848,21 +1843,30 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
         - ApplicationContext继承自MessageSource,因此ApplicationContext为应用提供118n 国际化消息访问的功能
         - ApplicationContext继承自ApplicationEventPublisher,使得容器拥有发布应用上下文事件的功能,包括容器启动事件、关闭
             事件等.实现了 ApplicationListener 事件监听接口的 Bean 可以接收到容器事件,并对事件进行响应处理
-        -  ApplicationContext间接继承自ResourceLoader,提供了统一的资源文件访问方式
+        - ApplicationContext间接继承自ResourceLoader,提供了统一的资源文件访问方式
             - **FileSystemXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你需要提供给构造器 XML 文件的完整路径
             - **ClassPathXmlApplicationContext**:该容器从 XML 文件中加载已被定义的 bean,在这里,你不需要提供 XML 文件的完整路径,只需正确配置 CLASSPATH 环境变量即可,因为,容器会从 CLASSPATH 中搜索 bean 配置文件
             - **WebXmlApplicationContext**:该容器会在一个 web 应用程序的范围内加载在 XML 文件中已被定义的 bean
-        - 与BeanFactory需要手动注册BeanPostProcessor/BeanFactoryPostProcessor不同,ApplicationContext则是自动注册BeanPostProcessor/BeanFactoryPostProcessor
+    - 与BeanFactory需要手动注册BeanPostProcessor/BeanFactoryPostProcessor不同,ApplicationContext则是自动注册BeanPostProcessor/BeanFactoryPostProcessor
 
-### FactoryBean
+#### IoC 容器启动过程
 
-- FactoryBean是一个接口，它是一个Bean。FactoryBean并不是一个简单的Bean，而是一个能生产或者修饰对象生成的工厂Bean，
-    它最大的一个作用是：可以让我们自定义Bean的创建过程
-- **接口方法**
-    - getobject():返回的对象实例
-    - getobjectType():返回的对象实例的类型
-    - isSingleton():指定返回的对象实例时是单例还是非单例.true是单例,false是非单例
-- **注意**：当在loC容器中的Bean实现了FactoryBean后，通过getBean("beanName")获取到的Bean对象并不是FactoryBean的实现类对象，而是这个实现类中的getobject()方法返回的对象。而通过getBean( "&" + "beanName")获取到的才是FactoryBean的实现类对象
+- 以ClassPathXmlApplicationContext为例，当初始化ClassPathXmlApplicationContext对象的流程如下
+    1. `super(parent)`:调用父类构造方法，进行相关的对象创建等操作，如创建资源模式解析器等
+    2. `setConfigLocations (configLocations)`:设置配置文件的路径
+    3. `refresh()`:刷新IoC容器，IoC的核心方法,该方法加同步监视器锁，确保只有一个线程在初始化IoC容器
+        1. `prepareRefresh()`:容器刷新前的一些预处理工作
+        2. `obtainFreshBeanFactory()`：创建DefaultListableBeanFactory工厂,给bean工厂设置一些属性,加载配置文件信息,封装成bean定义信息
+        3. `prepareBeanFactory(beanFactory)`:设置bean工厂的一些屋性,如添加一些BeanPostProcessor增强器等
+        4. `postProcessBeanFactory(beanFactory)`:模板方法，留給子类扩展实现,允许子类修改、扩展bean工厂
+        5. `invokeBeanFactoryPostProcessors(beanFactory)`:执行BeanFactoryPostProcessor的`postProcessBeanFactory()`增强方法
+        6. `registerBeanPostProcessors(beanFactory)`:注册BeanPostProcessor增强器，注意这里只是注册，真正是在初始化阶段的前后执行
+        7. `initMessageSource()`:初始化MessageSource,国际化处理
+        8. `initApplicationEventMulticaster()`:初始化事件多播器
+        9. `onRefresh()`:模板方法,在单例对象的实例化之前，允许子类做一下扩展
+        10. `registerListeners()`:往applicationEventMulticaster事件多播器中注册一系列监听器
+        11. `finishBeanFactoryinitialization(beanFactory)`:IoC容器创建最重要的一个步骤：完成非機加载的单例bean对象的实例化，包括反射创建bean对象、屋性填充、循环依赖的处理、bean的初始化等等
+        12. `finishRefresh()`:容器刷新完成之后的一些处理工作
 
 ### DI
 
@@ -1876,12 +1880,30 @@ WHERE t1.id <= t2.id ORDER BY t1.id desc LIMIT 2;
     - @Autowired 默认按类型装配 (属于 Spring 规范),如果我们想使用名称装配可以结合@Qualifier 注解进行使用
     - @Resource 默认按照名称进行装配 (属于 J2EE 规范), 名称可以通过 name 属性进行指定,而使用 type 属性时则使用 byType 自动注入策略
 
-### Bean 作用域
+#### FactoryBean
+
+- FactoryBean是一个接口，它是一个Bean。FactoryBean并不是一个简单的Bean，而是一个能生产或者修饰对象生成的工厂Bean，
+    它最大的一个作用是：可以让我们自定义Bean的创建过程
+- **接口方法**
+    - getobject():返回的对象实例
+    - getobjectType():返回的对象实例的类型
+    - isSingleton():指定返回的对象实例时是单例还是非单例.true是单例,false是非单例
+- **注意**：当在loC容器中的Bean实现了FactoryBean后，通过getBean("beanName")获取到的Bean对象并不是FactoryBean的实现类对象，而是这个实现类中的getobject()方法返回的对象。而通过getBean( "&" + "beanName")获取到的才是FactoryBean的实现类对象
+
+#### Bean 循环依赖
+
+- **Spring解决循环依赖的前置条件**
+    1. 出现循环依赖的Bean必须要是单例
+    2. 依赖注入的方式不能全是构造器注入的方式
+- **Spring解决循环依赖的方法**：Spring通过三级缓存解决了循环依赖，其中一级缓存为单例池（`singletonObjects`）,二级缓存为早期曝光对象`earlySingletonObjects`，三级缓存为早期曝光对象工厂（`singletonFactories`）。当A、B两个类发生循环引用时，在A完成实例化后，就使用实例化后的对象去创建一个对象工厂，并添加到三级缓存中，如果A被AOP代理，那么通过这个工厂获取到的就是A代理后的对象，如果A没有被AOP代理，那么这个工厂获取到的就是A实例化的对象。当A进行属性注入时，会去创建B，同时B又依赖了A，所以创建B的同时又会去调用getBean(a)来获取需要的依赖，此时的getBean(a)会从缓存中获取，第一步，先获取到三级缓存中的工厂；第二步，调用对象工工厂的getObject方法来获取到对应的对象，得到这个对象后将其注入到B中。紧接着B会走完它的生命周期流程，包括初始化、后置处理器等。当B创建完后，会将B再注入到A中，此时A再完成它的整个生命周期。至此，循环依赖结束
+- **为什么要使用三级缓存呢？二级缓存能解决循环依赖吗？**：如果要使用二级缓存解决循环依赖，意味着所有Bean在实例化后就要完成AOP代理，这样违背了Spring设计的原则，Spring在设计之初就是通过`AnnotationAwareAspectJAutoProxyCreator`这个后置处理器来在Bean生命周期的最后一步来完成AOP代理，而不是在实例化后就立马进行AOP代理。
+
+#### Bean 作用域
 
 - 在 Spring 的早期版本中仅有两个作用域:singleton 和 prototype,前者表示 Bean 以单例的方式存在,后者表示每次从容器中调用 Bean 时,都会返回一个新的实例
 - Spring2.x 中针对 WebApplicationContext 新增了 3 个作用域,分别是:request(每次 HTTP 请求都会创建一个新的 Bean), session(同一个 HttpSession 共享同一个 Beaan,不同的 HttpSession 使用不同的 Bean) 和 globalSession(同一个全局 Session 共享一个 Bean)
 
-### Bean 的生命周期
+#### Bean 的生命周期
 
 1. 实例化 Bean
     - 对于 ApplicationContext 容器:容器通过获取 BeanDefinition 对象中的信息进行简单的实例化,并且这一步仅仅是简单的实例化
@@ -2063,9 +2085,24 @@ public int binarySearch(int[] nums, int target) {
 
 ### 排序算法
 
+#### 总结
+
+| 排序算法     | 平均时间复杂度 | 最坏时间复杂度 | 最好时间复杂度 | 空间复杂度 | 稳定性 |
+| ------------ | -------------- | -------------- | -------------- | ---------- | ------ |
+| 冒泡排序     | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
+| 直接选择排序 | O(n²)          | O(n²)          | O(n²)          | O(1)       | 不稳定 |
+| 直接插入排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
+| 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(logn)    | 不稳定 |
+| 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
+| 堆排序       | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(1)       | 不稳定 |
+| 希尔排序     | O(nlogn)       | O((nlog²n)     | O((nlog²n)     | O(1)       | 不稳定 |
+| 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(k)       | 稳定   |
+| 桶排序       | O(n+k)         | O(n+k)         | O(n²)          | O(n+k)     | 稳定   |
+| 基数排序     | O(n*k)         | O(n*k)         | O(n*k)         | O(n+k)     | 稳定   |
+
 #### 冒泡排序
 
-- 冒泡排序是一种简单的排序算法,它重复地走访过要排序的数列,一次比较两个元素,如果它们的顺序错误就把它们交换过来,走访数列的工作是重复地进行直到没有再需要交换,也就是说该数列已经排序完成,这个算法的名字由来是因为越小的元素会经由交换慢慢浮到数列的顶端
+- 冒泡排序是一种简单的排序算法,它重复地访问要排序的数列,一次比较两个元素,如果它们的顺序错误就把它们交换过来,直到没有再需要交换,也就是说该数列已经排序完成,这个算法的名字由来是因为越小的元素会经由交换慢慢浮到数列的顶端
 - **算法描述**
     1. 比较相邻的元素,如果第一个比第二个大,就交换它们两个
     2. 对每一对相邻元素作同样的工作,从开始第一对到结尾的最后一对,这样在最后的元素应该会是最大的数
@@ -2582,21 +2619,6 @@ public class RadixSorter extends Sorter {
 
 - **稳定性**:通过上面的排序过程,我们可以看到,每一轮映射和收集操作,都保持从左到右的顺序进行,如果出现相同的元素,则保持他们在原始数组中的顺序,可见,基数排序是一种稳定的排序
 - **适用场景**:基数排序要求较高,元素必须是整数,整数时长度 10W 以上,最大值 100W 以下效率较好,但是基数排序比其他排序好在可以适用字符串,或者其他需要根据多个条件进行排序的场景,例如日期,先排序日,再排序月,最后排序年,其它排序算法可是做不了的
-
-#### 总结
-
-| 排序算法     | 平均时间复杂度 | 最坏时间复杂度 | 最好时间复杂度 | 空间复杂度 | 稳定性 |
-| ------------ | -------------- | -------------- | -------------- | ---------- | ------ |
-| 冒泡排序     | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
-| 直接选择排序 | O(n²)          | O(n²)          | O(n²)          | O(1)       | 不稳定 |
-| 直接插入排序 | O(n²)          | O(n²)          | O(n)           | O(1)       | 稳定   |
-| 快速排序     | O(nlogn)       | O(n²)          | O(nlogn)       | O(logn)    | 不稳定 |
-| 归并排序     | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(n)       | 稳定   |
-| 堆排序       | O(nlogn)       | O(nlogn)       | O(nlogn)       | O(1)       | 不稳定 |
-| 希尔排序     | O(nlogn)       | O((nlog²n)     | O((nlog²n)     | O(1)       | 不稳定 |
-| 计数排序     | O(n+k)         | O(n+k)         | O(n+k)         | O(k)       | 稳定   |
-| 桶排序       | O(n+k)         | O(n+k)         | O(n²)          | O(n+k)     | 稳定   |
-| 基数排序     | O(n*k)         | O(n*k)         | O(n*k)         | O(n+k)     | 稳定   |
 
 ### 二叉树遍历
 
