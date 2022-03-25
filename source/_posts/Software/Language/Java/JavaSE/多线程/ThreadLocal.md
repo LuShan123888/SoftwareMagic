@@ -104,7 +104,7 @@ private static int nextHashCode() {
 **为什么不直接用线程id来作为ThreadLocalMap的key？**
 
 - 这一点很容易理解,因为直接用线程id来作为ThreadLocalMap的key,无法区分放入ThreadLocalMap中的多个value,比如我们放入了两个字符串,你如何知道我要取出来的是哪一个字符串呢？
-- 而使用ThreadLocal作为key就不一样了,由于每一个ThreadLocal对象都可以由threadLocalHashCode属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分(下面的例子),所以可以用不同的ThreadLocal作为key,区分不同的value,方便存取
+- 而使用ThreadLocal作为key就不一样了,由于每一个ThreadLocal对象都可以由`threadLocalHashCode`属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分(下面的例子),所以可以用不同的ThreadLocal作为key,区分不同的value,方便存取
 
 ```java
 public class Son implements Cloneable{

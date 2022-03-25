@@ -48,21 +48,10 @@ categories:
 #### Write
 
 ```java
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.joda.time.DateTime;
+public class Test {
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 创建工作薄
         HSSFWorkbook workbook = new HSSFWorkbook();
         // 创建工作表
@@ -93,9 +82,6 @@ class Test {
         fileOutputStream.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
@@ -104,18 +90,10 @@ class Test {
 ##### 基本读取
 
 ```java
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+public class Test {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 获取文件流
         FileInputStream fileInputStream = new FileInputStream(PATH + "/HSSFWriteTest.xlsx");
         // 根据文件创建一个工作簿对象
@@ -134,28 +112,16 @@ class Test {
         fileInputStream.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
 ##### 根据数据类型遍历读取
 
 ```java
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
-import org.joda.time.DateTime;
+public class Test {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Date;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 获取文件流
         FileInputStream fileInputStream = new FileInputStream(PATH + "/HSSFWriteTest.xls");
         // 根据文件创建一个工作簿对象
@@ -230,26 +196,16 @@ class Test {
         fileInputStream.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
 ##### 读取公式
 
 ```java
-import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
+public class Test {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 获取文件流
         FileInputStream fileInputStream = new FileInputStream(PATH + "/HSSFWriteTest.xls");
         // 根据文件创建一个工作簿对象
@@ -275,9 +231,6 @@ class Test {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
@@ -290,20 +243,10 @@ class Test {
 #### Write
 
 ```java
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+public class Test {
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 开始时间
         long begin = System.currentTimeMillis();
         // 创建工作薄
@@ -326,28 +269,16 @@ class Test {
         // 输出所用的时间
         System.out.println((double) (end - begin) / 1000);
     }
-
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
 #### Read
 
 ```java
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+public class Test {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 获取文件流
         FileInputStream fileInputStream = new FileInputStream(PATH + "/XSSFWriteTest.xlsx");
         // 根据文件创建一个工作簿对象
@@ -366,9 +297,6 @@ class Test {
         fileInputStream.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
@@ -382,18 +310,10 @@ class Test {
 #### Write
 
 ```java
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+public class Test {
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 开始时间
         long begin = System.currentTimeMillis();
         // 创建工作薄
@@ -419,27 +339,16 @@ class Test {
         System.out.println((double) (end - begin) / 1000);
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
 #### Read
 
 ```java
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+public class Test {
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-class Test {
-    String PATH = "/Users/cian/Downloads";
-
-    public Test() throws IOException {
+    public void ExcelTest() throws IOException {
+        String PATH = "/Users/cian/Downloads";
         // 获取文件流
         FileInputStream fileInputStream = new FileInputStream(PATH + "/XSSFWriteTest.xlsx");
         // 根据文件创建一个工作簿对象
@@ -458,9 +367,6 @@ class Test {
         fileInputStream.close();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Test();
-    }
 }
 ```
 
@@ -474,11 +380,11 @@ class Test {
 ### pom.xml
 
 ```xml
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-            <version>2.2.7</version>
-        </dependency>
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>easyexcel</artifactId>
+    <version>2.2.7</version>
+</dependency>
 ```
 
 ### Write
@@ -488,12 +394,6 @@ class Test {
 - `DemoData.java`
 
 ```java
-import com.alibaba.excel.annotation.ExcelIgnore;
-import com.alibaba.excel.annotation.ExcelProperty;
-import lombok.Data;
-
-import java.util.Date;
-
 @Data
 public class DemoData {
     @ExcelProperty("字符串标题")
@@ -513,14 +413,8 @@ public class DemoData {
 **测试写入数据**
 
 ```java
-import com.alibaba.excel.EasyExcel;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-class EasyExcelTest {
+public class Test {
+    
     //初始化测试对象集合
     private List<DemoData> data() {
         List<DemoData> list = new ArrayList<DemoData>();
@@ -535,33 +429,27 @@ class EasyExcelTest {
     }
 
     // 根据list 写入 Excel
-    public  EasyExcelTest() {
+    public void EasyExcelTest() {
         String PATH = "/Users/cian/Downloads";
         // 写法1
         String fileName = PATH + "EasyExcel.xlsx";
-        // 这里需要指定写用哪个class去写,然后写到第一个sheet,名字为模板 然后文件流会自动关闭
-        // 如果这里想使用03 则 传入excelType参数即可
+        // 如果这里想使用2003版本则传入excelType参数即可
         EasyExcel.write(fileName, DemoData.class).sheet("模板").doWrite(data());
 
         // 写法2
         String fileName = PATH + "EasyExcel.xlsx";
         ExcelWriter excelWriter = null;
         try {
-            // 这里需要指定写用哪个class去写
             excelWriter = EasyExcel.write(fileName, DemoData.class).build();
             WriteSheet writeSheet = EasyExcel.writerSheet("模板").build();
             excelWriter.write(data(), writeSheet);
         } finally {
-            // 千万别忘记finish 会帮忙关闭流
             if (excelWriter != null) {
                 excelWriter.finish();
             }
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new EasyExcelTest();
-    }
 }
 ```
 
@@ -572,82 +460,38 @@ class EasyExcelTest {
 - `DemoDataListener.java`
 
 ```java
-// 有个很重要的点 DemoDataListener 不能被spring管理,要每次读取excel都要new,然后里面用到spring可以构造方法传进去
 public class DemoDataListener extends AnalysisEventListener<DemoData> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DemoDataListener.class);
-    /**
-     * 每隔5条存储数据库,实际使用中可以3000条,然后清理list,方便内存回收
-     */
+    
+    // 每隔5条存储数据库,实际使用中可以3000条,然后清理list,方便内存回收
     private static final int BATCH_COUNT = 5;
-    List<DemoData> list = new ArrayList<DemoData>();
-    /**
-     * 假设这个是一个DAO,当然有业务逻辑这个也可以是一个service,当然如果不用存储这个对象没用
-     */
+    private List<DemoData> list = new ArrayList<DemoData>();
     private DemoDAO demoDAO;
 
-    public DemoDataListener() {
-        // 这里是demo,所以随便new一个,实际使用如果到了spring,请使用下面的有参构造函数
-        demoDAO = new DemoDAO();
-    }
-    /**
-     * 如果使用了spring,请使用这个构造方法,每次创建Listener的时候需要把spring管理的类传进来
-     *
-     * @param demoDAO
-     */
-    public DemoDataListener(DemoDAO demoDAO) {
-        this.demoDAO = demoDAO;
-    }
-    /**
-     * 这个每一条数据解析都会来调用
-     *
-     * @param data
-     *            one row value. Is is same as {@link AnalysisContext#readRowHolder()}
-     * @param context
-     */
     @Override
     public void invoke(DemoData data, AnalysisContext context) {
-        LOGGER.info("解析到一条数据:{}", JSON.toJSONString(data));
         list.add(data);
         // 达到BATCH_COUNT了,需要去存储一次数据库,防止数据几万条数据在内存,容易OOM
         if (list.size() >= BATCH_COUNT) {
-            saveData();
+            this.saveData();
             // 存储完成清理 list
             list.clear();
         }
     }
+    
     /**
      * 所有数据解析完成了 都会来调用
-     *
-     * @param context
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据,确保最后遗留的数据也存储到数据库
         saveData();
-        LOGGER.info("所有数据解析完成!");
     }
+    
     /**
      * 加上存储数据库
      */
     private void saveData() {
-        LOGGER.info("{}条数据,开始存储数据库!", list.size());
         demoDAO.save(list);
-        LOGGER.info("存储数据库成功!");
-    }
-}
-```
-
-**持久层**
-
-- `DemoDAO,java`
-
-```java
-/**
- * 假设这个是你的DAO存储,当然还要这个类让spring管理,当然你不用需要存储,也不需要这个类
- **/
-public class DemoDAO {
-    public void save(List<DemoData> list) {
-        // 如果是mybatis,尽量别直接调用多次insert,自己写一个mapper里面新增一个方法batchInsert,所有数据一次性插入
     }
 }
 ```
@@ -655,16 +499,9 @@ public class DemoDAO {
 **测试读取数据**
 
 ```java
-import com.alibaba.excel.EasyExcel;
-import org.junit.Test;
+public class Test {
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-class EasyExcelTest {
-
-    public  EasyExcelTest() {
+    public void EasyExcelTest() {
         // 写法1:
         String fileName = PATH + "EasyExcel.xlsx";
         // 这里 需要指定读用哪个class去读,然后读取第一个sheet 文件流会自动关闭
@@ -679,15 +516,10 @@ class EasyExcelTest {
             excelReader.read(readSheet);
         } finally {
             if (excelReader != null) {
-                // 这里千万别忘记关闭,读的时候会创建临时文件,到时磁盘会崩的
                 excelReader.finish();
             }
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new EasyExcelTest();
-    }
 }
 ```
-
