@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Redis Spring Boot整合 pom.xml  在Spring Boot2.x之后,原来使用的jedis被替换为lettuce jedis使用直连server,多线程操作时有安全隐患,可使用jedis pool连接池改善,类似BIO模式 lettuce底层使用netty实例可以在多个线程中进行共享,不存在线程不安全的情况,可以减少线程数据,类似NIO模式  1234&lt;depende">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-16T14:48:49.000Z">
-<meta property="article:modified_time" content="2022-01-16T14:48:49.000Z">
+<meta property="article:published_time" content="2022-03-20T13:33:34.000Z">
+<meta property="article:modified_time" content="2022-03-20T13:33:34.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-16 22:48" pubdate>
-        2022年1月16日 晚上
+      <time datetime="2022-03-20 21:33" pubdate>
+        2022年3月20日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      12k 字
+      13k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38 分钟
+      39 分钟
     </span>
   
 
@@ -225,8 +225,7 @@
 <h3 id="application-yml">application.yml</h3>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">redis:</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">6379</span><br>    <span class="hljs-attr">password:</span><br>    <span class="hljs-attr">jedis:</span><br>      <span class="hljs-attr">pool:</span><br>        <span class="hljs-attr">max-active:</span> <span class="hljs-number">8</span><br>        <span class="hljs-attr">max-wait:</span> <span class="hljs-string">-1ms</span><br>        <span class="hljs-attr">max-idle:</span> <span class="hljs-number">500</span><br>        <span class="hljs-attr">min-idle:</span> <span class="hljs-number">0</span><br>    <span class="hljs-attr">lettuce:</span><br>      <span class="hljs-attr">shutdown-timeout:</span> <span class="hljs-string">0ms</span><br></code></pre></td></tr></table></figure>
 <h3 id="自定义RedisTemplate">自定义RedisTemplate</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisConfig</span> </span>&#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory factory)</span> </span>&#123;<br>        RedisTemplate&lt;String, Object&gt; template = <span class="hljs-keyword">new</span> RedisTemplate&lt;String, Object&gt;();<br>        template.setConnectionFactory(factory);<br>        <span class="hljs-comment">//Json的序列化配置</span><br>        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="hljs-keyword">new</span> Jackson2JsonRedisSerializer(Object.class);<br>        ObjectMapper om = <span class="hljs-keyword">new</span> ObjectMapper();<br>        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);<br>        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);<br>        jackson2JsonRedisSerializer.setObjectMapper(om);<br>        <span class="hljs-comment">//String的序列化配置</span><br>        StringRedisSerializer stringRedisSerializer = <span class="hljs-keyword">new</span> StringRedisSerializer();<br>        <span class="hljs-comment">// key采用String的序列化方式</span><br>        template.setKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">// hash的key也采用String的序列化方式</span><br>        template.setHashKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">// value序列化方式采用jackson</span><br>        template.setValueSerializer(jackson2JsonRedisSerializer);<br>        <span class="hljs-comment">// hash的value序列化方式采用jackson</span><br>        template.setHashValueSerializer(jackson2JsonRedisSerializer);<br>        template.afterPropertiesSet();<br><br>        <span class="hljs-keyword">return</span> template;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id=""></h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableCaching</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@ConditionalOnMissingBean(name = &quot;redisTemplate&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory redisConnectionFactory)</span> </span>&#123;<br>        <span class="hljs-comment">//Json的序列化配置</span><br>        Jackson2JsonRedisSerializer&lt;Object&gt; jackson2JsonRedisSerializer = <span class="hljs-keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Object.class);<br>        ObjectMapper om = <span class="hljs-keyword">new</span> ObjectMapper();<br>        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);<br>        om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,<br>                ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);<br>        jackson2JsonRedisSerializer.setObjectMapper(om);<br>        <span class="hljs-comment">//String的序列化配置</span><br>        StringRedisSerializer stringRedisSerializer = <span class="hljs-keyword">new</span> StringRedisSerializer();<br>        RedisTemplate&lt;String, Object&gt; template = <span class="hljs-keyword">new</span> RedisTemplate&lt;&gt;();<br>        template.setConnectionFactory(redisConnectionFactory);<br>        <span class="hljs-comment">// key采用String的序列化方式</span><br>        template.setKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">// hash的key也采用String的序列化方式</span><br>        template.setHashKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">// value序列化方式采用jackson</span><br>        template.setValueSerializer(jackson2JsonRedisSerializer);<br>        <span class="hljs-comment">// hash的value序列化方式采用jackson</span><br>        template.setHashValueSerializer(jackson2JsonRedisSerializer);<br>        template.afterPropertiesSet();<br>        <span class="hljs-keyword">return</span> template;<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@ConditionalOnMissingBean(StringRedisTemplate.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> StringRedisTemplate <span class="hljs-title">stringRedisTemplate</span><span class="hljs-params">(RedisConnectionFactory redisConnectionFactory)</span> </span>&#123;<br>        StringRedisTemplate template = <span class="hljs-keyword">new</span> StringRedisTemplate();<br>        template.setConnectionFactory(redisConnectionFactory);<br>        <span class="hljs-keyword">return</span> template;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="使用Redis">使用Redis</h2>
 <h3 id="RedisTemplate">RedisTemplate</h3>
 <p><strong>methods</strong></p>
@@ -283,9 +282,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                      <a href="/Software/Backend/Database/Redis/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 配置文件</span>
+                        <span class="hidden-mobile">Redis 用户签到</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -293,8 +292,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">设计模式 单例模式</span>
+                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Excel%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">Java Excel处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

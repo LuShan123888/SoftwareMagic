@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-07T09:38:35.000Z">
-<meta property="article:modified_time" content="2022-02-07T09:38:35.000Z">
+<meta property="article:published_time" content="2022-03-23T11:26:31.000Z">
+<meta property="article:modified_time" content="2022-03-23T11:26:31.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-07 17:38" pubdate>
-        2022年2月7日 下午
+      <time datetime="2022-03-23 19:26" pubdate>
+        2022年3月23日 晚上
       </time>
     </span>
   
@@ -260,7 +260,7 @@
 <h2 id="中文乱码">中文乱码</h2>
 <p><strong>解决方法</strong>：修改默认字符集</p>
 <p><strong>默认编码</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;<br>show variables like &quot;%collation%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br>8 rows in` `set` `(0.00 sec)<br><br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br>3 rows in` `set` `(0.01 sec)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br><br>mysql&gt; show variables like &quot;%collation%&quot;;<br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br></code></pre></td></tr></table></figure>
 <p><strong>修改配置文件</strong></p>
 <ul>
 <li><code>/etc/my.cnf</code></li>
@@ -269,7 +269,7 @@
 <ul>
 <li>重启服务</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl restart mysqld.service<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ systemctl restart mysqld.service<br></code></pre></td></tr></table></figure>
 <h2 id="password-方法报错">password()方法报错</h2>
 <p><strong>报错信息</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements<br></code></pre></td></tr></table></figure>
@@ -337,9 +337,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Server/Nginx/Gzip/">
+                      <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nginx Gzip 压缩</span>
+                        <span class="hidden-mobile">MySQL 初始化</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -347,8 +347,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E5%88%9D%E5%A7%8B%E5%8C%96/">
-                        <span class="hidden-mobile">MySQL 初始化</span>
+                      <a href="/Software/Backend/Database/Redis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <span class="hidden-mobile">Redis 配置文件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
