@@ -31,7 +31,7 @@ System.out.println(i1 == i3); // true:数值 59 在-128 到 127 之间,上文所
 System.out.println(i1 == i4); // false:引用类型比较地址值,地址值不同
 System.out.println(i2 == i3); // true:i1 的源码是 i3,i2 和 i3 比较结果和 i2 与 i1 比较结果相同,包装类和基本类型比较时自动拆箱
 System.out.println(i2 == i4); // true:包装类和基本类型比较时自动拆箱
-System.out.println(i3 == i4); // 同 i1 == i4
+System.out.println(i3 == i4); // false:同 i1 == i4
 ```
 
 ### 自动拆箱装箱
@@ -142,10 +142,10 @@ public static void main(String[]args){
 - StringBuffer/StringBuilder 类表示的字符串对象可以直接进行修改
 - StringBuilder 和 StringBuffer 的方法完全相同,区别在于 StringBuilder 不是线程安全,因为它的所有方面都没有被 synchronized 修饰,因此它的效率也比 StringBuffer 要高
 - 当使用 + 号将字符串拼接时,其实底层是调用了 StringBuilder 的 append 方法
-- 创建一个字符串时,首先会检查池中是否有值相同的字符串对象,如果有就直接返回引用,不会创建字符串对象,如果没有则新建字符串对象,返回对象引用,并且将新创建的对象放入池中,但是,通过 new 方法创建的 String 对象是不检查字符串常量池的,而是直接在堆中创建新对象,也不会把对象放入池中,上述原则只适用于直接给 String 对象引用赋值的情况
+- 创建一个字符串时,首先会检查字符串常量池中是否有值相同的字符串对象,如果有就直接返回引用,不会创建字符串对象,如果没有则新建字符串对象,返回对象引用,并且将新创建的对象放入字符串常量池池中,但是,通过 new 方法创建的 String 对象是不检查字符串常量池的,而是直接在堆中创建新对象,并把对象放入字符串常量池中。
 
 ```java
-String str1 = new String("a"); //不检查字符串常量池的
+String str1 = new String("a"); //不检查字符串常量池，直接存入
 String str2 = "bb"; //检查字符串常量池的
 ```
 
@@ -750,11 +750,13 @@ public class AtomicIntegerThread implements Runnable {
     - **本地方法栈**
     - **堆**
         - 存放 new 的对象和数组
+        - 字符串常量池
         - 可以被所有的线程共享,不会存放别的对象引用
     - **方法区**:方法区逻辑上属于堆的一部分,但是为了与堆进行区分,通常又叫"非堆”
         - 已经被虚拟机加载的类信息
         - 常量
         - 静态变量
+        - 运行时常量池
         - 即时编译器编译后的代码
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-14-jvm-memory-structure.jpg" alt="jvm-memory-structure" style="zoom: 67%;" />
