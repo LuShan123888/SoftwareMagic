@@ -25,8 +25,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-14-jvm-memory-structure.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-14-jvm-stack.jpg">
-<meta property="article:published_time" content="2022-03-15T06:56:37.000Z">
-<meta property="article:modified_time" content="2022-03-15T06:56:37.000Z">
+<meta property="article:published_time" content="2022-03-26T17:09:45.000Z">
+<meta property="article:modified_time" content="2022-03-26T17:09:45.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -164,8 +164,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-15 14:56" pubdate>
-        2022年3月15日 下午
+      <time datetime="2022-03-27 01:09" pubdate>
+        2022年3月27日 凌晨
       </time>
     </span>
   
@@ -346,7 +346,7 @@
 <h3 id="方法区的特点">方法区的特点</h3>
 <ul>
 <li><strong>线程共享</strong>: 方法区是堆的一个逻辑部分,因此和堆一样,都是线程共享的,整个虚拟机中只有一个方法区</li>
-<li><strong>永久代与元空间</strong>: 方法区中的信息一般需要长期存在,而且它又是堆的逻辑分区,因此用堆的划分方法,把方法区称为&quot;永久代”,对于Java8,HotSpots取消了永久代,那么是不是也就没有方法区了呢？当然不是,方法区是一个规范,规范没变,它就一直在,那么取代永久代的就是元空间
+<li><strong>永久代与元空间</strong>: 方法区中的信息一般需要长期存在,而且它又是堆的逻辑分区,因此用堆的划分方法,把方法区称为&quot;永久代”,对于Java8,HotSpots用元空间取消了永久代
 <ul>
 <li><strong>元空间和永久代的不同</strong>
 <ul>
@@ -361,11 +361,25 @@
 </ul>
 <h3 id="常量池">常量池</h3>
 <ul>
-<li>方法区里存储着 Class文件的信息和运行时常量池,Class文件的信息包括类信息和 Class文件常量池,运行时常量池里的内容除了Class文件常量池里的内容外,还将Class文件常量池里的符号引用转变为直接引用,而且运行时常量池里的内容是能动态添加的,例如调用String的<code>intern()</code>方法就能将String的值添加到字符串常量池中,这里String常量池是包含在运行时常量池里的,但在JDK1.8后,将字符串常量池放到了堆中</li>
-<li>字符串常量池在每个VM中只有一份,存放的是字符串常量的引用值</li>
-<li>Class常量池是在编译的时候每个Class都有的,在编译阶段,存放的是常量的符号引用</li>
-<li>运行时常量池是在类加载完成之后,将每个Class常量池中的符号引用值转存到运行时常量池中,也就是说,每个Class都有一个运行时常量池,类在解析之后,将符号引用替换成直接引用,与全局常量池中的引用值保持一致</li>
-<li>运行时常量池是当Class文件被加载完成后,java虚拟机会将Class文件常量池里的内容转移到运行时常量池里,在Class文件常量池的符号引用有一部分是会被转变为直接引用的,比如说类的静态方法或私有方法,实例构造方法,父类方法,这是因为这些方法不能被重写其他版本,所以能在加载的时候就可以将符号引用转变为直接引用,而其他的一些方法是在这个方法被第一次调用的时候才会将符号引用转变为直接引用的</li>
+<li>
+<p>方法区里存储着 Class文件的信息和运行时常量池：</p>
+<ul>
+<li>Class 文件的信息包括类信息和 Class 文件常量池</li>
+<li>运行时常量池里的内容除了 Class 文件常量池里的内容外,还将Class文件常量池里的符号引用转变为直接引用,而且运行时常量池里的内容是能动态添加的</li>
+</ul>
+</li>
+<li>
+<p>字符串常量池在每个VM中只有一份,存放的是字符串常量的引用值，例如调用 String 的<code>intern()</code>方法就能将String的值添加到字符串常量池中(JDK1.8添加的为引用地址),这里String常量池是包含在运行时常量池里的,但在 JDK1.8 后,将字符串常量池放到了堆中</p>
+</li>
+<li>
+<p>Class 常量池是在编译的时候每个 Class 都有的,在编译阶段,存放的是常量的符号引用</p>
+</li>
+<li>
+<p>运行时常量池是在类加载完成之后,将每个 Class 常量池中的符号引用值转存到运行时常量池中,也就是说,每个 Class 都有一个运行时常量池,类在解析之后,将符号引用替换成直接引用,与全局常量池中的引用值保持一致</p>
+</li>
+<li>
+<p>运行时常量池是当 Class 文件被加载完成后,Java虚拟机会将 Class 文件常量池里的内容转移到运行时常量池里,在 Class 文件常量池的符号引用有一部分是会被转变为直接引用的,比如说类的静态方法或私有方法,实例构造方法,父类方法,这是因为这些方法不能被重写,所以能在加载的时候就可以将符号引用转变为直接引用,而其他的一些方法是在这个方法被第一次调用的时候才会将符号引用转变为直接引用的</p>
+</li>
 </ul>
 <h3 id="不同-JDK-版本中方法区的变化">不同 JDK 版本中方法区的变化</h3>
 <ul>
@@ -374,7 +388,9 @@
 <li>在JDK1.8中,HotSpot移除永久代,使用元空间代替,此时字符串常量池保留在堆中,运行时常量池保留在方法区中,只是实现不一样了,JVM内存变成了直接内存</li>
 </ul>
 <h2 id="直接内存-堆外内存">直接内存(堆外内存)</h2>
-<p>直接内存是除 Java 虚拟机之外的内存,但也可能被 Java 使用</p>
+<ul>
+<li>直接内存是除 Java 虚拟机之外的内存,但也可能被 Java 使用</li>
+</ul>
 <h3 id="操作直接内存">操作直接内存</h3>
 <ul>
 <li>在 NIO 中引入了一种基于通道和缓冲的 IO 方式,它可以通过调用本地方法直接分配 Java 虚拟机之外的内存,然后通过一个存储在堆中的<code>DirectByteBuffer</code>对象直接操作该内存,而无须先将外部内存中的数据复制到堆中再进行操作,从而提高了数据操作的效率</li>
@@ -425,9 +441,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/HashMap/">
+                      <a href="/Software/Common/Programming/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java HashMap</span>
+                        <span class="hidden-mobile">Programming</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -435,8 +451,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">设计模式 迭代器模式</span>
+                      <a href="/Software/System/Linux/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                        <span class="hidden-mobile">Linux 文件系统</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
