@@ -8,7 +8,7 @@ categories:
 ---
 # Git clone
 
-**克隆云端仓库**
+**克隆远端仓库**
 
 ```shell
 git clone <url> [local_path]

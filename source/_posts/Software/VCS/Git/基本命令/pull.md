@@ -8,11 +8,10 @@ categories:
 ---
 # Git pull
 
-- 尽管 git fetch 可用于获取某个分支的远程信息,但我们也可以执行 git pull,git pull 实际上是两个命令合成了一个:git fetch 和 git merge,当我们从来源拉取修改时,我们首先是像 git fetch 那样取回所有数据,然后最新的修改会自动合并到本地分支中
+- git pull 实际上是两个命令合成了一个即git fetch 和 git merge
+- 当我们从来源拉取修改时,先是像 git fetch 那样取回所有数据,然后最新的修改会自动合并到本地分支中
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-vS253GcLbUsfOzW.gif)
-
-
 
 **取回远程仓库的变化,并与本地分支合并**
 

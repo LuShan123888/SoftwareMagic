@@ -8,7 +8,7 @@ categories:
 ---
 # Git commit
 
-**把暂存区域的文件提交到Git仓库**
+**提交暂存域的文件修改**
 
 ```shell
 git commit [file1] [file2] -m "提交说明"
