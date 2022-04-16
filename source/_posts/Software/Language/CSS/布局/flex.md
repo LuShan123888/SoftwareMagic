@@ -22,8 +22,8 @@ categories:
 行内元素也可以使用 Flex 布局
 
 ```css
-    .box{
-  display: inline-flex;
+.box{
+    display: inline-flex;
 }
 ```
 
@@ -31,8 +31,8 @@ Webkit 内核的浏览器,必须加上`-webkit`前缀
 
 ```css
 .box{
-  display: -webkit-flex; /* Safari */
-  display: flex;
+    display: -webkit-flex; /* Safari */
+    display: flex;
 }
 ```
 

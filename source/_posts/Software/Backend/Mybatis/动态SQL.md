@@ -9,12 +9,10 @@ categories:
 
 ## 介绍
 
-- 动态SQL**:动态SQL指的是根据不同的查询条件 , 生成不同的Sql语句.**
-
-> **官网描述**
-> MyBatis 的强大特性之一便是它的动态 SQL,如果你有使用 JDBC 或其它类似框架的经验, 你就能体会到根据不同条件拼接 SQL 语句的痛苦,例如拼接时要确保不能忘记添加必要的空格, 还要注意去掉列表最后一个列名的逗号,利用动态 SQL 这一特性可以彻底摆脱这种痛苦
-> 虽然在以前使用动态 SQL 并非一件易事, 但正是 MyBatis 提供了可以被用在任意 SQL 映射语句中的强大的动态 SQL 语言得以改进这种情形
-> 动态 SQL 元素和 JSTL 或基于类似 XML 的文本处理器相似,在 MyBatis 之前的版本中, 有很多元素需要花时间了解,MyBatis 3 大大精简了元素种类, 现在只需学习原来一半的元素便可,MyBatis 采用功能强大的基于 OGNL 的表达式来淘汰其它大部分元素
+- **动态SQL**:动态SQL指的是根据不同的查询条件 , 生成不同的Sql语句
+- MyBatis 的强大特性之一便是它的动态 SQL,如果你有使用 JDBC 或其它类似框架的经验, 你就能体会到根据不同条件拼接 SQL 语句的痛苦,例如拼接时要确保不能忘记添加必要的空格, 还要注意去掉列表最后一个列名的逗号,利用动态 SQL 这一特性可以彻底摆脱这种痛苦
+- 虽然在以前使用动态 SQL 并非一件易事, 但正是 MyBatis 提供了可以被用在任意 SQL 映射语句中的强大的动态 SQL 语言得以改进这种情形
+- 动态 SQL 元素和 JSTL 或基于类似 XML 的文本处理器相似,在 MyBatis 之前的版本中, 有很多元素需要花时间了解,MyBatis 3 大大精简了元素种类, 现在只需学习原来一半的元素便可,MyBatis 采用功能强大的基于 OGNL 的表达式来淘汰其它大部分元素
 
 ## if 语句
 
@@ -26,12 +24,12 @@ categories:
 
 ```xml
 <select id="findActiveBlogWithTitleLike"
-     resultType="Blog">
-  SELECT * FROM BLOG
-  WHERE state = ‘ACTIVE’
-  <if test="title != null">
-    AND title like #{title}
-  </if>
+        resultType="Blog">
+    SELECT * FROM BLOG
+    WHERE state = ‘ACTIVE’
+    <if test="title != null">
+        AND title like #{title}
+    </if>
 </select>
 ```
 
@@ -39,14 +37,14 @@ categories:
 
 ```xml
 <select id="findActiveBlogLike"
-     resultType="Blog">
-  SELECT * FROM BLOG WHERE state = ‘ACTIVE’
-  <if test="title != null">
-    AND title like #{title}
-  </if>
-  <if test="author != null and author.name != null">
-    AND author_name like #{author.name}
-  </if>
+        resultType="Blog">
+    SELECT * FROM BLOG WHERE state = ‘ACTIVE’
+    <if test="title != null">
+        AND title like #{title}
+    </if>
+    <if test="author != null and author.name != null">
+        AND author_name like #{author.name}
+    </if>
 </select>
 ```
 
@@ -57,18 +55,18 @@ categories:
 
 ```xml
 <select id="findActiveBlogLike" resultType="Blog">
-  SELECT * FROM BLOG WHERE state = ‘ACTIVE’
-  <choose>
-    <when test="title != null">
-      AND title like #{title}
-    </when>
-    <when test="author != null and author.name != null">
-      AND author_name like #{author.name}
-    </when>
-    <otherwise>
-      AND featured = 1
-    </otherwise>
-  </choose>
+    SELECT * FROM BLOG WHERE state = ‘ACTIVE’
+    <choose>
+        <when test="title != null">
+            AND title like #{title}
+        </when>
+        <when test="author != null and author.name != null">
+            AND author_name like #{author.name}
+        </when>
+        <otherwise>
+            AND featured = 1
+        </otherwise>
+    </choose>
 </select>
 ```
 
@@ -78,18 +76,18 @@ categories:
 
 ```xml
 <select id="findActiveBlogLike"
-     resultType="Blog">
-  SELECT * FROM BLOG
-  WHERE
-  <if test="state != null">
-    state = #{state}
-  </if>
-  <if test="title != null">
-    AND title like #{title}
-  </if>
-  <if test="author != null and author.name != null">
-    AND author_name like #{author.name}
-  </if>
+        resultType="Blog">
+    SELECT * FROM BLOG
+    WHERE
+    <if test="state != null">
+        state = #{state}
+    </if>
+    <if test="title != null">
+        AND title like #{title}
+    </if>
+    <if test="author != null and author.name != null">
+        AND author_name like #{author.name}
+    </if>
 </select>
 ```
 
@@ -113,19 +111,19 @@ AND title like ‘someTitle’
 
 ```xml
 <select id="findActiveBlogLike"
-     resultType="Blog">
-  SELECT * FROM BLOG
-  <where>
-    <if test="state != null">
-         state = #{state}
-    </if>
-    <if test="title != null">
-        AND title like #{title}
-    </if>
-    <if test="author != null and author.name != null">
-        AND author_name like #{author.name}
-    </if>
-  </where>
+        resultType="Blog">
+    SELECT * FROM BLOG
+    <where>
+        <if test="state != null">
+            state = #{state}
+        </if>
+        <if test="title != null">
+            AND title like #{title}
+        </if>
+        <if test="author != null and author.name != null">
+            AND author_name like #{author.name}
+        </if>
+    </where>
 </select>
 ```
 
@@ -143,14 +141,14 @@ AND title like ‘someTitle’
 
 ```xml
 <update id="updateAuthorIfNecessary">
-  update Author
+    update Author
     <set>
-      <if test="username != null">username=#{username},</if>
-      <if test="password != null">password=#{password},</if>
-      <if test="email != null">email=#{email},</if>
-      <if test="bio != null">bio=#{bio}</if>
+        <if test="username != null">username=#{username},</if>
+        <if test="password != null">password=#{password},</if>
+        <if test="email != null">email=#{email},</if>
+        <if test="bio != null">bio=#{bio}</if>
     </set>
-  where id=#{id}
+    where id=#{id}
 </update>
 ```
 
@@ -159,7 +157,7 @@ AND title like ‘someTitle’
 
 ```xml
 <trim prefix="SET" suffixOverrides=",">
-  ...
+    ...
 </trim>
 ```
 
@@ -171,13 +169,13 @@ AND title like ‘someTitle’
 
 ```xml
 <select id="selectPostIn" resultType="domain.blog.Post">
-  SELECT *
-  FROM POST P
-  WHERE ID in
-  <foreach item="item" index="index" collection="list"
-      open="(" separator="," close=")">
+    SELECT *
+    FROM POST P
+    WHERE ID in
+    <foreach item="item" index="index" collection="list"
+             open="(" separator="," close=")">
         #{item}
-  </foreach>
+    </foreach>
 </select>
 ```
 
@@ -190,17 +188,17 @@ AND title like ‘someTitle’
 - 要在带注解的映射器接口类中使用动态 SQL, 可以使用 `script` 元素,比如:
 
 ```java
-    @Update({"<script>",
-      "update Author",
-      "  <set>",
-      "    <if test='username != null'>username=#{username},</if>",
-      "    <if test='password != null'>password=#{password},</if>",
-      "    <if test='email != null'>email=#{email},</if>",
-      "    <if test='bio != null'>bio=#{bio}</if>",
-      "  </set>",
-      "where id=#{id}",
-      "</script>"})
-    void updateAuthorValues(Author author);
+@Update({"<script>",
+         "update Author",
+         "  <set>",
+         "    <if test='username != null'>username=#{username},</if>",
+         "    <if test='password != null'>password=#{password},</if>",
+         "    <if test='email != null'>email=#{email},</if>",
+         "    <if test='bio != null'>bio=#{bio}</if>",
+         "  </set>",
+         "where id=#{id}",
+         "</script>"})
+void updateAuthorValues(Author author);
 ```
 
 ### bind
@@ -209,9 +207,9 @@ AND title like ‘someTitle’
 
 ```xml
 <select id="selectBlogsLike" resultType="Blog">
-  <bind name="pattern" value="'%' + _parameter.getTitle() + '%'" />
-  SELECT * FROM BLOG
-  WHERE title LIKE #{pattern}
+    <bind name="pattern" value="'%' + _parameter.getTitle() + '%'" />
+    SELECT * FROM BLOG
+    WHERE title LIKE #{pattern}
 </select>
 ```
 
@@ -221,15 +219,15 @@ AND title like ‘someTitle’
 
 ```xml
 <insert id="insert">
-  <selectKey keyProperty="id" resultType="int" order="BEFORE">
-    <if test="_databaseId == 'oracle'">
-      select seq_users.nextval from dual
-    </if>
-    <if test="_databaseId == 'db2'">
-      select nextval for seq_users from sysibm.sysdummy1"
-    </if>
-  </selectKey>
-  insert into users values (#{id}, #{name})
+    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+        <if test="_databaseId == 'oracle'">
+            select seq_users.nextval from dual
+        </if>
+        <if test="_databaseId == 'db2'">
+            select nextval for seq_users from sysibm.sysdummy1"
+        </if>
+    </selectKey>
+    insert into users values (#{id}, #{name})
 </insert>
 ```
 
@@ -240,9 +238,9 @@ AND title like ‘someTitle’
 
 ```java
 public interface LanguageDriver {
-  ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql);
-  SqlSource createSqlSource(Configuration configuration, XNode script, Class<?> parameterType);
-  SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType);
+    ParameterHandler createParameterHandler(MappedStatement mappedStatement, Object parameterObject, BoundSql boundSql);
+    SqlSource createSqlSource(Configuration configuration, XNode script, Class<?> parameterType);
+    SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType);
 }
 ```
 
@@ -250,10 +248,10 @@ public interface LanguageDriver {
 
 ```xml
 <typeAliases>
-  <typeAlias type="org.sample.MyLanguageDriver" alias="myLanguage"/>
+    <typeAlias type="org.sample.MyLanguageDriver" alias="myLanguage"/>
 </typeAliases>
 <settings>
-  <setting name="defaultScriptingLanguage" value="myLanguage"/>
+    <setting name="defaultScriptingLanguage" value="myLanguage"/>
 </settings>
 ```
 
@@ -261,7 +259,7 @@ public interface LanguageDriver {
 
 ```xml
 <select id="selectBlog" lang="myLanguage">
-  SELECT * FROM BLOG
+    SELECT * FROM BLOG
 </select>
 ```
 
@@ -269,9 +267,9 @@ public interface LanguageDriver {
 
 ```java
 public interface Mapper {
-  @Lang(MyLanguageDriver.class)
-  @Select("SELECT * FROM BLOG")
-  List<Blog> selectBlog();
+    @Lang(MyLanguageDriver.class)
+    @Select("SELECT * FROM BLOG")
+    List<Blog> selectBlog();
 }
 ```
 

@@ -37,7 +37,7 @@ public void init() throws ServletException {
 ```java
 public void service(ServletRequest request,
                     ServletResponse response)
-      throws ServletException, IOException{
+    throws ServletException, IOException{
 }
 ```
 
@@ -74,9 +74,9 @@ public void doPost(HttpServletRequest request,
 - 在调用 destroy() 方法之后,servlet 对象被标记为垃圾回收,destroy 方法定义如下所示:
 
 ```java
-  public void destroy() {
+public void destroy() {
     // 终止化代码...
-  }
+}
 ```
 
 ## 架构图

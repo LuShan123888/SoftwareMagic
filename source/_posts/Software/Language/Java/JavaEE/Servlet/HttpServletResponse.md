@@ -1,5 +1,5 @@
 ---
-title: Servlet 服务器 HTTP 响应
+title: Servlet HttpServletResponse
 categories:
 - Software
 - Language
@@ -7,9 +7,9 @@ categories:
 - JavaEE
 - Servlet
 ---
-# Servlet 服务器 HTTP 响应
+# Servlet HttpServletResponse
 
-正如前面的章节中讨论的那样,当一个 Web 服务器响应一个 HTTP 请求时,响应通常包括一个状态行,一些响应报头,一个空行和文档,一个典型的响应如下所示:
+- 正如前面的章节中讨论的那样,当一个 Web 服务器响应一个 HTTP 请求时,响应通常包括一个状态行,一些响应报头,一个空行和文档,一个典型的响应如下所示:
 
 ```html
 HTTP/1.1 200 OK
@@ -31,7 +31,7 @@ HeaderN: ...
 
 ## 设置 HTTP 响应报头的方法
 
-下面的方法可用于在 Servlet 程序中设置 HTTP 响应报头,这些方法通过 `HttpServletResponse` 对象可用
+- 下面的方法可用于在 Servlet 程序中设置 HTTP 响应报头,这些方法通过 `HttpServletResponse` 对象可用
 
 | 方法 & 描述                                                  |
 | :----------------------------------------------------------- |
@@ -68,7 +68,7 @@ HeaderN: ...
 
 ## HTTP Header 响应实例
 
-您已经在前面的实例中看到 `setContentType()` 方法,下面的实例也使用了同样的方法,此外,我们会用 `setIntHeader()` 方法来设置 **Refresh** 头
+- 您已经在前面的实例中看到 `setContentType()` 方法,下面的实例也使用了同样的方法,此外,我们会用 `setIntHeader()` 方法来设置 **Refresh** 头
 
 ```java
 @WebServlet("/Refresh")

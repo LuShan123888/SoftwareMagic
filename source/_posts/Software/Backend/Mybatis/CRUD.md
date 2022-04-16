@@ -25,10 +25,10 @@ categories:
 
 ```java
 public interface UserMapper {
-   //查询全部用户
-   List<User> selectUser();
-   //根据id查询用户
-   User selectUserById(int id);
+    //查询全部用户
+    List<User> selectUser();
+    //根据id查询用户
+    User selectUserById(int id);
 }
 ```
 
@@ -36,7 +36,7 @@ public interface UserMapper {
 
 ```xml
 <select id="selectUserById" resultType="com.example.entity.User">
-select * from user where id = #{id}
+    select * from user where id = #{id}
 </select>
 ```
 
@@ -45,11 +45,11 @@ select * from user where id = #{id}
 ```java
 @Test
 public void tsetSelectUserById() {
-   SqlSession session = MybatisUtils.getSession();  //获取SqlSession连接
-   UserMapper mapper = session.getMapper(UserMapper.class);
-   User user = mapper.selectUserById(1);
-   System.out.println(user);
-   session.close();
+    SqlSession session = MybatisUtils.getSession();  //获取SqlSession连接
+    UserMapper mapper = session.getMapper(UserMapper.class);
+    User user = mapper.selectUserById(1);
+    System.out.println(user);
+    session.close();
 }
 ```
 
@@ -65,7 +65,7 @@ User selectUserByNP2(Map<String,Object> map);
 
 ```xml
 <select id="selectUserByNP2" parameterType="map"cresultType="com.example.entity.User">
-  select * from user where name = #{username} and pwd = #{pwd}
+    select * from user where name = #{username} and pwd = #{pwd}
 </select>
 ```
 
@@ -88,7 +88,7 @@ User user = mapper.selectUserByNP2(map);
 
 ```xml
 <select id="selectUser" parameterType="map" resultType="user">
-  select * from user limit #{offset},#{pageSize}
+    select * from user limit #{offset},#{pageSize}
 </select>
 ```
 
@@ -106,20 +106,20 @@ List<User> selectUser(Map<String,Integer> map);
 //分页查询 , 两个参数startIndex , pageSize
 @Test
 public void testSelectUser(int currentPage, int pageSize) {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
+    SqlSession session = MybatisUtils.getSession();
+    UserMapper mapper = session.getMapper(UserMapper.class);
 
-   Map<String,Integer> map = new HashMap<String,Integer>();
-   map.put("offset",(currentPage-1)*pageSize);
-   map.put("pageSize",pageSize);
+    Map<String,Integer> map = new HashMap<String,Integer>();
+    map.put("offset",(currentPage-1)*pageSize);
+    map.put("pageSize",pageSize);
 
-   List<User> users = mapper.selectUser(map);
+    List<User> users = mapper.selectUser(map);
 
-   for (User user: users){
-       System.out.println(user);
-  }
+    for (User user: users){
+        System.out.println(user);
+    }
 
-   session.close();
+    session.close();
 }
 ```
 
@@ -138,7 +138,7 @@ List<User> getUserByRowBounds();
 
 ```xml
 <select id="getUserByRowBounds" resultType="user">
-select * from user
+    select * from user
 </select>
 ```
 
@@ -147,17 +147,17 @@ select * from user
 ```java
 @Test
 public void testUserByRowBounds(int currentPage, int pageSize) {
-   SqlSession session = MybatisUtils.getSession();
+    SqlSession session = MybatisUtils.getSession();
 
-   RowBounds rowBounds = new RowBounds((currentPage-1)*pageSize,pageSize);
+    RowBounds rowBounds = new RowBounds((currentPage-1)*pageSize,pageSize);
 
-   //通过session的方法进行传递rowBounds, [此种方式现在已经不推荐使用了]
-   List<User> users =session.selectList("com.example.mapper.UserMapper.getUserByRowBounds", null, rowBounds);
+    //通过session的方法进行传递rowBounds, [此种方式现在已经不推荐使用了]
+    List<User> users =session.selectList("com.example.mapper.UserMapper.getUserByRowBounds", null, rowBounds);
 
-   for (User user: users){
-       System.out.println(user);
-  }
-   session.close();
+    for (User user: users){
+        System.out.println(user);
+    }
+    session.close();
 }
 ```
 
@@ -187,13 +187,13 @@ int addUser(User user);
 ```java
 @Test
 public void testAddUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-   User user = new User(5,"王五","zxcvbn");
-   int i = mapper.addUser(user);
-   System.out.println(i);
-   session.commit(); //提交事务,不写的话不会提交到数据库
-   session.close();
+    SqlSession session = MybatisUtils.getSession();
+    UserMapper mapper = session.getMapper(UserMapper.class);
+    User user = new User(5,"王五","zxcvbn");
+    int i = mapper.addUser(user);
+    System.out.println(i);
+    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.close();
 }
 ```
 
@@ -216,7 +216,7 @@ int updateUser(User user);
 
 ```xml
 <update id="updateUser" parameterType="com.example.entity.User">
-  update user set name=#{name},pwd=#{pwd} where id = #{id}
+    update user set name=#{name},pwd=#{pwd} where id = #{id}
 </update>
 ```
 
@@ -225,14 +225,14 @@ int updateUser(User user);
 ```java
 @Test
 public void testUpdateUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-   User user = mapper.selectUserById(1);
-   user.setPwd("asdfgh");
-   int i = mapper.updateUser(user);
-   System.out.println(i);
-   session.commit(); //提交事务,不写的话不会提交到数据库
-   session.close();
+    SqlSession session = MybatisUtils.getSession();
+    UserMapper mapper = session.getMapper(UserMapper.class);
+    User user = mapper.selectUserById(1);
+    user.setPwd("asdfgh");
+    int i = mapper.updateUser(user);
+    System.out.println(i);
+    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.close();
 }
 ```
 
@@ -253,7 +253,7 @@ int deleteUser(int id);
 
 ```xml
 <delete id="deleteUser" parameterType="int">
-  delete from user where id = #{id}
+    delete from user where id = #{id}
 </delete>
 ```
 
@@ -262,12 +262,12 @@ int deleteUser(int id);
 ```java
 @Test
 public void testDeleteUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-   int i = mapper.deleteUser(5);
-   System.out.println(i);
-   session.commit(); //提交事务,不写的话不会提交到数据库
-   session.close();
+    SqlSession session = MybatisUtils.getSession();
+    UserMapper mapper = session.getMapper(UserMapper.class);
+    int i = mapper.deleteUser(5);
+    System.out.println(i);
+    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.close();
 }
 ```
 
