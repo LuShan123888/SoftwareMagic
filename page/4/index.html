@@ -163,24 +163,32 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Common/JD/" target="_self">
-          JD 实习记录
+        <a href="/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式 代理模式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Common/JD/" target="_self">
+        <a href="/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          JD 实习记录
-业务需求
-管理端数据隔离
+          设计模式 代理模式
 
-情景:管理员通过管理端各模块的查询接口可以获取不属于其管辖仓库的相关配置数据
-任务:根据管理员的操作权限实现基于仓库级别的数据隔离
-行动:首先使用单例模式获取用户上下文，然后查询当前登录用户对应的仓库权限并用 Redis 做缓存,使用 Spring AOP 拦截查询接口将仓库权限注入查询对象中,然后在 Mybatis 拦截器中获取查询对象的仓库权限字段并
+为其他对象提供一种代理以便控制对这个对象的访问
+可以详细控制访问某个类(对象)的方法,在调用这个方法前作的前置处理(统一的流程代码放到代理中处理),调用这个方法后做后置处理
+代理模式分类:
+
+静态代理(静态定义代理类,自定义静态定义的代理类)
+动态代理(通过程序动态生成代理类,该代理类不是我们自己定义的,而是由程序自动生成)
+
+
+
+静态代理
+静态代理角色分析
+
+抽象角色:一般
         </a>
       </p>
 
@@ -188,8 +196,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-10 21:04" pubdate>
-              2022-02-10
+            <time datetime="2022-03-15 14:54" pubdate>
+              2022-03-15
             </time>
           </div>
         
@@ -199,7 +207,9 @@
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Common/">Common</a>
+              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+            
+              <a href="/categories/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">结构型模式</a>
             
           </div>
         
@@ -214,21 +224,25 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Common/%E5%B9%82%E7%AD%89%E6%80%A7/" target="_self">
-          幂等性
+        <a href="/Software/Backend/SpringFramework/Spring/IoC/" target="_self">
+          Spring IoC 控制反转
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Common/%E5%B9%82%E7%AD%89%E6%80%A7/" target="_self">
+        <a href="/Software/Backend/SpringFramework/Spring/IoC/" target="_self">
           
           
             
           
-          幂等性
+          Spring IoC 控制反转
+IoC本质
 
-幂等是一个数学与计算机学概念,在数学中某一元运算为幂等时,其作用在任一元素两次后会和其作用一次的结果相同,在计算机中编程中,一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同
-在编程中一个幂等操作的特点是其任意多次执行所产生的影响均与一次执行的影响相同,幂等函数,或幂等方法,是指可以使用相同参数重复执行,并能获得相同结果的函数,这些函数不会影响系统状态,也不用担心重复执
+控制反转,是把传统上由程序代码直接操控的对象的调用权交给容器,由容器来创建对象并管理对象之间的依赖关系,DI是对IoC更准确的描述,即由容器动态的将某种依赖关系注入到组件之中
+
+IoC 容器
+
+BeanFactory:是一个工厂类，它是一个负责生产和管理bean的工厂。在Spring中，BeanFactory是IoC容器的核心接口，它的职责包括：实例化
         </a>
       </p>
 
@@ -236,492 +250,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-10 21:02" pubdate>
-              2022-02-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Common/">Common</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Ops/Deploy/" target="_self">
-          项目部署
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Ops/Deploy/" target="_self">
-          
-          
-            
-          
-          项目部署
-
-科学部署的意义在于尽可能减少服务停机时间以及控制新版本带来的质量风险
-
-全量发布
-蓝绿部署
-
-指同时运行两个版本的应用，蓝绿部署的时候，并不停止掉老版本，而是直接部署一套新版本，等新版本运行起来后，再将流量切换到新版本上
-
-
-
-步骤
-
-首先通过网关配置断开集群A的连接
-在集群A上部署新版本
-断开集群B的连接，恢复集群A的连接
-在集群B上部署新版本
-恢复集群B的连接
-
-
-缺点：蓝绿部署要
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-07 19:07" pubdate>
-              2022-02-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Ops/">Ops</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Server/Nginx/%E9%87%8D%E5%AE%9A%E5%90%91/" target="_self">
-          Nginx 重定向
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Server/Nginx/%E9%87%8D%E5%AE%9A%E5%90%91/" target="_self">
-          
-          
-            
-          
-          Nginx 重定向
-301永久重定向
-
-浏览器地址会显示跳转新的URL地址
-
-1234567server &#123;    listen 80;    server_name example.com;    return 301 https://www.example.com$request_uri;&#125;
-
-这样用户打开example.com时候就会转到www.example.com
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-07 19:02" pubdate>
-              2022-02-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Server/Nginx/%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/" target="_self">
-          Nginx 动静分离
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Server/Nginx/%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/" target="_self">
-          
-          
-            
-          
-          Nginx 动静分离
-图片服务器
-123456789101112131415161718server &#123;    listen 80;    listen [::]:80;    server_name  static.tally.ltd;    location / &#123;        expires 24h;        alias /deploy/static/;     
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-07 18:55" pubdate>
-              2022-02-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Server/Nginx/SSL/" target="_self">
-          Nginx SSL证书部署
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Server/Nginx/SSL/" target="_self">
-          
-          
-            
-          
-          Nginx SSL证书部署
-获取证书
-
-Nginx文件夹内获得SSL证书文件 ``1_www.domain.com_bundle.crt和私钥文件 2_www.domain.com.key`
-
-1_www.domain.com_bundle.crt 文件包括两段证书代码 “-----BEGIN CERTIFICATE-----”和”-----END CERTIFICATE-----”
-2_www.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-07 18:55" pubdate>
-              2022-02-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Server/Nginx/Gzip/" target="_self">
-          Nginx Gzip 压缩
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Server/Nginx/Gzip/" target="_self">
-          
-          
-            
-          
-          Nginx Gzip 压缩
-1234567891011http &#123;    gzip on;    gzip_min_length 1k;    gzip_buffers 4 16k;    gzip_http_version 1.1;    gzip_comp_level 9;    gzip_types text/plain application/x-javascript text/
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-07 18:55" pubdate>
-              2022-02-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Server/">Server</a>
-            
-              <a href="/categories/Software/Server/Nginx/">Nginx</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Ops/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
-          Docker 网络
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Ops/Docker/%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5/" target="_self">
-          
-          
-            
-          
-          Docker 网络
-
-docker网络实现原理是通过veth-pair实现的,veth-pair是一对的虚拟设备接口,总是成对出现的,一段连接协议,另一段彼此相连,充当连接各种虚拟网络设备的桥梁
-所有的容器不指定网络的情况下,都是docker0路由的,docker会给我们的容器分配一个默认的可用IP
-Docker中的所有的网络接口都是虚拟的
-
-port
-
-快捷地查看端口的绑定情况
-
-1$ dock
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-04 15:34" pubdate>
-              2022-02-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Ops/">Ops</a>
-            
-              <a href="/categories/Software/Ops/Docker/">Docker</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Distributed/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" target="_self">
-          分布式事务
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" target="_self">
-          
-          
-            
-          
-          分布式事务
-
-分布式事务是指事务的参与者,支持事务的服务器,资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上
-例如在大型电商系统中,下单接口通常会扣减库存,减去优惠,生成订单 id, 而订单服务与库存,优惠,订单 id 都是不同的服务,下单接口的成功与否,不仅取决于本地的 db 操作,而且依赖第三方系统的结果,这时候分布式事务就保证这些操作要么全部成功,要么全部失败,本质上来说,分布
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-31 14:43" pubdate>
-              2022-01-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Distributed/">Distributed</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81/" target="_self">
-          Java 邮件发送
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E9%82%AE%E4%BB%B6%E5%8F%91%E9%80%81/" target="_self">
-          
-          
-            
-          
-          Java 邮件发送
-Spring Boot
-pom.xml
-1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-mail&lt;/artifactId&gt;&lt;/dependency&gt;
-分析源码
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-28 20:10" pubdate>
-              2022-01-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81/" target="_self">
-          Spring 数据验证
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81/" target="_self">
-          
-          
-            
-          
-          Spring 数据验证
-
-Java API规范 (JSR303) 定义了Bean校验的标准validation-api,但没有提供实现,hibernate validation是对这个规范的实现,并增加了校验注解如@Email,@Length等,Spring Validation是对hibernate validation的二次封装,用于支持Springmvc参数自动校验
-
-JSR-303
-
-
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-28 17:43" pubdate>
-              2022-01-28
+            <time datetime="2022-03-13 23:41" pubdate>
+              2022-03-13
             </time>
           </div>
         
@@ -750,20 +280,21 @@ JSR-303
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1/" target="_self">
-          Spring Boot 短信服务
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/ls-remote/" target="_self">
+          Git ls-remote
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1/" target="_self">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/ls-remote/" target="_self">
           
           
             
           
-          Spring Boot 短信服务
-pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;    &lt;artifactId&gt;dysmsapi20170525&lt;/artifactId&gt;    &lt;version&gt;2.0.9&lt;/version&gt;&lt;/depen
+          Git ls-remote
+查看远程所有标签
+1git ls-remote --tags
+
         </a>
       </p>
 
@@ -771,8 +302,185 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-28 17:02" pubdate>
-              2022-01-28
+            <time datetime="2022-03-11 15:08" pubdate>
+              2022-03-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%ABK%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" target="_self">
+          至多包含K个不同字符的最长子串
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%ABK%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" target="_self">
+          
+          
+            
+          
+          至多包含K个不同字符的最长子串
+问题描述
+
+给定一个字符串 s ，找出 至多 包含 k 个不同字符的最长子串 T。
+
+123456789示例 1:输入: s = &quot;eceba&quot;, k = 2输出: 3解释: 则 T 为 &quot;ece&quot;，所以长度为 3。示例 2:输入: s = &quot;aa&quot;, k = 1输出: 2解释: 则 T 为 &quot;a
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-10 21:06" pubdate>
+              2022-03-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式 工厂模式
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" target="_self">
+          
+          
+            
+          
+          设计模式 工厂模式
+
+实例化对象不使用 new,用工厂方法代替
+将选择实现类,创建对象统一管理和控制,从而将调用者跟我们的实现类解耦
+
+
+应用场景
+
+JDK 中 Calendar 的 getInstance 方法
+JDBC 中的 Connection 对象的获取
+Spring 中 IoC 容器创建管理bean 对象
+反射中 Class 对象的 newInstance 方法
+
+
+简单工厂模式
+
+用来
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 23:13" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/DesignPattern/">DesignPattern</a>
+            
+              <a href="/categories/Software/DesignPattern/%E5%88%9B%E5%BB%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">创建型模式</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BB%84%E6%88%90/" target="_self">
+          Spring 概述与组成
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/SpringFramework/Spring/%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BB%84%E6%88%90/" target="_self">
+          
+          
+            
+          
+          Spring 概述与组成
+
+Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器(框架)
+
+组成
+
+
+Spring 框架是一个分层架构,由 7 个定义良好的模块组成,Spring 模块构建在核心容器之上,核心容器定义了创建,配置和管理 bean 的方式
+
+
+
+组成 Spring 框架的每个模块(或组件)都可以单独存在,或者与其他一个或多个模块联合实现,每个模块的功能如下:
+
+核心
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 23:13" pubdate>
+              2022-03-09
             </time>
           </div>
         
@@ -786,7 +494,7 @@ pom.xml
             
               <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
+              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
             
           </div>
         
@@ -801,20 +509,20 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Internet/VPS/VPS%E5%B8%B8%E7%94%A8%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" target="_self">
-          VPS常用虚拟技术
+        <a href="/Software/Backend/SpringFramework/SpringMVC/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Spring MVC 初始化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Internet/VPS/VPS%E5%B8%B8%E7%94%A8%E8%99%9A%E6%8B%9F%E6%8A%80%E6%9C%AF/" target="_self">
+        <a href="/Software/Backend/SpringFramework/SpringMVC/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          VPS常用虚拟技术
-VPS(虚拟专用服务器)的虚拟技术有很多种,VPS就是通过某种虚拟技术把一台服务器分成多个虚拟服务器,VPS常用的虚拟技术有OpenVZ,Xen,KVM三种,不同的虚拟机的VPS相同的配置可能价格相差很大,那么这三种虚拟技术到底是什么,它们之间又有什么区别?本文对OpenVZ,Xen,KVM三种虚拟技术做一个简单的介绍,并比较它们之间的差异,希望对以后你们选择VPS有点帮助
-O
+          Spring MVC 初始化
+pom.xml
+12345&lt;dependency&gt;    &lt;groupId&gt;org.springframework&lt;/groupId&gt;    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;    &lt;version&gt;5.2.0.RELEASE&lt;/version&g
         </a>
       </p>
 
@@ -822,8 +530,8 @@ O
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-24 14:15" pubdate>
-              2022-01-24
+            <time datetime="2022-03-09 23:13" pubdate>
+              2022-03-09
             </time>
           </div>
         
@@ -831,9 +539,13 @@ O
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Internet/">Internet</a>
+              <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Internet/VPS/">VPS</a>
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
             
           </div>
         
@@ -848,37 +560,22 @@ O
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Java/JavaSE/JVM/HotSpot/" target="_self">
-          JVM HotSpot
+        <a href="/Software/Backend/SpringFramework/SpringBoot/%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%8E%9F%E7%90%86/" target="_self">
+          Spring Boot 概述与原理
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/HotSpot/" target="_self">
+        <a href="/Software/Backend/SpringFramework/SpringBoot/%E6%A6%82%E8%BF%B0%E4%B8%8E%E5%8E%9F%E7%90%86/" target="_self">
           
           
             
           
-          JVM HotSpot
-HotSpot 虚拟机对象
-对象的内存布局
+          Spring Boot 概述与原理
+Spring Boot概述
 
-
-
-在 HotSpot 虚拟机中,对象的内存布局分为以下 3 块区域:
-
-
-对象头(Header)
-对象头记录了对象在运行过程中所需要使用的一些数据:
-
-Hash值
-GC 分代年龄
-锁状态标志
-线程持有的锁
-偏向线程 ID
-偏向时间戳
-
-对象头可能包含类型指针,通过该指针能确定对象属于哪个类,如果对象是一个数组,那么对象头还会包
+Spring Boot 基于 Spring 开发,Spirng Boot 本身并不提供 Spring 框架的核心特性以及扩展功能,只是用于快速,敏捷地开发新一代基于 Spring 框架的应用程序,也就是说,它并不是用来替代 Spring 的解决方案,而是和 Spring 框架紧密结合用于提升 Spring 开发者体验的工具
+Spri
         </a>
       </p>
 
@@ -886,8 +583,394 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 23:29" pubdate>
-              2022-01-22
+            <time datetime="2022-03-09 23:13" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Backend/">Backend</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
+            
+              <a href="/categories/Software/Backend/SpringFramework/SpringBoot/">SpringBoot</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%9C%86%E7%8E%AF%E5%9B%9E%E5%8E%9F%E7%82%B9%E9%97%AE%E9%A2%98/" target="_self">
+          圆环回原点问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%9C%86%E7%8E%AF%E5%9B%9E%E5%8E%9F%E7%82%B9%E9%97%AE%E9%A2%98/" target="_self">
+          
+          
+            
+          
+          圆环回原点问题
+问题描述
+
+圆环上有10个点，编号为0~9。从0点出发，每次可以逆时针和顺时针走一步，问走n步回到0点共有多少种走法。
+
+123输入: 2输出: 2解释：有2种方案。分别是0-&gt;1-&gt;0和0-&gt;9-&gt;0
+代码实现
+1234567891011121314151617181920public class Solution &#123;    public sta
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 02:02" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/" target="_self">
+          最长公共子序列问题
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/" target="_self">
+          
+          
+            
+          
+          最长公共子序列问题
+问题分析
+
+给定两个序列X = { x1, x2, …, xm }和Y = { y1,y2, …,yn },找出X和Y的最长公共子序列
+
+算法分析
+
+设序列X = { x1, x2, …, xm }和Y = { y1,y2, …,yn }的最长公共子序列为Z = { z1,z2, …,zk },则
+
+若xm = yn, 则zk = xm = yn,且Zk-1是Xm-1和Yn-1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 02:02" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/DFS/%E9%A3%9F%E7%89%A9%E9%93%BE/" target="_self">
+          食物链
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/DFS/%E9%A3%9F%E7%89%A9%E9%93%BE/" target="_self">
+          
+          
+            
+          
+          食物链
+问题描述
+
+
+如图所示为某生态系统的食物网示意图,现在给你n个物种和m条能量流动关系，求其中的食物链条数。
+物种的名称为从1到n编号,M条能量流动关系形如
+
+123456a1 b1a2 b2a3 b3...... am-1 bm-1am bm
+
+其中ai bi表示能量从物种ai流向物种bi,注意单独的一种孤立生物不算一条食物链
+
+代码实现
+1234567891011121314151617
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-09 02:02" pubdate>
+              2022-03-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/DFS/">DFS</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/BFS/%E5%BE%97%E5%88%B0%E7%9B%AE%E6%A0%87%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%91%E8%A1%8C%E5%8A%A8%E6%AC%A1%E6%95%B0/" target="_self">
+          得到目标值的最少行动次数
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/BFS/%E5%BE%97%E5%88%B0%E7%9B%AE%E6%A0%87%E5%80%BC%E7%9A%84%E6%9C%80%E5%B0%91%E8%A1%8C%E5%8A%A8%E6%AC%A1%E6%95%B0/" target="_self">
+          
+          
+            
+          
+          得到目标值的最少行动次数
+问题描述
+
+将 sourceX, sourceY 转换成 targetX, targetY 最少需要多少次计算，给定两个数字 (x, y)，允许以下两种计算：
+
+1.同时对两个数加1， 即 (x, y) -&gt; (x+1, y+1)
+
+
+2.同时对两个数乘2，即 (x, y) -&gt; (x2, y2)
+
+
+求要将 (x, y) 转换成 (X,Y)，至少需要多次计算
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-07 22:28" pubdate>
+              2022-03-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/BFS/">BFS</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" target="_self">
+          二分查找
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" target="_self">
+          
+          
+            
+          
+          二分查找
+算法分析
+
+将n个元素分成个数大致相同的两半, 取a[n/2]与x作比较
+如果x=a[n/2], 则找到x, 算法终止, 如果x&lt;a[n/2], 则只在数组a的左半部继续搜索x, 如果x&gt;a[n/2], 则只在数组a的右半部分继续搜索x
+
+代码实现
+123456789101112131415161718192021222324public class Solution &#1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-06 23:42" pubdate>
+              2022-03-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Algorithm/">Algorithm</a>
+            
+              <a href="/categories/Software/Algorithm/%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/">递归与分治策略</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/DataStruct/%E6%A0%91/%E7%BA%A2%E9%BB%91%E6%A0%91/" target="_self">
+          红黑树（RBT）
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/DataStruct/%E6%A0%91/%E7%BA%A2%E9%BB%91%E6%A0%91/" target="_self">
+          
+          
+            
+          
+          红黑树（RBT）
+
+基于BST存在的问题,一种新的树——平衡二叉查找树(Balanced BST)产生了,平衡树在插入和删除的时候,会通过旋转操作将高度保持在logN,其中两款具有代表性的平衡树分别为AVL树和红黑树,AVL树由于实现比较复杂,而且插入和删除性能差,在实际环境下的应用不如红黑树
+红黑树(Red-Black Tree,以下简称RBTree)的实际应用非常广泛,比如Linux内核中的完
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-06 23:40" pubdate>
+              2022-03-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/DataStruct/">DataStruct</a>
+            
+              <a href="/categories/Software/DataStruct/%E6%A0%91/">树</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Socket/" target="_self">
+          Java Socket
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Socket/" target="_self">
+          
+          
+            
+          
+          Java Socket
+
+Java提供了Socket类和ServerSocket类分别用于Client端的Server端的Socket通信编程,可将联网的任何两台计算机进行Socket通信,一台作为服务器,另一台作为客户端,也可以用一台计算机上运行的两个进程分别运行服务端和客户端程序
+
+Socket类
+
+Socket类用在客户端,通过构造一个Socket类来建立与服务器的连接,Socket连接可以
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-03 23:03" pubdate>
+              2022-03-03
             </time>
           </div>
         
@@ -903,7 +986,7 @@ GC 分代年龄
             
               <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
             
           </div>
         
@@ -918,21 +1001,47 @@ GC 分代年龄
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AD%96%E7%95%A5%E4%B8%8E%E7%AE%97%E6%B3%95/" target="_self">
-          JVM 垃圾收集策略与算法
+        <a href="/Software/Language/Shell/%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
+          Shell 条件表达式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AD%96%E7%95%A5%E4%B8%8E%E7%AE%97%E6%B3%95/" target="_self">
+        <a href="/Software/Language/Shell/%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F/" target="_self">
           
           
             
           
-          JVM 垃圾收集策略与算法
+          Shell 条件表达式
+逻辑条件表达式
 
-程序计数器,虚拟机栈,本地方法栈随线程而生,也随线程而灭,栈帧随着方法的开始而入栈,随着方法的结束而出栈,这几个区域的内存分配和回收都具有确定性,在这几个区域内不需要过多考虑回收的问题,因为方法结束或者线程结束时,内存自然就跟随着回收了
-而对于 Java 堆和方法区,我们只有在程序运行期间才能知道会创建哪些对象,这部分内存的分配和回收都是动态的,垃圾收集器所关注的正是
+
+
+运算符
+说明
+举例
+
+
+
+
+==
+相等,用于比较两个数字,相同则返回 true,
+[ $a == $b ]
+
+
+!=
+不相等,用于比较两个数字,不相同则返回 true,
+[ $a != $b ]
+
+
+!
+非运算,表达式为 true 则返回 false,否则返回 true,
+[ ! false ]
+
+
+&amp;&amp;
+逻辑的 AND
+[[ $a -
         </a>
       </p>
 
@@ -940,8 +1049,174 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 23:19" pubdate>
-              2022-01-22
+            <time datetime="2022-03-03 22:59" pubdate>
+              2022-03-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Shell/">Shell</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/Supervisor/%E9%85%8D%E7%BD%AE/" target="_self">
+          Supervisor 配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/Supervisor/%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          
+            
+          
+          Supervisor 配置
+
+配置文件的目录
+
+/etc/supervisord.conf (主配置文件)
+/etc/supervisor.d/ (默认子进程配置文件,也就是需要我们根据程序配置的地方)
+
+
+
+主服务配置
+12345678910111213141516171819202122232425[unix_http_server]file=/home/supervisor/supervis
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-03 22:59" pubdate>
+              2022-03-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Supervisor/">Supervisor</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/" target="_self">
+          Linux 进程与服务
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/System/Linux/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1/" target="_self">
+          
+          
+            
+          
+          Linux 进程与服务
+基本概念
+
+在Linux中,每一个程序都是有自己的一个进程,每一个进程都有一个id号,每一个进程都会有一个父进程
+正在执行的一个或多个相关进程可形成一个作业,使用管道 和重定向命令,一个作业可启动多个进程,根据运行方式的不同可将作业分为两大类:
+
+前台作业:运行于前台,用户可对其进行交互操作
+后台作业:运行于后台,不接收终端的输入,但向终端输出执行结果
+
+
+服务是按照服务启
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-03 22:58" pubdate>
+              2022-03-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/System/">System</a>
+            
+              <a href="/categories/Software/System/Linux/">Linux</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" target="_self">
+          Java 网络编程基础
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" target="_self">
+          
+          
+            
+          
+          Java 网络编程基础
+网络协议
+
+网络上的计算机要互相通信,必须遵守一定的协议,目前使用最广泛的网络协议是应用于Internet的TCP/IP协议,TCP/IP协议在设计上分为5层:物理层,数据链路层,网络层,传输层,应用层,不同层有各自的职责,下层为上层提供服务
+
+网络层也称IP层,主要负责网络主机的定义,实现数据传输的路由选择,IP地址可以唯一地确定Internet上的一台主机,为了方便记忆
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-03 22:58" pubdate>
+              2022-03-03
             </time>
           </div>
         
@@ -957,7 +1232,7 @@ GC 分代年龄
             
               <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
             
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
             
           </div>
         
@@ -972,37 +1247,35 @@ GC 分代年龄
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Java/JavaSE/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
-          Java 类加载与类加载器
+        <a href="/Software/Common/%E9%9B%B6%E6%8B%B7%E8%B4%9D/" target="_self">
+          零拷贝
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
+        <a href="/Software/Common/%E9%9B%B6%E6%8B%B7%E8%B4%9D/" target="_self">
           
           
             
           
-          Java 类加载与类加载器
-类的生命周期
+          零拷贝
 
-类从被加载到虚拟机内存开始,到卸载出内存为止,它的整个生命周期包括以下 7 个阶段:
+零拷贝是指计算机执行IO操作时，CPU不需要将数据从一个存储区域复制到另一个存储区域，从而可以减少上下文切换以及CPU的拷贝时间。它是一种I/O操作优化技术。
 
-加载
-验证
-准备
-解析
-初始化
-使用
-卸载
+传统 IO 的执行流程
+
+传统的IO流程，包括read和write的过程
+
+read：把数据从磁盘读取到内核缓冲区，再拷贝到用户缓冲区
+write：先把数据写入到Socket缓冲区，最后写入网卡设备。
 
 
 
-验证,准备,解析 3 个阶段统称为连接
 
 
+流程
 
-加载,验证,准备,初始化和卸载这 5 个阶段的顺序是确定的,类的加载过程必须按照这种顺序按部就班地开始(注意是&quot;开始”,而不是&quot;进行”或&quot;完成
+用户应用
         </a>
       </p>
 
@@ -1010,8 +1283,8 @@ GC 分代年龄
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 22:54" pubdate>
-              2022-01-22
+            <time datetime="2022-03-03 22:58" pubdate>
+              2022-03-03
             </time>
           </div>
         
@@ -1021,246 +1294,7 @@ GC 分代年龄
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
-          JVM 内存分配与回收策略
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5/" target="_self">
-          
-          
-            
-          
-          JVM 内存分配与回收策略
-
-对象的内存分配,就是在堆上分配(也可能经过 JIT 编译后被拆散为标量类型并间接在栈上分配),对象主要分配在年轻代的 Eden 区上,少数情况下可能直接分配在老年代,分配规则不固定,取决于当前使用的垃圾收集器组合以及相关的参数配置
-查看详细的 GC 过程需要在运行时加上参数:-XX:+PrintGCDetails
-
-
-对象优先在 Eden 分配
-
-大多数情况下,对象在
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 22:49" pubdate>
-              2022-01-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/JVM/VMOptions/" target="_self">
-          JVM VM Options
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/VMOptions/" target="_self">
-          
-          
-            
-          
-          JVM VM Options
-
--Xms:设置初始化内存分配大小,默认本机内存的1/64
--Xmx:设置最大分配内存,默认本机内存的1/4
--XX:+HeapDumpOnOutOfMemoryError生成oomDump文件
--Xmn — 堆中年轻代的大小
--XX:-DisableExplicitGC — 让System.gc()不产生任何作用
--XX:+PrintGCDetails — 打印GC
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 22:49" pubdate>
-              2022-01-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
-          JVM 性能调优
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" target="_self">
-          
-          
-            
-          
-          JVM 性能调优
-在高性能硬件上部署程序,目前主要有两种方式:
-
-通过 64 位 JDK 来使用大内存
-使用若干个 32 位虚拟机建立逻辑集群来利用硬件资源
-
-使用 64 位 JDK 管理大内存
-
-堆内存变大后,虽然垃圾收集的频率减少了,但每次垃圾回收的时间变长,如果堆内存为 14 G,那么每次 Full GC 将长达数十秒,如果 Full GC 频繁发生,那么对于一个网站来说是无法忍受的
-对于用
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 22:49" pubdate>
-              2022-01-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%80%BC%E4%BC%A0%E9%80%92%E4%B8%8E%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
-          Java 值传递与引用传递
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/JVM/%E5%80%BC%E4%BC%A0%E9%80%92%E4%B8%8E%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92/" target="_self">
-          
-          
-            
-          
-          Java 值传递与引用传递
-
-Java参数传递分为值传递和引用传递,基本类型是值传递,封装的对象时引用传递
-
-值传递
-1234567891011public class Demo&#123;    public static void main(String[] args) &#123;        boolean flag = false;        test(flag);        
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-01-22 22:33" pubdate>
-              2022-01-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/JVM/">JVM</a>
+              <a href="/categories/Software/Common/">Common</a>
             
           </div>
         
