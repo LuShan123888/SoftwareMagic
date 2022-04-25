@@ -55,8 +55,7 @@ categories:
     3. 收到测试报告
 9. 将v_feature_lushan合并到v_gary
 10. 通过J-ONE部署到预发布环境
-11. UAT验证
-    1. 解决UAT验证中遇到的问题
+11. UAT验证:解决UAT验证中遇到的问题
 12. 将v_feature_lushan修改合并到master(临上线前1-2天,看情况,沟通好)
 13. 正式发布上线
 14. 线上验证(凌晨)
