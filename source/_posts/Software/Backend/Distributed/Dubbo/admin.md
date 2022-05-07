@@ -96,4 +96,3 @@ ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /ap
 ```shell
 $ docker build -t lushan123888/dubbo-admin:0.4.0 --build-arg version=0.4.0 .
 ```
-

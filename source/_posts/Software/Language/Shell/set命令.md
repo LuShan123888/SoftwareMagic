@@ -1,11 +1,11 @@
 ---
-title: Shell set命令
+title: Shell set 命令
 categories:
 - Software
 - Language
 - Shell
 ---
-# Shell set命令
+# Shell set 命令
 
 - set指令能设置所使用shell的执行方式，可依照不同的需求来做设置。
 

@@ -320,7 +320,8 @@ public class UserService {
 @Aspect
 @Component
 public class MetricAspect {
-        @Pointcut("@annotation(com.example.annotation.metricTime)")
+
+    @Pointcut("@annotation(com.example.annotation.metricTime)")
     private void pointcut() {
     }
 
