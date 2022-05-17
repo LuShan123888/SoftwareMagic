@@ -7,17 +7,19 @@ categories:
 ---
 # Go Reflect
 
-- Go语言中的变量分为两部分
-    - 类型信息：预先定义好的元信息。
-    - 值信息：程序运行过程中可动态变化的。
 - 反射是指在程序运行期对程序本身进行访问和修改的能力。程序在编译时，变量被转换为内存地址，变量名不会被编译器写入到可执行部分。在运行程序时，程序无法获取自身的信息。
 - 支持反射的语言可以在程序编译期将变量的反射信息，如字段名称、类型信息、结构体信息等整合到可执行文件中，并给程序提供接口访问反射信息，这样就可以在程序运行期获取类型的反射信息，并且有能力修改它们。
+- 反射是一个强大并富有表现力的工具，能让我们写出更灵活的代码。但是反射不应该被滥用，原因有以下三个。
+
+    1. 基于反射的代码是极其脆弱的，反射中的类型错误会在真正运行的时候才会引发panic，那很可能是在代码写完的很长时间之后。
+    2. 大量使用反射的代码通常难以理解。
+    3. 反射的性能低下，基于反射实现的代码通常比正常代码运行速度慢一到两个数量级。
 
 ## reflect包
 
 - 在Go语言的反射机制中，任何接口值都由是`一个具体类型`和`具体类型的值`两部分组成的。 在Go语言中反射的相关功能由内置的reflect包提供，任意接口值在反射中都可以理解为由`reflect.Type`和`reflect.Value`两部分组成，并且reflect包提供了`reflect.TypeOf`和`reflect.ValueOf`两个函数来获取任意对象的Value和Type。
 
-#### TypeOf
+### TypeOf
 
 - 在Go语言中，使用`reflect.TypeOf()`函数可以获得任意值的类型对象（reflect.Type），程序通过类型对象可以访问任意值的类型信息。
 
@@ -43,49 +45,46 @@ func main() {
 
 #### type name和type kind
 
-在反射中关于类型还划分为两种：`类型（Type）`和`种类（Kind）`。因为在Go语言中我们可以使用type关键字构造很多自定义类型，而`种类（Kind）`就是指底层的类型，但在反射中，当需要区分指针、结构体等大品种的类型时，就会用到`种类（Kind）`。 举个例子，我们定义了两个指针类型和两个结构体类型，通过反射查看它们的类型和种类。
+- 在反射中关于类型还划分为两种：`类型（Type）`和`种类（Kind）`。因为在Go语言中我们可以使用type关键字构造很多自定义类型，而`种类（Kind）`就是指底层的类型，但在反射中，当需要区分指针、结构体等类型时，就会用到`种类（Kind）`。 例如定义了两个指针类型和两个结构体类型，通过反射查看它们的类型和种类。
 
 ```go
 package main
 
 import (
-	"fmt"
-	"reflect"
+    "fmt"
+    "reflect"
 )
-
+type person struct {
+    name string
+    age  int
+}
+type book struct{ title string }
 type myInt int64
 
 func reflectType(x interface{}) {
-	t := reflect.TypeOf(x)
-	fmt.Printf("type:%v kind:%v\n", t.Name(), t.Kind())
+    t := reflect.TypeOf(x)
+    fmt.Printf("name:%v kind:%v\n", t.Name(), t.Kind())
 }
 
 func main() {
-	var a *float32 // 指针
-	var b myInt    // 自定义类型
-	var c rune     // 类型别名
-	reflectType(a) // type: kind:ptr
-	reflectType(b) // type:myInt kind:int64
-	reflectType(c) // type:int32 kind:int32
-
-	type person struct {
-		name string
-		age  int
-	}
-	type book struct{ title string }
-	var d = person{
-		name: "沙河小王子",
-		age:  18,
-	}
-	var e = book{title: "《跟小王子学Go语言》"}
-	reflectType(d) // type:person kind:struct
-	reflectType(e) // type:book kind:struct
+    var a *float32 // 指针
+    reflectType(a) // name: kind:ptr
+    var b myInt    // 自定义类型
+    reflectType(b) // name:myInt kind:int64
+    var c rune     // 类型别名
+    reflectType(c) // name:int32 kind:int32
+    var d = person{
+        name: "Test",
+        age:  18,
+    }
+    reflectType(d) // name:person kind:struct
+    var e = book{title: "BookName"}
+    reflectType(e) // name:book kind:struct
 }
 ```
 
-Go语言的反射中像数组、切片、Map、指针等类型的变量，它们的`.Name()`都是返回`空`。
-
-在`reflect`包中定义的Kind类型如下：
+- Go语言的反射中像数组、切片、Map、指针等类型的变量，它们的`.Name()`都是返回`空`。
+- 在`reflect`包中定义的Kind类型如下：
 
 ```go
 type Kind uint
@@ -122,9 +121,8 @@ const (
 
 ### ValueOf
 
-`reflect.ValueOf()`返回的是`reflect.Value`类型，其中包含了原始值的值信息。`reflect.Value`与原始值之间可以互相转换。
-
-`reflect.Value`类型提供的获取原始值的方法如下：
+- `reflect.ValueOf()`返回的是`reflect.Value`类型，其中包含了原始值的值信息。`reflect.Value`与原始值之间可以互相转换。
+- `reflect.Value`类型提供的获取原始值的方法如下：
 
 |           方法           |                             说明                             |
 | :----------------------: | :----------------------------------------------------------: |
@@ -167,7 +165,7 @@ func main() {
 
 #### 通过反射设置变量的值
 
-想要在函数中通过反射修改变量的值，需要注意函数参数传递的是值拷贝，必须传递变量地址才能修改变量值。而反射中使用专有的`Elem()`方法来获取指针对应的值。
+- 想要在函数中通过反射修改变量的值，需要注意函数参数传递的是值拷贝，必须传递变量地址才能修改变量值。而反射中使用专有的`Elem()`方法来获取指针对应的值。
 
 ```go
 package main
@@ -192,7 +190,7 @@ func reflectSetValue2(x interface{}) {
 }
 func main() {
 	var a int64 = 100
-	// reflectSetValue1(a) //panic: reflect: reflect.Value.SetInt using unaddressable value
+	reflectSetValue1(a) //panic: reflect: reflect.Value.SetInt using unaddressable value
 	reflectSetValue2(&a)
 	fmt.Println(a)
 }
@@ -200,25 +198,23 @@ func main() {
 
 #### isNil()和isValid()
 
-##### isNil()
+**isNil()**
+
+- `IsNil()`判断变量的值是否为nil。变量必须是通道、函数、接口、映射、指针、切片之一；否则IsNil函数会导致panic。
 
 ```go
 func (v Value) IsNil() bool
 ```
 
-`IsNil()`报告v持有的值是否为nil。v持有的值的分类必须是通道、函数、接口、映射、指针、切片之一；否则IsNil函数会导致panic。
+**isValid()**
 
-##### isValid()
+- `IsValid()`判断变量是否持有一个值。如果变量是Value对应的零值会返回假，此时该变量调用除了IsValid、String、Kind之外的方法都会导致panic。
 
 ```go
 func (v Value) IsValid() bool
 ```
 
-`IsValid()`返回v是否持有一个值。如果v是Value零值会返回假，此时v除了IsValid、String、Kind之外的方法都会导致panic。
-
-##### 举个例子
-
-`IsNil()`常被用于判断指针是否为空；`IsValid()`常被用于判定返回值是否有效。
+- `IsNil()`常被用于判断指针是否为空，`IsValid()`常被用于判定返回值是否有效。
 
 ```go
 func main() {
@@ -244,9 +240,8 @@ func main() {
 
 ### 与结构体相关的方法
 
-任意值通过`reflect.TypeOf()`获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象（`reflect.Type`）的`NumField()`和`Field()`方法获得结构体成员的详细信息。
-
-`reflect.Type`中与获取结构体成员相关的的方法如下表所示。
+- 任意值通过`reflect.TypeOf()`获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象（`reflect.Type`）的`NumField()`和`Field()`方法获得结构体成员的详细信息。
+- `reflect.Type`中与获取结构体成员相关的的方法如下表所示。
 
 |                            方法                             |                             说明                             |
 | :---------------------------------------------------------: | :----------------------------------------------------------: |
@@ -256,21 +251,17 @@ func main() {
 |            FieldByIndex(index []int) StructField            | 多层成员访问时，根据 []int 提供的每个结构体的字段索引，返回字段的信息。 |
 | FieldByNameFunc(match func(string) bool) (StructField,bool) |              根据传入的匹配函数匹配需要的字段。              |
 |                       NumMethod() int                       |                返回该类型的方法集中方法的数目                |
-|                     Method(int) Method                      |                返回该类型方法集中的第i个方法                 |
+|                      Method(int) Value                      |                返回该类型方法集中的第i个方法                 |
 |             MethodByName(string)(Method, bool)              |              根据方法名返回该类型方法集中的方法              |
 
 ### StructField类型
 
-`StructField`类型用来描述结构体中的一个字段的信息。
-
-`StructField`的定义如下：
+- `StructField`类型用来描述结构体中的一个字段的信息。
 
 ```go
 type StructField struct {
-    // Name是字段的名字。PkgPath是非导出字段的包路径，对导出字段该字段为""。
-    // 参见http://golang.org/ref/spec#Uniqueness_of_identifiers
-    Name    string
-    PkgPath string
+    Name    string      // Name是字段的名字
+    PkgPath string      //PkgPath是非导出字段的包路径，对导出字段该字段为""
     Type      Type      // 字段的类型
     Tag       StructTag // 字段的标签
     Offset    uintptr   // 字段在结构体中的字节偏移量
@@ -279,9 +270,7 @@ type StructField struct {
 }
 ```
 
-### 结构体反射示例
-
-当我们使用反射得到一个结构体数据之后可以通过索引依次获取其字段信息，也可以通过字段名去获取指定的字段信息。
+- 当我们使用反射得到一个结构体数据之后可以通过索引依次获取其字段信息，也可以通过字段名去获取指定的字段信息。
 
 ```go
 type student struct {
@@ -291,12 +280,12 @@ type student struct {
 
 func main() {
 	stu1 := student{
-		Name:  "小王子",
+		Name:  "Test",
 		Score: 90,
 	}
 
 	t := reflect.TypeOf(stu1)
-	fmt.Println(t.Name(), t.Kind()) // student struct
+	fmt.Println(t.Name(), t.Kind()) // Test struct
 	// 通过for循环遍历结构体的所有字段信息
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
@@ -310,18 +299,45 @@ func main() {
 }
 ```
 
-接下来编写一个函数`printMethod(s interface{})`来遍历打印s包含的方法。
+### Method类型
 
 ```go
-// 给student添加两个方法 Study和Sleep(注意首字母大写)
+type Method struct {
+ // Name is the method name.
+ Name string
+
+ // PkgPath is the package path that qualifies a lower case (unexported)
+ // method name. It is empty for upper case (exported) method names.
+ // The combination of PkgPath and Name uniquely identifies a method
+ // in a method set.
+ // See https://golang.org/ref/spec#Uniqueness_of_identifiers
+ PkgPath string
+
+ Type  Type  // method type
+ Func  Value // func with receiver as first argument
+ Index int   // index for Type.Method
+}
+```
+
+- 编写一个函数`printMethod(s interface{})`来遍历打印s包含的方法。
+
+```go
+func main() {
+	stu := student{}
+	printMethod(stu)
+}
+
+type student struct {
+}
+
 func (s student) Study() string {
-	msg := "好好学习，天天向上。"
+	msg := "Study"
 	fmt.Println(msg)
 	return msg
 }
 
 func (s student) Sleep() string {
-	msg := "好好睡觉，快快长大。"
+	msg := "Sleep"
 	fmt.Println(msg)
 	return msg
 }
@@ -329,23 +345,13 @@ func (s student) Sleep() string {
 func printMethod(x interface{}) {
 	t := reflect.TypeOf(x)
 	v := reflect.ValueOf(x)
-
-	fmt.Println(t.NumMethod())
 	for i := 0; i < v.NumMethod(); i++ {
-		methodType := v.Method(i).Type()
 		fmt.Printf("method name:%s\n", t.Method(i).Name)
-		fmt.Printf("method:%s\n", methodType)
+		fmt.Printf("method:%s\n", v.Method(i).Type())
 		// 通过反射调用方法传递的参数必须是 []reflect.Value 类型
-		var args = []reflect.Value{}
+		var args []reflect.Value
 		v.Method(i).Call(args)
 	}
 }
+
 ```
-
-## 反射是把双刃剑
-
-反射是一个强大并富有表现力的工具，能让我们写出更灵活的代码。但是反射不应该被滥用，原因有以下三个。
-
-1. 基于反射的代码是极其脆弱的，反射中的类型错误会在真正运行的时候才会引发panic，那很可能是在代码写完的很长时间之后。
-2. 大量使用反射的代码通常难以理解。
-3. 反射的性能低下，基于反射实现的代码通常比正常代码运行速度慢一到两个数量级。
