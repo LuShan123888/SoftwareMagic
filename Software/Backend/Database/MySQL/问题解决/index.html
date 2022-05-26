@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
+  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
+<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-23T11:26:31.000Z">
-<meta property="article:modified_time" content="2022-03-23T11:26:31.000Z">
+<meta property="article:published_time" content="2022-05-26T13:31:12.000Z">
+<meta property="article:modified_time" content="2022-05-26T13:31:12.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-23 19:26" pubdate>
-        2022年3月23日 晚上
+      <time datetime="2022-05-26 21:31" pubdate>
+        2022年5月26日 晚上
       </time>
     </span>
   
@@ -215,7 +215,7 @@
             <div class="markdown-body">
               <h1>MySQL 问题解决</h1>
 <h2 id="Date显示不正常">Date显示不正常</h2>
-<p><strong>原因</strong>：由于JDBC参数Timezone与Mysql系统时区不一致导致的</p>
+<p><strong>原因</strong>:由于JDBC参数Timezone与Mysql系统时区不一致导致的</p>
 <p><strong>解决方法</strong></p>
 <ol>
 <li>修改serverTimezone配置</li>
@@ -230,19 +230,19 @@
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">default-time-zone</span> = <span class="hljs-string">&quot;+08:00&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="Host-is-blocked">Host is blocked</h2>
-<p><strong>报错信息</strong>：Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</p>
-<p><strong>解决方法</strong>：刷新ip缓存记录</p>
+<p><strong>报错信息</strong>:Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</p>
+<p><strong>解决方法</strong>:刷新ip缓存记录</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">FLUSH HOSTS;<br></code></pre></td></tr></table></figure>
 <h2 id="认证失败">认证失败</h2>
-<p><strong>报错信息</strong>：MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found</p>
-<p><strong>原因</strong>：有关<code>caching_sha2_password</code> 报错的问题。MySQL 8.0 默认认证方式改为 SHA2 了，如果不支持 SHA2 插件认证方式，那么就会报错。</p>
+<p><strong>报错信息</strong>:MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found</p>
+<p><strong>原因</strong>:有关<code>caching_sha2_password</code> 报错的问题,MySQL 8.0 默认认证方式改为 SHA2 了,如果不支持 SHA2 插件认证方式,那么就会报错</p>
 <p><strong>解决方法</strong></p>
 <ul>
 <li><strong>修改密码认证方式</strong></li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET `plugin`=&#x27;mysql_native_password&#x27; WHERE user=&#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="拒绝连接">拒绝连接</h2>
-<p><strong>报错信息</strong>：Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</p>
+<p><strong>报错信息</strong>:Can’t connect to MySQL server on ‘x.x.x.x’ ([Errno 61] Connection refused)</p>
 <p><strong>解决方法</strong></p>
 <ol>
 <li>编辑<code>mysqld.cnf</code></li>
@@ -253,12 +253,12 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET host = &#x27;%&#x27; WHERE user = &#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
-<p><strong>报错信息</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
-<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥；可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥；但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
-<p><strong>解决方法</strong>：添加allowPublicKeyRetrieval配置</p>
+<p><strong>报错信息</strong>:在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
+<p><strong>原因</strong>:如果用户使用了 sha256_password 认证,密码在传输过程中必须使用 TLS 协议保护,但是如果 RSA 公钥不可用,可以使用服务器提供的公钥,可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥,或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥,但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码,所以默认是关闭的,必须显式开启</p>
+<p><strong>解决方法</strong>:添加allowPublicKeyRetrieval配置</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span>/test?allowPublicKeyRetrieval=true<br></code></pre></td></tr></table></figure>
 <h2 id="中文乱码">中文乱码</h2>
-<p><strong>解决方法</strong>：修改默认字符集</p>
+<p><strong>解决方法</strong>:修改默认字符集</p>
 <p><strong>默认编码</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br><br>mysql&gt; show variables like &quot;%collation%&quot;;<br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br></code></pre></td></tr></table></figure>
 <p><strong>修改配置文件</strong></p>
@@ -273,7 +273,7 @@
 <h2 id="password-方法报错">password()方法报错</h2>
 <p><strong>报错信息</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements<br></code></pre></td></tr></table></figure>
-<p><strong>原因</strong>：密码安全策略<code>validate_password_policy</code>,<code>validate_password_policy</code>可以取0,1,2三个值:</p>
+<p><strong>原因</strong>:密码安全策略<code>validate_password_policy</code>,<code>validate_password_policy</code>可以取0,1,2三个值:</p>
 <table>
 <thead>
 <tr>
@@ -337,9 +337,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E5%A4%87%E4%BB%BD/">
+                      <a href="/Software/Backend/Database/MySQL/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 备份</span>
+                        <span class="hidden-mobile">MySQL 存储引擎</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -347,8 +347,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/Redis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                        <span class="hidden-mobile">Redis 配置文件</span>
+                      <a href="/Software/Backend/Database/Redis/ShardedJedis/">
+                        <span class="hidden-mobile">Redis ShardedJedis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

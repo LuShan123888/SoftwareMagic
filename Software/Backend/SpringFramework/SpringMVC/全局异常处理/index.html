@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Spring MVC 全局异常处理  SpringBoot中，@ControllerAdvice 即可开启全局异常处理，使用该注解表示开启了全局异常的捕获，我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理。  自定义异常类 123456789101112131415161718192021222324252627282930">
+  <meta name="description" content="Spring MVC 全局异常处理  SpringBoot中,@ControllerAdvice 即可开启全局异常处理,使用该注解表示开启了全局异常的捕获,我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理  自定义异常类 1234567891011121314151617181920212223242526272829303">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring MVC 全局异常处理">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Backend/SpringFramework/SpringMVC/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Spring MVC 全局异常处理  SpringBoot中，@ControllerAdvice 即可开启全局异常处理，使用该注解表示开启了全局异常的捕获，我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理。  自定义异常类 123456789101112131415161718192021222324252627282930">
+<meta property="og:description" content="Spring MVC 全局异常处理  SpringBoot中,@ControllerAdvice 即可开启全局异常处理,使用该注解表示开启了全局异常的捕获,我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理  自定义异常类 1234567891011121314151617181920212223242526272829303">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-16T11:45:06.000Z">
-<meta property="article:modified_time" content="2021-12-16T11:45:06.000Z">
+<meta property="article:published_time" content="2022-05-26T13:31:05.000Z">
+<meta property="article:modified_time" content="2022-05-26T13:31:05.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-16 19:45" pubdate>
-        2021年12月16日 晚上
+      <time datetime="2022-05-26 21:31" pubdate>
+        2022年5月26日 晚上
       </time>
     </span>
   
@@ -215,7 +215,7 @@
             <div class="markdown-body">
               <h1>Spring MVC 全局异常处理</h1>
 <ul>
-<li>SpringBoot中，@ControllerAdvice 即可开启全局异常处理，使用该注解表示开启了全局异常的捕获，我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理。</li>
+<li>SpringBoot中,@ControllerAdvice 即可开启全局异常处理,使用该注解表示开启了全局异常的捕获,我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理</li>
 </ul>
 <h2 id="自定义异常类">自定义异常类</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@RestControllerAdvice</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlobalExceptionHandler</span> </span>&#123;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.FORBIDDEN)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = AccessDeniedException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(AccessDeniedException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;未授权异常:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-number">403</span>, <span class="hljs-string">&quot;用户未授权&quot;</span>, e.getMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.NOT_FOUND)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = NoHandlerFoundException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(NoHandlerFoundException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;未找到资源:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-number">404</span>, <span class="hljs-string">&quot;未找到资源&quot;</span>, e.getMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(HttpMediaTypeNotSupportedException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;参数类型异常:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-number">415</span>, <span class="hljs-string">&quot;参数类型异常&quot;</span>, e.getMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = BusinessException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(BusinessException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;业务异常------------------&#123;&#125;&quot;</span>, e.getErrorMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(e.getErrorCode(), <span class="hljs-string">&quot;业务异常&quot;</span>, e.getErrorMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = MethodArgumentNotValidException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(MethodArgumentNotValidException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;实体校验异常:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        BindingResult bindingResult = e.getBindingResult();<br>        ObjectError objectError = bindingResult.getAllErrors().stream().findFirst().get();<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-string">&quot;实体校验异常&quot;</span>, objectError.getDefaultMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = IllegalArgumentException.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(IllegalArgumentException e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;参数异常:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-string">&quot;参数异常&quot;</span>, e.getMessage());<br>    &#125;<br><br>    <span class="hljs-meta">@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br>    <span class="hljs-meta">@ExceptionHandler(value = Exception.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result&lt;String&gt; <span class="hljs-title">handler</span><span class="hljs-params">(Exception e)</span> </span>&#123;<br>        log.error(<span class="hljs-string">&quot;服务器异常:----------------&#123;&#125;&quot;</span>, e.getMessage(), e);<br>        <span class="hljs-keyword">return</span> ResultUtil.error(<span class="hljs-string">&quot;服务器异常&quot;</span>, e.getMessage());<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
@@ -254,9 +254,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">
+                      <a href="/Software/Backend/Distributed/Dubbo/%E7%9B%B4%E8%BF%9E%E6%8F%90%E4%BE%9B%E8%80%85/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Servlet 文件上传与下载</span>
+                        <span class="hidden-mobile">Dubbo 直连提供者</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -264,8 +264,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/SpringFramework/SpringMVC/HandleAdaptor/">
-                        <span class="hidden-mobile">Spring MVC 处理器适配器</span>
+                      <a href="/Software/Backend/SpringFramework/Spring/JSON%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+                        <span class="hidden-mobile">Spring 整合 JSON 工具类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

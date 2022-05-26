@@ -163,38 +163,30 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          ZShell 初始化
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reset/" target="_self">
+          Git reset
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Tools/Zshell/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/reset/" target="_self">
           
           
             
           
-          ZShell 初始化
-安装
+          Git reset
 
-查看已有的Shell
+重置当前分支的HEAD为指定commit
 
-1cat /etc/shells
-1sudo apt-get install zsh
+1$ git reset [commit]
 
-查看版本
+--soft:不修改暂存区域和工作目录
+--hard:重置暂存区与工作区,与上一次commit保持一致
+--mixed:重置暂存区,但工作区不变
 
-1zsh --version
+重置暂存区的指定文件,与上一次commit保持一致,但工作区不变
+1$ git reset [file]
 
-设为默认shell
-
-1sudo usermod -s /bin/zsh username
-或者
-12chsh -s /bin/zshchsh -s `which zsh`
-
-如果要切换回去bash:
-
-1chsh
         </a>
       </p>
 
@@ -202,7 +194,405 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-18 16:29" pubdate>
+            <time datetime="2021-12-18 19:28" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/HEAD/" target="_self">
+          Git HEAD
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/HEAD/" target="_self">
+          
+          
+            
+          
+          Git HEAD
+
+Git 中的 HEAD 可以理解为一个指针,可以在命令行中输入 cat .git/HEAD 查看当前 HEAD 指向哪儿,一般它指向当前工作目录所在分支的最新提交
+当使用git checkout切换分支的时候,HEAD 修订版本重新指向新的分支,有的时候HEAD会指向一个没有分支名字的修订版本,这种情况叫detached HEAD
+
+~ 的作用
+
+如果想要 HEAD 的第 10
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 19:26" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/revert/" target="_self">
+          Git revert
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/revert/" target="_self">
+          
+          
+            
+          
+          Git revert
+
+新建一个commit,用来撤销指定commit,后者的所有变化都将被前者抵消,并且应用到当前分支
+
+1$ git revert [commit]
+
+假设 ec5be 添加了一个 index.js 文件,但之后我们发现其实我们再也不需要由这个提交引入的修改了,那就还原 ec5be 提交吧!
+
+
+提交 9e78i 还原了由提交 ec5be 引入的修改,在撤销特定的提交时,git
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 19:18" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/tag/" target="_self">
+          Git tag
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/tag/" target="_self">
+          
+          
+            
+          
+          Git tag
+列出所有tag
+1git tag
+在当前commit新建一个tag
+1$ git tag [tag]
+在指定commit新建一个tag
+1$ git tag [tag] [commit]
+
+-m:添加注释
+
+删除本地tag
+1$ git tag -d [tag]
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 19:16" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/cherry-pick/" target="_self">
+          Git cherry-pick
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/cherry-pick/" target="_self">
+          
+          
+            
+          
+          Git cherry-pick
+选择一个commit,合并进当前分支
+1$ git cherry-pick [commit]
+
+假设 dev 分支上的提交 76d12 为 index.js 文件添加了一项修改,而希望将其整合到 master 分支中,但并不想要整个 dev 分支,而只需要这个提交
+
+
+
+现在 master 分支包含 76d12 引入的修改了
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 18:33" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/%E8%A7%84%E8%8C%83/" target="_self">
+          Git 规范
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/%E8%A7%84%E8%8C%83/" target="_self">
+          
+          
+            
+          
+          Git 规范
+分支命名
+master 分支
+
+master 为主分支,也是用于部署生产环境的分支,确保master分支稳定性,master 分支一般由develop以及hotfix分支合并,任何时间都不能直接修改代码
+
+develop 分支
+
+develop 为开发分支,始终保持最新完成以及bug修复后的代码,一般开发的新功能时,feature分支都是基于develop分支下创建的
+
+featur
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 18:31" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/archive/" target="_self">
+          Git archive
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/archive/" target="_self">
+          
+          
+            
+          
+          Git archive
+生成一个可供发布的压缩包
+ 1$ git archive
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:56" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/Git/">Git</a>
+            
+              <a href="/categories/Software/VCS/Git/%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">基本命令</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/Vsftpd/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Vsftpd 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/Vsftpd/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Vsftpd 初始化
+安装
+1sudo apt-get install vsftpd
+服务管理
+12sudo service vsftpd start|stop|restartsudo /etc/init.d/vsftpd start|stop|restart
+设置允许用户登录权限
+
+创建FTP用户
+
+12sudo useradd ftpuser -m -s /bin/bashsudo passw
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:55" pubdate>
               2021-12-18
             </time>
           </div>
@@ -215,7 +605,7 @@
             
               <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Tools/Zshell/">Zshell</a>
+              <a href="/categories/Software/Tools/Vsftpd/">Vsftpd</a>
             
           </div>
         
@@ -230,20 +620,29 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Mybatis Plus 初始化
+        <a href="/Software/Tools/Vsftpd/%E9%85%8D%E7%BD%AE/" target="_self">
+          Vsftpd 配置配置FTP服务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Tools/Vsftpd/%E9%85%8D%E7%BD%AE/" target="_self">
           
           
             
           
-          Mybatis Plus 初始化
-pom.xml
-1234567891011&lt;!-- mybatis-plus --&gt;&lt;dependency&gt;    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;    
+          Vsftpd 配置配置FTP服务
+
+主配置文件:/etc/vsftp.conf
+权限限制用户列表文件:/etc/vsftp.chroot_list
+认证配置文件:/etc/pam.d/vsftpd
+用户列表:/etc/vsftpd.user_list
+
+基本配置
+
+修改/etc/vsftp.conf文件
+
+123anonymous_enable=NO  #是否允许匿名登陆local_enable=
         </a>
       </p>
 
@@ -251,8 +650,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-17 17:08" pubdate>
-              2021-12-17
+            <time datetime="2021-12-18 17:54" pubdate>
+              2021-12-18
             </time>
           </div>
         
@@ -262,11 +661,9 @@ pom.xml
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
+              <a href="/categories/Software/Tools/Vsftpd/">Vsftpd</a>
             
           </div>
         
@@ -281,20 +678,21 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          Spring 初始化
+        <a href="/Software/Tools/Supervisor/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Supervisor
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+        <a href="/Software/Tools/Supervisor/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          Spring 初始化
-pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;org.springframework&lt;/groupId&gt;    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;    &lt;version&gt;5.1.10.RELEASE&lt;/version&gt;&
+          Supervisor
+介绍
+
+Supervisor是用Python开发的一套通用的进程管理程序,能将一个普通的命令行进程变为后台daemon,并监控进程状态,异常退出时能自动重启,它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动,这样只要在supervisor的配置文件中,把要管理的进程的可执行文件的路径写进去即可,也实现当子进程挂掉的时候,父进程可以准确获
         </a>
       </p>
 
@@ -302,8 +700,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-17 17:05" pubdate>
-              2021-12-17
+            <time datetime="2021-12-18 17:49" pubdate>
+              2021-12-18
             </time>
           </div>
         
@@ -313,11 +711,9 @@ pom.xml
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
+              <a href="/categories/Software/Tools/Supervisor/">Supervisor</a>
             
           </div>
         
@@ -332,20 +728,46 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Distributed/ElasticSearch/SpringBoot/" target="_self">
-          Elasticsearch 整合Spring Boot
+        <a href="/Software/Tools/IDE/IDEA/" target="_self">
+          IDEA
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Distributed/ElasticSearch/SpringBoot/" target="_self">
+        <a href="/Software/Tools/IDE/IDEA/" target="_self">
           
           
             
           
-          Elasticsearch 整合Spring Boot
-pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;    &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;    &
+          IDEA
+快捷键
+Editing(编辑)
+
+
+
+快捷键
+作用
+
+
+
+
+Control + Space
+基本的代码补全(补全任何类,方法,变量)
+
+
+Control + Shift + Space
+智能代码补全(过滤器方法列表和变量的预期类型)
+
+
+Command + Shift + Enter
+自动结束代码,行末自动添加分号
+
+
+Command + P
+显示方法的参数信息
+
+
+Control + 
         </a>
       </p>
 
@@ -353,8 +775,404 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-17 13:42" pubdate>
-              2021-12-17
+            <time datetime="2021-12-18 17:47" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/IDE/">IDE</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/IDE/Sublime/" target="_self">
+          Sublime
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/IDE/Sublime/" target="_self">
+          
+          
+            
+          
+          Sublime
+配置命令行启动
+1sudo ln -s &quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&quot; /usr/local/bin/subl
+
+然后就可以直接命令行启动Sublime
+
+12$ subl .bash_profile$ subl .../error.log
+关闭自动更新
+
+Pref
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:45" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/IDE/">IDE</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/Curl/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Curl 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/Curl/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Curl 初始化
+安装
+1brew install curl
+配置代理
+
+~/.curlrc
+
+12#代理socks5 = &quot;127.0.0.1:7890&quot;
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:45" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Curl/">Curl</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/Curl/%E5%91%BD%E4%BB%A4/" target="_self">
+          Curl 命令
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/Curl/%E5%91%BD%E4%BB%A4/" target="_self">
+          
+          
+            
+          
+          Curl 命令
+URL 访问
+1curl $url
+实例
+1curl www.google.com
+查看详细信息
+123456789101112131415curl http://youtube.com -v*   Trying 127.0.0.1...* TCP_NODELAY set* SOCKS5 communication to youtube.com:80* SOCKS5 connect
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:45" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Curl/">Curl</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Tools/Tmux/%E9%85%8D%E7%BD%AE/" target="_self">
+          Tmux 配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Tools/Tmux/%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          
+            
+          
+          Tmux 配置
+加载配置文件
+1tmux source-file ~/.tmux.conf
+鼠标配置
+
+Tmux默认不支持鼠标滚动查看窗口中的前后内容,需要修改配置文件~/.tmux.conf来支持
+
+12345678910setw -g mouseset-option -g history-limit 20000set-option -g mouse onbind -n WheelUpPane 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:43" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Tools/">Tools</a>
+            
+              <a href="/categories/Software/Tools/Tmux/">Tmux</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/SVN/%E9%85%8D%E7%BD%AE/" target="_self">
+          SVN 配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/SVN/%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          
+            
+          
+          SVN 配置
+配置svnserve服务
+
+将创建的版本库交给SVN服务管理
+
+1vim /etc/sysconfig/svnserve
+
+修改启动选项
+
+1OPTIONS=&quot;-r /var/svn/repository&quot;
+
+
+-r:版本库的目录
+
+
+由于-r配置方式的不一样,SVN启动就可以有两种不同的访问方式
+
+
+直接指定到版本库(称之为单库svnserve方式)
+
+
+指定到
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:38" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/SVN/">SVN</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/VCS/SVN/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          SVN 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/VCS/SVN/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          SVN 初始化
+安装
+1$ yum install -y subversion
+查看版本
+1$ svn --version
+创建版本库
+创建版本库目录
+1mkdir -p /var/svn/repository
+在版本库目录下创建具体项目目录
+1mkdir helloworld
+初始化版本库
+1svnadmin create /var/svn/repository/helloworld
+
+版本库目
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:37" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/VCS/">VCS</a>
+            
+              <a href="/categories/Software/VCS/SVN/">SVN</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          Elasticsearch 初始化
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/Backend/Distributed/ElasticSearch/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          
+          
+            
+          
+          Elasticsearch 初始化
+安装
+Docker
+12345678910$ docker network create elastic$ docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \--net elastic \--hostname elasticsearch \-e &quot;http.cors.enabled=t
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 17:35" pubdate>
+              2021-12-18
             </time>
           </div>
         
@@ -383,24 +1201,23 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/" target="_self">
-          Spring Boot 整合QQ登录
+        <a href="/Software/Tools/SSH/%E9%85%8D%E7%BD%AE/" target="_self">
+          SSH 配置
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/" target="_self">
+        <a href="/Software/Tools/SSH/%E9%85%8D%E7%BD%AE/" target="_self">
           
           
             
           
-          Spring Boot 整合QQ登录
-网站应用及移动应用接入申请
+          SSH 配置
+代理配置
 
-应用接入前,首先需进行申请https://wiki.connect.qq.com,获得对应的appid与appkey,以保证后续流程中可正确对网站与用户进行验证与授权
+~/.ssh/config
 
-pom.xml
-12345&lt;dependency&gt;    &lt;groupId&gt;net.gplatform&lt;/groupId&gt;  
+1234567Host github.com   HostName github.com   User git   # 走 HTTP 代理   # ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=8080   # 走 socks5 代理(如 Shadowsocks)   ProxyCo
         </a>
       </p>
 
@@ -408,8 +1225,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-17 13:39" pubdate>
-              2021-12-17
+            <time datetime="2021-12-18 17:35" pubdate>
+              2021-12-18
             </time>
           </div>
         
@@ -419,11 +1236,9 @@ pom.xml
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/%E5%AE%9E%E4%BE%8B/">实例</a>
+              <a href="/categories/Software/Tools/SSH/">SSH</a>
             
           </div>
         
@@ -438,28 +1253,32 @@ pom.xml
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E4%B9%90%E8%A7%82%E9%94%81/" target="_self">
-          Mybatis Plus 乐观锁
+        <a href="/Software/Tools/SSH/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
+          SSH 初始化
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E4%B9%90%E8%A7%82%E9%94%81/" target="_self">
+        <a href="/Software/Tools/SSH/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
           
           
             
           
-          Mybatis Plus 乐观锁
+          SSH 初始化
+安装ssh
+CentOS
+1sudo yum install sshd
+Ubuntu
 
-乐观锁 : 故名思意十分乐观, 它总是认为不会出现问题, 无论干什么不去上锁!如果出现了问题,  再次更新值测试
-悲观锁:故名思意十分悲观, 它总是认为总是出现问题, 无论干什么都会上锁!再去操作!
+安装 SSH
 
+1apt-get install openssh-server
 
-乐观锁实现方式
+安装 SSH 的客户端
 
-取出记录时, 获取当前 version
-更新时, 带上这个version
-执行更新时,  set version = newVersion w
+1apt-get install openssh-client
+进程管理
+123service ssh start/stop/restart# ORservice sshd start/s
         </a>
       </p>
 
@@ -467,8 +1286,8 @@ pom.xml
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-17 00:40" pubdate>
-              2021-12-17
+            <time datetime="2021-12-18 17:35" pubdate>
+              2021-12-18
             </time>
           </div>
         
@@ -478,803 +1297,9 @@ pom.xml
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/Backend/">Backend</a>
+              <a href="/categories/Software/Tools/">Tools</a>
             
-              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          Spring 日志
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%97%A5%E5%BF%97/" target="_self">
-          
-          
-            
-          
-          Spring 日志
-Slf4j
-
-Slf4j是一个日志框架，它是对所有日志框架制定的一种规范、标准、接口，并不是一个框架的具体的实现，因为接口并不能独立使用，它需要和具体的日志框架来配合使用
-在Java中具体的日志实现有Log4j、Log4j2、Slf4j、JDKLog、Logback等等
-
-Logback
-
-Spring Boot默认使用的日志框架
-
-日志级别
-
-日志级别从低到高分为TRACE 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-16 23:37" pubdate>
-              2021-12-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E4%BA%8B%E5%8A%A1/" target="_self">
-          Spring 事务
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E4%BA%8B%E5%8A%A1/" target="_self">
-          
-          
-            
-          
-          Spring 事务
-pom.xml
-1234567891011121314151617181920212223242526&lt;!--Spring Boot--&gt;&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-star
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-16 23:36" pubdate>
-              2021-12-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" target="_self">
-          Servlet 文件上传与下载
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" target="_self">
-          
-          
-            
-          
-          Servlet 文件上传与下载
-pom.xml
-1234567891011&lt;dependency&gt;    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;    &lt;version&gt;4.0.1&lt;/version&gt
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-16 23:12" pubdate>
-              2021-12-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaEE/">JavaEE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/">实例</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringMVC/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" target="_self">
-          Spring MVC 全局异常处理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringMVC/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" target="_self">
-          
-          
-            
-          
-          Spring MVC 全局异常处理
-
-SpringBoot中，@ControllerAdvice 即可开启全局异常处理，使用该注解表示开启了全局异常的捕获，我们只需在自定义一个方法使用@ExceptionHandler注解然后定义捕获异常的类型即可对这些捕获的异常进行统一的处理。
-
-自定义异常类
-123456789101112131415161718192021222324252627282930
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-16 19:45" pubdate>
-              2021-12-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringMVC/HandleAdaptor/" target="_self">
-          Spring MVC 处理器适配器
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringMVC/HandleAdaptor/" target="_self">
-          
-          
-            
-          
-          Spring MVC 处理器适配器
-
-HandlerAdapter调用具体的方法对用户发来的请求来进行处理
-当HandlerMapping获取到执行请求的controller时,DispatcherServlte会根据controller对应的controller类型来调用相应的HandlerAdapter来进行处
-
-源码分析
-12345678910111213141516171819202122
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 18:49" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringMVC/ModelAndView/" target="_self">
-          Spring MVC ModelAndView
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringMVC/ModelAndView/" target="_self">
-          
-          
-            
-          
-          Spring MVC ModelAndView
-
-可由Controller类的handleRequest方法返回
-对于Controller的目标方法,无论其返回值是String,View,ModelMap或是ModelAndView,Spring MVC都会在内部将它们封装为一个ModelAndView对象进行返回
-可以在该对象上设置数据与视图
-
-ModelAndView
-addObject()
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 18:49" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringMVC/HandlerInterceptor/" target="_self">
-          Spring MVC 拦截器
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringMVC/HandlerInterceptor/" target="_self">
-          
-          
-            
-          
-          Spring MVC 拦截器
-概述
-
-Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能
-过滤器
-
-servlet规范中的一部分,任何java web工程都可以使用
-在url-pattern中配置了/*之后,可以对所有要访问的资源进行拦截
-
-
-拦截器
-
-拦截器是Spring MVC框架自己的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 18:45" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringMVC/">SpringMVC</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%B5%8B%E8%AF%95/" target="_self">
-          Spring 测试
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/%E6%B5%8B%E8%AF%95/" target="_self">
-          
-          
-            
-          
-          Spring 测试
-Junit
-
-Junit是一个Java语言的单元测试框架,被开发者用于实施对应用程序的单元测试,加快程序编制速度,同时提高编码的质量
-
-注解
-123456public class TestDemo &#123;	    @Test    void fun1()&#123;        System.out.println(&quot;测试&quot;);    &#125;&
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 18:44" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Language/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E6%96%AD%E8%A8%80/" target="_self">
-          Java 断言
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Language/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/%E6%96%AD%E8%A8%80/" target="_self">
-          
-          
-            
-          
-          Java 断言
-
-断言(Assertion)是一种调试程序的方式,在Java中,使用assert关键字来实现断言
-断言在软件开发中是一种常用的调试方式,很多开发语言中都支持这种机制,一般来说,断言用于保证程序最基本,关键的正确性,断言检查通常在开发和测试时开启,为了保证程序的执行效率,在软件发布后断言检查通常是关闭的,断言是一个包含布尔表达式的语句,在执行这个语句时假定该表达式为true,如果表达
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 16:22" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Language/">Language</a>
-            
-              <a href="/categories/Software/Language/Java/">Java</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
-            
-              <a href="/categories/Software/Language/Java/JavaSE/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/Spring/Thymeleaf/" target="_self">
-          Spring 整合Thymeleaf
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/Spring/Thymeleaf/" target="_self">
-          
-          
-            
-          
-          Spring 整合Thymeleaf
-模板引擎
-模板引擎的作用就是通过一个页面模板,将表达式解析,从后台提取数值并填充到指定的位置,最终生成一个静态页面
-
-pom.xml
-12345&lt;!--thymeleaf--&gt;&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;ar
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-15 14:45" pubdate>
-              2021-12-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/Spring/">Spring</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Mybatis/MybatisPlus/CRUD%E6%8E%A5%E5%8F%A3/" target="_self">
-          Mybatis Plus CRUD 接口
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/CRUD%E6%8E%A5%E5%8F%A3/" target="_self">
-          
-          
-            
-          
-          Mybatis Plus CRUD 接口
-Service CRUD接口
-
-说明
-
-通用 Service CRUD 封装IService接口, 进一步封装 CRUD 采用 get 查询单行 remove 删除 list 查询集合 page 分页 前缀命名方式区分 Mapper 层避免混淆,
-泛型 T 为任意实体对象
-建议如果存在自定义通用 Service 方法的可能, 请创建自己的 IBaseSer
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-14 15:43" pubdate>
-              2021-12-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4/" target="_self">
-          逻辑删除
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4/" target="_self">
-          
-          
-            
-          
-          逻辑删除
-
-
-逻辑删除是为了方便数据恢复和保护数据本身价值等等的一种方案, 但实际就是删除
-
-
-如果你需要频繁查出来看就不应使用逻辑删除, 而是以一个状态去表示
-
-
-只对自动注入的sql起效:
-
-插入: 不作限制
-查找: 追加where条件过滤掉已删除数据,且使用 wrapper.entity 生成的where条件会忽略该字段
-更新: 追加where条件防止更新到已删除数据,且使用 wrapper
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-14 15:43" pubdate>
-              2021-12-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8F%92%E4%BB%B6/" target="_self">
-          Mybatis Plus 性能分析插件
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/Mybatis/MybatisPlus/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8F%92%E4%BB%B6/" target="_self">
-          
-          
-            
-          
-          Mybatis Plus 性能分析插件
-配置插件
-12345678@Bean@Profile(&#123;&quot;dev&quot;,&quot;test&quot;&#125;)// 设置 dev test 环境开启public PerformanceInterceptor performanceInterceptor() &#123;    PerformanceInterceptor p
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-14 15:37" pubdate>
-              2021-12-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/">Mybatis</a>
-            
-              <a href="/categories/Software/Backend/Mybatis/MybatisPlus/">MybatisPlus</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/Backend/SpringFramework/SpringBoot/%E8%87%AA%E5%AE%9A%E4%B9%89Starter/" target="_self">
-          Spring Boot 自定义Starter
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/Backend/SpringFramework/SpringBoot/%E8%87%AA%E5%AE%9A%E4%B9%89Starter/" target="_self">
-          
-          
-            
-          
-          Spring Boot 自定义Starter
-概述
-启动器模块是一个 空 jar 文件,仅提供辅助性依赖管理,这些依赖可能用于自动装配或者其他类库
-命名规约
-
-
-官方命名
-
-
-前缀:spring-boot-starter-xxx
-例如:spring-boot-starter-web
-
-
-
-
-自定义命名
-
-
-xxx-spring-boot-starter
-例如:mybatis-spring-boot
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-13 17:47" pubdate>
-              2021-12-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/Backend/">Backend</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/">SpringFramework</a>
-            
-              <a href="/categories/Software/Backend/SpringFramework/SpringBoot/">SpringBoot</a>
+              <a href="/categories/Software/Tools/SSH/">SSH</a>
             
           </div>
         

@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 备份 导出 导出一张表 123mysqldump -u用户名 -p密码 库名 表名 &gt; 文件名mysqldump -uroot -p123456 school student &gt; a.sql 导出多张表 123mysqldump -u用户名 -p密码 库名 表1 表2 表3 &gt; 文件名mysqldump -uroot -p123456 school student r">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-24T09:12:40.000Z">
-<meta property="article:modified_time" content="2022-03-24T09:12:40.000Z">
+<meta property="article:published_time" content="2022-05-26T13:35:24.000Z">
+<meta property="article:modified_time" content="2022-05-26T13:35:24.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-24 17:12" pubdate>
-        2022年3月24日 下午
+      <time datetime="2022-05-26 21:35" pubdate>
+        2022年5月26日 晚上
       </time>
     </span>
   
@@ -238,16 +238,16 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mysql -u用户名 -p密码 库名 &lt; 备份文件<br></code></pre></td></tr></table></figure>
 <h3 id="定期备份">定期备份</h3>
 <p><strong>创建</strong>shell脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br>db_user=&quot;root&quot;<br>db_passwd=&quot;123456&quot;<br>db_name=&quot;userdb&quot;<br>name=&quot;$(date +&quot;%Y%m%d%H%M%S&quot;)&quot; <br>/usr/bin/mysqldump -u$db_user -p$db_passwd $db_name &gt;&gt;/home/backup/$name.sql<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br>db_user=&quot;root&quot;<br>db_passwd=&quot;123456&quot;<br>db_name=&quot;userdb&quot;<br>name=&quot;$(date +&quot;%Y%m%d%H%M%S&quot;)&quot;<br>/usr/bin/mysqldump -u$db_user -p$db_passwd $db_name &gt;&gt;/home/backup/$name.sql<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>/usr/bin/mysqldump</code> ：mysql数据库安装目录下的mysqldump备份工具路径</li>
-<li><code>dbname</code> ：需要备份的数据库名字</li>
-<li><code>/home/backup/$name.sql</code> ：备份文件输出位置，可以根据情况自行设定</li>
+<li><code>/usr/bin/mysqldump</code>:mysql数据库安装目录下的mysqldump备份工具路径</li>
+<li><code>dbname</code>:需要备份的数据库名字</li>
+<li><code>/home/backup/$name.sql</code>:备份文件输出位置,可以根据情况自行设定</li>
 </ul>
 <p><strong>2. 给shell脚本添加执行权限</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> chmod +x backupdb.sh</span><br></code></pre></td></tr></table></figure>
 <p><strong>3. 给脚本添加定时任务</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> crontab -e</span><br><span class="hljs-meta">#</span><span class="bash"> 输入上一行命名进行编辑定时任务,最后添加如下内容</span><br>00 01 * * * /bin/sh /usr/local/mysql/backupdb.sh<br><span class="hljs-meta">#</span><span class="bash">上面的定时任务意思是每天凌晨1点会执行自动备份脚,进行MySQL数据库的定时备份.</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> crontab -e</span><br><span class="hljs-meta">#</span><span class="bash"> 输入上一行命名进行编辑定时任务,最后添加如下内容</span><br>00 01 * * * /bin/sh /usr/local/mysql/backupdb.sh<br><span class="hljs-meta">#</span><span class="bash">上面的定时任务意思是每天凌晨1点会执行自动备份脚,进行MySQL数据库的定时备份</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -281,9 +281,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ThreadLocal/">
+                      <a href="/Software/Language/Go/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java ThreadLocal</span>
+                        <span class="hidden-mobile">Go 基本数据类型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -291,8 +291,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-                        <span class="hidden-mobile">MySQL 问题解决</span>
+                      <a href="/Software/Algorithm/%E6%89%AB%E6%8F%8F%E7%BA%BF/%E6%95%B0%E9%A3%9E%E6%9C%BA/">
+                        <span class="hidden-mobile">数飞机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

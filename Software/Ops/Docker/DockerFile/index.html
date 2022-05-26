@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Docker DockerFile  Dockerfile 是一个用来构建镜像的文本文件,文本内容包含了一条条构建镜像所需的指令和说明  Dockerfile文件指令 FROM  定制的镜像都是基于 FROM 的镜像,这里的 nginx 就是定制需要的基础镜像,后续的操作都是基于 nginx  12FROM nginxRUN echo &amp;#x27;这是一个本地构建的nginx镜像&amp;#x27; &amp;g">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-08T08:53:50.000Z">
-<meta property="article:modified_time" content="2021-12-08T08:53:50.000Z">
+<meta property="article:published_time" content="2022-05-26T13:32:13.000Z">
+<meta property="article:modified_time" content="2022-05-26T13:32:13.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-08 16:53" pubdate>
-        2021年12月8日 下午
+      <time datetime="2022-05-26 21:32" pubdate>
+        2022年5月26日 晚上
       </time>
     </span>
   
@@ -246,7 +246,7 @@
 </ul>
 <h3 id="RUN">RUN</h3>
 <ul>
-<li>RUN 执行命令并创建新的镜像层，RUN 只影响如何构建镜像，所以镜像中不保留 RUN 命令</li>
+<li>RUN 执行命令并创建新的镜像层,RUN 只影响如何构建镜像,所以镜像中不保留 RUN 命令</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> shell 格式:</span><br>RUN &lt;shell 命令&gt;<br><span class="hljs-meta">#</span><span class="bash"> <span class="hljs-built_in">exec</span> 格式:</span><br>RUN [&quot;&lt;可执行文件或命令&gt;&quot;,&quot;&lt;param1&gt;&quot;,&quot;&lt;param2&gt;&quot;,...]<br></code></pre></td></tr></table></figure>
 <ul>
@@ -269,7 +269,7 @@
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment"># shell 格式:</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> &lt;shell 命令&gt;</span><br><span class="hljs-comment"># exec 格式:</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> [<span class="hljs-string">&quot;&lt;可执行文件或命令&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...]</span><br></code></pre></td></tr></table></figure>
 <h4 id="附加参数">附加参数</h4>
 <ul>
-<li>exec格式的 ENTRYPOINT 能接收 CMD 或 <code>dock run &lt;image&gt;</code> 后的参数作为附加参数，相当于是往这个数组中附加元素。</li>
+<li>exec格式的 ENTRYPOINT 能接收 CMD 或 <code>dock run &lt;image&gt;</code> 后的参数作为附加参数,相当于是往这个数组中附加元素</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
@@ -289,27 +289,27 @@
 </ul>
 <h4 id="环境变量替换">环境变量替换</h4>
 <ul>
-<li>exec格式无法通过环境变量进行替换，原因是变量替换操作实际是由 “/bin/sh” 能完成的，shell 格式总是由 “/bin/sh -c” 启动的。如果 exec 格式的 ENTRYPOINT 也希望能解析变量，就得依样写成</li>
+<li>exec格式无法通过环境变量进行替换,原因是变量替换操作实际是由 “/bin/sh” 能完成的,shell 格式总是由 “/bin/sh -c” 启动的,如果 exec 格式的 ENTRYPOINT 也希望能解析变量,就得依样写成</li>
 </ul>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">ENTRYPOINT <span class="hljs-selector-attr">[<span class="hljs-string">&quot;/bin/sh&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>, <span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...]</span><br></code></pre></td></tr></table></figure>
 <h5 id="增强型-shell-格式">增强型 shell 格式</h5>
 <ul>
-<li>这里补充一种 ENTRYPOINT 的声明格式，它实质是 shell 格式，为而把它单独列出来关键就在于 shell 的 <code>exec</code> 命令。此 <code>exec</code> 非前面 exec 格式中的 exec, 而是一个结结实实的 shell 命令。</li>
+<li>这里补充一种 ENTRYPOINT 的声明格式,它实质是 shell 格式,为而把它单独列出来关键就在于 shell 的 <code>exec</code> 命令,此 <code>exec</code> 非前面 exec 格式中的 exec, 而是一个结结实实的 shell 命令</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ENTRYPOINT exec command param1 param2 ...<br></code></pre></td></tr></table></figure>
 <ul>
-<li>它仍然是 shell 格式，所以 inspect 镜像后看到的 ENTRYPOINT 是</li>
+<li>它仍然是 shell 格式,所以 inspect 镜像后看到的 ENTRYPOINT 是</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ENTRYPOINT [&quot;/bin/sh&quot;, &quot;-c&quot; &quot;exec java $JAVA_OPTS -jar /app.jar&quot;]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>然而加了 <code>exec</code> 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell，而是用要被执行命令替换当前的 shell 进程，并且将老进程的环境清理掉，exec 后的命令不再是 shell 的子进程序，而且 exec 命令后的其它命令将不再执行。从执行效果上可以看到 exec 会把当前的 shell 关闭掉，直接启动它后面的命令。</li>
-<li>虽然它与之后的命令(如上 <code>exec java $JAVA_OPTS -jar /app.jar</code>）还是作为 “/bin/sh” 的第二个参数，但 <code>exec</code> 来了个金蝉脱壳，让这里的 <code>java</code> 进程得已作为一个 PID 1 的超级进程，进行使得这个 java 进程可以收到 SIGTERM 信号。或者理解 <code>exec</code> 为 “/bin/sh” 的子进程，但是借助于 <code>exec</code> 让它后面的进程启动在最顶端。</li>
-<li>另外，由于通过 “/bin/sh” 的搭桥，命令中的变量(如 $JAVA_OPTS) 也会被正确解析，因此 <code>ENTRYPOINT exec command param1 param2 ...</code> 是被推荐的格式。</li>
-<li><strong>注意</strong>：exec 只会启动后面的第一个命令，<code>exec ls; top</code> 或 <code>exec ls &amp;&amp; top</code> 只会执行 <code>ls</code> 命令。</li>
+<li>然而加了 <code>exec</code> 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell,而是用要被执行命令替换当前的 shell 进程,并且将老进程的环境清理掉,exec 后的命令不再是 shell 的子进程序,而且 exec 命令后的其它命令将不再执行,从执行效果上可以看到 exec 会把当前的 shell 关闭掉,直接启动它后面的命令</li>
+<li>虽然它与之后的命令(如上 <code>exec java $JAVA_OPTS -jar /app.jar</code>)还是作为 “/bin/sh” 的第二个参数,但 <code>exec</code> 来了个金蝉脱壳,让这里的 <code>java</code> 进程得已作为一个 PID 1 的超级进程,进行使得这个 java 进程可以收到 SIGTERM 信号,或者理解 <code>exec</code> 为 “/bin/sh” 的子进程,但是借助于 <code>exec</code> 让它后面的进程启动在最顶端</li>
+<li>另外,由于通过 “/bin/sh” 的搭桥,命令中的变量(如 $JAVA_OPTS) 也会被正确解析,因此 <code>ENTRYPOINT exec command param1 param2 ...</code> 是被推荐的格式</li>
+<li><strong>注意</strong>:exec 只会启动后面的第一个命令,<code>exec ls; top</code> 或 <code>exec ls &amp;&amp; top</code> 只会执行 <code>ls</code> 命令</li>
 </ul>
 <h3 id="CMD">CMD</h3>
 <ul>
-<li>CMD 设置容器启动后默认执行的命令及其参数，但 CMD 能够在启动容器时被覆盖。</li>
+<li>CMD 设置容器启动后默认执行的命令及其参数,但 CMD 能够在启动容器时被覆盖</li>
 <li><strong>注意</strong>:如果 Dockerfile 中如果存在多个 CMD 指令,仅最后一个生效</li>
 </ul>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">CMD</span><span class="bash"> &lt;shell 命令&gt;</span><br><span class="hljs-keyword">CMD</span><span class="bash"> [<span class="hljs-string">&quot;&lt;可执行文件或命令&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...]</span><br><span class="hljs-keyword">CMD</span><span class="bash"> [<span class="hljs-string">&quot;&lt;param1&gt;&quot;</span>,<span class="hljs-string">&quot;&lt;param2&gt;&quot;</span>,...]  <span class="hljs-comment"># 该写法是为 ENTRYPOINT 指令指定的程序提供默认参数</span></span><br></code></pre></td></tr></table></figure>
@@ -482,9 +482,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/Dubbo/%E5%A4%9A%E7%89%88%E6%9C%AC/">
+                      <a href="/Software/Language/Go/%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Dubbo 多版本</span>
+                        <span class="hidden-mobile">Go 变量与常量</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -492,8 +492,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Backend/Distributed/Kafka/Eagle/">
-                        <span class="hidden-mobile">Kafka Eagle</span>
+                      <a href="/Software/System/Linux/%E7%A1%AC%E4%BB%B6%E5%8F%82%E6%95%B0/">
+                        <span class="hidden-mobile">Linux 硬件参数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
