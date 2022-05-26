@@ -10,7 +10,7 @@ categories:
 
 ## 简介
 
-- 号称世界上最流行的API框架，Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
+- 号称世界上最流行的API框架,Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
 - 官网:https://swagger.io/
 
 ## pom.xml
@@ -89,8 +89,8 @@ public Docket createRestApi() {
     - `none()`:任何请求都不扫描
     - `regex(final String pathRegex)`:通过正则表达式控制
     - `ant(final String antPattern)`:通过ant()控制
-- `enable()`：配置是否启用swagger
-- `groupName()`：配置分组，如果没有配置分组,默认是default，配置多个分组只需要配置多个docket即可
+- `enable()`:配置是否启用swagger
+- `groupName()`:配置分组,如果没有配置分组,默认是default,配置多个分组只需要配置多个docket即可
 
 ### apiInfo()
 
@@ -273,7 +273,7 @@ public void select(){
 ```java
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/swagger-ui/").addResourceLocations("classpath:/META-INF/resources/", "/static", "/public");

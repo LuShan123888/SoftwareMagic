@@ -32,8 +32,8 @@ Collections.synchronizedSet(new HashSet<>());
 
 ## CopyOnWriteArrayList
 
-- CopyOnWriteArrayList 是 ArrayList 的线程安全变体，其中通过创建底层数组的新副本来实现所有可变操作（添加，设置等）。
-- CopyOnWriteArrayList 支持无锁并发读，在写操作时，将原容器拷贝一份，写操作则作用在新副本上，需要加锁。此过程中若有读操作则会作用在原容器上，将原容器引用指向新副本，切换过程使用volatile保证切换过程对读线程立即可见
+- CopyOnWriteArrayList 是 ArrayList 的线程安全变体,其中通过创建底层数组的新副本来实现所有可变操作(添加,设置等)
+- CopyOnWriteArrayList 支持无锁并发读,在写操作时,将原容器拷贝一份,写操作则作用在新副本上,需要加锁,此过程中若有读操作则会作用在原容器上,将原容器引用指向新副本,切换过程使用volatile保证切换过程对读线程立即可见
 
 ```java
 import java.util.concurrent.CopyOnWriteArrayList;

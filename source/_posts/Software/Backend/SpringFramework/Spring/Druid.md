@@ -66,27 +66,27 @@ spring:
     druid:
       # 配置获取连接等待超时的时间
       maxWait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      # 配置间隔多久才进行一次检测,检测需要关闭的空闲连接,单位是毫秒
       timeBetweenEvictionRunsMillis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      # 配置一个连接在池中最小生存的时间,单位是毫秒
       minEvictableIdleTimeMillis: 300000
-      # 用来检测连接是否有效的sql，要求是一个查询语句
+      # 用来检测连接是否有效的sql,要求是一个查询语句
       validationQuery: SELECT 1 FROM DUAL
-      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      # 建议配置为true,不影响性能,并且保证安全性,申请连接的时候检测,如果空闲时间大于timeBetweenEvictionRunsMillis,执行validationQuery检测连接是否有效
       testWhileIdle: true
-      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      # 申请连接时执行validationQuery检测连接是否有效,做了这个配置会降低性能
       testOnBorrow: false
-      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      # 归还连接时执行validationQuery检测连接是否有效,做了这个配置会降低性能
       testOnReturn: false
-      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      # 是否缓存preparedStatement,也就是PSCache,PSCache对支持游标的数据库性能提升巨大,比如说oracle,在mysql下建议关闭
       poolPreparedStatements: true
-      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。
+      # 要启用PSCache,必须配置大于0,当大于0时,poolPreparedStatements自动触发修改为true
       max-pool-prepared-statement-per-connection-size: 50
-      #配置监控统计拦截的filters，stat:监控统计、log4j:日志记录、wall:防御sql注入
+      #配置监控统计拦截的filters,stat:监控统计,log4j:日志记录,wall:防御sql注入
       filters: stat,wall
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      # 通过connectProperties属性来打开mergeSql功能,慢SQL记录
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
       stat-view-servlet:
         enabled: true
@@ -202,10 +202,10 @@ spring:
 
 ## 配置Druid数据源监控
 
-- Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。这个StatViewServlet的用途包括：
+- Druid内置提供了一个StatViewServlet用于展示Druid的统计信息,这个StatViewServlet的用途包括:
     - 提供监控信息展示的html页面
     - 提供监控信息的JSON API
-        注意：使用StatViewServlet，建议使用druid 0.2.6以上版本。
+        注意:使用StatViewServlet,建议使用druid 0.2.6以上版本
 
 ```java
 @Configuration
@@ -269,11 +269,11 @@ public class DruidConfig {
 
 ### Mapper中同时执行多条sql语句报错
 
-**报错信息**：java.sql.SQLException: sql injection violation, multi-statement not allow
+**报错信息**:java.sql.SQLException: sql injection violation, multi-statement not allow
 
-**原因**：需要设置过滤器 **WallFilter** 的配置: **WallConfig** 的参数 **multiStatementAllow** 为true,默认情况下false不允许批量操作
+**原因**:需要设置过滤器 **WallFilter** 的配置: **WallConfig** 的参数 **multiStatementAllow** 为true,默认情况下false不允许批量操作
 
-**解决方法**：配置druid连接池,实现同时执行多条语句
+**解决方法**:配置druid连接池,实现同时执行多条语句
 
 ```java
 @Configuration

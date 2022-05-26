@@ -73,7 +73,7 @@ spring.datasource.password=123456
 </dependency>
 ```
 
-3. 创建Dockerfile（需将下文配置文件存放至当前目录）
+3. 创建Dockerfile(需将下文配置文件存放至当前目录)
 
 ```dockerfile
 FROM maven:3-openjdk-8

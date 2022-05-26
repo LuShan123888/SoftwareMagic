@@ -24,4 +24,4 @@ git clone <url> [local_path]
 git clone --recurse-submodules -j8 git://github.com/foo/bar.git
 ```
 
-- `-j8`：可选的性能优化,在2.8版中可用,一次最多可以并行提取8个子模块
+- `-j8`:可选的性能优化,在2.8版中可用,一次最多可以并行提取8个子模块

@@ -15,7 +15,7 @@ categories:
 ```java
 Jedis jedis = new Jedis("127.0.0.1", 6379);
 // jedis.auth("password"); //如果服务器需要密码, 验证密码
-jedis.select(0)；//选择0号数据库
+jedis.select(0); //选择0号数据库
 jedis.connect(); //连接
 jedis.disconnect(); //断开连接
 jedis.flushAll(); //清空所有的key
@@ -23,7 +23,7 @@ jedis.flushAll(); //清空所有的key
 
 ### JedisPool
 
-- 每次连接需要创建一个连接、执行完后就关闭，非常浪费资源，所以使用jedispool（连接池）连接 
+- 每次连接需要创建一个连接,执行完后就关闭,非常浪费资源,所以使用jedispool(连接池)连接
 
 ```java
 //  创建连接池配置对象
@@ -50,13 +50,13 @@ System.out.println("服务正在运行: "+jedis.ping());
 System.out.println(jedis.getClient());
 //清空Redis数据库,相当于执行FLUSHALL命令
 System.out.println(jedis.flushAll());
-//查看Redis信息，相当于执行INFO命令
+//查看Redis信息,相当于执行INFO命令
 System.out.println(jedis.info());
-//获取数据库中key的数量，相当于执行DBSIZE命令
+//获取数据库中key的数量,相当于执行DBSIZE命令
 System.out.println(jedis.dbSize());
 //获取数据库名字
 System.out.println(jedis.getDB());
-//返回当前Redis服务器的时间，相当于执行TIME命令
+//返回当前Redis服务器的时间,相当于执行TIME命令
 System.out.println(jedis.time());
 ```
 
@@ -272,12 +272,12 @@ try{
 
 ## jedisCluster
 
-- jedisCluster专门用来连接Redis Cluster集群 
+- jedisCluster专门用来连接Redis Cluster集群
 
 ### 连接Cluster集群
 
 ```java
-//创建jedisCluster对象，有一个参数 nodes是Set类型，Set包含若干个HostAndPort对象
+//创建jedisCluster对象,有一个参数 nodes是Set类型,Set包含若干个HostAndPort对象
 Set<HostAndPort> nodes = new HashSet<>();
 nodes.add(new HostAndPort("127.0.0.1",7001));
 nodes.add(new HostAndPort("127.0.0.1",7002));

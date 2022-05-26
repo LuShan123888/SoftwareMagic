@@ -185,18 +185,18 @@ private String name;
 
 #### @JsonInclude
 
-- 在某些策略下，加了该注解的字段不去序列化该字段
+- 在某些策略下,加了该注解的字段不去序列化该字段
 
 ```java
 @JsonInclude(JsonInclude.Include.NON_NULL)
 private String username;
 ```
 
-- ALWAYS:默认策略，任何情况都执行序列化
+- ALWAYS:默认策略,任何情况都执行序列化
 - NON_NULL:null不会序列化
-- NON_ABSENT:null不会序列化，但如果类型是AtomicReference，依然会被序列化
-- NON_EMPTY:null、集合数组等没有内容、空字符串等，都不会被序列化
-- NON_DEFAULT:如果字段是默认值，就不会被序列化
+- NON_ABSENT:null不会序列化,但如果类型是AtomicReference,依然会被序列化
+- NON_EMPTY:null,集合数组等没有内容,空字符串等,都不会被序列化
+- NON_DEFAULT:如果字段是默认值,就不会被序列化
 
 #### @JsonSerialize
 

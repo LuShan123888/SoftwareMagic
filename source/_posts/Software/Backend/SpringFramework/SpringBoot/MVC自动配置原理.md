@@ -8,7 +8,7 @@ categories:
 ---
 # Spring Boot MVC 自动配置原理
 
-- 官方文档地址：https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration
+- 官方文档地址:https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration
 
 > **Spring MVC Auto-configuration**
 >
@@ -225,10 +225,10 @@ public void addViewControllers(ViewControllerRegistry registry) {
 
 ## 全面接管Spring MVC
 
-- 在配置类中添加`@EnableWebMvc`注解，放弃SpringBoot对SpringMVC的自动配置,转为自己配置
+- 在配置类中添加`@EnableWebMvc`注解,放弃SpringBoot对SpringMVC的自动配置,转为自己配置
 - **不推荐使用全面接管SpringMVC**
 
-**分析源码**：`@EnableWebMvc`为什么会使自动配置失效
+**分析源码**:`@EnableWebMvc`为什么会使自动配置失效
 
 - 查看`@EnableWebMvc`发现它是导入了一个类`DelegatingWebMvcConfiguration`
 

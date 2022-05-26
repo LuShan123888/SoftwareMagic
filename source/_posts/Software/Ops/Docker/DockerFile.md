@@ -52,7 +52,7 @@ COPY --from=0 /source/dubbo-admin-$version/docker/entrypoint.sh /usr/local/bin/e
 
 ### RUN
 
-- RUN 执行命令并创建新的镜像层，RUN 只影响如何构建镜像，所以镜像中不保留 RUN 命令
+- RUN 执行命令并创建新的镜像层,RUN 只影响如何构建镜像,所以镜像中不保留 RUN 命令
 
 ```shell
 # shell 格式:
@@ -96,7 +96,7 @@ ENTRYPOINT ["<可执行文件或命令>","<param1>","<param2>",...]
 
 #### 附加参数
 
-- exec格式的 ENTRYPOINT 能接收 CMD 或 `dock run <image>` 后的参数作为附加参数，相当于是往这个数组中附加元素。
+- exec格式的 ENTRYPOINT 能接收 CMD 或 `dock run <image>` 后的参数作为附加参数,相当于是往这个数组中附加元素
 
 **实例**
 
@@ -126,7 +126,7 @@ $ nginx -c /etc/nginx/new.conf
 
 #### 环境变量替换
 
-- exec格式无法通过环境变量进行替换，原因是变量替换操作实际是由 "/bin/sh" 能完成的，shell 格式总是由 "/bin/sh -c" 启动的。如果 exec 格式的 ENTRYPOINT 也希望能解析变量，就得依样写成
+- exec格式无法通过环境变量进行替换,原因是变量替换操作实际是由 "/bin/sh" 能完成的,shell 格式总是由 "/bin/sh -c" 启动的,如果 exec 格式的 ENTRYPOINT 也希望能解析变量,就得依样写成
 
 ```
 ENTRYPOINT ["/bin/sh", "-c", "<param1>","<param2>",...]
@@ -134,28 +134,28 @@ ENTRYPOINT ["/bin/sh", "-c", "<param1>","<param2>",...]
 
 ##### 增强型 shell 格式
 
-- 这里补充一种 ENTRYPOINT 的声明格式，它实质是 shell 格式，为而把它单独列出来关键就在于 shell 的 `exec` 命令。此 `exec` 非前面 exec 格式中的 exec, 而是一个结结实实的 shell 命令。
+- 这里补充一种 ENTRYPOINT 的声明格式,它实质是 shell 格式,为而把它单独列出来关键就在于 shell 的 `exec` 命令,此 `exec` 非前面 exec 格式中的 exec, 而是一个结结实实的 shell 命令
 
 ```shell
 ENTRYPOINT exec command param1 param2 ...
 ```
 
-- 它仍然是 shell 格式，所以 inspect 镜像后看到的 ENTRYPOINT 是
+- 它仍然是 shell 格式,所以 inspect 镜像后看到的 ENTRYPOINT 是
 
 ```shell
 ENTRYPOINT ["/bin/sh", "-c" "exec java $JAVA_OPTS -jar /app.jar"]
 ```
 
-- 然而加了 `exec` 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell，而是用要被执行命令替换当前的 shell 进程，并且将老进程的环境清理掉，exec 后的命令不再是 shell 的子进程序，而且 exec 命令后的其它命令将不再执行。从执行效果上可以看到 exec 会把当前的 shell 关闭掉，直接启动它后面的命令。
-- 虽然它与之后的命令(如上 `exec java $JAVA_OPTS -jar /app.jar`）还是作为 "/bin/sh" 的第二个参数，但 `exec` 来了个金蝉脱壳，让这里的 `java` 进程得已作为一个 PID 1 的超级进程，进行使得这个 java 进程可以收到 SIGTERM 信号。或者理解 `exec` 为 "/bin/sh" 的子进程，但是借助于 `exec` 让它后面的进程启动在最顶端。
-- 另外，由于通过 "/bin/sh" 的搭桥，命令中的变量(如 $JAVA_OPTS) 也会被正确解析，因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式。
-- **注意**：exec 只会启动后面的第一个命令，`exec ls; top` 或 `exec ls && top` 只会执行 `ls` 命令。
+- 然而加了 `exec` 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell,而是用要被执行命令替换当前的 shell 进程,并且将老进程的环境清理掉,exec 后的命令不再是 shell 的子进程序,而且 exec 命令后的其它命令将不再执行,从执行效果上可以看到 exec 会把当前的 shell 关闭掉,直接启动它后面的命令
+- 虽然它与之后的命令(如上 `exec java $JAVA_OPTS -jar /app.jar`)还是作为 "/bin/sh" 的第二个参数,但 `exec` 来了个金蝉脱壳,让这里的 `java` 进程得已作为一个 PID 1 的超级进程,进行使得这个 java 进程可以收到 SIGTERM 信号,或者理解 `exec` 为 "/bin/sh" 的子进程,但是借助于 `exec` 让它后面的进程启动在最顶端
+- 另外,由于通过 "/bin/sh" 的搭桥,命令中的变量(如 $JAVA_OPTS) 也会被正确解析,因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式
+- **注意**:exec 只会启动后面的第一个命令,`exec ls; top` 或 `exec ls && top` 只会执行 `ls` 命令
 
 
 
 ### CMD
 
-- CMD 设置容器启动后默认执行的命令及其参数，但 CMD 能够在启动容器时被覆盖。
+- CMD 设置容器启动后默认执行的命令及其参数,但 CMD 能够在启动容器时被覆盖
 - **注意**:如果 Dockerfile 中如果存在多个 CMD 指令,仅最后一个生效
 
 ```dockerfile

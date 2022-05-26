@@ -176,7 +176,7 @@ public class HelloWorldController {
 }
 ```
 
-- 实际上, 不做此注释也能拿到user对象，它的作用是将该绑定的命令对象以user为名称添加到模型对象中供视图页面展示使用
+- 实际上, 不做此注释也能拿到user对象,它的作用是将该绑定的命令对象以user为名称添加到模型对象中供视图页面展示使用
 - 此时可以在视图页面使用${user.username}来获取绑定的命令对象的属性
 
 ### @ModelAttribute注释方法的返回值

@@ -414,7 +414,7 @@ public class DemoData {
 
 ```java
 public class Test {
-    
+
     //初始化测试对象集合
     private List<DemoData> data() {
         List<DemoData> list = new ArrayList<DemoData>();
@@ -461,7 +461,7 @@ public class Test {
 
 ```java
 public class DemoDataListener extends AnalysisEventListener<DemoData> {
-    
+
     // 每隔5条存储数据库,实际使用中可以3000条,然后清理list,方便内存回收
     private static final int BATCH_COUNT = 5;
     private List<DemoData> list = new ArrayList<DemoData>();
@@ -477,7 +477,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
             list.clear();
         }
     }
-    
+
     /**
      * 所有数据解析完成了 都会来调用
      */
@@ -486,7 +486,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
         // 这里也要保存数据,确保最后遗留的数据也存储到数据库
         saveData();
     }
-    
+
     /**
      * 加上存储数据库
      */

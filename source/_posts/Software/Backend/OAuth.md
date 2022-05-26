@@ -2,7 +2,7 @@
 title: OAuth
 categories:
 - Software
-- Common
+- Backend
 ---
 # OAuth
 

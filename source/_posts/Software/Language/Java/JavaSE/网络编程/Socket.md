@@ -184,13 +184,13 @@ class Client extends Thread {
     int id; //客户的标识
     DataOutputStream dos;//去往客户的输出流
     DataInputStream din;//来自客户的输入流
-    
+
     public Client(int id, DataOutputStream dos, DataInputStream din) {
         this.id = id;
         this.dos = dos;
         this.din = din;
     }
-    
+
     public void run() {//循环读取客户数据转发给其他客户
         //循环将数据发送给所有客户(包括自己)的Socket通道
         while (true) {

@@ -31,8 +31,8 @@ public interface Controller {
 <bean name="/test" class="com.example.controller.ControllerTest"/>
 ```
 
-- **name**：对应请求路径
-- **class**：对应处理请求的类
+- **name**:对应请求路径
+- **class**:对应处理请求的类
 
 **说明**
 
@@ -87,7 +87,7 @@ public class TestController {
 
 ### @SessionAttributes
 
-- 用于声明特定控制器使用的会话属性，一般在Servlet会话中存储model属性
+- 用于声明特定控制器使用的会话属性,一般在Servlet会话中存储model属性
 
 ```java
 @SessionAttributes("user")

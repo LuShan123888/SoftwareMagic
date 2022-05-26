@@ -205,7 +205,7 @@ pmset -g batt
 pmset -g pslog
 ```
 
-**参考文章**： [pmset wiki 页面](https://en.wikipedia.org/wiki/Pmset)
+**参考文章**:[pmset wiki 页面](https://en.wikipedia.org/wiki/Pmset)
 
 ## Setting
 

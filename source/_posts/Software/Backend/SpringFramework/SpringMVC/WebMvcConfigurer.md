@@ -53,7 +53,7 @@ public interface WebMvcConfigurer {
 
 ## addInterceptors
 
-- 拦截器配置，此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter
+- 拦截器配置,此方法用来专门注册一个Interceptor,如HandlerInterceptorAdapter
 
 ```java
 @Override
@@ -77,8 +77,8 @@ public void addViewControllers(ViewControllerRegistry registry) {
 }
 ```
 
-- 以前要访问一个页面需要先创建个Controller控制类,再写方法跳转到页面，在这里配置后就不需要那么麻烦了,直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了
-- **注意**：在这里重写`addViewControllers`方法,并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`(在此方法中,Spring Boot将`/`映射至index.html),这也就意味着我们自己的配置和Spring Boot的自动配置同时有效,这也是推荐添加自己的MVC配置的方式
+- 以前要访问一个页面需要先创建个Controller控制类,再写方法跳转到页面,在这里配置后就不需要那么麻烦了,直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了
+- **注意**:在这里重写`addViewControllers`方法,并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`(在此方法中,Spring Boot将`/`映射至index.html),这也就意味着我们自己的配置和Spring Boot的自动配置同时有效,这也是推荐添加自己的MVC配置的方式
 
 ## addResourceHandlers
 
