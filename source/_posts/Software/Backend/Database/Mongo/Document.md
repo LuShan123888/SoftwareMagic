@@ -139,3 +139,223 @@ db.comment.find({userid:"1003"},{userid:1,nickname:1})
 
 - 数字1表示显示该字段，0表示不现实该字段，默认为0
 - 默认 _id 会显示
+
+### 分页查询
+
+- 使用`limit()`方法来读取指定数量的数据，使用`skip()`方法来跳过指定数量的数据
+
+```
+db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
+```
+
+**实例**:每页2个，第二页开始:跳过前两条数据，接着值显示3和4条数据
+
+```
+//第一页 
+db.comment.find().skip(0).limit(2) 
+//第二页 
+db.comment.find().skip(2).limit(2) 
+//第三页 
+db.comment.find().skip(4).limit(2)
+```
+
+### 排序查询
+
+`sort()`方法对数据进行排序，`sort()`方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而 -1 是用于降序排列。
+
+```
+db.集合名称.find().sort(排序方式) 
+
+db.COLLECTION_NAME.find().sort({KEY:1})
+```
+
+**实例**：对userid降序排列，并对访问量进行升序排列
+
+```
+db.comment.find().sort({userid:-1,likenum:1})
+```
+
+**注意**：`skip()`,`limilt()`,`sort()`执行的顺序是先`sort()`, 然后是`skip()`,最后是显示的`limit()`，和命令编写顺序无关。
+
+### 正则查询
+
+MongoDB的模糊查询是通过正则表达式的方式实现的。格式为:
+
+```
+db.collection.find({field:/正则表达式/})
+```
+
+**实例**：如果要查询评论的内容中以“专家”开头的，代码如下:
+
+```
+db.comment.find({content:/^专家/})
+```
+
+### 比较查询
+
+```
+db.集合名称.find({ "field" : { $gt: value }}) // 大于: field > value 
+db.集合名称.find({ "field" : { $lt: value }}) // 小于: field < value 
+db.集合名称.find({ "field" : { $gte: value }}) // 大于等于: field >= value 
+db.集合名称.find({ "field" : { $lte: value }}) // 小于等于: field <= value 
+db.集合名称.find({ "field" : { $ne: value }}) // 不等于: field != value
+```
+
+**实例**:查询评论点赞数量大于700的记录
+
+```
+db.comment.find({likenum:{$gt:NumberInt(700)}})
+```
+
+### 包含查询
+
+包含使用$in操作符。 示例:查询评论的集合中userid字段包含1003或1004的文档
+
+```
+db.comment.find({userid:{$in:["1003","1004"]}})
+```
+
+不包含使用$nin操作符。 示例:查询评论集合中userid字段不包含1003和1004的文档
+
+```
+db.comment.find({userid:{$nin:["1003","1004"]}})
+```
+
+### 条件连接查询
+
+如果需要查询同时满足两个以上条件，需要使用`$and`操作符将条件进行关联
+
+```
+$and:[{ },{ },{}]
+```
+
+**实例**:查询评论集合中likenum大于等于700 并且小于2000的文档
+
+```
+db.comment.find(
+	{
+		$and:[
+			{likenum:{$gte:NumberInt(700)}},
+			{likenum:{$lt:NumberInt(2000)}}
+		]
+	}
+)
+```
+
+如果两个以上条件之间是或者的关系，我们使用`$or`操作符进行关联
+
+```
+$or:[{},{},{ }]
+```
+
+**实例**：查询评论集合中userid为1003，或者点赞数小于1000的文档记录
+
+```
+db.comment.find(
+	{
+		$or:[
+        	{userid:"1003"},
+        	{likenum:{$lt:1000}}
+		]
+	}
+)
+```
+
+## 更新文档
+
+```
+db.collection.update(
+    <query>, 
+    <update>, 
+    {
+        upsert: <boolean>,
+        multi: <boolean>,
+        writeConcern: <document>,
+        collation: <document>,
+        arrayFilters: [ <filterdocument1>, ... ],
+        hint: <document|string> // Available starting in MongoDB 4.2
+	}
+)
+```
+
+- **query**: 更新的选择条件。可以使用与find()方法中相同的查询选择器。在3.0版中进行了更改:当使用upsert:true执行update()时，如果查询使用点表示法在_id字段上指定条件，则MongoDB将拒绝插入新文档。
+- **update**:要应用的修改。该值可以是:包含更新运算符表达式的文档，或仅包含:对的替换文档，或在MongoDB 4.2中启动聚合管道。
+- **upsert**:可选参数。如果设置为true，则在没有与查询条件匹配的文档时创建新文档。默认值为false，如果找不到匹配项，则不会插入新文档。
+- **multi**:可选参数。如果设置为true，则更新符合查询条件的多个文档。如果设置为false，则更新一个文档。默认值为false。
+- **writeConcern**:可选参数。写入安全机制，是一种客户端设置，用于控制写入安全的级别。Write Concern 描述了MongoDB写入到mongod单实例，副本集，以及分片集群时何时应答给客户端。默认情况下，mongoDB文档增删改都会一直等待数据库响应(确认写入是否成功)，然后才会继续执行
+- **collation**:可选参数。 指定要用于操作的校对规则。 校对规则允许用户为字符串比较指定特定于语言的规则， 如果未指定校对规则，但集合具有默认校对规则(请参见db.createCollection())，则该操作将使用为集合指定的校对规则。 如果没有为集合或操作指定校对规则，MongoDB将使用以前版本中使用的简单二进制比较进行字符串比较。不能为一个操作指定多个校对规则。例如，不能为每个字段指定不同的校对规则，或者如果使用排序执行查找，则不能将一个校对规则用于查找，另一个校对规则用于排序。
+- arrayFilters：可选参数。一个筛选文档数组，用于确定要为数组字段上的更新操作修改哪些数组元素。
+- hint：可选参数。指定用于支持查询谓词的索引的文档或字符串。该选项可以采用索引规范文档或索引名称字符串。如果指定的索引不存在，则说明操作错误。
+
+### 覆盖修改
+
+```
+ db.comment.update({_id:"1"},{likenum:NumberInt(1001)})
+```
+
+- 执行后，这条文档除了likenum字段其它字段的值都被删除
+
+### 局部修改
+
+```
+ db.comment.update({_id:"2"},{$set:{likenum:NumberInt(889)}})
+```
+
+- 执行后，只会修改`likenum`字段的值
+
+### 批量修改
+
+```
+//默认只修改第一条数据 
+db.comment.update({userid:"1003"},{$set:{nickname:"Jack"}}) 
+//修改所有符合条件的数据 
+db.comment.update({userid:"1003"},{$set:{nickname:"Jack"}},{multi:true})
+```
+
+### 列值增长的修改
+
+如果我们想实现对某列值在原有值的基础上进行增加或减少，可以使用 $inc 运算符来实现
+
+```
+db.comment.update({_id:"3"},{$inc:{likenum:NumberInt(1)}})
+```
+
+## 删除文档
+
+```
+db.集合名称.remove(条件)
+```
+
+### 删除所有文档
+
+```
+db.comment.remove({})
+```
+
+### 根据条件删除文档
+
+```
+db.comment.remove({_id:"1"})
+```
+
+## 计数文档
+
+```
+db.collection.count(query, options)
+```
+
+- `query`:查询选择条件
+- `options`:可选。用于修改计数的额外选项。
+
+### 统计所有记录数
+
+```
+db.comment.count()
+```
+
+### 按条件统计记录数
+
+```
+db.comment.count({userid:"1003"})
+```
+
