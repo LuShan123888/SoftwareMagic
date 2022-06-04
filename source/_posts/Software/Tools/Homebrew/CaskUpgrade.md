@@ -15,7 +15,7 @@ categories:
 brew tap buo/cask-upgrade
 ```
 
-## 常用命令
+## 命令
 
 ### Upgrade outdated apps:
 

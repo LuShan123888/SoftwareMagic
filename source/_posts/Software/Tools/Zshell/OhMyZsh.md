@@ -17,13 +17,6 @@ categories:
 $ git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 ```
 
-2. 备份已有的`.zshrc`, 替换`.zshrc`
-
-```shell
-$ cp ~/.zshrc ~/.zshrc.orig
-$ cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-```
-
 3. 使用脚本安装
 
 ```shell

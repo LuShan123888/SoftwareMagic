@@ -1,11 +1,4 @@
----
-title: Go 流程控制
-categories:
-- Software
-- Language
-- Go
----
-# Go 流程控制
+# Go Flow control
 
 - 流程控制是每种编程语言控制逻辑走向和执行次序的重要部分,流程控制可以说是一门语言的"经脉”
 - Go语言中最常用的流程控制有`if`和`for`,而`switch`和`goto`主要是为了简化代码,降低重复代码而生的结构,属于扩展类的流程控制
@@ -221,7 +214,7 @@ b
 
 ```go
 func breakDemo1() {
-BREAKDEMO1:
+	BREAKDEMO1:
 	for i := 0; i < 10; i++ {
 		for j := 0; j < 10; j++ {
 			if j == 2 {
@@ -232,6 +225,12 @@ BREAKDEMO1:
 	}
 	fmt.Println("...")
 }
+```
+
+```
+0-0
+0-1
+...
 ```
 
 ## continue

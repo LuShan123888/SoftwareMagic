@@ -1,11 +1,11 @@
 ---
-title: Go 变量与常量
+title: Go var&const
 categories:
 - Software
 - Language
 - Go
 ---
-# Go 变量与常量
+# Go var&const
 
 ## 标识符与关键字
 
