@@ -4,6 +4,7 @@ categories:
 - Software
 - Language
 - Go
+- Command
 ---
 # Go Test
 

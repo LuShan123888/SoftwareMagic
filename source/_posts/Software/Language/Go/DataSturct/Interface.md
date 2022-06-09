@@ -4,6 +4,7 @@ categories:
 - Software
 - Language
 - Go
+- DataSturct
 ---
 # Go Interface
 

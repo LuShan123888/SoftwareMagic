@@ -4,6 +4,7 @@ categories:
 - Software
 - Language
 - Go
+- Library
 ---
 # Go fmt
 

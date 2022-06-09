@@ -1,11 +1,12 @@
 ---
-title: Context
+title: Go context
 categories:
 - Software
 - Language
 - Go
+- Library
 ---
-# Context
+# Go context
 
 Go1.7加入了一个新的标准库`context`，它定义了`Context`类型，专门用来简化对于处理单个请求的多个 goroutine 之间与请求域的数据、取消信号、截止时间等相关操作，这些操作可能涉及多个 API 调用。
 
