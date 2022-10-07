@@ -18,18 +18,18 @@
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   <meta name="description" content="Go Json 基本的序列化 首先我们来看一下Go语言中json.Marshal（序列化）与json.Unmarshal（反序列化）的基本用法。 12345678910111213141516171819202122232425262728type Person struct &amp;#123;	Name   string	Age    int64	Weight float64&amp;#125;func ma">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SoftwareMagic">
+<meta property="og:title" content="Go Json">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/Library/json/">
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Go Json 基本的序列化 首先我们来看一下Go语言中json.Marshal（序列化）与json.Unmarshal（反序列化）的基本用法。 12345678910111213141516171819202122232425262728type Person struct &amp;#123;	Name   string	Age    int64	Weight float64&amp;#125;func ma">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-03T17:08:56.000Z">
-<meta property="article:modified_time" content="2022-10-03T17:08:56.000Z">
+<meta property="article:published_time" content="2022-10-07T09:35:40.000Z">
+<meta property="article:modified_time" content="2022-10-07T09:35:40.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>SoftwareMagic</title>
+  <title>Go Json - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -151,7 +151,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="Go Json">
               
             </span>
 
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-10-04 01:08" pubdate>
-        2022年10月4日 凌晨
+      <time datetime="2022-10-07 17:35" pubdate>
+        2022年10月7日 下午
       </time>
     </span>
   
@@ -210,10 +210,10 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">Go Json</h1>
             
             <div class="markdown-body">
-              <h2 id="Go-Json">Go Json</h2>
+              <h1>Go Json</h1>
 <h3 id="基本的序列化">基本的序列化</h3>
 <p>首先我们来看一下Go语言中<code>json.Marshal</code>（序列化）与<code>json.Unmarshal</code>（反序列化）的基本用法。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Person <span class="hljs-keyword">struct</span> &#123;<br>	Name   <span class="hljs-keyword">string</span><br>	Age    <span class="hljs-keyword">int64</span><br>	Weight <span class="hljs-keyword">float64</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	p1 := Person&#123;<br>		Name:   <span class="hljs-string">&quot;七米&quot;</span>,<br>		Age:    <span class="hljs-number">18</span>,<br>		Weight: <span class="hljs-number">71.5</span>,<br>	&#125;<br>	<span class="hljs-comment">// struct -&gt; json string</span><br>	b, err := json.Marshal(p1)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Printf(<span class="hljs-string">&quot;json.Marshal failed, err:%v\n&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	fmt.Printf(<span class="hljs-string">&quot;str:%s\n&quot;</span>, b)<br>	<span class="hljs-comment">// json string -&gt; struct</span><br>	<span class="hljs-keyword">var</span> p2 Person<br>	err = json.Unmarshal(b, &amp;p2)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Printf(<span class="hljs-string">&quot;json.Unmarshal failed, err:%v\n&quot;</span>, err)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	fmt.Printf(<span class="hljs-string">&quot;p2:%#v\n&quot;</span>, p2)<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -319,18 +319,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式 适配器模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/MySQL/JSON/">
-                        <span class="hidden-mobile">MySQL JSON</span>
+                      <a href="/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式 外观模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
