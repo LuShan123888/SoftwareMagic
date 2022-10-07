@@ -163,21 +163,21 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" target="_self">
-          设计模式 模板方法模式
+        <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" target="_self">
+          设计模式 策略模式
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" target="_self">
+        <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" target="_self">
           
           
             
           
-          设计模式 模板方法模式
+          设计模式 策略模式
 
-定义一个操作中的算法骨架,而将一些步骤延迟到子类中,模板方法使得子类可以不改变一个算法的结构即可重定义该算法的
-某些特定步骤,也就是说:假如某些操作代码基本相同,只是其中一部分会经常改变,则可以使用模板方法,将不变的部分作为一个模板,将容易变动的部分让子类来实现
+它定义了算法家族,分别封装起来,让它们之间可以互相替换,此模式让算法的变化不会影响到使用算法的客户
+例如:商场中的打折商品,针对不同的客户可能有不同的折扣,那这些算法该怎么定义呢？可以使用策略模式,给每个会员或者商品都指定一个特定的算法,根据不同的算法,打不同的折扣
 
 
         </a>
@@ -1106,26 +1106,38 @@ echo
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
-          Spring 异步任务
+        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
+          Spring 定时任务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
+        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
           
           
             
           
-          Spring 异步任务
-异步任务
-异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功
-@Async
+          Spring 定时任务
 
-在异步方法上添加@Async注解,告诉Spring这是一个异步方法
-假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况
+项目开发中经常需要执行一些定时任务,比如需要在每天凌晨的时候,分析一次前一天的日志信息
+Spring为我们提供了异步执行任务调度的方式,提供了两个接口
 
-123456789@Asyncpublic void hello()&#123;  try &#1
+TaskExecutor接口
+TaskScheduler接口
+
+
+两个注解
+
+@EnableScheduling
+@Scheduled
+
+
+
+开启定时任务功能
+
+在主程序上增加@EnableScheduling注解
+
+1
         </a>
       </p>
 
@@ -1163,38 +1175,26 @@ echo
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
-          Spring 定时任务
+        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
+          Spring 异步任务
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/" target="_self">
+        <a href="/Software/BackEnd/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/" target="_self">
           
           
             
           
-          Spring 定时任务
+          Spring 异步任务
+异步任务
+异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功
+@Async
 
-项目开发中经常需要执行一些定时任务,比如需要在每天凌晨的时候,分析一次前一天的日志信息
-Spring为我们提供了异步执行任务调度的方式,提供了两个接口
+在异步方法上添加@Async注解,告诉Spring这是一个异步方法
+假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况
 
-TaskExecutor接口
-TaskScheduler接口
-
-
-两个注解
-
-@EnableScheduling
-@Scheduled
-
-
-
-开启定时任务功能
-
-在主程序上增加@EnableScheduling注解
-
-1
+123456789@Asyncpublic void hello()&#123;  try &#1
         </a>
       </p>
 
