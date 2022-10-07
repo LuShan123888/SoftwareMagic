@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Redis 分布式锁  我们在系统中修改已有数据时,需要先读取,然后进行修改保存,此时很容易遇到并发问题,由于修改和保存不是原子操作,在并发场景下,部分对数据的操作可能会丢失,在单服务器系统我们常用本地锁来避免并发带来的问题,然而,当服务采用集群方式部署时,本地锁无法在多个服务器之间生效,这时候保证数据的一致性就需要分布式锁来实现 Redis 以其高性能著称,但使用其实现分布式锁来解决并发仍存在一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 分布式锁">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Redis 分布式锁  我们在系统中修改已有数据时,需要先读取,然后进行修改保存,此时很容易遇到并发问题,由于修改和保存不是原子操作,在并发场景下,部分对数据的操作可能会丢失,在单服务器系统我们常用本地锁来避免并发带来的问题,然而,当服务采用集群方式部署时,本地锁无法在多个服务器之间生效,这时候保证数据的一致性就需要分布式锁来实现 Redis 以其高性能著称,但使用其实现分布式锁来解决并发仍存在一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705183942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184316.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184344.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165459.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165545.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165555.png">
+<meta property="article:published_time" content="2021-07-14T16:25:14.000Z">
+<meta property="article:modified_time" content="2021-07-14T16:25:14.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705183942.png">
+  
+  <title>Redis 分布式锁 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis 分布式锁">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-15 00:25" pubdate>
+        2021年7月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis 分布式锁</h1>
+            
+            <div class="markdown-body">
+              <h1>Redis 分布式锁</h1>
+<ul>
+<li>我们在系统中修改已有数据时,需要先读取,然后进行修改保存,此时很容易遇到并发问题,由于修改和保存不是原子操作,在并发场景下,部分对数据的操作可能会丢失,在单服务器系统我们常用本地锁来避免并发带来的问题,然而,当服务采用集群方式部署时,本地锁无法在多个服务器之间生效,这时候保证数据的一致性就需要分布式锁来实现</li>
+<li>Redis 以其高性能著称,但使用其实现分布式锁来解决并发仍存在一些困难,Redis 分布式锁只能作为一种缓解并发的手段,如果要完全解决并发问题,仍需要数据库的防并发手段</li>
+</ul>
+<h2 id="分布式锁的实现">分布式锁的实现</h2>
+<ul>
+<li>Redis 锁主要利用 Redis 的 setnx 命令
+<ul>
+<li>加锁命令:SETNX key value,当键不存在时,对键进行设置操作并返回成功,否则返回失败,KEY 是锁的唯一标识,一般按业务来决定命名</li>
+<li>解锁命令:DEL key,通过删除键值对释放锁,以便其他线程可以通过 SETNX 命令来获取锁</li>
+<li>锁超时:EXPIRE key timeout, 设置 key 的超时时间,以保证即使锁没有被显式释放,锁也可以在一定时间后自动释放,避免资源被永远锁住</li>
+</ul>
+</li>
+<li>则加锁解锁伪代码如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (setnx(key, <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>)&#123;<br>    expire(key, <span class="hljs-number">30</span>)<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">//TODO 业务逻辑</span><br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        del(key)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>上述锁实现方式存在如下一些问题</strong></p>
+<h3 id="SETNX-和-EXPIRE-非原子性">SETNX 和 EXPIRE 非原子性</h3>
+<ul>
+<li>如果 SETNX 成功,在设置锁超时时间后,服务器挂掉,重启或网络问题等,导致 EXPIRE 命令没有执行,锁没有设置超时时间变成死锁</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705183942.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<ul>
+<li>有很多开源代码来解决这个问题,比如使用 lua 脚本,示例:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (redis.call(<span class="hljs-string">&#x27;setnx&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">1</span>]) &lt; <span class="hljs-number">1</span>)<br>then <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>end;<br>redis.call(<span class="hljs-string">&#x27;expire&#x27;</span>, KEYS[<span class="hljs-number">1</span>], tonumber(ARGV[<span class="hljs-number">2</span>]));<br><span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">// 使用实例</span><br>EVAL <span class="hljs-string">&quot;if (redis.call(&#x27;setnx&#x27;,KEYS[1],ARGV[1]) &lt; 1) then return 0; end; redis.call(&#x27;expire&#x27;,KEYS[1],tonumber(ARGV[2])); return 1;&quot;</span> <span class="hljs-number">1</span> key value <span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+<h3 id="锁误解除">锁误解除</h3>
+<ul>
+<li>如果线程 A 成功获取到了锁,并且设置了过期时间 30 秒,但线程 A 执行时间超过了 30 秒,锁过期自动释放,此时线程 B 获取到了锁,随后 A 执行完成,线程 A 使用 DEL 命令来释放锁,但此时线程 B 加的锁还没有执行完成,线程 A 实际释放的线程 B 加的锁</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184045.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<ul>
+<li>通过在 value 中设置当前线程加锁的标识,在删除之前验证 key 对应的 value 判断锁是否是当前线程持有,可生成一个 UUID 标识当前线程,使用 lua 脚本做验证标识和解锁操作</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua">// 加锁<br>String uuid = UUID.randomUUID().toString().replaceAll(<span class="hljs-string">&quot;-&quot;</span>,<span class="hljs-string">&quot;&quot;</span>);<br>SET key uuid NX EX <span class="hljs-number">30</span><br>// 解锁<br><span class="hljs-keyword">if</span> (redis.call(<span class="hljs-string">&#x27;get&#x27;</span>, KEYS[<span class="hljs-number">1</span>]) == ARGV[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> redis.call(<span class="hljs-string">&#x27;del&#x27;</span>, KEYS[<span class="hljs-number">1</span>])<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h3 id="超时解锁导致并发">超时解锁导致并发</h3>
+<ul>
+<li>如果线程 A 成功获取锁并设置过期时间 30 秒,但线程 A 执行时间超过了 30 秒,锁过期自动释放,此时线程 B 获取到了锁,线程 A 和线程 B 并发执行</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184316.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<ul>
+<li>A,B 两个线程发生并发显然是不被允许的,一般有两种方式解决该问题:
+<ul>
+<li>将过期时间设置足够长,确保代码逻辑在锁释放之前能够执行完成</li>
+<li>为获取锁的线程增加守护线程,为将要过期但未释放的锁增加有效时间</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705184344.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<h3 id="不可重入">不可重入</h3>
+<ul>
+<li>当线程在持有锁的情况下再次请求加锁,如果一个锁支持一个线程多次加锁,那么这个锁就是可重入的,如果一个不可重入锁被再次加锁,由于该锁已经被持有,再次加锁会失败,Redis 可通过对锁进行重入计数,加锁时加 1,解锁时减 1,当计数归 0 时释放锁</li>
+<li>在本地记录记录重入次数,如 Java 中使用 ThreadLocal 进行重入次数统计,简单示例代码:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;Map&lt;String, Integer&gt;&gt; LOCKERS = ThreadLocal.withInitial(HashMap::<span class="hljs-keyword">new</span>);<br><span class="hljs-comment">// 加锁</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">lock</span><span class="hljs-params">(String key)</span> </span>&#123;<br>    Map&lt;String, Integer&gt; lockers = LOCKERS.get();<br>    <span class="hljs-keyword">if</span> (lockers.containsKey(key)) &#123;<br>        lockers.put(key, lockers.get(key) + <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">if</span> (SET key uuid NX EX <span class="hljs-number">30</span>) &#123;<br>            lockers.put(key, <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>&#125;<br><span class="hljs-comment">// 解锁</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">(String key)</span> </span>&#123;<br>    Map&lt;String, Integer&gt; lockers = LOCKERS.get();<br>    <span class="hljs-keyword">if</span> (lockers.getOrDefault(key, <span class="hljs-number">0</span>) &lt;= <span class="hljs-number">1</span>) &#123;<br>        lockers.remove(key);<br>        DEL key<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        lockers.put(key, lockers.get(key) - <span class="hljs-number">1</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>本地记录重入次数虽然高效,但如果考虑到过期时间和本地,Redis 一致性的问题,就会增加代码的复杂性,另一种方式是 Redis Map 数据结构来实现分布式锁,既存锁的标识也对重入次数进行计数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 如果 lock_key 不存在</span><br><span class="hljs-keyword">if</span> (redis.call(<span class="hljs-string">&#x27;exists&#x27;</span>, KEYS[<span class="hljs-number">1</span>]) == <span class="hljs-number">0</span>)<br>    then<br>    <span class="hljs-comment">// 设置 lock_key 线程标识 1 进行加锁</span><br>    redis.call(<span class="hljs-string">&#x27;hset&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">2</span>], <span class="hljs-number">1</span>);<br><span class="hljs-comment">// 设置过期时间</span><br>redis.call(<span class="hljs-string">&#x27;pexpire&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">1</span>]);<br><span class="hljs-keyword">return</span> nil;<br>end;<br><span class="hljs-comment">// 如果 lock_key 存在且线程标识是当前欲加锁的线程标识</span><br><span class="hljs-keyword">if</span> (redis.call(<span class="hljs-string">&#x27;hexists&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">2</span>]) == <span class="hljs-number">1</span>)<br>    <span class="hljs-comment">// 自增</span><br>    then redis.call(<span class="hljs-string">&#x27;hincrby&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">2</span>], <span class="hljs-number">1</span>);<br><span class="hljs-comment">// 重置过期时间</span><br>redis.call(<span class="hljs-string">&#x27;pexpire&#x27;</span>, KEYS[<span class="hljs-number">1</span>], ARGV[<span class="hljs-number">1</span>]);<br><span class="hljs-keyword">return</span> nil;<br>end;<br><span class="hljs-comment">// 如果加锁失败,返回锁剩余时间</span><br><span class="hljs-keyword">return</span> redis.call(<span class="hljs-string">&#x27;pttl&#x27;</span>, KEYS[<span class="hljs-number">1</span>]);<br></code></pre></td></tr></table></figure>
+<h3 id="无法等待锁释放">无法等待锁释放</h3>
+<ul>
+<li>上述命令执行都是立即返回的,如果客户端可以等待锁释放就无法使用
+<ul>
+<li>可以通过客户端轮询的方式解决该问题,当未获取到锁时,等待一段时间重新获取锁,直到成功获取锁或等待超时,这种方式比较消耗服务器资源,当并发量比较大时,会影响服务器的效率</li>
+<li>另一种方式是使用 Redis 的发布订阅功能,当获取锁失败时,订阅锁释放消息,获取锁成功后释放时,发送锁释放消息,如下:</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165459.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<h2 id="集群">集群</h2>
+<h3 id="主备切换">主备切换</h3>
+<ul>
+<li>为了保证 Redis 的可用性,一般采用主从方式部署,主从数据同步有异步和同步两种方式,Redis 将指令记录在本地内存 buffer 中,然后异步将 buffer 中的指令同步到从节点,从节点一边执行同步的指令流来达到和主节点一致的状态,一边向主节点反馈同步情况</li>
+<li>在包含主从模式的集群部署方式中,当主节点挂掉时,从节点会取而代之,但客户端无明显感知,当客户端 A 成功加锁,指令还未同步,此时主节点挂掉,从节点提升为主节点,新的主节点没有锁的数据,当客户端 B 加锁时就会成功</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165545.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+<h3 id="集群脑裂">集群脑裂</h3>
+<ul>
+<li>集群脑裂指因为网络问题,导致 Redis master 节点跟 slave 节点和 sentinel 集群处于不同的网络分区,因为 sentinel 集群无法感知到 master 的存在,所以将 slave 节点提升为 master 节点,此时存在两个不同的 master 节点,Redis Cluster 集群部署方式同理</li>
+<li>当不同的客户端连接不同的 master 节点时,两个客户端可以同时拥有同一把锁,如下</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706165555.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/">BackEnd</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Database/%E6%A6%82%E5%BF%B5/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%87%E5%87%86%E8%AF%AD%E8%A8%80SQL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关系数据库标准语言SQL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Distributed/Kafka/%E9%9B%86%E7%BE%A4/">
+                        <span class="hidden-mobile">Kafka 集群</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

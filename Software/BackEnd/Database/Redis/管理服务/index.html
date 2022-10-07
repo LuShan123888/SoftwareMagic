@@ -1,0 +1,618 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 管理服务">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-03T14:57:45.000Z">
+<meta property="article:modified_time" content="2022-03-03T14:57:45.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Redis 管理服务 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis 管理服务">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-03 22:57" pubdate>
+        2022年3月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis 管理服务</h1>
+            
+            <div class="markdown-body">
+              <h1>Redis 管理服务</h1>
+<h2 id="启动Redis">启动Redis</h2>
+<ul>
+<li>Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:
+<ul>
+<li>首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型</li>
+<li>然后为这个 Socket 设置<code>TCP_NODELAY</code>属性,禁用 Nagle 算法</li>
+<li>然后创建一个可读的文件事件用于监听这个客户端 Socket 的数据发送</li>
+</ul>
+</li>
+</ul>
+<h3 id="redis-server">redis-server</h3>
+<ul>
+<li>使用默认配置文件启动Redis</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>指定配置文件启动Redis</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server 配置文件位置</span><br></code></pre></td></tr></table></figure>
+<h3 id="最大连接数">最大连接数</h3>
+<ul>
+<li>在 Redis2.4 中,最大连接数是被直接硬编码在代码里面的,而在2.6版本中这个值变成可配置的</li>
+<li>maxclients 的默认值是 10000,你也可以在 redis.conf 中对这个值进行修改</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> config get maxclients</span><br>1) &quot;maxclients&quot;<br>2) &quot;10000&quot;<br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<ul>
+<li>以下实例我们在服务启动时设置最大连接数为 100000:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server --maxclients 100000</span><br></code></pre></td></tr></table></figure>
+<h2 id="连接Redis">连接Redis</h2>
+<h3 id="redis-cli">redis-cli</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli</span><br><span class="hljs-meta">$</span><span class="bash"> redis-cli -h host -p port -a password</span><br></code></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<ul>
+<li>连接本地的 Redis 服务</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli</span><br>redis 127.0.0.1:6379&gt;<br>redis 127.0.0.1:6379&gt; PING<br><br>PONG<br></code></pre></td></tr></table></figure>
+<ul>
+<li>以下实例演示了如何连接到主机为 127.0.0.1,端口为 6379 ,密码为 mypass 的 Redis 服务上</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-cli -h 127.0.0.1 -p 6379 -a <span class="hljs-string">&quot;mypass&quot;</span></span><br>redis 127.0.0.1:6379&gt;<br>redis 127.0.0.1:6379&gt; PING<br><br>PONG<br></code></pre></td></tr></table></figure>
+<h2 id="Redis-服务器命令">Redis 服务器命令</h2>
+<ul>
+<li>下表列出了 Redis 服务器的相关命令:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">命令及描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">BGREWRITEAOF  异步执行一个 AOF(AppendOnly File) 文件重写操作</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">BGSAVE  在后台异步保存当前数据库的数据到磁盘</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">CLIENT KILL [ip:port] [ID client-id]  关闭客户端连接</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">CLIENT LIST  获取连接到服务器的客户端连接列表</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">CLIENT GETNAME  获取连接的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">CLIENT PAUSE timeout  在指定时间内终止运行来自客户端的命令</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">CLIENT SETNAME connection-name  设置当前连接的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">CLUSTER SLOTS  获取集群节点的映射数组</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left">COMMAND  获取 Redis 命令详情数组</td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">COMMAND COUNT  获取 Redis 命令总数</td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left">COMMAND GETKEYS  获取给定命令的所有键</td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left">TIME  返回当前服务器时间</td>
+</tr>
+<tr>
+<td style="text-align:left">13</td>
+<td style="text-align:left">[COMMAND INFO command-name command-name …]  获取指定 Redis 命令描述的数组</td>
+</tr>
+<tr>
+<td style="text-align:left">14</td>
+<td style="text-align:left">CONFIG GET parameter  获取指定配置参数的值</td>
+</tr>
+<tr>
+<td style="text-align:left">15</td>
+<td style="text-align:left">CONFIG REWRITE  对启动 Redis 服务器时所指定的 redis.conf 配置文件进行改写</td>
+</tr>
+<tr>
+<td style="text-align:left">16</td>
+<td style="text-align:left">CONFIG SET parameter value  修改 redis 配置参数,无需重启</td>
+</tr>
+<tr>
+<td style="text-align:left">17</td>
+<td style="text-align:left">CONFIG RESETSTAT  重置 INFO 命令中的某些统计数据</td>
+</tr>
+<tr>
+<td style="text-align:left">18</td>
+<td style="text-align:left">DBSIZE  返回当前数据库的 key 的数量</td>
+</tr>
+<tr>
+<td style="text-align:left">19</td>
+<td style="text-align:left">DEBUG OBJECT key  获取 key 的调试信息</td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">DEBUG SEGFAULT  让 Redis 服务崩溃</td>
+</tr>
+<tr>
+<td style="text-align:left">21</td>
+<td style="text-align:left">FLUSHALL  删除所有数据库的所有key</td>
+</tr>
+<tr>
+<td style="text-align:left">22</td>
+<td style="text-align:left">FLUSHDB  删除当前数据库的所有key</td>
+</tr>
+<tr>
+<td style="text-align:left">23</td>
+<td style="text-align:left">[INFO section]  获取 Redis 服务器的各种信息和统计数值</td>
+</tr>
+<tr>
+<td style="text-align:left">24</td>
+<td style="text-align:left">LASTSAVE  返回最近一次 Redis 成功将数据保存到磁盘上的时间,以 UNIX 时间戳格式表示</td>
+</tr>
+<tr>
+<td style="text-align:left">25</td>
+<td style="text-align:left">MONITOR  实时打印出 Redis 服务器接收到的命令,调试用</td>
+</tr>
+<tr>
+<td style="text-align:left">26</td>
+<td style="text-align:left">ROLE  返回主从实例所属的角色</td>
+</tr>
+<tr>
+<td style="text-align:left">27</td>
+<td style="text-align:left">SAVE  同步保存数据到硬盘</td>
+</tr>
+<tr>
+<td style="text-align:left">28</td>
+<td style="text-align:left">SHUTDOWN [NOSAVE] [SAVE]  异步保存数据到硬盘,并关闭服务器</td>
+</tr>
+<tr>
+<td style="text-align:left">29</td>
+<td style="text-align:left">SLAVEOF host port  将当前服务器转变为指定服务器的从属服务器(slave server)</td>
+</tr>
+<tr>
+<td style="text-align:left">30</td>
+<td style="text-align:left">[SLOWLOG subcommand argument]  管理 redis 的慢日志</td>
+</tr>
+<tr>
+<td style="text-align:left">31</td>
+<td style="text-align:left">SYNC  用于复制功能(replication)的内部命令</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/">BackEnd</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 网络编程基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Database/Redis/%E6%B5%8B%E8%AF%95/">
+                        <span class="hidden-mobile">Redis 测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

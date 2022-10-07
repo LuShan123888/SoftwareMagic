@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="PHP 比较字符串  PHP有两个操作符和6个函数用于字符串间相互比较  精确比较  你可以用&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;操作符来比较两个字符串是否相等,这两个操作符的不同在于它们如何处理非字符串数据类型的操作数,&#x3D;&#x3D;操作符把非字符串操作数准换成字符串,所以它认为3和&quot;3&quot;使相等的,&#x3D;&#x3D;&#x3D;操作符不进行转换,并且如果参数的数据类型不同就返回false  12345678910$o1 &#x3D; 3;$0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 比较字符串">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E6%AF%94%E8%BE%83%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="PHP 比较字符串  PHP有两个操作符和6个函数用于字符串间相互比较  精确比较  你可以用&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;操作符来比较两个字符串是否相等,这两个操作符的不同在于它们如何处理非字符串数据类型的操作数,&#x3D;&#x3D;操作符把非字符串操作数准换成字符串,所以它认为3和&quot;3&quot;使相等的,&#x3D;&#x3D;&#x3D;操作符不进行转换,并且如果参数的数据类型不同就返回false  12345678910$o1 &#x3D; 3;$0">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T04:47:13.000Z">
+<meta property="article:modified_time" content="2021-02-21T04:47:13.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>PHP 比较字符串 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 比较字符串">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 12:47" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 比较字符串</h1>
+            
+            <div class="markdown-body">
+              <h1>PHP 比较字符串</h1>
+<ul>
+<li>PHP有两个操作符和6个函数用于字符串间相互比较</li>
+</ul>
+<h2 id="精确比较">精确比较</h2>
+<ul>
+<li>你可以用<code>==</code>和<code>===</code>操作符来比较两个字符串是否相等,这两个操作符的不同在于它们如何处理非字符串数据类型的操作数,<code>==</code>操作符把非字符串操作数准换成字符串,所以它认为3和&quot;3&quot;使相等的,<code>===</code>操作符不进行转换,并且如果参数的数据类型不同就返回false</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$o1</span> = <span class="hljs-number">3</span>;<br>$<span class="hljs-number">02</span> = <span class="hljs-string">&quot;3&quot;</span>;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$o1</span> == <span class="hljs-variable">$o2</span>)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;== returns true&lt;br&gt;&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$o1</span> === <span class="hljs-variable">$o2</span>)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;=== returns true&lt;br&gt;&quot;</span>);<br>&#125;<br><br>==returns <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>比较运算符(<code>&lt;</code>,<code>&lt;=</code>,<code>&gt;</code>和<code>&gt;=</code>)也用于字符串:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$him</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<br><span class="hljs-variable">$her</span> = <span class="hljs-string">&quot;Wilma&quot;</span>;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$him</span> &lt; <span class="hljs-variable">$her</span>)&#123;<br>    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;<span class="hljs-subst">$him</span> comes before <span class="hljs-subst">$her</span> in the alphabet.\n&quot;</span><br>&#125;<br><br>Fred comes before Wilma in the alphabet<br></code></pre></td></tr></table></figure>
+<ul>
+<li>然而,在比较字符串和数字时,比较操作符会给出意想不到的结果:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&quot;PHP Rocks&quot;</span>;<br><span class="hljs-variable">$number</span> = <span class="hljs-number">5</span>;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$string</span> &lt; <span class="hljs-variable">$number</span>)&#123;<br>    <span class="hljs-keyword">echo</span> (<span class="hljs-string">&quot;<span class="hljs-subst">$string</span>&lt;<span class="hljs-subst">$number</span>&quot;</span>);<br>&#125;<br><br>PHP Rocks &lt; <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>当比较操作符的一个参数是数据时,其他也将被转换为数字类型,这就意味着&quot;PHP Rocks&quot;被准换成数字0(因为这个字符串没有以数字开头),因为0&lt;5,所以PHP打印出&quot;PHP Rocks &lt; 5&quot;</li>
+<li>要明明确地将两个字符串作为字符串来比较,可以在必要时先把数字准换为字符串,使用<code>strcmp()</code>函数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$relationship</span> = strcmp(string_1,string_2);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果string_1的字典排序在string_2之前(即string_1 &lt; string_2),函数返回小于0的数字,如果string_1次序在string_2之后,函数返回大于0的数字,如果它们相等则返回0:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$n</span> = strcmp(<span class="hljs-string">&quot;PHP Rocks&quot;</span>, <span class="hljs-number">5</span>);<br><span class="hljs-keyword">echo</span>(<span class="hljs-variable">$n</span>);<br><br><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>strcasecmp()</code>是<code>strcmp()</code>的一个变种,<code>strcasecmp()</code>在比较字符串之前先把字符串转换为小写,它的参数和返回值都和<code>strcmp()</code>相同:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$n</span> = strcasecmp(<span class="hljs-string">&quot;Ferd&quot;</span>,<span class="hljs-string">&quot;frED&quot;</span>);		<span class="hljs-comment">//$n是0</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>字符串比较的另一个变种是只比较字符串的前几个字符,<code>strncmp()</code>和<code>strncasecmp()</code>函数有一个附加的参数,这个参数来指定用于比较的初始字符个数:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$relationship</span> = strnmp(string_1,string_2,len);<br><span class="hljs-variable">$relationship</span> = strncasecmp(string_1,string_2,len);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这些函数的最后一个变种是用<code>strnatcmp()</code>和<code>strnatcasecmp()</code>进行自然顺序(natural-order)的比较,这两个函数和<code>strcmp()</code>有相同的参数,并且返回同种类型的值,自然顺序的比较可以识别出待比较的字符串中数字的部分,并且把字符串部分和数字部分分开来排序</li>
+<li>下表显示了字符串的自然顺序和ASCII顺序:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">自然顺序</th>
+<th style="text-align:center">ASCII顺序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">pic1.jpg</td>
+<td style="text-align:center">Pic1.jpg</td>
+</tr>
+<tr>
+<td style="text-align:center">pic5.jpg</td>
+<td style="text-align:center">Pic10.jpg</td>
+</tr>
+<tr>
+<td style="text-align:center">pic10.jpg</td>
+<td style="text-align:center">Pic5.jpg</td>
+</tr>
+<tr>
+<td style="text-align:center">pic50.jpg</td>
+<td style="text-align:center">Pic50.jpg</td>
+</tr>
+</tbody>
+</table>
+<h2 id="近似相等">近似相等</h2>
+<ul>
+<li>PHP提供了一些函数来测试两个字符串是否近似相等:<code>soundex()</code>,<code>metaphone()</code>,<code>similar_text()</code>和<code>levenshtein()</code></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$soundex_code</span>() = soundex(<span class="hljs-variable">$string</span>);<br><span class="hljs-variable">$metaphone_code</span> = metaphone(<span class="hljs-variable">$string</span>);<br><span class="hljs-variable">$in_common</span> = similar_text(<span class="hljs-variable">$string_1</span>,<span class="hljs-variable">$string_2</span>[,<span class="hljs-variable">$percentage</span>]);<br><span class="hljs-variable">$similarity</span> = lebenshtein(<span class="hljs-variable">$string_1</span>,<span class="hljs-variable">$string_2</span>);<br><span class="hljs-variable">$similarity</span> = levenshtein(<span class="hljs-variable">$string_1</span>,<span class="hljs-variable">$string_2</span>[,<span class="hljs-variable">$cost_ins</span>,<span class="hljs-variable">$cost_rep</span>,<span class="hljs-variable">$cost_del</span>]);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Soundex和Metaphone算法都生成一个字符串来大致表示单词在英语中如何发音,可以用这些算法来比较两个字符串的发音,从而判断它们是否近似相等,可以只将Soundex的值和Soundex的值比较,Metaphone的值和Metaphone的值比较,一般来说Metaphone算法更加准确,下面的例子将证实这一点:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$known</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<br><span class="hljs-variable">$query</span> = <span class="hljs-string">&quot;Phred&quot;</span>;<br><span class="hljs-keyword">if</span>(soundex(<span class="hljs-variable">$known</span>) == soundex(<span class="hljs-variable">$query</span>))&#123;<br>    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;soundex: <span class="hljs-subst">$known</span> sounds <span class="hljs-subst">$query</span>&lt;br&gt;&quot;</span>;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;soundex: <span class="hljs-subst">$known</span> doesn&#x27;t sound like <span class="hljs-subst">$query</span>&lt;br&gt;&quot;</span>;<br>&#125;<br><span class="hljs-keyword">if</span>(metaphone(<span class="hljs-variable">$known</span>) == metaphone(<span class="hljs-variable">$query</span>))&#123;<br>    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;metaphone: <span class="hljs-subst">$known</span> sounds <span class="hljs-subst">$query</span>&lt;br&gt;&quot;</span>;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;metaphone: <span class="hljs-subst">$known</span> doesn&#x27;t sound like <span class="hljs-subst">$query</span>&lt;br&gt;&quot;</span>;<br>&#125;<br><br>soundex: Fred doesn<span class="hljs-string">&#x27;t sound like Phred</span><br><span class="hljs-string">metaphone: Fred sounds like Phred</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>similar_text()</code>函数返回两个字符串参数共有的字符个数,如果设置了第三个参数,则第三个参数作为存放共有字符百分比的变量:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string_1</span> = <span class="hljs-string">&quot;Rasmus Lerdorf&quot;</span>;<br><span class="hljs-variable">$string_2</span> = <span class="hljs-string">&quot;Razmus Lehrdorf&quot;</span>;<br><span class="hljs-variable">$common</span> = similar_text(<span class="hljs-variable">$string_1</span>,<span class="hljs-variable">$string_2</span>,<span class="hljs-variable">$percent</span>);<br>printf(<span class="hljs-string">&quot;They have %d chars in common (%.2f%%).&quot;</span>,<span class="hljs-variable">$common</span>,<span class="hljs-variable">$percent</span>);<br><br>They have <span class="hljs-number">13</span> chars in common (<span class="hljs-number">89.66</span>%).<br></code></pre></td></tr></table></figure>
+<ul>
+<li>加,替换或删除多少字符来计算,例如,&quot;cat&quot;和&quot;cot&quot;的Levenshtein距离为1,因为你要使它们相等只需改变一个字符(“a&quot;变成&quot;o”):</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$similarity</span> = levenshtein(<span class="hljs-string">&quot;cat&quot;</span>,<span class="hljs-string">&quot;cot&quot;</span>);	<span class="hljs-comment">//$similarity为1</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>一般来说这样计算相似度比使用<code>similar_text()</code>函数更快,可以随意地传递三个值给<code>levenshtein()</code>函数来分别决定插入,删除,替换三种操作的权重(权重越大,对相似度的影响越大),例如,比较一个单词和它的缩写</li>
+<li>这个例子在比较一个字符串和它可能的缩进时过分地增加了插入的权重,因为缩写时不可能插入字符:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> levenshtein(<span class="hljs-string">&#x27;would not&#x27;</span>,<span class="hljs-string">&#x27;wouldn\t&#x27;</span>,<span class="hljs-number">500</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);<br><br><span class="hljs-number">2</span>	<span class="hljs-comment">//需要删除一个字符(空格),替换一个字符(o-&gt;&#x27;),所以输出2</span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E7%BC%96%E7%A0%81%E4%B8%8E%E8%BD%AC%E4%B9%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 编码与转义</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E6%95%B4%E7%90%86%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                        <span class="hidden-mobile">PHP 整理字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

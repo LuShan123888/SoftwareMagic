@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="PHP 数组抽象的数据集合  几乎在每一个PHP程序中都要用到数组,除了用于存储集合的值以外,它们还被用于实现各种抽象的数据集合,在本节中,将介绍如何使用数组来实现集合(set)和堆栈(stack)  集合  数组允许你实现基本的集合操作:并集(union),交集(intersection)和差集(difference),每个集合都以数组表示,有很多各种各样的PHP函数可实现集合操作,集合中的值就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 数组抽象的数据集合">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E6%95%B0%E7%BB%84%E6%8A%BD%E8%B1%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E5%90%88/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="PHP 数组抽象的数据集合  几乎在每一个PHP程序中都要用到数组,除了用于存储集合的值以外,它们还被用于实现各种抽象的数据集合,在本节中,将介绍如何使用数组来实现集合(set)和堆栈(stack)  集合  数组允许你实现基本的集合操作:并集(union),交集(intersection)和差集(difference),每个集合都以数组表示,有很多各种各样的PHP函数可实现集合操作,集合中的值就">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T07:30:48.000Z">
+<meta property="article:modified_time" content="2021-02-21T07:30:48.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>PHP 数组抽象的数据集合 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="PHP 数组抽象的数据集合">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-21 15:30" pubdate>
+        2021年2月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">PHP 数组抽象的数据集合</h1>
+            
+            <div class="markdown-body">
+              <h1>PHP 数组抽象的数据集合</h1>
+<ul>
+<li>几乎在每一个PHP程序中都要用到数组,除了用于存储集合的值以外,它们还被用于实现各种抽象的数据集合,在本节中,将介绍如何使用数组来实现集合(set)和堆栈(stack)</li>
+</ul>
+<h2 id="集合">集合</h2>
+<ul>
+<li>数组允许你实现基本的集合操作:并集(union),交集(intersection)和差集(difference),每个集合都以数组表示,有很多各种各样的PHP函数可实现集合操作,集合中的值就是数组中的值,数组中的键不再被使用,但是通常可通过操作被保留</li>
+<li>两个集合的并集(union)是两个集合的所有元素,并删除重复的元素,<code>array_merge()</code>和<code>array_unique()</code>函数用于计算并集,下面得到两个数组的并集:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">array_union</span>(<span class="hljs-params"><span class="hljs-variable">$a</span>,<span class="hljs-variable">$b</span></span>)</span>&#123;<br>    <span class="hljs-variable">$union</span> = array_merge(<span class="hljs-variable">$a</span>,<span class="hljs-variable">$b</span>);<span class="hljs-comment">//重复元素可能仍然存在</span><br>    <span class="hljs-variable">$union</span> = array_unique(<span class="hljs-variable">$union</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$union</span>;<br>&#125;<br><span class="hljs-variable">$first</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;two&#x27;</span>,<span class="hljs-number">3</span>);<br><span class="hljs-variable">$second</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;two&#x27;</span>,<span class="hljs-string">&#x27;three&#x27;</span>,<span class="hljs-string">&#x27;four&#x27;</span>);<br><span class="hljs-variable">$union</span> = array_union(<span class="hljs-variable">$first</span>,<span class="hljs-variable">$second</span>);<br>print_r(<span class="hljs-variable">$union</span>);<br><br><span class="hljs-keyword">Array</span><br>    (<br>    [<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">1</span><br>    [<span class="hljs-number">1</span>] =&gt; two<br>    [<span class="hljs-number">2</span>] =&gt; <span class="hljs-number">3</span><br>    [<span class="hljs-number">3</span>] =&gt; three<br>    [<span class="hljs-number">4</span>] =&gt; four<br>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>两个结合的交集(intersection)是它们公有元素的集合,PHP的内置函数<code>array_intersection()</code>接收人一个数组作为参数,并且返回在每个数组中都存在的值的数组,如果有多个键有相同的值,保存值的第一个键</li>
+<li>另外一个在数组集合上常用的函数是得到差集(difference)的函数,即在一个数组中出现且不在另一个数组中出现的值,<code>array_diff()</code>函数用于计算差集,返回一个数组,该数组中的值在第一个数组中出现而不在第二个数组中出现</li>
+<li>下面的代码是得到两个数组的差集:</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$first</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;two&#x27;</span>,<span class="hljs-number">3</span>);<br><span class="hljs-variable">$second</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;two&#x27;</span>,<span class="hljs-string">&#x27;three&#x27;</span>,<span class="hljs-string">&#x27;four&#x27;</span>);<br><span class="hljs-variable">$difference</span> = array_diff(<span class="hljs-variable">$first</span>,<span class="hljs-variable">$second</span>);<br>print_r(<span class="hljs-variable">$difference</span>);<br><br><span class="hljs-keyword">Array</span><br>    (<br>    [<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">1</span><br>    [<span class="hljs-number">2</span>] =&gt; <span class="hljs-number">3</span><br>)<br></code></pre></td></tr></table></figure>
+<h2 id="堆栈">堆栈</h2>
+<ul>
+<li>后进后出(last-in first-out,LIFO)堆栈是一个常用的数据类型,虽然堆栈在PHP程序中不像其他程序中那样普遍,我们可以使用一对函数<code>array_push()</code>和<code>array_pop()</code>来创建堆栈,<code>array_push()</code>函数和用$array[]赋值具有相同的作用,我们使用<code>array_push()</code>是因为它强调一个事实,我们用堆栈工作,并且对应地使用<code>array_pop()</code>让代码更加易于阅读,另外<code>array_shift()</code>和<code>array_unshift()</code>函数把数组作为队列(queue)对待</li>
+<li>堆栈在维持状态时很有用,下例提供一个简单的状态调试器,它允许你打印出一个到这点为止被调用的函数清单(即栈的跟踪,stack trace)</li>
+</ul>
+<p><strong>示例5-4</strong>:状态调试器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$call_trace</span> = <span class="hljs-keyword">array</span>();<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">enter_function</span>(<span class="hljs-params"><span class="hljs-variable">$name</span></span>)</span>&#123;<br>    <span class="hljs-keyword">global</span> <span class="hljs-variable">$call_trace</span>;<br>    array_push(<span class="hljs-variable">$call_trace</span>,<span class="hljs-variable">$name</span>);<span class="hljs-comment">//和$call_trace[] = $name一样</span><br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Entering <span class="hljs-subst">$name</span> (stack is now&quot;</span> . join(<span class="hljs-string">&#x27; -&gt; &#x27;</span>,<span class="hljs-variable">$call_trace</span>) . <span class="hljs-string">&#x27;)&lt;br/&gt;&#x27;</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exit_function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;Exiting&lt;br/&gt;&#x27;</span>;<br>    <span class="hljs-keyword">global</span> <span class="hljs-variable">$call_trace</span>;<br>    array_pop(<span class="hljs-variable">$call_trace</span>);<span class="hljs-comment">//我们忽略array_pop()的返回值</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">first</span>(<span class="hljs-params"></span>)</span>&#123;<br>    enter_function(<span class="hljs-string">&#x27;first&#x27;</span>);<br>    exit_function();<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">second</span>(<span class="hljs-params"></span>)</span>&#123;<br>    enter_function(<span class="hljs-string">&#x27;second&#x27;</span>);<br>    first();<br>    exit_function();&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">third</span>(<span class="hljs-params"></span>)</span>&#123;<br>    enter_function(<span class="hljs-string">&#x27;third&#x27;</span>);<br>    second();<br>    first();<br>    exit_function();<br>&#125;<br>first();<br>third();<br><br>Entering first (stack is now: first)<br>Exiting<br>Entering third (stack is now: third)<br>Entering second (stack is now: third -&gt; second)<br>Entering first (stack is now: third -&gt; second -&gt; first)<br>Exiting<br>Exiting<br>Entering first (stack is now: third -&gt; first)<br>Exiting<br>Exiting<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E6%95%B0%E7%BB%84/">数组</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E6%95%B0%E7%BB%84/%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP 初始化数组</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/PHP/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="hidden-mobile">PHP 访问数据库</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

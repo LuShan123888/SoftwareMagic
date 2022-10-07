@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="JSP 异常处理  当编写JSP程序的时候,程序员可能会遗漏一些BUG,这些BUG可能会出现在程序的任何地方,JSP代码中通常有以下几类异常:  检查型异常:检查型异常就是一个典型的用户错误或者一个程序员无法预见的错误,举例来说,如果一个文件将要被打开,但是无法找到这个文件,则一个异常被抛出,这些异常不能在编译期被简单地忽略 运行时异常:一个运行时异常可能已经被程序员避免,这种异常在编译期将会被忽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP 异常处理">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaEE/JSP/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="JSP 异常处理  当编写JSP程序的时候,程序员可能会遗漏一些BUG,这些BUG可能会出现在程序的任何地方,JSP代码中通常有以下几类异常:  检查型异常:检查型异常就是一个典型的用户错误或者一个程序员无法预见的错误,举例来说,如果一个文件将要被打开,但是无法找到这个文件,则一个异常被抛出,这些异常不能在编译期被简单地忽略 运行时异常:一个运行时异常可能已经被程序员避免,这种异常在编译期将会被忽">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-jsp-exeception-1.jpg">
+<meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
+<meta property="article:modified_time" content="2021-08-30T13:26:39.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-jsp-exeception-1.jpg">
+  
+  <title>JSP 异常处理 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JSP 异常处理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-30 21:26" pubdate>
+        2021年8月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JSP 异常处理</h1>
+            
+            <div class="markdown-body">
+              <h1>JSP 异常处理</h1>
+<ul>
+<li>当编写JSP程序的时候,程序员可能会遗漏一些BUG,这些BUG可能会出现在程序的任何地方,JSP代码中通常有以下几类异常:
+<ul>
+<li>检查型异常:检查型异常就是一个典型的用户错误或者一个程序员无法预见的错误,举例来说,如果一个文件将要被打开,但是无法找到这个文件,则一个异常被抛出,这些异常不能在编译期被简单地忽略</li>
+<li>运行时异常:一个运行时异常可能已经被程序员避免,这种异常在编译期将会被忽略</li>
+<li>错误:错误不是异常,但问题是它超出了用户或者程序员的控制范围,错误通常会在代码中被忽略,您几乎不能拿它怎么样,举例来说,栈溢出错误,这些错误都会在编译期被忽略</li>
+<li>本节将会给出几个简单而优雅的方式来处理运行时异常和错误</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用Exception对象">使用Exception对象</h2>
+<ul>
+<li><code>exception</code>对象是<code>Throwable</code>子类的一个实例,只在错误页面中可用,下表列出了<code>Throwable</code>类中一些重要的方法:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">方法&amp;描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left"><code>public String getMessage()</code>返回异常的信息,这个信息在Throwable构造函数中被初始化</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left"><code>public ThrowablegetCause()</code>返回引起异常的原因,类型为Throwable对象</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left"><code>public String toString()</code>返回类名</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left"><code>public void printStackTrace()</code>将异常栈轨迹输出至System.err</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left"><code>public StackTraceElement [] getStackTrace()</code>以栈轨迹元素数组的形式返回异常栈轨迹</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left"><code>public ThrowablefillInStackTrace()</code>使用当前栈轨迹填充Throwable对象</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>JSP提供了可选项来为每个JSP页面指定错误页面,无论何时页面抛出了异常,JSP容器都会自动地调用错误页面</li>
+<li>接下来的例子为<code>main.jsp</code>指定了一个错误页面,使用<code>&lt;%@page errorPage=&quot;XXXXX&quot;%&gt;</code>指令指定一个错误页面</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page errorPage=<span class="hljs-string">&quot;ShowError.jsp&quot;</span> %&gt;<br><br>&lt;html&gt;<br>&lt;head&gt;<br>   &lt;title&gt;Error Handling Example&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;%<br>   <span class="hljs-comment">// Throw an exception to invoke the error page</span><br>   <span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>;<br>   <span class="hljs-keyword">if</span> (x == <span class="hljs-number">1</span>)<br>   &#123;<br>      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Error condition!!!&quot;</span>);<br>   &#125;<br>%&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<p>现在,编写ShowError.jsp文件如下:</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page isErrorPage=<span class="hljs-string">&quot;true&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>&lt;title&gt;Show Error Page&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;Opps...&lt;/h1&gt;<br>&lt;p&gt;Sorry, an error occurred.&lt;/p&gt;<br>&lt;p&gt;Here is the exception stack trace: &lt;/p&gt;<br>&lt;pre&gt;<br>&lt;% exception.printStackTrace(response.getWriter()); %&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意到,ShowError.jsp文件使用了<code>&lt;%@page isErrorPage=&quot;true&quot;%&gt;</code>指令,这个指令告诉JSP编译器需要产生一个异常实例变量</li>
+<li>现在试着访问<code>main.jsp</code>页面,它将会产生如下结果:</li>
+</ul>
+<figure class="highlight mercury"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mercury">java.lang.RuntimeException: Error condition!!!<br>...<br><br>Opps...<br>Sorry, an error occurred.<br><br>Here <span class="hljs-keyword">is</span> the exception stack <span class="hljs-keyword">trace</span>:<br></code></pre></td></tr></table></figure>
+<h2 id="在错误页面中使用JSTL标签">在错误页面中使用JSTL标签</h2>
+<ul>
+<li>可以利用JSTL标签来编写错误页面ShowError.jsp,这个例子中的代码与上例代码的逻辑几乎一样,但是本例的代码有更好的结构,并且能够提供更多信息:</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ taglib prefix=<span class="hljs-string">&quot;c&quot;</span> uri=<span class="hljs-string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;<br>&lt;%<span class="hljs-meta">@page</span> isErrorPage=<span class="hljs-string">&quot;true&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>&lt;title&gt;Show Error Page&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;h1&gt;Opps...&lt;/h1&gt;<br>&lt;table width=<span class="hljs-string">&quot;100%&quot;</span> border=<span class="hljs-string">&quot;1&quot;</span>&gt;<br>&lt;tr valign=<span class="hljs-string">&quot;top&quot;</span>&gt;<br>&lt;td width=<span class="hljs-string">&quot;40%&quot;</span>&gt;&lt;b&gt;Error:&lt;/b&gt;&lt;/td&gt;<br>&lt;td&gt;$&#123;pageContext.exception&#125;&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr valign=<span class="hljs-string">&quot;top&quot;</span>&gt;<br>&lt;td&gt;&lt;b&gt;URI:&lt;/b&gt;&lt;/td&gt;<br>&lt;td&gt;$&#123;pageContext.errorData.requestURI&#125;&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr valign=<span class="hljs-string">&quot;top&quot;</span>&gt;<br>&lt;td&gt;&lt;b&gt;Status code:&lt;/b&gt;&lt;/td&gt;<br>&lt;td&gt;$&#123;pageContext.errorData.statusCode&#125;&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr valign=<span class="hljs-string">&quot;top&quot;</span>&gt;<br>&lt;td&gt;&lt;b&gt;Stack trace:&lt;/b&gt;&lt;/td&gt;<br>&lt;td&gt;<br>&lt;c:forEach <span class="hljs-keyword">var</span>=<span class="hljs-string">&quot;trace&quot;</span><br>         items=<span class="hljs-string">&quot;$&#123;pageContext.exception.stackTrace&#125;&quot;</span>&gt;<br>&lt;p&gt;$&#123;trace&#125;&lt;/p&gt;<br>&lt;/c:forEach&gt;<br>&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/table&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果如下:</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-jsp-exeception-1.jpg" srcset="/images/loading.gif" lazyload alt=""></p>
+<h2 id="使用-try…catch块">使用 try…catch块</h2>
+<ul>
+<li>如果您想要将异常处理放在一个页面中,并且对不同的异常进行不同的处理,那么您就需要使用<code>try...catch</code>块了</li>
+<li>接下来的这个例子显示了如何使用<code>try...catch</code>块,将这些代码放在<code>main.jsp</code>中:</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;html&gt;<br>&lt;head&gt;<br>   &lt;title&gt;Try...Catch Example&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>&lt;%<br>   <span class="hljs-keyword">try</span>&#123;<br>      <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<br>      i = i / <span class="hljs-number">0</span>;<br>      out.println(<span class="hljs-string">&quot;The answer is &quot;</span> + i);<br>   &#125;<br>   <span class="hljs-keyword">catch</span> (Exception e)&#123;<br>      out.println(<span class="hljs-string">&quot;An exception occurred: &quot;</span> + e.getMessage());<br>   &#125;<br>%&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+<p>试着访问main.jsp,它将会产生如下结果:</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">An exception occurred: / <span class="hljs-keyword">by</span> <span class="hljs-literal">zero</span><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaEE/">JavaEE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaEE/JSP/">JSP</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaEE/JSP/XML%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JSP XML 数据处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaEE/Servlet/Redirect/">
+                        <span class="hidden-mobile">Servlet 网页重定向</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

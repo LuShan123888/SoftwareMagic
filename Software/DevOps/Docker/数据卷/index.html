@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Docker 数据卷 创建数据卷 1$ docker volume create vol_name 查看数据卷 查看所有volum情况 1234$ docker volume lsDRIVER    VOLUME NAMElocal     portainer_data 查看volume信息  所有的docker容器内的卷,没有指定目录的情况下都是在&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 数据卷">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/DevOps/Docker/%E6%95%B0%E6%8D%AE%E5%8D%B7/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Docker 数据卷 创建数据卷 1$ docker volume create vol_name 查看数据卷 查看所有volum情况 1234$ docker volume lsDRIVER    VOLUME NAMElocal     portainer_data 查看volume信息  所有的docker容器内的卷,没有指定目录的情况下都是在&#x2F;var&#x2F;lib&#x2F;docker&#x2F;volumes&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-28T06:56:50.000Z">
+<meta property="article:modified_time" content="2022-05-28T06:56:50.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Docker 数据卷 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker 数据卷">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-28 14:56" pubdate>
+        2022年5月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker 数据卷</h1>
+            
+            <div class="markdown-body">
+              <h1>Docker 数据卷</h1>
+<h2 id="创建数据卷">创建数据卷</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker volume create vol_name</span><br></code></pre></td></tr></table></figure>
+<h2 id="查看数据卷">查看数据卷</h2>
+<h3 id="查看所有volum情况">查看所有volum情况</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker volume ls</span><br><br>DRIVER    VOLUME NAME<br>local     portainer_data<br></code></pre></td></tr></table></figure>
+<h3 id="查看volume信息">查看volume信息</h3>
+<ul>
+<li>所有的docker容器内的卷,没有指定目录的情况下都是在<code>/var/lib/docker/volumes/xxxx/_data</code></li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json">$ docker volume inspect vol_name<br><br>docker volume inspect nginx<br>[<br>    &#123;<br>        <span class="hljs-attr">&quot;CreatedAt&quot;</span>: <span class="hljs-string">&quot;2020-09-27T23:21:48+08:00&quot;</span>,<br>        <span class="hljs-attr">&quot;Driver&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,<br>        <span class="hljs-attr">&quot;Labels&quot;</span>: <span class="hljs-literal">null</span>,<br>        <span class="hljs-attr">&quot;Mountpoint&quot;</span>: <span class="hljs-string">&quot;/var/lib/docker/volumes/nginx/_data&quot;</span>,<br>        <span class="hljs-attr">&quot;Name&quot;</span>: <span class="hljs-string">&quot;nginx&quot;</span>,<br>        <span class="hljs-attr">&quot;Options&quot;</span>: <span class="hljs-literal">null</span>,<br>        <span class="hljs-attr">&quot;Scope&quot;</span>: <span class="hljs-string">&quot;local&quot;</span><br>    &#125;<br>]<br></code></pre></td></tr></table></figure>
+<h3 id="查看容器挂载的数据卷">查看容器挂载的数据卷</h3>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json">$ docker inspect vol_name<br><br><span class="hljs-string">&quot;Mounts&quot;</span>: [<br>&#123;<br>    <span class="hljs-attr">&quot;Type&quot;</span>: <span class="hljs-string">&quot;bind&quot;</span>,<br>    <span class="hljs-attr">&quot;Source&quot;</span>: <span class="hljs-string">&quot;/home/mysql/conf&quot;</span>,<br>    <span class="hljs-attr">&quot;Destination&quot;</span>: <span class="hljs-string">&quot;/etc/mysql/conf.d&quot;</span>,<br>    <span class="hljs-attr">&quot;Mode&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>    <span class="hljs-attr">&quot;RW&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">&quot;Propagation&quot;</span>: <span class="hljs-string">&quot;rprivate&quot;</span><br>&#125;,<br></code></pre></td></tr></table></figure>
+<h2 id="删除数据卷">删除数据卷</h2>
+<ul>
+<li>删除指定的 volume</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker volume rm vol_name<br></code></pre></td></tr></table></figure>
+<ul>
+<li>清理所有无用数据卷,有些删除的容器还会有卷的残留</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker volume prune</span><br></code></pre></td></tr></table></figure>
+<h2 id="挂载数据卷">挂载数据卷</h2>
+<ul>
+<li>实现容器中数据持久化的问题</li>
+<li>主机目录与容器目录为双向绑定</li>
+</ul>
+<h3 id="数据的覆盖问题">数据的覆盖问题</h3>
+<ul>
+<li>当挂载主机文件夹时,会覆盖容器中的文件夹</li>
+<li>当挂载主机文件时,需要确保本机存在该文件,否则docker自动创建为目录</li>
+<li>如果挂载一个空的数据卷到容器中的一个非空目录中,那么这个目录下的文件会被复制到数据卷中</li>
+<li>如果挂载一个非空的数据卷到容器中的一个目录中,那么容器中的目录中会显示数据卷中的数据,如果原来容器中的目录中有数据,那么这些原始数据会被隐藏掉</li>
+</ul>
+<h3 id="路径映射挂载">路径映射挂载</h3>
+<ul>
+<li><strong>注意</strong>:容器删除后,主机目录仍然存在</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -v 主机目录:容器目录 镜像名</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过在容器目录后加上<code>:ro</code>或<code>:rw</code>可指定读写权限</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx1 -v /home/nginx:/etc/nginx:ro nginx <span class="hljs-comment"># 只读</span></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx2 -v /home/nginx:/etc/nginx:rw nginx <span class="hljs-comment"># 可读可写</span></span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>ro</code>:说明这个路径只能通过宿主机操作,容器内部无法操作</li>
+</ul>
+<h4 id="数据卷挂载">数据卷挂载</h4>
+<ul>
+<li>没有指定主机地址但指定了volume名</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v vol_name:容器目录 镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx02 -v nginx:/etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br>local               nginx<br></code></pre></td></tr></table></figure>
+<h4 id="匿名挂载">匿名挂载</h4>
+<ul>
+<li>没有指定主机地址和volume名</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v 容器目录 镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br></code></pre></td></tr></table></figure>
+<h3 id="挂载共享">挂载共享</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --volumes-from 被共享容器名 镜像名</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>挂载共享数据卷的操作实际上是对被共享容器的外部匿名数据卷的挂载分享</li>
+<li><code>--volumes-from</code>:新容器通过复制了旧容器的mounts配置的<code>source</code>和<code>destination</code>来实现的,并且优先于<code>dockerfile</code>中的卷挂载定义</li>
+</ul>
+<p><strong>实例</strong></p>
+<ul>
+<li>多个mysql实现数据共享</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d -p 3306:3306 \</span><br><span class="bash">--name mysq01 \</span><br><span class="bash">-v /var/lib/mysql \</span><br><span class="bash">-v /etc/mysql/conf.d \</span><br><span class="bash">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="bash">-d mysql:5.7</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -p 3307:3306 \</span><br><span class="bash">--name mysql02 \</span><br><span class="bash">--volumes-from mysql01 \</span><br><span class="bash">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="bash">-d mysql:5.7</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>容器之间配置信息的传递,数据卷容器的生命周期一直持续到没有容器使用为止</li>
+<li>但是如果容器数据卷持久化到本地目录,则不会被删除</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/DevOps/">DevOps</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/DevOps/Docker/">Docker</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Database/Mongo/Database/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mongo Database</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Distributed/Thrift/%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">Thrift 概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

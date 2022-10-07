@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java Socket  Java提供了Socket类和ServerSocket类分别用于Client端的Server端的Socket通信编程,可将联网的任何两台计算机进行Socket通信,一台作为服务器,另一台作为客户端,也可以用一台计算机上运行的两个进程分别运行服务端和客户端程序  Socket类  Socket类用在客户端,通过构造一个Socket类来建立与服务器的连接,Socket连接可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Socket">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/Socket/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java Socket  Java提供了Socket类和ServerSocket类分别用于Client端的Server端的Socket通信编程,可将联网的任何两台计算机进行Socket通信,一台作为服务器,另一台作为客户端,也可以用一台计算机上运行的两个进程分别运行服务端和客户端程序  Socket类  Socket类用在客户端,通过构造一个Socket类来建立与服务器的连接,Socket连接可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg">
+<meta property="article:published_time" content="2022-05-26T13:28:10.000Z">
+<meta property="article:modified_time" content="2022-05-26T13:28:10.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg">
+  
+  <title>Java Socket - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java Socket">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-26 21:28" pubdate>
+        2022年5月26日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java Socket</h1>
+            
+            <div class="markdown-body">
+              <h1>Java Socket</h1>
+<ul>
+<li>Java提供了Socket类和ServerSocket类分别用于Client端的Server端的Socket通信编程,可将联网的任何两台计算机进行Socket通信,一台作为服务器,另一台作为客户端,也可以用一台计算机上运行的两个进程分别运行服务端和客户端程序</li>
+</ul>
+<h2 id="Socket类">Socket类</h2>
+<ul>
+<li>Socket类用在客户端,通过构造一个Socket类来建立与服务器的连接,Socket连接可以是流连接,也可以是数据报连接,这取决于构造Socket类时使用的构造方法,一般使用流连接,流连接的优点是所有数据都能准确,有序地送到接收方,缺点是速度较慢,Socket类的构造方法有如下4种:
+<ul>
+<li><code>Socket(String host,int port)</code>:构造一个连接指定主机,指定端口的流Socket</li>
+<li><code>Socket(String host,int port,boolean kind)</code>:构造一个连接指定主机,指定端口的Socket类,boolean类型的参数用来设置是流Socket还是数据报Socket</li>
+<li><code>Socket(InetAddress address,int port)</code>:构造一个连接指定Internet地址,指定端口的流Socket</li>
+<li><code>Socket(InetAddress address,int port,boolean kind)</code>:构造一个连接指定Internet地址,指定端口的Socket类,boolean类型的参数用来设置是流Socket还是数据报Socket</li>
+</ul>
+</li>
+<li>在构造完Socket类后,就可以通过Socket类来建立输入,输出流,通过流来传送数据</li>
+</ul>
+<h2 id="ServerSocket类">ServerSocket类</h2>
+<ul>
+<li>ServerSocket类用在服务器端,常用的构造方法有两种:
+<ul>
+<li><code>ServerSocket(int port)</code>:在制定端口上构造一个ServerSocket类</li>
+<li><code>ServerSocket(int port ,int queue length)</code>:在指定端口上构造一个ServerSocket类,第2个参数queueLength用于限制并发等待连接的客户最大数目</li>
+</ul>
+</li>
+</ul>
+<h2 id="建立连接与数据通信">建立连接与数据通信</h2>
+<ul>
+<li>Socket通信的基本过程
+<ol>
+<li>在服务器端创建一个ServerSocket对象,通过执行<code>accept()</code>方法监听客户连接,这将使线程处于等待状态</li>
+<li>在客户端建立Socket类,与某服务器的指定端口进行连接,服务a器监听到连接请求后,就可在两者之间建立连接</li>
+<li>连接建立之后,就可以取得相应的输入/输出流进行通信,一方的输出流发送的数据将被另一方的输入流读取</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg" srcset="/images/loading.gif" lazyload alt=""></p>
+<p><strong>[例16-1]</strong>:下面是一个简单的Socket通信演示程序</p>
+<p><strong>客户方程序</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        Socket socket = <span class="hljs-keyword">new</span> Socket(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">5432</span>);<br>        <span class="hljs-comment">//申请与服务器的5432端口连接</span><br>        InputStream sln = socket.getInputStream();<span class="hljs-comment">//取得Socket的输入流</span><br>        DataInputStream dis = <span class="hljs-keyword">new</span> DataInputStream(sln);<br>        String message = dis.readUTF();<br>        System.out.println(message);<br>        s.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这里客户机要访问的计算机为本地主机(localhost),也就是在一台计算机上自己与自己通信,客户通过创建Socket与服务端建立连接后,可以取得Socket的输入流,用过滤流<code>DataInputStream</code>的<code>readUTF()</code>方法读取来自服务方的字符串,最后关闭Socket连接</li>
+</ul>
+<p><strong>服务方程序</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            ServerSocket socket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">5423</span>);<span class="hljs-comment">//创建服务</span><br>            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>)&#123;<br>                Socket s1 = socket.accept(); <span class="hljs-comment">//监听客户端的连接</span><br>                OutputStream s1out = s1.getOutputStream();<br>                DataOutputStream dos = <span class="hljs-keyword">new</span> DataOutputStream(s1out);<br>                dos.writeUTF(<span class="hljs-string">&quot;Hello  World!&quot;</span>);<br>                System.out.println(<span class="hljs-string">&quot;a client is connected...&quot;</span>);<br>                s1.close();<br>            &#125;<br>        &#125;<span class="hljs-keyword">catch</span> (IOException e)&#123;  &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>通过<code>accpet()</code>方法等待客户连接,如果无客户连接,线程将进入阻塞状态,一旦有客户连接成功,则将在客户与服务器间建立一条Socket数据传输通道,</li>
+<li>通过Socket的<code>getOutputStream()</code>方法可获得该通道本方的输出流,为了方便流操作,可以用DataOutputStream流对其进行过滤,并用<code>DataOutputStream</code>对象的<code>writeUTF()</code>方法给客户发送数据,而后关闭与该客户的连接,继续循环等待其他客户的访问</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>注意</strong>:该程序在同一机器上运行时要开辟两个DOS窗口,首先运行服务器程序,然后在另一个窗口运行客户程序,服务器端循环运行等待客户连接,每个客户连接到服务器后,在客户方将显示服务器发送的信息&quot;Hello World!“,而服务方将显示”a client is connected…”,本程序中只是服务方给客户方发送数据,如果客户要给服务方发送数据,方法一样,只是要注意双方收发的配合</li>
+<li><strong>思考</strong>:上面的程序如果要实现双向通行,则服务器需要获取客户发送的数据,如果客户连接和读取客户数据安排在一个循环中,那么等待读取客户发送的数据将导致线程阻塞,不能及时转向执行<code>accept()</code>方法去等待其他客户连接,因此,对于复杂的多用户通信是不可行的</li>
+</ul>
+</blockquote>
+<h2 id="实例">实例</h2>
+<h3 id="例16-2-一个简单的多用户聊天程序"><strong>[例16-2]</strong>:一个简单的多用户聊天程序</h3>
+<h4 id="聊天客户端程序">聊天客户端程序</h4>
+<ul>
+<li>聊天客户端的职责有两个:
+<ul>
+<li>能提供一个图形界面实现聊天信息的输入和显示,其中包括处理用户输入时间</li>
+<li>要随时接受来自其他客户的信息并显示出来,因此在客户端也采用多线程实现,应用程序主线程负责图形界面的输入处理,而接受消息线程负责读取其他客户发来的数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TalkClient</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        Socket s1 = <span class="hljs-keyword">new</span> Socket(args[<span class="hljs-number">0</span>], <span class="hljs-number">5432</span>);  <span class="hljs-comment">//连接服务器</span><br>        <span class="hljs-comment">//输入输出流</span><br>        DataInputStream dis = <span class="hljs-keyword">new</span> DataInputStream(s1.getInputStream());<br>        <span class="hljs-keyword">final</span> DataOutputStream dos = <span class="hljs-keyword">new</span> DataOutputStream(s1.getOutputStream());<br>        <span class="hljs-comment">//GUI</span><br>        Frame myframe = <span class="hljs-keyword">new</span> Frame(<span class="hljs-string">&quot;简易聊天室&quot;</span>);<br>        Panel panelx = <span class="hljs-keyword">new</span> Panel();<br>        <span class="hljs-keyword">final</span> TextField input = <span class="hljs-keyword">new</span> TextField(<span class="hljs-number">20</span>);<br>        TextArea display = <span class="hljs-keyword">new</span> TextArea(<span class="hljs-number">5</span>, <span class="hljs-number">20</span>);<br>        panelx.add(input);<br>        panelx.add(display);<br>        myframe.add(panelx);<br>        <span class="hljs-comment">//根据文本框的动作事件处理,将文本框的数据发送给服务器</span><br>        <span class="hljs-keyword">new</span> receiveThread(dis, display);<span class="hljs-comment">//创建启动接受消息线程</span><br>        input.addActionListener(<span class="hljs-keyword">new</span> ActionListener() &#123;<span class="hljs-comment">//匿名内嵌类</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> </span>&#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    dos.writeUTF(input.getText());<span class="hljs-comment">//发送数据</span><br>                &#125; <span class="hljs-keyword">catch</span> (IOException z) &#123;<br>                &#125;<br>            &#125;<br>        &#125;);<br>        myframe.setSize(<span class="hljs-number">300</span>, <span class="hljs-number">300</span>);<br>        myframe.setVisible(<span class="hljs-keyword">true</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*接收消息线程循环读取网络消息,显示在文本域*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">receiveThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    DataInputStream dis;<br>    TextArea displayarea;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">receiveThread</span><span class="hljs-params">(DataInputStream dis, TextArea m)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.dis = dis;<br>        displayarea = m;<br>        <span class="hljs-keyword">this</span>.start();<br>    &#125;<br><br>    <span class="hljs-comment">//循环读取来自服务器的数据,并显示在文本域中</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (; ; ) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                String str = dis.readUTF();<span class="hljs-comment">//读来自服务器的消息</span><br>                displayarea.append(str + <span class="hljs-string">&quot;\n&quot;</span>);<span class="hljs-comment">//将消息添加到文本域显示</span><br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="聊天服务端程序">聊天服务端程序</h4>
+<ul>
+<li>聊天服务端的任务主要有两个
+<ul>
+<li>监听某端口,建立与客户的Socket连接,处理一个客户的连接后,能很快再进入监听状态</li>
+<li>处理与客户的通信,由于聊天是在客户之间进行的,所以服务器的职责是将客户发送的消息转发给其他客户,为了实现这两个任务,必须设法将人物分开,可以借助多线程技术,在服务方为每个客户连接建立一个通信线程,通信线程负责接收客户的消息并将消息转发给其他客户,这样主程序的任务就简单化了,循环监听客户连接,每个客户连接成功后,创建一个通信线程,并将与Socket对应的输入/输出流传给该线程</li>
+</ul>
+</li>
+<li>此例中还有一个关键问题是,由于要将数据转发给其他客户,因此某个客户对应的通信线程要设法获取其他客户的Socket输出流,也就是必须设法将所有客户的资料在连接处理时保存在一个公共能访问的地方,因此,在TalkServer类中引入了一个静态ArrayList方法存放所有客户的通信线程,这样要取得其他客户相关的输出流可通过该ArrayList方法去间接访问</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TalkServer</span> </span>&#123;<br>    <span class="hljs-comment">//存放所有通信线程</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ArrayList&lt;Client&gt; allclient = <span class="hljs-keyword">new</span> ArrayList&lt;Client&gt;();<br>    <span class="hljs-comment">//统计客户连接的计数变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> clientnum = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            ServerSocket s = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">5432</span>);<span class="hljs-comment">//规定服务端口</span><br>            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>                Socket s1 = s.accept(); <span class="hljs-comment">//等待客户连接</span><br>                DataOutputStream dos = <span class="hljs-keyword">new</span> DataOutputStream(s1.getOutputStream());<br>                DataInputStream din = <span class="hljs-keyword">new</span> DataInputStream(s1.getInputStream());<br>                Client x = <span class="hljs-keyword">new</span> Client(clientnum, dos, din);<br>                <span class="hljs-comment">//创建与客户对应的通信线程</span><br>                allclient.add(x);<br>                x.start();<br>                clientnum++;<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/*通信线程处理与对应客户的通信,将来自客户数据发往其他客户*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> id; <span class="hljs-comment">//客户的标识</span><br>    DataOutputStream dos;<span class="hljs-comment">//去往客户的输出流</span><br>    DataInputStream din;<span class="hljs-comment">//来自客户的输入流</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Client</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id, DataOutputStream dos, DataInputStream din)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.id = id;<br>        <span class="hljs-keyword">this</span>.dos = dos;<br>        <span class="hljs-keyword">this</span>.din = din;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">//循环读取客户数据转发给其他客户</span><br>        <span class="hljs-comment">//循环将数据发送给所有客户(包括自己)的Socket通道</span><br>        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//等待接收自己客户发送过来的数据</span><br>                String message = <span class="hljs-string">&quot;客户&quot;</span> + id + <span class="hljs-string">&quot;:&quot;</span> + din.readUTF();<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; TalkServer.clientnum; i++) &#123;<br>                    <span class="hljs-comment">//将消息转发给所有客户</span><br>                    TalkServer.allclient.get(i).dos.writeUTF(message);<br>                &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行该程序前首先要运行服务方程序,运行客户方程序要注意提供一个代表服务器地址的参数,如果客户方程序与服务方程序在同一机器上运行,则客户方运行命令为:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">java TalkClient localhost<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>思考</strong></p>
+<p>该程序仅实现了简单的多用户聊天演示,在程序中还有许多问题值得改进,例如:</p>
+<ul>
+<li>如何修改服务方,使用户自己发送的消息不显示在自己的文本域中</li>
+<li>增加一个用户名输入界面,用户输入身份后再进入聊天界面</li>
+<li>在客户方显示用户列表,可以选择将信息发送给哪些用户</li>
+<li>如何在服务方对退出的用户进行处理,保证聊天发送的消息只发给在场的用户,这点要客户方与服务方配合编程,客户退出时给服务方发消息,或者给服务器设置一个监视线程,检查各通信线程的Socket通道是否正常,对于不正常的通道自动停止相关的通信线程</li>
+</ul>
+</blockquote>
+<h3 id="TCP文件上传实现">TCP文件上传实现</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        <span class="hljs-comment">//创建一个Socket连接</span><br>        Socket socket = <span class="hljs-keyword">new</span> Socket(InetAddress.getByName(<span class="hljs-string">&quot;127.0.0.1&quot;</span>), <span class="hljs-number">9000</span>);<br>        <span class="hljs-comment">//创建一个输出流</span><br>        OutputStream outputStream = socket.getOutputStream();<br>        <span class="hljs-comment">//读取文件</span><br>        FileInputStream fileInputStream = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;test.txt&quot;</span>);<br>        <span class="hljs-comment">//写出文件</span><br>        <span class="hljs-keyword">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-keyword">int</span> length;<br>        <span class="hljs-keyword">while</span> ((length = fileInputStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>            outputStream.write(buffer, <span class="hljs-number">0</span>, length);<br>        &#125;<br>        <span class="hljs-comment">//通知服务器,文件传输完成</span><br>        socket.shutdownOutput();<br>        <span class="hljs-comment">//确定服务器接收完成</span><br>        InputStream inputStream = socket.getInputStream();<br>        ByteArrayOutputStream byteArrayOutputStream = <span class="hljs-keyword">new</span> ByteArrayOutputStream();<br>        <span class="hljs-keyword">byte</span>[] buffer2 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-keyword">int</span> length2;<br>        <span class="hljs-keyword">while</span> ((length2 = inputStream.read(buffer2)) != -<span class="hljs-number">1</span>) &#123;<br>            byteArrayOutputStream.write(buffer2, <span class="hljs-number">0</span>, length2);<br>        &#125;<br>        System.out.println(byteArrayOutputStream);<br>        <span class="hljs-comment">//关闭资源</span><br>        fileInputStream.close();<br>        outputStream.close();<br>        socket.close();<br><br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        <span class="hljs-comment">//创建服务</span><br>        ServerSocket serverSocket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">9000</span>);<br>        <span class="hljs-comment">//监听客服端的连接</span><br>        Socket socket = serverSocket.accept();<span class="hljs-comment">//阻塞式监听,会一直等待客户端连接</span><br>        <span class="hljs-comment">//获取输入流</span><br>        InputStream inputStream = socket.getInputStream();<br>        <span class="hljs-comment">//文件输出</span><br>        FileOutputStream fileOutputStream = <span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-keyword">new</span> File(<span class="hljs-string">&quot;receive.txt&quot;</span>));<br>        <span class="hljs-keyword">byte</span>[] buffer = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-keyword">int</span> length;<br>        <span class="hljs-keyword">while</span> ((length = inputStream.read(buffer)) != -<span class="hljs-number">1</span>) &#123;<br>            fileOutputStream.write(buffer, <span class="hljs-number">0</span>, length);<br>        &#125;<br>        <span class="hljs-comment">//通知客服端接收完成</span><br>        OutputStream os = socket.getOutputStream();<br>        os.write(<span class="hljs-string">&quot;Receive successful!&quot;</span>.getBytes());<br>        <span class="hljs-comment">//关闭资源</span><br>        fileOutputStream.close();<br>        inputStream.close();<br>        socket.close();<br>        serverSocket.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E5%B7%A5%E5%85%B7%E7%B1%BB/Excel%E5%A4%84%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java Excel处理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Distributed/ZooKeeper/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/">
+                        <span class="hidden-mobile">ZooKeeper 数据同步</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

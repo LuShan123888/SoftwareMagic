@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java 线程 线程与进程  进程(Process) :是计算机中的程序关于某数据集合上的一次运行活动,是系统进行资源分配和调度的基本单位,是操作系统结构的基础,在当代面向线程设计的计算机结构中,进程是线程的容器,程序是指令,数据及其组织形式的描述,进程是程序的实体 线程(thread) :是操作系统能够进行运算调度的最小单位,它被包含在进程之中,是进程中的实际运作单位,一条线程指的是进程中一个单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 线程">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java 线程 线程与进程  进程(Process) :是计算机中的程序关于某数据集合上的一次运行活动,是系统进行资源分配和调度的基本单位,是操作系统结构的基础,在当代面向线程设计的计算机结构中,进程是线程的容器,程序是指令,数据及其组织形式的描述,进程是程序的实体 线程(thread) :是操作系统能够进行运算调度的最小单位,它被包含在进程之中,是进程中的实际运作单位,一条线程指的是进程中一个单">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-14-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BhbmdlMTk5MQ==,size_16,color_FFFFFF,t_70.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-18-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.png">
+<meta property="article:published_time" content="2021-08-28T07:26:25.000Z">
+<meta property="article:modified_time" content="2021-08-28T07:26:25.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-14-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BhbmdlMTk5MQ==,size_16,color_FFFFFF,t_70.jpeg">
+  
+  <title>Java 线程 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 线程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-28 15:26" pubdate>
+        2021年8月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 线程</h1>
+            
+            <div class="markdown-body">
+              <h1>Java 线程</h1>
+<h2 id="线程与进程">线程与进程</h2>
+<ul>
+<li><strong>进程(Process)</strong> :是计算机中的程序关于某数据集合上的一次运行活动,是系统进行资源分配和调度的基本单位,是操作系统结构的基础,在当代面向线程设计的计算机结构中,进程是线程的容器,程序是指令,数据及其组织形式的描述,进程是程序的实体</li>
+<li><strong>线程(thread)</strong> :是操作系统能够进行运算调度的最小单位,它被包含在进程之中,是进程中的实际运作单位,一条线程指的是进程中一个单一顺序的控制流,一个进程中可以并发多个线程,每条线程并行执行不同的任务,与进程不同的是同类的多个线程共享进程的堆和方法区资源,但每个线程有自己的程序计数器,虚拟机栈和本地方法栈,所以系统在产生一个线程,或是在各个线程之间作切换工作时,负担要比进程小得多,也正因为如此,线程也被称为轻量级进程</li>
+</ul>
+<blockquote>
+<p><strong>进程与线程的区别</strong></p>
+<ul>
+<li>线程具有许多传统进程所具有的特征,故又称为轻型进程(Light—Weight Process)或进程元,而把传统的进程称为重型进程(Heavy—Weight Process),它相当于只有一个线程的任务,在引入了线程的操作系统中,通常一个进程都有若干个线程,至少包含一个线程</li>
+<li>根本区别:进程是操作系统资源分配的基本单位,而线程是处理器任务调度和执行的基本单位,常用的Windows,Linux等操作系统都采用抢占式多任务,如何调度线程完全由操作系统决定,程序自己不能决定什么时候执行,以及执行多长时间</li>
+<li>资源开销:每个进程都有独立的代码和数据空间(程序上下文),程序之间的切换会有较大的开销,线程可以看做轻量级的进程,同一类线程共享代码和数据空间,每个线程都有自己独立的运行栈和程序计数器(PC),线程之间切换的开销小</li>
+<li>包含关系:如果一个进程内有多个线程,则执行过程不是一条线的,而是多条线(线程)共同完成的,线程是进程的一部分,所以线程也被称为轻权进程或者轻量级进程</li>
+<li>内存分配:同一进程的线程共享本进程的地址空间和资源,而进程之间的地址空间和资源是相互独立的</li>
+<li>影响关系:一个进程崩溃后,在保护模式下不会对其他进程产生影响,但是一个线程崩溃整个进程都死掉,所以多进程要比多线程健壮</li>
+<li>执行过程:每个独立的进程有程序运行的入口,顺序执行序列和程序出口,但是线程不能独立执行,必须依存在应用程序中,由应用程序提供多个线程执行控制,两者均可并发执行</li>
+</ul>
+</blockquote>
+<ul>
+<li>Java 程序天生就是多线程程序,我们可以通过 JMX 来看一下一个普通的 Java 程序有哪些线程,代码如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MultiThread</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// 获取 Java 线程管理 MXBean</span><br>    ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();<br>    <span class="hljs-comment">// 不需要获取同步的 monitor 和 synchronizer 信息,仅获取线程和线程堆栈信息</span><br>    ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(<span class="hljs-keyword">false</span>, <span class="hljs-keyword">false</span>);<br>    <span class="hljs-comment">// 遍历线程信息,仅打印线程 ID 和线程名称信息</span><br>    <span class="hljs-keyword">for</span> (ThreadInfo threadInfo : threadInfos) &#123;<br>      System.out.println(<span class="hljs-string">&quot;[&quot;</span> + threadInfo.getThreadId() + <span class="hljs-string">&quot;] &quot;</span> + threadInfo.getThreadName());<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上述程序输出如下(输出内容可能不同,不用太纠结下面每个线程的作用,只用知道 main 线程执行 main 方法即可):</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">[<span class="hljs-number">6</span>] Monitor Ctrl-Break <span class="hljs-comment">//监听线程转储或&quot;线程堆栈跟踪”的线程</span><br>[<span class="hljs-number">5</span>] Attach Listener <span class="hljs-comment">//负责接收到外部的命令,而对该命令进行执行的并且把结果返回给发送者</span><br>[<span class="hljs-number">4</span>] Signal Dispatcher <span class="hljs-comment">// 分发处理给 JVM 信号的线程</span><br>[<span class="hljs-number">3</span>] Finalizer <span class="hljs-comment">//在垃圾收集前,调用对象 finalize 方法的线程</span><br>[<span class="hljs-number">2</span>] Reference Handler <span class="hljs-comment">//用于处理引用对象本身(软引用,弱引用,虚引用)的垃圾回收的线程</span><br>[<span class="hljs-number">1</span>] main <span class="hljs-comment">//main 线程,程序入口</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>从上面的输出内容可以看出<strong>一个 Java 程序的运行是 main 线程和多个其他线程同时运行</strong></li>
+</ul>
+<h3 id="多进程与多线程">多进程与多线程</h3>
+<ul>
+<li>
+<p>进程和线程是包含关系,但是多任务既可以由多进程实现,也可以由单进程内的多线程实现,还可以混合多进程＋多线程</p>
+</li>
+<li>
+<p><strong>多进程</strong>:大多数操作系统允许创建多个进程,当一个程序因等待网络访问或用户输入而被堵塞时,另一个程序还可以运行,这样就增加了资源利用率,但是进程切换要占用较多的处理器时间和内存资源,也就是多进程开销大,而且进程间的通信也不太方便,大多数操作系统不允许进程访问其他进程的内存空间</p>
+</li>
+<li>
+<p><strong>多线程</strong>:多线程则指的是在单个程序中可以同时运行多个不同的线程,执行不同的任务,因为线程只能在单个进程的作用域内活动,所以创建线程比创建进程要廉价得多,同一类线程共享代码和数据空间,每个线程有独立的运行栈,线程切换的开销小,因此多线程编程在现代软件设计中被大量采用</p>
+</li>
+<li>
+<p>具体采用哪种方式,要考虑到进程和线程的特点</p>
+<ul>
+<li>和多线程相比,多进程的缺点在于:
+<ul>
+<li>创建进程比创建线程开销大,尤其是在Windows系统上</li>
+<li>进程间通信比线程间通信要慢,因为线程间通信就是读写同一个变量,速度很快</li>
+</ul>
+</li>
+<li>而多进程的优点在于:
+<ul>
+<li>多进程稳定性比多线程高,因为在多进程的情况下,一个进程崩溃不会影响其他进程,而在多线程的情况下,任何一个线程崩溃会直接导致整个进程崩溃</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="线程的状态">线程的状态</h2>
+<ul>
+<li>
+<p>Java中线程的状态分为6种</p>
+<ol>
+<li>初始(NEW):新创建了一个线程对象,但还没有调用start()方法</li>
+<li>运行(RUNNABLE):Java线程中将就绪(ready)和运行中(running)两种状态笼统的称为&quot;运行”<br>
+线程对象创建后,其他线程(比如main线程)调用了该对象的start()方法,该状态的线程位于可运行线程池中,等待被线程调度选中,获取CPU的使用权,此时处于就绪状态(ready),就绪状态的线程在获得CPU时间片后变为运行中状态(running)</li>
+<li>阻塞(BLOCKED):表示线程阻塞于锁</li>
+<li>等待(WAITING):进入该状态的线程需要等待其他线程做出一些特定动作(通知或中断)</li>
+<li>超时等待(TIMED_WAITING):该状态不同于WAITING,它可以在指定的时间后自行返回</li>
+<li>终止(TERMINATED):表示该线程已经执行完毕</li>
+</ol>
+</li>
+<li>
+<p>这6种状态定义在Thread类的State枚举中,可查看源码进行一一对应</p>
+</li>
+</ul>
+<h3 id="线程的状态图">线程的状态图</h3>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-14-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BhbmdlMTk5MQ==,size_16,color_FFFFFF,t_70.jpeg" srcset="/images/loading.gif" lazyload alt="线程状态图" style="zoom: 50%;" />
+<h3 id="状态详细说明">状态详细说明</h3>
+<ul>
+<li>初始状态(NEW)
+<ul>
+<li>实现Runnable接口和继承Thread可以得到一个线程类,new一个实例出来,线程就进入了初始状态</li>
+</ul>
+</li>
+<li>就绪状态(RUNNABLE之READY)
+<ul>
+<li>就绪状态只是说你资格运行,调度程序没有挑选到你,你就永远是就绪状态</li>
+<li>调用线程的start()方法,此线程进入就绪状态</li>
+<li>当前线程sleep()方法结束,其他线程join()结束,等待用户输入完毕,某个线程拿到对象锁,这些线程也将进入就绪状态</li>
+<li>当前线程时间片用完了,调用当前线程的yield()方法,当前线程进入就绪状态</li>
+<li>锁池里的线程拿到对象锁后,进入就绪状态</li>
+</ul>
+</li>
+<li>运行中状态(RUNNABLE之RUNNING)
+<ul>
+<li>线程调度程序从可运行池中选择一个线程作为当前线程时线程所处的状态,这也是线程进入运行状态的唯一的一种方式</li>
+</ul>
+</li>
+<li>阻塞状态(BLOCKED)
+<ul>
+<li>阻塞状态是线程阻塞在进入synchronized关键字修饰的方法或代码块(获取锁)时的状态</li>
+</ul>
+</li>
+<li>等待(WAITING)
+<ul>
+<li>处于这种状态的线程不会被分配CPU执行时间,它们要等待被显式地唤醒,否则会处于无限期等待的状态</li>
+</ul>
+</li>
+<li>超时等待(TIMED_WAITING)
+<ul>
+<li>处于这种状态的线程不会被分配CPU执行时间,不过无须无限期等待被其他线程显示地唤醒,在达到一定时间后它们会自动唤醒</li>
+</ul>
+</li>
+<li>终止状态(TERMINATED)
+<ul>
+<li>当线程的run()方法完成时,或者主线程的main()方法完成时,我们就认为它终止了,这个线程对象也许是活的,但是它已经不是一个单独执行的线程,线程一旦终止了,就不能复生</li>
+<li>在一个终止的线程上调用start()方法,会抛出<code>java.lang.IllegalThreadStateException</code>异常</li>
+</ul>
+</li>
+</ul>
+<h3 id="同步队列-等待队列与就绪队列">同步队列,等待队列与就绪队列</h3>
+<ul>
+<li>就绪队列存储了将要获得锁的线程</li>
+<li>同步队列:进入Synchronized方法块(同步方法)时竞争锁的时候失败,则进入同步队列</li>
+<li>等待队列:比如线程调用了wait()方法,线程则进入等待队列,等待被唤醒再进入同步队列</li>
+</ul>
+<h3 id="线程有关的方法">线程有关的方法</h3>
+<ul>
+<li><code>thread.sleep(long millis)</code>:一定是当前线程调用此方法,当前线程进入TIMED_WAITING状态,但不释放对象锁,millis后线程自动苏醒进入就绪状态,作用:给其它线程执行机会的最佳方式</li>
+<li><code>thread.yield()</code>:一定是当前线程调用此方法,当前线程放弃获取的CPU时间片,但不释放锁资源,由运行状态变为就绪状态,让OS再次选择线程,作用:让相同优先级的线程轮流执行,但并不保证一定会轮流执行,实际中无法保证yield()达到让步目的,因为让步的线程还有可能被线程调度程序再次选中,Thread.yield()不会导致阻塞,该方法与sleep()类似,只是不能由用户指定暂停多长时间</li>
+<li><code>thread.join()/thread.join(long millis)</code>:当前线程里调用其它线程t的join方法,当前线程进入WAITING/TIMED_WAITING状态,当前线程不会释放已经持有的对象锁,线程t执行完毕或者millis时间到,当前线程一般情况下进入RUNNABLE状态,也有可能进入BLOCKED状态(因为join是基于wait实现的)</li>
+<li><code>obj.wait()</code>:当前线程调用对象的wait()方法,当前线程释放对象锁,进入等待队列,依靠notify()/notifyAll()唤醒或者wait(long timeout) timeout时间到自动唤醒</li>
+<li><code>obj.notify()</code>:唤醒在此对象监视器上等待的单个线程,选择是任意性的</li>
+<li><code>obj.notifyAll()</code>:唤醒在此对象监视器上等待的所有线程</li>
+<li><code>LockSupport.park()/LockSupport.parkNanos(long nanos),LockSupport.parkUntil(long deadlines)</code>:当前线程进入<code>WAITING/TIMED_WAITING</code>状态,对比wait方法,不需要获得锁就可以让线程进入<code>WAITING/TIMED_WAITING</code>状态,需要通过<code>LockSupport.unpark(Thread thread)</code>唤醒</li>
+</ul>
+<h2 id="线程调度与优先级">线程调度与优先级</h2>
+<ul>
+<li>Java提供一个线程调度器来负责线程调度,Java采用抢占式调度策略,在程序中可以给每个程序分配一个线程优先级,优先级高的线程优先获得调度,对于优先级相同的线程,根据在等待队列的排列顺序按&quot;先到先服务”原则调度,每个线程安排一个时间片,执行完时间片将轮到下一线程</li>
+<li>下面几种情况中,当前线程会放弃CPU:
+<ul>
+<li>当前时间片用完</li>
+<li>线程在执行时调用了<code>yield()</code>或<code>sleep()</code>方法主动放弃</li>
+<li>进行I/O访问,等待用户输入,导致线程阻塞,或者为等待一个条件变量,线程调用<code>wait()</code>方法</li>
+<li>有高优先级的线程参与调度</li>
+</ul>
+</li>
+<li>线程的优先级用数字来表示,范围从1~10,主线程的默认优先级为5,其他线程的优先级与创建它的父线程的优先级相同,为了方便,Thread类提供了如下几个常量来表示优先级:
+<ul>
+<li><code>Thread.MIN_PRIORITY=1</code></li>
+<li><code>Thread.MAX_PRIORITY=10</code></li>
+<li><code>Thread.NORM_PRIORITY=5</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="从-JVM-角度说进程和线程之间的关系">从 JVM 角度说进程和线程之间的关系</h2>
+<ul>
+<li>下图是 Java 内存区域,通过下图我们从 JVM 的角度来说一下线程和进程之间的关系</li>
+</ul>
+<img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-18-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly90aGlua3dvbi5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.png" srcset="/images/loading.gif" lazyload alt="在这里插入图片描述" style="zoom:50%;" />
+<ul>
+<li>从上图可以看出:一个进程中可以有多个线程,多个线程共享进程的堆和方法区 (JDK1.8 之后的元空间)资源,但是每个线程有自己的程序计数器,虚拟机栈和本地方法栈</li>
+<li><strong>程序计数器为什么是私有的?</strong>
+<ul>
+<li>程序计数器主要有下面两个作用:
+<ul>
+<li>字节码解释器通过改变程序计数器来依次读取指令,从而实现代码的流程控制,如:顺序执行,选择,循环,异常处理</li>
+<li>在多线程的情况下,程序计数器用于记录当前线程执行的位置,从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了需要注意的是,如果执行的是 native 方法,那么程序计数器记录的是 undefined 地址,只有执行的是 Java 代码时程序计数器记录的才是下一条指令的地址</li>
+</ul>
+</li>
+<li>所以,程序计数器私有主要是为了线程切换后能恢复到正确的执行位置</li>
+</ul>
+</li>
+<li><strong>虚拟机栈和本地方法栈为什么是私有的?</strong>
+<ul>
+<li>虚拟机栈:每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表,操作数栈,常量池引用等信息,从方法调用直至执行完成的过程,就对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程</li>
+<li>本地方法栈:和虚拟机栈所发挥的作用非常相似,区别是:虚拟机栈为虚拟机执行 Java 方法(也就是字节码)服务,而本地方法栈则为虚拟机使用到的 Native 方法服务,在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一</li>
+<li>所以,为了保证线程中的局部变量不被别的线程访问到,虚拟机栈和本地方法栈是线程私有的</li>
+</ul>
+</li>
+<li><strong>堆和方法区</strong>
+<ul>
+<li>堆和方法区是所有线程共享的资源,其中堆是进程中最大的一块内存,主要用于存放新创建的对象 (所有对象都在这里分配内存),方法区主要用于存放已被加载的类信息,常量,静态变量,即时编译器编译后的代码等数据</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E9%94%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 锁</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E5%85%B6%E4%BB%96%E6%A0%B8%E5%BF%83%E7%B1%BB/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB/">
+                        <span class="hidden-mobile">Java 基本数据类型包装类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

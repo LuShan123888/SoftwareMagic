@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Java 转换流  转换流InputStreamReader和OutputStreamWriter完成字符与字符编码字节的转换,在字节流和字符流间架起了一道桥梁,类FileReader和FileWriter分别是两个转换流的子类,用于实现对文本文件的读写访问  转换输入流(InputStreamReader)  从前面的介绍可发现,InputStreamReader是Reader的子类,一个Inp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 转换流">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E8%BD%AC%E6%8D%A2%E6%B5%81/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Java 转换流  转换流InputStreamReader和OutputStreamWriter完成字符与字符编码字节的转换,在字节流和字符流间架起了一道桥梁,类FileReader和FileWriter分别是两个转换流的子类,用于实现对文本文件的读写访问  转换输入流(InputStreamReader)  从前面的介绍可发现,InputStreamReader是Reader的子类,一个Inp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-Component-Page-2-4724113.svg">
+<meta property="article:published_time" content="2022-01-08T10:09:51.000Z">
+<meta property="article:modified_time" content="2022-01-08T10:09:51.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-Component-Page-2-4724113.svg">
+  
+  <title>Java 转换流 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java 转换流">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-08 18:09" pubdate>
+        2022年1月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 转换流</h1>
+            
+            <div class="markdown-body">
+              <h1>Java 转换流</h1>
+<ul>
+<li>转换流<code>InputStreamReader</code>和<code>OutputStreamWriter</code>完成字符与字符编码字节的转换,在字节流和字符流间架起了一道桥梁,类<code>FileReader</code>和<code>FileWriter</code>分别是两个转换流的子类,用于实现对文本文件的读写访问</li>
+</ul>
+<h2 id="转换输入流-InputStreamReader">转换输入流(InputStreamReader)</h2>
+<ul>
+<li>从前面的介绍可发现,<code>InputStreamReader</code>是<code>Reader</code>的子类,一个<code>InputStreamReader</code>对象接受一个字节输入流作为源,产生相应的<code>UTF-16</code>字符,类<code>InputStreamReader</code>的常用构造方法如下
+<ul>
+<li><code>public InputStreamReader(InputStream in)</code>:创建转换输入流,按默认字符集的编码从输入流读数据</li>
+<li><code>public InputStreamReader(InputStream in,Charset c)</code>:创建转换输入流,按指定字符集的编码从输入流读数据</li>
+<li><code>public InputStreamReader(InputStream in,String enc) throws UnsupportedEncod ing Exception</code>:创建转换输入流,按名称所指字符集的编码从输入流读数据</li>
+</ul>
+</li>
+<li>以下代码建立的转换输入流将按<code>ISO8859-6</code>字符集编码从文件读数据,并将字节数据转换为相应的UTF-16字符</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">InputStream filein = <span class="hljs-keyword">new</span> FileInputStream(file);<br>Reader in = <span class="hljs-keyword">new</span> InputStreamReader(filein,<span class="hljs-string">&quot;iso-8859-6&quot;</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>字符集编码规定了原始的8位字符与16为<code>Unicode</code>字符的等价对应关系,本地平台定义了其支持的字符集</li>
+<li>如果用该类强行将任意的字节转换为字符流是没有意义的,在实际应用中要根据流数据的特点来决定是否需要进行转换,例如,标准输入(键盘)提供的数据是字节形式的,实际上,从键盘输入的数据是字符系列,转换成字符流更符合应用的特点,因此使用<code>InputStreamReader</code>将字节流,又为了能一次性从键盘输入一样字符串,在用<code>BufferedReader</code>对字符流进行包装处理,如下图显示,进而可以用<code>BufferedReader</code>的<code>readLine()</code>方法读取一行字符串</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-Component-Page-2-4724113.svg" srcset="/images/loading.gif" lazyload alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in));<br>String x = in.readLine();<br></code></pre></td></tr></table></figure>
+<h2 id="转换输出流-OutputStreamWriter">转换输出流(OutputStreamWriter)</h2>
+<ul>
+<li>类<code>OutputStreamWriter</code>是<code>Writer</code>的子类,一个<code>OutputStreamWriter</code>对象将<code>UTF-16</code>字符转换为指定的字符编码形式写入到字节输出流,类OutputStreamWriter的常用构造方法如下:
+<ul>
+<li><code>public OutputStreamWriter(OutputStream out)</code>:创建转换输出流,按默认字符集的编码往输出流写数据</li>
+<li><code>public OutputStreamWriter(OutputStream out,Charset c)</code>:创建转换输出流,按指定字符集的编码往输出流写数据</li>
+<li><code>public OutputStreamWriter(OutputStream out,String enc)throws UnsupportedEncoding Exception</code>:创建转换输出流,按名称所指的字符集的编码往输出流写数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">OutputStream fileout = <span class="hljs-keyword">new</span> FileOutputStream(file);<br>Writer out = <span class="hljs-keyword">new</span> outputStreamWriter(fileout,<span class="hljs-string">&quot;iso-8859-6&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">流式输入输出与文件处理</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 文件与目录管理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E9%9D%A2%E5%90%91%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/">
+                        <span class="hidden-mobile">面向字符的输入输出流</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>

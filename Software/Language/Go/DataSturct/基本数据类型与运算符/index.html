@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="Go 基本数据类型  Go语言中有丰富的数据类型,除了基本的整型,浮点型,布尔型,字符串外,还有数组,切片,结构体,函数,map,通道(channel)等  基本数据类型 整型  整型分为以下两个大类:按长度分为:int8,int16,int32,int64 对应的无符号整型:uint8,uint16,uint32,uint64 其中,uint8就是byte类型,int16对应C语言中的short">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go 基本数据类型">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/DataSturct/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="Go 基本数据类型  Go语言中有丰富的数据类型,除了基本的整型,浮点型,布尔型,字符串外,还有数组,切片,结构体,函数,map,通道(channel)等  基本数据类型 整型  整型分为以下两个大类:按长度分为:int8,int16,int32,int64 对应的无符号整型:uint8,uint16,uint32,uint64 其中,uint8就是byte类型,int16对应C语言中的short">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-02T10:12:15.000Z">
+<meta property="article:modified_time" content="2022-10-02T10:12:15.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Go 基本数据类型 - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Go 基本数据类型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-02 18:12" pubdate>
+        2022年10月2日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Go 基本数据类型</h1>
+            
+            <div class="markdown-body">
+              <h1>Go 基本数据类型</h1>
+<ul>
+<li>Go语言中有丰富的数据类型,除了基本的整型,浮点型,布尔型,字符串外,还有数组,切片,结构体,函数,map,通道(channel)等</li>
+</ul>
+<h2 id="基本数据类型">基本数据类型</h2>
+<h3 id="整型">整型</h3>
+<ul>
+<li>整型分为以下两个大类:按长度分为:int8,int16,int32,int64 对应的无符号整型:uint8,uint16,uint32,uint64</li>
+<li>其中,<code>uint8</code>就是<code>byte</code>类型,<code>int16</code>对应C语言中的<code>short</code>型,<code>int64</code>对应C语言中的<code>long</code>型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">uint8</td>
+<td style="text-align:center">无符号 8位整型 (0 到 255)</td>
+</tr>
+<tr>
+<td style="text-align:center">uint16</td>
+<td style="text-align:center">无符号 16位整型 (0 到 65535)</td>
+</tr>
+<tr>
+<td style="text-align:center">uint32</td>
+<td style="text-align:center">无符号 32位整型 (0 到 4294967295)</td>
+</tr>
+<tr>
+<td style="text-align:center">uint64</td>
+<td style="text-align:center">无符号 64位整型 (0 到 18446744073709551615)</td>
+</tr>
+<tr>
+<td style="text-align:center">int8</td>
+<td style="text-align:center">有符号 8位整型 (-128 到 127)</td>
+</tr>
+<tr>
+<td style="text-align:center">int16</td>
+<td style="text-align:center">有符号 16位整型 (-32768 到 32767)</td>
+</tr>
+<tr>
+<td style="text-align:center">int32</td>
+<td style="text-align:center">有符号 32位整型 (-2147483648 到 2147483647)</td>
+</tr>
+<tr>
+<td style="text-align:center">int64</td>
+<td style="text-align:center">有符号 64位整型 (-9223372036854775808 到 9223372036854775807)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊整型">特殊整型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">uint</td>
+<td style="text-align:center">32位操作系统上就是<code>uint32</code>,64位操作系统上就是<code>uint64</code></td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">32位操作系统上就是<code>int32</code>,64位操作系统上就是<code>int64</code></td>
+</tr>
+<tr>
+<td style="text-align:center">uintptr</td>
+<td style="text-align:center">无符号整型,用于存放一个指针</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意</strong></p>
+<ul>
+<li>在使用<code>int</code>和 <code>uint</code>类型时,不能假定它是32位或64位的整型,而是考虑<code>int</code>和<code>uint</code>可能在不同平台上的差异</li>
+<li>获取对象的长度的内建<code>len()</code>函数返回的长度可以根据不同平台的字节长度进行变化,实际使用中,切片或 map 的元素数量等都可以用<code>int</code>来表示</li>
+<li>在涉及到二进制传输,读写文件的结构描述时,为了保持文件的结构不会受到不同编译目标平台字节长度的影响,不要使用<code>int</code>和 <code>uint</code></li>
+</ul>
+<h3 id="数字字面量语法-Number-literals-syntax">数字字面量语法(Number literals syntax)</h3>
+<ul>
+<li>Go1.13版本之后引入了数字字面量语法,这样便于开发者以二进制,八进制或十六进制浮点数的格式定义数字,例如:<code>v := 0b00101101</code>,代表二进制的 101101,相当于十进制的 45,<code>v := 0o377</code>,代表八进制的 377,相当于十进制的 255,<code>v := 0x1p-2</code>,代表十六进制的 1 除以 2²,也就是 0.25</li>
+<li>而且还允许用 <code>_</code> 来分隔数字,比如说:<code>v := 123_456</code> 表示 v 的值等于 123456</li>
+<li>可以借助fmt函数来将一个整数以不同进制形式展示</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">// 十进制</span><br>    <span class="hljs-keyword">var</span> a <span class="hljs-keyword">int</span> = <span class="hljs-number">10</span><br>    fmt.Printf(<span class="hljs-string">&quot;%d \n&quot;</span>, a)  <span class="hljs-comment">// 10</span><br>    fmt.Printf(<span class="hljs-string">&quot;%b \n&quot;</span>, a)  <span class="hljs-comment">// 1010  占位符%b表示二进制</span><br><br>    <span class="hljs-comment">// 八进制  以0开头</span><br>    <span class="hljs-keyword">var</span> b <span class="hljs-keyword">int</span> = <span class="hljs-number">077</span><br>    fmt.Printf(<span class="hljs-string">&quot;%o \n&quot;</span>, b)  <span class="hljs-comment">// 77</span><br><br>    <span class="hljs-comment">// 十六进制  以0x开头</span><br>    <span class="hljs-keyword">var</span> c <span class="hljs-keyword">int</span> = <span class="hljs-number">0xff</span><br>    fmt.Printf(<span class="hljs-string">&quot;%x \n&quot;</span>, c)  <span class="hljs-comment">// ff</span><br>    fmt.Printf(<span class="hljs-string">&quot;%X \n&quot;</span>, c)  <span class="hljs-comment">// FF</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="浮点型">浮点型</h3>
+<ul>
+<li>Go语言支持两种浮点型数:<code>float32</code>和<code>float64</code>,这两种浮点型数据格式遵循<code>IEEE 754</code>标准:<code>float32</code> 的浮点数的最大范围约为 <code>3.4e38</code>,可以使用常量定义:<code>math.MaxFloat32</code>,<code>float64</code> 的浮点数的最大范围约为 <code>1.8e308</code>,可以使用一个常量定义:<code>math.MaxFloat64</code></li>
+<li>打印浮点数时,可以使用<code>fmt</code>包配合动词<code>%f</code>,代码如下:</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;math&quot;</span><br>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;%f\n&quot;</span>, math.Pi)<br>    fmt.Printf(<span class="hljs-string">&quot;%.2f\n&quot;</span>, math.Pi)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="复数">复数</h3>
+<ul>
+<li>complex64和complex128</li>
+<li>复数有实部和虚部,complex64的实部和虚部为32位,complex128的实部和虚部为64位</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> c1 <span class="hljs-keyword">complex64</span><br>c1 = <span class="hljs-number">1</span> + <span class="hljs-number">2i</span><br><span class="hljs-keyword">var</span> c2 <span class="hljs-keyword">complex128</span><br>c2 = <span class="hljs-number">2</span> + <span class="hljs-number">3i</span><br>fmt.Println(c1)<br>fmt.Println(c2)<br></code></pre></td></tr></table></figure>
+<h3 id="布尔值">布尔值</h3>
+<ul>
+<li>Go语言中以<code>bool</code>类型进行声明布尔型数据,布尔型数据只有<code>true(真)</code>和<code>false(假)</code>两个值</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>布尔类型变量的默认值为<code>false</code></li>
+<li>Go 语言中不允许将整型强制转换为布尔型</li>
+<li>布尔型无法参与数值运算,也无法与其他类型进行转换</li>
+</ul>
+<h2 id="字符串">字符串</h2>
+<ul>
+<li>Go语言中的字符串以原生数据类型出现,使用字符串就像使用其他原生数据类型(int,bool,float32,float64 等)一样,Go 语言里的字符串的内部实现使用<code>UTF-8</code>编码,字符串的值为<code>双引号&quot;</code>中的内容,可以在Go语言的源码中直接添加非ASCII码字符,例如:</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go">s1 := <span class="hljs-string">&quot;hello&quot;</span><br>s2 := <span class="hljs-string">&quot;你好&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="字符串转义符">字符串转义符</h3>
+<ul>
+<li>Go 语言的字符串常见转义符包含回车,换行,单双引号,制表符等</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>\r</code></td>
+<td style="text-align:center">回车符(返回行首)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\n</code></td>
+<td style="text-align:center">换行符(直接跳到下一行的同列位置)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\t</code></td>
+<td style="text-align:center">制表符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\'</code></td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\&quot;</code></td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\\</code></td>
+<td style="text-align:center">反斜杠</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>例如打印一个Windows平台下的一个文件路径</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;str := \&quot;c:\\Code\\lesson1\\go.exe\&quot;&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="多行字符串">多行字符串</h3>
+<ul>
+<li>Go语言中要定义一个多行字符串时,就必须使用<code>反引号</code>字符</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">s1 := <span class="hljs-string">`第一行</span><br><span class="hljs-string">第二行</span><br><span class="hljs-string">第三行</span><br><span class="hljs-string">`</span><br>fmt.Println(s1)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>反引号间换行将被作为字符串中的换行,但是所有的转义字符均无效,文本将会原样输出</li>
+</ul>
+<h3 id="字符串的常用操作">字符串的常用操作</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">len(str)</td>
+<td style="text-align:center">求长度</td>
+</tr>
+<tr>
+<td style="text-align:center">+或fmt.Sprintf</td>
+<td style="text-align:center">拼接字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">strings.Split</td>
+<td style="text-align:center">分割</td>
+</tr>
+<tr>
+<td style="text-align:center">strings.contains</td>
+<td style="text-align:center">判断是否包含</td>
+</tr>
+<tr>
+<td style="text-align:center">strings.HasPrefix,strings.HasSuffix</td>
+<td style="text-align:center">前缀/后缀判断</td>
+</tr>
+<tr>
+<td style="text-align:center">strings.Index(),strings.LastIndex()</td>
+<td style="text-align:center">子串出现的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">strings.Join(a[]string, sep string)</td>
+<td style="text-align:center">join操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="byte和rune类型">byte和rune类型</h3>
+<ul>
+<li>组成每个字符串的元素叫做&quot;字符”,可以通过遍历或者单个获取字符串元素获得字符,字符用单引号<code>'</code>包裹起来,如:</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;中&#x27;</span><br><span class="hljs-keyword">var</span> b = <span class="hljs-string">&#x27;x&#x27;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>Go 语言的字符有以下两种:
+<ol>
+<li><code>uint8</code>类型,或者叫 byte 型,代表了<code>ASCII码</code>的一个字符</li>
+<li><code>rune</code>类型,代表一个 <code>UTF-8字符</code></li>
+</ol>
+</li>
+<li>当需要处理中文,日文或者其他复合字符时,则需要用到<code>rune</code>类型,<code>rune</code>类型实际是一个<code>int32</code></li>
+<li>Go 使用了特殊的 rune 类型来处理 Unicode,让基于 Unicode 的文本处理更为方便,也可以使用 byte 型进行默认字符串处理,性能和扩展性都有照顾</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 遍历字符串</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">traversalString</span><span class="hljs-params">()</span></span> &#123;<br>    s := <span class="hljs-string">&quot;hello沙河&quot;</span><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(s); i++ &#123; <span class="hljs-comment">//byte</span><br>        fmt.Printf(<span class="hljs-string">&quot;%v(%c) &quot;</span>, s[i], s[i])<br>    &#125;<br>    fmt.Println()<br>    <span class="hljs-keyword">for</span> _, r := <span class="hljs-keyword">range</span> s &#123; <span class="hljs-comment">//rune</span><br>        fmt.Printf(<span class="hljs-string">&quot;%v(%c) &quot;</span>, r, r)<br>    &#125;<br>    fmt.Println()<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">104(h) 101(e) 108(l) 108(l) 111(o) 230(æ) 178(²) 153() 230(æ) 178(²) 179(³)<br>104(h) 101(e) 108(l) 108(l) 111(o) 27801(沙) 27827(河)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>因为UTF8编码下一个中文汉字由3~4个字节组成,所以我们不能简单的按照字节去遍历一个包含中文的字符串,否则就会出现上面输出中第一行的结果</li>
+<li>字符串底层是一个byte数组,所以可以和<code>[]byte</code>类型相互转换,字符串是不能修改的 字符串是由byte字节组成,所以字符串的长度是byte字节的长度,rune类型用来表示utf8字符,一个rune字符由一个或多个byte组成</li>
+</ul>
+<h3 id="修改字符串">修改字符串</h3>
+<ul>
+<li>要修改字符串,需要先将其转换成<code>[]rune</code>或<code>[]byte</code>,完成后再转换为<code>string</code>,无论哪种转换,都会重新分配内存,并复制字节数组</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">changeString</span><span class="hljs-params">()</span></span> &#123;<br>    s1 := <span class="hljs-string">&quot;big&quot;</span><br>    <span class="hljs-comment">// 强制类型转换</span><br>    byteS1 := []<span class="hljs-keyword">byte</span>(s1)<br>    byteS1[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;p&#x27;</span><br>    fmt.Println(<span class="hljs-keyword">string</span>(byteS1))<br><br>    s2 := <span class="hljs-string">&quot;白萝卜&quot;</span><br>    runeS2 := []<span class="hljs-keyword">rune</span>(s2)<br>    runeS2[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;红&#x27;</span><br>    fmt.Println(<span class="hljs-keyword">string</span>(runeS2))<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="类型转换">类型转换</h2>
+<ul>
+<li>Go语言中只有强制类型转换,没有隐式类型转换,该语法只能在两个类型之间支持相互转换的时候使用</li>
+<li>强制类型转换的基本语法如下:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">T(表达式)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>其中,T表示要转换的类型,表达式包括变量,复杂算子和函数返回值等</li>
+<li>比如计算直角三角形的斜边长时使用math包的<code>Sqrt()</code>函数,该函数接收的是float64类型的参数,而变量a和b都是int类型的,这个时候就需要将a和b强制类型转换为float64类型</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">sqrtDemo</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> a, b = <span class="hljs-number">3</span>, <span class="hljs-number">4</span><br>    <span class="hljs-keyword">var</span> c <span class="hljs-keyword">int</span><br>    <span class="hljs-comment">// math.Sqrt()接收的参数是float64类型,需要强制转换</span><br>    c = <span class="hljs-keyword">int</span>(math.Sqrt(<span class="hljs-keyword">float64</span>(a*a + b*b)))<br>    fmt.Println(c)<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="运算符">运算符</h2>
+<ul>
+<li>Go 语言内置的运算符有
+<ul>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>赋值运算符</li>
+</ul>
+</li>
+</ul>
+<h3 id="算术运算符">算术运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">相加</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">相减</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">相乘</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">相除</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">求余</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>注意</strong>:<code>++</code>(自增)和<code>--</code>(自减)在Go语言中是单独的语句,并不是运算符</li>
+</ul>
+<h3 id="关系运算符">关系运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">==</td>
+<td style="text-align:center">检查两个值是否相等,如果相等返回 True 否则返回 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">!=</td>
+<td style="text-align:center">检查两个值是否不相等,如果不相等返回 True 否则返回 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:center">检查左边值是否大于右边值,如果是返回 True 否则返回 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td style="text-align:center">检查左边值是否大于等于右边值,如果是返回 True 否则返回 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:center">检查左边值是否小于右边值,如果是返回 True 否则返回 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;=</td>
+<td style="text-align:center">检查左边值是否小于等于右边值,如果是返回 True 否则返回 False,</td>
+</tr>
+</tbody>
+</table>
+<h3 id="逻辑运算符">逻辑运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&amp;&amp;</td>
+<td style="text-align:center">逻辑 AND 运算符,如果两边的操作数都是 True,则为 True,否则为 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">||</td>
+<td style="text-align:center">逻辑 OR 运算符,如果两边的操作数有一个 True,则为 True,否则为 False,</td>
+</tr>
+<tr>
+<td style="text-align:center">!</td>
+<td style="text-align:center">逻辑 NOT 运算符,如果条件为 True,则为 False,否则为 True,</td>
+</tr>
+</tbody>
+</table>
+<h3 id="位运算符">位运算符</h3>
+<ul>
+<li>位运算符对整数在内存中的二进制位进行操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">参与运算的两数各对应的二进位相与,(两位均为1才为1)</td>
+</tr>
+<tr>
+<td style="text-align:center">|</td>
+<td style="text-align:center">参与运算的两数各对应的二进位相或,(两位有一个为1就为1)</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">参与运算的两数各对应的二进位相异或,当两对应的二进位相异时,结果为1,(两位不一样则为1)</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;</td>
+<td style="text-align:center">左移n位就是乘以2的n次方,&quot;a&lt;&lt;b”是把a的各二进位全部左移b位,高位丢弃,低位补0,</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;&gt;</td>
+<td style="text-align:center">右移n位就是除以2的n次方,&quot;a&gt;&gt;b”是把a的各二进位全部右移b位,</td>
+</tr>
+</tbody>
+</table>
+<h3 id="赋值运算符">赋值运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">=</td>
+<td style="text-align:center">简单的赋值运算符,将一个表达式的值赋给一个左值</td>
+</tr>
+<tr>
+<td style="text-align:center">+=</td>
+<td style="text-align:center">相加后再赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">-=</td>
+<td style="text-align:center">相减后再赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">*=</td>
+<td style="text-align:center">相乘后再赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">/=</td>
+<td style="text-align:center">相除后再赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">%=</td>
+<td style="text-align:center">求余后再赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">&lt;&lt;=</td>
+<td style="text-align:center">左移后赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;&gt;=</td>
+<td style="text-align:center">右移后赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;=</td>
+<td style="text-align:center">按位与后赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">|=</td>
+<td style="text-align:center">按位或后赋值</td>
+</tr>
+<tr>
+<td style="text-align:center">^=</td>
+<td style="text-align:center">按位异或后赋值</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Go/">Go</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Go/DataSturct/">DataSturct</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/Language/Go/FlowControl/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Go Flow control</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Go/Library/log/">
+                        <span class="hidden-mobile">Go log</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
