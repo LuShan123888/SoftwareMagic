@@ -2,7 +2,7 @@
 title: Redis Spring Boot整合
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 ---

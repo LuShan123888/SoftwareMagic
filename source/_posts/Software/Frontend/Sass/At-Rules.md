@@ -2,7 +2,7 @@
 title: Sass At-Rules
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass At-Rules

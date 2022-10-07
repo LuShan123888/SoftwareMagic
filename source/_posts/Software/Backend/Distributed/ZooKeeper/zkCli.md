@@ -2,7 +2,7 @@
 title: Zookeeper zkCli
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - ZooKeeper
 ---

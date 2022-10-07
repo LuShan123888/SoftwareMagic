@@ -2,7 +2,7 @@
 title: Sass Nesting
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Nesting

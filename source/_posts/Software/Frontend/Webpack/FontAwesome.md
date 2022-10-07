@@ -2,7 +2,7 @@
 title: Webpack 整合 Font Awesome
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack 整合 Font Awesome

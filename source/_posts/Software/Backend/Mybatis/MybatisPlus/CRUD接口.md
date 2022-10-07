@@ -2,7 +2,7 @@
 title: Mybatis Plus CRUD 接口
 categories:
 - Software
-- Backend
+- BackEnd
 - Mybatis
 - MybatisPlus
 ---

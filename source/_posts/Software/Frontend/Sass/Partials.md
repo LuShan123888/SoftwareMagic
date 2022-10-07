@@ -2,7 +2,7 @@
 title: Sass Partials
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Partials

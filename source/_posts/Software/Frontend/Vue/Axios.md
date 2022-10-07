@@ -2,7 +2,7 @@
 title: Vue 整合Axios
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Vue
 ---
 # Vue 整合Axios

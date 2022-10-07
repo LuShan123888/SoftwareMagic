@@ -2,7 +2,7 @@
 title: Webpack Plugin
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack Plugin

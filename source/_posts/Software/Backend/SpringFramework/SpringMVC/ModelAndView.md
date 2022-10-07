@@ -2,7 +2,7 @@
 title: Spring MVC ModelAndView
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringMVC
 ---

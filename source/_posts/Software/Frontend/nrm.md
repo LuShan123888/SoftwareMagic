@@ -2,7 +2,7 @@
 title: NPM nrm
 categories:
 - Software
-- Frontend
+- FrontEnd
 ---
 # NPM nrm
 

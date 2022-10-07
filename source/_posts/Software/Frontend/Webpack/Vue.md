@@ -2,7 +2,7 @@
 title: Webpack 整合Vue
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack 整合Vue

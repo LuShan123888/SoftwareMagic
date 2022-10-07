@@ -2,7 +2,7 @@
 title: Spring MVC WebMvcConfigurer
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringMVC
 ---

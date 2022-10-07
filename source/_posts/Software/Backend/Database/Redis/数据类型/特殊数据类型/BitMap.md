@@ -2,7 +2,7 @@
 title: Redis BitMap
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 - 数据类型

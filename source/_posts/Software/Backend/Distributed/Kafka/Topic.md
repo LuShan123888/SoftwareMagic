@@ -2,7 +2,7 @@
 title: Kafka Topic
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Kafka
 ---

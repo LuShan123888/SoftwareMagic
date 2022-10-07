@@ -2,7 +2,7 @@
 title: jQuery Dom操作
 categories:
 - Software
-- Frontend
+- FrontEnd
 - jQuery
 ---
 # jQuery Dom操作

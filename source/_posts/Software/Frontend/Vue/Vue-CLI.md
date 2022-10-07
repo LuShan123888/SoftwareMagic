@@ -2,7 +2,7 @@
 title: Vue Vue-CLI
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Vue
 ---
 # Vue Vue-CLI

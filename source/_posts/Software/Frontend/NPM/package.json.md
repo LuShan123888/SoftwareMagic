@@ -2,7 +2,7 @@
 title: NPM package.json
 categories:
 - Software
-- Frontend
+- FrontEnd
 - NPM
 ---
 # NPM package.json

@@ -2,7 +2,7 @@
 title: Sass Operators
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Operators

@@ -2,7 +2,7 @@
 title: Sass @each
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 - FlowControl
 ---

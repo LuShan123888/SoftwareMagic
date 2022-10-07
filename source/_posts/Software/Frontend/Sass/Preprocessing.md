@@ -2,7 +2,7 @@
 title: Sass Preprocessing
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Preprocessing

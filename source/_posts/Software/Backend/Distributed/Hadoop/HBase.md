@@ -2,7 +2,7 @@
 title: Hadoop HBase
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Hadoop
 ---

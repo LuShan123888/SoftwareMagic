@@ -2,7 +2,7 @@
 title: Sass Modules
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Modules

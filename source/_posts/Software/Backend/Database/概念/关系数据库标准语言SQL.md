@@ -2,7 +2,7 @@
 title: 关系数据库标准语言SQL
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - 概念
 ---

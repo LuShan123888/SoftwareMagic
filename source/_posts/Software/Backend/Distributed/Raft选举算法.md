@@ -2,7 +2,7 @@
 title: Raft 选举算法
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 ---
 # Raft 选举算法

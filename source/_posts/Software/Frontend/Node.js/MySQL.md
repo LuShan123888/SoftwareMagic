@@ -2,7 +2,7 @@
 title: Node.js MySQL
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Node.js
 ---
 # Node.js MySQL

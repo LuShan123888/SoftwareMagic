@@ -2,7 +2,7 @@
 title: Sass Mixins
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Mixins

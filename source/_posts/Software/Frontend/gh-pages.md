@@ -2,7 +2,7 @@
 title: gh-pages
 categories:
 - Software
-- Frontend
+- FrontEnd
 ---
 # gh-pages
 

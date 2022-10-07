@@ -2,7 +2,7 @@
 title: Spring IoC 控制反转
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - Spring
 ---

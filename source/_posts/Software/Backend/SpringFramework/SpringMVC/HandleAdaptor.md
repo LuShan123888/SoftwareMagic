@@ -2,7 +2,7 @@
 title: Spring MVC 处理器适配器
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringMVC
 ---

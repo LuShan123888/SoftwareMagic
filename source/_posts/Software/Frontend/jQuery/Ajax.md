@@ -2,7 +2,7 @@
 title: jQuery Ajax
 categories:
 - Software
-- Frontend
+- FrontEnd
 - jQuery
 ---
 # jQuery Ajax

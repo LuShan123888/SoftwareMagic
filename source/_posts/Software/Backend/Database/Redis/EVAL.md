@@ -2,7 +2,7 @@
 title: Redis EVAL命令
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 ---

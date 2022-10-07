@@ -2,7 +2,7 @@
 title: Oracle DDL
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Oracle
 ---

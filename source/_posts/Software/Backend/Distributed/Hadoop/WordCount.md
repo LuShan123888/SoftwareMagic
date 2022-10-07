@@ -2,7 +2,7 @@
 title: Hadoop WordCount
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Hadoop
 ---

@@ -2,7 +2,7 @@
 title: Mybatis Plus ID生成器
 categories:
 - Software
-- Backend
+- BackEnd
 - Mybatis
 - MybatisPlus
 ---

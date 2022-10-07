@@ -2,7 +2,7 @@
 title: ZooKeeper Curator
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - ZooKeeper
 ---

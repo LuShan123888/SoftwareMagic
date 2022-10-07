@@ -2,7 +2,7 @@
 title: Hadoop HDFS
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Hadoop
 ---

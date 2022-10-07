@@ -2,7 +2,7 @@
 title: Webpack 整合Bootstrap
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack 整合Bootstrap

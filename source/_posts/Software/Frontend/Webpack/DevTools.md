@@ -2,7 +2,7 @@
 title: Webpack Dev Tools
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack Dev Tools

@@ -2,7 +2,7 @@
 title: Sass Extend&Inheritance
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Extend&Inheritance

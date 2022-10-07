@@ -2,7 +2,7 @@
 title: Redis Cluster
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 - 高可用

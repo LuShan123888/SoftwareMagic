@@ -2,7 +2,7 @@
 title: Mongo Collection
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Mongo
 ---

@@ -2,7 +2,7 @@
 title: Spring 整合Druid
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - Spring
 ---

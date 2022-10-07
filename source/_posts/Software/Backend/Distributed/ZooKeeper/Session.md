@@ -2,7 +2,7 @@
 title: Zookeeper Session
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - ZooKeeper
 ---

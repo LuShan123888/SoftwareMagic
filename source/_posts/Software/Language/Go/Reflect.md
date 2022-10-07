@@ -43,9 +43,9 @@ func main() {
 }
 ```
 
-#### type name和type kind
+**type.Name()和type.Kind()**
 
-- 在反射中关于类型还划分为两种:`类型(Type)`和`种类(Kind)`,因为在Go语言中我们可以使用type关键字构造很多自定义类型,而`种类(Kind)`就是指底层的类型,但在反射中,当需要区分指针,结构体等类型时,就会用到`种类(Kind)`,例如定义了两个指针类型和两个结构体类型,通过反射查看它们的类型和种类
+- 在反射中关于类型还划分为两种:`名称(Name)`和`种类(Kind)`,因为在Go语言中我们可以使用type关键字构造很多自定义类型,而`名称(Name)`就是指底层的类型,但在反射中,当需要区分指针,结构体等类型时,就会用到`种类(Kind)`,例如定义了两个指针类型和两个结构体类型,通过反射查看它们的名称和种类
 
 ```go
 package main
@@ -285,7 +285,7 @@ func main() {
 	}
 
 	t := reflect.TypeOf(stu1)
-	fmt.Println(t.Name(), t.Kind()) // Test struct
+	fmt.Println(t.Name(), t.Kind()) // student struct
 	// 通过for循环遍历结构体的所有字段信息
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)

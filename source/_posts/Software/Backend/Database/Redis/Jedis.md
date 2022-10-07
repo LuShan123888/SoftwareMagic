@@ -2,7 +2,7 @@
 title: Redis Jedis
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 ---

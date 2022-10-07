@@ -2,7 +2,7 @@
 title: Thrift Server
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Thrift
 ---

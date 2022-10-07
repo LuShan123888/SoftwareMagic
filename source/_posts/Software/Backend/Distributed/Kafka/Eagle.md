@@ -2,7 +2,7 @@
 title: Kafka Eagle
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Kafka
 ---

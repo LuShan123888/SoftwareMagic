@@ -2,7 +2,7 @@
 title: Spring DI
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - Spring
 ---

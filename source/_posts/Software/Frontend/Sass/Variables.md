@@ -2,7 +2,7 @@
 title: Sass Variables
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 ---
 # Sass Variables

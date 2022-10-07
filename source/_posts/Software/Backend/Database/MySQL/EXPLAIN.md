@@ -2,7 +2,7 @@
 title: MySQL EXPLAIN
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - MySQL
 ---

@@ -2,7 +2,7 @@
 title: Sass @if&@else
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Sass
 - FlowControl
 ---

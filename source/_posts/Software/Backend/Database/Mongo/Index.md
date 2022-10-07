@@ -2,7 +2,7 @@
 title: Mongo Index
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Mongo
 ---

@@ -2,7 +2,7 @@
 title: Spring MVC 视图解析器
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringMVC
 ---

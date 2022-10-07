@@ -2,7 +2,7 @@
 title: JWT
 categories:
 - Software
-- Backend
+- BackEnd
 ---
 # JWT
 

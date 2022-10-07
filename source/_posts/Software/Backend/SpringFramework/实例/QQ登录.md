@@ -2,7 +2,7 @@
 title: Spring Boot 整合QQ登录
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - 实例
 ---

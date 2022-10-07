@@ -2,7 +2,7 @@
 title: 一致性Hash
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 ---
 # 一致性Hash

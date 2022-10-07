@@ -2,7 +2,7 @@
 title: Bean的循环依赖问题
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - Spring
 ---

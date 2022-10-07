@@ -2,7 +2,7 @@
 title: Mybatis 动态SQL
 categories:
 - Software
-- Backend
+- BackEnd
 - Mybatis
 ---
 # Mybatis 动态SQL

@@ -2,7 +2,7 @@
 title: Kafka API
 categories:
 - Software
-- Backend
+- BackEnd
 - Distributed
 - Kafka
 ---

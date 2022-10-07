@@ -2,7 +2,7 @@
 title: Spring MVC 拦截器
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringMVC
 ---

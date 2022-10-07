@@ -2,7 +2,7 @@
 title: Redis ShardedJedis
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - Redis
 ---

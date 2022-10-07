@@ -2,7 +2,7 @@
 title: Webpack Loader
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Webpack
 ---
 # Webpack Loader

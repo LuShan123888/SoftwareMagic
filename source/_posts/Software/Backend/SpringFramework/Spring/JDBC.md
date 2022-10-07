@@ -2,7 +2,7 @@
 title: Spring 整合 JDBC
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - Spring
 ---

@@ -2,7 +2,7 @@
 title: MySQL DELIMITER
 categories:
 - Software
-- Backend
+- BackEnd
 - Database
 - MySQL
 ---

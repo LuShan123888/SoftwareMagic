@@ -2,7 +2,7 @@
 title: Node.js GET&POST请求
 categories:
 - Software
-- Frontend
+- FrontEnd
 - Node.js
 ---
 # Node.js GET&POST请求

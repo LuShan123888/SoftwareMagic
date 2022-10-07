@@ -2,7 +2,7 @@
 title: Spring Boot MVC 自动配置原理
 categories:
 - Software
-- Backend
+- BackEnd
 - SpringFramework
 - SpringBoot
 ---
