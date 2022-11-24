@@ -21,7 +21,7 @@ type Person struct {
 
 func main() {
 	p1 := Person{
-		Name:   "七米",
+		Name:   "Test",
 		Age:    18,
 		Weight: 71.5,
 	}
@@ -44,8 +44,8 @@ func main() {
 ```
 
 ```bash
-str:{"Name":"七米","Age":18,"Weight":71.5}
-p2:main.Person{Name:"七米", Age:18, Weight:71.5}
+str:{"Name":"Test","Age":18,"Weight":71.5}
+p2:main.Person{Name:"Test", Age:18, Weight:71.5}
 ```
 
 ### 结构体tag介绍
@@ -97,7 +97,7 @@ type User struct {
 
 func omitemptyDemo() {
 	u1 := User{
-		Name: "七米",
+		Name: "Test",
 	}
 	// struct -> json string
 	b, err := json.Marshal(u1)
@@ -110,7 +110,7 @@ func omitemptyDemo() {
 ```
 
 ```go
-str:{"name":"七米","email":"","hobby":null}
+str:{"name":"Test","email":"","hobby":null}
 ```
 
 如果想要在最终的序列化结果中去掉空值字段，可以像下面这样定义结构体：
@@ -128,7 +128,7 @@ type User struct {
 此时，再执行上述的`omitemptyDemo`，输出结果如下：
 
 ```bash
-str:{"name":"七米"} // 序列化结果中没有email和hobby字段
+str:{"name":"Test"} // 序列化结果中没有email和hobby字段
 ```
 
 ### 忽略嵌套结构体空值字段
@@ -150,7 +150,7 @@ type Profile struct {
 
 func nestedStructDemo() {
 	u1 := User{
-		Name:  "七米",
+		Name:  "Test",
 		Hobby: []string{"足球", "双色球"},
 	}
 	b, err := json.Marshal(u1)
@@ -165,7 +165,7 @@ func nestedStructDemo() {
 匿名嵌套`Profile`时序列化后的json串为单层的：
 
 ```bash
-str:{"name":"七米","hobby":["足球","双色球"],"site":"","slogan":""}
+str:{"name":"Test","hobby":["足球","双色球"],"site":"","slogan":""}
 ```
 
 想要变成嵌套的json串，需要改为具名嵌套或定义字段tag：
@@ -177,7 +177,7 @@ type User struct {
 	Hobby   []string `json:"hobby,omitempty"`
 	Profile `json:"profile"`
 }
-// str:{"name":"七米","hobby":["足球","双色球"],"profile":{"site":"","slogan":""}}
+// str:{"name":"Test","hobby":["足球","双色球"],"profile":{"site":"","slogan":""}}
 ```
 
 想要在嵌套的结构体为空值时，忽略该字段，仅添加`omitempty`是不够的：
@@ -189,7 +189,7 @@ type User struct {
 	Hobby    []string `json:"hobby,omitempty"`
 	Profile `json:"profile,omitempty"`
 }
-// str:{"name":"七米","hobby":["足球","双色球"],"profile":{"site":"","slogan":""}}
+// str:{"name":"Test","hobby":["足球","双色球"],"profile":{"site":"","slogan":""}}
 ```
 
 还需要使用嵌套的结构体指针：
@@ -201,7 +201,7 @@ type User struct {
 	Hobby    []string `json:"hobby,omitempty"`
 	*Profile `json:"profile,omitempty"`
 }
-// str:{"name":"七米","hobby":["足球","双色球"]}
+// str:{"name":"Test","hobby":["足球","双色球"]}
 ```
 
 ### 不修改原结构体忽略空值字段
@@ -221,7 +221,7 @@ type PublicUser struct {
 
 func omitPasswordDemo() {
 	u1 := User{
-		Name:     "七米",
+		Name:     "Test",
 		Password: "123456",
 	}
 	b, err := json.Marshal(PublicUser{User: &u1})
@@ -229,7 +229,7 @@ func omitPasswordDemo() {
 		fmt.Printf("json.Marshal u1 failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)  // str:{"name":"七米"}
+	fmt.Printf("str:%s\n", b)  // str:{"name":"Test"}
 }
 ```
 
@@ -507,7 +507,7 @@ func (o *Order) UnmarshalJSON(data []byte) error {
 func customMethodDemo() {
 	o1 := Order{
 		ID:          123456,
-		Title:       "《七米的Go学习笔记》",
+		Title:       "《Test的Go学习笔记》",
 		CreatedTime: time.Now(),
 	}
 	// 通过自定义的MarshalJSON方法实现struct -> json string
@@ -518,7 +518,7 @@ func customMethodDemo() {
 	}
 	fmt.Printf("str:%s\n", b)
 	// 通过自定义的UnmarshalJSON方法实现json string -> struct
-	jsonStr := `{"created_time":"2020-04-05 10:18:20","id":123456,"title":"《七米的Go学习笔记》"}`
+	jsonStr := `{"created_time":"2020-04-05 10:18:20","id":123456,"title":"《Test的Go学习笔记》"}`
 	var o2 Order
 	if err := json.Unmarshal([]byte(jsonStr), &o2); err != nil {
 		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
@@ -529,8 +529,8 @@ func customMethodDemo() {
 ```
 
 ```bash
-str:{"created_time":"2020-04-05 10:32:20","id":123456,"title":"《七米的Go学习笔记》"}
-o2:main.Order{ID:123456, Title:"《七米的Go学习笔记》", CreatedTime:time.Time{wall:0x0, ext:63721678700, loc:(*time.Location)(nil)}}
+str:{"created_time":"2020-04-05 10:32:20","id":123456,"title":"《Test的Go学习笔记》"}
+o2:main.Order{ID:123456, Title:"《Test的Go学习笔记》", CreatedTime:time.Time{wall:0x0, ext:63721678700, loc:(*time.Location)(nil)}}
 ```
 
 ### 使用匿名结构体添加字段
@@ -546,7 +546,7 @@ type UserInfo struct {
 func anonymousStructDemo() {
 	u1 := UserInfo{
 		ID:   123456,
-		Name: "七米",
+		Name: "Test",
 	}
 	// 使用匿名结构体内嵌User并添加额外字段Token
 	b, err := json.Marshal(struct {
@@ -561,7 +561,7 @@ func anonymousStructDemo() {
 		return
 	}
 	fmt.Printf("str:%s\n", b)
-	// str:{"id":123456,"name":"七米","token":"91je3a4s72d1da96h"}
+	// str:{"id":123456,"name":"Test","token":"91je3a4s72d1da96h"}
 }
 ```
 
@@ -581,7 +581,7 @@ type Image struct {
 
 func anonymousStructDemo2() {
 	c1 := Comment{
-		Content: "永远不要高估自己",
+		Content: "TestMsg",
 	}
 	i1 := Image{
 		Title: "赞赏码",
@@ -598,7 +598,7 @@ func anonymousStructDemo2() {
 	}
 	fmt.Printf("str:%s\n", b)
 	// json string -> struct
-	jsonStr := `{"Content":"永远不要高估自己","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}`
+	jsonStr := `{"Content":"TestMsg","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}`
 	var (
 		c2 Comment
 		i2 Image
@@ -615,8 +615,8 @@ func anonymousStructDemo2() {
 ```
 
 ```go
-str:{"Content":"永远不要高估自己","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
-c2:main.Comment{Content:"永远不要高估自己"} i2:main.Image{Title:"赞赏码", URL:"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
+str:{"Content":"TestMsg","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
+c2:main.Comment{Content:"TestMsg"} i2:main.Image{Title:"赞赏码", URL:"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
 ```
 
 ### 处理不确定层级的json
@@ -630,7 +630,7 @@ type sendMsg struct {
 }
 
 func rawMessageDemo() {
-	jsonStr := `{"sendMsg":{"user":"q1mi","msg":"永远不要高估自己"},"say":"Hello"}`
+	jsonStr := `{"sendMsg":{"user":"q1mi","msg":"TestMsg"},"say":"Hello"}`
 	// 定义一个map，value类型为json.RawMessage，方便后续更灵活地处理
 	var data map[string]json.RawMessage
 	if err := json.Unmarshal([]byte(jsonStr), &data); err != nil {
@@ -643,6 +643,6 @@ func rawMessageDemo() {
 		return
 	}
 	fmt.Printf("msg:%#v\n", msg)
-	// msg:main.sendMsg{User:"q1mi", Msg:"永远不要高估自己"}
+	// msg:main.sendMsg{User:"q1mi", Msg:"TestMsg"}
 }
 ```
