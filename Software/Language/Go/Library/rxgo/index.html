@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Cian">
+  <meta name="keywords" content="software computer programmer otes Cloud personal">
+  <meta name="description" content="GO rxgo  ReactiveX，简称为 Rx，是一个异步编程的 API。与 callback（回调）、promise（JS 提供这种方式）和 deferred（Python 的 twisted 网络编程库就是使用这种方式）这些异步编程方式有所不同，Rx 是基于事件流的。这里的事件可以是系统中产生或变化的任何东西，在代码中我们一般用对象表示。在 Rx 中，事件流被称为 Observable（可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO rxgo">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/Library/rxgo/">
+<meta property="og:site_name" content="SoftwareMagic">
+<meta property="og:description" content="GO rxgo  ReactiveX，简称为 Rx，是一个异步编程的 API。与 callback（回调）、promise（JS 提供这种方式）和 deferred（Python 的 twisted 网络编程库就是使用这种方式）这些异步编程方式有所不同，Rx 是基于事件流的。这里的事件可以是系统中产生或变化的任何东西，在代码中我们一般用对象表示。在 Rx 中，事件流被称为 Observable（可">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/rxgo1.png">
+<meta property="article:published_time" content="2023-01-27T11:27:05.000Z">
+<meta property="article:modified_time" content="2023-01-27T11:27:05.000Z">
+<meta property="article:author" content="Cian">
+<meta property="article:tag" content="software computer programmer otes Cloud personal">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/rxgo1.png">
+  
+  <title>GO rxgo - SoftwareMagic</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"softwaremagic.lushan.tech","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/images/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/local-search.xml"};
+  </script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/utils.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 50vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>SoftwareMagic</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/images/background.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="GO rxgo">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-27 19:27" pubdate>
+        2023年1月27日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GO rxgo</h1>
+            
+            <div class="markdown-body">
+              <h1>GO rxgo</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://reactivex.io/#">ReactiveX</a>，简称为 Rx，是一个异步编程的 API。与 <strong>callback</strong>（回调）、<strong>promise</strong>（JS 提供这种方式）和 <strong>deferred</strong>（Python 的 twisted 网络编程库就是使用这种方式）这些异步编程方式有所不同，Rx 是基于事件流的。这里的事件可以是系统中产生或变化的任何东西，在代码中我们一般用对象表示。在 Rx 中，事件流被称为 <strong>Observable</strong>（可观察的）。事件流需要被 <strong>Observer</strong>（观察者）处理才有意义。想象一下，我们日常作为一个 <strong>Observer</strong>，一个重要的工作就是观察 BUG 的事件流。每次发现一个 BUG，我们都需要去解决它。</li>
+<li>Rx 仅仅只是一个 API 规范的定义。Rx 有多种编程语言实现，<code>RxJava/RxJS/Rx.NET/RxClojure/RxSwift</code>。RxGo 是 Rx 的 Go 语言实现。借助于 Go 语言简洁的语法和强大的并发支持（goroutine、channel），Rx 与 Go 语言的结合非常完美。</li>
+<li>**<a target="_blank" rel="noopener" href="https://blog.golang.org/pipelines">pipelines</a>**是 Go 基础的并发编程模型。其中包含，fan-in——多个 goroutine 产生数据，一个goroutine 处理数据，fan-out——一个 goroutine 产生数据，多个 goroutine 处理数据，fan-inout——多个 goroutine 产生数据，多个 goroutine 处理数据。它们都是通过 channel 连接。RxGo 的实现就是基于 <strong>pipelines</strong> 的理念，并且提供了方便易用的包装和强大的扩展。</li>
+</ul>
+<h2 id="初始化">初始化</h2>
+<ul>
+<li>安装<code>rxgo</code>库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnash">go get -u github.com/reactivex/rxgo/v2<br></code></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>  <span class="hljs-string">&quot;fmt&quot;</span><br><br>  <span class="hljs-string">&quot;github.com/reactivex/rxgo/v2&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)()<br>  ch := observable.Observe()<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> ch &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span> <br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br><span class="hljs-number">3</span><br><span class="hljs-number">4</span><br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用 RxGo 的一般流程如下：
+<ul>
+<li>使用相关的 <strong>Operator</strong> 创建 <strong>Observable</strong>，<strong>Operator</strong> 就是用来创建 <strong>Observable</strong> 的。</li>
+<li>中间各个阶段可以使用过滤操作筛选出我们想要的数据，使用转换操作对数据进行转换</li>
+<li>调用 <strong>Observable</strong> 的<code>Observe()</code>方法，该方法返回一个<code>&lt;- chan rxgo.Item</code>。然后<code>for range</code>遍历即可。</li>
+</ul>
+</li>
+<li>GitHub 上一张图很形象地描绘了这个过程：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/rxgo1.png" srcset="/images/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>首先使用<code>Just</code>创建一个仅有若干固定数据的 <strong>Observable</strong></li>
+<li>使用<code>Map()</code>方法执行转换（将圆形转为方形）</li>
+<li>使用<code>Filter()</code>方法执行过滤（过滤掉黄色的方形）。</li>
+</ol>
+<h2 id="rxgo-Item">rxgo.Item</h2>
+<ul>
+<li>实际上<code>rxgo.Item</code>还可以包含错误。所以在使用时，我们应该做一层判断：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, errors.New(<span class="hljs-string">&quot;unknown&quot;</span>), <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)()<br>  ch := observable.Observe()<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> ch &#123;<br>    <span class="hljs-keyword">if</span> item.Error() &#123;<br>      fmt.Println(<span class="hljs-string">&quot;error:&quot;</span>, item.E)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      fmt.Println(item.V)<br>    &#125;<br>  &#125;<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span> <br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br>error: unknown<br><span class="hljs-number">3</span><br><span class="hljs-number">4</span><br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>我们使用<code>item.Error()</code>检查是否出现错误。然后使用<code>item.V</code>访问数据，<code>item.E</code>访问错误。</li>
+</ul>
+<h2 id="ForEach">ForEach()</h2>
+<ul>
+<li>除了使用<code>for range</code>之外，我们还可以调用 <strong>Observable</strong> 的<code>ForEach()</code>方法来实现遍历。<code>ForEach()</code>接受 3 个回调函数：
+<ul>
+<li><code>NextFunc</code>：类型为<code>func (v interface &#123;&#125;)</code>，处理数据；</li>
+<li><code>ErrFunc</code>：类型为<code>func (err error)</code>，处理错误；</li>
+<li><code>CompletedFunc</code>：类型为<code>func ()</code>，<strong>Observable</strong> 完成时调用。</li>
+</ul>
+</li>
+<li>使用<code>ForEach()</code>，可以将上面的示例改写为：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)()<br>  &lt;-observable.ForEach(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(v <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;received:&quot;</span>, v)<br>  &#125;, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(err error)</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;error:&quot;</span>, err)<br>  &#125;, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    fmt.Println(<span class="hljs-string">&quot;completed&quot;</span>)<br>  &#125;)<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span> <br>received: <span class="hljs-number">1</span><br>received: <span class="hljs-number">2</span><br>received: <span class="hljs-number">3</span><br>received: <span class="hljs-number">4</span><br>received: <span class="hljs-number">5</span><br>completed<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>ForEach()</code>实际上是异步执行的，它返回一个接收通知的 channel。当 <strong>Observable</strong> 数据发送完毕时，该 channel 会关闭。所以如果要等待<code>ForEach()</code>执行完成，我们需要使用<code>&lt;-</code>。上面的示例中如果去掉<code>&lt;-</code>，可能就没有输出了，因为主 goroutine 结束了，整个程序就退出了。</li>
+</ul>
+<h2 id="创建-Observable">创建 Observable</h2>
+<h3 id="Just"><code>Just</code></h3>
+<ul>
+<li><code>Just</code>使用柯里化（currying）让它可以在第一个参数中接受多个数据，在第二个参数中接受多个选项定制行为。柯里化是函数化编程的思想，简单来说就是通过在函数中返回函数，以此来减少每个函数的参数个数。例如：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json">func add(value int) func (int) int &#123;<br>  return func (a int) int &#123;<br>    return value + a<br>  &#125;<br>&#125;<br><br>fmt.Prinlnt(add(<span class="hljs-number">5</span>)(<span class="hljs-number">10</span>)) <span class="hljs-comment">// 15</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>由于 Go 不支持多个可变参数，<code>Just</code>通过柯里化迂回地实现了这个功能：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// rxgo/factory.go</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Just</span><span class="hljs-params">(items ...<span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-title">func</span><span class="hljs-params">(opts ...Option)</span> <span class="hljs-title">Observable</span></span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(opts ...Option)</span> <span class="hljs-title">Observable</span></span> &#123;<br>    <span class="hljs-keyword">return</span> &amp;ObservableImpl&#123;<br>      iterable: newJustIterable(items...)(opts...),<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Create"><code>Create</code></h3>
+<ul>
+<li>传入一个<code>[]rxgo.Producer</code>的切片，其中<code>rxgo.Producer</code>的类型为<code>func(ctx context.Context, next chan&lt;- Item)</code>。我们可以在代码中调用<code>rxgo.Of(value)</code>生成数据，<code>rxgo.Error(err)</code>生成错误，然后发送到<code>next</code>通道中：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Create([]rxgo.Producer&#123;<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, next <span class="hljs-keyword">chan</span>&lt;- rxgo.Item)</span></span> &#123;<br>    next &lt;- rxgo.Of(<span class="hljs-number">1</span>)<br>    next &lt;- rxgo.Of(<span class="hljs-number">2</span>)<br>    next &lt;- rxgo.Of(<span class="hljs-number">3</span>)<br>    next &lt;- rxgo.Error(errors.New(<span class="hljs-string">&quot;unknown&quot;</span>))<br>    next &lt;- rxgo.Of(<span class="hljs-number">4</span>)<br>    next &lt;- rxgo.Of(<span class="hljs-number">5</span>)<br>  &#125;&#125;)<br><br>  ch := observable.Observe()<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> ch &#123;<br>    <span class="hljs-keyword">if</span> item.Error() &#123;<br>      fmt.Println(<span class="hljs-string">&quot;error:&quot;</span>, item.E)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      fmt.Println(item.V)<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>分成两个<code>rxgo.Producer</code>也是一样的效果：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go">observable := rxgo.Create([]rxgo.Producer&#123;<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, next <span class="hljs-keyword">chan</span>&lt;- rxgo.Item)</span></span> &#123;<br>  next &lt;- rxgo.Of(<span class="hljs-number">1</span>)<br>  next &lt;- rxgo.Of(<span class="hljs-number">2</span>)<br>  next &lt;- rxgo.Of(<span class="hljs-number">3</span>)<br>  next &lt;- rxgo.Error(errors.New(<span class="hljs-string">&quot;unknown&quot;</span>))<br>  &#125;, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context, next <span class="hljs-keyword">chan</span>&lt;- rxgo.Item)</span></span> &#123;<br>  next &lt;- rxgo.Of(<span class="hljs-number">4</span>)<br>  next &lt;- rxgo.Of(<span class="hljs-number">5</span>)<br>&#125;&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="FromChannel"><code>FromChannel</code></h3>
+<ul>
+<li><code>FromChannel</code>可以直接从一个已存在的<code>&lt;-chan rxgo.Item</code>对象中创建 <strong>Observable</strong>：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item)<br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">5</span>; i++ &#123;<br>			ch &lt;- rxgo.Of(i)<br>		&#125;<br>		<span class="hljs-built_in">close</span>(ch)<br>	&#125;()<br><br>	observable := rxgo.FromChannel(ch)<br>	<span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>		fmt.Println(item.V)<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意：通道需要手动调用<code>close()</code>关闭，上面<code>Create()</code>方法内部<code>rxgo</code>自动帮我们执行了这个步骤。</li>
+</ul>
+<h3 id="Interval"><code>Interval</code></h3>
+<ul>
+<li><code>Interval</code>以传入的时间间隔生成一个无穷的数字序列，从 0 开始：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Interval(rxgo.WithDuration(<span class="hljs-number">5</span> * time.Second))<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的程序启动后，第 5s 输出 0，第 10s 输出 1，…，而且不会停止。</li>
+<li>可以用<code>time.Ticker</code>实现相同的功能：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  t := time.NewTicker(<span class="hljs-number">5</span> * time.Second)<br><br>  <span class="hljs-keyword">var</span> count <span class="hljs-keyword">int</span><br>  <span class="hljs-keyword">for</span> <span class="hljs-keyword">range</span> t.C &#123;<br>    fmt.Println(count)<br>    count++<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Range"><code>Range</code></h3>
+<ul>
+<li><code>Range</code>可以生成一个范围内的数字：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Range(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面代码依次输出 0，1，2，3。</li>
+</ul>
+<h3 id="Repeat"><code>Repeat</code></h3>
+<ul>
+<li>在已存在的 <strong>Observable</strong> 对象上调用<code>Repeat</code>，可以实现每隔指定时间，重复一次该序列，一共重复指定次数：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)().Repeat(<br>    <span class="hljs-number">3</span>, rxgo.WithDuration(<span class="hljs-number">1</span>*time.Second),<br>  )<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行上面的代码，立即输出 1，2，3，然后等待 1s，又输出一次 1，2，3，然后又等待 1s，最后又输出一次 1，2，3。</li>
+</ul>
+<h3 id="Start"><code>Start</code></h3>
+<ul>
+<li>可以给<code>Start</code>方法传入<code>[]rxgo.Supplier</code>作为参数，它可以包含任意数量的<code>rxgo.Supplier</code>类型。<code>rxgo.Supplier</code>的底层类型为：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// rxgo/types.go</span><br><span class="hljs-keyword">var</span> Supplier <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(ctx context.Context)</span> <span class="hljs-title">rxgo</span>.<span class="hljs-title">Item</span></span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>Observable</strong> 内部会依次调用这些<code>rxgo.Supplier</code>生成<code>rxgo.Item</code>：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Supplier1</span><span class="hljs-params">(ctx context.Context)</span> <span class="hljs-title">rxgo</span>.<span class="hljs-title">Item</span></span> &#123;<br>  <span class="hljs-keyword">return</span> rxgo.Of(<span class="hljs-number">1</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Supplier2</span><span class="hljs-params">(ctx context.Context)</span> <span class="hljs-title">rxgo</span>.<span class="hljs-title">Item</span></span> &#123;<br>  <span class="hljs-keyword">return</span> rxgo.Of(<span class="hljs-number">2</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Supplier3</span><span class="hljs-params">(ctx context.Context)</span> <span class="hljs-title">rxgo</span>.<span class="hljs-title">Item</span></span> &#123;<br>  <span class="hljs-keyword">return</span> rxgo.Of(<span class="hljs-number">3</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Start([]rxgo.Supplier&#123;Supplier1, Supplier2, Supplier3&#125;)<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Observable-分类">Observable 分类</h3>
+<ul>
+<li>根据数据在何处生成，<strong>Observable</strong> 被分为 <strong>Hot</strong> 和 <strong>Cold</strong> 两种类型（类比热启动和冷启动）。数据在其它地方生成的被成为 <strong>Hot Observable</strong>。相反，在 <strong>Observable</strong> 内部生成数据的就是 <strong>Cold Observable</strong>。</li>
+<li>使用上面介绍的方法创建的实际上都是 <strong>Hot Observable</strong>。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item)<br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>      ch &lt;- rxgo.Of(i)<br>    &#125;<br>    <span class="hljs-built_in">close</span>(ch)<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面创建的是 <strong>Hot Observable</strong>。但是有个问题，第一次<code>Observe()</code>消耗了所有的数据，第二个就没有数据输出了。</li>
+<li>而 <strong>Cold Observable</strong> 就不会有这个问题，因为它创建的流是独立于每个观察者的。即每次调用<code>Observe()</code>都创建一个新的 channel。我们使用<code>Defer()</code>方法创建 <strong>Cold Observable</strong>，它的参数与<code>Create()</code>方法一样。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Defer([]rxgo.Producer&#123;<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, ch <span class="hljs-keyword">chan</span>&lt;- rxgo.Item)</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ &#123;<br>      ch &lt;- rxgo.Of(i)<br>    &#125;<br>  &#125;&#125;)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br><span class="hljs-number">0</span><br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br><span class="hljs-number">0</span><br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<h3 id="可连接的-Observable">可连接的 <strong>Observable</strong></h3>
+<ul>
+<li>可连接的（Connectable）<strong>Observable</strong> 对普通的 <strong>Observable</strong> 进行了一层组装。调用它的<code>Observe()</code>方法时并不会立刻产生数据。使用它，我们可以等所有的观察者都准备就绪了（即调用了<code>Observe()</code>方法）之后，再调用其<code>Connect()</code>方法开始生成数据。我们通过两个示例比较使用普通的 <strong>Observable</strong> 和可连接的 <strong>Observable</strong> 有何不同。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item)<br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++ &#123;<br>      ch &lt;- rxgo.Of(i)<br>    &#125;<br>    <span class="hljs-built_in">close</span>(ch)<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch)<br><br>  observable.DoOnNext(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;First observer: %d\n&quot;</span>, i)<br>  &#125;)<br><br>  time.Sleep(<span class="hljs-number">3</span> * time.Second)<br>  fmt.Println(<span class="hljs-string">&quot;before subscribe second observer&quot;</span>)<br><br>  observable.DoOnNext(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;Second observer: %d\n&quot;</span>, i)<br>  &#125;)<br><br>  time.Sleep(<span class="hljs-number">3</span> * time.Second)<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上例中我们使用<code>DoOnNext()</code>方法来注册观察者。由于<code>DoOnNext()</code>方法是异步执行的，所以为了等待结果输出，在最后增加了一行<code>time.Sleep</code>。运行：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>First observer: <span class="hljs-number">1</span><br>First observer: <span class="hljs-number">2</span><br>First observer: <span class="hljs-number">3</span><br>before subscribe second observer<br></code></pre></td></tr></table></figure>
+<ul>
+<li>由输出可以看出，注册第一个观察者之后就开始产生数据了。</li>
+<li>我们通过在创建 <strong>Observable</strong> 的方法中指定<code>rxgo.WithPublishStrategy()</code>选项就可以创建可连接的 <strong>Observable</strong>：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item)<br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++ &#123;<br>      ch &lt;- rxgo.Of(i)<br>    &#125;<br>    <span class="hljs-built_in">close</span>(ch)<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch, rxgo.WithPublishStrategy())<br><br>  observable.DoOnNext(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;First observer: %d\n&quot;</span>, i)<br>  &#125;)<br><br>  time.Sleep(<span class="hljs-number">3</span> * time.Second)<br>  fmt.Println(<span class="hljs-string">&quot;before subscribe second observer&quot;</span>)<br><br>  observable.DoOnNext(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Printf(<span class="hljs-string">&quot;Second observer: %d\n&quot;</span>, i)<br>  &#125;)<br><br>  observable.Connect(context.Background())<br>  time.Sleep(<span class="hljs-number">3</span> * time.Second)<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>before subscribe second observer<br>Second observer: <span class="hljs-number">1</span><br>First observer: <span class="hljs-number">1</span><br>First observer: <span class="hljs-number">2</span><br>First observer: <span class="hljs-number">3</span><br>Second observer: <span class="hljs-number">2</span><br>Second observer: <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面是等两个观察者都注册之后，并且手动调用了 Observable 的<code>Connect()</code>方法才产生数据。而且可连接的 <strong>Observable</strong> 有一个特性：<strong>它是冷启动的</strong>，即每个观察者都会收到一份相同的拷贝。</li>
+</ul>
+<h2 id="转换-Observable">转换 <strong>Observable</strong></h2>
+<ul>
+<li>rxgo 提供了很多转换函数，可以修改经过它的<code>rxgo.Item</code>，然后再发送给下一个阶段。</li>
+</ul>
+<h3 id="Map"><code>Map</code></h3>
+<ul>
+<li><code>Map()</code>方法简单修改它收到的<code>rxgo.Item</code>然后发送到下一个阶段（转换或过滤）。<code>Map()</code>接受一个类型为<code>func (context.Context, interface&#123;&#125;) (interface&#123;&#125;, error)</code>的函数。第二个参数就是<code>rxgo.Item</code>中的数据，返回转换后的数据。如果出错，则返回错误。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)()<br><br>  observable = observable.Map(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>&#123;&#125;, error)</span></span> &#123;<br>    <span class="hljs-keyword">return</span> i.(<span class="hljs-keyword">int</span>)*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>, <span class="hljs-literal">nil</span><br>  &#125;).Map(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>&#123;&#125;, error)</span></span> &#123;<br>    <span class="hljs-keyword">return</span> i.(<span class="hljs-keyword">int</span>)*<span class="hljs-number">3</span> + <span class="hljs-number">2</span>, <span class="hljs-literal">nil</span><br>  &#125;)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br><span class="hljs-number">11</span><br><span class="hljs-number">17</span><br><span class="hljs-number">23</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>上例中每个数字经过两个<code>Map</code>，第一个<code>Map</code>执行<code>2 * i + 1</code>，第二个<code>Map</code>执行<code>3 * i + 2</code>。即对于每个数字来说，最终进行的变换为<code>3 * (2 * i + 1) + 2</code>。运行：</li>
+</ul>
+<h3 id="Marshal"><code>Marshal</code></h3>
+<ul>
+<li><code>Marshal</code>对经过它的数据进行一次<code>Marshal</code>。这个<code>Marshal</code>可以是<code>json.Marshal/proto.Marshal</code>，甚至我们自己写的<code>Marshal</code>函数。它接受一个类型为<code>func(interface&#123;&#125;) ([]byte, error)</code>的函数用于对数据进行处理。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>  Name <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;name&quot;`</span><br>  Age  <span class="hljs-keyword">int</span>    <span class="hljs-string">`json:&quot;age&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<br>    User&#123;<br>      Name: <span class="hljs-string">&quot;dj&quot;</span>,<br>      Age:  <span class="hljs-number">18</span>,<br>    &#125;,<br>    User&#123;<br>      Name: <span class="hljs-string">&quot;jw&quot;</span>,<br>      Age:  <span class="hljs-number">20</span>,<br>    &#125;,<br>  )()<br><br>  observable = observable.Marshal(json.Marshal)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(<span class="hljs-keyword">string</span>(item.V.([]<span class="hljs-keyword">byte</span>)))<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Unmarshal"><code>Unmarshal</code></h3>
+<ul>
+<li>既然有<code>Marshal</code>，也就有它的相反操作<code>Unmarshal</code>。<code>Unmarshal</code>用于将一个<code>[]byte</code>类型转换为相应的结构体或其他类型。与<code>Marshal</code>不同，<code>Unmarshal</code>需要知道转换的目标类型，所以需要提供一个函数用于生成该类型的对象。然后将<code>[]byte</code>数据<code>Unmarshal</code>到该对象中。<code>Unmarshal</code>接受两个参数，参数一是类型为<code>func([]byte, interface&#123;&#125;) error</code>的函数，参数二是<code>func () interface&#123;&#125;</code>用于生成实际类型的对象。我们拿上面的例子中生成的 JSON 字符串作为数据，将它们重新<code>Unmarshal</code>为<code>User</code>对象：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> User <span class="hljs-keyword">struct</span> &#123;<br>  Name <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;name&quot;`</span><br>  Age  <span class="hljs-keyword">int</span>    <span class="hljs-string">`json:&quot;age&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<br>    <span class="hljs-string">`&#123;&quot;name&quot;:&quot;dj&quot;,&quot;age&quot;:18&#125;`</span>,<br>    <span class="hljs-string">`&#123;&quot;name&quot;:&quot;jw&quot;,&quot;age&quot;:20&#125;`</span>,<br>  )()<br><br>  observable = observable.Map(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>&#123;&#125;, error)</span></span> &#123;<br>    <span class="hljs-keyword">return</span> []<span class="hljs-keyword">byte</span>(i.(<span class="hljs-keyword">string</span>)), <span class="hljs-literal">nil</span><br>  &#125;).Unmarshal(json.Unmarshal, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-title">interface</span></span>&#123;&#125; &#123;<br>    <span class="hljs-keyword">return</span> &amp;User&#123;&#125;<br>  &#125;)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>由于<code>Unmarshaller</code>接受<code>[]byte</code>类型的参数，我们在<code>Unmarshal</code>之前加了一个<code>Map</code>用于将<code>string</code>转为<code>[]byte</code>。运行：</li>
+</ul>
+<h3 id="Buffer"><code>Buffer</code></h3>
+<ul>
+<li>
+<p><code>Buffer</code>按照一定的规则收集接收到的数据，然后一次性发送出去（作为切片），而不是收到一个发送一个。有 3 种类型的<code>Buffer</code>：</p>
+<ul>
+<li><code>BufferWithCount(n)</code>：每收到<code>n</code>个数据发送一次，最后一次可能少于<code>n</code>个；</li>
+<li><code>BufferWithTime(n)</code>：发送在一个时间间隔<code>n</code>内收到的数据；</li>
+<li><code>BufferWithTimeOrCount(d, n)</code>：收到<code>n</code>个数据，或经过<code>d</code>时间间隔，发送当前收到的数据。</li>
+</ul>
+</li>
+<li>
+<p><code>BufferWithCount</code>：</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)()<br><br>  observable = observable.BufferWithCount(<span class="hljs-number">3</span>)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 注意，最后一组只有一个</span><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>[<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>]<br>[<span class="hljs-number">4</span>]<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>BufferWithTime</code>：每 3s 发送一次</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item, <span class="hljs-number">1</span>)<br><br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    i := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> <span class="hljs-keyword">range</span> time.Tick(time.Second) &#123;<br>      ch &lt;- rxgo.Of(i)<br>      i++<br>    &#125;<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch).BufferWithTime(rxgo.WithDuration(<span class="hljs-number">3</span> * time.Second))<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// </span><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>[<span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span>]<br>[<span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span>]<br>[<span class="hljs-number">6</span> <span class="hljs-number">7</span> <span class="hljs-number">8</span>]<br>...<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>BufferWithTimeOrCount</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item, <span class="hljs-number">1</span>)<br><br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    i := <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> <span class="hljs-keyword">range</span> time.Tick(time.Second) &#123;<br>      ch &lt;- rxgo.Of(i)<br>      i++<br>    &#125;<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch).BufferWithTimeOrCount(rxgo.WithDuration(<span class="hljs-number">3</span>*time.Second), <span class="hljs-number">2</span>)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 上面 3s 可以收集 3 个数据，但是设置了收集 2 个就发送</span><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br>[<span class="hljs-number">0</span> <span class="hljs-number">1</span>]<br>[<span class="hljs-number">2</span> <span class="hljs-number">3</span>]<br>[<span class="hljs-number">4</span> <span class="hljs-number">5</span>]<br>...<br></code></pre></td></tr></table></figure>
+<h3 id="GroupBy"><code>GroupBy</code></h3>
+<ul>
+<li><code>GroupBy</code>根据传入一个 <strong>Hash</strong> 函数，为每个不同的结果分别创建新的 <strong>Observable</strong>。换句话说，<code>GroupBy</code>生成一个数据类型为 <strong>Observable</strong> 的 <strong>Observable</strong>。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  count := <span class="hljs-number">3</span><br>  observable := rxgo.Range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>).GroupBy(count, <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(item rxgo.Item)</span> <span class="hljs-title">int</span></span> &#123;<br>    <span class="hljs-keyword">return</span> item.V.(<span class="hljs-keyword">int</span>) % count<br>  &#125;, rxgo.WithBufferedChannel(<span class="hljs-number">10</span>))<br><br>  <span class="hljs-keyword">for</span> subObservable := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(<span class="hljs-string">&quot;New observable:&quot;</span>)<br><br>    <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> subObservable.V.(rxgo.Observable).Observe() &#123;<br>      fmt.Printf(<span class="hljs-string">&quot;item: %v\n&quot;</span>, item.V)<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 上面根据每个数模 3 的余数将整个流分为 3 组。运行：</span><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span> <br>New observable:<br>item: <span class="hljs-number">0</span><br>item: <span class="hljs-number">3</span><br>item: <span class="hljs-number">6</span><br>item: <span class="hljs-number">9</span><br>New observable:<br>item: <span class="hljs-number">1</span><br>item: <span class="hljs-number">4</span><br>item: <span class="hljs-number">7</span><br>New observable:<br>item: <span class="hljs-number">2</span><br>item: <span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意<code>rxgo.WithBufferedChannel(10)</code>的使用，由于我们的数字是连续生成的，依次为 0-&gt;1-&gt;2-&gt;…-&gt;9-&gt;10。而 <strong>Observable</strong> 默认是惰性的，即由<code>Observe()</code>驱动。内层的<code>Observe()</code>在返回一个 0 之后就等待下一个数，但是下一个数 1 不在此 <strong>Observable</strong> 中。所以会陷入死锁。使用<code>rxgo.WithBufferedChannel(10)</code>，设置它们之间的连接 channel 缓冲区大小为 10，这样即使我们未取出 channel 里面的数字，上游还是能发送数字进来。</li>
+</ul>
+<h3 id="并行操作">并行操作</h3>
+<p>默认情况下，这些转换操作都是串行的，即只有一个 goroutine 负责执行转换函数。我们也可以使用<code>rxgo.WithPool(n)</code>选项设置运行<code>n</code>个 goroutine，或者<code>rxgo.WitCPUPool()</code>选项设置运行与逻辑 CPU 数量相等的 goroutine。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Range(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>)<br><br>  observable = observable.Map(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>&#123;&#125;, error)</span></span> &#123;<br>    time.Sleep(time.Duration(rand.Int31()))<br>    <span class="hljs-keyword">return</span> i.(<span class="hljs-keyword">int</span>)*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>, <span class="hljs-literal">nil</span><br>  &#125;, rxgo.WithCPUPool())<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>由于是并行，所以<strong>输出顺序就不确定了</strong>。为了让不确定性更明显一点，在代码中加了一行<code>time.Sleep</code>。</li>
+</ul>
+<h2 id="过滤-Observable">过滤 <strong>Observable</strong></h2>
+<ul>
+<li><strong>Observable</strong> 中发送过来的数据并不一定都是我们需要的，我们要把不想要的过滤掉。</li>
+</ul>
+<h3 id="Filter"><code>Filter</code></h3>
+<ul>
+<li><code>Filter()</code>接受一个类型为<code>func (i interface&#123;&#125;) bool</code>的参数，通过的数据使用这个函数断言，返回<code>true</code>的将发送给下一个阶段。否则，丢弃。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)<br><br>  observable = observable.Filter(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-title">bool</span></span> &#123;<br>    <span class="hljs-keyword">return</span> i.(<span class="hljs-keyword">int</span>)%<span class="hljs-number">2</span> == <span class="hljs-number">0</span><br>  &#125;)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 上面过滤掉奇数，最后只剩下偶数</span><br>$ <span class="hljs-keyword">go</span> run main.<span class="hljs-keyword">go</span><br><span class="hljs-number">2</span><br><span class="hljs-number">4</span><br><span class="hljs-number">6</span><br><span class="hljs-number">8</span><br><span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<h3 id="ElementAt"><code>ElementAt</code></h3>
+<ul>
+<li><code>ElementAt()</code>只发送指定索引的数据，如<code>ElementAt(2)</code>只发送索引为 2 的数据，即第 3 个数据。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)().ElementAt(<span class="hljs-number">2</span>)<br><br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Debounce"><code>Debounce</code></h3>
+<ul>
+<li><code>Debounce()</code>收到数据后还会等待指定的时间间隔，后续间隔内没有收到其他数据才会发送刚开始的数据。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> rxgo.Item)<br><br>  <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    ch &lt;- rxgo.Of(<span class="hljs-number">1</span>)<br>    time.Sleep(<span class="hljs-number">2</span> * time.Second)<br>    ch &lt;- rxgo.Of(<span class="hljs-number">2</span>)<br>    ch &lt;- rxgo.Of(<span class="hljs-number">3</span>)<br>    time.Sleep(<span class="hljs-number">2</span> * time.Second)<br>    <span class="hljs-built_in">close</span>(ch)<br>  &#125;()<br><br>  observable := rxgo.FromChannel(ch).Debounce(rxgo.WithDuration(<span class="hljs-number">1</span> * time.Second))<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面示例，先收到 1，然后 2s 内没收到数据，所以发送 1。接着收到了数据 2，由于马上又收到了 3，所以 2 不会发送。收到 3 之后 2s 内没有收到数据，发送了 3。所以最后输出为 1，3。</li>
+</ul>
+<h3 id="Distinct"><code>Distinct</code></h3>
+<ul>
+<li><code>Distinct()</code>会记录它发送的所有数据，它不会发送重复的数据。由于数据格式多样，<code>Distinct()</code>要求我们提供一个函数，根据原数据返回一个唯一标识码（有点类似哈希值）。基于这个标识码去重。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>)().<br>    Distinct(<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(_ context.Context, i <span class="hljs-keyword">interface</span>&#123;&#125;)</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>&#123;&#125;, error)</span></span> &#123;<br>      <span class="hljs-keyword">return</span> i, <span class="hljs-literal">nil</span><br>    &#125;)<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Skip"><code>Skip</code></h3>
+<ul>
+<li><code>Skip</code>可以跳过前若干个数据。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)().Skip(<span class="hljs-number">2</span>)<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="Take"><code>Take</code></h3>
+<p><code>Take</code>只取前若干个数据。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  observable := rxgo.Just(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)().Take(<span class="hljs-number">2</span>)<br>  <span class="hljs-keyword">for</span> item := <span class="hljs-keyword">range</span> observable.Observe() &#123;<br>    fmt.Println(item.V)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="选项">选项</h2>
+<ul>
+<li>rxgo 提供的大部分方法的最后一个参数是一个可变长的选项类型。这是 Go 中特有的、经典的选项设计模式。
+<ul>
+<li><code>rxgo.WithBufferedChannel(10)</code>：设置 channel 的缓存大小</li>
+<li><code>rxgo.WithPool(n)/rxgo.WithCpuPool()</code>：使用多个 goroutine 执行转换操作</li>
+<li><code>rxgo.WithPublishStrategy()</code>：使用发布策略，即创建可连接的 <strong>Observable</strong></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Go/">Go</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Go/Library/">Library</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL 锁</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Software/Language/Go/%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/">
+                        <span class="hidden-mobile">Go 线程同步</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/events.js" ></script>
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="https://cdn.jsdelivr.net/gh/LuShan123888/SoftwareMagic@gh-pages/js/boot.js" ></script>
+
+
+</body>
+</html>
