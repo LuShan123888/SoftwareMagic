@@ -16,20 +16,20 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Kafka 集群 创建集群 1234567891011121314151617$ docker run -d --name kafka1 -p 9093:9092 \--net zookeeper \--env KAFKA_ZOOKEEPER_CONNECT&#x3D;zookeeper:2181 \--env KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;kafka1:9092 \--env K">
+  <meta name="description" content="Kafka Topic 创建Topic 1$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test-replicated-topic  --topic:定义 topic 名 --replication-factor:定义副本数,副本数要小于等于br">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka 集群">
-<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/Kafka/%E9%9B%86%E7%BE%A4/">
+<meta property="og:title" content="Kafka Topic">
+<meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Kafka/Topic/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Kafka 集群 创建集群 1234567891011121314151617$ docker run -d --name kafka1 -p 9093:9092 \--net zookeeper \--env KAFKA_ZOOKEEPER_CONNECT&#x3D;zookeeper:2181 \--env KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;kafka1:9092 \--env K">
+<meta property="og:description" content="Kafka Topic 创建Topic 1$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test-replicated-topic  --topic:定义 topic 名 --replication-factor:定义副本数,副本数要小于等于br">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-14T16:25:14.000Z">
-<meta property="article:modified_time" content="2021-07-14T16:25:14.000Z">
+<meta property="article:published_time" content="2021-12-05T08:20:49.000Z">
+<meta property="article:modified_time" content="2021-12-05T08:20:49.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>Kafka 集群 - SoftwareMagic</title>
+  <title>Kafka Topic - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -151,7 +151,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Kafka 集群">
+            <span class="h2" id="subtitle" title="Kafka Topic">
               
             </span>
 
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-15 00:25" pubdate>
-        2021年7月15日 凌晨
+      <time datetime="2021-12-05 16:20" pubdate>
+        2021年12月5日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      900 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      3 分钟
     </span>
   
 
@@ -210,40 +210,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Kafka 集群</h1>
+            <h1 style="display: none">Kafka Topic</h1>
             
             <div class="markdown-body">
-              <h1>Kafka 集群</h1>
-<h2 id="创建集群">创建集群</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker run -d --name kafka1 -p 9093:9092 \<br>--net zookeeper \<br>--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \<br>--env KAFKA_LISTENERS=PLAINTEXT://kafka1:9092 \<br>--env KAFKA_BROKER_ID=1 \<br>--env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka1:9092 \<br>--hostname kafka1 \<br>wurstmeister/kafka:2.12-2.3.1<br><br>$ docker run -d --name kafka2 -p 9094:9092 \<br>--net zookeeper \<br>--env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \<br>--env KAFKA_LISTENERS=PLAINTEXT://kafka2:9092 \<br>--env KAFKA_BROKER_ID=2 \<br>--env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka2:9092 \<br>--hostname kafka2 \<br>wurstmeister/kafka:2.12-2.3.1<br></code></pre></td></tr></table></figure>
-<h2 id="创建Topic">创建Topic</h2>
+              <h1>Kafka Topic</h1>
+<h3 id="创建Topic">创建Topic</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test-replicated-topic<br></code></pre></td></tr></table></figure>
 <ul>
-<li>创建一个replication-factor为3的topic</li>
+<li><code>--topic</code>:定义 topic 名</li>
+<li><code>--replication-factor</code>:定义副本数,副本数要小于等于broker数</li>
+<li><code>--partitions</code>:定义分区数</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 3 --partitions 1 --topic test-replicated-topic<br></code></pre></td></tr></table></figure>
-<h2 id="查看Topic">查看Topic</h2>
+<blockquote>
+<p>为了实现扩展性,一个非常大的 topic 可以分布到多个 broker(即服务器)上,一个 topic 可以分为多个 partition,每个 partition 是一个有序的队列</p>
+</blockquote>
+<h3 id="查看所有Topic">查看所有Topic</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --list --zookeeper zookeeper:2181<br></code></pre></td></tr></table></figure>
+<h3 id="查看某个Topic的详情">查看某个Topic的详情</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --zookeeper zookeeper:2181 --describe --topic test-topic<br></code></pre></td></tr></table></figure>
+<h3 id="删除Topic">删除Topic</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --zookeeper zookeeper:2181 --delete --topic test-topic<br></code></pre></td></tr></table></figure>
 <ul>
-<li>运行<code>describe topics</code>命令</li>
+<li>可以在<code>server.properties</code>中设置 <code>delete.topic.enable=true</code> 否则只是标记删除</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test-replicated-topic</span><br>Topic:test-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:<br>	Topic: test-replicated-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0<br></code></pre></td></tr></table></figure>
+<h3 id="修改Topic分区数">修改Topic分区数</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --zookeeper zookeeper:2181 --alter --topic  test-topic --partitions 3<br></code></pre></td></tr></table></figure>
+<h3 id="发送消息">发送消息</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-console-producer.sh --broker-list kafka:9092 --topic test-topic<br><br>&gt;hello, kafka.<br>&gt;<span class="hljs-built_in">test</span> message<br></code></pre></td></tr></table></figure>
+<h3 id="消费消息">消费消息</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test-topic --from-beginning<br><br>hello, kafka.<br><span class="hljs-built_in">test</span> message<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>leader</strong>:负责给定Partition的所有读写的节点,每个节点都可能成为Partition随机选择的leader</li>
-<li><strong>replicas</strong>:复制此Partition日志的节点列表,无论它们是leader还是当前处于存活状态</li>
-<li><strong>isr</strong>:是一组 “in-sync” replicas,这是replicas列表的一个子集,它当前处于存活状态,并补充leader</li>
+<li><code>--from-beginning</code>:会把主题中以往所有的数据都读取出来</li>
 </ul>
-<h2 id="Topic发布信息">Topic发布信息</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-console-producer.sh --broker-list kafka:9092 --topic test-replicated-topic</span><br><span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">test</span> message 1</span><br><span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">test</span> message 2</span><br></code></pre></td></tr></table></figure>
-<h2 id="接收信息">接收信息</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-console-consumer.sh --bootstrap-server kafka:9092 --from-beginning --topic test-replicated-topic</span><br>test message 1<br>test message 2<br></code></pre></td></tr></table></figure>
-<h2 id="容错性">容错性</h2>
-<ul>
-<li>关闭node0节点,原leader已被替换成它的flowers中的其中一个,并且 node 0 不在 in-sync replica 集合当中</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test-replicated-topic<br>Topic:test-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:<br>	Topic: test-replicated-topic	Partition: 0	Leader: 1	Replicas: 0,1,2	Isr: 1,2<br></code></pre></td></tr></table></figure>
-<ul>
-<li>尽管原leader已逝,但原来消息依然可以通过其他node接收</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-console-consumer.sh --bootstrap-server kafka2:9092 --from-beginning --topic test-replicated-topic<br><span class="hljs-built_in">test</span> message 1<br><span class="hljs-built_in">test</span> message 2<br><span class="hljs-built_in">test</span> message 3<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -257,9 +255,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/">BackEnd</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Distributed/">Distributed</a>
-                    
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Distributed/Kafka/">Kafka</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Kafka/">Kafka</a>
                     
                   </div>
                 
@@ -277,9 +273,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/Redis/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                      <a href="/Software/BackEnd/Database/MySQL/%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis 分布式锁</span>
+                        <span class="hidden-mobile">MySQL 命令行操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -287,8 +283,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/ElasticSearch/IK%E5%88%86%E8%AF%8D%E5%99%A8/">
-                        <span class="hidden-mobile">Elasticsearch 中文分词插件IK</span>
+                      <a href="/Software/Common/UML/">
+                        <span class="hidden-mobile">UML 概述</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
