@@ -163,28 +163,28 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/Database/MySQL/EXPLAIN/" target="_self">
-          MySQL EXPLAIN
+        <a href="/Software/BackEnd/Distributed/Dubbo/admin/" target="_self">
+          Dubbo admin
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/MySQL/EXPLAIN/" target="_self">
+        <a href="/Software/BackEnd/Distributed/Dubbo/admin/" target="_self">
           
           
             
           
-          MySQL EXPLAIN
+          Dubbo admin
 
-EXPLAIN可以帮助开发人员分析SQL问题,EXPLAIN显示了MySQL如何使用索引来处理查询语句以及连接表,可以帮助选择更好的索引和写出更优化的查询语句
-MySQL在执行一条查询之前,会对发出的每条SQL进行分析,决定是否使用索引或全表扫描
+为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin
 
-1Explain + SQL语句
+Docker
+创建数据库
 
-id
+创建名为dubbo_admin的Schema
+执行SQL语句./dubbo-admin-server/src/main/resources/schema.sql
 
-id值越大优先级越高,越先被执行
-id如果相同,可以认为是一组,从上往下顺序
+12345678910CREATE TABLE IF NOT EXISTS `m
         </a>
       </p>
 
@@ -205,9 +205,9 @@ id如果相同,可以认为是一组,从上往下顺序
             
               <a href="/categories/Software/BackEnd/">BackEnd</a>
             
-              <a href="/categories/Software/BackEnd/Database/">Database</a>
+              <a href="/categories/Software/BackEnd/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/BackEnd/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/BackEnd/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -222,49 +222,21 @@ id如果相同,可以认为是一组,从上往下顺序
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/Database/MySQL/%E9%85%8D%E7%BD%AE/" target="_self">
-          MySQL 配置
+        <a href="/Software/BackEnd/Distributed/Dubbo/%E6%9C%AC%E5%9C%B0%E5%AD%98%E6%A0%B9/" target="_self">
+          Dubbo 本地存根
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/MySQL/%E9%85%8D%E7%BD%AE/" target="_self">
+        <a href="/Software/BackEnd/Distributed/Dubbo/%E6%9C%AC%E5%9C%B0%E5%AD%98%E6%A0%B9/" target="_self">
           
           
             
           
-          MySQL 配置
-JDBC连接参数
+          Dubbo 本地存根
 
-
-
-参数名称
-参数说明
-缺省值
-最低版本要求
-
-
-
-
-user
-数据库用户名(用于连接数据库)
-
-所有版本
-
-
-password
-用户密码(用于连接数据库)
-
-所有版本
-
-
-useUnicode
-是否使用Unicode字符集,如果参数characterEncoding设置为gb2312或gbk,本参数值必须设置为true
-false
-1.1g
-
-
-charac
+在 Dubbo 中利用本地存根在客户端执行部分逻辑
+远程服务后,客户端通常只剩下接口,而实现全在服务器端,但提供方有些时候想在客户端也执行部分逻辑,比如:做 ThreadLocal 缓存,提前验证参数,调用失败后伪造容错数据等等,此时就需要在 API 中带上 Stub,客户端生成 Proxy 实例,会把 Proxy 通过构造函数传给 Stub(Stub 必须有可传入 Pro
         </a>
       </p>
 
@@ -285,9 +257,82 @@ charac
             
               <a href="/categories/Software/BackEnd/">BackEnd</a>
             
-              <a href="/categories/Software/BackEnd/Database/">Database</a>
+              <a href="/categories/Software/BackEnd/Distributed/">Distributed</a>
             
-              <a href="/categories/Software/BackEnd/Database/MySQL/">MySQL</a>
+              <a href="/categories/Software/BackEnd/Distributed/Dubbo/">Dubbo</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/BackEnd/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/" target="_self">
+          Dubbo 配置
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/BackEnd/Distributed/Dubbo/%E9%85%8D%E7%BD%AE/" target="_self">
+          
+          
+            
+          
+          Dubbo 配置
+
+配置覆盖关系
+
+方法级优先,接口级次之,全局配置再次之
+如果级别一样,则消费方优先,提供方次之
+
+
+其中,服务提供方配置,通过URL经由注册中心传递给消费方
+
+dubbo:application
+
+应用信息配置,对应的配置类:org.apache.dubbo.config.ApplicationConfig
+
+
+
+
+属性
+对应URL参数
+类型
+是否必填
+缺省值
+作用
+描述
+兼容
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-26 21:32" pubdate>
+              2022-05-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Distributed/">Distributed</a>
+            
+              <a href="/categories/Software/BackEnd/Distributed/Dubbo/">Dubbo</a>
             
           </div>
         
@@ -1170,60 +1215,6 @@ set指令能设置所使用shell的执行方式,可依照不同的需求来做�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/Maven/%E5%8E%9F%E7%90%86/" target="_self">
-          Maven 原理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/BackEnd/Maven/%E5%8E%9F%E7%90%86/" target="_self">
-          
-          
-            
-          
-          Maven 原理
-依赖加载规则
-
-Maven 解析 pom.xml 文件时,同一个 jar 包只会保留一个,如果面对多个版本的jar包则使用一下规则处理
-
-
-依赖路径最短优先原则:一个项目Demo依赖了两个jar包,其中A-B-C-X(1.0),A-D-X(2.0),由于X(2.0)路径最短,所以项目使用的是X(2.0)
-pom文件中申明顺序优先:当路径长度相同时,maven会根据pom文件声明的
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-26 21:31" pubdate>
-              2022-05-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Software/">Software</a>
-            
-              <a href="/categories/Software/BackEnd/">BackEnd</a>
-            
-              <a href="/categories/Software/BackEnd/Maven/">Maven</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/Software/BackEnd/Maven/%E4%BE%9D%E8%B5%96%E8%8C%83%E5%9B%B4/" target="_self">
           Maven Dependency scope
         </a>
@@ -1275,25 +1266,25 @@ test(测试依赖范围):使用此依赖范围的Maven依赖,只对于测试clas
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/DataStruct/%E6%A0%91/%E6%9C%80%E5%A4%9A%E5%AE%9D%E8%97%8F/" target="_self">
-          最多宝藏
+        <a href="/Software/BackEnd/Maven/%E5%8E%9F%E7%90%86/" target="_self">
+          Maven 原理
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/DataStruct/%E6%A0%91/%E6%9C%80%E5%A4%9A%E5%AE%9D%E8%97%8F/" target="_self">
+        <a href="/Software/BackEnd/Maven/%E5%8E%9F%E7%90%86/" target="_self">
           
           
             
           
-          最多宝藏
-问题描述
+          Maven 原理
+依赖加载规则
 
-寻宝队来到了埋藏宝藏的山洞入口,根据藏宝图显示,山洞中的藏宝室 按照二叉树的形式分布,除与山洞入口相连的root藏宝室外,每个藏宝室有且只有一个’父’藏宝室相联,藏宝室之问被安装了特殊监控装置,如果拿了两个直接相联的藏宝室的宝物或者拿了root藏宝室的宝物,藏宝洞的大门将会永远关闭,给定二叉树的root,返回寻宝队可以成功从 藏宝洞中最多取出的宝物数量
+Maven 解析 pom.xml 文件时,同一个 jar 包只会保留一个,如果面对多个版本的jar包则使用一下规则处理
 
 
-代码实现
-1234
+依赖路径最短优先原则:一个项目Demo依赖了两个jar包,其中A-B-C-X(1.0),A-D-X(2.0),由于X(2.0)路径最短,所以项目使用的是X(2.0)
+pom文件中申明顺序优先:当路径长度相同时,maven会根据pom文件声明的
         </a>
       </p>
 
@@ -1312,9 +1303,9 @@ test(测试依赖范围):使用此依赖范围的Maven依赖,只对于测试clas
             
               <a href="/categories/Software/">Software</a>
             
-              <a href="/categories/Software/DataStruct/">DataStruct</a>
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
             
-              <a href="/categories/Software/DataStruct/%E6%A0%91/">树</a>
+              <a href="/categories/Software/BackEnd/Maven/">Maven</a>
             
           </div>
         
