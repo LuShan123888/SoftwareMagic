@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="管理Redis数据库 select  Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值 Redis默认有0~15共16个数据库,可在配置文件中修改  1redis 127.0.0.1:6379&gt; SELECT index 实例 12345678910111213141516171819redis 127.0.0.1:6379">
+  <meta name="description" content="管理Redis数据库 select  Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值 Redis默认有0~15共16个数据库,可在配置文件中修改  1$ SELECT index 实例 12345678910111213141516171819$ SET db_number 0         # 默认使用 0 号数据库OK$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="管理Redis数据库">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="管理Redis数据库 select  Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值 Redis默认有0~15共16个数据库,可在配置文件中修改  1redis 127.0.0.1:6379&gt; SELECT index 实例 12345678910111213141516171819redis 127.0.0.1:6379">
+<meta property="og:description" content="管理Redis数据库 select  Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值 Redis默认有0~15共16个数据库,可在配置文件中修改  1$ SELECT index 实例 12345678910111213141516171819$ SET db_number 0         # 默认使用 0 号数据库OK$">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-17T08:06:28.000Z">
-<meta property="article:modified_time" content="2020-10-17T08:06:28.000Z">
+<meta property="article:published_time" content="2023-07-22T10:00:34.000Z">
+<meta property="article:modified_time" content="2023-07-22T10:00:34.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-17 16:06" pubdate>
-        2020年10月17日 下午
+      <time datetime="2023-07-22 18:00" pubdate>
+        2023年7月22日 晚上
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      684 字
+      530 字
     </span>
   
 
@@ -219,29 +219,29 @@
 <li>Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值</li>
 <li>Redis默认有0~15共16个数据库,可在配置文件中修改</li>
 </ul>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran">redis <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6379</span>&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">index</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran">$ <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">index</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; SET db_number <span class="hljs-number">0</span>         <span class="hljs-comment"># 默认使用 0 号数据库</span><br>OK<br><br>redis <span class="hljs-number">127.0.0.1:6379</span>&gt; SELECT <span class="hljs-number">1</span>                <span class="hljs-comment"># 使用 1 号数据库</span><br>OK<br><br>redis <span class="hljs-number">127.0.0.1:6379</span>[<span class="hljs-number">1</span>]&gt; GET db_number        <span class="hljs-comment"># 已经切换到 1 号数据库,注意 Redis 现在的命令提示符多了个 [1]</span><br>(nil)<br><br>redis <span class="hljs-number">127.0.0.1:6379</span>[<span class="hljs-number">1</span>]&gt; SET db_number <span class="hljs-number">1</span><br>OK<br><br>redis <span class="hljs-number">127.0.0.1:6379</span>[<span class="hljs-number">1</span>]&gt; GET db_number<br><span class="hljs-string">&quot;1&quot;</span><br><br>redis <span class="hljs-number">127.0.0.1:6379</span>[<span class="hljs-number">1</span>]&gt; SELECT <span class="hljs-number">3</span>             <span class="hljs-comment"># 再切换到 3 号数据库</span><br>OK<br><br>redis <span class="hljs-number">127.0.0.1:6379</span>[<span class="hljs-number">3</span>]&gt;                      <span class="hljs-comment"># 提示符从 [1] 改变成了 [3]</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> <span class="hljs-built_in">SET</span> db_number <span class="hljs-number">0</span>         <span class="hljs-comment"># 默认使用 0 号数据库</span><br>OK<br><br><span class="hljs-variable">$</span> <span class="hljs-built_in">SELECT</span> <span class="hljs-number">1</span>                <span class="hljs-comment"># 使用 1 号数据库</span><br>OK<br><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>[<span class="hljs-number">1</span>]&gt; GET db_number        <span class="hljs-comment"># 已经切换到 1 号数据库,注意 Redis 现在的命令提示符多了个 [1]</span><br>(nil)<br><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>[<span class="hljs-number">1</span>]&gt; <span class="hljs-built_in">SET</span> db_number <span class="hljs-number">1</span><br>OK<br><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>[<span class="hljs-number">1</span>]&gt; GET db_number<br><span class="hljs-string">&quot;1&quot;</span><br><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>[<span class="hljs-number">1</span>]&gt; <span class="hljs-built_in">SELECT</span> <span class="hljs-number">3</span>             <span class="hljs-comment"># 再切换到 3 号数据库</span><br>OK<br><br>redis <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">6379</span>[<span class="hljs-number">3</span>]&gt;                      <span class="hljs-comment"># 提示符从 [1] 改变成了 [3]</span><br></code></pre></td></tr></table></figure>
 <h2 id="flushdb">flushdb</h2>
 <ul>
 <li>清除当前数据库</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; flushdb<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>flushdb<br></code></pre></td></tr></table></figure>
 <h2 id="flushall">flushall</h2>
 <ul>
 <li>清除全部数据库</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; flushall<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>flushall<br></code></pre></td></tr></table></figure>
 <h2 id="DBSIZE">DBSIZE</h2>
 <ul>
 <li>查看数据库大小</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; DBSIZE<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>DBSIZE<br></code></pre></td></tr></table></figure>
 <h2 id="keys">keys *</h2>
 <ul>
 <li>查看本数据库所有的键</li>
 </ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">redis</span> <span class="hljs-number">127.0.0.1:6379</span>&gt; keys *<br></code></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>keys *<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -275,9 +275,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/">
+                      <a href="/Software/BackEnd/Database/Redis/%E6%B5%8B%E8%AF%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaScript 严格模式(use strict)</span>
+                        <span class="hidden-mobile">Redis 测试</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -285,8 +285,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/JavaScript/%E5%AF%B9%E8%B1%A1/Number/">
-                        <span class="hidden-mobile">JavaScript Number 对象</span>
+                      <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/">
+                        <span class="hidden-mobile">Redis 管理服务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
