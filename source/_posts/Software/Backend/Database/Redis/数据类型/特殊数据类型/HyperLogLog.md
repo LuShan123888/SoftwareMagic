@@ -24,19 +24,19 @@ categories:
 - 以下实例演示了 HyperLogLog 的工作过程:
 
 ```
-redis 127.0.0.1:6379> PFADD testkey "redis"
+$ PFADD testkey "redis"
 
 1) (integer) 1
 
-redis 127.0.0.1:6379> PFADD testkey "mongodb"
+$ PFADD testkey "mongodb"
 
 1) (integer) 1
 
-redis 127.0.0.1:6379> PFADD testkey "mysql"
+$ PFADD testkey "mysql"
 
 1) (integer) 1
 
-redis 127.0.0.1:6379> PFCOUNT testkey
+$ PFCOUNT testkey
 
 (integer) 3
 ```

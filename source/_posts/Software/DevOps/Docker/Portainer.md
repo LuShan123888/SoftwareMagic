@@ -17,7 +17,7 @@ $ docker run -d \
 --name portainer \
 --hostname portainer \
 -v /var/run/docker.sock:/var/run/docker.sock \
--v portainer_data:/data \
+-v ~/DockerVolumes/portainer/data/:/data \
 cr.portainer.io/portainer/portainer-ce:2.9.3
 ```
 

@@ -16,13 +16,13 @@ categories:
 **实例**
 
 ```shell
-redis 127.0.0.1:6379> LPUSH testkey redis
+$ LPUSH testkey redis
 (integer) 1
-redis 127.0.0.1:6379> LPUSH testkey mongodb
+$ LPUSH testkey mongodb
 (integer) 2
-redis 127.0.0.1:6379> LPUSH testkey mysql
+$ LPUSH testkey mysql
 (integer) 3
-redis 127.0.0.1:6379> LRANGE testkey 0 10
+$ LRANGE testkey 0 10
 
 1) "mysql"
 2) "mongodb"

@@ -12,15 +12,15 @@ categories:
 - Redis 键命令用于管理 Redis 的键
 
 ```
-redis 127.0.0.1:6379> COMMAND KEY_NAME
+$ COMMAND KEY_NAME
 ```
 
 **实例**
 
 ```
-redis 127.0.0.1:6379> SET testkey redis
+$ SET testkey redis
 OK
-redis 127.0.0.1:6379> DEL testkey
+$ DEL testkey
 (integer) 1
 ```
 

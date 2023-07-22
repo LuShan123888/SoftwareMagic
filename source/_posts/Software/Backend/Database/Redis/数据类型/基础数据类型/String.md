@@ -13,15 +13,15 @@ categories:
 - Redis 字符串数据类型的相关命令用于管理 Redis 字符串值,基本语法如下:
 
 ```shell
-redis 127.0.0.1:6379> COMMAND KEY_NAME
+$ COMMAND KEY_NAME
 ```
 
 **实例**
 
 ```shell
-redis 127.0.0.1:6379> SET testKey redis
+$ SET testKey redis
 OK
-redis 127.0.0.1:6379> GET testKey
+$ GET testKey
 "redis"
 ```
 
@@ -29,7 +29,7 @@ redis 127.0.0.1:6379> GET testKey
 - 可通过设计key为key:{父属性}:{子属性}...存储对象
 
 ```shell
-redis 127.0.0.1:6379> SET key:person:age 1
+$ SET key:person:age 1
 ```
 
 ## Redis 字符串命令

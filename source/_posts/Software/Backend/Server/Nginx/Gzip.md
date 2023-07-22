@@ -10,7 +10,6 @@ categories:
 
 ```nginx
 http {
-
     gzip on;
     gzip_min_length 1k;
     gzip_buffers 4 16k;

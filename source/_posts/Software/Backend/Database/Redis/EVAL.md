@@ -1,18 +1,18 @@
 ---
-title: Redis EVAL命令
+title: Redis Eval命令
 categories:
 - Software
 - BackEnd
 - Database
 - Redis
 ---
-# Redis EVAL命令
+# Redis Eval命令
 
 - Redis Eval 命令使用 Lua 解释器执行脚本
 - Redis Eval 命令基本语法如下:
 
 ```
-redis 127.0.0.1:6379> EVAL script numkeys key [key ...] arg [arg ...]
+$ EVAL script numkeys key [key ...] arg [arg ...]
 ```
 
 - `script`:参数是一段 Lua 5.1 脚本程序,脚本不必(也不应该)定义为一个 Lua 函数
@@ -23,7 +23,7 @@ redis 127.0.0.1:6379> EVAL script numkeys key [key ...] arg [arg ...]
 ## 实例
 
 ```
-redis 127.0.0.1:6379> eval "return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}" 2 key1 key2 first second
+$ eval "return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}" 2 key1 key2 first second
 1) "key1"
 2) "key2"
 3) "first"

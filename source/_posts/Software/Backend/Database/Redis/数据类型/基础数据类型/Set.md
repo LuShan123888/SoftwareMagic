@@ -17,15 +17,15 @@ categories:
 **实例**
 
 ```
-redis 127.0.0.1:6379> SADD testkey redis
+$ SADD testkey redis
 (integer) 1
-redis 127.0.0.1:6379> SADD testkey mongodb
+$ SADD testkey mongodb
 (integer) 1
-redis 127.0.0.1:6379> SADD testkey mysql
+$ SADD testkey mysql
 (integer) 1
-redis 127.0.0.1:6379> SADD testkey mysql
+$ SADD testkey mysql
 (integer) 0
-redis 127.0.0.1:6379> SMEMBERS testkey
+$ SMEMBERS testkey
 
 1) "mysql"
 2) "mongodb"

@@ -1,11 +1,11 @@
 ---
-title: Docker 镜像
+title: Docker Image
 categories:
 - Software
 - DevOps
 - Docker
 ---
-# Docker 镜像
+# Docker Image
 
 ## 镜像加载原理
 

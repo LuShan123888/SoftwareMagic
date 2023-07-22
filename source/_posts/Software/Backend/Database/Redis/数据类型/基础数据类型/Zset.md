@@ -18,17 +18,17 @@ categories:
 **实例**
 
 ```shell
-redis 127.0.0.1:6379> ZADD testkey 1 redis
+$ ZADD testkey 1 redis
 (integer) 1
-redis 127.0.0.1:6379> ZADD testkey 2 mongodb
+$ ZADD testkey 2 mongodb
 (integer) 1
-redis 127.0.0.1:6379> ZADD testkey 3 mysql
+$ ZADD testkey 3 mysql
 (integer) 1
-redis 127.0.0.1:6379> ZADD testkey 3 mysql
+$ ZADD testkey 3 mysql
 (integer) 0
-redis 127.0.0.1:6379> ZADD testkey 4 mysql
+$ ZADD testkey 4 mysql
 (integer) 0
-redis 127.0.0.1:6379> ZRANGE testkey 0 10 WITHSCORES
+$ ZRANGE testkey 0 10 WITHSCORES
 
 1) "redis"
 2) "1"
