@@ -3,6 +3,7 @@ baseDir=~/Code/SoftwareMagic/source/_posts; # 根目录
 function front_matter(){
     for file in `ls $1` #注意此处这是两个反引号，表示运行系统命令
     do
+        {
         if [ -d $1"/"$file ] #注意此处之间一定要加上空格，否则会报错
         then
             front_matter $1"/"$file
@@ -26,8 +27,10 @@ function front_matter(){
             SetFile -d "$createdTime" $fullPath # 写入文件创建时间
             SetFile -m "$modifiedTime" $fullPath # 获取文件修改时间
         fi
+        }
+
     done
-} 
+}
 
 # 替换post文件夹
 rm -rf ~/Code/SoftwareMagic/source/_posts/*
