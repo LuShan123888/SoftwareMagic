@@ -1,5 +1,5 @@
 hexo clean && \
-sh FrontMatter.sh && \
+sh front_matter.sh && \
 hexo generate && \
 hexo deploy && \
 git add . && \
