@@ -18,21 +18,21 @@
   <meta name="keywords" content="software computer programmer otes Cloud personal">
   <meta name="description" content="面向字节的输入输出流 面向字节的输入流 类InputStream介绍   面向字节的输入流类都是类InputStream的子类,如下图所示,类InputStream是一个抽象类,定义了如下方法:  public int read():读一个字节,返回读到字节的int表示方式(0~255),读到流的末尾时返回-1 public int read(byte b[]):读多个字节到字节数组,返回结果为读">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SoftwareMagic">
+<meta property="og:title" content="面向字节的输入输出流">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E9%9D%A2%E5%90%91%E5%AD%97%E8%8A%82%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/">
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="面向字节的输入输出流 面向字节的输入流 类InputStream介绍   面向字节的输入流类都是类InputStream的子类,如下图所示,类InputStream是一个抽象类,定义了如下方法:  public int read():读一个字节,返回读到字节的int表示方式(0~255),读到流的末尾时返回-1 public int read(byte b[]):读多个字节到字节数组,返回结果为读">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://www.plantuml.com/plantuml/svg/XPFVJjim5CRlynIUk43gHPA6eeK98MYtQ9CALEju03SvJKpz9pi-LjLDl3kEMuqqrI0Nbivdv_TzFhPlBN4a9NIbU1kTiqz2bz9LmAW11N7hbEoh3L5hloG9ycrS2shSobd0qcW2JN5fL39touRhSNQHvtbI20asKTmIOBAGNDFJ_JpfeQyjxIJSHDfu-D-8-M_1gqhecetJKDvph8LcUIYclDpKQ9okPaOQPDj648IPxmR57n-3opifQgry75Rw0J1C_zp_WngGZI-3D1SQzfIpT9PFlXL1zU4himt-qKk4nj33MxIZBFzoPg4y3y1bjnsMn-dGeYWkFa_I3pRHJvbx-qW2N__Flm-VNHMNsGaYIuSDzKYEQBO7NZ_pv9scTEglHfGR3TQoBEv0rydXw4RiXsuTBGc1gsWqOjCTmHqYtmtqxZ8Cf8LeeJfTva_jMFHGjru33XUFs5TEVAXrSH-SMfrI5iusAz_-WUKIVZlGvJ3Tu-ePIkgBj-3VoVwjl080">
 <meta property="og:image" content="https://www.plantuml.com/plantuml/svg/XPBFJiCm3CRlVOeW3aWzj5qPeg093GOLXy4c1WyGMgyDf4dbEge6ujt9iWcwZZyvHF9dv-SlYSSDSQHAgBpYjNV43eJAfCc1KGaL1BMfP5SjYUhcF0oHjq4Xg3JFfW7Cj29G56Iw2gTcKN8rY8-J90bJ8Q49AzuGO3YNND7JtJJie4SDhIHSU4fR-Bl7x9hpF1UgO8F8XNSS2w5Oue8hdhqMg8tA9rfgP6qf25pcLgDuipQul9IYK9MrmpAx0Rhqm-OCAa0sE77IL2ZOK0wZIJAyIPrgpUUwTVsz3m-rfljlQpjUldp6BZnomCNwEYm9edwBD3q-7KR_NABhCh7jFGby-Ll_Bdnobfx4UuWuwZ-eHN94tMvvNS_3FnvbhJwM8djLq3Gi3jQWKRZzEf_D3DM65eJ0Ay_tsTMAu1AHh_g9zJZqjRce8V-XqFvSJxLWirm2xfNxx9eJtnFdA5I7ENj-WOnsgiPWntup-fy0">
-<meta property="article:published_time" content="2022-01-08T10:08:30.798Z">
-<meta property="article:modified_time" content="2022-01-08T10:08:30.798Z">
+<meta property="article:published_time" content="2022-01-08T10:08:30.000Z">
+<meta property="article:modified_time" content="2022-01-08T10:08:30.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://www.plantuml.com/plantuml/svg/XPFVJjim5CRlynIUk43gHPA6eeK98MYtQ9CALEju03SvJKpz9pi-LjLDl3kEMuqqrI0Nbivdv_TzFhPlBN4a9NIbU1kTiqz2bz9LmAW11N7hbEoh3L5hloG9ycrS2shSobd0qcW2JN5fL39touRhSNQHvtbI20asKTmIOBAGNDFJ_JpfeQyjxIJSHDfu-D-8-M_1gqhecetJKDvph8LcUIYclDpKQ9okPaOQPDj648IPxmR57n-3opifQgry75Rw0J1C_zp_WngGZI-3D1SQzfIpT9PFlXL1zU4himt-qKk4nj33MxIZBFzoPg4y3y1bjnsMn-dGeYWkFa_I3pRHJvbx-qW2N__Flm-VNHMNsGaYIuSDzKYEQBO7NZ_pv9scTEglHfGR3TQoBEv0rydXw4RiXsuTBGc1gsWqOjCTmHqYtmtqxZ8Cf8LeeJfTva_jMFHGjru33XUFs5TEVAXrSH-SMfrI5iusAz_-WUKIVZlGvJ3Tu-ePIkgBj-3VoVwjl080">
   
-  <title>SoftwareMagic</title>
+  <title>面向字节的输入输出流 - SoftwareMagic</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="面向字节的输入输出流">
               
             </span>
 
@@ -213,7 +213,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">面向字节的输入输出流</h1>
             
             <div class="markdown-body">
               <h1>面向字节的输入输出流</h1>
@@ -382,6 +382,21 @@
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/">Software</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/">Language</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/">Java</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/">流式输入输出与文件处理</a>
+                    
+                  </div>
+                
                 
               </div>
               
@@ -398,7 +413,7 @@
                     
                       <a href="/Software/Language/Java/JavaSE/%E6%B5%81%E5%BC%8F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/%E9%9D%A2%E5%90%91%E5%AD%97%E7%AC%A6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">面向字符的输入输出流</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

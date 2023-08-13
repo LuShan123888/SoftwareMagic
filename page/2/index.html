@@ -163,167 +163,25 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/" target="_self">
-          
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Set/" target="_self">
+          Redis Set
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/" target="_self">
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Set/" target="_self">
           
           
             
           
-          Redis 管理服务
-启动Redis
+          Redis Set
 
-Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:
+Redis 的 Set 是 String 类型的无序集合,集合成员是唯一的,这就意味着集合中不能出现重复的数据
+Redis 中集合是通过Hash表实现的,所以添加,删除,查找的复杂度都是 O(1)
+集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)
 
-首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型
-然后为这个 Socket 设置TCP_NODELAY属性,禁用 Nagle 算法
-然后创建一
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-22 18:00" pubdate>
-              2023-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/BackEnd/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
-          
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/Redis/%E4%BA%8B%E5%8A%A1/" target="_self">
-          
-          
-            
-          
-          Redis 事务
-
-Redis 事务可以一次执行多个命令, 并且带有以下三个重要的保证
-
-批量操作在发送 EXEC 命令前被放入队列缓存
-收到 EXEC 命令后进入事务执行,事务中任意命令执行失败,其余的命令依然被执行
-在事务执行过程,其他客户端提交的命令请求不会插入到事务执行命令序列中
-
-
-一个事务从开始到执行会经历以下三个阶段:
-
-开始事务
-命令入队
-执行事务
-
-
-
-实例:以下是一个事务的例子
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-22 18:00" pubdate>
-              2023-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
-          
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
-          
-          
-            
-          
-          管理Redis数据库
-select
-
-Redis Select 命令用于切换到指定的数据库,数据库索引号 index 用数字值指定,以 0 作为起始索引值
-Redis默认有0~15共16个数据库,可在配置文件中修改
-
-1$ SELECT index
 实例
-12345678910111213141516171819$ SET db_number 0         # 默认使用 0 号数据库OK$ 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-22 18:00" pubdate>
-              2023-07-22
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/BackEnd/Database/Redis/Eval/" target="_self">
-          Redis Eval命令
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/Redis/Eval/" target="_self">
-          
-          
-            
-          
-          Redis Eval命令
-
-Redis Eval 命令使用 Lua 解释器执行脚本
-Redis Eval 命令基本语法如下:
-
-1$ EVAL script numkeys key [key ...] arg [arg ...]
-
-script:参数是一段 Lua 5.1 脚本程序,脚本不必(也不应该)定义为一个 Lua 函数
-numkeys:用于指定键名参数的个数
-key [key ...]:从
+12345678910111213$ SADD testkey redis(
         </a>
       </p>
 
@@ -348,6 +206,187 @@ key [key ...]:从
             
               <a href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
             
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基础数据类型</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/" target="_self">
+          Redis HyperLogLog
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/HyperLogLog/" target="_self">
+          
+          
+            
+          
+          Redis HyperLogLog
+
+Redis 在 2.8.9 版本添加了 HyperLogLog 结构
+Redis HyperLogLog 是用来做基数统计的算法,HyperLogLog 的优点是,在输入元素的数量或者体积非常非常大时,计算基数所需的空间总是固定 的,并且是很小的
+在 Redis 里面,每个 HyperLogLog 键只需要花费 12 KB 内存,就可以计算接近 2^64 个不
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-22 18:00" pubdate>
+              2023-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Database/">Database</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">特殊数据类型</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/String/" target="_self">
+          Redis String
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/String/" target="_self">
+          
+          
+            
+          
+          Redis String
+
+Redis 字符串数据类型的相关命令用于管理 Redis 字符串值,基本语法如下:
+
+1$ COMMAND KEY_NAME
+实例
+1234$ SET testKey redisOK$ GET testKey&quot;redis&quot;
+
+在以上实例中我们使用了 SET 和 GET 命令,键为 testKey
+可通过设计key为key:{父属性}:{子属性}…存储
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-22 18:00" pubdate>
+              2023-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Database/">Database</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基础数据类型</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Zset/" target="_self">
+          Redis Zset
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Zset/" target="_self">
+          
+          
+            
+          
+          Redis Zset
+
+Redis 有序集合(sorted set)和集合一样也是String类型元素的集合,且不允许重复的成员
+不同的是每个元素都会关联一个double类型的分数,Redis正是通过分数来为集合中的成员进行从小到大的排序
+有序集合的成员是唯一的,但分数(score)却可以重复
+集合是通过Hash表实现的,所以添加,删除,查找的复杂度都是O(1), 集合中最大的成员数为 232 -
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-22 18:00" pubdate>
+              2023-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Database/">Database</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            
+              <a href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">基础数据类型</a>
+            
           </div>
         
         
@@ -362,7 +401,7 @@ key [key ...]:从
       <h1 class="index-header">
         
         <a href="/Software/BackEnd/Server/Tomcat/%E5%88%9D%E5%A7%8B%E5%8C%96/" target="_self">
-          
+          Tomcat 初始化
         </a>
       </h1>
 
@@ -388,6 +427,19 @@ Docker
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Server/">Server</a>
+            
+              <a href="/categories/Software/BackEnd/Server/Tomcat/">Tomcat</a>
+            
+          </div>
+        
         
       </div>
     </article>
@@ -400,7 +452,7 @@ Docker
       <h1 class="index-header">
         
         <a href="/Software/BackEnd/Server/Nginx/%E9%87%8D%E5%AE%9A%E5%90%91/" target="_self">
-          
+          Nginx 重定向
         </a>
       </h1>
 
@@ -433,6 +485,19 @@ Docker
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Server/">Server</a>
+            
+              <a href="/categories/Software/BackEnd/Server/Nginx/">Nginx</a>
+            
+          </div>
+        
         
       </div>
     </article>
@@ -445,7 +510,7 @@ Docker
       <h1 class="index-header">
         
         <a href="/Software/BackEnd/Server/Nginx/Gzip/" target="_self">
-          
+          Nginx Gzip 压缩
         </a>
       </h1>
 
@@ -469,6 +534,19 @@ Docker
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Server/">Server</a>
+            
+              <a href="/categories/Software/BackEnd/Server/Nginx/">Nginx</a>
+            
+          </div>
         
         
       </div>
@@ -756,7 +834,7 @@ run
       <h1 class="index-header">
         
         <a href="/Software/Language/Go/Library/json/" target="_self">
-          
+          Go Json
         </a>
       </h1>
 
@@ -782,6 +860,19 @@ run
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Go/">Go</a>
+            
+              <a href="/categories/Software/Language/Go/Library/">Library</a>
+            
+          </div>
         
         
       </div>
@@ -849,7 +940,7 @@ OAuth是一种授权机制,数据的所有者告诉系统,同意授权第三方�
       <h1 class="index-header">
         
         <a href="/Software/Language/Go/%E6%B3%9B%E5%9E%8B/" target="_self">
-          
+          Go 泛型
         </a>
       </h1>
 
@@ -878,6 +969,17 @@ OAuth是一种授权机制,数据的所有者告诉系统,同意授权第三方�
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Go/">Go</a>
+            
+          </div>
+        
         
       </div>
     </article>
@@ -890,7 +992,7 @@ OAuth是一种授权机制,数据的所有者告诉系统,同意授权第三方�
       <h1 class="index-header">
         
         <a href="/Software/Language/Go/Library/rxgo/" target="_self">
-          
+          GO rxgo
         </a>
       </h1>
 
@@ -916,46 +1018,18 @@ ReactiveX，简称为 Rx，是一个异步编程的 API。与 callback（回调�
           </div>
         
         
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/" target="_self">
-          
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/" target="_self">
-          
-          
-            
-          
-          MySQL 锁
-两段锁
-
-数据库遵循的是两段锁协议,将事务分成两个阶段,加锁阶段和解锁阶段(所以叫两段锁)
-加锁阶段:在该阶段可以进行加锁操作,在对任何数据进行读操作之前要申请并获得S锁(共享锁,其它事务可以继续加共享锁,但不能加排它锁),在进行写操作之前要申请并获得X锁(排它锁,其它事务不能再获得任何锁),加锁不成功,则事务进入等待状态,直到加锁成功才继续执行
-解锁阶段:当事务释放了一个封锁以后
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-01-27 19:27" pubdate>
-              2023-01-27
-            </time>
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Go/">Go</a>
+            
+              <a href="/categories/Software/Language/Go/Library/">Library</a>
+            
           </div>
-        
         
         
       </div>
@@ -1021,8 +1095,62 @@ MVCC的优点:
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/Software/Language/Go/%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" target="_self">
+        <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/" target="_self">
+          MySQL 锁
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/" target="_self">
           
+          
+            
+          
+          MySQL 锁
+两段锁
+
+数据库遵循的是两段锁协议,将事务分成两个阶段,加锁阶段和解锁阶段(所以叫两段锁)
+加锁阶段:在该阶段可以进行加锁操作,在对任何数据进行读操作之前要申请并获得S锁(共享锁,其它事务可以继续加共享锁,但不能加排它锁),在进行写操作之前要申请并获得X锁(排它锁,其它事务不能再获得任何锁),加锁不成功,则事务进入等待状态,直到加锁成功才继续执行
+解锁阶段:当事务释放了一个封锁以后
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-27 19:27" pubdate>
+              2023-01-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/BackEnd/">BackEnd</a>
+            
+              <a href="/categories/Software/BackEnd/Database/">Database</a>
+            
+              <a href="/categories/Software/BackEnd/Database/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/Software/Language/Go/%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/" target="_self">
+          Go 线程同步
         </a>
       </h1>
 
@@ -1051,6 +1179,19 @@ MVCC的优点:
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Go/">Go</a>
+            
+              <a href="/categories/Software/Language/Go/%E5%B9%B6%E5%8F%91/">并发</a>
+            
+          </div>
+        
         
       </div>
     </article>
@@ -1063,7 +1204,7 @@ MVCC的优点:
       <h1 class="index-header">
         
         <a href="/Software/Language/Go/DataSturct/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6/" target="_self">
-          
+          Go 基本数据类型
         </a>
       </h1>
 
@@ -1094,6 +1235,19 @@ Go语言中有丰富的数据类型,除了基本的整型,浮点型,布尔型,�
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Software/">Software</a>
+            
+              <a href="/categories/Software/Language/">Language</a>
+            
+              <a href="/categories/Software/Language/Go/">Go</a>
+            
+              <a href="/categories/Software/Language/Go/DataSturct/">DataSturct</a>
+            
+          </div>
         
         
       </div>
