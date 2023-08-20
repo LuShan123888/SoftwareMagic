@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-26T13:31:12.000Z">
-<meta property="article:modified_time" content="2022-05-26T13:31:12.000Z">
+<meta property="article:published_time" content="2023-08-20T07:24:16.000Z">
+<meta property="article:modified_time" content="2023-08-20T07:24:16.000Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-26 21:31" pubdate>
-        2022年5月26日 晚上
+      <time datetime="2023-08-20 15:24" pubdate>
+        2023年8月20日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.3k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9 分钟
+      10 分钟
     </span>
   
 
@@ -304,6 +304,20 @@
 <li>有时候,只是为了自己测试,不想密码设置得那么复杂,比如只想设置root的密码为123456,必须修改两个全局参数:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET GLOBAL validate_password_policy=0;<br>SET GLOBAL validate_password_length=1;<br></code></pre></td></tr></table></figure>
+<h2 id="创建索引失败">创建索引失败</h2>
+<p><strong>报错信息</strong></p>
+<ul>
+<li><code>ERROR 1071 (42000): Specified key was too long; max key length is 767 bytes</code></li>
+</ul>
+<p><strong>原因</strong></p>
+<ul>
+<li>InnoDB的Varchar主键每个列的长度不能大于767 bytes，所有组成索引列的长度和不能大于3072 bytes</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<ul>
+<li>修改索引列varchar小于767</li>
+<li>启用innodb_large_prefix参数能够取消对于索引中每列长度的限制(但是无法取消对于索引总长度的限制)，启用innodb_large_prefix必须同时指定innodb_file_format=barracuda，innodb_file_per_table=true，并且建表的时候指定表的row_format为dynamic或者compressed(mysql 5.6中row_format默认值为compact)</li>
+</ul>
 
             </div>
             <hr>
@@ -337,18 +351,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/MySQL/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL 存储引擎</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/Redis/ShardedJedis/">
-                        <span class="hidden-mobile">Redis ShardedJedis</span>
+                      <a href="/Software/BackEnd/Database/MySQL/EXPLAIN/">
+                        <span class="hidden-mobile">MySQL EXPLAIN</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
