@@ -1,12 +1,12 @@
 ---
-title: DML
+title: DDL
 categories:
 - Software
 - BackEnd
 - Database
 - MySQL
 ---
-# DML
+# DDL
 
 - 在MySQL使用过程中，根据业务的需求对表结构进行变更是个普遍的运维操作，这些称为DDL操作。常见的DDL操作有在表上增加新列或给某个列添加索引。通常有两种方式可执行DDL，包括MySQL原生在线DDL（online DDL）以及一种第三方工具pt-osc。下图是执行方式的性能对比及说明
   
