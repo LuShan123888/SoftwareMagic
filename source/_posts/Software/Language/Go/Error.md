@@ -4,7 +4,6 @@ categories:
 - Software
 - Language
 - Go
-- Function
 ---
 # Go Error
 

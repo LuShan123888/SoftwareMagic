@@ -1,12 +1,12 @@
 ---
-title: Go 线程同步
+title: Go Sync
 categories:
 - Software
 - Language
 - Go
-- 并发
+- Concurrent
 ---
-# Go 线程同步
+# Go Sync
 
 ## 并发安全和锁
 
