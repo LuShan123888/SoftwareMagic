@@ -15,16 +15,16 @@ categories:
     - 在客户端的请求访问后端资源之前，拦截这些请求。
     - 在服务器的响应发送回客户端之前，处理这些响应。
 - 根据规范建议的各种类型的过滤器：
-    - 身份验证过滤器(Authentication Filters)
-    - 数据压缩过滤器(Data compression Filters)
-    - 加密过滤器(Encryption Filters)
+    - 身份验证过滤器（Authentication Filters)
+    - 数据压缩过滤器（Data compression Filters)
+    - 加密过滤器（Encryption Filters)
     - 触发资源访问事件过滤器。
-    - 图像转换过滤器(Image Conversion Filters)
-    - 日志记录和审核过滤器(Logging and Auditing Filters)
-    - MIME-TYPE 链过滤器(MIME-TYPE Chain Filters)
-    - 标记化过滤器(Tokenizing Filters)
-    - XSL/T 过滤器(XSL/T Filters)，转换 XML 内容。
-- 过滤器通过 Web 部署描述符(web.xml)中的 XML 标签来声明，然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式。
+    - 图像转换过滤器（Image Conversion Filters)
+    - 日志记录和审核过滤器（Logging and Auditing Filters)
+    - MIME-TYPE 链过滤器（MIME-TYPE Chain Filters)
+    - 标记化过滤器（Tokenizing Filters)
+    - XSL/T 过滤器（XSL/T Filters)，转换 XML 内容。
+- 过滤器通过 Web 部署描述符（web.xml)中的 XML 标签来声明，然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式。
 - 当 Web 容器启动 Web 应用程序时，它会为您在部署描述符中声明的每一个过滤器创建一个实例。
 - Filter的执行顺序与在web.xml配置文件中的配置顺序一致，一般把Filter配置在所有的Servlet之前。
 
@@ -35,7 +35,7 @@ categories:
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
 | 1    | **public void doFilter (ServletRequest, ServletResponse, FilterChain)** 该方法完成实际的过滤操作，当客户端请求方法与过滤器设置匹配的URL时，Servlet容器将先调用过滤器的doFilter方法，FilterChain用户访问后续过滤器， |
-| 2    | **public void init(FilterConfig filterConfig)** web 应用程序启动时，web 服务器将创建Filter 的实例对象，并调用其init方法，读取web.xml配置，完成对象的初始化功能，从而为后续的用户请求作好拦截的准备工作(filter对象只会创建一次，init方法也只会执行一次)，开发人员通过init方法的参数，可获得代表当前filter配置信息的FilterConfig对象， |
+| 2    | **public void init(FilterConfig filterConfig)** web 应用程序启动时，web 服务器将创建Filter 的实例对象，并调用其init方法，读取web.xml配置，完成对象的初始化功能，从而为后续的用户请求作好拦截的准备工作（filter对象只会创建一次，init方法也只会执行一次），开发人员通过init方法的参数，可获得代表当前filter配置信息的FilterConfig对象， |
 | 3    | **public void destroy()** Servlet容器在销毁过滤器实例前调用该方法，在该方法中释放Servlet过滤器占用的资源， |
 
 ### FilterConfig 使用
@@ -136,7 +136,7 @@ public class DisplayHeader extends HttpServlet {
 }
 ```
 
-### Web.xml 中的 Servlet 过滤器映射(Servlet Filter Mapping)
+### Web.xml 中的 Servlet 过滤器映射（Servlet Filter Mapping)
 
 定义过滤器，然后映射到一个 URL 或 Servlet，这与定义 Servlet，然后映射到一个 URL 模式方式大致相同，在部署描述符文件 **web.xml** 中为 filter 标签创建下面的条目：
 
@@ -239,7 +239,7 @@ public class DisplayHeader extends HttpServlet {
     元素用于设置一个 Filter 所负责拦截的资源，一个Filter拦截的资源可通过两种方式来指定：Servlet 名称和资源访问的请求路径。
 
     - `<filter-name>`子元素用于设置filter的注册名称，该值必须是在`<filter>`元素中声明过的过滤器的名字。
-    - `<url-pattern>`设置 filter 所拦截的请求路径（过滤器关联的URL样式)
+    - `<url-pattern>`设置 filter 所拦截的请求路径（过滤器关联的URL样式）
 
 - `<servlet-name>`指定过滤器所拦截的Servlet名称。
 

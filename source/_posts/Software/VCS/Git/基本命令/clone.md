@@ -18,7 +18,7 @@ git clone <url> [local_path]
 - `-b <branch_name>`：指定分支。
 - `--bare`：只克隆仓库信息。
 
-**递归克隆（包含子模块)**
+**递归克隆（包含子模块）**
 
 ```shell
 git clone --recurse-submodules -j8 git://github.com/foo/bar.git

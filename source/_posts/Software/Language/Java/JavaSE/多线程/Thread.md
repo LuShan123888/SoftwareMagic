@@ -113,7 +113,7 @@ Slow: Sun Jan 12 11:50:30 CST 2020
 
 -    线程调用stop()方法会被暴力停止，方法已弃用，该方法会有不好的后果：
     1. 强制让线程停止有可能使一些清理性的工作得不到完成。
-    2. 对锁定的对象进行了**解锁**，导致数据得不到同步的处理，出现数据不一致的问题（比如一个方法加上了synchronized，并在其中进行了一个长时间的处理，而在处理结束之前该线程进行了`stop()`，则未完成的数据将没有进行到同步的处理)
+    2. 对锁定的对象进行了**解锁**，导致数据得不到同步的处理，出现数据不一致的问题（比如一个方法加上了synchronized，并在其中进行了一个长时间的处理，而在处理结束之前该线程进行了`stop()`，则未完成的数据将没有进行到同步的处理）
 
 ### 异常法停止
 
@@ -276,7 +276,7 @@ class TestYield implements Runnable {
 
 ## 线程插入
 
-- **join()**：当前线程里调用其它线程t的join方法，当前线程进入`WAITING/TIMED_WAITING`状态，当前线程不会释放已经持有的对象锁，线程t执行完毕或者millis时间到，当前线程一般情况下进入RUNNABLE状态，也有可能进入BLOCKED状态（因为join是基于wait实现的)
+- **join()**：当前线程里调用其它线程t的join方法，当前线程进入`WAITING/TIMED_WAITING`状态，当前线程不会释放已经持有的对象锁，线程t执行完毕或者millis时间到，当前线程一般情况下进入RUNNABLE状态，也有可能进入BLOCKED状态（因为join是基于wait实现的）
 
 ```java
 class TestJoin implements Runnable {

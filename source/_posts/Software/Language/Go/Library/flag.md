@@ -64,7 +64,7 @@ flag 包支持的命令行参数类型有 `bool`、`int`、`int64`、`uint`、`u
 
 ### flag.Type ()
 
-基本格式：`flag.Type(flag名，默认值，帮助信息)*Type` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
+基本格式：`flag.Type(flag名，默认值，帮助信息）*Type` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
 
 ```go
 name := flag.String("name", "张三", "姓名")
@@ -77,7 +77,7 @@ delay := flag.Duration("d", 0, "时间间隔")
 
 ### flag.TypeVar ()
 
-基本格式如下： `flag.TypeVar(Type指针， flag名，默认值，帮助信息)` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
+基本格式如下： `flag.TypeVar(Type指针， flag名，默认值，帮助信息）` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
 
 ```go
 var name string
@@ -149,13 +149,13 @@ func main() {
 $ ./flag_demo -help
 Usage of ./flag_demo:
   -age int
-        年龄 (default 18)
+        年龄（default 18)
   -d duration
         时间间隔。
   -married
         婚否。
   -name string
-        姓名 (default "张三")
+        姓名（default "张三")
 ```
 
 正常使用命令行 flag 参数：

@@ -11,7 +11,7 @@ categories:
 
 ### Hash环
 
-- 一致性Hash算法也是使用取模的方法，只是刚才描述的取模法是对服务器的数量进行取模，而一致性Hash算法是对2^ 32取模，，一致性Hash算法将整个Hash值控件组织成一个虚拟的圆环，如假设某Hash函数H的值空间为0~2^32^-1取模（即Hash值是一个32位无符号整型)，整个Hash环如下。
+- 一致性Hash算法也是使用取模的方法，只是刚才描述的取模法是对服务器的数量进行取模，而一致性Hash算法是对2^ 32取模，，一致性Hash算法将整个Hash值控件组织成一个虚拟的圆环，如假设某Hash函数H的值空间为0~2^32^-1取模（即Hash值是一个32位无符号整型），整个Hash环如下。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20210727105027679.png" alt="image-20210727105027679" style="zoom:67%;" />
 

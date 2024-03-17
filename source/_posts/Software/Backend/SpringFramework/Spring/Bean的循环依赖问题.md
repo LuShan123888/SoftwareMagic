@@ -45,10 +45,10 @@ Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: E
 
 | 依赖情况               | 依赖注入方式                                       | 循环依赖是否被解决 |
 | :--------------------- | :------------------------------------------------- | :----------------- |
-| AB相互依赖（循环依赖)| 均采用setter方法注入                               | 是                 |
-| AB相互依赖（循环依赖)| 均采用构造器注入                                   | 否                 |
-| AB相互依赖（循环依赖)| A中注入B的方式为setter方法，B中注入A的方式为构造器 | 是                 |
-| AB相互依赖（循环依赖)| B中注入A的方式为setter方法，A中注入B的方式为构造器 | 否                 |
+| AB相互依赖（循环依赖）| 均采用setter方法注入                               | 是                 |
+| AB相互依赖（循环依赖）| 均采用构造器注入                                   | 否                 |
+| AB相互依赖（循环依赖）| A中注入B的方式为setter方法，B中注入A的方式为构造器 | 是                 |
+| AB相互依赖（循环依赖）| B中注入A的方式为setter方法，A中注入B的方式为构造器 | 否                 |
 
 - 不是只有在setter方法注入的情况下循环依赖才能被解决，即使存在构造器注入的场景下，循环依赖依然被可以被正常处理掉，但是要确保第一个初始化的Bean为setter方法注入。
 
@@ -174,7 +174,7 @@ protected void addSingletonFactory(String beanName, ObjectFactory<?> singletonFa
 }
 ```
 
-- 这里只是添加了一个工厂，通过这个工厂(`ObjectFactory`)的`getObject`方法可以得到一个对象，而这个对象实际上就是通过`getEarlyBeanReference`这个方法创建的，当创建B的流程中会调用这个工厂的`getObject`方法。
+- 这里只是添加了一个工厂，通过这个工厂（`ObjectFactory`)的`getObject`方法可以得到一个对象，而这个对象实际上就是通过`getEarlyBeanReference`这个方法创建的，当创建B的流程中会调用这个工厂的`getObject`方法。
 - 当A完成了实例化并添加进了三级缓存后，就要开始为A进行属性注入了，在注入时发现A依赖了B，那么这个时候Spring又会去`getBean(b)`，然后反射调用setter方法完成属性注入。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/format,png-20220314235458883.png" alt="image-20200706114501300" style="zoom:50%;" />

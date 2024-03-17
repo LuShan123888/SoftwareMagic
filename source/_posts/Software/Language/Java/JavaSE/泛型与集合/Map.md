@@ -62,7 +62,7 @@ public class Map接口的使用 {
 - LinkedHashMap 是 HashMap 的一个子类，它保留插入的顺序，如果需要输出的顺序和输入时的相同，那么就选用 LinkedHashMap
 - **LinkedHashMap 是 Map 接口的Hash表和链接列表实现，具有可预知的迭代顺序，**此实现提供所有可选的映射操作，并允许使用 null 值和 null 键，此类不保证映射的顺序，特别是它不保证该顺序不变。
 - LinkedHashMap 实现与 HashMap 的不同之处在于，前者维护着一个运行于所有条目的双重链接列表，此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。
-- 根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序（调用 get 方法）的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾（其实是先删除再插入)
+- 根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序（调用 get 方法）的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾（其实是先删除再插入）
 
 > **注意**:
 >
@@ -335,7 +335,7 @@ void resize(int newCapacity) {
 - 可以看出，LinkedHashMap扩容时，数据的再散列和HashMap是不一样的。
 - HashMap是先遍历旧table，再遍历旧table中每个元素的单向链表，取得Entry以后，重新计算hash值，然后存放到新table的对应位置。
 - LinkedHashMap是遍历的双向链表，取得每一个Entry，然后重新计算hash值，然后存放到新table的对应位置。
-- 从遍历的效率来说，遍历双向链表的效率要高于遍历table，因为遍历双向链表是N次(N为元素个数)，而遍历table是N+table的空余个数(N为元素个数)
+- 从遍历的效率来说，遍历双向链表的效率要高于遍历table，因为遍历双向链表是N次（N为元素个数），而遍历table是N+table的空余个数（N为元素个数）
 
 ### 双向链表的重排序
 
@@ -594,7 +594,7 @@ private void remove() {
 
 ## Hashtable
 
-- Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁(`synchronized`)保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。
+- Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁（`synchronized`)保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。
 - 像HashMap一样，Hashtable在Hash表中存储键/值对，当使用一个Hash表，要指定用作键的对象，以及要链接到该键的值，然后，该键经过Hash处理，所得到的Hash值被用作存储在该表中值的索引，但是HashTable 的 key,value 都不可为 null
 - HashTable类中，保存实际数据的，依然是`Entry`对象，其数据结构与HashMap是相同的。
 
@@ -638,7 +638,7 @@ private void remove() {
 | 4    | **boolean containsKey(Object key)** 测试指定对象是否为此Hashtable中的键 |
 | 5    | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值，则返回 true |
 | 6    | **Enumeration elements( )** 返回此Hashtable中的值的枚举      |
-| 7    | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null |
+| 7    | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足（key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null |
 | 8    | **boolean isEmpty( )** 测试此Hashtable是否没有键映射到值     |
 | 9    | **Enumeration keys( )**  返回此Hashtable中的键的枚举         |
 | 10   | **Object put(Object key, Object value)** 将指定 key 映射到此Hashtable中的指定 value |
@@ -698,7 +698,7 @@ Zara's new balance: 4434.34
 
 ## TreeMap
 
-- TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树(Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点。
+- TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树（Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点。
 - 放入TreeMap的元素，必须实现`Comparable`接口，如果没有实现`Comparable`接口，则必须在创建 TreeMap 时传入自定义的 `Comparator`对象，TreeMap 会自动对元素的进行排序。
 - TreeMap 中判断相等的标准是：两个 key 通过`equals()`方法返回为 true，并且通过`compare()`方法比较应该返回为 0
 - 要严格按照`compare()`规范实现比较逻辑，否则，`TreeMap`将不能正常工作，如果使用自定义的类来作为 TreeMap 中的 key 值，且想让 TreeMap 能够良好的工作，则必须重写自定义类中的`equals()`方法。
@@ -869,7 +869,7 @@ props.store(new FileOutputStream("C:\\conf\\setting.properties"), "这是写入�
 
 ### 编码
 
-- 早期版本的Java规定`.properties`文件编码是ASCII编码(ISO8859-1)，如果涉及到中文就必须用`name=\u4e2d\u6587`来表示，从JDK9开始，Java的`.properties`文件可以使用UTF-8编码了。
+- 早期版本的Java规定`.properties`文件编码是ASCII编码（ISO8859-1)，如果涉及到中文就必须用`name=\u4e2d\u6587`来表示，从JDK9开始，Java的`.properties`文件可以使用UTF-8编码了。
 - 不过，需要注意的是，由于`load(InputStream)`默认总是以ASCII编码读取字节流，所以会导致读到乱码，我们需要用另一个重载方法`load(Reader)`读取：
 
 ```java
@@ -948,7 +948,7 @@ int hashCode() {
 
 > **补充**：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》(很多软件公司，《Effective Java》,《Java编程思想》以及《重构：改善既有代码质量》)中是这样介绍equals方法的：
 >
-> - 首先equals方法必须满足自反性(x.equals(x)必须返回true)，对称性(x.equals(y)返回true时，y.equals(x)也必须返回true)，传递性(x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值)，而且对于任何非null值的引用x,x.equals(null)必须返回false
+> - 首先equals方法必须满足自反性（x.equals(x)必须返回true)，对称性（x.equals(y)返回true时，y.equals(x)也必须返回true)，传递性（x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值），而且对于任何非null值的引用x,x.equals(null)必须返回false
 > - 实现高质量的equals方法的诀窍包括：
 >   1. 使用==操作符检查"参数是否为这个对象的引用"
 >   2. 使用instanceof操作符检查"参数是否为正确的类型"

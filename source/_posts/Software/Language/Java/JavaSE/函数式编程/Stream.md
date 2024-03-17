@@ -13,7 +13,7 @@ categories:
 - Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。
 - Stream API可以极大提高Java程序员的生产力，让程序员写出高效率，干净，简洁的代码。
 - 这种风格将要处理的元素集合看作一种流，流在管道中传输，并且可以在管道的节点上进行处理，比如筛选，排序，聚合等。
-- 元素流在管道中经过中间操作(intermediate operation)的处理，最后由最终操作(terminal operation)得到前面处理的结果。
+- 元素流在管道中经过中间操作（intermediate operation)的处理，最后由最终操作（terminal operation)得到前面处理的结果。
 
 ```
 stream of elements ----> filter---->sorted----> map----> collect
@@ -40,15 +40,15 @@ Stream(流）是一个来自数据源的元素队列并支持聚合操作。
 
 和以前的Collection操作不同，Stream操作还有两个基础的特征：
 
-- **Pipelining**：中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格(fluent style)，这样做可以对操作进行优化，比如延迟执行(laziness)和短路( short-circuiting)
-- **内部迭代**：以前对集合遍历都是通过Iterator或者For-Each的方式，显式的在集合外部进行迭代，这叫做外部迭代，Stream提供了内部迭代的方式，通过访问者模式(Visitor)实现。
+- **Pipelining**：中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格（fluent style)，这样做可以对操作进行优化，比如延迟执行（laziness)和短路（ short-circuiting)
+- **内部迭代**：以前对集合遍历都是通过Iterator或者For-Each的方式，显式的在集合外部进行迭代，这叫做外部迭代，Stream提供了内部迭代的方式，通过访问者模式（Visitor)实现。
 
 ## 流处理的特性
 
 - 不存储数据。
 - 不会改变数据源。
 - 不可以重复使用。
-- 通过连续执行多个操作倒便就组成了 Stream 中的执行管道(pipeline)
+- 通过连续执行多个操作倒便就组成了 Stream 中的执行管道（pipeline)
 - 需要注意的是这些管道被添加后并不会真正执行，只有等到调用终值操作之后才会执行。
 
 ## 生成流
@@ -81,7 +81,7 @@ long count = strings.parallelStream().filter(string -> string.isEmpty()).count()
 
 ### 由数组创建流
 
-- 通过静态方法 `Arrays.stream()` 将数组转化为流(Stream)
+- 通过静态方法 `Arrays.stream()` 将数组转化为流（Stream)
 
 ```java
 IntStream stream = Arrays.stream(new int[]{3, 2, 1});
@@ -106,15 +106,15 @@ Stream.generate(Math::random).limit(10).forEach(System.out::println);
 Stream.iterate(0, n -> n + 2).limit(10).forEach(System.out::println);
 ```
 
-## 中间操作(intermediate)
+## 中间操作（intermediate)
 
 调用中间操作方法返回的是一个新的流对象。
 
 ### peek()
 
-- 提供了一种对流中所有元素操作的方法，生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数(Consumer实例)
+- 提供了一种对流中所有元素操作的方法，生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例）
 - 新Stream每个元素被消费的时候都会执行给定的消费函数。
-- 一般不推荐使用，文档提示：该方法主要用于调试，做一些消耗这个对象但不修改它的东西（发送通知，打印模型等)
+- 一般不推荐使用，文档提示：该方法主要用于调试，做一些消耗这个对象但不修改它的东西（发送通知，打印模型等）
 
 ```java
 Stream.of("1", "2", "3", "4")
@@ -196,7 +196,7 @@ Random random = new Random();
 random.ints().limit(10).sorted().forEach(System.out::println);
 ```
 
-## 终值操作(terminal)
+## 终值操作（terminal)
 
 在调用该方法后，将执行之前所有的中间操作，并返回结果。
 
@@ -306,7 +306,7 @@ public void reduce() {
 #### 计数
 
 - Collectors.counting()
-- 计数只是归约的一种特殊形式：等同于初始值为 **0**，转换函数 **f(x)=1**(x 就是`Stream<T>`的 T 类型)，累积函数就是做加法的reducing()
+- 计数只是归约的一种特殊形式：等同于初始值为 **0**，转换函数 **f(x)=1**(x 就是`Stream<T>`的 T 类型），累积函数就是做加法的reducing()
 
 #### 分组
 

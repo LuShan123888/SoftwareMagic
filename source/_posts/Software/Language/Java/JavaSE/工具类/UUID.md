@@ -11,7 +11,7 @@ categories:
 
 ## UUID.randomUUID
 
-- 返回通用唯一识别码 (Universally Unique Identifier)，它保证对在同一时空中的所有机器都是唯一的，是由一个十六位的数字组成，表现出来的形式。
+- 返回通用唯一识别码（Universally Unique Identifier)，它保证对在同一时空中的所有机器都是唯一的，是由一个十六位的数字组成，表现出来的形式。
 
 **实例**
 

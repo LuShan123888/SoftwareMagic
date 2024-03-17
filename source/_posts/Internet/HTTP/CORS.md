@@ -6,14 +6,14 @@ categories:
 ---
 # HTTP CORS
 
-- CORS是一个W3C标准，全称是跨域资源共享(Cross-origin resource sharing)，它允许浏览器向跨源服务器，发出`XMLHttpRequest`请求，从而克服了AJAX只能同源使用的限制。
+- CORS是一个W3C标准，全称是跨域资源共享（Cross-origin resource sharing)，它允许浏览器向跨源服务器，发出`XMLHttpRequest`请求，从而克服了AJAX只能同源使用的限制。
 - CORS需要浏览器和服务器同时支持，目前，所有浏览器都支持该功能，IE浏览器不能低于IE10
 - 整个CORS通信过程，都是浏览器自动完成，不需要用户参与，对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样，浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。
 - 因此，实现CORS通信的关键是服务器，只要服务器实现了CORS接口，就可以跨源通信。
 
 ## 两种请求
 
-- 浏览器将CORS请求分成两类：简单请求(simple request)和非简单请求(not-so-simple request)
+- 浏览器将CORS请求分成两类：简单请求（simple request)和非简单请求（not-so-simple request)
 - 只要同时满足以下两大条件，就属于简单请求。
 
 > 1. 请求方法是以下三种方法之一。
@@ -27,7 +27,7 @@ categories:
 >     - Last-Event-ID
 >     - Content-Type：只限于三个值`application/x-www-form-urlencoded`,`multipart/form-data`,`text/plain`
 
-- 这是为了兼容表单(form)，因为历史上表单一直可以发出跨域请求，AJAX 的跨域设计就是，只要表单可以发，AJAX 就可以直接发。
+- 这是为了兼容表单（form)，因为历史上表单一直可以发出跨域请求，AJAX 的跨域设计就是，只要表单可以发，AJAX 就可以直接发。
 - 凡是不同时满足上面两个条件，就属于非简单请求。
 - 浏览器对这两种请求的处理，是不一样的。
 
@@ -47,8 +47,8 @@ Connection: keep-alive
 User-Agent: Mozilla/5.0...
 ```
 
-- 上面的头信息中，`Origin`字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口)，服务器根据这个值，决定是否同意这次请求。
-- 如果`Origin`指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应，浏览器发现，这个回应的头信息没有包含`Access-Control-Allow-Origin`字段（详见下文)，就知道出错了，从而抛出一个错误，被`XMLHttpRequest`的`onerror`回调函数捕获。
+- 上面的头信息中，`Origin`字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口），服务器根据这个值，决定是否同意这次请求。
+- 如果`Origin`指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应，浏览器发现，这个回应的头信息没有包含`Access-Control-Allow-Origin`字段（详见下文），就知道出错了，从而抛出一个错误，被`XMLHttpRequest`的`onerror`回调函数捕获。
 - **注意**：这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200
 - 如果`Origin`指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段。
 
@@ -94,7 +94,7 @@ xhr.withCredentials = false;
 
 - 非简单请求是那种对服务器有特殊要求的请求，比如请求方法是`PUT`或`DELETE`，或者`Content-Type`字段的类型。
 - 是`application/json`
-- 非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为预检请求(preflight)
+- 非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为预检请求（preflight)
 - 浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段，只有得到肯定答复，浏览器才会发出正式的`XMLHttpRequest`请求，否则就报错。
 - 下面是一段浏览器的JavaScript脚本。
 
@@ -169,7 +169,7 @@ Access-Control-Max-Age: 1728000
 - `Access-Control-Allow-Methods`：该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法，注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法，这是为了避免多次**预检**请求。
 - `Access-Control-Allow-Headers`：如果浏览器请求包括`Access-Control-Request-Headers`字段，则`Access-Control-Allow-Headers`字段是必需的，它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在**预检**中请求的字段。
 - `Access-Control-Allow-Credentials`：该字段与简单请求时的含义相同。
-- `Access-Control-Max-Age`：该字段可选，用来指定本次预检请求的有效期，单位为秒，上面结果中，有效期是20天(1728000秒)，即允许缓存该条回应1728000秒（即20天)，在此期间，不用发出另一条预检请求。
+- `Access-Control-Max-Age`：该字段可选，用来指定本次预检请求的有效期，单位为秒，上面结果中，有效期是20天（1728000秒），即允许缓存该条回应1728000秒（即20天），在此期间，不用发出另一条预检请求。
 
 ### 浏览器的正常请求和回应
 

@@ -18,7 +18,7 @@ categories:
     - `URL(String protocol,String host,String path)`：参数含义与上相同，使用协议默认端口号。
     - `URL(URL url,String path)`：利用给定url中的协议，主机，加上path指定的相对路径拼接新URL
     - `URL(String url)`：使用URL字符串构造一个URL类。
-- 如果URL信息错误将产生`MalformedURLException`异常，在构造完一个URL类后，可以使用URL类中的`openStream()`方法与服务器上的文件建立一个流的连接，但是这个流是输入流(InputStream)，只能读而不能写。
+- 如果URL信息错误将产生`MalformedURLException`异常，在构造完一个URL类后，可以使用URL类中的`openStream()`方法与服务器上的文件建立一个流的连接，但是这个流是输入流（InputStream)，只能读而不能写。
 - URL类提供的典型方法如下：
     - `String getFile()`：取得URL的文件名，它是带路径的文件标识。
     - `String getHost()`：取得URl的主机名。

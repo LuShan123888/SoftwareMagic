@@ -88,7 +88,7 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 
 ## 实例
 
-- 验证用户是否登录（认证用户)
+- 验证用户是否登录（认证用户）
 
 **实现思路**
 

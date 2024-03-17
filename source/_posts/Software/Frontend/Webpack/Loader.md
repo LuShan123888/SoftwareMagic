@@ -130,7 +130,7 @@ import "./style.scss";
 @import "~bootstrap";
 ```
 
-- **注意**：只在前面加上 `~`，因为`~/` 将会解析到用户的主目录(home directory)
+- **注意**：只在前面加上 `~`，因为`~/` 将会解析到用户的主目录（home directory)
 - 因为 CSS 和 Sass 文件没有用于导入相关文件的特殊语法，所以 Webpack 需要区分 `bootstrap` 和 `~bootstrap`
 -  `@import "style.scss"` 和 `@import "./style.scss";` 两种写法是相同的。
 
@@ -324,7 +324,7 @@ babel src -d dist2
 
 ## file-loader
 
-- 将文件保存至输出文件夹中并返回（相对)URL
+- 将文件保存至输出文件夹中并返回（相对）URL
 
 **安装**
 

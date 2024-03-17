@@ -236,10 +236,10 @@ props.put("auto.commit.interval.ms", "1000");
 
 - 虽然自动提交 offset 十分便利，但由于其是基于时间提交的，开发人员难以把握offset 提交的时机，因此 **Kafka 还提供了手动提交 offset 的 API**
 - 手动提交 offset 的方法有两种。
-    1. commitSync(同步提交)
-    2. commitAsync(异步提交)
+    1. commitSync(同步提交）
+    2. commitAsync(异步提交）
 - **相同点**：都会将本次 poll 的一批数据最高的 offset 提交。
-- **不同点**:commitSync 阻塞当前线程，一直到提交成功，并且会自动失败重试（由不可控因素导致，也会出现提交失败)，而 commitAsync 则没有失败重试机制，故有可能提交失败。
+- **不同点**:commitSync 阻塞当前线程，一直到提交成功，并且会自动失败重试（由不可控因素导致，也会出现提交失败），而 commitAsync 则没有失败重试机制，故有可能提交失败。
 
 ##### 同步提交offset
 
@@ -307,7 +307,7 @@ public class AsyncCommitOffset {
 - offset 的维护是相当繁琐的，因为需要考虑到消费者的 Rebalace
     - 当有新的消费者加入消费者组，已有的消费者推出消费者组或者所订阅的主题的分区发生变化，就会触发到分区的重新分配，重新分配的过程叫做 Rebalance
     - 消费者发生 Rebalance 之后，每个消费者消费的分区就会发生变化，因此消费者要首先获取到自己被重新分配到的分区，并且定位到每个分区最近提交的 offset 位置继续消费。
-- 要实现自定义存储 offset，需要借助 `ConsumerRebalanceListener`，以下为示例代码，其中提交和获取 offset 的方法，需要根据所选的 offset 存储系统自行实现，(可将offset存入MySQL数据库)
+- 要实现自定义存储 offset，需要借助 `ConsumerRebalanceListener`，以下为示例代码，其中提交和获取 offset 的方法，需要根据所选的 offset 存储系统自行实现，(可将offset存入MySQL数据库）
 
 ```java
 public class CustomSaveOffset {
@@ -362,9 +362,9 @@ public class CustomSaveOffset {
 
 ### 拦截器原理
 
-- Producer 拦截器(interceptor)是在 Kafka 0.10 版本被引入的，主要用于实现 clients 端的定制化控制逻辑。
+- Producer 拦截器（interceptor)是在 Kafka 0.10 版本被引入的，主要用于实现 clients 端的定制化控制逻辑。
 
-- 对于 producer 而言，interceptor 使得用户在消息发送前以及 producer 回调逻辑前有机会对消息做一些定制化需求，比如`修改消息`等，同时，producer 允许用户指定多个 interceptor按序作用于同一条消息从而形成一个拦截链(interceptor chain)
+- 对于 producer 而言，interceptor 使得用户在消息发送前以及 producer 回调逻辑前有机会对消息做一些定制化需求，比如`修改消息`等，同时，producer 允许用户指定多个 interceptor按序作用于同一条消息从而形成一个拦截链（interceptor chain)
 
 - Intercetpor 的实现接口是`org.apache.kafka.clients.producer.ProducerInterceptor`，其定义的方法包括。
 

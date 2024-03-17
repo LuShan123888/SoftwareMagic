@@ -148,4 +148,4 @@ border-image: source slice width outset repeat|initial|inherit;
 | border-image-slice  | 图像边界向内偏移                                             |
 | border-image-width  | 图像边界的宽度                                               |
 | border-image-outset | 用于指定在边框外部绘制 border-image-area 的量                |
-| border-image-repeat | 用于设置图像边界是否应重复(repeat)，拉伸(stretch)或铺满(round), |
+| border-image-repeat | 用于设置图像边界是否应重复（repeat)，拉伸（stretch)或铺满（round), |

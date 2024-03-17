@@ -82,7 +82,7 @@ module.exports = {
   // 输出文件目录。
   outputDir: 'dist',
 
-  // 放置生成的静态资源 (js,css,img,fonts) 的（相对于 outputDir 的）目录。
+  // 放置生成的静态资源（js,css,img,fonts) 的（相对于 outputDir 的）目录。
   assetsDir: 'static',
 
   // eslint-loader 是否在保存的时候检查。

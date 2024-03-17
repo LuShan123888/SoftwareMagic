@@ -13,7 +13,7 @@ categories:
     - 在方法中，this 表示该方法所属的对象。
     - 如果单独使用，this 表示全局对象。
     - 在函数中，this 表示全局对象。
-    - 在函数中，在严格模式下，this 是未定义的(undefined)
+    - 在函数中，在严格模式下，this 是未定义的（undefined)
     - 在事件中，this 表示接收事件的元素。
     - 类似 `call()` 和 `apply()` 方法可以将 this 引用到任何对象。
 
@@ -36,14 +36,14 @@ var person = {
 
 ## 单独使用 this
 
-- 单独使用 this，则它指向全局(Global)对象。
+- 单独使用 this，则它指向全局（Global)对象。
 - 在浏览器中，window 就是该全局对象为**Object Window**
 
 ```js
 var x = this;
 ```
 
-- 严格模式下，如果单独使用，this 也是指向全局(Global)对象。
+- 严格模式下，如果单独使用，this 也是指向全局（Global)对象。
 
 ```js
 "use strict";
@@ -86,7 +86,7 @@ function myFunction() {
 
 ## 显式函数绑定
 
-- 在 JavaScript 中函数也是对象，对象则有方法，apply 和 call 就是函数对象的方法，这两个方法异常强大，他们允许切换函数执行的上下文环境(context)，即 this 绑定的对象。
+- 在 JavaScript 中函数也是对象，对象则有方法，apply 和 call 就是函数对象的方法，这两个方法异常强大，他们允许切换函数执行的上下文环境（context)，即 this 绑定的对象。
 - 在下面实例中，当我们使用 person2 作为参数来调用 person1.fullName 方法时， **this** 将指向 person2，即便它是 person1 的方法：
 
 ```js

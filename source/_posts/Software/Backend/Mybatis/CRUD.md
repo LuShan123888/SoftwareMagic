@@ -7,7 +7,7 @@ categories:
 ---
 # Mybatis CRUD操作
 
-- **resultType**:SQL语句返回值类型（完整的类名或者别名)
+- **resultType**:SQL语句返回值类型（完整的类名或者别名）
 - **parameterType**：传入SQL语句的参数类型。
 - 接口中的方法名与映射文件中的SQL语句ID 一一对应。
 - 所有的增删改操作都需要提交事务。
@@ -273,7 +273,7 @@ public void testDeleteUser() {
 
 ## #与$的区别
 
-- `#{} `的作用主要是替换预编译语句(PrepareStatement)中的占位符，可以防止SQL注入攻击。
+- `#{} `的作用主要是替换预编译语句（PrepareStatement)中的占位符，可以防止SQL注入攻击。
 
 ```sql
 INSERT INTO user (name) VALUES (#{name});

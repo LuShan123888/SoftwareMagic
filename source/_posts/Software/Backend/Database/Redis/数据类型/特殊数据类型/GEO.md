@@ -22,7 +22,7 @@ categories:
 
 ## geoadd
 
-- geoadd 用于存储指定的地理空间位置，可以将一个或多个经度(longitude)，纬度(latitude)，位置名称(member)添加到指定的 key 中。
+- geoadd 用于存储指定的地理空间位置，可以将一个或多个经度（longitude)，纬度（latitude)，位置名称（member)添加到指定的 key 中。
 - geoadd 语法格式如下：
 
 ```
@@ -48,7 +48,7 @@ redis>
 
 ## geopos
 
-- geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置（经度和纬度)，不存在的返回 nil
+- geopos 用于从给定的 key 里返回一个或多个指定名称（member)的位置（经度和纬度），不存在的返回 nil
 - geopos 语法格式如下：
 
 ```

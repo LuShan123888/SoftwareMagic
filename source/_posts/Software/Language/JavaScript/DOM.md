@@ -68,7 +68,7 @@ document.write(Date());
 </html>
 ```
 
-- 绝对不要在文档(DOM)加载完成之后使用 `document.write()`，这会覆盖该文档。
+- 绝对不要在文档（DOM)加载完成之后使用 `document.write()`，这会覆盖该文档。
 
 ### 改变 HTML 内容
 
@@ -213,7 +213,7 @@ document.getElementById("myBtn").addEventListener("click", displayDate);
 - 你可以向一个元素添加多个事件句柄。
 - 你可以向同个元素添加多个同类型的事件句柄，如：两个 "click" 事件。
 - 你可以向任何 DOM 对象添加事件监听，不仅仅是 HTML 元素，如： window 对象。
-- `addEventListener()` 方法可以更简单的控制事件（冒泡与捕获)
+- `addEventListener()` 方法可以更简单的控制事件（冒泡与捕获）
 - 当你使用 `addEventListener()` 方法时， JavaScript 从 HTML 标记中分离开来，可读性更强，在没有控制HTML标记时也可以添加事件监听。
 - 你可以使用 `removeEventListener()` 方法来移除事件的监听。
 
@@ -397,7 +397,7 @@ parent.removeChild(child);
 
 **实例**
 
-- HTML 文档中 `<div>` 元素包含两个子节点（两个 `<p>` 元素):
+- HTML 文档中 `<div>` 元素包含两个子节点（两个 `<p>` 元素）:
 
 ```html
 <div id="div1">
@@ -425,7 +425,7 @@ parent.removeChild(child);
 ```
 
 - 如果能够在不引用父元素的情况下删除某个元素，就太好了，不过很遗憾，DOM 需要清楚您需要删除的元素，以及它的父元素。
-- 以下代码是已知要查找的子元素，然后查找其父元素，再删除这个子元素（删除节点必须知道父节点):
+- 以下代码是已知要查找的子元素，然后查找其父元素，再删除这个子元素（删除节点必须知道父节点）:
 
 ```js
 var child = document.getElementById("p1");
@@ -499,7 +499,7 @@ for (i = 0; i < myCollection.length; i++) {
 
 ## NodeList 对象
 
-- **NodeList** 对象是一个从文档中获取的节点列表（集合)
+- **NodeList** 对象是一个从文档中获取的节点列表（集合）
 - NodeList 对象类似 [HTMLCollection](https://www.runoob.com/js/js-htmldom-elements.html) 对象。
 - 一些旧版本浏览器中的方法（如`getElementsByClassName()`)返回的是 NodeList 对象，而不是 HTMLCollection 对象。
 - 所有浏览器的`childNodes`属性返回的是 NodeList 对象。
@@ -549,7 +549,7 @@ for (i = 0; i < myNodelist.length; i++) {
 - [HTMLCollection](https://www.runoob.com/js/js-htmldom-collections.html) 是 HTML 元素的集合。
 - NodeList 是一个文档节点的集合。
 - NodeList 与 HTMLCollection 有很多类似的地方。
-- NodeList 与 HTMLCollection 都与数组对象有点类似，可以使用索引 (0, 1, 2, 3, 4, ...) 来获取元素。
+- NodeList 与 HTMLCollection 都与数组对象有点类似，可以使用索引（0, 1, 2, 3, 4, ...) 来获取元素。
 - NodeList 与 HTMLCollection 都有 length 属性。
 - HTMLCollection 元素可以通过 name,id 或索引来获取。
 - NodeList 只能通过索引来获取。

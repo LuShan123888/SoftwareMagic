@@ -10,10 +10,10 @@ categories:
 ---
 # Redis Zset
 
-- Redis 有序集合(sorted set)和集合一样也是String类型元素的集合，且不允许重复的成员。
+- Redis 有序集合（sorted set)和集合一样也是String类型元素的集合，且不允许重复的成员。
 - 不同的是每个元素都会关联一个double类型的分数，Redis正是通过分数来为集合中的成员进行从小到大的排序。
-- 有序集合的成员是唯一的，但分数(score)却可以重复。
-- 集合是通过Hash表实现的，所以添加，删除，查找的复杂度都是O(1)，集合中最大的成员数为 232 - 1 (4294967295，每个集合可存储40多亿个成员)
+- 有序集合的成员是唯一的，但分数（score)却可以重复。
+- 集合是通过Hash表实现的，所以添加，删除，查找的复杂度都是O(1)，集合中最大的成员数为 232 - 1 (4294967295，每个集合可存储40多亿个成员）
 
 **实例**
 
@@ -67,4 +67,4 @@ $ ZRANGE testkey 0 10 WITHSCORES
 | 17   | ZREVRANK key member  返回有序集合中指定成员的排名，有序集成员按分数值递减（从大到小）排序 |
 | 18   | ZSCORE key member  返回有序集中，成员的分数值                 |
 | 19   | [ZUNIONSTORE destination numkeys key key ...\]  计算给定的一个或多个有序集的并集，并存储在新的 key 中 |
-| 20   | ZSCAN key cursor [MATCH pattern\] [COUNT count]  迭代有序集合中的元素（包括元素成员和元素分值) |
+| 20   | ZSCAN key cursor [MATCH pattern\] [COUNT count]  迭代有序集合中的元素（包括元素成员和元素分值） |

@@ -8,7 +8,7 @@ categories:
 ---
 # JavaScript Boolean对象
 
-- Boolean(布尔）对象用于将非布尔值转换为布尔值(true 或者 false)
+- Boolean(布尔）对象用于将非布尔值转换为布尔值（true 或者 false)
 
 ## 创建 Boolean 对象
 
@@ -27,4 +27,4 @@ var myBoolean=new Boolean();
     - false
     - undefined
     - NaN
-- 那么对象的值为 false，否则，其值为 true(即使当变量值为字符串 "false" 时)
+- 那么对象的值为 false，否则，其值为 true(即使当变量值为字符串 "false" 时）

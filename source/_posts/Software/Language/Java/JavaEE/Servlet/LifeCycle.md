@@ -12,7 +12,7 @@ categories:
 - Servlet 生命周期可被定义为从创建直到毁灭的整个过程，以下是 Servlet 遵循的过程：
     - Servlet 通过调用 **init ()** 方法进行初始化。
     - Servlet 调用 **service()** 方法来处理客户端的请求。
-    - Servlet 通过调用 **destroy()** 方法终止（结束)
+    - Servlet 通过调用 **destroy()** 方法终止（结束）
     - 最后，Servlet 是由 JVM 的垃圾回收器进行垃圾回收的。
 
 ## init() 方法
@@ -31,7 +31,7 @@ public void init() throws ServletException {
 ## service() 方法
 
 - service() 方法是执行实际任务的主要方法，Servlet 容器（即 Web 服务器）调用 service() 方法来处理来自客户端（浏览器）的请求，并把格式化的响应写回给客户端。
-- 每次服务器接收到一个 Servlet 请求时，服务器会产生一个新的线程并调用服务，service() 方法检查 HTTP 请求类型(GET,POST,PUT,DELETE 等)，并在适当的时候调用 doGet,doPost,doPut,doDelete 等方法。
+- 每次服务器接收到一个 Servlet 请求时，服务器会产生一个新的线程并调用服务，service() 方法检查 HTTP 请求类型（GET,POST,PUT,DELETE 等），并在适当的时候调用 doGet,doPost,doPut,doDelete 等方法。
 - 下面是该方法的特征：
 
 ```java

@@ -13,8 +13,8 @@ categories:
 
 - Apache POI是Apache软件基金会的开放源码函式库，POI提供API给Java程序对Microsoft Office格式档案读和写的功能。
 - 结构：
-    - HSSF － 提供读写Microsoft Excel格式档案的功能(Excel 2003 版本)
-    - XSSF － 提供读写Microsoft Excel OOXML格式档案的功能(Excel 2007 版本)
+    - HSSF － 提供读写Microsoft Excel格式档案的功能（Excel 2003 版本）
+    - XSSF － 提供读写Microsoft Excel OOXML格式档案的功能（Excel 2007 版本）
     - HWPF － 提供读写Microsoft Word格式档案的功能。
     - HSLF － 提供读写Microsoft PowerPoint格式档案的功能。
     - HDGF － 提供读写Microsoft Visio格式档案的功能。
@@ -41,7 +41,7 @@ categories:
 
 ### HSSF
 
-- 提供读写Microsoft Excel格式档案的功能(Excel 2003 版本)
+- 提供读写Microsoft Excel格式档案的功能（Excel 2003 版本）
 - **缺点**：最多只能处理 65536 行，否则会抛出异常。
 - **优点**：过程中写入缓存，不操作磁盘，最后一次性写入磁盘，速度快。
 
@@ -59,19 +59,19 @@ public class Test {
 
         // 创建第一行。
         Row row1 = sheet.createRow(0);
-        // 创建单元格(1,1)
+        // 创建单元格（1,1)
         Cell cell11 = row1.createCell(0);
         cell11.setCellValue("(1,1)");
-        // 创建单元格(1,2)
+        // 创建单元格（1,2)
         Cell cell12 = row1.createCell(1);
         cell12.setCellValue(1.2);
 
         // 创建第二行。
         Row row2 = sheet.createRow(1);
-        // 创建单元格(2,1)
+        // 创建单元格（2,1)
         Cell cell21 = row2.createCell(0);
         cell21.setCellValue("(2,1)");
-        // 创建单元格(2,2)
+        // 创建单元格（2,2)
         Cell cell22 = row2.createCell(1);
         cell22.setCellValue(2.2);
 
@@ -236,7 +236,7 @@ public class Test {
 
 ### XSSF
 
-- 提供读写Microsoft Excel OOXML格式档案的功能(Excel 2007 版本)
+- 提供读写Microsoft Excel OOXML格式档案的功能（Excel 2007 版本）
 - **缺点**：写数据时速度非常慢，非常耗内存，也会发生内存溢出，如 100 万条数据。
 - **优点**：可以写较大的数据量，如 20 万条。
 
@@ -305,7 +305,7 @@ public class Test {
 - SXSSFWorkbook 来自官方的解释：实现"BigGridDemo” 策略的流式 SXSSFWorkbook 版本，这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中。
 - **缺点**：仍然可能会消耗大量内存，这些内存基于你正在使用的功能，例如合并区域，注释只存储在内存中，因此如果广泛使用，可能需要大量内存。
 - **优点**：可以写非常大的数据量，如 100 万条甚至更多，写数据速度快，占用更少的内存。
-- **注意**：过程总会产生临时文件，需要清理临时文件，默认由 100 条记录被保存在内存中，则最前面的数据被写入临时文件，如果想要自定义内存中数据的数量，可以使用`new SXSSFWorkbook(数量)`
+- **注意**：过程总会产生临时文件，需要清理临时文件，默认由 100 条记录被保存在内存中，则最前面的数据被写入临时文件，如果想要自定义内存中数据的数量，可以使用`new SXSSFWorkbook(数量）`
 
 #### Write
 

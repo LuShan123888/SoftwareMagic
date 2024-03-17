@@ -71,7 +71,7 @@ int comparator(T obj1.Tobj2);
 - Comparator接口可以看成一种对象比较算法的实现，不妨称为"比较算子”，它将算法和数据分离，Comparator接口常用于以下两种环境：
   - 类的设计师没有考虑到比较问题，因而没有实现Comparator接口，可以通过Comparator比较算子来实现排序而不必改变对象本身。
   - 对象排序时要用多种排序标准，如升序，降序等，只要执行`sort()`方法时用不同的Comparator比较算子就可适应变化。
-- 假设User类没有实现Comparator接口，可采用UserComparator比较算子提供的方法实现排序，以下是按年龄(age)进行升序排序的具体实现代码。
+- 假设User类没有实现Comparator接口，可采用UserComparator比较算子提供的方法实现排序，以下是按年龄（age)进行升序排序的具体实现代码。
 
 ```java
 import java.util.Arrays;

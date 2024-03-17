@@ -53,7 +53,7 @@ graph LR
 id(This is the text in the box);
 ```
 
-###### 圆节点(The form of a circle)
+###### 圆节点（The form of a circle)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eeslcu3j30a8070q2r.jpg)
 
@@ -62,7 +62,7 @@ graph LR
 id((This is the text in the circle));
 ```
 
-###### 非对称节点(asymetric shape)
+###### 非对称节点（asymetric shape)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef0jxx0j3094031mwy.jpg)
 
@@ -71,7 +71,7 @@ graph LR
 id>This is the text in the box]
 ```
 
-###### 菱形节点(rhombus)
+###### 菱形节点（rhombus)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eeqv0oqj309y06rglf.jpg)
 
@@ -124,7 +124,7 @@ graph LR
  A-- text -->B
 ```
 
-###### 虚线(dotted link，点连线)
+###### 虚线（dotted link，点连线）
 
 > -.->
 
@@ -226,7 +226,7 @@ graph LR
         A["A double quote:#quot;"]-->B["A dec char:#9829;"]
 ```
 
-#### 子图(Subgraphs)
+#### 子图（Subgraphs)
 
 > subgraph title
 > graph definition
@@ -282,7 +282,7 @@ graph TD
 以上reference:
 1.[mermaid docs](https://knsv.github.io/mermaid/#initialization)
 
-### 第二部分—图表(graph)
+### 第二部分—图表（graph)
 
 ##### 定义连接线的样式
 

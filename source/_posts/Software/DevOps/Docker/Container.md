@@ -269,14 +269,14 @@ CONTAINER ID   IMAGE          COMMAND                ...  PORTS                 
 - **CREATED**：容器的创建时间。
 - **STATUS**：容器状态。
     - 状态有7种：
-    - created(已创建)
-    - restarting(重启中)
-    - running(运行中)
-    - removing(迁移中)
-    - paused(暂停)
-    - exited(停止)
-    - dead(死亡)
-- **PORTS**：容器的端口信息和使用的连接类型(tcp\udp)
+    - created(已创建）
+    - restarting(重启中）
+    - running(运行中）
+    - removing(迁移中）
+    - paused(暂停）
+    - exited(停止）
+    - dead(死亡）
+- **PORTS**：容器的端口信息和使用的连接类型（tcp\udp)
 - **NAMES**：自动分配的容器名称。
 
 - 列出最近创建的5个容器信息。
@@ -379,7 +379,7 @@ $ for i in  `docker ps |grep Up|awk '{print $1}'`;
 
 ### port
 
-- 通过 **docker ps** 命令可以查看到容器的端口映射，**docker** 还提供了另一个快捷方式 **docker port**，使用 **docker port** 可以查看指定 (ID 或者名字）容器的某个确定端口映射到宿主机的端口号。
+- 通过 **docker ps** 命令可以查看到容器的端口映射，**docker** 还提供了另一个快捷方式 **docker port**，使用 **docker port** 可以查看指定（ID 或者名字）容器的某个确定端口映射到宿主机的端口号。
 
 ```
 $ docker port 容器名/容器id

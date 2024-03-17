@@ -9,7 +9,7 @@ categories:
 # Spring MVC WebMvcConfigurer
 
 - WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式，采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制，基于java-based方式的Spring MVC配置，需要创建一个配置类并实现`WebMvcConfigurer` 接口。
-- `WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象（增加了一些默认实现)，但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃，官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
+- `WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象（增加了一些默认实现），但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃，官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
 
 ```java
 public interface WebMvcConfigurer {
@@ -108,11 +108,11 @@ public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf
 
 - 此时会注册一个默认的Handler:`DefaultServletHttpRequestHandler`，这个Handler也是用来处理静态文件的，它会尝试映射`/*`
 
-- 当DispatcherServelt映射`/`时(`/`和`/*`是有区别的)，并且没有找到合适的Handler来处理请求时，就会交给`DefaultServletHttpRequestHandler`来处理。
+- 当DispatcherServelt映射`/`时（`/`和`/*`是有区别的），并且没有找到合适的Handler来处理请求时，就会交给`DefaultServletHttpRequestHandler`来处理。
 
 - **注意**：这里的静态资源是放置在web根目录下，而非`WEB-INF`下。
 
-- 例如：在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录(webroot)下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是：`/`，它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性（根目录下的文件可以直接访问),`DefaultServletHttpRequestHandler`是帮助回归这个特性的。
+- 例如：在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录（webroot)下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是：`/`，它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性（根目录下的文件可以直接访问）,`DefaultServletHttpRequestHandler`是帮助回归这个特性的。
 
 ## configureViewResolvers
 

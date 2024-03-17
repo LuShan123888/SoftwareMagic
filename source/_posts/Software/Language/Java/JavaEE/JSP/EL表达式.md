@@ -9,7 +9,7 @@ categories:
 ---
 # JSP 表达式语言
 
-- JSP表达式语言(EL)使得访问存储在JavaBean中的数据变得非常简单，JSP EL既可以用来创建算术表达式也可以用来创建逻辑表达式，在JSP EL表达式内可以使用整型数，浮点数，字符串，常量true,false，还有null
+- JSP表达式语言（EL)使得访问存储在JavaBean中的数据变得非常简单，JSP EL既可以用来创建算术表达式也可以用来创建逻辑表达式，在JSP EL表达式内可以使用整型数，浮点数，字符串，常量true,false，还有null
 
 ## 一个简单的语法
 
@@ -91,7 +91,7 @@ ${expr}
 ${ns:func(param1, param2, ...)}
 ```
 
-- ns指的是命名空间(namespace),func指的是函数的名称，param1指的是第一个参数，param2指的是第二个参数，以此类推，比如，有函数fn:length，在JSTL库中定义，可以像下面这样来获取一个字符串的长度：
+- ns指的是命名空间（namespace),func指的是函数的名称，param1指的是第一个参数，param2指的是第二个参数，以此类推，比如，有函数fn:length，在JSTL库中定义，可以像下面这样来获取一个字符串的长度：
 
 ```jsp
 ${fn:length("Get my length")}

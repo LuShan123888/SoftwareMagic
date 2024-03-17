@@ -14,7 +14,7 @@ Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口�
 
 ## 数据结构
 
-### 基本类型(Base Types)
+### 基本类型（Base Types)
 
 基本类型就是：不管哪一种语言，都支持的数据形式表现，Apache Thrift中支持以下几种基本类型：
 
@@ -26,13 +26,13 @@ Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口�
 | 164    | 有符号的64位整数            | long             | int64   |
 | double | 64位浮点数                  | double           | float64 |
 | bool   | 布尔值                      | boolean          | bool    |
-| string | 文本字符串(UTF-8编码格式)| java.lang.String | string  |
+| string | 文本字符串（UTF-8编码格式）| java.lang.String | string  |
 
-### 特殊类型 (Special Types)
+### 特殊类型（Special Types)
 
 `binary`：未编码的字节序列，是string的一种特殊形式;这种类型主要是方便某些场景下JAVA调用.JAVA中对应的是`java.nio.ByteBuffer`类型，GO中是`[]byte`
 
-### 集合容器 (Containers)
+### 集合容器（Containers)
 
 有3种可用容器类型：
 
@@ -54,7 +54,7 @@ struct Test {
 }
 ```
 
-### 常量及类型别名 (Const&&Typedef)
+### 常量及类型别名（Const&&Typedef)
 
 ```idl
 // 常量定义。
@@ -100,7 +100,7 @@ struct有以下一些约束：
  	6. 每个字段可以设置默认值。
  	7. 同一文件可以定义多个struct，也可以定义在不同的文件，进行include引入。
 
-### 枚举 (enum)
+### 枚举（enum)
 
 Thrift不支持枚举类嵌套，枚举常量必须是32位的正整数。
 
@@ -111,7 +111,7 @@ enum Httpstatus{
 }
 ```
 
-### 异常 (Exceptions)
+### 异常（Exceptions)
 
 异常在语法和功能上类似于结构体，差别是异常使用关键字exception，而且异常是继承每种语言的基础异常类。
 

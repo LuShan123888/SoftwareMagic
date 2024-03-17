@@ -11,7 +11,7 @@ categories:
 # Redis Hash
 
 - Redis Hash是一个 String类型的 field(字段）和 value(值）的映射表，类似于Map,Hash特别适合用于存储对象。
-- Redis 中每个 Hash可以存储 232 - 1 键值对(40多亿)
+- Redis 中每个 Hash可以存储 232 - 1 键值对（40多亿）
 
 ```
 127.0.0.1:6379>  HMSET testKey name "redis tutorial" description "redis basic commands for caching" likes 20 visitors 23000
@@ -27,7 +27,7 @@ OK
 8) "23000"
 ```
 
-- 在以上实例中，我们设置了 Redis 的一些描述信息(name, description, likes, visitors) 到Hash表的 **testKey** 中。
+- 在以上实例中，我们设置了 Redis 的一些描述信息（name, description, likes, visitors) 到Hash表的 **testKey** 中。
 
 ## Redis Hash命令
 

@@ -22,12 +22,12 @@ categories:
 
 ### XMLHttpRequest 对象
 
-- 所有现代浏览器均支持 XMLHttpRequest 对象(IE5 和 IE6 使用 ActiveXObject)
+- 所有现代浏览器均支持 XMLHttpRequest 对象（IE5 和 IE6 使用 ActiveXObject)
 - XMLHttpRequest 用于在后台与服务器交换数据，这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
 
 ### 创建 XMLHttpRequest 对象
 
-- 所有现代浏览器(IE7+,Firefox,Chrome,Safari 以及 Opera)均内建 XMLHttpRequest 对象。
+- 所有现代浏览器（IE7+,Firefox,Chrome,Safari 以及 Opera)均内建 XMLHttpRequest 对象。
 - 创建 XMLHttpRequest 对象的语法：
 
 ```js
@@ -59,7 +59,7 @@ else
 ## XHR请求
 
 - 如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open() 和 send() 方法：
-- open() 方法的 *url* 参数是服务器上文件的地址：该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php (在传回响应之前，能够在服务器上执行任务)
+- open() 方法的 *url* 参数是服务器上文件的地址：该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php (在传回响应之前，能够在服务器上执行任务）
 - XMLHttpRequest 对象如果要用于 AJAX 的话，其 open() 方法的 async 参数必须设置为 true
 
 ```js
@@ -69,7 +69,7 @@ xmlhttp.send();
 
 | 方法                         | 描述                                                         |
 | :--------------------------- | :----------------------------------------------------------- |
-| open(*method*,*url*,*async*) | 规定请求的类型，URL 以及是否异步处理请求，*method*：请求的类型;GET 或 POST*url*：文件在服务器上的位置*async*:true(异步）或 false(同步) |
+| open(*method*,*url*,*async*) | 规定请求的类型，URL 以及是否异步处理请求，*method*：请求的类型;GET 或 POST*url*：文件在服务器上的位置*async*:true(异步）或 false(同步） |
 | send(*string*)               | 将请求发送到服务器，*string*：仅用于 POST 请求               |
 
 ### GET请求
@@ -146,7 +146,7 @@ document.getElementById("myDiv").innerHTML=txt;
 
 | 属性               | 描述                                                         |
 | :----------------- | :----------------------------------------------------------- |
-| onreadystatechange | 存储函数（或函数名)，每当 readyState 属性改变时，就会调用该函数， |
+| onreadystatechange | 存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数， |
 | readyState         | 存有 XMLHttpRequest 的状态，从 0 到 4 发生变化，0：请求未初始化1：服务器连接已建立2：请求已接收3：请求处理中4：请求已完成，且响应已就绪 |
 | status             | 200: "OK" 404：未找到页面                                    |
 
@@ -163,13 +163,13 @@ xmlhttp.onreadystatechange=function()
 }
 ```
 
-- **注意**:onreadystatechange 事件被触发 4 次(0 - 4)，分别是： 0-1,1-2,2-3,3-4，对应着 readyState 的每个变化。
+- **注意**:onreadystatechange 事件被触发 4 次（0 - 4)，分别是： 0-1,1-2,2-3,3-4，对应着 readyState 的每个变化。
 
 ## 使用回调函数
 
 - 回调函数是一种以参数形式传递给另一个函数的函数。
 - 如果您的网站上存在多个 AJAX 任务，那么您应该为创建 XMLHttpRequest 对象编写一个*标准*的函数，并为每个 AJAX 任务调用该函数。
-- 该函数调用应该包含 URL 以及发生 `onreadystatechange` 事件时执行的任务（每次调用可能不尽相同):
+- 该函数调用应该包含 URL 以及发生 `onreadystatechange` 事件时执行的任务（每次调用可能不尽相同）:
 
 ```js
 function myFunction()

@@ -20,11 +20,11 @@ categories:
 ### Save
 
 ```java
-// 插入一条记录（选择字段，策略插入)
+// 插入一条记录（选择字段，策略插入）
 boolean save(T entity);
-// 插入（批量)
+// 插入（批量）
 boolean saveBatch(Collection<T> entityList);
-// 插入（批量)
+// 插入（批量）
 boolean saveBatch(Collection<T> entityList, int batchSize);
 ```
 
@@ -67,7 +67,7 @@ boolean remove(Wrapper<T> queryWrapper);
 boolean removeById(Serializable id);
 // 根据 columnMap 条件，删除记录。
 boolean removeByMap(Map<String, Object> columnMap);
-// 删除（根据ID 批量删除)
+// 删除（根据ID 批量删除）
 boolean removeByIds(Collection<? extends Serializable> idList);
 ```
 
@@ -136,9 +136,9 @@ Map<String, Object> getMap(Wrapper<T> queryWrapper);
 List<T> list();
 // 查询列表。
 List<T> list(Wrapper<T> queryWrapper);
-// 查询（根据ID 批量查询)
+// 查询（根据ID 批量查询）
 Collection<T> listByIds(Collection<? extends Serializable> idList);
-// 查询（根据 columnMap 条件)
+// 查询（根据 columnMap 条件）
 Collection<T> listByMap(Map<String, Object> columnMap);
 // 查询所有列表。
 List<Map<String, Object>> listMaps();
@@ -267,7 +267,7 @@ public void testInsert(){
 ```java
 // 根据 entity 条件，删除记录。
 int delete(@Param(Constants.WRAPPER) Wrapper<T> wrapper);
-// 删除（根据ID 批量删除)
+// 删除（根据ID 批量删除）
 int deleteBatchIds(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList);
 // 根据 ID 删除。
 int deleteById(Serializable id);
@@ -320,8 +320,8 @@ int updateById(@Param(Constants.ENTITY) T entity);
 
 |    类型    |    参数名     |                             描述                             |
 | :--------: | :-----------: | :----------------------------------------------------------: |
-|     T      |    entity     |               实体对象 (set 条件值，可为 null)                |
-| Wrapper<T> | updateWrapper | 实体对象封装操作类（可以为 null，里面的 entity 用于生成 where 语句) |
+|     T      |    entity     |               实体对象（set 条件值，可为 null)                |
+| Wrapper<T> | updateWrapper | 实体对象封装操作类（可以为 null，里面的 entity 用于生成 where 语句） |
 
 **实例**
 
@@ -347,20 +347,20 @@ T selectById(Serializable id);
 // 根据 entity 条件，查询一条记录。
 T selectOne(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
-// 查询（根据ID 批量查询)
+// 查询（根据ID 批量查询）
 List<T> selectBatchIds(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList);
 // 根据 entity 条件，查询全部记录。
 List<T> selectList(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 查询（根据 columnMap 条件)
+// 查询（根据 columnMap 条件）
 List<T> selectByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
 // 根据 Wrapper 条件，查询全部记录。
 List<Map<String, Object>> selectMaps(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询全部记录，注意：只返回第一个字段的值。
 List<Object> selectObjs(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
-// 根据 entity 条件，查询全部记录（并翻页)
+// 根据 entity 条件，查询全部记录（并翻页）
 IPage<T> selectPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件，查询全部记录（并翻页)
+// 根据 Wrapper 条件，查询全部记录（并翻页）
 IPage<Map<String, Object>> selectMapsPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询总记录数。
 Integer selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);

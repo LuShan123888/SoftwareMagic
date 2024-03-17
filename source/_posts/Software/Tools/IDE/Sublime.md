@@ -23,7 +23,7 @@ $ subl .../error.log
 ## 关闭自动更新
 
 1.  Preferences -> Settings-User
-2. 键入禁止检查更新命令后（如下)，保存：
+2. 键入禁止检查更新命令后（如下），保存：
 
 ```json
 { "update_check":false }

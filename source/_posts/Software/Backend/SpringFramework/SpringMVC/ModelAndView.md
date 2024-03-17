@@ -103,7 +103,7 @@ public class HelloWorldController {
 }
 ```
 
-- 接收请求`/helloWorld`后， populateModel方法在helloWorld方法之前先被调用，它把请求参数(/helloWorld?abc=text)加入到一个名为attributeName的model属性中，在它执行后 helloWorld被调用，返回视图名helloWorld和model已由@ModelAttribute方法生产好了。
+- 接收请求`/helloWorld`后， populateModel方法在helloWorld方法之前先被调用，它把请求参数（/helloWorld?abc=text)加入到一个名为attributeName的model属性中，在它执行后 helloWorld被调用，返回视图名helloWorld和model已由@ModelAttribute方法生产好了。
 
 **@ModelAttribute注释返回具体类的方法**
 

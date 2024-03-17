@@ -10,7 +10,7 @@ categories:
 # Java ThreadLocal
 
 - ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。
-- **作用**：提供一个线程内公共变量（比如本次请求的用户信息)，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。
+- **作用**：提供一个线程内公共变量（比如本次请求的用户信息），减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。
 - ThreadLoal 变量，线程局部变量，同一个 ThreadLocal 所包含的对象，在不同的 Thread 中有不同的副本，这里有几点需要注意：
   - 因为每个 Thread 内有自己的实例副本，且该副本只能由当前 Thread 使用，这是也是 ThreadLocal 命名的由来。
   - 既然每个 Thread 有自己的实例副本，且其它 Thread 不可访问，那就不存在多线程间共享的问题。
@@ -61,7 +61,7 @@ void createMap(Thread t, T firstValue) {
 }
 ```
 
-- Thread类中有一个成员变量属于ThreadLocalMap类（一个定义在ThreadLocal类中的内部类)，它是一个Map，他的key是ThreadLocal实例对象。
+- Thread类中有一个成员变量属于ThreadLocalMap类（一个定义在ThreadLocal类中的内部类），它是一个Map，他的key是ThreadLocal实例对象。
 - 初始容量16，负载因子2/3，解决冲突的方法是再hash法。
 
 ```java
@@ -99,12 +99,12 @@ private static int nextHashCode() {
 ```
 
 - 对于每一个ThreadLocal对象，都有一个final修饰的int型的threadLocalHashCode不可变属性，对于基本数据类型，可以认为它在初始化后就不可以进行修改，所以可以唯一确定一个ThreadLocal对象。
-- 但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性：在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类）成员变量（即类变量）和一个static final修饰的常量（作为两个相邻nextHashCode的差值)，由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性。
+- 但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性：在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类）成员变量（即类变量）和一个static final修饰的常量（作为两个相邻nextHashCode的差值），由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性。
 
 **为什么不直接用线程id来作为ThreadLocalMap的key？**
 
 - 这一点很容易理解，因为直接用线程id来作为ThreadLocalMap的key，无法区分放入ThreadLocalMap中的多个value，比如我们放入了两个字符串，你如何知道我要取出来的是哪一个字符串呢？
-- 而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由`threadLocalHashCode`属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分（下面的例子)，所以可以用不同的ThreadLocal作为key，区分不同的value，方便存取。
+- 而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由`threadLocalHashCode`属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分（下面的例子），所以可以用不同的ThreadLocal作为key，区分不同的value，方便存取。
 
 ```java
 public class Son implements Cloneable{
@@ -199,7 +199,7 @@ public class DateUtil {
 }
 ```
 
-- 这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 `java.time.format.DateTimeFormatter`是线程安全的，Joda time里的DateTimeFormat也是线程安全的)
+- 这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 `java.time.format.DateTimeFormatter`是线程安全的，Joda time里的DateTimeFormat也是线程安全的）
 
 ## ThreadLocalRandom
 

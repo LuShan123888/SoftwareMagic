@@ -53,7 +53,7 @@ class Client {
 }
 ```
 
-- 这里客户机要访问的计算机为本地主机(localhost)，也就是在一台计算机上自己与自己通信，客户通过创建Socket与服务端建立连接后，可以取得Socket的输入流，用过滤流`DataInputStream`的`readUTF()`方法读取来自服务方的字符串，最后关闭Socket连接。
+- 这里客户机要访问的计算机为本地主机（localhost)，也就是在一台计算机上自己与自己通信，客户通过创建Socket与服务端建立连接后，可以取得Socket的输入流，用过滤流`DataInputStream`的`readUTF()`方法读取来自服务方的字符串，最后关闭Socket连接。
 
 
 **服务方程序**

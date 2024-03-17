@@ -28,7 +28,7 @@ var z=123e-5;  // 0.00123
 - JavaScript 不是类型语言，与许多其他编程语言不同，JavaScript 不定义不同类型的数字，比如整数，短，长，浮点等等。
 - 在JavaScript中，数字不分为整数类型和浮点型类型，所有的数字都是由浮点型类型，JavaScript 采用 IEEE754 标准定义的 64 位浮点格式表示数字，它能表示最大值为 ±1.7976931348623157e+308，最小值为 ±5e-324
 
-| 值 (aka Fraction/Mantissa) | 指数              | Sign       |
+| 值（aka Fraction/Mantissa) | 指数              | Sign       |
 | :------------------------- | :---------------- | :--------- |
 | 52 bits (0 - 51)           | 11 bits (50 - 62) | 1 bit (63) |
 
@@ -66,9 +66,9 @@ myNumber.toString(8);    // 返回 200
 myNumber.toString(2);    // 返回 10000000
 ```
 
-## 无穷大(Infinity)
+## 无穷大（Infinity)
 
-- 当数字运算结果超过了JavaScript所能表示的数字上限（溢出)，结果为一个特殊的无穷大(infinity)值，在JavaScript中以Infinity表示，同样地，当负数的值超过了JavaScript所能表示的负数范围，结果为负无穷大，在JavaScript中以-Infinity表示，无穷大值的行为特性和我们所期望的是一致的：基于它们的加，减，乘和除运算结果还是无穷大（当然还保留它们的正负号)
+- 当数字运算结果超过了JavaScript所能表示的数字上限（溢出），结果为一个特殊的无穷大（infinity)值，在JavaScript中以Infinity表示，同样地，当负数的值超过了JavaScript所能表示的负数范围，结果为负无穷大，在JavaScript中以-Infinity表示，无穷大值的行为特性和我们所期望的是一致的：基于它们的加，减，乘和除运算结果还是无穷大（当然还保留它们的正负号）
 
 ```js
 myNumber=2;

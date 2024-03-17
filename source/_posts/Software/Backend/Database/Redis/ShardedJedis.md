@@ -31,7 +31,7 @@ categories:
 | ShardedJedis       | 同Jedis类似，实现JedisCommands对外提供基于String的key,value操作 |
 
 - shared一致性哈希算法。
-    1. Redis服务器节点划分：将每台服务器节点采用hash算法划分为160个虚拟节点（可以配置划分权重)
+    1. Redis服务器节点划分：将每台服务器节点采用hash算法划分为160个虚拟节点（可以配置划分权重）
     2. 将划分虚拟节点采用TreeMap存储。
     3. 对每个Redis服务器的物理连接采用LinkedHashMap存储。
     4. 对Key or KeyTag 采用同样的hash算法，然后从TreeMap获取大于等于键hash值得节点，取最邻近节点存储，当key的hash值大于虚拟节点hash值得最大值时，存入第一个虚拟节点。

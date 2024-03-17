@@ -439,7 +439,7 @@ func BenchmarkSplit (b *testing. B) {
 ### 并行测试
 
 - `func (b *B) RunParallel (body func (*PB))`会以并行的方式执行给定的基准测试。
-- `RunParallel`会创建出多个`goroutine`，并将`b.N`分配给这些`goroutine`执行，其中`goroutine`数量的默认值为`GOMAXPROCS`，用户如果想要增加非 CPU 受限 (non-CPU-bound) 基准测试的并行性，那么可以在`RunParallel`之前调用`SetParallelism`,`RunParallel`通常会与`-cpu`标志一同使用。
+- `RunParallel`会创建出多个`goroutine`，并将`b.N`分配给这些`goroutine`执行，其中`goroutine`数量的默认值为`GOMAXPROCS`，用户如果想要增加非 CPU 受限（non-CPU-bound) 基准测试的并行性，那么可以在`RunParallel`之前调用`SetParallelism`,`RunParallel`通常会与`-cpu`标志一同使用。
 
 ```go
 func BenchmarkSplitParallel (b *testing. B) {
@@ -509,12 +509,12 @@ func ExampleSplit () {
 
 ## Setup 与 TearDown
 
-- 测试程序有时需要在测试之前进行额外的设置 (setup) 或在测试之后进行拆卸 (teardown)
+- 测试程序有时需要在测试之前进行额外的设置（setup) 或在测试之后进行拆卸（teardown)
 
 ### TestMain
 
-- 通过在`*_test. go`文件中定义`TestMain`函数来可以在测试之前进行额外的设置 (setup) 或在测试之后进行拆卸 (teardown) 操作。
-- 如果测试文件包含函数：`func TestMain (m *testing. M)`那么生成的测试会先调用 TestMain (m)，然后再运行具体测试，`TestMain`运行在主`goroutine`中，可以在调用 `m.Run`前后做任何设置 (setup) 和拆卸 (teardown)，退出测试的时候应该使用`m.Run`的返回值作为参数调用`os. Exit`
+- 通过在`*_test. go`文件中定义`TestMain`函数来可以在测试之前进行额外的设置（setup) 或在测试之后进行拆卸（teardown) 操作。
+- 如果测试文件包含函数：`func TestMain (m *testing. M)`那么生成的测试会先调用 TestMain (m)，然后再运行具体测试，`TestMain`运行在主`goroutine`中，可以在调用 `m.Run`前后做任何设置（setup) 和拆卸（teardown)，退出测试的时候应该使用`m.Run`的返回值作为参数调用`os. Exit`
 - 一个使用`TestMain`来设置 Setup 和 TearDown 的示例如下：
 
 ```go
@@ -527,7 +527,7 @@ func TestMain (m *testing. M) {
 }
 ```
 
-- 需要注意的是：在调用`TestMain`时， `flag. Parse`并没有被调用，所以如果`TestMain` 依赖于 command-line 标志（包括 testing 包的标记)，则应该显示的调用`flag. Parse`
+- 需要注意的是：在调用`TestMain`时， `flag. Parse`并没有被调用，所以如果`TestMain` 依赖于 command-line 标志（包括 testing 包的标记），则应该显示的调用`flag. Parse`
 
 ### 子测试的 Setup 与 Teardown
 

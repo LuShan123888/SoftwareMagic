@@ -282,7 +282,7 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
 
     // 解决文件名字问题：我们使用uuid;
     String filename = "ks-"+UUID.randomUUID().toString().replaceAll("-", "");
-    // 通过CommonsMultipartFile的方法直接写文件（注意这个时候)
+    // 通过CommonsMultipartFile的方法直接写文件（注意这个时候）
     file.transferTo(new File(realPath +"/"+ filename));
 
     // 给editormd进行回调。

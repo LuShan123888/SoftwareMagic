@@ -8,7 +8,7 @@ categories:
 ---
 # Git rebase
 
-## 变基 (Rebasing)
+## 变基（Rebasing)
 
 - 将当前分支的提交复制到指定的分支之上。
 - **变基与合并有一个重大的区别**: Git 不会尝试确定要保留或不保留哪些文件，在执行 rebase 的分支总是含有想要保留的最新近的修改，这样不会遇到任何合并冲突，而且可以保留一个漂亮的，线性的 Git 历史记录。
@@ -22,7 +22,7 @@ git rebase  <branch_name>
 - 上面这个例子展示了在 master 分支上的变基，但是，在更大型的项目中，通常不需要这样的操作，因为 rebase 在为复制的提交创建新的 hash 时会修改项目的历史记录。
 - 如果在开发一个 feature 分支并且 master 分支已经更新过，那么变基就很好用，可以在你的分支上获取所有更新，这能防止未来出现合并冲突。
 
-## 交互式变基 (Interactive Rebase)
+## 交互式变基（Interactive Rebase)
 
 - 在为提交执行变基之前，可以修改它们，可以使用交互式变基来完成这一任务。
 - 交互式变基在你当前开发的分支上以及想要修改某些提交时会很有用。
@@ -33,7 +33,7 @@ git rebase  <branch_name>
 
 - `-i --interactive`：即弹出交互式的界面让用户编辑完成合并操作。
 - `[startpoint],[endpoint]`：指定了一个编辑区间，可以用 commit-id 或 HEAD 指针指定。
-- 如果不指定 `[endpoint]`，则该区间的终点默认是当前分支 `HEAD` 所指向的 `commit` (注：该区间指定的是一个前开后闭的区间)
+- 如果不指定 `[endpoint]`，则该区间的终点默认是当前分支 `HEAD` 所指向的 `commit` (注：该区间指定的是一个前开后闭的区间）
 
 在 rebase 的提交上，可以执行以下 6 个动作：
 
@@ -100,7 +100,7 @@ git rebase --continue
 git rebase   [startpoint]   [endpoint]  --onto  [branchName]
 ```
 
-其中， `[startpoint]` `[endpoint]` 仍然和上一个命令一样指定了一个编辑区间（前开后闭), `--onto` 的意思是要将该指定的提交复制到哪个分支上。
+其中， `[startpoint]` `[endpoint]` 仍然和上一个命令一样指定了一个编辑区间（前开后闭）, `--onto` 的意思是要将该指定的提交复制到哪个分支上。
 所以，在找到 C (90 bc 0045 b) 和 E (5 de 0 da 9 f 2) 的提交 id 后，运行以下命令：
 
 ```shell

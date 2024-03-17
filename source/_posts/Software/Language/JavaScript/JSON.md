@@ -19,7 +19,7 @@ JSON.stringify(value[, replacer[, space]])
 
 **参数说明**:
 
-- **value**：必需，要转换的 JavaScript 值（通常为对象或数组)
+- **value**：必需，要转换的 JavaScript 值（通常为对象或数组）
 - **replacer**:
     - 可选，用于转换结果的函数或数组。
     - 如果 replacer 为函数，则 JSON.stringify 将调用该函数，并传入每个成员的键和值，使用返回值而不是原始值，如果此函数返回 undefined，则排除成员，根对象的键是一个空字符串：""

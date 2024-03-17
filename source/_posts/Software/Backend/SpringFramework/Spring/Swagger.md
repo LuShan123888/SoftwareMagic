@@ -151,7 +151,7 @@ public class UserController {
 - 用于方法，表示一个http请求的操作。
     - **value**：用于方法描述	
     - **notes**：用于提示内容。
-    - **tags**：可以重新分组（视情况而用)
+    - **tags**：可以重新分组（视情况而用）
 
 ```java
 public class UserController {
@@ -164,7 +164,7 @@ public class UserController {
 
 #### @ApiParam()
 
-- 用于方法，参数，字段说明，表示对参数的添加元数据（说明或是否必填等)
+- 用于方法，参数，字段说明，表示对参数的添加元数据（说明或是否必填等）
     - **name**：参数名。
     - **value**：参数说明。
     - **required**：是否必填。

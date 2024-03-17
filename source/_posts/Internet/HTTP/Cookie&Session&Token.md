@@ -47,7 +47,7 @@ categories:
 
 - 那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法。
 - 当客户端第一次请求服务端，当server端程序调用`HttpServletRequest.getSession(true)`这样的语句时的时候，服务器会为客户端创建一个session，并将通过特殊算法算出一个session的ID，用来标识该session对象。
-- Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中)，也可以持久化到file，数据库，memcache,Redis等，客户端只保存sessionid到Cookie中，而不会保存session
+- Session存储在服务器的内存中（tomcat服务器通过StandardManager类将session存储在内存中），也可以持久化到file，数据库，memcache,Redis等，客户端只保存sessionid到Cookie中，而不会保存session
 - 浏览器的关闭并不会导致Session的删除，只有当超时，程序调用`HttpSession.invalidate()`以及服务端程序关闭才会删除。
 
 #### Tomcat中的Session创建
@@ -64,7 +64,7 @@ categories:
 
 #### Session 复制
 
-- 任何一个服务器上的 Session 发生改变（增删改)，该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session，以此来保证 Session 同步。
+- 任何一个服务器上的 Session 发生改变（增删改），该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session，以此来保证 Session 同步。
 - **优点**：可容错，各个服务器间 Session 能够实时响应。
 - **缺点**：会对网络负荷造成一定压力，如果 Session 量大的话可能会造成网络堵塞，拖慢服务器性能。
 
@@ -92,7 +92,7 @@ upstream backserver {
 - **JSON Web Token**：一般用来替换掉Session实现数据共享。
 - **优点**:
   - **无状态，可扩展**：在客户端存储的Token是无状态的，并且能够被扩展，基于这种无状态和不存储Session信息，负载均衡器能够将	用户信息从一个服务传到其他服务器上。
-  - **安全**：请求中发送token而不再是发送Cookie能够防止CSRF(跨站请求伪造)
+  - **安全**：请求中发送token而不再是发送Cookie能够防止CSRF(跨站请求伪造）
   - **可提供接口给第三方服务**：使用token时，可以提供可选的权限给第三方应用程序。
   - **多平台跨域**：对应用程序和服务进行扩展的时候，需要介入各种各种的设备和应用程序，假如我们的后端api服务器a.com只提供数据，而静态资源则存放在cdn 服务器b.com上，当我们从a.com请求b.com下面的资源时，由于触发浏览器的同源策略限制而被阻止。
 - **缺点**:
@@ -113,7 +113,7 @@ upstream backserver {
 - 第二行指明了实际请求中允许携带的首部字段，这里加入了Authorization，用来存放token
 - 第三行用于预检请求的响应，其指明了实际请求所允许使用的 HTTP 方法。
 - 然后用户从a.com携带有一个通过了验证的token访问B域名，数据和资源就能够在任何域上被请求到。
-- **注意**：在ACAO头部标明(designating)*时，不得带有像HTTP认证，客户端SSL证书和Cookies的证书。
+- **注意**：在ACAO头部标明（designating)*时，不得带有像HTTP认证，客户端SSL证书和Cookies的证书。
 
 #### tomcat内置的session同步
 
@@ -157,9 +157,9 @@ upstream backserver {
 - 使用分布式缓存方案比如 Memcached,Redis 来缓存 session，但是要求 Memcached 或 Redis 必须是集群。
 - 把 session 放到 Redis 中存储，虽然架构上变得复杂，并且需要多访问一次 Redis，但是这种方案带来的好处也是很大的：
   - 实现了 session 共享。
-  - 可以水平扩展（增加 Redis 服务器)
-  - 服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制)
-  - 不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端)
+  - 可以水平扩展（增加 Redis 服务器）
+  - 服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制）
+  - 不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端）
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331214312505.png)
 
@@ -192,7 +192,7 @@ upstream backserver {
 </dependency>
 ```
 
-- **修改application.properties全局配置文件（本地要开启Redis服务)**
+- **修改application.properties全局配置文件（本地要开启Redis服务）**
 
 ```properties
 spring.redis.database=0
@@ -211,7 +211,7 @@ spring.redis.timeout=10000
 ```java
 /**
  * 这个类用配置Redis服务器的连接。
- * maxInactiveIntervalInSeconds为SpringSession的过期时间（单位：秒)
+ * maxInactiveIntervalInSeconds为SpringSession的过期时间（单位：秒）
  */
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 public class SessionConfig {
@@ -259,7 +259,7 @@ public class RedisSessionInitializer extends AbstractHttpSessionApplicationIniti
 
 ## Token
 
-- 访问资源接口(API)时所需要的资源凭证。
+- 访问资源接口（API)时所需要的资源凭证。
 
   **特点**:
 

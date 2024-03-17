@@ -24,17 +24,17 @@ categories:
 ## JDBC驱动程序
 
 - JDBC驱动程序有以下4类。
-    - **JDBC-ODBC桥接(JDBC-ODBC Bridge)驱动程序**:Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序，供存取标准的ODBC数据源，然而，Sun公司建议除开发很小的应用程序外，一般不适用这种驱动程序。
-    - **JDBC结合本地API桥(JDBC-Native API Bridge)驱动程序**：这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用，Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
+    - **JDBC-ODBC桥接（JDBC-ODBC Bridge)驱动程序**:Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序，供存取标准的ODBC数据源，然而，Sun公司建议除开发很小的应用程序外，一般不适用这种驱动程序。
+    - **JDBC结合本地API桥（JDBC-Native API Bridge)驱动程序**：这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用，Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
 
-    - **JDBC结合中间件(JDBC-Middleware)的驱动程序**：这类驱动程序必须在数据库管理系统的服务器上安装中间件，该中间件将JDBC转换为具体数据库系统的本地API调用。
+    - **JDBC结合中间件（JDBC-Middleware)的驱动程序**：这类驱动程序必须在数据库管理系统的服务器上安装中间件，该中间件将JDBC转换为具体数据库系统的本地API调用。
 
-    - **纯JDBC驱动程序(Pure JDBC)**：这类驱动程序全由Java写出，所有存取数据库的操作直接由JDBC驱动程序完成，它属于专用的驱动程序，要靠数据库厂商提供支持。
+    - **纯JDBC驱动程序（Pure JDBC)**：这类驱动程序全由Java写出，所有存取数据库的操作直接由JDBC驱动程序完成，它属于专用的驱动程序，要靠数据库厂商提供支持。
 - 从性能上考虑，第3类和第4类驱动程序较理想。
 
 ## JDBC API
 
-- JDBC是对ODBC API进行的一种面向对象的封装和重新设计，Java应用程序通过JDBC API(java.sql)与数据库连接，而实际的动作则由JDBC驱动程序管理器(JDBC Driver Manager)通过JDBC驱动程序与数据库系统进行连接。
+- JDBC是对ODBC API进行的一种面向对象的封装和重新设计，Java应用程序通过JDBC API(java.sql)与数据库连接，而实际的动作则由JDBC驱动程序管理器（JDBC Driver Manager)通过JDBC驱动程序与数据库系统进行连接。
 - Java.sql包提供了多种JDBC API，以下为几个最常用的API
     - Connection接口：代表数据库的连接，通过Connection接口提供的`getMetaData()`方法可获取所连接的数据库的有关描述信息，如表名，表的索引，数据库产品的名称和版本，数据库支持的操作等。
     - Statement接口：用来执行SQL语句并返回结果记录集。
@@ -47,7 +47,7 @@ categories:
 ```java
 Class.forName("com.mysql.jdbc.Driver");
 String url="jdbc:mysql://localhost:3306?数据库名";
-Connection conn=DriverManager.getConnection(url，数据库用户，密码);
+Connection conn=DriverManager.getConnection(url，数据库用户，密码）;
 ```
 
 **注意**:`Class.forName`方法的作用，就是初始化给定的类，而我们给定的 MySQL 的 Driver 类中，它在静态代码块中通过 JDBC 的 DriverManager 注册了一下驱动，我们也可以直接使用 JDBC 的驱动管理器注册 MySQL 驱动，从而代替使用`Class.forName`
@@ -68,7 +68,7 @@ ResultSet rs = stmt.executeQuery("SELECT a,b,c FROM Table2");
 
 - Statement接口提供了3种执行SQL语句的方法，即`excuteQuery()`,`executeUpdate()`和`execute()`，使用哪一个方法由SQL语句所产生的内容决定。
     - `executeQuery()`方法用于产生单个结果集的语句，例如SELECT语句。
-    - `executeUpdate()`方法执行INSERT,UPDATE或DELETE语句以及SQL DDL(数据定义语言）语句，例如CREATE TABLE和DROP TABLE,INSERT,UPDATE或DELETE语句的效果是修改数据库表格中若干行的指定数据项内容，`executeUpdate()`的返回值是一个整数，是受影响的行数（即更新计数)，对于CREATE TABLE或DROP TABLE等不涉及操作记录的语句，`executeUpdate()`的返回值总为零。
+    - `executeUpdate()`方法执行INSERT,UPDATE或DELETE语句以及SQL DDL(数据定义语言）语句，例如CREATE TABLE和DROP TABLE,INSERT,UPDATE或DELETE语句的效果是修改数据库表格中若干行的指定数据项内容，`executeUpdate()`的返回值是一个整数，是受影响的行数（即更新计数），对于CREATE TABLE或DROP TABLE等不涉及操作记录的语句，`executeUpdate()`的返回值总为零。
     - `execute()`方法用于执行返回多个结果集，多个更新计数或二者组合的语句，Statement对象将由Java垃圾收集程序自动关闭，而作为一种好的编程风格，应在不需要Statement对象时显式地关闭它们，这将立即释放DBMS资源。
 
 **[例17-1]**：创建数据表。
@@ -100,7 +100,7 @@ public class JDBC {
     }
 ```
 
-**注意**：运行程序将在所连接的数据库中创建一个数据库表格student，如果数据库中已有该表，则不会覆盖已有表，要创建新表，必须先将原表删除（用drop命令)
+**注意**：运行程序将在所连接的数据库中创建一个数据库表格student，如果数据库中已有该表，则不会覆盖已有表，要创建新表，必须先将原表删除（用drop命令）
 
 ### 用PreparedStatement类实现SQL操作
 
@@ -166,11 +166,11 @@ public class 用PreparedStatement类实现SQL操作{
 
 > **Statement和PreparedStatement有什么区别?**
 >
-> - PreparedStatement接口代表预编译的语句，它主要的优势在于可以减少SQL的编译错误并增加SQL的安全性（减少SQL注射攻击的可能性)
+> - PreparedStatement接口代表预编译的语句，它主要的优势在于可以减少SQL的编译错误并增加SQL的安全性（减少SQL注射攻击的可能性）
 > - PreparedStatement中的SQL语句是可以带参数的，避免了用字符串连接拼接SQL语句的麻烦和不安全。
-> - 当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快（不用再次编译和生成执行计划)
+> - 当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快（不用再次编译和生成执行计划）
 
-> **补充**：为了提供对存储过程的调用，JDBC API中还提供了CallableStatement接口，存储过程(Stored Procedure)是数据库中一组为了完成特定功能的SQL语句的集合，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它，虽然调用存储过程会在网络开销，安全性，性能上获得很多好处，但是存在如果底层数据库发生迁移时就会有很多麻烦，因为每种数据库的存储过程在书写上存在不少的差别。
+> **补充**：为了提供对存储过程的调用，JDBC API中还提供了CallableStatement接口，存储过程（Stored Procedure)是数据库中一组为了完成特定功能的SQL语句的集合，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它，虽然调用存储过程会在网络开销，安全性，性能上获得很多好处，但是存在如果底层数据库发生迁移时就会有很多麻烦，因为每种数据库的存储过程在书写上存在不少的差别。
 
 ## 数据库查询
 
@@ -184,11 +184,11 @@ rsmd.getColumnCount();	// 获取数据项的个数。
 rsmd.getColumnName(i);	// 获取第i栏字段的名称。
 ```
 
-### 遍历访问结果集（定位行)
+### 遍历访问结果集（定位行）
 
 - ResultSet包含符合SQL语句中条件的所有行，每一行称作一条记录，我们可以按行的顺序逐行访问结果集的内容，在结果集中有一个游标用来指示当前行，初始指向第一行之前的位置，可以使用`next()`方法将游标移到下一行，通过循环使用改方法可实现对结果集中的记录的遍历访问。
 
-### 访问当前行的数据项（具体列)
+### 访问当前行的数据项（具体列）
 
 - ResultSet通过一套`get()`方法来访问当前行中的不同数据项，可以多种形式获取ResultSet中的数据内容，这取决于每个列中存储的数据类型，可以按列序号或列名来标识要获取的数据项，注意，列序号从1开始，而不是从0开始，如果结果集对象rs的第二列名为title，并将值存储为字符串，则下列任一代码将获取存储在该列中的值。
 

@@ -61,8 +61,8 @@ Cookie: name=xyz
 | :--- | :----------------------------------------------------------- |
 | 1    | **public void setDomain(String pattern)** 该方法设置 cookie 适用的域，例如 test.com, |
 | 2    | **public String getDomain()** 该方法获取 cookie 适用的域，例如 test.com, |
-| 3    | **public void setMaxAge(int expiry)** 该方法设置 cookie 过期的时间（以秒为单位)，如果不这样设置，cookie 只会在当前 session 会话中持续有效， |
-| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期（以秒为单位)，默认情况下，-1 表示 cookie 将持续下去，直到浏览器关闭， |
+| 3    | **public void setMaxAge(int expiry)** 该方法设置 cookie 过期的时间（以秒为单位），如果不这样设置，cookie 只会在当前 session 会话中持续有效， |
+| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期（以秒为单位），默认情况下，-1 表示 cookie 将持续下去，直到浏览器关闭， |
 | 5    | **public String getName()** 该方法返回 cookie 的名称，名称在创建后不能改变， |
 | 6    | **public void setValue(String newValue)** 该方法设置与 cookie 关联的值， |
 | 7    | **public String getValue()** 该方法获取与 cookie 关联的值，  |
@@ -88,7 +88,7 @@ Cookie cookie = new Cookie("key","value");
 [ ] ( ) = , " / ? @ : ;
 ```
 
-- **设置最大生存周期**：您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间（以秒为单位)，下面将设置一个最长有效期为 24 小时的 cookie
+- **设置最大生存周期**：您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间（以秒为单位），下面将设置一个最长有效期为 24 小时的 cookie
 
 ```java
 cookie.setMaxAge(60*60*24);

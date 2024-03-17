@@ -12,7 +12,7 @@ categories:
 -   使用`java.util.concurrent.atomic`提供的原子操作可以简化多线程编程：
     -   原子操作实现了无锁的线程安全。
     -   适用于计数器，累加器等。
--   Atomic类是通过无锁(lock-free)的方式实现的线程安全(thread-safe)访问，它的主要原理是利用了CAS:Compare and Set
+-   Atomic类是通过无锁（lock-free)的方式实现的线程安全（thread-safe)访问，它的主要原理是利用了CAS:Compare and Set
 -   以`AtomicInteger`为例，它提供的主要操作有：
     -   增加值并返回新值：`int addAndGet(int delta)`
     -   加1后返回新值：`int incrementAndGet()`
@@ -48,19 +48,19 @@ class IdGenerator {
 
 ## CAS
 
--  CAS 全称是(Compare and Swap)，即比较并交换，它是一种原子操作，同时 CAS 是一种乐观锁。
+-  CAS 全称是（Compare and Swap)，即比较并交换，它是一种原子操作，同时 CAS 是一种乐观锁。
 -  java.util.concurrent 包很多功能都是建立在 CAS 之上，如 ReenterLock 内部的 AQS，各种原子类，其底层都用 CAS来实现原子操作。
 -  在这个机制中有三个核心的参数：
-    -  主内存中存放的共享变量的值：V(一般情况下这个V是内存的地址值，通过这个地址可以获得内存中的值)
+    -  主内存中存放的共享变量的值：V(一般情况下这个V是内存的地址值，通过这个地址可以获得内存中的值）
     -  工作内存中共享变量的副本值，也叫预期值：A
     -  需要将共享变量更新到的最新值：B
 -  当且仅当预期值 A 和内存值 V 相同时，将内存值修改为 B 并返回 true，否则什么都不做，并返回 false
 
 ### CAS的Java实现
 
->   CAS是一条CPU的原子指令(cmpxchg指令)，不会造成所谓的数据不一致问题，Unsafe提供的CAS方法（如compareAndSwapXXX)底层实现即为CPU指令cmpxchg
+>   CAS是一条CPU的原子指令（cmpxchg指令），不会造成所谓的数据不一致问题，Unsafe提供的CAS方法（如compareAndSwapXXX)底层实现即为CPU指令cmpxchg
 
--   这里我们可以看一下Java的原子类AtomicLong.getAndIncrement()的实现，来理解一下CAS这一乐观锁(JDK 1.8)
+-   这里我们可以看一下Java的原子类AtomicLong.getAndIncrement()的实现，来理解一下CAS这一乐观锁（JDK 1.8)
 
 ```java
 public class AtomicLong extends Number implements java.io.Serializable {

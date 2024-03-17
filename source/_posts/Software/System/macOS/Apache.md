@@ -9,13 +9,13 @@ categories:
 
 ## Apache 文件默认位置
 
-- Mac OS 的 Apache2 的配置文件(httpd.config):
+- Mac OS 的 Apache2 的配置文件（httpd.config):
 
 ```
 /etc/apache2
 ```
 
-- Mac OS 的 Apache2 的程序文件(httpd, ab):
+- Mac OS 的 Apache2 的程序文件（httpd, ab):
 
 ```shell
 /usr/sbin/

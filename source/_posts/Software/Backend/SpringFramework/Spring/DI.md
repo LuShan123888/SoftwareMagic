@@ -82,7 +82,7 @@ public class MyConfig2 {
 ###  @Autowired
 
 - 自动装配，用于替代基于XML配置的自动装配。
-- @Autowired默认按类型装配（属于Spring规范)，默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false，如果我们想使用名称装配可以结合@Qualifier注解进行使用。
+- @Autowired默认按类型装配（属于Spring规范），默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false，如果我们想使用名称装配可以结合@Qualifier注解进行使用。
 
 #### required
 
@@ -177,7 +177,7 @@ private Cat cat;
 
 ### @Resource
 
-- @Resource(属于J2EE规范)，默认按照名称进行装配。
+- @Resource(属于J2EE规范），默认按照名称进行装配。
 - 名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行按照名称查找，如果注解写在setter方法上默认取属性名进行装配，当找不到与名称匹配的bean时才按照类型进行装配。
 - **注意**：如果name属性一旦指定，就只会按照名称进行装配。
 
@@ -407,8 +407,8 @@ xmlns:p="http://www.springframework.org/schema/p"
 ### 自动装配
 
 - Spring的自动装配的步骤。
-    - 组件扫描(component scanning):Spring会自动发现应用上下文中所创建的bean
-    - 自动装配(autowiring):Spring自动满足bean之间的依赖，也就是我们说的IoC/DI
+    - 组件扫描（component scanning):Spring会自动发现应用上下文中所创建的bean
+    - 自动装配（autowiring):Spring自动满足bean之间的依赖，也就是我们说的IoC/DI
 
 #### 配置
 
@@ -473,7 +473,7 @@ xmlns:p="http://www.springframework.org/schema/p"
 ### 静态工厂的方法注入
 
 - 静态工厂顾名思义，就是通过调用静态工厂的方法来获取自己需要的对象。
-- 为了让Spring管理所有对象，我们不能直接通过`工程类。静态方法()`来获取对象，而是依然通过spring注入的形式获取：
+- 为了让Spring管理所有对象，我们不能直接通过`工程类。静态方法（)`来获取对象，而是依然通过spring注入的形式获取：
 
 ```java
 public class UserMapperFactory {  

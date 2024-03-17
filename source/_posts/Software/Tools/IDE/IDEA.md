@@ -9,22 +9,22 @@ categories:
 
 ## 快捷键
 
-### Editing(编辑)
+### Editing(编辑）
 
 快捷键|作用
 ---|---
-Control + Space	|基本的代码补全（补全任何类，方法，变量)|
-Control + Shift + Space|	智能代码补全（过滤器方法列表和变量的预期类型)
+Control + Space	|基本的代码补全（补全任何类，方法，变量）|
+Control + Shift + Space|	智能代码补全（过滤器方法列表和变量的预期类型）
 Command + Shift + Enter	|自动结束代码，行末自动添加分号
 Command + P|	显示方法的参数信息
 Control + J|	快速查看文档
-Shift + F1|	查看外部文档（在某些代码上会触发打开浏览器显示相关文档)
+Shift + F1|	查看外部文档（在某些代码上会触发打开浏览器显示相关文档）
 Command + 鼠标放在代码上|	显示代码简要信息
 Command + F1|	在错误或警告处显示具体描述信息
-Command + N, Control + Enter, Control + N	|生成代码(getter,setter,hashCode,equals,toString，构造函数等)
-Control + O	|覆盖方法（重写父类方法)
-Control + I	|实现方法（实现接口中的方法)
-Command + Option + T|	包围代码（使用if...else,try...catch,for,synchronized等包围选中的代码)
+Command + N, Control + Enter, Control + N	|生成代码（getter,setter,hashCode,equals,toString，构造函数等）
+Control + O	|覆盖方法（重写父类方法）
+Control + I	|实现方法（实现接口中的方法）
+Command + Option + T|	包围代码（使用if...else,try...catch,for,synchronized等包围选中的代码）
 Command + /	|注释 / 取消注释与行注释
 Command + Option + /|	注释 / 取消注释与块注释
 Option + 方向键上|	连续选中代码块
@@ -52,7 +52,7 @@ Command + 加号 / Command + 减号	|展开 / 折叠代码块
 Command + Shift + 加号	|展开所以代码块
 Command + Shift + 减号	|折叠所有代码块
 Command + W	|关闭活动的编辑器选项卡
-### Search / Replace(查询/替换)
+### Search / Replace(查询/替换）
 
 快捷键|	作用
 ---|---
@@ -61,18 +61,18 @@ Command + F	|文件内查找
 Command + G	|查找模式下，向下查找
 Command + Shift + G	|查找模式下，向上查找
 Command + R|	文件内替换
-Command + Shift + F	|全局查找（根据路径)
-Command + Shift + R	|全局替换（根据路径)
-Command + Shift + S	|查询结构(Ultimate Edition 版专用，需要在 Keymap 中设置)
-Command + Shift + M	|替换结构(Ultimate Edition 版专用，需要在 Keymap 中设置)
-### Usage Search(使用查询)
+Command + Shift + F	|全局查找（根据路径）
+Command + Shift + R	|全局替换（根据路径）
+Command + Shift + S	|查询结构（Ultimate Edition 版专用，需要在 Keymap 中设置）
+Command + Shift + M	|替换结构（Ultimate Edition 版专用，需要在 Keymap 中设置）
+### Usage Search(使用查询）
 
 快捷键	|作用
 ---|---
 Option + F7 / Command + F7|	在文件中查找用法 / 在类中查找用法
 Command + Shift + F7	|在文件中突出显示的用法
 Command + Option + F7|	显示用法
-### Compile and Run(编译和运行)
+### Compile and Run(编译和运行）
 
 快捷键|	作用
 ---|---
@@ -83,7 +83,7 @@ Control + Option + D|	弹出 Debug 的可选择菜单
 Control + R	|运行
 Control + D|	调试
 Control + Shift + R, Control + Shift + D|	从编辑器运行上下文环境配置
-### Debugging(调试)
+### Debugging(调试）
 
 快捷键|	作用
 ---|---
@@ -92,11 +92,11 @@ F7	|进入下一步，如果当前行断点是一个方法，则进入当前方�
 Shift + F7	|智能步入，断点所在行上有多个方法调用，会弹出进入哪个方法
 Shift + F8	|跳出
 Option + F9	|运行到光标处，如果光标前有其他断点会进入到该断点
-Option + F8	|计算表达式（可以更改变量值使其生效)
+Option + F8	|计算表达式（可以更改变量值使其生效）
 Command + Option + R|	恢复程序运行，如果该断点下面代码还有断点则停在下一个断点上
-Command + F8	|切换断点（若光标当前行有断点则取消断点，没有则加上断点)
+Command + F8	|切换断点（若光标当前行有断点则取消断点，没有则加上断点）
 Command + Shift + F8|	查看断点信息
-### Navigation(导航)
+### Navigation(导航）
 
 快捷键|	作用
 ---|---
@@ -121,7 +121,7 @@ Control + Shift + B|	跳转到类型声明处
 Command + U|	前往当前光标所在方法的父类的方法 / 接口定义
 Control + 方向键下 / Control + 方向键上	|当前光标跳转到当前文件的前一个 / 后一个方法名位置
 Command + ] / Command + [	|移动光标到当前所在代码的花括号开始 / 结束位置
-Command + F12	|弹出当前文件结构层，可以在弹出的层上直接输入进行筛选（可用于搜索类中的方法)
+Command + F12	|弹出当前文件结构层，可以在弹出的层上直接输入进行筛选（可用于搜索类中的方法）
 Control + H	|显示当前类的层次结构
 Command + Shift + H|显示方法层次结构
 Control + Option + H	|显示调用层次结构
@@ -132,7 +132,7 @@ F3	|选中文件 / 文件夹 / 代码行，添加 / 取消书签
 Option + F3	|选中文件 / 文件夹/代码行，使用助记符添加 / 取消书签
 Control + 0...Control + 9|	定位到对应数值的书签位置
 Command + F3	|显示所有书签
-### Refactoring(重构)
+### Refactoring(重构）
 
 快捷键|作用
 ---|---
@@ -148,7 +148,7 @@ Command + Option + F|	提取字段
 Command + Option + C|	提取常量
 Command + Option + P|	提取参数
 
-### VCS / Local History(版本控制 / 本地历史记录)
+### VCS / Local History(版本控制 / 本地历史记录）
 
 快捷键	|作用
 ---|---
@@ -156,13 +156,13 @@ Command + K	|提交代码到版本控制器
 Command + T	|从版本控制器更新代码
 Option + Shift + C	|查看最近的变更记录
 Control + C|	快速弹出版本控制器操作面板
-### Live Templates(动态代码模板)
+### Live Templates(动态代码模板）
 
 快捷键	|作用
 ---|---
 Command + Option + J	|弹出模板选择窗口，将选定的代码使用动态模板包住
 Command + J|	插入自定义动态代码模板
-### General(通用)
+### General(通用）
 
 快捷键|	作用
 ---|--
@@ -173,8 +173,8 @@ Control + Command + F	|切换全屏模式
 Command + Shift + F12	|切换最大化编辑器
 Option + Shift + F	|添加到收藏夹
 Option + Shift + I	|检查当前文件与当前的配置文件
-Control + `	|快速切换当前的 scheme(切换主题，代码样式等)
+Control + `	|快速切换当前的 scheme(切换主题，代码样式等）
 Command + ,	|打开 IDEA 系统设置
 Command + ;	|打开项目结构对话框
-Shift + Command + A	|查找动作（可设置相关选项)
-Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete，则是关闭对应选中的窗口)
+Shift + Command + A	|查找动作（可设置相关选项）
+Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete，则是关闭对应选中的窗口）

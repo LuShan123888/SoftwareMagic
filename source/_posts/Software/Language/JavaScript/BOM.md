@@ -7,7 +7,7 @@ categories:
 ---
 # JavaScript BOM
 
-- 浏览器对象模型(**B**rowser **O**bject **M**odel (BOM))尚无正式标准。
+- 浏览器对象模型（**B**rowser **O**bject **M**odel (BOM))尚无正式标准。
 - 由于现代浏览器已经（几乎）实现了 JavaScript 交互性方面的相同方法和属性，因此常被认为是 BOM 的方法和属性。
 
 ## Window 对象
@@ -32,8 +32,8 @@ document.getElementById("header");
 
 - 有三种方法能够确定浏览器窗口的尺寸。
 - 对于Internet Explorer,Chrome,Firefox,Opera 以及 Safari:
-    - window.innerHeight - 浏览器窗口的内部高度（包括滚动条)
-    - window.innerWidth - 浏览器窗口的内部宽度（包括滚动条)
+    - window.innerHeight - 浏览器窗口的内部高度（包括滚动条）
+    - window.innerWidth - 浏览器窗口的内部宽度（包括滚动条）
 - 对于 Internet Explorer 8,7,6,5:
     - document.documentElement.clientHeight
     - document.documentElement.clientWidth
@@ -41,7 +41,7 @@ document.getElementById("header");
     - document.body.clientHeight
     - document.body.clientWidth
 
-- 实用的 JavaScript 方案（涵盖所有浏览器):
+- 实用的 JavaScript 方案（涵盖所有浏览器）:
 
 ```js
 var w=window.innerWidth
@@ -110,8 +110,8 @@ var h=window.innerHeight
 - 一些例子：
     - `location.hostname` 返回 web 主机的域名。
     - `location.pathname` 返回当前页面的路径和文件名。
-    - `location.port` 返回 web 主机的端口 (80 或 443)
-    - `location.protocol` 返回所使用的 web 协议(http：或 https:)
+    - `location.port` 返回 web 主机的端口（80 或 443)
+    - `location.protocol` 返回所使用的 web 协议（http：或 https:)
 
 ### Window Location Href
 

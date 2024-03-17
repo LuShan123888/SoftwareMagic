@@ -229,7 +229,7 @@ services:
 
 - **endpoint_mode**：访问集群服务的方式。
     - **vip**:Docker 集群服务一个对外的虚拟 ip，所有的请求都会通过这个虚拟 ip 到达集群服务内部的机器。
-    - **dnsrr**:DNS 轮询(DNSRR)，所有的请求会自动轮询获取到集群 ip 列表中的一个 ip 地址。
+    - **dnsrr**:DNS 轮询（DNSRR)，所有的请求会自动轮询获取到集群 ip 列表中的一个 ip 地址。
 - **labels**：在服务上设置标签，可以用容器上的 labels(跟 deploy 同级的配置）覆盖 deploy 下的 labels
 - **mode**：指定服务提供的模式。
     - **replicated**：复制服务，复制指定服务到集群的机器上。
@@ -239,22 +239,22 @@ services:
 - **restart_policy**：配置如何在退出容器时重新启动容器。
     - condition：可选 none,on-failure 或者 any(默认值：any)
     - delay：设置多久之后重启（默认值：0)
-    - max_attempts：尝试重新启动容器的次数，超出次数，则不再尝试（默认值：一直重试)
+    - max_attempts：尝试重新启动容器的次数，超出次数，则不再尝试（默认值：一直重试）
     - window：设置容器重启超时时间（默认值：0)
 - **rollback_config**：配置在更新失败的情况下应如何回滚服务。
     - parallelism：一次要回滚的容器数，如果设置为0，则所有容器将同时回滚。
     - delay：每个容器组回滚之间等待的时间（默认为0s)
     - failure_action：如果回滚失败，该怎么办，其中一个 continue 或者 pause(默认pause)
-    - monitor：每个容器更新后，持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
+    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)(默认为0s)
     - max_failure_ratio：在回滚期间可以容忍的故障率（默认为0)
-    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚)，或者 start-first(并行回滚)(默认 stop-first)
+    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚），或者 start-first(并行回滚）(默认 stop-first)
 - **update_config**：配置应如何更新服务，对于配置滚动更新很有用。
     - parallelism：一次更新的容器数。
     - delay：在更新一组容器之间等待的时间。
     - failure_action：如果更新失败，该怎么办，其中一个 continue,rollback 或者pause(默认：pause)
-    - monitor：每个容器更新后，持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
+    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)(默认为0s)
     - max_failure_ratio：在更新过程中可以容忍的故障率。
-    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚)，或者 start-first(并行回滚)(默认stop-first)
+    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚），或者 start-first(并行回滚）(默认stop-first)
 - **注意**：仅支持 V3.4 及更高版本。
 
 #### devices
@@ -583,7 +583,7 @@ security-opt:
 
 #### stop_grace_period
 
-- 指定在容器无法处理 SIGTERM (或者任何 stop_signal 的信号)，等待多久后发送 SIGKILL 信号关闭容器。
+- 指定在容器无法处理 SIGTERM (或者任何 stop_signal 的信号），等待多久后发送 SIGKILL 信号关闭容器。
 
 ```yaml
 stop_grace_period: 1s # 等待 1 秒。
@@ -679,7 +679,7 @@ $ docker-compose conifg
 $ docker-compose ps
 ```
 
-- `-a`：打印所有的容器信息（包括停止的容器)
+- `-a`：打印所有的容器信息（包括停止的容器）
 - `-q` ：只打印容器的 ID 信息。
 
 ### top
@@ -712,7 +712,7 @@ $ docker-compose up
 - `--force-recreate` 强制重新创建容器，不能与 `--no-recreate` 同时使用。
 - `--no-recreate` 如果容器已经存在了，则不重新创建，不能与 `--force-recreate` 同时使用。
 - `--no-build` 不自动构建缺失的服务镜像。
-- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒）
 
 ### port
 
@@ -749,7 +749,7 @@ $ docker-compose start [SERVICE...]
 $ docker-compose stop [SERVICE...]
 ```
 
-- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒）
 
 ### restart
 
@@ -759,7 +759,7 @@ $ docker-compose stop [SERVICE...]
 $ docker-compose restart [SERVICE...]
 ```
 
-- `-t, --timeout TIMEOUT` 指定重启前停止容器的超时（默认为 10 秒)
+- `-t, --timeout TIMEOUT` 指定重启前停止容器的超时（默认为 10 秒）
 
 ### rm
 
@@ -794,7 +794,7 @@ $ docker-compose build [options] [SERVICE...]
 ```
 
 - `--force-rm` 删除构建过程中的临时容器。
-- `--no-cache` 构建镜像过程中不使用 cache(这将加长构建过程)
+- `--no-cache` 构建镜像过程中不使用 cache(这将加长构建过程）
 - `--pull` 始终尝试通过 pull 来获取更新版本的镜像。
 
 ### run
@@ -841,7 +841,7 @@ $ docker-compose scale [options] [SERVICE=NUM...]
 ```
 
 - `service=num` 设置数量，一般的，当指定数目多于该服务当前实际运行容器，将新创建并启动容器，反之，将停止容器。
-- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒）
 
 **实例**
 

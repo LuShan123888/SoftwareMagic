@@ -11,7 +11,7 @@ categories:
 ## 并发安全和锁
 
 
-- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 `竞态问题` (数据竞态)
+- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 `竞态问题` (数据竞态）
 
 ```go
 package main
@@ -401,7 +401,7 @@ func main() {
 
 ## 原子操作
 
-- 针对整数数据类型 (int 32, uint 32, int 64, uint 64) 我们还可以使用原子操作来保证并发安全，通常直接使用原子操作比使用锁操作效率更高， Go 语言中原子操作由内置的标准库 `sync/atomic` 提供。
+- 针对整数数据类型（int 32, uint 32, int 64, uint 64) 我们还可以使用原子操作来保证并发安全，通常直接使用原子操作比使用锁操作效率更高， Go 语言中原子操作由内置的标准库 `sync/atomic` 提供。
 
 ### atomic 包
 
@@ -544,7 +544,7 @@ created by main.f1
 Process finished with exit code 2
 ```
 
-- 从输出结果可以看到程序并没有正常退出，而是由于 panic 异常退出了 (exit code 2)
+- 从输出结果可以看到程序并没有正常退出，而是由于 panic 异常退出了（exit code 2)
 - 正如上面示例演示的那样，在启用 goroutine 去执行任务的场景下，如果想要 recover goroutine 中可能出现的 panic 就需要在 goroutine 中使用 recover，就像下面的 f 2 函数那样。
 
 ```go
@@ -659,7 +659,7 @@ func (g *Group) Go (f func () error)
 func (g *Group) Wait () error
 ```
 
-- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回，然后从它们返回第一个非 nil 的错误（如果有)
+- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回，然后从它们返回第一个非 nil 的错误（如果有）
 - 下面的示例代码演示了如何使用 errgroup 包来处理多个子任务 goroutine 中可能返回的 error
 
 ```go

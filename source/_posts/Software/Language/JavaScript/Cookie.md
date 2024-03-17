@@ -33,7 +33,7 @@ username=John Doe
 document.cookie="username=John Doe";
 ```
 
-- 您还可以为 cookie 添加一个过期时间（以 UTC 或 GMT 时间)，默认情况下，cookie 在浏览器关闭时删除：
+- 您还可以为 cookie 添加一个过期时间（以 UTC 或 GMT 时间），默认情况下，cookie 在浏览器关闭时删除：
 
 ```js
 document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT";
@@ -139,8 +139,8 @@ function getCookie(cname)
 - cookie 名的参数为 cname
 - 创建一个文本变量用于检索指定 cookie :`cname + "="`
 - 使用分号来分割 document.cookie 字符串，并将分割后的字符串数组赋值给 ca (ca = document.cookie.split(';'))
-- 循环 ca 数组 (i=0;i<ca.length;i++)，然后读取数组中的每个值，并去除前后空格 (c=ca[i].trim())
-- 如果找到 cookie(c.indexOf(name) == 0)，返回 cookie 的值 (c.substring(name.length,c.length)
+- 循环 ca 数组（i=0;i<ca.length;i++)，然后读取数组中的每个值，并去除前后空格（c=ca[i].trim())
+- 如果找到 cookie(c.indexOf(name) == 0)，返回 cookie 的值（c.substring(name.length,c.length)
 - 如果没有找到 cookie，返回 ""
 
 ## 检测 cookie 值的函数

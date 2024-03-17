@@ -183,11 +183,11 @@ public String findUser2(@PathVariable(value = "sex") String sex){
 
 ### @RequestParam
 
-- 可接收url中的键值对(GET)
+- 可接收url中的键值对（GET)
 - 可接受ContentType指定为`application/x-www-form-urlencoded`或 `multipart/form-data`的请求体。
 - 如果请求为以上两种方法请求且参数名与形式参数名相同，可以省略该注释。
 - 这种情况下，用到的参数处理器是`RequestParamMapMethodArgumentResolver`
-- **注意**：形式参数可以为实体类的对象，这时请求的键值对会自动按照键名与属性名匹配的原则自动注入，这种情况下，不能使用本注解，参数处理器为ServletModelAttributeMethodProcessor，主要是把HttpServletRequest中的表单参数封装到MutablePropertyValues实例中，再通过参数类型实例化（通过构造反射创建User实例)，反射匹配属性进行值的填充。
+- **注意**：形式参数可以为实体类的对象，这时请求的键值对会自动按照键名与属性名匹配的原则自动注入，这种情况下，不能使用本注解，参数处理器为ServletModelAttributeMethodProcessor，主要是把HttpServletRequest中的表单参数封装到MutablePropertyValues实例中，再通过参数类型实例化（通过构造反射创建User实例），反射匹配属性进行值的填充。
 
 **属性**
 
@@ -233,7 +233,7 @@ public String file1(@RequestPart(name = "file1") MultipartFile multipartFile) {
 }
 ```
 
-- 可知MultipartFile实例的主要属性分别来自Content-Disposition,content-type和content-length，另外，InputStream用于读取请求体的最后部分（文件的字节序列)
+- 可知MultipartFile实例的主要属性分别来自Content-Disposition,content-type和content-length，另外，InputStream用于读取请求体的最后部分（文件的字节序列）
 
 ### @RequestHeader
 

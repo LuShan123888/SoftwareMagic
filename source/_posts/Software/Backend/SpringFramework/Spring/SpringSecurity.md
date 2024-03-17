@@ -12,17 +12,17 @@ categories:
 
 - Spring Security 是针对Spring项目的安全框架，也是Spring Boot底层安全模块默认的技术选型，可以实现强大的Web安全控制，对于安全控制，仅需要引入 spring-boot-starter-security 模块，进行少量的配置，即可实现强大的安全管理。
 - Spring Security的两个主要目标。
-    - 认证(Authentication)
+    - 认证（Authentication)
         - 身份验证是关于验证您的凭据，如用户名/用户ID和密码，以验证您的身份。
         - 身份验证通常通过用户名和密码完成，有时与身份验证因素结合使用。
-    - 授权(Authorization)
+    - 授权（Authorization)
         - 授权发生在系统成功验证您的身份后，最终会授予您访问资源（如信息，文件，数据库，资金，位置，几乎任何内容）的完全权限。
         - 这个概念是通用的，而不是只在Spring Security 中存在。
 
 ## 过滤器
 
 - Spring Security 基本都是通过过滤器来完成配置的身份认证，权限认证以及登出。
-- Spring Security 在 Servlet 的过滤链(filter chain)中注册了一个过滤器 `FilterChainProxy`，它会把请求代理到 Spring Security 自己维护的多个过滤链，每个过滤链会匹配一些 URL，如果匹配则执行对应的过滤器，过滤链是有顺序的，一个请求只会执行第一条匹配的过滤链，Spring Security 的配置本质上就是新增，删除，修改过滤器。
+- Spring Security 在 Servlet 的过滤链（filter chain)中注册了一个过滤器 `FilterChainProxy`，它会把请求代理到 Spring Security 自己维护的多个过滤链，每个过滤链会匹配一些 URL，如果匹配则执行对应的过滤器，过滤链是有顺序的，一个请求只会执行第一条匹配的过滤链，Spring Security 的配置本质上就是新增，删除，修改过滤器。
 - 默认情况下系统帮我们注入的这 15 个过滤器，分别对应配置不同的需求，例如 `UsernamePasswordAuthenticationFilter` 是用来使用用户名和密码登录认证的过滤器，但是很多情况下登录不止是简单的用户名和密码，又可能是用到第三方授权登录，这个时候我们就需要使用自定义过滤器。
 
 ```java
@@ -48,10 +48,10 @@ protected void configure(HttpSecurity http) throws Exception {
 SecurityContext context = SecurityContextHolder.getContext();
 Authentication authentication = context.getAuthentication();
 
-// 保存认证对象（一般用于自定义认证成功保存认证对象)
+// 保存认证对象（一般用于自定义认证成功保存认证对象）
 SecurityContextHolder.getContext().setAuthentication(authResult);
 
-// 清空认证对象（一般用于自定义登出清空认证对象)
+// 清空认证对象（一般用于自定义登出清空认证对象）
 SecurityContextHolder.clearContext();
 ```
 
@@ -67,7 +67,7 @@ public interface Authentication extends Principal, Serializable {
     Object getCredentials();
     // 获取用户的额外信息，比如 IP 地址，经纬度等。
     Object getDetails();
-    // 获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展)
+    // 获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展）
     Object getPrincipal();
     // 获取当前 Authentication 是否已认证。
     boolean isAuthenticated();
@@ -421,7 +421,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 不进行权限验证的请求或资源（从配置文件中读取)
+                // 不进行权限验证的请求或资源（从配置文件中读取）
                 .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()
                 // 其他的需要认证后才能访问。
                 .anyRequest()

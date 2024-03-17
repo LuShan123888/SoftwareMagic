@@ -50,11 +50,11 @@ The solution is: 2
 | password           | 密码                                                         |
 | port               | 端口号（默认：3306)|
 | database           | 数据库名                                                     |
-| charset            | 连接字符集（默认：'UTF8_GENERAL_CI'，注意字符集的字母都要大写)|
-| localAddress       | 此IP用于TCP连接（可选)|
+| charset            | 连接字符集（默认：'UTF8_GENERAL_CI'，注意字符集的字母都要大写）|
+| localAddress       | 此IP用于TCP连接（可选）|
 | socketPath         | 连接到unix域路径，当使用 host 和 port 时会被忽略             |
 | timezone           | 时区（默认：'local')|
-| connectTimeout     | 连接超时（默认：不限制，单位：毫秒)|
+| connectTimeout     | 连接超时（默认：不限制，单位：毫秒）|
 | stringifyObjects   | 是否序列化对象                                               |
 | typeCast           | 是否将列值转化为本地JavaScript类型值（默认：true)|
 | queryFormat        | 自定义query语句格式化方法                                    |
@@ -68,7 +68,7 @@ The solution is: 2
 
 - 更多说明可参见：https://github.com/mysqljs/mysql
 
-## 数据库操作( CURD )
+## 数据库操作（ CURD )
 
 ### 查询数据
 

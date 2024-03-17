@@ -52,7 +52,7 @@ main
 **注意**
 
 - 现在的 main 仓库对于其他项目人员来说，可以不需要知道 plugin 是一个子仓库。
-- 当 `git clone` 或者 `git pull` 的时候，拉取到的是整个 main (包括 plugin 在内， plugin 就相当于 main 里的一个普通目录)
+- 当 `git clone` 或者 `git pull` 的时候，拉取到的是整个 main (包括 plugin 在内， plugin 就相当于 main 里的一个普通目录）
 - 当修改了 sub 里的内容后执行 `git push`，你将会把修改 push 到 main 上，也就是说 main 仓库下的 plugin 与其他文件无异。
 
 ## 从子仓库拉取更新

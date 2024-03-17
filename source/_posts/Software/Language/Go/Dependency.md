@@ -22,7 +22,7 @@ Go 依赖管理的演进经历了以下 3 个阶段：
 
 ### GOPATH
 
-GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。其目录有以下 3 个结构（需要手动创建文件夹)：
+GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。其目录有以下 3 个结构（需要手动创建文件夹）：
 
 | 文件夹 | 作用                 |
 | ------ | -------------------- |
@@ -115,7 +115,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 
 #### indirect
 
-在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `// indirect` 的后缀，这是一个特殊标识符，表示 go. mod 对应的当前 module 没有直接导入的包，也就是非直接依赖（即间接依赖) 。
+在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `// indirect` 的后缀，这是一个特殊标识符，表示 go. mod 对应的当前 module 没有直接导入的包，也就是非直接依赖（即间接依赖） 。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/ee43ef2fca7c4c9494a2285985dd6bb3~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image-20220517153440426" style="zoom:50%;" />
 
@@ -143,7 +143,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 #### 回源
 
 - 依赖分发，即依赖从何处下载、如何下载的问题。
-- Go 的依赖绝大部分托管在 GitHub 上。Go Module 系统中定义的依赖，最终都可以对应到 GitHub 中某一项目的特定提交 (commit) 或版本。
+- Go 的依赖绝大部分托管在 GitHub 上。Go Module 系统中定义的依赖，最终都可以对应到 GitHub 中某一项目的特定提交（commit) 或版本。
 - 对于 go. mod 中定义的依赖，则直接可以从对应仓库中下载指定依赖，从而完成依赖分发。
 
 ![image-20220517161158838](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/a08866eef9694c8083831781f2e21ee1~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
@@ -173,7 +173,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 GOPROXY = "https://proxy1.cn, https://proxy2.cn, direct"
 ```
 
-- 上述代码中，`direct` 表示源站（如 GitHub) ，`proxy 1` `proxy 2` 是两个 URL 站点。依赖寻址路径为：优先从 `proxy 1` 下载依赖，如果 `proxy 1` 不存在，再从 `proxy 2` 寻找，如果 `proxy 2` 不存在，则会回源到源站直接下载依赖，并缓存到 Go Proxy 站点中（这种设计思路和 Redis 缓存与 MySQL 数据库一模一样)。
+- 上述代码中，`direct` 表示源站（如 GitHub) ，`proxy 1` `proxy 2` 是两个 URL 站点。依赖寻址路径为：优先从 `proxy 1` 下载依赖，如果 `proxy 1` 不存在，再从 `proxy 2` 寻找，如果 `proxy 2` 不存在，则会回源到源站直接下载依赖，并缓存到 Go Proxy 站点中（这种设计思路和 Redis 缓存与 MySQL 数据库一模一样）。
 
 ![image-20220517184332536](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/02fb6e8a00c84508b02ab2109b5d6c14~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
 
@@ -185,7 +185,7 @@ GOPROXY = "https://proxy1.cn, https://proxy2.cn, direct"
 go get example. org/pkg +...
 ```
 
-- `go get -u` ：更新到最新的次要版本或者修订版本 (x.y.z)
+- `go get -u` ：更新到最新的次要版本或者修订版本（x.y.z)
 - `go get -u=patch` ：更新到最新的修订版本。
 - `go get package@version ` ：更新到指定的版本号 version
 - 运行 `go get` 如果有版本的更改，那么 go. mod 文件也会作出相应的更改。

@@ -137,7 +137,7 @@ public class RedisUtil {
      * 指定缓存失效时间。
      *
      * @param key  键。
-     * @param time 时间（秒)
+     * @param time 时间（秒）
      */
     public boolean expire(String key, long time) {
         try {
@@ -225,7 +225,7 @@ public class RedisUtil {
      *
      * @param key   键。
      * @param value 值。
-     * @param time  时间（秒) time要大于0 如果time小于等于0 将设置无限期。
+     * @param time  时间（秒） time要大于0 如果time小于等于0 将设置无限期。
      * @return true成功 false 失败。
      */
     public boolean set(String key, Object value, long time) {
@@ -314,7 +314,7 @@ public class RedisUtil {
      *
      * @param key  键。
      * @param map  对应多个键值。
-     * @param time 时间（秒)
+     * @param time 时间（秒）
      * @return true成功 false失败。
      */
     public boolean hmset(String key, Map<String, Object> map, long time) {
@@ -466,7 +466,7 @@ public class RedisUtil {
      * 将set数据放入缓存。
      *
      * @param key    键。
-     * @param time   时间（秒)
+     * @param time   时间（秒）
      * @param values 值可以是多个。
      * @return 成功个数。
      */
@@ -581,7 +581,7 @@ public class RedisUtil {
      *
      * @param key   键。
      * @param value 值。
-     * @param time  时间（秒)
+     * @param time  时间（秒）
      */
     public boolean lSet(String key, Object value, long time) {
         try {
@@ -619,7 +619,7 @@ public class RedisUtil {
      *
      * @param key   键。
      * @param value 值。
-     * @param time  时间（秒)
+     * @param time  时间（秒）
      * @return
      */
     public boolean lSet(String key, List<Object> value, long time) {

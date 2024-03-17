@@ -26,7 +26,7 @@ categories:
 - **connected**：已连接，连接成功之后的状态。
 - **closed**：已关闭，发生在 session 过期，一般由于网络故障客户端重连失败，服务器宕机或者客户端主动断开。
 
-### 会话超时管理（分桶策略+会话激活)
+### 会话超时管理（分桶策略+会话激活）
 
 - zookeeper 的 leader 服务器再运行期间定时进行会话超时检查，时间间隔是 ExpirationInterval，单位是毫秒，默认值是 tickTime，每隔 tickTime 进行一次会话超时检查。
 

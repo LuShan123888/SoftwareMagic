@@ -9,7 +9,7 @@ categories:
 # JavaScript Prototype对象
 
 - 所有的 JavaScript 对象都会从一个 prototype(原型对象）中继承属性和方法。
-- 在前面的章节中我们学会了如何使用对象的构造器(constructor):
+- 在前面的章节中我们学会了如何使用对象的构造器（constructor):
 
 ```js
 function Person(first, last, age, eyecolor) {

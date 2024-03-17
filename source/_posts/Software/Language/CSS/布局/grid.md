@@ -151,7 +151,7 @@ grid-template-columns: repeat(auto-fill, 100px);
 
 - **fr 关键字**
 
-为了方便表示比例关系，网格布局提供了`fr`关键字(fraction 的缩写，意为"片段")，如果两列的宽度分别为`1fr`和`2fr`，就表示后者是前者的两倍。
+为了方便表示比例关系，网格布局提供了`fr`关键字（fraction 的缩写，意为"片段")，如果两列的宽度分别为`1fr`和`2fr`，就表示后者是前者的两倍。
 
 ```css
 .container {
@@ -234,7 +234,7 @@ grid-template-columns: repeat(12, 1fr);
 
 ### grid-row-gap&grid-column-gap&grid-gap
 
-`grid-row-gap`属性设置行与行的间隔（行间距),`grid-column-gap`属性设置列与列的间隔（列间距)
+`grid-row-gap`属性设置行与行的间隔（行间距）,`grid-column-gap`属性设置列与列的间隔（列间距）
 
 ```css
 .container {
@@ -366,7 +366,7 @@ grid-auto-flow: column dense;
 
 ### justify-items&align-items&place-items
 
-`justify-items`属性设置单元格内容的水平位置（左中右),`align-items`属性设置单元格内容的垂直位置（上中下)
+`justify-items`属性设置单元格内容的水平位置（左中右）,`align-items`属性设置单元格内容的垂直位置（上中下）
 
 ```css
 .container {
@@ -380,7 +380,7 @@ align-items: start | end | center | stretch;
 - start：对齐单元格的起始边缘。
 - end：对齐单元格的结束边缘。
 - center：单元格内部居中。
-- stretch：拉伸，占满单元格的整个宽度（默认值)
+- stretch：拉伸，占满单元格的整个宽度（默认值）
 
 ```css
 .container {
@@ -418,7 +418,7 @@ place-items: start end;
 
 ### justify-content&align-content&place-content
 
-`justify-content`属性是整个内容区域在容器里面的水平位置（左中右),`align-content`属性是整个内容区域的垂直位置（上中下)
+`justify-content`属性是整个内容区域在容器里面的水平位置（左中右）,`align-content`属性是整个内容区域的垂直位置（上中下）
 
 ```css
 .container {
@@ -666,9 +666,9 @@ grid-column-end: 4;
 
 ### justify-self&align-self&place-self
 
-`justify-self`属性设置单元格内容的水平位置（左中右)，跟`justify-items`属性的用法完全一致，但只作用于单个项目。
+`justify-self`属性设置单元格内容的水平位置（左中右），跟`justify-items`属性的用法完全一致，但只作用于单个项目。
 
-`align-self`属性设置单元格内容的垂直位置（上中下)，跟`align-items`属性的用法完全一致，也是只作用于单个项目。
+`align-self`属性设置单元格内容的垂直位置（上中下），跟`align-items`属性的用法完全一致，也是只作用于单个项目。
 
 ```css
 .item {
@@ -682,7 +682,7 @@ grid-column-end: 4;
 - start：对齐单元格的起始边缘。
 - end：对齐单元格的结束边缘。
 - center：单元格内部居中。
-- stretch：拉伸，占满单元格的整个宽度（默认值)
+- stretch：拉伸，占满单元格的整个宽度（默认值）
 
 下面是`justify-self: start`的例子。
 

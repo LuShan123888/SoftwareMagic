@@ -35,9 +35,9 @@ categories:
 | testOnBorrow                  | true               | 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能，|
 | testOnReturn                  | false              | 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 |
 | testWhileIdle                 | false              | 建议配置为true，不影响性能，并且保证安全性，申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效，|
-| timeBetweenEvictionRunsMillis | 1分钟(1.0.14)| 有两个含义：1) Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接 2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明 |
+| timeBetweenEvictionRunsMillis | 1分钟（1.0.14)| 有两个含义：1) Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接 2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明 |
 | numTestsPerEvictionRun        |                    | 不再使用，一个DruidDataSource只支持一个EvictionRun           |
-| minEvictableIdleTimeMillis    | 30分钟(1.0.14)| 连接保持空闲而不被驱逐的最长时间                             |
+| minEvictableIdleTimeMillis    | 30分钟（1.0.14)| 连接保持空闲而不被驱逐的最长时间                             |
 | connectionInitSqls            |                    | 物理连接初始化的时候执行的sql                                |
 | exceptionSorter               | 根据dbType自动识别 | 当数据库抛出一些不可恢复的异常时，抛弃连接                   |
 | filters                       |                    | 属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：监控统计用的filter:stat 日志用的filter:log4j 防御sql注入的filter:wall |
