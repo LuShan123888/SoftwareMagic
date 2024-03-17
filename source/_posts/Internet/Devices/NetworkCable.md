@@ -1,8 +1,8 @@
 ---
 title: NetworkCable
 categories:
-- Internet
-- Devices
+  - Internet
+  - Devices
 ---
 # NetworkCable
 
