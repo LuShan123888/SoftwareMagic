@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Mybatis Plus 乐观锁  乐观锁 : 故名思意十分乐观, 它总是认为不会出现问题, 无论干什么不去上锁!如果出现了问题,  再次更新值测试 悲观锁：故名思意十分悲观, 它总是认为总是出现问题, 无论干什么都会上锁!再去操作!   乐观锁实现方式  取出记录时, 获取当前 version 更新时, 带上这个version 执行更新时,  set version &#x3D; newVersion w">
+  <meta name="description" content="Mybatis Plus 乐观锁  乐观锁 : 故名思意十分乐观，它总是认为不会出现问题，无论干什么不去上锁!如果出现了问题，再次更新值测试 悲观锁：故名思意十分悲观，它总是认为总是出现问题，无论干什么都会上锁!再去操作!   乐观锁实现方式  取出记录时，获取当前 version 更新时，带上这个version 执行更新时,  set version &#x3D; newVersion where ver">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis Plus 乐观锁">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Mybatis/MybatisPlus/%E4%B9%90%E8%A7%82%E9%94%81/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Mybatis Plus 乐观锁  乐观锁 : 故名思意十分乐观, 它总是认为不会出现问题, 无论干什么不去上锁!如果出现了问题,  再次更新值测试 悲观锁：故名思意十分悲观, 它总是认为总是出现问题, 无论干什么都会上锁!再去操作!   乐观锁实现方式  取出记录时, 获取当前 version 更新时, 带上这个version 执行更新时,  set version &#x3D; newVersion w">
+<meta property="og:description" content="Mybatis Plus 乐观锁  乐观锁 : 故名思意十分乐观，它总是认为不会出现问题，无论干什么不去上锁!如果出现了问题，再次更新值测试 悲观锁：故名思意十分悲观，它总是认为总是出现问题，无论干什么都会上锁!再去操作!   乐观锁实现方式  取出记录时，获取当前 version 更新时，带上这个version 执行更新时,  set version &#x3D; newVersion where ver">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-16T16:40:10.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:32:17.814Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.176Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:19.929Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-17 00:40" pubdate>
-        2021年12月17日 凌晨
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -229,20 +229,20 @@
             <div class="markdown-body">
               <h1>Mybatis Plus 乐观锁</h1>
 <blockquote>
-<p>乐观锁 : 故名思意十分乐观, 它总是认为不会出现问题, 无论干什么不去上锁!如果出现了问题,  再次更新值测试</p>
-<p>悲观锁：故名思意十分悲观, 它总是认为总是出现问题, 无论干什么都会上锁!再去操作!</p>
+<p>乐观锁 : 故名思意十分乐观，它总是认为不会出现问题，无论干什么不去上锁!如果出现了问题，再次更新值测试</p>
+<p>悲观锁：故名思意十分悲观，它总是认为总是出现问题，无论干什么都会上锁!再去操作!</p>
 </blockquote>
 <ul>
 <li>乐观锁实现方式
 <ul>
-<li>取出记录时, 获取当前 version</li>
-<li>更新时, 带上这个version</li>
+<li>取出记录时，获取当前 version</li>
+<li>更新时，带上这个version</li>
 <li>执行更新时,  set version = newVersion where version = oldVersion</li>
-<li>如果version不对, 就更新失败</li>
+<li>如果version不对，就更新失败</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 先查询, 获得版本号 version = 1<br>-- A<br>update user set name = &quot;test&quot;, version = version + 1<br>where id = 2 and version = 1<br>-- B<br>-- 线程抢先完成, 这个时候 version = 2, 会导致 A 修改失败<br>update user set name = &quot;test&quot;, version = version + 1<br>where id = 2 and version = 1<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">-- 先查询，获得版本号 version = 1<br>-- A<br>update user set name = &quot;test&quot;, version = version + 1<br>where id = 2 and version = 1<br>-- B<br>-- 线程抢先完成，这个时候 version = 2, 会导致 A 修改失败<br>update user set name = &quot;test&quot;, version = version + 1<br>where id = 2 and version = 1<br></code></pre></td></tr></table></figure>
 <h2 id="乐观锁插件">乐观锁插件</h2>
 <ul>
 <li>实体类增加version字段</li>
@@ -298,9 +298,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/%E5%AE%9E%E4%BE%8B/QQ%E7%99%BB%E5%BD%95/">
+                      <a href="/Software/BackEnd/Mybatis/MybatisPlus/%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot 整合QQ登录</span>
+                        <span class="hidden-mobile">逻辑删除</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -308,8 +308,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/Spring/%E4%BA%8B%E5%8A%A1/">
-                        <span class="hidden-mobile">Spring 事务</span>
+                      <a href="/Software/BackEnd/Mybatis/MybatisPlus/%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/">
+                        <span class="hidden-mobile">Mybatis Plus 分页插件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+  <meta name="description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接，当一个连接建立后,Redis 内部会进行以下一些操作:  首先，客户端 Socket 会被设置为非阻塞模式，因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性，禁用 Nagle 算法 然后创建一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis 管理服务">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:  首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性,禁用 Nagle 算法 然后创建一">
+<meta property="og:description" content="Redis 管理服务 启动Redis  Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接，当一个连接建立后,Redis 内部会进行以下一些操作:  首先，客户端 Socket 会被设置为非阻塞模式，因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型 然后为这个 Socket 设置TCP_NODELAY属性，禁用 Nagle 算法 然后创建一">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-22T10:00:34.000Z">
-<meta property="article:modified_time" content="2023-07-22T10:00:34.000Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.554Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.112Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-07-22 18:00" pubdate>
-        2023年7月22日 晚上
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年7月22日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -230,10 +230,10 @@
               <h1>Redis 管理服务</h1>
 <h2 id="启动Redis">启动Redis</h2>
 <ul>
-<li>Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接,当一个连接建立后,Redis 内部会进行以下一些操作:
+<li>Redis 通过监听一个 TCP 端口或者 Unix Socket 的方式来接收来自客户端的连接，当一个连接建立后,Redis 内部会进行以下一些操作:
 <ul>
-<li>首先,客户端 Socket 会被设置为非阻塞模式,因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型</li>
-<li>然后为这个 Socket 设置<code>TCP_NODELAY</code>属性,禁用 Nagle 算法</li>
+<li>首先，客户端 Socket 会被设置为非阻塞模式，因为 Redis 在网络事件处理上采用的是非阻塞多路复用模型</li>
+<li>然后为这个 Socket 设置<code>TCP_NODELAY</code>属性，禁用 Nagle 算法</li>
 <li>然后创建一个可读的文件事件用于监听这个客户端 Socket 的数据发送</li>
 </ul>
 </li>
@@ -249,7 +249,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> redis-server 配置文件位置</span><br></code></pre></td></tr></table></figure>
 <h3 id="最大连接数">最大连接数</h3>
 <ul>
-<li>在 Redis2.4 中,最大连接数是被直接硬编码在代码里面的,而在2.6版本中这个值变成可配置的</li>
+<li>在 Redis2.4 中，最大连接数是被直接硬编码在代码里面的，而在2.6版本中这个值变成可配置的</li>
 <li>maxclients 的默认值是 10000,你也可以在 redis.conf 中对这个值进行修改</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> config get maxclients</span><br>1) &quot;maxclients&quot;<br>2) &quot;10000&quot;<br></code></pre></td></tr></table></figure>
@@ -344,7 +344,7 @@
 </tr>
 <tr>
 <td style="text-align:left">16</td>
-<td style="text-align:left">CONFIG SET parameter value  修改 redis 配置参数,无需重启</td>
+<td style="text-align:left">CONFIG SET parameter value  修改 redis 配置参数，无需重启</td>
 </tr>
 <tr>
 <td style="text-align:left">17</td>
@@ -376,11 +376,11 @@
 </tr>
 <tr>
 <td style="text-align:left">24</td>
-<td style="text-align:left">LASTSAVE  返回最近一次 Redis 成功将数据保存到磁盘上的时间,以 UNIX 时间戳格式表示</td>
+<td style="text-align:left">LASTSAVE  返回最近一次 Redis 成功将数据保存到磁盘上的时间，以 UNIX 时间戳格式表示</td>
 </tr>
 <tr>
 <td style="text-align:left">25</td>
-<td style="text-align:left">MONITOR  实时打印出 Redis 服务器接收到的命令,调试用</td>
+<td style="text-align:left">MONITOR  实时打印出 Redis 服务器接收到的命令，调试用</td>
 </tr>
 <tr>
 <td style="text-align:left">26</td>
@@ -392,7 +392,7 @@
 </tr>
 <tr>
 <td style="text-align:left">28</td>
-<td style="text-align:left">SHUTDOWN [NOSAVE] [SAVE]  异步保存数据到硬盘,并关闭服务器</td>
+<td style="text-align:left">SHUTDOWN [NOSAVE] [SAVE]  异步保存数据到硬盘，并关闭服务器</td>
 </tr>
 <tr>
 <td style="text-align:left">29</td>
@@ -441,9 +441,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/Redis/%E6%B5%8B%E8%AF%95/">
+                      <a href="/Software/BackEnd/Database/Redis/%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis 测试</span>
+                        <span class="hidden-mobile">管理Redis数据库</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -451,8 +451,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/Redis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
-                        <span class="hidden-mobile">Redis 配置文件</span>
+                      <a href="/Software/BackEnd/Database/Redis/%E6%B5%8B%E8%AF%95/">
+                        <span class="hidden-mobile">Redis 测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

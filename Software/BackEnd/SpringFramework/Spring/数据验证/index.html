@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Spring 数据验证  Java API规范 (JSR303) 定义了Bean校验的标准validation-api,但没有提供实现,hibernate validation是对这个规范的实现，并增加了校验注解如@Email,@Length等,Spring Validation是对hibernate validation的二次封装，用于支持Springmvc参数自动校验  JSR-303">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-26T13:30:47.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:37:50.967Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.760Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:19.925Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-26 21:30" pubdate>
-        2022年5月26日 晚上
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -420,8 +420,8 @@
 <h3 id="报错回显至JSP">报错回显至JSP</h3>
 <ul>
 <li>要访问一个Controller再跳转到JSP页面，同时需要向Model中添加一个名字叫User的对象，否则跳转到JSP页面的时候会报错</li>
-<li><code>@ModelAttribute</code>:在进入Controller时先调用getUser方法, 将User空对象放入Model中, 可在其他接口中用User类接收前端的ModelAttribute,并且可以将Model中的User带回页面</li>
-<li><code>@SessionAttributes</code>:将Model中的User存入Session中, 避免每次请求重复创建Model</li>
+<li><code>@ModelAttribute</code>:在进入Controller时先调用getUser方法，将User空对象放入Model中，可在其他接口中用User类接收前端的ModelAttribute,并且可以将Model中的User带回页面</li>
+<li><code>@SessionAttributes</code>:将Model中的User存入Session中，避免每次请求重复创建Model</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SessionAttributes(&quot;User&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValidForm</span> </span>&#123;<br>    <span class="hljs-meta">@ModelAttribute(&quot;User&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> User  <span class="hljs-title">getUser</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> User();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -433,7 +433,7 @@
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;sf:form action=<span class="hljs-string">&quot;addUser&quot;</span> method=<span class="hljs-string">&quot;post&quot;</span>  modelAttribute=<span class="hljs-string">&quot;User&quot;</span>&gt;<br>    &lt;sf:label path=<span class="hljs-string">&quot;name&quot;</span>&gt;用户名:&lt;/sf:label&gt;<br>    &lt;sf:input path=<span class="hljs-string">&quot;name&quot;</span>/&gt;<br>    &lt;sf:errors path=<span class="hljs-string">&quot;name&quot;</span> cssStyle=<span class="hljs-string">&quot;color:red&quot;</span>&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>    &lt;sf:label path=<span class="hljs-string">&quot;age&quot;</span>&gt; 年龄:&lt;/sf:label&gt;<br>    &lt;sf:input path=<span class="hljs-string">&quot;age&quot;</span>/&gt;<br>    &lt;sf:errors path=<span class="hljs-string">&quot;age&quot;</span> cssStyle=<span class="hljs-string">&quot;color:red&quot;</span>&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>    &lt;sf:label path=<span class="hljs-string">&quot;birthday&quot;</span>&gt; 生日:&lt;/sf:label&gt;<br>    &lt;sf:input path=<span class="hljs-string">&quot;birthday&quot;</span>/&gt;<br>    &lt;sf:errors path=<span class="hljs-string">&quot;birthday&quot;</span> cssStyle=<span class="hljs-string">&quot;color:red&quot;</span>&gt;&lt;/sf:errors&gt;&lt;br&gt;<br><br>    &lt;input type=<span class="hljs-string">&quot;submit&quot;</span> value=<span class="hljs-string">&quot;提交&quot;</span>/&gt;<br>&lt;/sf:form<br></code></pre></td></tr></table></figure>
 <ul>
-<li>进入当前页面model中必须有User变量对应对象, 对象中必须有name age和birthday属性</li>
+<li>进入当前页面model中必须有User变量对应对象，对象中必须有name age和birthday属性</li>
 <li>input标签中的path属性的值对应的是表单对象中的属性</li>
 </ul>
 <h2 id="实现原理">实现原理</h2>
@@ -499,9 +499,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/Spring/Swagger/">
+                      <a href="/Software/BackEnd/SpringFramework/Spring/%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%BB%84%E6%88%90/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring 整合Swagger</span>
+                        <span class="hidden-mobile">Spring 概述与组成</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -509,8 +509,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">
-                        <span class="hidden-mobile">Spring MVC 文件上传和下载</span>
+                      <a href="/Software/BackEnd/SpringFramework/Spring/%E4%BA%8B%E5%8A%A1/">
+                        <span class="hidden-mobile">Spring 事务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Spring Boot 实现 Markdown 编辑与持久化 准备工作 数据库设计  article:文章表     字段  备注     id int 文章的唯一ID   author varchar 作者   title varchar 标题   content longtext 文章的内容     建表SQL:  1234567CREATE TABLE &#96;article&#96; (    &#96;id&#96;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-28T11:57:59.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.768Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:19.926Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-28 19:57" pubdate>
-        2021年12月28日 晚上
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -301,7 +301,7 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//图片上传</span><br><span class="hljs-attr">imageUpload</span> : <span class="hljs-literal">true</span>,<br><span class="hljs-attr">imageFormats</span> : [<span class="hljs-string">&quot;jpg&quot;</span>, <span class="hljs-string">&quot;jpeg&quot;</span>, <span class="hljs-string">&quot;gif&quot;</span>, <span class="hljs-string">&quot;png&quot;</span>, <span class="hljs-string">&quot;bmp&quot;</span>, <span class="hljs-string">&quot;webp&quot;</span>],<br><span class="hljs-attr">imageUploadURL</span> : <span class="hljs-string">&quot;/article/file/upload&quot;</span>, <span class="hljs-comment">// //这个是上传图片时的访问地址</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>后端请求接收保存这个图片, 需要导入<code>FastJson</code>的依赖</li>
+<li>后端请求接收保存这个图片，需要导入<code>FastJson</code>的依赖</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/file/upload&quot;)</span><br><span class="hljs-meta">@ResponseBody</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> JSONObject <span class="hljs-title">fileUpload</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;editormd-image-file&quot;, required= true)</span> MultipartFile file, HttpServletRequest request)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>    <span class="hljs-comment">//上传路径保存设置</span><br><br>    <span class="hljs-comment">//获得SpringBoot当前项目的路径:System.getProperty(&quot;user.dir&quot;)</span><br>    String path = System.getProperty(<span class="hljs-string">&quot;user.dir&quot;</span>)+<span class="hljs-string">&quot;/upload/&quot;</span>;<br><br>    <span class="hljs-comment">//按照月份进行分类:</span><br>    Calendar instance = Calendar.getInstance();<br>    String month = (instance.get(Calendar.MONTH) + <span class="hljs-number">1</span>)+<span class="hljs-string">&quot;月&quot;</span>;<br>    path = path+month;<br><br>    File realPath = <span class="hljs-keyword">new</span> File(path);<br>    <span class="hljs-keyword">if</span> (!realPath.exists())&#123;<br>        realPath.mkdir();<br>    &#125;<br><br>    <span class="hljs-comment">//上传文件地址</span><br>    System.out.println(<span class="hljs-string">&quot;上传文件保存地址:&quot;</span>+realPath);<br><br>    <span class="hljs-comment">//解决文件名字问题：我们使用uuid;</span><br>    String filename = <span class="hljs-string">&quot;ks-&quot;</span>+UUID.randomUUID().toString().replaceAll(<span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>    <span class="hljs-comment">//通过CommonsMultipartFile的方法直接写文件（注意这个时候)</span><br>    file.transferTo(<span class="hljs-keyword">new</span> File(realPath +<span class="hljs-string">&quot;/&quot;</span>+ filename));<br><br>    <span class="hljs-comment">//给editormd进行回调</span><br>    JSONObject res = <span class="hljs-keyword">new</span> JSONObject();<br>    res.put(<span class="hljs-string">&quot;url&quot;</span>,<span class="hljs-string">&quot;/upload/&quot;</span>+month+<span class="hljs-string">&quot;/&quot;</span>+ filename);<br>    res.put(<span class="hljs-string">&quot;success&quot;</span>, <span class="hljs-number">1</span>);<br>    res.put(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;upload success!&quot;</span>);<br><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -356,9 +356,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaEE/%E5%AE%9E%E4%BE%8B/%E7%94%A8%E6%88%B7%E8%AE%A1%E6%95%B0/">
+                      <a href="/Software/BackEnd/SpringFramework/%E5%AE%9E%E4%BE%8B/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Servlet 监听 Session 实现用户计数</span>
+                        <span class="hidden-mobile">Spring MVC 文件上传和下载</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -366,8 +366,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Tools/Aria2/%E9%85%8D%E7%BD%AE/">
-                        <span class="hidden-mobile">Aria2 配置</span>
+                      <a href="/Software/BackEnd/SpringFramework/Spring/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+                        <span class="hidden-mobile">Spring 配置文件</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 触发器  触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程,一旦定义,触发器将保存在数据库服务器中,任何用户对表的增,删,改操作均由服务器自动激活相应的触发器,在关系数据库管理系统核心层进行集中的完整性控制,触发器类似于约束,但是比约束更加灵活,可以实施更为复杂的检查和操作,具有更精细和更强大的数据控制能力 触发器SQL99之后再写入SQL标准,但是很多关系数据库管理">
+  <meta name="description" content="SQL 触发器  触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程，一旦定义，触发器将保存在数据库服务器中，任何用户对表的增，删,改操作均由服务器自动激活相应的触发器，在关系数据库管理系统核心层进行集中的完整性控制，触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力 触发器SQL99之后再写入SQL标准，但是很多关系数据库管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 触发器">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E8%A7%A6%E5%8F%91%E5%99%A8/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 触发器  触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程,一旦定义,触发器将保存在数据库服务器中,任何用户对表的增,删,改操作均由服务器自动激活相应的触发器,在关系数据库管理系统核心层进行集中的完整性控制,触发器类似于约束,但是比约束更加灵活,可以实施更为复杂的检查和操作,具有更精细和更强大的数据控制能力 触发器SQL99之后再写入SQL标准,但是很多关系数据库管理">
+<meta property="og:description" content="SQL 触发器  触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程，一旦定义，触发器将保存在数据库服务器中，任何用户对表的增，删,改操作均由服务器自动激活相应的触发器，在关系数据库管理系统核心层进行集中的完整性控制，触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力 触发器SQL99之后再写入SQL标准，但是很多关系数据库管理">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-11T05:40:10.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.174Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.573Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.107Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 13:40" pubdate>
-        2021年9月11日 下午
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -229,34 +229,34 @@
             <div class="markdown-body">
               <h1>SQL 触发器</h1>
 <ul>
-<li>触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程,一旦定义,触发器将保存在数据库服务器中,任何用户对表的增,删,改操作均由服务器自动激活相应的触发器,在关系数据库管理系统核心层进行集中的完整性控制,触发器类似于约束,但是比约束更加灵活,可以实施更为复杂的检查和操作,具有更精细和更强大的数据控制能力</li>
-<li>触发器SQL99之后再写入SQL标准,但是很多关系数据库管理系统很早就支持触发器,因此不同的关系数据库管理系统实现的触发器语法各不相同,互不兼容</li>
+<li>触发器(trigger)是用户定义在关系表上的一类由事件驱动的特殊过程，一旦定义，触发器将保存在数据库服务器中，任何用户对表的增，删,改操作均由服务器自动激活相应的触发器，在关系数据库管理系统核心层进行集中的完整性控制，触发器类似于约束，但是比约束更加灵活，可以实施更为复杂的检查和操作，具有更精细和更强大的数据控制能力</li>
+<li>触发器SQL99之后再写入SQL标准，但是很多关系数据库管理系统很早就支持触发器，因此不同的关系数据库管理系统实现的触发器语法各不相同，互不兼容</li>
 </ul>
 <h2 id="定义触发器">定义触发器</h2>
 <ul>
-<li>触发器又叫作事件-条件-动作(event-condition-action)规则,当特定的系统事件（如对一个表的增,删,改操作,事务的结束等）发生时,对规则的条件进行检查,如果条件成立则执行规则中的动作,否则不执行该动作,规则中的动作体可以很复杂,可以涉及其他表和其他数据库对象,通常是一段SQL存储过程</li>
-<li>SQL使用CREATE TRIGGER命令建立触发器,其一般格式为;</li>
+<li>触发器又叫作事件-条件-动作(event-condition-action)规则，当特定的系统事件（如对一个表的增，删,改操作，事务的结束等）发生时，对规则的条件进行检查，如果条件成立则执行规则中的动作，否则不执行该动作，规则中的动作体可以很复杂，可以涉及其他表和其他数据库对象，通常是一段SQL存储过程</li>
+<li>SQL使用CREATE TRIGGER命令建立触发器，其一般格式为;</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span><span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*每当触发事件发生时,该触发器被激活*/</span><br>&#123;BEFORE<span class="hljs-operator">|</span>AAFTER&#125;<span class="hljs-operator">&lt;</span>触发事件<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*指明触发器激活的时间是在执行触发事件前或后*/</span><br><span class="hljs-keyword">REFERENCING</span> <span class="hljs-keyword">NEW</span><span class="hljs-operator">|</span><span class="hljs-keyword">OLD</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span><span class="hljs-operator">&lt;</span>变量<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*REFERENCING指出引用的变量*/</span><br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span>&#123;<span class="hljs-type">ROW</span><span class="hljs-operator">|</span>STATEMENT&#125; <span class="hljs-comment">/*定义触发器的类型,指明动作体执行的频率*/</span><br>[<span class="hljs-keyword">WHEN</span><span class="hljs-operator">&lt;</span>触发条件<span class="hljs-operator">&gt;</span>]<span class="hljs-operator">&lt;</span>触发动作体<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*仅当触发条件为真时才执行触发动作体*/</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span><span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*每当触发事件发生时，该触发器被激活*/</span><br>&#123;BEFORE<span class="hljs-operator">|</span>AAFTER&#125;<span class="hljs-operator">&lt;</span>触发事件<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*指明触发器激活的时间是在执行触发事件前或后*/</span><br><span class="hljs-keyword">REFERENCING</span> <span class="hljs-keyword">NEW</span><span class="hljs-operator">|</span><span class="hljs-keyword">OLD</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span><span class="hljs-operator">&lt;</span>变量<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*REFERENCING指出引用的变量*/</span><br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span>&#123;<span class="hljs-type">ROW</span><span class="hljs-operator">|</span>STATEMENT&#125; <span class="hljs-comment">/*定义触发器的类型，指明动作体执行的频率*/</span><br>[<span class="hljs-keyword">WHEN</span><span class="hljs-operator">&lt;</span>触发条件<span class="hljs-operator">&gt;</span>]<span class="hljs-operator">&lt;</span>触发动作体<span class="hljs-operator">&gt;</span> <span class="hljs-comment">/*仅当触发条件为真时才执行触发动作体*/</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>下面对定义触发器的各部分语法进行详细说明:</p>
 <ul>
 <li>
 <p><strong>触发器创建权限</strong></p>
-<p>只有表的拥有者,即创建表的用户才可以才表上创建触发器,并且一个表只能创建一定数量的触发器,触发器的具体数量由具体的关系数据库管理系统在设计时确定</p>
+<p>只有表的拥有者，即创建表的用户才可以才表上创建触发器，并且一个表只能创建一定数量的触发器，触发器的具体数量由具体的关系数据库管理系统在设计时确定</p>
 </li>
 <li>
 <p><strong>触发器名</strong></p>
-<p>触发器名可以包含模式名,也可以不包含模式名,同一模式下,触发器名必须是唯一的,并且触发器名和表名必须在同一模式下</p>
+<p>触发器名可以包含模式名，也可以不包含模式名，同一模式下，触发器名必须是唯一的，并且触发器名和表名必须在同一模式下</p>
 </li>
 <li>
 <p><strong>表名</strong></p>
-<p>触发器只能定义在基本表上,不能定义在视图上,当基本表的数据发生变化时,将激活定义在该表上相应触发事件的触发器,因此该表也也称为触发器的目标表</p>
+<p>触发器只能定义在基本表上，不能定义在视图上，当基本表的数据发生变化时，将激活定义在该表上相应触发事件的触发器，因此该表也也称为触发器的目标表</p>
 </li>
 <li>
 <p><strong>触发事件</strong></p>
-<p>触发事件可以时INSERT,DELETE或UPDATE,也可以是这几个事件的组合,如INSERT OR DELETE等,还可以是UPDATE OF&lt;触发列,…&gt;,即进一步指明修改哪些列时激活触发器,AFTER/BEFORE是触发的时机,AFTER表示在触发事件的操作执行之后激活触发器,BEFORE表示在触发事件的操作执行之前激活触发器</p>
+<p>触发事件可以时INSERT,DELETE或UPDATE,也可以是这几个事件的组合，如INSERT OR DELETE等，还可以是UPDATE OF&lt;触发列,…&gt;,即进一步指明修改哪些列时激活触发器,AFTER/BEFORE是触发的时机,AFTER表示在触发事件的操作执行之后激活触发器,BEFORE表示在触发事件的操作执行之前激活触发器</p>
 </li>
 <li>
 <p><strong>触发器类型</strong></p>
@@ -265,47 +265,47 @@
 <p>触发器按照所触发动作的间隔尺寸可以分为行级触发器(FOR EACH ROW)和语句级触发器(FOR EACH STATEMENT)</p>
 </li>
 <li>
-<p>例如,假设在例5.11的TEACHER表上创建了一个AFTER UPDATE触发器,触发事件是UPDATE语句:</p>
+<p>例如，假设在例5.11的TEACHER表上创建了一个AFTER UPDATE触发器，触发事件是UPDATE语句:</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">UPDATE TEACHER <span class="hljs-builtin-name">SET</span> <span class="hljs-attribute">Deptno</span>=5;<br></code></pre></td></tr></table></figure>
 </li>
 <li>
-<p>假设表TEACHER有1000行,如果定义的触发器为语句级触发器,那么执行完UPDATE语句后触发动作执行一次,如果是行级触发器,触发动作体将执行1000次</p>
+<p>假设表TEACHER有1000行，如果定义的触发器为语句级触发器，那么执行完UPDATE语句后触发动作执行一次，如果是行级触发器，触发动作体将执行1000次</p>
 </li>
 </ul>
 </li>
 <li>
 <p><strong>触发条件</strong></p>
-<p>触发器被激活时,只有当触发条件为真时触发动作体才执行,否则触发动作体不执行,如果省略WHEN触发条件,则触发动作体在触发器激活后立即执行</p>
+<p>触发器被激活时，只有当触发条件为真时触发动作体才执行，否则触发动作体不执行，如果省略WHEN触发条件，则触发动作体在触发器激活后立即执行</p>
 </li>
 <li>
 <p><strong>触发动作体</strong></p>
 <ul>
-<li>触发动作体既可以是一个匿名PL/SQL过程块,也可以是对已创建存储过程的调用,如果是行级触发器,用户可以在过程体中使用NEW和OLD引- 用UPDATE/INSERT事件之后的新值和UPDATE/DELETE事件之前的旧值,如果是语句级触发器,则不能在触发动作体中使用NEW或OLD进行引用</li>
-<li>如果触发动作体执行失败,激活触发器的事件（即对数据库的增,删,改操作）就会终止执行,触发器的目标表或触发器可能影响的其他对象不发生任何变化</li>
+<li>触发动作体既可以是一个匿名PL/SQL过程块，也可以是对已创建存储过程的调用，如果是行级触发器，用户可以在过程体中使用NEW和OLD引- 用UPDATE/INSERT事件之后的新值和UPDATE/DELETE事件之前的旧值，如果是语句级触发器，则不能在触发动作体中使用NEW或OLD进行引用</li>
+<li>如果触发动作体执行失败，激活触发器的事件（即对数据库的增，删,改操作）就会终止执行，触发器的目标表或触发器可能影响的其他对象不发生任何变化</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><strong>[例5.21]</strong>:当对表SC的Grade属性进行修改时,若分数增加了10%,则将此次操作记录到另一个表SC_U(Sno,Cno,Oldgrade,Newgrade)中,其中Oldgrade是修改前的分数,Newgrade是修改后的分数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> SC_T  <span class="hljs-comment">/*SC_T是触发器的名字*/</span><br>AFTER UPDATE   Grade <span class="hljs-keyword">ON</span> [S<span class="hljs-operator">-</span>T].SC <span class="hljs-comment">/*UPDATE OF Grade是触发事件,AFTER是触发的时机,表示对SC的Grade属性修改完后再触发下面的规则*/</span><br><span class="hljs-keyword">REFERENCING</span><br> OLDROW <span class="hljs-keyword">AS</span> OldTuple,<br> NEWROW <span class="hljs-keyword">AS</span> NewTuple<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span>    <span class="hljs-comment">/*行级触发器,即每执行一次Grade的更新,下面的规则就执行一次*/</span><br><span class="hljs-keyword">WHEN</span>(NewTuple.Grade<span class="hljs-operator">&gt;=</span><span class="hljs-number">1.1</span><span class="hljs-operator">*</span>OldTuple.Grade)    <span class="hljs-comment">/*触发条件,只有该条件为真时才执行下面的INSERT操作*/</span><br> <span class="hljs-keyword">INSERT</span>  <span class="hljs-keyword">INTO</span> SC_U(Sno,Cno,OldGrade,NewGrade)<br> <span class="hljs-keyword">VALUES</span> (OldTuple.Sno,OldTuple.Cno,OldTuple.Grade,NewTuple.Grade)<br></code></pre></td></tr></table></figure>
-<p>在本例中REFERENCING指出引用的变量,如果触发事件是UPDATE操作并且有FOR EACH ROW子句,则可以引用的变量有OLDROW和NEWROW,分别表示修改之前的元组和修改之后的元组,若没有FOR EACH ROW子句,则可以引用的变量有OLDTABLE和NEWTABLE,OLDTABLE表示表中原来的内容,NEWTABLE表示表中变化后的部分</p>
+<p><strong>[例5.21]</strong>:当对表SC的Grade属性进行修改时，若分数增加了10%,则将此次操作记录到另一个表SC_U(Sno,Cno,Oldgrade,Newgrade)中，其中Oldgrade是修改前的分数,Newgrade是修改后的分数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> SC_T  <span class="hljs-comment">/*SC_T是触发器的名字*/</span><br>AFTER UPDATE   Grade <span class="hljs-keyword">ON</span> [S<span class="hljs-operator">-</span>T].SC <span class="hljs-comment">/*UPDATE OF Grade是触发事件,AFTER是触发的时机，表示对SC的Grade属性修改完后再触发下面的规则*/</span><br><span class="hljs-keyword">REFERENCING</span><br> OLDROW <span class="hljs-keyword">AS</span> OldTuple,<br> NEWROW <span class="hljs-keyword">AS</span> NewTuple<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span>    <span class="hljs-comment">/*行级触发器，即每执行一次Grade的更新，下面的规则就执行一次*/</span><br><span class="hljs-keyword">WHEN</span>(NewTuple.Grade<span class="hljs-operator">&gt;=</span><span class="hljs-number">1.1</span><span class="hljs-operator">*</span>OldTuple.Grade)    <span class="hljs-comment">/*触发条件，只有该条件为真时才执行下面的INSERT操作*/</span><br> <span class="hljs-keyword">INSERT</span>  <span class="hljs-keyword">INTO</span> SC_U(Sno,Cno,OldGrade,NewGrade)<br> <span class="hljs-keyword">VALUES</span> (OldTuple.Sno,OldTuple.Cno,OldTuple.Grade,NewTuple.Grade)<br></code></pre></td></tr></table></figure>
+<p>在本例中REFERENCING指出引用的变量，如果触发事件是UPDATE操作并且有FOR EACH ROW子句，则可以引用的变量有OLDROW和NEWROW,分别表示修改之前的元组和修改之后的元组，若没有FOR EACH ROW子句，则可以引用的变量有OLDTABLE和NEWTABLE,OLDTABLE表示表中原来的内容,NEWTABLE表示表中变化后的部分</p>
 <p><strong>[例5.22]</strong>:将每次对表Student的插入操作所增加的学生个数记录到表Student-InsertLog中</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Student_Count<br>AFTER <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> Student <span class="hljs-comment">/*指明触发器激活的时间是在执行INSERT后*/</span><br><span class="hljs-keyword">REFERENCING</span><br><span class="hljs-keyword">NEW</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">AS</span> DELTA<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> STATEMENT <span class="hljs-comment">/*语句级触发器,即执行完INSERT语句后下面的触发动作体才执行一次*/</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> StudentInsertLog(Numbers)<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> DELTA<br></code></pre></td></tr></table></figure>
-<p>在本例中出现的FOR EACH STATEMENT,表示触发事件INSERT语句执行完成后才执行一次触发器中的动作,这种触发器叫做语句级触发器,而例5.21中的触发器是行级触发器,默认的触发器是语句级触发器,DELTA是一个关系名,其模式于Student相同,包含的元组是INSERT语句增加的元组</p>
-<p><strong>[例5.23]</strong>:定义一个BEFORE行级触发器,为教师表Teacher定义完整性规则&quot;教授的工资不得低于4000元,如果低于4000元,自动改为4000元&quot;</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Insert_Or_Update_Sal<span class="hljs-comment">/*对教师表插入或更新时激活触发器*/</span><br>BEFORE <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">OR</span> UPDATE <span class="hljs-keyword">ON</span> Teacher<span class="hljs-comment">/*BEFORE触发事件*/</span><br><span class="hljs-keyword">REFERENCING</span><br> <span class="hljs-keyword">NEW</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span> newTuple<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span>    <span class="hljs-comment">/*这是行级触发器*/</span><br><span class="hljs-keyword">BEGIN</span>       <span class="hljs-comment">/*定义触发动作体,这是一个PL/SQL过程块*/</span><br> IF(newTuple.Job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;教授&#x27;</span>) <span class="hljs-keyword">AND</span> (newTuple.Sal<span class="hljs-operator">&lt;</span><span class="hljs-number">4000</span>)<span class="hljs-comment">/*因为时行级触发器,可在过程体中*/</span><br>     <span class="hljs-keyword">THEN</span> newTuple.Sal<span class="hljs-operator">=</span><span class="hljs-number">4000</span>;<span class="hljs-comment">/*使用插入或更新操作后的新值*/</span><br> <span class="hljs-keyword">END</span> IF;<br><span class="hljs-keyword">END</span>; <span class="hljs-comment">/*触发动作体结束*/</span><br></code></pre></td></tr></table></figure>
-<p>因为定义的是BEFORE触发器,在插入和更新教师记录前就可以按照触发器的规则调整教授工资,不必等插入后再检查再调整</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Student_Count<br>AFTER <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">ON</span> Student <span class="hljs-comment">/*指明触发器激活的时间是在执行INSERT后*/</span><br><span class="hljs-keyword">REFERENCING</span><br><span class="hljs-keyword">NEW</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">AS</span> DELTA<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> STATEMENT <span class="hljs-comment">/*语句级触发器，即执行完INSERT语句后下面的触发动作体才执行一次*/</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> StudentInsertLog(Numbers)<br><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> DELTA<br></code></pre></td></tr></table></figure>
+<p>在本例中出现的FOR EACH STATEMENT,表示触发事件INSERT语句执行完成后才执行一次触发器中的动作，这种触发器叫做语句级触发器，而例5.21中的触发器是行级触发器，默认的触发器是语句级触发器,DELTA是一个关系名，其模式于Student相同，包含的元组是INSERT语句增加的元组</p>
+<p><strong>[例5.23]</strong>:定义一个BEFORE行级触发器，为教师表Teacher定义完整性规则&quot;教授的工资不得低于4000元，如果低于4000元，自动改为4000元&quot;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TRIGGER</span> Insert_Or_Update_Sal<span class="hljs-comment">/*对教师表插入或更新时激活触发器*/</span><br>BEFORE <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">OR</span> UPDATE <span class="hljs-keyword">ON</span> Teacher<span class="hljs-comment">/*BEFORE触发事件*/</span><br><span class="hljs-keyword">REFERENCING</span><br> <span class="hljs-keyword">NEW</span> <span class="hljs-type">ROW</span> <span class="hljs-keyword">AS</span> newTuple<br><span class="hljs-keyword">FOR</span> <span class="hljs-keyword">EACH</span> <span class="hljs-type">ROW</span>    <span class="hljs-comment">/*这是行级触发器*/</span><br><span class="hljs-keyword">BEGIN</span>       <span class="hljs-comment">/*定义触发动作体，这是一个PL/SQL过程块*/</span><br> IF(newTuple.Job<span class="hljs-operator">=</span><span class="hljs-string">&#x27;教授&#x27;</span>) <span class="hljs-keyword">AND</span> (newTuple.Sal<span class="hljs-operator">&lt;</span><span class="hljs-number">4000</span>)<span class="hljs-comment">/*因为时行级触发器，可在过程体中*/</span><br>     <span class="hljs-keyword">THEN</span> newTuple.Sal<span class="hljs-operator">=</span><span class="hljs-number">4000</span>;<span class="hljs-comment">/*使用插入或更新操作后的新值*/</span><br> <span class="hljs-keyword">END</span> IF;<br><span class="hljs-keyword">END</span>; <span class="hljs-comment">/*触发动作体结束*/</span><br></code></pre></td></tr></table></figure>
+<p>因为定义的是BEFORE触发器，在插入和更新教师记录前就可以按照触发器的规则调整教授工资，不必等插入后再检查再调整</p>
 <h2 id="激活触发器">激活触发器</h2>
 <ul>
-<li>触发器的执行是由触发事件激活,并由数据库服务器自动执行的,一个数据表上可能定义了多个触发器,如多个BEFORE触发器,多个AFTER触发器等,同一个表上的多个触发器激活时遵循如下的执行顺序:
+<li>触发器的执行是由触发事件激活，并由数据库服务器自动执行的，一个数据表上可能定义了多个触发器，如多个BEFORE触发器，多个AFTER触发器等，同一个表上的多个触发器激活时遵循如下的执行顺序:
 <ul>
 <li>执行该表上的BEFORE触发器</li>
 <li>激活触发器的SQL语句</li>
 <li>执行该表上的AFTER触发器</li>
 </ul>
 </li>
-<li>对于同一个表上的多个BEFORE(AFTER)触发器,遵循&quot;谁先创建谁先执行&quot;的原则,即按照触发器创建的时间先后顺序执行,有些关系数据库管理系统是按照触发器名称的字母排序顺序执行触发器</li>
+<li>对于同一个表上的多个BEFORE(AFTER)触发器，遵循&quot;谁先创建谁先执行&quot;的原则，即按照触发器创建的时间先后顺序执行，有些关系数据库管理系统是按照触发器名称的字母排序顺序执行触发器</li>
 </ul>
 <h2 id="删除触发器">删除触发器</h2>
 <ul>
@@ -313,8 +313,8 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TRIGGER</span> <span class="hljs-operator">&lt;</span>触发器名<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">ON</span> <span class="hljs-operator">&lt;</span>表名<span class="hljs-operator">&gt;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>被删除的触发器必须是一个已经创建的触发器,并且只能由具体相应权限的用户删除</li>
-<li>触发器是一种功能强大的工具,但在使用时要慎重,因为再每次访问一个表时都可能触发一个触发器,这样会影响系统的性能</li>
+<li>被删除的触发器必须是一个已经创建的触发器，并且只能由具体相应权限的用户删除</li>
+<li>触发器是一种功能强大的工具，但在使用时要慎重，因为再每次访问一个表时都可能触发一个触发器，这样会影响系统的性能</li>
 </ul>
 
             </div>
@@ -351,9 +351,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E7%BA%A6%E6%9D%9F/%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7/">
+                      <a href="/Software/BackEnd/Distributed/Dubbo/%E6%9C%AC%E5%9C%B0%E5%AD%98%E6%A0%B9/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 参照完整性</span>
+                        <span class="hidden-mobile">Dubbo 本地存根</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="PHP PDF文字 文字是一个PDF文档的核心，所以,FPDF提供了很多选项来改变文字外观和布局，本节中，我们将讨论PDF文档所用的坐标系统和用来插入文字，改变文字属性及字体的相关函数 坐标系 FPDF库指定的PDF文档坐标原点(0,0)位于页面的左上角，度量单位为磅(point),毫米(millimeter),英寸(inche)或厘米(centimeter),一磅（默认单位）等于1&#x2F;72英寸，或">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-19T15:57:00.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.276Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.211Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.134Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-19 23:57" pubdate>
-        2021年2月19日 晚上
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -256,7 +256,7 @@
 <p>在示例10-2中，我们还用了<code>ln()</code>函数来设置行跳转，指定我们从什么位置开始继续处理文档,<code>ln()</code>方法有一个可选的参数，指定了下移多少个单位（单位即我们在构造函数中指定的度量单位),在我们的例子中，度量单位为英寸，所以我们下移的单位为英寸,<code>cell()</code>方法的坐标系也用英寸来表示，用英寸为单位不是一个理想的创建PDF页面的方法，因为无法随心所欲地控制页面（英寸单位太大，无法精细控制页面，不易设计较精致的效果)</p>
 <p>示例10-2在页面的角落和中央放置文字:</p>
 <p><strong>示例10-2</strong>:演示坐标和行控制</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-keyword">require</span>(<span class="hljs-string">&quot;../../../../library/FPDF/fpdf.php&quot;</span>);<br><span class="hljs-variable">$pdf</span> = <span class="hljs-keyword">new</span> FPDF(<span class="hljs-string">&#x27;P&#x27;</span>,<span class="hljs-string">&#x27;in&#x27;</span>,<span class="hljs-string">&#x27;Letter&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;AddPage();<br><span class="hljs-variable">$pdf</span>-&gt;SetFont(<span class="hljs-string">&#x27;Arial&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-number">24</span>);<br><span class="hljs-comment">//cell(宽，高,文字，边框，返回，对齐方式)--基本语法</span><br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Top left!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;L&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">6</span>,<span class="hljs-number">0.5</span>,<span class="hljs-string">&#x27;Top right!&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;R&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;ln(<span class="hljs-number">4.5</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;This is the middle!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;C&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;ln(<span class="hljs-number">5.3</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Bottom Left!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;L&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Bottom Right!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;R&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Output();<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>    <span class="hljs-keyword">require</span>(<span class="hljs-string">&quot;../../../../library/FPDF/fpdf.php&quot;</span>);<br><span class="hljs-variable">$pdf</span> = <span class="hljs-keyword">new</span> FPDF(<span class="hljs-string">&#x27;P&#x27;</span>,<span class="hljs-string">&#x27;in&#x27;</span>,<span class="hljs-string">&#x27;Letter&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;AddPage();<br><span class="hljs-variable">$pdf</span>-&gt;SetFont(<span class="hljs-string">&#x27;Arial&#x27;</span>,<span class="hljs-string">&#x27;B&#x27;</span>,<span class="hljs-number">24</span>);<br><span class="hljs-comment">//cell(宽，高，文字，边框，返回，对齐方式)--基本语法</span><br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Top left!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;L&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">6</span>,<span class="hljs-number">0.5</span>,<span class="hljs-string">&#x27;Top right!&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;R&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;ln(<span class="hljs-number">4.5</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;This is the middle!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;C&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;ln(<span class="hljs-number">5.3</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Bottom Left!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;L&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Bottom Right!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;R&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Output();<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <p>我们来简单分析部分代码，在我们用构造函数定义页面后，有这样几行代码:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;Top left!&#x27;</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;L&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;Cell(<span class="hljs-number">6</span>,<span class="hljs-number">0.5</span>,<span class="hljs-string">&#x27;Top right!&#x27;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;R&#x27;</span>);<br><span class="hljs-variable">$pdf</span>-&gt;ln(<span class="hljs-number">4.5</span>);<br></code></pre></td></tr></table></figure>
 <p>第一行告诉PDF类在坐标系原点(0,0)写上文字&quot;Top Left”,没有边框，并在输出结束后发送一个换行，文字同时也被设置成左对齐，接下来的再次调用<code>cell()</code>方法是再次创建一个单元格,6英寸宽，高为0.5英寸，宽度为1的边框，并插入右对齐的文字&quot;Top Right!”,然后我们用<code>ln(4.5)</code>语句告诉PDF类在页面上下移4.5英寸，从该位置开始继续输出内容，正如你看到的，组合<code>cell()</code>和<code>ln()</code>方法可以形成很多用法，但这些还不是FPDF的全部功能</p>
@@ -332,9 +332,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/PHP/PDF/%E6%96%87%E6%A1%A3%E5%92%8C%E9%A1%B5%E9%9D%A2/">
+                      <a href="/Software/Language/Markdown/%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PHP PDF文档与页面</span>
+                        <span class="hidden-mobile">Markdown 高级用法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -342,8 +342,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Java/JavaEE/Servlet/%E6%B3%A8%E8%A7%A3/">
-                        <span class="hidden-mobile">Servlet 常用注解</span>
+                      <a href="/Software/Language/Markdown/%E5%88%97%E8%A1%A8/">
+                        <span class="hidden-mobile">Markdown 列表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

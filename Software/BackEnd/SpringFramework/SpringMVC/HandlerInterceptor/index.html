@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能 过滤器  servlet规范中的一部分，任何java web工程都可以使用 在url-pattern中配置了&#x2F;*之后，可以对所有要访问的资源进行拦截   拦截器  拦截器是Spring MVC框架自己的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-15T10:45:41.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.178Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:19.925Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-15 18:45" pubdate>
-        2021年12月15日 晚上
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -240,7 +240,7 @@
 <li><strong>拦截器</strong>
 <ul>
 <li>拦截器是Spring MVC框架自己的，只有使用了Spring MVC框架的工程才能使用</li>
-<li>拦截器只会拦截访问的控制器方法, 如果访问的是<code>jsp/html/css/image/js</code>是不会进行拦截的</li>
+<li>拦截器只会拦截访问的控制器方法，如果访问的是<code>jsp/html/css/image/js</code>是不会进行拦截的</li>
 </ul>
 </li>
 <li><strong>过滤器与拦截器的区别</strong>:拦截器是AOP思想的具体应用</li>
@@ -254,7 +254,7 @@
 <ul>
 <li><strong>Spring</strong></li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--关于拦截器的配置--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mvc:interceptors</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mvc:interceptor</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--/** 包括路径及其子路径--&gt;</span><br>        <span class="hljs-comment">&lt;!--/admin/* 拦截的是/admin/add等等这种 , /admin/add/user不会被拦截--&gt;</span><br>        <span class="hljs-comment">&lt;!--/admin/** 拦截的是/admin/下的所有--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">mvc:mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/**&quot;</span>/&gt;</span><br>        <span class="hljs-comment">&lt;!--bean配置的就是拦截器--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.interceptor.MyInterceptor&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mvc:interceptor</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!--可以通过这种配置方式指定拦截器的映射类, 但是默认拦截所有请求--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handlerInterceptor1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.briup.web.interceptor.MyInterceptor1&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;interceptors&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">ref</span> <span class="hljs-attr">bean</span>=<span class="hljs-string">&quot;handlerInterceptor1&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">mvc:interceptors</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--关于拦截器的配置--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mvc:interceptors</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mvc:interceptor</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--/** 包括路径及其子路径--&gt;</span><br>        <span class="hljs-comment">&lt;!--/admin/* 拦截的是/admin/add等等这种 , /admin/add/user不会被拦截--&gt;</span><br>        <span class="hljs-comment">&lt;!--/admin/** 拦截的是/admin/下的所有--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">mvc:mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;/**&quot;</span>/&gt;</span><br>        <span class="hljs-comment">&lt;!--bean配置的就是拦截器--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.interceptor.MyInterceptor&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mvc:interceptor</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!--可以通过这种配置方式指定拦截器的映射类，但是默认拦截所有请求--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;handlerInterceptor1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.briup.web.interceptor.MyInterceptor1&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;interceptors&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">ref</span> <span class="hljs-attr">bean</span>=<span class="hljs-string">&quot;handlerInterceptor1&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">mvc:interceptors</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p><strong>SpringBoot</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoMvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;<br>        registry.addInterceptor(<span class="hljs-keyword">new</span> DemoLoginHandlerInterceptor()).addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>).excludePathPatterns(<span class="hljs-string">&quot;/index.html&quot;</span>,<span class="hljs-string">&quot;/user/login&quot;</span>,<span class="hljs-string">&quot;/css/**&quot;</span>,<span class="hljs-string">&quot;/js/**&quot;</span>,<span class="hljs-string">&quot;/img/**&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="实例">实例</h2>
@@ -265,7 +265,7 @@
 <ul>
 <li>有一个登陆页面，需要写一个controller访问页面</li>
 <li>登陆页面有一提交表单的动作，需要在controller中处理，判断用户名密码是否正确，如果正确，向session中写入用户信息，返回登陆成功</li>
-<li>拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行, 如果用户未登陆，跳转到登陆页面</li>
+<li>拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行，如果用户未登陆，跳转到登陆页面</li>
 </ul>
 <p><strong>测试</strong>:</p>
 <ol>
@@ -321,9 +321,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/SpringMVC/HandleAdaptor/">
+                      <a href="/Software/BackEnd/SpringFramework/SpringMVC/Controller/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring MVC 处理器适配器</span>
+                        <span class="hidden-mobile">Spring MVC 控制器</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -331,8 +331,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/SpringFramework/Spring/Thymeleaf/">
-                        <span class="hidden-mobile">Spring 整合Thymeleaf</span>
+                      <a href="/Software/BackEnd/SpringFramework/SpringMVC/ModelAndView/">
+                        <span class="hidden-mobile">Spring MVC ModelAndView</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

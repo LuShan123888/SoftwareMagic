@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Hadoop 初始化 绪论  使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark 集群共有5台机器, 主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave JDK 1.8 Scala 2.11">
+  <meta name="description" content="Hadoop 初始化 绪论  使用Docker搭建Hadoop技术平台，包括安装Docker, Java, Scala, Hadoop, Hbase, Spark 集群共有5台机器，主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave JDK 1.8 Scala 2.11.6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop 初始化">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/Hadoop/%E5%88%9D%E5%A7%8B%E5%8C%96/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Hadoop 初始化 绪论  使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark 集群共有5台机器, 主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave JDK 1.8 Scala 2.11">
+<meta property="og:description" content="Hadoop 初始化 绪论  使用Docker搭建Hadoop技术平台，包括安装Docker, Java, Scala, Hadoop, Hbase, Spark 集群共有5台机器，主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave JDK 1.8 Scala 2.11.6">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-15T06:55:49.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.046Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.575Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.117Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-15 14:55" pubdate>
-        2022年3月15日 下午
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -230,8 +230,8 @@
               <h1>Hadoop 初始化</h1>
 <h2 id="绪论">绪论</h2>
 <ul>
-<li>使用Docker搭建Hadoop技术平台, 包括安装Docker, Java, Scala, Hadoop, Hbase, Spark</li>
-<li>集群共有5台机器, 主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave</li>
+<li>使用Docker搭建Hadoop技术平台，包括安装Docker, Java, Scala, Hadoop, Hbase, Spark</li>
+<li>集群共有5台机器，主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05,其中 hadoop01 为 master, 其他的为 slave</li>
 <li>JDK 1.8</li>
 <li>Scala 2.11.6</li>
 <li>Hadoop 3.2.1</li>
@@ -241,12 +241,12 @@
 <h2 id="准备工作">准备工作</h2>
 <h3 id="配置Docker">配置Docker</h3>
 <ul>
-<li>现在的 Docker 网络能够提供 DNS 解析功能, 我们可以使用如下命令为接下来的 Hadoop 集群单独构建一个虚拟的网络</li>
+<li>现在的 Docker 网络能够提供 DNS 解析功能，我们可以使用如下命令为接下来的 Hadoop 集群单独构建一个虚拟的网络</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker network create --driver=bridge hadoop<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以上命令创建了一个名为 Hadoop 的虚拟桥接网络, 该虚拟网络内部提供了自动的DNS解析服务</li>
-<li>使用下面这个命令查看 Docker 中的网络, 可以看到刚刚创建的名为 <code>hadoop</code> 的虚拟桥接网络</li>
+<li>以上命令创建了一个名为 Hadoop 的虚拟桥接网络，该虚拟网络内部提供了自动的DNS解析服务</li>
+<li>使用下面这个命令查看 Docker 中的网络，可以看到刚刚创建的名为 <code>hadoop</code> 的虚拟桥接网络</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker network ls<br><br>NETWORK ID          NAME                DRIVER              SCOPE<br>06548c9440f8        bridge              bridge              <span class="hljs-built_in">local</span><br>b21dba8dc351        hadoop              bridge              <span class="hljs-built_in">local</span><br>eb48a64969d1        host                host                    <span class="hljs-built_in">local</span><br>3e8c9d771ec8        none                null                     <span class="hljs-built_in">local</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -281,7 +281,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ apt install net-tools<br></code></pre></td></tr></table></figure>
 <h3 id="安装-SSH">安装 SSH</h3>
 <ul>
-<li>安装 SSH, 并配置免密登录, 由于后面的容器之间是由一个镜像启动的, 就像同一个磨具出来的 5 把锁与钥匙, 可以互相开锁，所以在当前容器里配置 SSH 自身免密登录就 OK 了</li>
+<li>安装 SSH, 并配置免密登录，由于后面的容器之间是由一个镜像启动的，就像同一个磨具出来的 5 把锁与钥匙，可以互相开锁，所以在当前容器里配置 SSH 自身免密登录就 OK 了</li>
 <li>安装 SSH</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ apt-get install openssh-server<br></code></pre></td></tr></table></figure>
@@ -290,7 +290,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ apt-get install openssh-client<br></code></pre></td></tr></table></figure>
 <ul>
-<li>生成密钥, 不用输入, 一直回车就行, 生成的密钥在当前用户根目录下的 <code>.ssh</code> 文件夹中</li>
+<li>生成密钥，不用输入，一直回车就行，生成的密钥在当前用户根目录下的 <code>.ssh</code> 文件夹中</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> ~<br>$ ssh-keygen -t rsa -P <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -306,7 +306,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ssh 127.0.0.1<br><br>Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.15.0-45-generic x86_64)<br><br> * Documentation:  https://help.ubuntu.com<br> * Management:     https://landscape.canonical.com<br> * Support:        https://ubuntu.com/advantage<br>Last login: Tue Mar 19 07:46:14 2019 from 127.0.0.1<br></code></pre></td></tr></table></figure>
 <ul>
-<li>修改 <code>~/.bashrc</code> 文件, 启动 shell 的时候, 自动启动 SSH 服务</li>
+<li>修改 <code>~/.bashrc</code> 文件，启动 shell 的时候，自动启动 SSH 服务</li>
 <li>用 vim 打开 <code>~/.bashrc</code> 文件</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ vim ~/.bashrc<br></code></pre></td></tr></table></figure>
@@ -323,7 +323,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ tar -zxvf hadoop-3.2.1.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br>$ <span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/<br>$ mv hadoop-3.2.1 hadoop<br></code></pre></td></tr></table></figure>
 <h3 id="修改配置文件">修改配置文件</h3>
 <ul>
-<li>修改 <code>/etc/profile</code> 文件, 添加一下环境变量到文件中</li>
+<li>修改 <code>/etc/profile</code> 文件，添加一下环境变量到文件中</li>
 <li>先用 vim 打开 <code>/etc/profile</code></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ vim /etc/profile<br></code></pre></td></tr></table></figure>
@@ -331,7 +331,7 @@
 <li>追加以下内容</li>
 </ul>
 <blockquote>
-<p>JAVA_HOME 为 JDK 安装路径, 使用 apt 安装就是这个, 用 <code>update-alternatives --config java</code> 可查看</p>
+<p>JAVA_HOME 为 JDK 安装路径，使用 apt 安装就是这个，用 <code>update-alternatives --config java</code> 可查看</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#java</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openJDK-amd64<br><span class="hljs-built_in">export</span> JRE_HOME=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/jre<br><span class="hljs-built_in">export</span> CLASSPATH=.:<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/lib:<span class="hljs-variable">$&#123;JRE_HOME&#125;</span>/lib<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-comment">#hadoop</span><br><span class="hljs-built_in">export</span> HADOOP_HOME=/usr/<span class="hljs-built_in">local</span>/hadoop<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">export</span> HADOOP_COMMON_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_HDFS_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_MAPRED_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_YARN_HOME=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_INSTALL=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/lib/native<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_HOME</span><br><span class="hljs-built_in">export</span> HADOOP_LIBEXEC_DIR=<span class="hljs-variable">$HADOOP_HOME</span>/libexec<br><span class="hljs-built_in">export</span> JAVA_LIBRARY_PATH=<span class="hljs-variable">$HADOOP_HOME</span>/lib/native:<span class="hljs-variable">$JAVA_LIBRARY_PATH</span><br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=<span class="hljs-variable">$HADOOP_PREFIX</span>/etc/hadoop<br><span class="hljs-built_in">export</span> HDFS_DATANODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_DATANODE_SECURE_USER=root<br><span class="hljs-built_in">export</span> HDFS_SECONDARYNAMENODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_NAMENODE_USER=root<br><span class="hljs-built_in">export</span> YARN_RESOURCEMANAGER_USER=root<br><span class="hljs-built_in">export</span> YARN_NODEMANAGER_USER=root<br></code></pre></td></tr></table></figure>
 <ul>
@@ -340,7 +340,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <ul>
 <li>在目录 <code>/usr/local/hadoop/etc/hadoop</code> 下</li>
-<li>修改<code> hadoop-env.sh</code> 文件, 在文件末尾添加一下信息</li>
+<li>修改<code> hadoop-env.sh</code> 文件，在文件末尾添加一下信息</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64<br><span class="hljs-built_in">export</span> HDFS_NAMENODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_DATANODE_USER=root<br><span class="hljs-built_in">export</span> HDFS_SECONDARYNAMENODE_USER=root<br><span class="hljs-built_in">export</span> YARN_RESOURCEMANAGER_USER=root<br><span class="hljs-built_in">export</span> YARN_NODEMANAGER_USER=root<br></code></pre></td></tr></table></figure>
 <ul>
@@ -365,20 +365,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">hadoop01<br>hadoop02<br>hadoop03<br>hadoop04<br>hadoop05<br></code></pre></td></tr></table></figure>
 <h3 id="在-Docker-中启动集群">在 Docker 中启动集群</h3>
 <ul>
-<li>先将当前容器导出为镜像, 并查看当前镜像</li>
+<li>先将当前容器导出为镜像，并查看当前镜像</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker commit -m <span class="hljs-string">&quot;haddop&quot;</span> -a <span class="hljs-string">&quot;hadoop&quot;</span> temp-container lushan123888/hadoop:3.2.1<br></code></pre></td></tr></table></figure>
 <ul>
-<li>启动 5 个终端, 分别执行这几个命令</li>
+<li>启动 5 个终端，分别执行这几个命令</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker run -d --network hadoop -p 9870:9870 -p 8088:8088 \<br>--hostname <span class="hljs-string">&quot;hadoop01&quot;</span> \<br>--name <span class="hljs-string">&quot;hadoop01&quot;</span> \<br>lushan123888/hadoop:3.2.1 /bin/bash<br></code></pre></td></tr></table></figure>
 <ul>
-<li>第一条命令启动的是 <code>hadoop01</code> 是做 master 节点的, 所以暴露了端口, 以供访问 web 页面</li>
+<li>第一条命令启动的是 <code>hadoop01</code> 是做 master 节点的，所以暴露了端口，以供访问 web 页面</li>
 <li>其余的四条命令就是几乎一样的</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ docker run -d --network hadoop -h <span class="hljs-string">&quot;hadoop02&quot;</span> --name <span class="hljs-string">&quot;hadoop02&quot;</span> lushan123888/hadoop:3.2.1 /bin/bash<br>$ docker run -d --network hadoop -h <span class="hljs-string">&quot;hadoop03&quot;</span> --name <span class="hljs-string">&quot;hadoop03&quot;</span> lushan123888/hadoop:3.2.1 /bin/bash<br>$ docker run -d --network hadoop -h <span class="hljs-string">&quot;hadoop04&quot;</span> --name <span class="hljs-string">&quot;hadoop04&quot;</span> lushan123888/hadoop:3.2.1 /bin/bash<br>$ docker run -d --network hadoop -h <span class="hljs-string">&quot;hadoop05&quot;</span> --name <span class="hljs-string">&quot;hadoop05&quot;</span> lushan123888/hadoop:3.2.1 /bin/bash<br></code></pre></td></tr></table></figure>
 <ul>
-<li>接下来, 在 <code>hadoop01</code> 主机中, 启动 Haddop 集群</li>
+<li>接下来，在 <code>hadoop01</code> 主机中，启动 Haddop 集群</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker <span class="hljs-built_in">exec</span> -it hadoop01 /bin/bash</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -446,7 +446,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ tar -zxvf hbase-2.3.3-bin.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br></code></pre></td></tr></table></figure>
 <h3 id="修改配置文件-2">修改配置文件</h3>
 <ul>
-<li>修改 <code>/etc/profile</code> 环境变量文件, 添加 Hbase 的环境变量, 追加下述代码</li>
+<li>修改 <code>/etc/profile</code> 环境变量文件，添加 Hbase 的环境变量，追加下述代码</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> HBASE_HOME=/usr/<span class="hljs-built_in">local</span>/hbase-2.3.3<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HBASE_HOME</span>/bin<br></code></pre></td></tr></table></figure>
 <ul>
@@ -455,7 +455,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>使用 <code>ssh hadoop02</code> 可进入其他四个容器, 依次修改</p>
+<p>使用 <code>ssh hadoop02</code> 可进入其他四个容器，依次修改</p>
 </li>
 <li>
 <p>即是每个容器都要在 <code>/etc/profile</code> 文件后追加那两行环境变量</p>
@@ -505,7 +505,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/<br>$ mv spark-2.4.7-bin-hadoop2.7 spark-2.4.0<br></code></pre></td></tr></table></figure>
 <h3 id="修改配置文件-3">修改配置文件</h3>
 <ul>
-<li>修改 <code>/etc/profile</code> 环境变量文件, 添加 Hbase 的环境变量, 追加下述代码</li>
+<li>修改 <code>/etc/profile</code> 环境变量文件，添加 Hbase 的环境变量，追加下述代码</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> SPARK_HOME=/usr/<span class="hljs-built_in">local</span>/spark-2.4.0<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin<br></code></pre></td></tr></table></figure>
 <ul>
@@ -514,7 +514,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>使用 <code>ssh hadoop02</code> 可进入其他四个容器, 依次修改</p>
+<p>使用 <code>ssh hadoop02</code> 可进入其他四个容器，依次修改</p>
 </li>
 <li>
 <p>即是每个容器都要在 <code>/etc/profile</code> 文件后追加那两行环境变量</p>
@@ -551,7 +551,7 @@
 <p>参考 <code>https://blog.csdn.net/gis_101/article/details/52821946</code></p>
 </blockquote>
 <ul>
-<li>重新格式化意味着集群的数据会被全部删除, 格式化前需考虑数据备份或转移问题</li>
+<li>重新格式化意味着集群的数据会被全部删除，格式化前需考虑数据备份或转移问题</li>
 <li>先删除主节点（即namenode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容（注意是删除目录下的内容不是目录)</li>
 <li>删除所有数据节点（即datanode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容</li>
 <li>格式化一个新的分布式文件系统:</li>
@@ -559,8 +559,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ./hadoop namenode -format<br></code></pre></td></tr></table></figure>
 <p><strong>注意事项</strong></p>
 <ul>
-<li>Hadoop的临时存储目录tmp(即core-site.xml配置文件中的hadoop.tmp.dir属性, 默认值是/tmp/hadoop-${<a target="_blank" rel="noopener" href="http://user.name">user.name</a>}), 如果没有配置hadoop.tmp.dir属性, 那么hadoop格式化时将会在/tmp目录下创建一个目录, 例如在cloud用户下安装配置hadoop, 那么Hadoop的临时存储目录就位于/tmp/hadoop-cloud目录下</li>
-<li>Hadoop的namenode元数据目录（即hdfs-site.xml配置文件中的dfs.namenode.name.dir属性, 默认值是${hadoop.tmp.dir}/dfs/name), 同样如果没有配置该属性, 那么hadoop在格式化时将自行创建，必须注意的是在格式化前必须清楚所有子节点（即DataNode节点)dfs/name下的内容, 否则在启动hadoop时子节点的守护进程会启动失败，这是由于, 每一次format主节点namenode, dfs/name/current目录下的VERSION文件会产生新的clusterID, namespaceID,但是如果子节点的dfs/name/current仍存在, hadoop格式化时就不会重建该目录, 因此形成子节点的clusterID, namespaceID与主节点（即namenode节点）的clusterID, namespaceID不一致，最终导致hadoop启动失败</li>
+<li>Hadoop的临时存储目录tmp(即core-site.xml配置文件中的hadoop.tmp.dir属性，默认值是/tmp/hadoop-${<a target="_blank" rel="noopener" href="http://user.name">user.name</a>}), 如果没有配置hadoop.tmp.dir属性，那么hadoop格式化时将会在/tmp目录下创建一个目录，例如在cloud用户下安装配置hadoop, 那么Hadoop的临时存储目录就位于/tmp/hadoop-cloud目录下</li>
+<li>Hadoop的namenode元数据目录（即hdfs-site.xml配置文件中的dfs.namenode.name.dir属性，默认值是${hadoop.tmp.dir}/dfs/name), 同样如果没有配置该属性，那么hadoop在格式化时将自行创建，必须注意的是在格式化前必须清楚所有子节点（即DataNode节点)dfs/name下的内容，否则在启动hadoop时子节点的守护进程会启动失败，这是由于，每一次format主节点namenode, dfs/name/current目录下的VERSION文件会产生新的clusterID, namespaceID,但是如果子节点的dfs/name/current仍存在, hadoop格式化时就不会重建该目录，因此形成子节点的clusterID, namespaceID与主节点（即namenode节点）的clusterID, namespaceID不一致，最终导致hadoop启动失败</li>
 </ul>
 
             </div>
@@ -595,9 +595,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/DesignPattern/%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+                      <a href="/Software/BackEnd/Kafka/%E6%A6%82%E5%BF%B5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">设计模式迭代器模式</span>
+                        <span class="hidden-mobile">Kafka 概念</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -605,8 +605,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/DesignPattern/%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">设计模式代理模式</span>
+                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/MD5%E5%8A%A0%E5%AF%86/">
+                        <span class="hidden-mobile">SQL MD5</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

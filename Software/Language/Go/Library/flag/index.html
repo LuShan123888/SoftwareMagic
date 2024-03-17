@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="Go flag Go 语言内置的 flag 包实现了命令行参数的解析，flag 包使得开发命令行工具更为简单。 os. Args 如果只是简单的想要获取命令行参数，可以像下面的代码示例一样使用 os.Args 来获取命令行参数。 12345678910111213141516package mainimport (    &quot;fmt&quot;    &quot;os&quot;)&#x2F;&#x2F;os">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-17T04:26:10.000Z">
-<meta property="article:modified_time" content="2024-03-17T04:26:10.000Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.196Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.154Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-03-17 12:26" pubdate>
-        2024年3月17日 中午
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 中午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -272,11 +272,11 @@
 <h2 id="flag-Type-flag-TypeVar">flag.Type () &amp; flag.TypeVar ()</h2>
 <p>有以下两种常用的定义命令行 <code>flag</code> 参数的方法。</p>
 <h3 id="flag-Type">flag.Type ()</h3>
-<p>基本格式：<code>flag.Type(flag名, 默认值, 帮助信息)*Type</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
+<p>基本格式：<code>flag.Type(flag名，默认值，帮助信息)*Type</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">name := flag.String(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-string">&quot;姓名&quot;</span>)<br>age := flag.Int(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;年龄&quot;</span>)<br>married := flag.Bool(<span class="hljs-string">&quot;married&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-string">&quot;婚否&quot;</span>)<br>delay := flag.Duration(<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;时间间隔&quot;</span>)<br></code></pre></td></tr></table></figure>
 <p>需要注意的是，此时 <code>name</code>、<code>age</code>、<code>married</code>、<code>delay</code> 均为对应类型的指针。</p>
 <h3 id="flag-TypeVar">flag.TypeVar ()</h3>
-<p>基本格式如下： <code>flag.TypeVar(Type指针, flag名, 默认值, 帮助信息)</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
+<p>基本格式如下： <code>flag.TypeVar(Type指针, flag名，默认值，帮助信息)</code> 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> name <span class="hljs-keyword">string</span><br><span class="hljs-keyword">var</span> age <span class="hljs-keyword">int</span><br><span class="hljs-keyword">var</span> married <span class="hljs-keyword">bool</span><br><span class="hljs-keyword">var</span> delay time.Duration<br>flag.StringVar(&amp;name, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-string">&quot;姓名&quot;</span>)<br>flag.IntVar(&amp;age, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;年龄&quot;</span>)<br>flag.BoolVar(&amp;married, <span class="hljs-string">&quot;married&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-string">&quot;婚否&quot;</span>)<br>flag.DurationVar(&amp;delay, <span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;时间间隔&quot;</span>)<br></code></pre></td></tr></table></figure>
 <h2 id="flag-Parse">flag.Parse ()</h2>
 <p>通过以上两种方法定义好命令行 flag 参数后，需要通过调用 <code>flag.Parse()</code> 来对命令行参数进行解析。</p>
@@ -333,9 +333,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Go/Library/fmt/">
+                      <a href="/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Iterator&amp;ListIterator/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Go fmt</span>
+                        <span class="hidden-mobile">Java Iterator & ListLterator</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -343,8 +343,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Go/Library/context/">
-                        <span class="hidden-mobile">Go context</span>
+                      <a href="/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/Arrays/">
+                        <span class="hidden-mobile">Java Arrays</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

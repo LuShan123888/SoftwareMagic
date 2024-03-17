@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 参照完整性 定义参照完整性  关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码,用REFERENCES短语指明这些外码参照哪些表的主码 例如,关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码  [例5.3]:定义SC中的参照完整性 12345678">
+  <meta name="description" content="SQL 参照完整性 定义参照完整性  关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码，用REFERENCES短语指明这些外码参照哪些表的主码 例如，关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码  [例5.3]:定义SC中的参照完整性 12345678">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 参照完整性">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E7%BA%A6%E6%9D%9F/%E5%8F%82%E7%85%A7%E5%AE%8C%E6%95%B4%E6%80%A7/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 参照完整性 定义参照完整性  关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码,用REFERENCES短语指明这些外码参照哪些表的主码 例如,关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码  [例5.3]:定义SC中的参照完整性 12345678">
+<meta property="og:description" content="SQL 参照完整性 定义参照完整性  关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码，用REFERENCES短语指明这些外码参照哪些表的主码 例如，关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码  [例5.3]:定义SC中的参照完整性 12345678">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-11T05:40:13.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.174Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.568Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.108Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-11 13:40" pubdate>
-        2021年9月11日 下午
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -230,15 +230,15 @@
               <h1>SQL 参照完整性</h1>
 <h2 id="定义参照完整性">定义参照完整性</h2>
 <ul>
-<li>关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码,用REFERENCES短语指明这些外码参照哪些表的主码</li>
-<li>例如,关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码</li>
+<li>关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码，用REFERENCES短语指明这些外码参照哪些表的主码</li>
+<li>例如，关系SC中一个元组表示一个学生选修的某门课程的成绩,(Sno,Cno)是主码,Sno,Cno分别参照引用Student表的主码和Course表的主码</li>
 </ul>
 <p><strong>[例5.3]</strong>:定义SC中的参照完整性</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span>  <span class="hljs-keyword">TABLE</span> SC<br> (<br>     Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>     Grade <span class="hljs-type">SMALLINT</span>,<br>     <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno),      <span class="hljs-comment">/*在表级定义实体完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno),<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>     <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>);<br></code></pre></td></tr></table></figure>
 <h2 id="参照完整性检查和违约处理">参照完整性检查和违约处理</h2>
 <ul>
-<li>参照完整性将两个表中的相应元素联系起来了,因此,对被参照表和参照表进行增,删,改操作时有可能破坏参照完整性,必须进行检查以保证这两个表的相容性</li>
-<li>例如,对表SC和Student有4种可能破坏参照完整性的情况,如下表所示:</li>
+<li>参照完整性将两个表中的相应元素联系起来了，因此，对被参照表和参照表进行增，删,改操作时有可能破坏参照完整性，必须进行检查以保证这两个表的相容性</li>
+<li>例如，对表SC和Student有4种可能破坏参照完整性的情况，如下表所示:</li>
 </ul>
 <table>
 <thead>
@@ -272,44 +272,44 @@
 </tbody>
 </table>
 <ul>
-<li>SC表中增加一个元组,该元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
-<li>修改SC表中的一个元组,修改后该元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
-<li>从Student表中删除一个元组,造成SC表中某些元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
-<li>修改Student表中一个元组的Sno属性,造成SC表中某些元组的Sno属性值在表Student中找不到一个元组,其Sno属性值与之相等</li>
-<li>当上述的不一致发生时,系统可以采用以下策略加以处理
+<li>SC表中增加一个元组，该元组的Sno属性值在表Student中找不到一个元组，其Sno属性值与之相等</li>
+<li>修改SC表中的一个元组，修改后该元组的Sno属性值在表Student中找不到一个元组，其Sno属性值与之相等</li>
+<li>从Student表中删除一个元组，造成SC表中某些元组的Sno属性值在表Student中找不到一个元组，其Sno属性值与之相等</li>
+<li>修改Student表中一个元组的Sno属性，造成SC表中某些元组的Sno属性值在表Student中找不到一个元组，其Sno属性值与之相等</li>
+<li>当上述的不一致发生时，系统可以采用以下策略加以处理
 <ul>
 <li>拒绝(NO ACTION)执行
 <ul>
-<li>不允许该操作执行,该策略一般设置为默认策略</li>
+<li>不允许该操作执行，该策略一般设置为默认策略</li>
 </ul>
 </li>
 <li>级联(CASCADE)操作
 <ul>
-<li>当删除或修改被参照表(Student)的一个元组导致与参照表(SC)的不一致时,删除或修改参照表中的所有道义不一致的元组</li>
-<li>例如,删除Student表中Sno值为&quot;201215121&quot;的元组,则从要SC表中级联删除SC.Sno='201215121’的所有元组</li>
+<li>当删除或修改被参照表(Student)的一个元组导致与参照表(SC)的不一致时，删除或修改参照表中的所有道义不一致的元组</li>
+<li>例如，删除Student表中Sno值为&quot;201215121&quot;的元组，则从要SC表中级联删除SC.Sno='201215121’的所有元组</li>
 </ul>
 </li>
 <li>设置为空值
 <ul>
-<li>当删除或修改被参照表的一个元组时造成了不一致,则将参照表中的所有造成不一致的元组的对应属性设置为空值,例如,有下面两个关系:</li>
-<li>学生(<u>学号</u>,姓名,性别,专业号,年龄)</li>
+<li>当删除或修改被参照表的一个元组时造成了不一致，则将参照表中的所有造成不一致的元组的对应属性设置为空值，例如，有下面两个关系:</li>
+<li>学生(<u>学号</u>,姓名，性别，专业号，年龄)</li>
 <li>专业(<u>专业号</u>,专业名)</li>
-<li>其中学生关系的&quot;专业号&quot;是外码,因为专业号是专业关系的主码</li>
-<li>假设专业表中的某个元组被删除,专业号为12,按照设置为空值的策略,就要把学生表中专业号=12的所有元组的专业号设置为空值,这对应了这样的语义：某个专业删除了,该专业的所有学生专业未定,等待重新分配专业</li>
+<li>其中学生关系的&quot;专业号&quot;是外码，因为专业号是专业关系的主码</li>
+<li>假设专业表中的某个元组被删除，专业号为12,按照设置为空值的策略，就要把学生表中专业号=12的所有元组的专业号设置为空值，这对应了这样的语义：某个专业删除了，该专业的所有学生专业未定，等待重新分配专业</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>这里讲解一下外码能否接收空值的问题</li>
-<li>例如,学生表中&quot;专业号&quot;是外码,按照应用的实际情况可以取空值,表示这个学生的专业尚未确定,但在学生----选课数据库中,关系Student为被参照关系,其主码为Sno,SC为参照关系,Sno为外码,它能否取空值呢?答案是否定的,因为Sno为SC的主属性,按照实体完整性Sno不能为空值,若SC的Sno为空值,则表明尚不存在的某个学生,或按照实体完整性Sno不能为空值,若SC的Sno为空值,则表明尚不存在的某个学生,或者某个不知学号的学生,选修了某门课程,其成绩记录在Grade列中,这与学校的应用环境是不相符的,因此SC的Sno列不能取空值,同样SC的Cno是外码,也是SC的主属性,也不能取空值</li>
-<li>因此对于参照完整性,除了应该定义外码,还应定义外码列是否允许空值</li>
-<li>一般地,当对参照表和被参照表的操作违反了参照完整性时,系统选用默认策略,即拒绝执行,如果想让系统采用其他策略则必须在创建参照表时显式地加以说明</li>
+<li>例如，学生表中&quot;专业号&quot;是外码，按照应用的实际情况可以取空值，表示这个学生的专业尚未确定，但在学生----选课数据库中，关系Student为被参照关系，其主码为Sno,SC为参照关系,Sno为外码，它能否取空值呢?答案是否定的，因为Sno为SC的主属性，按照实体完整性Sno不能为空值，若SC的Sno为空值，则表明尚不存在的某个学生，或按照实体完整性Sno不能为空值，若SC的Sno为空值，则表明尚不存在的某个学生，或者某个不知学号的学生，选修了某门课程，其成绩记录在Grade列中，这与学校的应用环境是不相符的，因此SC的Sno列不能取空值，同样SC的Cno是外码，也是SC的主属性，也不能取空值</li>
+<li>因此对于参照完整性，除了应该定义外码，还应定义外码列是否允许空值</li>
+<li>一般地，当对参照表和被参照表的操作违反了参照完整性时，系统选用默认策略，即拒绝执行，如果想让系统采用其他策略则必须在创建参照表时显式地加以说明</li>
 </ul>
 <p><strong>[例5.4]</strong>:显式说明参照完整性的违约处理示例</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>     (<br>         Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br>         Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>         Grade <span class="hljs-type">SMALLINT</span>,<br>         <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno),<span class="hljs-comment">/*在表级定义实体完整性,Sno,Cno都不能取空值*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span>  <span class="hljs-keyword">DELETE</span> CASCADE <span class="hljs-comment">/*当删除Student表中的元组时,级联删除SC表中相应元组*/</span><br>             <span class="hljs-keyword">ON</span>  UPDATE  CASCADE ,<span class="hljs-comment">/*当更新Student表中的sno时,级联更新SC表中的相应的元组*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">NO</span> ACTION <span class="hljs-comment">/*当删除Course表中的元组造成与SC表不一致时,拒绝删除*/</span><br>             <span class="hljs-keyword">ON</span> UPDATE  CASCADE <span class="hljs-comment">/*当更新Course表中的Cno时,级联更新SC表中相应的元组*/</span><br>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>     (<br>         Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br>         Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>         Grade <span class="hljs-type">SMALLINT</span>,<br>         <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno),<span class="hljs-comment">/*在表级定义实体完整性,Sno,Cno都不能取空值*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span>  <span class="hljs-keyword">DELETE</span> CASCADE <span class="hljs-comment">/*当删除Student表中的元组时，级联删除SC表中相应元组*/</span><br>             <span class="hljs-keyword">ON</span>  UPDATE  CASCADE ,<span class="hljs-comment">/*当更新Student表中的sno时，级联更新SC表中的相应的元组*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">NO</span> ACTION <span class="hljs-comment">/*当删除Course表中的元组造成与SC表不一致时，拒绝删除*/</span><br>             <span class="hljs-keyword">ON</span> UPDATE  CASCADE <span class="hljs-comment">/*当更新Course表中的Cno时，级联更新SC表中相应的元组*/</span><br>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以对DELETE和UPDATE采用不同的策略,例如,例5.4中当删除被参照表Course表中的元组,造成与参照表(SC表）不一致时,拒绝删除被参照表的元组,对更新操作则采取级联更新的策略</li>
-<li>从上面的讨论可以看到,关系数据库管理系统在实现参照完整性时,除了要提供定义主码,外码的机制外,还需要提供不同的策略供用户选择,具体选择哪种策略,要根据应用环境的要求确定</li>
+<li>可以对DELETE和UPDATE采用不同的策略，例如，例5.4中当删除被参照表Course表中的元组，造成与参照表(SC表）不一致时，拒绝删除被参照表的元组，对更新操作则采取级联更新的策略</li>
+<li>从上面的讨论可以看到，关系数据库管理系统在实现参照完整性时，除了要提供定义主码，外码的机制外，还需要提供不同的策略供用户选择，具体选择哪种策略，要根据应用环境的要求确定</li>
 </ul>
 
             </div>
@@ -348,9 +348,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E7%BA%A6%E6%9D%9F/%E5%9F%9F%E4%B8%AD%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E9%99%90%E5%88%B6/">
+                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E7%B4%A2%E5%BC%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 域中的完整性限制</span>
+                        <span class="hidden-mobile">SQL 索引</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +358,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E8%A7%A6%E5%8F%91%E5%99%A8/">
-                        <span class="hidden-mobile">SQL 触发器</span>
+                      <a href="/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">SQL 模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

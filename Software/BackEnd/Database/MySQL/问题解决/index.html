@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="SoftwareMagic">
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-15T17:25:05.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.170Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.101Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-09-16 01:25" pubdate>
-        2023年9月16日 凌晨
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -240,7 +240,7 @@
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.jackson.time-zone</span>=<span class="hljs-string">GMT+8</span><br></code></pre></td></tr></table></figure>
 <ol start="3">
-<li>如果需要使用数据库关于时间的函数,需要修改配置文件<code>/etc/mysql/my.cnf</code></li>
+<li>如果需要使用数据库关于时间的函数，需要修改配置文件<code>/etc/mysql/my.cnf</code></li>
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">default-time-zone</span> = <span class="hljs-string">&quot;+08:00&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="Host-is-blocked">Host is blocked</h2>
@@ -249,7 +249,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">FLUSH HOSTS;<br></code></pre></td></tr></table></figure>
 <h2 id="认证失败">认证失败</h2>
 <p><strong>报错信息</strong>:MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found</p>
-<p><strong>原因</strong>:有关<code>caching_sha2_password</code> 报错的问题,MySQL 8.0 默认认证方式改为 SHA2 了,如果不支持 SHA2 插件认证方式,那么就会报错</p>
+<p><strong>原因</strong>:有关<code>caching_sha2_password</code> 报错的问题,MySQL 8.0 默认认证方式改为 SHA2 了，如果不支持 SHA2 插件认证方式，那么就会报错</p>
 <p><strong>解决方法</strong></p>
 <ul>
 <li><strong>修改密码认证方式</strong></li>
@@ -268,7 +268,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET host = &#x27;%&#x27; WHERE user = &#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
 <p><strong>报错信息</strong>:在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
-<p><strong>原因</strong>:如果用户使用了 sha256_password 认证,密码在传输过程中必须使用 TLS 协议保护,但是如果 RSA 公钥不可用,可以使用服务器提供的公钥,可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥,或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥,但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码,所以默认是关闭的,必须显式开启</p>
+<p><strong>原因</strong>:如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥，可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥，但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
 <p><strong>解决方法</strong>:添加allowPublicKeyRetrieval配置</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span>/test?allowPublicKeyRetrieval=true<br></code></pre></td></tr></table></figure>
 <h2 id="中文乱码">中文乱码</h2>
@@ -311,11 +311,11 @@
 </tbody>
 </table>
 <ul>
-<li>默认的数值是1,符合长度,且必须含有数字,小写或大写字母,特殊字符,所以初始密码必须符合长度,且必须含有数字,小写或大写字母,特殊字符</li>
+<li>默认的数值是1,符合长度，且必须含有数字，小写或大写字母，特殊字符，所以初始密码必须符合长度，且必须含有数字，小写或大写字母，特殊字符</li>
 </ul>
 <p><strong>解决方法</strong></p>
 <ul>
-<li>有时候,只是为了自己测试,不想密码设置得那么复杂,比如只想设置root的密码为123456,必须修改两个全局参数:</li>
+<li>有时候，只是为了自己测试，不想密码设置得那么复杂，比如只想设置root的密码为123456,必须修改两个全局参数:</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET GLOBAL validate_password_policy=0;<br>SET GLOBAL validate_password_length=1;<br></code></pre></td></tr></table></figure>
 <h2 id="创建索引失败">创建索引失败</h2>
@@ -365,9 +365,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/BackEnd/Database/MySQL/EXPLAIN/">
+                      <a href="/Software/BackEnd/Database/Redis/EVAL/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL EXPLAIN</span>
+                        <span class="hidden-mobile">Redis Eval命令</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -375,8 +375,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Hardware/IO/HDMI/">
-                        <span class="hidden-mobile">HDMI</span>
+                      <a href="/Software/BackEnd/Database/MySQL/%E9%94%81/">
+                        <span class="hidden-mobile">MySQL 锁</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

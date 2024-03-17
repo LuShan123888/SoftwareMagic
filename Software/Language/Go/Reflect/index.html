@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Go Reflect   反射是指在程序运行期对程序本身进行访问和修改的能力, 程序在编译时, 变量被转换为内存地址, 变量名不会被编译器写入到可执行部分, 在运行程序时, 程序无法获取自身的信息   支持反射的语言可以在程序编译期将变量的反射信息, 如字段名称, 类型信息, 结构体信息等整合到可执行文件中, 并给程序提供接口访问反射信息, 这样就可以在程序运行期获取类型的反射信息, 并且有能力修">
+  <meta name="description" content="Go Reflect   反射是指在程序运行期对程序本身进行访问和修改的能力，程序在编译时，变量被转换为内存地址，变量名不会被编译器写入到可执行部分，在运行程序时，程序无法获取自身的信息   支持反射的语言可以在程序编译期将变量的反射信息，如字段名称，类型信息，结构体信息等整合到可执行文件中，并给程序提供接口访问反射信息，这样就可以在程序运行期获取类型的反射信息，并且有能力修改它们   反射是一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go Reflect">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/Reflect/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Go Reflect   反射是指在程序运行期对程序本身进行访问和修改的能力, 程序在编译时, 变量被转换为内存地址, 变量名不会被编译器写入到可执行部分, 在运行程序时, 程序无法获取自身的信息   支持反射的语言可以在程序编译期将变量的反射信息, 如字段名称, 类型信息, 结构体信息等整合到可执行文件中, 并给程序提供接口访问反射信息, 这样就可以在程序运行期获取类型的反射信息, 并且有能力修">
+<meta property="og:description" content="Go Reflect   反射是指在程序运行期对程序本身进行访问和修改的能力，程序在编译时，变量被转换为内存地址，变量名不会被编译器写入到可执行部分，在运行程序时，程序无法获取自身的信息   支持反射的语言可以在程序编译期将变量的反射信息，如字段名称，类型信息，结构体信息等整合到可执行文件中，并给程序提供接口访问反射信息，这样就可以在程序运行期获取类型的反射信息，并且有能力修改它们   反射是一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-17T04:26:51.000Z">
-<meta property="article:modified_time" content="2024-03-17T04:26:51.000Z">
+<meta property="article:published_time" content="2024-03-17T15:48:00.826Z">
+<meta property="article:modified_time" content="2024-03-17T15:48:20.136Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -161,8 +161,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-03-17 12:26" pubdate>
-        2024年3月17日 中午
+      <time datetime="2024-03-17 23:48" pubdate>
+        2024年3月17日 晚上
       </time>
     </span>
   
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 中午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -230,42 +230,42 @@
               <h1>Go Reflect</h1>
 <ul>
 <li>
-<p>反射是指在程序运行期对程序本身进行访问和修改的能力, 程序在编译时, 变量被转换为内存地址, 变量名不会被编译器写入到可执行部分, 在运行程序时, 程序无法获取自身的信息</p>
+<p>反射是指在程序运行期对程序本身进行访问和修改的能力，程序在编译时，变量被转换为内存地址，变量名不会被编译器写入到可执行部分，在运行程序时，程序无法获取自身的信息</p>
 </li>
 <li>
-<p>支持反射的语言可以在程序编译期将变量的反射信息, 如字段名称, 类型信息, 结构体信息等整合到可执行文件中, 并给程序提供接口访问反射信息, 这样就可以在程序运行期获取类型的反射信息, 并且有能力修改它们</p>
+<p>支持反射的语言可以在程序编译期将变量的反射信息，如字段名称，类型信息，结构体信息等整合到可执行文件中，并给程序提供接口访问反射信息，这样就可以在程序运行期获取类型的反射信息，并且有能力修改它们</p>
 </li>
 <li>
-<p>反射是一个强大并富有表现力的工具, 能让我们写出更灵活的代码, 但是反射不应该被滥用, 原因有以下三个</p>
+<p>反射是一个强大并富有表现力的工具，能让我们写出更灵活的代码，但是反射不应该被滥用，原因有以下三个</p>
 <ol>
-<li>基于反射的代码是极其脆弱的, 反射中的类型错误会在真正运行的时候才会引发 panic, 那很可能是在代码写完的很长时间之后</li>
+<li>基于反射的代码是极其脆弱的，反射中的类型错误会在真正运行的时候才会引发 panic, 那很可能是在代码写完的很长时间之后</li>
 <li>大量使用反射的代码通常难以理解</li>
-<li>反射的性能低下, 基于反射实现的代码通常比正常代码运行速度慢一到两个数量级</li>
+<li>反射的性能低下，基于反射实现的代码通常比正常代码运行速度慢一到两个数量级</li>
 </ol>
 </li>
 </ul>
 <h2 id="reflect-包">reflect 包</h2>
 <ul>
-<li>在 Go 语言的反射机制中, 任何接口值都由是 <code>一个具体类型</code> 和 <code>具体类型的值</code> 两部分组成的, 在 Go 语言中反射的相关功能由内置的 reflect 包提供, 任意接口值在反射中都可以理解为由 <code>reflect.Type</code> 和 <code>reflect.Value</code> 两部分组成, 并且 reflect 包提供了 <code>reflect.TypeOf</code> 和 <code>reflect.ValueOf</code> 两个函数来获取任意对象的Value和Type</li>
+<li>在 Go 语言的反射机制中，任何接口值都由是 <code>一个具体类型</code> 和 <code>具体类型的值</code> 两部分组成的，在 Go 语言中反射的相关功能由内置的 reflect 包提供，任意接口值在反射中都可以理解为由 <code>reflect.Type</code> 和 <code>reflect.Value</code> 两部分组成，并且 reflect 包提供了 <code>reflect.TypeOf</code> 和 <code>reflect.ValueOf</code> 两个函数来获取任意对象的Value和Type</li>
 </ul>
 <h3 id="TypeOf">TypeOf</h3>
 <ul>
-<li>在 Go 语言中, 使用 <code>reflect.TypeOf()</code> 函数可以获得任意值的类型对象 (reflect. Type), 程序通过类型对象可以访问任意值的类型信息</li>
+<li>在 Go 语言中，使用 <code>reflect.TypeOf()</code> 函数可以获得任意值的类型对象 (reflect. Type), 程序通过类型对象可以访问任意值的类型信息</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;reflect&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectType</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>	v := reflect.TypeOf(x)<br>	fmt.Printf(<span class="hljs-string">&quot;type:%v\n&quot;</span>, v)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-keyword">float32</span> = <span class="hljs-number">3.14</span><br>	reflectType(a) <span class="hljs-comment">// type:float32</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-keyword">int64</span> = <span class="hljs-number">100</span><br>	reflectType(b) <span class="hljs-comment">// type:int64</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p><strong><a target="_blank" rel="noopener" href="http://type.Name">type.Name</a> () 和 type.Kind ()</strong></p>
 <ul>
-<li>在反射中关于类型还划分为两种: <code>名称(Name)</code> 和 <code>种类(Kind)</code>, 因为在 Go 语言中我们可以使用 type 关键字构造很多自定义类型, 而 <code>名称(Name)</code> 就是指底层的类型, 但在反射中, 当需要区分指针, 结构体等类型时, 就会用到 <code>种类(Kind)</code>, 例如定义了两个指针类型和两个结构体类型, 通过反射查看它们的名称和种类</li>
+<li>在反射中关于类型还划分为两种: <code>名称(Name)</code> 和 <code>种类(Kind)</code>, 因为在 Go 语言中我们可以使用 type 关键字构造很多自定义类型，而 <code>名称(Name)</code> 就是指底层的类型，但在反射中，当需要区分指针，结构体等类型时，就会用到 <code>种类(Kind)</code>, 例如定义了两个指针类型和两个结构体类型，通过反射查看它们的名称和种类</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;reflect&quot;</span><br>)<br><span class="hljs-keyword">type</span> person <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-keyword">string</span><br>    age  <span class="hljs-keyword">int</span><br>&#125;<br><span class="hljs-keyword">type</span> book <span class="hljs-keyword">struct</span>&#123; title <span class="hljs-keyword">string</span> &#125;<br><span class="hljs-keyword">type</span> myInt <span class="hljs-keyword">int64</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectType</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    t := reflect.TypeOf(x)<br>    fmt.Printf(<span class="hljs-string">&quot;name:%v kind:%v\n&quot;</span>, t.Name(), t.Kind())<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> a *<span class="hljs-keyword">float32</span> <span class="hljs-comment">// 指针</span><br>    reflectType(a) <span class="hljs-comment">// name: kind:ptr</span><br>    <span class="hljs-keyword">var</span> b myInt    <span class="hljs-comment">// 自定义类型</span><br>    reflectType(b) <span class="hljs-comment">// name:myInt kind:int64</span><br>    <span class="hljs-keyword">var</span> c <span class="hljs-keyword">rune</span>     <span class="hljs-comment">// 类型别名</span><br>    reflectType(c) <span class="hljs-comment">// name:int32 kind:int32</span><br>    <span class="hljs-keyword">var</span> d = person&#123;<br>        name: <span class="hljs-string">&quot;Test&quot;</span>,<br>        age:  <span class="hljs-number">18</span>,<br>    &#125;<br>    reflectType(d) <span class="hljs-comment">// name:person kind:struct</span><br>    <span class="hljs-keyword">var</span> e = book&#123;title: <span class="hljs-string">&quot;BookName&quot;</span>&#125;<br>    reflectType(e) <span class="hljs-comment">// name:book kind:struct</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>Go 语言的反射中像数组, 切片, Map, 指针等类型的变量, 它们的 <code>.Name()</code> 都是返回 <code>空</code></li>
+<li>Go 语言的反射中像数组，切片, Map, 指针等类型的变量，它们的 <code>.Name()</code> 都是返回 <code>空</code></li>
 <li>在 <code>reflect</code> 包中定义的 Kind 类型如下:</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Kind <span class="hljs-keyword">uint</span><br><span class="hljs-keyword">const</span> (<br>    Invalid Kind = <span class="hljs-literal">iota</span>  <span class="hljs-comment">// 非法类型</span><br>    Bool                 <span class="hljs-comment">// 布尔型</span><br>    Int                  <span class="hljs-comment">// 有符号整型</span><br>    Int8                 <span class="hljs-comment">// 有符号8位整型</span><br>    Int16                <span class="hljs-comment">// 有符号16位整型</span><br>    Int32                <span class="hljs-comment">// 有符号32位整型</span><br>    Int64                <span class="hljs-comment">// 有符号64位整型</span><br>    Uint                 <span class="hljs-comment">// 无符号整型</span><br>    Uint8                <span class="hljs-comment">// 无符号8位整型</span><br>    Uint16               <span class="hljs-comment">// 无符号16位整型</span><br>    Uint32               <span class="hljs-comment">// 无符号32位整型</span><br>    Uint64               <span class="hljs-comment">// 无符号64位整型</span><br>    Uintptr              <span class="hljs-comment">// 指针</span><br>    Float32              <span class="hljs-comment">// 单精度浮点数</span><br>    Float64              <span class="hljs-comment">// 双精度浮点数</span><br>    Complex64            <span class="hljs-comment">// 64位复数类型</span><br>    Complex128           <span class="hljs-comment">// 128位复数类型</span><br>    Array                <span class="hljs-comment">// 数组</span><br>    Chan                 <span class="hljs-comment">// 通道</span><br>    Func                 <span class="hljs-comment">// 函数</span><br>    Interface            <span class="hljs-comment">// 接口</span><br>    Map                  <span class="hljs-comment">// 映射</span><br>    Ptr                  <span class="hljs-comment">// 指针</span><br>    Slice                <span class="hljs-comment">// 切片</span><br>    String               <span class="hljs-comment">// 字符串</span><br>    Struct               <span class="hljs-comment">// 结构体</span><br>    UnsafePointer        <span class="hljs-comment">// 底层指针</span><br>)<br></code></pre></td></tr></table></figure>
 <h3 id="ValueOf">ValueOf</h3>
 <ul>
-<li><code>reflect.ValueOf()</code> 返回的是 <code>reflect.Value</code> 类型, 其中包含了原始值的值信息, <code>reflect.Value</code> 与原始值之间可以互相转换</li>
+<li><code>reflect.ValueOf()</code> 返回的是 <code>reflect.Value</code> 类型，其中包含了原始值的值信息, <code>reflect.Value</code> 与原始值之间可以互相转换</li>
 <li><code>reflect.Value</code> 类型提供的获取原始值的方法如下:</li>
 </ul>
 <table>
@@ -278,19 +278,19 @@
 <tbody>
 <tr>
 <td style="text-align:center">Interface () interface {}</td>
-<td style="text-align:center">将值以 interface{} 类型返回, 可以通过类型断言转换为指定类型</td>
+<td style="text-align:center">将值以 interface{} 类型返回，可以通过类型断言转换为指定类型</td>
 </tr>
 <tr>
 <td style="text-align:center">Int () int 64</td>
-<td style="text-align:center">将值以 int 类型返回, 所有有符号整型均可以此方式返回</td>
+<td style="text-align:center">将值以 int 类型返回，所有有符号整型均可以此方式返回</td>
 </tr>
 <tr>
 <td style="text-align:center">Uint () uint 64</td>
-<td style="text-align:center">将值以 uint 类型返回, 所有无符号整型均可以此方式返回</td>
+<td style="text-align:center">将值以 uint 类型返回，所有无符号整型均可以此方式返回</td>
 </tr>
 <tr>
 <td style="text-align:center">Float () float 64</td>
-<td style="text-align:center">将值以双精度 (float 64) 类型返回,所有浮点数 (float 32, float 64) 均可以此方式返回</td>
+<td style="text-align:center">将值以双精度 (float 64) 类型返回，所有浮点数 (float 32, float 64) 均可以此方式返回</td>
 </tr>
 <tr>
 <td style="text-align:center">Bool () bool</td>
@@ -307,21 +307,21 @@
 </tbody>
 </table>
 <h4 id="通过反射获取值">通过反射获取值</h4>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectValue</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>	v := reflect.ValueOf(x)<br>	k := v.Kind()<br>	<span class="hljs-keyword">switch</span> k &#123;<br>	<span class="hljs-keyword">case</span> reflect.Int64:<br>		<span class="hljs-comment">// v.Int()从反射中获取整型的原始值,然后通过int64()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is int64, value is %d\n&quot;</span>, <span class="hljs-keyword">int64</span>(v.Int()))<br>	<span class="hljs-keyword">case</span> reflect.Float32:<br>		<span class="hljs-comment">// v.Float()从反射中获取浮点型的原始值,然后通过float32()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is float32, value is %f\n&quot;</span>, <span class="hljs-keyword">float32</span>(v.Float()))<br>	<span class="hljs-keyword">case</span> reflect.Float64:<br>		<span class="hljs-comment">// v.Float()从反射中获取浮点型的原始值,然后通过float64()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is float64, value is %f\n&quot;</span>, <span class="hljs-keyword">float64</span>(v.Float()))<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-keyword">float32</span> = <span class="hljs-number">3.14</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-keyword">int64</span> = <span class="hljs-number">100</span><br>	reflectValue(a) <span class="hljs-comment">// type is float32, value is 3.140000</span><br>	reflectValue(b) <span class="hljs-comment">// type is int64, value is 100</span><br>	<span class="hljs-comment">// 将int类型的原始值转换为reflect.Value类型</span><br>	c := reflect.ValueOf(<span class="hljs-number">10</span>)<br>	fmt.Printf(<span class="hljs-string">&quot;type c :%T\n&quot;</span>, c) <span class="hljs-comment">// type c :reflect.Value</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectValue</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>	v := reflect.ValueOf(x)<br>	k := v.Kind()<br>	<span class="hljs-keyword">switch</span> k &#123;<br>	<span class="hljs-keyword">case</span> reflect.Int64:<br>		<span class="hljs-comment">// v.Int()从反射中获取整型的原始值，然后通过int64()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is int64, value is %d\n&quot;</span>, <span class="hljs-keyword">int64</span>(v.Int()))<br>	<span class="hljs-keyword">case</span> reflect.Float32:<br>		<span class="hljs-comment">// v.Float()从反射中获取浮点型的原始值，然后通过float32()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is float32, value is %f\n&quot;</span>, <span class="hljs-keyword">float32</span>(v.Float()))<br>	<span class="hljs-keyword">case</span> reflect.Float64:<br>		<span class="hljs-comment">// v.Float()从反射中获取浮点型的原始值，然后通过float64()强制类型转换</span><br>		fmt.Printf(<span class="hljs-string">&quot;type is float64, value is %f\n&quot;</span>, <span class="hljs-keyword">float64</span>(v.Float()))<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-keyword">float32</span> = <span class="hljs-number">3.14</span><br>	<span class="hljs-keyword">var</span> b <span class="hljs-keyword">int64</span> = <span class="hljs-number">100</span><br>	reflectValue(a) <span class="hljs-comment">// type is float32, value is 3.140000</span><br>	reflectValue(b) <span class="hljs-comment">// type is int64, value is 100</span><br>	<span class="hljs-comment">// 将int类型的原始值转换为reflect.Value类型</span><br>	c := reflect.ValueOf(<span class="hljs-number">10</span>)<br>	fmt.Printf(<span class="hljs-string">&quot;type c :%T\n&quot;</span>, c) <span class="hljs-comment">// type c :reflect.Value</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="通过反射设置变量的值">通过反射设置变量的值</h4>
 <ul>
-<li>想要在函数中通过反射修改变量的值, 需要注意函数参数传递的是值拷贝, 必须传递变量地址才能修改变量值, 而反射中使用专有的 <code>Elem()</code> 方法来获取指针对应的值</li>
+<li>想要在函数中通过反射修改变量的值，需要注意函数参数传递的是值拷贝，必须传递变量地址才能修改变量值，而反射中使用专有的 <code>Elem()</code> 方法来获取指针对应的值</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;reflect&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectSetValue1</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>	v := reflect.ValueOf(x)<br>	<span class="hljs-keyword">if</span> v.Kind() == reflect.Int64 &#123;<br>		v.SetInt(<span class="hljs-number">200</span>) <span class="hljs-comment">//修改的是副本,reflect包会引发panic</span><br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reflectSetValue2</span><span class="hljs-params">(x <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>	v := reflect.ValueOf(x)<br>	<span class="hljs-comment">// 反射中使用 Elem()方法获取指针对应的值</span><br>	<span class="hljs-keyword">if</span> v.Elem().Kind() == reflect.Int64 &#123;<br>		v.Elem().SetInt(<span class="hljs-number">200</span>)<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a <span class="hljs-keyword">int64</span> = <span class="hljs-number">100</span><br>	reflectSetValue1(a) <span class="hljs-comment">//panic: reflect: reflect.Value.SetInt using unaddressable value</span><br>	reflectSetValue2(&amp;a)<br>	fmt.Println(a)<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="isNil-和-isValid">isNil () 和 isValid ()</h4>
 <p><strong>isNil ()</strong></p>
 <ul>
-<li><code>IsNil()</code> 判断变量的值是否为 nil, 变量必须是通道, 函数, 接口, 映射, 指针, 切片之一, 否则 IsNil 函数会导致 panic</li>
+<li><code>IsNil()</code> 判断变量的值是否为 nil, 变量必须是通道，函数，接口，映射，指针，切片之一，否则 IsNil 函数会导致 panic</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(v Value)</span> <span class="hljs-title">IsNil</span><span class="hljs-params">()</span> <span class="hljs-title">bool</span></span><br></code></pre></td></tr></table></figure>
 <p><strong>isValid ()</strong></p>
 <ul>
-<li><code>IsValid()</code> 判断变量是否持有一个值, 如果变量是 Value 对应的零值会返回假, 此时该变量调用除了 IsValid, String, Kind 之外的方法都会导致 panic</li>
+<li><code>IsValid()</code> 判断变量是否持有一个值，如果变量是 Value 对应的零值会返回假，此时该变量调用除了 IsValid, String, Kind 之外的方法都会导致 panic</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(v Value)</span> <span class="hljs-title">IsValid</span><span class="hljs-params">()</span> <span class="hljs-title">bool</span></span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -331,7 +331,7 @@
 <h2 id="结构体反射">结构体反射</h2>
 <h3 id="与结构体相关的方法">与结构体相关的方法</h3>
 <ul>
-<li>任意值通过 <code>reflect.TypeOf()</code> 获得反射对象信息后,如果它的类型是结构体,可以通过反射值对象 (<code>reflect.Type</code>) 的 <code>NumField()</code> 和 <code>Field()</code> 方法获得结构体成员的详细信息</li>
+<li>任意值通过 <code>reflect.TypeOf()</code> 获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象 (<code>reflect.Type</code>) 的 <code>NumField()</code> 和 <code>Field()</code> 方法获得结构体成员的详细信息</li>
 <li><code>reflect. Type</code>中与获取结构体成员相关的的方法如下表所示</li>
 </ul>
 <table>
@@ -344,7 +344,7 @@
 <tbody>
 <tr>
 <td style="text-align:center">Field (i int) StructField</td>
-<td style="text-align:center">根据索引, 返回索引对应的结构体字段的信息,</td>
+<td style="text-align:center">根据索引，返回索引对应的结构体字段的信息,</td>
 </tr>
 <tr>
 <td style="text-align:center">NumField () int</td>
@@ -356,7 +356,7 @@
 </tr>
 <tr>
 <td style="text-align:center">FieldByIndex (index []int) StructField</td>
-<td style="text-align:center">多层成员访问时, 根据 []int 提供的每个结构体的字段索引, 返回字段的信息,</td>
+<td style="text-align:center">多层成员访问时，根据 []int 提供的每个结构体的字段索引，返回字段的信息,</td>
 </tr>
 <tr>
 <td style="text-align:center">FieldByNameFunc (match func (string) bool) (StructField, bool)</td>
@@ -380,9 +380,9 @@
 <ul>
 <li><code>StructField</code>类型用来描述结构体中的一个字段的信息</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> StructField <span class="hljs-keyword">struct</span> &#123;<br>    Name    <span class="hljs-keyword">string</span>      <span class="hljs-comment">// Name 是字段的名字</span><br>    PkgPath <span class="hljs-keyword">string</span>      <span class="hljs-comment">//PkgPath 是非导出字段的包路径, 对导出字段该字段为&quot;&quot;</span><br>    Type      Type      <span class="hljs-comment">// 字段的类型</span><br>    Tag       StructTag <span class="hljs-comment">// 字段的标签</span><br>    Offset    <span class="hljs-keyword">uintptr</span>   <span class="hljs-comment">// 字段在结构体中的字节偏移量</span><br>    Index     []<span class="hljs-keyword">int</span>     <span class="hljs-comment">// 用于 Type. FieldByIndex 时的索引切片</span><br>    Anonymous <span class="hljs-keyword">bool</span>      <span class="hljs-comment">// 是否匿名字段</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> StructField <span class="hljs-keyword">struct</span> &#123;<br>    Name    <span class="hljs-keyword">string</span>      <span class="hljs-comment">// Name 是字段的名字</span><br>    PkgPath <span class="hljs-keyword">string</span>      <span class="hljs-comment">//PkgPath 是非导出字段的包路径，对导出字段该字段为&quot;&quot;</span><br>    Type      Type      <span class="hljs-comment">// 字段的类型</span><br>    Tag       StructTag <span class="hljs-comment">// 字段的标签</span><br>    Offset    <span class="hljs-keyword">uintptr</span>   <span class="hljs-comment">// 字段在结构体中的字节偏移量</span><br>    Index     []<span class="hljs-keyword">int</span>     <span class="hljs-comment">// 用于 Type. FieldByIndex 时的索引切片</span><br>    Anonymous <span class="hljs-keyword">bool</span>      <span class="hljs-comment">// 是否匿名字段</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>当我们使用反射得到一个结构体数据之后可以通过索引依次获取其字段信息, 也可以通过字段名去获取指定的字段信息</li>
+<li>当我们使用反射得到一个结构体数据之后可以通过索引依次获取其字段信息，也可以通过字段名去获取指定的字段信息</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> student <span class="hljs-keyword">struct</span> &#123;<br>	Name  <span class="hljs-keyword">string</span> <span class="hljs-string">`json: &quot;name&quot;`</span><br>	Score <span class="hljs-keyword">int</span>    <span class="hljs-string">`json: &quot;score&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span> &#123;<br>	stu <span class="hljs-number">1</span> := student&#123;<br>		Name:  <span class="hljs-string">&quot;Test&quot;</span>,<br>		Score: <span class="hljs-number">90</span>,<br>	&#125;<br><br>	t := reflect.TypeOf (stu <span class="hljs-number">1</span>)<br>	fmt.Println (t.Name (), t.Kind ()) <span class="hljs-comment">// student struct</span><br>	<span class="hljs-comment">// 通过 for 循环遍历结构体的所有字段信息</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; t.NumField (); i++ &#123;<br>		field := t.Field (i)<br>		fmt.Printf (<span class="hljs-string">&quot;name:%s index:%d type:%v json tag:%v\n&quot;</span>, field. Name, field. Index, field. Type, field.Tag.Get (<span class="hljs-string">&quot;json&quot;</span>))<br>	&#125;<br><br>	<span class="hljs-comment">// 通过字段名获取指定结构体字段信息</span><br>	<span class="hljs-keyword">if</span> scoreField, ok := t.FieldByName (<span class="hljs-string">&quot;Score&quot;</span>); ok &#123;<br>		fmt.Printf (<span class="hljs-string">&quot;name:%s index:%d type:%v json tag:%v\n&quot;</span>, scoreField. Name, scoreField. Index, scoreField. Type, scoreField.Tag.Get (<span class="hljs-string">&quot;json&quot;</span>))<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Method-类型">Method 类型</h3>
@@ -422,9 +422,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Software/Language/Go/Socket/">
+                      <a href="/Software/Language/Go/Test/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Go Socket</span>
+                        <span class="hidden-mobile">Go Test</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -432,8 +432,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Software/Language/Go/Package/">
-                        <span class="hidden-mobile">Go Dependence</span>
+                      <a href="/Software/Language/Go/Socket/">
+                        <span class="hidden-mobile">Go Socket</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
