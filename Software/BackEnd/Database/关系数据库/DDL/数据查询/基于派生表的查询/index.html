@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 基于派生表的查询  子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成:  123456SELECT Sno,CnoFROM SC,(SELECT Sno,Avg(Grade)         FROM SC">
+  <meta name="description" content="SQL 基于派生表的查询  子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成：  123456SELECT Sno,CnoFROM SC,(SELECT Sno,Avg(Grade)         FROM SC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 基于派生表的查询">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%9F%BA%E4%BA%8E%E6%B4%BE%E7%94%9F%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 基于派生表的查询  子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成:  123456SELECT Sno,CnoFROM SC,(SELECT Sno,Avg(Grade)         FROM SC">
+<meta property="og:description" content="SQL 基于派生表的查询  子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成：  123456SELECT Sno,CnoFROM SC,(SELECT Sno,Avg(Grade)         FROM SC">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.561Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.103Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.893Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      615 字
+      617 字
     </span>
   
 
@@ -222,23 +222,23 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>SQL 基于派生表的查询</h1>
 <ul>
-<li>子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成:</li>
+<li>子查询不仅可以出现在WHERE子句中，还可以出现在FROM子句中，这时子查询生成的临时派生表(derived table)成为主查询的查询对象，例如，例3.57找出每个学生超过他自己选修课程平均成绩的课程号，也可以用如下的查询完成：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC,(<span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">Avg</span>(Grade)<br>         <span class="hljs-keyword">FROM</span> SC<br>         <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno)<br><span class="hljs-keyword">AS</span> Avg_sc(avg_sno,avg_grade)<br><span class="hljs-keyword">WHERE</span> SC.Sno<span class="hljs-operator">=</span>Avg_sc.avg_sno <span class="hljs-keyword">and</span> SC.Grade <span class="hljs-operator">&gt;=</span>Avg_sc.avg_grade<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里FROM子句中的子查询将生成一个派生表Avg_sc,该表avg_grade两个属性组成，记录了每个学生的学号及平均成绩，主查询将SC表与Avg_sc按学号相等进行连接，选出修课成绩大于其平均成绩的课程号</li>
-<li>如果中没有聚集函数，派生表可以不指定属性列，子查询SELECT子句后面的列名为其默认属性，例如例3.60查询所有选修了1号课程的学生姓名，可以用如下查询完成:</li>
+<li>这里FROM子句中的子查询将生成一个派生表Avg_sc，该表avg_grade两个属性组成，记录了每个学生的学号及平均成绩，主查询将SC表与Avg_sc按学号相等进行连接，选出修课成绩大于其平均成绩的课程号。</li>
+<li>如果中没有聚集函数，派生表可以不指定属性列，子查询SELECT子句后面的列名为其默认属性，例如例3.60查询所有选修了1号课程的学生姓名，可以用如下查询完成：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname<br><span class="hljs-keyword">FROM</span> Student,(<span class="hljs-keyword">SELECT</span> Sno<br>              <span class="hljs-keyword">FROM</span> SC<br>              <span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>)<br><span class="hljs-keyword">AS</span> SC1<br><span class="hljs-keyword">WHERE</span> Student.Sno<span class="hljs-operator">=</span>SC1.Sno;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>需要说明的是，通过FROM子句生成派生表时,AS关键字可以省略，但必须为派生关系指定一个别名，而对基本表，别名是可选择项</li>
+<li>需要说明的是，通过FROM子句生成派生表时，AS关键字可以省略，但必须为派生关系指定一个别名，而对基本表，别名是可选择项。</li>
 </ul>
 
             </div>
@@ -255,11 +255,11 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/">关系数据库。</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/">DDL</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E3%80%82/">数据查询。</a>
                     
                   </div>
                 

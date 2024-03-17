@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Oracle 表连接 概述  即查询的时候同时需要多张表（特别是存在外键关系的), 此时需要多张表之间的值进行连接 目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准 92 形式简单，但编写较为冗长, 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准  92语法  多张表需要全部放在 fr">
+  <meta name="description" content="Oracle 表连接 概述  即查询的时候同时需要多张表（特别是存在外键关系的)，此时需要多张表之间的值进行连接。 目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准。 92 形式简单，但编写较为冗长， 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准。  92语法  多张表需要全部放在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oracle 表连接">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Oracle/%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Oracle 表连接 概述  即查询的时候同时需要多张表（特别是存在外键关系的), 此时需要多张表之间的值进行连接 目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准 92 形式简单，但编写较为冗长, 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准  92语法  多张表需要全部放在 fr">
+<meta property="og:description" content="Oracle 表连接 概述  即查询的时候同时需要多张表（特别是存在外键关系的)，此时需要多张表之间的值进行连接。 目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准。 92 形式简单，但编写较为冗长， 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准。  92语法  多张表需要全部放在">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019144355608.png">
 <meta property="article:published_time" content="2024-03-17T15:48:00.546Z">
-<meta property="article:modified_time" content="2024-03-17T15:52:56.607Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.503Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -174,7 +174,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      2.6k 字
     </span>
   
 
@@ -224,7 +224,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -232,109 +232,109 @@
               <h1>Oracle 表连接</h1>
 <h2 id="概述">概述</h2>
 <ul>
-<li>即查询的时候同时需要多张表（特别是存在外键关系的), 此时需要多张表之间的值进行连接</li>
-<li>目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准</li>
-<li>92 形式简单，但编写较为冗长, 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准</li>
+<li>即查询的时候同时需要多张表（特别是存在外键关系的)，此时需要多张表之间的值进行连接。</li>
+<li>目前 SQL 标准提出过两种连接查询，第一种是较早的 SQL92 标准，第二种是目前使用广泛的较新的 SQL99 标准。</li>
+<li>92 形式简单，但编写较为冗长， 99 不仅在底层得到优化，而且形式看上去更加一目了然，逻辑性更强，一般建议使用 99 标准。</li>
 </ul>
 <h2 id="92语法">92语法</h2>
 <ul>
-<li>多张表需要全部放在 from 之后，所有的连接条件都放在 where 当中，因此SQL92 中的等值连接，非等值链接，外连接等等其实只是 where 条件的筛选结构</li>
-<li>很多时候需要为表取别名(1, 简化表名 2, 可能存在自连接的情况)</li>
-<li>连接的原理：按照 from 后面表的出现顺序，前面的表作为内存的 for 循环，后出现的表作为外层的 for 循环</li>
+<li>多张表需要全部放在 from 之后，所有的连接条件都放在 where 当中，因此SQL92 中的等值连接，非等值链接，外连接等等其实只是 where 条件的筛选结构。</li>
+<li>很多时候需要为表取别名(1，简化表名 2，可能存在自连接的情况)</li>
+<li>连接的原理：按照 from 后面表的出现顺序，前面的表作为内存的 for 循环，后出现的表作为外层的 for 循环。</li>
 </ul>
 <h3 id="等值连接">等值连接</h3>
 <ul>
-<li>不同表的键之间用<code>=</code>号进行连接</li>
+<li>不同表的键之间用<code>=</code>号进行连接。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询员工的信息以及所在部门的信息</li>
-<li>查询的数据：员工信息，部门信息</li>
-<li>数据来源:emp, dept</li>
-<li>连接条件:emp.deptno=dept.deptno</li>
+<li>查询员工的信息以及所在部门的信息。</li>
+<li>查询的数据：员工信息，部门信息。</li>
+<li>数据来源：emp, dept</li>
+<li>连接条件：emp.deptno=dept.deptno</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">from</span> emp e,dept d<br><span class="hljs-keyword">where</span> e.deptno<span class="hljs-operator">=</span>d.deptno;<br></code></pre></td></tr></table></figure>
 <h3 id="非等值连接">非等值连接</h3>
 <ul>
-<li>不同表的键之间用<code>!=, &gt;, &lt;, &lt;&gt;, between and</code>进行连接</li>
+<li>不同表的键之间用<code>!=, &gt;, &lt;, &lt;&gt;, between and</code>进行连接。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询每一个员工的姓名，工资金额，入职时间，对应工资等级</li>
-<li>查询数据:ename, sal, hiredate, grade</li>
-<li>数据来源:emp, salgrade</li>
-<li>连接条件:emp, sal between losal and hisal</li>
+<li>查询每一个员工的姓名，工资金额，入职时间，对应工资等级。</li>
+<li>查询数据：ename, sal, hiredate, grade</li>
+<li>数据来源：emp, salgrade</li>
+<li>连接条件：emp, sal between losal and hisal</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, hiredate, s.grade<br><span class="hljs-keyword">from</span> emp e, salgrade s<br><span class="hljs-keyword">where</span> e.sal <span class="hljs-keyword">between</span> s.losal <span class="hljs-keyword">and</span> s.hisal;<br></code></pre></td></tr></table></figure>
 <h3 id="自连接">自连接</h3>
 <ul>
-<li>查询出每一个员工（有上级存在的员工）自己的信息，以及上级的信息</li>
-<li>查询信息：员工信息，上级信息</li>
-<li>数据来源:emp e, emp m</li>
-<li>连接条件:e.mgr = m.empno</li>
+<li>查询出每一个员工（有上级存在的员工）自己的信息，以及上级的信息。</li>
+<li>查询信息：员工信息，上级信息。</li>
+<li>数据来源：emp e, emp m</li>
+<li>连接条件：e.mgr = m.empno</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">from</span> emp e,emp m<br><span class="hljs-keyword">where</span> e.mgr <span class="hljs-operator">=</span> m.empno;<br></code></pre></td></tr></table></figure>
 <h3 id="外连接">外连接</h3>
 <ul>
-<li>内联接使用比较运算符根据每个表共有的列的值匹配两个表中的行</li>
-<li>外联接可以是左向外联接，右向外联接或完整外部联接</li>
-<li>左向外联接的结果集包括 LEFT OUTER 子句中指定的左表的所有行，而不仅仅是联接列所匹配的行，如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表列均为空值</li>
-<li>右向外联接是左向外联接的反向联接，将返回右表的所有行，如果右表的某行在左表中没有匹配行，则将为左表返回空值</li>
-<li><code>+</code>:带<code>+</code>的表为从表，对立面的表为主表</li>
+<li>内联接使用比较运算符根据每个表共有的列的值匹配两个表中的行。</li>
+<li>外联接可以是左向外联接，右向外联接或完整外部联接。</li>
+<li>左向外联接的结果集包括 LEFT OUTER 子句中指定的左表的所有行，而不仅仅是联接列所匹配的行，如果左表的某行在右表中没有匹配行，则在相关联的结果集行中右表的所有选择列表列均为空值。</li>
+<li>右向外联接是左向外联接的反向联接，将返回右表的所有行，如果右表的某行在左表中没有匹配行，则将为左表返回空值。</li>
+<li><code>+</code>：带<code>+</code>的表为从表，对立面的表为主表。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询每一个部门的信息及对应人数</li>
+<li>查询每一个部门的信息及对应人数。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><br>  <span class="hljs-keyword">from</span> dept d, (<span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>), deptno <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> deptno) c<br> <span class="hljs-keyword">where</span> d.deptno <span class="hljs-operator">=</span> c.deptno(<span class="hljs-operator">+</span>);<br></code></pre></td></tr></table></figure>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019144355608.png" srcset="/images/loading.gif" lazyload alt="image-20201019144355608" style="zoom:50%;" />
 <h2 id="99语法">99语法</h2>
 <h3 id="cross-join">cross join</h3>
 <ul>
-<li>交叉连接，可实现笛卡尔积</li>
+<li>交叉连接，可实现笛卡尔积。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询所有员工姓名及所在部门的名称</li>
+<li>查询所有员工姓名及所在部门的名称。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">cross</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
 <h3 id="natural-join">natural join</h3>
 <ul>
-<li>自然连接(Natural join)是一种特殊的等值连接，它要求两个关系中进行比较的分量必须是相同的属性组，并且在结果中把重复的属性列去掉</li>
+<li>自然连接(Natural join)是一种特殊的等值连接，它要求两个关系中进行比较的分量必须是相同的属性组，并且在结果中把重复的属性列去掉。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询所有员工姓名，员工编号，所属的部门编号，部门名称</li>
+<li>查询所有员工姓名，员工编号，所属的部门编号，部门名称。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,empno,deptno,dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>查询部门10的员工名称，部门编号，部门名称</li>
+<li>查询部门10的员工名称，部门编号，部门名称。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">natural</span> <span class="hljs-keyword">join</span> dept <span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="join-using">join using()</h3>
 <ul>
-<li>有一种特殊情况，当两个要关联表的字段名是一样的，可以使用 <strong>USING</strong>, 可减少 SQL 语句的长度</li>
-<li>自然连接也可以用<code>join...using</code>来实现</li>
+<li>有一种特殊情况，当两个要关联表的字段名是一样的，可以使用 <strong>USING</strong>，可减少 SQL 语句的长度。</li>
+<li>自然连接也可以用<code>join...using</code>来实现。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, deptno, dname<br><span class="hljs-keyword">from</span> emp<br><span class="hljs-keyword">join</span> dept<br><span class="hljs-keyword">using</span> (deptno)<br><span class="hljs-keyword">where</span> deptno <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="join-on">join on</h3>
 <ul>
-<li>on连接，可做等值连接，非等值连接，自连接，可以解决一切连接，关系列必须要区分</li>
+<li>on连接，可做等值连接，非等值连接，自连接，可以解决一切连接，关系列必须要区分。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>使用on可以做等值连接</li>
+<li>使用on可以做等值连接。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, empno, e.deptno, dname<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">join</span> dept d<br><span class="hljs-keyword">on</span> e.deptno <span class="hljs-operator">=</span> d.deptno;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用on还可以做非等值连接</li>
+<li>使用on还可以做非等值连接。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename,sal,deptno,grade <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">join</span> salgrade s <span class="hljs-keyword">on</span><br>sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>查询30部门员工姓名，工资，部门编号，工资等级，部门名称</li>
-<li>数据来源:emp e,  salgrade s, dept d</li>
-<li>连接条件:sal between losal and hisal e.deptno=d.deptno</li>
-<li>题意条件:e.deptno=30</li>
+<li>查询30部门员工姓名，工资，部门编号，工资等级，部门名称。</li>
+<li>数据来源：emp e,  salgrade s, dept d</li>
+<li>连接条件：sal between losal and hisal e.deptno=d.deptno</li>
+<li>题意条件：e.deptno=30</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ename, sal, deptno, grade, dname<br>  <span class="hljs-keyword">from</span> emp e<br>  <span class="hljs-keyword">join</span> dept d<br>    <span class="hljs-keyword">on</span> e.deptno <span class="hljs-operator">=</span> d.deptno<br>  <span class="hljs-keyword">join</span> salgrade<br>    <span class="hljs-keyword">on</span> e.sal <span class="hljs-keyword">between</span> losal <span class="hljs-keyword">and</span> hisal<br> <span class="hljs-keyword">where</span> e.deptno <span class="hljs-operator">=</span> <span class="hljs-number">30</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="外连接-2">外连接</h3>
@@ -346,16 +346,16 @@
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查询员工编号，员工名称，上级编号，上级名称</li>
+<li>查询员工编号，员工名称，上级编号，上级名称。</li>
 <li>LEFT JOIN 关键字从左表(table1)返回所有的行，即使右表(table2)中没有匹配，如果右表中没有匹配，则结果为 NULL</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.empno 员工编号,<br>       e.ename 员工名称,<br>       e.mgr   上级编号,<br>       m.ename 上级名称<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp m<br><span class="hljs-keyword">on</span> e.mgr <span class="hljs-operator">=</span> m.empno;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.empno 员工编号，<br>       e.ename 员工名称，<br>       e.mgr   上级编号，<br>       m.ename 上级名称。<br><span class="hljs-keyword">from</span> emp e<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp m<br><span class="hljs-keyword">on</span> e.mgr <span class="hljs-operator">=</span> m.empno;<br></code></pre></td></tr></table></figure>
 <h2 id="集合操作">集合操作</h2>
 <ul>
-<li>Union, 并集（去重）对两个结果集进行并集操作，不包括重复行同时进行默认规则的排序</li>
-<li>Union All, 全集（不去重）对两个结果集进行并集操作，包括重复行，不进行排序</li>
-<li>Intersect, 交集（找出重复）对两个结果集进行交集操作，不包括重复行，同时进行默认规则的排序</li>
-<li>Minus, 差集（减去重复）对两个结果集进行差操作，不包括重复行，同时进行默认规则的排序</li>
+<li>Union，并集（去重）对两个结果集进行并集操作，不包括重复行同时进行默认规则的排序。</li>
+<li>Union All，全集（不去重）对两个结果集进行并集操作，包括重复行，不进行排序。</li>
+<li>Intersect，交集（找出重复）对两个结果集进行交集操作，不包括重复行，同时进行默认规则的排序。</li>
+<li>Minus，差集（减去重复）对两个结果集进行差操作，不包括重复行，同时进行默认规则的排序。</li>
 </ul>
 
             </div>

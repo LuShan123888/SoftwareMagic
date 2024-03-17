@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 函数返回值  PHP函数可以使用return关键字返回一个单值  123function return_one()&amp;#123;    return 42;&amp;#125;  要返回多个值，则需要返回一个数组  123function return_two()&amp;#123;    return array(&quot;Fred&quot;,35);&amp;#125;  默认从函数中复制出值，在函数声明时">
+  <meta name="description" content="PHP 函数返回值  PHP函数可以使用return关键字返回一个单值。  123function return_one()&amp;#123;    return 42;&amp;#125;  要返回多个值，则需要返回一个数组。  123function return_two()&amp;#123;    return array(&quot;Fred&quot;,35);&amp;#125;  默认从函数中复制出值，在函数声">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 函数返回值">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E5%87%BD%E6%95%B0/%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 函数返回值  PHP函数可以使用return关键字返回一个单值  123function return_one()&amp;#123;    return 42;&amp;#125;  要返回多个值，则需要返回一个数组  123function return_two()&amp;#123;    return array(&quot;Fred&quot;,35);&amp;#125;  默认从函数中复制出值，在函数声明时">
+<meta property="og:description" content="PHP 函数返回值  PHP函数可以使用return关键字返回一个单值。  123function return_one()&amp;#123;    return 42;&amp;#125;  要返回多个值，则需要返回一个数组。  123function return_two()&amp;#123;    return array(&quot;Fred&quot;,35);&amp;#125;  默认从函数中复制出值，在函数声">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-20T05:20:44.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:02.785Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      733 字
+      737 字
     </span>
   
 
@@ -229,11 +229,11 @@
             <div class="markdown-body">
               <h1>PHP 函数返回值</h1>
 <ul>
-<li>PHP函数可以使用return关键字返回一个单值</li>
+<li>PHP函数可以使用return关键字返回一个单值。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">return_one</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">42</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>要返回多个值，则需要返回一个数组</li>
+<li>要返回多个值，则需要返回一个数组。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">return_two</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;Fred&quot;</span>,<span class="hljs-number">35</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -241,8 +241,8 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$names</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;Fred&quot;</span>,<span class="hljs-string">&quot;Barney&quot;</span>,<span class="hljs-string">&quot;Wilma&quot;</span>,<span class="hljs-string">&quot;Betty&quot;</span>);<br><span class="hljs-function"><span class="hljs-keyword">function</span> &amp; <span class="hljs-title">find_one</span>(<span class="hljs-params"><span class="hljs-variable">$n</span></span>)</span>&#123;<br>    <span class="hljs-keyword">global</span> <span class="hljs-variable">$names</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$names</span>[<span class="hljs-variable">$n</span>];<br>&#125;<br><span class="hljs-variable">$person</span> = &amp; find_one(<span class="hljs-number">1</span>);    <span class="hljs-comment">//Barney</span><br><span class="hljs-variable">$person</span> = <span class="hljs-string">&quot;Barnetta&quot;</span>;		<span class="hljs-comment">// 改变了$names[1]	</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>这段代码中,<code>find_one()</code>函数返回<code>$names[1]</code>的别名，而不是<code>$names[1]</code>值得拷贝，因为我们是通过引用赋值，所以<code>$person</code>是<code>name[1]</code>的别名。并且第二个赋值操作改变了<code>$names[1]</code>中的值</li>
-<li>这个技术有时被用于高效地从函数返回大型字符串或数组的值，然而,PHP的写时复制/浅复制(copy-on-write/shallow-copy)机制通常意味着从函数返回一个引用并不是必要的，除非你知道你可能将会改变数据，否则不必为一些大型的数据返回引用，返回引用的缺点是它比返回值慢，并且需要依赖shallow-copy的机制来确保在数据改变之前不会生成数据的副本</li>
+<li>这段代码中，<code>find_one()</code>函数返回<code>$names[1]</code>的别名，而不是<code>$names[1]</code>值得拷贝，因为我们是通过引用赋值，所以<code>$person</code>是<code>name[1]</code>的别名。并且第二个赋值操作改变了<code>$names[1]</code>中的值。</li>
+<li>这个技术有时被用于高效地从函数返回大型字符串或数组的值，然而，PHP的写时复制/浅复制(copy-on-write/shallow-copy)机制通常意味着从函数返回一个引用并不是必要的，除非你知道你可能将会改变数据，否则不必为一些大型的数据返回引用，返回引用的缺点是它比返回值慢，并且需要依赖shallow-copy的机制来确保在数据改变之前不会生成数据的副本。</li>
 </ul>
 
             </div>
@@ -259,7 +259,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%87%BD%E6%95%B0/">函数</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%87%BD%E6%95%B0%E3%80%82/">函数。</a>
                     
                   </div>
                 

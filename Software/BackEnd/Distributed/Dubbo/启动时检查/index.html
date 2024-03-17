@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Dubbo 启动时检查  Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check&#x3D;&quot;true&quot;,可以通过 check&#x3D;&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动 另外，如果你的 Spring 容器是懒加载的，或者通过">
+  <meta name="description" content="Dubbo 启动时检查  Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check&#x3D;&quot;true&quot;，可以通过 check&#x3D;&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。 另外，如果你的 Spring 容器是懒加载的，或者通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo 启动时检查">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/Dubbo/%E5%90%AF%E5%8A%A8%E6%97%B6%E6%A3%80%E6%9F%A5/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Dubbo 启动时检查  Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check&#x3D;&quot;true&quot;,可以通过 check&#x3D;&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动 另外，如果你的 Spring 容器是懒加载的，或者通过">
+<meta property="og:description" content="Dubbo 启动时检查  Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 check&#x3D;&quot;true&quot;，可以通过 check&#x3D;&quot;false&quot; 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。 另外，如果你的 Spring 容器是懒加载的，或者通过">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:31:12.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.492Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,15 +222,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Dubbo 启动时检查</h1>
 <ul>
-<li>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 <code>check=&quot;true&quot;</code>,可以通过 <code>check=&quot;false&quot;</code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动</li>
-<li>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check,否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 <code>check=&quot;false&quot;</code>,总是会返回引用，当服务恢复时，能自动连上</li>
+<li>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 <code>check=&quot;true&quot;</code>，可以通过 <code>check=&quot;false&quot;</code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。</li>
+<li>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 <code>check=&quot;false&quot;</code>，总是会返回引用，当服务恢复时，能自动连上。</li>
 </ul>
 <h2 id="通过-Spring配置文件">通过 Spring配置文件</h2>
 <ul>
@@ -251,9 +251,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">java -Ddubbo.reference.com.foo.BarService.check=<span class="hljs-literal">false</span><br>java -Ddubbo.consumer.check=<span class="hljs-literal">false</span><br>java -Ddubbo.registry.check=<span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
 <h2 id="配置的含义">配置的含义</h2>
 <ul>
-<li><code>dubbo.reference.com.foo.BarService.check</code>,覆盖 <code>com.foo.BarService</code>的 reference 的 check 值，就算配置中有声明，也会被覆盖</li>
-<li><code>dubbo.consumer.check=false</code>,是设置reference的 <code>check</code> 的缺省值，如果配置中有显式的声明，如:<code>&lt;dubbo:reference check=&quot;true&quot;/&gt;</code>,不会受影响</li>
-<li><code>dubbo.registry.check=false</code>,前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试</li>
+<li><code>dubbo.reference.com.foo.BarService.check</code>，覆盖 <code>com.foo.BarService</code>的 reference 的 check 值，就算配置中有声明，也会被覆盖。</li>
+<li><code>dubbo.consumer.check=false</code>，是设置reference的 <code>check</code> 的缺省值，如果配置中有显式的声明，如：<code>&lt;dubbo:reference check=&quot;true&quot;/&gt;</code>，不会受影响。</li>
+<li><code>dubbo.registry.check=false</code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。</li>
 </ul>
 
             </div>

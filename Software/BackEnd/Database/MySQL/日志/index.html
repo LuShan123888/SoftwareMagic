@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 日志  Mysql 有4种类型的日志:Error Log,Genaral Query Log,Binary Log 和 Slow Query Log  Error Log  记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志 Mysql的错误日志默认以$&amp;#123;hostname&amp;#125;.err存放在Mysql的">
+  <meta name="description" content="MySQL 日志  Mysql 有4种类型的日志：Error Log,Genaral Query Log,Binary Log 和 Slow Query Log  Error Log  记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志。 Mysql的错误日志默认以$&amp;#123;hostname&amp;#125;.err存放在Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 日志">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/MySQL/%E6%97%A5%E5%BF%97/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 日志  Mysql 有4种类型的日志:Error Log,Genaral Query Log,Binary Log 和 Slow Query Log  Error Log  记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志 Mysql的错误日志默认以$&amp;#123;hostname&amp;#125;.err存放在Mysql的">
+<meta property="og:description" content="MySQL 日志  Mysql 有4种类型的日志：Error Log,Genaral Query Log,Binary Log 和 Slow Query Log  Error Log  记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志。 Mysql的错误日志默认以$&amp;#123;hostname&amp;#125;.err存放在Mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.165Z">
-<meta property="article:modified_time" content="2024-03-17T17:34:39.791Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.502Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31 分钟
+      32 分钟
     </span>
   
 
@@ -229,119 +229,119 @@
             <div class="markdown-body">
               <h1>MySQL 日志</h1>
 <ul>
-<li>Mysql 有4种类型的日志:Error Log,Genaral Query Log,Binary Log 和 Slow Query Log</li>
+<li>Mysql 有4种类型的日志：Error Log,Genaral Query Log,Binary Log 和 Slow Query Log</li>
 </ul>
 <h2 id="Error-Log">Error Log</h2>
 <ul>
-<li>记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志</li>
-<li>Mysql的错误日志默认以<code>$&#123;hostname&#125;.err</code>存放在Mysql的日志目录，可以通过以下语句查看:</li>
+<li>记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志。</li>
+<li>Mysql的错误日志默认以<code>$&#123;hostname&#125;.err</code>存放在Mysql的日志目录，可以通过以下语句查看：</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show variables like <span class="hljs-string">&quot;log_error&quot;</span>;<br>+---------------+----------------+<br><span class="hljs-params">| Variable_name |</span> Value          <span class="hljs-params">|</span><br><span class="hljs-params">+---------------+----------------+</span><br><span class="hljs-params">|</span> log_error     <span class="hljs-params">| /tmp/mysql.log |</span><br>+---------------+---------------<br></code></pre></td></tr></table></figure>
 <ul>
-<li>错误日志配置:<code>/etc/my.cnf</code>中添加<code>log-error = $&#123;filename&#125;</code>来开启MySQL错误日志</li>
+<li>错误日志配置：<code>/etc/my.cnf</code>中添加<code>log-error = $&#123;filename&#125;</code>来开启MySQL错误日志。</li>
 </ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">log_error</span> = <span class="hljs-string">/tmp/mysql.log</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>查看错误日志</li>
+<li>查看错误日志。</li>
 </ul>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dart">bash<span class="hljs-number">-3.2</span># tail -f /tmp/mysql.log<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">41.467311</span>Z <span class="hljs-number">0</span> [Note] IPv6 <span class="hljs-keyword">is</span> available.<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">41.467324</span>Z <span class="hljs-number">0</span> [Note]   - <span class="hljs-string">&#x27;::&#x27;</span> resolves to <span class="hljs-string">&#x27;::&#x27;</span>;<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">41.467350</span>Z <span class="hljs-number">0</span> [Note] Server socket created <span class="hljs-keyword">on</span> IP: <span class="hljs-string">&#x27;::&#x27;</span>.<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">41.584287</span>Z <span class="hljs-number">0</span> [Note] Event Scheduler: Loaded <span class="hljs-number">0</span> events<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">41.584390</span>Z <span class="hljs-number">0</span> [Note] /usr/local/Cellar/mysql/<span class="hljs-number">5.7</span><span class="hljs-number">.9</span>/bin/mysqld: ready <span class="hljs-keyword">for</span> connections.<br>Version: <span class="hljs-string">&#x27;5.7.9&#x27;</span>  socket: <span class="hljs-string">&#x27;/tmp/mysql.sock&#x27;</span>  port: <span class="hljs-number">3306</span>  Homebrew<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">22</span>:<span class="hljs-number">42.540786</span>Z <span class="hljs-number">0</span> [Note] InnoDB: Buffer pool(s) load completed at <span class="hljs-number">151223</span> <span class="hljs-number">10</span>:<span class="hljs-number">22</span>:<span class="hljs-number">42</span><br><span class="hljs-number">151223</span> <span class="hljs-number">10</span>:<span class="hljs-number">22</span>:<span class="hljs-number">51</span> mysqld_safe A mysqld process already exists<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T02:<span class="hljs-number">25</span>:<span class="hljs-number">30.984395</span>Z <span class="hljs-number">2</span> [ERROR] Could not use /tmp/mysql_query.log <span class="hljs-keyword">for</span> logging (error <span class="hljs-number">13</span> - Permission denied). Turning logging off <span class="hljs-keyword">for</span> the server process. To turn it <span class="hljs-keyword">on</span> again: fix the cause, then either restart the query logging by using <span class="hljs-string">&quot;SET GLOBAL GENERAL_LOG=ON&quot;</span> or restart the MySQL server.<br><span class="hljs-number">2015</span><span class="hljs-number">-12</span><span class="hljs-number">-23</span>T07:<span class="hljs-number">28</span>:<span class="hljs-number">03.923562</span>Z <span class="hljs-number">0</span> [Note] InnoDB: page_cleaner: <span class="hljs-number">1000</span>ms intended loop took <span class="hljs-number">61473</span>ms. The settings might not be optimal. (flushed=<span class="hljs-number">0</span> and evicted=<span class="hljs-number">0</span>, during the time.)<br></code></pre></td></tr></table></figure>
 <h2 id="General-Query-Log">General Query Log</h2>
 <ul>
 <li>记录MySQL的日常日志，包括查询，修改，更新等的每条sql</li>
-<li>查看MySQL是否启用了查询日志</li>
+<li>查看MySQL是否启用了查询日志。</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show global variables like <span class="hljs-string">&quot;%general%&quot;</span>;<br>+----------------------------------------+----------------------+<br><span class="hljs-params">| Variable_name                          |</span> Value                <span class="hljs-params">|</span><br><span class="hljs-params">+----------------------------------------+----------------------+</span><br><span class="hljs-params">|</span> general_log                            <span class="hljs-params">| OFF                  |</span><br><span class="hljs-params">| general_log_file                       |</span> /tmp/mysql_query.log <span class="hljs-params">|</span><br><span class="hljs-params">+----------------------------------------+----------------------+</span><br><span class="hljs-params">2 rows <span class="hljs-keyword">in</span> set (0.00 sec)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>查询日志配置:<code>/etc/my.cnf</code>中添加<code>general-log-file =  $&#123;filename&#125;</code></li>
+<li>查询日志配置：<code>/etc/my.cnf</code>中添加<code>general-log-file =  $&#123;filename&#125;</code></li>
 </ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">log_bin</span> = <span class="hljs-string">/tmp/mysql_query.log</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>Mysql打开general log日志后，所有的查询语句都可以在general log文件中输出，如果打开，文件会非常大，建议调试的时候打开，平时关闭</li>
+<li>Mysql打开general log日志后，所有的查询语句都可以在general log文件中输出，如果打开，文件会非常大，建议调试的时候打开，平时关闭。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mysql&gt; <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> general_log = <span class="hljs-keyword">on</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-function">rows <span class="hljs-title">affected</span> (<span class="hljs-params"><span class="hljs-number">0.01</span> sec</span>)</span><br><span class="hljs-function"></span><br><span class="hljs-function">mysql&gt; <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> general_log</span> = off;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-function">rows <span class="hljs-title">affected</span> (<span class="hljs-params"><span class="hljs-number">0.01</span> sec</span>)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>注意</strong>:如果打开了日志功能，但是没有写入日志，那就有可能是MySQL对日志文件的权限不够，所以需要指定权限</li>
+<li><strong>注意</strong>：如果打开了日志功能，但是没有写入日志，那就有可能是MySQL对日志文件的权限不够，所以需要指定权限。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">chown mysql:mysql /tmp/mysql_query.log<br></code></pre></td></tr></table></figure>
 <h2 id="Binary-Log">Binary Log</h2>
 <ul>
-<li>二进制日志，包含一些事件，这些事件描述了数据库的改动，如建表，数据改动等，主要用于备份恢复，回滚操作等</li>
+<li>二进制日志，包含一些事件，这些事件描述了数据库的改动，如建表，数据改动等，主要用于备份恢复，回滚操作等。</li>
 <li><strong>作用</strong>
 <ul>
 <li>包含了所有更新了数据或者已经潜在更新了数据（比如没有匹配任何行的一个DELETE)</li>
-<li>包含关于每个更新数据库(DML)的语句的执行时间信息</li>
-<li>不包含没有修改任何数据的语句，如果需要启用该选项，需要开启通用日志功能</li>
-<li>主要目的是尽可能的将数据库恢复到数据库故障点，因为二进制日志包含备份后进行的所有更新</li>
-<li>用于在主复制服务器上记录所有将发送给从服务器的语句</li>
-<li>启用该选项数据库性能降低1%,但保障数据库完整性，对于重要数据库值得以性能换完整</li>
+<li>包含关于每个更新数据库(DML)的语句的执行时间信息。</li>
+<li>不包含没有修改任何数据的语句，如果需要启用该选项，需要开启通用日志功能。</li>
+<li>主要目的是尽可能的将数据库恢复到数据库故障点，因为二进制日志包含备份后进行的所有更新。</li>
+<li>用于在主复制服务器上记录所有将发送给从服务器的语句。</li>
+<li>启用该选项数据库性能降低1%，但保障数据库完整性，对于重要数据库值得以性能换完整。</li>
 </ul>
 </li>
-<li><strong>格式</strong>:Binlog有3种格式
+<li><strong>格式</strong>:Binlog有3种格式。
 <ul>
-<li><strong>STATMENT</strong>:每一条会修改数据的sql都会记录到master的binlog中,slave在复制的时候sql进程会解析成和原来master端执行多相同的sql再执行
+<li><strong>STATMENT</strong>：每一条会修改数据的sql都会记录到master的binlog中，slave在复制的时候sql进程会解析成和原来master端执行多相同的sql再执行。
 <ul>
-<li><strong>优点</strong>:在statement模式下首先就是解决了row模式的缺点，不需要记录每一行数据的变化减少了binlog日志量，节省了I/O以及存储资源，提高性能，因为他只需要记录在master上所执行的语句的细节以及执行语句时候的上下文信息</li>
+<li><strong>优点</strong>：在statement模式下首先就是解决了row模式的缺点，不需要记录每一行数据的变化减少了binlog日志量，节省了I/O以及存储资源，提高性能，因为他只需要记录在master上所执行的语句的细节以及执行语句时候的上下文信息。</li>
 <li><strong>缺点</strong>
 <ul>
-<li>在statement模式下，由于是记录的执行语句，所以，为了让这些语句在slave端也能正确执行，那么他还必须记录每条语句在执行的时候的一些相关信息，也就是上下文信息，以保证所有语句在slave端被执行的时候能够得到和在master端执行时候相同的结果</li>
-<li>由于MySQL现在发展比较快，很多的新功能不断的加入，使MySQL的复制遇到了不小的挑战，自然复制的时候涉及到越复杂的内容,bug也就越容易出现，在statement中，目前已经发现不少情况会造成Mysql的复制出现问题，主要是修改数据的时候使用了某些特定的函数或者功能的时候会出现，比如:<code>sleep()</code>函数在有些版本中就不能被正确复制，在存储过程中使用了<code>last_insert_id()</code>函数，可能会使slave和master上得到不一致的id等等</li>
+<li>在statement模式下，由于是记录的执行语句，所以，为了让这些语句在slave端也能正确执行，那么他还必须记录每条语句在执行的时候的一些相关信息，也就是上下文信息，以保证所有语句在slave端被执行的时候能够得到和在master端执行时候相同的结果。</li>
+<li>由于MySQL现在发展比较快，很多的新功能不断的加入，使MySQL的复制遇到了不小的挑战，自然复制的时候涉及到越复杂的内容，bug也就越容易出现，在statement中，目前已经发现不少情况会造成Mysql的复制出现问题，主要是修改数据的时候使用了某些特定的函数或者功能的时候会出现，比如：<code>sleep()</code>函数在有些版本中就不能被正确复制，在存储过程中使用了<code>last_insert_id()</code>函数，可能会使slave和master上得到不一致的id等等。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>ROW</strong>:日志中会记录成每一行数据被修改的形式，然后在slave端再对相同的数据进行修改，只记录要修改的数据，只有value,不会有sql多表关联的情况
+<li><strong>ROW</strong>：日志中会记录成每一行数据被修改的形式，然后在slave端再对相同的数据进行修改，只记录要修改的数据，只有value，不会有sql多表关联的情况。
 <ul>
-<li><strong>优点</strong>:在row模式下,bin-log中可以不记录执行的sql语句的上下文相关的信息，仅仅只需要记录那一条记录被修改成什么样了，所以row的日志内容会非常清楚的记录下每一行数据修改的细节，而且不会出现某些特定情况下的存储过程和function,以及trigger的调用和触发无法被正确复制问题</li>
-<li><strong>缺点</strong>:在row模式下，所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容</li>
+<li><strong>优点</strong>：在row模式下，bin-log中可以不记录执行的sql语句的上下文相关的信息，仅仅只需要记录那一条记录被修改成什么样了，所以row的日志内容会非常清楚的记录下每一行数据修改的细节，而且不会出现某些特定情况下的存储过程和function，以及trigger的调用和触发无法被正确复制问题。</li>
+<li><strong>缺点</strong>：在row模式下，所有的执行的语句当记录到日志中的时候，都将以每行记录的修改来记录，这样可能会产生大量的日志内容。</li>
 </ul>
 </li>
-<li><strong>MIXED</strong>:MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种</li>
+<li><strong>MIXED</strong>:MySQL 会根据执行的每一条具体的 SQL 语句来区分对待记录的日志形式，也就是在 statement 和 row 之间选择一种。</li>
 </ul>
 </li>
 </ul>
 <h3 id="配置">配置</h3>
 <ul>
-<li>查看mysql中二进制文件的配置情况</li>
+<li>查看mysql中二进制文件的配置情况。</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show variables like <span class="hljs-string">&quot;%log_bin%&quot;</span>;<br>+---------------------------------+-------+<br><span class="hljs-params">| Variable_name                   |</span> Value <span class="hljs-params">|</span><br><span class="hljs-params">+---------------------------------+-------+</span><br><span class="hljs-params">|</span> log_bin                         <span class="hljs-params">| OFF   |</span><br><span class="hljs-params">| log_bin_basename                |</span>       <span class="hljs-params">|</span><br><span class="hljs-params">|</span> log_bin_index                   <span class="hljs-params">|       |</span><br><span class="hljs-params">| log_bin_trust_function_creators |</span> OFF   <span class="hljs-params">|</span><br><span class="hljs-params">|</span> log_bin_use_v1_row_events       <span class="hljs-params">| OFF   |</span><br><span class="hljs-params">| sql_log_bin                     |</span> ON    <span class="hljs-params">|</span><br><span class="hljs-params">+---------------------------------+-------+</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>二进制日志配置: <code>/etc/my.cnf</code>添加<code>log_bin =  $&#123;filename&#125;</code>开启binlog</li>
+<li>二进制日志配置： <code>/etc/my.cnf</code>添加<code>log_bin =  $&#123;filename&#125;</code>开启binlog</li>
 </ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">log_bin</span> = <span class="hljs-string">/tmp/mysql-bin.log</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p><code>log_bin</code>:设置此参数表示启用binlog功能，并指定路径名称</p>
+<p><code>log_bin</code>：设置此参数表示启用binlog功能，并指定路径名称。</p>
 </li>
 <li>
-<p><code>log_bin_index</code>:设置此参数是指定二进制索引文件的路径与名称</p>
+<p><code>log_bin_index</code>：设置此参数是指定二进制索引文件的路径与名称。</p>
 </li>
 <li>
-<p><code>binlog_do_db</code>:此参数表示只记录指定数据库的二进制日志</p>
+<p><code>binlog_do_db</code>：此参数表示只记录指定数据库的二进制日志。</p>
 </li>
 <li>
-<p><code>binlog_ignore_db</code>:此参数表示不记录指定的数据库的二进制日志</p>
+<p><code>binlog_ignore_db</code>：此参数表示不记录指定的数据库的二进制日志。</p>
 </li>
 <li>
-<p><code>max_binlog_cache_size</code>:此参数表示binlog使用的内存最大的尺寸</p>
+<p><code>max_binlog_cache_size</code>：此参数表示binlog使用的内存最大的尺寸。</p>
 </li>
 <li>
-<p><code>binlog_cache_size</code>:此参数表示binlog使用的内存大小，可以通过状态变量binlog_cache_use和binlog_cache_disk_use来帮助测试</p>
+<p><code>binlog_cache_size</code>：此参数表示binlog使用的内存大小，可以通过状态变量binlog_cache_use和binlog_cache_disk_use来帮助测试。</p>
 </li>
 <li>
-<p><code>binlog_cache_use</code>:使用二进制日志缓存的事务数量</p>
+<p><code>binlog_cache_use</code>：使用二进制日志缓存的事务数量。</p>
 </li>
 <li>
-<p><code>binlog_cache_disk_use</code>:使用二进制日志缓存但超过binlog_cache_size值并使用临时文件来保存事务中的语句的事务数量</p>
+<p><code>binlog_cache_disk_use</code>：使用二进制日志缓存但超过binlog_cache_size值并使用临时文件来保存事务中的语句的事务数量。</p>
 </li>
 <li>
-<p><code>max_binlog_size</code>:binlog最大值，最大和默认值是1GB,该设置并不能严格控制Binlog的大小，尤其是Binlog比较靠近最大值而又遇到一个比较大事务时，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的所有SQL都记录进当前日志，直到事务结束</p>
+<p><code>max_binlog_size</code>:binlog最大值，最大和默认值是1GB，该设置并不能严格控制Binlog的大小，尤其是Binlog比较靠近最大值而又遇到一个比较大事务时，为了保证事务的完整性，不可能做切换日志的动作，只能将该事务的所有SQL都记录进当前日志，直到事务结束。</p>
 </li>
 <li>
-<p><code>sync_binlog</code>:这个参数直接影响MySQL的性能和完整性</p>
+<p><code>sync_binlog</code>：这个参数直接影响MySQL的性能和完整性。</p>
 <ul>
-<li><code>sync_binlog=0</code>:当事务提交后,Mysql仅仅是将binlog_cache中的数据写入Binlog文件，但不执行fsync之类的磁盘同步指令通知文件系统将缓存刷新到磁盘，而让Filesystem自行决定什么时候来做同步，这个是性能最好的</li>
-<li><code>sync_binlog=n</code>:在进行n次事务提交以后,Mysql将执行一次fsync之类的磁盘同步指令，同志文件系统将Binlog文件缓存刷新到磁盘</li>
-<li>Mysql中默认的设置是sync_binlog=0,即不作任何强制性的磁盘刷新指令，这时性能是最好的，但风险也是最大的，一旦系统绷Crash,在文件系统缓存中的所有Binlog信息都会丢失</li>
+<li><code>sync_binlog=0</code>：当事务提交后，Mysql仅仅是将binlog_cache中的数据写入Binlog文件，但不执行fsync之类的磁盘同步指令通知文件系统将缓存刷新到磁盘，而让Filesystem自行决定什么时候来做同步，这个是性能最好的。</li>
+<li><code>sync_binlog=n</code>：在进行n次事务提交以后，Mysql将执行一次fsync之类的磁盘同步指令，同志文件系统将Binlog文件缓存刷新到磁盘。</li>
+<li>Mysql中默认的设置是sync_binlog=0，即不作任何强制性的磁盘刷新指令，这时性能是最好的，但风险也是最大的，一旦系统绷Crash，在文件系统缓存中的所有Binlog信息都会丢失。</li>
 </ul>
 </li>
 <li>
@@ -354,14 +354,14 @@
 </ul>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-number">151224</span> <span class="hljs-number">00</span>:<span class="hljs-number">37</span>:<span class="hljs-number">34</span> mysqld_safe Starting mysqld daemon <span class="hljs-keyword">with</span> databases <span class="hljs-keyword">from</span> /usr/local/<span class="hljs-keyword">var</span>/mysql<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>643998Z <span class="hljs-number">0</span> [Warning] TIMESTAMP <span class="hljs-keyword">with</span> implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation <span class="hljs-keyword">for</span> more details).<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>644124Z <span class="hljs-number">0</span> [Warning] <span class="hljs-string">&#x27;NO_ZERO_DATE&#x27;</span>, <span class="hljs-string">&#x27;NO_ZERO_IN_DATE&#x27;</span> and <span class="hljs-string">&#x27;ERROR_FOR_DIVISION_BY_ZERO&#x27;</span> sql modes should be used <span class="hljs-keyword">with</span> strict mode. They will be merged <span class="hljs-keyword">with</span> strict mode <span class="hljs-keyword">in</span> a future release.<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>644129Z <span class="hljs-number">0</span> [Warning] <span class="hljs-string">&#x27;NO_AUTO_CREATE_USER&#x27;</span> sql mode was not set.<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>644189Z <span class="hljs-number">0</span> [Warning] Insecure configuration <span class="hljs-keyword">for</span> --secure-file-priv: Current value does not restrict location <span class="hljs-keyword">of</span> generated files. Consider setting it to a valid, non-empty path.<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>644226Z <span class="hljs-number">0</span> [Note] /usr/local/Cellar/mysql/<span class="hljs-number">5.7</span><span class="hljs-number">.9</span>/bin/mysqld (mysqld <span class="hljs-number">5.7</span><span class="hljs-number">.9</span>-log) starting <span class="hljs-keyword">as</span> process <span class="hljs-number">24268</span> ...<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>646468Z <span class="hljs-number">0</span> [Warning] Setting lower_case_table_names=<span class="hljs-number">2</span> because file system <span class="hljs-keyword">for</span> /usr/local/<span class="hljs-keyword">var</span>/mysql/ is <span class="hljs-keyword">case</span> insensitive<br><span class="hljs-number">2015</span>-<span class="hljs-number">12</span>-23T16:<span class="hljs-number">37</span>:<span class="hljs-number">34.</span>646945Z <span class="hljs-number">0</span> [ERROR] You have enabled the binary log, but you haven<span class="hljs-string">&#x27;t provided the mandatory server-id. Please refer to the proper server start-up parameters documentation</span><br><span class="hljs-string">2015-12-23T16:37:34.646978Z 0 [ERROR] Aborting</span><br><span class="hljs-string"></span><br><span class="hljs-string">2015-12-23T16:37:34.646991Z 0 [Note] Binlog end</span><br><span class="hljs-string">2015-12-23T16:37:34.647068Z 0 [Note] /usr/local/Cellar/mysql/5.7.9/bin/mysqld: Shutdown complete</span><br><span class="hljs-string"></span><br><span class="hljs-string">151224 00:37:34 mysqld_safe mysqld from pid file /usr/local/Cellar/mysql/5.7.9/data/mysql.pid ended</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>You have enabled the binary log, but you haven’t provided the mandatory server-id. Please refer to the proper server start-up parameters documentation</strong>:说明需要配置一个server-id</li>
-<li>在配置文件<code>/etc/my.cn</code>中添加<code>server-id = 1</code>,再重启MySQL,解决问题，而且在配置的bin-log同级目录增加了<code>mysql-bin.000001</code>,<code>mysql-bin.index</code>,<code>mysql-bin.log</code>三个文件，前两个是自动生成</li>
-<li>登录MySQL,再次查看bin-log的状态，属于启用状态</li>
+<li><strong>You have enabled the binary log, but you haven’t provided the mandatory server-id. Please refer to the proper server start-up parameters documentation</strong>：说明需要配置一个server-id</li>
+<li>在配置文件<code>/etc/my.cn</code>中添加<code>server-id = 1</code>，再重启MySQL，解决问题，而且在配置的bin-log同级目录增加了<code>mysql-bin.000001</code>,<code>mysql-bin.index</code>,<code>mysql-bin.log</code>三个文件，前两个是自动生成。</li>
+<li>登录MySQL，再次查看bin-log的状态，属于启用状态。</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show variables like <span class="hljs-string">&quot;%log_bin%&quot;</span>;<br>+---------------------------------+----------------------+<br><span class="hljs-params">| Variable_name                   |</span> Value                <span class="hljs-params">|</span><br><span class="hljs-params">+---------------------------------+----------------------+</span><br><span class="hljs-params">|</span> log_bin                         <span class="hljs-params">| ON                   |</span><br><span class="hljs-params">| log_bin_basename                |</span> /tmp/mysql-bin       <span class="hljs-params">|</span><br><span class="hljs-params">|</span> log_bin_index                   <span class="hljs-params">| /tmp/mysql-bin.index |</span><br><span class="hljs-params">| log_bin_trust_function_creators |</span> OFF                  <span class="hljs-params">|</span><br><span class="hljs-params">|</span> log_bin_use_v1_row_events       <span class="hljs-params">| OFF                  |</span><br><span class="hljs-params">| sql_log_bin                     |</span> ON                   <span class="hljs-params">|</span><br><span class="hljs-params">+---------------------------------+----------------------+</span><br></code></pre></td></tr></table></figure>
 <h3 id="删除日志">删除日志</h3>
 <ul>
-<li>binlog的删除可以手动删除或自动删除</li>
+<li>binlog的删除可以手动删除或自动删除。</li>
 </ul>
 <p><strong>自动删除binlog</strong></p>
 <ul>
@@ -369,63 +369,63 @@
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show binary logs;<br>+------------------+-----------+<br><span class="hljs-params">| Log_name         |</span> File_size <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-----------+</span><br><span class="hljs-params">|</span> mysql-bin.<span class="hljs-number">000001</span> <span class="hljs-params">|       869 |</span><br>+------------------+-----------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; show variables like <span class="hljs-string">&#x27;expire_logs_days&#x27;</span> ;<br>+------------------+-------+<br><span class="hljs-params">| Variable_name    |</span> Value <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-------+</span><br><span class="hljs-params">|</span> expire_logs_days <span class="hljs-params">| 0     |</span><br>+------------------+-------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; set global expire_logs_days=<span class="hljs-number">3</span>;<br><br>Query OK, <span class="hljs-number">0</span> rows affected (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; show variables like <span class="hljs-string">&#x27;expire_logs_days&#x27;</span> ;<br>+------------------+-------+<br><span class="hljs-params">| Variable_name    |</span> Value <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-------+</span><br><span class="hljs-params">|</span> expire_logs_days <span class="hljs-params">| 3     |</span><br>+------------------+-------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
 <p><strong>手动删除binlog</strong></p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mysql&gt; reset master;   <span class="hljs-comment">// 删除master的binlog</span><br>mysql&gt; reset slave;    <span class="hljs-comment">// 删除slave的中继日志</span><br>mysql&gt; purge master logs before <span class="hljs-string">&#x27;2012-03-30 17:20:00&#x27;</span>;  <span class="hljs-comment">// 删除指定日期以前的日志索引中binlog日志文件</span><br>mysql&gt; purge master logs to <span class="hljs-string">&#x27;mysql-bin.000001&#x27;</span>;   <span class="hljs-comment">// 删除指定日志文件的日志索引中binlog日志文件</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mysql&gt; reset master;   <span class="hljs-comment">// 删除master的binlog</span><br>mysql&gt; reset slave;    <span class="hljs-comment">// 删除slave的中继日志。</span><br>mysql&gt; purge master logs before <span class="hljs-string">&#x27;2012-03-30 17:20:00&#x27;</span>;  <span class="hljs-comment">// 删除指定日期以前的日志索引中binlog日志文件。</span><br>mysql&gt; purge master logs to <span class="hljs-string">&#x27;mysql-bin.000001&#x27;</span>;   <span class="hljs-comment">// 删除指定日志文件的日志索引中binlog日志文件。</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>或者用操作系统命令直接删除</li>
+<li>或者用操作系统命令直接删除。</li>
 </ul>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart">mysql&gt; <span class="hljs-keyword">set</span> sql_log_bin=<span class="hljs-number">1</span>/<span class="hljs-number">0</span>; <span class="hljs-comment">// 如果用户有super权限，可以启用或禁用当前会话的binlog记录</span><br>mysql&gt; <span class="hljs-keyword">show</span> master logs; <span class="hljs-comment">// 查看master的binlog日志</span><br>mysql&gt; <span class="hljs-keyword">show</span> binary logs; <span class="hljs-comment">// 查看master的binlog日志</span><br>mysql&gt; <span class="hljs-keyword">show</span> master status; <span class="hljs-comment">// 用于提供master二进制日志文件的状态信息</span><br>mysql&gt; <span class="hljs-keyword">show</span> slave hosts; <span class="hljs-comment">// 显示当前注册的slave的列表，不以--report-host=slave_name选项为开头的slave不会显示在本列表中</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart">mysql&gt; <span class="hljs-keyword">set</span> sql_log_bin=<span class="hljs-number">1</span>/<span class="hljs-number">0</span>; <span class="hljs-comment">// 如果用户有super权限，可以启用或禁用当前会话的binlog记录。</span><br>mysql&gt; <span class="hljs-keyword">show</span> master logs; <span class="hljs-comment">// 查看master的binlog日志。</span><br>mysql&gt; <span class="hljs-keyword">show</span> binary logs; <span class="hljs-comment">// 查看master的binlog日志。</span><br>mysql&gt; <span class="hljs-keyword">show</span> master status; <span class="hljs-comment">// 用于提供master二进制日志文件的状态信息。</span><br>mysql&gt; <span class="hljs-keyword">show</span> slave hosts; <span class="hljs-comment">// 显示当前注册的slave的列表，不以--report-host=slave_name选项为开头的slave不会显示在本列表中。</span><br></code></pre></td></tr></table></figure>
 <h3 id="查看日志">查看日志</h3>
 <ul>
-<li>通过MySQLbinlog 查看日志文件</li>
+<li>通过MySQLbinlog 查看日志文件。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ MySQLbinlog /tmp/mysql-bin.log<br></code></pre></td></tr></table></figure>
 <h2 id="Slow-Query-Log">Slow Query Log</h2>
 <ul>
-<li>记录Mysql 慢查询的日志</li>
+<li>记录Mysql 慢查询的日志。</li>
 </ul>
 <h3 id="配置-2">配置</h3>
 <ul>
-<li>查看日志功能是否开启</li>
+<li>查看日志功能是否开启。</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show variables like <span class="hljs-string">&quot;%slow%&quot;</span>;<br>+---------------------------+----------------------------------------------------+<br><span class="hljs-params">| Variable_name             |</span> Value                                              <span class="hljs-params">|</span><br><span class="hljs-params">+---------------------------+----------------------------------------------------+</span><br><span class="hljs-params">|</span> log_slow_admin_statements <span class="hljs-params">| OFF                                                |</span><br><span class="hljs-params">| log_slow_slave_statements |</span> OFF                                                <span class="hljs-params">|</span><br><span class="hljs-params">|</span> slow_launch_time          <span class="hljs-params">| 2                                                  |</span><br><span class="hljs-params">| slow_query_log            |</span> OFF                                                <span class="hljs-params">|</span><br><span class="hljs-params">|</span> slow_query_log_file       <span class="hljs-params">| /usr/local/var/mysql/tongkundeMacBook-Pro-slow.log |</span><br>+---------------------------+----------------------------------------------------+<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p><code>slow_query_log</code>为OFF ,说明未开启慢日志</p>
+<p><code>slow_query_log</code>为OFF ，说明未开启慢日志。</p>
 </li>
 <li>
-<p>查看默认设置的慢查询的时间</p>
+<p>查看默认设置的慢查询的时间。</p>
 </li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show variables like <span class="hljs-string">&quot;%long_query%&quot;</span>;<br>+-----------------+-----------+<br><span class="hljs-params">| Variable_name   |</span> Value     <span class="hljs-params">|</span><br><span class="hljs-params">+-----------------+-----------+</span><br><span class="hljs-params">|</span> long_query_time <span class="hljs-params">| 10.000000 |</span><br>+-----------------+-----------+<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以看出，默认是10秒</li>
-<li>打开<code>/etc/my.cnf</code>,加上慢查询的配置</li>
+<li>可以看出，默认是10秒。</li>
+<li>打开<code>/etc/my.cnf</code>，加上慢查询的配置。</li>
 </ul>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">slow-query-log</span> = <span class="hljs-string">1</span><br><span class="hljs-meta">slow-query-log-file</span> = <span class="hljs-string">/tmp/mysql-slow.log</span><br><span class="hljs-attr">long_query_time</span> = <span class="hljs-string">1 #设置满请求时间，设置查多少秒的查询算是慢查询</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">slow-query-log</span> = <span class="hljs-string">1</span><br><span class="hljs-meta">slow-query-log-file</span> = <span class="hljs-string">/tmp/mysql-slow.log</span><br><span class="hljs-attr">long_query_time</span> = <span class="hljs-string">1 #设置满请求时间，设置查多少秒的查询算是慢查询。</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>保存退出后要重启MySQL</li>
 </ul>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">$ mysql<span class="hljs-selector-class">.server</span> restart;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>打开慢日志功能</li>
+<li>打开慢日志功能。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mysql&gt; <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> slow_query_log = <span class="hljs-keyword">on</span>;<br>ERROR <span class="hljs-number">29</span> (HY000): File <span class="hljs-string">&#x27;/tmp/mysql-slow.log&#x27;</span> <span class="hljs-function"><span class="hljs-keyword">not</span> <span class="hljs-title">found</span> (<span class="hljs-params">Errcode: <span class="hljs-number">13</span> - Permission denied</span>)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>报错，需要分配权限</li>
+<li>报错，需要分配权限。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">chown mysql:mysql /tmp/mysql-slow.log<br></code></pre></td></tr></table></figure>
 <ul>
-<li>回到MySQL,再次打开慢日志</li>
+<li>回到MySQL，再次打开慢日志。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mysql&gt; <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span> slow_query_log = <span class="hljs-keyword">on</span>;<br>Query OK, <span class="hljs-number">0</span> <span class="hljs-function">rows <span class="hljs-title">affected</span> (<span class="hljs-params"><span class="hljs-number">0.00</span> sec</span>)</span><br></code></pre></td></tr></table></figure>
 <h3 id="查看日志-2">查看日志</h3>
 <ul>
-<li>先监控日志输出:<code>tail -f /tmp/mysql-slow.log</code></li>
-<li>在MySQL中分别执行两句查询</li>
+<li>先监控日志输出：<code>tail -f /tmp/mysql-slow.log</code></li>
+<li>在MySQL中分别执行两句查询。</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; SELECT <span class="hljs-number">2</span>;<br>+---+<br><span class="hljs-params">| 2 |</span><br>+---+<br><span class="hljs-params">| 2 |</span><br>+---+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; SELECT sleep(<span class="hljs-number">3</span>);<br>+----------+<br><span class="hljs-params">| sleep(3) |</span><br>+----------+<br><span class="hljs-params">|        0 |</span><br>+----------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">3.01</span> sec)<br></code></pre></td></tr></table></figure>
 <ul>
-<li>查看日志文件的输出</li>
+<li>查看日志文件的输出。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># Time: 2015-12-23T15:50:44.140140Z</span><br><span class="hljs-meta"># User@Host: root[root] @ localhost []  Id:     2</span><br><span class="hljs-meta"># Query_time: 3.003542  Lock_time: 0.000000 Rows_sent: 1  Rows_examined: 0</span><br>SET timestamp=<span class="hljs-number">1450885844</span>;<br><span class="hljs-function">SELECT <span class="hljs-title">sleep</span>(<span class="hljs-params"><span class="hljs-number">3</span></span>)</span>;<br></code></pre></td></tr></table></figure>
             </div>

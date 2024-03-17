@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Zookeeper 数据模型  在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode,并以 key&#x2F;value 形式存储数据 整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 &#x2F; 开头  zookeeper 数据结构 zookkeeper 提供的名称空间非常类似于标准文件系统,key-value 的形式存储">
+  <meta name="description" content="Zookeeper 数据模型  在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode，并以 key&#x2F;value 形式存储数据。 整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 &#x2F; 开头。  zookeeper 数据结构 zookkeeper 提供的名称空间非常类似于标准文件系统，key-value 的形式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zookeeper 数据模型">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/ZooKeeper/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Zookeeper 数据模型  在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode,并以 key&#x2F;value 形式存储数据 整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 &#x2F; 开头  zookeeper 数据结构 zookkeeper 提供的名称空间非常类似于标准文件系统,key-value 的形式存储">
+<meta property="og:description" content="Zookeeper 数据模型  在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode，并以 key&#x2F;value 形式存储数据。 整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 &#x2F; 开头。  zookeeper 数据结构 zookkeeper 提供的名称空间非常类似于标准文件系统，key-value 的形式">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-14-zknamespace.jpg">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.893Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -174,7 +174,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      881 字
+      886 字
     </span>
   
 
@@ -224,26 +224,26 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Zookeeper 数据模型</h1>
 <ul>
-<li>在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode,并以 key/value 形式存储数据</li>
-<li>整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 <code>/</code> 开头</li>
+<li>在 zookeeper 中，可以说 zookeeper 中的所有存储的数据是由 znode 组成的，节点也称为 znode，并以 key/value 形式存储数据。</li>
+<li>整体结构类似于 linux 文件系统的模式以树形结构存储，其中根路径以 <code>/</code> 开头。</li>
 </ul>
 <h2 id="zookeeper-数据结构">zookeeper 数据结构</h2>
-<p>zookkeeper 提供的名称空间非常类似于标准文件系统,key-value 的形式存储，名称 key 由斜线 <code>/</code> 分割的一系列路径元素,zookeeper 名称空间中的每个节点都是由一个路径标识</p>
+<p>zookkeeper 提供的名称空间非常类似于标准文件系统，key-value 的形式存储，名称 key 由斜线 <code>/</code> 分割的一系列路径元素，zookeeper 名称空间中的每个节点都是由一个路径标识。</p>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-14-zknamespace.jpg" srcset="/images/loading.gif" lazyload alt=""></p>
 <h3 id="Znode-的状态属性">Znode 的状态属性</h3>
 <ul>
-<li>使用get命令可以获得znode的属性</li>
+<li>使用get命令可以获得znode的属性。</li>
 </ul>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">[zk: localhost:2181(CONNECTED) 2] get /dubbo</span><br>127.0.0.1<br>cZxid = 0x3<br>ctime = Wed Jul 29 13:17:32 CST 2020<br>mZxid = 0x3<br>mtime = Wed Jul 29 13:17:32 CST 2020<br>pZxid = 0x5<br>cversion = 1<br>dataVersion = 0<br>aclVersion = 0<br>ephemeralOwner = 0x0<br>dataLength = 9<br>numChildren = 1<br></code></pre></td></tr></table></figure>
 <ul>
-<li>其中第一行显示的<code>127.0.01</code>是该节点的 value 值</li>
+<li>其中第一行显示的<code>127.0.01</code>是该节点的 value 值。</li>
 </ul>
 <table>
 <thead>
@@ -271,7 +271,7 @@
 </tr>
 <tr>
 <td style="text-align:left">pZxid</td>
-<td style="text-align:left">表示该节点的子节点列表最后一次修改的事务ID,添加子节点或删除子节点就会影响子节点列表，但是修改子节点的数据内容则不影响该ID**(注意，只有子节点列表变更了才会变更pzxid,子节点内容变更不会影响pzxid)**</td>
+<td style="text-align:left">表示该节点的子节点列表最后一次修改的事务ID，添加子节点或删除子节点就会影响子节点列表，但是修改子节点的数据内容则不影响该ID**(注意，只有子节点列表变更了才会变更pzxid，子节点内容变更不会影响pzxid)**</td>
 </tr>
 <tr>
 <td style="text-align:left">cversion</td>

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Git 问题解决 删除某些文件的全部提交记录  查询较大的文件  12345cd ROOT_OF_YOUR_REPOgit verify-pack -v .git&#x2F;objects&#x2F;pack&#x2F;*.idx  | sort -k 3 -n | tail -3edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 331967034d">
+  <meta name="description" content="Git 问题解决 删除某些文件的全部提交记录  查询较大的文件。  12345cd ROOT_OF_YOUR_REPOgit verify-pack -v .git&#x2F;objects&#x2F;pack&#x2F;*.idx  | sort -k 3 -n | tail -3edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 331967034">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/VCS/Git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Git 问题解决 删除某些文件的全部提交记录  查询较大的文件  12345cd ROOT_OF_YOUR_REPOgit verify-pack -v .git&#x2F;objects&#x2F;pack&#x2F;*.idx  | sort -k 3 -n | tail -3edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 331967034d">
+<meta property="og:description" content="Git 问题解决 删除某些文件的全部提交记录  查询较大的文件。  12345cd ROOT_OF_YOUR_REPOgit verify-pack -v .git&#x2F;objects&#x2F;pack&#x2F;*.idx  | sort -k 3 -n | tail -3edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 331967034">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:29:20.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:54.510Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.042Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      5 分钟
     </span>
   
 
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -230,21 +230,21 @@
               <h1>Git 问题解决</h1>
 <h2 id="删除某些文件的全部提交记录">删除某些文件的全部提交记录</h2>
 <ol>
-<li>查询较大的文件</li>
+<li>查询较大的文件。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd ROOT_OF_YOUR_REPO<br>git verify-pack -v .git/objects/pack/*.idx  | sort -k 3 -n | tail -3<br>edcfd306818542eecbbea3982ae83fc5a726cbe5 blob   6888412 2402254 3319670<br>34d5e541f538e86861f2cbcbd99c31172fcbbc9b blob   11080068 3615988 29584633<br>81c33b34dbffb320aa797c9c08d50c7502bce925 blob   13362444 4524205 13876485<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>获取hash对应的文件名</li>
+<li>获取hash对应的文件名。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git rev-list --objects --all | grep 81c33b34dbffb320aa797c9c08d50c7502bce925<br>34d5e541f538e86861f2cbcbd99c31172fcbbc9b tests/tests<br></code></pre></td></tr></table></figure>
 <ol start="3">
-<li>删除该文件</li>
+<li>删除该文件。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git filter-branch --force --index-filter   &quot;git rm --cached --ignore-unmatch tests/tests&quot;   --prune-empty --tag-name-filter cat -- --all<br></code></pre></td></tr></table></figure>
 <ol start="4">
 <li>推送到github</li>
 </ol>
-<p>根据文件所在的位置，二选一，你可以都尝试，只要管用即可</p>
+<p>根据文件所在的位置，二选一，你可以都尝试，只要管用即可。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">git push origin --force --all<br>git push origin --force --tags<br></code></pre></td></tr></table></figure>
 <ol start="5">
 <li>本地GC</li>
@@ -252,7 +252,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">git for-each-ref --format=&quot;delete %(refname)&quot; refs/original | git update-ref --stdin<br>git reflog expire --expire=now --all<br>git gc --prune=now<br></code></pre></td></tr></table></figure>
 <h2 id="清除所有提交历史">清除所有提交历史</h2>
 <ol>
-<li>提交未保存的修改并切换到新的分支</li>
+<li>提交未保存的修改并切换到新的分支。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git checkout --orphan latest_branch<br></code></pre></td></tr></table></figure>
 <ol start="2">
@@ -260,11 +260,11 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git add -A<br></code></pre></td></tr></table></figure>
 <ol start="3">
-<li>提交跟踪过的文件</li>
+<li>提交跟踪过的文件。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git commit -am &quot;first commit&quot;<br></code></pre></td></tr></table></figure>
 <ol start="4">
-<li>删除master分支</li>
+<li>删除master分支。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git branch -D main<br></code></pre></td></tr></table></figure>
 <ol start="5">
@@ -272,21 +272,21 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git branch -m main<br></code></pre></td></tr></table></figure>
 <ol start="6">
-<li>提交到远程master分支</li>
+<li>提交到远程master分支。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git push -f origin main<br></code></pre></td></tr></table></figure>
 <h2 id="无法访问-git-github-com">无法访问 git://github.com</h2>
-<p><strong>解决方法</strong>:将<code>git://</code>替换为<code>https://</code></p>
+<p><strong>解决方法</strong>：将<code>git://</code>替换为<code>https://</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global url.https://github.com/.insteadOf git://github.com/<br></code></pre></td></tr></table></figure>
 <h2 id="Git-身份验证失败">Git 身份验证失败</h2>
-<p><strong>解决方法</strong>:清除密码缓存</p>
+<p><strong>解决方法</strong>：清除密码缓存。</p>
 <ul>
-<li>提交命令的时候我们用户名和密码填错了，身份认证失败后，就不会再弹用户名和密码了，可以直接使用下面的命令</li>
+<li>提交命令的时候我们用户名和密码填错了，身份认证失败后，就不会再弹用户名和密码了，可以直接使用下面的命令。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --system --<span class="hljs-built_in">unset</span> credential.helper<br></code></pre></td></tr></table></figure>
 <h3 id="CRLF-LF自动转换">CRLF/LF自动转换</h3>
-<p><strong>解决方法</strong>:修改配置文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF,检出时转换为CRLF</span><br>git config --global core.autocrlf true<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF,检出时不转换</span><br>git config --global core.autocrlf input<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 提交检出均不转换</span><br>git config --global core.autocrlf false<br></code></pre></td></tr></table></figure>
+<p><strong>解决方法</strong>：修改配置文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF，检出时转换为CRLF</span><br>git config --global core.autocrlf true<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 提交时转换为LF，检出时不转换</span><br>git config --global core.autocrlf input<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 提交检出均不转换</span><br>git config --global core.autocrlf false<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

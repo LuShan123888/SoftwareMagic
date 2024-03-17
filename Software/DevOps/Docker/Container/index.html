@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Docker Container 容器生命周期 run 1$ docker run [可选参数] 镜像名&#x2F;镜像ID [命令]  -a stdin:指定标准输入输出内容类型，可选 STDIN&#x2F;STDOUT&#x2F;STDERR 三项; -d:后台运行容器，并返回容器ID -i:以交互模式运行容器，通常与 -t 同时使用 -P:随机端口映射，容器内部端口随机映射到主机的端口 -p, --publish&#x3D;[]:">
+  <meta name="description" content="Docker Container 容器生命周期 run 1$ docker run [可选参数] 镜像名&#x2F;镜像ID [命令]  -a stdin：指定标准输入输出内容类型，可选 STDIN&#x2F;STDOUT&#x2F;STDERR 三项; -d：后台运行容器，并返回容器ID -i：以交互模式运行容器，通常与 -t 同时使用。 -P：随机端口映射，容器内部端口随机映射到主机的端口。 -p, --publish&#x3D;[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker Container">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/DevOps/Docker/Container/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Docker Container 容器生命周期 run 1$ docker run [可选参数] 镜像名&#x2F;镜像ID [命令]  -a stdin:指定标准输入输出内容类型，可选 STDIN&#x2F;STDOUT&#x2F;STDERR 三项; -d:后台运行容器，并返回容器ID -i:以交互模式运行容器，通常与 -t 同时使用 -P:随机端口映射，容器内部端口随机映射到主机的端口 -p, --publish&#x3D;[]:">
+<meta property="og:description" content="Docker Container 容器生命周期 run 1$ docker run [可选参数] 镜像名&#x2F;镜像ID [命令]  -a stdin：指定标准输入输出内容类型，可选 STDIN&#x2F;STDOUT&#x2F;STDERR 三项; -d：后台运行容器，并返回容器ID -i：以交互模式运行容器，通常与 -t 同时使用。 -P：随机端口映射，容器内部端口随机映射到主机的端口。 -p, --publish&#x3D;[">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.588Z">
-<meta property="article:modified_time" content="2024-03-17T15:52:04.104Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.455Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.1k 字
+      8.2k 字
     </span>
   
 
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      26 分钟
     </span>
   
 
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -232,27 +232,27 @@
 <h3 id="run">run</h3>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker run <span class="hljs-comment">[可选参数]</span> 镜像名/镜像ID <span class="hljs-comment">[命令]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-a stdin</strong>:指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项;</li>
-<li><strong>-d</strong>:后台运行容器，并返回容器ID</li>
-<li><strong>-i</strong>:以交互模式运行容器，通常与 -t 同时使用</li>
-<li><strong>-P</strong>:随机端口映射，容器内部端口<strong>随机</strong>映射到主机的端口</li>
-<li><strong>-p, --publish=[]</strong>:指定端口映射，格式为**:主机（宿主）端口：容器端口**,默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 <strong>/udp</strong></li>
-<li><strong>-t</strong>:为容器重新分配一个伪输入终端，通常与 -i 同时使用;</li>
-<li><strong>–name</strong>:为容器指定一个名称</li>
-<li><strong>–dns</strong>:指定容器使用的DNS服务器，默认和宿主一致</li>
-<li><strong>–dns-search</strong>:指定容器DNS搜索域名，默认和宿主一致</li>
-<li><strong>-h,–hostname</strong>:指定容器的hostname</li>
-<li><strong>-e,–env</strong>:设置环境变量</li>
-<li><strong>–env-file=[]</strong>:从指定文件读入环境变量</li>
-<li><strong>–cpuset=“0-2” or --cpuset=“0,1,2”</strong>:绑定容器到指定CPU运行</li>
-<li><strong>-m</strong>:设置容器使用内存最大值</li>
-<li><strong>–net=“bridge”</strong>:指定容器的网络连接类型，支持bridge/host/none/container: 四种类型</li>
-<li><strong>–link=[]</strong>:添加链接到另一个容器</li>
-<li><strong>–expose=[]</strong>:开放一个端口或一组端口</li>
-<li><strong>–volume , -v</strong>:	绑定一个卷</li>
-<li><strong>–rm</strong>:使用之后自动删除，一般用来测试</li>
-<li><strong>–privileged=true</strong>:使用特权模式启动，在容器中可以使用systemctl启动服务</li>
-<li><strong>–restart=always</strong>:自动重启容器</li>
+<li><strong>-a stdin</strong>：指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项;</li>
+<li><strong>-d</strong>：后台运行容器，并返回容器ID</li>
+<li><strong>-i</strong>：以交互模式运行容器，通常与 -t 同时使用。</li>
+<li><strong>-P</strong>：随机端口映射，容器内部端口<strong>随机</strong>映射到主机的端口。</li>
+<li><strong>-p, --publish=[]</strong>：指定端口映射，格式为**：主机（宿主）端口：容器端口**，默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 <strong>/udp</strong></li>
+<li><strong>-t</strong>：为容器重新分配一个伪输入终端，通常与 -i 同时使用;</li>
+<li><strong>–name</strong>：为容器指定一个名称。</li>
+<li><strong>–dns</strong>：指定容器使用的DNS服务器，默认和宿主一致。</li>
+<li><strong>–dns-search</strong>：指定容器DNS搜索域名，默认和宿主一致。</li>
+<li><strong>-h,–hostname</strong>：指定容器的hostname</li>
+<li><strong>-e,–env</strong>：设置环境变量。</li>
+<li><strong>–env-file=[]</strong>：从指定文件读入环境变量。</li>
+<li><strong>–cpuset=“0-2” or --cpuset=“0,1,2”</strong>：绑定容器到指定CPU运行。</li>
+<li><strong>-m</strong>：设置容器使用内存最大值。</li>
+<li><strong>–net=“bridge”</strong>：指定容器的网络连接类型，支持bridge/host/none/container：四种类型。</li>
+<li><strong>–link=[]</strong>：添加链接到另一个容器。</li>
+<li><strong>–expose=[]</strong>：开放一个端口或一组端口。</li>
+<li><strong>–volume , -v</strong>:	绑定一个卷。</li>
+<li><strong>–rm</strong>：使用之后自动删除，一般用来测试。</li>
+<li><strong>–privileged=true</strong>：使用特权模式启动，在容器中可以使用systemctl启动服务。</li>
+<li><strong>–restart=always</strong>：自动重启容器。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
@@ -260,27 +260,27 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --name mynginx -d nginx:latest</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用镜像nginx:latest以后台模式启动一个容器，并将容器的80端口映射到主机随机端口</li>
+<li>使用镜像nginx:latest以后台模式启动一个容器，并将容器的80端口映射到主机随机端口。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -P -d nginx:latest</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用镜像 nginx:latest,以后台模式启动一个容器，将容器的 80 端口映射到主机的 80 端口，主机的目录 /data 映射到容器的 /data</li>
+<li>使用镜像 nginx:latest，以后台模式启动一个容器，将容器的 80 端口映射到主机的 80 端口，主机的目录 /data 映射到容器的 /data</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -p 80:80 -v /data:/data -d nginx:latest</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上</li>
+<li>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -p 127.0.0.1:80:8080/tcp ubuntu /bin/bash</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用镜像nginx:latest以交互模式启动一个容器，在容器内执行/bin/bash命令</li>
+<li>使用镜像nginx:latest以交互模式启动一个容器，在容器内执行/bin/bash命令。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -it nginx:latest /bin/bash</span><br></code></pre></td></tr></table></figure>
 <h3 id="rm">rm</h3>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker rm <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-f</strong>:通过 SIGKILL 信号强制删除一个运行中的容器</li>
-<li><strong>-l</strong>:移除容器间的网络连接，而非容器本身</li>
-<li><strong>-v</strong>:删除与容器关联的卷</li>
+<li><strong>-f</strong>：通过 SIGKILL 信号强制删除一个运行中的容器。</li>
+<li><strong>-l</strong>：移除容器间的网络连接，而非容器本身。</li>
+<li><strong>-v</strong>：删除与容器关联的卷。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
@@ -292,32 +292,32 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker <span class="hljs-built_in">rm</span> <span class="hljs-literal">-l</span> db<br></code></pre></td></tr></table></figure>
 <ul>
-<li>删除容器 nginx01, 并删除容器挂载的数据卷:</li>
+<li>删除容器 nginx01，并删除容器挂载的数据卷：</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker <span class="hljs-built_in">rm</span> <span class="hljs-literal">-v</span> nginx01<br></code></pre></td></tr></table></figure>
 <ul>
-<li>删除所有已经停止的容器:</li>
+<li>删除所有已经停止的容器：</li>
 </ul>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">$ docker rm <span class="hljs-constructor">$(<span class="hljs-params">docker</span> <span class="hljs-params">ps</span> -<span class="hljs-params">a</span> -<span class="hljs-params">q</span>)</span><br></code></pre></td></tr></table></figure>
 <h3 id="start-stop-restart-kill">start/stop/restart/kill</h3>
 <ul>
-<li><strong>docker start</strong> :启动一个或多个已经被停止的容器</li>
+<li><strong>docker start</strong> ：启动一个或多个已经被停止的容器。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker start <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>docker stop</strong> :停止一个运行中的容器</li>
+<li><strong>docker stop</strong> ：停止一个运行中的容器。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker stop <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>docker restart</strong> :重启容器</li>
+<li><strong>docker restart</strong> ：重启容器。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker restart <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>docker kill</strong> :杀掉一个运行中的容器</li>
+<li><strong>docker kill</strong> ：杀掉一个运行中的容器。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker kill <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-s</strong>:向容器发送一个信号</li>
+<li><strong>-s</strong>：向容器发送一个信号。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
@@ -326,25 +326,25 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> docker <span class="hljs-built_in">kill</span> <span class="hljs-literal">-s</span> <span class="hljs-built_in">KILL</span> mynginx<br>mynginx<br></code></pre></td></tr></table></figure>
 <h3 id="exec">exec</h3>
 <ul>
-<li><strong>docker exec</strong>:在运行的容器中执行命令</li>
+<li><strong>docker exec</strong>：在运行的容器中执行命令。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker exec <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> COMMAND <span class="hljs-comment">[ARG...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-d</strong>:分离模式：在后台运行</li>
-<li><strong>-i</strong>:即使没有附加也保持STDIN 打开</li>
-<li><strong>-t</strong>:分配一个伪终端</li>
+<li><strong>-d</strong>：分离模式：在后台运行。</li>
+<li><strong>-i</strong>：即使没有附加也保持STDIN 打开。</li>
+<li><strong>-t</strong>：分配一个伪终端。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>在容器 <code>mynginx</code> 中以交互模式执行容器内 <code>/root/test.sh</code> 脚本:</li>
+<li>在容器 <code>mynginx</code> 中以交互模式执行容器内 <code>/root/test.sh</code> 脚本：</li>
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ docker exec -it mynginx <span class="hljs-regexp">/bin/</span>sh <span class="hljs-regexp">/root/</span>test.sh<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在容器 mynginx 中开启一个交互模式的终端:</li>
+<li>在容器 mynginx 中开启一个交互模式的终端：</li>
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ docker exec -i -t  mynginx <span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
 <ul>
-<li>也可以通过 <strong>docker ps -a</strong> 命令查看已经在运行的容器，然后使用容器 ID 进入容器</li>
+<li>也可以通过 <strong>docker ps -a</strong> 命令查看已经在运行的容器，然后使用容器 ID 进入容器。</li>
 <li>查看已经在运行的容器 ID:</li>
 </ul>
 <figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">$ docker ps -a<br><span class="hljs-meta">...</span><br>9df70f9a0714        openJDK             &quot;/usercode/script.sh...&quot;<br><span class="hljs-meta">...</span><br></code></pre></td></tr></table></figure>
@@ -355,22 +355,22 @@
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ docker exec -it <span class="hljs-number">9</span>df70f9a0714 <span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
 <h3 id="pause-unpause">pause/unpause</h3>
 <ul>
-<li><strong>docker pause</strong> :暂停容器中所有的进程</li>
-<li><strong>docker unpause</strong> :恢复容器中所有的进程</li>
+<li><strong>docker pause</strong> ：暂停容器中所有的进程。</li>
+<li><strong>docker unpause</strong> ：恢复容器中所有的进程。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker pause <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br>$ docker unpause <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[CONTAINER...]</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
-<li>暂停数据库容器db01提供服务</li>
+<li>暂停数据库容器db01提供服务。</li>
 </ul>
 <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">$ docker <span class="hljs-keyword">pause</span> db01<br></code></pre></td></tr></table></figure>
 <ul>
-<li>恢复数据库容器db01提供服务</li>
+<li>恢复数据库容器db01提供服务。</li>
 </ul>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker unpause db01<br></code></pre></td></tr></table></figure>
 <h3 id="create">create</h3>
 <ul>
-<li><strong>docker create</strong>:创建一个新的容器但不启动它</li>
+<li><strong>docker create</strong>：创建一个新的容器但不启动它。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker create <span class="hljs-comment">[OPTIONS]</span> IMAGE <span class="hljs-comment">[COMMAND]</span> <span class="hljs-comment">[ARG...]</span><br></code></pre></td></tr></table></figure>
 <p>语法同<code>docker run</code></p>
@@ -384,52 +384,52 @@
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker ps [<span class="hljs-keyword">OPTIONS</span>]<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p><strong>-a</strong>:显示所有的容器，包括未运行的</p>
+<p><strong>-a</strong>：显示所有的容器，包括未运行的。</p>
 </li>
 <li>
-<p><strong>-f</strong>:根据条件过滤显示的内容</p>
+<p><strong>-f</strong>：根据条件过滤显示的内容。</p>
 </li>
 <li>
-<p><strong>–format</strong>:指定返回值的模板文件</p>
+<p><strong>–format</strong>：指定返回值的模板文件。</p>
 </li>
 <li>
-<p><strong>-l</strong>:显示最近创建的容器</p>
+<p><strong>-l</strong>：显示最近创建的容器。</p>
 </li>
 <li>
-<p><strong>-n</strong>:列出最近创建的n个容器</p>
+<p><strong>-n</strong>：列出最近创建的n个容器。</p>
 </li>
 <li>
-<p><strong>–no-trunc</strong>:不截断输出</p>
+<p><strong>–no-trunc</strong>：不截断输出。</p>
 </li>
 <li>
-<p><strong>-q</strong>:静默模式，只显示容器编号</p>
+<p><strong>-q</strong>：静默模式，只显示容器编号。</p>
 </li>
 <li>
-<p><strong>-s</strong>:显示总的文件大小</p>
+<p><strong>-s</strong>：显示总的文件大小。</p>
 </li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>列出所有在运行的容器信息</li>
+<li>列出所有在运行的容器信息。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker ps<br><span class="hljs-function"><span class="hljs-title">CONTAINER</span></span> ID   IMAGE          COMMAND                ...  PORTS                    NAMES<br><span class="hljs-number">09</span>b93464c2f7   nginx:latest   <span class="hljs-string">&quot;nginx -g &#x27;daemon off&quot;</span> ...  <span class="hljs-number">80</span>/tcp, <span class="hljs-number">443</span>/tcp          mynginx<br><span class="hljs-number">96</span>f7f14e99ab   mysql:<span class="hljs-number">5.6</span>      <span class="hljs-string">&quot;docker-entrypoint.sh&quot;</span> ...  <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">3306</span>-&gt;<span class="hljs-number">3306</span>/tcp   mymysql<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p><strong>CONTAINER ID</strong>:容器 ID</p>
+<p><strong>CONTAINER ID</strong>：容器 ID</p>
 </li>
 <li>
-<p><strong>IMAGE</strong>:使用的镜像</p>
+<p><strong>IMAGE</strong>：使用的镜像。</p>
 </li>
 <li>
-<p><strong>COMMAND</strong>:启动容器时运行的命令</p>
+<p><strong>COMMAND</strong>：启动容器时运行的命令。</p>
 </li>
 <li>
-<p><strong>CREATED</strong>:容器的创建时间</p>
+<p><strong>CREATED</strong>：容器的创建时间。</p>
 </li>
 <li>
-<p><strong>STATUS</strong>:容器状态</p>
+<p><strong>STATUS</strong>：容器状态。</p>
 <ul>
-<li>状态有7种:</li>
+<li>状态有7种：</li>
 <li>created(已创建)</li>
 <li>restarting(重启中)</li>
 <li>running(运行中)</li>
@@ -440,13 +440,13 @@
 </ul>
 </li>
 <li>
-<p><strong>PORTS</strong>:容器的端口信息和使用的连接类型(tcp\udp)</p>
+<p><strong>PORTS</strong>：容器的端口信息和使用的连接类型(tcp\udp)</p>
 </li>
 <li>
-<p><strong>NAMES</strong>:自动分配的容器名称</p>
+<p><strong>NAMES</strong>：自动分配的容器名称。</p>
 </li>
 <li>
-<p>列出最近创建的5个容器信息</p>
+<p>列出最近创建的5个容器信息。</p>
 </li>
 </ul>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs excel">$ docker ps -<span class="hljs-built_in">n</span> <span class="hljs-number">5</span><br>CONTAINER ID        IMAGE               COMMAND                   CREATED<br><span class="hljs-number">09</span>b93464c2f7        ngi<span class="hljs-symbol">nx:la</span>test        <span class="hljs-string">&quot;nginx -g &#x27;daemon off&quot;</span>    <span class="hljs-number">2</span> <span class="hljs-built_in">days</span> ago   ...<br>b8573233d675        ngi<span class="hljs-symbol">nx:la</span>test        <span class="hljs-string">&quot;/bin/bash&quot;</span>               <span class="hljs-number">2</span> <span class="hljs-built_in">days</span> ago   ...<br>b1a0703e41e7        ngi<span class="hljs-symbol">nx:la</span>test        <span class="hljs-string">&quot;nginx -g &#x27;daemon off&quot;</span>    <span class="hljs-number">2</span> <span class="hljs-built_in">days</span> ago   ...<br>f46fb1dec520        <span class="hljs-number">5</span>c6e1090e771        <span class="hljs-string">&quot;/bin/sh -c &#x27;set -x \t&quot;</span>   <span class="hljs-number">2</span> <span class="hljs-built_in">days</span> ago   ...<br>a63b4a5597de        <span class="hljs-number">860</span>c279d2fec        <span class="hljs-string">&quot;bash&quot;</span>                    <span class="hljs-number">2</span> <span class="hljs-built_in">days</span> ago   ...<br></code></pre></td></tr></table></figure>
@@ -456,66 +456,66 @@
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dns">$ docker ps -a -q<br><span class="hljs-number">09</span>b<span class="hljs-number">93464c2f7</span><br>b8<span class="hljs-number">573233d675</span><br>b1a<span class="hljs-number">0703e41e7</span><br>f46fb1dec520<br>a63b4a5597de<br><span class="hljs-number">6</span>a4aa42e947b<br>de7bb36e7968<br><span class="hljs-number">43</span>a<span class="hljs-number">432b73776</span><br><span class="hljs-number">664</span>a8ab1a585<br>ba52eb632bbd<br>...<br></code></pre></td></tr></table></figure>
 <h3 id="stats">stats</h3>
 <ul>
-<li>容器占用资源的信息</li>
+<li>容器占用资源的信息。</li>
 </ul>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker stats<br></code></pre></td></tr></table></figure>
 <h3 id="logs">logs</h3>
 <ul>
-<li>获取容器的日志</li>
+<li>获取容器的日志。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker logs [<span class="hljs-keyword">OPTIONS</span>] CONTAINER<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-f</strong>:跟踪日志输出</li>
-<li><strong>–since</strong>:显示某个开始时间的所有日志</li>
-<li><strong>-t</strong>:显示时间戳</li>
-<li><strong>–tail</strong>:仅列出最新N条容器日志</li>
+<li><strong>-f</strong>：跟踪日志输出。</li>
+<li><strong>–since</strong>：显示某个开始时间的所有日志。</li>
+<li><strong>-t</strong>：显示时间戳。</li>
+<li><strong>–tail</strong>：仅列出最新N条容器日志。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>跟踪查看容器mynginx的日志输出</li>
+<li>跟踪查看容器mynginx的日志输出。</li>
 </ul>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">$ docker logs -f mynginx<br><span class="hljs-number">192.168.239.1</span> - - <span class="hljs-string">[10/Jul/2016:16:53:33 +0000]</span> <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> / HTTP/1.1&quot;</span> <span class="hljs-number">200</span> <span class="hljs-number">612</span> <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36&quot;</span> <span class="hljs-string">&quot;-&quot;</span><br><span class="hljs-number">2016</span>/<span class="hljs-number">07</span>/<span class="hljs-number">10</span> <span class="hljs-number">16</span>:<span class="hljs-number">53</span>:<span class="hljs-number">33</span> <span class="hljs-string">[error]</span> <span class="hljs-number">5</span>#<span class="hljs-number">5</span>: *<span class="hljs-number">1</span> open() <span class="hljs-string">&quot;/usr/share/nginx/html/favicon.ico&quot;</span> failed (<span class="hljs-number">2</span>: No such file or directory), client: <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">239</span>.<span class="hljs-number">1</span>, server: localhost, request: <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> /favicon.ico HTTP/1.1&quot;</span>, host: <span class="hljs-string">&quot;192.168.239.130&quot;</span>, referrer: <span class="hljs-string">&quot;http://192.168.239.130/&quot;</span><br><span class="hljs-number">192.168.239.1</span> - - <span class="hljs-string">[10/Jul/2016:16:53:33 +0000]</span> <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> /favicon.ico HTTP/1.1&quot;</span> <span class="hljs-number">404</span> <span class="hljs-number">571</span> <span class="hljs-string">&quot;http://192.168.239.130/&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36&quot;</span> <span class="hljs-string">&quot;-&quot;</span><br><span class="hljs-number">192.168.239.1</span> - - <span class="hljs-string">[10/Jul/2016:16:53:59 +0000]</span> <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> / HTTP/1.1&quot;</span> <span class="hljs-number">304</span> <span class="hljs-number">0</span> <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36&quot;</span> <span class="hljs-string">&quot;-&quot;</span><br>...<br></code></pre></td></tr></table></figure>
 <ul>
-<li>查看容器mynginx从2016年7月1日后的最新10条日志</li>
+<li>查看容器mynginx从2016年7月1日后的最新10条日志。</li>
 </ul>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">$ docker logs <span class="hljs-attribute">--since</span>=<span class="hljs-string">&quot;2016-07-01&quot;</span> <span class="hljs-attribute">--tail</span>=10 mynginx<br></code></pre></td></tr></table></figure>
 <h3 id="top">top</h3>
 <ul>
-<li>查看容器中运行的进程信息，支持 ps 命令参数</li>
+<li>查看容器中运行的进程信息，支持 ps 命令参数。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker top [<span class="hljs-keyword">OPTIONS</span>] CONTAINER [ps <span class="hljs-keyword">OPTIONS</span>]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>容器运行时不一定有/bin/bash终端来交互执行top命令，而且容器还不一定有top命令，可以使用docker top来实现查看container中正在运行的进程</li>
+<li>容器运行时不一定有/bin/bash终端来交互执行top命令，而且容器还不一定有top命令，可以使用docker top来实现查看container中正在运行的进程。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>查看容器mymysql的进程信息</li>
+<li>查看容器mymysql的进程信息。</li>
 </ul>
 <figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">$ docker top mymysql<br>UID    PID    PPID    C      STIME   TTY  TIME       CMD<br>999   <span class="hljs-number"> 40347 </span><span class="hljs-number"> 40331 </span> <span class="hljs-number"> 18 </span>    00:58   ?    00:00:02   mysqld<br></code></pre></td></tr></table></figure>
 <ul>
-<li>查看所有运行容器的进程信息</li>
+<li>查看所有运行容器的进程信息。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span>  `docker ps |grep Up|awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>`;<br>	<span class="hljs-keyword">do</span><br>		<span class="hljs-built_in">echo</span> \ &amp;&amp;docker top <span class="hljs-variable">$i</span>;<br>	<span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
 <h3 id="port">port</h3>
 <ul>
-<li>通过 <strong>docker ps</strong> 命令可以查看到容器的端口映射,<strong>docker</strong> 还提供了另一个快捷方式 <strong>docker port</strong>,使用 <strong>docker port</strong> 可以查看指定 (ID 或者名字）容器的某个确定端口映射到宿主机的端口号</li>
+<li>通过 <strong>docker ps</strong> 命令可以查看到容器的端口映射，<strong>docker</strong> 还提供了另一个快捷方式 <strong>docker port</strong>，使用 <strong>docker port</strong> 可以查看指定 (ID 或者名字）容器的某个确定端口映射到宿主机的端口号。</li>
 </ul>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">$ docker port 容器名/容器<span class="hljs-built_in">id</span><br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker top wizardly_chandrasekhar</span><br>UID     PID         PPID          ...       TIME                CMD<br>root    23245       23228         ...       00:00:00            python app.py<br></code></pre></td></tr></table></figure>
 <h3 id="inspect">inspect</h3>
 <ul>
-<li><strong>docker inspect</strong>:获取容器/镜像的元数据</li>
+<li><strong>docker inspect</strong>：获取容器/镜像的元数据。</li>
 </ul>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">$ docker inspect [OPTIONS] NAME|<span class="hljs-type">ID</span> [NAME|<span class="hljs-type">ID</span>...]<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-f</strong>:指定返回值的模板文件</li>
-<li><strong>-s</strong>:显示总的文件大小</li>
-<li><strong>–type</strong>:为指定类型返回JSON</li>
+<li><strong>-f</strong>：指定返回值的模板文件。</li>
+<li><strong>-s</strong>：显示总的文件大小。</li>
+<li><strong>–type</strong>：为指定类型返回JSON</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>获取镜像mysql:5.6的元信息</li>
+<li>获取镜像mysql:5.6的元信息。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs csharp">$ docker inspect mysql:<span class="hljs-number">5.6</span><br>[<span class="hljs-meta"></span><br><span class="hljs-meta">    &#123;</span><br><span class="hljs-meta">        <span class="hljs-meta-string">&quot;Id&quot;</span>: <span class="hljs-meta-string">&quot;sha256:2c0964ec182ae9a045f866bbc2553087f6e42bfc16074a74fb820af235f070ec&quot;</span>,</span><br><span class="hljs-meta">        <span class="hljs-meta-string">&quot;RepoTags&quot;</span>: [</span><br><span class="hljs-meta">            <span class="hljs-meta-string">&quot;mysql:5.6&quot;</span></span><br><span class="hljs-meta">        </span>],<br>        <span class="hljs-string">&quot;RepoDigests&quot;</span>: [],<br>        <span class="hljs-string">&quot;Parent&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;Comment&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;Created&quot;</span>: <span class="hljs-string">&quot;2016-05-24T04:01:41.168371815Z&quot;</span>,<br>        <span class="hljs-string">&quot;Container&quot;</span>: <span class="hljs-string">&quot;e0924bc460ff97787f34610115e9363e6363b30b8efa406e28eb495ab199ca54&quot;</span>,<br>        <span class="hljs-string">&quot;ContainerConfig&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;Hostname&quot;</span>: <span class="hljs-string">&quot;b0cf605c7757&quot;</span>,<br>            <span class="hljs-string">&quot;Domainname&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>            <span class="hljs-string">&quot;User&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>            <span class="hljs-string">&quot;AttachStdin&quot;</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-string">&quot;AttachStdout&quot;</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-string">&quot;AttachStderr&quot;</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-string">&quot;ExposedPorts&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;3306/tcp&quot;</span>: &#123;&#125;<br>            &#125;,<br>...<br></code></pre></td></tr></table></figure>
 <ul>
@@ -524,36 +524,36 @@
 <figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="xml">$ docker inspect --format=&#x27;</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">range</span> .NetworkSettings.Networks&#125;&#125;</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">.IPAddress</span>&#125;&#125;</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">end</span>&#125;&#125;</span><span class="xml">&#x27; mymysql</span><br><span class="xml">172.17.0.3</span><br></code></pre></td></tr></table></figure>
 <h3 id="attach">attach</h3>
 <ul>
-<li><strong>docker attach</strong>:连接到正在运行中的容器，不会启动新的进程</li>
+<li><strong>docker attach</strong>：连接到正在运行中的容器，不会启动新的进程。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker attach [<span class="hljs-keyword">OPTIONS</span>] CONTAINER<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果container当前正在前台运行进程，如输出nginx的<code>access.log</code>日志,<code>&lt;CTRL-C&gt;</code>不仅会导致退出容器，而且还stop了</li>
-<li><strong>注意</strong>:如果使用该命令从容器退出，会导致容器的停止</li>
-<li>好在attach是可以带上<code>--sig-proxy=false</code>来确保CTRL-D或CTRL-C不会关闭容器</li>
+<li>如果container当前正在前台运行进程，如输出nginx的<code>access.log</code>日志，<code>&lt;CTRL-C&gt;</code>不仅会导致退出容器，而且还stop了。</li>
+<li><strong>注意</strong>：如果使用该命令从容器退出，会导致容器的停止。</li>
+<li>好在attach是可以带上<code>--sig-proxy=false</code>来确保CTRL-D或CTRL-C不会关闭容器。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>容器mynginx将访问日志指到标准输出，连接到容器查看访问信息</li>
+<li>容器mynginx将访问日志指到标准输出，连接到容器查看访问信息。</li>
 </ul>
 <figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">$ docker attach --sig-proxy=false mynginx<br><span class="hljs-number">192.168.239.1</span> - - <span class="hljs-string">[10/Jul/2016:16:54:26 +0000]</span> <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> / HTTP/1.1&quot;</span> <span class="hljs-number">304</span> <span class="hljs-number">0</span> <span class="hljs-string">&quot;-&quot;</span> <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36&quot;</span> <span class="hljs-string">&quot;-&quot;</span><br></code></pre></td></tr></table></figure>
 <h3 id="rename">rename</h3>
 <ul>
-<li><strong>docker rename</strong>: 用于修改容器名</li>
+<li><strong>docker rename</strong>：用于修改容器名。</li>
 </ul>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">$ docker <span class="hljs-built_in">rename</span> 原容器名新容器名<br></code></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">$ docker <span class="hljs-built_in">rename</span> 原容器名新容器名。<br></code></pre></td></tr></table></figure>
 <h2 id="容器rootfs">容器rootfs</h2>
 <h3 id="cp">cp</h3>
 <ul>
-<li><strong>docker cp</strong>:用于容器与主机之间的数据拷贝</li>
+<li><strong>docker cp</strong>：用于容器与主机之间的数据拷贝。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker cp [<span class="hljs-keyword">OPTIONS</span>] CONTAINER:SRC_PATH DEST_PATH|-<br><span class="hljs-symbol">$</span> docker cp [<span class="hljs-keyword">OPTIONS</span>] SRC_PATH|- CONTAINER:DEST_PATH<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-L</strong>:保持源目标中的链接</li>
+<li><strong>-L</strong>：保持源目标中的链接。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>将主机<code>/www/test</code>目录拷贝到容器96f7f14e99ab的<code>/www</code>目录下</li>
+<li>将主机<code>/www/test</code>目录拷贝到容器96f7f14e99ab的<code>/www</code>目录下。</li>
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ docker cp <span class="hljs-regexp">/www/</span>test <span class="hljs-number">96</span>f7f14e99ab:<span class="hljs-regexp">/www/</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -561,33 +561,33 @@
 </ul>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ docker cp <span class="hljs-regexp">/www/</span>test <span class="hljs-number">96</span>f7f14e99ab:/www<br></code></pre></td></tr></table></figure>
 <ul>
-<li>将容器96f7f14e99ab的<code>/www</code>目录拷贝到主机的<code>/tmp</code>目录中</li>
+<li>将容器96f7f14e99ab的<code>/www</code>目录拷贝到主机的<code>/tmp</code>目录中。</li>
 </ul>
 <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">$ docker cp  <span class="hljs-number">96</span>f7f14e99ab:<span class="hljs-regexp">/www /</span>tmp/<br></code></pre></td></tr></table></figure>
 <h3 id="diff">diff</h3>
 <ul>
-<li><strong>docker diff</strong>:检查容器里文件结构的更改</li>
+<li><strong>docker diff</strong>：检查容器里文件结构的更改。</li>
 </ul>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams"><span class="hljs-symbol">$</span> docker diff [<span class="hljs-keyword">OPTIONS</span>] CONTAINER<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <ul>
-<li>查看容器mymysql的文件结构更改</li>
+<li>查看容器mymysql的文件结构更改。</li>
 </ul>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">$ docker diff mymysql<br>A <span class="hljs-string">/logs</span><br>A <span class="hljs-string">/mysql_data</span><br>C <span class="hljs-string">/run</span><br>C <span class="hljs-string">/run/mysqld</span><br>A <span class="hljs-string">/run/mysqld/mysqld.pid</span><br>A <span class="hljs-string">/run/mysqld/mysqld.sock</span><br>C <span class="hljs-string">/tmp</span><br></code></pre></td></tr></table></figure>
 <h3 id="commit">commit</h3>
 <ul>
-<li><strong>docker commit</strong>:从容器创建一个新的镜像</li>
+<li><strong>docker commit</strong>：从容器创建一个新的镜像。</li>
 </ul>
 <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs inform7">$ docker commit <span class="hljs-comment">[OPTIONS]</span> <span class="hljs-keyword">CONTAINER</span> <span class="hljs-comment">[REPOSITORY<span class="hljs-comment">[:TAG]</span>]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-a</strong>:提交的镜像作者;</li>
-<li><strong>-c</strong>:使用Dockerfile指令来创建镜像;</li>
-<li><strong>-m</strong>:提交时的说明文字;</li>
-<li><strong>-p</strong>:在commit时，将容器暂停</li>
+<li><strong>-a</strong>：提交的镜像作者;</li>
+<li><strong>-c</strong>：使用Dockerfile指令来创建镜像;</li>
+<li><strong>-m</strong>：提交时的说明文字;</li>
+<li><strong>-p</strong>：在commit时，将容器暂停。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>将容器a404c6c174a2 保存为新的镜像，并添加提交人信息和说明信息</li>
+<li>将容器a404c6c174a2 保存为新的镜像，并添加提交人信息和说明信息。</li>
 </ul>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker commit -a <span class="hljs-string">&quot;test&quot;</span> -m <span class="hljs-string">&quot;my apache&quot;</span> a404c6c174a2  <span class="hljs-symbol">mymysql:</span>v1<br><span class="hljs-symbol">sha256:</span><span class="hljs-number">37</span>af1236adef1544e8886be23010b66577647a40bc02c0885a6600b33ee28057<br>test<span class="hljs-variable">@test</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>docker images <span class="hljs-symbol">mymysql:</span>v1<br>REPOSITORY          TAG                 IMAGE ID                CREATED                    SIZE<br>mymysql                   v1                  <span class="hljs-number">37</span>af1236adef        <span class="hljs-number">15</span> seconds ago      <span class="hljs-number">329</span> MB<br></code></pre></td></tr></table></figure>
 

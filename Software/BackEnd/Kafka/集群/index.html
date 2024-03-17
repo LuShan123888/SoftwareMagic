@@ -24,7 +24,7 @@
 <meta property="og:description" content="Kafka 集群 创建集群 1234567891011121314151617$ docker run -d --name kafka1 -p 9093:9092 \--net zookeeper \--env KAFKA_ZOOKEEPER_CONNECT&#x3D;zookeeper:2181 \--env KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;kafka1:9092 \--env K">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-14T16:25:14.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.339Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.319Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -237,13 +237,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 3 --partitions 1 --topic test-replicated-topic<br></code></pre></td></tr></table></figure>
 <h2 id="查看Topic">查看Topic</h2>
 <ul>
-<li>运行<code>describe topics</code>命令</li>
+<li>运行<code>describe topics</code>命令。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test-replicated-topic</span><br>Topic:test-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:<br>	Topic: test-replicated-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>leader</strong>:负责给定Partition的所有读写的节点，每个节点都可能成为Partition随机选择的leader</li>
-<li><strong>replicas</strong>:复制此Partition日志的节点列表，无论它们是leader还是当前处于存活状态</li>
-<li><strong>isr</strong>:是一组 “in-sync” replicas,这是replicas列表的一个子集，它当前处于存活状态，并补充leader</li>
+<li><strong>leader</strong>：负责给定Partition的所有读写的节点，每个节点都可能成为Partition随机选择的leader</li>
+<li><strong>replicas</strong>：复制此Partition日志的节点列表，无论它们是leader还是当前处于存活状态。</li>
+<li><strong>isr</strong>：是一组 “in-sync” replicas，这是replicas列表的一个子集，它当前处于存活状态，并补充leader</li>
 </ul>
 <h2 id="Topic发布信息">Topic发布信息</h2>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-console-producer.sh --broker-list kafka:9092 --topic test-replicated-topic</span><br><span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">test</span> message 1</span><br><span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">test</span> message 2</span><br></code></pre></td></tr></table></figure>
@@ -251,11 +251,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> kafka-console-consumer.sh --bootstrap-server kafka:9092 --from-beginning --topic test-replicated-topic</span><br>test message 1<br>test message 2<br></code></pre></td></tr></table></figure>
 <h2 id="容错性">容错性</h2>
 <ul>
-<li>关闭node0节点，原leader已被替换成它的flowers中的其中一个，并且 node 0 不在 in-sync replica 集合当中</li>
+<li>关闭node0节点，原leader已被替换成它的flowers中的其中一个，并且 node 0 不在 in-sync replica 集合当中。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test-replicated-topic<br>Topic:test-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:<br>	Topic: test-replicated-topic	Partition: 0	Leader: 1	Replicas: 0,1,2	Isr: 1,2<br></code></pre></td></tr></table></figure>
 <ul>
-<li>尽管原leader已逝，但原来消息依然可以通过其他node接收</li>
+<li>尽管原leader已逝，但原来消息依然可以通过其他node接收。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ kafka-console-consumer.sh --bootstrap-server kafka2:9092 --from-beginning --topic test-replicated-topic<br><span class="hljs-built_in">test</span> message 1<br><span class="hljs-built_in">test</span> message 2<br><span class="hljs-built_in">test</span> message 3<br></code></pre></td></tr></table></figure>
 

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="JSP 自定义标签  自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet,标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作 JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面, JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记 你可以继承">
+  <meta name="description" content="JSP 自定义标签  自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet，标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作。 JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面， JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记。 你可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP 自定义标签">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaEE/JSP/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="JSP 自定义标签  自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet,标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作 JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面, JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记 你可以继承">
+<meta property="og:description" content="JSP 自定义标签  自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet，标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作。 JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面， JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记。 你可以">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-30T15:17:38.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:37:50.989Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.523Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,79 +222,79 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>JSP 自定义标签</h1>
 <ul>
-<li>自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet,标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作</li>
-<li>JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面, JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记</li>
-<li>你可以继承<code>SimpleTagSupport</code>类并重写的<code>doTag()</code>方法来开发一个最简单的自定义标签</li>
+<li>自定义标签是用户定义的JSP语言元素，当JSP页面包含一个自定义标签时将被转化为servlet，标签转化为对被称为tag handler的对象的操作，即当servlet执行时Web container调用那些操作。</li>
+<li>JSP标签扩展可以让你创建新的标签并且可以直接插入到一个JSP页面， JSP 2.0规范中引入Simple Tag Handlers来编写这些自定义标记。</li>
+<li>你可以继承<code>SimpleTagSupport</code>类并重写的<code>doTag()</code>方法来开发一个最简单的自定义标签。</li>
 </ul>
 <h2 id="创建-Hello-标签">创建&quot;Hello&quot;标签</h2>
 <ul>
-<li>接下来，我们想创建一个自定义标签叫作<code>&lt;ex:Hello&gt;</code>,标签格式为:</li>
+<li>接下来，我们想创建一个自定义标签叫作<code>&lt;ex:Hello&gt;</code>，标签格式为：</li>
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;ex:Hello /&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>要创建自定义的JSP标签，你首先必须创建处理标签的Java类，所以，让我们创建一个HelloTag类，如下所示:</li>
+<li>要创建自定义的JSP标签，你首先必须创建处理标签的Java类，所以，让我们创建一个HelloTag类，如下所示：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloTag</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SimpleTagSupport</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doTag</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> JspException, IOException </span>&#123;<br>    JspWriter out = getJspContext().getOut();<br>    out.println(<span class="hljs-string">&quot;Hello Custom Tag!&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以下代码重写了<code>doTag()</code>方法，方法中使用了<code>getJspContext()</code>方法来获取当前的JspContext对象，并将&quot;Hello Custom Tag!&quot;传递给JspWriter对象</li>
-<li>编译以上类，并将其复制到环境变量CLASSPATH目录中，最后创建如下标签库:<code>&lt;Tomcat安装目录&gt;webapps\ROOT\WEB-INF\custom.tld</code></li>
+<li>以下代码重写了<code>doTag()</code>方法，方法中使用了<code>getJspContext()</code>方法来获取当前的JspContext对象，并将&quot;Hello Custom Tag!&quot;传递给JspWriter对象。</li>
+<li>编译以上类，并将其复制到环境变量CLASSPATH目录中，最后创建如下标签库：<code>&lt;Tomcat安装目录&gt;webapps\ROOT\WEB-INF\custom.tld</code></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">taglib</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tlib-version</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">tlib-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">jsp-version</span>&gt;</span>2.0<span class="hljs-tag">&lt;/<span class="hljs-name">jsp-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">short-name</span>&gt;</span>Example TLD<span class="hljs-tag">&lt;/<span class="hljs-name">short-name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tag-class</span>&gt;</span>com.test.HelloTag<span class="hljs-tag">&lt;/<span class="hljs-name">tag-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body-content</span>&gt;</span>empty<span class="hljs-tag">&lt;/<span class="hljs-name">body-content</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">tag</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">taglib</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>接下来，我们就可以在JSP文件中使用Hello标签:</li>
+<li>接下来，我们就可以在JSP文件中使用Hello标签：</li>
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ taglib prefix=<span class="hljs-string">&quot;ex&quot;</span> uri=<span class="hljs-string">&quot;WEB-INF/custom.tld&quot;</span>%&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;A sample custom tag&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;ex:Hello/&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以上程序输出结果为:</li>
+<li>以上程序输出结果为：</li>
 </ul>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">Hello Custom <span class="hljs-keyword">Tag</span>!<br></code></pre></td></tr></table></figure>
 <h2 id="访问标签体">访问标签体</h2>
 <ul>
-<li>你可以像标准标签库一样在标签中包含消息内容，如我们要在我们自定义的Hello中包含内容，格式如下:</li>
+<li>你可以像标准标签库一样在标签中包含消息内容，如我们要在我们自定义的Hello中包含内容，格式如下：</li>
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;ex:Hello&gt;<br>   This is message body<br>&lt;/ex:Hello&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>我们可以修改标签处理类文件，代码如下:</li>
+<li>我们可以修改标签处理类文件，代码如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloTag</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SimpleTagSupport</span> </span>&#123;<br><br>   StringWriter sw = <span class="hljs-keyword">new</span> StringWriter();<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doTag</span><span class="hljs-params">()</span></span><br><span class="hljs-function">      <span class="hljs-keyword">throws</span> JspException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>       getJspBody().invoke(sw);<br>       getJspContext().getOut().println(sw.toString());<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>接下来我们需要修改TLD文件，如下所示:</li>
+<li>接下来我们需要修改TLD文件，如下所示：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">taglib</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tlib-version</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">tlib-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">jsp-version</span>&gt;</span>2.0<span class="hljs-tag">&lt;/<span class="hljs-name">jsp-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">short-name</span>&gt;</span>Example TLD with Body<span class="hljs-tag">&lt;/<span class="hljs-name">short-name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tag-class</span>&gt;</span>com.test.HelloTag<span class="hljs-tag">&lt;/<span class="hljs-name">tag-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body-content</span>&gt;</span>scriptless<span class="hljs-tag">&lt;/<span class="hljs-name">body-content</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">tag</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">taglib</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>现在我们可以在JSP使用修改后的标签，如下所示:</li>
+<li>现在我们可以在JSP使用修改后的标签，如下所示：</li>
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ taglib prefix=<span class="hljs-string">&quot;ex&quot;</span> uri=<span class="hljs-string">&quot;WEB-INF/custom.tld&quot;</span>%&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;A sample custom tag&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;ex:Hello&gt;<br>        This is message body<br>    &lt;/ex:Hello&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以上程序输出结果如下所示:</li>
+<li>以上程序输出结果如下所示：</li>
 </ul>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">This <span class="hljs-keyword">is</span> message <span class="hljs-keyword">body</span><br></code></pre></td></tr></table></figure>
 <h2 id="自定义标签属性">自定义标签属性</h2>
 <ul>
-<li>你可以在自定义标准中设置各种属性，要接收属性，值自定义标签类必须实现setter方法, JavaBean 中的setter方法如下所示:</li>
+<li>你可以在自定义标准中设置各种属性，要接收属性，值自定义标签类必须实现setter方法， JavaBean 中的setter方法如下所示：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloTag</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SimpleTagSupport</span> </span>&#123;<br><br>   <span class="hljs-keyword">private</span> String message;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMessage</span><span class="hljs-params">(String msg)</span> </span>&#123;<br>      <span class="hljs-keyword">this</span>.message = msg;<br>   &#125;<br><br>   StringWriter sw = <span class="hljs-keyword">new</span> StringWriter();<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doTag</span><span class="hljs-params">()</span></span><br><span class="hljs-function">      <span class="hljs-keyword">throws</span> JspException, IOException</span><br><span class="hljs-function">    </span>&#123;<br>       <span class="hljs-keyword">if</span> (message != <span class="hljs-keyword">null</span>) &#123;<br>          <span class="hljs-comment">/* 从属性中使用消息 */</span><br>          JspWriter out = getJspContext().getOut();<br>          out.println( message );<br>       &#125;<br>       <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-comment">/* 从内容体中使用消息 */</span><br>          getJspBody().invoke(sw);<br>          getJspContext().getOut().println(sw.toString());<br>       &#125;<br>   &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>属性的名称是&quot;message&quot;,所以setter方法是的setMessage(),现在让我们在TLD文件中使用的<code>&lt;attribute&gt;</code>元素添加此属性:</li>
+<li>属性的名称是&quot;message&quot;，所以setter方法是的setMessage()，现在让我们在TLD文件中使用的<code>&lt;attribute&gt;</code>元素添加此属性：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">taglib</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tlib-version</span>&gt;</span>1.0<span class="hljs-tag">&lt;/<span class="hljs-name">tlib-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">jsp-version</span>&gt;</span>2.0<span class="hljs-tag">&lt;/<span class="hljs-name">jsp-version</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">short-name</span>&gt;</span>Example TLD with Body<span class="hljs-tag">&lt;/<span class="hljs-name">short-name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">tag-class</span>&gt;</span>com.test.HelloTag<span class="hljs-tag">&lt;/<span class="hljs-name">tag-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">body-content</span>&gt;</span>scriptless<span class="hljs-tag">&lt;/<span class="hljs-name">body-content</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">attribute</span>&gt;</span><br>       <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>message<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">attribute</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">tag</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">taglib</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>现在我们就可以在JSP文件中使用message属性了，如下所示:</li>
+<li>现在我们就可以在JSP文件中使用message属性了，如下所示：</li>
 </ul>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ taglib prefix=<span class="hljs-string">&quot;ex&quot;</span> uri=<span class="hljs-string">&quot;WEB-INF/custom.tld&quot;</span>%&gt;<br>&lt;html&gt;<br>  &lt;head&gt;<br>    &lt;title&gt;A sample custom tag&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;ex:Hello message=<span class="hljs-string">&quot;This is custom tag&quot;</span> /&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以上实例数据输出结果为:</li>
+<li>以上实例数据输出结果为：</li>
 </ul>
 <figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pony"><span class="hljs-type">This</span> <span class="hljs-keyword">is</span> custom <span class="hljs-meta">tag</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>你还可以包含以下属性:</li>
+<li>你还可以包含以下属性：</li>
 </ul>
 <table>
 <thead>
@@ -306,15 +306,15 @@
 <tbody>
 <tr>
 <td style="text-align:left">name</td>
-<td style="text-align:left">定义属性的名称，每个标签的是属性名称必须是唯一的,</td>
+<td style="text-align:left">定义属性的名称，每个标签的是属性名称必须是唯一的，</td>
 </tr>
 <tr>
 <td style="text-align:left">required</td>
-<td style="text-align:left">指定属性是否是必须的或者可选的，如果设置为false为可选,</td>
+<td style="text-align:left">指定属性是否是必须的或者可选的，如果设置为false为可选，</td>
 </tr>
 <tr>
 <td style="text-align:left">rtexprvalue</td>
-<td style="text-align:left">声明在运行表达式时，标签属性是否有效,</td>
+<td style="text-align:left">声明在运行表达式时，标签属性是否有效，</td>
 </tr>
 <tr>
 <td style="text-align:left">type</td>
@@ -331,11 +331,11 @@
 </tbody>
 </table>
 <ul>
-<li>以下是指定相关的属性实例:</li>
+<li>以下是指定相关的属性实例：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">attribute</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>attribute_name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">required</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">required</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>java.util.Date<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">fragment</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">fragment</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">attribute</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果你使用了两个属性，修改TLD文件，如下所示:</li>
+<li>如果你使用了两个属性，修改TLD文件，如下所示：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">attribute</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>attribute_name1<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">required</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">required</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>java.util.Boolean<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">fragment</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">fragment</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">attribute</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">attribute</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>attribute_name2<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">required</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">required</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>java.util.Date<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">attribute</span>&gt;</span><br></code></pre></td></tr></table></figure>
             </div>

@@ -16,19 +16,19 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Thrift Server Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型  阻塞服务模型:TSimpleServer、TThreadPoolServer 非阻塞服务模型:TNonblockingserver、THsHaServer和TThreadedselectorServer   TServer TServer定义了静态内部类Args，Args继承自抽象类AbstractServ">
+  <meta name="description" content="Thrift Server Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型。  阻塞服务模型：TSimpleServer、TThreadPoolServer 非阻塞服务模型：TNonblockingserver、THsHaServer和TThreadedselectorServer   TServer TServer定义了静态内部类Args，Args继承自抽象类AbstractSer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Thrift Server">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/Thrift/Server/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Thrift Server Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型  阻塞服务模型:TSimpleServer、TThreadPoolServer 非阻塞服务模型:TNonblockingserver、THsHaServer和TThreadedselectorServer   TServer TServer定义了静态内部类Args，Args继承自抽象类AbstractServ">
+<meta property="og:description" content="Thrift Server Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型。  阻塞服务模型：TSimpleServer、TThreadPoolServer 非阻塞服务模型：TNonblockingserver、THsHaServer和TThreadedselectorServer   TServer TServer定义了静态内部类Args，Args继承自抽象类AbstractSer">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528001252494.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023005364.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528015654998.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023059587.png">
 <meta property="article:published_time" content="2022-05-27T18:31:21.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:34:04.180Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.504Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,20 +227,20 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Thrift Server</h1>
-<p>Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型</p>
+<p>Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型。</p>
 <ul>
-<li>阻塞服务模型:TSimpleServer、TThreadPoolServer</li>
-<li>非阻塞服务模型:TNonblockingserver、THsHaServer和TThreadedselectorServer</li>
+<li>阻塞服务模型：TSimpleServer、TThreadPoolServer</li>
+<li>非阻塞服务模型：TNonblockingserver、THsHaServer和TThreadedselectorServer</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528001252494.png" srcset="/images/loading.gif" lazyload alt="image-20220528001252494" style="zoom:50%;" />
 <h2 id="TServer">TServer</h2>
-<p>TServer定义了静态内部类Args，Args继承自抽象类AbstractServerArgs。AbstractServerArgs采用了建造者模式，向TServer提供各种工厂:</p>
+<p>TServer定义了静态内部类Args，Args继承自抽象类AbstractServerArgs。AbstractServerArgs采用了建造者模式，向TServer提供各种工厂：</p>
 <table>
 <thead>
 <tr>
@@ -277,41 +277,41 @@
 </tr>
 </tbody>
 </table>
-<p>TServer的三个方法:<code>serve()</code>,<code>stop()</code>和<code>isServing()</code>,<code>serve()</code>用于启动服务,<code>stop()</code>用于关闭服务,<code>isServing()</code>用于检测服务的起停状态</p>
+<p>TServer的三个方法：<code>serve()</code>,<code>stop()</code>和<code>isServing()</code>,<code>serve()</code>用于启动服务，<code>stop()</code>用于关闭服务，<code>isServing()</code>用于检测服务的起停状态。</p>
 <h2 id="TSimpleServer">TSimpleServer</h2>
-<p>TSimpleServer的工作模式采用最简单的阻塞IO，实现方法相对，但是一次只能接收和处理一个socket连接，效率比较低。主要用于演示Thrift的工作过程，在实际开发过程中很少用到它</p>
+<p>TSimpleServer的工作模式采用最简单的阻塞IO，实现方法相对，但是一次只能接收和处理一个socket连接，效率比较低。主要用于演示Thrift的工作过程，在实际开发过程中很少用到它。</p>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023005364.png" srcset="/images/loading.gif" lazyload alt="image-20220528023005364" style="zoom:33%;" />
 <h2 id="TThreadPoolServer">TThreadPoolServer</h2>
-<p>TThreadPoolServer模式采用阻塞socket方式工作，主线程负责阻塞式监听是否有新socket到来，具体的业务处理交由一个线程池来处理</p>
+<p>TThreadPoolServer模式采用阻塞socket方式工作，主线程负责阻塞式监听是否有新socket到来，具体的业务处理交由一个线程池来处理。</p>
 <p><strong>优点</strong></p>
 <ul>
 <li>拆分了监听线程(Accept Thread)和处理客户端连接的工作线程(Worker Thread)，数据读取和业务处理都交给线程池处理。因此在并发量较大时新连接也能够被及时接受。</li>
-<li>线程池模式比较适合服务器端能预知最多有多少个客户端并发的情况，这时每个请求都能被业务线程池及时处理，性能也非常高</li>
+<li>线程池模式比较适合服务器端能预知最多有多少个客户端并发的情况，这时每个请求都能被业务线程池及时处理，性能也非常高。</li>
 </ul>
 <p><strong>缺点</strong></p>
 <ul>
-<li>线程池模式的处理能力受限于线程池的工作能力，当并发请求数大于线程池中的线程数时，新请求也只能排队等待</li>
+<li>线程池模式的处理能力受限于线程池的工作能力，当并发请求数大于线程池中的线程数时，新请求也只能排队等待。</li>
 <li>默认线程池允许创建的最大线程数量为Integer.MAXVALUE，可能会创建出大量线程，导致OOM</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528015654998.png" srcset="/images/loading.gif" lazyload alt="image-20220528015654998" style="zoom:33%;" />
 <h2 id="TNonblockingServer">TNonblockingServer</h2>
-<p>TNonblockingServer模式也是单线程工作，但是采用NIO的模式，利用IO多路复用模型处理socket就绪事件，对于有数据到来的socket进行数据读取操作，对于有数据发送的socket则进行数据发送娱作，对于监听socke侧产生一个新业务socket并将其注册到selector上</p>
+<p>TNonblockingServer模式也是单线程工作，但是采用NIO的模式，利用IO多路复用模型处理socket就绪事件，对于有数据到来的socket进行数据读取操作，对于有数据发送的socket则进行数据发送娱作，对于监听socke侧产生一个新业务socket并将其注册到selector上。</p>
 <p><strong>注意</strong>:TNonblockingServer要求底层的传输通道必须使用TFramedTransport</p>
 <p><strong>优点</strong>：相比于TSimpleServer效率提升主要体现在IO多路复用上，TNonblockingServer采用非阻塞IO，对accept/read/write等IO事件进行监控和处理，同时监控多个socket的状态变化。</p>
 <p><strong>缺点</strong>：TNonblockingServer模式在业务处理上还是采用单线程顺序来完成。在业务处理比较复杂、耗时的时候，例如某些接口函数需要读取据库执行时间较长，会导致整个服务被阻塞住，此时该模式效率也不高，因为多个调用请求任务依然是顺序—个接—个执行。</p>
 <h2 id="THsHaServer">THsHaServer</h2>
-<p>鉴于TNonblockingServer的缺点,THsHaserver继承于TNonblockingserver,引入了线程池提高了任务处理的并发能力</p>
+<p>鉴于TNonblockingServer的缺点，THsHaserver继承于TNonblockingserver，引入了线程池提高了任务处理的并发能力。</p>
 <p><strong>注意</strong>:THsHaServer和TNonblockingServer一样，要求底层的传输通道必须使用TFramedTransport</p>
-<p><strong>优点</strong>：THSHaServer与TNonblockingServer模式相比，THSHaServer在完成数据读取之后，将业务处理过程交由一个线程池来完成，主线程直接返回进行下一次循环操作，效率大大提升</p>
+<p><strong>优点</strong>：THSHaServer与TNonblockingServer模式相比，THSHaServer在完成数据读取之后，将业务处理过程交由一个线程池来完成，主线程直接返回进行下一次循环操作，效率大大提升。</p>
 <p><strong>缺点</strong>：主线程仍然需要完成所有socket的监听接收、数据读取和数据写入操作。当并发请求数较大时，且发送数据量较多时，监听socket上新连接请求不能被及时接受。</p>
 <h2 id="TThreadedSelectorServer">TThreadedSelectorServer</h2>
-<p>ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件(read/write)从主线程中分离出来。同时3入 worker工作线程池</p>
-<p>TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型，它内部有如下部分构成:</p>
+<p>ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件(read/write)从主线程中分离出来。同时3入 worker工作线程池。</p>
+<p>TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型，它内部有如下部分构成：</p>
 <ul>
-<li>—个AcceptThread专门用于处理监听socket上的新连接</li>
-<li>若干个SelectorThread专门用于处理业务socket的网络I/O读写操作，所有网络数据的读写均是有这些线程来完成</li>
-<li>一个负载均衡器SelectorThreadLoadBalancer对象，主要用于AcceptThread线程接收到一个新socket连接请求时，决定将这个新连求分配给哪个SelectorThread线程</li>
-<li>一个ExecutorService类型的工作线程池，在SelectorThread线程中，监听到有业务socket中有调用请求过来，则将请求数据读取之后，交给ExecutorService线程池中的线程完成此次调用的具体执行。主要用于处理每个RPC请求的handler回调处理</li>
+<li>—个AcceptThread专门用于处理监听socket上的新连接。</li>
+<li>若干个SelectorThread专门用于处理业务socket的网络I/O读写操作，所有网络数据的读写均是有这些线程来完成。</li>
+<li>一个负载均衡器SelectorThreadLoadBalancer对象，主要用于AcceptThread线程接收到一个新socket连接请求时，决定将这个新连求分配给哪个SelectorThread线程。</li>
+<li>一个ExecutorService类型的工作线程池，在SelectorThread线程中，监听到有业务socket中有调用请求过来，则将请求数据读取之后，交给ExecutorService线程池中的线程完成此次调用的具体执行。主要用于处理每个RPC请求的handler回调处理。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023059587.png" srcset="/images/loading.gif" lazyload alt="image-20220528023059587" style="zoom:50%;" />
             </div>

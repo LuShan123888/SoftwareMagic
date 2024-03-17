@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Windows Diskpart 创建GPT分区  全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10,会出现命令提示符（管理员）界面 键入diskpart命令后回车，然后完成下面的命令，相关命令为:  list disk:列出系统计算机所有磁盘 select disk 0:选择0号磁盘   选定磁盘后，完成下述命">
+  <meta name="description" content="Windows Diskpart 创建GPT分区  全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10，会出现命令提示符（管理员）界面。 键入diskpart命令后回车，然后完成下面的命令，相关命令为：  list disk：列出系统计算机所有磁盘。 select disk 0：选择0号磁盘。   选定磁盘后，完成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows Diskpart">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/System/Windows/Diskpart/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Windows Diskpart 创建GPT分区  全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10,会出现命令提示符（管理员）界面 键入diskpart命令后回车，然后完成下面的命令，相关命令为:  list disk:列出系统计算机所有磁盘 select disk 0:选择0号磁盘   选定磁盘后，完成下述命">
+<meta property="og:description" content="Windows Diskpart 创建GPT分区  全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10，会出现命令提示符（管理员）界面。 键入diskpart命令后回车，然后完成下面的命令，相关命令为：  list disk：列出系统计算机所有磁盘。 select disk 0：选择0号磁盘。   选定磁盘后，完成">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-21T11:38:41.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.041Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.304Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      615 字
+      624 字
     </span>
   
 
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -230,30 +230,30 @@
               <h1>Windows Diskpart</h1>
 <h2 id="创建GPT分区">创建GPT分区</h2>
 <ol>
-<li>全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10,会出现命令提示符（管理员）界面</li>
-<li>键入diskpart命令后回车，然后完成下面的命令，相关命令为:
+<li>全新安装Win7或者Win8系统过程中，在选择目标磁盘，安装程序会提示不创建GPT分区，不能完成安装，这时候我们按下Shift+F10，会出现命令提示符（管理员）界面。</li>
+<li>键入diskpart命令后回车，然后完成下面的命令，相关命令为：
 <ul>
-<li><code>list disk</code>:列出系统计算机所有磁盘</li>
-<li><code>select disk 0</code>:选择0号磁盘</li>
+<li><code>list disk</code>：列出系统计算机所有磁盘。</li>
+<li><code>select disk 0</code>：选择0号磁盘。</li>
 </ul>
 </li>
-<li>选定磁盘后，完成下述命令，相关命令为:
+<li>选定磁盘后，完成下述命令，相关命令为：
 <ul>
-<li><code>clean</code>:清除磁盘，该命令将擦除磁盘上的所有数据</li>
-<li><code>convert gpt</code>:将磁盘转换为GPT格式</li>
-<li><code>list partition</code>:列出磁盘上的分区</li>
+<li><code>clean</code>：清除磁盘，该命令将擦除磁盘上的所有数据。</li>
+<li><code>convert gpt</code>：将磁盘转换为GPT格式。</li>
+<li><code>list partition</code>：列出磁盘上的分区。</li>
 </ul>
 </li>
-<li>完成查询和转换操作后，输入<code>list partition</code>命令，会显示这个磁盘上没有显示的分区，是因为我们刚刚完成转换成GPT分区格式，分区为空，接下来要创建EFI分区及系统安装分区，相关命令为:
+<li>完成查询和转换操作后，输入<code>list partition</code>命令，会显示这个磁盘上没有显示的分区，是因为我们刚刚完成转换成GPT分区格式，分区为空，接下来要创建EFI分区及系统安装分区，相关命令为：
 <ul>
-<li><code>create partition efi size=100</code>:创建EFI分区，大小为100M</li>
-<li><code>create partition msr size=128</code>:创建MSR分区，微软默认大小是128M</li>
-<li><code>create partition primary size=50000</code>:创建主分区，这里要注意数字按M计算,50000就是分区大小为50000M,可以根据自己实际情况调整，该分区用来安装win7</li>
-<li><code>list partition</code>:列出磁盘上的分区</li>
+<li><code>create partition efi size=100</code>：创建EFI分区，大小为100M</li>
+<li><code>create partition msr size=128</code>：创建MSR分区，微软默认大小是128M</li>
+<li><code>create partition primary size=50000</code>：创建主分区，这里要注意数字按M计算，50000就是分区大小为50000M，可以根据自己实际情况调整，该分区用来安装win7</li>
+<li><code>list partition</code>：列出磁盘上的分区。</li>
 </ul>
 </li>
-<li>diskpart命令的详细内容，可以利用键入help命令查看</li>
-<li>输入Exit,退出命令提示符界面，返回安装界面</li>
+<li>diskpart命令的详细内容，可以利用键入help命令查看。</li>
+<li>输入Exit，退出命令提示符界面，返回安装界面。</li>
 </ol>
 
             </div>

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Hadoop WordCount Hadoop 2.x 版本中的依赖 jar Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar,如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:  $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;hadoop-common-2.6.0.jar">
+  <meta name="description" content="Hadoop WordCount Hadoop 2.x 版本中的依赖 jar Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar，如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:  $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;hadoop-common-2.6.0.jar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop WordCount">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/Hadoop/WordCount/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Hadoop WordCount Hadoop 2.x 版本中的依赖 jar Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar,如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:  $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;hadoop-common-2.6.0.jar">
+<meta property="og:description" content="Hadoop WordCount Hadoop 2.x 版本中的依赖 jar Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar，如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:  $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;hadoop-common-2.6.0.jar">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-12T14:28:23.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.428Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.892Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.6k 字
+      3.7k 字
     </span>
   
 
@@ -222,22 +222,22 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Hadoop WordCount</h1>
 <h2 id="Hadoop-2-x-版本中的依赖-jar">Hadoop 2.x 版本中的依赖 jar</h2>
-<p>Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar,如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:</p>
+<p>Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar，如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:</p>
 <ul>
 <li>$HADOOP_HOME/share/hadoop/common/hadoop-common-2.6.0.jar</li>
 <li>$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar</li>
 <li>$HADOOP_HOME/share/hadoop/common/lib/commons-cli-1.2.jar</li>
 </ul>
-<p>实际上，通过命令 <code>hadoop classpath</code> 我们可以得到运行 Hadoop 程序所需的全部 classpath 信息</p>
+<p>实际上，通过命令 <code>hadoop classpath</code> 我们可以得到运行 Hadoop 程序所需的全部 classpath 信息。</p>
 <h2 id="添加环境变量">添加环境变量</h2>
-<p>将 Hadoop 的 classhpath 信息添加到 CLASSPATH 变量中，在<code>~/.bashrc</code>中增加如下几行:</p>
+<p>将 Hadoop 的 classhpath 信息添加到 CLASSPATH 变量中，在<code>~/.bashrc</code>中增加如下几行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> HADOOP_HOME=/usr/<span class="hljs-built_in">local</span>/hadoop<br><span class="hljs-built_in">export</span> CLASSPATH=$(<span class="hljs-variable">$HADOOP_HOME</span>/bin/hadoop classpath):<span class="hljs-variable">$CLASSPATH</span><br></code></pre></td></tr></table></figure>
 <h2 id="编译，打包-Hadoop-MapReduce-程序">编译，打包 Hadoop MapReduce 程序</h2>
 <ol>
@@ -245,23 +245,23 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs java">vim WordCount.java<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.util.Iterator;<br><span class="hljs-keyword">import</span> java.util.StringTokenizer;<br><span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;<br><span class="hljs-keyword">import</span> org.apache.hadoop.fs.Path;<br><span class="hljs-keyword">import</span> org.apache.hadoop.io.IntWritable;<br><span class="hljs-keyword">import</span> org.apache.hadoop.io.Text;<br><span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Job;<br><span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Mapper;<br><span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Reducer;<br><span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;<br><span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;<br><span class="hljs-keyword">import</span> org.apache.hadoop.util.GenericOptionsParser;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WordCount</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WordCount</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Configuration conf = <span class="hljs-keyword">new</span> Configuration();<br>        String[] otherArgs = (<span class="hljs-keyword">new</span> GenericOptionsParser(conf, args)).getRemainingArgs();<br>        <span class="hljs-keyword">if</span>(otherArgs.length &lt; <span class="hljs-number">2</span>) &#123;<br>            System.err.println(<span class="hljs-string">&quot;Usage: wordcount &lt;in&gt; [&lt;in&gt;...] &lt;out&gt;&quot;</span>);<br>            System.exit(<span class="hljs-number">2</span>);<br>        &#125;<br><br>        Job job = Job.getInstance(conf, <span class="hljs-string">&quot;word count&quot;</span>);<br>        job.setJarByClass(WordCount.class);<br>        job.setMapperClass(WordCount.TokenizerMapper.class);<br>        job.setCombinerClass(WordCount.IntSumReducer.class);<br>        job.setReducerClass(WordCount.IntSumReducer.class);<br>        job.setOutputKeyClass(Text.class);<br>        job.setOutputValueClass(IntWritable.class);<br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; otherArgs.length - <span class="hljs-number">1</span>; ++i) &#123;<br>            FileInputFormat.addInputPath(job, <span class="hljs-keyword">new</span> Path(otherArgs[i]));<br>        &#125;<br><br>        FileOutputFormat.setOutputPath(job, <span class="hljs-keyword">new</span> Path(otherArgs[otherArgs.length - <span class="hljs-number">1</span>]));<br>        System.exit(job.waitForCompletion(<span class="hljs-keyword">true</span>)?<span class="hljs-number">0</span>:<span class="hljs-number">1</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntSumReducer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Reducer</span>&lt;<span class="hljs-title">Text</span>, <span class="hljs-title">IntWritable</span>, <span class="hljs-title">Text</span>, <span class="hljs-title">IntWritable</span>&gt; </span>&#123;<br>        <span class="hljs-keyword">private</span> IntWritable result = <span class="hljs-keyword">new</span> IntWritable();<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">IntSumReducer</span><span class="hljs-params">()</span> </span>&#123;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reduce</span><span class="hljs-params">(Text key, Iterable&lt;IntWritable&gt; values, Reducer&lt;Text, IntWritable, Text, IntWritable&gt;.Context context)</span> <span class="hljs-keyword">throws</span> IOException, InterruptedException </span>&#123;<br>            <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br><br>            IntWritable val;<br>            <span class="hljs-keyword">for</span>(Iterator i$ = values.iterator(); i$.hasNext(); sum += val.get()) &#123;<br>                val = (IntWritable)i$.next();<br>            &#125;<br><br>            <span class="hljs-keyword">this</span>.result.set(sum);<br>            context.write(key, <span class="hljs-keyword">this</span>.result);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TokenizerMapper</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Mapper</span>&lt;<span class="hljs-title">Object</span>, <span class="hljs-title">Text</span>, <span class="hljs-title">Text</span>, <span class="hljs-title">IntWritable</span>&gt; </span>&#123;<br>        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> IntWritable one = <span class="hljs-keyword">new</span> IntWritable(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">private</span> Text word = <span class="hljs-keyword">new</span> Text();<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TokenizerMapper</span><span class="hljs-params">()</span> </span>&#123;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">map</span><span class="hljs-params">(Object key, Text value, Mapper&lt;Object, Text, Text, IntWritable&gt;.Context context)</span> <span class="hljs-keyword">throws</span> IOException, InterruptedException </span>&#123;<br>            StringTokenizer itr = <span class="hljs-keyword">new</span> StringTokenizer(value.toString());<br><br>            <span class="hljs-keyword">while</span>(itr.hasMoreTokens()) &#123;<br>                <span class="hljs-keyword">this</span>.word.set(itr.nextToken());<br>                context.write(<span class="hljs-keyword">this</span>.word, one);<br>            &#125;<br><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>编译</li>
+<li>编译。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">javac WordCount.java<br></code></pre></td></tr></table></figure>
 <ul>
-<li>编译时可能会有警告，可以忽略</li>
+<li>编译时可能会有警告，可以忽略。</li>
 </ul>
 <ol start="3">
-<li>打包</li>
+<li>打包。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">jar -cvf WordCount.jar ./WordCount*.class<br></code></pre></td></tr></table></figure>
 <h2 id="创建上传测试文件">创建上传测试文件</h2>
 <ol>
-<li>创建测试文件</li>
+<li>创建测试文件。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir input<br>echo &quot;echo of the rainbow&quot; &gt; ./input/file0<br>echo &quot;the waiting game&quot; &gt; ./input/file1<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>把本地文件上传到伪分布式HDFS上</li>
+<li>把本地文件上传到伪分布式HDFS上。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/usr/local/hadoop/bin/hadoop fs -put ~/wordcount/input /user/hadoop/input<br></code></pre></td></tr></table></figure>
 <h2 id="运行WordCount">运行WordCount</h2>

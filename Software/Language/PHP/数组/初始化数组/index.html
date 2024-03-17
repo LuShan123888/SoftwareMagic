@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 初始化数组  在PHP中有两种数组：索引数组和关联数组，索引(indexed)数组的键名 (key)是整数并且从0开始，当你需要通过位置识别元素时可使用索引数组，关联(associative)数组的键名是字符串，看起来像有两个列的数据表，第一列是用与访问键值的键名，第二列是键值(value) PHP内部将所有的数组都存储为关联数组，所以关联数组和索引数组的唯一区别在于键(key)是什么，一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T07:44:38.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.786Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,28 +230,28 @@
               <h1>PHP 初始化数组</h1>
 <ul>
 <li>在PHP中有两种数组：索引数组和关联数组，索引(indexed)数组的键名 (key)是整数并且从0开始，当你需要通过位置识别元素时可使用索引数组，关联(associative)数组的键名是字符串，看起来像有两个列的数据表，第一列是用与访问键值的键名，第二列是键值(value)</li>
-<li>PHP内部将所有的数组都存储为关联数组，所以关联数组和索引数组的唯一区别在于键(key)是什么，一些数组功能主要用于使用索引数组，因为它们假设你有或者需要从0开始连续的整数作为键，在两种情况下，键都是唯一的，换句话说，不管键是字符串还是整数，都不能为两个元素使用相同的键</li>
-<li>PHP数组的元素有一个人不依赖于键和值的内部顺序，这个顺序一般就是把值放入到数组的顺序，很多用于遍历数组的函数都是基于这个内部顺序，但是稍后介绍的各种排序函数可以让你基于键，值或其他来改变数组中元素的顺序</li>
+<li>PHP内部将所有的数组都存储为关联数组，所以关联数组和索引数组的唯一区别在于键(key)是什么，一些数组功能主要用于使用索引数组，因为它们假设你有或者需要从0开始连续的整数作为键，在两种情况下，键都是唯一的，换句话说，不管键是字符串还是整数，都不能为两个元素使用相同的键。</li>
+<li>PHP数组的元素有一个人不依赖于键和值的内部顺序，这个顺序一般就是把值放入到数组的顺序，很多用于遍历数组的函数都是基于这个内部顺序，但是稍后介绍的各种排序函数可以让你基于键，值或其他来改变数组中元素的顺序。</li>
 </ul>
 <h2 id="创建数组">创建数组</h2>
 <ul>
-<li>如果数组不存在，那么新数组存放值将创建该数组，但是在一个未定义的数组中检索值不会创建数组，例如:</li>
+<li>如果数组不存在，那么新数组存放值将创建该数组，但是在一个未定义的数组中检索值不会创建数组，例如：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 在此之前$addresses没有定义</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>];		<span class="hljs-comment">// 无输出</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>;		<span class="hljs-comment">// 无输出</span><br><span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>;		<span class="hljs-comment">// 输出&quot;Array&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 在此之前$addresses没有定义。</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>];		<span class="hljs-comment">// 无输出。</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>;		<span class="hljs-comment">// 无输出。</span><br><span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$addresses</span>;		<span class="hljs-comment">// 输出&quot;Array&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>下面的代码用简单的赋值来初始化程序中的一个数组:</li>
+<li>下面的代码用简单的赋值来初始化程序中的一个数组：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>;<br><span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;abuse@example.com&#x27;</span>;<br><span class="hljs-variable">$addresses</span>[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;root@example.com&#x27;</span>;<br><span class="hljs-comment">//...</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>上面的代码使用是一个索引数组，其索引是从0开始的整数索引，下面是关联数组:</li>
+<li>上面的代码使用是一个索引数组，其索引是从0开始的整数索引，下面是关联数组：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$addresses</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;spam@cyberpromo.net&#x27;</span>,<span class="hljs-string">&#x27;abuse@example.com&#x27;</span>,<span class="hljs-string">&#x27;root@example.com&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>要用<code>array()</code>创建一个关联数组，可使用=&gt;符号来分隔索引和值:</li>
+<li>要用<code>array()</code>创建一个关联数组，可使用=&gt;符号来分隔索引和值：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$price</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Gasket&#x27;</span> =&gt; <span class="hljs-number">15.29</span>,<br>            <span class="hljs-string">&#x27;Wheel&#x27;</span> =&gt; <span class="hljs-number">75</span>,<span class="hljs-number">25</span>,<br>            <span class="hljs-string">&#x27;Tire&#x27;</span> =&gt; <span class="hljs-number">50.00</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>注意使用空白符和对齐，虽然我们也可以把代码都挤在一起，但是那样不易阅读:</li>
+<li>注意使用空白符和对齐，虽然我们也可以把代码都挤在一起，但是那样不易阅读：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$price</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Gasket&#x27;</span> =&gt; <span class="hljs-number">15.29</span>,<span class="hljs-string">&#x27;Wheel&#x27;</span> =&gt; <span class="hljs-number">75</span>,<span class="hljs-number">25</span>,<span class="hljs-string">&#x27;Tire&#x27;</span> =&gt; <span class="hljs-number">50.00</span>);<br></code></pre></td></tr></table></figure>
 <ul>
@@ -259,40 +259,40 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$addresses</span> = <span class="hljs-keyword">array</span>();<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以用=&gt;来指定一个初始索引，并在后面跟着一系列键值，键值从初始键开始插入到数组中，后面的元素索引是连续的:</li>
+<li>可以用=&gt;来指定一个初始索引，并在后面跟着一系列键值，键值从初始键开始插入到数组中，后面的元素索引是连续的：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$days</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Monday&#x27;</span>,<span class="hljs-string">&#x27;Tuesday&#x27;</span>,<span class="hljs-string">&#x27;Wednesday&#x27;</span>,<span class="hljs-string">&#x27;Thursday&#x27;</span>,<span class="hljs-string">&#x27;Friday&#x27;</span>,<span class="hljs-string">&#x27;Saturday&#x27;</span>,<span class="hljs-string">&#x27;Sunday&#x27;</span>);	<span class="hljs-comment">// 数组中2号元素是Tuesday,3号是Wednesday,等等</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$days</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Monday&#x27;</span>,<span class="hljs-string">&#x27;Tuesday&#x27;</span>,<span class="hljs-string">&#x27;Wednesday&#x27;</span>,<span class="hljs-string">&#x27;Thursday&#x27;</span>,<span class="hljs-string">&#x27;Friday&#x27;</span>,<span class="hljs-string">&#x27;Saturday&#x27;</span>,<span class="hljs-string">&#x27;Sunday&#x27;</span>);	<span class="hljs-comment">// 数组中2号元素是Tuesday,3号是Wednesday，等等。</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果初始索引是一个非数字的字符串，那么后面的索引是从0开始的整数，因此，下面的代码可能是一个错误:</li>
+<li>如果初始索引是一个非数字的字符串，那么后面的索引是从0开始的整数，因此，下面的代码可能是一个错误：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$whoops</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-string">&#x27;Green&#x27;</span>);<br><span class="hljs-comment">// 与下面相同</span><br><span class="hljs-variable">$whoops</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Green&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$whoops</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-string">&#x27;Green&#x27;</span>);<br><span class="hljs-comment">// 与下面相同。</span><br><span class="hljs-variable">$whoops</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Firday&#x27;</span> =&gt; <span class="hljs-string">&#x27;Black&#x27;</span>,<span class="hljs-number">0</span> =&gt; <span class="hljs-string">&#x27;Brown&#x27;</span>,<span class="hljs-number">1</span> =&gt; <span class="hljs-string">&#x27;Green&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>$whoops[0]本该为’Black’,但却指向了’Brown’</li>
+<li>$whoops[0]本该为’Black’，但却指向了’Brown’</li>
 </ul>
 <h2 id="多维数组">多维数组</h2>
 <ul>
-<li>数组中的值也可以是数组，这使你可以轻松地创建多维数组:</li>
+<li>数组中的值也可以是数组，这使你可以轻松地创建多维数组：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$row_0</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>);<br><span class="hljs-variable">$row_0</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>);<br><span class="hljs-variable">$row_0</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>);<br><span class="hljs-variable">$multi</span> = <span class="hljs-keyword">array</span>(<span class="hljs-variable">$row_0</span>,<span class="hljs-variable">$row_1</span>,<span class="hljs-variable">$row_2</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以通过添加更多的[]来引用多维数组的元素:</li>
+<li>可以通过添加更多的[]来引用多维数组的元素：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = <span class="hljs-variable">$multi</span>[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>];<span class="hljs-comment">// 第2行，第0列,$value=7</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = <span class="hljs-variable">$multi</span>[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>];<span class="hljs-comment">// 第2行，第0列，$value=7</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>可使用变量替换来访问多维数组中的元素，必须将整个元素用大括号括起来:</li>
+<li>可使用变量替换来访问多维数组中的元素，必须将整个元素用大括号括起来：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span>(<span class="hljs-string">&quot;The value at row 2, column 0 is <span class="hljs-subst">&#123;$multi[2][0]&#125;</span>\n&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果不使用大括号，则输出结果如下所示:</li>
+<li>如果不使用大括号，则输出结果如下所示：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">The value at row <span class="hljs-number">2</span>,column <span class="hljs-number">0</span> is <span class="hljs-keyword">Array</span>[<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
 <h2 id="在数组末尾添加值">在数组末尾添加值</h2>
 <ul>
-<li>要把更多的值插入到一个已存在的索引数组末尾，使用<code>[]</code>语法:</li>
+<li>要把更多的值插入到一个已存在的索引数组末尾，使用<code>[]</code>语法：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$family</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Fred&#x27;</span>,<span class="hljs-string">&#x27;Wilma&#x27;</span>);<br><span class="hljs-variable">$family</span>[] = <span class="hljs-string">&#x27;Pebbles&#x27;</span>;		<span class="hljs-comment">//$family[2]为&#x27;Pebbles&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>这个语言结构假设该数组的索引是数字，并且把元素分配给下一个可用的数字索引，数字从0开始，试图添加值到一个关联数组是程序员常犯的错误，但是PHP会给新的元素指定数字索引而不发出警告:</li>
+<li>这个语言结构假设该数组的索引是数字，并且把元素分配给下一个可用的数字索引，数字从0开始，试图添加值到一个关联数组是程序员常犯的错误，但是PHP会给新的元素指定数字索引而不发出警告：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$person</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;name&#x27;</span> =&gt; <span class="hljs-string">&#x27;Fred&#x27;</span>);<br><span class="hljs-variable">$person</span>[] = <span class="hljs-string">&#x27;Wilma&#x27;</span>;		<span class="hljs-comment">//$person[0]现在是&#x27;Wilma&#x27;</span><br></code></pre></td></tr></table></figure>
             </div>
@@ -309,7 +309,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E6%95%B0%E7%BB%84/">数组</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E6%95%B0%E7%BB%84%E3%80%82/">数组。</a>
                     
                   </div>
                 

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Mybatis 配置文件  mybatis-config.xml 系统核心配置文件 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息  configuration(配置) properties(属性) settings(设置) typeAliases(类型别名) typeHandlers(类型处理器) objectFactory(对象工厂) plugins(插件)">
+  <meta name="description" content="Mybatis 配置文件  mybatis-config.xml 系统核心配置文件。 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。  configuration(配置) properties(属性) settings(设置) typeAliases(类型别名) typeHandlers(类型处理器) objectFactory(对象工厂) plugins(插件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis 配置文件">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Mybatis/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Mybatis 配置文件  mybatis-config.xml 系统核心配置文件 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息  configuration(配置) properties(属性) settings(设置) typeAliases(类型别名) typeHandlers(类型处理器) objectFactory(对象工厂) plugins(插件)">
+<meta property="og:description" content="Mybatis 配置文件  mybatis-config.xml 系统核心配置文件。 MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。  configuration(配置) properties(属性) settings(设置) typeAliases(类型别名) typeHandlers(类型处理器) objectFactory(对象工厂) plugins(插件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.581Z">
-<meta property="article:modified_time" content="2024-03-17T15:52:00.846Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.380Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -181,7 +181,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17 分钟
+      18 分钟
     </span>
   
 
@@ -222,15 +222,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Mybatis 配置文件</h1>
 <ul>
-<li>mybatis-config.xml 系统核心配置文件</li>
-<li>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息
+<li>mybatis-config.xml 系统核心配置文件。</li>
+<li>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。
 <ul>
 <li>configuration(配置)</li>
 <li>properties(属性)</li>
@@ -247,35 +247,35 @@
 <li>mappers(映射器)</li>
 </ul>
 </li>
-<li><strong>注意</strong>:元素节点的顺序不对会报错</li>
+<li><strong>注意</strong>：元素节点的顺序不对会报错。</li>
 </ul>
 <h2 id="environments">environments</h2>
 <h3 id="environment">environment</h3>
 <ul>
-<li>具体的一套环境，通过设置id进行区别, id保证唯一</li>
+<li>具体的一套环境，通过设置id进行区别， id保证唯一。</li>
 <li>配置MyBatis的多套运行环境，将SQL映射到多个不同的数据库上，必须指定其中一个为默认运行环境（通过default指定)</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h4 id="dataSource">dataSource</h4>
 <ul>
 <li>
-<p>使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源</p>
+<p>使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源。</p>
 </li>
 <li>
-<p>数据源是必须配置的</p>
+<p>数据源是必须配置的。</p>
 </li>
 <li>
-<p>有三种内建的数据源类型</p>
+<p>有三种内建的数据源类型。</p>
   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dateSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;[UNPOOLED|POOLED|JNDI]&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
 </li>
 <li>
-<p><strong>unpooled</strong>:这个数据源的实现只是每次被请求时打开和关闭连接</p>
+<p><strong>unpooled</strong>：这个数据源的实现只是每次被请求时打开和关闭连接。</p>
 </li>
 <li>
-<p><strong>pooled</strong>:这种数据源的实现利用&quot;池”的概念将 JDBC 连接对象组织起来，这是一种使得并发 Web 应用快速响应请求的流行处理方式</p>
+<p><strong>pooled</strong>：这种数据源的实现利用&quot;池”的概念将 JDBC 连接对象组织起来，这是一种使得并发 Web 应用快速响应请求的流行处理方式。</p>
 </li>
 <li>
-<p><strong>jndi</strong>:这个数据源的实现是为了能在如 Spring 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的引用</p>
+<p><strong>jndi</strong>：这个数据源的实现是为了能在如 Spring 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的引用。</p>
 </li>
 <li>
 <p>数据源也有很多第三方的实现，比如dbcp, c3p0, druid</p>
@@ -283,14 +283,14 @@
 </ul>
 <h4 id="transactionManager">transactionManager</h4>
 <ul>
-<li>这两种事务管理器类型都不需要设置任何属性</li>
+<li>这两种事务管理器类型都不需要设置任何属性。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;[ JDBC | MANAGED ]&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="mappers">mappers</h2>
 <ul>
-<li>映射器：定义映射SQL语句文件</li>
-<li>首先需要告诉 MyBatis 到哪里去找到这些语句，可以使用相对于类路径的资源引用，或完全限定资源定位符（包括 <code>file://</code> 的 URL), 或类名和包名等</li>
-<li>映射器是MyBatis中最核心的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配置，而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL语句</li>
+<li>映射器：定义映射SQL语句文件。</li>
+<li>首先需要告诉 MyBatis 到哪里去找到这些语句，可以使用相对于类路径的资源引用，或完全限定资源定位符（包括 <code>file://</code> 的 URL)，或类名和包名等。</li>
+<li>映射器是MyBatis中最核心的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配置，而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL语句。</li>
 </ul>
 <h3 id="用相对于类路径的资源引用">用相对于类路径的资源引用</h3>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;org/mybatis/builder/PostMapper.xml&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
@@ -298,12 +298,12 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">url</span>=<span class="hljs-string">&quot;file://var/mappers/AuthorMapper.xml&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="使用映射器接口实现类的完全限定类名">使用映射器接口实现类的完全限定类名</h3>
 <ul>
-<li>需要配置文件名称和接口名称一致，并且位于同一目录下</li>
+<li>需要配置文件名称和接口名称一致，并且位于同一目录下。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.mybatis.builder.AuthorMapper&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="将包内的映射器接口实现全部注册为映射器">将包内的映射器接口实现全部注册为映射器</h3>
 <ul>
-<li>但是需要配置文件名称和接口名称一致，并且位于同一目录下</li>
+<li>但是需要配置文件名称和接口名称一致，并且位于同一目录下。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;org.mybatis.builder&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="Mapper文件">Mapper文件</h3>
@@ -313,7 +313,7 @@
 <ul>
 <li>namespace的命名必须跟某个接口同名（包名+类名)
 <ul>
-<li>接口中的方法与映射文件中sql语句id一一对应</li>
+<li>接口中的方法与映射文件中sql语句id一一对应。</li>
 </ul>
 </li>
 </ul>
@@ -321,46 +321,46 @@
 </ul>
 <h2 id="Properties">Properties</h2>
 <ul>
-<li>数据库这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递</li>
+<li>数据库这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。</li>
 </ul>
 <ol>
 <li>在资源目录下新建一个db.properties</li>
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">driver</span>=<span class="hljs-string">com.mysql.jdbc.Driver</span><br><span class="hljs-attr">url</span>=<span class="hljs-string">jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8</span><br><span class="hljs-attr">username</span>=<span class="hljs-string">root</span><br><span class="hljs-attr">password</span>=<span class="hljs-string">123456</span><br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>将文件导入properties 配置文件</li>
+<li>将文件导入properties 配置文件。</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--导入properties文件--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;db.properties&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;mapper/UserMapper.xml&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="typeAliases">typeAliases</h2>
 <ul>
-<li>类型别名是为 Java 类型设置一个短的名字，它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余</li>
+<li>类型别名是为 Java 类型设置一个短的名字，它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--配置别名，注意顺序--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">typeAlias</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">alias</span>=<span class="hljs-string">&quot;User&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>当这样配置时, <code>User</code>可以用在任何使用<code>com.example.entity.User</code>的地方</li>
-<li>也可以指定一个包名, MyBatis 会在包名下面搜索需要的 Java Bean, 比如:</li>
+<li>当这样配置时， <code>User</code>可以用在任何使用<code>com.example.entity.User</code>的地方。</li>
+<li>也可以指定一个包名， MyBatis 会在包名下面搜索需要的 Java Bean，比如：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">typeAliases</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.entity&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">typeAliases</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>每一个在包 <code>com.example.entity</code> 中的 Java Bean, 在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名</li>
-<li>若有注解，则别名为其注解值，见下面的例子:</li>
+<li>每一个在包 <code>com.example.entity</code> 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。</li>
+<li>若有注解，则别名为其注解值，见下面的例子：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Alias(&quot;user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="settings">settings</h2>
 <ul>
-<li>Mybatis配置</li>
+<li>Mybatis配置。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cacheEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lazyLoadingEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;multipleResultSetsEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;useColumnLabel&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;useGeneratedKeys&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;autoMappingBehavior&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;PARTIAL&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;autoMappingUnknownColumnBehavior&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;WARNING&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;defaultExecutorType&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;SIMPLE&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;defaultStatementTimeout&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;25&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;defaultFetchSize&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;100&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;safeRowBoundsEnabled&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;localCacheScope&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;SESSION&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;jdbcTypeForNull&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;OTHER&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lazyLoadTriggerMethods&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;equals,clone,hashCode,toString&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="typeHandlers">typeHandlers</h2>
 <ul>
-<li>无论是 MyBatis 在预处理语句(PreparedStatement)中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型</li>
-<li>你可以重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型,[了解即可]</li>
+<li>无论是 MyBatis 在预处理语句(PreparedStatement)中设置一个参数时，还是从结果集中取出一个值时，都会用类型处理器将获取的值以合适的方式转换成 Java 类型。</li>
+<li>你可以重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型，[了解即可]</li>
 </ul>
 <h2 id="objectFactory">objectFactory</h2>
 <ul>
-<li>MyBatis 每次创建结果对象的新实例时，它都会使用一个对象工厂(ObjectFactory)实例来完成</li>
-<li>默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过有参构造方法来实例化</li>
-<li>如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现</li>
+<li>MyBatis 每次创建结果对象的新实例时，它都会使用一个对象工厂(ObjectFactory)实例来完成。</li>
+<li>默认的对象工厂需要做的仅仅是实例化目标类，要么通过默认构造方法，要么在参数映射存在的时候通过有参构造方法来实例化。</li>
+<li>如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现。</li>
 </ul>
 
             </div>

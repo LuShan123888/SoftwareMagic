@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="ZooKeeper Watch  zookeeper 的 watcher 机制，可以分为四个过程:  客户端注册 watcher 服务端处理 watcher 服务端触发 watcher 事件 客户端回调 watcher   其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以">
+  <meta name="description" content="ZooKeeper Watch  zookeeper 的 watcher 机制，可以分为四个过程：  客户端注册 watcher 服务端处理 watcher 服务端触发 watcher 事件。 客户端回调 watcher   其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ZooKeeper Watch">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Distributed/ZooKeeper/Watch/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="ZooKeeper Watch  zookeeper 的 watcher 机制，可以分为四个过程:  客户端注册 watcher 服务端处理 watcher 服务端触发 watcher 事件 客户端回调 watcher   其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以">
+<meta property="og:description" content="ZooKeeper Watch  zookeeper 的 watcher 机制，可以分为四个过程：  客户端注册 watcher 服务端处理 watcher 服务端触发 watcher 事件。 客户端回调 watcher   其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092811.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092813.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093500.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093502.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.428Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.893Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,79 +238,79 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>ZooKeeper Watch</h1>
 <ul>
-<li>zookeeper 的 watcher 机制，可以分为四个过程:
+<li>zookeeper 的 watcher 机制，可以分为四个过程：
 <ul>
 <li>客户端注册 watcher</li>
 <li>服务端处理 watcher</li>
-<li>服务端触发 watcher 事件</li>
+<li>服务端触发 watcher 事件。</li>
 <li>客户端回调 watcher</li>
 </ul>
 </li>
-<li>其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以 exists 方法举例说明其原理</li>
+<li>其中客户端注册 watcher 有三种方式，调用客户端 API 可以分别通过 getData,exists,getChildren 实现，新建 WatcherDemo 类，以 exists 方法举例说明其原理。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WatcherDemo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Watcher</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> ZooKeeper zooKeeper;<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            zooKeeper = <span class="hljs-keyword">new</span> ZooKeeper(<span class="hljs-string">&quot;127.0.0.1:2181&quot;</span>, <span class="hljs-number">4000</span>,<span class="hljs-keyword">new</span> WatcherDemo());<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(WatchedEvent event)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;eventType:&quot;</span>+event.getType());<br>        <span class="hljs-keyword">if</span>(event.getType()==Event.EventType.NodeDataChanged)&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                zooKeeper.exists(event.getPath(),<span class="hljs-keyword">true</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (KeeperException e) &#123;<br>                e.printStackTrace();<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException, KeeperException, InterruptedException </span>&#123;<br>        String path=<span class="hljs-string">&quot;/watcher&quot;</span>;<br>        <span class="hljs-keyword">if</span>(zooKeeper.exists(path,<span class="hljs-keyword">false</span>)==<span class="hljs-keyword">null</span>) &#123;<br>            zooKeeper.create(<span class="hljs-string">&quot;/watcher&quot;</span>, <span class="hljs-string">&quot;0&quot;</span>.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);<br>        &#125;<br>        Thread.sleep(<span class="hljs-number">1000</span>);<br>        System.out.println(<span class="hljs-string">&quot;-----------&quot;</span>);<br>        <span class="hljs-comment">//true表示使用zookeeper实例中配置的watcher</span><br>        Stat stat=zooKeeper.exists(path,<span class="hljs-keyword">true</span>);<br>        System.in.read();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>运行完程序，控制台显示:</li>
+<li>运行完程序，控制台显示：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092811.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom: 67%;" />
 <ul>
-<li>此时启动 zookeeper 命令行终端，查看并且删除<code>watcher</code>节点:</li>
+<li>此时启动 zookeeper 命令行终端，查看并且删除<code>watcher</code>节点：</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092813.png" srcset="/images/loading.gif" lazyload alt=""></p>
 <ul>
-<li>IDE 控制台输出，触发了节点删除事件:</li>
+<li>IDE 控制台输出，触发了节点删除事件：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092820.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>客户端发送请求给服务端是通过 TCP 长连接建立网络通道，底层默认是通过 java 的 NIO 方式，也可以配置 netty 实现方式</li>
+<li>客户端发送请求给服务端是通过 TCP 长连接建立网络通道，底层默认是通过 java 的 NIO 方式，也可以配置 netty 实现方式。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092855.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>注册 watcher 监听事件流程图:</li>
+<li>注册 watcher 监听事件流程图：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615092902.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <h2 id="客户端发送事件通知请求">客户端发送事件通知请求</h2>
 <ul>
-<li>在 Zookeeper 类调用 exists 方法时候，把创建事件监听封装到 request 对象中,watch 属性设置为 true,待服务端返回 response 后把监听事件封装到客户端的 ZKWatchManager 类中</li>
+<li>在 Zookeeper 类调用 exists 方法时候，把创建事件监听封装到 request 对象中，watch 属性设置为 true，待服务端返回 response 后把监听事件封装到客户端的 ZKWatchManager 类中。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093143.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <h2 id="服务端处理-watcher-事件的请求">服务端处理 watcher 事件的请求</h2>
 <ul>
-<li>服务端 NIOServerCnxn 类用来处理客户端发送过来的请求，最终调用到 FinalRequestProcessor,其中有一段源码添加客户端发送过来的 watcher 事件:</li>
+<li>服务端 NIOServerCnxn 类用来处理客户端发送过来的请求，最终调用到 FinalRequestProcessor，其中有一段源码添加客户端发送过来的 watcher 事件：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093226.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>然后进入 statNode 方法，在 DataTree 类方法中添加 watcher 事件，并保存至 WatchManager 的 watchTable 与 watchTable 中</li>
+<li>然后进入 statNode 方法，在 DataTree 类方法中添加 watcher 事件，并保存至 WatchManager 的 watchTable 与 watchTable 中。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093240.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093244.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <h2 id="服务端触发-watcher-事件流程">服务端触发 watcher 事件流程</h2>
 <ul>
-<li>若服务端某个被监听的节点发生事务请求，服务端处理请求过程中调用 FinalRequestProcessor 类 processRequest 方法中的代码如下所示:</li>
+<li>若服务端某个被监听的节点发生事务请求，服务端处理请求过程中调用 FinalRequestProcessor 类 processRequest 方法中的代码如下所示：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093348.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>删除调用链最终到 DataTree 类中删除节点分支的触发代码段:</li>
+<li>删除调用链最终到 DataTree 类中删除节点分支的触发代码段：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093403.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>进入 WatchManager 类的 triggerWatch 方法:</li>
+<li>进入 WatchManager 类的 triggerWatch 方法：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093411.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <ul>
-<li>继续跟踪进入 NIOServerCnxn,构建了一个 xid 为 -1,zxid 为 -1 的 ReplyHeader 对象，然后再调用 sendResonpe 方法</li>
+<li>继续跟踪进入 NIOServerCnxn，构建了一个 xid 为 -1,zxid 为 -1 的 ReplyHeader 对象，然后再调用 sendResonpe 方法。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093425.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <h2 id="客户端回调-watcher-事件">客户端回调 watcher 事件</h2>
 <ul>
-<li>客户端 SendThread 类 readResponse 方法接收服务端触发的事件通知，进入 xid 为 -1 流程，处理 Event 事件</li>
+<li>客户端 SendThread 类 readResponse 方法接收服务端触发的事件通知，进入 xid 为 -1 流程，处理 Event 事件。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093500.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615093502.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:67%;" />

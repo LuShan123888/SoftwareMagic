@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Docker 本地导入导出 概述  docker save保存的是镜像(image),docker export保存的是容器(container) docker load用来载入镜像包,docker import 用来载入容器包，但两者都会恢复为镜像 docker export导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的workdir,entrypoin">
+  <meta name="description" content="Docker 本地导入导出 概述  docker save保存的是镜像(image),docker export保存的是容器(container) docker load用来载入镜像包，docker import 用来载入容器包，但两者都会恢复为镜像。 docker export导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的workdir,entrypoi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 本地导入导出">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/DevOps/Docker/%E6%9C%AC%E5%9C%B0%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Docker 本地导入导出 概述  docker save保存的是镜像(image),docker export保存的是容器(container) docker load用来载入镜像包,docker import 用来载入容器包，但两者都会恢复为镜像 docker export导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的workdir,entrypoin">
+<meta property="og:description" content="Docker 本地导入导出 概述  docker save保存的是镜像(image),docker export保存的是容器(container) docker load用来载入镜像包，docker import 用来载入容器包，但两者都会恢复为镜像。 docker export导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的workdir,entrypoi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.593Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.129Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.455Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -231,10 +231,10 @@
 <h2 id="概述">概述</h2>
 <ul>
 <li><code>docker save</code>保存的是镜像(image),<code>docker export</code>保存的是容器(container)</li>
-<li><code>docker load</code>用来载入镜像包,<code>docker import </code>用来载入容器包，但两者都会恢复为镜像</li>
-<li><code>docker export</code>导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的<code>workdir</code>,<code>entrypoint</code>之类的所有东西都会丢失,<code>commit</code>过的话也会丢失</li>
-<li><code>docker export</code>快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态),而<code>docker save</code>镜像存储文件将保存完整记录，体积也更大</li>
-<li><code>docker load</code>不能对载入的镜像重命名，而<code>docker import</code>可以为镜像指定新名称</li>
+<li><code>docker load</code>用来载入镜像包，<code>docker import </code>用来载入容器包，但两者都会恢复为镜像。</li>
+<li><code>docker export</code>导出的是一个容器的快照，不是镜像本身，也就是说没 layer,dockerfile 里的<code>workdir</code>,<code>entrypoint</code>之类的所有东西都会丢失，<code>commit</code>过的话也会丢失。</li>
+<li><code>docker export</code>快照文件将丢弃所有的历史记录和元数据信息（即仅保存容器当时的快照状态)，而<code>docker save</code>镜像存储文件将保存完整记录，体积也更大。</li>
+<li><code>docker load</code>不能对载入的镜像重命名，而<code>docker import</code>可以为镜像指定新名称。</li>
 </ul>
 <h2 id="命令">命令</h2>
 <h3 id="export">export</h3>
@@ -243,22 +243,22 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker <span class="hljs-built_in">export</span> [OPTIONS] CONTAINER</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-o</strong>:将输入内容写到文件</li>
-<li>将id为a404c6c174a2的容器按日期保存为tar文件</li>
+<li><strong>-o</strong>：将输入内容写到文件。</li>
+<li>将id为a404c6c174a2的容器按日期保存为tar文件。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li><strong>-o</strong>:将输入内容写到文件</li>
+<li><strong>-o</strong>：将输入内容写到文件。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker <span class="hljs-built_in">export</span> -o mysql-`date +%Y%m%d`.tar a404c6c174a2</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> ls mysql-`date +%Y%m%d`.tar</span><br>mysql-20160711.tar<br></code></pre></td></tr></table></figure>
 <h3 id="import">import</h3>
 <ul>
-<li>从归档文件中创建镜像</li>
+<li>从归档文件中创建镜像。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-c</strong>:应用docker 指令创建镜像;</li>
-<li><strong>-m</strong>:提交时的说明文字</li>
+<li><strong>-c</strong>：应用docker 指令创建镜像;</li>
+<li><strong>-m</strong>：提交时的说明文字。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
@@ -267,29 +267,29 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker import  my_ubuntu_v3.tar <span class="hljs-built_in">test</span>/ubuntu:v4</span><br>sha256:63ce4a6d6bc3fabb95dbd6c561404a309b7bdfc4e21c1d59fe9fe4299cbfea39<br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker images <span class="hljs-built_in">test</span>/ubuntu:v4</span><br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br>test/ubuntu       v4                  63ce4a6d6bc3        20 seconds ago      142.1 MB<br></code></pre></td></tr></table></figure>
 <h3 id="save">save</h3>
 <ul>
-<li>将指定镜像保存成 tar 归档文件</li>
+<li>将指定镜像保存成 tar 归档文件。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker save [OPTIONS] IMAGE [IMAGE...]</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>-o</strong>:输出到的文件</li>
+<li><strong>-o</strong>：输出到的文件。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>将镜像<code> test/ubuntu:v3</code> 生成 <code>my_ubuntu_v3.tar</code> 文档</li>
+<li>将镜像<code> test/ubuntu:v3</code> 生成 <code>my_ubuntu_v3.tar</code> 文档。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker save -o my_ubuntu_v3.tar <span class="hljs-built_in">test</span>/ubuntu:v3</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> ll my_ubuntu_v3.tar</span><br>-rw------- 1 test test 142102016 Jul 11 01:37 my_ubuntu_v3.ta<br></code></pre></td></tr></table></figure>
 <h3 id="load">load</h3>
 <ul>
-<li>导入使用docker save命令导出的镜像</li>
+<li>导入使用docker save命令导出的镜像。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker load [OPTIONS]<br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>–input , -i</strong>:指定导入的文件，代替 STDIN</li>
-<li><strong>–quiet , -q</strong>:精简输出信息</li>
+<li><strong>–input , -i</strong>：指定导入的文件，代替 STDIN</li>
+<li><strong>–quiet , -q</strong>：精简输出信息。</li>
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>导入镜像:</li>
+<li>导入镜像：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker image ls</span><br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker load &lt; busybox.tar.gz</span><br>Loaded image: busybox:latest<br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker images</span><br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br>busybox             latest              769b9341d937        7 weeks ago         2.489 MB<br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker load --input fedora.tar</span><br>Loaded image: fedora:rawhide<br>Loaded image: fedora:20<br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker images</span><br>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE<br>busybox             latest              769b9341d937        7 weeks ago         2.489 MB<br>fedora              rawhide             0d20aec6529d        7 weeks ago         387 MB<br>fedora              20                  58394af37342        7 weeks ago         385.5 MB<br>fedora              heisenbug           58394af37342        7 weeks ago         385.5 MBs<br>fedora              latest              58394af37342        7 weeks ago         385.5 MB<br></code></pre></td></tr></table></figure>
             </div>

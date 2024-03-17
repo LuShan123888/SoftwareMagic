@@ -24,7 +24,7 @@
 <meta property="og:description" content="Elasticsearch 初始化 安装 Docker  生成Docker Volume  12345678910# 创建临时容器$ docker run --name elastic_search -d -P docker.elastic.co&#x2F;elasticsearch&#x2F;elasticsearch:7.13.2# 将容器中的 elasticsearch 配置文件复制到宿主机中指定路径下$ mk">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-22T14:25:38.000Z">
-<meta property="article:modified_time" content="2023-07-22T14:25:38.000Z">
+<meta property="article:modified_time" content="2024-03-17T17:44:00.514Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年7月22日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -235,7 +235,7 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 创建临时容器</span><br><span class="hljs-meta">$</span><span class="bash"> docker run --name elastic_search -d -P docker.elastic.co/elasticsearch/elasticsearch:7.13.2</span><br><span class="hljs-meta">#</span><span class="bash"> 将容器中的 elasticsearch 配置文件复制到宿主机中指定路径下</span><br><span class="hljs-meta">$</span><span class="bash"> mkdir -p ~/DockerVolumes/elastic_search/</span><br><span class="hljs-meta">$</span><span class="bash"> docker cp elastic_search:/usr/share/elasticsearch/config/ ~/DockerVolumes/elastic_search/conf</span><br><span class="hljs-meta">#</span><span class="bash"> 将容器中的 elasticsearch 数据文件复制到宿主机中指定路径下</span><br><span class="hljs-meta">$</span><span class="bash"> mkdir -p ~/DockerVolumes/elastic_search/</span><br><span class="hljs-meta">$</span><span class="bash"> docker cp elastic_search:/usr/share/elasticsearch/data/ ~/DockerVolumes/elastic_search/data</span><br><span class="hljs-meta">#</span><span class="bash"> 删除临时容器</span><br><span class="hljs-meta">$</span><span class="bash"> docker rm -f elastic_search</span><br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>创建并启动容器</li>
+<li>创建并启动容器。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker network create elastic</span><br><span class="hljs-meta">$</span><span class="bash"> docker run --name elastic_search -d -p 9200:9200 -p 9300:9300 \</span><br><span class="bash">--net elastic \</span><br><span class="bash">--hostname elasticsearch \</span><br><span class="bash">-e <span class="hljs-string">&quot;http.cors.enabled=true&quot;</span> \</span><br><span class="bash">-e <span class="hljs-string">&quot;http.cors.allow-origin=*&quot;</span> \</span><br><span class="bash">-e <span class="hljs-string">&quot;discovery.type=single-node&quot;</span> \</span><br><span class="bash">-v ~/DockerVolumes/elastic_search/data/:/usr/share/elasticsearch/data/ \</span><br><span class="bash">-v ~/DockerVolumes/elastic_search/conf/:/usr/share/elasticsearch/config/ \</span><br><span class="bash">docker.elastic.co/elasticsearch/elasticsearch:7.13.2</span><br></code></pre></td></tr></table></figure>
 <h3 id="Homebrew">Homebrew</h3>

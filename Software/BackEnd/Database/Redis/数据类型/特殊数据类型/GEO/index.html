@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Redis GEO  Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增 Redis GEO 操作方法有:  geoadd:添加地理位置的坐标 geopos:获取地理位置的坐标 geodist:计算两个位置之间的距离 georadius:根据用户给定的经纬度坐标来获取指定范围内的地理位置集合 georadiusbymember:根据储存在位">
+  <meta name="description" content="Redis GEO  Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。 Redis GEO 操作方法有：  geoadd：添加地理位置的坐标。 geopos：获取地理位置的坐标。 geodist：计算两个位置之间的距离。 georadius：根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。 georadiusbymember：根">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis GEO">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/GEO/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Redis GEO  Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增 Redis GEO 操作方法有:  geoadd:添加地理位置的坐标 geopos:获取地理位置的坐标 geodist:计算两个位置之间的距离 georadius:根据用户给定的经纬度坐标来获取指定范围内的地理位置集合 georadiusbymember:根据储存在位">
+<meta property="og:description" content="Redis GEO  Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。 Redis GEO 操作方法有：  geoadd：添加地理位置的坐标。 geopos：获取地理位置的坐标。 geodist：计算两个位置之间的距离。 georadius：根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。 georadiusbymember：根">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.553Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.113Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.447Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,66 +222,66 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Redis GEO</h1>
 <ul>
-<li>Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增</li>
-<li>Redis GEO 操作方法有:
+<li>Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。</li>
+<li>Redis GEO 操作方法有：
 <ul>
-<li><code>geoadd</code>:添加地理位置的坐标</li>
-<li><code>geopos</code>:获取地理位置的坐标</li>
-<li><code>geodist</code>:计算两个位置之间的距离</li>
-<li><code>georadius</code>:根据用户给定的经纬度坐标来获取指定范围内的地理位置集合</li>
-<li><code>georadiusbymember</code>:根据储存在位置集合里面的某个地点获取指定范围内的地理位置集合</li>
-<li><code>geohash</code>:返回一个或多个位置对象的 geohash 值</li>
+<li><code>geoadd</code>：添加地理位置的坐标。</li>
+<li><code>geopos</code>：获取地理位置的坐标。</li>
+<li><code>geodist</code>：计算两个位置之间的距离。</li>
+<li><code>georadius</code>：根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。</li>
+<li><code>georadiusbymember</code>：根据储存在位置集合里面的某个地点获取指定范围内的地理位置集合。</li>
+<li><code>geohash</code>：返回一个或多个位置对象的 geohash 值。</li>
 </ul>
 </li>
 <li>Redis GEO是基于Zset实现的，可以使用Zset命令来操作GEO</li>
 </ul>
 <h2 id="geoadd">geoadd</h2>
 <ul>
-<li>geoadd 用于存储指定的地理空间位置，可以将一个或多个经度(longitude),纬度(latitude),位置名称(member)添加到指定的 key 中</li>
-<li>geoadd 语法格式如下:</li>
+<li>geoadd 用于存储指定的地理空间位置，可以将一个或多个经度(longitude)，纬度(latitude)，位置名称(member)添加到指定的 key 中。</li>
+<li>geoadd 语法格式如下：</li>
 </ul>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">GEOADD <span class="hljs-built_in">key</span> longitude latitude <span class="hljs-built_in">member</span> [longitude latitude <span class="hljs-built_in">member</span> ...]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>以下实例中 key 为 Sicily,Catania 为位置名称 :</li>
+<li>以下实例中 key 为 Sicily,Catania 为位置名称：</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs applescript">redis&gt; GEOADD Sicily <span class="hljs-number">13.361389</span> <span class="hljs-number">38.115556</span> <span class="hljs-string">&quot;Palermo&quot;</span> <span class="hljs-number">15.087269</span> <span class="hljs-number">37.502669</span> <span class="hljs-string">&quot;Catania&quot;</span><br>(<span class="hljs-built_in">integer</span>) <span class="hljs-number">2</span><br>redis&gt; GEODIST Sicily Palermo Catania<br><span class="hljs-string">&quot;166274.1516&quot;</span><br>redis&gt; GEORADIUS Sicily <span class="hljs-number">15</span> <span class="hljs-number">37</span> <span class="hljs-number">100</span> km<br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;Catania&quot;</span><br>redis&gt; GEORADIUS Sicily <span class="hljs-number">15</span> <span class="hljs-number">37</span> <span class="hljs-number">200</span> km<br><span class="hljs-number">1</span>) <span class="hljs-string">&quot;Palermo&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-string">&quot;Catania&quot;</span><br>redis&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="geopos">geopos</h2>
 <ul>
-<li>geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置（经度和纬度),不存在的返回 nil</li>
-<li>geopos 语法格式如下:</li>
+<li>geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置（经度和纬度)，不存在的返回 nil</li>
+<li>geopos 语法格式如下：</li>
 </ul>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">GEOPOS <span class="hljs-built_in">key</span> <span class="hljs-built_in">member</span> [<span class="hljs-built_in">member</span> ...]<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xl">redis&gt; GEOADD Sicily <span class="hljs-number">13.361389</span> <span class="hljs-number">38.115556</span> <span class="hljs-string">&quot;Palermo&quot;</span> <span class="hljs-number">15.087269</span> <span class="hljs-number">37.502669</span> <span class="hljs-string">&quot;Catania&quot;</span><br>(<span class="hljs-keyword">integer</span>) <span class="hljs-number">2</span><br>redis&gt; GEOPOS Sicily Palermo Catania NonExisting<br><span class="hljs-number">1</span>) <span class="hljs-number">1</span>) <span class="hljs-string">&quot;13.36138933897018433&quot;</span><br>   <span class="hljs-number">2</span>) <span class="hljs-string">&quot;38.11555639549629859&quot;</span><br><span class="hljs-number">2</span>) <span class="hljs-number">1</span>) <span class="hljs-string">&quot;15.08726745843887329&quot;</span><br>   <span class="hljs-number">2</span>) <span class="hljs-string">&quot;37.50266842333162032&quot;</span><br><span class="hljs-number">3</span>) (<span class="hljs-literal">nil</span>)<br>redis&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="geodist">geodist</h2>
 <ul>
-<li>geodist 用于返回两个给定位置之间的距离</li>
-<li>geodist 语法格式如下:</li>
+<li>geodist 用于返回两个给定位置之间的距离。</li>
+<li>geodist 语法格式如下：</li>
 </ul>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">GEODIST</span> key member<span class="hljs-number">1</span> member<span class="hljs-number">2</span><span class="hljs-meta"> [m|km|ft|mi]</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>
-<p>member1 member2 为两个地理位置</p>
+<p>member1 member2 为两个地理位置。</p>
 </li>
 <li>
-<p>最后一个距离单位参数说明:</p>
+<p>最后一个距离单位参数说明：</p>
 <ul>
-<li>m :米，默认单位</li>
-<li>km :千米</li>
-<li>mi :英里</li>
-<li>ft :英尺</li>
+<li>m ：米，默认单位。</li>
+<li>km ：千米。</li>
+<li>mi ：英里。</li>
+<li>ft ：英尺。</li>
 </ul>
 </li>
 <li>
-<p>计算 Palermo 与 Catania 之间的距离:</p>
+<p>计算 Palermo 与 Catania 之间的距离：</p>
 </li>
 <li>
 <p><strong>实例</strong></p>
@@ -298,23 +298,23 @@
   redis&gt; GEODIST Sicily Foo Bar
   (nil)
   redis&gt;
-  <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs inform7"><br>- ## georadius,georadiusbymember<br><br>- - georadius 以给定的经纬度为中心，返回键包含的位置元素当中，与中心的距离不超过给定最大距离的所有位置元素<br>    - georadiusbymember 和 GEORADIUS 命令一样，都可以找出位于指定范围内的元素，但是 georadiusbymember 的中心点是由给定的位置元素决定的，而不是使用经度和纬度来决定中心点<br>    - georadius 与 georadiusbymember 语法格式如下:<br><br>- ```<br>    GEORADIUS key longitude latitude radius m|km|ft|mi <span class="hljs-comment">[WITHCOORD]</span> <span class="hljs-comment">[WITHDIST]</span> <span class="hljs-comment">[WITHHASH]</span> <span class="hljs-comment">[COUNT count]</span> <span class="hljs-comment">[ASC|DESC]</span> <span class="hljs-comment">[STORE key]</span> <span class="hljs-comment">[STOREDIST key]</span><br>    GEORADIUSBYMEMBER key member radius m|km|ft|mi <span class="hljs-comment">[WITHCOORD]</span> <span class="hljs-comment">[WITHDIST]</span> <span class="hljs-comment">[WITHHASH]</span> <span class="hljs-comment">[COUNT count]</span> <span class="hljs-comment">[ASC|DESC]</span> <span class="hljs-comment">[STORE key]</span> <span class="hljs-comment">[STOREDIST key]</span><br></code></pre></td></tr></table></figure>
+  <figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs inform7"><br>- ## georadius,georadiusbymember<br><br>- - georadius 以给定的经纬度为中心，返回键包含的位置元素当中，与中心的距离不超过给定最大距离的所有位置元素。<br>    - georadiusbymember 和 GEORADIUS 命令一样，都可以找出位于指定范围内的元素，但是 georadiusbymember 的中心点是由给定的位置元素决定的，而不是使用经度和纬度来决定中心点。<br>    - georadius 与 georadiusbymember 语法格式如下：<br><br>- ```<br>    GEORADIUS key longitude latitude radius m|km|ft|mi <span class="hljs-comment">[WITHCOORD]</span> <span class="hljs-comment">[WITHDIST]</span> <span class="hljs-comment">[WITHHASH]</span> <span class="hljs-comment">[COUNT count]</span> <span class="hljs-comment">[ASC|DESC]</span> <span class="hljs-comment">[STORE key]</span> <span class="hljs-comment">[STOREDIST key]</span><br>    GEORADIUSBYMEMBER key member radius m|km|ft|mi <span class="hljs-comment">[WITHCOORD]</span> <span class="hljs-comment">[WITHDIST]</span> <span class="hljs-comment">[WITHHASH]</span> <span class="hljs-comment">[COUNT count]</span> <span class="hljs-comment">[ASC|DESC]</span> <span class="hljs-comment">[STORE key]</span> <span class="hljs-comment">[STOREDIST key]</span><br></code></pre></td></tr></table></figure>
 
 </code></pre>
 </li>
 <li>
 <ul>
-<li>参数说明:<br>
-- m :米，默认单位<br>
-- km :千米<br>
-- mi :英里<br>
-- ft :英尺<br>
-- WITHDIST: 在返回位置元素的同时，将位置元素与中心之间的距离也一并返回<br>
-- WITHCOORD: 将位置元素的经度和维度也一并返回<br>
-- WITHHASH: 以 52 位有符号整数的形式，返回位置元素经过原始 geohash 编码的有序集合分值，这个选项主要用于底层应用或者调试，实际中的作用并不大<br>
-- COUNT 限定返回的记录数<br>
-- ASC: 查找结果根据距离从近到远排序<br>
-- DESC: 查找结果根据从远到近排序</li>
+<li>参数说明：<br>
+- m ：米，默认单位。<br>
+- km ：千米。<br>
+- mi ：英里。<br>
+- ft ：英尺。<br>
+- WITHDIST：在返回位置元素的同时，将位置元素与中心之间的距离也一并返回。<br>
+- WITHCOORD：将位置元素的经度和维度也一并返回。<br>
+- WITHHASH：以 52 位有符号整数的形式，返回位置元素经过原始 geohash 编码的有序集合分值，这个选项主要用于底层应用或者调试，实际中的作用并不大。<br>
+- COUNT 限定返回的记录数。<br>
+- ASC：查找结果根据距离从近到远排序。<br>
+- DESC：查找结果根据从远到近排序。</li>
 </ul>
 </li>
 <li>
@@ -354,10 +354,10 @@
 </li>
 <li>
 <ul>
-<li>Redis GEO 使用 geohash 来保存地理位置的坐标
+<li>Redis GEO 使用 geohash 来保存地理位置的坐标。
 <ul>
-<li>geohash 用于获取一个或多个位置元素的 geohash 值</li>
-<li>geohash 语法格式如下:</li>
+<li>geohash 用于获取一个或多个位置元素的 geohash 值。</li>
+<li>geohash 语法格式如下：</li>
 </ul>
 </li>
 </ul>
@@ -387,9 +387,9 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/">Redis</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%82/">数据类型。</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">特殊数据类型</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/Redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%82/%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E3%80%82/">特殊数据类型。</a>
                     
                   </div>
                 

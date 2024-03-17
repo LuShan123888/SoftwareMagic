@@ -16,18 +16,18 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Servlet 网页重定向 当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向 setStatus()和setHeader() 该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果: 123St">
+  <meta name="description" content="Servlet 网页重定向 当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向。 setStatus()和setHeader() 该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果： 123S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Servlet 网页重定向">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaEE/Servlet/Redirect/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Servlet 网页重定向 当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向 setStatus()和setHeader() 该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果: 123St">
+<meta property="og:description" content="Servlet 网页重定向 当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向。 setStatus()和setHeader() 该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果： 123S">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-sendRedirect%25E7%259A%2584%25E6%25B5%2581%25E7%25A8%258B.PNG">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-include%25E6%25B5%2581%25E7%25A8%258B.PNG">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-forward%25E6%25B5%2581%25E7%25A8%258B.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.451Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.453Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,22 +226,22 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>Servlet 网页重定向</h1>
-<p>当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向</p>
+<p>当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向。</p>
 <h2 id="setStatus-和setHeader">setStatus()和setHeader()</h2>
-<p>该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果:</p>
+<p>该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">String site = <span class="hljs-string">&quot;http://www.test.com&quot;</span> ;<br>response.setStatus(response.SC_MOVED_TEMPORARILY);<br>response.setHeader(<span class="hljs-string">&quot;Location&quot;</span>, site);<br></code></pre></td></tr></table></figure>
 <h2 id="sendRedirect">sendRedirect ()</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">response.sendRedirect();<br></code></pre></td></tr></table></figure>
 <p><strong>说明</strong>:</p>
 <ul>
-<li>服务器根据逻辑，发送一个状态码302,告诉浏览器重新去请求指定的地址，一般来说，你会把需要的参数放在转发的地址里面</li>
-<li><strong>注意</strong>:使用request.setAttribute的内容，不能读取了，你可以用session代替，或者用include,forward代替</li>
+<li>服务器根据逻辑，发送一个状态码302，告诉浏览器重新去请求指定的地址，一般来说，你会把需要的参数放在转发的地址里面。</li>
+<li><strong>注意</strong>：使用request.setAttribute的内容，不能读取了，你可以用session代替，或者用include,forward代替。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-sendRedirect%25E7%259A%2584%25E6%25B5%2581%25E7%25A8%258B.PNG" srcset="/images/loading.gif" lazyload alt=""></p>
 <h2 id="RequestDispatcher">RequestDispatcher</h2>
@@ -256,8 +256,8 @@
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:include page=<span class="hljs-string">&quot;include.jsp&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
 <p><strong>说明</strong></p>
 <ul>
-<li>页面会同时包含页面1和页面2的内容，地址栏不变</li>
-<li>使用<code>request.setAttribute</code>的内容，可以正常使用</li>
+<li>页面会同时包含页面1和页面2的内容，地址栏不变。</li>
+<li>使用<code>request.setAttribute</code>的内容，可以正常使用。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-include%25E6%25B5%2581%25E7%25A8%258B.PNG" srcset="/images/loading.gif" lazyload alt=""></p>
 <h3 id="forward">forward()</h3>
@@ -271,18 +271,18 @@
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:forward page=<span class="hljs-string">&quot;include.jsp&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
 <p><strong>说明</strong></p>
 <ul>
-<li>页面会是页面2的内容，地址栏不变</li>
-<li>使用<code>request.setAttribute</code>的内容，可以正常使用</li>
+<li>页面会是页面2的内容，地址栏不变。</li>
+<li>使用<code>request.setAttribute</code>的内容，可以正常使用。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-forward%25E6%25B5%2581%25E7%25A8%258B.png" srcset="/images/loading.gif" lazyload alt=""></p>
 <p><strong>注意</strong></p>
 <ul>
 <li>
-<p>利用<code>include()</code>方法将请求转发给其他的Servlet,被调用的Servlet对该请求作出的响应将并入原先的响应对象中，原先的Servlet还可以继续输出响应信息;而利用<code>forward()</code>方法将请求转发给其他的Servlet,将由被调用的Servlet负责队请求做出响应，而原先Servlet的执行则终止</p>
+<p>利用<code>include()</code>方法将请求转发给其他的Servlet，被调用的Servlet对该请求作出的响应将并入原先的响应对象中，原先的Servlet还可以继续输出响应信息;而利用<code>forward()</code>方法将请求转发给其他的Servlet，将由被调用的Servlet负责队请求做出响应，而原先Servlet的执行则终止。</p>
 </li>
 <li>
-<p><code>include</code> 和 <code>sendRediect</code> 之后，后面的语句会继续执行，而<code>return;forward</code>的不会</p>
-<p>会</p>
+<p><code>include</code> 和 <code>sendRediect</code> 之后，后面的语句会继续执行，而<code>return;forward</code>的不会。</p>
+<p>会。</p>
 </li>
 </ul>
 

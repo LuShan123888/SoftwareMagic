@@ -24,7 +24,7 @@
 <meta property="og:description" content="Dubbo 初始化 定义接口依赖包 12345public interface UserService &amp;#123;    List&lt;UserAddress&gt; getUserAddressList(String userId);&amp;#125; 12345678910111213@Data@AllArgsConstructorpublic class UserAddress impleme">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-13T06:54:45.000Z">
-<meta property="article:modified_time" content="2021-12-13T06:54:45.000Z">
+<meta property="article:modified_time" content="2024-03-17T17:46:33.892Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年12月13日 下午
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -238,8 +238,8 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">dubbo.application.name</span>=<span class="hljs-string">dubbo-demo</span><br><span class="hljs-meta">dubbo.registry.address</span>=<span class="hljs-string">zookeeper://zookeeper:2181</span><br><span class="hljs-meta">dubbo.registry.protocol</span>=<span class="hljs-string">zookeeper</span><br><span class="hljs-meta">dubbo.protocol.name</span>=<span class="hljs-string">dubbo</span><br><span class="hljs-meta">dubbo.protocol.port</span>=<span class="hljs-string">20880</span><br><span class="hljs-meta">dubbo.provider.loadbalance</span>=<span class="hljs-string">leastactive</span><br><span class="hljs-meta">dubbo.provider.timeout</span>=<span class="hljs-string">30000</span><br><span class="hljs-meta">dubbo.provider.version</span>=<span class="hljs-string">1.0</span><br><span class="hljs-meta">dubbo.provider.group</span>=<span class="hljs-string">test-group</span><br></code></pre></td></tr></table></figure>
 <h3 id="提供服务">提供服务</h3>
 <ul>
-<li>配置服务注解<code>@Service</code>,发布服务</li>
-<li>注意导包问题</li>
+<li>配置服务注解<code>@Service</code>，发布服务。</li>
+<li>注意导包问题。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@DubboService</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">UserService</span> </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;UserAddress&gt; <span class="hljs-title">getUserAddressList</span><span class="hljs-params">(String userId)</span> </span>&#123;<br>        Map&lt;String, List&lt;UserAddress&gt;&gt; userAddressMap = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        userAddressMap.put(<span class="hljs-string">&quot;1&quot;</span>, Arrays.asList(<span class="hljs-keyword">new</span> UserAddress(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;北京市&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;张三&quot;</span>, <span class="hljs-string">&quot;123456&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)));<br>        userAddressMap.put(<span class="hljs-string">&quot;2&quot;</span>, Arrays.asList(<span class="hljs-keyword">new</span> UserAddress(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;上海市&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;李四&quot;</span>, <span class="hljs-string">&quot;123456&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)));<br>        <span class="hljs-keyword">return</span> userAddressMap.get(userId);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="服务消费者">服务消费者</h2>

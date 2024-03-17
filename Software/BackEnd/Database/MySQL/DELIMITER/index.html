@@ -24,7 +24,7 @@
 <meta property="og:description" content="MySQL DELIMITER  DELIMITER命令指定了MySQL解释器命令行的结束符，默认为; 但一般在存储过程中会有多个分号，我们并不希望一遇到分号就执行命令，因此可以用delimiter命令指定其他结束符来代替; 这个结束符可以自己定义，常用的是&#x2F;&#x2F; 和 $$  12345678910111213141516171819202122mysql&gt; delimiter &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.150Z">
-<meta property="article:modified_time" content="2024-03-17T17:34:39.787Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:31.503Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      652 字
+      653 字
     </span>
   
 
@@ -233,8 +233,8 @@
 <li>但一般在存储过程中会有多个分号，我们并不希望一遇到分号就执行命令，因此可以用delimiter命令指定其他结束符来代替<code>;</code></li>
 <li>这个结束符可以自己定义，常用的是<code>//</code> 和 <code>$$</code></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; delimiter //        --将结束符指定为&quot;//”<br><br>mysql&gt; CREATE PROCEDURE simpleproc (OUT param1 INT)<br>-&gt; BEGIN<br>-&gt; SELECT COUNT(*) INTO param1 FROM t;<br>-&gt; END;<br>-&gt; //                   --遇到// 符号结束并执行上面的命令<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt; delimiter ;        --将结束符改回默认值&quot;;”<br><br>mysql&gt; CALL simpleproc(@a);<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt; SELECT @a;<br>+------+<br>| @a |<br>+------+<br>| 3 |<br>+------+<br>1 row in set (0.00 sec)<br><br></code></pre></td></tr></table></figure>
-<p><strong>注意</strong>:在定义结束符时:<code>delimiter //</code> 命令后不能加上<code>;</code>  出于习惯或者是把delimiter命令误以为必须加<code>;</code>才能执行而在后面加上了分号，那么在执行存储过程时会报错，因为当<code>mysql&gt; delimiter // ;</code>这样定义时，此时的结束符不是<code>//</code>,而是<code>// ;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; delimiter //        --将结束符指定为&quot;//”<br><br>mysql&gt; CREATE PROCEDURE simpleproc (OUT param1 INT)<br>-&gt; BEGIN<br>-&gt; SELECT COUNT(*) INTO param1 FROM t;<br>-&gt; END;<br>-&gt; //                   --遇到// 符号结束并执行上面的命令。<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt; delimiter ;        --将结束符改回默认值&quot;;”<br><br>mysql&gt; CALL simpleproc(@a);<br>Query OK, 0 rows affected (0.00 sec)<br><br>mysql&gt; SELECT @a;<br>+------+<br>| @a |<br>+------+<br>| 3 |<br>+------+<br>1 row in set (0.00 sec)<br><br></code></pre></td></tr></table></figure>
+<p><strong>注意</strong>：在定义结束符时：<code>delimiter //</code> 命令后不能加上<code>;</code>  出于习惯或者是把delimiter命令误以为必须加<code>;</code>才能执行而在后面加上了分号，那么在执行存储过程时会报错，因为当<code>mysql&gt; delimiter // ;</code>这样定义时，此时的结束符不是<code>//</code>，而是<code>// ;</code></p>
 
             </div>
             <hr>

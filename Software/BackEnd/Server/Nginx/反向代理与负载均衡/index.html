@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Nginx 反向代理与负载均衡 反向代理  将&#x2F;api&#x2F;**代理到localhost:8080&#x2F;**上  123456789101112server &amp;#123;    location &#x2F;api&#x2F; &amp;#123;        proxy_pass http:&#x2F;&#x2F;localhost:8080&#x2F;;        proxy_cookie_path  &#x2F; &#x2F;api&#x2F;;        proxy_set">
+  <meta name="description" content="Nginx 反向代理与负载均衡 反向代理  将&#x2F;api&#x2F;**代理到localhost:8080&#x2F;**上。  123456789101112server &amp;#123;    location &#x2F;api&#x2F; &amp;#123;        proxy_pass http:&#x2F;&#x2F;localhost:8080&#x2F;;        proxy_cookie_path  &#x2F; &#x2F;api&#x2F;;        proxy_se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx 反向代理与负载均衡">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Server/Nginx/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Nginx 反向代理与负载均衡 反向代理  将&#x2F;api&#x2F;**代理到localhost:8080&#x2F;**上  123456789101112server &amp;#123;    location &#x2F;api&#x2F; &amp;#123;        proxy_pass http:&#x2F;&#x2F;localhost:8080&#x2F;;        proxy_cookie_path  &#x2F; &#x2F;api&#x2F;;        proxy_set">
+<meta property="og:description" content="Nginx 反向代理与负载均衡 反向代理  将&#x2F;api&#x2F;**代理到localhost:8080&#x2F;**上。  123456789101112server &amp;#123;    location &#x2F;api&#x2F; &amp;#123;        proxy_pass http:&#x2F;&#x2F;localhost:8080&#x2F;;        proxy_cookie_path  &#x2F; &#x2F;api&#x2F;;        proxy_se">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-05-640-7179448.jpeg">
 <meta property="article:published_time" content="2022-01-10T10:29:05.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.323Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -174,7 +174,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.4k 字
     </span>
   
 
@@ -224,7 +224,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -232,72 +232,72 @@
               <h1>Nginx 反向代理与负载均衡</h1>
 <h2 id="反向代理">反向代理</h2>
 <ul>
-<li>将<code>/api/**</code>代理到<code>localhost:8080/**</code>上</li>
+<li>将<code>/api/**</code>代理到<code>localhost:8080/**</code>上。</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">location</span> /api/ &#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://localhost:8080/;<br>        <span class="hljs-attribute">proxy_cookie_path</span>  / /api/;<br>        <span class="hljs-attribute">proxy_set_header</span>  Host  $host;<br>        <span class="hljs-attribute">proxy_set_header</span>  X-Real-IP  $remote_addr;<br>        <span class="hljs-attribute">proxy_set_header</span>  X-Forwarded-For $proxy_add_x_forwarded_for;<br>        <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">3</span>;<br>        <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">30</span>;<br>        <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">30</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>proxy_cookie_path</code>:修改cookie里域名</li>
+<li><code>proxy_cookie_path</code>：修改cookie里域名。</li>
 <li><code>proxy_connect_timeout</code>:nginx跟后端服务器连接超时时间（代理连接超时)</li>
-<li><code>proxy_send_timeout</code>:后端服务器数据回传时间（代理发送超时)</li>
-<li><code>proxy_read_timeout</code>:连接成功后，后端服务器响应时间（代理接收超时)</li>
+<li><code>proxy_send_timeout</code>：后端服务器数据回传时间（代理发送超时)</li>
+<li><code>proxy_read_timeout</code>：连接成功后，后端服务器响应时间（代理接收超时)</li>
 </ul>
 <h2 id="负载均衡">负载均衡</h2>
 <ul>
-<li>负载均衡主要分为硬件负载均衡和软件负载均衡，硬件负载均衡是使用专门的软件和硬件相结合的设备，设备商会提供完整成熟的解决方案，比如F5,在数据的稳定性以及安全性来说非常可靠，但是相比软件而言造价会更加昂贵，软件的负载均衡以Nginx这类软件为主，实现的一种消息队列分发机制</li>
-<li>简单来说所谓的负载均衡就是把很多请求进行分流，将他们分配到不同的服务器去处理，比如我有3个服务器，分别为A,B,C,然后使用Nginx进行负载均衡，使用轮询策略，此时如果收到了9个请求，那么会均匀的将这9个请求分发给A,B,Cf服务器，每一个服务器处理3个请求，这样的话我们可以利用多台机器集群的特性减少单个服务器的压力</li>
+<li>负载均衡主要分为硬件负载均衡和软件负载均衡，硬件负载均衡是使用专门的软件和硬件相结合的设备，设备商会提供完整成熟的解决方案，比如F5，在数据的稳定性以及安全性来说非常可靠，但是相比软件而言造价会更加昂贵，软件的负载均衡以Nginx这类软件为主，实现的一种消息队列分发机制。</li>
+<li>简单来说所谓的负载均衡就是把很多请求进行分流，将他们分配到不同的服务器去处理，比如我有3个服务器，分别为A,B,C，然后使用Nginx进行负载均衡，使用轮询策略，此时如果收到了9个请求，那么会均匀的将这9个请求分发给A,B,Cf服务器，每一个服务器处理3个请求，这样的话我们可以利用多台机器集群的特性减少单个服务器的压力。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-12-05-640-7179448.jpeg" srcset="/images/loading.gif" lazyload alt=""></p>
 <h3 id="负载均衡策略">负载均衡策略</h3>
-<p>NGINX开源支持四种负载平衡方法，而NGINX Plus又增加了两种方法</p>
+<p>NGINX开源支持四种负载平衡方法，而NGINX Plus又增加了两种方法。</p>
 <h4 id="Round-Robin">Round Robin</h4>
-<p>对所有的请求进行轮询发送请求，默认的分配方式</p>
+<p>对所有的请求进行轮询发送请求，默认的分配方式。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><strong>注意</strong>:上面的域名也可以用IP替代</p>
+<p><strong>注意</strong>：上面的域名也可以用IP替代。</p>
 <h4 id="Least-Connections">Least Connections</h4>
-<p>以最少的活动连接数将请求发送到服务器，同样要考虑服务器权重</p>
+<p>以最少的活动连接数将请求发送到服务器，同样要考虑服务器权重。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    least_conn;<br>        <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="IP-Hash">IP Hash</h4>
-<p>发送请求的服务器由客户机IP地址决定，在这种情况下，使用IPv4地址的前三个字节或整个IPv6地址来计算散列值，该方法保证来自相同地址的请求到达相同的服务器，除非该服务器不可用</p>
+<p>发送请求的服务器由客户机IP地址决定，在这种情况下，使用IPv4地址的前三个字节或整个IPv6地址来计算散列值，该方法保证来自相同地址的请求到达相同的服务器，除非该服务器不可用。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    ip_hash;<br>    <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="Generic-Hash">Generic Hash</h4>
-<p>请求发送到的服务器由用户定义的键决定，该键可以是文本字符串，变量或组合</p>
+<p>请求发送到的服务器由用户定义的键决定，该键可以是文本字符串，变量或组合。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    <span class="hljs-attribute">hash</span> $request_uri consistent;<br>    <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="Least-Time-NGINX-Plus-only">Least Time (NGINX Plus only)</h4>
-<p>对于每个请求,NGINX Plus选择具有最低平均延迟和最低活动连接数的服务器，其中最低平均延迟是根据包含least_time指令的下列参数计算的:</p>
+<p>对于每个请求，NGINX Plus选择具有最低平均延迟和最低活动连接数的服务器，其中最低平均延迟是根据包含least_time指令的下列参数计算的：</p>
 <ul>
-<li>header:从服务器接收第一个字节的时间</li>
-<li>last_byte:从服务器接收完整响应的时间</li>
-<li>last_byte inflight:从服务器接收完整响应的时间</li>
+<li>header：从服务器接收第一个字节的时间。</li>
+<li>last_byte：从服务器接收完整响应的时间。</li>
+<li>last_byte inflight：从服务器接收完整响应的时间。</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    <span class="hljs-attribute">least_time</span> header;<br>    <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="Random">Random</h4>
 <ul>
 <li>
-<p>每个请求将被传递到随机选择的服务器，如果指定了两个参数，首先,NGINX根据服务器权重随机选择两个服务器，然后使用指定的方法选择其中一个</p>
+<p>每个请求将被传递到随机选择的服务器，如果指定了两个参数，首先，NGINX根据服务器权重随机选择两个服务器，然后使用指定的方法选择其中一个。</p>
 </li>
 <li>
-<p>least_conn:活动连接的最少数量</p>
+<p>least_conn：活动连接的最少数量。</p>
 </li>
 <li>
-<p>least_time=header (NGINX Plus):从服务器接收响应标头的最短平均时间 ($upstream_header_time)</p>
+<p>least_time=header (NGINX Plus)：从服务器接收响应标头的最短平均时间 ($upstream_header_time)</p>
 </li>
 <li>
-<p>least_time=last_byte (NGINX Plus):从服务器接收完整响应的最短平均时间($upstream_response_time)</p>
+<p>least_time=last_byte (NGINX Plus)：从服务器接收完整响应的最短平均时间($upstream_response_time)</p>
 </li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> server &#123;<br>    <span class="hljs-attribute">random</span> two least_time=last_byte;<br>    <span class="hljs-attribute">server</span> www.panchengming.com;<br>    <span class="hljs-attribute">server</span> www.panchengming2.com;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="fair-第三方">fair(第三方)</h4>
 <ul>
-<li>按后端服务器的响应时间来分配请求，响应时间短的优先分配</li>
+<li>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> backserver &#123;<br>    fair;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.0.14</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.0.15</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="url-hash-第三方">url_hash(第三方)</h4>
 <ul>
-<li>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效</li>
+<li>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> images6.static.com &#123;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.11.11:80</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.12:80</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.13:80</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">11.11.21.14:80</span>;<br>    <span class="hljs-attribute">hash</span>    $request_uri;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="weight">weight</h3>
-<p>指定轮询几率,weight和访问比率成正比，用于后端服务器性能不均的情况</p>
+<p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> tomcat &#123;<br>  ip_hash;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8081</span> weight=<span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8082</span> weight=<span class="hljs-number">2</span>;<br>  <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8083</span> weight=<span class="hljs-number">3</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="配置文件实例">配置文件实例</h2>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">upstream</span> tomcat &#123;<br>    ip_hash;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8081</span> weight=<span class="hljs-number">1</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8082</span> weight=<span class="hljs-number">2</span>;<br>    <span class="hljs-attribute">server</span> <span class="hljs-number">192.168.12.209:8083</span> weight=<span class="hljs-number">3</span>;<br>&#125;<br><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> project.lushan.com;<br>    <span class="hljs-comment">#charset koi8-r;</span><br>    <span class="hljs-comment">#access_log  logs/host.access.log  main;</span><br><br>    <span class="hljs-attribute">location</span> / &#123;<br>        <span class="hljs-attribute">index</span> index.html index.htm;<br>        <span class="hljs-attribute">proxy_pass</span> http://tomcat;<br>        <span class="hljs-attribute">proxy_cookie_path</span> /project /;<br>        <span class="hljs-attribute">proxy_set_header</span> Host $host;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP $remote_addr;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;<br>        <span class="hljs-attribute">proxy_connect_timeout</span> <span class="hljs-number">3</span>;<br>        <span class="hljs-attribute">proxy_send_timeout</span> <span class="hljs-number">30</span>;<br>        <span class="hljs-attribute">proxy_read_timeout</span> <span class="hljs-number">30</span>;<br>    &#125;<br><br>    <span class="hljs-comment">#error_page  404              /404.html;</span><br><br>    <span class="hljs-comment"># redirect server error pages to the static page /50x.html</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-attribute">error_page</span> <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span> /50x.html;<br>    <span class="hljs-attribute">location</span> = /50x.html &#123;<br>        <span class="hljs-attribute">root</span> html;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>

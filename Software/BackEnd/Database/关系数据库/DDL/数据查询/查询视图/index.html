@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 查询视图  视图定义后，用户就可以像对基本表一样对视图进行查询了  [例3.92]:在信息系学生的视图中找出年龄小于20岁的学生 123SELECT Sno,SageFROM IS_StudentWHERE Sage&lt;20;  关系数据库管理系统执行对视图的查询时，首先进行有效性检查，检查查询中涉及的表，视图等是否存在，如果存在，则从数据字典中取出视图的定义，把定义中的子查询和用户的">
+  <meta name="description" content="SQL 查询视图  视图定义后，用户就可以像对基本表一样对视图进行查询了。  [例3.92]：在信息系学生的视图中找出年龄小于20岁的学生。 123SELECT Sno,SageFROM IS_StudentWHERE Sage&lt;20;  关系数据库管理系统执行对视图的查询时，首先进行有效性检查，检查查询中涉及的表，视图等是否存在，如果存在，则从数据字典中取出视图的定义，把定义中的子查询和用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 查询视图">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E6%9F%A5%E8%AF%A2%E8%A7%86%E5%9B%BE/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 查询视图  视图定义后，用户就可以像对基本表一样对视图进行查询了  [例3.92]:在信息系学生的视图中找出年龄小于20岁的学生 123SELECT Sno,SageFROM IS_StudentWHERE Sage&lt;20;  关系数据库管理系统执行对视图的查询时，首先进行有效性检查，检查查询中涉及的表，视图等是否存在，如果存在，则从数据字典中取出视图的定义，把定义中的子查询和用户的">
+<meta property="og:description" content="SQL 查询视图  视图定义后，用户就可以像对基本表一样对视图进行查询了。  [例3.92]：在信息系学生的视图中找出年龄小于20岁的学生。 123SELECT Sno,SageFROM IS_StudentWHERE Sage&lt;20;  关系数据库管理系统执行对视图的查询时，首先进行有效性检查，检查查询中涉及的表，视图等是否存在，如果存在，则从数据字典中取出视图的定义，把定义中的子查询和用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.561Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.103Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.392Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,42 +222,42 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>SQL 查询视图</h1>
 <ul>
-<li>视图定义后，用户就可以像对基本表一样对视图进行查询了</li>
+<li>视图定义后，用户就可以像对基本表一样对视图进行查询了。</li>
 </ul>
-<p><strong>[例3.92]</strong>:在信息系学生的视图中找出年龄小于20岁的学生</p>
+<p><strong>[例3.92]</strong>：在信息系学生的视图中找出年龄小于20岁的学生。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Sage<br><span class="hljs-keyword">FROM</span> IS_Student<br><span class="hljs-keyword">WHERE</span> Sage<span class="hljs-operator">&lt;</span><span class="hljs-number">20</span>;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>关系数据库管理系统执行对视图的查询时，首先进行有效性检查，检查查询中涉及的表，视图等是否存在，如果存在，则从数据字典中取出视图的定义，把定义中的子查询和用户的查询结合起来，转换成等价的对基本表的查询，然后再执行修正了的查询，这一转换过程称为视图消解(view resolution)</li>
-<li>本例转换后的查询语句为:</li>
+<li>本例转换后的查询语句为：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Sage<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;IS&#x27;</span> <span class="hljs-keyword">AND</span> Sage<span class="hljs-operator">&lt;</span><span class="hljs-number">20</span>;<br></code></pre></td></tr></table></figure>
-<p><strong>[例3.93]</strong>:查询了选修1号课程的信息系学生</p>
+<p><strong>[例3.93]</strong>：查询了选修1号课程的信息系学生。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> IS_Student.Sno,Sname<br><span class="hljs-keyword">FROM</span> IS_Student,SC<br><span class="hljs-keyword">WHERE</span> IS_Student.Sno<span class="hljs-operator">=</span>SC.Sno <span class="hljs-keyword">AND</span> SC.Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>本查询涉及视图IS_Student(虚表）和基本表SC,通过这两个表的连接来完成用户请求</li>
-<li>再一般情况下，视图查询的转换时直截了当的，但有些情况下，这种转换不能直接进行，查询时就会出现问题，如下例:</li>
+<li>本查询涉及视图IS_Student(虚表）和基本表SC，通过这两个表的连接来完成用户请求。</li>
+<li>再一般情况下，视图查询的转换时直截了当的，但有些情况下，这种转换不能直接进行，查询时就会出现问题，如下例：</li>
 </ul>
-<p><strong>[例3.94]</strong>:在S_G视图（例3.89中定义的视图）中查询平均成绩在90分以上的学生学号和平均成绩，语句为:</p>
+<p><strong>[例3.94]</strong>：在S_G视图（例3.89中定义的视图）中查询平均成绩在90分以上的学生学号和平均成绩，语句为：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> S_G<br><span class="hljs-keyword">WHERE</span> Gavg<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
-<p>例3.89中定义S_G视图的子查询为:</p>
+<p>例3.89中定义S_G视图的子查询为：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno;<br></code></pre></td></tr></table></figure>
-<p>将本例中的查询语句与定义S_G视图的子查询结合，形成下列查询语句:</p>
+<p>将本例中的查询语句与定义S_G视图的子查询结合，形成下列查询语句：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno;<br></code></pre></td></tr></table></figure>
-<p>因为WHERE子句中是不能用聚集函数作为条件表达式的，因此执行此修正后的查询将会出现语法错误，正确转换的查询语句应该是:</p>
+<p>因为WHERE子句中是不能用聚集函数作为条件表达式的，因此执行此修正后的查询将会出现语法错误，正确转换的查询语句应该是：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno<br><span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>目前多数关系数据库对行列子集视图的查询均能进行正确转换，但对非行列子集视图的查询（如例3.94)就不一定能做转换了，因此这类查询应该直接对基本表进行</li>
-<li>例3.94也可以用如下SQL语句完成:</li>
+<li>目前多数关系数据库对行列子集视图的查询均能进行正确转换，但对非行列子集视图的查询（如例3.94)就不一定能做转换了，因此这类查询应该直接对基本表进行。</li>
+<li>例3.94也可以用如下SQL语句完成：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span><span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span>(<span class="hljs-keyword">SELECT</span> Sno,<span class="hljs-built_in">AVG</span>(Grade)<span class="hljs-comment">/*子查询生成一个派生表S_G*/</span><br>	<span class="hljs-keyword">FROM</span> SC<br>	<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> Sno)<br>	<span class="hljs-keyword">AS</span> S_G(Sno,Gavg)<br><span class="hljs-keyword">WHERE</span> Gavg<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
-<p>但定义视图并查询视图与基于派生表的查询是有区别的，视图一旦定义，其定义将永久保存在数据字典中，之后的所有查询都可以直接引用该视图，而派生表只是在语句执行时临时定义，语句执行后该定义即被删除</p>
+<p>但定义视图并查询视图与基于派生表的查询是有区别的，视图一旦定义，其定义将永久保存在数据字典中，之后的所有查询都可以直接引用该视图，而派生表只是在语句执行时临时定义，语句执行后该定义即被删除。</p>
 
             </div>
             <hr>
@@ -273,11 +273,11 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/">关系数据库。</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/">DDL</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E3%80%82/">数据查询。</a>
                     
                   </div>
                 

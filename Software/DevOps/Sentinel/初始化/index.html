@@ -24,7 +24,7 @@
 <meta property="og:description" content="Alibaba Sentinel 初始化 pom.xml 1234&lt;dependency&gt;    &lt;groupId&gt;com.alibaba.cloud&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;spring-cloud-starter-alibaba-sentinel&lt;&#x2F;artifactId&gt;&lt;&#x2F;dependency&gt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.595Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.129Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.455Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -231,16 +231,16 @@
 <h2 id="pom-xml">pom.xml</h2>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="配置">配置</h2>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-comment"># 控制台的地址</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-string">localhost:9100</span><br>        <span class="hljs-comment"># sentinel 端口</span><br>        <span class="hljs-attr">port:</span> <span class="hljs-number">8719</span><br>        <span class="hljs-comment"># 设置当前机器可被外部访问的IP地址</span><br>        <span class="hljs-comment"># clientIp: localhost</span><br>        <span class="hljs-comment"># 发送心跳的周期，默认是10s</span><br>      	<span class="hljs-comment"># heartbeat-interval-ms: 10000</span><br>      <span class="hljs-comment">#默认情况下 Sentinel 会在客户端首次调用的时候进行初始化，开始向控制台发送心跳包，配置为 true 取消控制台懒加载功能</span><br>      <span class="hljs-attr">eager:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">sentinel:</span><br>      <span class="hljs-attr">transport:</span><br>        <span class="hljs-comment"># 控制台的地址。</span><br>        <span class="hljs-attr">dashboard:</span> <span class="hljs-string">localhost:9100</span><br>        <span class="hljs-comment"># sentinel 端口。</span><br>        <span class="hljs-attr">port:</span> <span class="hljs-number">8719</span><br>        <span class="hljs-comment"># 设置当前机器可被外部访问的IP地址。</span><br>        <span class="hljs-comment"># clientIp: localhost</span><br>        <span class="hljs-comment"># 发送心跳的周期，默认是10s</span><br>      	<span class="hljs-comment"># heartbeat-interval-ms: 10000</span><br>      <span class="hljs-comment">#默认情况下 Sentinel 会在客户端首次调用的时候进行初始化，开始向控制台发送心跳包，配置为 true 取消控制台懒加载功能。</span><br>      <span class="hljs-attr">eager:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
 <h2 id="Dashboard">Dashboard</h2>
 <h3 id="Docker">Docker</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -d \</span><br><span class="bash">-e JAVA_OPTS=<span class="hljs-string">&quot;-Dserver.port=9100 -Dcsp.sentinel.dashboard.server=localhost:9100 -Dproject.name=sentinel-dashboard -Dsentinel.dashboard.auth.username=root -Dsentinel.dashboard.auth.password=123456&quot;</span> \</span><br><span class="bash">-p 9100:9100 \</span><br><span class="bash">--name sentinel-dashboard \</span><br><span class="bash">lushan123888/sentinel-dashboard:1.8.3</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>-Dserver.port=9100</code>:用于指定 Sentinel 管理端口</li>
-<li><code>-Dcsp.sentinel.dashboard.server=localhost:9100</code>:向 Sentinel 测试项目指定Dashboard 地址</li>
-<li><code>-Dproject.name=sentinel-dashboard</code>:向 Sentinel 指定应用名称，比如上面对应的应用名称就为 <code>sentinel-dashboard</code></li>
-<li><code>-Dsentinel.dashboard.auth.username=sentinel</code>:用于指定控制台的登录用户名为 <code>sentinel</code></li>
-<li><code>-Dsentinel.dashboard.auth.password=123456</code>:用于指定控制台的登录密码为 <code>123456</code>,如果省略这两个参数，默认用户和密码均为 <code>sentinel</code></li>
+<li><code>-Dserver.port=9100</code>：用于指定 Sentinel 管理端口。</li>
+<li><code>-Dcsp.sentinel.dashboard.server=localhost:9100</code>：向 Sentinel 测试项目指定Dashboard 地址。</li>
+<li><code>-Dproject.name=sentinel-dashboard</code>：向 Sentinel 指定应用名称，比如上面对应的应用名称就为 <code>sentinel-dashboard</code></li>
+<li><code>-Dsentinel.dashboard.auth.username=sentinel</code>：用于指定控制台的登录用户名为 <code>sentinel</code></li>
+<li><code>-Dsentinel.dashboard.auth.password=123456</code>：用于指定控制台的登录密码为 <code>123456</code>，如果省略这两个参数，默认用户和密码均为 <code>sentinel</code></li>
 </ul>
 <h3 id="构建Docker镜像">构建Docker镜像</h3>
 <ol>
@@ -248,7 +248,7 @@
 </ol>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> openJDK:<span class="hljs-number">8</span><br><span class="hljs-keyword">WORKDIR</span><span class="bash"> /usr/<span class="hljs-built_in">local</span>/sentinel-dashboard</span><br><span class="hljs-keyword">ADD</span><span class="bash"> ./sentinel-dashboard.jar sentinel-dashboard.jar</span><br><span class="hljs-keyword">ENV</span> JAVA_OPTS <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> java <span class="hljs-variable">$JAVA_OPTS</span> -jar sentinel-dashboard.jar</span><br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>构建镜像</li>
+<li>构建镜像。</li>
 </ol>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-variable">$ </span>docker build -t lushan123888/sentinel-<span class="hljs-symbol">dashboard:</span><span class="hljs-number">1.8</span>.<span class="hljs-number">3</span> .<br></code></pre></td></tr></table></figure>
 

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
+  <meta name="description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的。 解决方法  修改serverTimezone配置。  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置。  1spring.jac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 问题解决">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/MySQL/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因:由于JDBC参数Timezone与Mysql系统时区不一致导致的 解决方法  修改serverTimezone配置  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置  1spring.jackso">
+<meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的。 解决方法  修改serverTimezone配置。  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置。  1spring.jac">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.170Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.101Z">
+<meta property="article:modified_time" content="2024-03-17T17:47:17.381Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.4k 字
     </span>
   
 
@@ -222,21 +222,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <h1>MySQL 问题解决</h1>
 <h2 id="Date显示不正常">Date显示不正常</h2>
-<p><strong>原因</strong>:由于JDBC参数Timezone与Mysql系统时区不一致导致的</p>
+<p><strong>原因</strong>：由于JDBC参数Timezone与Mysql系统时区不一致导致的。</p>
 <p><strong>解决方法</strong></p>
 <ol start="3">
-<li>修改serverTimezone配置</li>
+<li>修改serverTimezone配置。</li>
 </ol>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span><span class="hljs-regexp">/test?serverTimezone=Asia/</span>Shanghai<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>在<code>application.properties</code>配置文件增加JSON时区配置</li>
+<li>在<code>application.properties</code>配置文件增加JSON时区配置。</li>
 </ol>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.jackson.time-zone</span>=<span class="hljs-string">GMT+8</span><br></code></pre></td></tr></table></figure>
 <ol start="3">
@@ -245,11 +245,11 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">default-time-zone</span> = <span class="hljs-string">&quot;+08:00&quot;</span><br></code></pre></td></tr></table></figure>
 <h2 id="Host-is-blocked">Host is blocked</h2>
 <p><strong>报错信息</strong>:Host is blocked because of many connection errors; unblock with ‘mysqladmin flush-hosts’</p>
-<p><strong>解决方法</strong>:刷新ip缓存记录</p>
+<p><strong>解决方法</strong>：刷新ip缓存记录。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">FLUSH HOSTS;<br></code></pre></td></tr></table></figure>
 <h2 id="认证失败">认证失败</h2>
 <p><strong>报错信息</strong>:MySQL said: Authentication plugin ‘caching_sha2_password’ cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found</p>
-<p><strong>原因</strong>:有关<code>caching_sha2_password</code> 报错的问题,MySQL 8.0 默认认证方式改为 SHA2 了，如果不支持 SHA2 插件认证方式，那么就会报错</p>
+<p><strong>原因</strong>：有关<code>caching_sha2_password</code> 报错的问题，MySQL 8.0 默认认证方式改为 SHA2 了，如果不支持 SHA2 插件认证方式，那么就会报错。</p>
 <p><strong>解决方法</strong></p>
 <ul>
 <li><strong>修改密码认证方式</strong></li>
@@ -263,16 +263,16 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">[mysqld]<br># bind-address = 127.0.0.1 # 只允许本机连接<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>如果要登录的用户的 host 不是<code>%</code>则需要修改</li>
+<li>如果要登录的用户的 host 不是<code>%</code>则需要修改。</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET host = &#x27;%&#x27; WHERE user = &#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
-<p><strong>报错信息</strong>:在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
-<p><strong>原因</strong>:如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥，可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥，但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启</p>
-<p><strong>解决方法</strong>:添加allowPublicKeyRetrieval配置</p>
+<p><strong>报错信息</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
+<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥，可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥，但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启。</p>
+<p><strong>解决方法</strong>：添加allowPublicKeyRetrieval配置。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span>/test?allowPublicKeyRetrieval=true<br></code></pre></td></tr></table></figure>
 <h2 id="中文乱码">中文乱码</h2>
-<p><strong>解决方法</strong>:修改默认字符集</p>
+<p><strong>解决方法</strong>：修改默认字符集。</p>
 <p><strong>默认编码</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; show variables like &quot;%character%&quot;;<br>+--------------------------+----------------------------+<br>| Variable_name      | Value           |<br>+--------------------------+----------------------------+<br>| character_set_client   | utf8            |<br>| character_set_connection | utf8            |<br>| character_set_database  | latin1           |<br>| character_set_filesystem | binary           |<br>| character_set_results  | utf8            |<br>| character_set_server   | latin1           |<br>| character_set_system   | utf8            |<br>| character_sets_dir    | /usr/share/mysql/charsets/|<br>+--------------------------+----------------------------+<br><br>mysql&gt; show variables like &quot;%collation%&quot;;<br>+----------------------+-------------------+<br>| Variable_name    | Value       |<br>+----------------------+-------------------+<br>| collation_connection | utf8_general_ci  |<br>| collation_database  | latin1_swedish_ci |<br>| collation_server   | latin1_swedish_ci |<br>+----------------------+-------------------+<br></code></pre></td></tr></table></figure>
 <p><strong>修改配置文件</strong></p>
@@ -281,13 +281,13 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">[mysqld]<br>...<br>character-set-server=utf8mb4<br><br>[client]<br>default-character-set=utf8mb4<br></code></pre></td></tr></table></figure>
 <ul>
-<li>重启服务</li>
+<li>重启服务。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ systemctl restart mysqld.service<br></code></pre></td></tr></table></figure>
 <h2 id="password-方法报错">password()方法报错</h2>
 <p><strong>报错信息</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements<br></code></pre></td></tr></table></figure>
-<p><strong>原因</strong>:密码安全策略<code>validate_password_policy</code>,<code>validate_password_policy</code>可以取0,1,2三个值:</p>
+<p><strong>原因</strong>：密码安全策略<code>validate_password_policy</code>,<code>validate_password_policy</code>可以取0,1,2三个值：</p>
 <table>
 <thead>
 <tr>
@@ -311,11 +311,11 @@
 </tbody>
 </table>
 <ul>
-<li>默认的数值是1,符合长度，且必须含有数字，小写或大写字母，特殊字符，所以初始密码必须符合长度，且必须含有数字，小写或大写字母，特殊字符</li>
+<li>默认的数值是1，符合长度，且必须含有数字，小写或大写字母，特殊字符，所以初始密码必须符合长度，且必须含有数字，小写或大写字母，特殊字符。</li>
 </ul>
 <p><strong>解决方法</strong></p>
 <ul>
-<li>有时候，只是为了自己测试，不想密码设置得那么复杂，比如只想设置root的密码为123456,必须修改两个全局参数:</li>
+<li>有时候，只是为了自己测试，不想密码设置得那么复杂，比如只想设置root的密码为123456，必须修改两个全局参数：</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SET GLOBAL validate_password_policy=0;<br>SET GLOBAL validate_password_length=1;<br></code></pre></td></tr></table></figure>
 <h2 id="创建索引失败">创建索引失败</h2>
