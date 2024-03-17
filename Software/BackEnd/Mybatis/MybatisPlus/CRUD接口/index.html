@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis Plus CRUD 接口 Service CRUD接口  说明  通用 Service CRUD 封装IService接口, 进一步封装 CRUD 采用 get 查询单行 remove 删除 list 查询集合 page 分页 前缀命名方式区分 Mapper 层避免混淆, 泛型 T 为任意实体对象 建议如果存在自定义通用 Service 方法的可能, 请创建自己的 IBaseSer">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-14T07:43:26.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:modified_time" content="2024-03-17T15:37:50.980Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -235,7 +235,7 @@
 <li>通用 Service CRUD 封装IService接口, 进一步封装 CRUD 采用 <code>get 查询单行</code> <code>remove 删除</code> <code>list 查询集合</code> <code>page 分页</code> 前缀命名方式区分 <code>Mapper</code> 层避免混淆,</li>
 <li>泛型 <code>T</code> 为任意实体对象</li>
 <li>建议如果存在自定义通用 Service 方法的可能, 请创建自己的 <code>IBaseService</code> 继承 <code>Mybatis-Plus</code> 提供的父类</li>
-<li>对象 <code>Wrapper</code> 为 条件构造器</li>
+<li>对象 <code>Wrapper</code> 为条件构造器</li>
 </ul>
 </blockquote>
 <h3 id="Save">Save</h3>
@@ -342,7 +342,7 @@
 </tbody>
 </table>
 <h3 id="Update">Update</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据 UpdateWrapper 条件, 更新记录 需要设置sqlset</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">update</span><span class="hljs-params">(Wrapper&lt;T&gt; updateWrapper)</span></span>;<br><span class="hljs-comment">// 根据 whereEntity 条件, 更新记录</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">update</span><span class="hljs-params">(T entity, Wrapper&lt;T&gt; updateWrapper)</span></span>;<br><span class="hljs-comment">// 根据 ID 选择修改</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateById</span><span class="hljs-params">(T entity)</span></span>;<br><span class="hljs-comment">// 根据ID 批量更新</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateBatchById</span><span class="hljs-params">(Collection&lt;T&gt; entityList)</span></span>;<br><span class="hljs-comment">// 根据ID 批量更新</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateBatchById</span><span class="hljs-params">(Collection&lt;T&gt; entityList, <span class="hljs-keyword">int</span> batchSize)</span></span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据 UpdateWrapper 条件, 更新记录需要设置sqlset</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">update</span><span class="hljs-params">(Wrapper&lt;T&gt; updateWrapper)</span></span>;<br><span class="hljs-comment">// 根据 whereEntity 条件, 更新记录</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">update</span><span class="hljs-params">(T entity, Wrapper&lt;T&gt; updateWrapper)</span></span>;<br><span class="hljs-comment">// 根据 ID 选择修改</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateById</span><span class="hljs-params">(T entity)</span></span>;<br><span class="hljs-comment">// 根据ID 批量更新</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateBatchById</span><span class="hljs-params">(Collection&lt;T&gt; entityList)</span></span>;<br><span class="hljs-comment">// 根据ID 批量更新</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">updateBatchById</span><span class="hljs-params">(Collection&lt;T&gt; entityList, <span class="hljs-keyword">int</span> batchSize)</span></span>;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>参数说明</li>
 </ul>
@@ -503,9 +503,9 @@
 </table>
 <h3 id="Chain">Chain</h3>
 <h4 id="query">query</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 链式查询 普通</span><br><span class="hljs-function">QueryChainWrapper&lt;T&gt; <span class="hljs-title">query</span><span class="hljs-params">()</span></span>;<br><span class="hljs-comment">// 链式查询 lambda 式，注意：不支持 Kotlin</span><br><span class="hljs-function">LambdaQueryChainWrapper&lt;T&gt; <span class="hljs-title">lambdaQuery</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-comment">// 示例:</span><br>query().eq(<span class="hljs-string">&quot;column&quot;</span>, value).one();<br>lambdaQuery().eq(Entity::getId, value).list();<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 链式查询普通</span><br><span class="hljs-function">QueryChainWrapper&lt;T&gt; <span class="hljs-title">query</span><span class="hljs-params">()</span></span>;<br><span class="hljs-comment">// 链式查询 lambda 式，注意：不支持 Kotlin</span><br><span class="hljs-function">LambdaQueryChainWrapper&lt;T&gt; <span class="hljs-title">lambdaQuery</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-comment">// 示例:</span><br>query().eq(<span class="hljs-string">&quot;column&quot;</span>, value).one();<br>lambdaQuery().eq(Entity::getId, value).list();<br></code></pre></td></tr></table></figure>
 <h4 id="update">update</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 链式更改 普通</span><br><span class="hljs-function">UpdateChainWrapper&lt;T&gt; <span class="hljs-title">update</span><span class="hljs-params">()</span></span>;<br><span class="hljs-comment">// 链式更改 lambda 式，注意：不支持 Kotlin</span><br><span class="hljs-function">LambdaUpdateChainWrapper&lt;T&gt; <span class="hljs-title">lambdaUpdate</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-comment">// 示例:</span><br>update().eq(<span class="hljs-string">&quot;column&quot;</span>, value).remove();<br>lambdaUpdate().eq(Entity::getId, value).update(entity);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 链式更改普通</span><br><span class="hljs-function">UpdateChainWrapper&lt;T&gt; <span class="hljs-title">update</span><span class="hljs-params">()</span></span>;<br><span class="hljs-comment">// 链式更改 lambda 式，注意：不支持 Kotlin</span><br><span class="hljs-function">LambdaUpdateChainWrapper&lt;T&gt; <span class="hljs-title">lambdaUpdate</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-comment">// 示例:</span><br>update().eq(<span class="hljs-string">&quot;column&quot;</span>, value).remove();<br>lambdaUpdate().eq(Entity::getId, value).update(entity);<br></code></pre></td></tr></table></figure>
 <h2 id="Mapper-CRUD-接口">Mapper CRUD 接口</h2>
 <blockquote>
 <p><strong>说明</strong></p>
@@ -513,7 +513,7 @@
 <li>通用 CRUD 封装BaseMapper接口, 为 <code>Mybatis-Plus</code> 启动时自动解析实体表关系映射转换为 <code>Mybatis</code> 内部对象注入容器</li>
 <li>泛型 <code>T</code> 为任意实体对象</li>
 <li>参数 <code>Serializable</code> 为任意类型主键 <code>Mybatis-Plus</code> 不推荐使用复合主键约定每一张表都有自己的唯一 <code>id</code> 主键</li>
-<li>对象 <code>Wrapper</code> 为 条件构造器</li>
+<li>对象 <code>Wrapper</code> 为条件构造器</li>
 </ul>
 </blockquote>
 <h3 id="insert">insert</h3>

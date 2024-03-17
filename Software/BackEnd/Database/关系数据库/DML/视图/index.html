@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 视图  视图最终是定义在基本表之上的,对视图的一切操作最终也要转换为对基本表的操作,而且对于非行列子集视图进行查询或更新时还有可能出现问题,既然如此,为什么还要定义视图呢?这是因为合理使用视图能够带来许多好处  视图能够简化用户的操作  视图机制使用户可以将注意力集中在所关心的数据上,如果这些数据不是直接来自基本表,则可以通过定义视图使数据库看起来结构简单,清晰,并且可以简化用户的数据查询">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-11T05:40:08.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
+<meta property="article:modified_time" content="2024-03-17T15:37:50.971Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -299,7 +299,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> IS_S2<br><span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> Sno,Sname,Grade<br><span class="hljs-keyword">FROM</span> IS_S1<br><span class="hljs-keyword">WHERE</span> Grade<span class="hljs-operator">&gt;=</span><span class="hljs-number">90</span>;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>这里的视图IS_S2就是建立在视图IS_S1之上的</li>
-<li>定义基本表时,为了减少数据库中 的冗余数据,表中只存放基本数据,由基本数据经过各种计算派生出的数据一般是不存储的,由于视图中的数据并不实际存储,所以定义视图时可以根据应用的需要设置一些派生属性列,这些派生属性由于在基本表中并不实际存在,也称它们为虚拟列,带虚拟列的视图也称为带表达式的视图</li>
+<li>定义基本表时,为了减少数据库中的冗余数据,表中只存放基本数据,由基本数据经过各种计算派生出的数据一般是不存储的,由于视图中的数据并不实际存储,所以定义视图时可以根据应用的需要设置一些派生属性列,这些派生属性由于在基本表中并不实际存在,也称它们为虚拟列,带虚拟列的视图也称为带表达式的视图</li>
 </ul>
 <p><strong>[例3.88]</strong>:定义一个反映学生出生年份的视图</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">VIEW</span> BT_S(Sno,Sname,Sbirth)<br><span class="hljs-keyword">AS</span><br><span class="hljs-keyword">SELECT</span> Sno,Sname,<span class="hljs-number">2014</span><span class="hljs-operator">-</span>Sage<br><span class="hljs-keyword">FROM</span> Student;<br></code></pre></td></tr></table></figure>

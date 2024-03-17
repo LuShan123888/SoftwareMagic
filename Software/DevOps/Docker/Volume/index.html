@@ -24,7 +24,7 @@
 <meta property="og:description" content="Docker Volume 创建 volume 1$ docker volume create vol_name 查看 volume 查看所有 volume 情况 1234$ docker volume lsDRIVER    VOLUME NAMElocal     portainer_data 查看 volum e信息  所有的docker容器内的卷,没有指定目录的情况下都是在&#x2F;var&#x2F;lib">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-22T09:46:07.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:32:18.174Z">
+<meta property="article:modified_time" content="2024-03-17T15:37:50.992Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -265,7 +265,7 @@
 <ul>
 <li><strong>注意</strong>:容器删除后,主机目录仍然存在</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -v 主机目录：容器目录 镜像名</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run -v 主机目录：容器目录镜像名</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>通过在容器目录后加上<code>:ro</code>或<code>:rw</code>可指定读写权限</li>
 </ul>
@@ -277,14 +277,14 @@
 <ul>
 <li>没有指定主机地址但指定了volume名</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v vol_name:容器目录 镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx02 -v nginx:/etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br>local               nginx<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v vol_name:容器目录镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx02 -v nginx:/etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br>local               nginx<br></code></pre></td></tr></table></figure>
 <h3 id="匿名挂载">匿名挂载</h3>
 <ul>
 <li>没有指定主机地址和volume名</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v 容器目录 镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run  -v 容器目录镜像名</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">$</span><span class="bash"> docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br>DRIVER              VOLUME NAME<br>local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d6341644<br></code></pre></td></tr></table></figure>
 <h3 id="挂载共享">挂载共享</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --volumes-from 被共享容器名 镜像名</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> docker run --volumes-from 被共享容器名镜像名</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>挂载共享 volume 的操作实际上是对被共享容器的外部匿名 volume 的挂载分享</li>
 <li><code>--volumes-from</code>:新容器通过复制了旧容器的mounts配置的<code>source</code>和<code>destination</code>来实现的,并且优先于<code>dockerfile</code>中的卷挂载定义</li>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 正则表达式  正则表达式是一个描述模式(pattern)的字符串，正则表达式函数会将模式和另一个字符串进行比较，检查字符串是否和模式匹配，一些函数会告诉你是否匹配，另一些则改变字符串 PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl&#x3D;compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱，并且有时速度慢，但是易于阅读 正则表">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:10:49.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.241Z">
+<meta property="article:modified_time" content="2024-03-17T15:37:50.988Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -962,7 +962,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Fred&#x27;</span>;<br><span class="hljs-variable">$age</span> = <span class="hljs-number">35</span>;<br><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;$name is $age&#x27;</span>;<br>preg_replace(<span class="hljs-string">&#x27;/\$(\w+)/e&#x27;</span>,<span class="hljs-string">&#x27;$$1&#x27;</span>,<span class="hljs-variable">$string</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>每一个匹配分隔变量名(<code>$name</code>,<code>$age</code>),替换中的$1引用这些名字，所以PHP代码实际上执行的是<code>$name</code>和<code>$age</code>,上面的代码可计算出用于替换的变量的值</li>
-<li><code>preg_replace()</code>的一个变种是<code>preg_replace_callback()</code>,它调用一个函数来对匹配模式 的每个子字符进行处理，函数的参数是一个由匹配模式的字符串组成的数字（第零个元素是匹配模式的所有字符串，第一个元素是第一个匹配子模式的内容，依此类推),例如:</li>
+<li><code>preg_replace()</code>的一个变种是<code>preg_replace_callback()</code>,它调用一个函数来对匹配模式的每个子字符进行处理，函数的参数是一个由匹配模式的字符串组成的数字（第零个元素是匹配模式的所有字符串，第一个元素是第一个匹配子模式的内容，依此类推),例如:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">titlecase</span>(<span class="hljs-params"><span class="hljs-variable">$s</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> ucfirst(strtolower(<span class="hljs-variable">$s</span>[<span class="hljs-number">0</span>]));<br>&#125;<br><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;goodbye cruel world&#x27;</span>;<br><span class="hljs-variable">$new</span> = preg_replace_callback(<span class="hljs-string">&#x27;/\w+/&#x27;</span>,<span class="hljs-string">&#x27;titlecase&#x27;</span>,<span class="hljs-variable">$string</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$new</span>;<br><br>Goodbye Cruel World<br></code></pre></td></tr></table></figure>
 <h4 id="拆分-2">拆分</h4>
