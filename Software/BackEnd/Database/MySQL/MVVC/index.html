@@ -16,19 +16,19 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="MySQL MVVC  MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control) MVCC是为了实现事务的隔离性,通过版本号,避免同一数据在不同事务间的竞争,可以把它当成基于多版本号的一种乐观锁 MVCC的优点：">
+  <meta name="description" content="MySQL MVVC  MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议, 只有在 InnoDB 引擎下存在, 与 MVCC 相对的,是基于锁的并发控制 (Lock-Based Concurrency Control) MVCC 是为了实现事务的隔离性, 通过版本号, 避免同一数据在不同事务间的竞争, 可以把它当成基于多版本号的一种乐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL MVVC">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/MySQL/MVVC/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="MySQL MVVC  MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control) MVCC是为了实现事务的隔离性,通过版本号,避免同一数据在不同事务间的竞争,可以把它当成基于多版本号的一种乐观锁 MVCC的优点：">
+<meta property="og:description" content="MySQL MVVC  MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议, 只有在 InnoDB 引擎下存在, 与 MVCC 相对的,是基于锁的并发控制 (Lock-Based Concurrency Control) MVCC 是为了实现事务的隔离性, 通过版本号, 避免同一数据在不同事务间的竞争, 可以把它当成基于多版本号的一种乐">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240151ddf24a~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/17282401527b303b~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240162340a11~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240153bb5d4e~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp">
 <meta property="article:published_time" content="2023-01-27T11:27:05.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.080Z">
+<meta property="article:modified_time" content="2024-03-17T15:44:39.492Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,37 +234,37 @@
             <div class="markdown-body">
               <h1>MySQL MVVC</h1>
 <ul>
-<li>MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议,只有在InnoDB引擎下存在,与MVCC相对的,是基于锁的并发控制(Lock-Based Concurrency Control)</li>
-<li>MVCC是为了实现事务的隔离性,通过版本号,避免同一数据在不同事务间的竞争,可以把它当成基于多版本号的一种乐观锁</li>
-<li>MVCC的优点：读不加锁,读写不冲突,在读多写少的OLTP应用中,读写不冲突是非常重要的,极大的增加了系统的并发性能</li>
-<li>MVCC只在 READ COMMITTED 和 REPEATABLE READ 两个隔离级别下工作,其他两个隔离级别够和MVCC不兼容,因为 READ UNCOMMITTED 总是读取最新的数据行,而不是符合当前事务版本的数据行,而 SERIALIZABLE 则会对所有读取的行都加锁</li>
+<li>MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议, 只有在 InnoDB 引擎下存在, 与 MVCC 相对的,是基于锁的并发控制 (Lock-Based Concurrency Control)</li>
+<li>MVCC 是为了实现事务的隔离性, 通过版本号, 避免同一数据在不同事务间的竞争, 可以把它当成基于多版本号的一种乐观锁</li>
+<li>MVCC 的优点：读不加锁, 读写不冲突, 在读多写少的 OLTP 应用中, 读写不冲突是非常重要的, 极大的增加了系统的并发性能</li>
+<li>MVCC 只在 READ COMMITTED 和 REPEATABLE READ 两个隔离级别下工作, 其他两个隔离级别够和 MVCC 不兼容, 因为 READ UNCOMMITTED 总是读取最新的数据行, 而不是符合当前事务版本的数据行, 而 SERIALIZABLE 则会对所有读取的行都加锁</li>
 </ul>
 <h2 id="MVVC-实现原理">MVVC 实现原理</h2>
 <ul>
-<li>InnoDB在每行数据都增加三个隐藏字段
+<li>InnoDB 在每行数据都增加三个隐藏字段
 <ul>
-<li><code>DB_ROW_ID</code>:包含一个随着新行插入而单调递增的行ID,当由innodb自动产生聚集索引时,聚集索引会包括这个行ID的值,否则这个行ID不会出现在任何索引中</li>
-<li><code>DB_TRX_ID</code>(创建版本号):用来标识最近一次对本行记录做修改的事务ID</li>
-<li><code>DB_ROLL_PTR</code>(删除版本号):指向写入回滚段(rollback segment)的 undo log record,如果一行记录被更新, 则 undo log record 包含该行记录被更新之前内容</li>
+<li><code>DB_ROW_ID</code>: 包含一个随着新行插入而单调递增的行 ID, 当由 innodb 自动产生聚集索引时, 聚集索引会包括这个行 ID 的值, 否则这个行 ID 不会出现在任何索引中</li>
+<li><code>DB_TRX_ID</code> (创建版本号): 用来标识最近一次对本行记录做修改的事务 ID</li>
+<li><code>DB_ROLL_PTR</code> (删除版本号):指向写入回滚段 (rollback segment) 的 undo log record, 如果一行记录被更新, 则 undo log record 包含该行记录被更新之前内容</li>
 </ul>
 </li>
 </ul>
-<h3 id="MVVC-环境下的CRUD">MVVC 环境下的CRUD</h3>
+<h3 id="MVVC-环境下的-CRUD">MVVC 环境下的 CRUD</h3>
 <ul>
-<li><strong>SELECT</strong>:读取创建版本号&lt;=当前事务版本号,删除版本号为空,或者是删除版本号大于当前事务版本号的的数据
+<li><strong>SELECT</strong>: 读取创建版本号&lt;=当前事务版本号, 删除版本号为空, 或者是删除版本号大于当前事务版本号的的数据
 <ul>
-<li>InnoDB 只查找创建版本小于当前事务版本号的数据行,这样可以确保事务读取的行,要么是在事务开始前已经存在的,要么是事务自身插入或者修改过的</li>
-<li>行的删除版本要么未定义,要么大于当前事务版本号,这可以确保事务读取到的行在事务开始之前未被删除</li>
+<li>InnoDB 只查找创建版本小于当前事务版本号的数据行, 这样可以确保事务读取的行, 要么是在事务开始前已经存在的, 要么是事务自身插入或者修改过的</li>
+<li>行的删除版本要么未定义, 要么大于当前事务版本号, 这可以确保事务读取到的行在事务开始之前未被删除</li>
 </ul>
 </li>
-<li><strong>INSERT</strong>:保存当前事务的版本号为创建版本号</li>
-<li><strong>UPDATE</strong>:插入一条新的记录,保存当前的版本号为创建版本号,同时当前版本号保存为原来数据的删除版本号</li>
-<li><strong>DELETE</strong>:保存当前版本号为删除版本号</li>
+<li><strong>INSERT</strong>: 保存当前事务的版本号为创建版本号</li>
+<li><strong>UPDATE</strong>: 插入一条新的记录, 保存当前的版本号为创建版本号, 同时当前版本号保存为原来数据的删除版本号</li>
+<li><strong>DELETE</strong>: 保存当前版本号为删除版本号</li>
 </ul>
 <p><strong>插入操作</strong></p>
 <ul>
 <li>记录的创建版本号就是事务版本号</li>
-<li>比如插入一条记录, 事务id 假设是1,那么记录如下：也就是说,创建版本号就是事务版本号</li>
+<li>比如插入一条记录, 事务 id 假设是 1, 那么记录如下：也就是说, 创建版本号就是事务版本号</li>
 </ul>
 <table>
 <thead>
@@ -286,8 +286,8 @@
 </table>
 <p><strong>更新操作</strong></p>
 <ul>
-<li>采用的是先标记旧的那行记录为已删除,并且删除版本号是事务版本号,然后插入一行新的记录的方式</li>
-<li>比如,针对上面那行记录,事务Id为2 要把name字段更新</li>
+<li>采用的是先标记旧的那行记录为已删除, 并且删除版本号是事务版本号, 然后插入一行新的记录的方式</li>
+<li>比如, 针对上面那行记录, 事务 Id 为 2 要把 name 字段更新</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">update <span class="hljs-keyword">table</span> <span class="hljs-keyword">set</span> name<span class="hljs-operator">=</span> <span class="hljs-string">&#x27;xttblog.com&#x27;</span> <span class="hljs-keyword">where</span> id<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
 <table>
@@ -308,7 +308,7 @@
 </tr>
 <tr>
 <td>1</td>
-<td><a target="_blank" rel="noopener" href="http://xttblog.com">xttblog.com</a></td>
+<td>xttblog. com</td>
 <td>2</td>
 <td></td>
 </tr>
@@ -331,7 +331,7 @@
 <tbody>
 <tr>
 <td>1</td>
-<td><a target="_blank" rel="noopener" href="http://xttblog.com">xttblog.com</a></td>
+<td>xttblog. com</td>
 <td>2</td>
 <td>3</td>
 </tr>
@@ -339,20 +339,20 @@
 </table>
 <p><strong>查询操作</strong></p>
 <ul>
-<li>上面的描述可以看到,在查询时要符合以下两个条件的记录才能被事务查询出来
+<li>上面的描述可以看到, 在查询时要符合以下两个条件的记录才能被事务查询出来
 <ul>
-<li>删除版本号大于当前事务版本号,就是说删除操作是在当前事务启动之后做的</li>
-<li>创建版本号小于或者等于当前事务版本号,就是说记录创建是在事务中（等于的情况）或者事务启动之前</li>
+<li>删除版本号大于当前事务版本号, 就是说删除操作是在当前事务启动之后做的</li>
+<li>创建版本号小于或者等于当前事务版本号, 就是说记录创建是在事务中（等于的情况）或者事务启动之前</li>
 </ul>
 </li>
 </ul>
 <h2 id="快照读和当前读">快照读和当前读</h2>
 <ul>
-<li>通过MVCC机制,虽然让数据变得可重复读,但我们读到的数据可能是历史数据,是不及时的数据,不是数据库当前的数据!这在一些对于数据的时效特别敏感的业务中,就很可能出问题</li>
-<li>对于这种读取历史数据的方式,我们叫它快照读 (snapshot read),而读取数据库当前版本数据的方式,叫当前读 (current read),很显然,在MVCC中:
+<li>通过 MVCC 机制, 虽然让数据变得可重复读, 但我们读到的数据可能是历史数据, 是不及时的数据, 不是数据库当前的数据! 这在一些对于数据的时效特别敏感的业务中, 就很可能出问题</li>
+<li>对于这种读取历史数据的方式, 我们叫它快照读 (snapshot read), 而读取数据库当前版本数据的方式, 叫当前读 (current read), 很显然, 在 MVCC 中:
 <ul>
-<li><strong>快照读</strong>:<code>select * from table….;</code></li>
-<li><strong>当前读</strong>:特殊的读操作,插入/更新/删除操作,属于当前读,处理的都是当前的数据,需要加锁
+<li><strong>快照读</strong>: <code>select * from table….;</code></li>
+<li><strong>当前读</strong>: 特殊的读操作, 插入/更新/删除操作, 属于当前读, 处理的都是当前的数据, 需要加锁
 <ul>
 <li><code>select * from table where ? lock in share mode;</code></li>
 <li><code>select * from table where ? for update;</code></li>
@@ -363,17 +363,17 @@
 </li>
 </ul>
 </li>
-<li>事务的隔离级别实际上都是定义了当前读的级别,MySQL为了减少锁处理（包括等待其它锁）的时间,提升并发能力,引入了快照读的概念,使得select不用加锁,而update,insert这些&quot;当前读”,就需要另外的模块来解决了</li>
+<li>事务的隔离级别实际上都是定义了当前读的级别, MySQL 为了减少锁处理（包括等待其它锁）的时间, 提升并发能力, 引入了快照读的概念, 使得 select 不用加锁, 而 update, insert 这些&quot;当前读”, 就需要另外的模块来解决了</li>
 </ul>
 <h2 id="快照">快照</h2>
 <ul>
 <li>InnoDB 里面每个事务都有一个唯一的事务 ID，叫作 transaction id。它在事务开始的时候向 InnoDB 的事务系统申请的，是按申请顺序严格递增的。</li>
 <li>每条记录在更新的时候都会同时记录一条 undo log，这条 log 就会记录上当前事务的 transaction id，记为 row trx_id。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。</li>
-<li>如下图所示，一行记录被多个事务更新之后，最新值为 k=22。假设事务A在 trx_id=15 这个事务<strong>提交后启动</strong>，事务A 要读取该行时，就通过 undo log，计算出该事务启动瞬间该行的值为 k=10。</li>
+<li>如下图所示，一行记录被多个事务更新之后，最新值为 k=22。假设事务 A 在 trx_id=15 这个事务<strong>提交后启动</strong>，事务 A 要读取该行时，就通过 undo log，计算出该事务启动瞬间该行的值为 k=10。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240151ddf24a~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ul>
-<li>在可重复读隔离级别下，一个事务在启动时，InnoDB 会为事务构造一个数组，用来保存这个事务启动瞬间，当前正在”活跃“的所有事务ID。”活跃“指的是，启动了但还没提交。</li>
+<li>在可重复读隔离级别下，一个事务在启动时，InnoDB 会为事务构造一个数组，用来保存这个事务启动瞬间，当前正在”活跃“的所有事务 ID。”活跃“指的是，启动了但还没提交。</li>
 <li>数组里面事务 ID 为最小值记为低水位，当前系统里面已经创建过的事务 ID 的最大值加 1 记为高水位。</li>
 <li>这个视图数组和高水位，就组成了当前事务的一致性视图（read-view）。</li>
 <li>这个视图数组把所有的 row trx_id 分成了几种不同的情况。</li>
@@ -395,14 +395,14 @@
 <h2 id="示例">示例</h2>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `t` (<br>  `id` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  `k` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`)<br>) ENGINE<span class="hljs-operator">=</span>InnoDB;<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t(id, k) <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>下表为事务A, B, C 的执行流程</li>
+<li>下表为事务 A, B, C 的执行流程</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>事务A</th>
-<th>事务B</th>
-<th>事务C</th>
+<th>事务 A</th>
+<th>事务 B</th>
+<th>事务 C</th>
 </tr>
 </thead>
 <tbody>
@@ -449,40 +449,40 @@
 </tbody>
 </table>
 <ul>
-<li>我们假设事务A, B, C 的 trx_id 分别为 100, 101, 102。事务A开始前活跃的事务 ID 只有 99，并且 id=1 这一行数据的 trx_id=90。</li>
-<li>根据假设，我们得出事务启动瞬间的视图数组：事务A：[99, 100]，事务B：[99, 100, 101]，事务C：[99, 100, 101, 102]。</li>
+<li>我们假设事务 A, B, C 的 trx_id 分别为 100, 101, 102。事务 A 开始前活跃的事务 ID 只有 99，并且 id=1 这一行数据的 trx_id=90。</li>
+<li>根据假设，我们得出事务启动瞬间的视图数组：事务 A：[99, 100]，事务 B：[99, 100, 101]，事务 C：[99, 100, 101, 102]。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240162340a11~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ol>
-<li>事务C通过更新语句，把 k 更新为 2，此时trx_id=102；</li>
-<li>事务B通过更新语句，把 k 更新为 3，此时trx_id=101；</li>
-<li>事务B通过查询语句，查询到最新一条记录为3，trx_id=101，满足隔离条件，返回 k=3；</li>
-<li>事务A通过查询语句：
+<li>事务 C 通过更新语句，把 k 更新为 2，此时 trx_id=102；</li>
+<li>事务 B 通过更新语句，把 k 更新为 3，此时 trx_id=101；</li>
+<li>事务 B 通过查询语句，查询到最新一条记录为 3，trx_id=101，满足隔离条件，返回 k=3；</li>
+<li>事务 A 通过查询语句：
 <ol>
-<li>查询到最新一条记录为3，trx_id=101，比高水位大，不可见；</li>
+<li>查询到最新一条记录为 3，trx_id=101，比高水位大，不可见；</li>
 <li>通过 undo log，找到上一个历史版本，trx_id=102，比高水位大，不可见；</li>
 <li>继续找上一个历史版本，trx_id=90，比低水位小，可见。</li>
 </ol>
 </li>
 </ol>
-<h3 id="提出问题：为啥事务B更新的时候能看到事务C的修改？">提出问题：为啥事务B更新的时候能看到事务C的修改？</h3>
+<h3 id="提出问题：为啥事务-B-更新的时候能看到事务-C-的修改？">提出问题：为啥事务 B 更新的时候能看到事务 C 的修改？</h3>
 <ul>
-<li>我们假设事务B在更新的看不到事务C的修改，是什么个情况？
+<li>我们假设事务 B 在更新的看不到事务 C 的修改，是什么个情况？
 <ol>
-<li>事务B查询到最新一条记录为2，trx_id=102，比高水位大，不可见；</li>
+<li>事务 B 查询到最新一条记录为 2，trx_id=102，比高水位大，不可见；</li>
 <li>通过 undo log，找到上一个版本，trx_id=90，比低水位小，可见；</li>
-<li>返回记录 k=1，执行 k=k+1，把 k 更新为2，此时 trx_id=101。</li>
+<li>返回记录 k=1，执行 k=k+1，把 k 更新为 2，此时 trx_id=101。</li>
 </ol>
 </li>
-<li>如果是这种情况。事务B覆盖了事务C的更新。所以，InnoDB在更新时运用一条规则：<strong>更新数据都是先读后写的，而这个读，只能读当前的值，称为“当前读“ （current read）。</strong></li>
-<li>因此，事务B在更新时要拿到最新的数据，在此基础上做更新。紧接着，事务B在读取的时候，查询到最新的记录为3， trx_id=101 为当前事务ID，可见。</li>
-<li>我们再假设另一种情况：事务B在更新之后，事务C紧接着更新，事务B回滚了，事务C成功提交。</li>
+<li>如果是这种情况。事务 B 覆盖了事务 C 的更新。所以，InnoDB 在更新时运用一条规则：<strong>更新数据都是先读后写的，而这个读，只能读当前的值，称为“当前读“ （current read）。</strong></li>
+<li>因此，事务 B 在更新时要拿到最新的数据，在此基础上做更新。紧接着，事务 B 在读取的时候，查询到最新的记录为 3， trx_id=101 为当前事务 ID，可见。</li>
+<li>我们再假设另一种情况：事务 B 在更新之后，事务 C 紧接着更新，事务 B 回滚了，事务 C 成功提交。</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>事务B</th>
-<th>事务C</th>
+<th>事务 B</th>
+<th>事务 C</th>
 </tr>
 </thead>
 <tbody>
@@ -519,13 +519,13 @@
 <ul>
 <li>如果按照当前读的定义，会发生以下事故，假设当前 K=1：
 <ol>
-<li>事务B把 k 更新为 2；</li>
-<li>事务C读取到当前最新值，k=2，更新为3；</li>
-<li>事务B回滚；</li>
-<li>事务C提交。</li>
+<li>事务 B 把 k 更新为 2；</li>
+<li>事务 C 读取到当前最新值，k=2，更新为 3；</li>
+<li>事务 B 回滚；</li>
+<li>事务 C 提交。</li>
 </ol>
 </li>
-<li>这时候，事务C发现自己想要执行的是 +1 操作，结果变成了 ”+2“ 操作。InnoDB 肯定不允许这种情况的发生，事务B在执行更新语句时，会给该行加上行锁，直到事务B结束，才会释放这个锁。</li>
+<li>这时候，事务 C 发现自己想要执行的是 +1 操作，结果变成了 ”+2“ 操作。InnoDB 肯定不允许这种情况的发生，事务 B 在执行更新语句时，会给该行加上行锁，直到事务 B 结束，才会释放这个锁。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/1728240153bb5d4e~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.awebp" srcset="/images/loading.gif" lazyload alt="img"></p>
 <h2 id="小结">小结</h2>
