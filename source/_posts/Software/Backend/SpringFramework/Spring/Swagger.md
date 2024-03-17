@@ -102,7 +102,7 @@ private ApiInfo apiInfo() {
         .title("标题")
         .description("描述")
         .termsOfServiceUrl("组织链接")
-        .contcat(contect) //联系人信息
+        .contcat(contect) // 联系人信息
         .license("许可")
         .licenseUrl("许可链接")
         .version("版本")
@@ -197,7 +197,7 @@ public class User implements Serializable{
 
     private String[] ids;
     private List<String> idList;
-    //省略get/set
+    // 省略get/set
 }
 ```
 
@@ -225,7 +225,7 @@ public class User implements Serializable{
     @ApiModelProperty(value="id数组",hidden=true)
     private String[] ids;
     private List<String> idList;
-    //省略get/set
+    // 省略get/set
 }
 ```
 

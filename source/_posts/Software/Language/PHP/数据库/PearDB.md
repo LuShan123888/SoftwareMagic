@@ -18,14 +18,14 @@ categories:
         <table border=1>
             <tr><th>Book</th>Year Published</th><th>Author</th></tr>
     <?php
-    //连接
+    // 连接
     require_once('DB.php');
     $db = DB::connect("mysql://librarian:password@local/library");
     if(DB::iserror($db)){
         die($db->getMessage());
     }
 
-    //执行查询
+    // 执行查询
     $sql = "SELECT books.title,books.pub_year,authors.name
  		FROM books,authors
  		WHERE books.authorid=authors.authorid
@@ -34,7 +34,7 @@ categories:
     if(DB::iserror($sql){
         die($q->getMessage());
     }
-       //生成表格
+       // 生成表格
        while($q->fetchInto($row)){
     ?>
     <tr><td><?= $row[0] ?></td>
@@ -150,7 +150,7 @@ while($row = $result->fetchRow()){
     if(DB::isError($row)){
         die($row->getMessage());
     }
-    //处理行
+    // 处理行
 }
 ```
 
@@ -170,7 +170,7 @@ while($result->fetchInto($row)){
  if(DB::isError($success)){
      die($success->getMessage());
  }
- //处理行
+ // 处理行
 }
 ```
 
@@ -430,7 +430,7 @@ $info = $response->tableInfo();
 - 下面的代码是把一个表的信息放到HTML表格中:
 
 ```php
-//连接
+// 连接
 require_once('DB.php');
 $db = DB::connect("mysql://librarian:passw0rd@localhost/librart");
 if(DB::iserror($db)){

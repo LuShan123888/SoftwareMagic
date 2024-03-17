@@ -38,10 +38,10 @@ categories:
 
 ```java
 static class Node<K,V> implements Map.Entry<K,V> {
-    final int hash;    //用来定位数组索引位置
+    final int hash;    // 用来定位数组索引位置
     final K key;
     V value;
-    Node<K,V> next;   //链表的下一个node
+    Node<K,V> next;   // 链表的下一个node
 
     Node(int hash, K key, V value, Node<K,V> next) { ... }
     public final K getKey(){ ... }
@@ -95,7 +95,7 @@ static final int hash(Object key) {   //JDK1.8 & JDK1.7
 }
 
 static int indexFor(int h, int length) {  //JDK1.7的源码,JDK1.8没有这个方法，但是实现原理一样的
-    return h & (length-1);  //第三步取模运算
+    return h & (length-1);  // 第三步取模运算
 }
 ```
 
@@ -151,7 +151,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
             for (int binCount = 0; ; ++binCount) {
                 if ((e = p.next) == null) {
                     p.next = newNode(hash, key,value,null);
-                    //链表长度大于8转换为红黑树进行处理
+                    // 链表长度大于8转换为红黑树进行处理
                     if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
                         treeifyBin(tab, hash);
                     break;
@@ -187,18 +187,18 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 - 我们分析下resize的源码，鉴于JDK1.8融入了红黑树，较复杂，为了便于理解我们仍然使用JDK1.7的代码，好理解一些，本质上区别不大，具体区别后文再说
 
 ```java
-void resize(int newCapacity) {   //传入新的容量
-    Entry[] oldTable = table;    //引用扩容前的Entry数组
+void resize(int newCapacity) {   // 传入新的容量
+    Entry[] oldTable = table;    // 引用扩容前的Entry数组
     int oldCapacity = oldTable.length;
-    if (oldCapacity == MAXIMUM_CAPACITY) {  //扩容前的数组大小如果已经达到最大(2^30)了
-        threshold = Integer.MAX_VALUE; //修改阈值为int的最大值(2^31-1),这样以后就不会扩容了
+    if (oldCapacity == MAXIMUM_CAPACITY) {  // 扩容前的数组大小如果已经达到最大(2^30)了
+        threshold = Integer.MAX_VALUE; // 修改阈值为int的最大值(2^31-1),这样以后就不会扩容了
         return;
     }
 
-    Entry[] newTable = new Entry[newCapacity];  //初始化一个新的Entry数组
+    Entry[] newTable = new Entry[newCapacity];  // 初始化一个新的Entry数组
     transfer(newTable);                         //!!将数据转移到新的Entry数组里
     table = newTable;                           //HashMap的table属性引用新的Entry数组
-    threshold = (int)(newCapacity * loadFactor);//修改阈值
+    threshold = (int)(newCapacity * loadFactor);// 修改阈值
 }
 ```
 
@@ -208,16 +208,16 @@ void resize(int newCapacity) {   //传入新的容量
 void transfer(Entry[] newTable) {
     Entry[] src = table;                   //src引用了旧的Entry数组
     int newCapacity = newTable.length;
-    for (int j = 0; j < src.length; j++) { //遍历旧的Entry数组
-        Entry<K,V> e = src[j];             //取得旧Entry数组的每个元素
+    for (int j = 0; j < src.length; j++) { // 遍历旧的Entry数组
+        Entry<K,V> e = src[j];             // 取得旧Entry数组的每个元素
         if (e != null) {
-            src[j] = null;//释放旧Entry数组的对象引用(for循环后，旧的Entry数组不再引用任何对象)
+            src[j] = null;// 释放旧Entry数组的对象引用(for循环后，旧的Entry数组不再引用任何对象)
             do {
                 Entry<K,V> next = e.next;
                 int i = indexFor(e.hash, newCapacity); //!!重新计算每个元素在数组中的位置
-                e.next = newTable[i]; //标记[1]
-                newTable[i] = e;      //将元素放在数组上
-                e = next;             //访问下一个Entry链上的元素
+                e.next = newTable[i]; // 标记[1]
+                newTable[i] = e;      // 将元素放在数组上
+                e = next;             // 访问下一个Entry链上的元素
             } while (e != null);
         }
     }
@@ -441,7 +441,7 @@ static void test(int mapSize) {
         map.put(Keys.of(i), i);
     }
 
-    long beginTime = System.nanoTime(); //获取纳秒
+    long beginTime = System.nanoTime(); // 获取纳秒
     for (int i = 0; i < mapSize; i++) {
         map.get(Keys.of(i));
     }

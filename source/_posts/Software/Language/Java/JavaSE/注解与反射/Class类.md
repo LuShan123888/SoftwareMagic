@@ -56,14 +56,14 @@ public class Ex6_6 {
     public static void main(String[] args) throws Exception {
         Class<?> myclass = Class.forName("Test");
         System.out.println(myclass.getName());
-        Object x = myclass.newInstance();//获取Test类的一个对象
-        Method[ ] m = myclass.getMethods();//获取Test类的所有方法
+        Object x = myclass.newInstance();// 获取Test类的一个对象
+        Method[ ] m = myclass.getMethods();// 获取Test类的所有方法
         Object[ ] Args = new Object[ ]{1, 2};
         for (int i = 0; i < 2; i++)
             System.out.println(m[i].toString());
-        System.out.println(m[1].invoke(x, Args));//调用对象的第二个方法
+        System.out.println(m[1].invoke(x, Args));// 调用对象的第二个方法
         Method addm = myclass.getMethod("add", int.class, int.class);
-        System.out.println(addm.invoke(x, Args));//调用add方法
+        System.out.println(addm.invoke(x, Args));// 调用add方法
     }
 }
 

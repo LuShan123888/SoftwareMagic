@@ -80,7 +80,7 @@ public class ArrayList的使用 {
     ArrayList<Integer> a = new ArrayList<Integer>();
     a.add(new Integer(12));
     a.add(new Integer(15));
-    a.add(23);//会自动包装转换，相当于a.add(new Integer(23))
+    a.add(23);// 会自动包装转换，相当于a.add(new Integer(23))
     output(a);
     ArrayList<Double> b = new ArrayList<Double>();
     b.add(new Double(1.2));
@@ -124,11 +124,11 @@ List list = Collections.synchronizedList(new LinkedList(...));
 import java.util.*;
 public class ArrayList和LinkedList的使用测试 {
   static long timeList(List<Integer> st){
-    long start = System.currentTimeMillis();//开始时间
+    long start = System.currentTimeMillis();// 开始时间
     for (int i =0;i<5000;i++)
       // 使用List对象的add(int Object)方法加入对象到List内指定位置
       st.add(0,new Integer(i));
-    return System.currentTimeMillis()-start;//计算花费时间
+    return System.currentTimeMillis()-start;// 计算花费时间
   }
 
   public static void main(String[] args) {
@@ -174,7 +174,7 @@ public class 测试向量的大小及容量变化 {
     System.out.println("size="+v.size());
     System.out.println("capacity="+v.capacity());
     for (int i=0;i<24;i++){
-      v.add(i);//加入数据自动包装转换为Integer对象
+      v.add(i);// 加入数据自动包装转换为Integer对象
     }
     System.out.println("After added 24 Elements");
     System.out.println("size="+v.size());
@@ -357,16 +357,16 @@ public class TestSet {
   public static void main(String[] args){
 
     Set<String> books = new HashSet<String>();
-    //添加一个字符串对象
+    // 添加一个字符串对象
     books.add(new String("Struts2权威指南"));
 
-    //再次添加一个字符串对象
-    //因为两个字符串对象通过equals方法比较相等，所以添加失败，返回false
+    // 再次添加一个字符串对象
+    // 因为两个字符串对象通过equals方法比较相等，所以添加失败，返回false
     boolean result = books.add(new String("Struts2权威指南"));
 
     System.out.println(result);
 
-    //下面输出看到集合只有一个元素
+    // 下面输出看到集合只有一个元素
     System.out.println(books);
 
   }
@@ -426,7 +426,7 @@ public class Main {
     set.add("pear");
     set.add("orange");
     for (String s : set) {
-      System.out.println(s);//输出的顺序与添加的顺序相同
+      System.out.println(s);// 输出的顺序与添加的顺序相同
     }
   }
 }

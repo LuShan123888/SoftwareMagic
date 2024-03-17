@@ -49,7 +49,7 @@ public class User implements Comparable<User> {
 
   public static void main(String[] args) {
     User[] users = {new User("张三",30),new User("李四",20)};
-    Arrays.sort(users);//用Arrays类的sort()方法对数组排序
+    Arrays.sort(users);// 用Arrays类的sort()方法对数组排序
     for (int i=0;i<users.length;i++)
       System.out.println(users[i]);
   }
@@ -83,7 +83,7 @@ public class UserComparator implements Comparator<User> {
 
   public static void main(String[] args) {
     User[] users = {new User("mary", 25), new User("John", 40)};
-    Arrays.sort(users, new UserComparator());//用算子排序
+    Arrays.sort(users, new UserComparator());// 用算子排序
     for (int i = 0; i < users.length; i++)
       System.out.println(users[i]);
   }

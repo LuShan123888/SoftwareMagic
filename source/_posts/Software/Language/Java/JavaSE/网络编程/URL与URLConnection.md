@@ -39,24 +39,24 @@ class GetURL {
         InputStream in = null;
         OutputStream out = null;
         try {
-            URL url = new URL(args[0]);//建立URL
-            //获取指定URL的输入流
+            URL url = new URL(args[0]);// 建立URL
+            // 获取指定URL的输入流
             in = url.openStream();
-            //根据命令行参数判断输出目标是文件还是屏幕
+            // 根据命令行参数判断输出目标是文件还是屏幕
             if (args.length == 2) {
-                out = new FileOutputStream(args[1]);//输出目标为指定文件
+                out = new FileOutputStream(args[1]);// 输出目标为指定文件
             } else {
-                out = System.out;//输出目标为屏幕
+                out = System.out;// 输出目标为屏幕
             }
-            //以下将URL访问结果数据复制到输出流
+            // 以下将URL访问结果数据复制到输出流
             byte[] buffer = new byte[4096];
             int bytes;
-            while ((bytes = in.read(buffer)) != -1)//读数据到缓冲区
+            while ((bytes = in.read(buffer)) != -1)// 读数据到缓冲区
                 out.write(buffer, 0, bytes);
         } catch (Exception e) {
             System.err.println("Usage:java GetURL <URL> [<filename>]");
         } finally {
-            try {       //关闭输入输出流
+            try {       // 关闭输入输出流
                 in.close();
                 out.close();
             } catch (IOException e) {
@@ -84,23 +84,23 @@ class downloadFile {
     public static void main(String[] args) {
         try {
             URL url = new URL(args[0]);
-            //建立与URL资源的连接
+            // 建立与URL资源的连接
             URLConnection uc = url.openConnection();
             int len = uc.getContentLength();
-            byte[] b = new byte[len];//创建字节数组存放读取的数据
-            //取得连接的输入流
+            byte[] b = new byte[len];// 创建字节数组存放读取的数据
+            // 取得连接的输入流
             InputStream stream = uc.getInputStream();
-            //取得URL资源文件路径
+            // 取得URL资源文件路径
             String theFile = url.getFile();
-            //分离出文件名
+            // 分离出文件名
             theFile = theFile.substring(theFile.lastIndexOf('/') + 1);
-            //创建对应的文件输出流
+            // 创建对应的文件输出流
             FileOutputStream fout = new FileOutputStream(theFile)
-                //读取URL资源的全部数据
-                stream.read(b, 0, len);//从输入流读len个字节数据存入数组b
-            //将数据写入文件，从而实现资源内容的下载保存
+                // 读取URL资源的全部数据
+                stream.read(b, 0, len);// 从输入流读len个字节数据存入数组b
+            // 将数据写入文件，从而实现资源内容的下载保存
             fout.write(b);
-            //断开连接
+            // 断开连接
             uc.disconnect();
         } catch (MalformedURLException e) {
             System.err.println("URL error");

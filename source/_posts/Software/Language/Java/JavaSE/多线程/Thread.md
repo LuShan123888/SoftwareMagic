@@ -67,8 +67,8 @@ public Thread(ThreadGroup group,String name);
 ```java
 import java.util.*;
 class TimePrinter extends Thread {
-  int pauseTime;    //中间休息时间
-  String name;      //名称标识
+  int pauseTime;    // 中间休息时间
+  String name;      // 名称标识
 
   public TimePrinter(int x, String n) {
     pauseTime = x;
@@ -79,7 +79,7 @@ class TimePrinter extends Thread {
     while (true) {
       try {
         System.out.println(name + ": " + Calendar.getInstance().getTime());
-        Thread.sleep(pauseTime);    //让线程睡眠一段时间
+        Thread.sleep(pauseTime);    // 让线程睡眠一段时间
       } catch (InterruptedException e) {
       }
     }
@@ -197,7 +197,7 @@ public class MyThread1 extends Thread {
             }
             System.out.println("run begin");
             //interrupt是做一个中断标记，当时不会去中断正在运行的线程，当该线程处于阻塞状态时就会进行中断
-            //因此，先进行interrupt后，再遇到sleep阻塞时，才会进行中断
+            // 因此，先进行interrupt后，再遇到sleep阻塞时，才会进行中断
             Thread.sleep(200000);
             System.out.println("run end");
         } catch (InterruptedException e) {
@@ -221,8 +221,8 @@ public class MyThread1 extends Thread {
 
 ```java
 class TestSleep implements Runnable {
-  int pauseTime;    //中间休息时间
-  String name;      //名称标识
+  int pauseTime;    // 中间休息时间
+  String name;      // 名称标识
 
   public TestSleep(int x, String n) {
     pauseTime = x;
@@ -232,7 +232,7 @@ class TestSleep implements Runnable {
   public void run() {
     while (true) {
       try {
-        Thread.sleep(pauseTime);    //让线程睡眠一段时间
+        Thread.sleep(pauseTime);    // 让线程睡眠一段时间
         System.out.println(name + " Sleep" + pauseTime + " ms");
       } catch (InterruptedException e) {
       }
@@ -244,7 +244,7 @@ class TestSleep implements Runnable {
     tp1.start();
     for (int k = 0; k < 100; k++) {
       try {
-        Thread.sleep(3000);//主线程睡眠一段时间
+        Thread.sleep(3000);// 主线程睡眠一段时间
       } catch (InterruptedException e) {
       }
       System.out.println("Main Thread Sleep 3000ms");
@@ -262,7 +262,7 @@ class TestYield implements Runnable {
 
   public void run() {
     System.out.println(Thread.currentThread().getName() + "线程开始执行");
-    Thread.yield();//线程让步
+    Thread.yield();// 线程让步
     System.out.println(Thread.currentThread().getName() + "线程停止执行");
   }
 
@@ -288,15 +288,15 @@ class TestJoin implements Runnable {
   }
 
   public static void main(String[] args) throws InterruptedException {
-    //启动测试线程
+    // 启动测试线程
     TestJoin test = new TestJoin();
     Thread thread = new Thread(test);
     thread.start();
 
-    //主线程
+    // 主线程
     for (int i = 0; i < 100; i++) {
       if (i == 20) {
-        thread.join();//线程插入
+        thread.join();// 线程插入
       }
       System.out.println("主线程: " + i);
     }
@@ -333,14 +333,14 @@ class TestState implements Runnable {
     TestState test = new TestState();
     Thread thread = new Thread(test);
 
-    //观察线程状态
+    // 观察线程状态
     Thread.State state = thread.getState();
     System.out.println(state);
 
-    //启动测试线程
+    // 启动测试线程
     thread.start();
 
-    //只要线程不终止，就一直输出状态
+    // 只要线程不终止，就一直输出状态
     while (state != Thread.State.TERMINATED) {
       Thread.sleep(500);
       state = thread.getState();
@@ -378,10 +378,10 @@ class TestPriority implements Runnable {
     Thread t3 = new Thread(test);
     Thread t4 = new Thread(test);
     Thread t5 = new Thread(test);
-    //主线程的优先级
+    // 主线程的优先级
     System.out.println(Thread.currentThread().getName() + "-->" + Thread.currentThread().getPriority());
 
-    //设置优先级
+    // 设置优先级
     t2.setPriority(1);
     t3.setPriority(Thread.NORM_PRIORITY);
     t4.setPriority(8);
@@ -425,13 +425,13 @@ class TestDaemon {
 
 
   public static void main(String[] args) {
-    //创建并启动守护进程
+    // 创建并启动守护进程
     Thread thread = new Thread(new DaemonThread());
-    //默认是false表示是用户进程，设置true改为守护进程
+    // 默认是false表示是用户进程，设置true改为守护进程
     thread.setDaemon(true);
     thread.start();
 
-    //创建并启动用户进程
+    // 创建并启动用户进程
     new Thread(new UserThread()).start();
   }
 }

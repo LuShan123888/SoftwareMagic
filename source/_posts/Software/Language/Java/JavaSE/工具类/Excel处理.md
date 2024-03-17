@@ -108,7 +108,7 @@ public class Test {
         // 得到第二列
         Cell cell1 = row.getCell(1);
         System.out.println(cell1.getNumericCellValue());
-        //关闭文件流
+        // 关闭文件流
         fileInputStream.close();
     }
 
@@ -126,7 +126,7 @@ public class Test {
         FileInputStream fileInputStream = new FileInputStream(PATH + "/HSSFWriteTest.xls");
         // 根据文件创建一个工作簿对象
         Workbook workbook = new HSSFWorkbook(fileInputStream);
-        //获得该工作簿的第一个工作表
+        // 获得该工作簿的第一个工作表
         Sheet sheet = workbook.getSheetAt(0);
         // 获取标题内容
         Row rowTitle = sheet.getRow(0);
@@ -148,7 +148,7 @@ public class Test {
         for (int rowNum = 1; rowNum < rowCount; rowNum++) {
             Row rowData = sheet.getRow(rowNum);
             if (rowData != null) {
-                //遍历列
+                // 遍历列
                 int cellCount = rowData.getPhysicalNumberOfCells();
                 for (int cellNum = 0; cellNum < cellCount; cellNum++) {
                     System.out.print("(" + (rowNum + 1) + "," + (cellNum + 1) + ")");
@@ -210,7 +210,7 @@ public class Test {
         FileInputStream fileInputStream = new FileInputStream(PATH + "/HSSFWriteTest.xls");
         // 根据文件创建一个工作簿对象
         Workbook workbook = new HSSFWorkbook(fileInputStream);
-        //获得该工作簿的第一个工作表
+        // 获得该工作簿的第一个工作表
         Sheet sheet = workbook.getSheetAt(0);
 
         Row row = sheet.getRow(3);
@@ -222,7 +222,7 @@ public class Test {
         // 输出单元格的内容
         CellType cellTypeEnum = cell.getCellTypeEnum();
         if (cellTypeEnum == CellType.FORMULA) {
-            //打印公式
+            // 打印公式
             System.out.println(cell.getCellFormula());
             // 计算公式
             CellValue evaluate = formulaEvaluator.evaluate(cell);
@@ -293,7 +293,7 @@ public class Test {
         // 得到第二列
         Cell cell1 = row.getCell(1);
         System.out.println(cell1.getNumericCellValue());
-        //关闭文件流
+        // 关闭文件流
         fileInputStream.close();
     }
 
@@ -331,7 +331,7 @@ public class Test {
         FileOutputStream fileOutputStream = new FileOutputStream(PATH + "/SXSSFWriteTest.xlsx");
         workbook.write(fileOutputStream);
         fileOutputStream.close();
-        //清除临时文件
+        // 清除临时文件
         workbook.dispose();
         // 结束时间
         long end = System.currentTimeMillis();
@@ -363,7 +363,7 @@ public class Test {
         // 得到第二列
         Cell cell1 = row.getCell(1);
         System.out.println(cell1.getNumericCellValue());
-        //关闭文件流
+        // 关闭文件流
         fileInputStream.close();
     }
 
@@ -415,7 +415,7 @@ public class DemoData {
 ```java
 public class Test {
 
-    //初始化测试对象集合
+    // 初始化测试对象集合
     private List<DemoData> data() {
         List<DemoData> list = new ArrayList<DemoData>();
         for (int i = 0; i < 10; i++) {

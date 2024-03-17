@@ -54,7 +54,7 @@ public class 列表元素的排序测试 {
 
 class Comparator1 implements Comparator<String>{
     public int compare(String s1,String s2){
-        s1 = s1.toLowerCase();//字符串全部字符换小写
+        s1 = s1.toLowerCase();// 字符串全部字符换小写
         s2 = s2.toLowerCase();
         return s1.compareTo(s2);
     }

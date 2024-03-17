@@ -102,7 +102,7 @@ public ViewResolver myViewResolver(){
     return new MyViewResolver();
 }
 
-//写一个静态内部类，视图解析器就需要实现ViewResolver接口
+// 写一个静态内部类，视图解析器就需要实现ViewResolver接口
 private static class MyViewResolver implements ViewResolver{
     @Override
     public View resolveViewName(String s, Locale locale) throws Exception {

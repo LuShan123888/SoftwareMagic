@@ -25,9 +25,9 @@ categories:
 
 ```java
 public interface UserMapper {
-    //查询全部用户
+    // 查询全部用户
     List<User> selectUser();
-    //根据id查询用户
+    // 根据id查询用户
     User selectUserById(int id);
 }
 ```
@@ -45,7 +45,7 @@ public interface UserMapper {
 ```java
 @Test
 public void tsetSelectUserById() {
-    SqlSession session = MybatisUtils.getSession();  //获取SqlSession连接
+    SqlSession session = MybatisUtils.getSession();  // 获取SqlSession连接
     UserMapper mapper = session.getMapper(UserMapper.class);
     User user = mapper.selectUserById(1);
     System.out.println(user);
@@ -95,7 +95,7 @@ User user = mapper.selectUserByNP2(map);
 2. Mapper接口，参数为map
 
 ```java
-//选择全部用户实现分页
+// 选择全部用户实现分页
 List<User> selectUser(Map<String,Integer> map);
 ```
 
@@ -103,7 +103,7 @@ List<User> selectUser(Map<String,Integer> map);
     - 推断：起始位置 =  (当前页面 - 1 ) * 页面大小
 
 ```java
-//分页查询，两个参数startIndex , pageSize
+// 分页查询，两个参数startIndex , pageSize
 @Test
 public void testSelectUser(int currentPage, int pageSize) {
     SqlSession session = MybatisUtils.getSession();
@@ -130,7 +130,7 @@ public void testSelectUser(int currentPage, int pageSize) {
 1. mapper接口
 
 ```java
-//选择全部用户RowBounds实现分页
+// 选择全部用户RowBounds实现分页
 List<User> getUserByRowBounds();
 ```
 
@@ -151,7 +151,7 @@ public void testUserByRowBounds(int currentPage, int pageSize) {
 
     RowBounds rowBounds = new RowBounds((currentPage-1)*pageSize,pageSize);
 
-    //通过session的方法进行传递rowBounds, [此种方式现在已经不推荐使用了]
+    // 通过session的方法进行传递rowBounds, [此种方式现在已经不推荐使用了]
     List<User> users =session.selectList("com.example.mapper.UserMapper.getUserByRowBounds", null, rowBounds);
 
     for (User user: users){
@@ -170,7 +170,7 @@ public void testUserByRowBounds(int currentPage, int pageSize) {
 1. 在UserMapper接口中添加对应的方法
 
 ```java
-//添加一个用户
+// 添加一个用户
 int addUser(User user);
 ```
 
@@ -192,7 +192,7 @@ public void testAddUser() {
     User user = new User(5,"王五","zxcvbn");
     int i = mapper.addUser(user);
     System.out.println(i);
-    session.commit(); //提交事务，不写的话不会提交到数据库
+    session.commit(); // 提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```
@@ -208,7 +208,7 @@ public void testAddUser() {
 1. 编写接口方法
 
 ```java
-//修改一个用户
+// 修改一个用户
 int updateUser(User user);
 ```
 
@@ -231,7 +231,7 @@ public void testUpdateUser() {
     user.setPwd("asdfgh");
     int i = mapper.updateUser(user);
     System.out.println(i);
-    session.commit(); //提交事务，不写的话不会提交到数据库
+    session.commit(); // 提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```
@@ -245,7 +245,7 @@ public void testUpdateUser() {
 1. 编写接口方法
 
 ```java
-//根据id删除用户
+// 根据id删除用户
 int deleteUser(int id);
 ```
 
@@ -266,7 +266,7 @@ public void testDeleteUser() {
     UserMapper mapper = session.getMapper(UserMapper.class);
     int i = mapper.deleteUser(5);
     System.out.println(i);
-    session.commit(); //提交事务，不写的话不会提交到数据库
+    session.commit(); // 提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```

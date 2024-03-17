@@ -40,7 +40,7 @@ document.write( "<br>" );
 document.write("<pre>" + str_pretty1 + "</pre>" );
 
 document.write( "<br>" );
-str_pretty2 = JSON.stringify(str, null, 4) //使用四个空格缩进
+str_pretty2 = JSON.stringify(str, null, 4) // 使用四个空格缩进
 document.write( "使用参数情况:" );
 document.write( "<br>" );
 document.write("<pre>" + str_pretty2 + "</pre>" ); // pre 用于格式化输出

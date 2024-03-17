@@ -49,35 +49,35 @@ public class test {
     }
 
     static public void backtrack(List<List<String>> solutions, int[] queens, int n, int row, Set<Integer> columns, Set<Integer> diagonals1, Set<Integer> diagonals2) {
-        //说明已经得出结果，打印棋盘，并存于结果集
+        // 说明已经得出结果，打印棋盘，并存于结果集
         if (row == n) {
             List<String> board = generateBoard(queens, n);
             solutions.add(board);
         } else {
             for (int i = 0; i < n; i++) {
-                //在同一列
+                // 在同一列
                 if (columns.contains(i)) {
                     continue;
                 }
-                //在同左斜线
+                // 在同左斜线
                 int diagonal1 = row - i;
                 if (diagonals1.contains(diagonal1)) {
                     continue;
                 }
-                //在同右斜线
+                // 在同右斜线
                 int diagonal2 = row + i;
                 if (diagonals2.contains(diagonal2)) {
                     continue;
                 }
-                //适合的位置
+                // 适合的位置
                 queens[row] = i;
-                //记录新放置的皇后
+                // 记录新放置的皇后
                 columns.add(i);
                 diagonals1.add(diagonal1);
                 diagonals2.add(diagonal2);
-                //判断下一行
+                // 判断下一行
                 backtrack(solutions, queens, n, row + 1, columns, diagonals1, diagonals2);
-                //下一行没有合适的位置，执行回溯操作
+                // 下一行没有合适的位置，执行回溯操作
                 queens[row] = -1;
                 columns.remove(i);
                 diagonals1.remove(diagonal1);
@@ -86,7 +86,7 @@ public class test {
         }
     }
 
-    //生成棋盘
+    // 生成棋盘
     static public List<String> generateBoard(int[] queens, int n) {
         List<String> board = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -137,36 +137,36 @@ public class test {
         x[1] = 0;
         int k = 1;
         while (k > 0) {
-            //搜索下一列
+            // 搜索下一列
             x[k] = x[k] + 1;
             while ((x[k] <= n) && !place(k))
-                //判断是否没出列，其次，判断是否能放在这个列，不能下一个列判断
+                // 判断是否没出列，其次，判断是否能放在这个列，不能下一个列判断
                 x[k] = x[k] + 1;
-            //找到一个合适的位置
+            // 找到一个合适的位置
             if (x[k] <= n) {
-                //是否是一个完整的解
+                // 是否是一个完整的解
                 if (k == n) {
                     for (int i = 1; i < x.length; i++) {
                         System.out.print(" " + x[i]);
                     }
                     System.out.println();
                 } else {
-                    //否则搜索下一行
+                    // 否则搜索下一行
                     k = k + 1;
                     x[k] = 0;
                 }
             } else {
-                //回溯到上一行
+                // 回溯到上一行
                 k = k - 1;
             }
         }
     }
 
     static private boolean place(int k) {
-        //如果一个皇后能放在第k行和x[k]列则返回true,否则返回false
+        // 如果一个皇后能放在第k行和x[k]列则返回true,否则返回false
         int i = 1;
         while (i < k) {
-            //同一列有两个皇后以及在同一个对角线上
+            // 同一列有两个皇后以及在同一个对角线上
             if (x[i] == x[k] || Math.abs(x[i] - x[k]) == Math.abs(i - k)) {
                 return false;
             }

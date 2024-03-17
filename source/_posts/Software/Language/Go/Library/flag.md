@@ -108,9 +108,9 @@ Flag 解析在第一个非 flag 参数（单个”-“不是 flag 参数）之�
 ## flag 其他函数
 
 ```go
-flag.Args()  ////返回命令行参数后的其他参数，以[]string类型
-flag.NArg()  //返回命令行参数后的其他参数个数
-flag.NFlag() //返回使用的命令行参数个数
+flag.Args()  //// 返回命令行参数后的其他参数，以[]string类型
+flag.NArg()  // 返回命令行参数后的其他参数个数
+flag.NFlag() // 返回使用的命令行参数个数
 ```
 
 ## 完整示例
@@ -119,7 +119,7 @@ flag.NFlag() //返回使用的命令行参数个数
 
 ```go
 func main() {
-    //定义命令行参数方式1
+    // 定义命令行参数方式1
     var name string
     var age int
     var married bool
@@ -129,14 +129,14 @@ func main() {
     flag.BoolVar(&married, "married", false, "婚否")
     flag.DurationVar(&delay, "d", 0, "延迟的时间间隔")
 
-    //解析命令行参数
+    // 解析命令行参数
     flag.Parse()
     fmt.Println(name, age, married, delay)
-    //返回命令行参数后的其他参数
+    // 返回命令行参数后的其他参数
     fmt.Println(flag.Args())
-    //返回命令行参数后的其他参数个数
+    // 返回命令行参数后的其他参数个数
     fmt.Println(flag.NArg())
-    //返回使用的命令行参数个数
+    // 返回使用的命令行参数个数
     fmt.Println(flag.NFlag())
 }
 ```

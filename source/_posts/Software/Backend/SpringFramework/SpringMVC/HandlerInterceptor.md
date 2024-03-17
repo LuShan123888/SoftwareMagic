@@ -26,20 +26,20 @@ categories:
 ```java
 public class MyInterceptor implements HandlerInterceptor {
 
-    //在请求处理的方法之前执行
-    //如果返回true执行下一个拦截器
-    //如果返回false就不执行下一个拦截器
+    // 在请求处理的方法之前执行
+    // 如果返回true执行下一个拦截器
+    // 如果返回false就不执行下一个拦截器
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         System.out.println("------------处理前------------");
         return true;
     }
 
-    //在请求处理方法执行之后执行
+    // 在请求处理方法执行之后执行
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         System.out.println("------------处理后------------");
     }
 
-    //在dispatcherServlet处理后执行，做清理工作
+    // 在dispatcherServlet处理后执行，做清理工作
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         System.out.println("------------清理------------");
     }
@@ -146,19 +146,19 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 @RequestMapping("/user")
 public class UserController {
 
-    //跳转到登陆页面
+    // 跳转到登陆页面
     @RequestMapping("/jumplogin")
     public String jumpLogin() throws Exception {
         return "login";
     }
 
-    //跳转到成功页面
+    // 跳转到成功页面
     @RequestMapping("/jumpSuccess")
     public String jumpSuccess() throws Exception {
         return "success";
     }
 
-    //登陆提交
+    // 登陆提交
     @RequestMapping("/login")
     public String login(HttpSession session, String username, String pwd) throwsException {
         // 向session记录用户身份信息
@@ -167,7 +167,7 @@ public class UserController {
         return "success";
     }
 
-    //退出登陆
+    // 退出登陆
     @RequestMapping("logout")
     public String logout(HttpSession session) throws Exception {
         // session 过期

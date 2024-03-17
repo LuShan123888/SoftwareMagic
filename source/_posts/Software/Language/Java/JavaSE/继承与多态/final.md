@@ -30,24 +30,24 @@ categories:
 ```java
 public class AssignTest {
     public static int totalNumber = 5;
-    public final int id;    //定义对象的常量属性
+    public final int id;    // 定义对象的常量属性
     public int weight;
 
     public void m() {
-        id++;               //实例方法中不能给常量赋值
+        id++;               // 实例方法中不能给常量赋值
     }
 
     public AssignTest(final int weight) {
-        id = totalNumber++; //由于常量id为赋初值，允许在构造方法中给其赋值
-        weight++;               //不允许，不能更改定义为常量的参数
+        id = totalNumber++; // 由于常量id为赋初值，允许在构造方法中给其赋值
+        weight++;               // 不允许，不能更改定义为常量的参数
         this.weight = weight;
     }
 
     public static void main(String[] args) {
         final AssignTest t = new AssignTest(5);
-        t.weight = t.weight + 2;  //允许
-        t.id++;                         //不允许
-        t = new.AssignTest(4);  //不允许
+        t.weight = t.weight + 2;  // 允许
+        t.id++;                         // 不允许
+        t = new.AssignTest(4);  // 不允许
     }
 }
 ```

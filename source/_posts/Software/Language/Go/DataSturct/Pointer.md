@@ -38,7 +38,7 @@ func main() {
 
 ```go
 func main() {
-	//指针取值
+	// 指针取值
 	a := 10
 	b := &a // 取变量a的地址，将指针保存到b中
 	fmt.Printf("type of b:%T\n", b)

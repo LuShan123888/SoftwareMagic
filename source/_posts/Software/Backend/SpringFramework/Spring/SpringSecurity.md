@@ -44,14 +44,14 @@ protected void configure(HttpSecurity http) throws Exception {
 - `SecurityContextHolder` 默认使用 MODE_THREADLOCAL 模式,`SecurityContext` 存储在当前线程中，调用 `SecurityContextHolder` 时不需要显示的参数传递，在当前线程中可以直接获取到 `SecurityContextHolder` 对象
 
 ```java
-//获取当前线程里面认证的对象
+// 获取当前线程里面认证的对象
 SecurityContext context = SecurityContextHolder.getContext();
 Authentication authentication = context.getAuthentication();
 
-//保存认证对象（一般用于自定义认证成功保存认证对象)
+// 保存认证对象（一般用于自定义认证成功保存认证对象)
 SecurityContextHolder.getContext().setAuthentication(authResult);
 
-//清空认证对象（一般用于自定义登出清空认证对象)
+// 清空认证对象（一般用于自定义登出清空认证对象)
 SecurityContextHolder.clearContext();
 ```
 
@@ -61,17 +61,17 @@ SecurityContextHolder.clearContext();
 
 ```java
 public interface Authentication extends Principal, Serializable {
-    //获取用户权限，一般情况下获取到的是用户的角色信息
+    // 获取用户权限，一般情况下获取到的是用户的角色信息
     Collection<? extends GrantedAuthority> getAuthorities();
-    //获取证明用户认证的信息，通常情况下获取到的是密码等信息，不过登录成功就会被移除
+    // 获取证明用户认证的信息，通常情况下获取到的是密码等信息，不过登录成功就会被移除
     Object getCredentials();
-    //获取用户的额外信息，比如 IP 地址，经纬度等
+    // 获取用户的额外信息，比如 IP 地址，经纬度等
     Object getDetails();
-    //获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展)
+    // 获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展)
     Object getPrincipal();
-    //获取当前 Authentication 是否已认证
+    // 获取当前 Authentication 是否已认证
     boolean isAuthenticated();
-    //设置当前 Authentication 是否已认证
+    // 设置当前 Authentication 是否已认证
     void setAuthenticated(boolean isAuthenticated);
 }
 ```
@@ -82,10 +82,10 @@ public interface Authentication extends Principal, Serializable {
 
 ```java
 public interface AuthenticationProvider {
-    //实现具体的身份认证逻辑，认证失败抛出对应的异常
+    // 实现具体的身份认证逻辑，认证失败抛出对应的异常
     Authentication authenticate(Authentication authentication)
         throws AuthenticationException;
-    //该认证类是否支持该 Authentication 的认证
+    // 该认证类是否支持该 Authentication 的认证
     boolean supports(Class<?> authentication);
 }
 ```
@@ -99,7 +99,7 @@ public interface AuthenticationProvider {
 
 ```java
 public interface UserDetailsService {
-    //根据用户名查到对应的 UserDetails 对象
+    // 根据用户名查到对应的 UserDetails 对象
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 }
 ```
@@ -111,14 +111,14 @@ public interface UserDetailsService {
 ```java
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     throws IOException, ServletException {
-    //首先配对是不是配置的登录的URI,是则执行下面的认证，不是则跳过
+    // 首先配对是不是配置的登录的URI,是则执行下面的认证，不是则跳过
     if (!requiresAuthentication(request, response)) {
         chain.doFilter(request, response);
         return;
     }
     Authentication authResult;
     try {
-        //关键方法，实现认证逻辑并返回 Authentication
+        // 关键方法，实现认证逻辑并返回 Authentication
         authResult = attemptAuthentication(request, response);
         if (authResult == null) {
             // return immediately as subclass has indicated that it hasn't completed
@@ -128,12 +128,12 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
         sessionStrategy.onAuthentication(authResult, request, response);
     }
     catch (InternalAuthenticationServiceException failed) {
-        //认证失败调用
+        // 认证失败调用
         unsuccessfulAuthentication(request, response, failed);
         return;
     }
     catch (AuthenticationException failed) {
-        //认证失败调用
+        // 认证失败调用
         unsuccessfulAuthentication(request, response, failed);
         return;
     }
@@ -141,7 +141,7 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     if (continueChainBeforeSuccessfulAuthentication) {
         chain.doFilter(request, response);
     }
-    //认证成功调用
+    // 认证成功调用
     successfulAuthentication(request, response, chain, authResult);
 }
 ```
@@ -156,7 +156,7 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
     private boolean postOnly = true;
 
-    //开始身份认证逻辑
+    // 开始身份认证逻辑
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         if (postOnly && !request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
@@ -170,11 +170,11 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
             password = "";
         }
         username = username.trim();
-        //先用前端提交过来的 username 和 password 封装一个简易的 AuthenticationToken
+        // 先用前端提交过来的 username 和 password 封装一个简易的 AuthenticationToken
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
-        //具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate() 方法完成
+        // 具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate() 方法完成
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 }
@@ -186,13 +186,13 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
 public class ProviderManager implements AuthenticationManager, MessageSourceAware,InitializingBean {
     private List<AuthenticationProvider> providers = Collections.emptyList();
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        //遍历所有的 AuthenticationProvider, 找到合适的完成身份验证
+        // 遍历所有的 AuthenticationProvider, 找到合适的完成身份验证
         for (AuthenticationProvider provider : getProviders()) {
             if (!provider.supports(toTest)) {
                 continue;
             }
             try {
-                //进行具体的身份验证逻辑
+                // 进行具体的身份验证逻辑
                 result = provider.authenticate(authentication);
                 if (result != null) {
                     copyDetails(authentication, result);
@@ -217,7 +217,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         // 获得提交过来的用户名
         String username = (authentication.getPrincipal() == null) ? "NONE_PROVIDED" : authentication.getName();
-        //根据用户名从缓存中查找 UserDetails
+        // 根据用户名从缓存中查找 UserDetails
         boolean cacheWasUsed = true;
         UserDetails user = this.userCache.getUserFromCache(username);
         if (user == null) {
@@ -229,9 +229,9 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
             catch
         }
         try {
-            //比对前的检查，例如账户以一些状态信息（是否锁定，过期...)
+            // 比对前的检查，例如账户以一些状态信息（是否锁定，过期...)
             preAuthenticationChecks.check(user);
-            //定义比对方式，子类实现该方法
+            // 定义比对方式，子类实现该方法
             additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
         }
         catch (AuthenticationException exception) {
@@ -240,7 +240,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
                 // 获取需要比对的 UserDetails 对象，子类实现该方法
                 user = retrieveUser(username, (UsernamePasswordAuthenticationToken) authentication);
                 preAuthenticationChecks.check(user);
-                //定义比对方式，子类实现该方法
+                // 定义比对方式，子类实现该方法
                 additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
             }
             else {
@@ -255,10 +255,10 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
         if (forcePrincipalAsString) {
             principalToReturn = user.getUsername();
         }
-        //根据最终user的一些信息重新生成具体详细的 Authentication 对象并返回
+        // 根据最终user的一些信息重新生成具体详细的 Authentication 对象并返回
         return createSuccessAuthentication(principalToReturn, authentication, user);
     }
-    //子类实现该方法
+    // 子类实现该方法
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
         UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(principal, authentication.getCredentials(),   authoritiesMapper.mapAuthorities(user.getAuthorities()));
         result.setDetails(authentication.getDetails());
@@ -276,7 +276,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
 
 ```java
 public class DaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
-    //密码比对
+    // 密码比对
     @SuppressWarnings("deprecation")
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
         if (authentication.getCredentials() == null) {
@@ -284,17 +284,17 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
         String presentedPassword = authentication.getCredentials().toString();
-        //通过 PasswordEncoder 进行密码比对，注：可自定义
+        // 通过 PasswordEncoder 进行密码比对，注：可自定义
         if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
             logger.debug("Authentication failed: password does not match stored value");
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
     }
-    //通过 UserDetailsService 获取 UserDetails
+    // 通过 UserDetailsService 获取 UserDetails
     protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
         prepareTimingAttackProtection();
         try {
-            //通过 UserDetailsService 获取 UserDetails
+            // 通过 UserDetailsService 获取 UserDetails
             UserDetails loadedUser = this.getUserDetailsService().loadUserByUsername(username);
             if (loadedUser == null) {
                 throw new InternalAuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
@@ -313,7 +313,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
         }
     }
 
-    //生成身份认证通过后最终返回的 Authentication, 记录认证的身份信息
+    // 生成身份认证通过后最终返回的 Authentication, 记录认证的身份信息
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
         boolean upgradeEncoding = this.userDetailsPasswordService != null && this.passwordEncoder.upgradeEncoding(user.getPassword());
@@ -345,7 +345,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 ```java
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) //开启权限注解，默认是关闭的
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 开启权限注解，默认是关闭的
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**

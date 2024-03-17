@@ -198,7 +198,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
-        //未授权界面;
+        // 未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         return shiroFilterFactoryBean;
     }
@@ -328,24 +328,24 @@ public class ShiroController {
 
     @RequestMapping("/login")
     public String login(String username, String password, Model model) {
-        //获取当前的用户
+        // 获取当前的用户
         Subject currentUser = SecurityUtils.getSubject();
-        //封装用户的登录数据
+        // 封装用户的登录数据
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
-            //执行登录的方法
+            // 执行登录的方法
             currentUser.login(token);
-            //开启记住登录状态功能
+            // 开启记住登录状态功能
             token.setRememberMe(true);
-            //用户名不存在
+            // 用户名不存在
         } catch (UnknownAccountException e) {
             model.addAttribute("msg", "用户名错误");
             return "login";
-            //密码不存在
+            // 密码不存在
         } catch (IncorrectCredentialsException e) {
             model.addAttribute("msg", "密码错误");
             return "login";
-            //账户被锁定
+            // 账户被锁定
         } catch (LockedAccountException e) {
             System.out.println("用户名 " + token.getPrincipal() + " 被锁定 !");
             return "login";
@@ -353,9 +353,9 @@ public class ShiroController {
         // 认证成功后
         if (currentUser.isAuthenticated()) {
             System.out.println("用户 " + currentUser.getPrincipal() + " 登陆成功!");
-            //测试角色
+            // 测试角色
             System.out.println("是否拥有 manager 角色:" + currentUser.hasRole("manager"));
-            //测试权限
+            // 测试权限
             System.out.println("是否拥有 user:create 权限" + currentUser.isPermitted("user:create"));
         }
         return "index";
@@ -382,17 +382,17 @@ public class ShiroController {
 - 在使用 Shiro 的注解之前，请确保项目中已经添加支持 AOP 功能的相关jar包
 
 ```java
-//角色校验
+// 角色校验
 @RequiresRoles( "manager" )
 public String save() {
     //TODO
 }
-//权限校验
+// 权限校验
 @RequiresPermissions("user:manage")
 public String delete() {
     //TODO
 }
-//用户校验
+// 用户校验
 @RequiresUser
 public Map<String,Object> getLogout(){
     //TODO
@@ -410,9 +410,9 @@ public Map<String,Object> getLogout(){
 - 允许存在多个角色和权限，默认逻辑是 AND, 也就是同时拥有这些才可以访问方法，可以在注解中以参数的形式设置成 OR
 
 ```java
-//拥有其中一个角色就可以访问
+// 拥有其中一个角色就可以访问
 @RequiresRoles(value={"ADMIN","USER"},logical = Logical.OR)
-//拥有所有权限才可以访问
+// 拥有所有权限才可以访问
 @RequiresPermissions (value={"sys:user:info" ,"sys:role: info", logical = Logical.AND)
 ```
 
@@ -420,7 +420,7 @@ public Map<String,Object> getLogout(){
 - 默认拦截顺序是: RequiresRoles->RequiresPermissions->RequiresAuthentication->RequiresUser->RequiresGuest
 
 ```java
-//拥有ADMIN角色同时还要拥有有sys:role:info权限
+// 拥有ADMIN角色同时还要拥有有sys:role:info权限
 @RequiresRoles (value={"ADMIN")
 @RequiresPermissions("sys:role:info")
 ```

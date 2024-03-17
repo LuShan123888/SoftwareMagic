@@ -189,46 +189,46 @@ public class ExampleForHbase{
     public static Connection connection;
     public static Admin admin;
 
-    //主函数中的语句请逐句执行，只需删除其前的//即可，如：执行insertRow时请将其他语句注释
+    // 主函数中的语句请逐句执行，只需删除其前的// 即可，如：执行insertRow时请将其他语句注释
     public static void main(String[] args)throws IOException{
-        //创建一个表，表名为Score,列族为sname,course
+        // 创建一个表，表名为Score,列族为sname,course
         createTable("Score",new String[]{"sname","course"});
 
-        //在Score表中插入一条数据，其行键为95001,sname为Mary(因为sname列族下没有子列所以第四个参数为空)
-        //等价命令:put 'Score','95001','sname','Mary'
+        // 在Score表中插入一条数据，其行键为95001,sname为Mary(因为sname列族下没有子列所以第四个参数为空)
+        // 等价命令:put 'Score','95001','sname','Mary'
         //insertRow("Score", "95001", "sname", "", "Mary");
-        //在Score表中插入一条数据，其行键为95001,course:Math为88(course为列族,Math为course下的子列)
-        //等价命令:put 'Score','95001','score:Math','88'
+        // 在Score表中插入一条数据，其行键为95001,course:Math为88(course为列族,Math为course下的子列)
+        // 等价命令:put 'Score','95001','score:Math','88'
         //insertRow("Score", "95001", "course", "Math", "88");
-        //在Score表中插入一条数据，其行键为95001,course:English为85(course为列族,English为course下的子列)
-        //等价命令:put 'Score','95001','score:English','85'
+        // 在Score表中插入一条数据，其行键为95001,course:English为85(course为列族,English为course下的子列)
+        // 等价命令:put 'Score','95001','score:English','85'
         //insertRow("Score", "95001", "course", "English", "85");
 
         //1,删除Score表中指定列数据，其行键为95001,列族为course,列为Math
-        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码取消注释注释，将删除制定列族的代码注释
-        //等价命令:delete 'Score','95001','score:Math'
+        // 执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码取消注释注释，将删除制定列族的代码注释
+        // 等价命令:delete 'Score','95001','score:Math'
         //deleteRow("Score", "95001", "course", "Math");
 
         //2,删除Score表中指定列族数据，其行键为95001,列族为course(95001的Math和English的值都会被删除)
-        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，将删除制定列族的代码取消注释
-        //等价命令:delete 'Score','95001','score'
+        // 执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，将删除制定列族的代码取消注释
+        // 等价命令:delete 'Score','95001','score'
         //deleteRow("Score", "95001", "course", "");
 
         //3,删除Score表中指定行数据，其行键为95001
-        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，以及将删除制定列族的代码注释
-        //等价命令:deleteall 'Score','95001'
+        // 执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，以及将删除制定列族的代码注释
+        // 等价命令:deleteall 'Score','95001'
         //deleteRow("Score", "95001", "", "");
 
-        //查询Score表中，行键为95001,列族为course,列为Math的值
+        // 查询Score表中，行键为95001,列族为course,列为Math的值
         //getData("Score", "95001", "course", "Math");
-        //查询Score表中，行键为95001,列族为sname的值（因为sname列族下没有子列所以第四个参数为空)
+        // 查询Score表中，行键为95001,列族为sname的值（因为sname列族下没有子列所以第四个参数为空)
         //getData("Score", "95001", "sname", "");
 
-        //删除Score表
+        // 删除Score表
         //deleteTable("Score");
     }
 
-    //建立连接
+    // 建立连接
     public static void init(){
         configuration  = HBaseConfiguration.create();
         configuration.set("hbase.rootdir","hdfs://localhost:9000/hbase");
@@ -239,7 +239,7 @@ public class ExampleForHbase{
             e.printStackTrace();
         }
     }
-    //关闭连接
+    // 关闭连接
     public static void close(){
         try{
             if(admin != null){
@@ -335,9 +335,9 @@ public class ExampleForHbase{
         init();
         Table table = connection.getTable(TableName.valueOf(tableName));
         Delete delete = new Delete(rowKey.getBytes());
-        //删除指定列族的所有数据
+        // 删除指定列族的所有数据
         //delete.addFamily(colFamily.getBytes());
-        //删除指定列的数据
+        // 删除指定列的数据
         //delete.addColumn(colFamily.getBytes(), col.getBytes());
 
         table.delete(delete);

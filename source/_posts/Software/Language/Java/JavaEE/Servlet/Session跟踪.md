@@ -78,7 +78,7 @@ public class SessionTrack extends HttpServlet {
         // 获取该网页的最后一次访问时间
         Date lastAccessTime = new Date(session.getLastAccessedTime());
 
-        //设置日期输出的格式
+        // 设置日期输出的格式
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String title = "Servlet Session 实例";

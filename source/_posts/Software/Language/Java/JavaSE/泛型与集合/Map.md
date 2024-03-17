@@ -44,8 +44,8 @@ public class Map接口的使用 {
         m.put("张三","2003011");
         m.put("李四","2003012");
         m.put("王五","2003013");
-        m.put("张三","2003001");//添加一个已有相同关键字的元素时将修改元素的键值
-        Set<String> keys = m.keySet();//通过Map对象的keySet()方法得到关键字的集合
+        m.put("张三","2003001");// 添加一个已有相同关键字的元素时将修改元素的键值
+        Set<String> keys = m.keySet();// 通过Map对象的keySet()方法得到关键字的集合
         for (Iterator<String> i = keys.iterator();i.hasNext();){
             System.out.print(i.next()+",");
         }
@@ -514,7 +514,7 @@ public Map.Entry<K,V> next() {
 Entry<K,V> nextEntry() {
   // 保存应该返回的Entry
   Entry<K,V> e = lastReturned = nextEntry;
-  //把当前应该返回的Entry的after作为下一个应该返回的Entry
+  // 把当前应该返回的Entry的after作为下一个应该返回的Entry
   nextEntry = e.after;
   // 返回当前应该返回的Entry
   return e;
@@ -754,11 +754,11 @@ public class TreeMapTest {
         map.put("d", "aaaaa");
         map.put("b", "ccccc");
 
-        //这里将map.entrySet()转换成list
+        // 这里将map.entrySet()转换成list
         List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
-        //然后通过比较器来实现排序
+        // 然后通过比较器来实现排序
         Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
-            //升序排序
+            // 升序排序
             public int compare(Entry<String, String> o1,
                                Entry<String, String> o2) {
                 return o1.getValue().compareTo(o2.getValue());

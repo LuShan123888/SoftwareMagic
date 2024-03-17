@@ -19,7 +19,7 @@ var 数组变量名 [元素数量]T
 ```go
 var a [3]int
 var b [4]int
-a = b //不可以这样做，因为此时a和b是不同的类型
+a = b // 不可以这样做，因为此时a和b是不同的类型
 ```
 
 - 数组可以通过下标进行访问，下标是从 `0` 开始，最后一个元素下标是: `len-1`, 访问越界（下标在合法范围之外), 则触发访问越界
@@ -30,9 +30,9 @@ a = b //不可以这样做，因为此时a和b是不同的类型
 
 ```go
 func main() {
-    var testArray [3]int                        //数组会初始化为int类型的零值
-    var numArray = [3]int{1, 2}                 //使用指定的初始值完成初始化
-    var cityArray = [3]string{"北京", "上海", "深圳"} //使用指定的初始值完成初始化
+    var testArray [3]int                        // 数组会初始化为int类型的零值
+    var numArray = [3]int{1, 2}                 // 使用指定的初始值完成初始化
+    var cityArray = [3]string{"北京", "上海", "深圳"} // 使用指定的初始值完成初始化
     fmt.Println(testArray)                      //[0 0 0]
     fmt.Println(numArray)                       //[1 2 0]
     fmt.Println(cityArray)                      //[北京上海深圳]
@@ -93,7 +93,7 @@ func main() {
         {"成都", "重庆"},
     }
     fmt.Println(a) //[[北京上海] [广州深圳] [成都重庆]]
-    fmt.Println(a[2][1]) //支持索引取值：重庆
+    fmt.Println(a[2][1]) // 支持索引取值：重庆
 }
 ```
 
@@ -124,7 +124,7 @@ func main() {
 **注意**: 多维数组**只有第一层**可以使用 `...` 来让编译器推导数组长度，例如:
 
 ```go
-//支持的写法
+// 支持的写法
 a := [...][2]string{
 	{"北京", "上海"},
 	{"广州", "深圳"},
@@ -146,14 +146,14 @@ func modifyArray2(x [3][2]int) {
 }
 func main() {
 	a := [3]int{10, 20, 30}
-	modifyArray(a) //在modify中修改的是a的副本x
+	modifyArray(a) // 在modify中修改的是a的副本x
 	fmt.Println(a) //[10 20 30]
 	b := [3][2]int{
 		{1, 1},
 		{1, 1},
 		{1, 1},
 	}
-	modifyArray2(b) //在modify中修改的是b的副本x
+	modifyArray2(b) // 在modify中修改的是b的副本x
 	fmt.Println(b)  //[[1 1] [1 1] [1 1]]
 }
 ```

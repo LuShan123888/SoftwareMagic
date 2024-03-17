@@ -156,7 +156,7 @@ public class Test {
             conf.set("fs.hdfs.impl","org.apache.hadoop.hdfs.DistributedFileSystem");
             FileSystem fs = FileSystem.get(conf);
             byte[] buff = "Hello world".getBytes(); // 要写入的内容
-            String filename = "test"; //要写入的文件名
+            String filename = "test"; // 要写入的文件名
             FSDataOutputStream os = fs.create(new Path(filename));
             os.write(buff,0,buff.length);
             System.out.println("Create:"+ filename);
@@ -219,10 +219,10 @@ public class Test {
             Path file = new Path("test");
             FSDataInputStream getIt = fs.open(file);
             BufferedReader d = new BufferedReader(new InputStreamReader(getIt));
-            String content = d.readLine(); //读取文件一行
+            String content = d.readLine(); // 读取文件一行
             System.out.println(content);
-            d.close(); //关闭文件
-            fs.close(); //关闭hdfs
+            d.close(); // 关闭文件
+            fs.close(); // 关闭hdfs
         } catch (Exception e) {
             e.printStackTrace();
         }

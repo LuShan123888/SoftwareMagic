@@ -16,13 +16,13 @@ categories:
 
 ```java
 {
- ExecutorService executor = Excutors.newFixedThreadPollExecutor(100);//线程池
+ ExecutorService executor = Excutors.newFixedThreadPollExecutor(100);// 线程池
 
  ServerSocket serverSocket = new ServerSocket();
  serverSocket.bind(8088);
- while(!Thread.currentThread.isInturrupted()){//主线程死循环等待新连接到来
+ while(!Thread.currentThread.isInturrupted()){// 主线程死循环等待新连接到来
  Socket socket = serverSocket.accept();
- executor.submit(new ConnectIOHandler(socket));//为新的连接创建新的线程
+ executor.submit(new ConnectIOHandler(socket));// 为新的连接创建新的线程
 }
 
 class ConnectIOnHandler extends Thread{
@@ -32,10 +32,10 @@ class ConnectIOnHandler extends Thread{
     }
     public void run(){
       while(!Thread.currentThread.isInturrupted()&&!socket.isClosed()){死循环处理读写事件
-          String someThing = socket.read()....//读取数据
+          String someThing = socket.read()....// 读取数据
           if(someThing!=null){
-             ......//处理数据
-             socket.write()....//写数据
+             ......// 处理数据
+             socket.write()....// 写数据
           }
 
       }
@@ -80,26 +80,26 @@ class ConnectIOnHandler extends Thread{
    }
    class Channel{
      Socket socket;
-     Event event;//读，写或者连接
+     Event event;// 读，写或者连接
    }
 
    //IO线程主循环:
    class IoThread extends Thread{
    public void run(){
    Channel channel;
-   while(channel=Selector.select()){//选择就绪的事件和对应的连接
+   while(channel=Selector.select()){// 选择就绪的事件和对应的连接
       if(channel.event==accept){
-         registerNewChannelHandler(channel);//如果是新连接，则注册一个新的读写处理器
+         registerNewChannelHandler(channel);// 如果是新连接，则注册一个新的读写处理器
       }
       if(channel.event==write){
-         getChannelHandler(channel).channelWritable(channel);//如果可以写，则执行写事件
+         getChannelHandler(channel).channelWritable(channel);// 如果可以写，则执行写事件
       }
       if(channel.event==read){
-          getChannelHandler(channel).channelReadable(channel);//如果可以读，则执行读事件
+          getChannelHandler(channel).channelReadable(channel);// 如果可以读，则执行读事件
       }
     }
    }
-   Map<Channel,ChannelHandler> handlerMap;//所有channel的对应事件处理器
+   Map<Channel,ChannelHandler> handlerMap;// 所有channel的对应事件处理器
   }
 ```
 
@@ -146,8 +146,8 @@ class RedisClient Implements ChannelHandler{
         });
     }
     public void ChannelReadFinish(Channel channel,Buffer Buffer){
-        List result = handleBuffer();//处理数据
-        //从cmdQueue取出future,并设值,future.done();
+        List result = handleBuffer();// 处理数据
+        // 从cmdQueue取出future,并设值,future.done();
     }
     public void ChannelWritable(Channel channel){
         channel.flush();
@@ -219,26 +219,26 @@ interface ChannelHandler{
 }
 class Channel{
     Socket socket;
-    Event event;//读，写或者连接
+    Event event;// 读，写或者连接
 }
 
 //IO线程主循环:
 class IoThread extends Thread{
     public void run(){
         Channel channel;
-        while(channel=Selector.select()){//选择就绪的事件和对应的连接
+        while(channel=Selector.select()){// 选择就绪的事件和对应的连接
             if(channel.event==accept){
-                registerNewChannelHandler(channel);//如果是新连接，则注册一个新的读写处理器
+                registerNewChannelHandler(channel);// 如果是新连接，则注册一个新的读写处理器
                 Selector.interested(read);
             }
             if(channel.event==write){
-                getChannelHandler(channel).channelWritable(channel);//如果可以写，则执行写事件
+                getChannelHandler(channel).channelWritable(channel);// 如果可以写，则执行写事件
             }
             if(channel.event==read){
                 byte[] data = channel.read();
-                if(channel.read()==0)//没有读到数据，表示本次数据读完了
+                if(channel.read()==0)// 没有读到数据，表示本次数据读完了
                 {
-                    getChannelHandler(channel).channelReadComplate(channel,data);//处理读完成事件
+                    getChannelHandler(channel).channelReadComplate(channel,data);// 处理读完成事件
                 }
                 if(过载保护){
                     Selector.interested(read);
@@ -247,7 +247,7 @@ class IoThread extends Thread{
             }
         }
     }
-    Map<Channel,ChannelHandler> handlerMap;//所有channel的对应事件处理器
+    Map<Channel,ChannelHandler> handlerMap;// 所有channel的对应事件处理器
 }
 ```
 

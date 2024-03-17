@@ -49,10 +49,10 @@ type rune = int32
 - 类型别名与类型定义表面上看只有一个等号的差异，通过下面的这段代码来理解它们之间的区别
 
 ```go
-//类型定义
+// 类型定义
 type NewInt int
 
-//类型别名
+// 类型别名
 type MyInt = int
 
 func main() {
@@ -317,7 +317,7 @@ func main() {
         18,
     }
     fmt.Printf("%#v\n", p1)        //main.Person{string:"北京", int:18}
-    fmt.Println(p1.string, p1.int) //北京 18
+    fmt.Println(p1.string, p1.int) // 北京 18
 }
 ```
 
@@ -367,7 +367,7 @@ type Address struct {
 type User struct {
     Name    string
     Gender  string
-    Address //匿名字段
+    Address // 匿名字段
 }
 
 func main () {
@@ -412,8 +412,8 @@ func main () {
 	user. Name = "Test"
 	user. Gender = "男"
 	// user. CreateTime = "2019" //ambiguous selector user 3. CreateTime
-	user. Address. CreateTime = "2000" //指定 Address 结构体中的 CreateTime
-	user. Email. CreateTime = "2000"   //指定 Email 结构体中的 CreateTime
+	user. Address. CreateTime = "2000" // 指定 Address 结构体中的 CreateTime
+	user. Email. CreateTime = "2000"   // 指定 Email 结构体中的 CreateTime
 }
 ```
 
@@ -434,7 +434,7 @@ func (a *Animal) move () {
 //Dog 狗
 type Dog struct {
     Feet    int 8
-    *Animal //通过嵌套匿名结构体实现继承
+    *Animal // 通过嵌套匿名结构体实现继承
 }
 
 func (d *Dog) bark () {
@@ -444,7 +444,7 @@ func (d *Dog) bark () {
 func main () {
     d 1 := &Dog{
         Feet: 4,
-        Animal: &Animal{ //注意嵌套的是结构体指针
+        Animal: &Animal{ // 注意嵌套的是结构体指针
             name: "Dog",
         },
     }
@@ -468,9 +468,9 @@ func main () {
 ```go
 //Student 学生
 type Student struct {
-	ID     int    `json: "id"` //通过指定 tag 实现 json 序列化该字段时的 key
+	ID     int    `json: "id"` // 通过指定 tag 实现 json 序列化该字段时的 key
 	Gender string //json 序列化是默认使用字段名作为 key
-	name   string //私有不能被 json 包访问
+	name   string // 私有不能被 json 包访问
 }
 
 func main () {

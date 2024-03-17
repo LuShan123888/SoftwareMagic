@@ -45,9 +45,9 @@ public class User {
 2. 新建一个config配置包，编写一个MyConfig配置类
 
 ```java
-@Configuration  //代表这是一个配置类
+@Configuration  // 代表这是一个配置类
 public class MyConfig {
-    @Bean //通过方法注册一个bean, 这里的返回值就Bean的类型，方法名就是bean的id
+    @Bean // 通过方法注册一个bean, 这里的返回值就Bean的类型，方法名就是bean的id
     public Dog dog(){
         return new Dog();
     }
@@ -59,7 +59,7 @@ public class MyConfig {
 1. 编写一个配置类
 
 ```java
-@Configuration  //代表这是一个配置类
+@Configuration  // 代表这是一个配置类
 public class MyConfig {
     @Bean
     public Dog dog(){
@@ -72,7 +72,7 @@ public class MyConfig {
 
 ```java
 @Configuration
-@Import(MyConfig.class)  //导入合并其他配置类，类似于配置文件中的 inculde 标签
+@Import(MyConfig.class)  // 导入合并其他配置类，类似于配置文件中的 inculde 标签
 public class MyConfig2 {
 }
 ```
@@ -116,7 +116,7 @@ public class TestBean {  
 @Data
 public class TestBean { 
 
-    @Autowired //字段注入  
+    @Autowired // 字段注入  
     private String message;  
 } 
 ```
@@ -149,7 +149,7 @@ public class TestBean {  
 
     private List<String> list;  
 
-    @Autowired //任意一个或多个参数方法注入  
+    @Autowired // 任意一个或多个参数方法注入  
     private void initMessage(String message, ArrayList<String> list) {  
         this.message = message;  
         this.list = list;  
@@ -217,7 +217,7 @@ public class User {
 @Component
 public class User {
 
-    @Value("${user.name}") //从配置文件中取值
+    @Value("${user.name}") // 从配置文件中取值
     private String name;
     @Value("#{9*2}")  // #{SPEL} Spring表达式
     private int age;

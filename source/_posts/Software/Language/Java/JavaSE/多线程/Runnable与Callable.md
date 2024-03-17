@@ -22,7 +22,7 @@ class Thread implements Runnable{
     public Thread(Runnable target){...}
     public void run() {
         if (target != null)
-            target.run();   //执行实现Runnable接口的target对象的run()方法
+            target.run();   // 执行实现Runnable接口的target对象的run()方法
     }
     ...
 }
@@ -32,8 +32,8 @@ class Thread implements Runnable{
 
 ```java
 class TimePrinter implements Runnable {
-    int pauseTime;    //中间休息时间
-    String name;      //名称标识
+    int pauseTime;    // 中间休息时间
+    String name;      // 名称标识
 
     public TimePrinter(int x, String n) {
         pauseTime = x;
@@ -44,7 +44,7 @@ class TimePrinter implements Runnable {
         while (true) {
             try {
                 System.out.println(name + ": " + Calendar.getInstance().getTime());
-                Thread.sleep(pauseTime);    //让线程睡眠一段时间
+                Thread.sleep(pauseTime);    // 让线程睡眠一段时间
             } catch (InterruptedException e) {
             }
         }
@@ -78,11 +78,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 class Winning extends Frame implements Runnable {
     String[] phoneNumber = {"15031204532", "13014156678", "13870953214",
-                            "13943123322", "18114156528"};//用数组存一组号码
-    TextArea disp = new TextArea(4, 50);    //用来显示滚动号码
-    int pos = 0;    //记录滚动到的索引位置
-    boolean flag = false;   //控制线程停止的标记变量
-    Button onoff;   //启动停止按钮
+                            "13943123322", "18114156528"};// 用数组存一组号码
+    TextArea disp = new TextArea(4, 50);    // 用来显示滚动号码
+    int pos = 0;    // 记录滚动到的索引位置
+    boolean flag = false;   // 控制线程停止的标记变量
+    Button onoff;   // 启动停止按钮
 
     public static void main(String[] args) {
         new Winning();
@@ -96,10 +96,10 @@ class Winning extends Frame implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("begin")) {
                     flag = true;
-                    onoff.setLabel("end"); //更改按钮标签
-                    (new Thread(Winning.this)).start(); //启动线程
+                    onoff.setLabel("end"); // 更改按钮标签
+                    (new Thread(Winning.this)).start(); // 启动线程
                 } else {
-                    flag = false;   //设置线程停止标记
+                    flag = false;   // 设置线程停止标记
                     onoff.setLabel("begin");
                 }
             }
@@ -111,10 +111,10 @@ class Winning extends Frame implements Runnable {
     public void run() {
         while (flag) {
             int n = phoneNumber.length;
-            pos = (int) (Math.random() * n);   //随机选位置
+            pos = (int) (Math.random() * n);   // 随机选位置
             String message = phoneNumber[pos] + "\n" +
                 phoneNumber[(pos + 1) % n];
-            disp.setText(message);     //显示位置连续的两个号码
+            disp.setText(message);     // 显示位置连续的两个号码
         }
     }
 }

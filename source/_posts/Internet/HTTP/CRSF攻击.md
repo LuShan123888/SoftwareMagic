@@ -184,9 +184,9 @@ Set-Cookie: baz=3
 
 ```java
 private void addTokenCookieAndHeader(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
-    //生成token
+    // 生成token
     String sToken = this.generateToken();
-    //手动添加Cookie实现支持"Samesite=strict”
+    // 手动添加Cookie实现支持"Samesite=strict”
     //Cookie添加双重验证
     String CookieSpec = String.format("%s=%s; Path=%s; HttpOnly; Samesite=Strict", this.determineCookieName(httpRequest), sToken, httpRequest.getRequestURI());
     httpResponse.addHeader("Set-Cookie", CookieSpec);

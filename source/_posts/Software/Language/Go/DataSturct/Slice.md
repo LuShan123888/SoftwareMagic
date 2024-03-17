@@ -25,17 +25,17 @@ var name []T
 ```go
 func main() {
     // 声明切片类型
-    var a []string              //声明一个字符串切片
-    var b = []int{}             //声明一个整型切片并初始化
-    var c = []bool{false, true} //声明一个布尔切片并初始化
-    var d = []bool{false, true} //声明一个布尔切片并初始化
+    var a []string              // 声明一个字符串切片
+    var b = []int{}             // 声明一个整型切片并初始化
+    var c = []bool{false, true} // 声明一个布尔切片并初始化
+    var d = []bool{false, true} // 声明一个布尔切片并初始化
     fmt.Println(a)              //[]
     fmt.Println(b)              //[]
     fmt.Println(c)              //[false true]
     fmt.Println(a == nil)       //true
     fmt.Println(b == nil)       //false
     fmt.Println(c == nil)       //false
-    // fmt.Println(c == d)   //切片是引用类型，不支持直接比较，只能和nil比较
+    // fmt.Println(c == d)   // 切片是引用类型，不支持直接比较，只能和nil比较
 }
 ```
 
@@ -173,7 +173,7 @@ s3 := make([]int, 0) //len(s3)=0;cap(s3)=0;s3!=nil
 ```go
 func main() {
 	s1 := make([]int, 3) //[0 0 0]
-	s2 := s1             //将s1直接赋值给s2,s1和s2共用一个底层数组
+	s2 := s1             // 将s1直接赋值给s2,s1和s2共用一个底层数组
 	s2[0] = 100
 	fmt.Println(s1) //[100 0 0]
 	fmt.Println(s2) //[100 0 0]
@@ -301,7 +301,7 @@ func main () {
     // copy () 复制切片
     a := []int{1, 2, 3, 4, 5}
     c := make ([]int, 5, 5)
-    copy (c, a)     //使用 copy () 函数将切片 a 中的元素复制到切片 c
+    copy (c, a)     // 使用 copy () 函数将切片 a 中的元素复制到切片 c
     fmt.Println (a) //[1 2 3 4 5]
     fmt.Println (c) //[1 2 3 4 5]
     c[0] = 1000

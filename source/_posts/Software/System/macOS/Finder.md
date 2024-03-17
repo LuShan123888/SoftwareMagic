@@ -42,7 +42,7 @@ killall Finder
 
 ```shell
 mv file .file
-//或者
+// 或者
 mv folder .folder
 ```
 

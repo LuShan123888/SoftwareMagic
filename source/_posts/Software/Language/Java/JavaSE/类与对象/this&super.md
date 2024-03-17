@@ -76,7 +76,7 @@ class City extends Country {
     String name;
     void value() {
         name = "Shanghai";
-        super.value();      //调用父类的方法
+        super.value();      // 调用父类的方法
         System.out.println(name);
         System.out.println(super.name);
     }
@@ -107,11 +107,11 @@ class Person {
 
   Person() {
     prt("父类无参数构造方法:"+"A Person.");
-  }//构造方法(1)
+  }// 构造方法(1)
 
   Person(String name) {
     prt("父类含一个参数的构造方法:"+"A person's name is " + name);
-  }//构造方法(2)
+  }// 构造方法(2)
 }
 
 public class Chinese extends Person {

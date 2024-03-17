@@ -43,8 +43,8 @@ categories:
 class Client {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost",5432);
-        //申请与服务器的5432端口连接
-        InputStream sln = socket.getInputStream();//取得Socket的输入流
+        // 申请与服务器的5432端口连接
+        InputStream sln = socket.getInputStream();// 取得Socket的输入流
         DataInputStream dis = new DataInputStream(sln);
         String message = dis.readUTF();
         System.out.println(message);
@@ -62,9 +62,9 @@ class Client {
 class Server {
     public static void main(String[] args) {
         try{
-            ServerSocket socket = new ServerSocket(5423);//创建服务
+            ServerSocket socket = new ServerSocket(5423);// 创建服务
             while (true){
-                Socket s1 = socket.accept(); //监听客户端的连接
+                Socket s1 = socket.accept(); // 监听客户端的连接
                 OutputStream s1out = s1.getOutputStream();
                 DataOutputStream dos = new DataOutputStream(s1out);
                 dos.writeUTF("Hello  World!");
@@ -96,8 +96,8 @@ class Server {
 ```java
 class TalkClient {
     public static void main(String[] args) throws IOException {
-        Socket s1 = new Socket(args[0], 5432);  //连接服务器
-        //输入输出流
+        Socket s1 = new Socket(args[0], 5432);  // 连接服务器
+        // 输入输出流
         DataInputStream dis = new DataInputStream(s1.getInputStream());
         final DataOutputStream dos = new DataOutputStream(s1.getOutputStream());
         //GUI
@@ -108,12 +108,12 @@ class TalkClient {
         panelx.add(input);
         panelx.add(display);
         myframe.add(panelx);
-        //根据文本框的动作事件处理，将文本框的数据发送给服务器
-        new receiveThread(dis, display);//创建启动接受消息线程
-        input.addActionListener(new ActionListener() {//匿名内嵌类
+        // 根据文本框的动作事件处理，将文本框的数据发送给服务器
+        new receiveThread(dis, display);// 创建启动接受消息线程
+        input.addActionListener(new ActionListener() {// 匿名内嵌类
             public void actionPerformed(ActionEvent e) {
                 try {
-                    dos.writeUTF(input.getText());//发送数据
+                    dos.writeUTF(input.getText());// 发送数据
                 } catch (IOException z) {
                 }
             }
@@ -134,12 +134,12 @@ class receiveThread extends Thread {
         this.start();
     }
 
-    //循环读取来自服务器的数据，并显示在文本域中
+    // 循环读取来自服务器的数据，并显示在文本域中
     public void run() {
         for (; ; ) {
             try {
-                String str = dis.readUTF();//读来自服务器的消息
-                displayarea.append(str + "\n");//将消息添加到文本域显示
+                String str = dis.readUTF();// 读来自服务器的消息
+                displayarea.append(str + "\n");// 将消息添加到文本域显示
             } catch (IOException e) {
             }
         }
@@ -156,20 +156,20 @@ class receiveThread extends Thread {
 
 ```java
 class TalkServer {
-    //存放所有通信线程
+    // 存放所有通信线程
     public static ArrayList<Client> allclient = new ArrayList<Client>();
-    //统计客户连接的计数变量
+    // 统计客户连接的计数变量
     public static int clientnum = 0;
 
     public static void main(String[] args) {
         try {
-            ServerSocket s = new ServerSocket(5432);//规定服务端口
+            ServerSocket s = new ServerSocket(5432);// 规定服务端口
             while (true) {
-                Socket s1 = s.accept(); //等待客户连接
+                Socket s1 = s.accept(); // 等待客户连接
                 DataOutputStream dos = new DataOutputStream(s1.getOutputStream());
                 DataInputStream din = new DataInputStream(s1.getInputStream());
                 Client x = new Client(clientnum, dos, din);
-                //创建与客户对应的通信线程
+                // 创建与客户对应的通信线程
                 allclient.add(x);
                 x.start();
                 clientnum++;
@@ -181,9 +181,9 @@ class TalkServer {
 
 /*通信线程处理与对应客户的通信，将来自客户数据发往其他客户*/
 class Client extends Thread {
-    int id; //客户的标识
-    DataOutputStream dos;//去往客户的输出流
-    DataInputStream din;//来自客户的输入流
+    int id; // 客户的标识
+    DataOutputStream dos;// 去往客户的输出流
+    DataInputStream din;// 来自客户的输入流
 
     public Client(int id, DataOutputStream dos, DataInputStream din) {
         this.id = id;
@@ -191,14 +191,14 @@ class Client extends Thread {
         this.din = din;
     }
 
-    public void run() {//循环读取客户数据转发给其他客户
-        //循环将数据发送给所有客户（包括自己）的Socket通道
+    public void run() {// 循环读取客户数据转发给其他客户
+        // 循环将数据发送给所有客户（包括自己）的Socket通道
         while (true) {
             try {
-                //等待接收自己客户发送过来的数据
+                // 等待接收自己客户发送过来的数据
                 String message = "客户" + id + ":" + din.readUTF();
                 for (int i = 0; i < TalkServer.clientnum; i++) {
-                    //将消息转发给所有客户
+                    // 将消息转发给所有客户
                     TalkServer.allclient.get(i).dos.writeUTF(message);
                 }
             } catch (IOException e) {
@@ -229,21 +229,21 @@ java TalkClient localhost
 ```java
 class Client {
     public static void main(String[] args) throws IOException {
-        //创建一个Socket连接
+        // 创建一个Socket连接
         Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), 9000);
-        //创建一个输出流
+        // 创建一个输出流
         OutputStream outputStream = socket.getOutputStream();
-        //读取文件
+        // 读取文件
         FileInputStream fileInputStream = new FileInputStream("test.txt");
-        //写出文件
+        // 写出文件
         byte[] buffer = new byte[1024];
         int length;
         while ((length = fileInputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, length);
         }
-        //通知服务器，文件传输完成
+        // 通知服务器，文件传输完成
         socket.shutdownOutput();
-        //确定服务器接收完成
+        // 确定服务器接收完成
         InputStream inputStream = socket.getInputStream();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] buffer2 = new byte[1024];
@@ -252,7 +252,7 @@ class Client {
             byteArrayOutputStream.write(buffer2, 0, length2);
         }
         System.out.println(byteArrayOutputStream);
-        //关闭资源
+        // 关闭资源
         fileInputStream.close();
         outputStream.close();
         socket.close();
@@ -262,23 +262,23 @@ class Client {
 
 class Server {
     public static void main(String[] args) throws IOException {
-        //创建服务
+        // 创建服务
         ServerSocket serverSocket = new ServerSocket(9000);
-        //监听客服端的连接
-        Socket socket = serverSocket.accept();//阻塞式监听，会一直等待客户端连接
-        //获取输入流
+        // 监听客服端的连接
+        Socket socket = serverSocket.accept();// 阻塞式监听，会一直等待客户端连接
+        // 获取输入流
         InputStream inputStream = socket.getInputStream();
-        //文件输出
+        // 文件输出
         FileOutputStream fileOutputStream = new FileOutputStream(new File("receive.txt"));
         byte[] buffer = new byte[1024];
         int length;
         while ((length = inputStream.read(buffer)) != -1) {
             fileOutputStream.write(buffer, 0, length);
         }
-        //通知客服端接收完成
+        // 通知客服端接收完成
         OutputStream os = socket.getOutputStream();
         os.write("Receive successful!".getBytes());
-        //关闭资源
+        // 关闭资源
         fileOutputStream.close();
         inputStream.close();
         socket.close();

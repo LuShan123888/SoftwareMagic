@@ -76,7 +76,7 @@ ResultSet rs = stmt.executeQuery("SELECT a,b,c FROM Table2");
 ```java
 public class JDBC {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        //创建数据表
+        // 创建数据表
         String url = "jdbc:mysql://localhost:3306/Classroom_Management";
         String sql = "CREATE TABLE Student" +
             "(name VARCHAR(20)," +
@@ -180,8 +180,8 @@ public class 用PreparedStatement类实现SQL操作{
 
 ```java
 ResultSetMetaData rsmd = results.getMetaData();
-rsmd.getColumnCount();	//获取数据项的个数
-rsmd.getColumnName(i);	//获取第i栏字段的名称
+rsmd.getColumnCount();	// 获取数据项的个数
+rsmd.getColumnName(i);	// 获取第i栏字段的名称
 ```
 
 ### 遍历访问结果集（定位行)

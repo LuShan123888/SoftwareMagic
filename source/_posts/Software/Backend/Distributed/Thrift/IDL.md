@@ -57,10 +57,10 @@ struct Test {
 ### 常量及类型别名 (Const&&Typedef)
 
 ```idl
-//常量定义
+// 常量定义
 const i32 MALE_INT = 1
 const map<i32,string> GENDER_MAP = {1:"male",2:"female"}
-//某些数据类型比较长可以用别名简化
+// 某些数据类型比较长可以用别名简化
 typedef map<i32,string> gmp T
 ```
 
@@ -78,9 +78,9 @@ struct <结构体名称>{
 
 ```idl
 struct User{
-	1: required string name, //该字段必须填写 
-	2: optional i32 age = 0;//默认值
-	3: bool gender //默认字段类型为optional
+	1: required string name, // 该字段必须填写 
+	2: optional i32 age = 0;// 默认值
+	3: bool gender // 默认字段类型为optional
 }
 struct bean{
 	1: i32 number=10,
@@ -171,9 +171,9 @@ package com.example.test
 
 ```idl
 namespace java com.example.test // 命名空间定义，规范：namespace +语言 +包路径
-service Hello{ //接口定义，类似Java接口定义
+service Hello{ // 接口定义，类似Java接口定义
 	string getword(), // 方法定义，类似Java接口定义
-	void writewold(1:string words） //参数类型指定
+	void writewold(1:string words） // 参数类型指定
 }		
 ```
 

@@ -111,7 +111,7 @@ System.out.println(Arrays.toString(intArray));
 
 ```java
 int[] intArray = { 1, 2, 3, 4, 5 };
-int[] removed = ArrayUtils.removeElement(intArray, 3);//创建新的数组
+int[] removed = ArrayUtils.removeElement(intArray, 3);// 创建新的数组
 System.out.println(Arrays.toString(removed));
 ```
 

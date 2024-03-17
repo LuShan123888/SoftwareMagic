@@ -54,12 +54,12 @@ public class SpringbootDataJdbcApplicationTests {
 
     @Test
     public void contextLoads() throws SQLException {
-        //看一下默认数据源
+        // 看一下默认数据源
         System.out.println(dataSource.getClass());
-        //获得连接
+        // 获得连接
         Connection connection = dataSource.getConnection();
         System.out.println(connection);
-        //关闭连接
+        // 关闭连接
         connection.close();
     }
 }
@@ -109,7 +109,7 @@ public class JdbcController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    //查询employee表中所有数据
+    // 查询employee表中所有数据
     //List中的1个Map对应数据库的1行数据
     //Map中的key对应数据库的字段名,value对应数据库的字段值
     @GetMapping("/list")
@@ -119,7 +119,7 @@ public class JdbcController {
         return maps;
     }
 
-    //新增一个用户
+    // 新增一个用户
     @GetMapping("/add")
     public String addUser(){
         String sql = "insert into employee(last_name, email,gender,department,birth)" +
@@ -128,7 +128,7 @@ public class JdbcController {
         return "addOk";
     }
 
-    //修改用户信息
+    // 修改用户信息
     @GetMapping("/update/{id}")
     public String updateUser(@PathVariable("id") int id){
         String sql = "update employee set last_name=?,email=? where id="+id;
@@ -139,7 +139,7 @@ public class JdbcController {
         return "updateOk";
     }
 
-    //删除用户
+    // 删除用户
     @GetMapping("/delete/{id}")
     public String delUser(@PathVariable("id") int id){
         String sql = "delete from employee where id=?";

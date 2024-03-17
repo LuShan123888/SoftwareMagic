@@ -147,11 +147,11 @@ package main
 
 import "fmt"
 
-//定义全局变量num
+// 定义全局变量num
 var num int64 = 10
 
 func testGlobalVar() {
-    fmt.Printf("num=%d\n", num) //函数中可以访问全局变量num
+    fmt.Printf("num=%d\n", num) // 函数中可以访问全局变量num
 }
 func main() {
     testGlobalVar() //num=10
@@ -164,7 +164,7 @@ func main() {
 
 ```go
 func testLocalVar() {
-	//定义一个函数局部变量x,仅在该函数内生效
+	// 定义一个函数局部变量x,仅在该函数内生效
 	var x int64 = 100
 	fmt.Printf("x=%d\n", x)
 }
@@ -175,19 +175,19 @@ func main() {
 }
 
 func testLocalVar2(x, y int) {
-	fmt.Println(x, y) //函数的参数也是只在本函数中生效
+	fmt.Println(x, y) // 函数的参数也是只在本函数中生效
 	if x > 0 {
-		z := 100 //变量z只在if语句块生效
+		z := 100 // 变量z只在if语句块生效
 		fmt.Println(z)
 	}
-	//fmt.Println(z)//此处无法使用变量z
+	//fmt.Println(z)// 此处无法使用变量z
 }
 
 func testLocalVar3() {
 	for i := 0; i < 10; i++ {
-		fmt.Println(i) //变量i只在当前for语句块中生效
+		fmt.Println(i) // 变量i只在当前for语句块中生效
 	}
-	//fmt.Println(i) //此处无法使用变量i
+	//fmt.Println(i) // 此处无法使用变量i
 }
 ```
 
@@ -198,7 +198,7 @@ package main
 
 import "fmt"
 
-//定义全局变量num
+// 定义全局变量num
 var num int64 = 10
 
 func testNum() {
@@ -321,7 +321,7 @@ func main() {
     }
     add(10, 20) // 通过变量调用匿名函数
 
-    //自执行函数：匿名函数定义完加()直接执行
+    // 自执行函数：匿名函数定义完加()直接执行
     func(x, y int) {
         fmt.Println(x + y)
     }(10, 20)

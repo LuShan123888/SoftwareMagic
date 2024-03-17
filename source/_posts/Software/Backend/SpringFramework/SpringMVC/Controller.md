@@ -18,9 +18,9 @@ categories:
 - Controller是一个接口，在`org.springframework.web.servlet.mvc`包下，接口中只有一个方法
 
 ```java
-//实现该接口的类获得控制器功能
+// 实现该接口的类获得控制器功能
 public interface Controller {
-    //处理请求且返回一个模型与视图对象
+    // 处理请求且返回一个模型与视图对象
     ModelAndView handleRequest(HttpServletRequest var1, HttpServletResponse var2) throws Exception;
 }
 ```
@@ -57,12 +57,12 @@ public interface Controller {
 @Controller
 public class ControllerTest2{
 
-   //映射访问路径
+   // 映射访问路径
    @RequestMapping("/t2")
    public String index(Model model){
        //Spring MVC会自动实例化一个Model对象用于向视图中传值
        model.addAttribute("msg", "ControllerTest2");
-       //返回视图名
+       // 返回视图名
        return "test";
   }
 }
@@ -156,14 +156,14 @@ public class TestController {
 @Controller
 public class RestFulController {
 
-   //映射访问路径
+   // 映射访问路径
    @RequestMapping("/commit/{p1}/{p2}")
    public String index(@PathVariable int p1, @PathVariable int p2, Model model){
 
        int result = p1+p2;
        //Spring MVC会自动实例化一个Model对象用于向视图中传值
        model.addAttribute("msg", "结果:"+result);
-       //返回视图名
+       // 返回视图名
        return "test";
   }
 }
@@ -285,10 +285,10 @@ public class TestController {
 public class Redirect {
     @RequestMapping("/redirect")
     public String redirect() {
-    //转发
+    // 转发
     	return "forward:/index.jsp";
 //    	return "include:/index.jsp";
-    //重定向
+    // 重定向
 //        return "redirect:/index.jsp";
     }
 }
@@ -314,7 +314,7 @@ public class ResultGo {
 
     @RequestMapping("/result/t3")
     public void test3(HttpServletRequest req, HttpServletResponse rsp) throws Exception{
-        //转发
+        // 转发
         req.setAttribute("msg","/result/t3");
         req.getRequestDispatcher("/WEB-INF/jsp/test.jsp").forward(req,rsp);
     }

@@ -151,11 +151,11 @@ db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
 **实例**:每页2个，第二页开始：跳过前两条数据，接着值显示3和4条数据
 
 ```
-//第一页 
+// 第一页 
 db.comment.find().skip(0).limit(2) 
-//第二页 
+// 第二页 
 db.comment.find().skip(2).limit(2) 
-//第三页 
+// 第三页 
 db.comment.find().skip(4).limit(2)
 ```
 
@@ -306,9 +306,9 @@ db.collection.update(
 ### 批量修改
 
 ```
-//默认只修改第一条数据 
+// 默认只修改第一条数据 
 db.comment.update({userid:"1003"},{$set:{nickname:"Jack"}}) 
-//修改所有符合条件的数据 
+// 修改所有符合条件的数据 
 db.comment.update({userid:"1003"},{$set:{nickname:"Jack"}},{multi:true})
 ```
 

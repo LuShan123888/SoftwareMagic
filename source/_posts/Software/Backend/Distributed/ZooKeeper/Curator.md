@@ -41,7 +41,7 @@ public class Test {
       .namespace("").build();
     curatorFramework.start();
     Stat stat=new Stat();
-    //查询节点数据
+    // 查询节点数据
     byte[] bytes = curatorFramework.getData().storingStatIn(stat).forPath("/test");
     System.out.println(new String(bytes));
     curatorFramework.close();

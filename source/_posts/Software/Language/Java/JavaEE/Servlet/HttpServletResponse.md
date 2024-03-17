@@ -84,13 +84,13 @@ public class Refresh extends HttpServlet {
           // 设置响应内容类型
           response.setContentType("text/html;charset=UTF-8");
 
-          //使用默认时区和语言环境获得一个日历
+          // 使用默认时区和语言环境获得一个日历
           Calendar cale = Calendar.getInstance();
-          //将Calendar类型转换成Date类型
+          // 将Calendar类型转换成Date类型
           Date tasktime=cale.getTime();
-          //设置日期输出的格式
+          // 设置日期输出的格式
           SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          //格式化输出
+          // 格式化输出
           String nowTime = df.format(tasktime);
           PrintWriter out = response.getWriter();
           String title = "自动刷新 Header 设置 - 菜鸟教程实例";

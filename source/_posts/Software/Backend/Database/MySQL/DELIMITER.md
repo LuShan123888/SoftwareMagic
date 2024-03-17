@@ -19,7 +19,7 @@ mysql> CREATE PROCEDURE simpleproc (OUT param1 INT)
 -> BEGIN
 -> SELECT COUNT(*) INTO param1 FROM t;
 -> END;
--> //                   --遇到//符号结束并执行上面的命令
+-> //                   --遇到// 符号结束并执行上面的命令
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> delimiter ;        --将结束符改回默认值";”

@@ -18,7 +18,7 @@ public class SimpleControllerHandlerAdapter implements HandlerAdapter {
 
     @Override
     public boolean supports(Object handler) {
-        //判断待执行的类是不是Controller的实现类
+        // 判断待执行的类是不是Controller的实现类
         return (handler instanceof Controller);
     }
 
@@ -27,7 +27,7 @@ public class SimpleControllerHandlerAdapter implements HandlerAdapter {
     public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
 
-        //调用Controller实现类的handleRequest方法
+        // 调用Controller实现类的handleRequest方法
         return ((Controller) handler).handleRequest(request, response);
     }
 
@@ -49,7 +49,7 @@ public class MyHandlerAdapter implements HandlerAdapter {
 
     @Override
     public boolean supports(Object handler) {
-        //判断待执行的类是不是MyController的实现类
+        // 判断待执行的类是不是MyController的实现类
         return (handler instanceof MyController);
     }
 
@@ -57,11 +57,11 @@ public class MyHandlerAdapter implements HandlerAdapter {
     @Nullable
     public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
-        //配置编码格式
+        // 配置编码格式
         request.setCharacterEncoding("UTF-8");
-        //打印
+        // 打印
         System.out.println("Enter MyHandlerAdapter!");
-        //调用MyController的实现类的test方法
+        // 调用MyController的实现类的test方法
         return ((MyController) handler).test(request);
     }
 

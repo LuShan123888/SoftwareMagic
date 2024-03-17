@@ -49,16 +49,16 @@ datasource:
 - 实体类
 
 ```java
-//文章类
+// 文章类
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Article implements Serializable {
 
-    private int id; //文章的唯一ID
-    private String author; //作者名
-    private String title; //标题
-    private String content; //文章的内容
+    private int id; // 文章的唯一ID
+    private String author; // 作者名
+    private String title; // 标题
+    private String content; // 文章的内容
 
 }
 ```
@@ -69,16 +69,16 @@ public class Article implements Serializable {
 @Mapper
 @Repository
 public interface ArticleMapper {
-    //查询所有的文章
+    // 查询所有的文章
     List<Article> queryArticles();
 
-    //新增一个文章
+    // 新增一个文章
     int addArticle(Article article);
 
-    //根据文章id查询文章
+    // 根据文章id查询文章
     Article getArticleById(int id);
 
-    //根据文章id删除文章
+    // 根据文章id删除文章
     int deleteArticleById(int id);
 
 }
@@ -174,13 +174,13 @@ mybatis:
                 path : "../editormd/lib/",
                 saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
                 emoji: true,
-                theme: "dark",//工具栏主题
-                previewTheme: "dark",//预览主题
-                editorTheme: "pastel-on-dark",//编辑主题
+                theme: "dark",// 工具栏主题
+                previewTheme: "dark",// 预览主题
+                editorTheme: "pastel-on-dark",// 编辑主题
                 tex : true,                   // 开启科学公式TeX语言支持，默认关闭
                 flowChart : true,             // 开启流程图支持，默认关闭
                 sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
-                //图片上传
+                // 图片上传
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/article/file/upload",
@@ -208,9 +208,9 @@ mybatis:
                 /*给自定义按钮指定回调函数*/
                 toolbarHandlers:{
                     releaseIcon : function(cm, icon, cursor, selection) {
-                        //表单提交
+                        // 表单提交
                         mdEditorForm.method = "post";
-                        mdEditorForm.action = "/article/addArticle";//提交至服务器的路径
+                        mdEditorForm.action = "/article/addArticle";// 提交至服务器的路径
                         mdEditorForm.submit();
                     },
                     index : function(){
@@ -250,10 +250,10 @@ public class ArticleController {
 - `editormd`中添加配置
 
 ```js
-//图片上传
+// 图片上传
 imageUpload : true,
 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-imageUploadURL : "/article/file/upload", // //这个是上传图片时的访问地址
+imageUploadURL : "/article/file/upload", // // 这个是上传图片时的访问地址
 ```
 
 - 后端请求接收保存这个图片，需要导入`FastJson`的依赖
@@ -262,12 +262,12 @@ imageUploadURL : "/article/file/upload", // //这个是上传图片时的访问�
 @RequestMapping("/file/upload")
 @ResponseBody
 public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", required= true) MultipartFile file, HttpServletRequest request) throws IOException {
-    //上传路径保存设置
+    // 上传路径保存设置
 
-    //获得SpringBoot当前项目的路径:System.getProperty("user.dir")
+    // 获得SpringBoot当前项目的路径:System.getProperty("user.dir")
     String path = System.getProperty("user.dir")+"/upload/";
 
-    //按照月份进行分类:
+    // 按照月份进行分类:
     Calendar instance = Calendar.getInstance();
     String month = (instance.get(Calendar.MONTH) + 1)+"月";
     path = path+month;
@@ -277,15 +277,15 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
         realPath.mkdir();
     }
 
-    //上传文件地址
+    // 上传文件地址
     System.out.println("上传文件保存地址:"+realPath);
 
-    //解决文件名字问题：我们使用uuid;
+    // 解决文件名字问题：我们使用uuid;
     String filename = "ks-"+UUID.randomUUID().toString().replaceAll("-", "");
-    //通过CommonsMultipartFile的方法直接写文件（注意这个时候)
+    // 通过CommonsMultipartFile的方法直接写文件（注意这个时候)
     file.transferTo(new File(realPath +"/"+ filename));
 
-    //给editormd进行回调
+    // 给editormd进行回调
     JSONObject res = new JSONObject();
     res.put("url","/upload/"+month+"/"+ filename);
     res.put("success", 1);
@@ -375,7 +375,7 @@ public String show(@PathVariable("id") int id,Model model){
         <script type="text/javascript">
             var testEditor;
             $(function () {
-                testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+                testEditor = editormd.markdownToHTML("doc-content", {// 注意：这里是上面DIV的id
                     htmlDecode: "style,script,iframe",
                     emoji: true,
                     taskList: true,

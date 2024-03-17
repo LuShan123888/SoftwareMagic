@@ -86,7 +86,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 var  sql = 'SELECT * FROM websites';
-//执行查询语句，并返回数据集
+// 执行查询语句，并返回数据集
 connection.query(sql,function (err, result) {
         if(err){
           console.log('[SELECT ERROR] - ',err.message);
@@ -150,7 +150,7 @@ connection.connect();
 
 var  addSql = 'INSERT INTO websites(Id,name,url,alexa,country) VALUES(0,?,?,?,?)';
 var  addSqlParams = ['百度', 'https://www.baidu.com','23453', 'CN'];
-//执行插入语句
+// 执行插入语句
 connection.query(addSql,addSqlParams,function (err, result) {
         if(err){
          console.log('[INSERT ERROR] - ',err.message);
@@ -200,7 +200,7 @@ connection.connect();
 
 var modSql = 'UPDATE websites SET name = ?,url = ? WHERE Id = ?';
 var modSqlParams = ['腾讯', 'https://qq.com',6];
-//执行更新语句
+// 执行更新语句
 connection.query(modSql,modSqlParams,function (err, result) {
    if(err){
          console.log('[UPDATE ERROR] - ',err.message);
@@ -239,7 +239,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 var delSql = 'DELETE FROM websites where id=6';
-//执行删除语句
+// 执行删除语句
 connection.query(delSql,function (err, result) {
         if(err){
           console.log('[DELETE ERROR] - ',err.message);

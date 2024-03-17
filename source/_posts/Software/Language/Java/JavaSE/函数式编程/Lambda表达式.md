@@ -19,7 +19,7 @@ categories:
 
 ```java
 (parameters) -> expression
-//或
+// 或
 (parameters) ->{ statements; }
 ```
 
@@ -159,7 +159,7 @@ int num = 1;
 Converter<Integer, String> s = (param) -> System.out.println(String.valueOf(param + num));
 s.convert(2);
 num = 5;
-//报错信息:Local variable num defined in an enclosing scope must be final or effectively
+// 报错信息:Local variable num defined in an enclosing scope must be final or effectively
 final
 ```
 
@@ -167,5 +167,5 @@ final
 
 ```java
 String first = "";
-Comparator<String> comparator = (first, second) -> Integer.compare(first.length(), second.length());  //编译会出错
+Comparator<String> comparator = (first, second) -> Integer.compare(first.length(), second.length());  // 编译会出错
 ```

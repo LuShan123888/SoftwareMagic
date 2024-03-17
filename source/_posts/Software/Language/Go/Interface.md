@@ -286,7 +286,7 @@ func (d dryer) dry() {
 
 // 洗衣机
 type WashingMachine struct {
-	dryer //嵌入甩干器
+	dryer // 嵌入甩干器
 }
 
 // 实现WashingMachine接口的wash()方法

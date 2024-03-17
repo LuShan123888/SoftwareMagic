@@ -388,33 +388,33 @@ coderknock> SISMEMBER embstrKey a
 
 ```
 Jedis redis = new Jedis("192.168.31.89",6379,100000);
-//用户uid
+// 用户uid
 String uid = "1";
 String cacheKey = "sign_"+Integer.valueOf(uid);
-//记录有uid的key
+// 记录有uid的key
 // $cacheKey = sprintf("sign_%d", $uid);
 
-//开始有签到功能的日期
+// 开始有签到功能的日期
 String startDate = "2017-01-01";
 
-//今天的日期
+// 今天的日期
 String todayDate = "2017-01-21";
 
-//计算offset(时间搓)
+// 计算offset(时间搓)
 long startTime = dateParase(startDate,"yyyy-MM-dd").getTime();
 long todayTime = dateParase(todayDate,"yyyy-MM-dd").getTime();
 long offset = (long) Math.floor((todayTime - startTime) / 86400);
 
 System.out.println("今天是第"+offset+"天");
 
-//签到
-//一年一个用户会占用多少空间呢？大约365/8=45.625个字节，好小，有木有被惊呆？
+// 签到
+// 一年一个用户会占用多少空间呢？大约365/8=45.625个字节，好小，有木有被惊呆？
 redis.setbit(cacheKey,offset,"1");
 
-//查询签到情况
+// 查询签到情况
 boolean bitStatus = redis.getbit(cacheKey, offset);
-//判断是否已经签到
-//计算总签到次数
+// 判断是否已经签到
+// 计算总签到次数
 long qdCount = redis.bitcount(cacheKey);复制代码
 ```
 
@@ -453,7 +453,7 @@ dateActiveuser.put("2017-01-14",temp05List);
 
 String date[] = {"2017-01-10","2017-01-11","2017-01-12","2017-01-13","2017-01-14"};
 
-//测试数据放入Redis中
+// 测试数据放入Redis中
 for (int i=0;i<date.length;i++){
     for (int j=0;j<dateActiveuser.get(date[i]).size();j++){
         redis.setbit(date[i], dateActiveuser.get(date[i]).get(j), "1");

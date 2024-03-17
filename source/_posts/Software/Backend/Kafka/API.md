@@ -46,7 +46,7 @@ public class CustomProducer {
     Properties props = new Properties();
     // kafka 集群,broker-list
     props.put("bootstrap.servers", "kafka:9092");
-    //可用ProducerConfig.ACKS_CONFIG 代替 "acks"
+    // 可用ProducerConfig.ACKS_CONFIG 代替 "acks"
     //props.put(ProducerConfig.ACKS_CONFIG, "all");
     props.put("acks", "all");
     // 重试次数
@@ -90,7 +90,7 @@ public class CallBackProducer {
     Producer<String, String> producer = new KafkaProducer<>(props);
     for (int i = 0; i < 100; i++) {
       producer.send(new ProducerRecord<String, String>("test-topic","test-" + i, new Callback() {
-        //回调函数，该方法会在 Producer 收到 ack 时调用，为异步调用
+        // 回调函数，该方法会在 Producer 收到 ack 时调用，为异步调用
         @Override
         public void onCompletion(RecordMetadata metadata, Exception exception) {
           if (exception == null) {
@@ -249,17 +249,17 @@ props.put("auto.commit.interval.ms", "1000");
 public class SyncCommitOffset {
   public static void main(String[] args) {
     Properties props = new Properties();
-    //关闭自动提交 offset
+    // 关闭自动提交 offset
     props.put("enable.auto.commit", "false");
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     consumer.subscribe(Collections.singletonList("test-topic"));
     while (true) {
-      //消费者拉取数据
+      // 消费者拉取数据
       ConsumerRecords<String, String> records = consumer.poll(100);
       for (ConsumerRecord<String, String> record : records) {
         System.out.printf("offset = %d, key = %s, value= %s%n", record.offset(), record.key(), record.value());
       }
-      //同步提交，当前线程会阻塞直到 offset 提交成功
+      // 同步提交，当前线程会阻塞直到 offset 提交成功
       consumer.commitSync();
     }
   }
@@ -274,7 +274,7 @@ public class SyncCommitOffset {
 public class AsyncCommitOffset {
   public static void main(String[] args) {
     Properties props = new Properties();
-    //关闭自动提交
+    // 关闭自动提交
     props.put("enable.auto.commit", "false");
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     consumer.subscribe(Collections.singletonList("test-topic"));

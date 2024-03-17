@@ -14,11 +14,11 @@ categories:
 
 ```java
 Jedis jedis = new Jedis("127.0.0.1", 6379);
-// jedis.auth("password"); //如果服务器需要密码，验证密码
-jedis.select(0); //选择0号数据库
-jedis.connect(); //连接
-jedis.disconnect(); //断开连接
-jedis.flushAll(); //清空所有的key
+// jedis.auth("password"); // 如果服务器需要密码，验证密码
+jedis.select(0); // 选择0号数据库
+jedis.connect(); // 连接
+jedis.disconnect(); // 断开连接
+jedis.flushAll(); // 清空所有的key
 ```
 
 ### JedisPool
@@ -44,19 +44,19 @@ jedisPool.close();
 
 ```java
 Jedis jedis = new Jedis("127.0.0.1",6379);
-//查看服务是否运行
+// 查看服务是否运行
 System.out.println("服务正在运行: "+jedis.ping());
-//获取客户端信息
+// 获取客户端信息
 System.out.println(jedis.getClient());
-//清空Redis数据库，相当于执行FLUSHALL命令
+// 清空Redis数据库，相当于执行FLUSHALL命令
 System.out.println(jedis.flushAll());
-//查看Redis信息，相当于执行INFO命令
+// 查看Redis信息，相当于执行INFO命令
 System.out.println(jedis.info());
-//获取数据库中key的数量，相当于执行DBSIZE命令
+// 获取数据库中key的数量，相当于执行DBSIZE命令
 System.out.println(jedis.dbSize());
-//获取数据库名字
+// 获取数据库名字
 System.out.println(jedis.getDB());
-//返回当前Redis服务器的时间，相当于执行TIME命令
+// 返回当前Redis服务器的时间，相当于执行TIME命令
 System.out.println(jedis.time());
 ```
 
@@ -191,7 +191,7 @@ System.out.println("e1是否在eleSet中:"+jedis.sismember("eleSet", "e5"));
 System.out.println("=================================");
 System.out.println(jedis.sadd("eleSet1", "e1","e2","e4","e3","e0","e8","e7","e5"));
 System.out.println(jedis.sadd("eleSet2", "e1","e2","e4","e3","e0","e8"));
-System.out.println("将eleSet1中删除e1并存入eleSet3中:"+jedis.smove("eleSet1", "eleSet3", "e1"));//移到集合元素
+System.out.println("将eleSet1中删除e1并存入eleSet3中:"+jedis.smove("eleSet1", "eleSet3", "e1"));// 移到集合元素
 System.out.println("将eleSet1中删除e2并存入eleSet3中:"+jedis.smove("eleSet1", "eleSet3", "e2"));
 System.out.println("eleSet1中的元素:"+jedis.smembers("eleSet1"));
 System.out.println("eleSet3中的元素:"+jedis.smembers("eleSet3"));
@@ -201,7 +201,7 @@ System.out.println("eleSet2中的元素:"+jedis.smembers("eleSet2"));
 System.out.println("eleSet1和eleSet2的交集:"+jedis.sinter("eleSet1","eleSet2"));
 System.out.println("eleSet1和eleSet2的并集:"+jedis.sunion("eleSet1","eleSet2"));
 System.out.println("eleSet1和eleSet2的差集:"+jedis.sdiff("eleSet1","eleSet2"));//eleSet1中有,eleSet2中没有
-jedis.sinterstore("eleSet4","eleSet1","eleSet2");//求交集并将交集保存到dstkey的集合
+jedis.sinterstore("eleSet4","eleSet1","eleSet2");// 求交集并将交集保存到dstkey的集合
 System.out.println("eleSet4中的元素:"+jedis.smembers("eleSet4"));
 ```
 
@@ -215,9 +215,9 @@ map.put("key1","value1");
 map.put("key2","value2");
 map.put("key3","value3");
 map.put("key4","value4");
-//添加名称为hash(key)的hash元素
+// 添加名称为hash(key)的hash元素
 jedis.hmset("hash",map);
-//向名称为hash的hash中添加key为key5,value为value5元素
+// 向名称为hash的hash中添加key为key5,value为value5元素
 jedis.hset("hash", "key5", "value5");
 System.out.println("散列hash的所有键值对为:"+jedis.hgetAll("hash"));//return Map<String,String>
 System.out.println("散列hash的所有键为:"+jedis.hkeys("hash"));//return Set<String>
@@ -238,33 +238,33 @@ System.out.println("获取hash中的值:"+jedis.hmget("hash","key3","key4"));
 ## 事务
 
 ```java
-//创建客户端连接服务端,Redis服务端需要被开启
+// 创建客户端连接服务端,Redis服务端需要被开启
 Jedis jedis = new Jedis("127.0.0.1", 6379);
 jedis.flushDB();
 
 JSONObject jsonObject = new JSONObject();
 jsonObject.put("hello", "world");
 jsonObject.put("name", "java");
-//开启事务
+// 开启事务
 Transaction multi = jedis.multi();
 String result = jsonObject.toJSONString();
 try{
-    //向Redis存入一条数据
+    // 向Redis存入一条数据
     multi.set("json", result);
-    //再存入一条数据
+    // 再存入一条数据
     multi.set("json2", result);
-    //这里引发了异常，用0作为被除数
+    // 这里引发了异常，用0作为被除数
     int i = 100/0;
-    //如果没有引发异常，执行进入队列的命令
+    // 如果没有引发异常，执行进入队列的命令
     multi.exec();
     }catch(Exception e){
         e.printStackTrace();
-        //如果出现异常，回滚
+        // 如果出现异常，回滚
         multi.discard();
     }finally{
         System.out.println(jedis.get("json"));
         System.out.println(jedis.get("json2"));
-        //最终关闭客户端
+        // 最终关闭客户端
         jedis.close();
 }
 
@@ -277,7 +277,7 @@ try{
 ### 连接Cluster集群
 
 ```java
-//创建jedisCluster对象，有一个参数 nodes是Set类型,Set包含若干个HostAndPort对象
+// 创建jedisCluster对象，有一个参数 nodes是Set类型,Set包含若干个HostAndPort对象
 Set<HostAndPort> nodes = new HashSet<>();
 nodes.add(new HostAndPort("127.0.0.1",7001));
 nodes.add(new HostAndPort("127.0.0.1",7002));
@@ -300,6 +300,6 @@ Jedis connection = jedisPool.getResource();
 // 操作对于分片
 String str = connection.get("test");
 System.out.println(str);
-//关闭连接池
+// 关闭连接池
 jedisCluster.close();
 ```

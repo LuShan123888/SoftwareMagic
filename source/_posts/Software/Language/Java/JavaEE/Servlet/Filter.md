@@ -70,7 +70,7 @@ public void  init(FilterConfig config) throws ServletException {
 - 以下是 Servlet 过滤器的实例，将输出网站名称和地址，本实例让您对 Servlet 过滤器有基本的了解，您可以使用相同的概念编写更复杂的过滤器应用程序:
 
 ```java
-//实现 Filter 类
+// 实现 Filter 类
 public class LogFilter implements Filter  {
     public void  init(FilterConfig config) throws ServletException {
         // 获取初始化参数
