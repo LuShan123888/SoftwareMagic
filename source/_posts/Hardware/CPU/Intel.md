@@ -1,8 +1,8 @@
 ---
 title: Intel CPU 架构与代号
 categories:
-- Hardware
-- CPU
+  - Hardware
+  - CPU
 ---
 # Intel CPU 架构与代号
 
