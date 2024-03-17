@@ -27,7 +27,7 @@ hdfs dfs -mkdir <path>
 ```
 
 - 该命令中表示在HDFS中创建一个`/user/hadoop`目录
-- `-p`:表示如果是多级目录,则父目录和子目录一起创建
+- `-p`:表示如果是多级目录，则父目录和子目录一起创建
 
 #### 查看目录
 
@@ -43,7 +43,7 @@ hdfs dfs -ls <path>
 ./bin/hdfs dfs –ls ~
 ```
 
-- `~`:表示HDFS中的当前用户目录也就是`/user/hadoop`目录,因此,上面的命令和下面的命令是等价的:
+- `~`:表示HDFS中的当前用户目录也就是`/user/hadoop`目录，因此，上面的命令和下面的命令是等价的:
 
 ```bash
 ./bin/hdfs dfs –ls /home/hadoop
@@ -56,7 +56,7 @@ hdfs dfs -rm -r <path>
 ```
 
 - `-rm`:表示删除目录或文件
-- `-r`:表示递归删除,即删除文件夹
+- `-r`:表示递归删除，即删除文件夹
 
 **实例**
 
@@ -76,7 +76,7 @@ hdfs dfs -put <path>
 
 **实例**
 
-- 把本地文件系统的`/home/hadoop/myLocalFile.txt`上传到HDFS中的当前用户目录的input目录下,也就是上传到HDFS的`/user/hadoop/input/`目录下
+- 把本地文件系统的`/home/hadoop/myLocalFile.txt`上传到HDFS中的当前用户目录的input目录下，也就是上传到HDFS的`/user/hadoop/input/`目录下
 
 ```bash
 ./bin/hdfs dfs -put /home/hadoop/myLocalFile.txt  input
@@ -118,7 +118,7 @@ hdfs dfs -cp <originPath> <destinationPath>
 
 **实例**
 
-- 把HDFS的`/user/hadoop/input/myLocalFile.txt`文件,拷贝到HDFS的另外一个目录`/input`中
+- 把HDFS的`/user/hadoop/input/myLocalFile.txt`文件，拷贝到HDFS的另外一个目录`/input`中
 
 ```
 ./bin/hdfs dfs -cp input/myLocalFile.txt  /input
@@ -132,7 +132,7 @@ hdfs dfs -mv <originPath> <destinationPath>
 
 **实例**
 
-- 把HDFS的`/user/hadoop/input/myLocalFile.txt`文件,移动到HDFS的另外一个目录`/input`中,并且将文件名修改为`test.txt`
+- 把HDFS的`/user/hadoop/input/myLocalFile.txt`文件，移动到HDFS的另外一个目录`/input`中，并且将文件名修改为`test.txt`
 
 ```
 ./bin/hdfs dfs -cp input/myLocalFile.txt  /input/test.txt

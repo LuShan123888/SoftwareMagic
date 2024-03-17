@@ -8,15 +8,15 @@ categories:
 ---
 # Thrift IDL
 
-Thrift是一个典型的CS(客户端/服务端结构,客户端和服务端可以使用不同的语言开发,既然客户端和服务端能使用不同的语言开发,那么一定就要有一种中间语言来关联客户端和服务端的语言,这种语言就是IDL (Interface Description Language)
+Thrift是一个典型的CS(客户端/服务端结构，客户端和服务端可以使用不同的语言开发，既然客户端和服务端能使用不同的语言开发，那么一定就要有一种中间语言来关联客户端和服务端的语言，这种语言就是IDL (Interface Description Language)
 
-Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口,然后通过Thrift提供的编译器,可以将服务接口编译成不同语言编写的代码,通过这个方式来实现跨语言的功能
+Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口，然后通过Thrift提供的编译器，可以将服务接口编译成不同语言编写的代码，通过这个方式来实现跨语言的功能
 
 ## 数据结构
 
 ### 基本类型(Base Types)
 
-基本类型就是:不管哪一种语言,都支持的数据形式表现,Apache Thrift中支持以下几种基本类型:
+基本类型就是:不管哪一种语言，都支持的数据形式表现,Apache Thrift中支持以下几种基本类型:
 
 | Type   | Desc                        | JAVA             | GO      |
 | ------ | --------------------------- | ---------------- | ------- |
@@ -30,7 +30,7 @@ Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口,
 
 ### 特殊类型 (Special Types)
 
-`binary`:未编码的字节序列,是string的一种特殊形式;这种类型主要是方便某些场景下JAVA调用.JAVA中对应的是`java.nio.ByteBuffer`类型,GO中是`[]byte`
+`binary`:未编码的字节序列，是string的一种特殊形式;这种类型主要是方便某些场景下JAVA调用.JAVA中对应的是`java.nio.ByteBuffer`类型,GO中是`[]byte`
 
 ### 集合容器 (Containers)
 
@@ -38,13 +38,13 @@ Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口,
 
 | Type     | Desc                            | JAVA           | GO       | remark                  |
 | -------- | ------------------------------- | -------------- | -------- | ----------------------- |
-| list<T>  | 元素有序列表,允许重复           | java.util.List | []T      |                         |
-| set<T>   | 元素无序列表,不允许重复         | java.util.Set  | []T      | GO没有set集合以数组代替 |
+| list<T>  | 元素有序列表，允许重复           | java.util.List | []T      |                         |
+| set<T>   | 元素无序列表，不允许重复         | java.util.Set  | []T      | GO没有set集合以数组代替 |
 | map<K,V> | key-value结构数据,key不允许重复 | java.util.Map  | map[K] V |                         |
 
-在使用容器类型时必须指定泛型,否则无法编译idl文件,其次,泛型中的基本类型,JAVA语言中会被替换为对应的包装类型
+在使用容器类型时必须指定泛型，否则无法编译idl文件，其次，泛型中的基本类型,JAVA语言中会被替换为对应的包装类型
 
-集合中的元素可以是除了service之外的任何类型,包括exception
+集合中的元素可以是除了service之外的任何类型，包括exception
 
 ```idl
 struct Test {
@@ -102,7 +102,7 @@ struct有以下一些约束：
 
 ### 枚举 (enum)
 
-Thrift不支持枚举类嵌套,枚举常量必须是32位的正整数
+Thrift不支持枚举类嵌套，枚举常量必须是32位的正整数
 
 ```idl
 enum Httpstatus{
@@ -191,7 +191,7 @@ Thrift支持C多行风格和Java/C++单行风格
 
 ## Include
 
-便于管理,重用和提高模块性/组织性,我们常常分割Thrift定义在不同的文件中,包含文件搜索方式与C++一样,Thrift允许文件包含其它 thrift文件,用户需要使用thrift文件名作为前缀访问被包含的对象
+便于管理，重用和提高模块性/组织性，我们常常分割Thrift定义在不同的文件中，包含文件搜索方式与C++一样,Thrift允许文件包含其它 thrift文件，用户需要使用thrift文件名作为前缀访问被包含的对象
 
 ```idl
 include "test.thrift"
@@ -201,7 +201,7 @@ include "test.thrift"
 }
 ```
 
-- thrift文件名要用双引号包含,末尾没有逗号或者分号
+- thrift文件名要用双引号包含，末尾没有逗号或者分号
 
 ## IDL文件编译
 

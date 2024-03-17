@@ -20,14 +20,14 @@ create '<表名>','<列族>','[列族]'...
 
 **实例**
 
-- 创建了一个`student`表,属性有:`Sname`,`Ssex`,`Sage`,`Sdept`,`course`
-- 因为HBase的表中会有一个系统默认的属性作为行键,无需自行创建,默认为put命令操作中表名后第一个数据
+- 创建了一个`student`表，属性有:`Sname`,`Ssex`,`Sage`,`Sdept`,`course`
+- 因为HBase的表中会有一个系统默认的属性作为行键，无需自行创建，默认为put命令操作中表名后第一个数据
 
 ```sqlite
   create 'student','Sname','Ssex','Sage','Sdept','course'
 ```
 
-- 创建一个`teacher`表,属性有`username`,指定保存的版本数为5
+- 创建一个`teacher`表，属性有`username`,指定保存的版本数为5
 
 ```sql
   create 'teacher',{NAME=>'username',VERSIONS=>5}
@@ -41,7 +41,7 @@ describe '<表名>'
 
 **实例**
 
-- 创建完`student`表后,通过describe命令查看`student`表的基本信息
+- 创建完`student`表后，通过describe命令查看`student`表的基本信息
 
 ```
 hbase(main):002:0> describe 'student'
@@ -73,7 +73,7 @@ COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '
 
 #### 删除表
 
-删除表有两步,第一步先让该表不可用,第二步删除表
+删除表有两步，第一步先让该表不可用，第二步删除表
 
 ```sql
 disable '<表名>'
@@ -94,8 +94,8 @@ drop 'student'
 #### 添加数据
 
 - HBase中用put命令添加数据
-- 在添加数据时,HBase会自动为添加的数据添加一个时间戳,故在需要修改数据时,只需直接添加数据,HBase即会生成一个新的版本,从而完成"改”操作,旧的版本依旧保留,系统会定时回收垃圾数据,只留下最新的几个版本,保存的版本数可以在创建表的时候指定
-- **注意**:一次只能为一个表的一行数据的一个列添加数据,也就是一个单元格添加一个数据,所以直接用shell命令插入数据效率很低,在实际应用中,一般都是利用编程操作数据
+- 在添加数据时,HBase会自动为添加的数据添加一个时间戳，故在需要修改数据时，只需直接添加数据,HBase即会生成一个新的版本，从而完成"改”操作，旧的版本依旧保留，系统会定时回收垃圾数据，只留下最新的几个版本，保存的版本数可以在创建表的时候指定
+- **注意**:一次只能为一个表的一行数据的一个列添加数据，也就是一个单元格添加一个数据，所以直接用shell命令插入数据效率很低，在实际应用中，一般都是利用编程操作数据
 
 ```sql
 put '<表名>','<行键>','<列族>','<值>'
@@ -103,7 +103,7 @@ put '<表名>','<行键>','<列族>','<值>'
 
 **实例**
 
-- 为student表添加了学号为95001,名字为LiYing的一行数据,其行键为95001
+- 为student表添加了学号为95001,名字为LiYing的一行数据，其行键为95001
 
 ```sql
 put 'student','95001','Sname','LiYing'
@@ -118,7 +118,7 @@ put 'student','95001','course:math','80'
 #### 查看数据
 
 - HBase中有两个用于查看数据的命令
-    - get命令,用于查看表的某一行数据
+    - get命令，用于查看表的某一行数据
     - scan命令用于查看某个表的全部数据
 
 ```sql
@@ -152,7 +152,7 @@ scan 'student'
 #### 删除数据
 
 - 在HBase中用delete以及deleteall命令进行删除数据操作
-    - delete用于删除一个数据,是put的反向操作
+    - delete用于删除一个数据，是put的反向操作
     - deleteall操作用于删除一行数据
 
 ```sql
@@ -189,39 +189,39 @@ public class ExampleForHbase{
     public static Connection connection;
     public static Admin admin;
 
-    //主函数中的语句请逐句执行,只需删除其前的//即可,如:执行insertRow时请将其他语句注释
+    //主函数中的语句请逐句执行，只需删除其前的//即可，如:执行insertRow时请将其他语句注释
     public static void main(String[] args)throws IOException{
-        //创建一个表,表名为Score,列族为sname,course
+        //创建一个表，表名为Score,列族为sname,course
         createTable("Score",new String[]{"sname","course"});
 
-        //在Score表中插入一条数据,其行键为95001,sname为Mary(因为sname列族下没有子列所以第四个参数为空)
+        //在Score表中插入一条数据，其行键为95001,sname为Mary(因为sname列族下没有子列所以第四个参数为空)
         //等价命令:put 'Score','95001','sname','Mary'
         //insertRow("Score", "95001", "sname", "", "Mary");
-        //在Score表中插入一条数据,其行键为95001,course:Math为88(course为列族,Math为course下的子列)
+        //在Score表中插入一条数据，其行键为95001,course:Math为88(course为列族,Math为course下的子列)
         //等价命令:put 'Score','95001','score:Math','88'
         //insertRow("Score", "95001", "course", "Math", "88");
-        //在Score表中插入一条数据,其行键为95001,course:English为85(course为列族,English为course下的子列)
+        //在Score表中插入一条数据，其行键为95001,course:English为85(course为列族,English为course下的子列)
         //等价命令:put 'Score','95001','score:English','85'
         //insertRow("Score", "95001", "course", "English", "85");
 
-        //1,删除Score表中指定列数据,其行键为95001,列族为course,列为Math
-        //执行这句代码前请deleteRow方法的定义中,将删除指定列数据的代码取消注释注释,将删除制定列族的代码注释
+        //1,删除Score表中指定列数据，其行键为95001,列族为course,列为Math
+        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码取消注释注释，将删除制定列族的代码注释
         //等价命令:delete 'Score','95001','score:Math'
         //deleteRow("Score", "95001", "course", "Math");
 
-        //2,删除Score表中指定列族数据,其行键为95001,列族为course(95001的Math和English的值都会被删除)
-        //执行这句代码前请deleteRow方法的定义中,将删除指定列数据的代码注释,将删除制定列族的代码取消注释
+        //2,删除Score表中指定列族数据，其行键为95001,列族为course(95001的Math和English的值都会被删除)
+        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，将删除制定列族的代码取消注释
         //等价命令:delete 'Score','95001','score'
         //deleteRow("Score", "95001", "course", "");
 
-        //3,删除Score表中指定行数据,其行键为95001
-        //执行这句代码前请deleteRow方法的定义中,将删除指定列数据的代码注释,以及将删除制定列族的代码注释
+        //3,删除Score表中指定行数据，其行键为95001
+        //执行这句代码前请deleteRow方法的定义中，将删除指定列数据的代码注释，以及将删除制定列族的代码注释
         //等价命令:deleteall 'Score','95001'
         //deleteRow("Score", "95001", "", "");
 
-        //查询Score表中,行键为95001,列族为course,列为Math的值
+        //查询Score表中，行键为95001,列族为course,列为Math的值
         //getData("Score", "95001", "course", "Math");
-        //查询Score表中,行键为95001,列族为sname的值(因为sname列族下没有子列所以第四个参数为空)
+        //查询Score表中，行键为95001,列族为sname的值(因为sname列族下没有子列所以第四个参数为空)
         //getData("Score", "95001", "sname", "");
 
         //删除Score表
@@ -254,7 +254,7 @@ public class ExampleForHbase{
     }
 
     /**
-     * 建表,HBase的表中会有一个系统默认的属性作为主键,主键无需自行创建,默认为put命令操作中表名后第一个数据,因此此处无需创建id列
+     * 建表,HBase的表中会有一个系统默认的属性作为主键，主键无需自行创建，默认为put命令操作中表名后第一个数据，因此此处无需创建id列
      * @param myTableName 表名
      * @param colFamily 列族名
      * @throws IOException
@@ -309,7 +309,7 @@ public class ExampleForHbase{
      * @param tableName 表名
      * @param rowKey 行键
      * @param colFamily 列族名
-     * @param col 列名(如果其列族下没有子列,此参数可为空)
+     * @param col 列名(如果其列族下没有子列，此参数可为空)
      * @param val 值
      * @throws IOException
      */

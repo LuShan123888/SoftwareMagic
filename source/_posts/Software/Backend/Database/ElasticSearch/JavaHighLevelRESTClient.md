@@ -69,7 +69,7 @@ IndexRequest request= new IndexRequest("test_index");
 request.id("1");
 request.timeout(TimeValue.timeValueSeconds(1));
 request.source(JSON.toJSONString(new User("user1", 20)), XContentType.JSON);
-// 发送请求,获取响应的结果
+// 发送请求，获取响应的结果
 IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);
 System.out.println(JSON.toJSONString(response));
 ```

@@ -9,7 +9,7 @@ categories:
 ---
 # JSP JavaBean
 
-- JavaBean 是特殊的 Java 类,使用 Java 语言书写,并且遵守 JavaBean API 规范
+- JavaBean 是特殊的 Java 类，使用 Java 语言书写，并且遵守 JavaBean API 规范
 - 接下来给出的是 JavaBean 与其它 Java 类相比而言独一无二的特征:
     - 提供一个默认的无参构造函数
     - 需要被序列化并且实现了 Serializable 接口
@@ -18,15 +18,15 @@ categories:
 
 ## JavaBean 属性
 
-- 一个 JavaBean 对象的属性应该是可访问的,这个属性可以是任意合法的 Java 数据类型,包括自定义 Java 类
-- 一个 JavaBean 对象的属性可以是可读写,或只读,或只写,JavaBean 对象的属性通过 JavaBean 实现类中提供的两个方法来访问:
+- 一个 JavaBean 对象的属性应该是可访问的，这个属性可以是任意合法的 Java 数据类型，包括自定义 Java 类
+- 一个 JavaBean 对象的属性可以是可读写，或只读，或只写,JavaBean 对象的属性通过 JavaBean 实现类中提供的两个方法来访问:
 
 | 方法                | 描述                                                         |
 | :------------------ | :----------------------------------------------------------- |
-| `getPropertyName()` | 举例来说,如果属性的名称为 myName,那么这个方法的名字就要写成 `getMyName()` 来读取这个属性,这个方法也称为访问器, |
-| `setPropertyName()` | 举例来说,如果属性的名称为 myName,那么这个方法的名字就要写成 `setMyName()`来写入这个属性,这个方法也称为写入器, |
+| `getPropertyName()` | 举例来说，如果属性的名称为 myName,那么这个方法的名字就要写成 `getMyName()` 来读取这个属性，这个方法也称为访问器, |
+| `setPropertyName()` | 举例来说，如果属性的名称为 myName,那么这个方法的名字就要写成 `setMyName()`来写入这个属性，这个方法也称为写入器, |
 
-一个只读的属性只提供 `getPropertyName()` 方法,一个只写的属性只提供 `setPropertyName()` 方法
+一个只读的属性只提供 `getPropertyName()` 方法，一个只写的属性只提供 `setPropertyName()` 方法
 
 ## JavaBean 程序示例
 
@@ -67,13 +67,13 @@ public class StudentsBean implements java.io.Serializable
 
 ## 访问JavaBean
 
-- `<jsp:useBean>` 标签可以在 JSP 中声明一个 JavaBean,然后使用,声明后,JavaBean 对象就成了脚本变量,可以通过脚本元素或其他自定义标签来访问,`<jsp:useBean>` 标签的语法格式如下:
+- `<jsp:useBean>` 标签可以在 JSP 中声明一个 JavaBean,然后使用，声明后,JavaBean 对象就成了脚本变量，可以通过脚本元素或其他自定义标签来访问,`<jsp:useBean>` 标签的语法格式如下:
 
 ```jsp
 <jsp:useBean id="bean 的名字" scope="bean 的作用域" typeSpec/>
 ```
 
-- 其中,根据具体情况,scope 的值可以是 page,request,session 或 application,id值可任意只要不和同一 JSP 文件中其它 <jsp:useBean> 中 id 值一样就行了
+- 其中，根据具体情况,scope 的值可以是 page,request,session 或 application,id值可任意只要不和同一 JSP 文件中其它 <jsp:useBean> 中 id 值一样就行了
 - 接下来给出的是 `<jsp:useBean>` 标签的一个简单的用法:
 
 ```jsp
@@ -100,7 +100,7 @@ public class StudentsBean implements java.io.Serializable
 
 ## 访问 JavaBean 对象的属性
 
-- 在 `<jsp:useBean>` 标签主体中使用 `<jsp:getProperty/>` 标签来调用 **getter** 方法,使用 `<jsp:setProperty/>` 标签来调用 **setter** 方法,语法格式如下:
+- 在 `<jsp:useBean>` 标签主体中使用 `<jsp:getProperty/>` 标签来调用 **getter** 方法，使用 `<jsp:setProperty/>` 标签来调用 **setter** 方法，语法格式如下:
 
 ```jsp
 <jsp:useBean id="id" class="bean 编译的类" scope="bean 作用域">

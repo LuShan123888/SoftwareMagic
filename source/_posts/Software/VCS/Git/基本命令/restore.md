@@ -14,5 +14,5 @@ categories:
 git restore <file>
 ```
 
-- `--staged`作用是将暂存区的文件从暂存区撤出,但不会更改文件
+- `--staged`作用是将暂存区的文件从暂存区撤出，但不会更改文件
 

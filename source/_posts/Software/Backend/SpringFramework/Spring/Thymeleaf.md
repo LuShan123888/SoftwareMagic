@@ -10,7 +10,7 @@ categories:
 
 ## 模板引擎
 
-模板引擎的作用就是通过一个页面模板,将表达式解析,从后台提取数值并填充到指定的位置,最终生成一个静态页面
+模板引擎的作用就是通过一个页面模板，将表达式解析，从后台提取数值并填充到指定的位置，最终生成一个静态页面
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-16-640-20201116091443136.png)
 
@@ -49,7 +49,7 @@ public class ThymeleafProperties {
 - 默认后缀:`.html`
 - 所以如果我们返回视图:`users`,会指向到 `classpath:/templates/users.html`
 
-- Thymeleaf默认会开启页面缓存,提高页面并发能力,但会导致我们修改页面不会立即被展现,因此我们关闭缓存:
+- Thymeleaf默认会开启页面缓存，提高页面并发能力，但会导致我们修改页面不会立即被展现，因此我们关闭缓存:
 
 ```properties
 # 关闭Thymeleaf的缓存
@@ -68,17 +68,17 @@ spring.thymeleaf.cache=false
 
 ### 指令
 
-- Thymeleaf中所有的表达式都需要写在`指令`中,指令是HTML5中的自定义属性,在Thymeleaf中所有指令都是以`th:`开头
-- 静态页面中,`th`指令不被识别,但是浏览器也不会报错,把它当做一个普通属性处理
+- Thymeleaf中所有的表达式都需要写在`指令`中，指令是HTML5中的自定义属性，在Thymeleaf中所有指令都是以`th:`开头
+- 静态页面中,`th`指令不被识别，但是浏览器也不会报错，把它当做一个普通属性处理
 - 如果是在Thymeleaf环境下,`th`指令就会被识别和解析
-- 指令的设计,正是Thymeleaf的高明之处,也是它优于其它模板引擎的原因,动静结合的设计,使得无论是前端开发人员还是后端开发人员可以完美契合
+- 指令的设计，正是Thymeleaf的高明之处，也是它优于其它模板引擎的原因，动静结合的设计，使得无论是前端开发人员还是后端开发人员可以完美契合
 - 可以使用任意的 th:attr 来替换Html中原生属性的值
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-19-640-20201116170238354.jpeg)
 
 ### 变量
 
-Thymeleaf通过`${}`来获取model中的变量,注意这不是el表达式,而是ognl表达式,但是语法非常像
+Thymeleaf通过`${}`来获取model中的变量，注意这不是el表达式，而是ognl表达式，但是语法非常像
 
 ```html
 <h1>
@@ -88,7 +88,7 @@ Thymeleaf通过`${}`来获取model中的变量,注意这不是el表达式,而是
 
 #### ognl表达式的语法糖
 
-- 刚才获取变量值,使用的是经典的`对象.属性名`方式,但有些情况下,我们的属性名可能本身也是变量
+- 刚才获取变量值，使用的是经典的`对象.属性名`方式，但有些情况下，我们的属性名可能本身也是变量
 - ognl提供了类似js的语法方式
 - 例如:`${user.name}` 可以写作`${user['name']}`
 
@@ -106,7 +106,7 @@ Thymeleaf通过`${}`来获取model中的变量,注意这不是el表达式,而是
 </h2>
 ```
 
-- 当数据量比较多的时候,频繁的写`user.`就会非常麻烦
+- 当数据量比较多的时候，频繁的写`user.`就会非常麻烦
 - 因此,Thymeleaf提供了自定义变量来解决
 
 ```html
@@ -117,12 +117,12 @@ Thymeleaf通过`${}`来获取model中的变量,注意这不是el表达式,而是
 </h2>
 ```
 
-- 首先在 `h2`上 用 `th:object="${user}"`获取user的值,并且保存
-- 然后,在`h2`内部的任意元素上,可以通过 `*{属性名}`的方式,来获取user中的属性,这样就省去了大量的`user.`前缀了
+- 首先在 `h2`上 用 `th:object="${user}"`获取user的值，并且保存
+- 然后，在`h2`内部的任意元素上，可以通过 `*{属性名}`的方式，来获取user中的属性，这样就省去了大量的`user.`前缀了
 
 ### 方法
 
-- ognl表达式本身就支持方法调用,例如:
+- ognl表达式本身就支持方法调用，例如:
 
 ```html
 <h2 th:object="${user}">
@@ -133,17 +133,17 @@ Thymeleaf通过`${}`来获取model中的变量,注意这不是el表达式,而是
 
 - 这里我们调用了字符串的`split()`方法
 
-Thymeleaf中提供了一些内置对象,并且在这些对象中提供了一些方法,方便我们来调用,获取这些对象,需要使用`#对象名`来引用
+Thymeleaf中提供了一些内置对象，并且在这些对象中提供了一些方法，方便我们来调用，获取这些对象，需要使用`#对象名`来引用
 
 **环境相关对象**
 
 |       对象        | 作用                                          |
 | :---------------: | :-------------------------------------------- |
 |      `#ctx`       | 获取Thymeleaf自己的Context对象                |
-|    `#requset`     | 如果是web程序,可以获取HttpServletRequest对象 |
-|    `#response`    | 如果是web程序,可以获取HttpServletReponse对象 |
-|    `#session`     | 如果是web程序,可以获取HttpSession对象        |
-| `#servletContext` | 如果是web程序,可以获取HttpServletContext对象 |
+|    `#requset`     | 如果是web程序，可以获取HttpServletRequest对象 |
+|    `#response`    | 如果是web程序，可以获取HttpServletReponse对象 |
+|    `#session`     | 如果是web程序，可以获取HttpSession对象        |
+| `#servletContext` | 如果是web程序，可以获取HttpServletContext对象 |
 
 **Thymeleaf提供的全局对象**
 
@@ -181,7 +181,7 @@ public String show3(Model model){
 
 ### 字面值
 
-- 有的时候,我们需要在指令中填写基本类型如:字符串,数值,布尔等,并不希望被Thymeleaf解析为变量,这个时候称为字面值
+- 有的时候，我们需要在指令中填写基本类型如:字符串，数值，布尔等，并不希望被Thymeleaf解析为变量，这个时候称为字面值
 
 #### 字符串字面值
 
@@ -193,11 +193,11 @@ public String show3(Model model){
 </p>
 ```
 
-- `th:text`中的thymeleaf并不会被认为是变量,而是一个字符串
+- `th:text`中的thymeleaf并不会被认为是变量，而是一个字符串
 
 #### 数字字面值
 
-- 数字不需要任何特殊语法,可以直接进行算术运算
+- 数字不需要任何特殊语法，可以直接进行算术运算
 
 ```html
 <p>今年是 <span th:text="2018">1900</span>.</p>
@@ -214,7 +214,7 @@ public String show3(Model model){
 </div>
 ```
 
-- 这里引用了一个`th:if`指令,跟vue中的`v-if`类似
+- 这里引用了一个`th:if`指令，跟vue中的`v-if`类似
 
 #### 拼接
 
@@ -224,17 +224,17 @@ public String show3(Model model){
 <span th:text="'欢迎您:' + ${user.name} + '!'"></span>
 ```
 
-- 字符串字面值需要用`''`,拼接起来非常麻烦,Thymeleaf对此进行了简化,使用一对`|`即可:
+- 字符串字面值需要用`''`,拼接起来非常麻烦,Thymeleaf对此进行了简化，使用一对`|`即可:
 
 ```html
 <span th:text="|欢迎您:${user.name}|"></span>
 ```
 
-- 与上面是完全等效的,这样就省去了字符串字面值的书写
+- 与上面是完全等效的，这样就省去了字符串字面值的书写
 
 ### 运算
 
-**注意**:`${}`内部的是通过OGNL表达式引擎解析的,外部的才是通过Thymeleaf的引擎解析,因此运算符尽量放在`${}`外进行
+**注意**:`${}`内部的是通过OGNL表达式引擎解析的，外部的才是通过Thymeleaf的引擎解析，因此运算符尽量放在`${}`外进行
 
 #### 算术运算
 
@@ -247,13 +247,13 @@ public String show3(Model model){
 
 #### 比较运算
 
-- 支持的比较运算:`>`, `<`, `>=` and `<=`,但是`>`, `<`不能直接使用,因为xml会解析为标签,要使用别名
-- **注意**: `==` and `!=`不仅可以比较数值,类似于equals的功能
+- 支持的比较运算:`>`, `<`, `>=` and `<=`,但是`>`, `<`不能直接使用，因为xml会解析为标签，要使用别名
+- **注意**: `==` and `!=`不仅可以比较数值，类似于equals的功能
 - 可以使用的别名:`gt (>), lt (<), ge (>=), le (<=), not (!). Also eq (==), neq/ne (!=).`
 
 ### 循环
 
-- 循环也是非常频繁使用的需求,我们使用`th:each`指令来完成
+- 循环也是非常频繁使用的需求，我们使用`th:each`指令来完成
 - 假如有用户的集合:users在Context中
 
 ```html
@@ -263,14 +263,14 @@ public String show3(Model model){
 </tr>
 ```
 
-- `${users}`是要遍历的集合,可以是以下类型:
+- `${users}`是要遍历的集合，可以是以下类型:
     - `Iterable`:实现了Iterable接口的类
     - `Enumeration`:枚举
     - `Interator`:迭代器
     - `Map`:遍历得到的是Map.Entry
     - `Array`:数组及其它一切符合数组结果的对象
 
-- 在迭代的同时,我们也可以获取迭代的状态对象
+- 在迭代的同时，我们也可以获取迭代的状态对象
 
 ```html
 <tr th:each="user,stat : ${users}">
@@ -281,7 +281,7 @@ public String show3(Model model){
 
 - `stat`对象包含以下属性:
     - `index`:从0开始的角标
-    - `count`:元素的个数,从1开始
+    - `count`:元素的个数，从1开始
     - `size`:总元素个数
     - `current`:当前遍历到的元素
     - `even/odd`:返回是否为奇偶,boolean值
@@ -295,13 +295,13 @@ public String show3(Model model){
 <span th:if="${user.age} < 24">test</span>
 ```
 
-- 如果表达式的值为true,则标签会渲染到页面,否则不进行渲染
+- 如果表达式的值为true,则标签会渲染到页面，否则不进行渲染
 - 以下情况被认定为true:
     - 表达式值为true
     - 表达式值为非0数值
     - 表达式值为非0字符
-    - 表达式值为字符串,但不是`"false"`,`"no"`,`"off"`
-    - 表达式不是布尔,字符串,数字,字符中的任何一种
+    - 表达式值为字符串，但不是`"false"`,`"no"`,`"off"`
+    - 表达式不是布尔，字符串，数字，字符中的任何一种
     - 其它情况包括null都被认定为false
 
 #### 三元运算
@@ -314,13 +314,13 @@ public String show3(Model model){
 
 **默认值**
 
-- 有的时候,我们取一个值可能为空,这个时候需要做非空判断,可以使用 `表达式 ?: 默认值`简写
+- 有的时候，我们取一个值可能为空，这个时候需要做非空判断，可以使用 `表达式 ?: 默认值`简写
 
 ```html
 <span th:text="${user.name} ?: 'test'"></span>
 ```
 
-- 当前面的表达式值为null时,就会使用后面的默认值
+- 当前面的表达式值为null时，就会使用后面的默认值
 - **注意**:`?:`之间没有空格
 
 ### 分支控制switch
@@ -335,12 +335,12 @@ public String show3(Model model){
 </div>
 ```
 
-- **注意**,一旦有一个th:case成立,其它的则不再判断,与java中的switch是一样的
-- `th:case="*"`表示默认,放在最后
+- **注意**,一旦有一个th:case成立，其它的则不再判断，与java中的switch是一样的
+- `th:case="*"`表示默认，放在最后
 
 ### JS模板
 
-- 模板引擎不仅可以渲染html,也可以对JS中的进行预处理,而且为了在纯静态环境下可以运行,其Thymeleaf代码可以被注释起来
+- 模板引擎不仅可以渲染html,也可以对JS中的进行预处理，而且为了在纯静态环境下可以运行，其Thymeleaf代码可以被注释起来
 
 ```html
 <script th:inline="javascript">
@@ -359,7 +359,7 @@ public String show3(Model model){
 const user = /*[[Thymeleaf表达式]]*/ "静态环境下的默认值";
 ```
 
-- 因为Thymeleaf被注释起来,因此即便是静态环境下,js代码也不会报错,而是采用表达式后面跟着的默认值
+- 因为Thymeleaf被注释起来，因此即便是静态环境下,js代码也不会报错，而是采用表达式后面跟着的默认值
 
 **控制台**
 

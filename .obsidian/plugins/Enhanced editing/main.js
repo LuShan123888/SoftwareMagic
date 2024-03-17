@@ -835,7 +835,7 @@ class MyPlugin extends obsidian.Plugin {
             选至文首 = 编辑模式.getRange({line:0,ch:0},当前光标);
             var 以前字数 = 选至文首.length;
             var 返回位置 = 0;
-            var 搜索结果,起始位置,结束位置;
+            var 搜索结果，起始位置，结束位置;
             if(方向=="下"){
                 搜索范围 = 编辑模式.getRange(当前光标,{line:末行行号,ch:末行文本.length});
                 返回位置 = 搜索范围.search(表达式);
@@ -1764,7 +1764,7 @@ class MyPlugin extends obsidian.Plugin {
 
     列表转为图示 () {
         var 大纲文本 = 所选文本.replace(/(    |\t)/mg,"■");
-        大纲文本 = 大纲文本.replace(/(\-\s|\d+\.\s)/mg,"");   //对所有文本行的行首进行替换整理,去除-
+        大纲文本 = 大纲文本.replace(/(\-\s|\d+\.\s)/mg,"");   //对所有文本行的行首进行替换整理，去除-
         大纲文本 = 大纲文本.replace(/\s+$/mg,"");   //对所有文本行的行尾进行替换去除
         大纲文本 = 大纲文本.replace(/\n/g,"↵");
         大纲文本 = 大纲文本.replace(/↵+$/,"");   //去除末尾多余换行符
@@ -1780,7 +1780,7 @@ class MyPlugin extends obsidian.Plugin {
                 var m = upLine.lastIndexOf("■");
             }
             
-            if(n<0){//无■，即为根级大纲,可创建@导航页面
+            if(n<0){//无■，即为根级大纲，可创建@导航页面
                 fName = thisLine;
             }else{
                 //new obsidian.Notice(upLine+"  "+m+"\n"+thisLine+"  "+n);

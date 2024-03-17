@@ -6,10 +6,10 @@ categories:
 - Database
 - ElasticSearch
 ---
-# Elasticsearch 中文分词插件IK
+# Elasticsearch 中文分词插件 IK
 
-- **分词**:即把一段中文或者别的划分成一个个的关键字,在搜索时候会把信息进行分词,会把数据库中或者索引库中的数据进行分词,然后进行一个匹配操作,默认的中文分词是将每个字看成一个词,这显然是不符合要求的,所以需要安装中文分词器ik来解决这个问题
-- IK提供了两个分词算法: ik_smart和ik_max_word,其中 ik smart为最少切分,ik_max_word为最细粒度划分
+- **分词**: 即把一段中文或者别的划分成一个个的关键字, 在搜索时候会把信息进行分词, 会把数据库中或者索引库中的数据进行分词, 然后进行一个匹配操作，默认的中文分词是将每个字看成一个词，这显然是不符合要求的，所以需要安装中文分词器ik来解决这个问题
+- IK 提供了两个分词算法: ik_smart 和 ik_max_word, 其中 ik smart 为最少切分, ik_max_word 为最细粒度划分
 
 ### 安装
 
@@ -17,13 +17,13 @@ categories:
 ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.13.2/elasticsearch-analysis-ik-7.13.2.zip
 ```
 
-- **注意**:版本需要和Elasticsearch的版本匹配
+- **注意**: 版本需要和 Elasticsearch 的版本匹配
 
 ### 测试
 
-- 使用Kibana测试不同分词算法的差别
+- 使用 Kibana 测试不同分词算法的差别
 
-**ik_smart**:最少切分每个字只会出现一次
+**ik_smart**: 最少切分每个字只会出现一次
 
 ```json
 GET _analyze
@@ -55,7 +55,7 @@ GET _analyze
 
 ```
 
-**ik_max_word**:最细粒度划分,尽量匹配更多的词语,单字会重复
+**ik_max_word**: 最细粒度划分, 尽量匹配更多的词语, 单字会重复
 
 ```json
 GET _analyze
@@ -116,13 +116,13 @@ GET _analyze
 
 ## 扩展配置
 
-- 新建`test.dic`
+- 新建 `test.dic`
 
 ```
 江大桥
 ```
 
-- 修改IKanalyer配置文件`./config/analysis-ik/IKAnalyzer.cfg.xml`
+- 修改 IKanalyer 配置文件 `./config/analysis-ik/IKAnalyzer.cfg.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -140,7 +140,7 @@ GET _analyze
 </properties>
 ```
 
-- 重启Elasticsearch,使用Kibana测试
+- 重启 Elasticsearch, 使用 Kibana 测试
 
 ```json
 GET _analyze
@@ -207,4 +207,4 @@ GET _analyze
 
 ```
 
-- 相比于之前`江大桥`成功被分词
+- 相比于之前 `江大桥` 成功被分词

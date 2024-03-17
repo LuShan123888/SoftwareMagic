@@ -42,8 +42,8 @@ categories:
 ### HSSF
 
 - 提供读写Microsoft Excel格式档案的功能(Excel 2003 版本)
-- **缺点**:最多只能处理 65536 行,否则会抛出异常
-- **优点**:过程中写入缓存,不操作磁盘,最后一次性写入磁盘,速度快
+- **缺点**:最多只能处理 65536 行，否则会抛出异常
+- **优点**:过程中写入缓存，不操作磁盘，最后一次性写入磁盘，速度快
 
 #### Write
 
@@ -178,7 +178,7 @@ public class Test {
                                     Date date = cell.getDateCellValue();
                                     cellValue = new DateTime(date).toString();
                                 } else {
-                                    // 不是日期格式,防止数字过长
+                                    // 不是日期格式，防止数字过长
                                     System.out.print("[数字转换为字符串输出]: ");
                                     cell.setCellType(CellType.STRING);
                                     cellValue = cell.toString();
@@ -237,8 +237,8 @@ public class Test {
 ### XSSF
 
 - 提供读写Microsoft Excel OOXML格式档案的功能(Excel 2007 版本)
-- **缺点**:写数据时速度非常慢,非常耗内存,也会发生内存溢出,如 100 万条数据
-- **优点**:可以写较大的数据量,如 20 万条
+- **缺点**:写数据时速度非常慢，非常耗内存，也会发生内存溢出，如 100 万条数据
+- **优点**:可以写较大的数据量，如 20 万条
 
 #### Write
 
@@ -302,10 +302,10 @@ public class Test {
 
 ### SXSSF
 
-- SXSSFWorkbook 来自官方的解释:实现"BigGridDemo” 策略的流式 SXSSFWorkbook 版本,这允许写入非常大的文件而不会耗尽内存,因为任何时候只有可配置的行部分被保存在内存中
-- **缺点**:仍然可能会消耗大量内存,这些内存基于你正在使用的功能,例如合并区域,注释只存储在内存中,因此如果广泛使用,可能需要大量内存
-- **优点**:可以写非常大的数据量,如 100 万条甚至更多,写数据速度快,占用更少的内存
-- **注意**:过程总会产生临时文件,需要清理临时文件,默认由 100 条记录被保存在内存中,则最前面的数据被写入临时文件,如果想要自定义内存中数据的数量,可以使用`new SXSSFWorkbook(数量)`
+- SXSSFWorkbook 来自官方的解释:实现"BigGridDemo” 策略的流式 SXSSFWorkbook 版本，这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中
+- **缺点**:仍然可能会消耗大量内存，这些内存基于你正在使用的功能，例如合并区域，注释只存储在内存中，因此如果广泛使用，可能需要大量内存
+- **优点**:可以写非常大的数据量，如 100 万条甚至更多，写数据速度快，占用更少的内存
+- **注意**:过程总会产生临时文件，需要清理临时文件，默认由 100 条记录被保存在内存中，则最前面的数据被写入临时文件，如果想要自定义内存中数据的数量，可以使用`new SXSSFWorkbook(数量)`
 
 #### Write
 
@@ -372,8 +372,8 @@ public class Test {
 
 ## EasyExcel
 
-- EasyExcel 是阿里巴巴开源的一个 excel处理框架,以使用简单,节省内存著称
-- EasyExcel 能大大减少内存占用的主要原因是在解析 Excel 时没有将文件数据一次性全部加载到内存中,而是从磁盘上一行行读取数据,逐个解析
+- EasyExcel 是阿里巴巴开源的一个 excel处理框架，以使用简单，节省内存著称
+- EasyExcel 能大大减少内存占用的主要原因是在解析 Excel 时没有将文件数据一次性全部加载到内存中，而是从磁盘上一行行读取数据，逐个解析
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-06-resize,w_746.png)
 
@@ -462,7 +462,7 @@ public class Test {
 ```java
 public class DemoDataListener extends AnalysisEventListener<DemoData> {
 
-    // 每隔5条存储数据库,实际使用中可以3000条,然后清理list,方便内存回收
+    // 每隔5条存储数据库，实际使用中可以3000条，然后清理list,方便内存回收
     private static final int BATCH_COUNT = 5;
     private List<DemoData> list = new ArrayList<DemoData>();
     private DemoDAO demoDAO;
@@ -470,7 +470,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
     @Override
     public void invoke(DemoData data, AnalysisContext context) {
         list.add(data);
-        // 达到BATCH_COUNT了,需要去存储一次数据库,防止数据几万条数据在内存,容易OOM
+        // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (list.size() >= BATCH_COUNT) {
             this.saveData();
             // 存储完成清理 list
@@ -483,7 +483,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        // 这里也要保存数据,确保最后遗留的数据也存储到数据库
+        // 这里也要保存数据，确保最后遗留的数据也存储到数据库
         saveData();
     }
 
@@ -504,7 +504,7 @@ public class Test {
     public void EasyExcelTest() {
         // 写法1:
         String fileName = PATH + "EasyExcel.xlsx";
-        // 这里 需要指定读用哪个class去读,然后读取第一个sheet 文件流会自动关闭
+        // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
         EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
 
         // 写法2:

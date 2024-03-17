@@ -8,12 +8,12 @@ categories:
 # JavaScript BOM
 
 - 浏览器对象模型(**B**rowser **O**bject **M**odel (BOM))尚无正式标准
-- 由于现代浏览器已经(几乎)实现了 JavaScript 交互性方面的相同方法和属性,因此常被认为是 BOM 的方法和属性
+- 由于现代浏览器已经(几乎)实现了 JavaScript 交互性方面的相同方法和属性，因此常被认为是 BOM 的方法和属性
 
 ## Window 对象
 
-- 所有浏览器都支持 window 对象,它表示浏览器窗口
-- 所有 JavaScript 全局对象,函数以及变量均自动成为 window 对象的成员
+- 所有浏览器都支持 window 对象，它表示浏览器窗口
+- 所有 JavaScript 全局对象，函数以及变量均自动成为 window 对象的成员
 - 全局变量是 window 对象的属性
 - 全局函数是 window 对象的方法
 - 甚至 HTML DOM 的 document 也是 window 对象的属性之一:
@@ -72,7 +72,7 @@ var h=window.innerHeight
 
 ### Window Screen 可用宽度
 
-- `screen.availWidth` 属性返回访问者屏幕的宽度,以像素计,减去界面特性,比如窗口任务栏
+- `screen.availWidth` 属性返回访问者屏幕的宽度，以像素计，减去界面特性，比如窗口任务栏
 - 返回您的屏幕的可用宽度:
 
 ```js
@@ -89,7 +89,7 @@ var h=window.innerHeight
 
 ### Window Screen 可用高度
 
-- `screen.availHeight` 属性返回访问者屏幕的高度,以像素计,减去界面特性,比如窗口任务栏
+- `screen.availHeight` 属性返回访问者屏幕的高度，以像素计，减去界面特性，比如窗口任务栏
 - 返回您的屏幕的可用高度:
 
 ```js
@@ -173,7 +173,7 @@ function newDoc(){
 ## Window History
 
 - **window.history**对象在编写时可不使用 window 这个前缀
-- 为了保护用户隐私,对 JavaScript 访问该对象的方法做出了限制
+- 为了保护用户隐私，对 JavaScript 访问该对象的方法做出了限制
 - 一些方法:
     - `history.back()` - 与在浏览器点击后退按钮相同
     - `history.forward()` - 与在浏览器中点击向前按钮相同
@@ -250,20 +250,20 @@ document.getElementById("example").innerHTML=txt;
 </script>
 ```
 
-- 来自 navigator 对象的信息具有误导性,不应该被用于检测浏览器版本,这是因为:
+- 来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为:
     - navigator 数据可被浏览器使用者更改
     - 一些浏览器对测试站点会识别错误
     - 浏览器无法报告晚于浏览器发布的新操作系统
 
 ## 弹窗
 
-- 可以在 JavaScript 中创建三种消息框:警告框,确认框,提示框
+- 可以在 JavaScript 中创建三种消息框:警告框，确认框，提示框
 - 弹窗使用 反斜杠 + "n"(\n) 来设置换行
 
 ### 警告框
 
 - 警告框经常用于确保用户可以得到某些信息
-- 当警告框出现后,用户需要点击确定按钮才能继续进行操作
+- 当警告框出现后，用户需要点击确定按钮才能继续进行操作
 
 **语法**
 
@@ -271,7 +271,7 @@ document.getElementById("example").innerHTML=txt;
 window.alert("*sometext*");
 ```
 
-- **window.alert()** 方法可以不带上window对象,直接使用**alert()**方法
+- **window.alert()** 方法可以不带上window对象，直接使用**alert()**方法
 
 ```html
 <!DOCTYPE html>
@@ -280,7 +280,7 @@ window.alert("*sometext*");
 <script>
 function myFunction()
 {
-    alert("你好,我是一个警告框!");
+    alert("你好，我是一个警告框!");
 }
 </script>
 </head>
@@ -295,7 +295,7 @@ function myFunction()
 ### 确认框
 
 - 确认框通常用于验证是否接受用户操作
-- 当确认卡弹出时,用户可以点击 "确认" 或者 "取消" 来确定用户操作
+- 当确认卡弹出时，用户可以点击 "确认" 或者 "取消" 来确定用户操作
 - 当你点击 "确认", 确认框返回 true, 如果点击 "取消", 确认框返回 false
 
 **语法**
@@ -304,7 +304,7 @@ function myFunction()
 window.confirm("sometext");
 ```
 
-- **window.confirm()** 方法可以不带上window对象,直接使用**confirm()**方法
+- **window.confirm()** 方法可以不带上window对象，直接使用**confirm()**方法
 
 ```js
 var r=confirm("按下按钮");
@@ -321,8 +321,8 @@ else
 ### 提示框
 
 - 提示框经常用于提示用户在进入页面前输入某个值
-- 当提示框出现后,用户需要输入某个值,然后点击确认或取消按钮才能继续操纵
-- 如果用户点击确认,那么返回值为输入的值,如果用户点击取消,那么返回值为 null
+- 当提示框出现后，用户需要输入某个值，然后点击确认或取消按钮才能继续操纵
+- 如果用户点击确认，那么返回值为输入的值，如果用户点击取消，那么返回值为 null
 
 **语法**
 
@@ -330,4 +330,4 @@ else
 window.prompt("sometext","defaultvalue");
 ```
 
-- **window.prompt()** 方法可以不带上window对象,直接使用**prompt()**方法
+- **window.prompt()** 方法可以不带上window对象，直接使用**prompt()**方法

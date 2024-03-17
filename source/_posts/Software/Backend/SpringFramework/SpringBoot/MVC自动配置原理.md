@@ -29,15 +29,15 @@ categories:
 >     ExceptionHandlerExceptionResolver, you can declare a WebMvcRegistrationsAdapter instance to provide such components.
 > - If you want to take complete control of Spring MVC, you can add your own @Configuration annotated with @EnableWebMvc.
 
-- **Converter**:转换器,这就是我们网页提交数据到后台自动封装成为对象的东西,比如把"1"字符串自动转换为int类型
-- **Formatter**:格式化器,比如页面给我们了一个2019-8-10,它会给我们自动格式化为Date对象
--  **HttpMessageConverters**: Spring MVC用来转换Http请求和响应的的,比如我们要把一个User对象转换为JSON字符串
+- **Converter**:转换器，这就是我们网页提交数据到后台自动封装成为对象的东西，比如把"1"字符串自动转换为int类型
+- **Formatter**:格式化器，比如页面给我们了一个2019-8-10,它会给我们自动格式化为Date对象
+-  **HttpMessageConverters**: Spring MVC用来转换Http请求和响应的的，比如我们要把一个User对象转换为JSON字符串
 
 ## ContentNegotiatingViewResolver
 
 - 内容协商视图解析器
 - 自动配置了ViewResolver,就是Spring MVC的视图解析器
-- 即根据方法的返回值取得视图对象(View),然后由视图对象决定如何渲染(转发,重定向)
+- 即根据方法的返回值取得视图对象(View),然后由视图对象决定如何渲染(转发，重定向)
 
 **分析源码**
 
@@ -50,7 +50,7 @@ categories:
 public ContentNegotiatingViewResolver viewResolver(BeanFactory beanFactory) {
     ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
     resolver.setContentNegotiationManager(beanFactory.getBean(ContentNegotiationManager.class));
-    // ContentNegotiatingViewResolver使用所有其他视图解析器来定位视图,因此它应该具有较高的优先级
+    // ContentNegotiatingViewResolver使用所有其他视图解析器来定位视图，因此它应该具有较高的优先级
     resolver.setOrder(Ordered.HIGHEST_PRECEDENCE);
     return resolver;
 }
@@ -67,7 +67,7 @@ public View resolveViewName(String viewName, Locale locale) throws Exception {
     if (requestedMediaTypes != null) {
         // 获取候选的视图对象
         List<View> candidateViews = this.getCandidateViews(viewName, locale, requestedMediaTypes);
-        // 选择一个最适合的视图对象,然后把这个对象返回
+        // 选择一个最适合的视图对象，然后把这个对象返回
         View bestView = this.getBestView(candidateViews, requestedMediaTypes, attrs);
         if (bestView != null) {
             return bestView;
@@ -102,7 +102,7 @@ public ViewResolver myViewResolver(){
     return new MyViewResolver();
 }
 
-//写一个静态内部类,视图解析器就需要实现ViewResolver接口
+//写一个静态内部类，视图解析器就需要实现ViewResolver接口
 private static class MyViewResolver implements ViewResolver{
     @Override
     public View resolveViewName(String s, Locale locale) throws Exception {
@@ -114,16 +114,16 @@ private static class MyViewResolver implements ViewResolver{
 **测试**
 
 - 查看我们自定义的视图解析器是否起作用
-- 给`DispatcherServlet`中的`doDispatch`方法加个断点进行调试一下,因为所有的请求都会走到这个方法中
+- 给`DispatcherServlet`中的`doDispatch`方法加个断点进行调试一下，因为所有的请求都会走到这个方法中
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436625.png)
 
-- 启动项目,然后随便访问一个页面,看一下Debug信息
+- 启动项目，然后随便访问一个页面，看一下Debug信息
 - 找到this
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436779.png)
 
-- 找到视图解析器,看到自定义的视图解析器名
+- 找到视图解析器，看到自定义的视图解析器名
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-17-640-20201117000436757.png)
 
@@ -162,7 +162,7 @@ public class WebMvcProperties {
 }
 ```
 
-- 可以查看`WebMvcProperties`这个类,通过配置文件配置`Formatter`
+- 可以查看`WebMvcProperties`这个类，通过配置文件配置`Formatter`
 
 ```properties
 spring.date-format="yyyy-MM-dd"
@@ -184,9 +184,9 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
 **分析源码**
 
-- `WebMvcAutoConfiguration`是`Spring MVC`的自动配置类,里面有一个类`WebMvcAutoConfigurationAdapter`
-- 这个类上有一个注解,在做其他自动配置时会导入:`@Import(EnableWebMvcConfiguration.class)`
-- 点进`EnableWebMvcConfiguration`这个类,它继承了一个父类`DelegatingWebMvcConfiguration`
+- `WebMvcAutoConfiguration`是`Spring MVC`的自动配置类，里面有一个类`WebMvcAutoConfigurationAdapter`
+- 这个类上有一个注解，在做其他自动配置时会导入:`@Import(EnableWebMvcConfiguration.class)`
+- 点进`EnableWebMvcConfiguration`这个类，它继承了一个父类`DelegatingWebMvcConfiguration`
 - 这个父类中有这样一段代码:
 
 ```java
@@ -203,7 +203,7 @@ public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 }
 ```
 
-- 可以在这个类中去寻找一个刚才设置的viewController当做参考,有如下方法
+- 可以在这个类中去寻找一个刚才设置的viewController当做参考，有如下方法
 
 ```java
 protected void addViewControllers(ViewControllerRegistry registry) {
@@ -221,11 +221,11 @@ public void addViewControllers(ViewControllerRegistry registry) {
 }
 ```
 
-- **结论**:所有的`WebMvcConfiguration`都会被作用,不止Spring自己的配置类,自己的配置类当然也会被调用
+- **结论**:所有的`WebMvcConfiguration`都会被作用，不止Spring自己的配置类，自己的配置类当然也会被调用
 
 ## 全面接管Spring MVC
 
-- 在配置类中添加`@EnableWebMvc`注解,放弃SpringBoot对SpringMVC的自动配置,转为自己配置
+- 在配置类中添加`@EnableWebMvc`注解，放弃SpringBoot对SpringMVC的自动配置，转为自己配置
 - **不推荐使用全面接管SpringMVC**
 
 **分析源码**:`@EnableWebMvc`为什么会使自动配置失效
@@ -252,7 +252,7 @@ public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class })
-// 这个注解的意思是:容器中没有这个组件的时候,这个自动配置类才生效
+// 这个注解的意思是:容器中没有这个组件的时候，这个自动配置类才生效
 @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)
 @AutoConfigureAfter({ DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class,
@@ -262,5 +262,5 @@ public class WebMvcAutoConfiguration {
 }
 ```
 
-- **总结**:`@EnableWebMvc`将`WebMvcConfigurationSupport`导入,导致`WebMvcAutoConfiguration`失效
+- **总结**:`@EnableWebMvc`将`WebMvcConfigurationSupport`导入，导致`WebMvcAutoConfiguration`失效
 - `WebMvcConfigurationSupport`只包含SpringMVC最基本的功能

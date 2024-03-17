@@ -26,7 +26,7 @@ cd some-big-repo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 ```
 
-调用上面的命令后,文件将彻底删除 (everywhere)
+调用上面的命令后，文件将彻底删除 (everywhere)
 
 ## 将代码提交到远程仓库
 

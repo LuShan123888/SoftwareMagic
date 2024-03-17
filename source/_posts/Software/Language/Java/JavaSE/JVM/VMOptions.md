@@ -9,8 +9,8 @@ categories:
 ---
 # JVM VM Options
 
-- `-Xms`:设置初始化内存分配大小,默认本机内存的1/64
-- `-Xmx`:设置最大分配内存,默认本机内存的1/4
+- `-Xms`:设置初始化内存分配大小，默认本机内存的1/64
+- `-Xmx`:设置最大分配内存，默认本机内存的1/4
 - `-XX:+HeapDumpOnOutOfMemoryError`生成oomDump文件
 - -Xmn — 堆中年轻代的大小
 - -XX:-DisableExplicitGC — 让System.gc()不产生任何作用

@@ -16,7 +16,7 @@ categories:
 
 ## 证书安装
 
-- 将域名 `www.domain.com` 的证书文件`1_www.domain.com_bundle.crt` ,私钥文件`2_www.domain.com.key`保存到同一个目录,例如`/usr/local/nginx/conf`目录下
+- 将域名 `www.domain.com` 的证书文件`1_www.domain.com_bundle.crt` ,私钥文件`2_www.domain.com.key`保存到同一个目录，例如`/usr/local/nginx/conf`目录下
 - 更新Nginx根目录下 conf/nginx.conf 文件如下:
 
 ```nginx

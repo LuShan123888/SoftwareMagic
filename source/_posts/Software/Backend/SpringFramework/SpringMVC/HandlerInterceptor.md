@@ -10,18 +10,18 @@ categories:
 
 ## 概述
 
-- Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能
+- Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能
 - **过滤器**
-    - servlet规范中的一部分,任何java web工程都可以使用
-    - 在url-pattern中配置了`/*`之后,可以对所有要访问的资源进行拦截
+    - servlet规范中的一部分，任何java web工程都可以使用
+    - 在url-pattern中配置了`/*`之后，可以对所有要访问的资源进行拦截
 - **拦截器**
-    - 拦截器是Spring MVC框架自己的,只有使用了Spring MVC框架的工程才能使用
+    - 拦截器是Spring MVC框架自己的，只有使用了Spring MVC框架的工程才能使用
     - 拦截器只会拦截访问的控制器方法, 如果访问的是`jsp/html/css/image/js`是不会进行拦截的
 - **过滤器与拦截器的区别**:拦截器是AOP思想的具体应用
 
 ## 自定义拦截器
 
-- 自定义拦截器,必须实现 HandlerInterceptor 接口
+- 自定义拦截器，必须实现 HandlerInterceptor 接口
 
 ```java
 public class MyInterceptor implements HandlerInterceptor {
@@ -39,7 +39,7 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("------------处理后------------");
     }
 
-    //在dispatcherServlet处理后执行,做清理工作
+    //在dispatcherServlet处理后执行，做清理工作
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         System.out.println("------------清理------------");
     }
@@ -92,9 +92,9 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 
 **实现思路**
 
-- 有一个登陆页面,需要写一个controller访问页面
-- 登陆页面有一提交表单的动作,需要在controller中处理,判断用户名密码是否正确,如果正确,向session中写入用户信息,返回登陆成功
-- 拦截用户请求,判断用户是否登陆,如果用户已经登陆,放行, 如果用户未登陆,跳转到登陆页面
+- 有一个登陆页面，需要写一个controller访问页面
+- 登陆页面有一提交表单的动作，需要在controller中处理，判断用户名密码是否正确，如果正确，向session中写入用户信息，返回登陆成功
+- 拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行, 如果用户未登陆，跳转到登陆页面
 
 **测试**:
 

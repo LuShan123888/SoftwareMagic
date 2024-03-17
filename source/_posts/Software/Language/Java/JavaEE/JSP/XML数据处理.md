@@ -9,11 +9,11 @@ categories:
 ---
 # JSP XML 数据处理
 
-- 当通过HTTP发送XML数据时,就有必要使用JSP来处理传入和流出的XML文档了,比如RSS文档,作为一个XML文档,它仅仅只是一堆文本而已,使用JSP创建XML文档并不比创建一个HTML文档难
+- 当通过HTTP发送XML数据时，就有必要使用JSP来处理传入和流出的XML文档了，比如RSS文档，作为一个XML文档，它仅仅只是一堆文本而已，使用JSP创建XML文档并不比创建一个HTML文档难
 
 ## 使用JSP发送XML
 
-- 使用JSP发送XML内容就和发送HTML内容一样,唯一的不同就是您需要把页面的context属性设置为text/xml,要设置context属性,使用`<%@page % >`命令,就像这样:
+- 使用JSP发送XML内容就和发送HTML内容一样，唯一的不同就是您需要把页面的context属性设置为text/xml,要设置context属性，使用`<%@page % >`命令，就像这样:
 
 ```jsp
 <%@ page contentType="text/xml" %>
@@ -33,11 +33,11 @@ categories:
 </books>
 ```
 
-- 使用不同的浏览器来访问这个例子,看看这个例子所呈现的文档树
+- 使用不同的浏览器来访问这个例子，看看这个例子所呈现的文档树
 
 ## 在JSP中处理XML
 
-- 在使用JSP处理XML之前,您需要将与XML 和XPath相关的两个库文件放在`<Tomcat Installation Directory>\lib`目录下:
+- 在使用JSP处理XML之前，您需要将与XML 和XPath相关的两个库文件放在`<Tomcat Installation Directory>\lib`目录下:
     - XercesImpl.jar:在这下载http://www.apache.org/dist/xerces/j/
     - xalan.jar:在这下载http://archive.apache.org/dist/xml/xalan-j/
 - `books.xml`文件:

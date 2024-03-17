@@ -17,15 +17,15 @@ Thrif提供的网络服务模型包括阻塞服务模型与非阻塞服务模型
 
 ## TServer
 
-TServer定义了静态内部类Args，Args继承自抽象类AbstractServerArgs。AbstractServerArgs采用了建造者模式,向TServer提供各种工厂:
+TServer定义了静态内部类Args，Args继承自抽象类AbstractServerArgs。AbstractServerArgs采用了建造者模式，向TServer提供各种工厂:
 
 | 工厂属性               | 工厂类型          | 作用                                            |
 | ---------------------- | ----------------- | ----------------------------------------------- |
-| ProcessorFactory       | TProcessorFactory | 处理层工厂类,用于具体的TProcessor对象的创建     |
-| InputTransportFactory  | TTransportFactory | 传输层输入工厂类,用于具体的TTransport对象的创建 |
-| OutputTransportFactory | TTransportFactory | 传输层输出工厂类,用于具体的TTransport对象的创建 |
-| InputProtocolFactory   | TProtocolFactory  | 协议层输入工厂类,用于具体的TProtocol对象的创建  |
-| OutputProtocolFactory  | TProtocolFactory  | 协议层输出工厂类,用于具体的TProtocol对象的创建  |
+| ProcessorFactory       | TProcessorFactory | 处理层工厂类，用于具体的TProcessor对象的创建     |
+| InputTransportFactory  | TTransportFactory | 传输层输入工厂类，用于具体的TTransport对象的创建 |
+| OutputTransportFactory | TTransportFactory | 传输层输出工厂类，用于具体的TTransport对象的创建 |
+| InputProtocolFactory   | TProtocolFactory  | 协议层输入工厂类，用于具体的TProtocol对象的创建  |
+| OutputProtocolFactory  | TProtocolFactory  | 协议层输出工厂类，用于具体的TProtocol对象的创建  |
 
 TServer的三个方法:`serve()`,`stop()`和`isServing()`,`serve()`用于启动服务,`stop()`用于关闭服务,`isServing()`用于检测服务的起停状态
 
@@ -37,7 +37,7 @@ TSimpleServer的工作模式采用最简单的阻塞IO，实现方法相对，�
 
 ## TThreadPoolServer
 
-TThreadPoolServer模式采用阻塞socket方式工作,主线程负责阻塞式监听是否有新socket到来,具体的业务处理交由一个线程池来处理
+TThreadPoolServer模式采用阻塞socket方式工作，主线程负责阻塞式监听是否有新socket到来，具体的业务处理交由一个线程池来处理
 
 **优点**
 
@@ -53,7 +53,7 @@ TThreadPoolServer模式采用阻塞socket方式工作,主线程负责阻塞式�
 
 ## TNonblockingServer
 
-TNonblockingServer模式也是单线程工作,但是采用NIO的模式,利用IO多路复用模型处理socket就绪事件,对于有数据到来的socket进行数据读取操作,对于有数据发送的socket则进行数据发送娱作,对于监听socke侧产生一个新业务socket并将其注册到selector上
+TNonblockingServer模式也是单线程工作，但是采用NIO的模式，利用IO多路复用模型处理socket就绪事件，对于有数据到来的socket进行数据读取操作，对于有数据发送的socket则进行数据发送娱作，对于监听socke侧产生一个新业务socket并将其注册到selector上
 
 **注意**:TNonblockingServer要求底层的传输通道必须使用TFramedTransport
 
@@ -65,7 +65,7 @@ TNonblockingServer模式也是单线程工作,但是采用NIO的模式,利用IO�
 
 鉴于TNonblockingServer的缺点,THsHaserver继承于TNonblockingserver,引入了线程池提高了任务处理的并发能力
 
-**注意**:THsHaServer和TNonblockingServer一样,要求底层的传输通道必须使用TFramedTransport
+**注意**:THsHaServer和TNonblockingServer一样，要求底层的传输通道必须使用TFramedTransport
 
 **优点**：THSHaServer与TNonblockingServer模式相比，THSHaServer在完成数据读取之后，将业务处理过程交由一个线程池来完成，主线程直接返回进行下一次循环操作，效率大大提升
 
@@ -73,13 +73,13 @@ TNonblockingServer模式也是单线程工作,但是采用NIO的模式,利用IO�
 
 ## TThreadedSelectorServer
 
-ThreadedSelectorserver是对THSHaServer的一种扩充,它将selector中的读写IO事件(read/write)从主线程中分离出来.同时3入 worker工作线程池
+ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件(read/write)从主线程中分离出来.同时3入 worker工作线程池
 
-TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型,它内部有如下部分构成:
+TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型，它内部有如下部分构成:
 
 - —个AcceptThread专门用于处理监听socket上的新连接
 - 若干个SelectorThread专门用于处理业务socket的网络I/O读写操作，所有网络数据的读写均是有这些线程来完成
-- 一个负载均衡器SelectorThreadLoadBalancer对象,主要用于AcceptThread线程接收到一个新socket连接请求时,决定将这个新连求分配给哪个SelectorThread线程
-- 一个ExecutorService类型的工作线程池,在SelectorThread线程中,监听到有业务socket中有调用请求过来,则将请求数据读取之后,交给ExecutorService线程池中的线程完成此次调用的具体执行.主要用于处理每个RPC请求的handler回调处理
+- 一个负载均衡器SelectorThreadLoadBalancer对象，主要用于AcceptThread线程接收到一个新socket连接请求时，决定将这个新连求分配给哪个SelectorThread线程
+- 一个ExecutorService类型的工作线程池，在SelectorThread线程中，监听到有业务socket中有调用请求过来，则将请求数据读取之后，交给ExecutorService线程池中的线程完成此次调用的具体执行.主要用于处理每个RPC请求的handler回调处理
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023059587.png" alt="image-20220528023059587" style="zoom:50%;" />

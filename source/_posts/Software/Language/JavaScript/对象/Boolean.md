@@ -27,4 +27,4 @@ var myBoolean=new Boolean();
     - false
     - undefined
     - NaN
-- 那么对象的值为 false,否则,其值为 true(即使当变量值为字符串 "false" 时)
+- 那么对象的值为 false,否则，其值为 true(即使当变量值为字符串 "false" 时)

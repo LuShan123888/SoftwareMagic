@@ -7,7 +7,7 @@ categories:
 ---
 # Kafka Eagle
 
-- Kafka Eagle是开源可视化和管理软件,它允许您查询,可视化,提醒和探索您的指标,无论它们存储在哪里,简单地说,它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
+- Kafka Eagle是开源可视化和管理软件，它允许您查询，可视化，提醒和探索您的指标，无论它们存储在哪里，简单地说，它为您提供了将kafka集群数据转换为漂亮的图形和可视化的工具
 
 ## Docker
 
@@ -124,7 +124,7 @@ $ docker build -t lushan123888/kafka-eagle:2.0.8 --build-arg version=2.0.8 .
 
 ## 使用
 
-1. 运行kafka server前,需设置JMX_PORT,否则Kafka Eagle 后台提示连接失败,执行命令行`$ export JMX_PORT=9999`设置JMX_PORT
-2. 打开浏览器,在地址栏输入`http://localhost:8048/`,然后在登录页面,输入在配置文件设置的账号与密码
+1. 运行kafka server前，需设置JMX_PORT,否则Kafka Eagle 后台提示连接失败，执行命令行`$ export JMX_PORT=9999`设置JMX_PORT
+2. 打开浏览器，在地址栏输入`http://localhost:8048/`,然后在登录页面，输入在配置文件设置的账号与密码
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-18-22.png)

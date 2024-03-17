@@ -7,44 +7,44 @@ categories:
 ---
 # macOS 键盘快捷键
 
-- 您可以按下某些组合键来实现通常需要鼠标,触控板或其他输入设备才能完成的操作
-- 要使用键盘快捷键,请按住一个或多个修饰键,然后按快捷键的最后一个键,例如,要使用 Command-C(拷贝),请按住 Command 键并按 C 键,然后同时松开这两个键,Mac 菜单和键盘通常[对某些按键使用符号](https://support.apple.com/zh-cn/guide/mac-help/what-are-those-symbols-shown-in-menus-cpmh0011/mac),其中包括以下修饰键:
+- 您可以按下某些组合键来实现通常需要鼠标，触控板或其他输入设备才能完成的操作
+- 要使用键盘快捷键，请按住一个或多个修饰键，然后按快捷键的最后一个键，例如，要使用 Command-C(拷贝),请按住 Command 键并按 C 键，然后同时松开这两个键,Mac 菜单和键盘通常[对某些按键使用符号](https://support.apple.com/zh-cn/guide/mac-help/what-are-those-symbols-shown-in-menus-cpmh0011/mac),其中包括以下修饰键:
     - Command(或 Cmd)⌘
     - Shift ⇧
     - Option(或 Alt)⌥
     - Control(或 Ctrl)⌃
-- 在 Windows PC 专用键盘上,请用 Alt 键代替 Option 键,用 Windows 标志键代替 Command 键
-- Apple 键盘上的某些按键具有特殊符号和功能,例如显示屏亮度,键盘亮度 ,调度中心等,如果您的键盘上没有这些功能,您也许可以通过[创建自己的键盘快捷键](https://support.apple.com/zh-cn/guide/mac-help/create-keyboard-shortcuts-for-apps-mchlp2271/mac)来实现其中的一些功能,要将这些键用作 F1,F2,F3 或其他标准功能键,请将它们与 Fn 键组合使用
+- 在 Windows PC 专用键盘上，请用 Alt 键代替 Option 键，用 Windows 标志键代替 Command 键
+- Apple 键盘上的某些按键具有特殊符号和功能，例如显示屏亮度，键盘亮度，调度中心等，如果您的键盘上没有这些功能，您也许可以通过[创建自己的键盘快捷键](https://support.apple.com/zh-cn/guide/mac-help/create-keyboard-shortcuts-for-apps-mchlp2271/mac)来实现其中的一些功能，要将这些键用作 F1,F2,F3 或其他标准功能键，请将它们与 Fn 键组合使用
 
-## 剪切,拷贝,粘贴和其他常用快捷键
+## 剪切，拷贝，粘贴和其他常用快捷键
 
 快捷键|操作
 :---:|:---:
 **Command-X**|剪切所选项并拷贝到剪贴板
-**Command-C**|将所选项拷贝到剪贴板,这同样适用于"访达”中的文件
-**Command-V**|将剪贴板的内容粘贴到当前文稿或 App 中,这同样适用于"访达”中的文件
-**Command-Z**|撤销上一个命令,随后您可以按 Shift-Command-Z 来重做,从而反向执行撤销命令,在某些 App 中,您可以撤销和重做多个命令
+**Command-C**|将所选项拷贝到剪贴板，这同样适用于"访达”中的文件
+**Command-V**|将剪贴板的内容粘贴到当前文稿或 App 中，这同样适用于"访达”中的文件
+**Command-Z**|撤销上一个命令，随后您可以按 Shift-Command-Z 来重做，从而反向执行撤销命令，在某些 App 中，您可以撤销和重做多个命令
 **Command-A**|全选各项
 **Command-F**|查找文稿中的项目或打开"查找”窗口
 **Command-G**|再次查找
-**Command-H**|隐藏最前面的 App 的窗口,要查看最前面的 App 但隐藏所有其他 App,请按 Option-Command-H
-**Command-M**|将最前面的窗口最小化至"程序坞”,要最小化最前面的 App 的所有窗口,请按 Option-Command-M
-**Command-O**|打开所选项,或打开一个对话框以选择要打开的文件
+**Command-H**|隐藏最前面的 App 的窗口，要查看最前面的 App 但隐藏所有其他 App,请按 Option-Command-H
+**Command-M**|将最前面的窗口最小化至"程序坞”,要最小化最前面的 App 的所有窗口，请按 Option-Command-M
+**Command-O**|打开所选项，或打开一个对话框以选择要打开的文件
 **Command-P**|打印当前文稿
 **Command-S**|存储当前文稿
 **Command-T**|打开新标签页
-**Command-W**|关闭最前面的窗口,要关闭 App 的所有窗口,请按下 Option-Command-W
+**Command-W**|关闭最前面的窗口，要关闭 App 的所有窗口，请按下 Option-Command-W
 **Option-Command-Esc**|[强制退出](https://support.apple.com/zh-cn/HT201276) App
-**Command–空格键**|显示或隐藏"[聚焦](https://support.apple.com/zh-cn/HT201744)”搜索栏,要从"访达”窗口执行"聚焦”搜索,请按 Command–Option–空格键,(如果您[使用多个输入源](https://support.apple.com/zh-cn/guide/mac-help/type-in-another-language-with-input-sources-mchlp1406/mac)以便用不同的语言键入内容,这些快捷键会更改输入源而非显示"聚焦”,了解如何[更改冲突的键盘快捷键](https://support.apple.com/zh-cn/guide/mac-help/change-a-conflicting-keyboard-shortcut-mh35591/mac),)
-**Control-Command–空格键**|显示字符检视器,您可以从中选择[表情符号和其他符号](https://support.apple.com/zh-cn/HT201586)
+**Command–空格键**|显示或隐藏"[聚焦](https://support.apple.com/zh-cn/HT201744)”搜索栏，要从"访达”窗口执行"聚焦”搜索，请按 Command–Option–空格键,(如果您[使用多个输入源](https://support.apple.com/zh-cn/guide/mac-help/type-in-another-language-with-input-sources-mchlp1406/mac)以便用不同的语言键入内容，这些快捷键会更改输入源而非显示"聚焦”,了解如何[更改冲突的键盘快捷键](https://support.apple.com/zh-cn/guide/mac-help/change-a-conflicting-keyboard-shortcut-mh35591/mac),)
+**Control-Command–空格键**|显示字符检视器，您可以从中选择[表情符号和其他符号](https://support.apple.com/zh-cn/HT201586)
 **Control-Command-F**|全屏使用 App(如果 App 支持)
 **空格键**|使用[快速查看](https://support.apple.com/zh-cn/guide/mac-help/quick-look-files-and-folders-mh14119/mac)来预览所选项
 **Command-Tab**|在打开的 App 中切换到下一个最近使用的 App
-**Shift-Command-5**|在 [macOS Mojave 或更高版本](https://support.apple.com/zh-cn/HT201260)中,拍摄截屏或录制屏幕,也可以使用 Shift-Command-3 或 Shift-Command-4 来拍摄截屏,[进一步了解截屏](https://support.apple.com/zh-cn/HT201361)
+**Shift-Command-5**|在 [macOS Mojave 或更高版本](https://support.apple.com/zh-cn/HT201260)中，拍摄截屏或录制屏幕，也可以使用 Shift-Command-3 或 Shift-Command-4 来拍摄截屏,[进一步了解截屏](https://support.apple.com/zh-cn/HT201361)
 **Shift-Command-N**|在"访达”中创建一个新文件夹
 **Command-逗号 (,)**|打开最前面的 App 的偏好设置
 
-## 睡眠,退出登录和关机快捷键
+## 睡眠，退出登录和关机快捷键
 
 ## 访达和系统快捷键
 快捷键|操作
@@ -53,10 +53,10 @@ categories:
 **Command-E**|推出所选磁盘或宗卷
 **Command-F**|在"访达”窗口中开始"聚焦”搜索
 **Command-I**|显示所选文件的"显示简介”窗口
-**Command-R**|(1) 如果在"访达”中选择了某个别名:显示所选别名对应的原始文件,(2) 在某些 App(如"日历”或 Safari 浏览器)中,刷新或重新载入页面,(3) 在["软件更新”偏好设置](https://support.apple.com/zh-cn/HT201541)中,再次检查有没有软件更新
+**Command-R**|(1) 如果在"访达”中选择了某个别名:显示所选别名对应的原始文件,(2) 在某些 App(如"日历”或 Safari 浏览器)中，刷新或重新载入页面,(3) 在["软件更新”偏好设置](https://support.apple.com/zh-cn/HT201541)中，再次检查有没有软件更新
 **Shift-Command-C**|打开"电脑”窗口
 **Shift-Command-D**|打开"桌面”文件夹
-**Shift-Command-F**|打开"最近使用”窗口,其中显示了您最近查看或更改过的所有文件
+**Shift-Command-F**|打开"最近使用”窗口，其中显示了您最近查看或更改过的所有文件
 **Shift-Command-G**|打开"前往文件夹”窗口
 **Shift-Command-H**|打开当前 macOS 用户帐户的个人文件夹
 **Shift-Command-I**|打开 iCloud 云盘
@@ -93,29 +93,29 @@ categories:
 **Command–上箭头**|打开包含当前文件夹的文件夹
 **Command–Control–上箭头**|在新窗口中打开包含当前文件夹的文件夹
 **Command–下箭头**|打开所选项
-**右箭头**|打开所选文件夹,这个快捷键仅在列表视图中有效
-**左箭头**|关闭所选文件夹,这个快捷键仅在列表视图中有效
+**右箭头**|打开所选文件夹，这个快捷键仅在列表视图中有效
+**左箭头**|关闭所选文件夹，这个快捷键仅在列表视图中有效
 **Command-Delete**|将所选项移到废纸篓
 **Shift-Command-Delete**|清倒废纸篓
 **Option-Shift-Command-Delete**|清倒废纸篓而不显示确认对话框
 **Command–调高亮度**|打开或关闭[目标显示器模式](https://support.apple.com/zh-cn/HT204592)
-**Command–调低亮度**|当您的 Mac 连接到多台显示器时,打开或关闭[视频镜像](https://support.apple.com/zh-cn/HT202351#mirroring)
-**Option–调高亮度**|打开"显示器”偏好设置,这个快捷键可与任一亮度键搭配使用
+**Command–调低亮度**|当您的 Mac 连接到多台显示器时，打开或关闭[视频镜像](https://support.apple.com/zh-cn/HT202351#mirroring)
+**Option–调高亮度**|打开"显示器”偏好设置，这个快捷键可与任一亮度键搭配使用
 **Control–调高亮度**或 **Control–调低亮度**|更改外部显示器的亮度(如果显示器支持)
-**Option-Shift–调高亮度**或 **Option-Shift–调低亮度**|以较小的步幅调节显示器亮度,如果您的显示器支持,可以将 Control 键添加到此快捷键,以便在外置显示器上进行调节
+**Option-Shift–调高亮度**或 **Option-Shift–调低亮度**|以较小的步幅调节显示器亮度，如果您的显示器支持，可以将 Control 键添加到此快捷键，以便在外置显示器上进行调节
 **Option–"调度中心”**|打开"调度中心”偏好设置
 **Command–调度中心**|显示桌面
 **Control–下箭头**|显示最前面的 App 的所有窗口
-**Option–调高音量**|打开"声音”偏好设置,这个快捷键可与任一音量键搭配使用
+**Option–调高音量**|打开"声音”偏好设置，这个快捷键可与任一音量键搭配使用
 **Option-Shift–调高音量**或 **Option-Shift–调低音量**|以较小的步幅调节音量
 **Option–键盘调高亮度**|打开"键盘”偏好设置,
 **Option-Shift–键盘调高亮度**或 **Option-Shift–键盘调低亮度**|以较小的步幅调节键盘亮度
-**连按 Option 键**|在单独的窗口中打开项目,然后关闭原始窗口
+**连按 Option 键**|在单独的窗口中打开项目，然后关闭原始窗口
 **连按 Command 键**|在单独的标签页或窗口中打开文件夹
-**按住 Command 键拖移到另一个宗卷**|将拖移的项目移到另一个宗卷,而不是拷贝它
-**按住 Option 键拖移**|拷贝托移的项目,拖移项目时指针会随之变化
-**拖移时按住 Option-Command**|为拖移的项目制作替身,拖移项目时指针会随之变化
-**按住 Option 键点按开合三角**|打开所选文件夹内的所有文件夹,这个快捷键仅在列表视图中有效
+**按住 Command 键拖移到另一个宗卷**|将拖移的项目移到另一个宗卷，而不是拷贝它
+**按住 Option 键拖移**|拷贝托移的项目，拖移项目时指针会随之变化
+**拖移时按住 Option-Command**|为拖移的项目制作替身，拖移项目时指针会随之变化
+**按住 Option 键点按开合三角**|打开所选文件夹内的所有文件夹，这个快捷键仅在列表视图中有效
 **按住 Command 键点按窗口标题**|查看包含当前文件夹的文件夹
 [了解如何使用 Command 或 Shift 在"访达”中选择多个项目](https://support.apple.com/zh-cn/guide/mac-help/select-items-mchlp1378)
 点按"访达”菜单栏中的"前往”菜单查看用于打开许多常用文件夹(如"应用程序”,"文稿”,"下载”,"实用工具”和"iCloud 云盘”)的快捷键
@@ -126,19 +126,19 @@ categories:
 
 快捷键|操作
 :---:|:---:
-**Command-B**|以粗体显示所选文本,或者打开或关闭粗体显示功能
-**Command-I**|以斜体显示所选文本,或者打开或关闭斜体显示功能
+**Command-B**|以粗体显示所选文本，或者打开或关闭粗体显示功能
+**Command-I**|以斜体显示所选文本，或者打开或关闭斜体显示功能
 **Command-K**|添加网页链接
-**Command-U**|对所选文本加下划线,或者打开或关闭加下划线功能
+**Command-U**|对所选文本加下划线，或者打开或关闭加下划线功能
 **Command-T**|显示或隐藏"字体”窗口
 **Command-D**|从"打开”对话框或"存储”对话框内选择"桌面”文件夹
 **Control-Command-D**|显示或隐藏所选字词的定义
 **Shift-Command–冒号`:`**|显示"拼写和语法”窗口
 **Command–分号`;`**|查找文稿中拼写错误的字词
 **Option-Delete**|删除插入点左边的字词
-**Control-H**|删除插入点左边的字符,也可以使用 Delete 键
-**Control-D**|删除插入点右边的字符,也可以使用 Fn-Delete
-**Fn-Delete**|在没有向前删除  键的键盘上向前删除,也可以使用 Control-D
+**Control-H**|删除插入点左边的字符，也可以使用 Delete 键
+**Control-D**|删除插入点右边的字符，也可以使用 Fn-Delete
+**Fn-Delete**|在没有向前删除  键的键盘上向前删除，也可以使用 Control-D
 **Control-K**|删除插入点与行或段落末尾处之间的文本
 **Fn–上箭头**|Page Up
 **Fn–下箭头**|Page Down
@@ -158,10 +158,10 @@ categories:
 **Shift–下箭头**|将文本选择范围扩展到下一行相同水平位置的最近字符处
 **Shift–左箭头**|将文本选择范围向左扩展一个字符
 **Shift–右箭头**|将文本选择范围向右扩展一个字符
-**Option–Shift–上箭头**|将文本选择范围扩展到当前段落的段首,再按一次则扩展到下一段落的段首
-**Option–Shift–下箭头**|将文本选择范围扩展到当前段落的段尾,再按一次则扩展到下一段落的段尾
-**Option–Shift–左箭头**|将文本选择范围扩展到当前字词的词首,再按一次则扩展到后一字词的词首
-**Option–Shift–左箭头**|将文本选择范围扩展到当前字词的词尾,再按一次则扩展到后一字词的词尾
+**Option–Shift–上箭头**|将文本选择范围扩展到当前段落的段首，再按一次则扩展到下一段落的段首
+**Option–Shift–下箭头**|将文本选择范围扩展到当前段落的段尾，再按一次则扩展到下一段落的段尾
+**Option–Shift–左箭头**|将文本选择范围扩展到当前字词的词首，再按一次则扩展到后一字词的词首
+**Option–Shift–左箭头**|将文本选择范围扩展到当前字词的词尾，再按一次则扩展到后一字词的词尾
 **Control–A**|移至行或段落的开头
 **Control–E**|移至行或段落的末尾
 **Control–F**|向前移动一个字符
@@ -206,36 +206,36 @@ categories:
 
 ## Mac 上 Safari 浏览器中的键盘快捷键和手势
 
-- 除 Safari 浏览器菜单中显示的快捷键外,您还可以使用以下快捷键
+- 除 Safari 浏览器菜单中显示的快捷键外，您还可以使用以下快捷键
 
 ### 网页
 
 | 操作                                                         | 快捷键或手势                                                 |
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
-| 向上,向下,向左或向右滚动                                   | 按下箭头键,                                                 |
+| 向上，向下，向左或向右滚动                                   | 按下箭头键,                                                 |
 | 大幅度滚动                                                   | 按下箭头键时按住 Option 键,                                 |
 | 向下滚动屏幕                                                 | Page Down 键空格键                                           |
 | 向上滚动屏幕                                                 | Page Up 键Shift-空格键                                       |
 | 滚动到页面左上角或左下角                                     | Command–上箭头键或 Home 键Command–下箭头键或 End 键          |
-| 高亮显示网页上的下一项                                       | Tab 将高亮显示下一文本栏或弹出式菜单,如果在"系统偏好设置”的"键盘”面板的"快捷键”面板中选择了"所有控制”,Tab 还将高亮显示按钮和其他控制,按下 Option-Tab 会高亮显示按下 Tab 键所高亮显示的项目,以及所有其他可点按项目,若要交换 Tab 和 Option-Tab 的行为,请在 Safari 浏览器偏好设置的"高级”面板中打开"按下 Tab 键以高亮显示网页上的每一项”, |
+| 高亮显示网页上的下一项                                       | Tab 将高亮显示下一文本栏或弹出式菜单，如果在"系统偏好设置”的"键盘”面板的"快捷键”面板中选择了"所有控制”,Tab 还将高亮显示按钮和其他控制，按下 Option-Tab 会高亮显示按下 Tab 键所高亮显示的项目，以及所有其他可点按项目，若要交换 Tab 和 Option-Tab 的行为，请在 Safari 浏览器偏好设置的"高级”面板中打开"按下 Tab 键以高亮显示网页上的每一项”, |
 | 显示所有标签页                                               | Shift-Command-\                                              |
-| 在新标签页中打开页面                                         | 按住 Command 键点按链接按住 Command 键点按书签在[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)中键入后,按下 Command-Return, |
-| 在新标签页中打开页面,并使该标签页成为活跃标签页             | 按住 Shift-Command 点按链接按住 Shift-Command 点按书签在智能搜索栏中键入后,按下 Shift-Command-Return, |
+| 在新标签页中打开页面                                         | 按住 Command 键点按链接按住 Command 键点按书签在[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)中键入后，按下 Command-Return, |
+| 在新标签页中打开页面，并使该标签页成为活跃标签页             | 按住 Shift-Command 点按链接按住 Shift-Command 点按书签在智能搜索栏中键入后，按下 Shift-Command-Return, |
 | 使下一标签页成为活跃标签页                                   | Control-Tab 或 Shift-Command-]                               |
 | 使上一标签页成为活跃标签页                                   | Control-Shift-Tab 或 Shift-Command -[                        |
 | 选择前 9 个标签页中的一个                                    | Command-1 到 Command-9                                       |
-| 关闭全部标签页,只保留其中一个                               | 按住 Option 键点按您想要保持打开的标签页上的关闭按钮         |
+| 关闭全部标签页，只保留其中一个                               | 按住 Option 键点按您想要保持打开的标签页上的关闭按钮         |
 | 重新打开上次关闭的标签页或窗口                               | Shift-Command-T                                              |
-| 按名称查看最近访问页面的列表                                 | 按住"后退” 或"前进” 按钮,直到列表出现                       |
-| 按网址 (URL) 查看最近访问页面的列表                          | 按下 Option 键,并按住"后退”或"前进”按钮,直到列表出现       |
+| 按名称查看最近访问页面的列表                                 | 按住"后退” 或"前进” 按钮，直到列表出现                       |
+| 按网址 (URL) 查看最近访问页面的列表                          | 按下 Option 键，并按住"后退”或"前进”按钮，直到列表出现       |
 | 前往主页                                                     | Command-Home 键                                              |
-| 在[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)中键入时,恢复当前网页地址 | Esc 键                                                       |
+| 在[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)中键入时，恢复当前网页地址 | Esc 键                                                       |
 | 关闭阅读器                                                   | Esc 键                                                       |
 | 退出全屏幕视图                                               | Esc 键                                                       |
 | 下载链接文件                                                 | 按住 Option 键点按文件的链接                                 |
 | 打开下载的文件                                               | 连按下载列表中的文件                                         |
 | 缩放网站内容                                                 | 按下 Command-加号 (+) 或 Command-减号 (–)                    |
-| 缩放网站文本                                                 | 选取"显示”>"使文本变大”或"显示”>"使文本变小”时,按下 Option 键, |
+| 缩放网站文本                                                 | 选取"显示”>"使文本变大”或"显示”>"使文本变小”时，按下 Option 键, |
 | 定位焦点到地址栏                                             | Control+L                                                    |
 
 ### 阅读列表
@@ -245,13 +245,13 @@ categories:
 | 显示或隐藏阅读列表边栏 | Control-Command-2                                            |
 | 添加当前页面           | Shift-Command-D                                              |
 | 添加链接页面           | 按住 Shift 键点按页面的链接                                  |
-| 移除页面               | 按住 Control 键点按边栏中的页面摘要,然后选取"移除项目”,您也可以在页面摘要上向左轻扫,然后点按"移除”,或者,一直向左轻扫直至页面摘要消失, |
+| 移除页面               | 按住 Control 键点按边栏中的页面摘要，然后选取"移除项目”,您也可以在页面摘要上向左轻扫，然后点按"移除”,或者，一直向左轻扫直至页面摘要消失, |
 
 ### 书签
 
 | 操作                                     | 快捷键或手势                                                 |
 | :--------------------------------------- | :----------------------------------------------------------- |
-| 将书签添加到"个人收藏”栏                 | 点按[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)以显示页面的完整地址及其图标,然后将图标拖移到"个人收藏”栏 |
+| 将书签添加到"个人收藏”栏                 | 点按[智能搜索栏](https://support.apple.com/zh-cn/guide/safari/aside/glos5a7c4a65/13.0/mac/10.15)以显示页面的完整地址及其图标，然后将图标拖移到"个人收藏”栏 |
 | 打开"个人收藏”栏中某个文件夹内的所有书签 | 按住 Command 键点按"个人收藏”栏中的文件夹                    |
 | 在"个人收藏”栏上移动书签                 | 左右拖移书签                                                 |
 | 从"个人收藏”栏移除书签                   | 将书签拖移到个人收藏栏外                                     |
@@ -266,33 +266,33 @@ categories:
 | 打开所选书签                                 | 空格键                                                       |
 | 打开所选文件夹                               | 空格键或右箭头键                                             |
 | 关闭所选文件夹                               | 空格键或左箭头键                                             |
-| 更改书签的名称或地址                         | 选择书签,然后按下 Return 键您还可以[用力点按](https://support.apple.com/zh-cn/guide/safari/aside/glosb234ba05/13.0/mac/10.15)书签 |
+| 更改书签的名称或地址                         | 选择书签，然后按下 Return 键您还可以[用力点按](https://support.apple.com/zh-cn/guide/safari/aside/glosb234ba05/13.0/mac/10.15)书签 |
 | 取消编辑边栏中的书签名称                     | Esc 键                                                       |
 | 完成编辑书签名称                             | Return 键                                                    |
 | 创建包含书签视图中的所选书签和文件夹的文件夹 | 按下 Option 键点按右上角附近的"新建文件夹”按钮               |
-| 删除书签                                     | 选择书签,然后按下 Delete 键                                 |
+| 删除书签                                     | 选择书签，然后按下 Delete 键                                 |
 
 ## Mac 的启动组合键
 
-- 若要使用这些组合键中的任何一个,请在按下电源按钮以[开启 Mac](https://support.apple.com/zh-cn/HT201150) 后或在 Mac 开始重新启动后,立即按住相应按键,请一直按住,直至电脑出现对应的行为
+- 若要使用这些组合键中的任何一个，请在按下电源按钮以[开启 Mac](https://support.apple.com/zh-cn/HT201150) 后或在 Mac 开始重新启动后，立即按住相应按键，请一直按住，直至电脑出现对应的行为
 - 如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),这些组合键全都会被停用(下文中另有注明的组合键除外)
 
 快捷键    | 操作
 :---: | :---:
- **Command (⌘)-R** | 从内建的 [macOS 恢复](https://support.apple.com/zh-cn/HT201314)系统启动,或者,您也可以使用 Option-Command-R 或 Shift-Option-Command-R 以通过互联网从 macOS 恢复功能启动,[macOS 恢复功能可以安装不同版本的 macOS](https://support.apple.com/zh-cn/HT204904),具体取决于您在电脑启动时使用的组合键,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
+ **Command (⌘)-R** | 从内建的 [macOS 恢复](https://support.apple.com/zh-cn/HT201314)系统启动，或者，您也可以使用 Option-Command-R 或 Shift-Option-Command-R 以通过互联网从 macOS 恢复功能启动,[macOS 恢复功能可以安装不同版本的 macOS](https://support.apple.com/zh-cn/HT204904),具体取决于您在电脑启动时使用的组合键，如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
 **Option (⌥)**|启动进入"[启动管理器](https://support.apple.com/zh-cn/HT202796)”,您可以从中选取其他启动磁盘或宗卷(若可用),如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
 **Option-Command-P-R**|[重置 NVRAM](https://support.apple.com/zh-cn/HT204063) 或 PRAM,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),它会忽略这个组合键或从 macOS 恢复功能启动
 **Shift (⇧)**|以[安全模式](https://support.apple.com/zh-cn/HT201262)启动
-**D**|从内建的 [Apple Hardware Test](https://support.apple.com/zh-cn/HT201257) 或"[Apple 诊断](https://support.apple.com/zh-cn/HT202731)”实用工具启动,具体取决于您的 Mac 机型,或者,您也可以使用 Option-D 通过互联网从这个实用工具启动
-**N**|从 NetBoot 服务器启动,[如果您的 Mac 支持网络启动宗卷](https://support.apple.com/zh-cn/HT202770),要使用服务器上默认的引导映像,请按住 Option-N
-**Command-S**|以[单用户模式](https://support.apple.com/zh-cn/HT201573)启动,这个组合键要求使用 [macOS High Sierra 或更早版本](https://support.apple.com/zh-cn/HT201260)
+**D**|从内建的 [Apple Hardware Test](https://support.apple.com/zh-cn/HT201257) 或"[Apple 诊断](https://support.apple.com/zh-cn/HT202731)”实用工具启动，具体取决于您的 Mac 机型，或者，您也可以使用 Option-D 通过互联网从这个实用工具启动
+**N**|从 NetBoot 服务器启动,[如果您的 Mac 支持网络启动宗卷](https://support.apple.com/zh-cn/HT202770),要使用服务器上默认的引导映像，请按住 Option-N
+**Command-S**|以[单用户模式](https://support.apple.com/zh-cn/HT201573)启动，这个组合键要求使用 [macOS High Sierra 或更早版本](https://support.apple.com/zh-cn/HT201260)
 **T**|以[目标磁盘模式](https://support.apple.com/zh-cn/HT201462)启动
 **Command-V**|以[详细模式](https://support.apple.com/zh-cn/HT201573)启动
-**推出键** (⏏),**F12**,**鼠标按钮**或**触控板按钮**|推出可移动介质,例如光盘
+**推出键** (⏏),**F12**,**鼠标按钮**或**触控板按钮**|推出可移动介质，例如光盘
 
 ## Mac 上"终端”中的键盘快捷键
 
-- 使用"终端”时,使用这些快捷键来节省时间
+- 使用"终端”时，使用这些快捷键来节省时间
 
 ### 使用"终端”窗口和标签页
 
@@ -404,15 +404,15 @@ categories:
 | :---------: | :----------------------------------------------------: |
 | Command + ← |                    到行首(不管折行)                    |
 | Command + → |                         到行尾                         |
-| Control + F |        光标前进一个字符,相当于右键(F = Forward)        |
-| Control + B |       光标后退一个字符,相当于左键(B = Backward)        |
-| Control + P |           上移一行,相当于上键(P = Previous)            |
-| Control + N |             下移一行,相当于下键(N = Next)              |
-| Control + A | 移动光标到本行行首(函数如果折行,到上一行首)(A = Ahead) |
+| Control + F |        光标前进一个字符，相当于右键(F = Forward)        |
+| Control + B |       光标后退一个字符，相当于左键(B = Backward)        |
+| Control + P |           上移一行，相当于上键(P = Previous)            |
+| Control + N |             下移一行，相当于下键(N = Next)              |
+| Control + A | 移动光标到本行行首(函数如果折行，到上一行首)(A = Ahead) |
 | Control + E |              移动光标到本行行尾(E = End)               |
 | Option + ←  |                      左移一个单词                      |
 | Option + →  |                      右移一个单词                      |
-| Control + K |          删除从光标开始,到一行结尾的所有字符           |
+| Control + K |          删除从光标开始，到一行结尾的所有字符           |
 | Control + D |                   删除光标右边的字符                   |
 | Control + H |                   删除光标左边的字符                   |
 | Control + W |               删除到前一个单词开始的位置               |
@@ -448,5 +448,5 @@ categories:
 | 隐藏备用屏幕                       | Option-Command-Page Up                               |
 | 打开所选内容的 man 页面            | Control-Shift-Command-问号键 (?)                     |
 | 搜索所选内容的 man 页面索引        | Control-Option-Command-斜杠 (/)                      |
-| 完整的目录或文件名称               | 在命令行上,键入一个或多个字符,然后按下 Tab 键        |
-| 显示可能的目录或文件名称补全列表   | 在命令行上,键入一个或多个字符,然后按下 Tab 键两次    |
+| 完整的目录或文件名称               | 在命令行上，键入一个或多个字符，然后按下 Tab 键        |
+| 显示可能的目录或文件名称补全列表   | 在命令行上，键入一个或多个字符，然后按下 Tab 键两次    |

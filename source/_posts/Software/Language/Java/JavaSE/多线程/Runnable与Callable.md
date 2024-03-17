@@ -11,9 +11,9 @@ categories:
 
 ## 实现Runnable接口编写多线程
 
-- 由于Java的单重继承限制,有些类必须继承其他某个类的同时又要实现线程的特性,这时可通过实现Runnable接口的方式来满足两方面的要求,Runnable接口只有一个方法`run()`,它就是线程运行时要执行的方法,只要将具体代码 写入其中即可
-- 使用Thread类的构造函数`public Thread(Runnable target)`可以将一个Runnable接口对象传递给线程,线程在调度执行其`run()`方法时将自动调用Runnable接口对象的`run()`方法
-- Thread类本身实现了Runnable接口,从其`run()`方法的设计可看出线程调度时会自动执行Runnable接口对象的`run()`方法,以下为Thread类的关键代码:
+- 由于Java的单重继承限制，有些类必须继承其他某个类的同时又要实现线程的特性，这时可通过实现Runnable接口的方式来满足两方面的要求,Runnable接口只有一个方法`run()`,它就是线程运行时要执行的方法，只要将具体代码 写入其中即可
+- 使用Thread类的构造函数`public Thread(Runnable target)`可以将一个Runnable接口对象传递给线程，线程在调度执行其`run()`方法时将自动调用Runnable接口对象的`run()`方法
+- Thread类本身实现了Runnable接口，从其`run()`方法的设计可看出线程调度时会自动执行Runnable接口对象的`run()`方法，以下为Thread类的关键代码:
 
 ```java
 class Thread implements Runnable{
@@ -28,7 +28,7 @@ class Thread implements Runnable{
 }
 ```
 
-- 将**例12-1**改用实现Runnable接口的方式实现,利用Thread类的带Runnable接口参数的构造方法创建线程,线程调度运行时,通过执行线程的`run()`方法,将转而调用TimePrinter对象的`run()`方法,不妨让`mian()`方法所在的主线程也循环执行,具体程序代码如下:
+- 将**例12-1**改用实现Runnable接口的方式实现，利用Thread类的带Runnable接口参数的构造方法创建线程，线程调度运行时，通过执行线程的`run()`方法，将转而调用TimePrinter对象的`run()`方法，不妨让`mian()`方法所在的主线程也循环执行，具体程序代码如下:
 
 ```java
 class TimePrinter implements Runnable {
@@ -66,11 +66,11 @@ class TimePrinter implements Runnable {
 }
 ```
 
-- 运行程序,会发现有3个线程在轮流执行,其中`main()`方法所在的线程,由于设置的线程睡眠时间更短,因此,得到调度运行的机会更多
+- 运行程序，会发现有3个线程在轮流执行，其中`main()`方法所在的线程，由于设置的线程睡眠时间更短，因此，得到调度运行的机会更多
 
 **[例12-2]**:一个随机选号程序
 
-有一组号码,让其滚动显示,随机选两个位置在一起的作为中奖号码,本应用让窗体实现Runnable接口,通过多线程的运作方式实现号码的滚动显示,在窗体中通过文本域显示滚动号码,通过一个按钮控制选号过程的开始和停止,线程的停止是通过一个标记变量flag来控制的
+有一组号码，让其滚动显示，随机选两个位置在一起的作为中奖号码，本应用让窗体实现Runnable接口，通过多线程的运作方式实现号码的滚动显示，在窗体中通过文本域显示滚动号码，通过一个按钮控制选号过程的开始和停止，线程的停止是通过一个标记变量flag来控制的
 
 ```java
 import java.awt.*;
@@ -120,14 +120,14 @@ class Winning extends Frame implements Runnable {
 }
 ```
 
-- **说明**:第4行定义了Winning类头,表明了该类继承Frame并实现了Runnable接口,第25行创建线程时将Winning窗体自身对象作为实参,并启动线程,线程调度运行时将执行其run()方法
+- **说明**:第4行定义了Winning类头，表明了该类继承Frame并实现了Runnable接口，第25行创建线程时将Winning窗体自身对象作为实参，并启动线程，线程调度运行时将执行其run()方法
 
 ## 实现Callable接口编写多线程
 
 > **步骤**
 >
-> 1. 创建Callable接口的实现类,并实现call()方法,该call()方法将作为线程执行体,并且有返回值
-> 2. 创建Callable实现类的实例,使用FutureTask类来包装Callable对象,该FutureTask对象封装了该Callable对象的call()方法的返回值
+> 1. 创建Callable接口的实现类，并实现call()方法，该call()方法将作为线程执行体，并且有返回值
+> 2. 创建Callable实现类的实例，使用FutureTask类来包装Callable对象，该FutureTask对象封装了该Callable对象的call()方法的返回值
 > 3. 使用FutureTask对象作为Thread对象的target创建并启动新线程
 > 4. 调用FutureTask对象的get()方法来获得子线程执行结束后的返回值
 
@@ -145,7 +145,7 @@ public class CallableTest {
     CallableTest thread = new CallableTest();
     FutureTask futureTask = new FutureTask(thread); // 适配类
     new Thread(futureTask,"A").start();
-    new Thread(futureTask,"B").start(); // 结果会被缓存,效率高
+    new Thread(futureTask,"B").start(); // 结果会被缓存，效率高
     Integer o = (Integer) futureTask.get(); //get 方法可能会产生阻塞
     // 或者使用异步通信来处理!
     System.out.println(o);

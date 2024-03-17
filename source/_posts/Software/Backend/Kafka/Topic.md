@@ -14,10 +14,10 @@ $ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --p
 ```
 
 - `--topic`:定义 topic 名
-- `--replication-factor`:定义副本数,副本数要小于等于broker数
+- `--replication-factor`:定义副本数，副本数要小于等于broker数
 - `--partitions`:定义分区数
 
-> 为了实现扩展性,一个非常大的 topic 可以分布到多个 broker(即服务器)上,一个 topic 可以分为多个 partition,每个 partition 是一个有序的队列
+> 为了实现扩展性，一个非常大的 topic 可以分布到多个 broker(即服务器)上，一个 topic 可以分为多个 partition,每个 partition 是一个有序的队列
 
 ### 查看所有Topic
 

@@ -8,7 +8,7 @@ categories:
 ---
 # Git shortlog
 
-**显示所有提交过的用户,按提交次数排序**
+**显示所有提交过的用户，按提交次数排序**
 
 ```shell
 $ git shortlog -sn

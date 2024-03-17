@@ -9,7 +9,7 @@ categories:
 # Spring MVC ModelAndView
 
 - 可由`Controller`类的`handleRequest`方法返回
-- 对于Controller的目标方法,无论其返回值是String,View,ModelMap或是ModelAndView,Spring MVC都会在内部将它们封装为一个`ModelAndView`对象进行返回
+- 对于Controller的目标方法，无论其返回值是String,View,ModelMap或是ModelAndView,Spring MVC都会在内部将它们封装为一个`ModelAndView`对象进行返回
 - 可以在该对象上设置数据与视图
 
 ## ModelAndView
@@ -73,9 +73,9 @@ public String hello(@RequestParam("username") String name, Model model){
 
 **对比**
 
-- Model 只有寥寥几个方法只适合用于储存数据,简化了新手对于Model对象的操作和理解
-- ModelMap 继承了 LinkedMap ,除了实现了自身的一些方法,同样的继承 LinkedMap 的方法和特性
-- ModelAndView 可以在储存数据的同时,可以进行设置返回的逻辑视图,进行控制展示层的跳转
+- Model 只有寥寥几个方法只适合用于储存数据，简化了新手对于Model对象的操作和理解
+- ModelMap 继承了 LinkedMap ,除了实现了自身的一些方法，同样的继承 LinkedMap 的方法和特性
+- ModelAndView 可以在储存数据的同时，可以进行设置返回的逻辑视图，进行控制展示层的跳转
 
 ## @ModelAttribute
 
@@ -176,7 +176,7 @@ public class HelloWorldController {
 }
 ```
 
-- 实际上, 不做此注释也能拿到user对象,它的作用是将该绑定的命令对象以user为名称添加到模型对象中供视图页面展示使用
+- 实际上, 不做此注释也能拿到user对象，它的作用是将该绑定的命令对象以user为名称添加到模型对象中供视图页面展示使用
 - 此时可以在视图页面使用${user.username}来获取绑定的命令对象的属性
 
 ### @ModelAttribute注释方法的返回值

@@ -11,9 +11,9 @@ categories:
 
 - Java 8 API添加了一个新的抽象称为流Stream,可以让你以一种声明的方式处理数据
 - Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象
-- Stream API可以极大提高Java程序员的生产力,让程序员写出高效率,干净,简洁的代码
-- 这种风格将要处理的元素集合看作一种流,流在管道中传输,并且可以在管道的节点上进行处理,比如筛选,排序,聚合等
-- 元素流在管道中经过中间操作(intermediate operation)的处理,最后由最终操作(terminal operation)得到前面处理的结果
+- Stream API可以极大提高Java程序员的生产力，让程序员写出高效率，干净，简洁的代码
+- 这种风格将要处理的元素集合看作一种流，流在管道中传输，并且可以在管道的节点上进行处理，比如筛选，排序，聚合等
+- 元素流在管道中经过中间操作(intermediate operation)的处理，最后由最终操作(terminal operation)得到前面处理的结果
 
 ```
 stream of elements ----> filter---->sorted----> map----> collect
@@ -34,14 +34,14 @@ List<Integer> transactionsIds =
 
 Stream(流)是一个来自数据源的元素队列并支持聚合操作
 
-- 元素是特定类型的对象,形成一个队列,Java中的Stream并不会存储元素,而是按需计算
-- **数据源** 流的来源,可以是集合,数组,I/O channel,产生器generator 等
-- **聚合操作** 类似SQL语句一样的操作,比如filter, map, reduce, find, match, sorted等
+- 元素是特定类型的对象，形成一个队列,Java中的Stream并不会存储元素，而是按需计算
+- **数据源** 流的来源，可以是集合，数组,I/O channel,产生器generator 等
+- **聚合操作** 类似SQL语句一样的操作，比如filter, map, reduce, find, match, sorted等
 
 和以前的Collection操作不同,Stream操作还有两个基础的特征:
 
-- **Pipelining**: 中间操作都会返回流对象本身,这样多个操作可以串联成一个管道,如同流式风格(fluent style),这样做可以对操作进行优化,比如延迟执行(laziness)和短路( short-circuiting)
-- **内部迭代**:以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代,这叫做外部迭代,Stream提供了内部迭代的方式,通过访问者模式(Visitor)实现
+- **Pipelining**: 中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格(fluent style),这样做可以对操作进行优化，比如延迟执行(laziness)和短路( short-circuiting)
+- **内部迭代**:以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代，这叫做外部迭代,Stream提供了内部迭代的方式，通过访问者模式(Visitor)实现
 
 ## 流处理的特性
 
@@ -49,7 +49,7 @@ Stream(流)是一个来自数据源的元素队列并支持聚合操作
 - 不会改变数据源
 - 不可以重复使用
 - 通过连续执行多个操作倒便就组成了 Stream 中的执行管道(pipeline)
-- 需要注意的是这些管道被添加后并不会真正执行,只有等到调用终值操作之后才会执行
+- 需要注意的是这些管道被添加后并不会真正执行，只有等到调用终值操作之后才会执行
 
 ## 生成流
 
@@ -112,9 +112,9 @@ Stream.iterate(0, n -> n + 2).limit(10).forEach(System.out::println);
 
 ### peek()
 
-- 提供了一种对流中所有元素操作的方法,生成一个包含原Stream的所有元素的新Stream,同时会提供一个消费函数(Consumer实例)
+- 提供了一种对流中所有元素操作的方法，生成一个包含原Stream的所有元素的新Stream,同时会提供一个消费函数(Consumer实例)
 - 新Stream每个元素被消费的时候都会执行给定的消费函数
-- 一般不推荐使用,文档提示:该方法主要用于调试,做一些消耗这个对象但不修改它的东西(发送通知,打印模型等)
+- 一般不推荐使用，文档提示:该方法主要用于调试，做一些消耗这个对象但不修改它的东西(发送通知，打印模型等)
 
 ```java
 Stream.of("1", "2", "3", "4")
@@ -198,7 +198,7 @@ random.ints().limit(10).sorted().forEach(System.out::println);
 
 ## 终值操作(terminal)
 
-在调用该方法后,将执行之前所有的中间操作,并返回结果
+在调用该方法后，将执行之前所有的中间操作，并返回结果
 
 ### toArray()
 
@@ -209,7 +209,7 @@ List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 List<Integer> list = numbers.stream().toArray();
 ```
 
-- 若是对象数组,则要在 toArray 里面加上 生产对象数组的方法引用
+- 若是对象数组，则要在 toArray 里面加上 生产对象数组的方法引用
 
 ```java
 //Integer 数组
@@ -232,11 +232,11 @@ random.ints().limit(10).forEach(System.out::println);
 
 - Stream 接口中 `collect()` 使用Collector做参数
 
-- Collectors类实现了很多归约操作,例如将流转换成集合和聚合元素
+- Collectors类实现了很多归约操作，例如将流转换成集合和聚合元素
 
 - Collectors可用于返回列表或字符串
 
-- Collectors 被指定和四个函数一起工作,并实现累加 entries 到一个可变的结果容器,并可选择执行该结果的最终变换,这四个函数就是:
+- Collectors 被指定和四个函数一起工作，并实现累加 entries 到一个可变的结果容器，并可选择执行该结果的最终变换，这四个函数就是:
 
     | 接口函数      | 作用                           | 返回值         |
     | ------------- | ------------------------------ | -------------- |
@@ -286,12 +286,12 @@ applestore.stream().collect(aceragingInt(Apple::getWeight())
 #### 归约
 
 - Collectors.reducing()
-- 归约就是为了遍历数据容器,将每个元素对象转换为特定的值,通过累积函数,得到一个最终值
-- 转换函数,函数输入参数的对象类型是跟`Stream<T>`中的 T 一样的对象类型,输出的对象类型的是和初始值一样的对象类型
-- 累积函数,就是把转换函数的结果与上一次累积的结果进行一次合并,如果是第一次累积,那么取初始值来计算
-    - 累积函数还可以作用于两个`Stream<T> `合并时的累积,这个可以结合 groupingBy 来理解
-- 初始值的对象类型,和每一次累积函数输出值的对象类型是相同的,这样才能一直进行累积函数的运算
-- 归约不仅仅可以支持加法,还可以支持比如乘法以及其他更高级的累积公式
+- 归约就是为了遍历数据容器，将每个元素对象转换为特定的值，通过累积函数，得到一个最终值
+- 转换函数，函数输入参数的对象类型是跟`Stream<T>`中的 T 一样的对象类型，输出的对象类型的是和初始值一样的对象类型
+- 累积函数，就是把转换函数的结果与上一次累积的结果进行一次合并，如果是第一次累积，那么取初始值来计算
+    - 累积函数还可以作用于两个`Stream<T> `合并时的累积，这个可以结合 groupingBy 来理解
+- 初始值的对象类型，和每一次累积函数输出值的对象类型是相同的，这样才能一直进行累积函数的运算
+- 归约不仅仅可以支持加法，还可以支持比如乘法以及其他更高级的累积公式
 
 ```java
 @Test
@@ -311,21 +311,21 @@ public void reduce() {
 #### 分组
 
 - Collectors.groupingBy()
-- 分组与SQL 中的 **GROUP BY** 十分类似,所以`groupingBy()`的所有参数中有一个参数是 Collector接口,这样就能够和求和/求平均值/归约 一起使用
+- 分组与SQL 中的 **GROUP BY** 十分类似，所以`groupingBy()`的所有参数中有一个参数是 Collector接口，这样就能够和求和/求平均值/归约 一起使用
     ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg)
-- 传入参数的接口是 Function 接口,实现这个接口可以是实现从 A 类型到 B 类型的转换
-- 其中有一个方法可以传入参数 `Supplier mapFactory`,这个可以通过自定义 Map工厂,来创建自定义的分组 Map
+- 传入参数的接口是 Function 接口，实现这个接口可以是实现从 A 类型到 B 类型的转换
+- 其中有一个方法可以传入参数 `Supplier mapFactory`,这个可以通过自定义 Map工厂，来创建自定义的分组 Map
 
 #### 分区
 
 - Collectors.partitioningBy()
 - 传入参数的是 Predicate 接口
 - 分区只是分组的一种特殊形式
-- 分区相当于把流中的数据,分组分成了"正反两个阵营”
+- 分区相当于把流中的数据，分组分成了"正反两个阵营”
 
 ### summaryStatistics()
 
-产生统计结果的收集器也非常有用,它们主要用于int,double,long等基本类型上,它们可以用来产生类似如下的统计结果
+产生统计结果的收集器也非常有用，它们主要用于int,double,long等基本类型上，它们可以用来产生类似如下的统计结果
 
 ```java
 List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
@@ -346,20 +346,20 @@ Java8引入了三个原始类型特化流接口:IntStream,LongStream,DoubleStrea
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-30-1730512-20200717202104577-1160921711.jpg)
 
 - 其中 IntStream 和 LongStream 可以调用 asDoubleStream 变为 DoubleStream,但是这是单向的转化方法
-- `IntStream.boxed()`可以得到`Stream<Integer>`,这个也是一个单向方法,支持数值流转换回对象流,LongStream 和 DoubleStream 也有类似的方法
+- `IntStream.boxed()`可以得到`Stream<Integer>`,这个也是一个单向方法，支持数值流转换回对象流,LongStream 和 DoubleStream 也有类似的方法
 
 ### 生成一个数值流
 
 - IntStream.range(int startInclusive, int endExclusive)
 - IntStream.rangeClosed(int startInclusive, int endInclusive)
 - range 和 rangeClosed 的区别在于数值流是否包含 end 这个值,range 代表的区间是 [start, end) , rangeClosed 代表的区间是 [start, end]
-- LongStream 也有 range 和 rangeClosed 方法,但是 DoubleStream 没有
+- LongStream 也有 range 和 rangeClosed 方法，但是 DoubleStream 没有
 
 ### flatMap
 
-- Stream.flatMap 就是流中的每个对象,转换产生一个对象流
-- Stream.flatMapToInt 指定流中的每个对象,转换产生一个 IntStream 数值流,类似的,还有 flatMapToLong,flatMapToDouble
-- IntStream.flatMap 数值流中的每个对象,转换产生一个数值流
+- Stream.flatMap 就是流中的每个对象，转换产生一个对象流
+- Stream.flatMapToInt 指定流中的每个对象，转换产生一个 IntStream 数值流，类似的，还有 flatMapToLong,flatMapToDouble
+- IntStream.flatMap 数值流中的每个对象，转换产生一个数值流
 - flatMap 可以代替一些嵌套循环来开展业务
 
 **实例**
@@ -387,7 +387,7 @@ public void testJava() {
 }
 ```
 
-Java8之后,我们可以用上 flatMap:
+Java8之后，我们可以用上 flatMap:
 
 ```java
 @Test
@@ -402,8 +402,8 @@ public void flatMap() {
 }
 ```
 
-- 创建一个从 1 到 100 的数值范围来创建 a 的值,对每个给定的 a 值,创建一个三元数流
-- flatMap 方法在做映射的同时,还会把所有生成的三元数流扁平化成一个流
+- 创建一个从 1 到 100 的数值范围来创建 a 的值，对每个给定的 a 值，创建一个三元数流
+- flatMap 方法在做映射的同时，还会把所有生成的三元数流扁平化成一个流
 
 ## Stream 完整实例
 
@@ -446,7 +446,7 @@ public class Java8Tester {
 }
 ```
 
-执行以上程序,输出结果为:
+执行以上程序，输出结果为:
 
 ```
 列表: [abc, , bc, efg, abcd, , jkl]

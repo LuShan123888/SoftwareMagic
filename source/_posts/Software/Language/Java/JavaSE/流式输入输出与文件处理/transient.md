@@ -11,8 +11,8 @@ categories:
 
 ## transient的作用及使用方法
 
-- 一旦变量被transient修饰,变量将不再是对象持久化的一部分,该变量内容在序列化后无法获得访问
-- transient关键字只能修饰变量,而不能修饰方法和类,注意,本地变量是不能被transient关键字修饰的,变量如果是用户自定义类变量,则该类需要实现Serializable接口
+- 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问
+- transient关键字只能修饰变量，而不能修饰方法和类，注意，本地变量是不能被transient关键字修饰的，变量如果是用户自定义类变量，则该类需要实现Serializable接口
 
 ```java
 public class TransientTest {

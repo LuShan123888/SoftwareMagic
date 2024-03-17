@@ -10,24 +10,24 @@ categories:
 
 ## Hadoop 2.x 版本中的依赖 jar
 
-Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中,而是分成多个 jar,如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:
+Hadoop 2.x 版本中 jar 不再集中在一个 hadoop-core*.jar 中，而是分成多个 jar,如使用 Hadoop 2.6.0 运行 WordCount 实例至少需要如下三个 jar:
 
 - $HADOOP_HOME/share/hadoop/common/hadoop-common-2.6.0.jar
 - $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.6.0.jar
 - $HADOOP_HOME/share/hadoop/common/lib/commons-cli-1.2.jar
 
-实际上,通过命令 `hadoop classpath` 我们可以得到运行 Hadoop 程序所需的全部 classpath 信息
+实际上，通过命令 `hadoop classpath` 我们可以得到运行 Hadoop 程序所需的全部 classpath 信息
 
 ## 添加环境变量
 
-将 Hadoop 的 classhpath 信息添加到 CLASSPATH 变量中,在`~/.bashrc`中增加如下几行:
+将 Hadoop 的 classhpath 信息添加到 CLASSPATH 变量中，在`~/.bashrc`中增加如下几行:
 
 ```bash
 export HADOOP_HOME=/usr/local/hadoop
 export CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath):$CLASSPATH
 ```
 
-## 编译,打包 Hadoop MapReduce 程序
+## 编译，打包 Hadoop MapReduce 程序
 
 1. 生成`WordCount.java`
 
@@ -121,7 +121,7 @@ public class WordCount {
 javac WordCount.java
 ```
 
-- 编译时可能会有警告,可以忽略
+- 编译时可能会有警告，可以忽略
 
 3. 打包
 

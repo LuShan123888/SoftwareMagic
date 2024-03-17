@@ -10,7 +10,7 @@ categories:
 
 ## 简介
 
-- 号称世界上最流行的API框架,Restful Api 文档在线自动生成器,即API 文档 与API 定义同步更新
+- 号称世界上最流行的API框架,Restful Api 文档在线自动生成器，即API 文档 与API 定义同步更新
 - 官网:https://swagger.io/
 
 ## pom.xml
@@ -80,17 +80,17 @@ public Docket createRestApi() {
 - `select()`:配置扫描接口
 - `RequestHandlerSelectors`:配置如何扫描接口
     - `basePackage(final String basePackage)`:根据包路径扫描接口
-    - `any()`:扫描所有,项目中的所有接口都会被扫描到
+    - `any()`:扫描所有，项目中的所有接口都会被扫描到
     - `none()`:不扫描接口
-    - `withMethodAnnotation(final Class<? extends Annotation> annotation)`:通过方法上的注解扫描,如`withMethodAnnotation(GetMapping.class)`只扫描get请求
-    - `withClassAnnotation(final Class<? extends Annotation> annotation)`:通过类上的注解扫描,如`withClassAnnotation(Controller.class)`只扫描有controller注解的类中的接口
+    - `withMethodAnnotation(final Class<? extends Annotation> annotation)`:通过方法上的注解扫描，如`withMethodAnnotation(GetMapping.class)`只扫描get请求
+    - `withClassAnnotation(final Class<? extends Annotation> annotation)`:通过类上的注解扫描，如`withClassAnnotation(Controller.class)`只扫描有controller注解的类中的接口
 - `PathSelectors`:配置路径过滤
     - `any()`:任何请求都扫描
     - `none()`:任何请求都不扫描
     - `regex(final String pathRegex)`:通过正则表达式控制
     - `ant(final String antPattern)`:通过ant()控制
 - `enable()`:配置是否启用swagger
-- `groupName()`:配置分组,如果没有配置分组,默认是default,配置多个分组只需要配置多个docket即可
+- `groupName()`:配置分组，如果没有配置分组，默认是default,配置多个分组只需要配置多个docket即可
 
 ### apiInfo()
 
@@ -129,14 +129,14 @@ private List<SecurityScheme> securitySchemes() {
 | @ApiOperation("xxx接口说明")                           | 作用在接口方法上                                     |
 | @ApiModel("xxxPOJO说明")                               | 作用在模型类上:如VO,BO                             |
 | @ApiModelProperty(value = "xxx属性说明",hidden = true) | 作用在类方法和属性上,hidden设置为true可以隐藏该属性 |
-| @ApiParam("xxx参数说明")                               | 作用在参数,方法和字段上,类似@ApiModelProperty      |
+| @ApiParam("xxx参数说明")                               | 作用在参数，方法和字段上，类似@ApiModelProperty      |
 
 #### @Api()
 
-- 用于类,表示标识这个类是swagger的资源
+- 用于类，表示标识这个类是swagger的资源
     - **tags**:表示说明	
-    - **value**:也是说明,可以使用tags替代
-- **注意**:tags如果有多个值,会生成多个list
+    - **value**:也是说明，可以使用tags替代
+- **注意**:tags如果有多个值，会生成多个list
 
 ```java
 @Api(value="用户controller",tags={"用户操作接口"})
@@ -148,7 +148,7 @@ public class UserController {
 
 #### @ApiOperation()
 
-- 用于方法,表示一个http请求的操作
+- 用于方法，表示一个http请求的操作
     - **value**:用于方法描述	
     - **notes**:用于提示内容
     - **tags**:可以重新分组(视情况而用)
@@ -164,7 +164,7 @@ public class UserController {
 
 #### @ApiParam()
 
-- 用于方法,参数,字段说明,表示对参数的添加元数据(说明或是否必填等)
+- 用于方法，参数，字段说明，表示对参数的添加元数据(说明或是否必填等)
     - **name**:参数名
     - **value**:参数说明
     - **required**:是否必填
@@ -181,7 +181,7 @@ public class UserController {
 
 #### @ApiModel()
 
-- 用于类,表示对类进行说明,用于参数用实体类接收
+- 用于类，表示对类进行说明，用于参数用实体类接收
     - **value**:表示对象名
     - **description**:描述
 
@@ -203,7 +203,7 @@ public class User implements Serializable{
 
 #### @ApiModelProperty()
 
-- 用于方法,字段:表示对model属性的说明或者数据操作更改
+- 用于方法，字段:表示对model属性的说明或者数据操作更改
     - **value**:字段说明
     - **name**:重写属性名字
     - **dataType**:重写属性类型
@@ -239,7 +239,7 @@ public class User implements Serializable{
 
 #### @ApiImplicitParams()
 
--  用于方法,包含多个 @ApiImplicitParam
+-  用于方法，包含多个 @ApiImplicitParam
     - **name**:参数名
     - **value**:参数说明
     - **dataType**:数据类型

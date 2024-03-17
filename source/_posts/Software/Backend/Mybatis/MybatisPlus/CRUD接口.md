@@ -109,7 +109,7 @@ boolean updateBatchById(Collection<T> entityList, int batchSize);
 ```java
 // 根据 ID 查询
 T getById(Serializable id);
-// 根据 Wrapper, 查询一条记录,结果集, 如果是多个会抛出异常, 随机取一条加上限制条件 wrapper.last("LIMIT 1")
+// 根据 Wrapper, 查询一条记录，结果集, 如果是多个会抛出异常, 随机取一条加上限制条件 wrapper.last("LIMIT 1")
 T getOne(Wrapper<T> queryWrapper);
 // 根据 Wrapper, 查询一条记录
 T getOne(Wrapper<T> queryWrapper, boolean throwEx);
@@ -205,7 +205,7 @@ int count(Wrapper<T> queryWrapper);
 ```java
 // 链式查询 普通
 QueryChainWrapper<T> query();
-// 链式查询 lambda 式,注意:不支持 Kotlin
+// 链式查询 lambda 式，注意:不支持 Kotlin
 LambdaQueryChainWrapper<T> lambdaQuery();
 
 // 示例:
@@ -218,7 +218,7 @@ lambdaQuery().eq(Entity::getId, value).list();
 ```java
 // 链式更改 普通
 UpdateChainWrapper<T> update();
-// 链式更改 lambda 式,注意:不支持 Kotlin
+// 链式更改 lambda 式，注意:不支持 Kotlin
 LambdaUpdateChainWrapper<T> lambdaUpdate();
 
 // 示例:
@@ -320,7 +320,7 @@ int updateById(@Param(Constants.ENTITY) T entity);
 
 |    类型    |    参数名     |                             描述                             |
 | :--------: | :-----------: | :----------------------------------------------------------: |
-|     T      |    entity     |               实体对象 (set 条件值,可为 null)                |
+|     T      |    entity     |               实体对象 (set 条件值，可为 null)                |
 | Wrapper<T> | updateWrapper | 实体对象封装操作类(可以为 null,里面的 entity 用于生成 where 语句) |
 
 **实例**
@@ -355,7 +355,7 @@ List<T> selectList(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 List<T> selectByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
 // 根据 Wrapper 条件, 查询全部记录
 List<Map<String, Object>> selectMaps(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件, 查询全部记录,注意: 只返回第一个字段的值
+// 根据 Wrapper 条件, 查询全部记录，注意: 只返回第一个字段的值
 List<Object> selectObjs(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
 // 根据 entity 条件, 查询全部记录(并翻页)

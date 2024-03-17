@@ -8,7 +8,7 @@ categories:
 ---
 # Git mv
 
-- 改名文件,并且将这个改名放入暂存区
+- 改名文件，并且将这个改名放入暂存区
 
 ```shell
 $ git mv [file-original] [file-renamed]

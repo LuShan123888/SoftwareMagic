@@ -192,7 +192,7 @@ public void testAddUser() {
     User user = new User(5,"王五","zxcvbn");
     int i = mapper.addUser(user);
     System.out.println(i);
-    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.commit(); //提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```
@@ -231,7 +231,7 @@ public void testUpdateUser() {
     user.setPwd("asdfgh");
     int i = mapper.updateUser(user);
     System.out.println(i);
-    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.commit(); //提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```
@@ -266,14 +266,14 @@ public void testDeleteUser() {
     UserMapper mapper = session.getMapper(UserMapper.class);
     int i = mapper.deleteUser(5);
     System.out.println(i);
-    session.commit(); //提交事务,不写的话不会提交到数据库
+    session.commit(); //提交事务，不写的话不会提交到数据库
     session.close();
 }
 ```
 
 ## #与$的区别
 
-- `#{} `的作用主要是替换预编译语句(PrepareStatement)中的占位符,可以防止SQL注入攻击
+- `#{} `的作用主要是替换预编译语句(PrepareStatement)中的占位符，可以防止SQL注入攻击
 
 ```sql
 INSERT INTO user (name) VALUES (#{name});

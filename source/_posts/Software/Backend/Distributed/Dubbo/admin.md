@@ -8,7 +8,7 @@ categories:
 ---
 # Dubbo admin
 
-- 为了让用户更好的管理监控众多的dubbo服务,官方提供了一个可视化的监控程序dubbo-admin
+- 为了让用户更好的管理监控众多的dubbo服务，官方提供了一个可视化的监控程序dubbo-admin
 
 ## Docker
 

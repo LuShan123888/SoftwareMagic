@@ -20,7 +20,7 @@ $ git remote -v
 $ git remote show [remote]
 ```
 
-**增加一个新的远程仓库,并命名**
+**增加一个新的远程仓库，并命名**
 
 ```shell
 $ git remote add [shortname] [url]

@@ -119,7 +119,7 @@ categories:
  Win键+C | 通过语音激活Cortana
  Win键+D | 显示桌面
  Win键+E | 打开文件管理器
- Win键+G | 打开Xbox游戏录制工具栏,供用户录制游戏视频或截屏
+ Win键+G | 打开Xbox游戏录制工具栏，供用户录制游戏视频或截屏
  Win键+H | 激活Windows 10应用的分享功能
  Win键+I | 打开Windows 10设置
  Win键+K | 激活无线显示器连接或音频设备连接

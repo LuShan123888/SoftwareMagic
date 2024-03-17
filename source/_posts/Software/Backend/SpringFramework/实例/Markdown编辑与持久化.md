@@ -177,9 +177,9 @@ mybatis:
                 theme: "dark",//工具栏主题
                 previewTheme: "dark",//预览主题
                 editorTheme: "pastel-on-dark",//编辑主题
-                tex : true,                   // 开启科学公式TeX语言支持,默认关闭
-                flowChart : true,             // 开启流程图支持,默认关闭
-                sequenceDiagram : true,       // 开启时序/序列图支持,默认关闭,
+                tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+                flowChart : true,             // 开启流程图支持，默认关闭
+                sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
                 //图片上传
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
@@ -199,7 +199,7 @@ mybatis:
                             "help","info","releaseIcon", "index"]
                 },
 
-                /*自定义功能按钮,下面我自定义了2个,一个是发布,一个是返回首页*/
+                /*自定义功能按钮，下面我自定义了2个，一个是发布，一个是返回首页*/
                 toolbarIconTexts : {
                     releaseIcon : "<span bgcolor=\"gray\">发布</span>",
                     index : "<span bgcolor=\"red\">返回首页</span>",
@@ -224,7 +224,7 @@ mybatis:
 </html>
 ```
 
-- 编写Controller,进行跳转,以及保存文章
+- 编写Controller,进行跳转，以及保存文章
 
 ```java
 @Controller
@@ -295,13 +295,13 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
 }
 ```
 
-- 解决文件回显显示的问题,设置虚拟目录映射
+- 解决文件回显显示的问题，设置虚拟目录映射
 
 ```java
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
 
-    // 访问的时候使用虚路径,比如/upload/1.png映射到本机的file:user.dir/upload/1.png
+    // 访问的时候使用虚路径，比如/upload/1.png映射到本机的file:user.dir/upload/1.png
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**")
@@ -351,7 +351,7 @@ public String show(@PathVariable("id") int id,Model model){
     <body>
 
         <div>
-            <!--文章头部信息:标题,作者,最后更新日期,导航-->
+            <!--文章头部信息:标题，作者，最后更新日期，导航-->
             <h2 style="margin: auto 0" th:text="${article.title}"></h2>
             作者:<span style="float: left" th:text="${article.author}"></span>
             <!--文章主体内容-->

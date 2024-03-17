@@ -10,20 +10,20 @@ categories:
 
 ## 简介
 
-- Spring Security 是针对Spring项目的安全框架,也是Spring Boot底层安全模块默认的技术选型,可以实现强大的Web安全控制,对于安全控制,仅需要引入 spring-boot-starter-security 模块,进行少量的配置,即可实现强大的安全管理
+- Spring Security 是针对Spring项目的安全框架，也是Spring Boot底层安全模块默认的技术选型，可以实现强大的Web安全控制，对于安全控制，仅需要引入 spring-boot-starter-security 模块，进行少量的配置，即可实现强大的安全管理
 - Spring Security的两个主要目标
     - 认证(Authentication)
-        - 身份验证是关于验证您的凭据,如用户名/用户ID和密码,以验证您的身份
-        - 身份验证通常通过用户名和密码完成,有时与身份验证因素结合使用
+        - 身份验证是关于验证您的凭据，如用户名/用户ID和密码，以验证您的身份
+        - 身份验证通常通过用户名和密码完成，有时与身份验证因素结合使用
     - 授权(Authorization)
-        - 授权发生在系统成功验证您的身份后,最终会授予您访问资源(如信息,文件,数据库,资金,位置,几乎任何内容)的完全权限
-        - 这个概念是通用的,而不是只在Spring Security 中存在
+        - 授权发生在系统成功验证您的身份后，最终会授予您访问资源(如信息，文件，数据库，资金，位置，几乎任何内容)的完全权限
+        - 这个概念是通用的，而不是只在Spring Security 中存在
 
 ## 过滤器
 
-- Spring Security 基本都是通过过滤器来完成配置的身份认证,权限认证以及登出
-- Spring Security 在 Servlet 的过滤链(filter chain)中注册了一个过滤器 `FilterChainProxy`,它会把请求代理到 Spring Security 自己维护的多个过滤链,每个过滤链会匹配一些 URL,如果匹配则执行对应的过滤器,过滤链是有顺序的,一个请求只会执行第一条匹配的过滤链,Spring Security 的配置本质上就是新增,删除,修改过滤器
-- 默认情况下系统帮我们注入的这 15 个过滤器,分别对应配置不同的需求,例如 `UsernamePasswordAuthenticationFilter` 是用来使用用户名和密码登录认证的过滤器,但是很多情况下登录不止是简单的用户名和密码,又可能是用到第三方授权登录,这个时候我们就需要使用自定义过滤器
+- Spring Security 基本都是通过过滤器来完成配置的身份认证，权限认证以及登出
+- Spring Security 在 Servlet 的过滤链(filter chain)中注册了一个过滤器 `FilterChainProxy`,它会把请求代理到 Spring Security 自己维护的多个过滤链，每个过滤链会匹配一些 URL,如果匹配则执行对应的过滤器，过滤链是有顺序的，一个请求只会执行第一条匹配的过滤链,Spring Security 的配置本质上就是新增，删除，修改过滤器
+- 默认情况下系统帮我们注入的这 15 个过滤器，分别对应配置不同的需求，例如 `UsernamePasswordAuthenticationFilter` 是用来使用用户名和密码登录认证的过滤器，但是很多情况下登录不止是简单的用户名和密码，又可能是用到第三方授权登录，这个时候我们就需要使用自定义过滤器
 
 ```java
 @Override
@@ -37,11 +37,11 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ### SecurityContextHolder
 
-- `SecurityContextHolder` 存储 `SecurityContext` 对象,`SecurityContextHolder` 是一个存储代理,有三种存储模式分别是:
+- `SecurityContextHolder` 存储 `SecurityContext` 对象,`SecurityContextHolder` 是一个存储代理，有三种存储模式分别是:
     - MODE_THREADLOCAL:SecurityContext 存储在线程中
-    - MODE_INHERITABLETHREADLOCAL:`SecurityContext` 存储在线程中,但子线程可以获取到父线程中的 `SecurityContext`
+    - MODE_INHERITABLETHREADLOCAL:`SecurityContext` 存储在线程中，但子线程可以获取到父线程中的 `SecurityContext`
     - MODE_GLOBAL:`SecurityContext` 在所有线程中都相同
-- `SecurityContextHolder` 默认使用 MODE_THREADLOCAL 模式,`SecurityContext` 存储在当前线程中,调用 `SecurityContextHolder` 时不需要显示的参数传递,在当前线程中可以直接获取到 `SecurityContextHolder` 对象
+- `SecurityContextHolder` 默认使用 MODE_THREADLOCAL 模式,`SecurityContext` 存储在当前线程中，调用 `SecurityContextHolder` 时不需要显示的参数传递，在当前线程中可以直接获取到 `SecurityContextHolder` 对象
 
 ```java
 //获取当前线程里面认证的对象
@@ -57,17 +57,17 @@ SecurityContextHolder.clearContext();
 
 ### Authentication
 
-- `Authentication` 即验证,表明当前用户是谁,什么是验证,比如一组用户名和密码就是验证,当然错误的用户名和密码也是验证,只不过 Spring Security 会校验失败
+- `Authentication` 即验证，表明当前用户是谁，什么是验证，比如一组用户名和密码就是验证，当然错误的用户名和密码也是验证，只不过 Spring Security 会校验失败
 
 ```java
 public interface Authentication extends Principal, Serializable {
-    //获取用户权限,一般情况下获取到的是用户的角色信息
+    //获取用户权限，一般情况下获取到的是用户的角色信息
     Collection<? extends GrantedAuthority> getAuthorities();
-    //获取证明用户认证的信息,通常情况下获取到的是密码等信息,不过登录成功就会被移除
+    //获取证明用户认证的信息，通常情况下获取到的是密码等信息，不过登录成功就会被移除
     Object getCredentials();
-    //获取用户的额外信息,比如 IP 地址,经纬度等
+    //获取用户的额外信息，比如 IP 地址，经纬度等
     Object getDetails();
-    //获取用户身份信息,在未认证的情况下获取到的是用户名,在已认证的情况下获取到的是 UserDetails (暂时理解为,当前应用用户对象的扩展)
+    //获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展)
     Object getPrincipal();
     //获取当前 Authentication 是否已认证
     boolean isAuthenticated();
@@ -82,7 +82,7 @@ public interface Authentication extends Principal, Serializable {
 
 ```java
 public interface AuthenticationProvider {
-    //实现具体的身份认证逻辑,认证失败抛出对应的异常
+    //实现具体的身份认证逻辑，认证失败抛出对应的异常
     Authentication authenticate(Authentication authentication)
         throws AuthenticationException;
     //该认证类是否支持该 Authentication 的认证
@@ -90,7 +90,7 @@ public interface AuthenticationProvider {
 }
 ```
 
-- 接下来就是遍历 `ProviderManager` 里面的 `providers` 集合,找到和合适的 `AuthenticationProvider`完成身份认证
+- 接下来就是遍历 `ProviderManager` 里面的 `providers` 集合，找到和合适的 `AuthenticationProvider`完成身份认证
 
 ### UserDetailsService/UserDetails
 
@@ -111,7 +111,7 @@ public interface UserDetailsService {
 ```java
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     throws IOException, ServletException {
-    //首先配对是不是配置的登录的URI,是则执行下面的认证,不是则跳过
+    //首先配对是不是配置的登录的URI,是则执行下面的认证，不是则跳过
     if (!requiresAuthentication(request, response)) {
         chain.doFilter(request, response);
         return;
@@ -207,7 +207,7 @@ public class ProviderManager implements AuthenticationManager, MessageSourceAwar
 ```
 
 3. 调用Provider的`authenticate()`方法
-    - 例如Provider为`DaoAuthenticationProvider` 继承自 `AbstractUserDetailsAuthenticationProvider`,后者实现了 `AuthenticationProvider` 接口,所以调用的是`AbstractUserDetailsAuthenticationProvider`的`authenticate()`方法
+    - 例如Provider为`DaoAuthenticationProvider` 继承自 `AbstractUserDetailsAuthenticationProvider`,后者实现了 `AuthenticationProvider` 接口，所以调用的是`AbstractUserDetailsAuthenticationProvider`的`authenticate()`方法
 
 ```java
 public abstract class AbstractUserDetailsAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
@@ -223,24 +223,24 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
         if (user == null) {
             cacheWasUsed = false;
             try {
-                // 获取需要比对的 UserDetails 对象,子类实现该方法
+                // 获取需要比对的 UserDetails 对象，子类实现该方法
                 user = retrieveUser(username,(UsernamePasswordAuthenticationToken) authentication);
             }
             catch
         }
         try {
-            //比对前的检查,例如账户以一些状态信息(是否锁定, 过期...)
+            //比对前的检查，例如账户以一些状态信息(是否锁定, 过期...)
             preAuthenticationChecks.check(user);
-            //定义比对方式,子类实现该方法
+            //定义比对方式，子类实现该方法
             additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
         }
         catch (AuthenticationException exception) {
             if (cacheWasUsed) {
                 cacheWasUsed = false;
-                // 获取需要比对的 UserDetails 对象,子类实现该方法
+                // 获取需要比对的 UserDetails 对象，子类实现该方法
                 user = retrieveUser(username, (UsernamePasswordAuthenticationToken) authentication);
                 preAuthenticationChecks.check(user);
-                //定义比对方式,子类实现该方法
+                //定义比对方式，子类实现该方法
                 additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
             }
             else {
@@ -345,7 +345,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
 ```java
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) //开启权限注解,默认是关闭的
+@EnableGlobalMethodSecurity(prePostEnabled = true) //开启权限注解，默认是关闭的
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**

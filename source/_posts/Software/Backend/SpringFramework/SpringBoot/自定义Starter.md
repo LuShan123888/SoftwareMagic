@@ -10,7 +10,7 @@ categories:
 
 ## 概述
 
-启动器模块是一个 空 jar 文件,仅提供辅助性依赖管理,这些依赖可能用于自动装配或者其他类库
+启动器模块是一个 空 jar 文件，仅提供辅助性依赖管理，这些依赖可能用于自动装配或者其他类库
 
 ### 命名规约
 
@@ -31,7 +31,7 @@ categories:
 1. 在IDEA中新建一个空项目`spring-boot-starter-diy`
 2. 新建一个普通Maven模块`test-spring-boot-starter`
 3. 新建一个Spring Boot模块`test-spring-boot-starter-autoconfigure`
-4. 点击apply即可,基本结构
+4. 点击apply即可，基本结构
 5. 在我们的 starter模块中导入 autoconfigure 的依赖
 
 ```xml
@@ -123,7 +123,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.test.HelloServiceAutoConfiguration
 ```
 
-11. 编写完成后,可以安装到maven仓库中
+11. 编写完成后，可以安装到maven仓库中
 
 ```shell
 mvn install
@@ -166,4 +166,4 @@ test.hello.prefix="aaa"
 test.hello.suffix="bbb"
 ```
 
-4. 启动项目进行测试,结果成功
+4. 启动项目进行测试，结果成功

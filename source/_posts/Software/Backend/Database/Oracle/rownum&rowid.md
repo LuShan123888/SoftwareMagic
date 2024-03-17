@@ -8,7 +8,7 @@ categories:
 ---
 # Oracle rownum&rowid
 
-- 分页的核心就是计算每页多少记录和总页数以及第几页,每一页的数据则只需计算起始的记录和结束记录即可
+- 分页的核心就是计算每页多少记录和总页数以及第几页, 每一页的数据则只需计算起始的记录和结束记录即可
 
 ## rownum
 
@@ -18,14 +18,14 @@ categories:
 select * from emp where rownum <= 5
 ```
 
-- 不能对rownum用`>`, 下列查询是失败的
+- 不能对 rownum 用 `>`, 下列查询是失败的
 
 ```sql
 select * from emp where rownum > 5
 ```
 
-- 查询出未匹配的行已经被丢弃, 之后查出来的rownum仍然是1,这样永远也不会成功
-- 同样道理, rownum如果单独用`=`,也只有在`rownum=1`时才成功
+- 查询出未匹配的行已经被丢弃, 之后查出来的 rownum 仍然是 1, 这样永远也不会成功
+- 同样道理, rownum 如果单独用 `=`, 也只有在 `rownum=1` 时才成功
 
 ### 实现分页
 
@@ -41,7 +41,7 @@ where rw>5 and rw<=10;
 **实例**
 
 - 查询员工的信息, 姓名, 工资, 部门编号, 按照工资降序排序, 实现分页
-- 每一页显示3条记录, 查询第一页的数据
+- 每一页显示 3 条记录, 查询第一页的数据
 
 ```sql
 select ename,sal,deptno,rownum r1 from emp order by sal desc
@@ -49,8 +49,8 @@ select ename,sal,deptno,rownum r1 from emp order by sal desc
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019113234148.png" alt="image-20201019113234148" style="zoom: 67%;" />
 
-- 此时结果`r1`发生了乱序, 是因为这个查询存在按照其他的列进行排序
-- 再次对该结果集取`rownum`使`rownum`按升序排列
+- 此时结果 `r1` 发生了乱序, 是因为这个查询存在按照其他的列进行排序
+- 再次对该结果集取 `rownum` 使 `rownum` 按升序排列
 
 ```sql
 select ename,sal,deptno,r1,rownum r2 from(
@@ -59,8 +59,8 @@ select ename,sal,deptno,r1,rownum r2 from(
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-image-20201019113330065.png" alt="image-20201019113330065" style="zoom:50%;" />
 
-- 此时`r2`为最初查询结果集的升序`rowndum`
-- 查询当前`rownum`中小于等于3的记录
+- 此时 `r2` 为最初查询结果集的升序 `rowndum`
+- 查询当前 `rownum` 中小于等于 3 的记录
 
 ```sql
 select ename,sal,deptno,r2 from(
@@ -75,18 +75,18 @@ select ename,sal,deptno,r2 from(
 
 ## rowid
 
-- `rowid` 是 ORACLE 中的一个重要的概念,用于定位数据库中一条记录的一个相对唯一地址值
-- 通常情况下, 该值在该行数据插入到数据库表时即被确定且唯一,`rowid` 它是一个伪列, 它并不实际存在于表中
-- `rowid`是 ORACLE 在读取表中数据行时, 根据每一行数据的物理地址信息编码而成的一个伪列,所以根据一行数据的`rowid` 能找到一行数据的物理地址信息,从而快速地定位到数据行,数据库的大多数操作都是通过 `rowid` 来完成的, 而且使用 `rowid` 来进行单记录定位速度是最快的
+- `rowid` 是 ORACLE 中的一个重要的概念, 用于定位数据库中一条记录的一个相对唯一地址值
+- 通常情况下, 该值在该行数据插入到数据库表时即被确定且唯一, `rowid` 它是一个伪列, 它并不实际存在于表中
+- `rowid` 是 ORACLE 在读取表中数据行时, 根据每一行数据的物理地址信息编码而成的一个伪列, 所以根据一行数据的 `rowid` 能找到一行数据的物理地址信息, 从而快速地定位到数据行, 数据库的大多数操作都是通过 `rowid` 来完成的, 而且使用 `rowid` 来进行单记录定位速度是最快的
 
 ## 实现去重
 
 - oracle 中如果要查询某张表中多个字段, 又只对某个字段去重的时候用 distinct 或者 group by 都不行
-- distinct 和 group by 会对要查询的字段一起进行去重, 也就是当查询的所有字段都相同, oracle 才认为是重复的,这时用 rowid 是个不错的选择
+- distinct 和 group by 会对要查询的字段一起进行去重, 也就是当查询的所有字段都相同, oracle 才认为是重复的, 这时用 rowid 是个不错的选择
 
 **实例**
 
-- 查询rowid
+- 查询 rowid
 
 ```sql
 select deptno,dname,loc,rowid from tempcp;
@@ -110,7 +110,7 @@ select * from tempcp group by deptno,dname,loc;
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133351902.png" alt="image-20201019133351902" style="zoom:50%;" />
 
-- 查找出rowid最小的记录(可以保证只有一条 )
+- 查找出 rowid 最小的记录 (可以保证只有一条 )
 
 ```sql
 select min(rowid) from tempcp group by deptno,dname,loc;
@@ -118,7 +118,7 @@ select min(rowid) from tempcp group by deptno,dname,loc;
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133505973.png" alt="image-20201019133505973" style="zoom:50%;" />
 
-- 查找rowid不在这些之内的记录
+- 查找 rowid 不在这些之内的记录
 
 ```sql
 select * from tempcp where rowid not in(
