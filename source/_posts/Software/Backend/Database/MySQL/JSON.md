@@ -33,7 +33,7 @@ Query OK, 1 row affected (0.01 sec)
 
 #### JSON_ARRAY(）和 JSON_OBJECT()
 
-- 前者用于构造 JSON 数组，后者用于构造 JSON 对象。如，
+- 前者用于构造 JSON 数组，后者用于构造 JSON 对象。如
 
 ```lua
 mysql> select json_array(1, "abc", null, true,curtime());
@@ -468,25 +468,25 @@ mysql> select * from t;
 
 1. 被更新的列是 JSON 类型。
 
-2. 使用 JSON_SET，JSON_REPLACE，JSON_REMOVE 进行 UPDATE 操作，如，
+2. 使用 JSON_SET，JSON_REPLACE，JSON_REMOVE 进行 UPDATE 操作，如
 
     ```bash
     update t set c1=json_remove(c1,'$.id') where id=1;
     ```
 
-    不使用这三个函数，而显式赋值，就不会进行部分更新，如，
+    不使用这三个函数，而显式赋值，就不会进行部分更新，如
 
     ```swift
     update t set c1='{"id": 1, "name": "a"}' where id=1;
     ```
 
-3. 输入列和目标列必须是同一列，如，
+3. 输入列和目标列必须是同一列，如
 
     ```bash
     update t set c1=json_replace(c1,'$.id',10) where id=1;
     ```
 
-    否则的话，就不会进行部分更新，如，
+    否则的话，就不会进行部分更新，如
 
     ```bash
     update t set c1=json_replace(c2,'$.id',10) where id=1;
@@ -975,7 +975,7 @@ mysql> select c2->'$.ename',json_unquote(c2->'$.ename'),
 
 #### JSON_OBJECTAGG(key, value)
 
-- 取表中的两列作为参数，其中，第一列是 key，第二列是 value，返回 JSON 对象。如，
+- 取表中的两列作为参数，其中，第一列是 key，第二列是 value，返回 JSON 对象。如
 
 ```lua
 mysql> select * from emp;
@@ -1204,7 +1204,7 @@ on_error:
 
 - expr：可以返回 JSON 文档的表达式。可以是一个标量（ JSON 文档 ），列名或者一个函数调用（ JSON_EXTRACT(t1.json_data,'$.post.comments') ）。
 
-- path：JSON 的路径表达式，
+- path：JSON 的路径表达式
 
 - column：列的类型，支持以下四种类型：
 

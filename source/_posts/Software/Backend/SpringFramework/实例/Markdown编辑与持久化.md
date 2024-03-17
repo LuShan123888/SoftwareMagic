@@ -179,7 +179,7 @@ mybatis:
                 editorTheme: "pastel-on-dark",// 编辑主题。
                 tex : true,                   // 开启科学公式TeX语言支持，默认关闭。
                 flowChart : true,             // 开启流程图支持，默认关闭。
-                sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭，
+                sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭
                 // 图片上传。
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
