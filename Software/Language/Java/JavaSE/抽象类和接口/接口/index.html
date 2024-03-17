@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java 接口 Java中不支持多重继承，而是通过接口实现比多重继承更强的功能,Java通过接口使处于不同层次，甚至互不关联的类可以具有相同的行为 接口定义  接口由常量和抽象方法组成，由关键字interface引导接口定义，具体语法如下:  1234[public]interface 接口名 [extends 父接口名列表]&amp;#123;    [public][static][final] 域类">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-11T05:40:49.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.444Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.315Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
 <ul>
 <li>接口由常量和抽象方法组成，由关键字interface引导接口定义，具体语法如下:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">[<span class="hljs-keyword">public</span>]<span class="hljs-class"><span class="hljs-keyword">interface</span> 接口名 [<span class="hljs-keyword">extends</span> 父接口名列表]</span>&#123;<br>    [<span class="hljs-keyword">public</span>][<span class="hljs-keyword">static</span>][<span class="hljs-keyword">final</span>] 域类型 域名 = 常量值;<br>    [<span class="hljs-keyword">public</span>][<span class="hljs-keyword">abstract</span>] 返回值 方法名(参数列表)[<span class="hljs-keyword">throw</span> 异常列表];<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">[<span class="hljs-keyword">public</span>]<span class="hljs-class"><span class="hljs-keyword">interface</span> 接口名 [<span class="hljs-keyword">extends</span> 父接口名列表]</span>&#123;<br>    [<span class="hljs-keyword">public</span>][<span class="hljs-keyword">static</span>][<span class="hljs-keyword">final</span>] 域类型 域名 = 常量值;<br>    [<span class="hljs-keyword">public</span>][<span class="hljs-keyword">abstract</span>] 返回值 方法名（参数列表)[<span class="hljs-keyword">throw</span> 异常列表];<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>有关接口定义要注意以下几点:
 <ul>
@@ -297,19 +297,19 @@
 <li>private好理解，接口是需要被实现才有意义的，不能被实现也就没有意义了</li>
 <li>protected需要理解面向对象的概念,protected是不在一个包内不能被访问，所以在类和接口不在同一个包内时就会有问题
 <ul>
-<li>假设public接口<code>I</code>有一个protected方法<code>M</code>,那么位于其他包的public类C就可以实现这个接口(方法M依然是protected),那么C的同包类D调用方法M只能这样访问:</li>
+<li>假设public接口<code>I</code>有一个protected方法<code>M</code>,那么位于其他包的public类C就可以实现这个接口（方法M依然是protected),那么C的同包类D调用方法M只能这样访问:</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">C c = <span class="hljs-keyword">new</span> C();<br>c.M();<br><span class="hljs-comment">// 无法这样访问:</span><br>I c = <span class="hljs-keyword">new</span> C();<br>c.M();<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这样就失去了使用接口的重要意义:提供统一的接口，面向接口编程思想也无法体现</li>
+<li>这样就失去了使用接口的重要意义：提供统一的接口，面向接口编程思想也无法体现</li>
 </ul>
 <p><strong>为什么接口中的属性必须是public static final 修饰的</strong></p>
 <ul>
 <li>public:对外提供服务，让接口的实现类可以使用接口</li>
 <li>static:我们假设有两个接口A和B,而类C实现了接口A和B,假设，此时,A和B中都有一个变量N,如果N不是static类型的，那么在C中该如何区分N到底是A的还是B的呢？而，如果是static类型的，我们可以通过A.N和B.N来区别调用A或者B中的成员变量N</li>
-<li>final:接口是一种通用的协议存在的，多个类实现同一个接口可以方便针对这个接口的调用类对接，所以final就是为了禁止在接口中不同的实现类修改属性造成混乱，如果变量不是final,那么每个实现接口的类就可以更改这个变量的值，也就违反了OCP(开闭原则)原则</li>
+<li>final:接口是一种通用的协议存在的，多个类实现同一个接口可以方便针对这个接口的调用类对接，所以final就是为了禁止在接口中不同的实现类修改属性造成混乱，如果变量不是final,那么每个实现接口的类就可以更改这个变量的值，也就违反了OCP(开闭原则）原则</li>
 </ul>
 <h2 id="接口的继承">接口的继承</h2>
 <ul>
@@ -334,7 +334,7 @@
 <h2 id="默认方法冲突">默认方法冲突</h2>
 <ol>
 <li><strong>超类优先</strong>:如果超类与接口的方法冲突，而超类提供了一个具体方法，同名而且有相同参数类型的接口默认方法将被忽略</li>
-<li><strong>类必须重写冲突的方法</strong>:如果一个超接口提供了一个默认方法，另一个接口提供了一个同名而且参数类型(不论是否是默认参数)相同的方法，必须覆盖这个方法来解决冲突，代码如下:</li>
+<li><strong>类必须重写冲突的方法</strong>:如果一个超接口提供了一个默认方法，另一个接口提供了一个同名而且参数类型（不论是否是默认参数）相同的方法，必须覆盖这个方法来解决冲突，代码如下:</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Named</span></span><br><span class="hljs-class"></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">default</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span> getClass().getName() + <span class="hljs-string">&quot;_&quot;</span> + hashCode():&#125;<br>&#125;　<br><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Person</span></span><br><span class="hljs-class"></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">default</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123; <span class="hljs-keyword">return</span> getClass().getName() + <span class="hljs-string">&quot;_&quot;</span> + hashCode():&#125;<br>&#125;　<br></code></pre></td></tr></table></figure>
 <ul>

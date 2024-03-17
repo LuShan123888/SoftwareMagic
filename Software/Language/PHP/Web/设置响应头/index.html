@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 设置响应头  正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息:用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏">
+  <meta name="description" content="PHP 设置响应头  正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息：用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 设置响应头">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/Web/%E8%AE%BE%E7%BD%AE%E5%93%8D%E5%BA%94%E5%A4%B4/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 设置响应头  正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息:用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏">
+<meta property="og:description" content="PHP 设置响应头  正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息：用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-20T15:27:30.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.438Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.280Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
             <div class="markdown-body">
               <h1>PHP 设置响应头</h1>
 <ul>
-<li>正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息:用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏览器到另一个地址，或是产生一个特定的HTTP错误，就需要使用<code>header()</code>函数来设置头部</li>
+<li>正如我们前面所讨论的，服务器发送回来的HTTP响应包含以下信息：用于识别响应主体内容的头(header),发送响应的服务器，响应消息有多少字节和响应何时发出等等,PHP和Apache通常已经为你处理好了头信息，将文档识别为HTML和计算HTML页面的长度等等，绝大多数WEB程序不需要自己设置头，然而，如果你想让服务器返回的不是HTML,或者想设置页面的过期时间，重定向客户端浏览器到另一个地址，或是产生一个特定的HTTP错误，就需要使用<code>header()</code>函数来设置头部</li>
 <li>设置header一定要在生成主体内容之前完成，这意味着所有<code>header()</code>(或<code>setcookie()</code>,如果你想设置 cookie)要在文件的最前面，甚至在<code>&lt;html&gt;</code>标签之前，例如:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br> header(<span class="hljs-string">&#x27;Content-Type: text/plain&#x27;</span>);<br><span class="hljs-meta">?&gt;</span><br><br>Date:today<br><span class="hljs-keyword">From</span>:fred<br>To:barney<br>Subject:hands off!<br>My lunchbox is mine <span class="hljs-keyword">and</span> mine alone.Get your own,<br>you filthy scrounger!<br></code></pre></td></tr></table></figure>
@@ -251,7 +251,7 @@
 </ul>
 <h2 id="过期">过期</h2>
 <ul>
-<li>服务器可以显式地通知浏览器(或者那些存在于服务器和浏览器发之间的代理服务器缓存)文档的过期时间，代理服务器和浏览器缓存在过期之前可保持文件，或提前结束它，重新载入一个被缓存的页面不需要和服务器进行通讯，但是尝试获取一个已经过期的文档就需要和服务器联系了</li>
+<li>服务器可以显式地通知浏览器（或者那些存在于服务器和浏览器发之间的代理服务器缓存）文档的过期时间，代理服务器和浏览器缓存在过期之前可保持文件，或提前结束它，重新载入一个被缓存的页面不需要和服务器进行通讯，但是尝试获取一个已经过期的文档就需要和服务器联系了</li>
 <li>为一个文档设置过期时间，可使用Expires头:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">header(<span class="hljs-string">&#x27;Expires: Fri, 18 Jan 2006 05:30:00 GMT&#x27;</span>);<br></code></pre></td></tr></table></figure>
@@ -272,16 +272,16 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">header(<span class="hljs-string">&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;</span>);<br>header(<span class="hljs-string">&quot;Last-Modified:&quot;</span> . gmdate(<span class="hljs-string">&quot;D,d M Y H:i:s&quot;</span>) . <span class="hljs-string">&quot; GMT&quot;</span>);<br>header(<span class="hljs-string">&quot;Cache-Control: no-store,no-cache,must-revalidate&quot;</span>);<br>header(<span class="hljs-string">&quot;Cache-Control: post-check=0,pre-check=0&quot;</span>,<span class="hljs-literal">false</span>);<br>header(<span class="hljs-string">&quot;Pragma: no-cache&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>你可以在Duane Wessels所著的$Web Caching$一书(由O’Reilly出版)的第6章中找到有关控制浏览器和Web缓存行为的更多信息</li>
+<li>你可以在Duane Wessels所著的$Web Caching$一书（由O’Reilly出版）的第6章中找到有关控制浏览器和Web缓存行为的更多信息</li>
 </ul>
 <h2 id="HTTP认证">HTTP认证</h2>
 <ul>
-<li>HTTP认证(HTTP authentication)通过请求的header和响应状态来工作，浏览器可以将用户名和密码放在请求的头里发送，如果认证凭证(credential,即指用户名和密码)未发送或者不匹配，服务器将发送一个&quot;401 Unauthorized&quot;响应并通过WWW认证头来确定当前认证的区域(realm)(一个字符串，诸如&quot;Mary’s Pictures”或&quot;Your Shopping Cart&quot;),这通常会导致浏览器弹出一个&quot;Enter username and password for …&quot;对话框，且该页面会重新请求更新头中的认证凭证</li>
-<li>为了用PHP来处理认证，可检查用户名和密码($_SERVER数组中的PHP_AUTH_USER和PHP_AUTH_PW两个元素)并调用<code>header()</code>函数来设置区域，然后发送一个&quot;401 Unauthorized&quot;响应:</li>
+<li>HTTP认证(HTTP authentication)通过请求的header和响应状态来工作，浏览器可以将用户名和密码放在请求的头里发送，如果认证凭证(credential,即指用户名和密码）未发送或者不匹配，服务器将发送一个&quot;401 Unauthorized&quot;响应并通过WWW认证头来确定当前认证的区域(realm)(一个字符串，诸如&quot;Mary’s Pictures”或&quot;Your Shopping Cart&quot;),这通常会导致浏览器弹出一个&quot;Enter username and password for …&quot;对话框，且该页面会重新请求更新头中的认证凭证</li>
+<li>为了用PHP来处理认证，可检查用户名和密码($_SERVER数组中的PHP_AUTH_USER和PHP_AUTH_PW两个元素）并调用<code>header()</code>函数来设置区域，然后发送一个&quot;401 Unauthorized&quot;响应:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">header(<span class="hljs-string">&#x27;WWW-Authenticate: Basic realm=&quot;Top Secret Files&quot;&#x27;</span>);<br>header(<span class="hljs-string">&quot;HTTP/1.0 401 Unauthorized&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以使用各种方法来验证用户名和密码，例如:查询数据库，或读一个保存着合法用户名的文件，或者查询一个Microsoft域服务器</li>
+<li>可以使用各种方法来验证用户名和密码，例如：查询数据库，或读一个保存着合法用户名的文件，或者查询一个Microsoft域服务器</li>
 <li>下例检查密码是否为翻转的用户名:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$auth_ok</span> = <span class="hljs-number">0</span>;<br><span class="hljs-variable">$user</span> = <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;PHP_AUTH_USER&#x27;</span>];<br><span class="hljs-variable">$pass</span> = <span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;PHP_AUTH_PW&#x27;</span>];<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$user</span>) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$pass</span>) &amp;&amp; <span class="hljs-variable">$user</span> === strrev(<span class="hljs-variable">$pass</span>))&#123;<br> <span class="hljs-variable">$auth_ok</span> = <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-keyword">if</span>(!<span class="hljs-variable">$auth_ok</span>)&#123;<br> header(<span class="hljs-string">&#x27;WWW-Authenticate: Basic realm=&quot;Top Secret Files&quot;&#x27;</span>);<br> header(<span class="hljs-string">&#x27;HTTP/1.0 401 Unauthorized&#x27;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>

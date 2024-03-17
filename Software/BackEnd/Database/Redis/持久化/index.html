@@ -24,7 +24,7 @@
 <meta property="og:description" content="Redis 持久化 RDB(Redis Database) 机制  在指定的时间间隔内将内存中的数据集快照写入磁盘,也就是Snapshot快照,它恢复时是将快照文件直接读到内存里 Redis会单独创建(fork)一个子进程来进行持久化,会先将数据写入到一个临时文件中,待持久化过程都结束了,再用这个临时文件替换上次持久化好的文件 整个过程中,主进程是不进行任何IO操作的,这就确保了极高的性能 如果需">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-22T10:00:34.000Z">
-<meta property="article:modified_time" content="2023-07-22T10:00:34.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.078Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年7月22日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -280,7 +280,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>save &lt;seconds&gt; &lt;changes&gt;</code>Redis 默认配置文件中提供了三个条件**save 900 1 ** <strong>save 300 10</strong> <strong>save 60 10000</strong>分别表示 900 秒(15 分钟)内有 1 个更改,300 秒(5 分钟)内有 10 个更改以及 60 秒内有 10000 个更改</td>
+<td><code>save &lt;seconds&gt; &lt;changes&gt;</code>Redis 默认配置文件中提供了三个条件**save 900 1 ** <strong>save 300 10</strong> <strong>save 60 10000</strong>分别表示 900 秒(15 分钟）内有 1 个更改,300 秒(5 分钟）内有 10 个更改以及 60 秒内有 10000 个更改</td>
 <td>指定在多长时间内,有多少次更新操作,就将数据同步到数据文件,可以多个条件配合</td>
 </tr>
 <tr>
@@ -314,7 +314,7 @@
 </ul>
 <h2 id="AOF-Append-Only-File">AOF(Append Only File)</h2>
 <ul>
-<li>以日志的形式来记录每个写操作,将Redis执行过的所有指令记录下来(读操作不记录)</li>
+<li>以日志的形式来记录每个写操作,将Redis执行过的所有指令记录下来（读操作不记录)</li>
 <li>只许追加文件但不可以改写文件</li>
 <li>Redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</li>
 <li>AOF保存的是<code>appendonly.aof</code>文件</li>
@@ -341,7 +341,7 @@
 </tr>
 <tr>
 <td><code>appendfsync everysec</code></td>
-<td>指定更新日志条件,共有 3 个可选值: <strong>no</strong>:表示等操作系统进行数据缓存同步到磁盘(快) <strong>always</strong>:表示每次更新操作后手动调用 fsync() 将数据写到磁盘(慢,安全) <strong>everysec</strong>:表示每秒同步一次(折中,默认值)</td>
+<td>指定更新日志条件,共有 3 个可选值: <strong>no</strong>:表示等操作系统进行数据缓存同步到磁盘（快) <strong>always</strong>:表示每次更新操作后手动调用 fsync() 将数据写到磁盘（慢,安全) <strong>everysec</strong>:表示每秒同步一次（折中,默认值)</td>
 </tr>
 <tr>
 <td><code>no-appendfsync-on-rewrite no</code></td>

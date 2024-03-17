@@ -24,7 +24,7 @@
 <meta property="og:description" content="Go Struct  Go 语言中没有&quot;类”的概念, 也不支持&quot;类”的继承等面向对象的概念, Go 语言中通过结构体的内嵌再配合接口比面向对象具有更高的扩展性和灵活性  类型别名和自定义类型 自定义类型  在 Go 语言中有一些基本的数据类型, 如 string, 整型, 浮点型, 布尔 等数据类型, Go 语言中可以使用 type 关键字来定义自定义类型  1type Cus">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T04:25:34.000Z">
-<meta property="article:modified_time" content="2024-03-17T04:25:34.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:55.076Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 中午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -288,8 +288,8 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> 结构体实例 结构体类型<br><span class="hljs-comment">// 或</span><br>结构体实例 := 结构体类型&#123;&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="基本实例化">基本实例化</h4>
 <ul>
-<li>结构体中字段大写开头表示可公开访问,小写表示私有 (仅在定义当前结构体的包中可访问)</li>
-<li>可以通过 <code>.</code> 来访问结构体的字段 (成员变量), 例如 <code>p1.name</code> 和 <code>p1.age</code> 等</li>
+<li>结构体中字段大写开头表示可公开访问,小写表示私有（仅在定义当前结构体的包中可访问)</li>
+<li>可以通过 <code>.</code> 来访问结构体的字段（成员变量), 例如 <code>p1.name</code> 和 <code>p1.age</code> 等</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> person <span class="hljs-keyword">struct</span> &#123;<br>    name <span class="hljs-keyword">string</span><br>    city <span class="hljs-keyword">string</span><br>    age  <span class="hljs-keyword">int8</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> p1 person<br>    p1.name = <span class="hljs-string">&quot;Test&quot;</span><br>    p1.city = <span class="hljs-string">&quot;北京&quot;</span><br>    p1.age = <span class="hljs-number">18</span><br>    fmt.Printf(<span class="hljs-string">&quot;p1=%v\n&quot;</span>, p1)  <span class="hljs-comment">// p1=&#123;Test 北京 18&#125;</span><br>    fmt.Printf(<span class="hljs-string">&quot;p1=%#v\n&quot;</span>, p1) <span class="hljs-comment">// p1=main.person&#123;name:&quot;Test&quot;, city:&quot;北京&quot;, age:18&#125;</span><br><br>    p3 := &amp;person&#123;&#125;<br>    p3.name = <span class="hljs-string">&quot;Test&quot;</span><br>    p3.age = <span class="hljs-number">30</span><br>    p3.city = <span class="hljs-string">&quot;成都&quot;</span><br>    fmt.Printf(<span class="hljs-string">&quot;p3=%#v\n&quot;</span>, p3) <span class="hljs-comment">// p3=&amp;main.person&#123;name:&quot;Test&quot;, city:&quot;成都&quot;, age:30&#125;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="匿名结构体实例化">匿名结构体实例化</h4>

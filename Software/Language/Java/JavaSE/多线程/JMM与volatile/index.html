@@ -26,7 +26,7 @@
 <meta property="og:image" content="c:%5CUsers%5Clushan11%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210611095441923.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123727.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.438Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.311Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,12 +264,12 @@
 <li>如果要把一个变量从主内存中复制到工作内存，就需要按顺寻地执行read和load操作，如果把变量从工作内存中同步回主内存中，就要按顺序地执行store和write操作，但Java内存模型只要求上述操作必须按顺序执行，而没有保证必须是连续执行</li>
 <li>不允许read和load,store和write操作之一单独出现</li>
 <li>不允许一个线程丢弃它的最近assign的操作，即变量在工作内存中改变了之后必须同步到主内存中</li>
-<li>不允许一个线程无原因地(没有发生过任何assign操作)把数据从工作内存同步回主内存中</li>
+<li>不允许一个线程无原因地（没有发生过任何assign操作）把数据从工作内存同步回主内存中</li>
 <li>一个新的变量只能在主内存中诞生，不允许在工作内存中直接使用一个未被初始化(load或assign)的变量，即就是对一个变量实施use和store操作之前，必须先执行过了assign和load操作</li>
 <li>一个变量在同一时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁,lock和unlock必须成对出现</li>
 <li>如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前需要重新执行load或assign操作初始化变量的值</li>
 <li>如果一个变量事先没有被lock操作锁定，则不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定的变量</li>
-<li>对一个变量执行unlock操作之前，必须先把此变量同步到主内存中(执行store和write操作)</li>
+<li>对一个变量执行unlock操作之前，必须先把此变量同步到主内存中（执行store和write操作)</li>
 </ul>
 </li>
 </ul>
@@ -282,14 +282,14 @@
 <ul>
 <li>据Java内存模型中的规定，可以总结出以下几条happens-before规则,Happens-before的前后两个操作不会被重排序且后者对前者的内存可见
 <ul>
-<li>程序次序法则:线程中的每个动作A都happens-before于该线程中的每一个动作B,其中，在程序中，所有的动作B都能出现在A之后</li>
-<li>监视器锁法则:对一个监视器锁的解锁 happens-before于每一个后续对同一监视器锁的加锁</li>
-<li>volatile变量法则:对volatile域的写入操作happens-before于每一个后续对同一个域的读写操作</li>
-<li>线程启动法则:在一个线程里，对Thread.start的调用会happens-before于每个启动线程的动作</li>
-<li>线程终结法则:线程中的任何动作都happens-before于其他线程检测到这个线程已经终结，或者从Thread.join调用中成功返回，或Thread.isAlive返回false</li>
-<li>中断法则:一个线程调用另一个线程的interrupt happens-before于被中断的线程发现中断</li>
-<li>终结法则:一个对象的构造函数的结束happens-before于这个对象finalizer的开始</li>
-<li>传递性:如果A happens-before于B,且B happens-before于C,则A happens-before于C</li>
+<li>程序次序法则：线程中的每个动作A都happens-before于该线程中的每一个动作B,其中，在程序中，所有的动作B都能出现在A之后</li>
+<li>监视器锁法则：对一个监视器锁的解锁 happens-before于每一个后续对同一监视器锁的加锁</li>
+<li>volatile变量法则：对volatile域的写入操作happens-before于每一个后续对同一个域的读写操作</li>
+<li>线程启动法则：在一个线程里，对Thread.start的调用会happens-before于每个启动线程的动作</li>
+<li>线程终结法则：线程中的任何动作都happens-before于其他线程检测到这个线程已经终结，或者从Thread.join调用中成功返回，或Thread.isAlive返回false</li>
+<li>中断法则：一个线程调用另一个线程的interrupt happens-before于被中断的线程发现中断</li>
+<li>终结法则：一个对象的构造函数的结束happens-before于这个对象finalizer的开始</li>
+<li>传递性：如果A happens-before于B,且B happens-before于C,则A happens-before于C</li>
 </ul>
 </li>
 <li>Happens-before关系只是对Java内存模型的一种近似性的描述，它并不够严谨，但便于日常程序开发参考使用，关于更严谨的Java内存模型的定义和描述，请阅读JSR-133原文或Java语言规范章节17.4</li>
@@ -305,17 +305,17 @@
 <blockquote>
 <ul>
 <li>
-<p><strong>as-if-serial语义</strong>:不管怎么重排序(编译器和处理器为了提高并行度),(单线程)程序的执行结果不能被改变,(编译器,runtime和处理器都必须遵守as-if-serial语义)</p>
+<p><strong>as-if-serial语义</strong>:不管怎么重排序（编译器和处理器为了提高并行度),(单线程）程序的执行结果不能被改变,(编译器,runtime和处理器都必须遵守as-if-serial语义)</p>
 </li>
 <li>
-<p><strong>指令重排序</strong>:在Java中,JVM能够根据处理器特性(CPU多级缓存系统，多核处理器等)适当对机器指令进行重排序，最大限度发挥机器性能,Java中的指令重排序有两次，第一次发生在将字节码编译成机器码的阶段，第二次发生在CPU执行的时候，也会适当对指令进行重排</p>
+<p><strong>指令重排序</strong>:在Java中,JVM能够根据处理器特性(CPU多级缓存系统，多核处理器等）适当对机器指令进行重排序，最大限度发挥机器性能,Java中的指令重排序有两次，第一次发生在将字节码编译成机器码的阶段，第二次发生在CPU执行的时候，也会适当对指令进行重排</p>
 </li>
 <li>
 <p><strong>内存访问重排序</strong>:计算机系统中，为了尽可能地避免处理器访问主内存的时间开销，处理器大多会利用缓存(cache)以提高性能，其模型如下图所示:</p>
   <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123727.png" srcset="/images/loading.gif" lazyload alt="处理器Cache模型" style="zoom:50%;" />
 </li>
 <li>
-<p>在这种模型下会存在一个现象，即缓存中的数据与主内存的数据并不是实时同步的，各CPU(或CPU核心)间缓存的数据也不是实时同步的，这导致在同一个时间点，各CPU所看到同一内存地址的数据的值可能是不一致的，从程序的视角来看，就是在同一个时间点，各个线程所看到的共享变量的值可能是不一致的</p>
+<p>在这种模型下会存在一个现象，即缓存中的数据与主内存的数据并不是实时同步的，各CPU(或CPU核心）间缓存的数据也不是实时同步的，这导致在同一个时间点，各CPU所看到同一内存地址的数据的值可能是不一致的，从程序的视角来看，就是在同一个时间点，各个线程所看到的共享变量的值可能是不一致的</p>
 </li>
 <li>
 <p>有的观点会将这种现象也视为重排序的一种，命名为&quot;内存系统重排序”,因为这种内存可见性问题造成的结果就好像是内存访问指令发生了重排序一样</p>

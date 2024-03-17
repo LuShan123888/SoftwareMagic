@@ -24,7 +24,7 @@
 <meta property="og:description" content="JavaScript 函数 函数定义  JavaScript 使用关键字 function 定义函数 函数可以通过声明定义，也可以是一个表达式  函数声明  函数声明后不会立即执行，会在我们需要的时候调用到  123function functionName(parameters) &amp;#123;&amp;#125; 实例 123function myFunction(a, b) &amp;#123;    ret">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-01T15:05:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.435Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:54.549Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -325,7 +325,7 @@
 <li>ES6 新增了箭头函数</li>
 <li>箭头函数表达式的语法比普通函数表达式更简洁</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">(参数<span class="hljs-number">1</span>, 参数<span class="hljs-number">2</span>, ..., 参数N) =&gt; &#123; 函数声明 &#125;<br><br>(参数<span class="hljs-number">1</span>, 参数<span class="hljs-number">2</span>, ..., 参数N) =&gt; 表达式(单一)<br><span class="hljs-comment">// 相当于:(参数1, 参数2, ..., 参数N) =&gt;&#123; return 表达式; &#125;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">(参数<span class="hljs-number">1</span>, 参数<span class="hljs-number">2</span>, ..., 参数N) =&gt; &#123; 函数声明 &#125;<br><br>(参数<span class="hljs-number">1</span>, 参数<span class="hljs-number">2</span>, ..., 参数N) =&gt; 表达式（单一)<br><span class="hljs-comment">// 相当于:(参数1, 参数2, ..., 参数N) =&gt;&#123; return 表达式; &#125;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>当只有一个参数时，圆括号是可选的:</li>
 </ul>
@@ -398,15 +398,15 @@
 <h2 id="通过值传递参数">通过值传递参数</h2>
 <ul>
 <li>在函数中调用的参数是函数的隐式参数</li>
-<li>JavaScript 隐式参数通过值来传递:函数仅仅只是获取值</li>
-<li>如果函数修改参数的值，不会修改显式参数的初始值(在函数外定义)</li>
+<li>JavaScript 隐式参数通过值来传递：函数仅仅只是获取值</li>
+<li>如果函数修改参数的值，不会修改显式参数的初始值（在函数外定义)</li>
 <li>隐式参数的改变在函数外是不可见的</li>
 </ul>
 <h2 id="通过对象传递参数">通过对象传递参数</h2>
 <ul>
 <li>在JavaScript中，可以引用对象的值</li>
 <li>因此我们在函数内部修改对象的属性就会修改其初始的值</li>
-<li>修改对象属性可作用于函数外部(全局变量)</li>
+<li>修改对象属性可作用于函数外部（全局变量)</li>
 <li>修改对象属性在函数外是可见的</li>
 </ul>
 <h2 id="函数调用">函数调用</h2>
@@ -476,7 +476,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myFunction</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> a * b;<br>&#125;<br>myObject = myFunction.call(myObject, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>);     <span class="hljs-comment">// 返回 20</span><br></code></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myFunction</span>(<span class="hljs-params">a, b</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> a * b;<br>&#125;<br>myArray = [<span class="hljs-number">10</span>, <span class="hljs-number">2</span>];<br>myObject = myFunction.apply(myObject, myArray);  <span class="hljs-comment">// 返回 20</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>两个方法都使用了对象本身作为第一个参数, 两者的区别在于第二个参数: apply传入的是一个参数数组，也就是将多个参数组合成为一个数组传入，而call则作为call的参数传入(从第二个参数开始)</li>
+<li>两个方法都使用了对象本身作为第一个参数, 两者的区别在于第二个参数: apply传入的是一个参数数组，也就是将多个参数组合成为一个数组传入，而call则作为call的参数传入（从第二个参数开始)</li>
 <li>在 JavaScript 严格模式(strict mode)下, 在调用函数时第一个参数会成为 <strong>this</strong> 的值, 即使该参数不是一个对象</li>
 <li>在 JavaScript 非严格模式(non-strict mode)下, 如果第一个参数的值是 null 或 undefined, 它将使用全局对象替代</li>
 <li>通过 <code>call()</code> 或 <code>apply()</code> 方法你可以设置 <strong>this</strong> 的值, 且作为已存在对象的新方法调用</li>

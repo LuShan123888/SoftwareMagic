@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java 序列化  Java序列化是将一个对象编码成一个字节流，反序列化将字节流编码转换成一个对象 对象输入流ObjectInputStream和对象输出流ObjectOutputStream将Java流系统扩充到能输入&#x2F;输出对象，他们提供的writeObject()和readObject()方法实现了对象的序列化(Serialized)和反序列化(Deserialized)  Serializa">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-08T10:11:44.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.437Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.315Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,7 +239,7 @@
 </ul>
 <h3 id="serialVersionUID">serialVersionUID</h3>
 <ul>
-<li>Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的，在进行反序列化时,JVM会把传来的字节流中的serialVersionUID与本地相应实体(类)的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常</li>
+<li>Java的序列化机制是通过在运行时判断类的serialVersionUID来验证版本一致性的，在进行反序列化时,JVM会把传来的字节流中的serialVersionUID与本地相应实体（类）的serialVersionUID进行比较，如果相同就认为是一致的，可以进行反序列化，否则就会出现序列化版本不一致的异常</li>
 <li>如果不显示指定 serialVersionUID, JVM 在序列化时会根据属性自动生成一个 serialVersionUID, 然后与属性一起序列化, 再进行持久化或网络传输. 在反序列化时, JVM 会再根据属性自动生成一个新版 serialVersionUID, 然后将这个新版 serialVersionUID 与序列化时生成的旧版 serialVersionUID 进行比较, 如果相同则反序列化成功, 否则报错</li>
 <li>如果显示指定了 serialVersionUID, JVM 在序列化和反序列化时仍然都会生成一个 serialVersionUID, 但值为我们显示指定的值, 这样在反序列化时新旧版本的 serialVersionUID 就一致了</li>
 <li>当序列化了一个类实例后，希望更改一个字段或添加一个字段，不设置serialVersionUID,所做的任何更改都将导致无法反序化旧有实例，并在反序列化时抛出异常</li>

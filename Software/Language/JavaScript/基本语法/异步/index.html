@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="JavaScript 异步编程 异步的概念  异步(Asynchronous, async)是与同步(Synchronous, sync)相对的概念 在我们学习的传统单线程编程中，程序的运行是同步的(同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系 简单来理解就是:同步按你的代码顺序执">
+  <meta name="description" content="JavaScript 异步编程 异步的概念  异步(Asynchronous, async)是与同步(Synchronous, sync)相对的概念 在我们学习的传统单线程编程中，程序的运行是同步的（同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系 简单来理解就是：同步按你的代码顺序执">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 异步编程">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/JavaScript/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="JavaScript 异步编程 异步的概念  异步(Asynchronous, async)是与同步(Synchronous, sync)相对的概念 在我们学习的传统单线程编程中，程序的运行是同步的(同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系 简单来理解就是:同步按你的代码顺序执">
+<meta property="og:description" content="JavaScript 异步编程 异步的概念  异步(Asynchronous, async)是与同步(Synchronous, sync)相对的概念 在我们学习的传统单线程编程中，程序的运行是同步的（同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系 简单来理解就是：同步按你的代码顺序执">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-async-sync.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.435Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.183Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,25 +233,25 @@
 <h2 id="异步的概念">异步的概念</h2>
 <ul>
 <li>异步(Asynchronous, async)是与同步(Synchronous, sync)相对的概念</li>
-<li>在我们学习的传统单线程编程中，程序的运行是同步的(同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系</li>
-<li>简单来理解就是:同步按你的代码顺序执行，异步不按照代码顺序执行，异步的执行效果更高:</li>
-<li>以上是关于异步的概念的解释，接下来我们通俗地解释一下异步:异步就是从主线程发射一个子线程来完成任务</li>
+<li>在我们学习的传统单线程编程中，程序的运行是同步的（同步不意味着所有步骤同时运行，而是指步骤在一个控制流序列中按顺序执行),而异步的概念则是不保证同步的概念，也就是说，一个异步过程的执行将不再与原有的序列有顺序关系</li>
+<li>简单来理解就是：同步按你的代码顺序执行，异步不按照代码顺序执行，异步的执行效果更高:</li>
+<li>以上是关于异步的概念的解释，接下来我们通俗地解释一下异步：异步就是从主线程发射一个子线程来完成任务</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-async-sync.png" srcset="/images/loading.gif" lazyload alt=""></p>
 <h2 id="什么时候用异步编程">什么时候用异步编程</h2>
 <ul>
-<li>在前端编程中(甚至后端有时也是这样),我们在处理一些简短，快速的操作时，例如计算 1 + 1 的结果，往往在主线程中就可以完成，主线程作为一个线程，不能够同时接受多方面的请求，所以，当一个事件没有结束时，界面将无法处理其他请求</li>
+<li>在前端编程中（甚至后端有时也是这样),我们在处理一些简短，快速的操作时，例如计算 1 + 1 的结果，往往在主线程中就可以完成，主线程作为一个线程，不能够同时接受多方面的请求，所以，当一个事件没有结束时，界面将无法处理其他请求</li>
 <li>现在有一个按钮，如果我们设置它的 <code>onclick</code> 事件为一个死循环，那么当这个按钮按下，整个网页将失去响应</li>
-<li>为了避免这种情况的发生，我们常常用子线程来完成一些可能消耗时间足够长以至于被用户察觉的事情，比如读取一个大文件或者发出一个网络请求，因为子线程独立于主线程，所以即使出现阻塞也不会影响主线程的运行，但是子线程有一个局限:一旦发射了以后就会与主线程失去同步，我们无法确定它的结束，如果结束之后需要处理一些事情，比如处理来自服务器的信息，我们是无法将它合并到主线程中去的</li>
+<li>为了避免这种情况的发生，我们常常用子线程来完成一些可能消耗时间足够长以至于被用户察觉的事情，比如读取一个大文件或者发出一个网络请求，因为子线程独立于主线程，所以即使出现阻塞也不会影响主线程的运行，但是子线程有一个局限：一旦发射了以后就会与主线程失去同步，我们无法确定它的结束，如果结束之后需要处理一些事情，比如处理来自服务器的信息，我们是无法将它合并到主线程中去的</li>
 <li>为了解决这个问题,JavaScript 中的异步操作函数往往通过回调函数来实现异步任务的结果处理</li>
 </ul>
 <h2 id="回调函数">回调函数</h2>
 <ul>
-<li>回调函数就是一个函数，它是在我们启动一个异步任务的时候就告诉它:等你完成了这个任务之后要干什么，这样一来主线程几乎不用关心异步任务的状态了，他自己会善始善终</li>
+<li>回调函数就是一个函数，它是在我们启动一个异步任务的时候就告诉它：等你完成了这个任务之后要干什么，这样一来主线程几乎不用关心异步任务的状态了，他自己会善始善终</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">print</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;demo&quot;</span>).innerHTML=<span class="hljs-string">&quot;Test!&quot;</span>;<br>&#125;<br><span class="hljs-built_in">setTimeout</span>(print, <span class="hljs-number">3000</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这段程序中的 setTimeout 就是一个消耗时间较长(3 秒)的过程，它的第一个参数是个回调函数，第二个参数是毫秒数，这个函数执行之后会产生一个子线程，子线程会等待 3 秒，然后执行回调函数 “print”,在命令行输出 “Time out”</li>
+<li>这段程序中的 setTimeout 就是一个消耗时间较长(3 秒）的过程，它的第一个参数是个回调函数，第二个参数是毫秒数，这个函数执行之后会产生一个子线程，子线程会等待 3 秒，然后执行回调函数 “print”,在命令行输出 “Time out”</li>
 <li>当然,JavaScript 语法十分友好，我们不必单独定义一个函数 print ,我们常常将上面的程序写成:</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;demo&quot;</span>).innerHTML=<span class="hljs-string">&quot;Test!&quot;</span>;<br>&#125;, <span class="hljs-number">3000</span>);<br></code></pre></td></tr></table></figure>

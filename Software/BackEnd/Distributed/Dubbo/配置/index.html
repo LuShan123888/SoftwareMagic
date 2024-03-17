@@ -24,7 +24,7 @@
 <meta property="og:description" content="Dubbo 配置  配置覆盖关系  方法级优先，接口级次之，全局配置再次之 如果级别一样，则消费方优先，提供方次之   其中，服务提供方配置，通过URL经由注册中心传递给消费方  dubbo:application  应用信息配置，对应的配置类:org.apache.dubbo.config.ApplicationConfig     属性 对应URL参数 类型 是否必填 缺省值 作用 描述 兼容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:32:13.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.428Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.046Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -262,7 +262,7 @@
 <td><strong>必填</strong></td>
 <td></td>
 <td>服务治理</td>
-<td>当前应用名称，用于注册中心计算应用间依赖关系，注意:消费者和提供者应用名不要一样，此参数不是匹配条件，你当前项目叫什么名字就填什么，和提供者消费者角色无关，比如:kylin应用调用了morgan应用的服务，则kylin项目配成kylin,morgan项目配成morgan,可能kylin也提供其它服务给别人使用，但kylin项目永远配成kylin,这样注册中心将显示kylin依赖于morgan</td>
+<td>当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样，此参数不是匹配条件，你当前项目叫什么名字就填什么，和提供者消费者角色无关，比如:kylin应用调用了morgan应用的服务，则kylin项目配成kylin,morgan项目配成morgan,可能kylin也提供其它服务给别人使用，但kylin项目永远配成kylin,这样注册中心将显示kylin依赖于morgan</td>
 <td>1.0.16以上版本</td>
 </tr>
 <tr>
@@ -442,7 +442,7 @@
 <td>可选</td>
 <td>5000</td>
 <td>性能调优</td>
-<td>注册中心请求超时时间(毫秒)</td>
+<td>注册中心请求超时时间（毫秒)</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -452,7 +452,7 @@
 <td>可选</td>
 <td>60000</td>
 <td>性能调优</td>
-<td>注册中心会话超时时间(毫秒),用于检测提供者非正常断线后的脏数据，比如用心跳检测的实现，此时间就是心跳间隔，不同注册中心实现不一样,</td>
+<td>注册中心会话超时时间（毫秒),用于检测提供者非正常断线后的脏数据，比如用心跳检测的实现，此时间就是心跳间隔，不同注册中心实现不一样,</td>
 <td>2.1.0以上版本</td>
 </tr>
 <tr>
@@ -462,7 +462,7 @@
 <td>可选</td>
 <td></td>
 <td>服务治理</td>
-<td>使用文件缓存注册中心地址列表及服务提供者列表，应用重启时将基于此文件恢复，注意:两个注册中心不能使用同一文件存储</td>
+<td>使用文件缓存注册中心地址列表及服务提供者列表，应用重启时将基于此文件恢复，注意：两个注册中心不能使用同一文件存储</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -472,7 +472,7 @@
 <td>可选</td>
 <td>0</td>
 <td>性能调优</td>
-<td>停止时等待通知完成时间(毫秒)</td>
+<td>停止时等待通知完成时间（毫秒)</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -532,7 +532,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>注册到注册中心的URL是否采用精简模式的(与低版本兼容)</td>
+<td>注册到注册中心的URL是否采用精简模式的（与低版本兼容)</td>
 <td>2.7.0以上版本</td>
 </tr>
 <tr>
@@ -622,7 +622,7 @@
 <td>可选</td>
 <td>200</td>
 <td>性能调优</td>
-<td>服务线程池大小(固定大小)</td>
+<td>服务线程池大小（固定大小)</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -632,7 +632,7 @@
 <td>可选</td>
 <td>cpu个数+1</td>
 <td>性能调优</td>
-<td>io线程池大小(固定大小)</td>
+<td>io线程池大小（固定大小)</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -652,7 +652,7 @@
 <td>可选</td>
 <td>8388608(=8M)</td>
 <td>性能调优</td>
-<td>请求及响应数据包大小限制，单位:字节</td>
+<td>请求及响应数据包大小限制，单位：字节</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -872,7 +872,7 @@
 <td>可选</td>
 <td>缺省为接口名</td>
 <td>服务发现</td>
-<td>服务路径 (注意:1.0不支持自定义路径，总是使用接口名，如果有1.0调2.0,配置服务路径可能不兼容)</td>
+<td>服务路径（注意:1.0不支持自定义路径，总是使用接口名，如果有1.0调2.0,配置服务路径可能不兼容)</td>
 <td>1.0.12以上版本</td>
 </tr>
 <tr>
@@ -882,7 +882,7 @@
 <td>可选</td>
 <td>0</td>
 <td>性能调优</td>
-<td>延迟注册服务时间(毫秒),设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
+<td>延迟注册服务时间（毫秒),设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
 <td>1.0.14以上版本</td>
 </tr>
 <tr>
@@ -892,7 +892,7 @@
 <td>可选</td>
 <td>1000</td>
 <td>性能调优</td>
-<td>远程服务调用超时时间(毫秒)</td>
+<td>远程服务调用超时时间（毫秒)</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -922,7 +922,7 @@
 <td>可选</td>
 <td>random</td>
 <td>性能调优</td>
-<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示:随机，轮询，最少活跃调用</td>
+<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示：随机，轮询，最少活跃调用</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -942,7 +942,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>设为true,表示使用缺省代理类名，即:接口名 + Local后缀，已废弃，请使用stub</td>
+<td>设为true,表示使用缺省代理类名，即：接口名 + Local后缀，已废弃，请使用stub</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -952,7 +952,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>设为true,表示使用缺省代理类名，即:接口名 + Stub后缀，服务接口客户端本地代理类名，用于在客户端执行本地逻辑，如本地缓存等，该本地代理类的构造函数必须允许传入远程代理对象，构造函数如:public XxxServiceStub(XxxService xxxService)</td>
+<td>设为true,表示使用缺省代理类名，即：接口名 + Stub后缀，服务接口客户端本地代理类名，用于在客户端执行本地逻辑，如本地缓存等，该本地代理类的构造函数必须允许传入远程代理对象，构造函数如:public XxxServiceStub(XxxService xxxService)</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -962,7 +962,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>设为true,表示使用缺省Mock类名，即:接口名 + Mock后缀，服务接口调用失败Mock实现类，该Mock类必须有一个无参构造函数，与Local的区别在于,Local总是被执行，而Mock只在出现非业务异常(比如超时，网络异常等)时执行,Local在远程调用之前执行,Mock在远程调用后执行,</td>
+<td>设为true,表示使用缺省Mock类名，即：接口名 + Mock后缀，服务接口调用失败Mock实现类，该Mock类必须有一个无参构造函数，与Local的区别在于,Local总是被执行，而Mock只在出现非业务异常（比如超时，网络异常等）时执行,Local在远程调用之前执行,Mock在远程调用后执行,</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -1202,7 +1202,7 @@
 <td>可选</td>
 <td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的timeout</td>
 <td>性能调优</td>
-<td>服务方法调用超时时间(毫秒)</td>
+<td>服务方法调用超时时间（毫秒)</td>
 <td>1.0.5以上版本</td>
 </tr>
 <tr>
@@ -1232,7 +1232,7 @@
 <td>可选</td>
 <td>缺省使用<a href="dubbo:consumer">dubbo:consumer</a>的loadbalance</td>
 <td>性能调优</td>
-<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示:随机，轮询，最少活跃调用</td>
+<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示：随机，轮询，最少活跃调用</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -1292,7 +1292,7 @@
 <td>可选</td>
 <td></td>
 <td>服务治理</td>
-<td>服务接口调用失败Mock实现类名，该Mock类必须有一个无参构造函数，与Local的区别在于,Local总是被执行，而Mock只在出现非业务异常(比如超时，网络异常等)时执行,Local在远程调用之前执行,Mock在远程调用后执行,</td>
+<td>服务接口调用失败Mock实现类名，该Mock类必须有一个无参构造函数，与Local的区别在于,Local总是被执行，而Mock只在出现非业务异常（比如超时，网络异常等）时执行,Local在远程调用之前执行,Mock在远程调用后执行,</td>
 <td>Dubbo1.0.13及其以上版本支持</td>
 </tr>
 <tr>
@@ -1482,7 +1482,7 @@
 <td>可选</td>
 <td>200</td>
 <td>性能调优</td>
-<td>服务线程池大小(固定大小)</td>
+<td>服务线程池大小（固定大小)</td>
 <td>1.0.16以上版本</td>
 </tr>
 <tr>
@@ -1492,7 +1492,7 @@
 <td>可选</td>
 <td>8388608(=8M)</td>
 <td>性能调优</td>
-<td>请求及响应数据包大小限制，单位:字节</td>
+<td>请求及响应数据包大小限制，单位：字节</td>
 <td>2.0.0以上版本</td>
 </tr>
 <tr>
@@ -1622,7 +1622,7 @@
 <td>可选</td>
 <td>0</td>
 <td>性能调优</td>
-<td>延迟注册服务时间(毫秒)-,设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
+<td>延迟注册服务时间（毫秒)-,设为-1时，表示延迟到Spring容器初始化完成时暴露服务</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -1632,7 +1632,7 @@
 <td>可选</td>
 <td>1000</td>
 <td>性能调优</td>
-<td>远程服务调用超时时间(毫秒)</td>
+<td>远程服务调用超时时间（毫秒)</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -1662,7 +1662,7 @@
 <td>可选</td>
 <td>random</td>
 <td>性能调优</td>
-<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示:随机，轮询，最少活跃调用</td>
+<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示：随机，轮询，最少活跃调用</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -1682,7 +1682,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>设为true,表示使用缺省代理类名，即:接口名 + Local后缀,</td>
+<td>设为true,表示使用缺省代理类名，即：接口名 + Local后缀,</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -1692,7 +1692,7 @@
 <td>可选</td>
 <td>false</td>
 <td>服务治理</td>
-<td>设为true,表示使用缺省Mock类名，即:接口名 + Mock后缀,</td>
+<td>设为true,表示使用缺省Mock类名，即：接口名 + Mock后缀,</td>
 <td>2.0.5以上版本</td>
 </tr>
 <tr>
@@ -1912,7 +1912,7 @@
 <td>可选</td>
 <td>1000</td>
 <td>性能调优</td>
-<td>远程服务调用超时时间(毫秒)</td>
+<td>远程服务调用超时时间（毫秒)</td>
 <td>1.0.16以上版本</td>
 </tr>
 <tr>
@@ -1932,7 +1932,7 @@
 <td>可选</td>
 <td>random</td>
 <td>性能调优</td>
-<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示:随机，轮询，最少活跃调用</td>
+<td>负载均衡策略，可选值:random,roundrobin,leastactive,分别表示：随机，轮询，最少活跃调用</td>
 <td>1.0.16以上版本</td>
 </tr>
 <tr>

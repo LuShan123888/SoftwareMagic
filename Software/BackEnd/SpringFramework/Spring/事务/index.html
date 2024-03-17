@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring 事务 pom.xml 1234567891011121314151617181920212223242526&lt;!--Spring Boot--&gt;&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;spring-boot-star">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-16T15:36:41.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.341Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.045Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,11 +236,11 @@
 </ul>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">TransactionDefinition</span> &#123;<br>    <span class="hljs-comment">// 返回事务传播行为</span><br>    <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">getPropagationBehavior</span>(<span class="hljs-params"></span>)</span>;<br>    <span class="hljs-comment">// 返回事务的隔离级别，事务管理器根据它来控制另外一个事务可以看到本事务内的哪些数据</span><br>    <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">getIsolationLevel</span>(<span class="hljs-params"></span>)</span>;<br>    <span class="hljs-comment">// 事务超时时间，事务必须在多少秒之内完成</span><br>    <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">getTimeout</span>(<span class="hljs-params"></span>)</span>;<br>    <span class="hljs-comment">// 事务是否只读，事务管理器能够根据这个返回值进行优化，确保事务是只读的</span><br>    <span class="hljs-function">boolean <span class="hljs-title">isReadOnly</span>(<span class="hljs-params"></span>)</span>;<br>    <span class="hljs-comment">// 事务名字</span><br>    @Nullable<br>    <span class="hljs-function">String <span class="hljs-title">getName</span>(<span class="hljs-params"></span>)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>事务属性可以理解成事务的一些基本配置，描述了事务策略如何应用到方法上，事务属性包含了5个方面:传播行为，隔离规则，回滚规则，事务超时，是否只读</li>
+<li>事务属性可以理解成事务的一些基本配置，描述了事务策略如何应用到方法上，事务属性包含了5个方面：传播行为，隔离规则，回滚规则，事务超时，是否只读</li>
 </ul>
 <h3 id="事务传播特性">事务传播特性</h3>
 <ul>
-<li>当事务方法被另一个事务方法调用时，必须指定事务应该如何传播，例如:方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行,Spring定义了七种传播行为:</li>
+<li>当事务方法被另一个事务方法调用时，必须指定事务应该如何传播，例如：方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行,Spring定义了七种传播行为:</li>
 </ul>
 <table>
 <thead>
@@ -308,7 +308,7 @@
 </tr>
 <tr>
 <td>TransactionDefinition.ISOLATION_READ_UNCOMMITTED</td>
-<td>允许读取尚未提交的数据变更(最低的隔离级别)</td>
+<td>允许读取尚未提交的数据变更（最低的隔离级别)</td>
 <td>是</td>
 <td>是</td>
 <td>是</td>
@@ -341,7 +341,7 @@
 <li>事务隔离级别与锁的关系
 <ul>
 <li>事务隔离级别为<code>ISOLATION_READ_UNCOMMITTED</code>时，写数据只会锁住相应的行</li>
-<li>事务隔离级别为可<code>ISOLATION_REPEATABLE_READ</code>时，如果检索条件有索引(包括主键索引)的时候，默认加锁方式是next-key锁，如果检索条件没有索引，更新数据时会锁住整张表，一个间隙被事务加了锁，其他事务是不能在这个间隙插入记录的，这样可以防止幻读</li>
+<li>事务隔离级别为可<code>ISOLATION_REPEATABLE_READ</code>时，如果检索条件有索引（包括主键索引）的时候，默认加锁方式是next-key锁，如果检索条件没有索引，更新数据时会锁住整张表，一个间隙被事务加了锁，其他事务是不能在这个间隙插入记录的，这样可以防止幻读</li>
 <li>事务隔离级别为<code>ISOLATION_SERIALIZABLE</code>时，读写数据都会锁住整张表</li>
 <li>隔离级别越高，越能保证数据的完整性和一致性，但是对并发性能的影响也就越大</li>
 </ul>
@@ -365,7 +365,7 @@
 <ul>
 <li>Spring 为事务管理提供了丰富的功能支持,Spring 事务管理分为编码式和声明式的两种方式:
 <ul>
-<li>编程式事务:允许用户在代码中精确定义事务的边界，编程式事务管理使用TransactionTemplate或者直接使用底层的PlatformTransactionManager,对于编程式事务管理,spring推荐使用TransactionTemplate</li>
+<li>编程式事务：允许用户在代码中精确定义事务的边界，编程式事务管理使用TransactionTemplate或者直接使用底层的PlatformTransactionManager,对于编程式事务管理,spring推荐使用TransactionTemplate</li>
 <li>声明式事务: 基于AOP,有助于用户将操作与事务规则进行解耦，其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，在执行完目标方法之后根据执行情况提交或者回滚事务，声明式事务管理也有两种常用x方式，一种是在配置文件(xml)中做相关的事务规则声明，另一种是基于@Transactional注解的方式</li>
 </ul>
 </li>
@@ -380,7 +380,7 @@
 <blockquote>
 <p><strong>事务管理器</strong></p>
 <ul>
-<li>无论使用Spring的哪种事务管理策略(编程式或者声明式)事务管理器都是必须的</li>
+<li>无论使用Spring的哪种事务管理策略（编程式或者声明式）事务管理器都是必须的</li>
 <li>事务管理器就是 Spring的核心事务管理抽象, 管理封装了一组独立于技术的方法</li>
 </ul>
 </blockquote>
@@ -455,28 +455,28 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>    <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>        aInnerFunction(); <span class="hljs-comment">// 调用内部没有添加@Transactional注解的函数</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aInnerFunction</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//todo: 操作数据B(做了增，删,改 操作)</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数操作的数据都会回滚</li>
+<li>结果：两个函数操作的数据都会回滚</li>
 </ul>
 <blockquote>
 <p>情况2:两个函数都添加了@Transactional注解,aInnerFunction抛异常</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    aInnerFunction(); <span class="hljs-comment">// 调用内部没有添加@Transactional注解的函数</span><br>  &#125;<br><br>  <span class="hljs-meta">@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aInnerFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 操作数据B(做了增，删,改 操作)</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:同第一种情况一样，两个函数对数据库操作都会回滚，因为同一个类中函数相互调用的时候，内部函数添加@Transactional注解无效,@Transactional注解只有外部调用才有效</li>
+<li>结果：同第一种情况一样，两个函数对数据库操作都会回滚，因为同一个类中函数相互调用的时候，内部函数添加@Transactional注解无效,@Transactional注解只有外部调用才有效</li>
 </ul>
 <blockquote>
 <p>情况3: aFunction不添加注解,aInnerFunction添加注解,aInnerFunction抛异常</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    aInnerFunction(); <span class="hljs-comment">// 调用内部没有添加@Transactional注解的函数</span><br>  &#125;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aInnerFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 操作数据B(做了增，删,改 操作)</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数对数据库的操作都不会回滚，因为内部函数@Transactional注解添加和没添加一样</li>
+<li>结果：两个函数对数据库的操作都不会回滚，因为内部函数@Transactional注解添加和没添加一样</li>
 </ul>
 <blockquote>
 <p>情况4:aFunction添加了@Transactional注解,aInnerFunction函数没有添加,aInnerFunction抛异常，不过在aFunction里面把异常抓出来了</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      aInnerFunction(); <span class="hljs-comment">// 调用内部没有添加@Transactional注解的函数</span><br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      e.printStackTrace();<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aInnerFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 操作数据B(做了增，删,改 操作)</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数里面的数据库操作都成功，事务回滚的动作发生在当有@Transactional注解函数有对应异常抛出时才会回滚</li>
+<li>结果：两个函数里面的数据库操作都成功，事务回滚的动作发生在当有@Transactional注解函数有对应异常抛出时才会回滚</li>
 </ul>
 <h5 id="不同类中函数相互调用">不同类中函数相互调用</h5>
 <ul>
@@ -487,21 +487,21 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> BClass bClass;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setbClass</span><span class="hljs-params">(BClass bClass)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.bClass = bClass;<br>    &#125;<br><br>    <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>        bClass.bFunction();<br>    &#125;<br><br>&#125;<br><br><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BClass</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bFunction</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数对数据库的操作都回滚了</li>
+<li>结果：两个函数对数据库的操作都回滚了</li>
 </ul>
 <blockquote>
 <p>情况2:aFunction,bFunction两个函数都添加注解,bFunction抛异常</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>  <span class="hljs-keyword">private</span> BClass bClass;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setbClass</span><span class="hljs-params">(BClass bClass)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.bClass = bClass;<br>  &#125;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    bClass.bFunction();<br>  &#125;<br><br>&#125;<br><br><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BClass</span> </span>&#123;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数对数据库的操作都回滚了，两个函数里面用的还是同一个事务，这种情况下，你可以认为事务rollback了两次，两个函数都有异常</li>
+<li>结果：两个函数对数据库的操作都回滚了，两个函数里面用的还是同一个事务，这种情况下，你可以认为事务rollback了两次，两个函数都有异常</li>
 </ul>
 <blockquote>
 <p>情况3:aFunction,bFunction两个函数都添加注解,bFunction抛异常,aFunction抓出异常</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AClass</span> </span>&#123;<br><br>  <span class="hljs-keyword">private</span> BClass bClass;<br><br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setbClass</span><span class="hljs-params">(BClass bClass)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.bClass = bClass;<br>  &#125;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      bClass.bFunction();<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>      e.printStackTrace();<br>    &#125;<br>  &#125;<br><br>&#125;<br><br><span class="hljs-meta">@Service()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BClass</span> </span>&#123;<br><br>  <span class="hljs-meta">@Transactional(rollbackFor = Exception.class)</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bFunction</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//todo: 数据库操作A(增，删,该)</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;函数执行有异常!&quot;</span>);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>结果:两个函数数据库操作都没成功，而且还抛出异常:<code>org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only</code></li>
+<li>结果：两个函数数据库操作都没成功，而且还抛出异常:<code>org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only</code></li>
 <li>可以这么理解，两个函数用的是同一个事务,bFunction函数抛了异常，调了事务的rollback函数，事务被标记了只能rollback了，程序继续执行,aFunction函数里面把异常给抓出来了，这个时候aFunction函数没有抛出异常，既然你没有异常那事务就需要提交，会调事务的commit函数，而之前已经标记了事务只能rollback-only(以为是同一个事务),直接就抛异常了，不让调了</li>
 </ul>
 <blockquote>

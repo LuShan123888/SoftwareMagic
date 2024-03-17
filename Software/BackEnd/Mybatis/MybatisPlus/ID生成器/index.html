@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Mybatis Plus ID生成器 实体类字段注解@TableId(type&#x3D;IdType.)  自3.3.0开始，默认使用雪花算法+UUID(不含中划线)     值 描述     AUTO 数据库ID自增   NONE 无状态，该类型为未设置主键类型(注解里等于跟随全局，全局里约等于 INPUT)   INPUT insert前自行set主键值   ASSIGN_ID 分配ID(主键类型为N">
+  <meta name="description" content="Mybatis Plus ID生成器 实体类字段注解@TableId(type&#x3D;IdType.)  自3.3.0开始，默认使用雪花算法+UUID(不含中划线)     值 描述     AUTO 数据库ID自增   NONE 无状态，该类型为未设置主键类型（注解里等于跟随全局，全局里约等于 INPUT)   INPUT insert前自行set主键值   ASSIGN_ID 分配ID(主键类型为N">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis Plus ID生成器">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Mybatis/MybatisPlus/ID%E7%94%9F%E6%88%90%E5%99%A8/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Mybatis Plus ID生成器 实体类字段注解@TableId(type&#x3D;IdType.)  自3.3.0开始，默认使用雪花算法+UUID(不含中划线)     值 描述     AUTO 数据库ID自增   NONE 无状态，该类型为未设置主键类型(注解里等于跟随全局，全局里约等于 INPUT)   INPUT insert前自行set主键值   ASSIGN_ID 分配ID(主键类型为N">
+<meta property="og:description" content="Mybatis Plus ID生成器 实体类字段注解@TableId(type&#x3D;IdType.)  自3.3.0开始，默认使用雪花算法+UUID(不含中划线)     值 描述     AUTO 数据库ID自增   NONE 无状态，该类型为未设置主键类型（注解里等于跟随全局，全局里约等于 INPUT)   INPUT insert前自行set主键值   ASSIGN_ID 分配ID(主键类型为N">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-13T12:46:02.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.432Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:55.091Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -246,7 +246,7 @@
 </tr>
 <tr>
 <td style="text-align:center">NONE</td>
-<td style="text-align:center">无状态，该类型为未设置主键类型(注解里等于跟随全局，全局里约等于 INPUT)</td>
+<td style="text-align:center">无状态，该类型为未设置主键类型（注解里等于跟随全局，全局里约等于 INPUT)</td>
 </tr>
 <tr>
 <td style="text-align:center">INPUT</td>
@@ -299,11 +299,11 @@
 </tr>
 </tbody>
 </table>
-<h3 id="方式一-声明为bean供spring扫描注入">方式一:声明为bean供spring扫描注入</h3>
+<h3 id="方式一：声明为bean供spring扫描注入">方式一：声明为bean供spring扫描注入</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomIdGenerator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IdentifierGenerator</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Long <span class="hljs-title">nextId</span><span class="hljs-params">(Object entity)</span> </span>&#123;<br>      	<span class="hljs-comment">//可以将当前传入的class全类名来作为bizKey,或者提取参数来生成bizKey进行分布式Id调用生成</span><br>      	String bizKey = entity.getClass().getName();<br>        <span class="hljs-comment">//根据bizKey调用分布式ID生成</span><br>        <span class="hljs-keyword">long</span> id = ....;<br>      	<span class="hljs-comment">//返回生成的id值即可</span><br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="方式二-使用配置类">方式二:使用配置类</h3>
+<h3 id="方式二：使用配置类">方式二：使用配置类</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> IdentifierGenerator <span class="hljs-title">idGenerator</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> CustomIdGenerator();<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="方式三-通过MybatisPlusPropertiesCustomizer自定义">方式三:通过MybatisPlusPropertiesCustomizer自定义</h3>
+<h3 id="方式三：通过MybatisPlusPropertiesCustomizer自定义">方式三：通过MybatisPlusPropertiesCustomizer自定义</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> MybatisPlusPropertiesCustomizer <span class="hljs-title">plusPropertiesCustomizer</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> plusProperties -&gt; plusProperties.getGlobalConfig().setIdentifierGenerator(<span class="hljs-keyword">new</span> CustomIdGenerator());<br>&#125;<br></code></pre></td></tr></table></figure>
             </div>
             <hr>

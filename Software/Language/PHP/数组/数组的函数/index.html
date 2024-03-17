@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 数组的函数  PHP有一些有用的函数来修改或将一个操作应用到数组的所有元素，可以合并数组，寻找数组间差别，计算总数等等，这些都可以由内置函数来完成  指定值的范围  range()函数创建一个连续整数或字符的数组，整数或字符的值在传递给函数的两个参数之间，例如:  123$numbers &#x3D; range(2,5);	&#x2F;&#x2F;$numbers &#x3D; array(2,3,4,5);$letters">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T09:28:59.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.436Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.248Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -251,7 +251,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$confusion</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">19</span> =&gt; <span class="hljs-string">&#x27;ten&#x27;</span>,<span class="hljs-number">11</span> =&gt; <span class="hljs-string">&#x27;eleven&#x27;</span>,<span class="hljs-number">12</span> =&gt; <span class="hljs-string">&#x27;twelve&#x27;</span>);<br><span class="hljs-variable">$size</span> = count(<span class="hljs-variable">$confusion</span>);		<span class="hljs-comment">//$size为3</span><br></code></pre></td></tr></table></figure>
 <h2 id="填充数组">填充数组</h2>
 <ul>
-<li>要用重复的内容来创建一个数组，可以使用<code>array_pad()</code>函数,<code>array_pad()</code>函数额第一个参数是数组，第二个参数是你想要数组拥有的最少元素个数，第三个参数是要给每个元素的初始值,<code>array_pad()</code>函数返回一个填充得到的新数组，而丢弃它的参数(源)数组，下面是<code>array_pad()</code>函数返回一个填充得到的新数组，而丢弃它的参数(源)数组，下面是<code>array_pad()</code>的实例:</li>
+<li>要用重复的内容来创建一个数组，可以使用<code>array_pad()</code>函数,<code>array_pad()</code>函数额第一个参数是数组，第二个参数是你想要数组拥有的最少元素个数，第三个参数是要给每个元素的初始值,<code>array_pad()</code>函数返回一个填充得到的新数组，而丢弃它的参数（源）数组，下面是<code>array_pad()</code>函数返回一个填充得到的新数组，而丢弃它的参数（源）数组，下面是<code>array_pad()</code>的实例:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$scores</span> = <span class="hljs-keyword">array</span>(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>);<br><span class="hljs-variable">$padded</span> = array_pad(<span class="hljs-variable">$scores</span>,<span class="hljs-number">5</span>,<span class="hljs-number">0</span>);<span class="hljs-comment">//$padded现在为array(5,10,0,0,0)</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -368,7 +368,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$people</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Tom&#x27;</span>,<span class="hljs-string">&#x27;Dick&#x27;</span>,<span class="hljs-string">&#x27;Harriet&#x27;</span>,<span class="hljs-string">&#x27;Brenda&#x27;</span>,<span class="hljs-string">&#x27;Jo&#x27;</span>);<br><span class="hljs-variable">$middle</span> = array_slice(<span class="hljs-variable">$people</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>);<span class="hljs-comment">//$middle为array(&#x27;Harriet&#x27;,&#x27;Brenda&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>一般你来说只有在索引数组(即那些有从0开始的连续整数索引的数组)上使用<code>array_slice()</code>才有意义:</li>
+<li>一般你来说只有在索引数组（即那些有从0开始的连续整数索引的数组）上使用<code>array_slice()</code>才有意义:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//这里使用array_slice()没有任何意义</span><br><span class="hljs-variable">$person</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;name&#x27;</span> =&gt; <span class="hljs-string">&quot;Fred&#x27;,&#x27;age&#x27; =&gt; 35, &#x27;wife&#x27; =&gt; &#x27;Betty&#x27;);</span><br><span class="hljs-string"><span class="hljs-subst">$subset</span> = array_slice(<span class="hljs-subst">$person</span>,1,2);//<span class="hljs-subst">$subset</span>为array(0 =&gt; 35,1 =&gt; &#x27;Betty&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -381,7 +381,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">chunks = array_chunk(<span class="hljs-keyword">array</span>,size[,preserve_key]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>本函数返回一个由小数组成的数组，第三个参数preserve_keys是一个布尔值，它指定新数组的元素是否和原数组相同的键(用于关联数组)还是从0开始的新数字键(用于索引数组),默认是分配新的键，如下所示:</li>
+<li>本函数返回一个由小数组成的数组，第三个参数preserve_keys是一个布尔值，它指定新数组的元素是否和原数组相同的键（用于关联数组）还是从0开始的新数字键（用于索引数组),默认是分配新的键，如下所示:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$nums</span> = range(<span class="hljs-number">1</span>,<span class="hljs-number">7</span>);<br><span class="hljs-variable">$rows</span> = array_chunk(<span class="hljs-variable">$nums</span>,<span class="hljs-number">3</span>);<br>print_r(<span class="hljs-variable">$rows</span>);<br><span class="hljs-keyword">Array</span><br>    (<br>    [<span class="hljs-number">0</span>] =&gt; <span class="hljs-keyword">Array</span><br>    (<br>        [<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">1</span><br>        [<span class="hljs-number">1</span>] =&gt; <span class="hljs-number">2</span><br>        [<span class="hljs-number">2</span>] =&gt; <span class="hljs-number">3</span><br>    )<br>    [<span class="hljs-number">1</span>] =&gt; <span class="hljs-keyword">Array</span><br>    (<br>        [<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">4</span><br>        [<span class="hljs-number">1</span>] =&gt; <span class="hljs-number">5</span><br>        [<span class="hljs-number">2</span>] =&gt; <span class="hljs-number">6</span><br>    )<br>    [<span class="hljs-number">2</span>] =&gt; <span class="hljs-keyword">Array</span><br>    (<br>        [<span class="hljs-number">0</span>] =&gt; <span class="hljs-number">7</span><br>    )<br>)<br></code></pre></td></tr></table></figure>
 <h2 id="检查元素是否存在">检查元素是否存在</h2>
@@ -449,7 +449,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$person</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;name&#x27;</span> =&gt; <span class="hljs-string">&#x27;Fred&#x27;</span>,<span class="hljs-string">&#x27;age&#x27;</span> =&gt; <span class="hljs-number">35</span>,<span class="hljs-string">&#x27;wife&#x27;</span> =&gt; <span class="hljs-string">&#x27;Wilma&#x27;</span>);<br><span class="hljs-variable">$keys</span> = array_keys(<span class="hljs-variable">$person</span>);<span class="hljs-comment">//$keys为array(&#x27;name&#x27;,&#x27;age&#x27;,&#x27;wife&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>PHP还提供了一个函数(较少使用)来得到数组中值的数组，即<code>array_values()</code>:</li>
+<li>PHP还提供了一个函数（较少使用）来得到数组中值的数组，即<code>array_values()</code>:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$array_of_values</span> = array_values(<span class="hljs-keyword">array</span>);<br></code></pre></td></tr></table></figure>
 <ul>

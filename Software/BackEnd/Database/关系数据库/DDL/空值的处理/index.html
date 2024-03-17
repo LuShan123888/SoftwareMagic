@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 空值的处理  前面已经多处提到空值(NULL)的概念和空值的处理,这里再系统介绍一下这个问题,所谓空值就是&quot;不知道&quot;或&quot;不存在&quot;或&quot;无意义&quot;的值,SQL语言中允许某些元组的某些属性再一定情况取空值,一般有以下几种情况:  该属性应该有一个值,但目前不知道它的具体值,例如,某学生的年龄属性,因为学生登记表漏填了,不知道该学生年龄,因">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-11T05:39:27.000Z">
-<meta property="article:modified_time" content="2021-09-11T05:39:27.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.085Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年9月11日 下午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -251,9 +251,9 @@
 <p><strong>[例3.81]</strong>:从Student表中找出漏填了数据的学生信息</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sname <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">OR</span> Ssex <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">OR</span> Sage <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">OR</span> Sdept <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
 <h2 id="空值的约束条件">空值的约束条件</h2>
-<p>属性定义(或者域定义)中有NOT NULL约束条件的不能取空值,加了UNIQUE限制的属性不能取空值,码属性不能取空值</p>
+<p>属性定义（或者域定义）中有NOT NULL约束条件的不能取空值,加了UNIQUE限制的属性不能取空值,码属性不能取空值</p>
 <h2 id="空值的算术运算-比较运算和逻辑运算">空值的算术运算,比较运算和逻辑运算</h2>
-<p>空值与另一个值(包括另一个空值)的算术运算的结果为空值,空值与另一个值(包括另一个空值)的比较运算的结果为UNKNOWN,有了UNKNOWN后,传统的逻辑运算中二值(TRUE,FALSE)逻辑就扩展成了三值逻辑,AND,OR,NOT的真值表如下所示,其中T表示TRUE,F表示FALSE,U表示UNKNOWN</p>
+<p>空值与另一个值（包括另一个空值）的算术运算的结果为空值,空值与另一个值（包括另一个空值）的比较运算的结果为UNKNOWN,有了UNKNOWN后,传统的逻辑运算中二值(TRUE,FALSE)逻辑就扩展成了三值逻辑,AND,OR,NOT的真值表如下所示,其中T表示TRUE,F表示FALSE,U表示UNKNOWN</p>
 <table>
 <thead>
 <tr>
@@ -323,7 +323,7 @@
 <p>在查询语句中,只有使用WHERE和HAVING子句中的选择条件为TRUE的元组才被选出作为输出结果</p>
 <p><strong>[例3.82]</strong>:找出选修1号课程的不及格的学生</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-operator">&lt;</span> <span class="hljs-number">60</span> <span class="hljs-keyword">AND</span> Cno <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span>;<br></code></pre></td></tr></table></figure>
-<p>选出的学生是那些参加了考试(Grade属性为非空值)而不及格的学生,不包括缺考的学生,因为前者使条件Grade&lt;60的值为TRUE,后者使条件的值为UNKNOWN</p>
+<p>选出的学生是那些参加了考试(Grade属性为非空值）而不及格的学生,不包括缺考的学生,因为前者使条件Grade&lt;60的值为TRUE,后者使条件的值为UNKNOWN</p>
 <p><strong>[例3.83]</strong>:选出选修1号课程的不及格的学生以及缺考的学生</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-operator">&lt;</span> <span class="hljs-number">60</span> <span class="hljs-keyword">AND</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span><br><span class="hljs-keyword">UNION</span><br><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">AND</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span>;<br><span class="hljs-keyword">SELECT</span> Sno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">AND</span> (Grade <span class="hljs-operator">&lt;</span> <span class="hljs-number">60</span> <span class="hljs-keyword">OR</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>);<br></code></pre></td></tr></table></figure>
 

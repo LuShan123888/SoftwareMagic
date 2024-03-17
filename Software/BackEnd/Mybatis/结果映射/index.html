@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis 结果映射 resultMap  ResultMap 的设计思想是, 对于简单的语句根本不需要配置显式的结果映射, 而对于复杂一点的语句需要描述它们的关系  实例  返回值类型为resultMap  123&lt;select id&#x3D;&quot;selectUserById&quot; resultMap&#x3D;&quot;UserMap&quot;&gt;    select id ,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-15T15:49:34.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.429Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -313,7 +313,7 @@
 <ul>
 <li>获取所有学生及对应老师的信息</li>
 <li>一个老师拥有多个学生</li>
-<li>如果对于老师这边, 就是一个一对多的现象, 即从一个老师下面拥有一群学生(集合)</li>
+<li>如果对于老师这边, 就是一个一对多的现象, 即从一个老师下面拥有一群学生（集合)</li>
 </ul>
 <h4 id="实体类编写">实体类编写</h4>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> tid;<br>&#125;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Teacher</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-comment">//一个老师多个学生</span><br>    <span class="hljs-keyword">private</span> List&lt;Student&gt; students;<br>&#125;<br></code></pre></td></tr></table></figure>

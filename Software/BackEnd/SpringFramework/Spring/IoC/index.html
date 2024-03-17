@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Spring IoC 控制反转 IoC本质  控制反转，是把传统上由程序代码直接操控的对象的调用权交给容器，由容器来创建对象并管理对象之间的依赖关系,DI是对IoC更准确的描述，即由容器动态的将某种依赖关系注入到组件之中  IoC 容器  BeanFactory:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括:实例化">
+  <meta name="description" content="Spring IoC 控制反转 IoC本质  控制反转，是把传统上由程序代码直接操控的对象的调用权交给容器，由容器来创建对象并管理对象之间的依赖关系,DI是对IoC更准确的描述，即由容器动态的将某种依赖关系注入到组件之中  IoC 容器  BeanFactory:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括：实例化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring IoC 控制反转">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/SpringFramework/Spring/IoC/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Spring IoC 控制反转 IoC本质  控制反转，是把传统上由程序代码直接操控的对象的调用权交给容器，由容器来创建对象并管理对象之间的依赖关系,DI是对IoC更准确的描述，即由容器动态的将某种依赖关系注入到组件之中  IoC 容器  BeanFactory:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括:实例化">
+<meta property="og:description" content="Spring IoC 控制反转 IoC本质  控制反转，是把传统上由程序代码直接操控的对象的调用权交给容器，由容器来创建对象并管理对象之间的依赖关系,DI是对IoC更准确的描述，即由容器动态的将某种依赖关系注入到组件之中  IoC 容器  BeanFactory:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括：实例化">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:31:12.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.341Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:55.077Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -234,10 +234,10 @@
 </ul>
 <h2 id="IoC-容器">IoC 容器</h2>
 <ul>
-<li><strong>BeanFactory</strong>:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括:实例化，定位，配置应用程序中的对象及建立这些对象间的依赖
+<li><strong>BeanFactory</strong>:是一个工厂类，它是一个负责生产和管理bean的工厂，在Spring中,BeanFactory是IoC容器的核心接口，它的职责包括：实例化，定位，配置应用程序中的对象及建立这些对象间的依赖
 <ul>
 <li><strong>延迟实例化</strong>:</li>
-<li>在启动IoC容器的时候不会去实例化Bean,只有在使用到某个Bean时(即调用getBean0方法获取时),才对该Bean进行加载实例化</li>
+<li>在启动IoC容器的时候不会去实例化Bean,只有在使用到某个Bean时（即调用getBean0方法获取时),才对该Bean进行加载实例化</li>
 <li>因为容器启动的时候不用实例化Bean,所以应用启动的时候占用资源较少，程序启动较快，适合对资源要求较高的应用
 <ul>
 <li>系统运行的速度相对来说慢一些，井且有可能会出现空指针异常的情况</li>
@@ -258,7 +258,7 @@
 <li>ApplicationContext继承自ListableBeanFactory接口，而ListableBeanFactory又继承自BeanFactory,所以ApplicationContext具有BeanFactory所支持的所有功能，当然ApplicationContext还提供了一些额外的功能
 <ul>
 <li>ApplicationContext继承自MessageSource,因此ApplicationContext为应用提供118n 国际化消息访问的功能</li>
-<li>ApplicationContext继承自ApplicationEventPublisher,使得容器拥有发布应用上下文事件的功能，包括容器启动事件，关闭事件等.实现了 ApplicationListener 事件监听接口的 Bean 可以接收到容器事件，并对事件进行响应处理</li>
+<li>ApplicationContext继承自ApplicationEventPublisher,使得容器拥有发布应用上下文事件的功能，包括容器启动事件，关闭事件等。实现了 ApplicationListener 事件监听接口的 Bean 可以接收到容器事件，并对事件进行响应处理</li>
 <li>ApplicationContext间接继承自ResourceLoader,提供了统一的资源文件访问方式
 <ul>
 <li><strong>FileSystemXmlApplicationContext</strong>:该容器从 XML 文件中加载已被定义的 bean,在这里，你需要提供给构造器 XML 文件的完整路径</li>
@@ -331,7 +331,7 @@
 </li>
 <li><code>onRefresh()</code>:模板方法，在单例对象的实例化之前，允许子类做一下扩展</li>
 <li><code>registerListeners()</code>:往applicationEventMulticaster事件多播器中注册一系列监听器</li>
-<li><code>finishBeanFactoryinitialization(beanFactory)</code>:IoC容器创建最重要的一个步骤:完成非機加载的单例bean对象的实例化，包括反射创建bean对象，屋性填充，循环依赖的处理,bean的初始化等等
+<li><code>finishBeanFactoryinitialization(beanFactory)</code>:IoC容器创建最重要的一个步骤：完成非機加载的单例bean对象的实例化，包括反射创建bean对象，屋性填充，循环依赖的处理,bean的初始化等等
 <ul>
 <li>循环遍历之前解析后的BeanDefinition定义信息</li>
 <li>通过反射创建bean对象</li>

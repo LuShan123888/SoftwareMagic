@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring 数据验证  Java API规范 (JSR303) 定义了Bean校验的标准validation-api,但没有提供实现,hibernate validation是对这个规范的实现，并增加了校验注解如@Email,@Length等,Spring Validation是对hibernate validation的二次封装，用于支持Springmvc参数自动校验  JSR-303">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:30:47.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.341Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.045Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -330,7 +330,7 @@
 <h3 id="requestParam-PathVariable参数校验">requestParam/PathVariable参数校验</h3>
 <ul>
 <li><code>GET</code>请求一般会使用<code>requestParam/PathVariable</code>传参</li>
-<li>在这种情况下，必须在<code>Controller</code>类上标注<code>@Validated</code>注解，并在入参上声明约束注解 (如<code>@Min</code>等)</li>
+<li>在这种情况下，必须在<code>Controller</code>类上标注<code>@Validated</code>注解，并在入参上声明约束注解（如<code>@Min</code>等)</li>
 <li>如果校验失败，会抛出<code>ConstraintViolationException</code>异常，代码示例如下:</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(&quot;/api/user&quot;)</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@Validated</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br><br>    <span class="hljs-meta">@GetMapping(&quot;&#123;userId&#125;&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">detail</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable(&quot;userId&quot;)</span> <span class="hljs-meta">@Min(10000000000000000L)</span> Long userId)</span> </span>&#123;<br><br>        UserDTO userDTO = <span class="hljs-keyword">new</span> UserDTO();<br>        userDTO.setUserId(userId);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        userDTO.setUserName(<span class="hljs-string">&quot;xixi&quot;</span>);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        <span class="hljs-keyword">return</span> Result.ok(userDTO);<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;getByAccount&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Result <span class="hljs-title">getByAccount</span><span class="hljs-params">(<span class="hljs-meta">@Length(min = 6, max = 20)</span> <span class="hljs-meta">@NotNull</span> String  account)</span> </span>&#123;<br><br>        UserDTO userDTO = <span class="hljs-keyword">new</span> UserDTO();<br>        userDTO.setUserId(<span class="hljs-number">10000000000000003L</span>);<br>        userDTO.setAccount(account);<br>        userDTO.setUserName(<span class="hljs-string">&quot;xixi&quot;</span>);<br>        userDTO.setAccount(<span class="hljs-string">&quot;11111111111111111&quot;</span>);<br>        <span class="hljs-keyword">return</span> Result.ok(userDTO);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -380,7 +380,7 @@
 <p>业务需求总是比框架提供的这些简单校验要复杂的多，我们可以自定义校验来满足我们的需求</p>
 </li>
 <li>
-<p>自定义<code>Springvalidation</code>非常简单，假设我们自定义<code>加密id</code>(由数字或者<code>a-f</code>的字母组成,<code>32-256</code>长度)校验，主要分为两步:</p>
+<p>自定义<code>Springvalidation</code>非常简单，假设我们自定义<code>加密id</code>(由数字或者<code>a-f</code>的字母组成,<code>32-256</code>长度）校验，主要分为两步:</p>
 </li>
 <li>
 <p>自定义约束注解</p>

@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705182323.webp">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210705183305.png">
 <meta property="article:published_time" content="2022-02-10T13:02:42.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.339Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.045Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -240,7 +240,7 @@
 </ul>
 <h2 id="接口幂等性">接口幂等性</h2>
 <ul>
-<li>在HTTP/1.1中，对幂等性进行了定义，它描述了一次和多次请求某一个资源对于资源本身应该具有同样的结果(网络超时等问题除外),即第一次请求的时候对资源产生了副作用，但是以后的多次请求都不会再对资源产生副作用</li>
+<li>在HTTP/1.1中，对幂等性进行了定义，它描述了一次和多次请求某一个资源对于资源本身应该具有同样的结果（网络超时等问题除外),即第一次请求的时候对资源产生了副作用，但是以后的多次请求都不会再对资源产生副作用</li>
 <li>这里的副作用是不会对结果产生破坏或者产生不可预料的结果，也就是说，其任意多次执行对资源本身所产生的影响均与一次执行的影响相同</li>
 <li>在接口调用时一般情况下都能正常返回信息不会重复提交，不过在遇见以下情况时可以就会出现问题，如:
 <ul>
@@ -251,7 +251,7 @@
 </ul>
 </li>
 <li>使用幂等性最大的优势在于使接口保证任何幂等性操作，免去因重试等造成系统产生的未知的问题</li>
-<li>引入幂等性后对系统的影响:幂等性是为了简化客户端逻辑处理，能放置重复提交等操作，但却增加了服务端的逻辑复杂性和成本
+<li>引入幂等性后对系统的影响：幂等性是为了简化客户端逻辑处理，能放置重复提交等操作，但却增加了服务端的逻辑复杂性和成本
 <ul>
 <li>把并行执行的功能改为串行执行，降低了执行效率</li>
 <li>增加了额外控制幂等的业务逻辑，复杂化了业务功能</li>
@@ -333,7 +333,7 @@
 <ol>
 <li>服务端提供获取 Token 的接口，该 Token 可以是一个序列号，也可以是一个分布式 ID 或者 UUID 串</li>
 <li>客户端调用接口获取 Token,这时候服务端会生成一个 Token 串</li>
-<li>然后将该串存入 Redis 数据库中，以该 Token 作为 Redis 的键(注意设置过期时间)</li>
+<li>然后将该串存入 Redis 数据库中，以该 Token 作为 Redis 的键（注意设置过期时间)</li>
 <li>将 Token 返回到客户端，客户端拿到后应存到表单隐藏域中</li>
 <li>客户端在执行提交表单时，把 Token 存入到 Headers 中，执行业务请求带上该 Headers</li>
 <li>服务端接收到请求后从 Headers 中拿到 Token,然后根据 Token 到 Redis 中查找该 key 是否存在</li>
@@ -353,7 +353,7 @@
 <li>当上游服务器收到请求信息后拿取该序列号 和下游认证ID 进行组合，形成用于操作 Redis 的 Key,然后到 Redis 中查询是否存在对应的 Key 的键值对
 <ul>
 <li>如果存在，就说明已经对该下游的该序列号的请求进行了业务处理，这时可以直接响应重复请求的错误信息</li>
-<li>如果不存在，就以该 Key 作为 Redis 的键，以下游关键信息作为存储的值(例如下游商传递的一些业务逻辑信息),将该键值对存储到 Redis 中，然后再正常执行对应的业务逻辑即可</li>
+<li>如果不存在，就以该 Key 作为 Redis 的键，以下游关键信息作为存储的值（例如下游商传递的一些业务逻辑信息),将该键值对存储到 Redis 中，然后再正常执行对应的业务逻辑即可</li>
 </ul>
 </li>
 <li><strong>适用操作</strong>
@@ -392,7 +392,7 @@
 <li>创建用于操作 Token 相关的 Service 类，里面存在 Token 创建与验证方法
 <ul>
 <li><strong>Token 创建方法</strong> 使用 UUID 工具创建 Token 串，设置以<code>idempotent_token:+Token串</code>作为 Key,以用户信息当成 Value,将信息存入 Redis 中</li>
-<li><strong>Token 验证方法</strong> 接收 Token 串参数，加上 Key 前缀形成 Key,再传入 value 值，执行 Lua 表达式(Lua 表达式能保证命令执行的原子性)进行查找对应 Key 与删除操作，执行完成后验证命令的返回结果，如果结果不为空且非0,则验证成功，否则失败</li>
+<li><strong>Token 验证方法</strong> 接收 Token 串参数，加上 Key 前缀形成 Key,再传入 value 值，执行 Lua 表达式(Lua 表达式能保证命令执行的原子性）进行查找对应 Key 与删除操作，执行完成后验证命令的返回结果，如果结果不为空且非0,则验证成功，否则失败</li>
 </ul>
 </li>
 </ul>
@@ -401,7 +401,7 @@
 <ul>
 <li>创建用于测试的 Controller 类，里面有获取 Token 与测试接口幂等性的接口，内容如下:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TokenController</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> TokenUtilService tokenService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取 Token 接口</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> Token 串</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/token&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getToken</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 获取用户信息(这里使用模拟数据)</span><br>        <span class="hljs-comment">// 注:这里存储该内容只是举例，其作用为辅助验证，使其验证逻辑更安全，如这里存储用户信息，其目的为:</span><br>        <span class="hljs-comment">// - 1),使用&quot;token&quot;验证 Redis 中是否存在对应的 Key</span><br>        <span class="hljs-comment">// - 2),使用&quot;用户信息&quot;验证 Redis 的 Value 是否匹配</span><br>        String userInfo = <span class="hljs-string">&quot;mydlq&quot;</span>;<br>        <span class="hljs-comment">// 获取 Token 字符串，并返回</span><br>        <span class="hljs-keyword">return</span> tokenService.generateToken(userInfo);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接口幂等性测试接口</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token 幂等 Token 串</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 执行结果</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(&quot;/test&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-meta">@RequestHeader(value = &quot;token&quot;)</span> String token)</span> </span>&#123;<br>        <span class="hljs-comment">// 获取用户信息(这里使用模拟数据)</span><br>        String userInfo = <span class="hljs-string">&quot;mydlq&quot;</span>;<br>        <span class="hljs-comment">// 根据 Token 和与用户相关的信息到 Redis 验证是否存在对应的信息</span><br>        <span class="hljs-keyword">boolean</span> result = tokenService.validToken(token, userInfo);<br>        <span class="hljs-comment">// 根据验证结果响应不同信息</span><br>        <span class="hljs-keyword">return</span> result ? <span class="hljs-string">&quot;正常调用&quot;</span> : <span class="hljs-string">&quot;重复调用&quot;</span>;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Slf4j</span><br><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TokenController</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> TokenUtilService tokenService;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取 Token 接口</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> Token 串</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(&quot;/token&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getToken</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 获取用户信息（这里使用模拟数据)</span><br>        <span class="hljs-comment">// 注：这里存储该内容只是举例，其作用为辅助验证，使其验证逻辑更安全，如这里存储用户信息，其目的为:</span><br>        <span class="hljs-comment">// - 1),使用&quot;token&quot;验证 Redis 中是否存在对应的 Key</span><br>        <span class="hljs-comment">// - 2),使用&quot;用户信息&quot;验证 Redis 的 Value 是否匹配</span><br>        String userInfo = <span class="hljs-string">&quot;mydlq&quot;</span>;<br>        <span class="hljs-comment">// 获取 Token 字符串，并返回</span><br>        <span class="hljs-keyword">return</span> tokenService.generateToken(userInfo);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接口幂等性测试接口</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token 幂等 Token 串</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 执行结果</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(&quot;/test&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">test</span><span class="hljs-params">(<span class="hljs-meta">@RequestHeader(value = &quot;token&quot;)</span> String token)</span> </span>&#123;<br>        <span class="hljs-comment">// 获取用户信息（这里使用模拟数据)</span><br>        String userInfo = <span class="hljs-string">&quot;mydlq&quot;</span>;<br>        <span class="hljs-comment">// 根据 Token 和与用户相关的信息到 Redis 验证是否存在对应的信息</span><br>        <span class="hljs-keyword">boolean</span> result = tokenService.validToken(token, userInfo);<br>        <span class="hljs-comment">// 根据验证结果响应不同信息</span><br>        <span class="hljs-keyword">return</span> result ? <span class="hljs-string">&quot;正常调用&quot;</span> : <span class="hljs-string">&quot;重复调用&quot;</span>;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="测试">测试</h3>
 <ul>
 <li>多次访问同一个接口，测试是否只有第一次能否执行成功</li>

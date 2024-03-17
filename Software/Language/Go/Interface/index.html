@@ -16,19 +16,19 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Go Interface  在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节 interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议 (规则), 只要一台机器">
+  <meta name="description" content="Go Interface  在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节 interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议（规则), 只要一台机器有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go Interface">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/Interface/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Go Interface  在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节 interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议 (规则), 只要一台机器">
+<meta property="og:description" content="Go Interface  在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节 interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议（规则), 只要一台机器有">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/interface01.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/interface02.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/interface03.png">
 <meta property="og:image" content="https://www.liwenzhou.com/images/Go/interface/interface04.png">
 <meta property="article:published_time" content="2024-03-17T04:26:46.000Z">
-<meta property="article:modified_time" content="2024-03-17T04:26:46.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:35:55.076Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 中午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -235,7 +235,7 @@
               <h1>Go Interface</h1>
 <ul>
 <li>在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节</li>
-<li>interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议 (规则), 只要一台机器有洗衣服和甩干的功能,我就称它为洗衣机,不关心属性 (数据), 只关心行为 (方法)</li>
+<li>interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议（规则), 只要一台机器有洗衣服和甩干的功能,我就称它为洗衣机,不关心属性（数据), 只关心行为（方法)</li>
 </ul>
 <h2 id="接口的定义">接口的定义</h2>
 <ul>
@@ -342,7 +342,7 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// Less 为reverse类型添加Less方法,重写原Interface接口类型的Less方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(r reverse)</span> <span class="hljs-title">Less</span><span class="hljs-params">(i, j <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">bool</span></span> &#123;<br>	<span class="hljs-keyword">return</span> r.Interface.Less(j, i)<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>Interface</code> 类型原本的 <code>Less</code> 方法签名为 <code>Less(i, j int) bool</code>, 此处重写为 <code>r.Interface.Less(j, i)</code>, 即通过将索引参数交换位置实现反转</li>
-<li>在这个示例中还有一个需要注意的地方是 <code>reverse</code> 结构体本身是不可导出的 (结构体类型名称首字母小写), <code>sort.go</code> 中通过定义一个可导出的 <code>Reverse</code> 函数来让使用者创建 <code>reverse</code> 结构体实例</li>
+<li>在这个示例中还有一个需要注意的地方是 <code>reverse</code> 结构体本身是不可导出的（结构体类型名称首字母小写), <code>sort.go</code> 中通过定义一个可导出的 <code>Reverse</code> 函数来让使用者创建 <code>reverse</code> 结构体实例</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Reverse</span><span class="hljs-params">(data Interface)</span> <span class="hljs-title">Interface</span></span> &#123;<br>	<span class="hljs-keyword">return</span> &amp;reverse&#123;data&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -411,7 +411,7 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> (<br>	x Mover = <span class="hljs-built_in">new</span> (Dog)<br>	y Mover = <span class="hljs-built_in">new</span> (Car)<br>)<br>fmt.Println (x == y) <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>但是有一种特殊情况需要特别注意,如果接口值的保存的动态类型相同,但是这个动态类型不支持互相比较 (比如切片), 那么对它们相互比较时就会引发 panic</li>
+<li>但是有一种特殊情况需要特别注意,如果接口值的保存的动态类型相同,但是这个动态类型不支持互相比较（比如切片), 那么对它们相互比较时就会引发 panic</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> z <span class="hljs-keyword">interface</span>&#123;&#125; = []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;<br>fmt.Println (z == z) <span class="hljs-comment">// panic: runtime error: comparing uncomparable type []int</span><br></code></pre></td></tr></table></figure>
 <h2 id="类型断言">类型断言</h2>

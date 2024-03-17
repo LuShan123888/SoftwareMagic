@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring MVC 跨域  跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，这里跨域是广义的 广义的跨域  资源跳转:A链接，重定向，表单提交 资源嵌入:&lt;link&gt;,&lt;script&gt;,&lt;img&gt;,&lt;frame&gt;等dom标签，还有样式中background:url(),@font-face()等文件外链 脚本请求:js发起的ajax请求,d">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:30:47.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.341Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.046Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -306,7 +306,7 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">Vue.http.options.credentials = <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>注意</strong>:如果要发送Cookie,<code>Access-Control-Allow-Origin</code>就不能设为星号，必须指定明确与请求网页一致的域名，同时,Cookie依然遵循同源策略，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且(跨源)原网页代码中的<code>document.cookie</code>也无法读取服务器域名下的Cookie</li>
+<li><strong>注意</strong>:如果要发送Cookie,<code>Access-Control-Allow-Origin</code>就不能设为星号，必须指定明确与请求网页一致的域名，同时,Cookie依然遵循同源策略，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的<code>document.cookie</code>也无法读取服务器域名下的Cookie</li>
 </ul>
 <h3 id="服务端设置">服务端设置</h3>
 <ul>
@@ -329,8 +329,8 @@
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">location</span> / &#123;<br>    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin *;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="nginx反向代理接口跨域">nginx反向代理接口跨域</h3>
 <ul>
-<li>跨域原理:同源策略是浏览器的安全策略，不是HTTP协议的一部分，服务器端调用HTTP接口只是使用HTTP协议，不会执行JS脚本，不需要同源策略，也就不存在跨越问题</li>
-<li>实现思路:通过nginx配置一个代理服务器(域名与domain1相同，端口不同)做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域登录</li>
+<li>跨域原理：同源策略是浏览器的安全策略，不是HTTP协议的一部分，服务器端调用HTTP接口只是使用HTTP协议，不会执行JS脚本，不需要同源策略，也就不存在跨越问题</li>
+<li>实现思路：通过nginx配置一个代理服务器（域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域登录</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment">#proxy服务器</span><br><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span>  www.domain1.com;<br><br>    <span class="hljs-attribute">location</span> / &#123;<br>        <span class="hljs-attribute">proxy_pass</span>   http://www.domain2.com:8080;  <span class="hljs-comment">#反向代理</span><br>        <span class="hljs-attribute">proxy_cookie_domain</span> www.domain2.com www.domain1.com; <span class="hljs-comment">#修改cookie里域名</span><br>        <span class="hljs-attribute">index</span>  index.html index.htm;<br><br>        <span class="hljs-comment"># 当用webpack-dev-server等中间件代理接口访问nignx时，此时无浏览器参与，故没有同源限制，下面的跨域配置可不启用</span><br>        <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin http://www.domain1.com;  <span class="hljs-comment">#当前端只跨域不带cookie时，可为*</span><br>        <span class="hljs-attribute">add_header</span> Access-Control-Allow-Credentials <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
             </div>

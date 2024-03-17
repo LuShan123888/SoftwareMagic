@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-13-image-20210613170001778.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-13-image-20210613170029775.png">
 <meta property="article:published_time" content="2022-05-26T13:31:13.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:26:08.439Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.308Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -259,7 +259,7 @@
 </li>
 </ul>
 </li>
-<li>synchronized的底层原理是跟monitor有关，也就是视图器锁，每个对象都有一个关联的monitor,当Synchronize获得monitor对象的所有权后会进行两个指令:加锁指令跟减锁指令</li>
+<li>synchronized的底层原理是跟monitor有关，也就是视图器锁，每个对象都有一个关联的monitor,当Synchronize获得monitor对象的所有权后会进行两个指令：加锁指令跟减锁指令</li>
 <li>monitor里面有个计数器，初始值是从0开始的，如果一个线程想要获取monitor的所有权，就查看它计数器是不是0
 <ul>
 <li>如果是0的话，那么就说明没人获取锁，那么它就可以获取锁了，然后将计数器+1,也就是执行monitorenter加锁指令,monitorexit减锁指令是跟在程序执行结束和异常里的</li>
@@ -341,7 +341,7 @@
 <ul>
 <li>Lock是一个接口，而synchronized是Java中的关键字,Lock 能完成synchronized所实现的所有功能</li>
 <li>synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生，而Lock在发生异常时，如果没有主动通过<code>unLock()</code>去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁</li>
-<li>Lock是显式锁(手动开启和关闭锁),synchronized是隐式锁，出了作用域自动释放</li>
+<li>Lock是显式锁（手动开启和关闭锁),synchronized是隐式锁，出了作用域自动释放</li>
 <li>Lock只有代码块锁,synchronized有代码块和方法锁</li>
 <li>Lock可以知道是不是已经获取到锁，而synchronized无法知道</li>
 <li>Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断</li>
@@ -405,22 +405,22 @@
 </ul>
 <h3 id="StampedLock">StampedLock</h3>
 <ul>
-<li>如果我们深入分析<code>ReadWriteLock</code>,会发现它有个潜在的问题:如果有线程正在读，写线程需要等待读线程释放锁后才能获取写锁，即读的过程中不允许写，这是一种悲观的读锁</li>
-<li><code>StampedLock</code>和<code>ReadWriteLock</code>相比，改进之处在于:读的过程中也允许获取写锁后写入!这样一来，我们读的数据就可能不一致，所以，需要一点额外的代码来判断读的过程中是否有写入，这种读锁是一种乐观锁</li>
+<li>如果我们深入分析<code>ReadWriteLock</code>,会发现它有个潜在的问题：如果有线程正在读，写线程需要等待读线程释放锁后才能获取写锁，即读的过程中不允许写，这是一种悲观的读锁</li>
+<li><code>StampedLock</code>和<code>ReadWriteLock</code>相比，改进之处在于：读的过程中也允许获取写锁后写入!这样一来，我们读的数据就可能不一致，所以，需要一点额外的代码来判断读的过程中是否有写入，这种读锁是一种乐观锁</li>
 <li>乐观锁的意思就是乐观地估计读的过程中大概率不会有写入，因此被称为乐观锁，反过来，悲观锁则是读的过程中拒绝有写入，也就是写入必须等待，显然乐观锁的并发效率更高，但一旦有小概率的写入导致读取的数据不一致，需要能检测出来，再读一遍就行</li>
 <li><code>StampedLock</code>是不可重入锁</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> StampedLock stampedLock = <span class="hljs-keyword">new</span> StampedLock();<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> x;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> y;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">move</span><span class="hljs-params">(<span class="hljs-keyword">double</span> deltaX, <span class="hljs-keyword">double</span> deltaY)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> stamp = stampedLock.writeLock(); <span class="hljs-comment">// 获取写锁</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            x += deltaX;<br>            y += deltaY;<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            stampedLock.unlockWrite(stamp); <span class="hljs-comment">// 释放写锁</span><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">distanceFromOrigin</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> stamp = stampedLock.tryOptimisticRead(); <span class="hljs-comment">// 获得一个乐观读锁</span><br>        <span class="hljs-comment">// 注意下面两行代码不是原子操作</span><br>        <span class="hljs-comment">// 假设x,y = (100,200)</span><br>        <span class="hljs-keyword">double</span> currentX = x;<br>        <span class="hljs-comment">// 此处已读取到x=100,但x,y可能被写线程修改为(300,400)</span><br>        <span class="hljs-keyword">double</span> currentY = y;<br>        <span class="hljs-comment">// 此处已读取到y,如果没有写入，读取是正确的(100,200)</span><br>        <span class="hljs-comment">// 如果有写入，读取是错误的(100,400)</span><br>        <span class="hljs-keyword">if</span> (!stampedLock.validate(stamp)) &#123; <span class="hljs-comment">// 检查乐观读锁后是否有其他写锁发生</span><br>            stamp = stampedLock.readLock(); <span class="hljs-comment">// 获取一个悲观读锁</span><br>            <span class="hljs-keyword">try</span> &#123;<br>                currentX = x;<br>                currentY = y;<br>            &#125; <span class="hljs-keyword">finally</span> &#123;<br>                stampedLock.unlockRead(stamp); <span class="hljs-comment">// 释放悲观读锁</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> Math.sqrt(currentX * currentX + currentY * currentY);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>和<code>ReadWriteLock</code>相比，写入的加锁是完全一样的，不同的是读取，注意到首先我们通过<code>tryOptimisticRead()</code>获取一个乐观读锁，并返回版本号，接着进行读取，读取完成后，我们通过<code>validate()</code>去验证版本号，如果在读取过程中没有写入，版本号不变，验证成功，我们就可以放心地继续后续操作，如果在读取过程中有写入，版本号会发生变化，验证将失败，在失败的时候，我们再通过获取悲观读锁再次读取，由于写入的概率不高，程序在绝大部分情况下可以通过乐观读锁获取数据，极少数情况下使用悲观读锁获取数据</li>
-<li>可见,<code>StampedLock</code>把读锁细分为乐观读和悲观读，能进一步提升并发效率，但这也是有代价的:一是代码更加复杂，二是<code>StampedLock</code>是不可重入锁，不能在一个线程中反复获取同一个锁</li>
-<li><code>StampedLock</code>还提供了更复杂的将悲观读锁升级为写锁的功能，它主要使用在if-then-update的场景:即先读，如果读的数据满足条件，就返回，如果读的数据不满足条件，再尝试写</li>
+<li>可见,<code>StampedLock</code>把读锁细分为乐观读和悲观读，能进一步提升并发效率，但这也是有代价的：一是代码更加复杂，二是<code>StampedLock</code>是不可重入锁，不能在一个线程中反复获取同一个锁</li>
+<li><code>StampedLock</code>还提供了更复杂的将悲观读锁升级为写锁的功能，它主要使用在if-then-update的场景：即先读，如果读的数据满足条件，就返回，如果读的数据不满足条件，再尝试写</li>
 </ul>
 <h2 id="不需要同步的操作">不需要同步的操作</h2>
 <ul>
 <li>JVM规范定义了几种原子操作:
 <ul>
-<li>基本类型(<code>long</code>和<code>double</code>除外)赋值，例如:<code>int n = m</code></li>
+<li>基本类型(<code>long</code>和<code>double</code>除外）赋值，例如:<code>int n = m</code></li>
 <li>引用类型赋值，例如:<code>List&lt;String&gt; list = anotherList</code></li>
 </ul>
 </li>

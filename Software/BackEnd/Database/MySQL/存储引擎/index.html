@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-04-image-20210304131149254.png">
 <meta property="article:published_time" content="2022-05-26T13:31:12.000Z">
-<meta property="article:modified_time" content="2022-05-26T13:31:12.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:36:21.078Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月26日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -252,9 +252,9 @@
 <li>InnoDB是事务型数据库的首选引擎,支持事务安全表(ACID),支持行锁定和外键,InnoDB是默认的MySQL引擎</li>
 <li>InnoDB主要特性:
 <ul>
-<li>为MySQL提供了具有提交,回滚和崩溃恢复能力的事务安全(ACID兼容)特性</li>
+<li>为MySQL提供了具有提交,回滚和崩溃恢复能力的事务安全(ACID兼容）特性</li>
 <li>InnoDB锁为行级锁,并且也在<code>SELECT</code>语句中提供一个类似Oracle的非锁定读,这些功能增加了多用户部署和性能,在SQL查询中,可以自由地将InnoDB类型的表和其他MySQL的表类型混合起来,甚至在同一个查询中也可以混合</li>
-<li>InnoDB存储引擎为在主内存中缓存数据和索引而维持它自己的缓冲池,InnoDB将它的表和索引在一个逻辑表空间中,表空间可以包含数个文件(或原始磁盘文件),这与MyISAM表不同,比如在MyISAM表中每个表被存放在分离的文件中,InnoDB表可以是任何尺寸,即使在文件尺寸被限制为2GB的操作系统上</li>
+<li>InnoDB存储引擎为在主内存中缓存数据和索引而维持它自己的缓冲池,InnoDB将它的表和索引在一个逻辑表空间中,表空间可以包含数个文件（或原始磁盘文件),这与MyISAM表不同,比如在MyISAM表中每个表被存放在分离的文件中,InnoDB表可以是任何尺寸,即使在文件尺寸被限制为2GB的操作系统上</li>
 <li>InnoDB支持外键完整性约束,存储表中的数据时,每张表的存储都按主键顺序存放,如果没有显示在表定义时指定主键,InnoDB会为每一行生成一个6字节的ROWID,并以此作为主键</li>
 </ul>
 </li>
@@ -293,9 +293,9 @@
 <li>MEMORY表使用一个固定的记录长度格式</li>
 <li>MEMORY不支持BLOB或TEXT列</li>
 <li>MEMORY支持AUTO_INCREMENT列和对可包含NULL值的列的索引</li>
-<li>MEMORY表在所由客户端之间共享(就像其他任何非TEMPORARY表)</li>
+<li>MEMORY表在所由客户端之间共享（就像其他任何非TEMPORARY表)</li>
 <li>MEMORY表内存被存储在内存中,内存是MEMORY表和服务器在查询处理时的空闲中,创建的内部表共享</li>
-<li>当不再需要MEMORY表的内容时,要释放被MEMORY表使用的内存,应该执行<code>DELETE FROM</code>或<code>TRUNCATE TABLE</code>,或者删除整个表(使用DROP TABLE)</li>
+<li>当不再需要MEMORY表的内容时,要释放被MEMORY表使用的内存,应该执行<code>DELETE FROM</code>或<code>TRUNCATE TABLE</code>,或者删除整个表（使用DROP TABLE)</li>
 </ul>
 </li>
 </ul>
@@ -352,7 +352,7 @@
 </tbody>
 </table>
 <ul>
-<li><strong>InnoDB</strong>: 支持事务处理,支持外键,支持崩溃修复能力和并发控制,如果需要对事务的完整性要求比较高(比如银行),要求实现并发控制(比如售票),那选择InnoDB有很大的优势,如果需要频繁的更新,删除操作的数据库,也可以选择InnoDB,因为支持事务的提交(commit)和回滚(rollback)</li>
+<li><strong>InnoDB</strong>: 支持事务处理,支持外键,支持崩溃修复能力和并发控制,如果需要对事务的完整性要求比较高（比如银行),要求实现并发控制（比如售票),那选择InnoDB有很大的优势,如果需要频繁的更新,删除操作的数据库,也可以选择InnoDB,因为支持事务的提交(commit)和回滚(rollback)</li>
 <li><strong>MyISAM</strong>:插入数据快,空间和内存使用比较低,如果表主要是用于插入新记录和读出记录,那么选择MyISAM能实现处理高效率,如果应用的完整性,并发性要求比 较低,也可以使用</li>
 <li><strong>MEMORY</strong>:所有的数据都在内存中,数据的处理速度快,但是安全性不高,如果需要很快的读写速度,对数据的安全性要求较低,可以选择MEMOEY,它对表的大小有要求,不能建立太大的表,所以,这类数据库只使用在相对较小的数据库表</li>
 </ul>
