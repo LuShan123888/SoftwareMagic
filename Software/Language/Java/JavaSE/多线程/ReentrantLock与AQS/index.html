@@ -16,12 +16,12 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Java ReentrantLock与AQS  Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS)实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。  ReentrantLock ReentrantLock特性概览  ReentrantLock意思为">
+  <meta name="description" content="Java ReentrantLock与AQS  Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS）实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。  ReentrantLock ReentrantLock特性概览  ReentrantLock意思为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java ReentrantLock与AQS">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ReentrantLock%E4%B8%8EAQS/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Java ReentrantLock与AQS  Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS)实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。  ReentrantLock ReentrantLock特性概览  ReentrantLock意思为">
+<meta property="og:description" content="Java ReentrantLock与AQS  Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS）实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。  ReentrantLock ReentrantLock特性概览  ReentrantLock意思为">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/412d294ff5535bbcddc0d979b2a339e6102264.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/82077ccf14127a87b77cefd1ccf562d3253591.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/ab89bfec875846e5028a4f8fead32b7117975.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/45d0d9e4a6897eddadc4397cf53d6cd522452.png">
 <meta property="article:published_time" content="2022-05-26T13:32:30.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:58:50.392Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.398Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,7 @@
             <div class="markdown-body">
               <h1>Java ReentrantLock与AQS</h1>
 <ul>
-<li>Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS)实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。</li>
+<li>Java中的大部分同步类（Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS）实现的，AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架。</li>
 </ul>
 <h2 id="ReentrantLock">ReentrantLock</h2>
 <h3 id="ReentrantLock特性概览">ReentrantLock特性概览</h3>
@@ -692,11 +692,11 @@
 <ul>
 <li>该方法其实是为了中断线程，但为什么获取了锁以后还要中断线程呢？这部分属于Java提供的协作式中断知识内容，感兴趣同学可以查阅一下，这里简单介绍一下：
 <ol>
-<li>当中断线程被唤醒时，并不知道被唤醒的原因，可能是当前线程在等待中被中断，也可能是释放了锁以后被唤醒，因此我们通过Thread.interrupted()方法检查中断标记（该方法返回了当前线程的中断状态，并将当前线程的中断标识设置为False)，并记录下来，如果发现该线程被中断过，就再中断一次。</li>
+<li>当中断线程被唤醒时，并不知道被唤醒的原因，可能是当前线程在等待中被中断，也可能是释放了锁以后被唤醒，因此我们通过Thread.interrupted(）方法检查中断标记（该方法返回了当前线程的中断状态，并将当前线程的中断标识设置为False)，并记录下来，如果发现该线程被中断过，就再中断一次。</li>
 <li>线程在等待资源的过程中被唤醒，唤醒后还是会不断地去尝试获取锁，直到抢到锁为止，也就是说，在整个流程中，并不响应中断，只是记录中断记录，最后抢到锁返回了，那么如果被中断过的话，就需要补充一次中断。</li>
 </ol>
 </li>
-<li>这里的处理方式主要是运用线程池中基本运作单元Worder中的runWorker，通过Thread.interrupted()进行额外的判断处理，感兴趣的同学可以看下ThreadPoolExecutor源码。</li>
+<li>这里的处理方式主要是运用线程池中基本运作单元Worder中的runWorker，通过Thread.interrupted(）进行额外的判断处理，感兴趣的同学可以看下ThreadPoolExecutor源码。</li>
 </ul>
 <h2 id="AQS应用">AQS应用</h2>
 <h3 id="ReentrantLock的可重入应用">ReentrantLock的可重入应用</h3>

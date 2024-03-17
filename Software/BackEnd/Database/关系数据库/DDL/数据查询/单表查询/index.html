@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 单表查询 查询指定列  在很多情况下，用户只对表中的一部分属性列感兴趣，这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列。  [例3.16]：查询全体学生的学号与姓名。 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的：从Student表中取出一个元组，取出该元组在属性Sno和Sname上的值，形成一个新的元组">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.560Z">
-<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.188Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -506,7 +506,7 @@
 <ul>
 <li>谓词IN可以用来查找属性值属于指定集合的元组。</li>
 </ul>
-<p><strong>[例3.27]</strong>：查询计算机科学系（CS)，数学系（MA)和信息系（IS)学生的姓名和性别。</p>
+<p><strong>[例3.27]</strong>：查询计算机科学系（CS)，数学系（MA）和信息系（IS）学生的姓名和性别。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Ssex<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept <span class="hljs-keyword">IN</span>(<span class="hljs-string">&#x27;CS&#x27;</span>,<span class="hljs-string">&#x27;MA&#x27;</span>,<span class="hljs-string">&#x27;IS&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>与IN相对的谓词NOT IN，用与查找属性值不属于指定集合的元组。</li>
@@ -521,7 +521,7 @@
 <ul>
 <li>其含义是查找指定的属性列值与&lt;匹配串&gt;相匹配的元组.&lt;匹配串&gt;可以是一个完整的字符串，也可以含有通配符%和_ 其中：
 <ul>
-<li>%（百分号）代表任意长度（长度可以为0)的字符串，例如a%b表示以a开头，以b结尾的任意长度的字符串，如acb,addgb,ab等都满足该匹配串。</li>
+<li>%（百分号）代表任意长度（长度可以为0）的字符串，例如a%b表示以a开头，以b结尾的任意长度的字符串，如acb,addgb,ab等都满足该匹配串。</li>
 <li>_（下横线）代表任意单个字符，例如a_b表示以a开头，以b结尾的长度为3的任意字符串，如acb,afb等都满足该匹配串。</li>
 </ul>
 </li>
@@ -582,7 +582,7 @@
 <p><strong>[例3.36]</strong>：某些学生选修课程后没有参加考试，所以有选课记录，但没有考试成绩，查询缺少成绩的学生的学号和相应的课程号。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>;<span class="hljs-comment">/*分数Grade是空值*/</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>注意这里的’IS’不能用等号（=)代替。</li>
+<li>注意这里的’IS’不能用等号（=）代替。</li>
 </ul>
 <p><strong>[例3.37]</strong>：查所有有成绩的学生学号和课程号。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC<br><span class="hljs-keyword">WHERE</span> Grade <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>;<br></code></pre></td></tr></table></figure>
@@ -729,7 +729,7 @@
 <p>ORDER BY子句允许您在连接之前按升序或降序排序值，默认情况下，它按升序排序值，如果要按降序对值进行排序，则需要明确指定<code>DESC</code>选项。</p>
 </li>
 <li>
-<p><code>SEPARATOR</code>指定在组中的值之间插入的文字值，如果不指定分隔符，则<code>GROUP_CONCAT</code>函数使用逗号（<code>,</code>)作为默认分隔符。</p>
+<p><code>SEPARATOR</code>指定在组中的值之间插入的文字值，如果不指定分隔符，则<code>GROUP_CONCAT</code>函数使用逗号（<code>,</code>）作为默认分隔符。</p>
 </li>
 <li>
 <p><code>GROUP_CONCAT</code>函数忽略<code>NULL</code>值，如果找不到匹配的行，或者所有参数都为<code>NULL</code>值，则返回<code>NULL</code></p>

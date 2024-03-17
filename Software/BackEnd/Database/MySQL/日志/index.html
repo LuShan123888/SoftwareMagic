@@ -24,7 +24,7 @@
 <meta property="og:description" content="MySQL 日志  Mysql 有4种类型的日志：Error Log,Genaral Query Log,Binary Log 和 Slow Query Log  Error Log  记录Mysql运行过程中的Error,Warning,Note等信息，系统出错或者某条记录出问题可以查看Error日志。 Mysql的错误日志默认以$&amp;#123;hostname&amp;#125;.err存放在Mysql">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.165Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:29.086Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.213Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -269,7 +269,7 @@
 <li><strong>作用</strong>
 <ul>
 <li>包含了所有更新了数据或者已经潜在更新了数据（比如没有匹配任何行的一个DELETE)</li>
-<li>包含关于每个更新数据库（DML)的语句的执行时间信息。</li>
+<li>包含关于每个更新数据库（DML）的语句的执行时间信息。</li>
 <li>不包含没有修改任何数据的语句，如果需要启用该选项，需要开启通用日志功能。</li>
 <li>主要目的是尽可能的将数据库恢复到数据库故障点，因为二进制日志包含备份后进行的所有更新。</li>
 <li>用于在主复制服务器上记录所有将发送给从服务器的语句。</li>
@@ -365,7 +365,7 @@
 </ul>
 <p><strong>自动删除binlog</strong></p>
 <ul>
-<li>通过binlog参数（expire_logs_days)来实现mysql自动删除binlog</li>
+<li>通过binlog参数（expire_logs_days）来实现mysql自动删除binlog</li>
 </ul>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs ruby">mysql&gt; show binary logs;<br>+------------------+-----------+<br><span class="hljs-params">| Log_name         |</span> File_size <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-----------+</span><br><span class="hljs-params">|</span> mysql-bin.<span class="hljs-number">000001</span> <span class="hljs-params">|       869 |</span><br>+------------------+-----------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; show variables like <span class="hljs-string">&#x27;expire_logs_days&#x27;</span> ;<br>+------------------+-------+<br><span class="hljs-params">| Variable_name    |</span> Value <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-------+</span><br><span class="hljs-params">|</span> expire_logs_days <span class="hljs-params">| 0     |</span><br>+------------------+-------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; set global expire_logs_days=<span class="hljs-number">3</span>;<br><br>Query OK, <span class="hljs-number">0</span> rows affected (<span class="hljs-number">0.00</span> sec)<br><br>mysql&gt; show variables like <span class="hljs-string">&#x27;expire_logs_days&#x27;</span> ;<br>+------------------+-------+<br><span class="hljs-params">| Variable_name    |</span> Value <span class="hljs-params">|</span><br><span class="hljs-params">+------------------+-------+</span><br><span class="hljs-params">|</span> expire_logs_days <span class="hljs-params">| 3     |</span><br>+------------------+-------+<br><span class="hljs-number">1</span> row <span class="hljs-keyword">in</span> set (<span class="hljs-number">0.00</span> sec)<br></code></pre></td></tr></table></figure>
 <p><strong>手动删除binlog</strong></p>

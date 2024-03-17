@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 编码与转义  因为PHP程序经常与HTML页，Web地址（URL)以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;)在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。  HTML  在H">
+  <meta name="description" content="PHP 编码与转义  因为PHP程序经常与HTML页，Web地址（URL）以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;）在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。  HTML  在H">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 编码与转义">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E7%BC%96%E7%A0%81%E4%B8%8E%E8%BD%AC%E4%B9%89/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 编码与转义  因为PHP程序经常与HTML页，Web地址（URL)以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;)在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。  HTML  在H">
+<meta property="og:description" content="PHP 编码与转义  因为PHP程序经常与HTML页，Web地址（URL）以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;）在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。  HTML  在H">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T05:01:48.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.378Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,11 +229,11 @@
             <div class="markdown-body">
               <h1>PHP 编码与转义</h1>
 <ul>
-<li>因为PHP程序经常与HTML页，Web地址（URL)以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;)在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。</li>
+<li>因为PHP程序经常与HTML页，Web地址（URL）以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;）在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。</li>
 </ul>
 <h2 id="HTML">HTML</h2>
 <ul>
-<li>在HTML中特殊的字符以实体（entify)表示，如<code>&amp;</code>和<code>&lt;</code> ，这里有两个PHP函数来吧字符串中的特殊字符转换为实体，一个用于删除HTML标签，一个仅用于提取meta标签。</li>
+<li>在HTML中特殊的字符以实体（entify）表示，如<code>&amp;</code>和<code>&lt;</code> ，这里有两个PHP函数来吧字符串中的特殊字符转换为实体，一个用于删除HTML标签，一个仅用于提取meta标签。</li>
 </ul>
 <h3 id="对所有特殊字符进行实体引用">对所有特殊字符进行实体引用</h3>
 <ul>
@@ -292,11 +292,11 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$input</span> = <span class="hljs-string">&#x27;The &lt;b&gt;bold&lt;/b&gt; tags will &lt;i&gt;stay&lt;/i&gt;&lt;p&gt;&#x27;</span>;<br><span class="hljs-variable">$output</span> = strip_tags(<span class="hljs-variable">$input</span>,<span class="hljs-string">&#x27;&lt;b&gt;&#x27;</span>);	<span class="hljs-comment">//$output是&#x27;The &lt;b&gt;bold&lt;/b&gt; tags will stay&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>在保留标签中的属性不会被<code>strip_tags()</code>改变，由于HTML标签属性（例如style和onmouseover)可以影响Web页面的外观和行为，所以用<code>strip_tags()</code>保留一些标签可能会导致无法删除所有潜在的冗余内容。</li>
+<li>在保留标签中的属性不会被<code>strip_tags()</code>改变，由于HTML标签属性（例如style和onmouseover）可以影响Web页面的外观和行为，所以用<code>strip_tags()</code>保留一些标签可能会导致无法删除所有潜在的冗余内容。</li>
 </ul>
 <h3 id="提取元标签">提取元标签</h3>
 <ul>
-<li>如果你把Web页面的HTML存在一个字符串中，函数<code>get_meta_tags()</code>可返回包含该页面中元标签（meta tag)内容的数组，元标签的名字（keywords,author,escription等）成为数组的键，而元标签的内容则成为对应的值：</li>
+<li>如果你把Web页面的HTML存在一个字符串中，函数<code>get_meta_tags()</code>可返回包含该页面中元标签（meta tag）内容的数组，元标签的名字（keywords,author,escription等）成为数组的键，而元标签的内容则成为对应的值：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$meta_tags</span> = get_meta_tags(<span class="hljs-string">&#x27;http://www.example.com/&#x27;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Web page made by <span class="hljs-subst">&#123;$meta_tags[author]&#125;</span>&quot;</span>;<br><br>Web page made by John Doe<br></code></pre></td></tr></table></figure>
 <ul>
@@ -327,7 +327,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&quot;programming PHP&quot;</span>;<br><span class="hljs-variable">$output</span> = rawurlencode(<span class="hljs-variable">$name</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;http://localhost/<span class="hljs-subst">$output</span>&quot;</span>;<br><br>http:<span class="hljs-comment">//localhost/Programming%20PHP</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>查询字符串编码。</li>
-<li><code>urlencode()</code>和<code>urlencode()</code>函数和它们原始版本（即<code>rawurlencode()</code>和<code>rawurldecode()</code>)的不同仅在于它们把空格编码为加号<code>+</code>，而不是<code>%20</code>，这是用于创建查询字符串（query string)和cookie值得格式，但是因为这些值在通过表单或cookie传送时会自动解码，所以你不需要使用这些函数来处理当前页的查询字符串或cookie，这两个函数对于生成查询字符串是很有用的：</li>
+<li><code>urlencode()</code>和<code>urlencode()</code>函数和它们原始版本（即<code>rawurlencode()</code>和<code>rawurldecode()</code>）的不同仅在于它们把空格编码为加号<code>+</code>，而不是<code>%20</code>，这是用于创建查询字符串（query string）和cookie值得格式，但是因为这些值在通过表单或cookie传送时会自动解码，所以你不需要使用这些函数来处理当前页的查询字符串或cookie，这两个函数对于生成查询字符串是很有用的：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$base_url</span> = <span class="hljs-string">&#x27;http://google.com/q=&#x27;</span>;<br><span class="hljs-variable">$query</span> = <span class="hljs-string">&#x27;PHP sessions -cookies&#x27;</span>;<br><span class="hljs-variable">$url</span> = <span class="hljs-variable">$base_url</span>.urlencode(<span class="hljs-variable">$query</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$url</span>;<br><br>http:<span class="hljs-comment">//www.google.com/q=PHP+sessions+-cookies</span><br></code></pre></td></tr></table></figure>
 <h2 id="SQL">SQL</h2>
@@ -335,10 +335,10 @@
 <li>绝大多数数据库系统都要求将SQL查询字符串进行转义，SQL的转义方法相当简单–在单引号，双引号，空字节和反斜杠前面加上一个反斜杠（\),<code>addslashes()</code>函数可添加这些反斜杠，<code>stripslashes()</code>函数则删除它们：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&lt;&lt;&lt; The_End</span><br><span class="hljs-string">&quot;It&#x27;s never going to work,&quot;she cried,</span><br><span class="hljs-string">as she hit the backslash(\)key.</span><br><span class="hljs-string">The_End</span>;<br><span class="hljs-keyword">echo</span> addslashes(<span class="hljs-variable">$string</span>);<br><br>\<span class="hljs-string">&quot;It\&#x27;s never going to work,\&quot;she cried,</span><br><span class="hljs-string">as she hit the backslash(\\)key.</span><br><span class="hljs-string"></span><br><span class="hljs-string">echo stripslashes(<span class="hljs-subst">$string</span>);</span><br><span class="hljs-string"></span><br><span class="hljs-string">&quot;</span>It<span class="hljs-string">&#x27;s never going to work,&quot;she cried,</span><br><span class="hljs-string">as she hit the backslash(\)key.</span><br></code></pre></td></tr></table></figure>
-<p><strong>提示</strong>：一些数据库（如SYBASE)用另一个单引号为单引号转义，而不是一个反斜杠，对于这些数据库，可以在php.ini文件中打开<code>magic_quores_sybase</code></p>
+<p><strong>提示</strong>：一些数据库（如SYBASE）用另一个单引号为单引号转义，而不是一个反斜杠，对于这些数据库，可以在php.ini文件中打开<code>magic_quores_sybase</code></p>
 <h2 id="C语言字符串编码">C语言字符串编码</h2>
 <ul>
-<li><code>addcslashes()</code>函数模仿C编程语言的处理方式，通过在字符前加反斜杠来转义任意字符，除了下表中的字符，ASCII值小于32或大于126的字符将使用它们的八进制值（例如，“\002”)进行编码，<code>addcslashes()</code>和<code>stripcslapshes()</code>函数常常被用于非标准的数据库系统，这些系统对哪些字符需要被转义有自己的要求。</li>
+<li><code>addcslashes()</code>函数模仿C编程语言的处理方式，通过在字符前加反斜杠来转义任意字符，除了下表中的字符，ASCII值小于32或大于126的字符将使用它们的八进制值（例如，“\002”）进行编码，<code>addcslashes()</code>和<code>stripcslapshes()</code>函数常常被用于非标准的数据库系统，这些系统对哪些字符需要被转义有自己的要求。</li>
 </ul>
 <table>
 <thead>

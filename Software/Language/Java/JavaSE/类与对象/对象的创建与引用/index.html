@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java 对象的创建与引用 创建对象及访问对象成员  定义java类后，就可以使用&quot;new+构造方法”来创造类的对象，并将创建的对象赋给某个引用变量，就可以使用&quot;引用变量名，属性”访问对象的属性，并将创建的对象赋给某个引用变量，就可以使用&quot;引用变量名。属性&quot;访问对象的属性，使用&quot;引用变量名。方法名（实参表）&quot;访问对象的方法，同一类可以创建">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-21T10:55:42.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.403Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -243,13 +243,13 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Point p2,p3;<br>p2 = <span class="hljs-keyword">new</span> Point();<br>p3 = p2;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>为了演示对象的创建，不妨在例5-1程序中增加一个main()方法，并添加如下代码：</li>
+<li>为了演示对象的创建，不妨在例5-1程序中增加一个main(）方法，并添加如下代码：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span> <span class="hljs-params">(String args[])</span></span>&#123;<br>    Point p1 = <span class="hljs-function">newL <span class="hljs-title">Point</span><span class="hljs-params">()</span></span>;	<span class="hljs-comment">// 创建一个Point对象。</span><br>    Point p2 = <span class="hljs-keyword">new</span> Point();		<span class="hljs-comment">// 创建另一个Point对象。</span><br>    Point p3 = <span class="hljs-keyword">new</span> p1;<br>    p1.setX(<span class="hljs-number">5</span>);		<span class="hljs-comment">// 修改p1的x属性值为5</span><br>    p1.setY(<span class="hljs-number">8</span>);		<span class="hljs-comment">// 修改p1的y属性值为8</span><br>    p2.x=<span class="hljs-number">12</span>;	<br>    System.out.println(<span class="hljs-string">&quot;p1&quot;</span>+p1);<br>    System.out.println(<span class="hljs-string">&quot;p2&quot;</span>+p2);<br>    System.out.println(<span class="hljs-string">&quot;p3的x属性值=&quot;</span>+p3.getX());<br>&#125;<br><br>p1点： <span class="hljs-number">5</span>,<span class="hljs-number">8</span><br>p2点： <span class="hljs-number">12</span>,<span class="hljs-number">0</span><br>p3的x属性值=<span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
 <p><strong>说明</strong></p>
 <ul>
-<li>在main()方法中创建了两个Point对象，并通过变量p1和p2保存其引用，通过p1和p2可以访问这两个对象，有时直接称对象p1和对象p2，但必须注意的是，p1和p2只是引用变量，其作用是方便访问对象成员，程序中创建Point对象时，其属性没有明确赋值，那么对象属性的初始值由相应数据类型的默认值决定，这里，整型的属性赋初值0</li>
-<li>执行后续代码，将变量p1赋值给变量p3，表示这两个变量引用同一个对象，接下来的3行，分别针对p1对象执行的setX()和setY()方法修改其x和y属性值，修改p2对象的x属性值为12，最后几条语句输出对象时将调用对象的toString()方法。</li>
+<li>在main(）方法中创建了两个Point对象，并通过变量p1和p2保存其引用，通过p1和p2可以访问这两个对象，有时直接称对象p1和对象p2，但必须注意的是，p1和p2只是引用变量，其作用是方便访问对象成员，程序中创建Point对象时，其属性没有明确赋值，那么对象属性的初始值由相应数据类型的默认值决定，这里，整型的属性赋初值0</li>
+<li>执行后续代码，将变量p1赋值给变量p3，表示这两个变量引用同一个对象，接下来的3行，分别针对p1对象执行的setX(）和setY(）方法修改其x和y属性值，修改p2对象的x属性值为12，最后几条语句输出对象时将调用对象的toString(）方法。</li>
 <li>值得一提的是，对象和引用变量是两个独立的东西，在程序运行过程中要注意其赋值变化，Java垃圾回收处理器将自动发现并清除程序中没有任何引用变量指向的对象。</li>
 </ul>
 <h2 id="对象的初始化和构造方法">对象的初始化和构造方法</h2>

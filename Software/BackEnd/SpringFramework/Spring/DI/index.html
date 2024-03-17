@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring DI Bean的实现 @Component  配置扫描包的注解。  12&lt;!--指定注解扫描包--&gt;&lt;context:component-scan base-package&#x3D;&quot;com.example.entity&quot;&#x2F;&gt;  在指定包下编写类，增加注解。  1234@Component(&quot;user&quot;)public class">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.745Z">
-<meta property="article:modified_time" content="2024-03-17T17:58:50.378Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.019Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -381,7 +381,7 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">xmlns:p=&quot;http://www.springframework.org/schema/p&quot;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>P（属性： properties)命名空间，属性依然要设置set方法。</li>
+<li>P（属性： properties）命名空间，属性依然要设置set方法。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">p:name</span>=<span class="hljs-string">&quot;test&quot;</span> <span class="hljs-attr">p:age</span>=<span class="hljs-string">&quot;18&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
 <h4 id="C命名空间注入">C命名空间注入</h4>
@@ -390,7 +390,7 @@
 </ul>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">xmlns:</span>c=<span class="hljs-string">&quot;http://www.springframework.org/schema/c&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>C（构造： Constructor)命名空间，属性依然要设置set方法。</li>
+<li>C（构造： Constructor）命名空间，属性依然要设置set方法。</li>
 <li>需要加上有参构造器。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">c:name</span>=<span class="hljs-string">&quot;test&quot;</span> <span class="hljs-attr">c:age</span>=<span class="hljs-string">&quot;18&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>
@@ -509,7 +509,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;<br>    ApplicationContext context = newClassPathXmlApplicationContext(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);<br>    User user1 = (User) context.getBean(<span class="hljs-string">&quot;user&quot;</span>);<br>    User user2 = (User) context.getBean(<span class="hljs-string">&quot;user&quot;</span>);<br>    System.out.println(user1 == user2);<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="Prototype">Prototype</h3>
 <ul>
-<li>当一个bean的作用域为Prototype，表示一个bean定义对应多个对象实例，Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法）时都会创建一个新的bean实例。</li>
+<li>当一个bean的作用域为Prototype，表示一个bean定义对应多个对象实例，Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean(）方法）时都会创建一个新的bean实例。</li>
 <li>Prototype是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象，根据经验，对有状态的bean应该使用prototype作用域，而对无状态的bean则应该使用singleton作用域。</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;prototype&quot;</span>/&gt;</span><br>// 或者。<br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.example.entity.User&quot;</span> <span class="hljs-attr">singleton</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span><br></code></pre></td></tr></table></figure>

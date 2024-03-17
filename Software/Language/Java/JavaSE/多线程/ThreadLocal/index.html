@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-1156565-20170724121152430-1111069410.png">
 <meta property="article:published_time" content="2022-03-25T06:29:14.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.394Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -246,7 +246,7 @@
 <h2 id="ThreadLocal实现原理">ThreadLocal实现原理</h2>
 <ul>
 <li>首先 ThreadLocal 是一个泛型类，保证可以接受任何类型的对象。</li>
-<li>因为一个线程内可以存在多个 ThreadLocal 对象，所以其实是 ThreadLocal 内部维护了一个 Map，这个 Map 不是直接使用的 HashMap，而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类，而我们使用的 get(),set() 方法其实都是调用了这个ThreadLocalMap类对应的<code>get()</code>,<code>set()</code>方法，例如下面的 set 方法：</li>
+<li>因为一个线程内可以存在多个 ThreadLocal 对象，所以其实是 ThreadLocal 内部维护了一个 Map，这个 Map 不是直接使用的 HashMap，而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类，而我们使用的 get(),set(）方法其实都是调用了这个ThreadLocalMap类对应的<code>get()</code>,<code>set()</code>方法，例如下面的 set 方法：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;<br>    Thread t = Thread.currentThread();<br>    ThreadLocalMap map = getMap(t);<br>    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)<br>        map.set(<span class="hljs-keyword">this</span>, value);<br>    <span class="hljs-keyword">else</span><br>        createMap(t, value);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -290,13 +290,13 @@
 <p>实际上 ThreadLocalMap 中使用的 key 为 ThreadLocal 的弱引用，当ThreadLocalMap移除该ThreadLocal实例时，在下一次垃圾回收的时候会被自动清理掉，但是value 是强引用，不会被清理，这样一来就会出现 key 为 null 的 value</p>
 </li>
 <li>
-<p>ThreadLocalMap 实现中已经考虑了这种情况，在调用 set(),get(),remove() 方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove() 方法，并且之后也不再调用 get(),set(),remove()</p>
+<p>ThreadLocalMap 实现中已经考虑了这种情况，在调用 set(),get(),remove(）方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove(）方法，并且之后也不再调用 get(),set(),remove()</p>
 </li>
 <li>
-<p>ThreadLocalMap实现中已经考虑了这种情况，在调用 set(),get(),remove() 方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove() 方法，并且之后也不再调用 get(),set(),remove() 方法的情况下，ThreadLocalMap的getEntry函数的流程大概为：</p>
+<p>ThreadLocalMap实现中已经考虑了这种情况，在调用 set(),get(),remove(）方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove(）方法，并且之后也不再调用 get(),set(),remove(）方法的情况下，ThreadLocalMap的getEntry函数的流程大概为：</p>
 <ol>
 <li>
-<p>首先从ThreadLocal的直接索引位置（通过ThreadLocal.threadLocalHashCode &amp; (table.length-1)运算得到）获取Entry e，如果e不为null并且key相同则返回e</p>
+<p>首先从ThreadLocal的直接索引位置（通过ThreadLocal.threadLocalHashCode &amp; (table.length-1）运算得到）获取Entry e，如果e不为null并且key相同则返回e</p>
 </li>
 <li>
 <p>如果e为null或者key不一致则向下一个位置查询，如果下一个位置的key和当前需要查询的key相等，则返回对应的Entry，否则，如果key值为null，则擦除该位置的Entry，并继续向下一个位置查询，在这个过程中遇到的key为null的Entry都会被擦除，那么Entry内的value也就没有强引用链，自然会被回收，仔细研究代码可以发现，set操作也有类似的思想，将key为null的这些Entry都删除，防止内存泄露。</p>
@@ -331,7 +331,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateUtil</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;SimpleDateFormat&gt; format1 = <span class="hljs-keyword">new</span> ThreadLocal&lt;SimpleDateFormat&gt;() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">protected</span> SimpleDateFormat <span class="hljs-title">initialValue</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);<br>        &#125;<br>    &#125;;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">formatDate</span><span class="hljs-params">(Date date)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> format1.get().format(date);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 <code>java.time.format.DateTimeFormatter</code>是线程安全的，Joda time里的DateTimeFormat也是线程安全的）</li>
+<li>这里的DateUtil.formatDate(）就是线程安全的了，(Java8里的 <code>java.time.format.DateTimeFormatter</code>是线程安全的，Joda time里的DateTimeFormat也是线程安全的）</li>
 </ul>
 <h2 id="ThreadLocalRandom">ThreadLocalRandom</h2>
 <ul>

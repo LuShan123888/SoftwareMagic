@@ -24,7 +24,7 @@
 <meta property="og:description" content="Raft 选举算法  Raft算法是分布式系统开发首选的共识算法。 主要在分布式集群架构下进行领导者（主节点）的确认，比如现在流行的组件Etcd,Consul,Nacos,RocketMQ,RedisSentinel底层都是采用Raft算法来确认集群中的主节点，再通过主节点向其他节点下发指令。 Raft算法是通过一切以领导者为准的方式，实现一系列值的共识和各节点日志的一致。  Raft 角色  跟">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:32:13.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.229Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:12.997Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,7 +242,7 @@
 <h2 id="Raft-选举过程">Raft 选举过程</h2>
 <ol>
 <li>
-<p><strong>初始状态</strong>：初始状态下，集群中所有节点都是跟随者的状态，任期（Term)都为0</p>
+<p><strong>初始状态</strong>：初始状态下，集群中所有节点都是跟随者的状态，任期（Term）都为0</p>
 </li>
 <li>
 <p><strong>发起投票</strong>:Raft算法中每个节点等待领导者节点心跳信息的超时时间间隔是随机的，如果NodeA因为没有等到领导者的心跳信息先超时，则A节点成为候选者，并增加自己的任期编号，Term值从0更新为1，并给自己投了一票。</p>
@@ -257,7 +257,7 @@
 <p>节点B和节点C接收到节点A发送的请求投票信息后，在编号为1的这届任期内，还没有进行过投票，就把选票投给节点A，并增加自己的任期编号。</p>
 </li>
 <li>
-<p>节点A收到了大多数节点（n/2+1)的投票，从候选者成为本届任期内的新的领导者。</p>
+<p>节点A收到了大多数节点（n/2+1）的投票，从候选者成为本届任期内的新的领导者。</p>
 </li>
 </ol>
 </li>

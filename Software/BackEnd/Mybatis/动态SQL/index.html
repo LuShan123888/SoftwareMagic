@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis 动态SQL 介绍  动态SQL：动态SQL指的是根据不同的查询条件，生成不同的Sql语句。 MyBatis 的强大特性之一便是它的动态 SQL，如果你有使用 JDBC 或其它类似框架的经验，你就能体会到根据不同条件拼接 SQL 语句的痛苦，例如拼接时要确保不能忘记添加必要的空格，还要注意去掉列表最后一个列名的逗号，利用动态 SQL 这一特性可以彻底摆脱这种痛苦。 虽然在以前使用动态">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.577Z">
-<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
+<meta property="article:modified_time" content="2024-03-17T17:59:13.258Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -296,7 +296,7 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectPostIn&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;domain.blog.Post&quot;</span>&gt;</span><br>    SELECT *<br>    FROM POST P<br>    WHERE ID in<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;item&quot;</span> <span class="hljs-attr">index</span>=<span class="hljs-string">&quot;index&quot;</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;list&quot;</span></span><br><span class="hljs-tag">             <span class="hljs-attr">open</span>=<span class="hljs-string">&quot;(&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span> <span class="hljs-attr">close</span>=<span class="hljs-string">&quot;)&quot;</span>&gt;</span><br>        #&#123;item&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>foreach</code> 元素的功能非常强大，它允许你指定一个集合，声明可以在元素体内使用的集合项（item)和索引（index)变量，它也允许你指定开头与结尾的字符串以及集合项迭代之间的分隔符，这个元素也不会错误地添加多余的分隔符，看它多智能!</li>
+<li><code>foreach</code> 元素的功能非常强大，它允许你指定一个集合，声明可以在元素体内使用的集合项（item）和索引（index）变量，它也允许你指定开头与结尾的字符串以及集合项迭代之间的分隔符，这个元素也不会错误地添加多余的分隔符，看它多智能!</li>
 <li><strong>提示</strong> 你可以将任何可迭代对象（如 List, Set 等）, Map 对象或者数组对象作为集合参数传递给 <em>foreach</em>，当使用可迭代对象或者数组时， index 是当前迭代的序号， item 的值是本次迭代获取到的元素，当使用 Map 对象（或者 Map.Entry 对象的集合）时， index 是键， item 是值。</li>
 <li>至此，我们已经完成了与 XML 配置及映射文件相关的讨论，下一章将详细探讨 Java API，以便你能充分利用已经创建的映射配置。</li>
 </ul>
@@ -333,7 +333,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Mapper</span> </span>&#123;<br>    <span class="hljs-meta">@Lang(MyLanguageDriver.class)</span><br>    <span class="hljs-meta">@Select(&quot;SELECT * FROM BLOG&quot;)</span><br>    <span class="hljs-function">List&lt;Blog&gt; <span class="hljs-title">selectBlog</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>提示</strong> 可以使用 Apache Velocity 作为动态语言，更多细节请参考 MyBatis-Velocity 项目。</li>
-<li>你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 <code>org.apache.ibatis.scripting.xmltags.XmlLanguageDriver</code>（别名为 <code>xml</code>)所提供。</li>
+<li>你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 <code>org.apache.ibatis.scripting.xmltags.XmlLanguageDriver</code>（别名为 <code>xml</code>）所提供。</li>
 </ul>
 
             </div>
