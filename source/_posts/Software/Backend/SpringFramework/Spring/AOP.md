@@ -10,7 +10,7 @@ categories:
 
 ## AOP 概述
 
-- AOP(Aspect Oriented Programming)面向切面编程, 通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术,AOP是OOP的延续, 是软件开发中的一个热点, 也是Spring框架中的一个重要内容, 是函数式编程的一种衍生范型，利用AOP可以对业务逻辑的各个部分进行隔离, 从而使得业务逻辑各部分之间的耦合度降低, 提高程序的可重用性, 同时提高了开发的效率
+- AOP(Aspect Oriented Programming)面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术,AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型，利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-10-31-640-20201031204745305.png)
 
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService{
 }
 ```
 
-- 编写增强类，一个为前置增强, 另一个为后置增强
+- 编写增强类，一个为前置增强，另一个为后置增强
 
 ```java
 @Component
@@ -129,7 +129,7 @@ public class AfterLog implements AfterReturningAdvice {
 }
 ```
 
-- 在Spring的配置文件中注册 , 并实现aop切入实现 , 注意导入约束
+- 在Spring的配置文件中注册，并实现aop切入实现，注意导入约束
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -165,7 +165,7 @@ public class MyTest {
 }
 ```
 
-- Spring的Aop就是将公共的业务（日志 , 安全等) 和领域业务结合起来
+- Spring的Aop就是将公共的业务（日志，安全等) 和领域业务结合起来
 - 当执行领域业务时，将会把公共业务加进来，实现公共业务的重复利用，领域业务更纯粹，其本质还是动态代理
 
 ### 自定义类来实现AOP
@@ -250,9 +250,9 @@ public class AnnotationPointcut {
 ```
 
 - **aspectj-autoproxy**
-    - 通过aop命名空间的`<aop:aspectj-autoproxy />`声明自动为Spring容器中那些配置`@aspect`切面的bean创建代理, 织入切面
-    - Spring 在内部依旧采用`AnnotationAwareAspectJAutoProxyCreator`进行自动代理的创建工作, 但具体实现的细节已经被`<aop:aspectj-autoproxy />`隐藏起来了
-    - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性, 默认为false, 表示使用JDK动态代理织入增强, 当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时, 表示使用CGLib动态代理技术织入增强，不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口, 则Spring将自动使用CGLib动态代理
+    - 通过aop命名空间的`<aop:aspectj-autoproxy />`声明自动为Spring容器中那些配置`@aspect`切面的bean创建代理，织入切面
+    - Spring 在内部依旧采用`AnnotationAwareAspectJAutoProxyCreator`进行自动代理的创建工作，但具体实现的细节已经被`<aop:aspectj-autoproxy />`隐藏起来了
+    - `<aop:aspectj-autoproxy />`有一个`proxy-target-class`属性，默认为false, 表示使用JDK动态代理织入增强，当配为`<aop:aspectj-autoproxy  poxy-target-class="true"/>`时，表示使用CGLib动态代理技术织入增强，不过即使`proxy-target-class`设置为false, 如果目标类没有声明接口，则Spring将自动使用CGLib动态代理
 
 ## Spring Boot
 

@@ -169,7 +169,7 @@ spring:
 <!-- myBatis文件 -->
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
-    <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+    <!-- 自动扫描entity目录，省掉Configuration.xml里的手工配置 -->
     <property name="configLocation" value="classpath:spring/mybatis-page.xml" />
     <property name="mapperLocations" value="classpath:mapping/*.xml" />
 </bean>

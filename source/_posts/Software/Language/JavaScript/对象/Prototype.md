@@ -49,7 +49,7 @@ function Person(first, last, age, eyecolor) {
     - `Person` 对象从 `Person.prototype` 继承
 - 所有 JavaScript 中的对象都是位于原型链顶端的 Object 的实例
 - JavaScript 对象有一个指向一个原型对象的链，当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾
-- `Date` 对象, `Array` 对象, 以及 `Person` 对象从 `Object.prototype` 继承
+- `Date` 对象, `Array` 对象，以及 `Person` 对象从 `Object.prototype` 继承
 
 ### 添加属性和方法
 

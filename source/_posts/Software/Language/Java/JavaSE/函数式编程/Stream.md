@@ -41,7 +41,7 @@ Stream(流）是一个来自数据源的元素队列并支持聚合操作
 和以前的Collection操作不同,Stream操作还有两个基础的特征:
 
 - **Pipelining**: 中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格(fluent style),这样做可以对操作进行优化，比如延迟执行(laziness)和短路( short-circuiting)
-- **内部迭代**:以前对集合遍历都是通过Iterator或者For-Each的方式, 显式的在集合外部进行迭代，这叫做外部迭代,Stream提供了内部迭代的方式，通过访问者模式(Visitor)实现
+- **内部迭代**:以前对集合遍历都是通过Iterator或者For-Each的方式，显式的在集合外部进行迭代，这叫做外部迭代,Stream提供了内部迭代的方式，通过访问者模式(Visitor)实现
 
 ## 流处理的特性
 

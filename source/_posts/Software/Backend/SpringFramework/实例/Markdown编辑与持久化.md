@@ -256,7 +256,7 @@ imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
 imageUploadURL : "/article/file/upload", // //这个是上传图片时的访问地址
 ```
 
-- 后端请求接收保存这个图片, 需要导入`FastJson`的依赖
+- 后端请求接收保存这个图片，需要导入`FastJson`的依赖
 
 ```java
 @RequestMapping("/file/upload")

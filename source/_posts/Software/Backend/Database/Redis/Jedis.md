@@ -14,7 +14,7 @@ categories:
 
 ```java
 Jedis jedis = new Jedis("127.0.0.1", 6379);
-// jedis.auth("password"); //如果服务器需要密码, 验证密码
+// jedis.auth("password"); //如果服务器需要密码，验证密码
 jedis.select(0); //选择0号数据库
 jedis.connect(); //连接
 jedis.disconnect(); //断开连接
@@ -23,7 +23,7 @@ jedis.flushAll(); //清空所有的key
 
 ### JedisPool
 
-- 每次连接需要创建一个连接,执行完后就关闭,非常浪费资源,所以使用jedispool(连接池）连接
+- 每次连接需要创建一个连接，执行完后就关闭，非常浪费资源，所以使用jedispool(连接池）连接
 
 ```java
 //  创建连接池配置对象
@@ -48,15 +48,15 @@ Jedis jedis = new Jedis("127.0.0.1",6379);
 System.out.println("服务正在运行: "+jedis.ping());
 //获取客户端信息
 System.out.println(jedis.getClient());
-//清空Redis数据库,相当于执行FLUSHALL命令
+//清空Redis数据库，相当于执行FLUSHALL命令
 System.out.println(jedis.flushAll());
-//查看Redis信息,相当于执行INFO命令
+//查看Redis信息，相当于执行INFO命令
 System.out.println(jedis.info());
-//获取数据库中key的数量,相当于执行DBSIZE命令
+//获取数据库中key的数量，相当于执行DBSIZE命令
 System.out.println(jedis.dbSize());
 //获取数据库名字
 System.out.println(jedis.getDB());
-//返回当前Redis服务器的时间,相当于执行TIME命令
+//返回当前Redis服务器的时间，相当于执行TIME命令
 System.out.println(jedis.time());
 ```
 
@@ -124,7 +124,7 @@ e.printStackTrace();
 }
 System.out.println(jedis.get("key3"));
 
-System.out.println("===========获取原值,更新为新值==========");
+System.out.println("===========获取原值，更新为新值==========");
 System.out.println(jedis.getSet("key2", "key2GetSet"));
 System.out.println(jedis.get("key2"));
 
@@ -144,14 +144,14 @@ jedis.lpush("collections", "TreeMap");
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));//-1代表倒数第一个元素,-2代表倒数第二个元素,end为-1表示查询全部
 System.out.println("collections区间0-3的元素:"+jedis.lrange("collections",0,3));
 System.out.println("===============================");
-// 删除列表指定的值 ,第二个参数为删除的个数（有重复时),后add进去的值先被删,类似于出栈
+// 删除列表指定的值，第二个参数为删除的个数（有重复时),后add进去的值先被删，类似于出栈
 System.out.println("删除指定元素个数:"+jedis.lrem("collections", 2, "HashMap"));
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));
 System.out.println("删除下表0-3区间之外的元素:"+jedis.ltrim("collections", 0, 3));
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));
 System.out.println("collections列表出栈（左端):"+jedis.lpop("collections"));
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));
-System.out.println("collections添加元素,从列表右端,与lpush相对应:"+jedis.rpush("collections", "EnumMap"));
+System.out.println("collections添加元素，从列表右端，与lpush相对应:"+jedis.rpush("collections", "EnumMap"));
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));
 System.out.println("collections列表出栈（右端):"+jedis.rpop("collections"));
 System.out.println("collections的内容:"+jedis.lrange("collections", 0, -1));
@@ -222,9 +222,9 @@ jedis.hset("hash", "key5", "value5");
 System.out.println("散列hash的所有键值对为:"+jedis.hgetAll("hash"));//return Map<String,String>
 System.out.println("散列hash的所有键为:"+jedis.hkeys("hash"));//return Set<String>
 System.out.println("散列hash的所有值为:"+jedis.hvals("hash"));//return List<String>
-System.out.println("将key6保存的值加上一个整数,如果key6不存在则添加key6:"+jedis.hincrBy("hash", "key6", 6));
+System.out.println("将key6保存的值加上一个整数，如果key6不存在则添加key6:"+jedis.hincrBy("hash", "key6", 6));
 System.out.println("散列hash的所有键值对为:"+jedis.hgetAll("hash"));
-System.out.println("将key6保存的值加上一个整数,如果key6不存在则添加key6:"+jedis.hincrBy("hash", "key6", 3));
+System.out.println("将key6保存的值加上一个整数，如果key6不存在则添加key6:"+jedis.hincrBy("hash", "key6", 3));
 System.out.println("散列hash的所有键值对为:"+jedis.hgetAll("hash"));
 System.out.println("删除一个或者多个键值对:"+jedis.hdel("hash", "key2"));
 System.out.println("散列hash的所有键值对为:"+jedis.hgetAll("hash"));
@@ -253,13 +253,13 @@ try{
     multi.set("json", result);
     //再存入一条数据
     multi.set("json2", result);
-    //这里引发了异常,用0作为被除数
+    //这里引发了异常，用0作为被除数
     int i = 100/0;
-    //如果没有引发异常,执行进入队列的命令
+    //如果没有引发异常，执行进入队列的命令
     multi.exec();
     }catch(Exception e){
         e.printStackTrace();
-        //如果出现异常,回滚
+        //如果出现异常，回滚
         multi.discard();
     }finally{
         System.out.println(jedis.get("json"));
@@ -277,7 +277,7 @@ try{
 ### 连接Cluster集群
 
 ```java
-//创建jedisCluster对象,有一个参数 nodes是Set类型,Set包含若干个HostAndPort对象
+//创建jedisCluster对象，有一个参数 nodes是Set类型,Set包含若干个HostAndPort对象
 Set<HostAndPort> nodes = new HashSet<>();
 nodes.add(new HostAndPort("127.0.0.1",7001));
 nodes.add(new HostAndPort("127.0.0.1",7002));

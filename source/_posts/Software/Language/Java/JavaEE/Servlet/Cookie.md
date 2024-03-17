@@ -9,13 +9,13 @@ categories:
 ---
 # Servlet Cookie 处理
 
-- Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie
+- Cookie 是存储在客户端计算机上的文本文件，并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie
 - 识别返回用户包括三个步骤:
-    - 服务器脚本向浏览器发送一组 Cookie,例如：姓名,年龄或识别号码等
-    - 浏览器将这些信息存储在本地计算机上,以备将来使用
-    - 当下一次浏览器向 Web 服务器发送任何请求时,浏览器会把这些 Cookie 信息发送到服务器,服务器将使用这些信息来识别用户
+    - 服务器脚本向浏览器发送一组 Cookie,例如：姓名，年龄或识别号码等
+    - 浏览器将这些信息存储在本地计算机上，以备将来使用
+    - 当下一次浏览器向 Web 服务器发送任何请求时，浏览器会把这些 Cookie 信息发送到服务器，服务器将使用这些信息来识别用户
 
-> Servlet Cookie 处理需要对中文进行编码与解码,方法如下:
+> Servlet Cookie 处理需要对中文进行编码与解码，方法如下:
 >
 > ```java
 > String str = java.net.URLEncoder.encode("中文","UTF-8");//编码
@@ -36,8 +36,8 @@ Connection: close
 Content-Type: text/html
 ```
 
-- 正如您所看到的,Set-Cookie 头包含了一个名称值对,一个 GMT 日期,一个路径和一个域,名称和值会被 URL 编码,expires 字段是一个指令,告诉浏览器在给定的时间和日期之后"忘记"该 Cookie
-- 如果浏览器被配置为存储 Cookie,它将会保留此信息直到到期日期,如果用户的浏览器指向任何匹配该 Cookie 的路径和域的页面,它会重新发送 Cookie 到服务器,浏览器的头信息可能如下所示:
+- 正如您所看到的,Set-Cookie 头包含了一个名称值对，一个 GMT 日期，一个路径和一个域，名称和值会被 URL 编码,expires 字段是一个指令，告诉浏览器在给定的时间和日期之后"忘记"该 Cookie
+- 如果浏览器被配置为存储 Cookie,它将会保留此信息直到到期日期，如果用户的浏览器指向任何匹配该 Cookie 的路径和域的页面，它会重新发送 Cookie 到服务器，浏览器的头信息可能如下所示:
 
 ```http
 GET / HTTP/1.0
@@ -59,18 +59,18 @@ Cookie: name=xyz
 
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
-| 1    | **public void setDomain(String pattern)** 该方法设置 cookie 适用的域,例如 test.com, |
-| 2    | **public String getDomain()** 该方法获取 cookie 适用的域,例如 test.com, |
+| 1    | **public void setDomain(String pattern)** 该方法设置 cookie 适用的域，例如 test.com, |
+| 2    | **public String getDomain()** 该方法获取 cookie 适用的域，例如 test.com, |
 | 3    | **public void setMaxAge(int expiry)** 该方法设置 cookie 过期的时间（以秒为单位),如果不这样设置,cookie 只会在当前 session 会话中持续有效, |
-| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期（以秒为单位),默认情况下,-1 表示 cookie 将持续下去,直到浏览器关闭, |
-| 5    | **public String getName()** 该方法返回 cookie 的名称,名称在创建后不能改变, |
+| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期（以秒为单位),默认情况下,-1 表示 cookie 将持续下去，直到浏览器关闭, |
+| 5    | **public String getName()** 该方法返回 cookie 的名称，名称在创建后不能改变, |
 | 6    | **public void setValue(String newValue)** 该方法设置与 cookie 关联的值, |
 | 7    | **public String getValue()** 该方法获取与 cookie 关联的值,  |
-| 8    | **public void setPath(String uri)** 该方法设置 cookie 适用的路径,如果您不指定路径,与当前页面相同目录下的（包括子目录下的）所有 URL 都会返回 cookie, |
+| 8    | **public void setPath(String uri)** 该方法设置 cookie 适用的路径，如果您不指定路径，与当前页面相同目录下的（包括子目录下的）所有 URL 都会返回 cookie, |
 | 9    | **public String getPath()** 该方法获取 cookie 适用的路径,   |
-| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值,表示 cookie 是否应该只在加密的（即 SSL)连接上发送, |
-| 11   | **public void setComment(String purpose)** 设置cookie的注释,该注释在浏览器向用户呈现 cookie 时非常有用, |
-| 12   | **public String getComment()** 获取 cookie 的注释,如果 cookie 没有注释则返回 null, |
+| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值，表示 cookie 是否应该只在加密的（即 SSL)连接上发送, |
+| 11   | **public void setComment(String purpose)** 设置cookie的注释，该注释在浏览器向用户呈现 cookie 时非常有用, |
+| 12   | **public String getComment()** 获取 cookie 的注释，如果 cookie 没有注释则返回 null, |
 
 ## 通过 Servlet 设置 Cookie
 
@@ -82,7 +82,7 @@ Cookie: name=xyz
 Cookie cookie = new Cookie("key","value");
 ```
 
-请记住,无论是名字还是值,都不应该包含空格或以下任何字符:
+请记住，无论是名字还是值，都不应该包含空格或以下任何字符:
 
 ```java
 [ ] ( ) = , " / ? @ : ;
@@ -167,7 +167,7 @@ public class HelloForm extends HttpServlet {
 
 ## 通过 Servlet 读取 Cookie
 
-- 要读取 Cookie,您需要通过调用 *HttpServletRequest* 的 **getCookies( )** 方法创建一个 *javax.servlet.http.Cookie* 对象的数组,然后循环遍历数组,并使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值
+- 要读取 Cookie,您需要通过调用 *HttpServletRequest* 的 **getCookies( )** 方法创建一个 *javax.servlet.http.Cookie* 对象的数组，然后循环遍历数组，并使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值
 
 ## 实例
 
@@ -237,20 +237,20 @@ public class ReadCookies extends HttpServlet {
 }
 ```
 
-- 编译上面的 Servlet **ReadCookies**,并在 web.xml 文件中创建适当的条目,尝试运行 *http://localhost:8080/TomcatTest/ReadCookies*,将显示如下结果:
+- 编译上面的 Servlet **ReadCookies**,并在 web.xml 文件中创建适当的条目，尝试运行 *http://localhost:8080/TomcatTest/ReadCookies*,将显示如下结果:
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6CE56289-5634-4122-B664-6910729D3A1A.jpg)
 
 ## 通过 Servlet 删除 Cookie
 
-- 删除 Cookie 是非常简单的,如果您想删除一个 cookie,那么您只需要按照以下三个步骤进行:
+- 删除 Cookie 是非常简单的，如果您想删除一个 cookie,那么您只需要按照以下三个步骤进行:
     - 读取一个现有的 cookie,并把它存储在 Cookie 对象中
-    - 使用 **setMaxAge()** 方法设置 cookie 的年龄为零,来删除现有的 cookie
+    - 使用 **setMaxAge()** 方法设置 cookie 的年龄为零，来删除现有的 cookie
     - 把这个 cookie 添加到响应头
 
 ## 实例
 
-下面的例子将删除现有的名为 `url` 的 cookie,当您下次运行 ReadCookies 的 Servlet 时,它会返回 url 为 null
+下面的例子将删除现有的名为 `url` 的 cookie,当您下次运行 ReadCookies 的 Servlet 时，它会返回 url 为 null
 
 ```java
 @WebServlet("/DeleteCookies")
@@ -317,6 +317,6 @@ public class DeleteCookies extends HttpServlet {
 }
 ```
 
-- 编译上面的 Servlet **DeleteCookies**,并在 web.xml 文件中创建适当的条目,现在运行 *http://localhost:8080/TomcatTest/DeleteCookies*,将显示如下结果:
+- 编译上面的 Servlet **DeleteCookies**,并在 web.xml 文件中创建适当的条目，现在运行 *http://localhost:8080/TomcatTest/DeleteCookies*,将显示如下结果:
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-19D5A4A6-2673-46E6-A9E2-0745D379350A.jpg)

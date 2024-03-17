@@ -16,7 +16,7 @@ categories:
     - 在url-pattern中配置了`/*`之后，可以对所有要访问的资源进行拦截
 - **拦截器**
     - 拦截器是Spring MVC框架自己的，只有使用了Spring MVC框架的工程才能使用
-    - 拦截器只会拦截访问的控制器方法, 如果访问的是`jsp/html/css/image/js`是不会进行拦截的
+    - 拦截器只会拦截访问的控制器方法，如果访问的是`jsp/html/css/image/js`是不会进行拦截的
 - **过滤器与拦截器的区别**:拦截器是AOP思想的具体应用
 
 ## 自定义拦截器
@@ -62,7 +62,7 @@ public class MyInterceptor implements HandlerInterceptor {
         <bean class="com.example.interceptor.MyInterceptor"/>
     </mvc:interceptor>
 
-    <!--可以通过这种配置方式指定拦截器的映射类, 但是默认拦截所有请求-->
+    <!--可以通过这种配置方式指定拦截器的映射类，但是默认拦截所有请求-->
     <bean name="handlerInterceptor1" class="com.briup.web.interceptor.MyInterceptor1"/>
     <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
         <property name="interceptors">
@@ -94,7 +94,7 @@ public class DemoMvcConfig implements WebMvcConfigurer {
 
 - 有一个登陆页面，需要写一个controller访问页面
 - 登陆页面有一提交表单的动作，需要在controller中处理，判断用户名密码是否正确，如果正确，向session中写入用户信息，返回登陆成功
-- 拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行, 如果用户未登陆，跳转到登陆页面
+- 拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行，如果用户未登陆，跳转到登陆页面
 
 **测试**:
 

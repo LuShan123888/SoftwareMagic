@@ -27,7 +27,7 @@ categories:
 
 | 方法     | 主键生成策略                        | 主键类型            | 说明                                                         |
 | -------- | ----------------------------------- | ------------------- | ------------------------------------------------------------ |
-| nextId   | ASSIGN_ID, ID_WORKER, ID_WORKER_STR | Long,Integer,String | 支持自动转换为String类型, 但数值类型不支持自动转换, 需精准匹配, 例如返回Long, 实体主键就不支持定义为Integer |
+| nextId   | ASSIGN_ID, ID_WORKER, ID_WORKER_STR | Long,Integer,String | 支持自动转换为String类型，但数值类型不支持自动转换，需精准匹配，例如返回Long, 实体主键就不支持定义为Integer |
 | nextUUID | ASSIGN_UUID, UUID                   | String              | 默认不含中划线的UUID生成                                     |
 
 ### 方式一：声明为bean供spring扫描注入

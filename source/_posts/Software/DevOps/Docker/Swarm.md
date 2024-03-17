@@ -9,29 +9,29 @@ categories:
 
 ## 概念
 
-- Docker Swarm 是 Docker 的集群管理工具,它将 Docker 主机池转变为单个虚拟 Docker 主机,Docker Swarm 提供了标准的 Docker API,所有任何已经与 Docker 守护程序通信的工具都可以使用 Swarm 轻松地扩展到多个主机
+- Docker Swarm 是 Docker 的集群管理工具，它将 Docker 主机池转变为单个虚拟 Docker 主机,Docker Swarm 提供了标准的 Docker API,所有任何已经与 Docker 守护程序通信的工具都可以使用 Swarm 轻松地扩展到多个主机
 
 ### 节点
 
-- 运行 Docker 的主机可以主动初始化一个 `Swarm` 集群或者加入一个已存在的 `Swarm` 集群,这样这个运行 Docker 的主机就成为一个 `Swarm` 集群的节点 (`node`)
+- 运行 Docker 的主机可以主动初始化一个 `Swarm` 集群或者加入一个已存在的 `Swarm` 集群，这样这个运行 Docker 的主机就成为一个 `Swarm` 集群的节点 (`node`)
 - 节点分为管理 (`manager`) 节点和工作 (`worker`) 节点
     - 管理节点用于 `Swarm` 集群的管理,`docker swarm` 命令基本只能在管理节点执行
-        - 一个 `Swarm` 集群可以有多个管理节点,但只有一个管理节点可以成为 `leader`,`leader` 通过 `raft` 协议实现
-        - `raft`协议至少是基于3个主节点,当管理节点大多数可用时,整个集群是可用的
-    - 工作节点是任务执行节点,管理节点将服务 (`service`) 下发至工作节点执行
-    - 管理节点默认也作为工作节点,你也可以通过配置让服务只运行在管理节点
+        - 一个 `Swarm` 集群可以有多个管理节点，但只有一个管理节点可以成为 `leader`,`leader` 通过 `raft` 协议实现
+        - `raft`协议至少是基于3个主节点，当管理节点大多数可用时，整个集群是可用的
+    - 工作节点是任务执行节点，管理节点将服务 (`service`) 下发至工作节点执行
+    - 管理节点默认也作为工作节点，你也可以通过配置让服务只运行在管理节点
 - 来自 Docker 官网的这张图片形象的展示了集群中管理节点与工作节点的关系
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-15-swarm-diagram.png)
 
 ###  服务和任务
 
-- 任务(`Task`)是 `Swarm` 中的最小的调度单位,目前来说就是一个单一的容器
-- 服务(`Services`)是指一组任务的集合,服务定义了任务的属性
+- 任务(`Task`)是 `Swarm` 中的最小的调度单位，目前来说就是一个单一的容器
+- 服务(`Services`)是指一组任务的集合，服务定义了任务的属性
 - 服务有两种模式:
     - `replicated services` 按照一定规则在各个工作节点上运行指定个数的任务
     - `global services` 每个工作节点上运行一个任务两种模式通过 `docker service create` 的 `--mode` 参数指定
-- 来自 Docker 官网的这张图片形象的展示了容器,任务,服务的关系
+- 来自 Docker 官网的这张图片形象的展示了容器，任务，服务的关系
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-02-15-services-diagram-20210215180815269.png)
 
@@ -58,18 +58,18 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 ```
 
 -  `--advertise-addr` :指定本节点的广播IP
-- 需要把`join-token`复制,在增加工作节点时会用到
+- 需要把`join-token`复制，在增加工作节点时会用到
 
 ### 添加工作节点
 
-- 创建两个 Docker 主机作为工作节点,并加入到集群中
+- 创建两个 Docker 主机作为工作节点，并加入到集群中
 
 ```
 $ docker-machine create -d virtualbox worker1
 $ docker-machine create -d virtualbox worker2
 ```
 
-- 分别进入两个机器里,指定添加至上一步中创建的集群,这里会用到上一步复制的内容
+- 分别进入两个机器里，指定添加至上一步中创建的集群，这里会用到上一步复制的内容
 
 ```
 $ docker-machine ssh worker1
@@ -137,7 +137,7 @@ $ docker swarm join-token [OPTIONS] (worker|manager)
 
 ### leave
 
-- 在工作节点中运行以下命令,即可将工作节点移除
+- 在工作节点中运行以下命令，即可将工作节点移除
 
 ```
 $ docker swarm leave
@@ -146,7 +146,7 @@ $ docker swarm leave
 ## service命令
 
 - 服务的部署与管理
-- **注意**:跟集群管理有关的任何操作,都是在管理节点上操作的
+- **注意**:跟集群管理有关的任何操作，都是在管理节点上操作的
 
 ### create
 
@@ -169,9 +169,9 @@ $ docker service create --replicas 3 -p 80:80 --name nginx nginx:1.13.7-alpine
     - replicated:按照一定规则在各个工作节点上运行指定个数的任务
     - global:每个工作节点上运行一个任务
 - `--secret source=docker_secret,target=目标路径`:指定`docker secret`
-    - 如果没有在 `target` 中显式的指定路径时,默认以 `tmpfs` 文件系统挂载到容器的 `/run/secrets` 目录中
+    - 如果没有在 `target` 中显式的指定路径时，默认以 `tmpfs` 文件系统挂载到容器的 `/run/secrets` 目录中
 - `--config  source=docker_config,target=目标路径`:指定`docker config`
-    - 如果没有在 `target` 中显式的指定路径时,默认以 `tmpfs` 文件系统挂载到容器的 `/config.conf`
+    - 如果没有在 `target` 中显式的指定路径时，默认以 `tmpfs` 文件系统挂载到容器的 `/config.conf`
 
 **实例**
 
@@ -254,7 +254,7 @@ $ docker service rollback [OPTIONS] SERVICE
 
 **实例**
 
-- 现在假设发现 `nginx` 服务的镜像升级到 `nginx:1.13.12-alpine` 出现了一些问题,我们可以使用命令一键回退
+- 现在假设发现 `nginx` 服务的镜像升级到 `nginx:1.13.12-alpine` 出现了一些问题，我们可以使用命令一键回退
 
 ```
 $ docker service rollback nginx
@@ -271,7 +271,7 @@ d9pw13v59d00         \_ nginx.1         nginx:1.13.12-alpine  VM-20-83-debian   
 i7ynkbg6ybq5         \_ nginx.1         nginx:1.13.7-alpine   VM-20-83-debian     Shutdown            Shutdown 2 minutes ago
 ```
 
-- 结果的输出详细记录了服务的部署,滚动升级,回退的过程
+- 结果的输出详细记录了服务的部署，滚动升级，回退的过程
 
 ### scale
 
@@ -354,8 +354,8 @@ $ docker stack rm [OPTIONS] STACK [STACK...]
 
 ## secret命令
 
-- 在动态的,大规模的分布式集群上,管理和分发 `密码`,`证书` 等敏感信息是极其重要的工作,传统的密钥分发方式（如密钥放入镜像中,设置环境变量,volume 动态挂载等）都存在着潜在的巨大的安全风险
-- Docker 目前已经提供了 `secrets` 管理功能,用户可以在 Swarm 集群中安全地管理密码,密钥证书等敏感数据,并允许在多个 Docker 容器实例之间共享访问指定的敏感数据
+- 在动态的，大规模的分布式集群上，管理和分发 `密码`,`证书` 等敏感信息是极其重要的工作，传统的密钥分发方式（如密钥放入镜像中，设置环境变量,volume 动态挂载等）都存在着潜在的巨大的安全风险
+- Docker 目前已经提供了 `secrets` 管理功能，用户可以在 Swarm 集群中安全地管理密码，密钥证书等敏感数据，并允许在多个 Docker 容器实例之间共享访问指定的敏感数据
 
 ### create
 
@@ -403,8 +403,8 @@ $ docker secret inspect [OPTIONS] SECRET [SECRET...]
 
 ## config命令
 
-- 在动态的,大规模的分布式集群上,管理和分发配置文件也是很重要的工作,传统的配置文件分发方式（如配置文件放入镜像中,设置环境变量,volume 动态挂载等）都降低了镜像的通用性
-- 在 Docker 17.06 以上版本中,Docker 新增了 `docker config` 子命令来管理集群中的配置信息,以后你无需将配置文件放入镜像或挂载到容器中就可实现对服务的配置
+- 在动态的，大规模的分布式集群上，管理和分发配置文件也是很重要的工作，传统的配置文件分发方式（如配置文件放入镜像中，设置环境变量,volume 动态挂载等）都降低了镜像的通用性
+- 在 Docker 17.06 以上版本中,Docker 新增了 `docker config` 子命令来管理集群中的配置信息，以后你无需将配置文件放入镜像或挂载到容器中就可实现对服务的配置
 - **注意**:`config` 仅能在 Swarm 集群中使用
 
 ### create

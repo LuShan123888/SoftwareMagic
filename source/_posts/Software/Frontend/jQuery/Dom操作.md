@@ -7,7 +7,7 @@ categories:
 ---
 # jQuery Dom操作
 
-- jQuery也提供了对HTML节点的操作,而且在原生js的基础之上进行了优化,使用起来更加方便,注意：以下的操作方式只适用于jQuery对象
+- jQuery也提供了对HTML节点的操作，而且在原生js的基础之上进行了优化，使用起来更加方便，注意：以下的操作方式只适用于jQuery对象
 
 ## 操作元素的属性
 
@@ -40,12 +40,12 @@ categories:
 
 | 方法                         | 说明                        | 举例                                            |
 | ---------------------------- | --------------------------- | ----------------------------------------------- |
-| attractive(属性名称,属性值) | 设置指定的属性值            | at tr('checked','checked')<br>attr('name','zs') |
-| prop(属性名称,属性值)       | 设置具有true和false的属性值 | prop('checked','true')                          |
+| attractive(属性名称，属性值) | 设置指定的属性值            | at tr('checked','checked')<br>attr('name','zs') |
+| prop(属性名称，属性值)       | 设置具有true和false的属性值 | prop('checked','true')                          |
 
 **注意**
 
-- 操作checkbox时,选中属性值为checked,没有选中属性值为undefined
+- 操作checkbox时，选中属性值为checked,没有选中属性值为undefined
 
 ```html
 <a href="http://www.baidu.com" id="a1">百度</a>
@@ -73,12 +73,12 @@ categories:
 
 ## 操作元素的样式
 
-- 对于元素的样式,也是一种属性,由于样式使用更加频繁,所以对于样式除了当做属性处理外还可以有专门的方法进行处理
+- 对于元素的样式，也是一种属性，由于样式使用更加频繁，所以对于样式除了当做属性处理外还可以有专门的方法进行处理
 
 | 方法                    | 说明                          |
 | ----------------------- | ----------------------------- |
-| attr('class')           | 获取class属性的值,即样式名称 |
-| attr('class','样式名'') | 修改class属性的值,修改样式   |
+| attr('class')           | 获取class属性的值，即样式名称 |
+| attr('class','样式名'') | 修改class属性的值，修改样式   |
 | addClass('样式名')      | 添加样式名称                  |
 | removeClass('class')    | 移除样式名称                  |
 | css()                   | 添加具体的样式                |
@@ -129,7 +129,7 @@ $('#conRed').css({"background-color":"red","color":"#fff"});
 <script type="text/javascript">
     // 获取样式名称
     console.log($("#remove").attr("class"));
-    // 修改样式,那么id为remove的元素样式class只有green
+    // 修改样式，那么id为remove的元素样式class只有green
     $('#remove').attr("class","green")
     // 添加样式名称,class名称同时添加两个类
     $('#conBlue').addClass("blue larger");
@@ -144,8 +144,8 @@ $('#conRed').css({"background-color":"red","color":"#fff"});
 | ---------------- | ------------------------------ |
 | html()           | 获取元素的html内容             |
 | html('html内容') | 设定元素的html内容             |
-| text()           | 获取元素的文本内容,不包含html |
-| text('text内容') | 设置文本的文本内容,不包含html |
+| text()           | 获取元素的文本内容，不包含html |
+| text('text内容') | 设置文本的文本内容，不包含html |
 | val()            | 获取元素value值                |
 | val('值')        | 指定元素的value值              |
 
@@ -158,22 +158,22 @@ $('#conRed').css({"background-color":"red","color":"#fff"});
     <input type="text" name="uname" value="oop"/>
 </body>
 <script type="text/javascript">
-    // 获取HTML内容,包括HTML标签
+    // 获取HTML内容，包括HTML标签
     console.log($('h3').html());
-    // 获取文本内容,不包括HTML标签
+    // 获取文本内容，不包括HTML标签
     console.log($('h3').text());
     // 获取value值
     console.log($('[name=uname]').val());
     // 设置
-    $('#html').html("<p>使用html设置,看不到标签</p>");
-    $('#text').text("<p>使用text设置,能看到标签</p>");
+    $('#html').html("<p>使用html设置，看不到标签</p>");
+    $('#text').text("<p>使用text设置，能看到标签</p>");
     $('[name=uname]').val("input");
 </script>
 ```
 
 ## 创建元素
 
-- > > 在jQuery中创建元素很简单,直接使用核心函数即可
+- > > 在jQuery中创建元素很简单，直接使用核心函数即可
 
 ```js
 $('元素内容');
@@ -185,10 +185,10 @@ $('<p>this is a paragraph!!!</p>');
 
 | 方法                           | 说明                                                         |
 | ------------------------------ | ------------------------------------------------------------ |
-| prepend(content)               | 在被选元素内部的开头插入元素或内容,被追加的 content 参数,可以是字符, HTML 元素标记, |
+| prepend(content)               | 在被选元素内部的开头插入元素或内容，被追加的 content 参数，可以是字符, HTML 元素标记, |
 | $(content).prependTo(selector) | 把 content 元素或内容加入 selector 元素开头                  |
-| append(content)                | 在被选元素内部的结尾插入元素或内容,被追加的 content 参数,可以是字符,HTML 元素标记, |
-| $(content).appendTo(selector)  | 把 content元素或内容插入selector 元素内,默认是在尾部        |
+| append(content)                | 在被选元素内部的结尾插入元素或内容，被追加的 content 参数，可以是字符,HTML 元素标记, |
+| $(content).appendTo(selector)  | 把 content元素或内容插入selector 元素内，默认是在尾部        |
 | before()                       | 在元素前插入指定的元素或内容:`$(selector).before(content)`   |
 | after()                        | 在元素后插入指定的元素或内容:`$(selector).after(content)`    |
 
@@ -228,7 +228,7 @@ $('<p>this is a paragraph!!!</p>');
 
 | 方法     | 说明                                                |
 | -------- | --------------------------------------------------- |
-| remove() | 删除所选元素或指定的子元素,包括整个标签和内容一起删 |
+| remove() | 删除所选元素或指定的子元素，包括整个标签和内容一起删 |
 | empty()  | 清空所选元素的内容                                  |
 
 ```html
@@ -250,8 +250,8 @@ $(selector).each(function(index,element))
 ```
 
 - 参数 function 为遍历时的回调函数
-- index 为遍历元素的序列号,从 0 开始
-- element是当前的元素,此时是dom元素
+- index 为遍历元素的序列号，从 0 开始
+- element是当前的元素，此时是dom元素
 
 ```html
 <body>

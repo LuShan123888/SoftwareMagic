@@ -407,7 +407,7 @@ public Map<String,Object> getLogout(){
 | @RequiresPermission     | 当前Subject需要拥有某些特定的权限时，才能执行被该注解标主的方法如果没有权限，则方法不会执行还会抛出AuthorizationException异常 |
 | @RequiresRoles          | 当前Subject必须拥有所有指定的角色时，才能访问被该注解标主的方法如果没有角色则方法不会执行还会抛出AuthorizationException异常 |
 
-- 允许存在多个角色和权限, 默认逻辑是 AND, 也就是同时拥有这些才可以访问方法, 可以在注解中以参数的形式设置成 OR
+- 允许存在多个角色和权限，默认逻辑是 AND, 也就是同时拥有这些才可以访问方法，可以在注解中以参数的形式设置成 OR
 
 ```java
 //拥有其中一个角色就可以访问
@@ -416,7 +416,7 @@ public Map<String,Object> getLogout(){
 @RequiresPermissions (value={"sys:user:info" ,"sys:role: info", logical = Logical.AND)
 ```
 
-- Shiro 注解是存在顺序的, 当多个注解在一个方法上的时候, 会逐个检查, 知道全部通过为止
+- Shiro 注解是存在顺序的，当多个注解在一个方法上的时候，会逐个检查，知道全部通过为止
 - 默认拦截顺序是: RequiresRoles->RequiresPermissions->RequiresAuthentication->RequiresUser->RequiresGuest
 
 ```java

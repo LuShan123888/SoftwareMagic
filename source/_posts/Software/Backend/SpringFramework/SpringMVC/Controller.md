@@ -100,7 +100,7 @@ public class LoginController {
 }
 ```
 
-- 如上面的例子, 定义了一个名为"User”的model并把它存储在Session中
+- 如上面的例子，定义了一个名为"User”的model并把它存储在Session中
 
 ### @RequestMapping
 

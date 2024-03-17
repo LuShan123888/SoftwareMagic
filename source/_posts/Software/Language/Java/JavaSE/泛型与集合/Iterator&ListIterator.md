@@ -107,7 +107,7 @@ class ReverseList<T> implements Iterable<T> {
 
 ## ListIterator
 
-- ListIterator 是一个功能更加强大的迭代器, 它继承于 Iterator 接口，只能用于各种 List 类型的访问，可以通过调用`listIterator()`方法产生一个指向 List 开始处的 ListIterator, 还可以调用`listIterator(n)`方法创建一个一开始就指向列表索引为 n 的元素处的 ListIterator
+- ListIterator 是一个功能更加强大的迭代器，它继承于 Iterator 接口，只能用于各种 List 类型的访问，可以通过调用`listIterator()`方法产生一个指向 List 开始处的 ListIterator, 还可以调用`listIterator(n)`方法创建一个一开始就指向列表索引为 n 的元素处的 ListIterator
 - ListIterator 接口定义如下:
 
 ```java

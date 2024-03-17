@@ -10,9 +10,9 @@ categories:
 
 ## pom.xml
 
-- 在Spring Boot2.x之后,原来使用的`jedis`被替换为`lettuce`
-- `jedis`使用直连server,多线程操作时有安全隐患,可使用`jedis pool`连接池改善,类似BIO模式
-- `lettuce`底层使用`netty`实例可以在多个线程中进行共享,不存在线程不安全的情况,可以减少线程数据,类似NIO模式
+- 在Spring Boot2.x之后，原来使用的`jedis`被替换为`lettuce`
+- `jedis`使用直连server,多线程操作时有安全隐患，可使用`jedis pool`连接池改善，类似BIO模式
+- `lettuce`底层使用`netty`实例可以在多个线程中进行共享，不存在线程不安全的情况，可以减少线程数据，类似NIO模式
 
 ```xml
 <dependency>
@@ -332,7 +332,7 @@ public class RedisUtil {
 
 
     /**
-     * 向一张hash表中放入数据,如果不存在将创建
+     * 向一张hash表中放入数据，如果不存在将创建
      *
      * @param key   键
      * @param item  项
@@ -350,12 +350,12 @@ public class RedisUtil {
     }
 
     /**
-     * 向一张hash表中放入数据,如果不存在将创建
+     * 向一张hash表中放入数据，如果不存在将创建
      *
      * @param key   键
      * @param item  项
      * @param value 值
-     * @param time  时间（秒) 注意：如果已存在的hash表有时间,这里将会替换原有的时间
+     * @param time  时间（秒) 注意：如果已存在的hash表有时间，这里将会替换原有的时间
      * @return true 成功 false失败
      */
     public boolean hset(String key, String item, Object value, long time) {
@@ -393,7 +393,7 @@ public class RedisUtil {
     }
 
     /**
-     * hash递增如果不存在,就会创建一个并把新增后的值返回
+     * hash递增如果不存在，就会创建一个并把新增后的值返回
      *
      * @param key  键
      * @param item 项
@@ -431,7 +431,7 @@ public class RedisUtil {
     }
 
     /**
-     * 根据value从一个set中查询,是否存在
+     * 根据value从一个set中查询，是否存在
      *
      * @param key   键
      * @param value 值
@@ -549,7 +549,7 @@ public class RedisUtil {
      * 通过索引获取list中的值
      *
      * @param key   键
-     * @param index 索引 index>=0时, 0 表头,1 第二个元素,依次类推,index<0时,-1,表尾,-2倒数第二个元素,依次类推
+     * @param index 索引 index>=0时, 0 表头,1 第二个元素，依次类推,index<0时,-1,表尾,-2倒数第二个元素，依次类推
      */
     public Object lGetIndex(String key, long index) {
         try {

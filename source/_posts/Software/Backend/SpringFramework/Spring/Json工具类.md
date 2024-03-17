@@ -133,7 +133,7 @@ public String json4() throws JsonProcessingException {
 #### @JsonFormat
 
 - 使该属性按指定格式序列化与反序列化时间属性
-- **注意**:当前端传来json串, 后台需要用@ReuqestBody接收, @JsonFormat才能实现反序列化
+- **注意**:当前端传来json串，后台需要用@ReuqestBody接收, @JsonFormat才能实现反序列化
 
 ```java
 @PostMapping(value = "/date2")
@@ -313,7 +313,7 @@ public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomiz
 
 ### JSONObject对象
 
-- JSONObject实现了Map接口, 猜想 JSONObject底层操作是由Map实现的
+- JSONObject实现了Map接口，猜想 JSONObject底层操作是由Map实现的
 - JSONObject对应json对象，通过各种形式的`get()`方法可以获取json对象中的数据，也可利用诸如`size()`,`isEmpty()`等方法获取"键：值"对的个数和判断是否为空，其本质是通过实现Map接口并调用接口中的方法完成的
 
 ### JSONArray对象

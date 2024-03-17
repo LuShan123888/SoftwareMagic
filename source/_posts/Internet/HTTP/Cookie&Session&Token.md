@@ -14,7 +14,7 @@ categories:
 
 ### Cookie的结构
 
-- Cookie的内容主要包括：名字，值,过期时间，路径和域，路径与域合在一起就构成了Cookie的作用范围
+- Cookie的内容主要包括：名字，值，过期时间，路径和域，路径与域合在一起就构成了Cookie的作用范围
 - 如果不设置过期时间，则表示这个Cookie的生命期为浏览器会话期间，只要关闭浏览器窗口,Cookie就消失了，这种生命期为浏览器会话期的 Cookie被称为会话Cookie,会话Cookie一般不存储在硬盘上而是保存在内存里，如果设置了过期时间，浏览器就会把Cookie保存到硬盘上，关闭后再次打开浏览器，这些Cookie仍然有效直到超过设定的过期时间
 
 ### Cookie的使用
@@ -31,10 +31,10 @@ categories:
 
 ### 客户端设置Cookie与服务端设置Cookie的区别
 
-- 无论是客户端还是服务端, 都只能向自己的域或者更高级域设置Cookie,例如 `client.com` 不能向 `server.com` 设置Cookie, 同样 `server.com` 也不能向 `client.com` 设置Cookie
+- 无论是客户端还是服务端，都只能向自己的域或者更高级域设置Cookie,例如 `client.com` 不能向 `server.com` 设置Cookie, 同样 `server.com` 也不能向 `client.com` 设置Cookie
 - 服务端可以设置 `httpOnly: true`, 带有该属性的Cookie客户端无法读取
 - 客户端只会带上与请求同域的Cookie, 例如 `client.com/index.html` 会带上 `client.com` 的Cookie,`server.com/app.js` 会带上 `server.com` 的Cookie, 并且也会带上`httpOnly`的Cookie
-- 但是, 如果是向服务端的ajax请求, 默认不会带上Cookie
+- 但是，如果是向服务端的ajax请求，默认不会带上Cookie
 
 ## Session
 

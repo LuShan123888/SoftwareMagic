@@ -36,7 +36,7 @@ Object invoke(Object obj,Object[]args);
 
 - `Method getMethods(String name,Class...parameterType)`:返回指定方法名和参数类型的方法对象
 - `Field[] getFields()`:返回当前Class对象表示的类或接口的所有可访问的公有域对象的数组
-- `getComponentType()`:可以取得一个数组的Class对象,  通过`Array.newInstance()`可以反射生成数组对象
+- `getComponentType()`:可以取得一个数组的Class对象，通过`Array.newInstance()`可以反射生成数组对象
 
 **[例6-6]**:反射机制简单测试举例
 

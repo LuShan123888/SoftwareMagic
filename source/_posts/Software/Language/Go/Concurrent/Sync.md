@@ -11,7 +11,7 @@ categories:
 ## 并发安全和锁
 
 
-- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区) 的情况, 这种情况下就会发生 `竞态问题` (数据竞态)
+- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区) 的情况，这种情况下就会发生 `竞态问题` (数据竞态)
 
 ```go
 package main
@@ -45,12 +45,12 @@ func main() {
 }
 ```
 
-- 我们将上面的代码编译后执行, 不出意外每次执行都会输出诸如 9537,5865,6527 等不同的结果, 这是为什么呢？
-- 在上面的示例代码片中, 我们开启了两个 goroutine 分别执行 add 函数, 这两个 goroutine 在访问和修改全局的 `x` 变量时就会存在数据竞争, 某个 goroutine 中对全局变量 `x` 的修改可能会覆盖掉另一个 goroutine 中的操作, 所以导致最后的结果与预期不符
+- 我们将上面的代码编译后执行，不出意外每次执行都会输出诸如 9537,5865,6527 等不同的结果，这是为什么呢？
+- 在上面的示例代码片中，我们开启了两个 goroutine 分别执行 add 函数，这两个 goroutine 在访问和修改全局的 `x` 变量时就会存在数据竞争，某个 goroutine 中对全局变量 `x` 的修改可能会覆盖掉另一个 goroutine 中的操作，所以导致最后的结果与预期不符
 
 ### 互斥锁
 
-- 互斥锁是一种常用的控制共享资源访问的方法, 它能够保证同一时间只有一个 goroutine 可以访问共享资源, Go 语言中使用 `sync` 包中提供的 `Mutex` 类型来实现互斥锁
+- 互斥锁是一种常用的控制共享资源访问的方法，它能够保证同一时间只有一个 goroutine 可以访问共享资源, Go 语言中使用 `sync` 包中提供的 `Mutex` 类型来实现互斥锁
 - `sync.Mutex` 提供了两个方法供我们使用
 
 |          方法名          |    功能    |
@@ -97,12 +97,12 @@ func main() {
 }
 ```
 
-- 将上面的代码编译后多次执行, 每一次都会得到预期中的结果——10000
-- 使用互斥锁能够保证同一时间有且只有一个 goroutine 进入临界区, 其他的 goroutine 则在等待锁, 当互斥锁释放后, 等待的 goroutine 才可以获取锁进入临界区, 多个 goroutine 同时等待一个锁时, 唤醒的策略是随机的
+- 将上面的代码编译后多次执行，每一次都会得到预期中的结果——10000
+- 使用互斥锁能够保证同一时间有且只有一个 goroutine 进入临界区，其他的 goroutine 则在等待锁，当互斥锁释放后，等待的 goroutine 才可以获取锁进入临界区，多个 goroutine 同时等待一个锁时，唤醒的策略是随机的
 
 ### 读写互斥锁
 
-- 互斥锁是完全互斥的, 但是实际上有很多场景是读多写少的, 当我们并发的去读取一个资源而不涉及资源修改的时候是没有必要加互斥锁的, 这种场景下使用读写锁是更好的一种选择, 读写锁在 Go 语言中使用 `sync` 包中的 `RWMutex` 类型
+- 互斥锁是完全互斥的，但是实际上有很多场景是读多写少的，当我们并发的去读取一个资源而不涉及资源修改的时候是没有必要加互斥锁的，这种场景下使用读写锁是更好的一种选择，读写锁在 Go 语言中使用 `sync` 包中的 `RWMutex` 类型
 - `sync.RWMutex` 提供了以下 5 个方法
 
 |                 方法名                 |         功能         |
@@ -113,8 +113,8 @@ func main() {
 |    func (rw *RWMutex) RUnlock ()     |        释放读锁        |
 | func (rw *RWMutex) RLocker () Locker | 返回一个实现 Locker 接口的读写锁 |
 
-- 读写锁分为两种: 读锁和写锁, 当一个 goroutine 获取到读锁之后, 其他的 goroutine 如果是获取读锁会继续获得锁, 如果是获取写锁就会等待, 而当一个 goroutine 获取写锁之后, 其他的 goroutine 无论是获取读锁还是写锁都会等待
-- 下面我们使用代码构造一个读多写少的场景, 然后分别使用互斥锁和读写锁查看它们的性能差异
+- 读写锁分为两种: 读锁和写锁，当一个 goroutine 获取到读锁之后，其他的 goroutine 如果是获取读锁会继续获得锁，如果是获取写锁就会等待，而当一个 goroutine 获取写锁之后，其他的 goroutine 无论是获取读锁还是写锁都会等待
+- 下面我们使用代码构造一个读多写少的场景，然后分别使用互斥锁和读写锁查看它们的性能差异
 
 ```go
 var (
@@ -189,7 +189,7 @@ do(writeWithLock, readWithLock, 10, 1000) // x:10 cost:1.466500951s
 do(writeWithRWLock, readWithRWLock, 10, 1000) // x:10 cost:117.207592ms
 ```
 
-- 从最终的执行结果可以看出, 使用读写互斥锁在读多写少的场景下能够极大地提高程序的性能, 不过需要注意的是如果一个程序中的读操作和写操作数量级差别不大, 那么读写互斥锁的优势就发挥不出来
+- 从最终的执行结果可以看出，使用读写互斥锁在读多写少的场景下能够极大地提高程序的性能，不过需要注意的是如果一个程序中的读操作和写操作数量级差别不大，那么读写互斥锁的优势就发挥不出来
 
 ### sync. WaitGroup
 
@@ -201,7 +201,7 @@ do(writeWithRWLock, readWithRWLock, 10, 1000) // x:10 cost:117.207592ms
 |        (wg *WaitGroup) Done ()        |      计数器-1       |
 |        (wg *WaitGroup) Wait ()        | 阻塞直到计数器变为 0 |
 
-- `sync.WaitGroup` 内部维护着一个计数器, 计数器的值可以增加和减少, 例如当我们启动了 N 个并发任务时, 就将计数器值增加 N, 每个任务完成时通过调用 Done 方法将计数器减 1, 通过调用 Wait 来等待并发任务执行完, 当计数器值为 0 时, 表示所有并发任务已经完成
+- `sync.WaitGroup` 内部维护着一个计数器，计数器的值可以增加和减少，例如当我们启动了 N 个并发任务时，就将计数器值增加 N, 每个任务完成时通过调用 Done 方法将计数器减 1, 通过调用 Wait 来等待并发任务执行完，当计数器值为 0 时，表示所有并发任务已经完成
 
 ```go
 var wg sync.WaitGroup
@@ -218,12 +218,12 @@ func main() {
 }
 ```
 
-- 需要注意 `sync.WaitGroup` 是一个结构体, 进行参数传递的时候要传递指针
+- 需要注意 `sync.WaitGroup` 是一个结构体，进行参数传递的时候要传递指针
 
 ### sync. Once
 
-- 在某些场景下我们需要确保某些操作即使在高并发的场景下也只会被执行一次, 例如只加载一次配置文件等
-- Go 语言中的 `sync` 包中提供了一个针对只执行一次场景的解决方案—— `sync.Once`, `sync.Once` 只有一个 `Do` 方法,其签名如下:
+- 在某些场景下我们需要确保某些操作即使在高并发的场景下也只会被执行一次，例如只加载一次配置文件等
+- Go 语言中的 `sync` 包中提供了一个针对只执行一次场景的解决方案—— `sync.Once`, `sync.Once` 只有一个 `Do` 方法，其签名如下:
 
 ```go
 func (o *Once) Do(f func())
@@ -233,7 +233,7 @@ func (o *Once) Do(f func())
 
 #### 加载配置文件示例
 
-- 延迟一个开销很大的初始化操作到真正用到它的时候再执行是一个很好的实践,因为预先初始化一个变量（比如在 init 函数中完成初始化) 会增加程序的启动耗时, 而且有可能实际执行过程中这个变量没有用上, 那么这个初始化操作就不是必须要做的, 我们来看一个例子:
+- 延迟一个开销很大的初始化操作到真正用到它的时候再执行是一个很好的实践，因为预先初始化一个变量（比如在 init 函数中完成初始化) 会增加程序的启动耗时，而且有可能实际执行过程中这个变量没有用上，那么这个初始化操作就不是必须要做的，我们来看一个例子:
 
 ```go
 var icons map[string]image.Image
@@ -256,7 +256,7 @@ func Icon(name string) image.Image {
 }
 ```
 
-- 多个 goroutine 并发调用 Icon 函数时不是并发安全的, 现代的编译器和 CPU 可能会在保证每个 goroutine 都满足串行一致的基础上自由地重排访问内存的顺序, loadIcons 函数可能会被重排为以下结果:
+- 多个 goroutine 并发调用 Icon 函数时不是并发安全的，现代的编译器和 CPU 可能会在保证每个 goroutine 都满足串行一致的基础上自由地重排访问内存的顺序, loadIcons 函数可能会被重排为以下结果:
 
 ```go
 func loadIcons() {
@@ -268,7 +268,7 @@ func loadIcons() {
 }
 ```
 
-- 在这种情况下就会出现即使判断了 `icons` 不是 nil 也不意味着变量初始化完成了, 考虑到这种情况, 我们能想到的办法就是添加互斥锁, 保证初始化 `icons` 的时候不会被其他的 goroutine 操作, 但是这样做又会引发性能问题
+- 在这种情况下就会出现即使判断了 `icons` 不是 nil 也不意味着变量初始化完成了，考虑到这种情况，我们能想到的办法就是添加互斥锁，保证初始化 `icons` 的时候不会被其他的 goroutine 操作，但是这样做又会引发性能问题
 - 使用 `sync.Once` 改造的示例代码如下:
 
 ```go
@@ -316,11 +316,11 @@ func GetInstance() *singleton {
 }
 ```
 
-- `sync.Once` 其实内部包含一个互斥锁和一个布尔值, 互斥锁保证布尔值和数据的安全, 而布尔值用来记录初始化是否完成, 这样设计就能保证初始化操作的时候是并发安全的并且初始化操作也不会被执行多次
+- `sync.Once` 其实内部包含一个互斥锁和一个布尔值，互斥锁保证布尔值和数据的安全，而布尔值用来记录初始化是否完成，这样设计就能保证初始化操作的时候是并发安全的并且初始化操作也不会被执行多次
 
 ### sync. Map
 
-- Go 语言中内置的 map 不是并发安全的, 请看下面这段示例代码
+- Go 语言中内置的 map 不是并发安全的，请看下面这段示例代码
 
 ```go
 package main
@@ -356,8 +356,8 @@ func main() {
 }
 ```
 
-- 将上面的代码编译后执行, 会报出 `fatal error: concurrent map writes` 错误, 我们不能在多个 goroutine 中并发对内置的 map 进行读写操作, 否则会存在数据竞争问题
-- 像这种场景下就需要为 map 加锁来保证并发的安全性了, Go 语言的 `sync` 包中提供了一个开箱即用的并发安全版 map—— `sync.Map`, 开箱即用表示其不用像内置的 map 一样使用 make 函数初始化就能直接使用, 同时 `sync.Map` 内置了诸如 `Store`, `Load`, `LoadOrStore`, `Delete`, `Range` 等操作方法
+- 将上面的代码编译后执行，会报出 `fatal error: concurrent map writes` 错误，我们不能在多个 goroutine 中并发对内置的 map 进行读写操作，否则会存在数据竞争问题
+- 像这种场景下就需要为 map 加锁来保证并发的安全性了, Go 语言的 `sync` 包中提供了一个开箱即用的并发安全版 map—— `sync.Map`, 开箱即用表示其不用像内置的 map 一样使用 make 函数初始化就能直接使用，同时 `sync.Map` 内置了诸如 `Store`, `Load`, `LoadOrStore`, `Delete`, `Range` 等操作方法
 
 |                                         方法名                                         |           功能           |
 | :---------------------------------------------------------------------------------: | :--------------------: |
@@ -401,7 +401,7 @@ func main() {
 
 ## 原子操作
 
-- 针对整数数据类型 (int 32, uint 32, int 64, uint 64) 我们还可以使用原子操作来保证并发安全, 通常直接使用原子操作比使用锁操作效率更高, Go 语言中原子操作由内置的标准库 `sync/atomic` 提供
+- 针对整数数据类型 (int 32, uint 32, int 64, uint 64) 我们还可以使用原子操作来保证并发安全，通常直接使用原子操作比使用锁操作效率更高, Go 语言中原子操作由内置的标准库 `sync/atomic` 提供
 
 ### atomic 包
 
@@ -501,14 +501,14 @@ func main() {
 }
 ```
 
-- `atomic` 包提供了底层的原子级内存操作, 对于同步算法的实现很有用, 这些函数必须谨慎地保证正确使用, 除了某些特殊的底层应用, 使用通道或者 sync 包的函数/类型实现同步更好
+- `atomic` 包提供了底层的原子级内存操作，对于同步算法的实现很有用，这些函数必须谨慎地保证正确使用，除了某些特殊的底层应用，使用通道或者 sync 包的函数/类型实现同步更好
 
 ## 处理并发错误
 
 ### recover goroutine 中的 panic
 
 - 我们知道可以在代码中使用 recover 来会恢复程序中意想不到的 panic, 而 panic 只会触发当前 goroutine 中的 defer 操作
-- 例如在下面的示例代码中, 无法在 main 函数中 recover 另一个 goroutine 中引发的 panic
+- 例如在下面的示例代码中，无法在 main 函数中 recover 另一个 goroutine 中引发的 panic
 
 ```go
 func f1() {
@@ -544,8 +544,8 @@ created by main.f1
 Process finished with exit code 2
 ```
 
-- 从输出结果可以看到程序并没有正常退出, 而是由于 panic 异常退出了 (exit code 2)
-- 正如上面示例演示的那样, 在启用 goroutine 去执行任务的场景下, 如果想要 recover goroutine 中可能出现的 panic 就需要在 goroutine 中使用 recover, 就像下面的 f 2 函数那样
+- 从输出结果可以看到程序并没有正常退出，而是由于 panic 异常退出了 (exit code 2)
+- 正如上面示例演示的那样，在启用 goroutine 去执行任务的场景下，如果想要 recover goroutine 中可能出现的 panic 就需要在 goroutine 中使用 recover, 就像下面的 f 2 函数那样
 
 ```go
 func f2() {
@@ -579,11 +579,11 @@ recover inner panic:panic in goroutine
 exit
 ```
 
-- 程序中的 panic 被 recover 成功捕获, 程序最终正常退出
+- 程序中的 panic 被 recover 成功捕获，程序最终正常退出
 
 ### errgroup
 
-- 在以往演示的并发示例中, 我们通常像下面的示例代码那样在 go 关键字后, 调用一个函数或匿名函数
+- 在以往演示的并发示例中，我们通常像下面的示例代码那样在 go 关键字后，调用一个函数或匿名函数
 
 ```go
 go func(){
@@ -593,9 +593,9 @@ go func(){
 go foo()
 ```
 
-- 在之前讲解并发的代码示例中我们默认被并发的那些函数都不会返回错误, 但真实的情况往往是事与愿违
-- 当我们想要将一个任务拆分成多个子任务交给多个 goroutine 去运行, 这时我们该如何获取到子任务可能返回的错误呢？
-- 假设我们有多个网址需要并发去获取它们的内容, 这时候我们会写出类似下面的代码
+- 在之前讲解并发的代码示例中我们默认被并发的那些函数都不会返回错误，但真实的情况往往是事与愿违
+- 当我们想要将一个任务拆分成多个子任务交给多个 goroutine 去运行，这时我们该如何获取到子任务可能返回的错误呢？
+- 假设我们有多个网址需要并发去获取它们的内容，这时候我们会写出类似下面的代码
 
 ```go
 // fetchUrlDemo 并发获取url内容
@@ -624,16 +624,16 @@ func fetchUrlDemo() {
 }
 ```
 
-- 执行上述 `fetchUrlDemo` 函数得到如下输出结果, 由于 http://www.yixieqitawangzhi.com并不真实存在, 所以对它的 HTTP 请求会返回错误
+- 执行上述 `fetchUrlDemo` 函数得到如下输出结果，由于 http://www.yixieqitawangzhi.com并不真实存在，所以对它的 HTTP 请求会返回错误
 
 ```bash
 获取http://pkg.go.dev成功
 获取http://www.liwenzhou.com成功
 ```
 
-- 在上面的示例代码中, 我们开启了 3 个 goroutine 分别去获取 3 个 url 的内容, 类似这种将任务分为若干个子任务的场景会有很多, 那么我们如何获取子任务中可能出现的错误呢？
-- errgroup 包就是为了解决这类问题而开发的, 它能为处理公共任务的子任务而开启的一组 goroutine 提供同步, error 传播和基于 context 的取消功能
-- errgroup 包中定义了一个 Group 类型, 它包含了若干个不可导出的字段
+- 在上面的示例代码中，我们开启了 3 个 goroutine 分别去获取 3 个 url 的内容，类似这种将任务分为若干个子任务的场景会有很多，那么我们如何获取子任务中可能出现的错误呢？
+- errgroup 包就是为了解决这类问题而开发的，它能为处理公共任务的子任务而开启的一组 goroutine 提供同步, error 传播和基于 context 的取消功能
+- errgroup 包中定义了一个 Group 类型，它包含了若干个不可导出的字段
 
 ```go
 type Group struct {
@@ -659,7 +659,7 @@ func (g *Group) Go (f func () error)
 func (g *Group) Wait () error
 ```
 
-- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回, 然后从它们返回第一个非 nil 的错误（如果有)
+- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回，然后从它们返回第一个非 nil 的错误（如果有)
 - 下面的示例代码演示了如何使用 errgroup 包来处理多个子任务 goroutine 中可能返回的 error
 
 ```go
@@ -701,8 +701,8 @@ func fetchUrlDemo 2 () error {
 Get "http://www.yixieqitawangzhi.com": dial tcp: lookup www.yixieqitawangzhi.com: no such host
 ```
 
-- 当子任务的 goroutine 中对`http://www.yixieqitawangzhi.com` 发起 HTTP 请求时会返回一个错误, 这个错误会由 errgroup. Group 的 Wait 方法返回
-- 通过阅读下方 errgroup. Group 的 Go 方法源码, 我们可以看到当任意一个函数 f 返回错误时, 会通过`g.errOnce. Do`只将第一个返回的错误记录, 并且如果存在 cancel 方法则会调用 cancel
+- 当子任务的 goroutine 中对`http://www.yixieqitawangzhi.com` 发起 HTTP 请求时会返回一个错误，这个错误会由 errgroup. Group 的 Wait 方法返回
+- 通过阅读下方 errgroup. Group 的 Go 方法源码，我们可以看到当任意一个函数 f 返回错误时，会通过`g.errOnce. Do`只将第一个返回的错误记录，并且如果存在 cancel 方法则会调用 cancel
 
 ```go
 func (g *Group) Go (f func () error) {
@@ -729,7 +729,7 @@ func (g *Group) Go (f func () error) {
 func WithContext (ctx context. Context) (*Group, context. Context)
 ```
 
-- WithContext 函数接收一个父 context, 返回一个新的 Group 对象和一个关联的子 context 对象, 下面的代码片段是一个官方文档给出的示例
+- WithContext 函数接收一个父 context, 返回一个新的 Group 对象和一个关联的子 context 对象，下面的代码片段是一个官方文档给出的示例
 
 ```go
 package main

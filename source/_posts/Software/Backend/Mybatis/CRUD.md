@@ -11,9 +11,9 @@ categories:
 - **parameterType**:传入SQL语句的参数类型
 - 接口中的方法名与映射文件中的SQL语句ID 一一对应
 - 所有的增删改操作都需要提交事务
-- 接口所有的普通参数, 尽量都写上@Param参数
-- 有时候根据业务的需求, 可以考虑使用map传递参数
-- 为了规范操作, 在SQL的配置文件中, 尽量编写Parameter参数和resultType参数
+- 接口所有的普通参数，尽量都写上@Param参数
+- 有时候根据业务的需求，可以考虑使用map传递参数
+- 为了规范操作，在SQL的配置文件中，尽量编写Parameter参数和resultType参数
 
 ## select
 
@@ -55,13 +55,13 @@ public void tsetSelectUserById() {
 
 ### 根据密码和名字查询用户（使用Map)
 
-1. 在接口方法中, 参数直接传递Map
+1. 在接口方法中，参数直接传递Map
 
 ```java
 User selectUserByNP2(Map<String,Object> map);
 ```
 
-2. 编写sql语句的时候, 需要传递参数类型, 参数类型为map
+2. 编写sql语句的时候，需要传递参数类型，参数类型为map
 
 ```xml
 <select id="selectUserByNP2" parameterType="map"cresultType="com.example.entity.User">
@@ -69,7 +69,7 @@ User selectUserByNP2(Map<String,Object> map);
 </select>
 ```
 
-3. 在使用方法的时候, Map的 key 为 sql中取的值即可, 没有顺序要求
+3. 在使用方法的时候, Map的 key 为 sql中取的值即可，没有顺序要求
 
 ```java
 Map<String, Object> map = new HashMap<String, Object>();
@@ -78,7 +78,7 @@ map.put("pwd","123456");
 User user = mapper.selectUserByNP2(map);
 ```
 
-**总结**:如果参数过多, 可以考虑直接使用Map实现, 如果参数比较少, 直接传递参数即可
+**总结**:如果参数过多，可以考虑直接使用Map实现，如果参数比较少，直接传递参数即可
 
 ###  分页
 
@@ -92,7 +92,7 @@ User user = mapper.selectUserByNP2(map);
 </select>
 ```
 
-2. Mapper接口, 参数为map
+2. Mapper接口，参数为map
 
 ```java
 //选择全部用户实现分页
@@ -103,7 +103,7 @@ List<User> selectUser(Map<String,Integer> map);
     - 推断：起始位置 =  (当前页面 - 1 ) * 页面大小
 
 ```java
-//分页查询 , 两个参数startIndex , pageSize
+//分页查询，两个参数startIndex , pageSize
 @Test
 public void testSelectUser(int currentPage, int pageSize) {
     SqlSession session = MybatisUtils.getSession();
@@ -125,7 +125,7 @@ public void testSelectUser(int currentPage, int pageSize) {
 
 #### RowBounds分页
 
-- 除了使用Limit在SQL层面实现分页, 也可以使用RowBounds在Java代码层面实现分页
+- 除了使用Limit在SQL层面实现分页，也可以使用RowBounds在Java代码层面实现分页
 
 1. mapper接口
 
@@ -197,7 +197,7 @@ public void testAddUser() {
 }
 ```
 
-**注意**:增, 删, 改操作需要提交事务
+**注意**:增，删, 改操作需要提交事务
 
 ## update
 

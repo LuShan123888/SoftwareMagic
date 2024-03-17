@@ -16,7 +16,7 @@ categories:
 ### Arrays.newInstance()
 
 - 创建数组
-- 在Java的反射机制中, 通过数组的 class 对象的`getComponentType()`方法可以取得一个数组的Class对象,  通过`Array.newInstance()`可以反射生成数组对象
+- 在Java的反射机制中，通过数组的 class 对象的`getComponentType()`方法可以取得一个数组的Class对象，通过`Array.newInstance()`可以反射生成数组对象
 
 ```java
  T[] b = (T[]) Arrays.newInstance(a.getClass().getComponentType(), a.length);

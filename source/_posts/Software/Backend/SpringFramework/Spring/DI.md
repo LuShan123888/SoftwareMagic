@@ -19,7 +19,7 @@ categories:
 <context:component-scan base-package="com.example.entity"/>
 ```
 
-2. 在指定包下编写类, 增加注解
+2. 在指定包下编写类，增加注解
 
 ```java
 @Component("user")
@@ -30,24 +30,24 @@ public class User {
 
 - 相当于配置文件中`<bean id="user" class="当前注解的类"/>`
 
-- **@Component三个衍生注解**:为了更好的进行分层, Spring可以使用其它三个注解, 功能一样, 目前使用哪一个功能都一样
+- **@Component三个衍生注解**:为了更好的进行分层, Spring可以使用其它三个注解，功能一样，目前使用哪一个功能都一样
     - **@Controller**:Web层
     - **@Service**:Service层
     - **@Repository**:Dao层
-- 写上这些注解, 就相当于将这个类交给Spring管理装配了
+- 写上这些注解，就相当于将这个类交给Spring管理装配了
 
 ### @Configuration&@Bean&@Import
 
-- JavaConfig 原来是 Spring 的一个子项目, 它通过 Java 类的方式提供 Bean 的定义信息, 在 Spring4 的版本,  JavaConfig 已正式成为 Spring4 的核心功能
+- JavaConfig 原来是 Spring 的一个子项目，它通过 Java 类的方式提供 Bean 的定义信息，在 Spring4 的版本,  JavaConfig 已正式成为 Spring4 的核心功能
 
 **实例**
 
-2. 新建一个config配置包, 编写一个MyConfig配置类
+2. 新建一个config配置包，编写一个MyConfig配置类
 
 ```java
 @Configuration  //代表这是一个配置类
 public class MyConfig {
-    @Bean //通过方法注册一个bean, 这里的返回值就Bean的类型, 方法名就是bean的id
+    @Bean //通过方法注册一个bean, 这里的返回值就Bean的类型，方法名就是bean的id
     public Dog dog(){
         return new Dog();
     }
@@ -72,7 +72,7 @@ public class MyConfig {
 
 ```java
 @Configuration
-@Import(MyConfig.class)  //导入合并其他配置类, 类似于配置文件中的 inculde 标签
+@Import(MyConfig.class)  //导入合并其他配置类，类似于配置文件中的 inculde 标签
 public class MyConfig2 {
 }
 ```
@@ -82,7 +82,7 @@ public class MyConfig2 {
 ###  @Autowired
 
 - 自动装配，用于替代基于XML配置的自动装配
-- @Autowired默认按类型装配（属于Spring规范), 默认情况下必须要求依赖对象必须存在, 如果要允许null 值, 可以设置它的required属性为false, 如果我们想使用名称装配可以结合@Qualifier注解进行使用
+- @Autowired默认按类型装配（属于Spring规范), 默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false, 如果我们想使用名称装配可以结合@Qualifier注解进行使用
 
 #### required
 
@@ -160,7 +160,7 @@ public class TestBean {  
 
 ### @Qualifier
 
-- @Autowired是基于byType自动装配的, 加上@Qualifier则可以根据byName的方式自动装配
+- @Autowired是基于byType自动装配的，加上@Qualifier则可以根据byName的方式自动装配
 - @Qualifier不能单独使用
 
 **测试**
@@ -178,8 +178,8 @@ private Cat cat;
 ### @Resource
 
 - @Resource(属于J2EE规范), 默认按照名称进行装配
-- 名称可以通过name属性进行指定，如果没有指定name属性, 当注解写在字段上时, 默认取字段名进行按照名称查找, 如果注解写在setter方法上默认取属性名进行装配，当找不到与名称匹配的bean时才按照类型进行装配
-- **注意**:如果name属性一旦指定, 就只会按照名称进行装配
+- 名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行按照名称查找，如果注解写在setter方法上默认取属性名进行装配，当找不到与名称匹配的bean时才按照类型进行装配
+- **注意**:如果name属性一旦指定，就只会按照名称进行装配
 
 **测试**
 
@@ -199,7 +199,7 @@ public class User {
 
 ### @Value
 
-- 可以不用提供set方法, 直接在直接名上添加@Value("值")
+- 可以不用提供set方法，直接在直接名上添加@Value("值")
 
 ```java
 @Component("user")
@@ -229,7 +229,7 @@ public class User {
 
 ### Setter方法注入
 
-- 要求被注入的属性 , 必须有set方法 , set方法的方法名由`set + 属性首字母大写`,如果该属性类型为boolean,必须有is方法
+- 要求被注入的属性，必须有set方法 , set方法的方法名由`set + 属性首字母大写`,如果该属性类型为boolean,必须有is方法
 - `<bean>`代表java类
     - `id`:bean的唯一标识符
     - `name`:class属性的一个别名
@@ -352,7 +352,7 @@ public class User {
 xmlns:p="http://www.springframework.org/schema/p"
 ```
 
-- P(属性: properties)命名空间 , 属性依然要设置set方法
+- P(属性: properties)命名空间，属性依然要设置set方法
 
 ```xml
 <bean id="user" class="com.example.entity.User" p:name="test" p:age="18"/>
@@ -366,7 +366,7 @@ xmlns:p="http://www.springframework.org/schema/p"
  xmlns:c="http://www.springframework.org/schema/c"
 ```
 
-- C(构造: Constructor)命名空间 , 属性依然要设置set方法
+- C(构造: Constructor)命名空间，属性依然要设置set方法
 - 需要加上有参构造器
 
 ```xml
@@ -613,8 +613,8 @@ public void test(){
 ### @Scope
 
 - 使用注解配置Bean的作用域
-    - **singleton**:默认的, Spring会采用单例模式创建这个对象，关闭工厂, 所有的对象都会销毁
-    - **prototype**:原型模式，关闭工厂, 所有的对象不会销毁，内部的垃圾回收机制会回收
+    - **singleton**:默认的, Spring会采用单例模式创建这个对象，关闭工厂，所有的对象都会销毁
+    - **prototype**:原型模式，关闭工厂，所有的对象不会销毁，内部的垃圾回收机制会回收
 
 ```java
 @Controller("user")

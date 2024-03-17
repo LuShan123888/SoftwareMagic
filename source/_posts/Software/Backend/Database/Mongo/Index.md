@@ -76,7 +76,7 @@ db.collection.createIndex(keys, options)
     - `background`:建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引， 默认值为false
     - `unique`:建立的索引是否唯一。指定为true创建唯一索引。默认值为false
     - `name`:索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称
-    - `dropDups`:在建立唯一索引时是否删除重复记录,指定 true 创建唯一索引。默认值为 false
+    - `dropDups`:在建立唯一索引时是否删除重复记录，指定 true 创建唯一索引。默认值为 false
     - `sparse`:对文档中不存在的字段数据不启用索引;这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false
     - `expireAfterSeconds`:指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间
     - `v`:索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本

@@ -26,7 +26,7 @@ local     portainer_data
 
 ### 查看 volum e信息
 
-- 所有的docker容器内的卷,没有指定目录的情况下都是在`/var/lib/docker/volumes/xxxx/_data`
+- 所有的docker容器内的卷，没有指定目录的情况下都是在`/var/lib/docker/volumes/xxxx/_data`
 
 ```json
 $ docker volume inspect vol_name
@@ -82,14 +82,14 @@ $ docker volume prune
 
 ### 数据的覆盖问题
 
-- 当挂载宿主机文件夹时,会覆盖容器中的文件夹
-- 当挂宿载主机文件时,需要确保本机存在该文件,否则docker自动创建为目录
-- 如果挂载一个空的 volume 到容器中的一个非空目录中,那么这个目录下的文件会被复制到 volume 中
-- 如果挂载一个非空的 volume 到容器中的一个目录中,那么容器中的目录中会显示 volume 中的数据,如果原来容器中的目录中有数据,那么这些原始数据会被隐藏掉
+- 当挂载宿主机文件夹时，会覆盖容器中的文件夹
+- 当挂宿载主机文件时，需要确保本机存在该文件，否则docker自动创建为目录
+- 如果挂载一个空的 volume 到容器中的一个非空目录中，那么这个目录下的文件会被复制到 volume 中
+- 如果挂载一个非空的 volume 到容器中的一个目录中，那么容器中的目录中会显示 volume 中的数据，如果原来容器中的目录中有数据，那么这些原始数据会被隐藏掉
 
 ### 路径映射挂载
 
-- **注意**:容器删除后,主机目录仍然存在
+- **注意**:容器删除后，主机目录仍然存在
 
 ```shell
 $ docker run -v 主机目录：容器目录镜像名
@@ -102,7 +102,7 @@ $ docker run -d -P --name nginx1 -v /home/nginx:/etc/nginx:ro nginx # 只读
 $ docker run -d -P --name nginx2 -v /home/nginx:/etc/nginx:rw nginx # 可读可写
 ```
 
-- `ro`:说明这个路径只能通过宿主机操作,容器内部无法操作
+- `ro`:说明这个路径只能通过宿主机操作，容器内部无法操作
 
 ###  volume 挂载
 
@@ -136,7 +136,7 @@ $ docker run --volumes-from 被共享容器名镜像名
 ```
 
 - 挂载共享 volume 的操作实际上是对被共享容器的外部匿名 volume 的挂载分享
-- `--volumes-from`:新容器通过复制了旧容器的mounts配置的`source`和`destination`来实现的,并且优先于`dockerfile`中的卷挂载定义
+- `--volumes-from`:新容器通过复制了旧容器的mounts配置的`source`和`destination`来实现的，并且优先于`dockerfile`中的卷挂载定义
 
 **实例**
 
@@ -158,4 +158,4 @@ $ docker run -d -p 3307:3306 \
 ```
 
 - 容器之间配置信息的传递, volume 容器的生命周期一直持续到没有容器使用为止
-- 但是如果容器 volume 持久化到本地目录,则不会被删除
+- 但是如果容器 volume 持久化到本地目录，则不会被删除

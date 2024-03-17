@@ -114,7 +114,7 @@ array.indexOf(item,start)
 
 **实例**
 
-- 查找数组中 "Apple" 的元素, 在数组的第四个位置开始检索
+- 查找数组中 "Apple" 的元素，在数组的第四个位置开始检索
 
 ```js
 var fruits=["Banana","Orange","Apple","Mango","Banana","Orange","Apple"];

@@ -11,7 +11,7 @@ categories:
 
 ## Cookie 概述
 
-- Cookie 是一些数据, 存储于你电脑上的文本文件中
+- Cookie 是一些数据，存储于你电脑上的文本文件中
 - 当 web 服务器向浏览器发送 web 页面时，在连接关闭后，服务端不会记录用户的信息
 - Cookie 的作用就是用于解决 "如何记录客户端的用户信息":
     - 当用户访问 web 页面时，他的名字可以记录在 cookie 中
@@ -22,7 +22,7 @@ categories:
 username=John Doe
 ```
 
-- 当浏览器从服务器上请求 web 页面时, 属于该页面的 cookie 会被添加到该请求中，服务端通过这种方式来获取用户的信息
+- 当浏览器从服务器上请求 web 页面时，属于该页面的 cookie 会被添加到该请求中，服务端通过这种方式来获取用户的信息
 
 ## 使用 JavaScript 创建Cookie
 
@@ -47,7 +47,7 @@ document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT; path=
 
 ## 使用 JavaScript 读取 Cookie
 
-- 在 JavaScript 中, 可以使用以下代码来读取 cookie:
+- 在 JavaScript 中，可以使用以下代码来读取 cookie:
 
 ```js
 var x = document.cookie;
@@ -78,8 +78,8 @@ document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 ## Cookie 字符串
 
 - `document.cookie` 属性看起来像一个普通的文本字符串，其实它不是
-- 即使您在 `document.cookie` 中写入一个完整的` cookie` 字符串, 当重新读取该 `cookie` 信息时,`cookie` 信息是以名/值对的形式展示的
-- 如果您设置了新的 `cookie`,旧的 `cookie` 不会被覆盖, 新 `cookie` 将添加到 `document.cookie` 中，所以如果您重新读取`document.cookie`,您将获得如下所示的数据:
+- 即使您在 `document.cookie` 中写入一个完整的` cookie` 字符串，当重新读取该 `cookie` 信息时,`cookie` 信息是以名/值对的形式展示的
+- 如果您设置了新的 `cookie`,旧的 `cookie` 不会被覆盖，新 `cookie` 将添加到 `document.cookie` 中，所以如果您重新读取`document.cookie`,您将获得如下所示的数据:
 
 ```
 cookie1=value; cookie2=value;
@@ -90,7 +90,7 @@ cookie1=value; cookie2=value;
 ## JavaScript Cookie 实例
 
 - 在以下实例中，我们将创建 cookie 来存储访问者名称
-- 首先，访问者访问 web 页面, 他将被要求填写自己的名字，该名字会存储在 cookie 中
+- 首先，访问者访问 web 页面，他将被要求填写自己的名字，该名字会存储在 cookie 中
 - 访问者下一次访问页面时，他会看到一个欢迎的消息
 - 在这个实例中我们会创建 3 个 JavaScript 函数:
     1. 设置 cookie 值的函数

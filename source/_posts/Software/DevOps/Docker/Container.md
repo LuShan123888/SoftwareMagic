@@ -15,55 +15,55 @@ categories:
 $ docker run [可选参数] 镜像名/镜像ID [命令]
 ```
 
-- **-a stdin**:指定标准输入输出内容类型,可选 STDIN/STDOUT/STDERR 三项;
-- **-d**:后台运行容器,并返回容器ID
-- **-i**:以交互模式运行容器,通常与 -t 同时使用
-- **-P**:随机端口映射,容器内部端口**随机**映射到主机的端口
-- **-p, --publish=[]**:指定端口映射,格式为**:主机（宿主）端口：容器端口**,默认都是绑定 tcp 端口,如果要绑定 UDP 端口,可以在端口后面加上 **/udp**
-- **-t**:为容器重新分配一个伪输入终端,通常与 -i 同时使用;
+- **-a stdin**:指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项;
+- **-d**:后台运行容器，并返回容器ID
+- **-i**:以交互模式运行容器，通常与 -t 同时使用
+- **-P**:随机端口映射，容器内部端口**随机**映射到主机的端口
+- **-p, --publish=[]**:指定端口映射，格式为**:主机（宿主）端口：容器端口**,默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 **/udp**
+- **-t**:为容器重新分配一个伪输入终端，通常与 -i 同时使用;
 - **--name**:为容器指定一个名称
-- **--dns**:指定容器使用的DNS服务器,默认和宿主一致
-- **--dns-search**:指定容器DNS搜索域名,默认和宿主一致
+- **--dns**:指定容器使用的DNS服务器，默认和宿主一致
+- **--dns-search**:指定容器DNS搜索域名，默认和宿主一致
 - **-h,--hostname**:指定容器的hostname
 - **-e,--env**:设置环境变量
 - **--env-file=[]**:从指定文件读入环境变量
 - **--cpuset="0-2" or --cpuset="0,1,2"**:绑定容器到指定CPU运行
 - **-m**:设置容器使用内存最大值
-- **--net="bridge"**:指定容器的网络连接类型,支持bridge/host/none/container: 四种类型
+- **--net="bridge"**:指定容器的网络连接类型，支持bridge/host/none/container: 四种类型
 - **--link=[]**:添加链接到另一个容器
 - **--expose=[]**:开放一个端口或一组端口
 - **--volume , -v**:	绑定一个卷
-- **--rm**:使用之后自动删除,一般用来测试
-- **--privileged=true**:使用特权模式启动,在容器中可以使用systemctl启动服务
+- **--rm**:使用之后自动删除，一般用来测试
+- **--privileged=true**:使用特权模式启动，在容器中可以使用systemctl启动服务
 - **--restart=always**:自动重启容器
 
 **实例**
 
-- 使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx
+- 使用docker镜像nginx:latest以后台模式启动一个容器，并将容器命名为mynginx
 
 ```shell
 $ docker run --name mynginx -d nginx:latest
 ```
 
-- 使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口
+- 使用镜像nginx:latest以后台模式启动一个容器，并将容器的80端口映射到主机随机端口
 
 ```shell
 $ docker run -P -d nginx:latest
 ```
 
-- 使用镜像 nginx:latest,以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data
+- 使用镜像 nginx:latest,以后台模式启动一个容器，将容器的 80 端口映射到主机的 80 端口，主机的目录 /data 映射到容器的 /data
 
 ```shell
 $ docker run -p 80:80 -v /data:/data -d nginx:latest
 ```
 
-- 绑定容器的 8080 端口,并将其映射到本地主机 127.0.0.1 的 80 端口上
+- 绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上
 
 ```shell
 $ docker run -p 127.0.0.1:80:8080/tcp ubuntu /bin/bash
 ```
 
-- 使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令
+- 使用镜像nginx:latest以交互模式启动一个容器，在容器内执行/bin/bash命令
 
 ```shell
 $ docker run -it nginx:latest /bin/bash
@@ -76,7 +76,7 @@ $ docker rm [OPTIONS] CONTAINER [CONTAINER...]
 ```
 
 - **-f**:通过 SIGKILL 信号强制删除一个运行中的容器
-- **-l**:移除容器间的网络连接,而非容器本身
+- **-l**:移除容器间的网络连接，而非容器本身
 - **-v**:删除与容器关联的卷
 
 **实例**
@@ -87,7 +87,7 @@ $ docker rm [OPTIONS] CONTAINER [CONTAINER...]
 $ docker rm -f db01 db02
 ```
 
-- 移除容器 nginx01 对容器 db01 的连接,连接名 db:
+- 移除容器 nginx01 对容器 db01 的连接，连接名 db:
 
 ```
 $ docker rm -l db
@@ -168,7 +168,7 @@ $ docker exec -it mynginx /bin/sh /root/test.sh
 $ docker exec -i -t  mynginx /bin/bash
 ```
 
-- 也可以通过 **docker ps -a** 命令查看已经在运行的容器,然后使用容器 ID 进入容器
+- 也可以通过 **docker ps -a** 命令查看已经在运行的容器，然后使用容器 ID 进入容器
 - 查看已经在运行的容器 ID:
 
 ```
@@ -221,7 +221,7 @@ $ docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 **实例**
 
-- 使用docker镜像nginx:latest创建一个容器,并将容器命名为mynginx
+- 使用docker镜像nginx:latest创建一个容器，并将容器命名为mynginx
 
 ```
 $ docker create  --name mynginx  nginx:latest
@@ -236,7 +236,7 @@ $ docker create  --name mynginx  nginx:latest
 $ docker ps [OPTIONS]
 ```
 
-- **-a**:显示所有的容器,包括未运行的
+- **-a**:显示所有的容器，包括未运行的
 
 - **-f**:根据条件过滤显示的内容
 
@@ -248,7 +248,7 @@ $ docker ps [OPTIONS]
 
 - **--no-trunc**:不截断输出
 
-- **-q**:静默模式,只显示容器编号
+- **-q**:静默模式，只显示容器编号
 
 - **-s**:显示总的文件大小
 
@@ -350,13 +350,13 @@ $ docker logs --since="2016-07-01" --tail=10 mynginx
 
 ### top
 
-- 查看容器中运行的进程信息,支持 ps 命令参数
+- 查看容器中运行的进程信息，支持 ps 命令参数
 
 ```
 $ docker top [OPTIONS] CONTAINER [ps OPTIONS]
 ```
 
-- 容器运行时不一定有/bin/bash终端来交互执行top命令,而且容器还不一定有top命令,可以使用docker top来实现查看container中正在运行的进程
+- 容器运行时不一定有/bin/bash终端来交互执行top命令，而且容器还不一定有top命令，可以使用docker top来实现查看container中正在运行的进程
 
 **实例**
 
@@ -446,19 +446,19 @@ $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{en
 
 ### attach
 
-- **docker attach**:连接到正在运行中的容器,不会启动新的进程
+- **docker attach**:连接到正在运行中的容器，不会启动新的进程
 
 ```
 $ docker attach [OPTIONS] CONTAINER
 ```
 
-- 如果container当前正在前台运行进程,如输出nginx的`access.log`日志,`<CTRL-C>`不仅会导致退出容器,而且还stop了
-- **注意**:如果使用该命令从容器退出,会导致容器的停止
+- 如果container当前正在前台运行进程，如输出nginx的`access.log`日志,`<CTRL-C>`不仅会导致退出容器，而且还stop了
+- **注意**:如果使用该命令从容器退出，会导致容器的停止
 - 好在attach是可以带上`--sig-proxy=false`来确保CTRL-D或CTRL-C不会关闭容器
 
 **实例**
 
-- 容器mynginx将访问日志指到标准输出,连接到容器查看访问信息
+- 容器mynginx将访问日志指到标准输出，连接到容器查看访问信息
 
 ```
 $ docker attach --sig-proxy=false mynginx
@@ -494,7 +494,7 @@ $ docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
 $ docker cp /www/test 96f7f14e99ab:/www/
 ```
 
-- 将主机`/www/test`目录拷贝到容器96f7f14e99ab中,目录重命名为www
+- 将主机`/www/test`目录拷贝到容器96f7f14e99ab中，目录重命名为www
 
 ```
 $ docker cp /www/test 96f7f14e99ab:/www
@@ -540,11 +540,11 @@ $ docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 - **-a**:提交的镜像作者;
 - **-c**:使用Dockerfile指令来创建镜像;
 - **-m**:提交时的说明文字;
-- **-p**:在commit时,将容器暂停
+- **-p**:在commit时，将容器暂停
 
 **实例**
 
-- 将容器a404c6c174a2 保存为新的镜像,并添加提交人信息和说明信息
+- 将容器a404c6c174a2 保存为新的镜像，并添加提交人信息和说明信息
 
 ```
 $ docker commit -a "test" -m "my apache" a404c6c174a2  mymysql:v1

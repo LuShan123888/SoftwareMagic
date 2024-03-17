@@ -60,7 +60,7 @@ db.comment.insert(
 **注意**
 
 - mongo中的数字，默认情况下是double类型，如果要存整型，必须使用函数NumberInt()
-- 插入的数据没有指定 _id ，会自动生成主键值,其类型是ObjectID类型
+- 插入的数据没有指定 _id ，会自动生成主键值，其类型是ObjectID类型
 - MongoDB的文档不能有重复的键
 
 **文档键命名规范**

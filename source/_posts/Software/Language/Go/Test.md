@@ -9,9 +9,9 @@ categories:
 
 ## go test 工具
 
-- Go 语言中的测试依赖 `go test` 命令, 编写测试代码和编写普通的 Go 代码过程是类似的, 并不需要学习新的语法, 规则或工具
-- go test 命令是一个按照一定约定和组织的测试代码的驱动程序, 在包目录内, 所有以 `_test.go` 为后缀名的源代码文件都是 `go test` 测试的一部分, 不会被 `go build` 编译到最终的可执行文件中
-- 在 `*_test.go` 文件中有三种类型的函数, 单元测试函数, 基准测试函数和示例函数
+- Go 语言中的测试依赖 `go test` 命令，编写测试代码和编写普通的 Go 代码过程是类似的，并不需要学习新的语法，规则或工具
+- go test 命令是一个按照一定约定和组织的测试代码的驱动程序，在包目录内，所有以 `_test.go` 为后缀名的源代码文件都是 `go test` 测试的一部分，不会被 `go build` 编译到最终的可执行文件中
+- 在 `*_test.go` 文件中有三种类型的函数，单元测试函数，基准测试函数和示例函数
 
 |   类型   |         格式          |              作用              |
 | :------: | :-------------------: | :----------------------------: |
@@ -19,13 +19,13 @@ categories:
 | 基准函数 | 函数名前缀为 Benchmark |         测试函数的性能         |
 | 示例函数 |  函数名前缀为 Example  |       为文档提供示例文档       |
 
-- `go test` 命令会遍历所有的 `*_test.go` 文件中符合上述命名规则的函数, 然后生成一个临时的 main 包用于调用相应的测试函数, 然后构建并运行, 报告测试结果, 最后清理测试中生成的临时文件
+- `go test` 命令会遍历所有的 `*_test.go` 文件中符合上述命名规则的函数，然后生成一个临时的 main 包用于调用相应的测试函数，然后构建并运行，报告测试结果，最后清理测试中生成的临时文件
 
 ## 测试函数
 
 ### 测试函数的格式
 
-- 每个测试函数必须导入 `testing` 包,测试函数的基本格式（签名) 如下:
+- 每个测试函数必须导入 `testing` 包，测试函数的基本格式（签名) 如下:
 
 ```go
 func TestName(t *testing.T){
@@ -33,7 +33,7 @@ func TestName(t *testing.T){
 }
 ```
 
-- 测试函数的名字必须以 `Test` 开头, 可选的后缀名必须以大写字母开头, 举几个例子:
+- 测试函数的名字必须以 `Test` 开头，可选的后缀名必须以大写字母开头，举几个例子:
 
 ```go
 func TestAdd(t *testing.T){ ... }
@@ -64,9 +64,9 @@ func (c *T) Skipped() bool
 
 ### 测试函数示例
 
-- 一个软件程序也是由很多单元组件构成的, 单元组件可以是函数, 结构体, 方法和最终用户可能依赖的任意东西, 总之我们需要确保这些组件是能够正常运行的, 单元测试是一些利用各种方法测试单元组件的程序, 它会将结果与预期输出进行比较
+- 一个软件程序也是由很多单元组件构成的，单元组件可以是函数，结构体，方法和最终用户可能依赖的任意东西，总之我们需要确保这些组件是能够正常运行的，单元测试是一些利用各种方法测试单元组件的程序，它会将结果与预期输出进行比较
 
-- 在当前目录下, 我们创建一个 `split_test.go` 的测试文件, 并定义一个测试函数如下:
+- 在当前目录下，我们创建一个 `split_test.go` 的测试文件，并定义一个测试函数如下:
 
 ```go
 // split/split_test.go
@@ -78,16 +78,16 @@ import (
 	"testing"
 )
 
-func TestSplit(t *testing.T) { // 测试函数名必须以Test开头,必须接收一个*testing.T类型参数
+func TestSplit(t *testing.T) { // 测试函数名必须以Test开头，必须接收一个*testing.T类型参数
 	got := Split("a:b:c", ":")         // 程序输出的结果
 	want := []string{"a", "b", "c"}    // 期望的结果
-	if !reflect.DeepEqual(want, got) { // 因为slice不能比较直接,借助反射包中的方法比较
+	if !reflect.DeepEqual(want, got) { // 因为slice不能比较直接，借助反射包中的方法比较
 		t.Errorf("expected:%v, got:%v", want, got) // 测试失败输出错误提示
 	}
 }
 ```
 
-- 在 `split` 包路径下, 执行 `go test` 命令, 可以看到输出结果如下:
+- 在 `split` 包路径下，执行 `go test` 命令，可以看到输出结果如下:
 
 ```bash
 $ go test
@@ -96,9 +96,9 @@ ok      github.com/Test/test_demo/split       0.005s
 ```
 
 - `-v`: 输出详细信息
-- `-run`: 参数, 它对应一个正则表达式, 只有函数名匹配上的测试函数才会被 `go test` 命令执行
+- `-run`: 参数，它对应一个正则表达式，只有函数名匹配上的测试函数才会被 `go test` 命令执行
 
-- 再次运行 `go test` 命令, 输出结果如下:
+- 再次运行 `go test` 命令，输出结果如下:
 
 ```bash
 $ go test
@@ -109,7 +109,7 @@ exit status 1
 FAIL    github.com/Test/test_demo/split       0.006s
 ```
 
-- 这一次, 我们的测试失败了, 我们可以为 `go test` 命令添加 `-v` 参数, 查看测试函数名称和运行时间:
+- 这一次，我们的测试失败了，我们可以为 `go test` 命令添加 `-v` 参数，查看测试函数名称和运行时间:
 
 ```bash
 $ go test -v
@@ -135,7 +135,7 @@ FAIL    github.com/Test/test_demo/split       0.006s
 
 ### 测试组
 
-- 我们现在还想要测试一下 `split` 函数对中文字符串的支持, 这个时候我们可以再编写一个 `TestChineseSplit` 测试函数, 但是我们也可以使用如下更友好的一种方式来添加更多的测试用例
+- 我们现在还想要测试一下 `split` 函数对中文字符串的支持，这个时候我们可以再编写一个 `TestChineseSplit` 测试函数，但是我们也可以使用如下更友好的一种方式来添加更多的测试用例
 
 ```go
 func TestSplit(t *testing.T) {
@@ -152,7 +152,7 @@ func TestSplit(t *testing.T) {
         {input: "abcd", sep: "bc", want: []string{"a", "d"}},
         {input: "沙河有沙又有河", sep: "沙", want: []string{"河有", "又有河"}},
     }
-    // 遍历切片,逐一执行测试用例
+    // 遍历切片，逐一执行测试用例
     for _, tc := range tests {
         got := Split(tc.input, tc.sep)
         if !reflect.DeepEqual(got, tc.want) {
@@ -176,7 +176,7 @@ FAIL    github.com/Q1mi/studygo/code_demo/test_demo/split       0.006s
 
 ### 子测试
 
-- Go 1.7+中新增了子测试, 我们可以按照如下方式使用 `t.Run` 执行子测试:
+- Go 1.7+中新增了子测试，我们可以按照如下方式使用 `t.Run` 执行子测试:
 
 ```go
 func TestSplit(t *testing.T) {
@@ -222,12 +222,12 @@ exit status 1
 FAIL    github.com/Q1mi/studygo/code_demo/test_demo/split       0.006s
 ```
 
-- 我们都知道可以通过 `-run=RegExp` 来指定运行的测试用例, 还可以通过 `/` 来指定要运行的子测试用例, 例如: `go test -v -run=Split/simple` 只会运行 `simple` 对应的子测试用例
+- 我们都知道可以通过 `-run=RegExp` 来指定运行的测试用例，还可以通过 `/` 来指定要运行的子测试用例，例如: `go test -v -run=Split/simple` 只会运行 `simple` 对应的子测试用例
 
 ### 测试覆盖率
 
-- 测试覆盖率是你的代码被测试套件覆盖的百分比, 通常我们使用的都是语句的覆盖率, 也就是在测试中至少被运行一次的代码占总代码的比例
-- Go 提供内置功能来检查你的代码覆盖率, 我们可以使用 `go test -cover` 来查看测试覆盖率, 例如:
+- 测试覆盖率是你的代码被测试套件覆盖的百分比，通常我们使用的都是语句的覆盖率，也就是在测试中至少被运行一次的代码占总代码的比例
+- Go 提供内置功能来检查你的代码覆盖率，我们可以使用 `go test -cover` 来查看测试覆盖率，例如:
 
 ```bash
 $ go test -cover
@@ -237,7 +237,7 @@ ok      github.com/Q1mi/studygo/code_demo/test_demo/split       0.005s
 ```
 
 - 从上面的结果可以看到我们的测试用例覆盖了 100%的代码
-- Go 还提供了一个额外的 `-coverprofile` 参数, 用来将覆盖率相关的记录信息输出到一个文件, 例如:
+- Go 还提供了一个额外的 `-coverprofile` 参数，用来将覆盖率相关的记录信息输出到一个文件，例如:
 
 ```bash
 $ go test -cover -coverprofile=c.out
@@ -246,17 +246,17 @@ coverage: 100.0% of statements
 ok      github.com/Q1mi/studygo/code_demo/test_demo/split       0.005s
 ```
 
-- 上面的命令会将覆盖率相关的信息输出到当前文件夹下面的 `c.out` 文件中, 然后我们执行 `go tool cover -html=c.out`, 使用 `cover` 工具来处理生成的记录信息, 该命令会打开本地的浏览器窗口生成一个 HTML报告
+- 上面的命令会将覆盖率相关的信息输出到当前文件夹下面的 `c.out` 文件中，然后我们执行 `go tool cover -html=c.out`, 使用 `cover` 工具来处理生成的记录信息，该命令会打开本地的浏览器窗口生成一个 HTML报告
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/cover-20220514010009756.png" alt="Go test cover" style="zoom: 33%;" />
 
-- 上图中每个用绿色标记的语句块表示被覆盖了, 而红色的表示没有被覆盖
+- 上图中每个用绿色标记的语句块表示被覆盖了，而红色的表示没有被覆盖
 
 ## 基准测试
 
 ### 基准测试函数格式
 
-- 基准测试就是在一定的工作负载之下检测程序性能的一种方法, 基准测试的基本格式如下:
+- 基准测试就是在一定的工作负载之下检测程序性能的一种方法，基准测试的基本格式如下:
 
 ```go
 func BenchmarkName (b *testing. B){
@@ -264,7 +264,7 @@ func BenchmarkName (b *testing. B){
 }
 ```
 
-- 基准测试以`Benchmark`为前缀, 需要一个`*testing. B`类型的参数 b, 基准测试必须要执行`b.N`次, 这样的测试才有对照性,`b.N`的值是系统根据实际情况去调整的, 从而保证测试的稳定性,`testing. B`拥有的方法如下:
+- 基准测试以`Benchmark`为前缀，需要一个`*testing. B`类型的参数 b, 基准测试必须要执行`b.N`次，这样的测试才有对照性,`b.N`的值是系统根据实际情况去调整的，从而保证测试的稳定性,`testing. B`拥有的方法如下:
 
 ```go
 func (c *B) Error (args ... interface{})
@@ -303,7 +303,7 @@ func BenchmarkSplit (b *testing. B) {
 }
 ```
 
-- 基准测试并不会默认执行, 需要增加`-bench`参数, 所以我们通过执行`go test -bench=Split`命令执行基准测试, 输出结果如下:
+- 基准测试并不会默认执行，需要增加`-bench`参数，所以我们通过执行`go test -bench=Split`命令执行基准测试，输出结果如下:
 
 ```bash
 $ go test -bench=Split
@@ -315,8 +315,8 @@ PASS
 ok      github. com/Test/split      2.255 s
 ```
 
-- 其中`BenchmarkSplit-8`表示对 Split 函数进行基准测试, 数字`8`表示`GOMAXPROCS`的值, 这个对于并发基准测试很重要,`10000000`和`203 ns/op`表示每次调用`Split`函数耗时`203 ns`, 这个结果是`10000000`次调用的平均值
-- 我们还可以为基准测试添加`-benchmem`参数, 来获得内存分配的统计数据
+- 其中`BenchmarkSplit-8`表示对 Split 函数进行基准测试，数字`8`表示`GOMAXPROCS`的值，这个对于并发基准测试很重要,`10000000`和`203 ns/op`表示每次调用`Split`函数耗时`203 ns`, 这个结果是`10000000`次调用的平均值
+- 我们还可以为基准测试添加`-benchmem`参数，来获得内存分配的统计数据
 
 ```bash
 $ go test -bench=Split -benchmem
@@ -332,8 +332,8 @@ ok      github. com/Test/split       2.394 s
 
 ### 性能比较函数
 
-- 上面的基准测试只能得到给定操作的绝对耗时, 但是在很多性能问题是发生在两个不同操作之间的相对耗时, 比如同一个函数处理 1000 个元素的耗时与处理 1 万甚至 100 万个元素的耗时的差别是多少？再或者对于同一个任务究竟使用哪种算法性能最佳？我们通常需要对两个不同算法的实现使用相同的输入来进行基准比较测试
-- 性能比较函数通常是一个带有参数的函数, 被多个不同的 Benchmark 函数传入不同的值来调用, 举个例子如下:
+- 上面的基准测试只能得到给定操作的绝对耗时，但是在很多性能问题是发生在两个不同操作之间的相对耗时，比如同一个函数处理 1000 个元素的耗时与处理 1 万甚至 100 万个元素的耗时的差别是多少？再或者对于同一个任务究竟使用哪种算法性能最佳？我们通常需要对两个不同算法的实现使用相同的输入来进行基准比较测试
+- 性能比较函数通常是一个带有参数的函数，被多个不同的 Benchmark 函数传入不同的值来调用，举个例子如下:
 
 ```go
 func benchmark (b *testing. B, size int){/* ... */}
@@ -392,8 +392,8 @@ PASS
 ok      github. com/Test/fib 12.944 s
 ```
 
-- **注意**: 默认情况下, 每个基准测试至少运行 1 秒, 如果在 Benchmark 函数返回时没有到 1 秒, 则`b.N`的值会按 1,2,5,10,20,50,…增加, 并且函数再次运行
-- 最终的 BenchmarkFib 40 只运行了两次, 每次运行的平均值只有不到一秒, 像这种情况下我们应该可以使用`-benchtime`标志增加最小基准时间, 以产生更准确的结果, 例如:
+- **注意**: 默认情况下，每个基准测试至少运行 1 秒，如果在 Benchmark 函数返回时没有到 1 秒，则`b.N`的值会按 1,2,5,10,20,50,…增加，并且函数再次运行
+- 最终的 BenchmarkFib 40 只运行了两次，每次运行的平均值只有不到一秒，像这种情况下我们应该可以使用`-benchtime`标志增加最小基准时间，以产生更准确的结果，例如:
 
 ```bash
 $ go test -bench=Fib 40 -benchtime=20 s
@@ -405,8 +405,8 @@ PASS
 ok      github. com/Test/fib 33.849 s
 ```
 
-- 这一次`BenchmarkFib 40`函数运行了 50 次, 结果就会更准确一些了
-- 使用性能比较函数做测试的时候一个容易犯的错误就是把`b.N`作为输入的大小, 例如以下两个例子都是错误的示范:
+- 这一次`BenchmarkFib 40`函数运行了 50 次，结果就会更准确一些了
+- 使用性能比较函数做测试的时候一个容易犯的错误就是把`b.N`作为输入的大小，例如以下两个例子都是错误的示范:
 
 ```go
 // 错误示范 1
@@ -424,7 +424,7 @@ func BenchmarkFibWrong 2 (b *testing. B) {
 
 ### 重置时间
 
-- `b.ResetTimer`之前的处理不会放到执行时间里, 也不会输出到报告中, 所以可以在之前做一些不计划作为测试报告的操作, 例如:
+- `b.ResetTimer`之前的处理不会放到执行时间里，也不会输出到报告中，所以可以在之前做一些不计划作为测试报告的操作，例如:
 
 ```go
 func BenchmarkSplit (b *testing. B) {
@@ -439,7 +439,7 @@ func BenchmarkSplit (b *testing. B) {
 ### 并行测试
 
 - `func (b *B) RunParallel (body func (*PB))`会以并行的方式执行给定的基准测试
-- `RunParallel`会创建出多个`goroutine`, 并将`b.N`分配给这些`goroutine`执行, 其中`goroutine`数量的默认值为`GOMAXPROCS`, 用户如果想要增加非 CPU 受限 (non-CPU-bound) 基准测试的并行性, 那么可以在`RunParallel`之前调用`SetParallelism`,`RunParallel`通常会与`-cpu`标志一同使用
+- `RunParallel`会创建出多个`goroutine`, 并将`b.N`分配给这些`goroutine`执行，其中`goroutine`数量的默认值为`GOMAXPROCS`, 用户如果想要增加非 CPU 受限 (non-CPU-bound) 基准测试的并行性，那么可以在`RunParallel`之前调用`SetParallelism`,`RunParallel`通常会与`-cpu`标志一同使用
 
 ```go
 func BenchmarkSplitParallel (b *testing. B) {
@@ -471,7 +471,7 @@ ok      github. com/Test/split       3.308 s
 
 ### 示例函数的格式
 
-- 被`go test`特殊对待的第三种函数就是示例函数, 它们的函数名以`Example`为前缀, 它们既没有参数也没有返回值, 标准格式如下:
+- 被`go test`特殊对待的第三种函数就是示例函数，它们的函数名以`Example`为前缀，它们既没有参数也没有返回值，标准格式如下:
 
 ```go
 func ExampleName () {
@@ -495,7 +495,7 @@ func ExampleSplit () {
 
 - 为你的代码编写示例代码有如下三个用处:
 
-    1. 示例函数能够作为文档直接使用, 例如基于 web 的 godoc 中能把示例函数与对应的函数或包相关联
+    1. 示例函数能够作为文档直接使用，例如基于 web 的 godoc 中能把示例函数与对应的函数或包相关联
 
     2. 示例函数只要包含了`// Output:`也是可以通过`go test`运行的可执行测试
 
@@ -505,7 +505,7 @@ func ExampleSplit () {
         ok      github. com/Test/split       0.006 s
         ```
 
-    3. 示例函数提供了可以直接运行的示例代码, 可以直接在`golang. org`的`godoc`文档服务器上使用`Go Playground`运行示例代码, 下图为`strings. ToUpper`函数在 Playground 的示例函数效果, ![Go Playground](https://www.liwenzhou.com/images/Go/unit_test/example.png)
+    3. 示例函数提供了可以直接运行的示例代码，可以直接在`golang. org`的`godoc`文档服务器上使用`Go Playground`运行示例代码，下图为`strings. ToUpper`函数在 Playground 的示例函数效果, ![Go Playground](https://www.liwenzhou.com/images/Go/unit_test/example.png)
 
 ## Setup 与 TearDown
 
@@ -514,7 +514,7 @@ func ExampleSplit () {
 ### TestMain
 
 - 通过在`*_test. go`文件中定义`TestMain`函数来可以在测试之前进行额外的设置 (setup) 或在测试之后进行拆卸 (teardown) 操作
-- 如果测试文件包含函数:`func TestMain (m *testing. M)`那么生成的测试会先调用 TestMain (m), 然后再运行具体测试,`TestMain`运行在主`goroutine`中, 可以在调用 `m.Run`前后做任何设置 (setup) 和拆卸 (teardown), 退出测试的时候应该使用`m.Run`的返回值作为参数调用`os. Exit`
+- 如果测试文件包含函数:`func TestMain (m *testing. M)`那么生成的测试会先调用 TestMain (m), 然后再运行具体测试,`TestMain`运行在主`goroutine`中，可以在调用 `m.Run`前后做任何设置 (setup) 和拆卸 (teardown), 退出测试的时候应该使用`m.Run`的返回值作为参数调用`os. Exit`
 - 一个使用`TestMain`来设置 Setup 和 TearDown 的示例如下:
 
 ```go
@@ -527,7 +527,7 @@ func TestMain (m *testing. M) {
 }
 ```
 
-- 需要注意的是: 在调用`TestMain`时, `flag. Parse`并没有被调用, 所以如果`TestMain` 依赖于 command-line 标志（包括 testing 包的标记), 则应该显示的调用`flag. Parse`
+- 需要注意的是: 在调用`TestMain`时, `flag. Parse`并没有被调用，所以如果`TestMain` 依赖于 command-line 标志（包括 testing 包的标记), 则应该显示的调用`flag. Parse`
 
 ### 子测试的 Setup 与 Teardown
 

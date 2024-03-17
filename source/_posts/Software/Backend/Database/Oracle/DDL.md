@@ -31,6 +31,6 @@ alter table 表名 rename column 列名 to 新列名
 ### 修改字段类型
 
 ```sql
-alter table 表名 modify(字段, 类型)
+alter table 表名 modify(字段，类型)
 ```
 

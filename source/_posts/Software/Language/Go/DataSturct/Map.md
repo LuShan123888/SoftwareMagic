@@ -8,7 +8,7 @@ categories:
 ---
 # Go Map
 
-- map 是一种无序的基于 `key-value` 的数据结构, Go 语言中的 map 是引用类型, 必须初始化才能使用
+- map 是一种无序的基于 `key-value` 的数据结构, Go 语言中的 map 是引用类型，必须初始化才能使用
 - Go 语言中提供的映射关系容器为 `map`, 其内部使用 `散列表(hash)` 实现
 
 ## map 定义
@@ -24,13 +24,13 @@ map[KeyType]ValueType
 
 ## 定义 map
 
-- map 类型的变量默认初始值为 nil, 需要使用 make () 函数来分配内存, 语法为:
+- map 类型的变量默认初始值为 nil, 需要使用 make () 函数来分配内存，语法为:
 
 ```go
 make(map[KeyType]ValueType, [cap])
 ```
 
-- 其中 cap 表示 map 的容量, 该参数虽然不是必须的, 但是应该在初始化 map 的时候就为其指定一个合适的容量
+- 其中 cap 表示 map 的容量，该参数虽然不是必须的，但是应该在初始化 map 的时候就为其指定一个合适的容量
 
 ```go
 func main() {
@@ -49,7 +49,7 @@ map[小明:100 张三:90]
 type of a:map[string]int
 ```
 
-- map 也支持在声明的时候填充元素, 例如:
+- map 也支持在声明的时候填充元素，例如:
 
 ```go
 func main() {
@@ -63,7 +63,7 @@ func main() {
 
 ## 判断某个 Key 是否存在
 
-- Go 语言中有个判断 map 中 Key 是否存在的特殊写法, 格式如下:
+- Go 语言中有个判断 map 中 Key 是否存在的特殊写法，格式如下:
 
 ```go
 value, ok := map[key]
@@ -76,7 +76,7 @@ func main() {
     scoreMap := make(map[string]int)
     scoreMap["张三"] = 90
     scoreMap["小明"] = 100
-    // 如果key存在ok为true,v为对应的值,不存在ok为false,v为值类型的零值
+    // 如果key存在ok为true,v为对应的值，不存在ok为false,v为值类型的零值
     v, ok := scoreMap["张三"]
     if ok {
         fmt.Println(v)

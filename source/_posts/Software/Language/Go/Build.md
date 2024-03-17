@@ -22,7 +22,7 @@ go build
 go build test
 ```
 
-- go 编译器会去 `GOPATH` 的 src 目录下查找要编译的 `test` 项目, 编译得到的可执行文件会保存在执行编译命令的当前目录下
+- go 编译器会去 `GOPATH` 的 src 目录下查找要编译的 `test` 项目，编译得到的可执行文件会保存在执行编译命令的当前目录下
 - 还可以使用 `-o` 参数来指定编译后得到的可执行文件的名字
 
 ```bash
@@ -31,11 +31,11 @@ go build -o hello
 
 ## go run
 
-- `go run main.go` 也可以执行程序, 该命令本质上也是先编译再执行
+- `go run main.go` 也可以执行程序，该命令本质上也是先编译再执行
 
 ## go install
 
-- `go install` 表示安装的意思, 它先编译源代码得到可执行文件, 然后将可执行文件移动到 `GOPATH` 的 bin 目录下
+- `go install` 表示安装的意思，它先编译源代码得到可执行文件，然后将可执行文件移动到 `GOPATH` 的 bin 目录下
 
 ## 跨平台编译
 

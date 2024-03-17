@@ -9,11 +9,11 @@ categories:
 ---
 # Servlet 编写过滤器
 
-- Servlet 过滤器可以动态地拦截请求和响应,以变换或使用包含在请求或响应中的信息
-- 可以将一个或多个 Servlet 过滤器附加到一个 Servlet 或一组 Servlet,Servlet 过滤器也可以附加到 JavaServer Pages (JSP) 文件和 HTML 页面,调用 Servlet 前调用所有附加的 Servlet 过滤器
-- Servlet 过滤器是可用于 Servlet 编程的 Java 类,可以实现以下目的:
-    - 在客户端的请求访问后端资源之前,拦截这些请求
-    - 在服务器的响应发送回客户端之前,处理这些响应
+- Servlet 过滤器可以动态地拦截请求和响应，以变换或使用包含在请求或响应中的信息
+- 可以将一个或多个 Servlet 过滤器附加到一个 Servlet 或一组 Servlet,Servlet 过滤器也可以附加到 JavaServer Pages (JSP) 文件和 HTML 页面，调用 Servlet 前调用所有附加的 Servlet 过滤器
+- Servlet 过滤器是可用于 Servlet 编程的 Java 类，可以实现以下目的:
+    - 在客户端的请求访问后端资源之前，拦截这些请求
+    - 在服务器的响应发送回客户端之前，处理这些响应
 - 根据规范建议的各种类型的过滤器:
     - 身份验证过滤器(Authentication Filters)
     - 数据压缩过滤器(Data compression Filters)
@@ -24,9 +24,9 @@ categories:
     - MIME-TYPE 链过滤器(MIME-TYPE Chain Filters)
     - 标记化过滤器(Tokenizing Filters)
     - XSL/T 过滤器(XSL/T Filters),转换 XML 内容
-- 过滤器通过 Web 部署描述符(web.xml)中的 XML 标签来声明,然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式
-- 当 Web 容器启动 Web 应用程序时,它会为您在部署描述符中声明的每一个过滤器创建一个实例
-- Filter的执行顺序与在web.xml配置文件中的配置顺序一致,一般把Filter配置在所有的Servlet之前
+- 过滤器通过 Web 部署描述符(web.xml)中的 XML 标签来声明，然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式
+- 当 Web 容器启动 Web 应用程序时，它会为您在部署描述符中声明的每一个过滤器创建一个实例
+- Filter的执行顺序与在web.xml配置文件中的配置顺序一致，一般把Filter配置在所有的Servlet之前
 
 ## Servlet 过滤器方法
 
@@ -34,9 +34,9 @@ categories:
 
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
-| 1    | **public void doFilter (ServletRequest, ServletResponse, FilterChain)** 该方法完成实际的过滤操作,当客户端请求方法与过滤器设置匹配的URL时,Servlet容器将先调用过滤器的doFilter方法,FilterChain用户访问后续过滤器, |
-| 2    | **public void init(FilterConfig filterConfig)** web 应用程序启动时,web 服务器将创建Filter 的实例对象,并调用其init方法,读取web.xml配置,完成对象的初始化功能,从而为后续的用户请求作好拦截的准备工作(filter对象只会创建一次,init方法也只会执行一次),开发人员通过init方法的参数,可获得代表当前filter配置信息的FilterConfig对象, |
-| 3    | **public void destroy()** Servlet容器在销毁过滤器实例前调用该方法,在该方法中释放Servlet过滤器占用的资源, |
+| 1    | **public void doFilter (ServletRequest, ServletResponse, FilterChain)** 该方法完成实际的过滤操作，当客户端请求方法与过滤器设置匹配的URL时,Servlet容器将先调用过滤器的doFilter方法,FilterChain用户访问后续过滤器, |
+| 2    | **public void init(FilterConfig filterConfig)** web 应用程序启动时,web 服务器将创建Filter 的实例对象，并调用其init方法，读取web.xml配置，完成对象的初始化功能，从而为后续的用户请求作好拦截的准备工作(filter对象只会创建一次,init方法也只会执行一次),开发人员通过init方法的参数，可获得代表当前filter配置信息的FilterConfig对象, |
+| 3    | **public void destroy()** Servlet容器在销毁过滤器实例前调用该方法，在该方法中释放Servlet过滤器占用的资源, |
 
 ### FilterConfig 使用
 
@@ -67,7 +67,7 @@ public void  init(FilterConfig config) throws ServletException {
 
 ## Servlet 过滤器实例
 
-- 以下是 Servlet 过滤器的实例,将输出网站名称和地址,本实例让您对 Servlet 过滤器有基本的了解,您可以使用相同的概念编写更复杂的过滤器应用程序:
+- 以下是 Servlet 过滤器的实例，将输出网站名称和地址，本实例让您对 Servlet 过滤器有基本的了解，您可以使用相同的概念编写更复杂的过滤器应用程序:
 
 ```java
 //实现 Filter 类
@@ -138,7 +138,7 @@ public class DisplayHeader extends HttpServlet {
 
 ### Web.xml 中的 Servlet 过滤器映射(Servlet Filter Mapping)
 
-定义过滤器,然后映射到一个 URL 或 Servlet,这与定义 Servlet,然后映射到一个 URL 模式方式大致相同,在部署描述符文件 **web.xml** 中为 filter 标签创建下面的条目:
+定义过滤器，然后映射到一个 URL 或 Servlet,这与定义 Servlet,然后映射到一个 URL 模式方式大致相同，在部署描述符文件 **web.xml** 中为 filter 标签创建下面的条目:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -169,12 +169,12 @@ public class DisplayHeader extends HttpServlet {
 </web-app>
 ```
 
-- 上述过滤器适用于所有的 Servlet,因为我们在配置中指定 **/\*** ,如果您只想在少数的 Servlet 上应用过滤器,您可以指定一个特定的 Servlet 路径
-- 现在试着以常用的方式调用任何 Servlet,您将会看到在 Web 服务器中生成的日志,您也可以使用 Log4J 记录器来把上面的日志记录到一个单独的文件中
+- 上述过滤器适用于所有的 Servlet,因为我们在配置中指定 **/\*** ,如果您只想在少数的 Servlet 上应用过滤器，您可以指定一个特定的 Servlet 路径
+- 现在试着以常用的方式调用任何 Servlet,您将会看到在 Web 服务器中生成的日志，您也可以使用 Log4J 记录器来把上面的日志记录到一个单独的文件中
 
 ## 使用多个过滤器
 
-- Web 应用程序可以根据特定的目的定义若干个不同的过滤器,假设您定义了两个过滤器 *AuthenFilter* 和 *LogFilter*,您需要创建一个如下所述的不同的映射,其余的处理与上述所讲解的大致相同:
+- Web 应用程序可以根据特定的目的定义若干个不同的过滤器，假设您定义了两个过滤器 *AuthenFilter* 和 *LogFilter*,您需要创建一个如下所述的不同的映射，其余的处理与上述所讲解的大致相同:
 
 ```xml
 <filter>
@@ -208,8 +208,8 @@ public class DisplayHeader extends HttpServlet {
 
 ## 过滤器的应用顺序
 
-- web.xml 中的 filter-mapping 元素的顺序决定了 Web 容器应用过滤器到 Servlet 的顺序,若要反转过滤器的顺序,您只需要在 web.xml 文件中反转 filter-mapping 元素即可
-- 例如,上面的实例将先应用 LogFilter,然后再应用 AuthenFilter,但是下面的实例将颠倒这个顺序:
+- web.xml 中的 filter-mapping 元素的顺序决定了 Web 容器应用过滤器到 Servlet 的顺序，若要反转过滤器的顺序，您只需要在 web.xml 文件中反转 filter-mapping 元素即可
+- 例如，上面的实例将先应用 LogFilter,然后再应用 AuthenFilter,但是下面的实例将颠倒这个顺序:
 
 ```xml
 <filter-mapping>
@@ -229,27 +229,27 @@ public class DisplayHeader extends HttpServlet {
 
     指定一个过滤器
 
-    - `<filter-name>`用于为过滤器指定一个名字,该元素的内容不能为空
+    - `<filter-name>`用于为过滤器指定一个名字，该元素的内容不能为空
     - `<filter-class>`元素用于指定过滤器的完整的限定类名
-    - `<init-param>`元素用于为过滤器指定初始化参数,它的子元素`<param-name>`指定参数的名字,`<param-value>`指定参数的值
-    - 在过滤器中,可以使用`FilterConfig`接口对象来访问初始化参数
+    - `<init-param>`元素用于为过滤器指定初始化参数，它的子元素`<param-name>`指定参数的名字,`<param-value>`指定参数的值
+    - 在过滤器中，可以使用`FilterConfig`接口对象来访问初始化参数
 
 - `<filter-mapping>`
 
-    元素用于设置一个 Filter 所负责拦截的资源,一个Filter拦截的资源可通过两种方式来指定:Servlet 名称和资源访问的请求路径
+    元素用于设置一个 Filter 所负责拦截的资源，一个Filter拦截的资源可通过两种方式来指定:Servlet 名称和资源访问的请求路径
 
-    - `<filter-name>`子元素用于设置filter的注册名称,该值必须是在`<filter>`元素中声明过的过滤器的名字
+    - `<filter-name>`子元素用于设置filter的注册名称，该值必须是在`<filter>`元素中声明过的过滤器的名字
     - `<url-pattern>`设置 filter 所拦截的请求路径（过滤器关联的URL样式)
 
 - `<servlet-name>`指定过滤器所拦截的Servlet名称
 
-- `<dispatcher>`指定过滤器所拦截的资源被 Servlet 容器调用的方式,可以是`REQUEST`,`INCLUDE`,`FORWARD`和`ERROR`之一,默认`REQUEST`,用户可以设置多个`<dispatcher>`子元素用来指定 Filter 对资源的多种调用方式进行拦截
+- `<dispatcher>`指定过滤器所拦截的资源被 Servlet 容器调用的方式，可以是`REQUEST`,`INCLUDE`,`FORWARD`和`ERROR`之一，默认`REQUEST`,用户可以设置多个`<dispatcher>`子元素用来指定 Filter 对资源的多种调用方式进行拦截
 
 - `<dispatcher>`
 
     子元素可以设置的值及其意义
 
-    - `REQUEST`:当用户直接访问页面时,Web容器将会调用过滤器,如果目标资源是通过RequestDispatcher的include()或forward()方法访问时,那么该过滤器就不会被调用
-    - `INCLUDE`:如果目标资源是通过RequestDispatcher的include()方法访问时,那么该过滤器将被调用,除此之外,该过滤器不会被调用
-    - `FORWARD`:如果目标资源是通过RequestDispatcher的forward()方法访问时,那么该过滤器将被调用,除此之外,该过滤器不会被调用
-    - `ERROR`:如果目标资源是通过声明式异常处理机制调用时,那么该过滤器将被调用,除此之外,过滤器不会被调用
+    - `REQUEST`:当用户直接访问页面时,Web容器将会调用过滤器，如果目标资源是通过RequestDispatcher的include()或forward()方法访问时，那么该过滤器就不会被调用
+    - `INCLUDE`:如果目标资源是通过RequestDispatcher的include()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用
+    - `FORWARD`:如果目标资源是通过RequestDispatcher的forward()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用
+    - `ERROR`:如果目标资源是通过声明式异常处理机制调用时，那么该过滤器将被调用，除此之外，过滤器不会被调用

@@ -16,7 +16,7 @@ graph LR
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eetirmmj3095037jr5.jpg)
 
-- 这是申明一个由左到右,水平向右的图
+- 这是申明一个由左到右，水平向右的图
 - 可能方向有:
     - TB - top bottom
     - BT - bottom top
@@ -82,7 +82,7 @@ id{This is the text in the box}
 
 #### 连接线
 
-节点间的连接线有多种形状,而且可以在连接线中加入标签:
+节点间的连接线有多种形状，而且可以在连接线中加入标签:
 
 ###### 箭头形连接
 
@@ -197,7 +197,7 @@ A==text===B
 
 #### 特殊的语法
 
-##### 使用引号可以抑制一些特殊的字符的使用,可以避免一些不必要的麻烦
+##### 使用引号可以抑制一些特殊的字符的使用，可以避免一些不必要的麻烦
 
 > graph LR\
 > d1["This is the (text) in the box”]
@@ -254,7 +254,7 @@ graph TB
 
 #### 基础fontawesome支持
 
-如果想加入来自frontawesome的图表字体,需要像frontawesome网站上那样引用的那样,\
+如果想加入来自frontawesome的图表字体，需要像frontawesome网站上那样引用的那样,\
 详情请点击:[fontawdsome](http://fontawesome.io/)
 
 引用的语法为:++fa:#icon class name#++
@@ -308,7 +308,7 @@ graph LR
 
 ##### 样式类
 
-为了方便样式的使用,可以定义类来使用样式
+为了方便样式的使用，可以定义类来使用样式
 类的定义示例:
 
 ```
@@ -327,7 +327,7 @@ class nodeId className;
 class nodeId1,nodeId2 className;
 ```
 
-可以在CSS中提前定义样式类,应用在图表的定义中
+可以在CSS中提前定义样式类，应用在图表的定义中
 
 ```{mermaid}
 graph LR
@@ -336,7 +336,7 @@ graph LR
       class A cssClass;
 ```
 
-默认样式类：当没有指定样式的时候,默认采用
+默认样式类：当没有指定样式的时候，默认采用
 
 ```
 classDef default fill:#f9f,stroke:#333,stroke-width:4px;

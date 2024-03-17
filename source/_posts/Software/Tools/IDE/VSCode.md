@@ -29,5 +29,5 @@ disable-hardware-acceleration": true
 
 3. 重启
 
-    此时应用启动时默认关闭硬件加速,等同于`code --disable-gpu`
+    此时应用启动时默认关闭硬件加速，等同于`code --disable-gpu`
 

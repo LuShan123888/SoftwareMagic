@@ -7,10 +7,10 @@ categories:
 ---
 # Docker Compose
 
-- Compose 是用于定义和运行多容器 Docker 应用程序的工具,通过 Compose,您可以使用 YML 文件来配置应用程序需要的所有服务,然后,使用一个命令,就可以从 YML 文件配置中创建并启动所有服务
+- Compose 是用于定义和运行多容器 Docker 应用程序的工具，通过 Compose,您可以使用 YML 文件来配置应用程序需要的所有服务，然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务
 - Compose 使用的三个步骤:
   1. 使用`Dockerfile`定义应用程序的环境
-  2. 使用`docker-compose.yml`定义构成应用程序的服务,这样它们可以在隔离环境中一起运行
+  2. 使用`docker-compose.yml`定义构成应用程序的服务，这样它们可以在隔离环境中一起运行
   3. 执行`docker-compose up`命令来启动并运行整个应用程序
 
 ## 安装
@@ -53,7 +53,7 @@ cker-compose version 1.24.1, build 4667896b
 #### build
 
 - 指定为构建镜像上下文路径:
-- 例如 webapp 服务,指定为从上下文路径`./dir/Dockerfile`所构建的镜像
+- 例如 webapp 服务，指定为从上下文路径`./dir/Dockerfile`所构建的镜像
 
 ```yaml
 version: "3.7"
@@ -62,7 +62,7 @@ services:
     build: ./dir
 ```
 
-- 或者,作为具有在上下文指定的路径的对象,以及可选的 Dockerfile 和 args
+- 或者，作为具有在上下文指定的路径的对象，以及可选的 Dockerfile 和 args
 
 ```yaml
 version: "3.7"
@@ -82,9 +82,9 @@ services:
 
 - context:上下文路径
 - dockerfile:指定构建镜像的 Dockerfile 文件名
-- args:添加构建参数,这是只能在构建过程中访问的环境变量
+- args:添加构建参数，这是只能在构建过程中访问的环境变量
 - labels:设置构建镜像的标签
-- target:多层构建,可以指定构建哪一层
+- target:多层构建，可以指定构建哪一层
 
 #### cap_add,cap_drop
 
@@ -100,7 +100,7 @@ cap_drop:
 
 #### cgroup_parent
 
-- 为容器指定父 cgroup 组,意味着将继承该组的资源限制
+- 为容器指定父 cgroup 组，意味着将继承该组的资源限制
 
 ```yaml
 cgroup_parent: m-executor-abcd
@@ -169,7 +169,7 @@ configs:
 
 #### container_name
 
-- 指定自定义容器名称,而不是生成的默认名称
+- 指定自定义容器名称，而不是生成的默认名称
 
 ```yaml
 container_name: my-web-container
@@ -178,9 +178,9 @@ container_name: my-web-container
 #### depends_on
 
 - 设置依赖关系
-- `docker-compose up`:以依赖性顺序启动服务,在以下示例中,先启动db和Redis,才会启动 web
-- `docker-compose up SERVICE`:自动包含 SERVICE 的依赖项,在以下示例中,docker-compose up web 还将创建并启动 DB 和 Redis
-- `docker-compose stop`:按依赖关系顺序停止服务,在以下示例中,web 在 DB 和 Redis 之前停止
+- `docker-compose up`:以依赖性顺序启动服务，在以下示例中，先启动db和Redis,才会启动 web
+- `docker-compose up SERVICE`:自动包含 SERVICE 的依赖项，在以下示例中,docker-compose up web 还将创建并启动 DB 和 Redis
+- `docker-compose stop`:按依赖关系顺序停止服务，在以下示例中,web 在 DB 和 Redis 之前停止
 
 ```yaml
 version: "3.7"
@@ -200,7 +200,7 @@ services:
 
 #### deploy
 
-- 指定与服务的部署和运行有关的配置,只在 swarm 模式下才会有用
+- 指定与服务的部署和运行有关的配置，只在 swarm 模式下才会有用
 
 ```yaml
 version: "3.7"
@@ -230,31 +230,31 @@ services:
 - **endpoint_mode**:访问集群服务的方式
     - **vip**:Docker 集群服务一个对外的虚拟 ip,所有的请求都会通过这个虚拟 ip 到达集群服务内部的机器
     - **dnsrr**:DNS 轮询(DNSRR),所有的请求会自动轮询获取到集群 ip 列表中的一个 ip 地址
-- **labels**:在服务上设置标签,可以用容器上的 labels(跟 deploy 同级的配置）覆盖 deploy 下的 labels
+- **labels**:在服务上设置标签，可以用容器上的 labels(跟 deploy 同级的配置）覆盖 deploy 下的 labels
 - **mode**:指定服务提供的模式
-    - **replicated**:复制服务,复制指定服务到集群的机器上
-    - **global**:全局服务,服务将部署至集群的每个节点
-- **replicas:mode** 为 replicated 时,需要使用此参数配置具体运行的节点数量
-- **resources**:配置服务器资源使用的限制,例如上例子,配置 Redis 集群运行需要的 cpu 的百分比和 内存的占用,避免占用资源过高出现异常
+    - **replicated**:复制服务，复制指定服务到集群的机器上
+    - **global**:全局服务，服务将部署至集群的每个节点
+- **replicas:mode** 为 replicated 时，需要使用此参数配置具体运行的节点数量
+- **resources**:配置服务器资源使用的限制，例如上例子，配置 Redis 集群运行需要的 cpu 的百分比和 内存的占用，避免占用资源过高出现异常
 - **restart_policy**:配置如何在退出容器时重新启动容器
     - condition:可选 none,on-failure 或者 any(默认值:any)
     - delay:设置多久之后重启（默认值:0)
-    - max_attempts:尝试重新启动容器的次数,超出次数,则不再尝试（默认值：一直重试)
+    - max_attempts:尝试重新启动容器的次数，超出次数，则不再尝试（默认值：一直重试)
     - window:设置容器重启超时时间（默认值:0)
 - **rollback_config**:配置在更新失败的情况下应如何回滚服务
-    - parallelism:一次要回滚的容器数,如果设置为0,则所有容器将同时回滚
+    - parallelism:一次要回滚的容器数，如果设置为0,则所有容器将同时回滚
     - delay:每个容器组回滚之间等待的时间（默认为0s)
-    - failure_action:如果回滚失败,该怎么办,其中一个 continue 或者 pause(默认pause)
-    - monitor:每个容器更新后,持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
+    - failure_action:如果回滚失败，该怎么办，其中一个 continue 或者 pause(默认pause)
+    - monitor:每个容器更新后，持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
     - max_failure_ratio:在回滚期间可以容忍的故障率（默认为0)
-    - order:回滚期间的操作顺序,其中一个 stop-first(串行回滚),或者 start-first(并行回滚)(默认 stop-first)
-- **update_config**:配置应如何更新服务,对于配置滚动更新很有用
+    - order:回滚期间的操作顺序，其中一个 stop-first(串行回滚),或者 start-first(并行回滚)(默认 stop-first)
+- **update_config**:配置应如何更新服务，对于配置滚动更新很有用
     - parallelism:一次更新的容器数
     - delay:在更新一组容器之间等待的时间
-    - failure_action:如果更新失败,该怎么办,其中一个 continue,rollback 或者pause(默认:pause)
-    - monitor:每个容器更新后,持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
+    - failure_action:如果更新失败，该怎么办，其中一个 continue,rollback 或者pause(默认:pause)
+    - monitor:每个容器更新后，持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
     - max_failure_ratio:在更新过程中可以容忍的故障率
-    - order:回滚期间的操作顺序,其中一个 stop-first(串行回滚),或者 start-first(并行回滚)(默认stop-first)
+    - order:回滚期间的操作顺序，其中一个 stop-first(串行回滚),或者 start-first(并行回滚)(默认stop-first)
 - **注意**:仅支持 V3.4 及更高版本
 
 #### devices
@@ -268,7 +268,7 @@ devices:
 
 #### dns
 
-- 自定义 DNS 服务器,可以是单个值或列表的多个值
+- 自定义 DNS 服务器，可以是单个值或列表的多个值
 
 ```yaml
 dns: 8.8.8.8
@@ -280,7 +280,7 @@ dns:
 
 #### dns_search
 
-- 自定义 DNS 搜索域,可以是单个值或列表
+- 自定义 DNS 搜索域，可以是单个值或列表
 
 ```yaml
 dns_search: example.com
@@ -312,7 +312,7 @@ entrypoint:
 
 #### env_file
 
-- 从文件添加环境变量,可以是单个值或列表的多个值
+- 从文件添加环境变量，可以是单个值或列表的多个值
 
 ```yaml
 env_file: .env
@@ -329,7 +329,7 @@ env_file:
 
 #### environment
 
-- 添加环境变量,您可以使用数组或字典,任何布尔值,布尔值需要用引号引起来,以确保 YML 解析器不会将其转换为 True 或 False
+- 添加环境变量，您可以使用数组或字典，任何布尔值，布尔值需要用引号引起来，以确保 YML 解析器不会将其转换为 True 或 False
 
 ```yaml
 environment:
@@ -339,7 +339,7 @@ environment:
 
 #### expose
 
-- 暴露端口,但不映射到宿主机,只被连接的服务访问
+- 暴露端口，但不映射到宿主机，只被连接的服务访问
 - 仅可以指定内部端口为参数:
 
 ```yaml
@@ -350,7 +350,7 @@ expose:
 
 #### extra_hosts
 
-- 添加主机名映射,类似`docker client --add-host`
+- 添加主机名映射，类似`docker client --add-host`
 
 ```yaml
 extra_hosts:
@@ -375,12 +375,12 @@ healthcheck:
   interval: 1m30s # 设置检测间隔
   timeout: 10s # 设置检测超时时间
   retries: 3 # 设置重试次数
-  start_period: 40s # 启动后,多少秒开始启动检测程序
+  start_period: 40s # 启动后，多少秒开始启动检测程序
 ```
 
 #### image
 
-- 指定容器运行的镜像,以下格式都可以
+- 指定容器运行的镜像，以下格式都可以
 
 ```yaml
 image: redis
@@ -393,7 +393,7 @@ image: a4bc65fd # 镜像id
 #### logging
 
 - 服务的日志记录配置
-- driver:指定服务容器的日志记录驱动程序,默认值为json-file,有以下三个选项
+- driver:指定服务容器的日志记录驱动程序，默认值为json-file,有以下三个选项
 
 ```yaml
 driver: "json-file"
@@ -401,7 +401,7 @@ driver: "syslog"
 driver: "none"
 ```
 
-- 仅在 json-file 驱动程序下,可以使用以下参数,限制日志得数量和大小
+- 仅在 json-file 驱动程序下，可以使用以下参数，限制日志得数量和大小
 
 ```yaml
 logging:
@@ -411,8 +411,8 @@ logging:
     max-file: "10" # 最多10个文件
 ```
 
-- 当达到文件限制上限,会自动删除旧文件
-- syslog 驱动程序下,可以使用 syslog-address 指定日志接收地址
+- 当达到文件限制上限，会自动删除旧文件
+- syslog 驱动程序下，可以使用 syslog-address 指定日志接收地址
 
 ```yaml
 logging:
@@ -435,7 +435,7 @@ network_mode: "container:[container name/id]"
 
 #### networks
 
-- 配置容器连接的网络,引用顶级 networks 下的条目
+- 配置容器连接的网络，引用顶级 networks 下的条目
 
 ```yaml
 services:
@@ -501,10 +501,10 @@ ports:
 
 #### restart
 
-- no:是默认的重启策略,在任何情况下都不会重启容器
+- no:是默认的重启策略，在任何情况下都不会重启容器
 - always:容器总是重新启动
 - on-failure:在容器非正常退出时（退出状态非0),才会重启容器
-- unless-stopped:在容器退出时总是重启容器,但是不考虑在Docker守护进程启动时就已经停止了的容器
+- unless-stopped:在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器
 
 ```yaml
 restart: "no"
@@ -513,11 +513,11 @@ restart: on-failure
 restart: unless-stopped
 ```
 
-- **注意**:swarm 集群模式,请改用 restart_policy
+- **注意**:swarm 集群模式，请改用 restart_policy
 
 #### secrets
 
-- 存储敏感数据,例如密码
+- 存储敏感数据，例如密码
 
 **SHORT SYNTAX**
 
@@ -594,8 +594,8 @@ stop_grace_period: 1m30s # 等待 1 分 30 秒
 
 #### stop_signal
 
-- 设置停止容器的替代信号,默认情况下使用 SIGTERM
-- 以下示例,使用 SIGUSR1 替代信号 SIGTERM 来停止容器
+- 设置停止容器的替代信号，默认情况下使用 SIGTERM
+- 以下示例，使用 SIGUSR1 替代信号 SIGTERM 来停止容器
 
 ```yaml
 stop_signal: SIGUSR1
@@ -603,7 +603,7 @@ stop_signal: SIGUSR1
 
 #### sysctls
 
-- 设置容器中的内核参数,可以使用数组或字典格式
+- 设置容器中的内核参数，可以使用数组或字典格式
 
 ```yaml
 sysctls:
@@ -617,7 +617,7 @@ sysctls:
 
 #### tmpfs
 
-- 在容器内安装一个临时文件系统,可以是单个值或列表的多个值
+- 在容器内安装一个临时文件系统，可以是单个值或列表的多个值
 
 ```yaml
 tmpfs: /run
@@ -665,7 +665,7 @@ volumes:
 
 ### config
 
-验证 Compose 文件格式是否正确,若正确则显示配置,若格式错误显示错误原因
+验证 Compose 文件格式是否正确，若正确则显示配置，若格式错误显示错误原因
 
 ```
 $ docker-compose conifg
@@ -700,7 +700,7 @@ $ docker-compose images
 
 ### up
 
-- 该命令十分强大,它将尝试自动完成包括构建镜像,(重新）创建服务,启动服务,并关联服务相关容器的一系列操作
+- 该命令十分强大，它将尝试自动完成包括构建镜像,(重新）创建服务，启动服务，并关联服务相关容器的一系列操作
 
 ```
 $ docker-compose up
@@ -709,8 +709,8 @@ $ docker-compose up
 - `-d` 在后台运行服务容器
 - `--no-color` 不使用颜色来区分不同的服务的控制台输出
 - `--no-deps` 不启动服务所链接的容器
-- `--force-recreate` 强制重新创建容器,不能与 `--no-recreate` 同时使用
-- `--no-recreate` 如果容器已经存在了,则不重新创建,不能与 `--force-recreate` 同时使用
+- `--force-recreate` 强制重新创建容器，不能与 `--no-recreate` 同时使用
+- `--no-recreate` 如果容器已经存在了，则不重新创建，不能与 `--force-recreate` 同时使用
 - `--no-build` 不自动构建缺失的服务镜像
 - `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
 
@@ -723,11 +723,11 @@ $ docker-compose port [options] SERVICE PRIVATE_PORT
 ```
 
 - `--protocol=proto` 指定端口协议,tcp(默认值）或者 udp
-- `--index=index` 如果同一服务存在多个容器,指定命令对象容器的序号（默认为 1)
+- `--index=index` 如果同一服务存在多个容器，指定命令对象容器的序号（默认为 1)
 
 ### down
 
-- 此命令将会停止 `up` 命令所启动的容器,并移除网络
+- 此命令将会停止 `up` 命令所启动的容器，并移除网络
 
 ```
 $ docker-compose down
@@ -735,7 +735,7 @@ $ docker-compose down
 
 ### start
 
-- 停止已经处于运行状态的容器,但不删除它,通过 `docker-compose start` 可以再次启动这些容器
+- 停止已经处于运行状态的容器，但不删除它，通过 `docker-compose start` 可以再次启动这些容器
 
 ```
 $ docker-compose start [SERVICE...]
@@ -769,7 +769,7 @@ $ docker-compose restart [SERVICE...]
 $ docker-compose rm  [SERVICE...]
 ```
 
-- `-f, --force` 强制直接删除,包括非停止状态的容器,一般尽量不要使用该选项
+- `-f, --force` 强制直接删除，包括非停止状态的容器，一般尽量不要使用该选项
 - `-v` 删除容器所挂载的数据卷
 
 ### logs
@@ -786,7 +786,7 @@ $ docker-compose logs [SERVICE...]
 ### build
 
 - 构建（重新构建）项目中的服务容器
-- 服务容器一旦构建后,将会带上一个标记名,例如对于 web 项目中的一个 db 容器,可能是 web_db
+- 服务容器一旦构建后，将会带上一个标记名，例如对于 web 项目中的一个 db 容器，可能是 web_db
 - 可以随时在项目目录下运行该命令来重新构建服务
 
 ```
@@ -808,7 +808,7 @@ $ docker-compose run [options] [-p PORT...] [-e KEY=VAL...] SERVICE [COMMAND] [A
 - `-d` 后台运行容器
 - `--name NAME` 为容器指定一个名字
 - `--entrypoint CMD` 覆盖默认的容器启动指令
-- `-e KEY=VAL` 设置环境变量值,可多次使用选项来设置多个环境变量
+- `-e KEY=VAL` 设置环境变量值，可多次使用选项来设置多个环境变量
 - `-u, --user=""` 指定运行容器的用户名或者 uid
 - `--no-deps` 不自动启动关联的服务容器
 - `--rm` 运行命令后自动删除容器,`d` 模式下将忽略
@@ -823,9 +823,9 @@ $ docker-compose run [options] [-p PORT...] [-e KEY=VAL...] SERVICE [COMMAND] [A
 $ docker-compose run ubuntu ping docker.com
 ```
 
-- 将会启动一个 ubuntu 服务容器,并执行 `ping docker.com` 命令
-- 默认情况下,如果存在关联,则所有关联的服务将会自动被启动,除非这些服务已经在运行中
-- 该命令类似启动容器后运行指定的命令,而相关卷,链接等等都将会按照配置自动创建,但是给定命令将会覆盖原有的自动运行命令,也不会自动创建端口,以避免冲突
+- 将会启动一个 ubuntu 服务容器，并执行 `ping docker.com` 命令
+- 默认情况下，如果存在关联，则所有关联的服务将会自动被启动，除非这些服务已经在运行中
+- 该命令类似启动容器后运行指定的命令，而相关卷，链接等等都将会按照配置自动创建，但是给定命令将会覆盖原有的自动运行命令，也不会自动创建端口，以避免冲突
 -
 
 ```
@@ -840,7 +840,7 @@ $ docker-compose run --no-deps web python manage.py shel
 $ docker-compose scale [options] [SERVICE=NUM...]
 ```
 
-- `service=num` 设置数量,一般的,当指定数目多于该服务当前实际运行容器,将新创建并启动容器,反之,将停止容器
+- `service=num` 设置数量，一般的，当指定数目多于该服务当前实际运行容器，将新创建并启动容器，反之，将停止容器
 - `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
 
 **实例**

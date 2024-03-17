@@ -118,7 +118,7 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     }
     Authentication authResult;
     try {
-        //关键方法, 实现认证逻辑并返回 Authentication
+        //关键方法，实现认证逻辑并返回 Authentication
         authResult = attemptAuthentication(request, response);
         if (authResult == null) {
             // return immediately as subclass has indicated that it hasn't completed
@@ -229,7 +229,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
             catch
         }
         try {
-            //比对前的检查，例如账户以一些状态信息（是否锁定, 过期...)
+            //比对前的检查，例如账户以一些状态信息（是否锁定，过期...)
             preAuthenticationChecks.check(user);
             //定义比对方式，子类实现该方法
             additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
@@ -284,7 +284,7 @@ public class DaoAuthenticationProvider extends AbstractUserDetailsAuthentication
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         }
         String presentedPassword = authentication.getCredentials().toString();
-        //通过 PasswordEncoder 进行密码比对, 注: 可自定义
+        //通过 PasswordEncoder 进行密码比对，注: 可自定义
         if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
             logger.debug("Authentication failed: password does not match stored value");
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
