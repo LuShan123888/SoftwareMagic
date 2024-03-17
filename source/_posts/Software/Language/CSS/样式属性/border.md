@@ -107,7 +107,7 @@ border-color属性设置一个元素的四个边框颜色，此属性可以有�
 
 | 值          | 说明                                                         |
 | :---------- | :----------------------------------------------------------- |
-| *color*     | 指定背景颜色，在[CSS颜色值](https://www.runoob.com/cssref/css-colors-legal.html)查找颜色值的完整列表 |
+| *color*     | 指定背景颜色，在[CSS颜色值](https://www.runoob.com/cssref/css-colors-legal.html）查找颜色值的完整列表 |
 | transparent | 指定边框的颜色应该是透明的，这是默认                         |
 | inherit     | 指定边框的颜色，应该从父元素继承                             |
 
@@ -148,4 +148,4 @@ border-image: source slice width outset repeat|initial|inherit;
 | border-image-slice  | 图像边界向内偏移                                             |
 | border-image-width  | 图像边界的宽度                                               |
 | border-image-outset | 用于指定在边框外部绘制 border-image-area 的量                |
-| border-image-repeat | 用于设置图像边界是否应重复（repeat)，拉伸（stretch)或铺满（round), |
+| border-image-repeat | 用于设置图像边界是否应重复（repeat)，拉伸（stretch）或铺满（round), |

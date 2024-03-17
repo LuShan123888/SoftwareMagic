@@ -26,8 +26,8 @@ categories:
 
 ## HashSlot
 
-- Redis Cluster 集群采用 HashSlot(哈希槽）分配数据，Redis 集群预先分好16384(16K)个槽，初始化集群时平均规划给每一台Redis Master
-- 然后对存入的Key取哈希并对16384(16K)取模得到指定的槽，存放到包含该槽的节点服务器上。
+- Redis Cluster 集群采用 HashSlot（哈希槽）分配数据，Redis 集群预先分好16384(16K）个槽，初始化集群时平均规划给每一台Redis Master
+- 然后对存入的Key取哈希并对16384(16K）取模得到指定的槽，存放到包含该槽的节点服务器上。
 
 ### 分片迁移
 

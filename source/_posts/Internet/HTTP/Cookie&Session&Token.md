@@ -92,14 +92,14 @@ upstream backserver {
 - **JSON Web Token**：一般用来替换掉Session实现数据共享。
 - **优点**:
   - **无状态，可扩展**：在客户端存储的Token是无状态的，并且能够被扩展，基于这种无状态和不存储Session信息，负载均衡器能够将	用户信息从一个服务传到其他服务器上。
-  - **安全**：请求中发送token而不再是发送Cookie能够防止CSRF(跨站请求伪造）
+  - **安全**：请求中发送token而不再是发送Cookie能够防止CSRF（跨站请求伪造）
   - **可提供接口给第三方服务**：使用token时，可以提供可选的权限给第三方应用程序。
   - **多平台跨域**：对应用程序和服务进行扩展的时候，需要介入各种各种的设备和应用程序，假如我们的后端api服务器a.com只提供数据，而静态资源则存放在cdn 服务器b.com上，当我们从a.com请求b.com下面的资源时，由于触发浏览器的同源策略限制而被阻止。
 - **缺点**:
   - 服务端无法主动让token失效。
   - 无法更新token有效期。
 
-**通过CORS(跨域资源共享）标准和token来解决资源共享和安全问题**
+**通过CORS（跨域资源共享）标准和token来解决资源共享和安全问题**
 
 - 举个例子，我们可以设置b.com的响应首部字段为：
 
@@ -259,7 +259,7 @@ public class RedisSessionInitializer extends AbstractHttpSessionApplicationIniti
 
 ## Token
 
-- 访问资源接口（API)时所需要的资源凭证。
+- 访问资源接口（API）时所需要的资源凭证。
 
   **特点**:
 

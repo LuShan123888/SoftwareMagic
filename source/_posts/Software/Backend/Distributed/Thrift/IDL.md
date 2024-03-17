@@ -8,9 +8,9 @@ categories:
 ---
 # Thrift IDL
 
-Thrift是一个典型的CS(客户端/服务端结构，客户端和服务端可以使用不同的语言开发，既然客户端和服务端能使用不同的语言开发，那么一定就要有一种中间语言来关联客户端和服务端的语言，这种语言就是IDL (Interface Description Language)
+Thrift是一个典型的CS（客户端/服务端结构，客户端和服务端可以使用不同的语言开发，既然客户端和服务端能使用不同的语言开发，那么一定就要有一种中间语言来关联客户端和服务端的语言，这种语言就是IDL (Interface Description Language)
 
-Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口，然后通过Thrift提供的编译器，可以将服务接口编译成不同语言编写的代码，通过这个方式来实现跨语言的功能。
+Thrift 采用IDL (Interface Definition Language）来定义通用的服务接口，然后通过Thrift提供的编译器，可以将服务接口编译成不同语言编写的代码，通过这个方式来实现跨语言的功能。
 
 ## 数据结构
 
@@ -155,7 +155,7 @@ public class HelloService {
 }
 ```
 
-## Namespace(名字空间）
+## Namespace（名字空间）
 
 Thrift中的命名空间类似于C++中的namespace和java中的package，它们提供了一种组织（隔离）代码的简便方式。命名空间也可以用于解决类型定义中的命名冲突。由于每种语言均有自己的命名空间定义方式（如python中有module)，thrift允许开发者针对特定语言定义namespace。
 
@@ -177,7 +177,7 @@ service Hello{ // 接口定义，类似Java接口定义。
 }		
 ```
 
-## Comment (注释）
+## Comment （注释）
 
 Thrift支持C多行风格和Java/C++单行风格。
 

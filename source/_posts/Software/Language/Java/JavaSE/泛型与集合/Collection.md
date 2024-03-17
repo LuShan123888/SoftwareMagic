@@ -68,7 +68,7 @@ public interface Collection<E> extends Iterable<E>
 
 - ArrayList 是一个动态数组，也是我们最常用的集合，它允许任何符合规则的元素插入甚至包括 null
 - 每一个 ArrayList 都有一个初始容量（10)，该容量代表了数组的大小，随着容器中的元素不断增加，容器的大小也会随着增加，在每次向容器中增加元素的同时都会进行容量检查，当快溢出时，就会进行扩容操作，所以**如果我们明确所插入元素的多少，最好指定一个初始容量值，避免过多的进行扩容操作而浪费时间，效率，**
-- `size()`,`isEmpty()`,`get()`,`set()`,`iterator()`和`listIterator()`操作都以固定时间运行，`add()`操作以分摊的固定时间运行，也就是说，添加 n 个元素需要 O(n) 时间（由于要考虑到扩容，所以这不只是添加元素会带来分摊固定时间开销那样简单）
+- `size()`,`isEmpty()`,`get()`,`set()`,`iterator()`和`listIterator()`操作都以固定时间运行，`add()`操作以分摊的固定时间运行，也就是说，添加 n 个元素需要 O(n）时间（由于要考虑到扩容，所以这不只是添加元素会带来分摊固定时间开销那样简单）
 - **ArrayList 擅长于随机访问，同时 ArrayList 是非同步的，**
 
 **[例14-4]**:ArrayList的使用。
@@ -126,7 +126,7 @@ public class ArrayList和LinkedList的使用测试 {
   static long timeList(List<Integer> st){
     long start = System.currentTimeMillis();// 开始时间。
     for (int i =0;i<5000;i++)
-      // 使用List对象的add(int Object)方法加入对象到List内指定位置。
+      // 使用List对象的add(int Object）方法加入对象到List内指定位置。
       st.add(0,new Integer(i));
     return System.currentTimeMillis()-start;// 计算花费时间。
   }
@@ -145,7 +145,7 @@ time for ArrayList= 5
 
 ### Vertor
 
-- 向量（Vector)是List接口中的另一个子类，Vector非常类似ArrayList，早期的程序中使用较多，现在通常用ArrayList代替，两者一个重要的差异是，Vector是线程同步的，线程在更改向量的过程中将对资源加锁，所以说 **Vector 是线程安全的动态数组**
+- 向量（Vector）是List接口中的另一个子类，Vector非常类似ArrayList，早期的程序中使用较多，现在通常用ArrayList代替，两者一个重要的差异是，Vector是线程同步的，线程在更改向量的过程中将对资源加锁，所以说 **Vector 是线程安全的动态数组**
 - Vector也是实现了可变大小的对象数组，在容量不够时会自动增加，以下构造方法规定了向量的初始容量及容量不够时的扩展容量。
 
 ```java
@@ -261,7 +261,7 @@ pop -> empty stack
 - `List`提供了`boolean contains(Object o)`方法来判断`List`是否包含某个指定元素，此外，`int indexOf(Object o)`方法可以返回某个元素的索引，如果元素不存在，就返回`-1`
 - 正确使用`List`的`contains()`,`indexOf()`这些方法，放入的实例必须正确覆写`equals()`方法，否则，放进去的实例，查找不到，我们之所以能正常放入`String`,`Integer`这些对象，是因为Java标准库定义的这些类已经正确实现了`equals()`方法。
 
-> **如何正确编写equals()方法**
+> **如何正确编写equals(）方法**
 >
 > - `equals()`方法要求我们必须满足以下条件：
 >   - **自反性**(Reflexive)：对于非`null`的`x`来说，`x.equals(x)`必须返回`true`
@@ -467,7 +467,7 @@ public class Main {
 
 ## Queue
 
-- 队列（`Queue`)是一种经常使用的集合，`Queue`实际上是实现了一个先进先出（FIFO:First In First Out)的有序表，它和`List`的区别在于，`List`可以在任意位置添加和删除元素，而`Queue`只有两个操作：
+- 队列（`Queue`）是一种经常使用的集合，`Queue`实际上是实现了一个先进先出（FIFO:First In First Out）的有序表，它和`List`的区别在于，`List`可以在任意位置添加和删除元素，而`Queue`只有两个操作：
   - 把元素添加到队列末尾。
   - 从队列头部取出元素。
 - 在Java的标准库中，队列接口`Queue`定义了以下几个方法：
@@ -561,7 +561,7 @@ public class Main {
         q.offer("apple");
         q.offer("pear");
         q.offer("banana");
-        // 队首永远都是apple，因为peek()不会删除它：
+        // 队首永远都是apple，因为peek(）不会删除它：
         System.out.println(q.peek()); // apple
         System.out.println(q.peek()); // apple
         System.out.println(q.peek()); // apple

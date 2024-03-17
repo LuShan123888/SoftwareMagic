@@ -43,7 +43,7 @@ func main() {
 }
 ```
 
-**type.Name () 和 type.Kind ()**
+**type.Name (）和 type.Kind ()**
 
 - 在反射中关于类型还划分为两种： `名称（Name)` 和 `种类（Kind)`，因为在 Go 语言中我们可以使用 type 关键字构造很多自定义类型，而 `名称（Name)` 就是指底层的类型，但在反射中，当需要区分指针，结构体等类型时，就会用到 `种类（Kind)`，例如定义了两个指针类型和两个结构体类型，通过反射查看它们的名称和种类。
 
@@ -129,7 +129,7 @@ const (
 | Interface () interface {} | 将值以 interface{} 类型返回，可以通过类型断言转换为指定类型  |
 |       Int () int 64        |     将值以 int 类型返回，所有有符号整型均可以此方式返回      |
 |      Uint () uint 64       |     将值以 uint 类型返回，所有无符号整型均可以此方式返回     |
-|     Float () float 64      | 将值以双精度（float 64) 类型返回，所有浮点数（float 32, float 64) 均可以此方式返回 |
+|     Float () float 64      | 将值以双精度（float 64）类型返回，所有浮点数（float 32, float 64）均可以此方式返回 |
 |       Bool () bool        |                     将值以 bool 类型返回                     |
 |     Bytes () []bytes      |               将值以字节数组 []bytes 类型返回                |
 |     String () string      |                     将值以字符串类型返回                     |
@@ -142,13 +142,13 @@ func reflectValue(x interface{}) {
 	k := v.Kind()
 	switch k {
 	case reflect.Int64:
-		// v.Int()从反射中获取整型的原始值，然后通过int64()强制类型转换。
+		// v.Int(）从反射中获取整型的原始值，然后通过int64(）强制类型转换。
 		fmt.Printf("type is int64, value is %d\n", int64(v.Int()))
 	case reflect.Float32:
-		// v.Float()从反射中获取浮点型的原始值，然后通过float32()强制类型转换。
+		// v.Float(）从反射中获取浮点型的原始值，然后通过float32(）强制类型转换。
 		fmt.Printf("type is float32, value is %f\n", float32(v.Float()))
 	case reflect.Float64:
-		// v.Float()从反射中获取浮点型的原始值，然后通过float64()强制类型转换。
+		// v.Float(）从反射中获取浮点型的原始值，然后通过float64(）强制类型转换。
 		fmt.Printf("type is float64, value is %f\n", float64(v.Float()))
 	}
 }
@@ -183,7 +183,7 @@ func reflectSetValue1(x interface{}) {
 }
 func reflectSetValue2(x interface{}) {
 	v := reflect.ValueOf(x)
-	// 反射中使用 Elem()方法获取指针对应的值。
+	// 反射中使用 Elem(）方法获取指针对应的值。
 	if v.Elem().Kind() == reflect.Int64 {
 		v.Elem().SetInt(200)
 	}
@@ -196,7 +196,7 @@ func main() {
 }
 ```
 
-#### isNil () 和 isValid ()
+#### isNil (）和 isValid ()
 
 **isNil ()**
 
@@ -240,7 +240,7 @@ func main() {
 
 ### 与结构体相关的方法
 
-- 任意值通过 `reflect.TypeOf()` 获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象（`reflect.Type`) 的 `NumField()` 和 `Field()` 方法获得结构体成员的详细信息。
+- 任意值通过 `reflect.TypeOf()` 获得反射对象信息后，如果它的类型是结构体，可以通过反射值对象（`reflect.Type`）的 `NumField()` 和 `Field()` 方法获得结构体成员的详细信息。
 - `reflect. Type`中与获取结构体成员相关的的方法如下表所示。
 
 |                            方法                             |                             说明                             |

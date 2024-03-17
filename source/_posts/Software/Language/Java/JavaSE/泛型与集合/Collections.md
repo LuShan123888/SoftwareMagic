@@ -9,7 +9,7 @@ categories:
 ---
 # Java  Collections
 
-Java还提供了一个包装类java.util.Collections，它包含有针对Collection(收集）操作的众多静态方法，下面列出常用的若干方法。
+Java还提供了一个包装类java.util.Collections，它包含有针对Collection（收集）操作的众多静态方法，下面列出常用的若干方法。
 
 - `addAll(Collection<? super T> c, T... elements)`：将指定元素添加到指定集合中。
 - `sort(List<T> list)`：根据元素的自然顺序对指定列表按升序进行排序。

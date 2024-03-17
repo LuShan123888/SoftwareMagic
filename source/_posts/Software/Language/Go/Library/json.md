@@ -334,7 +334,7 @@ func decoderDemo () {
 	}
 	fmt.Printf ("value:%v\n", m 2["count"]) // 1
 	fmt.Printf ("type:%T\n", m 2["count"])  // json. Number
-	// 将 m 2["count"]转为 json. Number 之后调用 Int 64 () 方法获得 int 64 类型的值。
+	// 将 m 2["count"]转为 json. Number 之后调用 Int 64 (）方法获得 int 64 类型的值。
 	count, err := m 2["count"]. (json. Number). Int 64 ()
 	if err != nil {
 		fmt.Printf ("parse to int 64 failed, err:%v\n", err)

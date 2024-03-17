@@ -9,7 +9,7 @@ categories:
 ---
 # Java URL与URLConnection
 
-- 在Internet上的所有网络资源都是用URL(Uniform Resource Locator)来表示的，一个URL地址通常由4部分组成，包括协议名，主机名，路径文件，端口号，例如华东交通大学Java课程的网上教学地址为http://cai.ecjtu.jx.cn:80/java/index.html
+- 在Internet上的所有网络资源都是用URL(Uniform Resource Locator）来表示的，一个URL地址通常由4部分组成，包括协议名，主机名，路径文件，端口号，例如华东交通大学Java课程的网上教学地址为http://cai.ecjtu.jx.cn:80/java/index.html
 
 ## URL类
 

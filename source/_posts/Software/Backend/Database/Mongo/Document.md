@@ -8,7 +8,7 @@ categories:
 ---
 # Mongo Document
 
-文档（document)的数据结构和 JSON 基本一样。所有存储在集合中的数据都是 BSON 格式。
+文档（document）的数据结构和 JSON 基本一样。所有存储在集合中的数据都是 BSON 格式。
 
 ## 创建文档
 
@@ -16,7 +16,7 @@ categories:
 
 ### 单个文档插入
 
-使用insert() 或 save() 方法向集合中插入文档，语法如下：
+使用insert(）或 save(）方法向集合中插入文档，语法如下：
 
 ```sh
 db.collection.insert(
@@ -65,7 +65,7 @@ db.comment.insert(
 
 **文档键命名规范**
 
-- 键不能含有\0 (空字符）。这个字符用来表示键的结尾。
+- 键不能含有\0 （空字符）。这个字符用来表示键的结尾。
 - .和$有特别的意义，只有在特定环境下才能使用。
 - 以下划线"_"开头的键是保留的。
 
@@ -117,7 +117,7 @@ db.comment.find({})
 
 ### 条件查询
 
-在find()中添加参数即可，参数也是json格式，如下：
+在find(）中添加参数即可，参数也是json格式，如下：
 
 ```
 db.comment.find({userid:'1003'})
@@ -164,7 +164,7 @@ db.comment.find().skip(4).limit(2)
 `sort()`方法对数据进行排序，`sort()`方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而 -1 是用于降序排列。
 
 ```
-db.集合名称.find().sort(排序方式） 
+db.集合名称.find().sort（排序方式） 
 
 db.COLLECTION_NAME.find().sort({KEY:1})
 ```
@@ -278,7 +278,7 @@ db.collection.update(
 )
 ```
 
-- **query**：更新的选择条件。可以使用与find()方法中相同的查询选择器。在3.0版中进行了更改：当使用upsert:true执行update()时，如果查询使用点表示法在_id字段上指定条件，则MongoDB将拒绝插入新文档。
+- **query**：更新的选择条件。可以使用与find(）方法中相同的查询选择器。在3.0版中进行了更改：当使用upsert:true执行update(）时，如果查询使用点表示法在_id字段上指定条件，则MongoDB将拒绝插入新文档。
 - **update**：要应用的修改。该值可以是：包含更新运算符表达式的文档，或仅包含：对的替换文档，或在MongoDB 4.2中启动聚合管道。
 - **upsert**：可选参数。如果设置为true，则在没有与查询条件匹配的文档时创建新文档。默认值为false，如果找不到匹配项，则不会插入新文档。
 - **multi**：可选参数。如果设置为true，则更新符合查询条件的多个文档。如果设置为false，则更新一个文档。默认值为false。
@@ -323,7 +323,7 @@ db.comment.update({_id:"3"},{$inc:{likenum:NumberInt(1)}})
 ## 删除文档
 
 ```
-db.集合名称.remove(条件）
+db.集合名称.remove（条件）
 ```
 
 ### 删除所有文档

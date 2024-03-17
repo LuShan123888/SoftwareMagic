@@ -22,7 +22,7 @@ class Thread implements Runnable{
     public Thread(Runnable target){...}
     public void run() {
         if (target != null)
-            target.run();   // 执行实现Runnable接口的target对象的run()方法。
+            target.run();   // 执行实现Runnable接口的target对象的run(）方法。
     }
     ...
 }
@@ -120,16 +120,16 @@ class Winning extends Frame implements Runnable {
 }
 ```
 
-- **说明**：第4行定义了Winning类头，表明了该类继承Frame并实现了Runnable接口，第25行创建线程时将Winning窗体自身对象作为实参，并启动线程，线程调度运行时将执行其run()方法。
+- **说明**：第4行定义了Winning类头，表明了该类继承Frame并实现了Runnable接口，第25行创建线程时将Winning窗体自身对象作为实参，并启动线程，线程调度运行时将执行其run(）方法。
 
 ## 实现Callable接口编写多线程
 
 > **步骤**
 >
-> 1. 创建Callable接口的实现类，并实现call()方法，该call()方法将作为线程执行体，并且有返回值。
-> 2. 创建Callable实现类的实例，使用FutureTask类来包装Callable对象，该FutureTask对象封装了该Callable对象的call()方法的返回值。
+> 1. 创建Callable接口的实现类，并实现call(）方法，该call(）方法将作为线程执行体，并且有返回值。
+> 2. 创建Callable实现类的实例，使用FutureTask类来包装Callable对象，该FutureTask对象封装了该Callable对象的call(）方法的返回值。
 > 3. 使用FutureTask对象作为Thread对象的target创建并启动新线程。
-> 4. 调用FutureTask对象的get()方法来获得子线程执行结束后的返回值。
+> 4. 调用FutureTask对象的get(）方法来获得子线程执行结束后的返回值。
 
 **特点**
 

@@ -143,7 +143,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 #### 回源
 
 - 依赖分发，即依赖从何处下载、如何下载的问题。
-- Go 的依赖绝大部分托管在 GitHub 上。Go Module 系统中定义的依赖，最终都可以对应到 GitHub 中某一项目的特定提交（commit) 或版本。
+- Go 的依赖绝大部分托管在 GitHub 上。Go Module 系统中定义的依赖，最终都可以对应到 GitHub 中某一项目的特定提交（commit）或版本。
 - 对于 go. mod 中定义的依赖，则直接可以从对应仓库中下载指定依赖，从而完成依赖分发。
 
 ![image-20220517161158838](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/a08866eef9694c8083831781f2e21ee1~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
@@ -158,7 +158,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 
 **3. 解决方案-Proxy**
 
-- Go Proxy 就是解决上述问题的方案。Go Proxy 是一个服务站点，它会缓存 GitHub 中的代码内容，缓存的代码版本不会改变，并且在 GitHub 作者删除了代码之后也依然可用，从而实现了 "immutability" (不变性）和 "available" (可用的）的依赖分发。
+- Go Proxy 就是解决上述问题的方案。Go Proxy 是一个服务站点，它会缓存 GitHub 中的代码内容，缓存的代码版本不会改变，并且在 GitHub 作者删除了代码之后也依然可用，从而实现了 "immutability" （不变性）和 "available" （可用的）的依赖分发。
 - 使用 Go Proxy 后，构建时会直接从 Go Proxy 站点拉取依赖。如下图所示。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/3765a36f40a846a69a45ea68347defb5~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image-20220517183641065" style="zoom:50%;" />

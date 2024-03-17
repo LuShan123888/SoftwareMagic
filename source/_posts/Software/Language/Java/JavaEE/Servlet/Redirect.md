@@ -11,9 +11,9 @@ categories:
 
 当文档移动到新的位置，我们需要向客户端发送这个新位置时，我们需要用到网页重定向，当然，也可能是为了负载均衡，或者只是为了简单的随机，这些情况都有可能用到网页重定向。
 
-## setStatus()和setHeader()
+## setStatus(）和setHeader()
 
-该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus() 和 setHeader() 方法一起使用来达到同样的效果：
+该方法把响应连同状态码和新的网页位置发送回浏览器，您也可以通过把 setStatus(）和 setHeader(）方法一起使用来达到同样的效果：
 
 ```java
 String site = "http://www.test.com" ;

@@ -15,8 +15,8 @@ categories:
     - 用户访问权限控制，比如：判断用户是否分配了一定的安全角色，判断用户是否被授予完成某个操作的权限。
     - 在非 Web 或 EJB 容器的环境下可以任意使用 Session API
     - 可以响应认证，访问控制，或者 Session 生命周期中发生的事件。
-    - 可将一个或以上用户安全数据源数据组合成一个复合的用户"view”(视图）
-    - 支持单点登录（SSO)功能。
+    - 可将一个或以上用户安全数据源数据组合成一个复合的用户"view”（视图）
+    - 支持单点登录（SSO）功能。
     - 支持提供"Remember Me”服务，获取用户关联信息而无需登录。
     - 等等——都集成到一个有凝聚力的易于使用的 API
 - Shiro 致力在所有应用环境下实现上述功能，小到命令行应用程序，大到企业应用中，而且不需要借助第三方框架，容器，应用服务器等，当然 Shiro 的目的是尽量的融入到这样的应用环境中去，但也可以在它们之外的任何环境下开箱即用。
@@ -27,11 +27,11 @@ categories:
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-ShiroFeatures.png)
 
-- Authentication(认证）, Authorization(授权）, Session Management(会话管理）, Cryptography(加密）被 Shiro 框架的开发团队称之为应用安全的四大基石，那么就让我们来看看它们吧：
-    - **Authentication(认证）**：用户身份识别，通常被称为用户"登录”
-    - **Authorization(授权）**：访问控制，比如某个用户是否具有某个操作的使用权限。
-    - **Session Management(会话管理）**：特定于用户的会话管理，甚至在非web 或 EJB 应用程序。
-    - **Cryptography(加密）**：在对数据源使用加密算法加密的同时，保证易于使用。
+- Authentication（认证）, Authorization（授权）, Session Management（会话管理）, Cryptography（加密）被 Shiro 框架的开发团队称之为应用安全的四大基石，那么就让我们来看看它们吧：
+    - **Authentication（认证）**：用户身份识别，通常被称为用户"登录”
+    - **Authorization（授权）**：访问控制，比如某个用户是否具有某个操作的使用权限。
+    - **Session Management（会话管理）**：特定于用户的会话管理，甚至在非web 或 EJB 应用程序。
+    - **Cryptography（加密）**：在对数据源使用加密算法加密的同时，保证易于使用。
 - 还有其他的功能来支持和加强这些不同应用环境下安全领域的关注点，特别是对以下的功能支持：
     - Web支持：Shiro 提供的 Web 支持 api，可以很轻松的保护 Web 应用程序的安全。
     - 缓存：缓存是 Apache Shiro 保证安全操作快速，高效的重要手段。
@@ -49,7 +49,7 @@ categories:
 
 - Subject：当前用户，Subject 可以是一个人，但也可以是第三方服务，守护进程帐户，时钟守护任务或者其它–当前和软件交互的任何事件。
 - SecurityManager：管理所有Subject,SecurityManager 是 Shiro 架构的核心，配合内部安全组件共同组成安全伞。
-- Realms：用于进行权限信息的验证，由我们自己实现，Realm 本质上是一个特定的安全 DAO，它封装与数据源连接的细节，得到Shiro 所需的相关的数据，在配置 Shiro 的时候，你必须指定至少一个Realm 来实现认证（authentication)和/或授权（authorization)
+- Realms：用于进行权限信息的验证，由我们自己实现，Realm 本质上是一个特定的安全 DAO，它封装与数据源连接的细节，得到Shiro 所需的相关的数据，在配置 Shiro 的时候，你必须指定至少一个Realm 来实现认证（authentication）和/或授权（authorization)
 
 - 我们需要实现Realms的Authentication 和 Authorization，其中 Authentication 是用来验证用户身份，Authorization 是授权访问控制，用于对用户进行的操作授权，证明该用户是否允许进行当前操作，如访问某个链接，某个资源文件等。
 
@@ -205,7 +205,7 @@ public class ShiroConfig {
 
     /**
      * 凭证匹配器。
-     *(由于密码校验交给Shiro的SimpleAuthenticationInfo进行处理了）
+     *（由于密码校验交给Shiro的SimpleAuthenticationInfo进行处理了）
      * @return
      */
     @Bean
@@ -403,7 +403,7 @@ public Map<String,Object> getLogout(){
 | ----------------------- | ------------------------------------------------------------ |
 | @RequiresAuthentication | 使用该注解标注的类，方法等在访问时，当前Subject必须在当前session中已经过认证 |
 | @RequiresGuest          | 使用该注解标注的类，方法等在访问时，当前Subject可以是"Guest"身份，不需要经过认证或者在原先的session中存在记录 |
-| @RequersUser            | 验证用户是否被记忆，有两种含义一种是成功登录的（subject.isAuthenticated()结果为true);另外一种是被记忆的（subject.isRemembere()结果为true). |
+| @RequersUser            | 验证用户是否被记忆，有两种含义一种是成功登录的（subject.isAuthenticated(）结果为true);另外一种是被记忆的（subject.isRemembere(）结果为true). |
 | @RequiresPermission     | 当前Subject需要拥有某些特定的权限时，才能执行被该注解标主的方法如果没有权限，则方法不会执行还会抛出AuthorizationException异常 |
 | @RequiresRoles          | 当前Subject必须拥有所有指定的角色时，才能访问被该注解标主的方法如果没有角色则方法不会执行还会抛出AuthorizationException异常 |
 

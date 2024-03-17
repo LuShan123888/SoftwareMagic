@@ -1,5 +1,5 @@
 ---
-title：项目部署
+title: 项目部署
 categories:
 - Software
 - DevOps

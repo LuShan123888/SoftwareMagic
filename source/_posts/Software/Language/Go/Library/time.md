@@ -197,7 +197,7 @@ func (t Time) After(u Time) bool
 
 ## 定时器
 
-使用 `time.Tick(时间间隔）` 来设置定时器，定时器的本质上是一个通道（channel）。
+使用 `time.Tick（时间间隔）` 来设置定时器，定时器的本质上是一个通道（channel）。
 
 ```go
 func tickDemo() {

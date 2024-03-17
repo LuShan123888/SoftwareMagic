@@ -100,7 +100,7 @@ List<User> selectUser(Map<String,Integer> map);
 ```
 
 3. 在测试类中传入参数测试。
-    - 推断：起始位置 =  (当前页面 - 1 ) * 页面大小。
+    - 推断：起始位置 =  （当前页面 - 1 ) * 页面大小。
 
 ```java
 // 分页查询，两个参数startIndex , pageSize
@@ -273,7 +273,7 @@ public void testDeleteUser() {
 
 ## #与$的区别
 
-- `#{} `的作用主要是替换预编译语句（PrepareStatement)中的占位符，可以防止SQL注入攻击。
+- `#{} `的作用主要是替换预编译语句（PrepareStatement）中的占位符，可以防止SQL注入攻击。
 
 ```sql
 INSERT INTO user (name) VALUES (#{name});

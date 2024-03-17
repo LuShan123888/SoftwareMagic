@@ -33,7 +33,7 @@ git rebase  <branch_name>
 
 - `-i --interactive`：即弹出交互式的界面让用户编辑完成合并操作。
 - `[startpoint],[endpoint]`：指定了一个编辑区间，可以用 commit-id 或 HEAD 指针指定。
-- 如果不指定 `[endpoint]`，则该区间的终点默认是当前分支 `HEAD` 所指向的 `commit` (注：该区间指定的是一个前开后闭的区间）
+- 如果不指定 `[endpoint]`，则该区间的终点默认是当前分支 `HEAD` 所指向的 `commit` （注：该区间指定的是一个前开后闭的区间）
 
 在 rebase 的提交上，可以执行以下 6 个动作：
 
@@ -101,7 +101,7 @@ git rebase   [startpoint]   [endpoint]  --onto  [branchName]
 ```
 
 其中， `[startpoint]` `[endpoint]` 仍然和上一个命令一样指定了一个编辑区间（前开后闭）, `--onto` 的意思是要将该指定的提交复制到哪个分支上。
-所以，在找到 C (90 bc 0045 b) 和 E (5 de 0 da 9 f 2) 的提交 id 后，运行以下命令：
+所以，在找到 C (90 bc 0045 b）和 E (5 de 0 da 9 f 2）的提交 id 后，运行以下命令：
 
 ```shell
 git  rebase   90bc0045b^   5de0da9f2   --onto master

@@ -31,7 +31,7 @@ mysql> insert into t values('{"id": 87, "name": "carrot"}');
 Query OK, 1 row affected (0.01 sec)
 ```
 
-#### JSON_ARRAY()和 JSON_OBJECT()
+#### JSON_ARRAY(）和 JSON_OBJECT()
 
 - 前者用于构造 JSON 数组，后者用于构造 JSON 对象。如，
 
@@ -343,7 +343,7 @@ ERROR 3152 (42000): JSON column 'c1' supports indexing only via generated column
 
 ```sql
 # C2 即虚拟列
-# index (c2) 对虚拟列添加索引。
+# index (c2）对虚拟列添加索引。
 create table t ( c1 json, c2 varchar(10) as (JSON_UNQUOTE(c1 -> "$.name")), index (c2) );
 
 insert into t (c1) values  ('{"id": 1, "name": "a"}'), ('{"id": 2, "name": "b"}'), ('{"id": 3, "name": "c"}'), ('{"id": 4, "name": "d"}');
@@ -953,7 +953,7 @@ mysql> select json_quote('null'), json_quote('"null"'), json_quote('[1, 2, 3]');
 1 row in set (0.00 sec)
 ```
 
-- 除此之外，也可通过 CAST(value AS JSON) 进行类型转换。
+- 除此之外，也可通过 CAST(value AS JSON）进行类型转换。
 
 #### JSON_UNQUOTE(json_val)
 
@@ -1240,7 +1240,7 @@ select *
 
 #### JSON_SCHEMA_VALID(schema,document)
 
-- 判断 document （ JSON 文档 ）是否满足 schema （ JSON 对象）定义的规范要求。完整的规范要求可参考 [Draft 4 of the JSON Schema specification](https://json-schema.org/specification-links.html#draft-4) 。如果不满足，可通过 JSON_SCHEMA_VALIDATION_REPORT() 获取具体的原因。
+- 判断 document （ JSON 文档 ）是否满足 schema （ JSON 对象）定义的规范要求。完整的规范要求可参考 [Draft 4 of the JSON Schema specification](https://json-schema.org/specification-links.html#draft-4) 。如果不满足，可通过 JSON_SCHEMA_VALIDATION_REPORT(）获取具体的原因。
 
 ```swift
 set @schema = '{

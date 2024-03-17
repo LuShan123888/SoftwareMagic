@@ -63,8 +63,8 @@ static class Node<K,V> implements Map.Entry<K,V> {
 map.put("美团","小美");
 ```
 
-- 系统将调用”美团”这个key的hashCode()方法得到其hashCode 值（该方法适用于每个Java对象），然后再通过Hash算法的后两步运算（高位运算和取模运算，下文有介绍）来定位该键值对的存储位置，有时两个key会定位到相同的位置，表示发生了Hash碰撞，当然Hash算法计算结果越分散均匀，Hash碰撞的概率就越小，map的存取效率就会越高。
-- 如果Hash桶数组很大，即使较差的Hash算法也会比较分散，如果Hash桶数组数组很小，即使好的Hash算法也会出现较多碰撞，所以就需要在空间成本和时间成本之间权衡，其实就是在根据实际情况确定Hash桶数组的大小，并在此基础上设计好的hash算法减少Hash碰撞，那么通过什么方式来控制map使得Hash碰撞的概率又小，Hash桶数组（Node[] table)占用空间又少呢？答案就是好的Hash算法和扩容机制。
+- 系统将调用”美团”这个key的hashCode(）方法得到其hashCode 值（该方法适用于每个Java对象），然后再通过Hash算法的后两步运算（高位运算和取模运算，下文有介绍）来定位该键值对的存储位置，有时两个key会定位到相同的位置，表示发生了Hash碰撞，当然Hash算法计算结果越分散均匀，Hash碰撞的概率就越小，map的存取效率就会越高。
+- 如果Hash桶数组很大，即使较差的Hash算法也会比较分散，如果Hash桶数组数组很小，即使好的Hash算法也会出现较多碰撞，所以就需要在空间成本和时间成本之间权衡，其实就是在根据实际情况确定Hash桶数组的大小，并在此基础上设计好的hash算法减少Hash碰撞，那么通过什么方式来控制map使得Hash碰撞的概率又小，Hash桶数组（Node[] table）占用空间又少呢？答案就是好的Hash算法和扩容机制。
 - 在理解Hash和扩容流程之前，我们得先了解下HashMap的几个字段，从HashMap的默认构造函数源码可知，构造函数就是对下面几个字段进行初始化，源码如下：
 
 ```java
@@ -74,11 +74,11 @@ int modCount;
 int size;
 ```
 
-- 首先，Node[] table的初始化长度length(默认值是16),Load factor为负载因子（默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node(键值对）个数，threshold = length * Load factor，也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多。
-- 结合负载因子的定义公式可知，threshold就是在此Load factor和length(数组长度）对应下允许的最大元素数目，超过这个数目就重新resize(扩容），扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1
+- 首先，Node[] table的初始化长度length（默认值是16),Load factor为负载因子（默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node（键值对）个数，threshold = length * Load factor，也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多。
+- 结合负载因子的定义公式可知，threshold就是在此Load factor和length（数组长度）对应下允许的最大元素数目，超过这个数目就重新resize（扩容），扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1
 - size这个字段其实很好理解，就是HashMap中实际存在的键值对数量，注意和table的长度length，容纳最大键值对数量threshold的区别，而modCount字段主要用来记录HashMap内部结构发生变化的次数，主要用于迭代的快速失败，强调一点，内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化。
 - 在HashMap中，Hash桶数组table的长度length大小必须为2的n次方（一定是合数），这是一种非常规的设计，常规的设计是把桶的大小设计为素数，相对来说素数导致冲突的概率要小于合数，Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）,HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位Hash桶索引位置时，也加入了高位参与运算的过程。
-- 这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能，于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树，而当链表长度太长（默认超过8)时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入，删除，查找等算法。
+- 这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能，于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树，而当链表长度太长（默认超过8）时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入，删除，查找等算法。
 
 ### 源码分析
 
@@ -89,8 +89,8 @@ int size;
 ```java
 static final int hash(Object key) {   //JDK1.8 & JDK1.7
     int h;
-    // h = key.hashCode() 为第一步取hashCode值。
-    // h ^ (h >>> 16)  为第二步高位参与运算。
+    // h = key.hashCode(）为第一步取hashCode值。
+    // h ^ (h >>> 16）为第二步高位参与运算。
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
 }
 
@@ -100,9 +100,9 @@ static int indexFor(int h, int length) {  //JDK1.7的源码，JDK1.8没有这个
 ```
 
 - 这里的Hash算法本质上就是三步--**取key的hashCode值，高位运算，取模运算**
-- 对于任意给定的对象，只要它的hashCode()返回值相同，那么程序调用方法一所计算得到的Hash码值总是相同的，我们首先想到的就是把hash值对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的，但是，模运算的消耗还是比较大的，在HashMap中是这样做的：调用方法二来计算该对象应该保存在table数组的哪个索引处。
-- 这个方法非常巧妙，它通过h & (table.length -1)来得到该对象的保存位置，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化，当length总是2的n次方时，h& (length-1)运算等价于对length取模，也就是h%length，但是&比%具有更高的效率。
-- 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的：`(h = k.hashCode()) ^ (h >>> 16)`，主要是从速度，功效，质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。
+- 对于任意给定的对象，只要它的hashCode(）返回值相同，那么程序调用方法一所计算得到的Hash码值总是相同的，我们首先想到的就是把hash值对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的，但是，模运算的消耗还是比较大的，在HashMap中是这样做的：调用方法二来计算该对象应该保存在table数组的哪个索引处。
+- 这个方法非常巧妙，它通过h & (table.length -1）来得到该对象的保存位置，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化，当length总是2的n次方时，h& (length-1）运算等价于对length取模，也就是h%length，但是&比%具有更高的效率。
+- 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode(）的高16位异或低16位实现的：`(h = k.hashCode()) ^ (h >>> 16)`，主要是从速度，功效，质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销。
 - 下面举例说明下，n为table的长度。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-45205ec2.png" alt="img" style="zoom:50%;" />
@@ -113,7 +113,7 @@ static int indexFor(int h, int length) {  //JDK1.7的源码，JDK1.8没有这个
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-d669d29c.png" alt="img" style="zoom:50%;" />
 
-1. 判断键值对数组table[i]是否为空或为null，否则执行resize()进行扩容。
+1. 判断键值对数组table[i]是否为空或为null，否则执行resize(）进行扩容。
 2. 根据键值key计算hash值得到插入的数组索引i，如果table[i]==null，直接新建节点添加，转向⑥，如果table[i]不为空，转向③
 3. 判断table[i]的首个元素是否和key一样，如果相同直接覆盖value，否则转向④，这里的相同指的是hashCode以及equals
 4. 判断table[i] 是否为treeNode，即table[i] 是否是红黑树，如果是红黑树，则直接在树中插入键值对，否则转向⑤
@@ -124,7 +124,7 @@ static int indexFor(int h, int length) {  //JDK1.7的源码，JDK1.8没有这个
 
 ```java
 public V put(K key, V value) {
-    // 对key的hashCode()做hash
+    // 对key的hashCode(）做hash
     return putVal(hash(key), key, value, false, true);
 }
 
@@ -183,14 +183,14 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 #### 扩容机制
 
-- 扩容（resize)就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素，当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组，就像我们用一个小桶装水，如果想装更多的水，就得换大水桶。
+- 扩容（resize）就是重新计算容量，向HashMap对象里不停的添加元素，而HashMap对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素，当然Java里的数组是无法自动扩容的，方法是使用一个新的数组代替已有的容量小的数组，就像我们用一个小桶装水，如果想装更多的水，就得换大水桶。
 - 我们分析下resize的源码，鉴于JDK1.8融入了红黑树，较复杂，为了便于理解我们仍然使用JDK1.7的代码，好理解一些，本质上区别不大，具体区别后文再说。
 
 ```java
 void resize(int newCapacity) {   // 传入新的容量。
     Entry[] oldTable = table;    // 引用扩容前的Entry数组。
     int oldCapacity = oldTable.length;
-    if (oldCapacity == MAXIMUM_CAPACITY) {  // 扩容前的数组大小如果已经达到最大（2^30)了。
+    if (oldCapacity == MAXIMUM_CAPACITY) {  // 扩容前的数组大小如果已经达到最大（2^30）了。
         threshold = Integer.MAX_VALUE; // 修改阈值为int的最大值（2^31-1)，这样以后就不会扩容了。
         return;
     }
@@ -202,7 +202,7 @@ void resize(int newCapacity) {   // 传入新的容量。
 }
 ```
 
-- 这里就是使用一个容量更大的数组来代替已有的容量小的数组，transfer()方法将原有Entry数组的元素拷贝到新的Entry数组里。
+- 这里就是使用一个容量更大的数组来代替已有的容量小的数组，transfer(）方法将原有Entry数组的元素拷贝到新的Entry数组里。
 
 ```java
 void transfer(Entry[] newTable) {
@@ -229,11 +229,11 @@ void transfer(Entry[] newTable) {
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-b2330062.png" alt="img" style="zoom:50%;" />
 
-- 下面我们讲解下JDK1.8做了哪些优化，经过观测可以发现，我们使用的是2次幂的扩展（指长度扩为原来2倍），所以元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置，看下图可以明白这句话的意思，n为table的长度，图（a)表示扩容前的key1和key2两种key确定索引位置的示例，图（b)表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的Hash与高位运算结果。
+- 下面我们讲解下JDK1.8做了哪些优化，经过观测可以发现，我们使用的是2次幂的扩展（指长度扩为原来2倍），所以元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置，看下图可以明白这句话的意思，n为table的长度，图（a）表示扩容前的key1和key2两种key确定索引位置的示例，图（b）表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的Hash与高位运算结果。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-4d8022db.png" alt="img" style="zoom:50%;" />
 
-- 元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色），因此新的index就会发生这样的变化：
+- 元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit（红色），因此新的index就会发生这样的变化：
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-d773f86e.png" alt="img" style="zoom:50%;" />
 
@@ -371,11 +371,11 @@ public class HashMapInfiniteLoop {
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-6eed9aaf.png" alt="img" style="zoom:50%;" />
 
-- 于是，当我们用线程一调用map.get(11)时，悲剧就出现了——Infinite Loop
+- 于是，当我们用线程一调用map.get(11）时，悲剧就出现了——Infinite Loop
 
 ## JDK1.8与JDK1.7的性能对比
 
-HashMap中，如果key经过hash算法得出的数组索引位置全部不相同，即Hash算法非常好，那样的话，getKey方法的时间复杂度就是O(1)，如果Hash算法技术的结果碰撞非常多，假如Hash算极其差，所有的Hash算法结果得出的索引位置一样，那样所有的键值对都集中到一个桶中，或者在一个链表中，或者在一个红黑树中，时间复杂度分别为O(n)和O(lgn)，鉴于JDK1.8做了多方面的优化，总体性能优于JDK1.7，下面我们从两个方面用例子证明这一点。
+HashMap中，如果key经过hash算法得出的数组索引位置全部不相同，即Hash算法非常好，那样的话，getKey方法的时间复杂度就是O(1)，如果Hash算法技术的结果碰撞非常多，假如Hash算极其差，所有的Hash算法结果得出的索引位置一样，那样所有的键值对都集中到一个桶中，或者在一个链表中，或者在一个红黑树中，时间复杂度分别为O(n）和O(lgn)，鉴于JDK1.8做了多方面的优化，总体性能优于JDK1.7，下面我们从两个方面用例子证明这一点。
 
 ### Hash较均匀的情况
 
@@ -482,7 +482,7 @@ class Key implements Comparable<Key> {
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-bd20c215.png)
 
-- 从表中结果中可知，随着size的变大，JDK1.7的花费时间是增长的趋势，而JDK1.8是明显的降低趋势，并且呈现对数增长稳定，当一个链表太长的时候，HashMap会动态的将它替换成一个红黑树，这话的话会将时间复杂度从O(n)降为O(logn),hash算法均匀和不均匀所花费的时间明显也不相同，这两种情况的相对比较，可以说明一个好的hash算法的重要性。
+- 从表中结果中可知，随着size的变大，JDK1.7的花费时间是增长的趋势，而JDK1.8是明显的降低趋势，并且呈现对数增长稳定，当一个链表太长的时候，HashMap会动态的将它替换成一个红黑树，这话的话会将时间复杂度从O(n）降为O(logn),hash算法均匀和不均匀所花费的时间明显也不相同，这两种情况的相对比较，可以说明一个好的hash算法的重要性。
 
 **测试环境**：处理器为2.2 GHz Intel Core i7，内存为16 GB 1600 MHz DDR3,SSD硬盘，使用默认的JVM参数，运行在64位的OS X 10.10.1上。
 

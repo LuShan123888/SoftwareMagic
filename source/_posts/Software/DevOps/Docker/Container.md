@@ -269,13 +269,13 @@ CONTAINER ID   IMAGE          COMMAND                ...  PORTS                 
 - **CREATED**：容器的创建时间。
 - **STATUS**：容器状态。
     - 状态有7种：
-    - created(已创建）
-    - restarting(重启中）
-    - running(运行中）
-    - removing(迁移中）
-    - paused(暂停）
-    - exited(停止）
-    - dead(死亡）
+    - created（已创建）
+    - restarting（重启中）
+    - running（运行中）
+    - removing（迁移中）
+    - paused（暂停）
+    - exited（停止）
+    - dead（死亡）
 - **PORTS**：容器的端口信息和使用的连接类型（tcp\udp)
 - **NAMES**：自动分配的容器名称。
 

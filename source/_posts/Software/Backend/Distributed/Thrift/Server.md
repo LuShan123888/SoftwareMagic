@@ -41,7 +41,7 @@ TThreadPoolServer模式采用阻塞socket方式工作，主线程负责阻塞式
 
 **优点**
 
-- 拆分了监听线程（Accept Thread)和处理客户端连接的工作线程（Worker Thread)，数据读取和业务处理都交给线程池处理。因此在并发量较大时新连接也能够被及时接受。
+- 拆分了监听线程（Accept Thread）和处理客户端连接的工作线程（Worker Thread)，数据读取和业务处理都交给线程池处理。因此在并发量较大时新连接也能够被及时接受。
 - 线程池模式比较适合服务器端能预知最多有多少个客户端并发的情况，这时每个请求都能被业务线程池及时处理，性能也非常高。
 
 **缺点**
@@ -73,7 +73,7 @@ TNonblockingServer模式也是单线程工作，但是采用NIO的模式，利�
 
 ## TThreadedSelectorServer
 
-ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件（read/write)从主线程中分离出来。同时3入 worker工作线程池。
+ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件（read/write）从主线程中分离出来。同时3入 worker工作线程池。
 
 TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型，它内部有如下部分构成：
 

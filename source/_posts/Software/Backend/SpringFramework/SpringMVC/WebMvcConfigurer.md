@@ -78,7 +78,7 @@ public void addViewControllers(ViewControllerRegistry registry) {
 ```
 
 - 以前要访问一个页面需要先创建个Controller控制类，再写方法跳转到页面，在这里配置后就不需要那么麻烦了，直接访问http://localhost:8080/toLogin就跳转到login.jsp页面了。
-- **注意**：在这里重写`addViewControllers`方法，并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`(在此方法中，Spring Boot将`/`映射至index.html)，这也就意味着我们自己的配置和Spring Boot的自动配置同时有效，这也是推荐添加自己的MVC配置的方式。
+- **注意**：在这里重写`addViewControllers`方法，并不会覆盖`WebMvcAutoConfiguration`中的`addViewControllers`（在此方法中，Spring Boot将`/`映射至index.html)，这也就意味着我们自己的配置和Spring Boot的自动配置同时有效，这也是推荐添加自己的MVC配置的方式。
 
 ## addResourceHandlers
 
@@ -112,7 +112,7 @@ public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf
 
 - **注意**：这里的静态资源是放置在web根目录下，而非`WEB-INF`下。
 
-- 例如：在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录（webroot)下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是：`/`，它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性（根目录下的文件可以直接访问）,`DefaultServletHttpRequestHandler`是帮助回归这个特性的。
+- 例如：在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录（webroot）下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是：`/`，它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性（根目录下的文件可以直接访问）,`DefaultServletHttpRequestHandler`是帮助回归这个特性的。
 
 ## configureViewResolvers
 
@@ -255,7 +255,7 @@ this is test.jsp
 显然，两次使用了不同的视图解析器，那么底层到底发生了什么？在配置里我们注册了两个视图解析器：`ContentNegotiatingViewResolver` 和 `InternalResourceViewResolver`，还有一个默认视图：`MappingJackson2JsonView`,controller执行完毕之后返回一个ModelAndView，其中视图的名称为example1
 
 > 1. 返回首先会交给`ContentNegotiatingViewResolver` 进行视图解析处理，而`ContentNegotiatingViewResolver` 会先把视图名example1交给它持有的所有`ViewResolver`尝试进行解析（本实例中只有`InternalResourceViewResolver`)
-> 2. 根据请求的`mediaType`，再将`example1.mediaType`(这里是`example1.json` 和`example1.html`)作为视图名让所有视图解析器解析一遍，两步解析完毕之后会获得一堆候选的`List<View>`再加上默认的`MappingJackson2JsonView`
+> 2. 根据请求的`mediaType`，再将`example1.mediaType`（这里是`example1.json` 和`example1.html`）作为视图名让所有视图解析器解析一遍，两步解析完毕之后会获得一堆候选的`List<View>`再加上默认的`MappingJackson2JsonView`
 > 3. 根据请求的`media type`从候选的`List<View>`中选择一个最佳的返回，至此视图解析完毕。
 
 - 现在就可以理解上例中为何请求链接加上`.json`和不`.json`结果会不一样。

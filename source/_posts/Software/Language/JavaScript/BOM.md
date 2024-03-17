@@ -7,7 +7,7 @@ categories:
 ---
 # JavaScript BOM
 
-- 浏览器对象模型（**B**rowser **O**bject **M**odel (BOM))尚无正式标准。
+- 浏览器对象模型（**B**rowser **O**bject **M**odel (BOM)）尚无正式标准。
 - 由于现代浏览器已经（几乎）实现了 JavaScript 交互性方面的相同方法和属性，因此常被认为是 BOM 的方法和属性。
 
 ## Window 对象
@@ -258,7 +258,7 @@ document.getElementById("example").innerHTML=txt;
 ## 弹窗
 
 - 可以在 JavaScript 中创建三种消息框：警告框，确认框，提示框。
-- 弹窗使用反斜杠 + "n"(\n) 来设置换行。
+- 弹窗使用反斜杠 + "n"(\n）来设置换行。
 
 ### 警告框
 

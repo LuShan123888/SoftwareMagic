@@ -147,8 +147,8 @@ ENTRYPOINT ["/bin/sh", "-c" "exec java $JAVA_OPTS -jar /app.jar"]
 ```
 
 - 然而加了 `exec` 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell，而是用要被执行命令替换当前的 shell 进程，并且将老进程的环境清理掉，exec 后的命令不再是 shell 的子进程序，而且 exec 命令后的其它命令将不再执行，从执行效果上可以看到 exec 会把当前的 shell 关闭掉，直接启动它后面的命令。
-- 虽然它与之后的命令（如上 `exec java $JAVA_OPTS -jar /app.jar`)还是作为 "/bin/sh" 的第二个参数，但 `exec` 来了个金蝉脱壳，让这里的 `java` 进程得已作为一个 PID 1 的超级进程，进行使得这个 java 进程可以收到 SIGTERM 信号，或者理解 `exec` 为 "/bin/sh" 的子进程，但是借助于 `exec` 让它后面的进程启动在最顶端。
-- 另外，由于通过 "/bin/sh" 的搭桥，命令中的变量（如 $JAVA_OPTS) 也会被正确解析，因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式。
+- 虽然它与之后的命令（如上 `exec java $JAVA_OPTS -jar /app.jar`）还是作为 "/bin/sh" 的第二个参数，但 `exec` 来了个金蝉脱壳，让这里的 `java` 进程得已作为一个 PID 1 的超级进程，进行使得这个 java 进程可以收到 SIGTERM 信号，或者理解 `exec` 为 "/bin/sh" 的子进程，但是借助于 `exec` 让它后面的进程启动在最顶端。
+- 另外，由于通过 "/bin/sh" 的搭桥，命令中的变量（如 $JAVA_OPTS）也会被正确解析，因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式。
 - **注意**:exec 只会启动后面的第一个命令，`exec ls; top` 或 `exec ls && top` 只会执行 `ls` 命令。
 
 
@@ -319,7 +319,7 @@ Error response from daemon: Unknown instruction: RUNCMD
 $ docker build -t nginx:test .
 ```
 
-- **上下文路径**:Docker 客户端会将构建命令后面指定的路径（`.`)下的所有文件打包成一个 tar 包，发送给 Docker 服务端，Docker 服务端收到客户端发送的 tar 包，然后解压，根据 Dockerfile 里面的指令进行镜像的分层构建，这个指定的路径就成为上下文路径。
+- **上下文路径**:Docker 客户端会将构建命令后面指定的路径（`.`）下的所有文件打包成一个 tar 包，发送给 Docker 服务端，Docker 服务端收到客户端发送的 tar 包，然后解压，根据 Dockerfile 里面的指令进行镜像的分层构建，这个指定的路径就成为上下文路径。
 - **解析**：由于 docker 的运行模式是 C/S，我们本机是 C,docker 引擎是 S，实际的构建过程是在docker引擎下完成的，所以这个时候无法用到我们本机的文件，这就需要把我们本机的指定目录下的文件一起打包提供给docker引擎使用。
 - 如果构建镜像时没有明确指定 Dockerfile，那么 Docker 客户端默认在构建镜像时指定的上下文路径下找名字为 Dockerfile 的构建文件。
 - **注意**：上下文路径下不要放无用的文件，因为会一起打包发送给 docker 引擎，如果文件过多会造成过程缓慢。

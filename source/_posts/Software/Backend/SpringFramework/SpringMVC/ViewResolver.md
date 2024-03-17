@@ -8,7 +8,7 @@ categories:
 ---
 # Spring MVC 视图解析器
 
-- Spring MVC 借助视图解析器（ViewResolver)得到最终的视图对象（View)，最终的视图可以是JSP也可是Excell
+- Spring MVC 借助视图解析器（ViewResolver）得到最终的视图对象（View)，最终的视图可以是JSP也可是Excell
     JFreeChart等各种表现形式的视图。
 
 ## 配置视图解析器

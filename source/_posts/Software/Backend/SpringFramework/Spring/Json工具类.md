@@ -207,7 +207,7 @@ private String username;
 @JsonIgnoreProperties({"id", "name"}) // 序列化时忽略指定的属性，与 @JsonIgnore冲突时，以此处为准。
 public class User {
 
-    @JsonIgnore// 默认是true，与@JsonIgnore(true)同义，序列化时忽略该属性。
+    @JsonIgnore// 默认是true，与@JsonIgnore(true）同义，序列化时忽略该属性。
     private Integer id;
 
     @JsonIgnore(value = false)// 序列化时不忽略该属性。

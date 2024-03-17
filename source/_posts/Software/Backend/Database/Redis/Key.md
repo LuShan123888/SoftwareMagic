@@ -38,8 +38,8 @@ $ DEL testkey
 | 4    | EXPIRE key seconds 为给定 key 设置过期时间，以秒计，           |
 | 5    | EXPIREAT key timestamp  EXPIREAT 的作用和 EXPIRE 类似，都用于为 key 设置过期时间，不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳（unix timestamp), |
 | 6    | PEXPIRE key milliseconds  设置 key 的过期时间以毫秒计，       |
-| 7    | PEXPIREAT key milliseconds-timestamp  设置 key 过期时间的时间戳（unix timestamp) 以毫秒计 |
-| 8    | KEYS pattern  查找所有符合给定模式（ pattern)的 key ,         |
+| 7    | PEXPIREAT key milliseconds-timestamp  设置 key 过期时间的时间戳（unix timestamp）以毫秒计 |
+| 8    | KEYS pattern  查找所有符合给定模式（ pattern）的 key ,         |
 | 9    | MOVE key db  将当前数据库的 key 移动到给定的数据库 db 当中，  |
 | 10   | PERSIST key  移除 key 的过期时间，key 将持久保持，             |
 | 11   | PTTL key  以毫秒为单位返回 key 的剩余的过期时间，             |

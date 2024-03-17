@@ -65,7 +65,7 @@ div
 - transform-Origin属性允许您更改转换元素的位置。
 - 2D转换元素可以改变元素的X和Y轴， 3D转换元素，还可以更改元素的Z轴。
 - 为了更好地理解Transform-Origin属性，请查看这个[演示](https://www.runoob.com/try/try.php?filename=trycss3_transform-origin_inuse).
-- **注意**：使用此属性必须先使用 [transform](https://www.runoob.com/cssref/css3-pr-transform.html) 属性。
+- **注意**：使用此属性必须先使用 [transform](https://www.runoob.com/cssref/css3-pr-transform.html）属性。
 
 **语法**
 
@@ -99,7 +99,7 @@ div{
 **属性定义及使用说明**
 
 - transform--style属性指定嵌套元素是怎样在三维空间中呈现。
-- **注意**：使用此属性必须先使用 [transform](https://www.runoob.com/cssref/css3-pr-transform.html) 属性。
+- **注意**：使用此属性必须先使用 [transform](https://www.runoob.com/cssref/css3-pr-transform.html）属性。
 
 **语法**
 

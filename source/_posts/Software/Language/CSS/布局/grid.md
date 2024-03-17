@@ -302,7 +302,7 @@ grid-template-areas: "header header header"
 
 上面代码中，顶部是页眉区域`header`，底部是页脚区域`footer`，中间部分则为`main`和`sidebar`
 
-如果某些区域不需要利用，则使用"点"(`.`)表示。
+如果某些区域不需要利用，则使用"点"(`.`）表示。
 
 ```css
 grid-template-areas: 'a . c'
@@ -427,7 +427,7 @@ align-content: start | end | center | stretch | space-around | space-between | s
 }
 ```
 
-这两个属性的写法完全相同，都可以取下面这些值，(下面的图都以`justify-content`属性为例，`align-content`属性的图完全一样，只是将水平方向改成垂直方向，)
+这两个属性的写法完全相同，都可以取下面这些值，（下面的图都以`justify-content`属性为例，`align-content`属性的图完全一样，只是将水平方向改成垂直方向，)
 
 - `start` - 对齐容器的起始边框。
 
@@ -477,7 +477,7 @@ place-content: space-around space-evenly;
 
 `grid-auto-columns`属性和`grid-auto-rows`属性用来设置，浏览器自动创建的多余网格的列宽和行高，它们的写法与`grid-template-columns`和`grid-template-rows`完全相同，如果不指定这两个属性，浏览器完全根据单元格内容的大小，决定新增网格的列宽和行高。
 
-[下面的例子](https://jsbin.com/sayuric/edit?css,output)里面，划分好的网格是3行 x 3列，但是，8号项目指定在第4行，9号项目指定在第5行。
+[下面的例子](https://jsbin.com/sayuric/edit?css,output）里面，划分好的网格是3行 x 3列，但是，8号项目指定在第4行，9号项目指定在第5行。
 
 ```css
 .container {
@@ -488,7 +488,7 @@ grid-auto-rows: 50px;
 }
 ```
 
-上面代码指定新增的行高统一为50px(原始的行高为100px)
+上面代码指定新增的行高统一为50px（原始的行高为100px)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019032525.png)
 
@@ -520,7 +520,7 @@ grid-column-end: 4;
 }
 ```
 
-[上面代码](https://jsbin.com/yukobuf/edit?css,output)指定，1号项目的左边框是第二根垂直网格线，右边框是第四根垂直网格线。
+[上面代码](https://jsbin.com/yukobuf/edit?css,output）指定，1号项目的左边框是第二根垂直网格线，右边框是第四根垂直网格线。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg20190325267.png)
 
@@ -528,7 +528,7 @@ grid-column-end: 4;
 
 除了1号项目以外，其他项目都没有指定位置，由浏览器自动布局，这时它们的位置由容器的`grid-auto-flow`属性决定，这个属性的默认值是`row`，因此会"先行后列"进行排列，读者可以把这个属性的值分别改成`column`,`row dense`和`column dense`，看看其他项目的位置发生了怎样的变化。
 
-[下面的例子](https://jsbin.com/nagobey/edit?html,css,output)是指定四个边框位置的效果。
+[下面的例子](https://jsbin.com/nagobey/edit?html,css,output）是指定四个边框位置的效果。
 
 ```css
 .item-1 {
@@ -560,11 +560,11 @@ grid-column-end: 4;
 }
 ```
 
-[上面代码](https://jsbin.com/hehumay/edit?html,css,output)表示，1号项目的左边框距离右边框跨越2个网格。
+[上面代码](https://jsbin.com/hehumay/edit?html,css,output）表示，1号项目的左边框距离右边框跨越2个网格。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019032528.png)
 
-这与[下面的代码](https://jsbin.com/mujihib/edit?html,css,output)效果完全一样。
+这与[下面的代码](https://jsbin.com/mujihib/edit?html,css,output）效果完全一样。
 
 ```css
 .item-1 {
@@ -619,7 +619,7 @@ grid-column-end: 4;
 }
 ```
 
-[上面代码](https://jsbin.com/volugow/edit?html,css,output)中，项目`item-1`占据的区域，包括第一行 + 第二行，第一列 + 第二列。
+[上面代码](https://jsbin.com/volugow/edit?html,css,output）中，项目`item-1`占据的区域，包括第一行 + 第二行，第一列 + 第二列。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019032529.png)
 
@@ -644,7 +644,7 @@ grid-column-end: 4;
 }
 ```
 
-[上面代码](https://jsbin.com/qokexob/edit?css,output)中，1号项目位于`e`区域，效果如下图。
+[上面代码](https://jsbin.com/qokexob/edit?css,output）中，1号项目位于`e`区域，效果如下图。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2019032530.png)
 

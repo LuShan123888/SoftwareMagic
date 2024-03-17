@@ -1,9 +1,9 @@
 ---
-title：至多包含K个不同字符的最长子串
+title: 至多包含K个不同字符的最长子串
 categories:
-- Software
-- Algorithm
-- 滑动窗口。
+  - Software
+  - Algorithm
+  - 滑动窗口
 ---
 # 至多包含K个不同字符的最长子串
 

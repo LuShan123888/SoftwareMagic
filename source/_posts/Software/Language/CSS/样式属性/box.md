@@ -34,7 +34,7 @@ box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 | *v-shadow* | 必需的，垂直阴影的位置，允许负值                             |
 | *blur*     | 可选，模糊距离                                               |
 | *spread*   | 可选，阴影的大小                                             |
-| *color*    | 可选，阴影的颜色，在[CSS颜色值](https://www.runoob.com/cssref/css_colors_legal.aspx)寻找颜色值的完整列表 |
+| *color*    | 可选，阴影的颜色，在[CSS颜色值](https://www.runoob.com/cssref/css_colors_legal.aspx）寻找颜色值的完整列表 |
 | inset      | 可选，从外层的阴影（开始时）改变阴影内侧阴影                 |
 
 ## box-sizing

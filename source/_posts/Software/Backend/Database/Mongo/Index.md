@@ -30,9 +30,9 @@ MongoDB还支持多个字段的用户定义索引，即复合索引（Compound I
 
 地理空间索引（Geospatial Index)、文本索引（Text Indexes)、哈希索引（Hashed Indexes)。
 
-- 地理空间索引（Geospatial Index) 为了支持对地理空间坐标数据的有效查询，MongoDB提供了两种特殊的索引：返回结果时使用平面几何的二维索引和返回结果时使用球面几何的二维球面索引。
+- 地理空间索引（Geospatial Index）为了支持对地理空间坐标数据的有效查询，MongoDB提供了两种特殊的索引：返回结果时使用平面几何的二维索引和返回结果时使用球面几何的二维球面索引。
 - 文本索引（Text Indexes)：MongoDB提供了一种文本索引类型，支持在集合中搜索字符串内容。这些文本索引不存储特定于语言的停止词（例如“the”、“a”、“or”)， 而将集合中的词作为词干，只存储根词。
-- 哈希索引（Hashed Indexes) 为了支持基于散列的分片，MongoDB提供了散列索引类型，它对字段值的散列进行索引。这些索引在其范围内的值分布更加随机，但只支持相等匹配，不支持基于范围的查询。
+- 哈希索引（Hashed Indexes）为了支持基于散列的分片，MongoDB提供了散列索引类型，它对字段值的散列进行索引。这些索引在其范围内的值分布更加随机，但只支持相等匹配，不支持基于范围的查询。
 
 ## 查看索引
 
@@ -92,7 +92,7 @@ db.collection.createIndex(keys, options)
 db.comment.createIndex({userid:1})
 ```
 
-- **复合索引**：对 userid 和 nickname 同时建立复合（Compound)索引：
+- **复合索引**：对 userid 和 nickname 同时建立复合（Compound）索引：
 
 ```json
 db.comment.createIndex({userid:1,nickname:-1})
@@ -132,7 +132,7 @@ db.comment.dropIndexes()
 
 ### 执行计划
 
-分析查询性能（Analyze Query Performance)通常使用执行计划（解释计划、Explain Plan)来查看查询的情况，如查询耗费的时间、是否基于索引查询等。
+分析查询性能（Analyze Query Performance）通常使用执行计划（解释计划、Explain Plan）来查看查询的情况，如查询耗费的时间、是否基于索引查询等。
 
 ```json
 db.collection.find(query,options).explain(options)

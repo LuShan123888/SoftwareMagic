@@ -36,14 +36,14 @@ var person = {
 
 ## 单独使用 this
 
-- 单独使用 this，则它指向全局（Global)对象。
+- 单独使用 this，则它指向全局（Global）对象。
 - 在浏览器中，window 就是该全局对象为**Object Window**
 
 ```js
 var x = this;
 ```
 
-- 严格模式下，如果单独使用，this 也是指向全局（Global)对象。
+- 严格模式下，如果单独使用，this 也是指向全局（Global）对象。
 
 ```js
 "use strict";

@@ -31,7 +31,7 @@ categories:
 | poolPreparedStatements        | false              | 是否缓存preparedStatement，也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle，在mysql下建议关闭，|
 | maxOpenPreparedStatements     | -1                 | 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true，在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100 |
 | validationQuery               |                    | 用来检测连接是否有效的sql，要求是一个查询语句，如果validationQuery为null,testOnBorrow,testOnReturn,testWhileIdle都不会其作用，|
-| validationQueryTimeout        |                    | 单位：秒，检测连接是否有效的超时时间，底层调用jdbc Statement对象的void setQueryTimeout(int seconds)方法 |
+| validationQueryTimeout        |                    | 单位：秒，检测连接是否有效的超时时间，底层调用jdbc Statement对象的void setQueryTimeout(int seconds）方法 |
 | testOnBorrow                  | true               | 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能，|
 | testOnReturn                  | false              | 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 |
 | testWhileIdle                 | false              | 建议配置为true，不影响性能，并且保证安全性，申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效，|

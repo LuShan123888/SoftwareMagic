@@ -22,7 +22,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     - Github上非vim-scripts仓库的插件。
     - 不在Github上的插件。
 - 对于不同的插件，vundle自动管理和下载插件的时候，有不同的地址填写方法，有如下三类：
-    - 在Github上vim-scripts用户下的仓库，只需要写出repos(仓库）名称。
+    - 在Github上vim-scripts用户下的仓库，只需要写出repos（仓库）名称。
     - 在Github其他用户下的repos，需要写出"用户名/repos名"
     - 不在Github上的插件，需要写出git全路径。
 

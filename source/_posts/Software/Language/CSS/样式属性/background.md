@@ -34,7 +34,7 @@ background-color属性设置一个元素的背景颜色，元素的背景是元�
 
 | 值          | 描述                                                         |
 | :---------- | :----------------------------------------------------------- |
-| *color*     | 指定背景颜色，在[CSS颜色值](https://www.runoob.com/css/css-colors-legal.html)近可能的寻找一个颜色值的完整列表， |
+| *color*     | 指定背景颜色，在[CSS颜色值](https://www.runoob.com/css/css-colors-legal.html）近可能的寻找一个颜色值的完整列表， |
 | transparent | 指定背景颜色应该是透明的，这是默认                           |
 | inherit     | 指定背景颜色，应该从父元素继承                               |
 
@@ -63,7 +63,7 @@ p
 
 background-position属性设置背景图像的起始位置。
 
-**注意**对于这个工作在Firefox和Opera,background-attachment必须设置为 "fixed(固定）"
+**注意**对于这个工作在Firefox和Opera,background-attachment必须设置为 "fixed（固定）"
 
 **属性值**
 
@@ -71,7 +71,7 @@ background-position属性设置背景图像的起始位置。
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | left top left center left bottom right top right center right bottom center top center center center bottom | 如果仅指定一个关键字，其他值将会是"center"                   |
 | *x% y%*                                                      | 第一个值是水平位置，第二个值是垂直，左上角是0％0％，右下角是100％100％，如果仅指定了一个值，其他值将是50％, ，默认值为：0％0％ |
-| *xpos ypos*                                                  | 第一个值是水平位置，第二个值是垂直，左上角是0，单位可以是像素（0px0px)或任何其他 [CSS单位](https://www.runoob.com/try/css-units.html)，如果仅指定了一个值，其他值将是50％，你可以混合使用％和positions |
+| *xpos ypos*                                                  | 第一个值是水平位置，第二个值是垂直，左上角是0，单位可以是像素（0px0px）或任何其他 [CSS单位](https://www.runoob.com/try/css-units.html)，如果仅指定了一个值，其他值将是50％，你可以混合使用％和positions |
 | inherit                                                      | 指定background-position属性设置应该从父元素继承              |
 
 ## background-size
@@ -86,8 +86,8 @@ background-size: length|percentage|cover|contain;
 
 | 值         | 描述                                                         |
 | :--------- | :----------------------------------------------------------- |
-| length     | 设置背景图片高度和宽度，第一个值设置宽度，第二个值设置的高度，如果只给出一个值，第二个是设置为 **auto**(自动） |
-| percentage | 将计算相对于背景定位区域的百分比，第一个值设置宽度，第二个值设置的高度，如果只给出一个值，第二个是设置为"auto(自动）" |
+| length     | 设置背景图片高度和宽度，第一个值设置宽度，第二个值设置的高度，如果只给出一个值，第二个是设置为 **auto**（自动） |
+| percentage | 将计算相对于背景定位区域的百分比，第一个值设置宽度，第二个值设置的高度，如果只给出一个值，第二个是设置为"auto（自动）" |
 | cover      | 此时会保持图像的纵横比并将图像缩放成将完全覆盖背景定位区域的最小大小， |
 | contain    | 此时会保持图像的纵横比并将图像缩放成将适合背景定位区域的最大大小， |
 
@@ -181,7 +181,7 @@ background-image 属性设置一个元素的背景图像，元素的背景是元
 | :-------------------------- | :---------------------------------------- |
 | url(*'URL'*)                | 图像的URL                                 |
 | none                        | 无图像背景会显示，这是默认                |
-| linear-gradient()           | 创建一个线性渐变的 "图像"(从上到下）       |
+| linear-gradient()           | 创建一个线性渐变的 "图像"（从上到下）       |
 | radial-gradient()           | 用径向渐变创建 "图像", (center to edges) |
 | repeating-linear-gradient() | 创建重复的线性渐变 "图像",               |
 | repeating-radial-gradient() | 创建重复的径向渐变 "图像"                 |

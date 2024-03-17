@@ -45,7 +45,7 @@ categories:
  Ctrl+I|斜体
  Ctrl+U|下划线
  Ctrl+F3|查找上一个
- Ctrl+Shift+(左方向键/右方向键）|光标向左/向右选中一个单词
+ Ctrl+Shift+（左方向键/右方向键）|光标向左/向右选中一个单词
  Ctrl+Shift|输入法切换
  Ctrl+空格|中英文切换
  Ctrl+回车|qq发送信息
@@ -106,7 +106,7 @@ categories:
  Shift+Del|删除文件
  右Shift键八秒钟|切换"筛选键”的开和关
  Shift键五次|切换"粘滞键”的开和关
- Shift+(左方向键/右方向键）|光标向左/向右选中一个字符
+ Shift+（左方向键/右方向键）|光标向左/向右选中一个字符
  Shift+Home|光标从当前位置一直选中到行首
  Shift+End|光标从当前位置一直选中到行尾
 

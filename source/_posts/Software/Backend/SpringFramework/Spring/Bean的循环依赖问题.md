@@ -174,7 +174,7 @@ protected void addSingletonFactory(String beanName, ObjectFactory<?> singletonFa
 }
 ```
 
-- 这里只是添加了一个工厂，通过这个工厂（`ObjectFactory`)的`getObject`方法可以得到一个对象，而这个对象实际上就是通过`getEarlyBeanReference`这个方法创建的，当创建B的流程中会调用这个工厂的`getObject`方法。
+- 这里只是添加了一个工厂，通过这个工厂（`ObjectFactory`）的`getObject`方法可以得到一个对象，而这个对象实际上就是通过`getEarlyBeanReference`这个方法创建的，当创建B的流程中会调用这个工厂的`getObject`方法。
 - 当A完成了实例化并添加进了三级缓存后，就要开始为A进行属性注入了，在注入时发现A依赖了B，那么这个时候Spring又会去`getBean(b)`，然后反射调用setter方法完成属性注入。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/format,png-20220314235458883.png" alt="image-20200706114501300" style="zoom:50%;" />
@@ -265,7 +265,7 @@ public Object getEarlyBeanReference(Object bean, String beanName) {
 >    - 我们思考一种简单的情况，就以单独创建A为例，假设AB之间现在没有依赖关系，但是A被代理了，这个时候当A完成实例化后还是会进入下面这段代码：
 >
 >    - ```java
->         // A是单例的，mbd.isSingleton()条件满足。
+>         // A是单例的，mbd.isSingleton(）条件满足。
 >         // allowCircularReferences：这个变量代表是否允许循环依赖，默认是开启的，条件也满足。
 >         // isSingletonCurrentlyInCreation：正在在创建A，也满足。
 >         // 所以earlySingletonExposure=true

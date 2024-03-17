@@ -88,7 +88,7 @@ public Docket createRestApi() {
     - `any()`：任何请求都扫描。
     - `none()`：任何请求都不扫描。
     - `regex(final String pathRegex)`：通过正则表达式控制。
-    - `ant(final String antPattern)`：通过ant()控制。
+    - `ant(final String antPattern)`：通过ant(）控制。
 - `enable()`：配置是否启用swagger
 - `groupName()`：配置分组，如果没有配置分组，默认是default，配置多个分组只需要配置多个docket即可。
 

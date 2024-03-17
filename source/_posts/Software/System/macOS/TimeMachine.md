@@ -38,7 +38,7 @@ com.apple.TimeMachine.2021-12-10-141731.local
 - 接下来只需逐个删除就行，终端输入。
 
 ```shell
-$ tmutil deletelocalsnapshots 2017-12-18-093234(上面文件末尾显示的日期）
+$ tmutil deletelocalsnapshots 2017-12-18-093234（上面文件末尾显示的日期）
 ```
 
 ## 加速命令

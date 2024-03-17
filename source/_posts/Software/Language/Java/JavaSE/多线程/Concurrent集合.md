@@ -74,7 +74,7 @@ public class SetTest {
     -   ConcurrentHashMap 和 HashMap 实现上类似，最主要的差别是 ConcurrentHashMap 采用了分段锁（Segment)，它继承自重入锁 ReentrantLock，每个分段锁维护着几个桶（HashEntry)，多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）
     -   在 HashEntry 类中：key,hash 和 next 域都被声明为 final 型，value 域被声明为 volatile 型。
     -   在ConcurrentHashMap 中，如果产生Hash碰撞，将采用**拉链法**来处理，即把碰撞的 HashEntry 对象链接成一个链表，由于 HashEntry 的 next 域为 final 型，所以新节点只能在链表的表头处插入，由于只能在表头插入，所以链表中节点的顺序和插入的顺序相反。
-    -   size()的计算是先采用不加锁的方式，连续计算元素的个数，最多计算3次：
+    -   size(）的计算是先采用不加锁的方式，连续计算元素的个数，最多计算3次：
         1.  如果前后两次计算结果相同，则说明计算出来的元素个数是准确的。
         2.  如果前后两次计算结果都不同，则给每个Segment进行加锁，再计算一次元素的个数。
 
@@ -124,7 +124,7 @@ public static void test() throws InterruptedException {
 ### LinkedBlockingDeque
 
 -   LinkedBlockingQueue是一个单向链表实现的阻塞队列。
--   该队列按 FIFO(先进先出）排序元素，新元素插入到队列的尾部，并且队列获取操作会获得位于队列头部的元素。
+-   该队列按 FIFO（先进先出）排序元素，新元素插入到队列的尾部，并且队列获取操作会获得位于队列头部的元素。
 -   链接队列的吞吐量通常要高于基于数组的队列，但是在大多数并发应用程序中，其可预知的性能要低。
 -   此外，LinkedBlockingQueue还是可选容量的（防止过度膨胀），即可以指定队列的容量，如果不指定，默认容量大小等于Integer.MAX_VALUE
 

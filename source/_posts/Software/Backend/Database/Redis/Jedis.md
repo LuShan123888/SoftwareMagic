@@ -23,7 +23,7 @@ jedis.flushAll(); // 清空所有的key
 
 ### JedisPool
 
-- 每次连接需要创建一个连接，执行完后就关闭，非常浪费资源，所以使用jedispool(连接池）连接。
+- 每次连接需要创建一个连接，执行完后就关闭，非常浪费资源，所以使用jedispool（连接池）连接。
 
 ```java
 //  创建连接池配置对象。
@@ -215,7 +215,7 @@ map.put("key1","value1");
 map.put("key2","value2");
 map.put("key3","value3");
 map.put("key4","value4");
-// 添加名称为hash(key)的hash元素。
+// 添加名称为hash(key）的hash元素。
 jedis.hmset("hash",map);
 // 向名称为hash的hash中添加key为key5,value为value5元素。
 jedis.hset("hash", "key5", "value5");

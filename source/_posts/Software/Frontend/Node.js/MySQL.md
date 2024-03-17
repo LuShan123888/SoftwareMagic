@@ -58,7 +58,7 @@ The solution is: 2
 | stringifyObjects   | 是否序列化对象                                               |
 | typeCast           | 是否将列值转化为本地JavaScript类型值（默认：true)|
 | queryFormat        | 自定义query语句格式化方法                                    |
-| supportBigNumbers  | 数据库支持bigint或decimal类型列时，需要设此option为true(默认：false)|
+| supportBigNumbers  | 数据库支持bigint或decimal类型列时，需要设此option为true（默认：false)|
 | bigNumberStrings   | supportBigNumbers和bigNumberStrings启用强制bigint或decimal列以JavaScript字符串类型返回（默认：false)|
 | dateStrings        | 强制timestamp,datetime,data类型以字符串类型返回，而不是JavaScript Date类型（默认：false)|
 | debug              | 开启调试（默认：false)|

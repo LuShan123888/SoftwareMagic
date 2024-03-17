@@ -8,7 +8,7 @@ categories:
 ---
 # PHP PearDB
 
-- 示例8-1的程序创建了一个关于科幻小说书籍信息的HTML表格，它说明了如何使用PEAR DB库来连接数据库，执行语句，检查错误和查询结果到HTML，请确保在安装PHP时启用了PEAR，这在Unix/Linux和Windows下有一点不同，PEAR DB代码库是面向对象的，带有类方法（`DB::connect()`,`DB::iserror()`)和对象方法（`$db->query()`,`$q->fetchInto()`)
+- 示例8-1的程序创建了一个关于科幻小说书籍信息的HTML表格，它说明了如何使用PEAR DB库来连接数据库，执行语句，检查错误和查询结果到HTML，请确保在安装PHP时启用了PEAR，这在Unix/Linux和Windows下有一点不同，PEAR DB代码库是面向对象的，带有类方法（`DB::connect()`,`DB::iserror()`）和对象方法（`$db->query()`,`$q->fetchInto()`)
 
 **示例8-1**：显示书籍信息。
 
@@ -120,7 +120,7 @@ if(DB::isError($db)){
 $result = $db->query(sql);
 ```
 
-- 操作成功时，一条非查询类的SQL语句（如INSERT,UPDATE,DELETE)返回常量DB_OK来标志操作成功，一条用于查询的SQL语句（如SELECT)返回一个可以用于返回查询结果的对象。
+- 操作成功时，一条非查询类的SQL语句（如INSERT,UPDATE,DELETE）返回常量DB_OK来标志操作成功，一条用于查询的SQL语句（如SELECT）返回一个可以用于返回查询结果的对象。
 - 可以用`DB::isError()`检查操作是否成功：
 
 ```php
@@ -142,7 +142,7 @@ PEAR DB提供两种从查询结果对象中获取数据的方法，一种是返�
 $row = $result->fetchRow([mode]);
 ```
 
-- 如果没有错误，将返回一个数据数组，如果没有数组时则是NULL(当查询结果集为空时），如果有错误发生则返回`DB_ERROR`,mode参数控制返回数组的格式。
+- 如果没有错误，将返回一个数据数组，如果没有数组时则是NULL（当查询结果集为空时），如果有错误发生则返回`DB_ERROR`,mode参数控制返回数组的格式。
 - `fetchRow()`方法的习惯用法是一次一行的处理查询结果，如下所示：
 
 ```php
@@ -254,7 +254,7 @@ $db->disconnect();
 
 ## 高级数据库技术
 
-- PEAR DB将之前所示的数据库原始操作（primitive)进行改进，它提供了一些简化的函数来取得结果集的一行，还提供了唯一行ID系统，以及互相独立的SQL预处理和执行步骤来提高重复查询的效率。
+- PEAR DB将之前所示的数据库原始操作（primitive）进行改进，它提供了一些简化的函数来取得结果集的一行，还提供了唯一行ID系统，以及互相独立的SQL预处理和执行步骤来提高重复查询的效率。
 
 ### 占位符（Placeholder)
 
@@ -464,7 +464,7 @@ echo "<table border=1>\n";
 
 ### 序列
 
-- 不是所有的RDBMS都可以指定某行记录的唯一ID，各种数据库有许多不同的方法来返回这一信息，PEAR BD序列（sequence)是一种数据库专用ID分配（例如，MySQL是用`AUTO_INCREMENT`来指定ID的分配）的替代方法。
+- 不是所有的RDBMS都可以指定某行记录的唯一ID，各种数据库有许多不同的方法来返回这一信息，PEAR BD序列（sequence）是一种数据库专用ID分配（例如，MySQL是用`AUTO_INCREMENT`来指定ID的分配）的替代方法。
 - `nextID()`方法返回给定sequence的下一个ID:
 
 ```php

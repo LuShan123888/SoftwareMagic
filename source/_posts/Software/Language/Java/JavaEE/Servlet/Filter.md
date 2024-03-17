@@ -10,7 +10,7 @@ categories:
 # Servlet 编写过滤器
 
 - Servlet 过滤器可以动态地拦截请求和响应，以变换或使用包含在请求或响应中的信息。
-- 可以将一个或多个 Servlet 过滤器附加到一个 Servlet 或一组 Servlet,Servlet 过滤器也可以附加到 JavaServer Pages (JSP) 文件和 HTML 页面，调用 Servlet 前调用所有附加的 Servlet 过滤器。
+- 可以将一个或多个 Servlet 过滤器附加到一个 Servlet 或一组 Servlet,Servlet 过滤器也可以附加到 JavaServer Pages (JSP）文件和 HTML 页面，调用 Servlet 前调用所有附加的 Servlet 过滤器。
 - Servlet 过滤器是可用于 Servlet 编程的 Java 类，可以实现以下目的：
     - 在客户端的请求访问后端资源之前，拦截这些请求。
     - 在服务器的响应发送回客户端之前，处理这些响应。
@@ -24,7 +24,7 @@ categories:
     - MIME-TYPE 链过滤器（MIME-TYPE Chain Filters)
     - 标记化过滤器（Tokenizing Filters)
     - XSL/T 过滤器（XSL/T Filters)，转换 XML 内容。
-- 过滤器通过 Web 部署描述符（web.xml)中的 XML 标签来声明，然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式。
+- 过滤器通过 Web 部署描述符（web.xml）中的 XML 标签来声明，然后映射到您的应用程序的部署描述符中的 Servlet 名称或 URL 模式。
 - 当 Web 容器启动 Web 应用程序时，它会为您在部署描述符中声明的每一个过滤器创建一个实例。
 - Filter的执行顺序与在web.xml配置文件中的配置顺序一致，一般把Filter配置在所有的Servlet之前。
 
@@ -249,7 +249,7 @@ public class DisplayHeader extends HttpServlet {
 
     子元素可以设置的值及其意义。
 
-    - `REQUEST`：当用户直接访问页面时，Web容器将会调用过滤器，如果目标资源是通过RequestDispatcher的include()或forward()方法访问时，那么该过滤器就不会被调用。
-    - `INCLUDE`：如果目标资源是通过RequestDispatcher的include()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。
-    - `FORWARD`：如果目标资源是通过RequestDispatcher的forward()方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。
+    - `REQUEST`：当用户直接访问页面时，Web容器将会调用过滤器，如果目标资源是通过RequestDispatcher的include(）或forward(）方法访问时，那么该过滤器就不会被调用。
+    - `INCLUDE`：如果目标资源是通过RequestDispatcher的include(）方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。
+    - `FORWARD`：如果目标资源是通过RequestDispatcher的forward(）方法访问时，那么该过滤器将被调用，除此之外，该过滤器不会被调用。
     - `ERROR`：如果目标资源是通过声明式异常处理机制调用时，那么该过滤器将被调用，除此之外，过滤器不会被调用。

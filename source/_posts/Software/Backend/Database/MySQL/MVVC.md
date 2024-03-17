@@ -8,7 +8,7 @@ categories:
 ---
 # MySQL MVVC
 
-- MVVC (Multi-Version Concurrency Control) 是一种基于多版本的并发控制协议，只有在 InnoDB 引擎下存在，与 MVCC 相对的，是基于锁的并发控制（Lock-Based Concurrency Control)
+- MVVC (Multi-Version Concurrency Control）是一种基于多版本的并发控制协议，只有在 InnoDB 引擎下存在，与 MVCC 相对的，是基于锁的并发控制（Lock-Based Concurrency Control)
 - MVCC 是为了实现事务的隔离性，通过版本号，避免同一数据在不同事务间的竞争，可以把它当成基于多版本号的一种乐观锁。
 - MVCC 的优点：读不加锁，读写不冲突，在读多写少的 OLTP 应用中，读写不冲突是非常重要的，极大的增加了系统的并发性能。
 - MVCC 只在 READ COMMITTED 和 REPEATABLE READ 两个隔离级别下工作，其他两个隔离级别够和 MVCC 不兼容，因为 READ UNCOMMITTED 总是读取最新的数据行，而不是符合当前事务版本的数据行，而 SERIALIZABLE 则会对所有读取的行都加锁。
@@ -17,8 +17,8 @@ categories:
 
 - InnoDB 在每行数据都增加三个隐藏字段。
     - `DB_ROW_ID`：包含一个随着新行插入而单调递增的行 ID，当由 innodb 自动产生聚集索引时，聚集索引会包括这个行 ID 的值，否则这个行 ID 不会出现在任何索引中。
-    - `DB_TRX_ID` (创建版本号）：用来标识最近一次对本行记录做修改的事务 ID
-    - `DB_ROLL_PTR` (删除版本号）：指向写入回滚段（rollback segment) 的 undo log record，如果一行记录被更新，则 undo log record 包含该行记录被更新之前内容。
+    - `DB_TRX_ID` （创建版本号）：用来标识最近一次对本行记录做修改的事务 ID
+    - `DB_ROLL_PTR` （删除版本号）：指向写入回滚段（rollback segment）的 undo log record，如果一行记录被更新，则 undo log record 包含该行记录被更新之前内容。
 
 ### MVVC 环境下的 CRUD
 

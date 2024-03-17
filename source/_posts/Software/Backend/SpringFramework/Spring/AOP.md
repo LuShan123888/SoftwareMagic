@@ -10,7 +10,7 @@ categories:
 
 ## AOP 概述
 
-- AOP(Aspect Oriented Programming)面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术，AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型，利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
+- AOP(Aspect Oriented Programming）面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术，AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型，利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-10-31-640-20201031204745305.png)
 
@@ -305,7 +305,7 @@ public @interface MetricTime {
 ```java
 @Component
 public class UserService {
-    // 监控register()方法性能：
+    // 监控register(）方法性能：
     @MetricTime("register")
     public User register(String email, String password, String name) {
         ...
@@ -341,7 +341,7 @@ public class MetricAspect {
 }
 ```
 
-- 注意`metric()`方法标注了`@Around("@annotation(metricTime)")`，它的意思是，符合条件的目标方法是带有`@MetricTime`注解的方法，因为`metric()`方法参数类型是`MetricTime`(注意参数名是`metricTime`不是`MetricTime`)，我们通过它获取性能监控的名称。
+- 注意`metric()`方法标注了`@Around("@annotation(metricTime)")`，它的意思是，符合条件的目标方法是带有`@MetricTime`注解的方法，因为`metric()`方法参数类型是`MetricTime`（注意参数名是`metricTime`不是`MetricTime`)，我们通过它获取性能监控的名称。
 - 有了`@MetricTime`注解，再配合`MetricAspect`，任何Bean，只要方法标注了`@MetricTime`注解，就可以自动实现性能监控，运行代码，输出结果如下：
 
 ```

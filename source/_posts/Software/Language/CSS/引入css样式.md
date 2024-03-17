@@ -32,7 +32,7 @@ categories:
 
 ```html
 <style type="text/css">
-    @import url(导入外部样式表.css);
+    @import url（导入外部样式表.css);
 </style>
 ```
 

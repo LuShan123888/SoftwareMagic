@@ -117,7 +117,7 @@ mybatis:
 
 ### 文章编辑整合
 
-1. 导入[Editor.md](https://pandao.github.io/editor.md/)资源与jQuery
+1. 导入[Editor.md](https://pandao.github.io/editor.md/）资源与jQuery
 2. 编辑文章页面`editor.html`
 
 ```html
@@ -338,7 +338,7 @@ public String show(@PathVariable("id") int id,Model model){
 ```
 
 - 编写页面`article.html`
-- 导入[Editor.md](https://pandao.github.io/editor.md/)资源与jQuery
+- 导入[Editor.md](https://pandao.github.io/editor.md/）资源与jQuery
 
 ```html
 <!DOCTYPE html>

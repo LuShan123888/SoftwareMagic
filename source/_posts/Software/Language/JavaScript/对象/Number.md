@@ -68,7 +68,7 @@ myNumber.toString(2);    // 返回 10000000
 
 ## 无穷大（Infinity)
 
-- 当数字运算结果超过了JavaScript所能表示的数字上限（溢出），结果为一个特殊的无穷大（infinity)值，在JavaScript中以Infinity表示，同样地，当负数的值超过了JavaScript所能表示的负数范围，结果为负无穷大，在JavaScript中以-Infinity表示，无穷大值的行为特性和我们所期望的是一致的：基于它们的加，减，乘和除运算结果还是无穷大（当然还保留它们的正负号）
+- 当数字运算结果超过了JavaScript所能表示的数字上限（溢出），结果为一个特殊的无穷大（infinity）值，在JavaScript中以Infinity表示，同样地，当负数的值超过了JavaScript所能表示的负数范围，结果为负无穷大，在JavaScript中以-Infinity表示，无穷大值的行为特性和我们所期望的是一致的：基于它们的加，减，乘和除运算结果还是无穷大（当然还保留它们的正负号）
 
 ```js
 myNumber=2;
@@ -133,8 +133,8 @@ typeof(y) // 返回 Object
 
 | 方法                   | 描述                                                         |
 | :--------------------- | :----------------------------------------------------------- |
-| Number.parseFloat()    | 将字符串转换成浮点数，和全局方法 [parseFloat()](https://www.runoob.com/jsref/jsref-parsefloat.html) 作用一致， |
-| Number.parseInt()      | 将字符串转换成整型数字，和全局方法 [parseInt()](https://www.runoob.com/jsref/jsref-parseint.html) 作用一致， |
+| Number.parseFloat()    | 将字符串转换成浮点数，和全局方法 [parseFloat()](https://www.runoob.com/jsref/jsref-parsefloat.html）作用一致， |
+| Number.parseInt()      | 将字符串转换成整型数字，和全局方法 [parseInt()](https://www.runoob.com/jsref/jsref-parseint.html）作用一致， |
 | Number.isFinite()      | 判断传递的参数是否为有限数字，                               |
 | Number.isInteger()     | 判断传递的参数是否为整数，                                   |
 | Number.isNaN()         | 判断传递的参数是否为 isNaN(),                               |

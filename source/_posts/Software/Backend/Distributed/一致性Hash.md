@@ -1,5 +1,5 @@
 ---
-title：一致性Hash
+title: 一致性Hash
 categories:
 - Software
 - BackEnd
@@ -16,7 +16,7 @@ categories:
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20210727105027679.png" alt="image-20210727105027679" style="zoom:67%;" />
 
 - 整个空间按顺时针方向组织，圆环的正上方的点代表0,0点右侧的第一个点代表1，以此类推，2,3,4,5,6...直到2^32^-1，也就是说0点左侧的第一个点代表2^32^-1，把这个由2^32个点组成的圆环称为Hash环。
-- 下一步将各个服务器使用Hash函数得到Hash值，具体可以选择服务器的主机名（考虑到ip变动，不要使用ip)作为关键字进行Hash，这样每台机器就能确定其在Hash环上的位置，这里假设将上文中三个master节点的IP地址Hash后在Hash环空间的位置如下：
+- 下一步将各个服务器使用Hash函数得到Hash值，具体可以选择服务器的主机名（考虑到ip变动，不要使用ip）作为关键字进行Hash，这样每台机器就能确定其在Hash环上的位置，这里假设将上文中三个master节点的IP地址Hash后在Hash环空间的位置如下：
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-26-image-20210726230600054.png" alt="image-20210726230600054" style="zoom:33%;" />
 
@@ -27,7 +27,7 @@ categories:
 
 ### 容错性和可扩展性
 
-- 现假设Node 2不幸宕机，可以看到此时对象key-a和key-c不会受到影响，只有key-b被重定位到Node 3，一般的，在一致性Hash算法中，如果一台服务器不可用，则受影响的数据仅仅是此服务器到其环空间中前一台服务器（即沿着逆时针方向行走遇到的第一台服务器，如下图中Node 2与Node 1之间的数据，图中受影响的是key-2)之间数据，其它不会受到影响。
+- 现假设Node 2不幸宕机，可以看到此时对象key-a和key-c不会受到影响，只有key-b被重定位到Node 3，一般的，在一致性Hash算法中，如果一台服务器不可用，则受影响的数据仅仅是此服务器到其环空间中前一台服务器（即沿着逆时针方向行走遇到的第一台服务器，如下图中Node 2与Node 1之间的数据，图中受影响的是key-2）之间数据，其它不会受到影响。
 - 同样的，如果集群中新增一个node 4，受影响的数据是node 1和node 4之间的数据，其他的数据是不受影响的。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-07-26-image-20210726230713949.png" alt="image-20210726230713949" style="zoom:33%;" />

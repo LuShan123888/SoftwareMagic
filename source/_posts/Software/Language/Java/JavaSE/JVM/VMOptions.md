@@ -13,7 +13,7 @@ categories:
 - `-Xmx`：设置最大分配内存，默认本机内存的1/4
 - `-XX:+HeapDumpOnOutOfMemoryError`生成oomDump文件。
 - -Xmn — 堆中年轻代的大小。
-- -XX:-DisableExplicitGC — 让System.gc()不产生任何作用。
+- -XX:-DisableExplicitGC — 让System.gc(）不产生任何作用。
 - -XX:+PrintGCDetails — 打印GC的细节。
 - -XX:+PrintGCDateStamps — 打印GC操作的时间戳。
 - -XX:NewSize / XX:MaxNewSize — 设置年轻代大小/年轻代最大大小。

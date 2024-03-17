@@ -177,7 +177,7 @@ private Cat cat;
 
 ### @Resource
 
-- @Resource(属于J2EE规范），默认按照名称进行装配。
+- @Resource（属于J2EE规范），默认按照名称进行装配。
 - 名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行按照名称查找，如果注解写在setter方法上默认取属性名进行装配，当找不到与名称匹配的bean时才按照类型进行装配。
 - **注意**：如果name属性一旦指定，就只会按照名称进行装配。
 
@@ -352,7 +352,7 @@ public class User {
 xmlns:p="http://www.springframework.org/schema/p"
 ```
 
-- P(属性： properties)命名空间，属性依然要设置set方法。
+- P（属性： properties）命名空间，属性依然要设置set方法。
 
 ```xml
 <bean id="user" class="com.example.entity.User" p:name="test" p:age="18"/>
@@ -366,7 +366,7 @@ xmlns:p="http://www.springframework.org/schema/p"
  xmlns:c="http://www.springframework.org/schema/c"
 ```
 
-- C(构造： Constructor)命名空间，属性依然要设置set方法。
+- C（构造： Constructor）命名空间，属性依然要设置set方法。
 - 需要加上有参构造器。
 
 ```xml
@@ -581,7 +581,7 @@ public void test(){
 
 ### Prototype
 
-- 当一个bean的作用域为Prototype，表示一个bean定义对应多个对象实例，Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法）时都会创建一个新的bean实例。
+- 当一个bean的作用域为Prototype，表示一个bean定义对应多个对象实例，Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean(）方法）时都会创建一个新的bean实例。
 - Prototype是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象，根据经验，对有状态的bean应该使用prototype作用域，而对无状态的bean则应该使用singleton作用域。
 
 ```xml

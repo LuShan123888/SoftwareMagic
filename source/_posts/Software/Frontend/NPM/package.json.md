@@ -91,6 +91,6 @@ categories:
     - `~`:匹配最近的小版本比如~1.0.2将会匹配所有的1.0.x版本，但不匹配1.1.0
     - `^`：匹配最近的一个大版本比如1.0.2 将会匹配所有 1.x.x，但不包括2.x.x
 - `repository`：包代码存放的地方的类型，可以是 git 或 svn,git 可在 Github 上。
-- `main`:main 字段指定了程序的主入口文件，require('moduleName') 就会加载这个文件，这个字段的默认值是模块根目录下面的 index.js
+- `main`:main 字段指定了程序的主入口文件，require('moduleName'）就会加载这个文件，这个字段的默认值是模块根目录下面的 index.js
 - `scirpt`:npm run 命令执行的脚本名，通过该方式运行的命令会优先使用本项目的依赖，然后再使用全局依赖。
 - `keywords`：关键字。

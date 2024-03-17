@@ -45,7 +45,7 @@ public class Map接口的使用 {
         m.put("李四","2003012");
         m.put("王五","2003013");
         m.put("张三","2003001");// 添加一个已有相同关键字的元素时将修改元素的键值。
-        Set<String> keys = m.keySet();// 通过Map对象的keySet()方法得到关键字的集合。
+        Set<String> keys = m.keySet();// 通过Map对象的keySet(）方法得到关键字的集合。
         for (Iterator<String> i = keys.iterator();i.hasNext();){
             System.out.print(i.next()+",");
         }
@@ -140,7 +140,7 @@ while(iterator2.hasNext()) {
 }
 ```
 
-- 因为调用了get("name1")导致了name1对应的Entry移动到了最后，这里只要知道LinkedHashMap有插入顺序和访问顺序两种就可以，后面会详细讲原理。
+- 因为调用了get("name1"）导致了name1对应的Entry移动到了最后，这里只要知道LinkedHashMap有插入顺序和访问顺序两种就可以，后面会详细讲原理。
 - 还记得，上一篇HashMap解析中提到，在HashMap的构造函数中，调用了init方法，而在HashMap中init方法是空实现，但LinkedHashMap重写了该方法，所以在LinkedHashMap的构造方法里，调用了自身的init方法，init的重写实现如下：
 
 ```dart
@@ -489,7 +489,7 @@ private abstract class LinkedHashIterator<T> implements Iterator<T> {
 ```
 
 - 我们先不看整个类的实现，只要知道在LinkedHashMap中，Iterator<Entry<String, String>> iterator = set.iterator()，这段代码会返回一个继承LinkedHashIterator的Iterator，它有着跟HashIterator不一样的遍历规则。
-- 接着，我们会用while(iterator.hasNext())去循环判断是否有下一个元素，LinkedHashMap中的EntryIterator没有重写该方法，所以还是调用LinkedHashIterator中的hasNext方法，如下：
+- 接着，我们会用while(iterator.hasNext()）去循环判断是否有下一个元素，LinkedHashMap中的EntryIterator没有重写该方法，所以还是调用LinkedHashIterator中的hasNext方法，如下：
 
 ```java
 public boolean hasNext() {
@@ -594,7 +594,7 @@ private void remove() {
 
 ## Hashtable
 
-- Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁（`synchronized`)保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。
+- Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁（`synchronized`）保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。
 - 像HashMap一样，Hashtable在Hash表中存储键/值对，当使用一个Hash表，要指定用作键的对象，以及要链接到该键的值，然后，该键经过Hash处理，所得到的Hash值被用作存储在该表中值的索引，但是HashTable 的 key,value 都不可为 null
 - HashTable类中，保存实际数据的，依然是`Entry`对象，其数据结构与HashMap是相同的。
 
@@ -638,14 +638,14 @@ private void remove() {
 | 4    | **boolean containsKey(Object key)** 测试指定对象是否为此Hashtable中的键 |
 | 5    | **boolean containsValue(Object value)** 如果此 Hashtable 将一个或多个键映射到此值，则返回 true |
 | 6    | **Enumeration elements( )** 返回此Hashtable中的值的枚举      |
-| 7    | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足（key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null |
+| 7    | **Object get(Object key)**  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足（key.equals(k)）的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null |
 | 8    | **boolean isEmpty( )** 测试此Hashtable是否没有键映射到值     |
 | 9    | **Enumeration keys( )**  返回此Hashtable中的键的枚举         |
 | 10   | **Object put(Object key, Object value)** 将指定 key 映射到此Hashtable中的指定 value |
 | 11   | **void rehash( )** 增加此Hashtable的容量并在内部对其进行重组，以便更有效地容纳和访问其元素 |
 | 12   | **Object remove(Object key)** 从Hashtable中移除该键及其相应的值 |
 | 13   | **int size( )**  返回此Hashtable中的键的数量                 |
-| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", "(逗号加空格）分隔开的，括在括号中的一组条目 |
+| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", "（逗号加空格）分隔开的，括在括号中的一组条目 |
 
 **实例**
 
@@ -698,14 +698,14 @@ Zara's new balance: 4434.34
 
 ## TreeMap
 
-- TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树（Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点。
+- TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树（Red-Black tree）实现，每一个 key-value 节点作为红黑树的一个节点。
 - 放入TreeMap的元素，必须实现`Comparable`接口，如果没有实现`Comparable`接口，则必须在创建 TreeMap 时传入自定义的 `Comparator`对象，TreeMap 会自动对元素的进行排序。
 - TreeMap 中判断相等的标准是：两个 key 通过`equals()`方法返回为 true，并且通过`compare()`方法比较应该返回为 0
 - 要严格按照`compare()`规范实现比较逻辑，否则，`TreeMap`将不能正常工作，如果使用自定义的类来作为 TreeMap 中的 key 值，且想让 TreeMap 能够良好的工作，则必须重写自定义类中的`equals()`方法。
 
 ### key排序
 
-- TreeMap默认是升序的，如果我们需要改变排序方式，则需要使用比较器：Comparator,Comparator可以对集合对象或者数组进行排序的比较器接口，实现该接口的public compare(T o1,To2)方法即可实现排序，如下：
+- TreeMap默认是升序的，如果我们需要改变排序方式，则需要使用比较器：Comparator,Comparator可以对集合对象或者数组进行排序的比较器接口，实现该接口的public compare(T o1,To2）方法即可实现排序，如下：
 
 ```dart
 public class TreeMapTest {
@@ -754,7 +754,7 @@ public class TreeMapTest {
         map.put("d", "aaaaa");
         map.put("b", "ccccc");
 
-        // 这里将map.entrySet()转换成list
+        // 这里将map.entrySet(）转换成list
         List<Map.Entry<String,String>> list = new ArrayList<Map.Entry<String,String>>(map.entrySet());
         // 然后通过比较器来实现排序。
         Collections.sort(list,new Comparator<Map.Entry<String,String>>() {
@@ -946,9 +946,9 @@ int hashCode() {
 - 编写`equals()`和`hashCode()`遵循的原则是：`equals()`用到的用于比较的每一个字段，都必须在`hashCode()`中用于计算，`equals()`中没有使用到的字段，绝不可放在`hashCode()`中计算。
 - 另外注意，对于放入`HashMap`的`value`对象，没有任何要求。
 
-> **补充**：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》(很多软件公司，《Effective Java》,《Java编程思想》以及《重构：改善既有代码质量》)中是这样介绍equals方法的：
+> **补充**：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》（很多软件公司，《Effective Java》,《Java编程思想》以及《重构：改善既有代码质量》）中是这样介绍equals方法的：
 >
-> - 首先equals方法必须满足自反性（x.equals(x)必须返回true)，对称性（x.equals(y)返回true时，y.equals(x)也必须返回true)，传递性（x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值），而且对于任何非null值的引用x,x.equals(null)必须返回false
+> - 首先equals方法必须满足自反性（x.equals(x）必须返回true)，对称性（x.equals(y）返回true时，y.equals(x）也必须返回true)，传递性（x.equals(y）和y.equals(z）都返回true时，x.equals(z）也必须返回true）和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y）应该得到同样的返回值），而且对于任何非null值的引用x,x.equals(null）必须返回false
 > - 实现高质量的equals方法的诀窍包括：
 >   1. 使用==操作符检查"参数是否为这个对象的引用"
 >   2. 使用instanceof操作符检查"参数是否为正确的类型"

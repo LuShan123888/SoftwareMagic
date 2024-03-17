@@ -15,8 +15,8 @@ categories:
 
 | 方法           | 说明                                                         | 举例                        |
 | -------------- | ------------------------------------------------------------ | --------------------------- |
-| attr(属性名称） | 获取指定的属性值 | attr('checked')<br>attr('name') |
-| prop(属性名称） | 获取具有true和false两个属性的属性值                          | prop('checked')             |
+| attr（属性名称） | 获取指定的属性值 | attr('checked')<br>attr('name') |
+| prop（属性名称） | 获取具有true和false两个属性的属性值                          | prop('checked')             |
 
 **实例**
 
@@ -40,8 +40,8 @@ categories:
 
 | 方法                         | 说明                        | 举例                                            |
 | ---------------------------- | --------------------------- | ----------------------------------------------- |
-| attractive(属性名称，属性值） | 设置指定的属性值            | at tr('checked','checked')<br>attr('name','zs') |
-| prop(属性名称，属性值）       | 设置具有true和false的属性值 | prop('checked','true')                          |
+| attractive（属性名称，属性值） | 设置指定的属性值            | at tr('checked','checked')<br>attr('name','zs') |
+| prop（属性名称，属性值）       | 设置具有true和false的属性值 | prop('checked','true')                          |
 
 **注意**
 
@@ -61,7 +61,7 @@ categories:
 
 | 方法               | 说明           | 举例                  |
 | ------------------ | -------------- | --------------------- |
-| removeAttr(属性名） | 移除指定的属性 | removeAttr('checked') |
+| removeAttr（属性名） | 移除指定的属性 | removeAttr('checked') |
 
 ```html
 <a href="http://www.sina.com" id="a2">新浪</a>
@@ -152,7 +152,7 @@ $('#conRed').css({"background-color":"red","color":"#fff"});
 ```html
 <script src="jquery-3.4.1.js" type="text/javascript"></script>
 <body>
-    <h3><span>html()和text()方法设置元素内容</span></h3>
+    <h3><span>html(）和text(）方法设置元素内容</span></h3>
     <div id="html"></div>
     <div id="text"></div>
     <input type="text" name="uname" value="oop"/>

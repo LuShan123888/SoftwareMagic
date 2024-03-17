@@ -51,7 +51,7 @@ categories:
 ### choose, when, otherwise
 
 - 有时候，我们不想使用所有的条件，而只是想从多个条件中选择一个使用，针对这种情况， MyBatis 提供了 choose 元素，它有点像 Java 中的 switch 语句。
-- 还是上面的例子，但是策略变为：传入了 "title” 就按 "title” 查找，传入了 "author” 就按 "author” 查找的情形，若两者都没有传入，就返回标记为 featured 的 BLOG(这可能是管理员认为，与其返回大量的无意义随机 Blog，还不如返回一些由管理员精选的 Blog)
+- 还是上面的例子，但是策略变为：传入了 "title” 就按 "title” 查找，传入了 "author” 就按 "author” 查找的情形，若两者都没有传入，就返回标记为 featured 的 BLOG（这可能是管理员认为，与其返回大量的无意义随机 Blog，还不如返回一些由管理员精选的 Blog)
 
 ```xml
 <select id="findActiveBlogLike" resultType="Blog">
@@ -179,7 +179,7 @@ AND title like ‘someTitle’
 </select>
 ```
 
-- `foreach` 元素的功能非常强大，它允许你指定一个集合，声明可以在元素体内使用的集合项（item)和索引（index)变量，它也允许你指定开头与结尾的字符串以及集合项迭代之间的分隔符，这个元素也不会错误地添加多余的分隔符，看它多智能!
+- `foreach` 元素的功能非常强大，它允许你指定一个集合，声明可以在元素体内使用的集合项（item）和索引（index）变量，它也允许你指定开头与结尾的字符串以及集合项迭代之间的分隔符，这个元素也不会错误地添加多余的分隔符，看它多智能!
 - **提示** 你可以将任何可迭代对象（如 List, Set 等）, Map 对象或者数组对象作为集合参数传递给 *foreach*，当使用可迭代对象或者数组时， index 是当前迭代的序号， item 的值是本次迭代获取到的元素，当使用 Map 对象（或者 Map.Entry 对象的集合）时， index 是键， item 是值。
 - 至此，我们已经完成了与 XML 配置及映射文件相关的讨论，下一章将详细探讨 Java API，以便你能充分利用已经创建的映射配置。
 
@@ -274,4 +274,4 @@ public interface Mapper {
 ```
 
 - **提示** 可以使用 Apache Velocity 作为动态语言，更多细节请参考 MyBatis-Velocity 项目。
-- 你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 `org.apache.ibatis.scripting.xmltags.XmlLanguageDriver`(别名为 `xml`)所提供。
+- 你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 `org.apache.ibatis.scripting.xmltags.XmlLanguageDriver`（别名为 `xml`）所提供。

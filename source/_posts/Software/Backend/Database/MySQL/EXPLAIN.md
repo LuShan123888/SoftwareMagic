@@ -19,15 +19,15 @@ Explain + SQL语句。
     - id值越大优先级越高，越先被执行。
     - id如果相同，可以认为是一组，从上往下顺序执行。
 -  **select_type**：显示查询中每个select子句的类型。
-    - SIMPLE(简单SELECT，不使用UNION或子查询等）
-    - PRIMARY(查询中若包含任何复杂的子部分，最外层的select被标记为PRIMARY)
+    - SIMPLE（简单SELECT，不使用UNION或子查询等）
+    - PRIMARY（查询中若包含任何复杂的子部分，最外层的select被标记为PRIMARY)
     - UNION(UNION中的第二个或后面的SELECT语句）
     - DEPENDENT UNION(UNION中的第二个或后面的SELECT语句，取决于外面的查询）
     - UNION RESULT(UNION的结果）
-    - SUBQUERY(子查询中的第一个SELECT)
-    - DEPENDENT SUBQUERY(子查询中的第一个SELECT，取决于外面的查询）
-    - DERIVED(派生表的SELECT, FROM子句的子查询）
-    - UNCACHEABLE SUBQUERY(一个子查询的结果不能被缓存，必须重新评估外链接的第一行）
+    - SUBQUERY（子查询中的第一个SELECT)
+    - DEPENDENT SUBQUERY（子查询中的第一个SELECT，取决于外面的查询）
+    - DERIVED（派生表的SELECT, FROM子句的子查询）
+    - UNCACHEABLE SUBQUERY（一个子查询的结果不能被缓存，必须重新评估外链接的第一行）
 -  **table**：显示这一行的数据是关于哪张表的，有时不是真实的表名字，看到的是derivedx(x是第x步执行的结果）
 -  **type**：表示MySQL在表中找到所需行的方式，又称访问类型。
     -  **NULL**: MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。

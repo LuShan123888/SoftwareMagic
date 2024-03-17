@@ -141,7 +141,7 @@ Online DDL 过程中占用 exclusive MDL 的步骤执行很快，所以几乎不
 
 ### 踩坑
 
-前面提到 Online DDL 执行过程中需要获取 MDL，MDL (metadata lock) 是 MySQL 5.5 引入的表级锁，在访问一个表的时候会被自动加上，以保证读写的正确性。当对一个表做 DML 操作的时候，加 MDL 读锁；当做 DDL 操作时候，加 MDL 写锁。
+前面提到 Online DDL 执行过程中需要获取 MDL，MDL (metadata lock）是 MySQL 5.5 引入的表级锁，在访问一个表的时候会被自动加上，以保证读写的正确性。当对一个表做 DML 操作的时候，加 MDL 读锁；当做 DDL 操作时候，加 MDL 写锁。
 
 为了在大表执行 DDL 的过程中同时保证 DML 能并发执行，前面使用了 ALGORITHM=INPLACE 的 Online DDL，但这里仍然存在死锁的风险，问题就出在 Online DDL 过程中需要 exclusive MDL 的地方。
 

@@ -68,7 +68,7 @@ Cookie: name=xyz
 | 7    | **public String getValue()** 该方法获取与 cookie 关联的值，  |
 | 8    | **public void setPath(String uri)** 该方法设置 cookie 适用的路径，如果您不指定路径，与当前页面相同目录下的（包括子目录下的）所有 URL 都会返回 cookie, |
 | 9    | **public String getPath()** 该方法获取 cookie 适用的路径，   |
-| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值，表示 cookie 是否应该只在加密的（即 SSL)连接上发送， |
+| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值，表示 cookie 是否应该只在加密的（即 SSL）连接上发送， |
 | 11   | **public void setComment(String purpose)** 设置cookie的注释，该注释在浏览器向用户呈现 cookie 时非常有用， |
 | 12   | **public String getComment()** 获取 cookie 的注释，如果 cookie 没有注释则返回 null, |
 
@@ -167,7 +167,7 @@ public class HelloForm extends HttpServlet {
 
 ## 通过 Servlet 读取 Cookie
 
-- 要读取 Cookie，您需要通过调用 *HttpServletRequest* 的 **getCookies( )** 方法创建一个 *javax.servlet.http.Cookie* 对象的数组，然后循环遍历数组，并使用 getName() 和 getValue() 方法来访问每个 cookie 和关联的值。
+- 要读取 Cookie，您需要通过调用 *HttpServletRequest* 的 **getCookies( )** 方法创建一个 *javax.servlet.http.Cookie* 对象的数组，然后循环遍历数组，并使用 getName(）和 getValue(）方法来访问每个 cookie 和关联的值。
 
 ## 实例
 

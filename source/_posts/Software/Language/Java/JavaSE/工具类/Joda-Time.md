@@ -9,7 +9,7 @@ categories:
 ---
 # Java Joda-Time
 
-- 在Java中处理日期和时间是很常见的需求，基础的工具类就是我们熟悉的Date和Calendar，然而这些工具类的api使用并不是很方便和强大，于是就诞生了[Joda-Time](http://www.joda.org/joda-time/)这个专门处理日期时间的库。
+- 在Java中处理日期和时间是很常见的需求，基础的工具类就是我们熟悉的Date和Calendar，然而这些工具类的api使用并不是很方便和强大，于是就诞生了[Joda-Time](http://www.joda.org/joda-time/）这个专门处理日期时间的库。
 
 ## pom.xml
 
@@ -99,7 +99,7 @@ now.dayOfWeek().getAsShortText(Locale.CHINESE); // 星期五。
 ```
 
 - 有时我们需要对一个DateTime的某些属性进行置0操作，比如得到当天的0点时刻。
-- 那么就需要用到Property中round开头的方法（例如：roundFloorCopy)如下面的例子所示：
+- 那么就需要用到Property中round开头的方法（例如：roundFloorCopy）如下面的例子所示：
 
 ```dart
 DateTime now = new DateTime(); // 2016-02-26T16:51:28.749+08:00

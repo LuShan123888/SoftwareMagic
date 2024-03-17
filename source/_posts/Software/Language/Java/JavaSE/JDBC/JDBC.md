@@ -24,17 +24,17 @@ categories:
 ## JDBC驱动程序
 
 - JDBC驱动程序有以下4类。
-    - **JDBC-ODBC桥接（JDBC-ODBC Bridge)驱动程序**:Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序，供存取标准的ODBC数据源，然而，Sun公司建议除开发很小的应用程序外，一般不适用这种驱动程序。
-    - **JDBC结合本地API桥（JDBC-Native API Bridge)驱动程序**：这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用，Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
+    - **JDBC-ODBC桥接（JDBC-ODBC Bridge）驱动程序**:Sun公司在Java2中免费提供了JDBC-ODBC桥接驱动程序，供存取标准的ODBC数据源，然而，Sun公司建议除开发很小的应用程序外，一般不适用这种驱动程序。
+    - **JDBC结合本地API桥（JDBC-Native API Bridge）驱动程序**：这类驱动程序将JDBC的调用转换成具体数据库系统的本地API调用，Oracle,SYBASE,Informix,DB2等数据库系统均提供了本地API
 
-    - **JDBC结合中间件（JDBC-Middleware)的驱动程序**：这类驱动程序必须在数据库管理系统的服务器上安装中间件，该中间件将JDBC转换为具体数据库系统的本地API调用。
+    - **JDBC结合中间件（JDBC-Middleware）的驱动程序**：这类驱动程序必须在数据库管理系统的服务器上安装中间件，该中间件将JDBC转换为具体数据库系统的本地API调用。
 
     - **纯JDBC驱动程序（Pure JDBC)**：这类驱动程序全由Java写出，所有存取数据库的操作直接由JDBC驱动程序完成，它属于专用的驱动程序，要靠数据库厂商提供支持。
 - 从性能上考虑，第3类和第4类驱动程序较理想。
 
 ## JDBC API
 
-- JDBC是对ODBC API进行的一种面向对象的封装和重新设计，Java应用程序通过JDBC API(java.sql)与数据库连接，而实际的动作则由JDBC驱动程序管理器（JDBC Driver Manager)通过JDBC驱动程序与数据库系统进行连接。
+- JDBC是对ODBC API进行的一种面向对象的封装和重新设计，Java应用程序通过JDBC API(java.sql）与数据库连接，而实际的动作则由JDBC驱动程序管理器（JDBC Driver Manager）通过JDBC驱动程序与数据库系统进行连接。
 - Java.sql包提供了多种JDBC API，以下为几个最常用的API
     - Connection接口：代表数据库的连接，通过Connection接口提供的`getMetaData()`方法可获取所连接的数据库的有关描述信息，如表名，表的索引，数据库产品的名称和版本，数据库支持的操作等。
     - Statement接口：用来执行SQL语句并返回结果记录集。
@@ -68,7 +68,7 @@ ResultSet rs = stmt.executeQuery("SELECT a,b,c FROM Table2");
 
 - Statement接口提供了3种执行SQL语句的方法，即`excuteQuery()`,`executeUpdate()`和`execute()`，使用哪一个方法由SQL语句所产生的内容决定。
     - `executeQuery()`方法用于产生单个结果集的语句，例如SELECT语句。
-    - `executeUpdate()`方法执行INSERT,UPDATE或DELETE语句以及SQL DDL(数据定义语言）语句，例如CREATE TABLE和DROP TABLE,INSERT,UPDATE或DELETE语句的效果是修改数据库表格中若干行的指定数据项内容，`executeUpdate()`的返回值是一个整数，是受影响的行数（即更新计数），对于CREATE TABLE或DROP TABLE等不涉及操作记录的语句，`executeUpdate()`的返回值总为零。
+    - `executeUpdate()`方法执行INSERT,UPDATE或DELETE语句以及SQL DDL（数据定义语言）语句，例如CREATE TABLE和DROP TABLE,INSERT,UPDATE或DELETE语句的效果是修改数据库表格中若干行的指定数据项内容，`executeUpdate()`的返回值是一个整数，是受影响的行数（即更新计数），对于CREATE TABLE或DROP TABLE等不涉及操作记录的语句，`executeUpdate()`的返回值总为零。
     - `execute()`方法用于执行返回多个结果集，多个更新计数或二者组合的语句，Statement对象将由Java垃圾收集程序自动关闭，而作为一种好的编程风格，应在不需要Statement对象时显式地关闭它们，这将立即释放DBMS资源。
 
 **[例17-1]**：创建数据表。
@@ -170,7 +170,7 @@ public class 用PreparedStatement类实现SQL操作{
 > - PreparedStatement中的SQL语句是可以带参数的，避免了用字符串连接拼接SQL语句的麻烦和不安全。
 > - 当批量处理SQL或频繁执行相同的查询时，PreparedStatement有明显的性能上的优势，由于数据库可以将编译优化后的SQL语句缓存起来，下次执行相同结构的语句时就会很快（不用再次编译和生成执行计划）
 
-> **补充**：为了提供对存储过程的调用，JDBC API中还提供了CallableStatement接口，存储过程（Stored Procedure)是数据库中一组为了完成特定功能的SQL语句的集合，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它，虽然调用存储过程会在网络开销，安全性，性能上获得很多好处，但是存在如果底层数据库发生迁移时就会有很多麻烦，因为每种数据库的存储过程在书写上存在不少的差别。
+> **补充**：为了提供对存储过程的调用，JDBC API中还提供了CallableStatement接口，存储过程（Stored Procedure）是数据库中一组为了完成特定功能的SQL语句的集合，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它，虽然调用存储过程会在网络开销，安全性，性能上获得很多好处，但是存在如果底层数据库发生迁移时就会有很多麻烦，因为每种数据库的存储过程在书写上存在不少的差别。
 
 ## 数据库查询
 

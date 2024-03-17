@@ -22,7 +22,7 @@ categories:
 ## 过滤器
 
 - Spring Security 基本都是通过过滤器来完成配置的身份认证，权限认证以及登出。
-- Spring Security 在 Servlet 的过滤链（filter chain)中注册了一个过滤器 `FilterChainProxy`，它会把请求代理到 Spring Security 自己维护的多个过滤链，每个过滤链会匹配一些 URL，如果匹配则执行对应的过滤器，过滤链是有顺序的，一个请求只会执行第一条匹配的过滤链，Spring Security 的配置本质上就是新增，删除，修改过滤器。
+- Spring Security 在 Servlet 的过滤链（filter chain）中注册了一个过滤器 `FilterChainProxy`，它会把请求代理到 Spring Security 自己维护的多个过滤链，每个过滤链会匹配一些 URL，如果匹配则执行对应的过滤器，过滤链是有顺序的，一个请求只会执行第一条匹配的过滤链，Spring Security 的配置本质上就是新增，删除，修改过滤器。
 - 默认情况下系统帮我们注入的这 15 个过滤器，分别对应配置不同的需求，例如 `UsernamePasswordAuthenticationFilter` 是用来使用用户名和密码登录认证的过滤器，但是很多情况下登录不止是简单的用户名和密码，又可能是用到第三方授权登录，这个时候我们就需要使用自定义过滤器。
 
 ```java
@@ -67,7 +67,7 @@ public interface Authentication extends Principal, Serializable {
     Object getCredentials();
     // 获取用户的额外信息，比如 IP 地址，经纬度等。
     Object getDetails();
-    // 获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails (暂时理解为，当前应用用户对象的扩展）
+    // 获取用户身份信息，在未认证的情况下获取到的是用户名，在已认证的情况下获取到的是 UserDetails （暂时理解为，当前应用用户对象的扩展）
     Object getPrincipal();
     // 获取当前 Authentication 是否已认证。
     boolean isAuthenticated();
@@ -174,7 +174,7 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
-        // 具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate() 方法完成。
+        // 具体的认证逻辑还是交给 AuthenticationManager 对象的 authenticate(）方法完成。
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 }

@@ -10,7 +10,7 @@ categories:
 - AJAX = 异步 JavaScript 和 XML
 - AJAX 是一种用于创建快速动态网页的技术。
 - 通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新，这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
-- 传统的网页（不使用 AJAX)如果需要更新内容，必需重载整个网页面。
+- 传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面。
 
 ## AJAX 工作原理
 
@@ -27,14 +27,14 @@ categories:
 
 ### 创建 XMLHttpRequest 对象
 
-- 所有现代浏览器（IE7+,Firefox,Chrome,Safari 以及 Opera)均内建 XMLHttpRequest 对象。
+- 所有现代浏览器（IE7+,Firefox,Chrome,Safari 以及 Opera）均内建 XMLHttpRequest 对象。
 - 创建 XMLHttpRequest 对象的语法：
 
 ```js
 variable=new XMLHttpRequest();
 ```
 
-- 老版本的 Internet Explorer (IE5 和 IE6)使用 ActiveX 对象：
+- 老版本的 Internet Explorer (IE5 和 IE6）使用 ActiveX 对象：
 
 ```js
 variable=new ActiveXObject("Microsoft.XMLHTTP");
@@ -58,9 +58,9 @@ else
 
 ## XHR请求
 
-- 如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open() 和 send() 方法：
-- open() 方法的 *url* 参数是服务器上文件的地址：该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php (在传回响应之前，能够在服务器上执行任务）
-- XMLHttpRequest 对象如果要用于 AJAX 的话，其 open() 方法的 async 参数必须设置为 true
+- 如需将请求发送到服务器，我们使用 XMLHttpRequest 对象的 open(）和 send(）方法：
+- open(）方法的 *url* 参数是服务器上文件的地址：该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）
+- XMLHttpRequest 对象如果要用于 AJAX 的话，其 open(）方法的 async 参数必须设置为 true
 
 ```js
 xmlhttp.open("GET","ajax_info.txt",true);
@@ -69,7 +69,7 @@ xmlhttp.send();
 
 | 方法                         | 描述                                                         |
 | :--------------------------- | :----------------------------------------------------------- |
-| open(*method*,*url*,*async*) | 规定请求的类型，URL 以及是否异步处理请求，*method*：请求的类型;GET 或 POST*url*：文件在服务器上的位置*async*:true(异步）或 false(同步） |
+| open(*method*,*url*,*async*) | 规定请求的类型，URL 以及是否异步处理请求，*method*：请求的类型;GET 或 POST*url*：文件在服务器上的位置*async*:true（异步）或 false（同步） |
 | send(*string*)               | 将请求发送到服务器，*string*：仅用于 POST 请求               |
 
 ### GET请求
@@ -90,7 +90,7 @@ xmlhttp.open("POST","/try/ajax/demo_post.php",true);
 xmlhttp.send();
 ```
 
-- 如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头，然后在 send() 方法中规定您希望发送的数据：
+- 如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader(）来添加 HTTP 头，然后在 send(）方法中规定您希望发送的数据：
 
 ```js
 xmlhttp.open("POST","/try/ajax/demo_post2.php",true);

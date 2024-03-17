@@ -169,7 +169,7 @@ public class RestFulController {
 }
 ```
 
-- 路径参数支持正则表达式，例如我们在使用接口的时候要求sex必须是F(Female)或者M(Male)，那么我们的URL模板可以定义如下。
+- 路径参数支持正则表达式，例如我们在使用接口的时候要求sex必须是F(Female）或者M(Male)，那么我们的URL模板可以定义如下。
 
 ```javascript
 @GetMapping(value = "/sex/{sex:M|F}")

@@ -67,7 +67,7 @@ list-style-type 属性设置列表项标记的类型。
 | armenian             | 传统的亚美尼亚编号方式                                      |
 | georgian             | 传统的乔治亚编号方式（an, ban, gan，等，)                    |
 | cjk-ideographic      | 简单的表意数字                                              |
-| hiragana             | 标记是：a, i, u, e, o, ka, ki，等，(日文平假名字符）       |
-| katakana             | 标记是：A, I, U, E, O, KA, KI，等，(日文片假名字符）       |
-| hiragana-iroha       | 标记是：i, ro, ha, ni, ho, he, to，等，(日文平假名序号）   |
-| katakana-iroha       | 标记是：I, RO, HA, NI, HO, HE, TO，等，(日文片假名序号）   |
+| hiragana             | 标记是：a, i, u, e, o, ka, ki，等，（日文平假名字符）       |
+| katakana             | 标记是：A, I, U, E, O, KA, KI，等，（日文片假名字符）       |
+| hiragana-iroha       | 标记是：i, ro, ha, ni, ho, he, to，等，（日文平假名序号）   |
+| katakana-iroha       | 标记是：I, RO, HA, NI, HO, HE, TO，等，（日文片假名序号）   |

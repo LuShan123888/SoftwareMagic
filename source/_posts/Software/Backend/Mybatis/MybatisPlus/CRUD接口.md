@@ -41,7 +41,7 @@ boolean saveBatch(Collection<T> entityList, int batchSize);
 ```java
 // TableId 注解存在更新记录，否插入一条记录。
 boolean saveOrUpdate(T entity);
-// 根据updateWrapper尝试更新，否继续执行saveOrUpdate(T)方法。
+// 根据updateWrapper尝试更新，否继续执行saveOrUpdate(T）方法。
 boolean saveOrUpdate(T entity, Wrapper<T> updateWrapper);
 // 批量修改插入。
 boolean saveOrUpdateBatch(Collection<T> entityList);

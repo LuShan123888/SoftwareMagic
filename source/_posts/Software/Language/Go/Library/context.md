@@ -197,7 +197,7 @@ type Context interface {
     - 如果当前 `Context` 超时就会返回 `DeadlineExceeded` 错误。
 - `Value` 方法会从 `Context` 中返回键对应的值，对于同一个上下文来说，多次调用 `Value` 并传入相同的 `Key` 会返回相同的结果，该方法仅用于传递跨 API 和进程间跟请求域的数据。
 
-### Background () 和 TODO ()
+### Background (）和 TODO ()
 
 Go 内置两个函数：`Background()` 和 `TODO()`，这两个函数分别返回一个实现了 `Context` 接口的 `background` 和 `todo`。最开始都是以这两个内置的上下文对象作为最顶层的 `partent context`，衍生出更多的子上下文对象。
 
@@ -262,7 +262,7 @@ func main() {
 func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
 ```
 
-返回父上下文的副本，并将 deadline 调整为不迟于 d。如果父上下文的 deadline 已经早于 d，则 WithDeadline (parent, d) 在语义上等同于父上下文。当截止日过期时，当调用返回的 cancel 函数时，或者当父上下文的 Done 通道关闭时，返回上下文的 Done 通道将被关闭，以最先发生的情况为准。
+返回父上下文的副本，并将 deadline 调整为不迟于 d。如果父上下文的 deadline 已经早于 d，则 WithDeadline (parent, d）在语义上等同于父上下文。当截止日过期时，当调用返回的 cancel 函数时，或者当父上下文的 Done 通道关闭时，返回上下文的 Done 通道将被关闭，以最先发生的情况为准。
 
 取消此上下文将释放与其关联的资源，因此代码应该在此上下文中运行的操作完成后立即调用 cancel。
 

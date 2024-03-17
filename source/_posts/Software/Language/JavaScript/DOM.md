@@ -40,7 +40,7 @@ var y=x.getElementsByTagName("p");
 
 ### 通过类名找到 HTML 元素
 
-- 本例通过 [getElementsByClassName](https://www.runoob.com/jsref/met-document-getelementsbyclassname.html) 函数来查找 class="intro" 的元素：
+- 本例通过 [getElementsByClassName](https://www.runoob.com/jsref/met-document-getelementsbyclassname.html）函数来查找 class="intro" 的元素：
 
 ```js
 var x=document.getElementsByClassName("intro");
@@ -68,7 +68,7 @@ document.write(Date());
 </html>
 ```
 
-- 绝对不要在文档（DOM)加载完成之后使用 `document.write()`，这会覆盖该文档。
+- 绝对不要在文档（DOM）加载完成之后使用 `document.write()`，这会覆盖该文档。
 
 ### 改变 HTML 内容
 
@@ -187,7 +187,7 @@ document.getElementById("p2").style.fontSize="larger";
 
 ## EventListener
 
-### addEventListener() 方法
+### addEventListener(）方法
 
 **语法**
 
@@ -293,7 +293,7 @@ addEventListener(event, function, useCapture);
 document.getElementById("myDiv").addEventListener("click", myFunction, true);
 ```
 
-### removeEventListener() 方法
+### removeEventListener(）方法
 
 - `removeEventListener()` 方法移除由 `addEventListener()` 方法添加的事件句柄：
 
@@ -455,7 +455,7 @@ parent.replaceChild(para, child);
 
 ## Collection 对象
 
-- `getElementsByTagName()` 方法返回 [HTMLCollection](https://www.runoob.com/jsref/dom-htmlcollection.html) 对象。
+- `getElementsByTagName()` 方法返回 [HTMLCollection](https://www.runoob.com/jsref/dom-htmlcollection.html）对象。
 - HTMLCollection 对象类似包含 HTML 元素的一个数组。
 - 以下代码获取文档所有的 `<p>` 元素：
 
@@ -500,8 +500,8 @@ for (i = 0; i < myCollection.length; i++) {
 ## NodeList 对象
 
 - **NodeList** 对象是一个从文档中获取的节点列表（集合）
-- NodeList 对象类似 [HTMLCollection](https://www.runoob.com/js/js-htmldom-elements.html) 对象。
-- 一些旧版本浏览器中的方法（如`getElementsByClassName()`)返回的是 NodeList 对象，而不是 HTMLCollection 对象。
+- NodeList 对象类似 [HTMLCollection](https://www.runoob.com/js/js-htmldom-elements.html）对象。
+- 一些旧版本浏览器中的方法（如`getElementsByClassName()`）返回的是 NodeList 对象，而不是 HTMLCollection 对象。
 - 所有浏览器的`childNodes`属性返回的是 NodeList 对象。
 - 大部分浏览器的 `querySelectorAll()`返回 NodeList 对象。
 - 下代码选取了文档中所有的 `<p>` 节点：
@@ -546,10 +546,10 @@ for (i = 0; i < myNodelist.length; i++) {
 
 ## HTMLCollection 与 NodeList 的区别
 
-- [HTMLCollection](https://www.runoob.com/js/js-htmldom-collections.html) 是 HTML 元素的集合。
+- [HTMLCollection](https://www.runoob.com/js/js-htmldom-collections.html）是 HTML 元素的集合。
 - NodeList 是一个文档节点的集合。
 - NodeList 与 HTMLCollection 有很多类似的地方。
-- NodeList 与 HTMLCollection 都与数组对象有点类似，可以使用索引（0, 1, 2, 3, 4, ...) 来获取元素。
+- NodeList 与 HTMLCollection 都与数组对象有点类似，可以使用索引（0, 1, 2, 3, 4, ...）来获取元素。
 - NodeList 与 HTMLCollection 都有 length 属性。
 - HTMLCollection 元素可以通过 name,id 或索引来获取。
 - NodeList 只能通过索引来获取。

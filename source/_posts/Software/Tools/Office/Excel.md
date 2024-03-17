@@ -49,7 +49,7 @@ categories:
         - 四舍五入函数ROUND
             - 功能：按参数二指定的位数对参数一的数值进行四舍五入。
             - 格式：ROUND(Number,Numdigits)
-            - 说明：参数（Number)要四舍五入的数字，参数（Num digits)保留的小数位数。
+            - 说明：参数（Number）要四舍五入的数字，参数（Num digits）保留的小数位数。
         - 取整函数TRUNC(Number,[Num-digits])
             - 功能：按照参数二规定的小数位数对参数一进行截取，参数二可以省略，如省略则默认为0
         - 向下取整函数INT(Number)
@@ -59,60 +59,60 @@ categories:
         - 逻辑函数OR
             - 功能：在其参数组中，任何一个参数逻辑值为TRUE，即返回TRUE;所有参数的逻辑值为FALSE才返回FALSE
             - 格式：OR(Logical1,Logical2,...)
-            - 示例：A3单元格内容为98,B3单元格内容为84，则OR(A3<100,B3>90)结果为TRUE，结果为TURE
+            - 示例：A3单元格内容为98,B3单元格内容为84，则OR(A3<100,B3>90）结果为TRUE，结果为TURE
         - 逻辑函数AND
             - 功能：所有参数的逻辑值为真时，返回TRUE，只要有一个参数的逻辑值为假，则返回FALSE
             - 格式：AND(Logical1,Logical2,...)
-            - 示例：A3单元格内容为98,B3单元格内容为89，则AND(A3<100,B3>90)结果为FALSE
+            - 示例：A3单元格内容为98,B3单元格内容为89，则AND(A3<100,B3>90）结果为FALSE
             - 格式：AND(Logical1,Logical2,...)
-            - 示例：A3单元格内容为98,B3单元格内容为89，则AND(A3<100,B3>90)结果为FALSE
+            - 示例：A3单元格内容为98,B3单元格内容为89，则AND(A3<100,B3>90）结果为FALSE
         - 判断函数IF
             - 功能：判断是否满足指定条件，如果满足返回一个值，如不满足则返回另一个值。
             - 格式：IF(Logical-test,Value if true,Value if false)
-            - 说明：参数一（Logical text)为真时，IF函数返回参数二作为结果，参数一为假时，返回参数三作为结果。
+            - 说明：参数一（Logical text）为真时，IF函数返回参数二作为结果，参数一为假时，返回参数三作为结果。
         - 条件求和函数SUMIF
             - 格式：SUMIF(Range,Criteria,[SUM-range])
-            - 说明：参数（Range)为条件区域（范围），参数（criteria)为条件或者参数，参数（SUM-range)为求和区域。
+            - 说明：参数（Range）为条件区域（范围），参数（criteria）为条件或者参数，参数（SUM-range）为求和区域。
             - 原理：对条件区域中的第一个单元格分析到最后一个单元格，判断当前单元格的值是否符合参数二，即条件，符合时才将该单元格的所在行的求和列中单元格的值纳入求和的范围。当省略第三个参数时，则条件区域认为求和区域。
         - 多条件求和函数SUMIFS
             - 格式：SUMIFS(Sum-range,Criteria-range1,Criteria1,[Criteria-range2,Criteria2],...)
-            - 说明：参数（SUM-range)为求和区域，参数（Criteria_range1)为第一个条件区域，参数（Criteria1)为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
+            - 说明：参数（SUM-range）为求和区域，参数（Criteria_range1）为第一个条件区域，参数（Criteria1）为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
             - 原理：对求和范围中的第一个单元格分析到最后一个单元格，判断当前单元格所在行的条件列的值是否符合后面的条件，符合时才将该单元格纳入求和的范围。
         - 条件平均值函数AVERAGEIF
             - 格式：AVERAGEIF(Range,Criteria,[Average-range],...)
-            - 说明：参数（Range)为条件区域（范围），参数（Criteria)为条件或者参数，参数（Average-range)为求平均值区域。
+            - 说明：参数（Range）为条件区域（范围），参数（Criteria）为条件或者参数，参数（Average-range）为求平均值区域。
             - 原理：对条件区域中的第一个单元格分析到最后一个单元格，判断当前单元格的值是否符合参数二，即条件，符合时才将该单元格所在行的求平均值列中单元格的值纳入求平均值的范围，当忽略第三个参数时，则条件区域默认为求平均值区域。
         - 多条件平均值函数AVERAGEIFS
             - 格式：AVERAGEIFS(Average-range,Criteria-range1,Criteria1,[Criteria-range2,Criteria2],...)
-            - 说明：参数（Average-range)为求平均值区域，参数（Criteria-range1)为第一个条件区域，参数（Criteria1)为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
+            - 说明：参数（Average-range）为求平均值区域，参数（Criteria-range1）为第一个条件区域，参数（Criteria1）为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
         - 条件计数函数COUNTIF
             - 格式：COUNTIF(Range,Criteria)
-            - 说明：参数（Range)为条件区域（范围），参数（Criteria)为参数或条件。
+            - 说明：参数（Range）为条件区域（范围），参数（Criteria）为参数或条件。
             - 原理：统计条件区域中符合条件的单元格的数量。
         - 多条件计数函数COUNTIFS
             - 功能：统计各条件区域中同时符合其条件的行的数量。
             - 格式：COUNTIFS(Criteria-range1,Criteria1,[Criteria-range2,Criteria2],...)
-            - 说明：参数（Criteria-range1)为第一个条件区域，参数（Criteria1)为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
+            - 说明：参数（Criteria-range1）为第一个条件区域，参数（Criteria1）为第一个条件区域中指定的条件，以此类推，一个条件区域管一个条件，成对出现。
         - 垂直查询函数VLOOKUP
             - 功能：搜索指定单元格区域的第一列，然后返回比较相等时这一列上指定列中单元格的值。
             - 格式：VLOOKUOP(Lookup-value,Table-array,Col-index-num,Range-lookup)
-            - 说明：参数（LOOKUP-value)为要查找或者比较的对象，该参数将拿去与比较区域中的第一列做精确比较，参数（Table-array)为待搜索或比较的区域，参数（Col-index-num)为返回的列号，参数（Range-lookup)为比较的方式，取FALSE时则为精确比较。
-            - 原理：将查找的对象（Lookup-value)拿去与待搜索区域（Table-array)中的首列进行一一比较，比较相等时便返回指定的列（Col-index-num)作为函数的结果，比较时为精确查找。
+            - 说明：参数（LOOKUP-value）为要查找或者比较的对象，该参数将拿去与比较区域中的第一列做精确比较，参数（Table-array）为待搜索或比较的区域，参数（Col-index-num）为返回的列号，参数（Range-lookup）为比较的方式，取FALSE时则为精确比较。
+            - 原理：将查找的对象（Lookup-value）拿去与待搜索区域（Table-array）中的首列进行一一比较，比较相等时便返回指定的列（Col-index-num）作为函数的结果，比较时为精确查找。
         - LOOKUP函数。
             - 功能：返回向量或数组中的数值。
             - 格式：LOOKUP(Lookup-value,Lookup-vector,Result-vector)
-            - 说明：参数（Result-vector)只包含一行或一列的区域，其大小必须与参数（Lookup-vector)相同。
+            - 说明：参数（Result-vector）只包含一行或一列的区域，其大小必须与参数（Lookup-vector）相同。
             - 原理：函数LOOKUP有两种语法形式：向量与数组。
             - 函数LOOKUP的向量形式时在单行区域或单列区域中查找数值，然后返回第二个单行区域或单列区域中相同位置的数值。
         - 排名函数RANK
             - 功能：求指定区域中的数据排名。
             - 格式：RANK(Number,Ref,Order)
-            - 说明：参数（Number)是排名的对象，参数（Ref)是排名的区域（绝对引用），参数（Order)是排名的顺序，为升序或降序。
+            - 说明：参数（Number）是排名的对象，参数（Ref）是排名的区域（绝对引用），参数（Order）是排名的顺序，为升序或降序。
             - 原理：将参数一放到参数二指定的区域中进行排名，计算出参数一的排名。
         - YEAR函数。
             - 功能：返回指定日期对应额年份。
             - 格式YEAR(Serial-number)
-            - 说明：参数（Serial-number)必需的参数是一个日期值。
+            - 说明：参数（Serial-number）必需的参数是一个日期值。
         - TODAY函数。
             - 功能：返回计算机系统当天的日期。
             - 格式：TODAY( );
@@ -132,19 +132,19 @@ categories:
             - 功能：求目标时间的分钟部分，函数括号内的数据必须为时间\
         - 文本合并函数CONCATENATE
             - 功能：将几个文本项合并为一个文本项。
-            - 格式：CONCATENATE(Text1,[Text2],...)也可以通过&号实现。
+            - 格式：CONCATENATE(Text1,[Text2],...）也可以通过&号实现。
         - 截取字符串函数MID
             - 功能：从文本字符串中的指定位置开始截取指定个数的字符。
             - 格式：MID(Text1,Start-num,Num-chars)
-            - 说明：参数（Text1)为原文本字符串，参数（Start_num)为截取字符串的起始位置，参数（Num-chars)为截取的单位数量。
+            - 说明：参数（Text1）为原文本字符串，参数（Start_num）为截取字符串的起始位置，参数（Num-chars）为截取的单位数量。
         - 左侧截取字符串函数LEFT
             - 功能：功能：从文本字符串中的最左边开始截取指定个数的字符。
             - 格式：LEFT(Text,[Num-chars])
-            - 说明：参数（Text)为原文本字符串，参数（Num-chars)为截取的单位数量。
+            - 说明：参数（Text）为原文本字符串，参数（Num-chars）为截取的单位数量。
         - 右侧截取字符串函数LEFT
             - 功能：功能：从文本字符串中的最右边开始截取指定个数的字符。
             - 格式：LEFT(Text,[Num-chars])
-            - 说明：参数（Text)为原文本字符串，参数（Num-chars)为截取的单位数量。
+            - 说明：参数（Text）为原文本字符串，参数（Num-chars）为截取的单位数量。
         - 删除空格函数TRIM
             - 功能：删除指定文本或区域的空格。
             - 格式：TRIM(Text)
@@ -161,14 +161,14 @@ categories:
         - 求余函数MOD
             - 功能：求两个数相除后的余数。
             - 格式：MOD(Number,Divisor)
-            - 说明：参数（Divisor)为2时，MOD(Number,2)是求参数（Number)除以二所得的余数，结果为1时说明Number为奇数，反之则为偶数。
+            - 说明：参数（Divisor）为2时，MOD(Number,2）是求参数（Number）除以二所得的余数，结果为1时说明Number为奇数，反之则为偶数。
         - 奇数判断函数ISODD
             - 功能：判断其参数是不是奇数则返回TRUE，反之返回FALSE或错误值。
             - 格式：ISODD(Number)
         - 偶数判断函数ISEVEN
             - 功能：判断其参数是不是偶数。
             - 格式：ISEVEVN(Number)
-            - 说明：如果参数（Number)是偶数就返回TRUE，反之则返回FALSE和错误值。
+            - 说明：如果参数（Number）是偶数就返回TRUE，反之则返回FALSE和错误值。
 - 图表的类型：簇状柱形图，折线图，饼图，散点图，和簇状条形图。
 - 图标的基本要素：数据源，坐标轴标题，图标标题，图例项，数据系列，数据标签，主要坐标轴，次要坐标轴，坐标轴格式设置。
     - 数据系列：某一个图形系列。

@@ -1,9 +1,9 @@
 ---
-title：换k张
+title: 换k张
 categories:
-- Software
-- Algorithm
-- 动态规划。
+  - Software
+  - Algorithm
+  - 动态规划
 ---
 # 换k张
 

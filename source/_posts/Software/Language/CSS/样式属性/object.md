@@ -14,7 +14,7 @@ categories:
 
 - object-fit 属性指定元素的内容应该如何去适应指定容器的高度与宽度。
 - object-fit 一般用于 img 和 video 标签，一般可以对这些元素进行保留原始比例的剪切，缩放或者直接进行拉伸等。
-- 可以通过使用 [object-position](https://www.runoob.com/cssref/pr-object-position.html) 属性来切换被替换元素的内容对象在元素框内的对齐方式。
+- 可以通过使用 [object-position](https://www.runoob.com/cssref/pr-object-position.html）属性来切换被替换元素的内容对象在元素框内的对齐方式。
 
 **语法**
 
@@ -38,7 +38,7 @@ object-fit: fill|contain|cover|scale-down|none|initial|inherit;
 
 **标签定义及使用说明**
 
-- object-position 属性一般与 [object-fit](https://www.runoob.com/cssref/pr-object-fit.html)一起使用，用来设置元素的位置。
+- object-position 属性一般与 [object-fit](https://www.runoob.com/cssref/pr-object-fit.html）一起使用，用来设置元素的位置。
 - object-position 一般用于 img 和 video 标签。
 
 **语法**

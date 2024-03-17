@@ -9,7 +9,7 @@ categories:
 ---
 # JSP 表达式语言
 
-- JSP表达式语言（EL)使得访问存储在JavaBean中的数据变得非常简单，JSP EL既可以用来创建算术表达式也可以用来创建逻辑表达式，在JSP EL表达式内可以使用整型数，浮点数，字符串，常量true,false，还有null
+- JSP表达式语言（EL）使得访问存储在JavaBean中的数据变得非常简单，JSP EL既可以用来创建算术表达式也可以用来创建逻辑表达式，在JSP EL表达式内可以使用整型数，浮点数，字符串，常量true,false，还有null
 
 ## 一个简单的语法
 

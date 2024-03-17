@@ -194,7 +194,7 @@ public class ExampleForHbase{
         // 创建一个表，表名为Score，列族为sname,course
         createTable("Score",new String[]{"sname","course"});
 
-        // 在Score表中插入一条数据，其行键为95001,sname为Mary(因为sname列族下没有子列所以第四个参数为空）
+        // 在Score表中插入一条数据，其行键为95001,sname为Mary（因为sname列族下没有子列所以第四个参数为空）
         // 等价命令：put 'Score','95001','sname','Mary'
         //insertRow("Score", "95001", "sname", "", "Mary");
         // 在Score表中插入一条数据，其行键为95001,course:Math为88(course为列族，Math为course下的子列）

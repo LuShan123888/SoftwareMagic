@@ -230,31 +230,31 @@ services:
 - **endpoint_mode**：访问集群服务的方式。
     - **vip**:Docker 集群服务一个对外的虚拟 ip，所有的请求都会通过这个虚拟 ip 到达集群服务内部的机器。
     - **dnsrr**:DNS 轮询（DNSRR)，所有的请求会自动轮询获取到集群 ip 列表中的一个 ip 地址。
-- **labels**：在服务上设置标签，可以用容器上的 labels(跟 deploy 同级的配置）覆盖 deploy 下的 labels
+- **labels**：在服务上设置标签，可以用容器上的 labels（跟 deploy 同级的配置）覆盖 deploy 下的 labels
 - **mode**：指定服务提供的模式。
     - **replicated**：复制服务，复制指定服务到集群的机器上。
     - **global**：全局服务，服务将部署至集群的每个节点。
 - **replicas:mode** 为 replicated 时，需要使用此参数配置具体运行的节点数量。
 - **resources**：配置服务器资源使用的限制，例如上例子，配置 Redis 集群运行需要的 cpu 的百分比和 内存的占用，避免占用资源过高出现异常。
 - **restart_policy**：配置如何在退出容器时重新启动容器。
-    - condition：可选 none,on-failure 或者 any(默认值：any)
+    - condition：可选 none,on-failure 或者 any（默认值：any)
     - delay：设置多久之后重启（默认值：0)
     - max_attempts：尝试重新启动容器的次数，超出次数，则不再尝试（默认值：一直重试）
     - window：设置容器重启超时时间（默认值：0)
 - **rollback_config**：配置在更新失败的情况下应如何回滚服务。
     - parallelism：一次要回滚的容器数，如果设置为0，则所有容器将同时回滚。
     - delay：每个容器组回滚之间等待的时间（默认为0s)
-    - failure_action：如果回滚失败，该怎么办，其中一个 continue 或者 pause(默认pause)
-    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)(默认为0s)
+    - failure_action：如果回滚失败，该怎么办，其中一个 continue 或者 pause（默认pause)
+    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)（默认为0s)
     - max_failure_ratio：在回滚期间可以容忍的故障率（默认为0)
-    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚），或者 start-first(并行回滚）(默认 stop-first)
+    - order：回滚期间的操作顺序，其中一个 stop-first（串行回滚），或者 start-first（并行回滚）（默认 stop-first)
 - **update_config**：配置应如何更新服务，对于配置滚动更新很有用。
     - parallelism：一次更新的容器数。
     - delay：在更新一组容器之间等待的时间。
-    - failure_action：如果更新失败，该怎么办，其中一个 continue,rollback 或者pause(默认：pause)
-    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)(默认为0s)
+    - failure_action：如果更新失败，该怎么办，其中一个 continue,rollback 或者pause（默认：pause)
+    - monitor：每个容器更新后，持续观察是否失败了的时间（ns|us|ms|s|m|h)（默认为0s)
     - max_failure_ratio：在更新过程中可以容忍的故障率。
-    - order：回滚期间的操作顺序，其中一个 stop-first(串行回滚），或者 start-first(并行回滚）(默认stop-first)
+    - order：回滚期间的操作顺序，其中一个 stop-first（串行回滚），或者 start-first（并行回滚）（默认stop-first)
 - **注意**：仅支持 V3.4 及更高版本。
 
 #### devices
@@ -583,7 +583,7 @@ security-opt:
 
 #### stop_grace_period
 
-- 指定在容器无法处理 SIGTERM (或者任何 stop_signal 的信号），等待多久后发送 SIGKILL 信号关闭容器。
+- 指定在容器无法处理 SIGTERM （或者任何 stop_signal 的信号），等待多久后发送 SIGKILL 信号关闭容器。
 
 ```yaml
 stop_grace_period: 1s # 等待 1 秒。
@@ -700,7 +700,7 @@ $ docker-compose images
 
 ### up
 
-- 该命令十分强大，它将尝试自动完成包括构建镜像，(重新）创建服务，启动服务，并关联服务相关容器的一系列操作。
+- 该命令十分强大，它将尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作。
 
 ```
 $ docker-compose up
@@ -722,7 +722,7 @@ $ docker-compose up
 $ docker-compose port [options] SERVICE PRIVATE_PORT
 ```
 
-- `--protocol=proto` 指定端口协议，tcp(默认值）或者 udp
+- `--protocol=proto` 指定端口协议，tcp（默认值）或者 udp
 - `--index=index` 如果同一服务存在多个容器，指定命令对象容器的序号（默认为 1)
 
 ### down
@@ -794,7 +794,7 @@ $ docker-compose build [options] [SERVICE...]
 ```
 
 - `--force-rm` 删除构建过程中的临时容器。
-- `--no-cache` 构建镜像过程中不使用 cache(这将加长构建过程）
+- `--no-cache` 构建镜像过程中不使用 cache（这将加长构建过程）
 - `--pull` 始终尝试通过 pull 来获取更新版本的镜像。
 
 ### run

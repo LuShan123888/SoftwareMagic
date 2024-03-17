@@ -6,7 +6,7 @@ categories:
 ---
 # JWT
 
-- JSON Web Token (简称 JWT) 是目前最流行的**跨域认证**解决方案，是一种**认证授权机制**
+- JSON Web Token （简称 JWT）是目前最流行的**跨域认证**解决方案，是一种**认证授权机制**
 - JWT 的认证方式类似于**临时的证书签名**，并且是一种服务端无状态的认证方式，非常适合于 REST API 的场景。所谓无状态就是服务端并不会保存身份认证相关的数据。
 - JWT 是自包含的（内部包含了一些会话信息），因此减少了需要查询数据库的需要。
 -  JWT 并不使用 Cookie 的，所以你可以使用任何域名提供你的 API 服务而不需要担心跨域资源共享问题（CORS)
@@ -28,9 +28,9 @@ categories:
 ## JWT 格式
 
 - JWT 的三个部分依次如下：
-  - Header (头部）
-  - Payload (负载）
-  - Signature (签名）
+  - Header （头部）
+  - Payload （负载）
+  - Signature （签名）
 
 ### Header
 
@@ -43,7 +43,7 @@ categories:
 }
 ```
 
-- 上面代码中， `alg` 属性表示签名的算法（algorithm)，默认是 HMAC SHA 256 (写成 HS 256), `typ` 属性表示这个令牌（token) 的类型（type), JWT 令牌统一写为 `JWT`
+- 上面代码中， `alg` 属性表示签名的算法（algorithm)，默认是 HMAC SHA 256 （写成 HS 256), `typ` 属性表示这个令牌（token）的类型（type), JWT 令牌统一写为 `JWT`
 - 最后，将上面的 JSON 对象使用 Base 64 URL 算法（详见后文）转成字符串。
 
 ### Payload
@@ -81,7 +81,7 @@ HMACSHA256(
   secret)
 ```
 
-- 算出签名以后，把 Header, Payload, Signature 三个部分拼成一个字符串，每个部分之间用"点" (`.`) 分隔，就可以返回给用户。
+- 算出签名以后，把 Header, Payload, Signature 三个部分拼成一个字符串，每个部分之间用"点" (`.`）分隔，就可以返回给用户。
 
 ## 编码 JWT
 
@@ -120,5 +120,5 @@ String authority = claims.get("authorities").toString();
 
 - 认证后，返回 accessToken 与 refreshToken，前者为鉴权 Token，后者为续签 Token
 - accessToken 失效时间应该设置较短，比如 10 分钟， refreshToken 失效时间可以长一点，比如 7 天。
-- 请求时先用 accessToken，当 accessToken 失效时，用 refreshToken 生成一个新的 accessToken (刷新 token) 并自动续期。
+- 请求时先用 accessToken，当 accessToken 失效时，用 refreshToken 生成一个新的 accessToken （刷新 token）并自动续期。
 - 最好在 accessToken 在失效前主动 refreshToken

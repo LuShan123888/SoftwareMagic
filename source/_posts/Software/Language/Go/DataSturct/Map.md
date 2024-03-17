@@ -24,7 +24,7 @@ map[KeyType]ValueType
 
 ## 定义 map
 
-- map 类型的变量默认初始值为 nil，需要使用 make () 函数来分配内存，语法为：
+- map 类型的变量默认初始值为 nil，需要使用 make (）函数来分配内存，语法为：
 
 ```go
 make(map[KeyType]ValueType, [cap])

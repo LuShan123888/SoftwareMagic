@@ -48,4 +48,4 @@ $ show tables
 $ db.collection.drop()
 ```
 
-- **返回值**：如果成功删除选定集合，则 drop() 方法返回 true，否则返回 false
+- **返回值**：如果成功删除选定集合，则 drop(）方法返回 true，否则返回 false

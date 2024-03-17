@@ -44,7 +44,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071004-20200915182614997.png)
 
-- 容器默认存在两根轴：水平的主轴（main axis)和垂直的交叉轴（cross axis)，主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`;交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`
+- 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis)，主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`;交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`
 - 项目默认沿主轴排列，单个项目占据的主轴空间叫做`main size`，占据的交叉轴空间叫做`cross size`
 
 ## 容器的属性
@@ -72,14 +72,14 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 它可能有4个值。
 
-- `row`(默认值）：主轴为水平方向，起点在左端。
+- `row`（默认值）：主轴为水平方向，起点在左端。
 - `row-reverse`：主轴为水平方向，起点在右端。
 - `column`：主轴为垂直方向，起点在上沿。
 - `column-reverse`：主轴为垂直方向，起点在下沿。
 
 ###  flex-wrap属性
 
-默认情况下，项目都排在一条线（又称"轴线")上，`flex-wrap`属性定义，如果一条轴线排不下，如何换行。
+默认情况下，项目都排在一条线（又称"轴线"）上，`flex-wrap`属性定义，如果一条轴线排不下，如何换行。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071006-20200915151014353-20200915182614992.png)
 
@@ -91,7 +91,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 它可能取三个值。
 
-- `nowrap`(默认）：不换行。
+- `nowrap`（默认）：不换行。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-bg2015071007-20200915151014438-20200915182615059.png)
 
@@ -127,7 +127,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 它可能取5个值，具体对齐方式与轴的方向有关，下面假设主轴为从左到右。
 
-- `flex-start`(默认值）：左对齐。
+- `flex-start`（默认值）：左对齐。
 - `flex-end`：右对齐。
 - `center`：居中。
 - `space-between`：两端对齐，项目之间的间隔都相等。
@@ -151,7 +151,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 - `flex-end`：交叉轴的终点对齐。
 - `center`：交叉轴的中点对齐。
 - `baseline`：项目的第一行文字的基线对齐。
-- `stretch`(默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+- `stretch`（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
 
 ### align-content属性
 
@@ -172,7 +172,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 - `center`：与交叉轴的中点对齐。
 - `space-between`：与交叉轴两端对齐，轴线之间的间隔平均分布。
 - `space-around`：每根轴线两侧的间隔都相等，所以，轴线之间的间隔比轴线与边框的间隔大一倍。
-- `stretch`(默认值）：轴线占满整个交叉轴。
+- `stretch`（默认值）：轴线占满整个交叉轴。
 
 ### align-self属性
 
@@ -262,6 +262,6 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-- 该属性有两个快捷值：`auto` (`1 1 auto`) 和 none (`0 0 auto`)
+- 该属性有两个快捷值：`auto` (`1 1 auto`）和 none (`0 0 auto`)
 - 建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
 

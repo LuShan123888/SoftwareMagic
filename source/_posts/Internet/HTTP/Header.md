@@ -15,7 +15,7 @@ categories:
 | Content-Encoding    | 在传输过程中，这个头信息指定页面的编码方式，                   |
 | Content-Language    | 这个头信息表示文档编写所使用的语言，例如，en,en-us,ru 等，      |
 | Content-Length      | 这个头信息指示响应中的字节数，只有当浏览器使用持久（keep-alive)HTTP 连接时才需要这些信息， |
-| Content-Type        | 这个头信息提供了响应文档的 MIME(Multipurpose Internet Mail Extension)类型， |
+| Content-Type        | 这个头信息提供了响应文档的 MIME(Multipurpose Internet Mail Extension）类型， |
 | Expires             | 这个头信息指定内容过期的时间，在这之后内容不再被缓存，         |
 | Last-Modified       | 这个头信息指示文档的最后修改时间，然后，客户端可以缓存文件，并在以后的请求中通过 **If-Modified-Since** 请求头信息提供一个日期， |
 | Location            | 这个头信息应被包含在所有的带有状态码的响应中，在 300s 内，这会通知浏览器文档的地址，浏览器会自动重新连接到这个位置，并获取新的文档， |

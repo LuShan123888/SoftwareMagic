@@ -21,7 +21,7 @@ categories:
 ## ThreadLocal实现原理
 
 - 首先 ThreadLocal 是一个泛型类，保证可以接受任何类型的对象。
-- 因为一个线程内可以存在多个 ThreadLocal 对象，所以其实是 ThreadLocal 内部维护了一个 Map，这个 Map 不是直接使用的 HashMap，而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类，而我们使用的 get(),set() 方法其实都是调用了这个ThreadLocalMap类对应的`get()`,`set()`方法，例如下面的 set 方法：
+- 因为一个线程内可以存在多个 ThreadLocal 对象，所以其实是 ThreadLocal 内部维护了一个 Map，这个 Map 不是直接使用的 HashMap，而是 ThreadLocal 实现的一个叫做 ThreadLocalMap 的静态内部类，而我们使用的 get(),set(）方法其实都是调用了这个ThreadLocalMap类对应的`get()`,`set()`方法，例如下面的 set 方法：
 
 ```java
 public void set(T value) {
@@ -129,11 +129,11 @@ public class Son implements Cloneable{
 
 - 实际上 ThreadLocalMap 中使用的 key 为 ThreadLocal 的弱引用，当ThreadLocalMap移除该ThreadLocal实例时，在下一次垃圾回收的时候会被自动清理掉，但是value 是强引用，不会被清理，这样一来就会出现 key 为 null 的 value
 
-- ThreadLocalMap 实现中已经考虑了这种情况，在调用 set(),get(),remove() 方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove() 方法，并且之后也不再调用 get(),set(),remove()
+- ThreadLocalMap 实现中已经考虑了这种情况，在调用 set(),get(),remove(）方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove(）方法，并且之后也不再调用 get(),set(),remove()
 
-- ThreadLocalMap实现中已经考虑了这种情况，在调用 set(),get(),remove() 方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove() 方法，并且之后也不再调用 get(),set(),remove() 方法的情况下，ThreadLocalMap的getEntry函数的流程大概为：
+- ThreadLocalMap实现中已经考虑了这种情况，在调用 set(),get(),remove(）方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove(）方法，并且之后也不再调用 get(),set(),remove(）方法的情况下，ThreadLocalMap的getEntry函数的流程大概为：
 
-  1. 首先从ThreadLocal的直接索引位置（通过ThreadLocal.threadLocalHashCode & (table.length-1)运算得到）获取Entry e，如果e不为null并且key相同则返回e
+  1. 首先从ThreadLocal的直接索引位置（通过ThreadLocal.threadLocalHashCode & (table.length-1）运算得到）获取Entry e，如果e不为null并且key相同则返回e
 
   2. 如果e为null或者key不一致则向下一个位置查询，如果下一个位置的key和当前需要查询的key相等，则返回对应的Entry，否则，如果key值为null，则擦除该位置的Entry，并继续向下一个位置查询，在这个过程中遇到的key为null的Entry都会被擦除，那么Entry内的value也就没有强引用链，自然会被回收，仔细研究代码可以发现，set操作也有类似的思想，将key为null的这些Entry都删除，防止内存泄露。
 
@@ -199,7 +199,7 @@ public class DateUtil {
 }
 ```
 
-- 这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 `java.time.format.DateTimeFormatter`是线程安全的，Joda time里的DateTimeFormat也是线程安全的）
+- 这里的DateUtil.formatDate(）就是线程安全的了，(Java8里的 `java.time.format.DateTimeFormatter`是线程安全的，Joda time里的DateTimeFormat也是线程安全的）
 
 ## ThreadLocalRandom
 

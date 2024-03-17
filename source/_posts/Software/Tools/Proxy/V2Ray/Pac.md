@@ -1,5 +1,5 @@
 ---
-title：自定义pac列表规则
+title: 自定义pac列表规则
 categories:
 - Software
 - Tools

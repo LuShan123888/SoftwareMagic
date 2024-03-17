@@ -7,7 +7,7 @@ categories:
 ---
 # Go Interface
 
-- 在 Go 语言中接口（interface) 是一种类型，一种抽象的类型，包含一组方法的集合，接口（interface) 定义了一个对象的行为规范，只定义规范不实现，由具体的对象来实现规范的细节。
+- 在 Go 语言中接口（interface）是一种类型，一种抽象的类型，包含一组方法的集合，接口（interface）定义了一个对象的行为规范，只定义规范不实现，由具体的对象来实现规范的细节。
 - interface 是一组 method 的集合，是 duck-type prog ramming 的一种体现，接口做的事情就像是定义一个协议（规则），只要一台机器有洗衣服和甩干的功能，我就称它为洗衣机，不关心属性（数据），只关心行为（方法）
 
 ## 接口的定义
@@ -16,14 +16,14 @@ categories:
 
 ```go
 type 接口类型名 interface{
-    方法名1( 参数列表1 ) 返回值列表1
-    方法名2( 参数列表2 ) 返回值列表2
+    方法名1（参数列表1 ）返回值列表1
+    方法名2（参数列表2 ）返回值列表2
 …
 }
 ```
 
 - `接口类型名`: Go 语言的接口在命名时，一般会在单词后面添加 `er`，如有写操作的接口叫 `Writer`，有关闭操作的接口叫 `closer` 等，接口名最好要能突出该接口的类型含义。
-- `方法名`：当方法名首字母是大写且这个接口类型名首字母也是大写时，这个方法可以被接口所在的包（package) 之外的代码访问。
+- `方法名`：当方法名首字母是大写且这个接口类型名首字母也是大写时，这个方法可以被接口所在的包（package）之外的代码访问。
 - `参数列表，返回值列表`：参数列表和返回值列表中的参数变量名可以省略。
 
 ```go
@@ -279,7 +279,7 @@ type Machine interface {
 // 甩干器。
 type dryer struct{}
 
-// 实现Machine接口的dry()方法。
+// 实现Machine接口的dry(）方法。
 func (d dryer) dry() {
 	fmt.Println("dry")
 }
@@ -289,7 +289,7 @@ type WashingMachine struct {
 	dryer // 嵌入甩干器。
 }
 
-// 实现WashingMachine接口的wash()方法。
+// 实现WashingMachine接口的wash(）方法。
 func (w WashingMachine) wash() {
 	fmt.Println("wash")
 }

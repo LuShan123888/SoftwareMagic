@@ -11,7 +11,7 @@ categories:
 - UML提供了极富表达能力的建模语言，可以让软件开发过程中的不同人员分别得到自己感兴趣的信息。
 - `Page-Jones` 在《Fundamental Object-Oriented Design in UML》 一书中总结了UML的主要目的，如下：
     1. 为用户提供现成的，有表现力的可视化建模语言，以便他们开发和交换有意义的模型。
-    2. 为核心概念提供可扩展性（Extensibility) 和特殊化（Specialization) 机制。
+    2. 为核心概念提供可扩展性（Extensibility）和特殊化（Specialization）机制。
     3. 独立于特定的编程语言和开发过程。
     4. 为了解建模语言提供一个正式的基础。
     5. 鼓励面向对象工具市场的发展。
@@ -96,7 +96,7 @@ categories:
 
 ### 类名
 
-顾名思义就是类的名字，对应于Java类中的类名，如果该类是抽象类的话，在类名右下角会有一个（Abstract)表示，假如Person是一个抽象类的话，则UML类图如下。
+顾名思义就是类的名字，对应于Java类中的类名，如果该类是抽象类的话，在类名右下角会有一个（Abstract）表示，假如Person是一个抽象类的话，则UML类图如下。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-image-20210317004707944.png" alt="image-20210317004707944" style="zoom: 50%;" />
 
