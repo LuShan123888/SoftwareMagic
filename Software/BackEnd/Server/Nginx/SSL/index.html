@@ -24,7 +24,7 @@
 <meta property="og:description" content="Nginx SSL证书部署 获取证书  Nginx文件夹内获得SSL证书文件 &#96;&#96;1_www.domain.com_bundle.crt和私钥文件 2_www.domain.com.key&#96;  1_www.domain.com_bundle.crt 文件包括两段证书代码 “-----BEGIN CERTIFICATE-----”和”-----END CERTIFICATE-----” 2_www.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-07T10:55:22.000Z">
-<meta property="article:modified_time" content="2022-02-07T10:55:22.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.345Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年2月7日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -239,7 +239,7 @@
 </ul>
 <h2 id="证书安装">证书安装</h2>
 <ul>
-<li>将域名 <code>www.domain.com</code> 的证书文件<code>1_www.domain.com_bundle.crt</code> ,私钥文件<code>2_www.domain.com.key</code>保存到同一个目录,例如<code>/usr/local/nginx/conf</code>目录下</li>
+<li>将域名 <code>www.domain.com</code> 的证书文件<code>1_www.domain.com_bundle.crt</code> ,私钥文件<code>2_www.domain.com.key</code>保存到同一个目录，例如<code>/usr/local/nginx/conf</code>目录下</li>
 <li>更新Nginx根目录下 conf/nginx.conf 文件如下:</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span>;<br>    <span class="hljs-attribute">server_name</span> www.domain.com; <span class="hljs-comment">#填写绑定证书的域名</span><br>    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">ssl_certificate</span> 1_www.domain.com_bundle.crt;<br>    <span class="hljs-attribute">ssl_certificate_key</span> 2_www.domain.com.key;<br>    <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;<br>    <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>; <span class="hljs-comment">#按照这个协议配置</span><br>    <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<span class="hljs-comment">#按照这个套件配置</span><br>    <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">location</span> / &#123;<br>        <span class="hljs-attribute">root</span>   html; <span class="hljs-comment">#站点目录</span><br>        <span class="hljs-attribute">index</span>  index.html index.htm;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="Nginx 重定向 301永久重定向  浏览器地址会显示跳转新的URL地址  12345server &amp;#123;    listen 80;    server_name example.com;    return 301 https:&#x2F;&#x2F;www.example.com$request_uri;&amp;#125;  这样用户打开example.com时候就会转到www.example.com  30">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-22T09:57:09.000Z">
-<meta property="article:modified_time" content="2023-07-22T09:57:09.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.345Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2023年7月22日 下午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -246,7 +246,7 @@
 </ul>
 <h2 id="根据客户端重定向">根据客户端重定向</h2>
 <ul>
-<li>如果请求来自于移动端,则重定向至移动站点</li>
+<li>如果请求来自于移动端，则重定向至移动站点</li>
 </ul>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> example.com;<br>    <span class="hljs-attribute">index</span> index.html index.php;<br>    <span class="hljs-attribute">root</span> html;<br>    <span class="hljs-attribute">if</span> ( $http_user_agent <span class="hljs-regexp">~* &quot;(Android)|(iPhone)|(Mobile)|(WAP)|(UCWEB)&quot;</span> )&#123;<br>        <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^/$</span>  http://www.m.example.com  <span class="hljs-literal">permanent</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <ul>

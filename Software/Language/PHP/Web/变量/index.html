@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP Web变量   本节介绍3种使用PHP脚本来获取服务器环境信息,请求信息(包括表单参数和cookie)的方法,我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)   如果php.ini文件中的register_globals选项被启用,PHP就会为每一个表单参数,请求信息及服务器环境创建一个独立的全局变量,这个功能非常方便,它可以让">
+  <meta name="description" content="PHP Web变量   本节介绍3种使用PHP脚本来获取服务器环境信息，请求信息(包括表单参数和cookie)的方法，我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)   如果php.ini文件中的register_globals选项被启用,PHP就会为每一个表单参数，请求信息及服务器环境创建一个独立的全局变量，这个功能非常方便，它可以让">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP Web变量">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/Web/%E5%8F%98%E9%87%8F/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP Web变量   本节介绍3种使用PHP脚本来获取服务器环境信息,请求信息(包括表单参数和cookie)的方法,我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)   如果php.ini文件中的register_globals选项被启用,PHP就会为每一个表单参数,请求信息及服务器环境创建一个独立的全局变量,这个功能非常方便,它可以让">
+<meta property="og:description" content="PHP Web变量   本节介绍3种使用PHP脚本来获取服务器环境信息，请求信息(包括表单参数和cookie)的方法，我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)   如果php.ini文件中的register_globals选项被启用,PHP就会为每一个表单参数，请求信息及服务器环境创建一个独立的全局变量，这个功能非常方便，它可以让">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T09:29:27.000Z">
-<meta property="article:modified_time" content="2021-02-21T09:29:27.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.436Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月21日 下午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -230,10 +230,10 @@
               <h1>PHP Web变量</h1>
 <ul>
 <li>
-<p>本节介绍3种使用PHP脚本来获取服务器环境信息,请求信息(包括表单参数和cookie)的方法,我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)</p>
+<p>本节介绍3种使用PHP脚本来获取服务器环境信息，请求信息(包括表单参数和cookie)的方法，我们通常把这些信息统称为EGPCS(environment,GET,POST,cookies,server)</p>
 </li>
 <li>
-<p>如果php.ini文件中的<code>register_globals</code>选项被启用,PHP就会为每一个表单参数,请求信息及服务器环境创建一个独立的全局变量,这个功能非常方便,它可以让浏览器为你的程序初始化以任何变量,但这个功能也非常危险</p>
+<p>如果php.ini文件中的<code>register_globals</code>选项被启用,PHP就会为每一个表单参数，请求信息及服务器环境创建一个独立的全局变量，这个功能非常方便，它可以让浏览器为你的程序初始化以任何变量，但这个功能也非常危险</p>
 </li>
 <li>
 <p>如果忽略<code>register_globals</code>的设置,PHP将创建6个包含EGPCS信息的全局数组</p>
@@ -241,85 +241,85 @@
 <li>
 <p>这些全局数组为:</p>
 <ul>
-<li><strong>$_COOKIE</strong>:包含作为请求的一部分进行传递所有的cookie值,数组的键名是cookie名称</li>
-<li><strong>$_GET</strong>:包含作为GET请求的一部分进行传递的参数,数组的键名是表单参数的名称</li>
-<li><strong>$_POST</strong>:包含作为POST请求的一部分进行传递的参数,数组的键名是表单参数的名称</li>
+<li><strong>$_COOKIE</strong>:包含作为请求的一部分进行传递所有的cookie值，数组的键名是cookie名称</li>
+<li><strong>$_GET</strong>:包含作为GET请求的一部分进行传递的参数，数组的键名是表单参数的名称</li>
+<li><strong>$_POST</strong>:包含作为POST请求的一部分进行传递的参数，数组的键名是表单参数的名称</li>
 <li><strong>$_FILES</strong>:包含所有上传的文件的信息</li>
 <li><strong>$_SERVER</strong>:包含很多服务器相关的有用信息</li>
-<li><strong>$_ENV</strong>:包含环境变量值,键名是环境变量的名称</li>
+<li><strong>$_ENV</strong>:包含环境变量值，键名是环境变量的名称</li>
 </ul>
 </li>
 <li>
-<p>这些变量不但是全局的,而且在函数的定义中也是可见的,<code>$_REQUEST</code>数组也由PHP自动生成,包含了<code>$_GET</code>,<code>$_POST</code>,<code>$_COOKIE</code>三个数组的所有元素</p>
+<p>这些变量不但是全局的，而且在函数的定义中也是可见的,<code>$_REQUEST</code>数组也由PHP自动生成，包含了<code>$_GET</code>,<code>$_POST</code>,<code>$_COOKIE</code>三个数组的所有元素</p>
 </li>
 </ul>
 <h2 id="SERVER">$_SERVER</h2>
 <ul>
 <li>
-<p>PHP还会创建一个<code>$_SERVER['PHP_SELF']</code>的变量,用于存放当前脚本的路径和名称(相对于文档根目录,如/store/cart.php),这个变量很好用</p>
+<p>PHP还会创建一个<code>$_SERVER['PHP_SELF']</code>的变量，用于存放当前脚本的路径和名称(相对于文档根目录，如/store/cart.php),这个变量很好用</p>
 </li>
 <li>
-<p><code>$_SERVER</code>数组包含很多服务器相关的有用信息,其中大部分信息来自于CGI规范(<a target="_blank" rel="noopener" href="http://hoohoo.ncsa.uiuc.edu/cgi/env.html">http://hoohoo.ncsa.uiuc.edu/cgi/env.html</a>)中所要求的环境变量(environment variable)</p>
+<p><code>$_SERVER</code>数组包含很多服务器相关的有用信息，其中大部分信息来自于CGI规范(<a target="_blank" rel="noopener" href="http://hoohoo.ncsa.uiuc.edu/cgi/env.html">http://hoohoo.ncsa.uiuc.edu/cgi/env.html</a>)中所要求的环境变量(environment variable)</p>
 </li>
 <li>
-<p><strong>SERVER_SOFTWARE</strong>:一个用于标识服务器的字符串,例如&quot;Apache/1.3.33 (Unix)mod_perk/1.26 PHP/5.04&quot;</p>
+<p><strong>SERVER_SOFTWARE</strong>:一个用于标识服务器的字符串，例如&quot;Apache/1.3.33 (Unix)mod_perk/1.26 PHP/5.04&quot;</p>
 </li>
 <li>
-<p><strong>SERVER_HOSTNAME</strong>:主机名,DNS别名,或者IP地址,如&quot;<a target="_blank" rel="noopener" href="http://www.example.com">www.example.com</a>”</p>
+<p><strong>SERVER_HOSTNAME</strong>:主机名,DNS别名，或者IP地址，如&quot;<a target="_blank" rel="noopener" href="http://www.example.com">www.example.com</a>”</p>
 </li>
 <li>
 <p><strong>GATEWAY_INTERFACE</strong>:所遵循的CGI标准的版本号</p>
 </li>
 <li>
-<p><strong>SERVER_PROTOCOL</strong>请求协议的名称和版本,例如&quot;HTML/1.1&quot;</p>
+<p><strong>SERVER_PROTOCOL</strong>请求协议的名称和版本，例如&quot;HTML/1.1&quot;</p>
 </li>
 <li>
-<p><strong>REQUEST_METHOD</strong>:客户端获取文档的方法,如&quot;GET&quot;</p>
+<p><strong>REQUEST_METHOD</strong>:客户端获取文档的方法，如&quot;GET&quot;</p>
 </li>
 <li>
-<p><strong>PATH_INFO</strong>:客户端发送的拓展路径,例如&quot;/list/users&quot;</p>
+<p><strong>PATH_INFO</strong>:客户端发送的拓展路径，例如&quot;/list/users&quot;</p>
 </li>
 <li>
-<p><strong>PATH_TRANSLATED</strong>:PATH_INFO的值,由服务器转换为文件名,例如&quot;/home.httpd/htdocs/list/users&quot;</p>
+<p><strong>PATH_TRANSLATED</strong>:PATH_INFO的值，由服务器转换为文件名，例如&quot;/home.httpd/htdocs/list/users&quot;</p>
 </li>
 <li>
-<p><strong>SCRIPT_NAME</strong>:当前页面的URL路径,用于自引用脚本,例如&quot;/~me/meun.php&quot;</p>
+<p><strong>SCRIPT_NAME</strong>:当前页面的URL路径，用于自引用脚本，例如&quot;/~me/meun.php&quot;</p>
 </li>
 <li>
-<p><strong>QUERY_STRING</strong>:检索字符串,URL中问号?后面的部分,例如URL为&quot;show.php?name=Fred+age=35&quot;,则$_SERVER[‘QUERY_STRING’]为&quot;name=Fred+age=35&quot;</p>
+<p><strong>QUERY_STRING</strong>:检索字符串,URL中问号?后面的部分，例如URL为&quot;show.php?name=Fred+age=35&quot;,则$_SERVER[‘QUERY_STRING’]为&quot;name=Fred+age=35&quot;</p>
 </li>
 <li>
-<p><strong>REMOTE_HOST</strong>:请求本页的机器主机名,<a target="_blank" rel="noopener" href="http://xn--dialup-192-168-0-1-to76a.example.com">如dialup-192-168-0-1.example.com</a>,机器没有DNS记录,则这个变量为空,只给REMOTE_ADDR值</p>
+<p><strong>REMOTE_HOST</strong>:请求本页的机器主机名，<a target="_blank" rel="noopener" href="http://xn--dialup-192-168-0-1-to76a.example.com">如dialup-192-168-0-1.example.com</a>,机器没有DNS记录，则这个变量为空，只给REMOTE_ADDR值</p>
 </li>
 <li>
-<p><strong>REMOTE_ADDR</strong>:请求本页的机器IP地址,如&quot;192.168.0.250&quot;</p>
+<p><strong>REMOTE_ADDR</strong>:请求本页的机器IP地址，如&quot;192.168.0.250&quot;</p>
 </li>
 <li>
-<p><strong>AUTH_TYPE</strong>:如果本页面受到密码保护,则本变量指明了保护本页面的验证方法,如&quot;basic&quot;</p>
+<p><strong>AUTH_TYPE</strong>:如果本页面受到密码保护，则本变量指明了保护本页面的验证方法，如&quot;basic&quot;</p>
 </li>
 <li>
-<p><strong>REMOTE_USER</strong>:如果本页面受到密码保护,则本变量客户端验证的用户(如&quot;fred&quot;),注意无法得知用户使用了什么密码</p>
+<p><strong>REMOTE_USER</strong>:如果本页面受到密码保护，则本变量客户端验证的用户(如&quot;fred&quot;),注意无法得知用户使用了什么密码</p>
 </li>
 <li>
-<p><strong>REMOTE_IDENT</strong>:如果服务器被配置成使用identd(RFC931)验证,这是从发出WEB请求的主机获得的用户名,例如&quot;barney&quot;,因为它很容易被伪造,所以不要使用它进行用户验证</p>
+<p><strong>REMOTE_IDENT</strong>:如果服务器被配置成使用identd(RFC931)验证，这是从发出WEB请求的主机获得的用户名，例如&quot;barney&quot;,因为它很容易被伪造，所以不要使用它进行用户验证</p>
 </li>
 <li>
-<p><strong>CONTENT_TYPE</strong>:通过PUT或POST进行查询所附带的信息内容的类型,例如&quot;x-url-encoded&quot;</p>
+<p><strong>CONTENT_TYPE</strong>:通过PUT或POST进行查询所附带的信息内容的类型，例如&quot;x-url-encoded&quot;</p>
 </li>
 <li>
 <p><strong>CONTENT_LENGTH</strong>:通过PUT或POST进行查询所附带的信息内容的长度</p>
 </li>
 <li>
-<p>Apache服务器也会在请求中为每一个HTTP头在<code>$_SERVER</code>数组中创建项,对于每一个键,头名称被转换为大写,连字符(-)会被转换成下划线(_),并在其前面加上字符串&quot;HTTP_“,例如User-Agent头对应的项具有&quot;HTTP_USER_AGENT”,最重要和常用的两个头为:</p>
+<p>Apache服务器也会在请求中为每一个HTTP头在<code>$_SERVER</code>数组中创建项，对于每一个键，头名称被转换为大写，连字符(-)会被转换成下划线(_),并在其前面加上字符串&quot;HTTP_“,例如User-Agent头对应的项具有&quot;HTTP_USER_AGENT”,最重要和常用的两个头为:</p>
 </li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">HTTP_USER_AGENT<br></code></pre></td></tr></table></figure>
 <ul>
-<li>标识浏览器的字符器,如&quot;Mozilla/5.0 (Windows 2000; U) Opera 6.0[en]”,表示访问当前页面的用户使用的操作系统,浏览器类型,版本等</li>
+<li>标识浏览器的字符器，如&quot;Mozilla/5.0 (Windows 2000; U) Opera 6.0[en]”,表示访问当前页面的用户使用的操作系统，浏览器类型，版本等</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">HTTP_REFERER<br></code></pre></td></tr></table></figure>
 <ul>
-<li>浏览器来到当前页面的上一个页面,例如:“<a target="_blank" rel="noopener" href="http://www.example.com/last_page.html">http://www.example.com/last_page.html</a>”</li>
+<li>浏览器来到当前页面的上一个页面，例如:“<a target="_blank" rel="noopener" href="http://www.example.com/last_page.html">http://www.example.com/last_page.html</a>”</li>
 </ul>
 
             </div>

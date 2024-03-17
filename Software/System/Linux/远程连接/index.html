@@ -24,7 +24,7 @@
 <meta property="og:description" content="Linux 远程连接 sftp 登陆 1sftp user@ip 帮助 1help 建立连接后, linux shell中的$编程了sftp&gt;,  这也对, 现在执行以下help, 可以看看sftp支持哪些命令 查看当前目录的路径 12pwdlpwd pwd是看远端服务器的目录, 即sftp服务器默认的当前目录,  lpwd是查看本地目录 查看当前目录的文件 12lslls ls是看sftp">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-20T15:42:09.000Z">
-<meta property="article:modified_time" content="2021-06-20T15:42:09.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.327Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年6月20日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -272,31 +272,31 @@
 <li>-6:强制scp命令只使用IPv6寻址</li>
 <li>-B:使用批处理模式(传输过程中不询问传输口令或短语)</li>
 <li>-C:允许压缩,(将-C标志传递给ssh,从而打开压缩功能)</li>
-<li>-p:保留原文件的修改时间,访问时间和访问权限</li>
+<li>-p:保留原文件的修改时间，访问时间和访问权限</li>
 <li>-q:不显示传输进度条</li>
 <li>-r:递归复制整个目录</li>
-<li>-v:详细方式显示输出,scp和ssh会显示出整个过程的调试信息,这些信息用于调试连接,验证和配置问题</li>
-<li>-c cipher:以cipher将数据传输进行加密,这个选项将直接传递给ssh</li>
-<li>-F ssh_config:指定一个替代的ssh配置文件,此参数直接传递给ssh</li>
-<li>-i identity_file:从指定文件中读取传输时使用的密钥文件,此参数直接传递给ssh</li>
-<li>-l limit:限定用户所能使用的带宽,以Kbit/s为单位</li>
+<li>-v:详细方式显示输出,scp和ssh会显示出整个过程的调试信息，这些信息用于调试连接，验证和配置问题</li>
+<li>-c cipher:以cipher将数据传输进行加密，这个选项将直接传递给ssh</li>
+<li>-F ssh_config:指定一个替代的ssh配置文件，此参数直接传递给ssh</li>
+<li>-i identity_file:从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh</li>
+<li>-l limit:限定用户所能使用的带宽，以Kbit/s为单位</li>
 <li>-o ssh_option:如果习惯于使用ssh_config中的参数传递方式</li>
 <li>-P port:注意是大写的P, port是指定数据传输用到的端口号</li>
-<li>-S program:指定加密传输时所使用的程序,此程序必须能够理解ssh的选项</li>
+<li>-S program:指定加密传输时所使用的程序，此程序必须能够理解ssh的选项</li>
 </ul>
 <h3 id="复制文件">复制文件</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp local_file remote_username@remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_username@remote_ip:remote_file<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp local_file remote_ip:remote_file<br></code></pre></td></tr></table></figure>
 <ul>
-<li>第1,2个指定了用户名,命令执行后需要再输入密码,第1个仅指定了远程的目录,文件名字不变,第2个指定了文件名</li>
-<li>第3,4个没有指定用户名,命令执行后需要输入用户名和密码,第3个仅指定了远程的目录,文件名字不变,第4个指定了文件名</li>
+<li>第1,2个指定了用户名，命令执行后需要再输入密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名</li>
+<li>第3,4个没有指定用户名，命令执行后需要输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music<br>scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3<br>scp /home/space/music/1.mp3 www.runoob.com:/home/root/others/music<br>scp /home/space/music/1.mp3 www.runoob.com:/home/root/others/music/001.mp3<br></code></pre></td></tr></table></figure>
 <h3 id="复制目录">复制目录</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp -r local_folder remote_username@remote_ip:remote_folder<br><span class="hljs-meta">#</span><span class="bash"> OR</span><br>scp -r local_folder remote_ip:remote_folder<br></code></pre></td></tr></table></figure>
 <ul>
-<li>第1个指定了用户名,命令执行后需要再输入密码</li>
-<li>第2个没有指定用户名,命令执行后需要输入用户名和密码</li>
+<li>第1个指定了用户名，命令执行后需要再输入密码</li>
+<li>第2个没有指定用户名，命令执行后需要输入用户名和密码</li>
 </ul>
 <p><strong>实例</strong></p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">scp -r <span class="hljs-regexp">/home/</span>space<span class="hljs-regexp">/music/</span> root@www.runoob.com:<span class="hljs-regexp">/home/</span>root<span class="hljs-regexp">/others/</span><br>scp -r <span class="hljs-regexp">/home/</span>space<span class="hljs-regexp">/music/</span> www.runoob.com:<span class="hljs-regexp">/home/</span>root<span class="hljs-regexp">/others/</span><br></code></pre></td></tr></table></figure>
@@ -305,21 +305,21 @@
 </ul>
 <p><strong>说明</strong></p>
 <ul>
-<li>从远程复制到本地,只要将从本地复制到远程的命令的后2个参数调换顺序即可</li>
-<li>如果远程服务器防火墙有为scp命令设置了指定的端口,我们需要使用 -P 参数来设置命令的端口号,命令格式如下:</li>
+<li>从远程复制到本地，只要将从本地复制到远程的命令的后2个参数调换顺序即可</li>
+<li>如果远程服务器防火墙有为scp命令设置了指定的端口，我们需要使用 -P 参数来设置命令的端口号，命令格式如下:</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">scp 命令使用端口号 4588</span><br>scp -P 4588 remote@www.runoob.com:/usr/local/sin.sh /home/administrator<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用scp命令要确保使用的用户具有可读取远程服务器相应文件的权限,否则scp命令是无法起作用的</li>
+<li>使用scp命令要确保使用的用户具有可读取远程服务器相应文件的权限，否则scp命令是无法起作用的</li>
 </ul>
 <h2 id="ftp">ftp</h2>
-<p>ftp命令用来设置文件系统相关功能,ftp服务器在网上较为常见,Linux ftp命令的功能是用命令的方式来控制在本地机和远程机之间传送文件,这里详细介绍Linux ftp命令的一些经常使用的命令,相信掌握了这些使用Linux进行ftp操作将会非常容易</p>
+<p>ftp命令用来设置文件系统相关功能,ftp服务器在网上较为常见,Linux ftp命令的功能是用命令的方式来控制在本地机和远程机之间传送文件，这里详细介绍Linux ftp命令的一些经常使用的命令，相信掌握了这些使用Linux进行ftp操作将会非常容易</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">ftp</span><span class="hljs-params">(选项)</span><span class="hljs-params">(参数)</span></span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>选项</strong>
 <ul>
-<li>-d:详细显示指令执行过程,便于排错或分析程序执行的情况</li>
-<li>-i:关闭互动模式,不询问任何问题</li>
+<li>-d:详细显示指令执行过程，便于排错或分析程序执行的情况</li>
+<li>-i:关闭互动模式，不询问任何问题</li>
 <li>-g:关闭本地主机文件名称支持特殊字符的扩充特性</li>
 <li>-n:不使用自动登录</li>
 <li>-v:显示指令执行过程</li>
@@ -332,9 +332,9 @@
 </li>
 </ul>
 <p><strong>实例</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">FTP&gt;</span><span class="bash">ascii: 设定以ASCII方式传送文件(缺省值)</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">bell: 每完成一次文件传送,报警提示</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">binary: 设定以二进制方式传送文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">bye</span>: 终止主机FTP进程,并退出FTP管理方式</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-keyword">case</span>: 当为ON时,用MGET命令拷贝的文件名到本地机器中,全部转换为小写字母</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">cd</span>: 同UNIX的CD命令</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">cdup: 返回上一级目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">chmod: 改变远端主机的文件权限</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">close: 终止远端的FTP进程,返回到FTP命令状态, 所有的宏定义都被删除</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">delete: 删除远端主机中的文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">dir [remote-directory] [local-file] 列出当前远端主机目录中的文件.如果有本地文件,就将结果写至本地文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">get [remote-file] [local-file] 从远端主机中传送至本地主机中</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">help</span> [<span class="hljs-built_in">command</span>] 输出命令的解释</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">lcd: 改变当前本地主机的工作目录,如果缺省,就转到当前用户的HOME目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">ls [remote-directory] [local-file] 同DIR</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">macdef: 定义宏命令</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mdelete [remote-files] 删除一批文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mget [remote-files] 从远端主机接收一批文件至本地主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mkdir directory-name 在远端主机中建立目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mput local-files 将本地主机中一批文件传送至远端主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">open host [port] 重新建立一个新的连接</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">prompt: 交互提示模</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">put local-file [remote-file] 将本地一个文件传送至远端主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">pwd</span>: 列出当前远端主机目</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">quit: 同BY</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">recv remote-file [local-file] 同GE</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">rename [from] [to] 改变远端主机中的文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">rmdir directory-name 删除远端主机中的目</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">send local-file [remote-file] 同PU</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">status: 显示当前FTP的状</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">system: 显示远端主机系统类</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">user user-name [password] [account] 重新以别的用户名登录远端主</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">? [<span class="hljs-built_in">command</span>]: 同HELP. [<span class="hljs-built_in">command</span>]指定需要帮助的命令名称,如果没有指定 <span class="hljs-built_in">command</span>,ftp 将显示全部命令的列表</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">! 从 ftp 子系统退出到外壳</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">FTP&gt;</span><span class="bash">ascii: 设定以ASCII方式传送文件(缺省值)</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">bell: 每完成一次文件传送，报警提示</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">binary: 设定以二进制方式传送文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">bye</span>: 终止主机FTP进程，并退出FTP管理方式</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-keyword">case</span>: 当为ON时，用MGET命令拷贝的文件名到本地机器中，全部转换为小写字母</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">cd</span>: 同UNIX的CD命令</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">cdup: 返回上一级目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">chmod: 改变远端主机的文件权限</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">close: 终止远端的FTP进程，返回到FTP命令状态, 所有的宏定义都被删除</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">delete: 删除远端主机中的文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">dir [remote-directory] [local-file] 列出当前远端主机目录中的文件.如果有本地文件，就将结果写至本地文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">get [remote-file] [local-file] 从远端主机中传送至本地主机中</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">help</span> [<span class="hljs-built_in">command</span>] 输出命令的解释</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">lcd: 改变当前本地主机的工作目录，如果缺省，就转到当前用户的HOME目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">ls [remote-directory] [local-file] 同DIR</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">macdef: 定义宏命令</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mdelete [remote-files] 删除一批文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mget [remote-files] 从远端主机接收一批文件至本地主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mkdir directory-name 在远端主机中建立目录</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">mput local-files 将本地主机中一批文件传送至远端主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">open host [port] 重新建立一个新的连接</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">prompt: 交互提示模</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">put local-file [remote-file] 将本地一个文件传送至远端主机</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash"><span class="hljs-built_in">pwd</span>: 列出当前远端主机目</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">quit: 同BY</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">recv remote-file [local-file] 同GE</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">rename [from] [to] 改变远端主机中的文件</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">rmdir directory-name 删除远端主机中的目</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">send local-file [remote-file] 同PU</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">status: 显示当前FTP的状</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">system: 显示远端主机系统类</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">user user-name [password] [account] 重新以别的用户名登录远端主</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">? [<span class="hljs-built_in">command</span>]: 同HELP. [<span class="hljs-built_in">command</span>]指定需要帮助的命令名称，如果没有指定 <span class="hljs-built_in">command</span>,ftp 将显示全部命令的列表</span><br><span class="hljs-meta">FTP&gt;</span><span class="bash">! 从 ftp 子系统退出到外壳</span><br></code></pre></td></tr></table></figure>
 <h2 id="ssh">ssh</h2>
-<p>ssh命令是openssh套件中的客户端连接工具,可以给予ssh加密协议实现安全的远程登录服务器</p>
+<p>ssh命令是openssh套件中的客户端连接工具，可以给予ssh加密协议实现安全的远程登录服务器</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">ssh</span><span class="hljs-params">(选项)</span><span class="hljs-params">(参数)</span></span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>选项</strong>

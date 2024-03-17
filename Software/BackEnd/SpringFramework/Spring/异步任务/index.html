@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Spring 异步任务 异步任务 异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功 @Async  在异步方法上添加@Async注解,告诉Spring这是一个异步方法 假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况  123456789@Asyncpublic void hello()&amp;#123;  try &amp;#1">
+  <meta name="description" content="Spring 异步任务 异步任务 异步处理是非常常用的，比如我们在网站上发送邮件，后台会去发送邮件，此时前台会造成响应不动，直到邮件发送完毕，响应才会成功 @Async  在异步方法上添加@Async注解，告诉Spring这是一个异步方法 假装正在处理数据，使用线程设置一些延时，模拟同步等待的情况  123456789@Asyncpublic void hello()&amp;#123;  try &amp;#1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring 异步任务">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/SpringFramework/Spring/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Spring 异步任务 异步任务 异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功 @Async  在异步方法上添加@Async注解,告诉Spring这是一个异步方法 假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况  123456789@Asyncpublic void hello()&amp;#123;  try &amp;#1">
+<meta property="og:description" content="Spring 异步任务 异步任务 异步处理是非常常用的，比如我们在网站上发送邮件，后台会去发送邮件，此时前台会造成响应不动，直到邮件发送完毕，响应才会成功 @Async  在异步方法上添加@Async注解，告诉Spring这是一个异步方法 假装正在处理数据，使用线程设置一些延时，模拟同步等待的情况  123456789@Asyncpublic void hello()&amp;#123;  try &amp;#1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-18T11:54:46.000Z">
-<meta property="article:modified_time" content="2021-06-18T11:54:46.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.341Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,26 +222,26 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年6月18日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <h1>Spring 异步任务</h1>
 <h2 id="异步任务">异步任务</h2>
-<p>异步处理是非常常用的,比如我们在网站上发送邮件,后台会去发送邮件,此时前台会造成响应不动,直到邮件发送完毕,响应才会成功</p>
+<p>异步处理是非常常用的，比如我们在网站上发送邮件，后台会去发送邮件，此时前台会造成响应不动，直到邮件发送完毕，响应才会成功</p>
 <h2 id="Async">@Async</h2>
 <ul>
-<li>在异步方法上添加@Async注解,告诉Spring这是一个异步方法</li>
-<li>假装正在处理数据,使用线程设置一些延时,模拟同步等待的情况</li>
+<li>在异步方法上添加@Async注解，告诉Spring这是一个异步方法</li>
+<li>假装正在处理数据，使用线程设置一些延时，模拟同步等待的情况</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Async</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    Thread.sleep(<span class="hljs-number">3000</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>    e.printStackTrace();<br>  &#125;<br>  System.out.println(<span class="hljs-string">&quot;业务进行中....&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>SpringBoot就会自己开一个线程池,进行调用,但是要让这个注解生效,还需要在主程序上添加一个注解<code>@EnableAsync</code>,开启异步注解功能</li>
+<li>SpringBoot就会自己开一个线程池，进行调用，但是要让这个注解生效，还需要在主程序上添加一个注解<code>@EnableAsync</code>,开启异步注解功能</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableAsync</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringbootTaskApplication</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    SpringApplication.run(SpringbootTaskApplication.class, args);<br>  &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>访问http://localhost:8080/hello进行测试,立即出现success,不用等待3000ms</li>
+<li>访问<a target="_blank" rel="noopener" href="http://localhost:8080/hello%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95%EF%BC%8C%E7%AB%8B%E5%8D%B3%E5%87%BA%E7%8E%B0success,%E4%B8%8D%E7%94%A8%E7%AD%89%E5%BE%853000ms">http://localhost:8080/hello进行测试，立即出现success,不用等待3000ms</a></li>
 </ul>
 
             </div>

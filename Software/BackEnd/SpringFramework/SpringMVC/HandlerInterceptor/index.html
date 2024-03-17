@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能 过滤器  servlet规范中的一部分,任何java web工程都可以使用 在url-pattern中配置了&#x2F;*之后,可以对所有要访问的资源进行拦截   拦截器  拦截器是Spring MVC框架自己的">
+  <meta name="description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能 过滤器  servlet规范中的一部分，任何java web工程都可以使用 在url-pattern中配置了&#x2F;*之后，可以对所有要访问的资源进行拦截   拦截器  拦截器是Spring MVC框架自己的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring MVC 拦截器">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/SpringFramework/SpringMVC/HandlerInterceptor/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能 过滤器  servlet规范中的一部分,任何java web工程都可以使用 在url-pattern中配置了&#x2F;*之后,可以对所有要访问的资源进行拦截   拦截器  拦截器是Spring MVC框架自己的">
+<meta property="og:description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能 过滤器  servlet规范中的一部分，任何java web工程都可以使用 在url-pattern中配置了&#x2F;*之后，可以对所有要访问的资源进行拦截   拦截器  拦截器是Spring MVC框架自己的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-15T10:45:41.000Z">
-<meta property="article:modified_time" content="2021-12-15T10:45:41.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.339Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年12月15日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -230,16 +230,16 @@
               <h1>Spring MVC 拦截器</h1>
 <h2 id="概述">概述</h2>
 <ul>
-<li>Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理,开发者可以自己定义一些拦截器来实现特定的功能</li>
+<li>Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能</li>
 <li><strong>过滤器</strong>
 <ul>
-<li>servlet规范中的一部分,任何java web工程都可以使用</li>
-<li>在url-pattern中配置了<code>/*</code>之后,可以对所有要访问的资源进行拦截</li>
+<li>servlet规范中的一部分，任何java web工程都可以使用</li>
+<li>在url-pattern中配置了<code>/*</code>之后，可以对所有要访问的资源进行拦截</li>
 </ul>
 </li>
 <li><strong>拦截器</strong>
 <ul>
-<li>拦截器是Spring MVC框架自己的,只有使用了Spring MVC框架的工程才能使用</li>
+<li>拦截器是Spring MVC框架自己的，只有使用了Spring MVC框架的工程才能使用</li>
 <li>拦截器只会拦截访问的控制器方法, 如果访问的是<code>jsp/html/css/image/js</code>是不会进行拦截的</li>
 </ul>
 </li>
@@ -247,9 +247,9 @@
 </ul>
 <h2 id="自定义拦截器">自定义拦截器</h2>
 <ul>
-<li>自定义拦截器,必须实现 HandlerInterceptor 接口</li>
+<li>自定义拦截器，必须实现 HandlerInterceptor 接口</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HandlerInterceptor</span> </span>&#123;<br><br>    <span class="hljs-comment">//在请求处理的方法之前执行</span><br>    <span class="hljs-comment">//如果返回true执行下一个拦截器</span><br>    <span class="hljs-comment">//如果返回false就不执行下一个拦截器</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">preHandle</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------处理前------------&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//在请求处理方法执行之后执行</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postHandle</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------处理后------------&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">//在dispatcherServlet处理后执行,做清理工作</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterCompletion</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------清理------------&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HandlerInterceptor</span> </span>&#123;<br><br>    <span class="hljs-comment">//在请求处理的方法之前执行</span><br>    <span class="hljs-comment">//如果返回true执行下一个拦截器</span><br>    <span class="hljs-comment">//如果返回false就不执行下一个拦截器</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">preHandle</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------处理前------------&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//在请求处理方法执行之后执行</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postHandle</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponsehttpServletResponse, Object o, ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------处理后------------&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">//在dispatcherServlet处理后执行，做清理工作</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterCompletion</span><span class="hljs-params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;------------清理------------&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="配置拦截器">配置拦截器</h2>
 <ul>
 <li><strong>Spring</strong></li>
@@ -263,9 +263,9 @@
 </ul>
 <p><strong>实现思路</strong></p>
 <ul>
-<li>有一个登陆页面,需要写一个controller访问页面</li>
-<li>登陆页面有一提交表单的动作,需要在controller中处理,判断用户名密码是否正确,如果正确,向session中写入用户信息,返回登陆成功</li>
-<li>拦截用户请求,判断用户是否登陆,如果用户已经登陆,放行, 如果用户未登陆,跳转到登陆页面</li>
+<li>有一个登陆页面，需要写一个controller访问页面</li>
+<li>登陆页面有一提交表单的动作，需要在controller中处理，判断用户名密码是否正确，如果正确，向session中写入用户信息，返回登陆成功</li>
+<li>拦截用户请求，判断用户是否登陆，如果用户已经登陆，放行, 如果用户未登陆，跳转到登陆页面</li>
 </ul>
 <p><strong>测试</strong>:</p>
 <ol>

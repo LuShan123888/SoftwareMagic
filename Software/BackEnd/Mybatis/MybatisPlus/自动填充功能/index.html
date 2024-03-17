@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis Plus 自动填充功能 原理  实现元对象处理器接口:com.baomidou.mybatisplus.core.handlers.MetaObjectHandler 注解填充字段 @TableField(.. fill &#x3D; FieldFill.INSERT) 生成器策略部分也可以配置  自动填充  实体类字段属性注解  123456public class User &amp;#123;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-13T12:46:28.000Z">
-<meta property="article:modified_time" content="2021-09-13T12:46:28.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.432Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年9月13日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -245,9 +245,9 @@
 <p><strong>注意</strong>:</p>
 <ul>
 <li>填充原理是直接给<code>entity</code>的属性设置值</li>
-<li>注解则是指定该属性在对应情况下必有值,如果无值则入库会是<code>null</code></li>
-<li><code>MetaObjectHandler</code>提供的默认方法的策略均为:如果属性有值则不覆盖,如果填充值为<code>null</code>则不填充</li>
-<li>字段必须声明<code>TableField</code>注解,属性<code>fill</code>选择对应策略,该声明告知<code>Mybatis-Plus</code>需要预留注入<code>SQL</code>字段</li>
+<li>注解则是指定该属性在对应情况下必有值，如果无值则入库会是<code>null</code></li>
+<li><code>MetaObjectHandler</code>提供的默认方法的策略均为:如果属性有值则不覆盖，如果填充值为<code>null</code>则不填充</li>
+<li>字段必须声明<code>TableField</code>注解，属性<code>fill</code>选择对应策略，该声明告知<code>Mybatis-Plus</code>需要预留注入<code>SQL</code>字段</li>
 <li>填充处理器<code>MyMetaObjectHandler</code>在 Spring Boot 中需要声明<code>@Component</code>或<code>@Bean</code>注入</li>
 <li>要想根据注解<code>FieldFill.xxx</code>和<code>字段名</code>以及<code>字段类型</code>来区分必须使用父类的<code>strictInsertFill</code>或者<code>strictUpdateFill</code>方法</li>
 <li>不需要根据任何来区分可以使用父类的<code>fillStrategy</code>方法</li>

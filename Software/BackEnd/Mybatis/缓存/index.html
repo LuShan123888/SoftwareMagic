@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-02-640-20201101234043284.png">
 <meta property="article:published_time" content="2022-04-15T15:49:54.000Z">
-<meta property="article:modified_time" content="2022-04-15T15:49:54.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.445Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月15日 晚上
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
@@ -252,7 +252,7 @@
 <h3 id="Mybatis缓存">Mybatis缓存</h3>
 <ul>
 <li>
-<p>MyBatis包含一个非常强大的查询缓存特性, 它可以非常方便地定制和配置缓存,缓存可以极大的提升查询效率</p>
+<p>MyBatis包含一个非常强大的查询缓存特性, 它可以非常方便地定制和配置缓存，缓存可以极大的提升查询效率</p>
 </li>
 <li>
 <p>MyBatis系统中默认定义了两级缓存–<strong>一级缓存</strong>和<strong>二级缓存</strong></p>
@@ -269,7 +269,7 @@
 </ul>
 <h2 id="一级缓存">一级缓存</h2>
 <ul>
-<li>一级缓存也叫本地缓存,本质是一个map,与数据库同一次会话期间查询到的数据会放在本地缓存中,以后如果需要获取相同的数据, 直接从缓存中拿, 没必须再去查询数据库</li>
+<li>一级缓存也叫本地缓存，本质是一个map,与数据库同一次会话期间查询到的数据会放在本地缓存中，以后如果需要获取相同的数据, 直接从缓存中拿, 没必须再去查询数据库</li>
 <li>一级缓存是SqlSession级别的缓存, 是一直开启的, 我们关闭不了它</li>
 </ul>
 <h3 id="一级缓存失效的四种情况">一级缓存失效的四种情况</h3>
@@ -305,8 +305,8 @@
 <h2 id="二级缓存">二级缓存</h2>
 <ul>
 <li>二级缓存也叫全局缓存, 一级缓存作用域太低了, 所以诞生了二级缓存</li>
-<li>基于namespace级别的缓存, 一个名称空间, 对应一个二级缓存,只要开启了二级缓存, 我们在同一个Mapper中的查询, 可以在二级缓存中拿到数据</li>
-<li>查出的数据都会被默认先放在一级缓存中,只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中</li>
+<li>基于namespace级别的缓存, 一个名称空间, 对应一个二级缓存，只要开启了二级缓存, 我们在同一个Mapper中的查询, 可以在二级缓存中拿到数据</li>
+<li>查出的数据都会被默认先放在一级缓存中，只有会话提交或者关闭以后, 一级缓存中的数据才会转到二级缓存中</li>
 </ul>
 <h3 id="使用步骤">使用步骤</h3>
 <ol>
@@ -350,14 +350,14 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">ehcache</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:noNamespaceSchemaLocation</span>=<span class="hljs-string">&quot;http://ehcache.org/ehcache.xsd&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">updateCheck</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">diskStore</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;./tmpdir/Tmp_EhCache&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">defaultCache</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;10000&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;259200&quot;</span></span><br><span class="hljs-tag">                  <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">cache</span></span><br><span class="hljs-tag">           <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cloud_user&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">eternal</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">maxElementsInMemory</span>=<span class="hljs-string">&quot;5000&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">overflowToDisk</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">diskPersistent</span>=<span class="hljs-string">&quot;false&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToIdleSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">timeToLiveSeconds</span>=<span class="hljs-string">&quot;1800&quot;</span></span><br><span class="hljs-tag">           <span class="hljs-attr">memoryStoreEvictionPolicy</span>=<span class="hljs-string">&quot;LRU&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">ehcache</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>diskStore:为缓存路径, ehcache分为内存和磁盘两级, 此属性定义磁盘的缓存位置,参数解释如下:
+<li>diskStore:为缓存路径, ehcache分为内存和磁盘两级, 此属性定义磁盘的缓存位置，参数解释如下:
 <ul>
 <li>user.home – 用户主目录</li>
 <li>user.dir – 用户当前工作目录</li>
 <li>java.io.tmpdir – 默认临时文件路径</li>
 </ul>
 </li>
-<li>defaultCache:默认缓存策略, 当ehcache找不到定义的缓存时, 则使用这个缓存策略,只能定义一个
+<li>defaultCache:默认缓存策略, 当ehcache找不到定义的缓存时, 则使用这个缓存策略，只能定义一个
 <ul>
 <li>name:缓存名称</li>
 <li>maxElementsInMemory:缓存最大数目</li>
@@ -365,11 +365,11 @@
 <li>eternal:对象是否永久有效, 一但设置了, timeout将不起作用</li>
 <li>overflowToDisk:是否保存到磁盘, 当系统宕机时</li>
 <li>timeToIdleSeconds:设置对象在失效前的允许闲置时间(单位:秒),仅当eternal=false对象不是永久有效时使用, 可选属性, 默认值是0, 也就是可闲置时间无穷大</li>
-<li>timeToLiveSeconds:设置对象在失效前允许存活时间(单位:秒),最大时间介于创建时间和失效时间之间,仅当eternal=false对象不是永久有效时使用, 默认是0., 也就是对象存活时间无穷大</li>
+<li>timeToLiveSeconds:设置对象在失效前允许存活时间(单位:秒),最大时间介于创建时间和失效时间之间，仅当eternal=false对象不是永久有效时使用, 默认是0., 也就是对象存活时间无穷大</li>
 <li>diskPersistent:是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false</li>
-<li>diskSpoolBufferSizeMB:这个参数设置DiskStore(磁盘缓存)的缓存区大小,默认是30MB,每个Cache都应该有自己的一个缓冲区</li>
+<li>diskSpoolBufferSizeMB:这个参数设置DiskStore(磁盘缓存)的缓存区大小，默认是30MB,每个Cache都应该有自己的一个缓冲区</li>
 <li>diskExpiryThreadIntervalSeconds:磁盘失效线程运行时间间隔, 默认是120秒</li>
-<li>memoryStoreEvictionPolicy:当达到maxElementsInMemory限制时, Ehcache将会根据指定的策略去清理内存,默认策略是LRU(最近最少使用),你可以设置为FIFO(先进先出)或是LFU(较少使用)</li>
+<li>memoryStoreEvictionPolicy:当达到maxElementsInMemory限制时, Ehcache将会根据指定的策略去清理内存，默认策略是LRU(最近最少使用),你可以设置为FIFO(先进先出)或是LFU(较少使用)</li>
 <li>clearOnFlush:内存数量最大时是否清除</li>
 <li>memoryStoreEvictionPolicy:可选策略有:LRU(最近最少使用, 默认策略), FIFO(先进先出), LFU(最少访问次数)</li>
 </ul>
@@ -377,7 +377,7 @@
 </ul>
 <blockquote>
 <p><strong>FIFO</strong>:first in first out 先进先出<br>
-<strong>LFU</strong>: Less Frequently Used 最少被使用的, 缓存的元素有一个hit属性, hit值最小的将会被清出缓存,也就是淘汰一定时期内被访问次数最少的<br>
+<strong>LFU</strong>: Less Frequently Used 最少被使用的, 缓存的元素有一个hit属性, hit值最小的将会被清出缓存，也就是淘汰一定时期内被访问次数最少的<br>
 <strong>LRU</strong>:Least Recently Used 最近最少使用的, 最后一次被使用到发生调度的时间最长的被清出缓存</p>
 </blockquote>
 

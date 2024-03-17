@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 正则表达式  正则表达式是一个描述模式(pattern)的字符串,正则表达式函数会将模式和另一个字符串进行比较,检查字符串是否和模式匹配,一些函数会告诉你是否匹配,另一些则改变字符串 PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl&#x3D;compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱,并且有时速度慢,但是易于阅读 正则表">
+  <meta name="description" content="PHP 正则表达式  正则表达式是一个描述模式(pattern)的字符串，正则表达式函数会将模式和另一个字符串进行比较，检查字符串是否和模式匹配，一些函数会告诉你是否匹配，另一些则改变字符串 PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl&#x3D;compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱，并且有时速度慢，但是易于阅读 正则表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 正则表达式">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 正则表达式  正则表达式是一个描述模式(pattern)的字符串,正则表达式函数会将模式和另一个字符串进行比较,检查字符串是否和模式匹配,一些函数会告诉你是否匹配,另一些则改变字符串 PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl&#x3D;compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱,并且有时速度慢,但是易于阅读 正则表">
+<meta property="og:description" content="PHP 正则表达式  正则表达式是一个描述模式(pattern)的字符串，正则表达式函数会将模式和另一个字符串进行比较，检查字符串是否和模式匹配，一些函数会告诉你是否匹配，另一些则改变字符串 PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl&#x3D;compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱，并且有时速度慢，但是易于阅读 正则表">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:10:49.000Z">
-<meta property="article:modified_time" content="2021-02-21T04:10:49.000Z">
+<meta property="article:modified_time" content="2024-03-17T15:26:08.436Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,26 +222,26 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年2月21日 中午
+                  本文最后更新于：2024年3月17日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <h1>PHP 正则表达式</h1>
 <ul>
-<li>正则表达式是一个描述模式(pattern)的字符串,正则表达式函数会将模式和另一个字符串进行比较,检查字符串是否和模式匹配,一些函数会告诉你是否匹配,另一些则改变字符串</li>
-<li>PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl=compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱,并且有时速度慢,但是易于阅读</li>
-<li>正则表达式有3种作用:匹配从字符串提取信息,用新文本取代匹配的文本,把字符串拆分成小块的数组</li>
-<li>PHP为Perl和PISIX正则表达式中的这3种行为都提供了函数,例如,ereg()进行POSIX匹配,而preg_match()进行Perl匹配,幸运的是,基本的POSIX和Perl正则表达式之间有一些相似之处,所以我们再深入研究每个库的细节之前可以先介绍它们</li>
+<li>正则表达式是一个描述模式(pattern)的字符串，正则表达式函数会将模式和另一个字符串进行比较，检查字符串是否和模式匹配，一些函数会告诉你是否匹配，另一些则改变字符串</li>
+<li>PHP支持两种不同类型的正则表达式:POSIX正则表达式和Perl兼容(Perl=compatible)的正则表达式,POSIX正则表达式比Perl兼容的正则表达式功能弱，并且有时速度慢，但是易于阅读</li>
+<li>正则表达式有3种作用:匹配从字符串提取信息，用新文本取代匹配的文本，把字符串拆分成小块的数组</li>
+<li>PHP为Perl和PISIX正则表达式中的这3种行为都提供了函数，例如,ereg()进行POSIX匹配，而preg_match()进行Perl匹配，幸运的是，基本的POSIX和Perl正则表达式之间有一些相似之处，所以我们再深入研究每个库的细节之前可以先介绍它们</li>
 </ul>
 <h2 id="基础">基础</h2>
 <ul>
-<li>正则表达式中大部分字符都是直接量字符,这意味着它们只匹配自身,例如,如果在字符串&quot;Dave was a cowhand&quot;中查找正则表达式&quot;cow&quot;,由于&quot;cow&quot;出现在字符串中,所以将得到匹配的结果</li>
-<li>一些字符在正则表达式中有特殊的含义,例如,在正则表达式开头的^符号它必须匹配字符串的开头(或者更精确地说,是把正则表达式定位在字符串开头)</li>
+<li>正则表达式中大部分字符都是直接量字符，这意味着它们只匹配自身，例如，如果在字符串&quot;Dave was a cowhand&quot;中查找正则表达式&quot;cow&quot;,由于&quot;cow&quot;出现在字符串中，所以将得到匹配的结果</li>
+<li>一些字符在正则表达式中有特殊的含义，例如，在正则表达式开头的^符号它必须匹配字符串的开头(或者更精确地说，是把正则表达式定位在字符串开头)</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;^cow&#x27;</span>,<span class="hljs-string">&#x27;Dave was a cowhand&#x27;</span>);	<span class="hljs-comment">//返回flase</span><br>ereg(<span class="hljs-string">&#x27;^cow&#x27;</span>,<span class="hljs-string">&#x27;cowabunga!&#x27;</span>);			<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>类似地,一个在正则表达式末尾出现的美元符号<code>$</code>表示它必须匹配字符串的末尾(也就是说,把正则表达式定位在字符串的末尾)</li>
+<li>类似地，一个在正则表达式末尾出现的美元符号<code>$</code>表示它必须匹配字符串的末尾(也就是说，把正则表达式定位在字符串的末尾)</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;cow$&#x27;</span>,<span class="hljs-string">&#x27;Dave was a cowhand&#x27;</span>);	<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;cow$&#x27;</span>,<span class="hljs-string">&quot;Don&#x27;t have a cow&quot;</span>);	<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -253,34 +253,34 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;\$5\.00&#x27;</span>,<span class="hljs-string">&#x27;Your bill is $5.00 exactly&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>erge(<span class="hljs-string">&#x27;$5.00&#x27;</span>,<span class="hljs-string">&#x27;Your bill is $5.00 exactly&#x27;</span>);			<span class="hljs-comment">//返回false</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>正则表达式默认区分大小写,所以正则表达式&quot;cow&quot;和字符串&quot;COW&quot;是不匹配的,如果想要执行一个不区分大小写的POSIX风格的匹配,可以使用<code>eregi()</code>函数,要使用Perl风格的正则表达式,则可以使用<code>preg_match()</code>,但是需要指定一个标志来说明是不区分大小写的匹配</li>
-<li>到目前为止,我们还没有做任何用字符串函数(比如strstr())无法处理的事,那为什么需要正则表达式呢?正则表达式的真正强大来自于它们可以指定抽象模式来匹配许多不同的字符序列,在正则表达式中可以指定3种基本的抽象模式:
+<li>正则表达式默认区分大小写，所以正则表达式&quot;cow&quot;和字符串&quot;COW&quot;是不匹配的，如果想要执行一个不区分大小写的POSIX风格的匹配，可以使用<code>eregi()</code>函数，要使用Perl风格的正则表达式，则可以使用<code>preg_match()</code>,但是需要指定一个标志来说明是不区分大小写的匹配</li>
+<li>到目前为止，我们还没有做任何用字符串函数(比如strstr())无法处理的事，那为什么需要正则表达式呢?正则表达式的真正强大来自于它们可以指定抽象模式来匹配许多不同的字符序列，在正则表达式中可以指定3种基本的抽象模式:
 <ul>
-<li>在字符串种可以出现的字符集(例如,字母,数字和特殊的标点符号)</li>
+<li>在字符串种可以出现的字符集(例如，字母，数字和特殊的标点符号)</li>
 <li>可选择的集合(例如,“com”,“edu”,“net&quot;或&quot;org”)</li>
-<li>在字符串中重复的序列(例如,至少一个但是不多于5个的数字字符)</li>
-<li>这3种模式可以按无数种方法结合在一起来创建正则表达式,以匹配像有效电话号码和URL之类的内容</li>
+<li>在字符串中重复的序列(例如，至少一个但是不多于5个的数字字符)</li>
+<li>这3种模式可以按无数种方法结合在一起来创建正则表达式，以匹配像有效电话号码和URL之类的内容</li>
 </ul>
 </li>
 </ul>
 <h2 id="字符类">字符类</h2>
 <ul>
-<li>要在模式中指定可接受的字符集,可以建立一个自己的字符类,可以通过用中括号包含可接受字符来建立自己的字符类:</li>
+<li>要在模式中指定可接受的字符集，可以建立一个自己的字符类，可以通过用中括号包含可接受字符来建立自己的字符类:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;c[aeiou]t&#x27;</span>,<span class="hljs-string">&#x27;I cut my hand&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;c[aeiou]t&#x27;</span>,<span class="hljs-string">&#x27;This crusty cat&#x27;</span>);	<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;c[aeiou]t&#x27;</span>,<span class="hljs-string">&#x27;What cart?&#x27;</span>);			<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;c[aeiou]t&#x27;</span>,<span class="hljs-string">&#x27;14ct gold&#x27;</span>);			<span class="hljs-comment">//返回false</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>正则表达式引擎发现一个<code>c</code>,然后检查下一个字符是否是<code>a,e,i,o,u</code>中的一个,如果它不是一个元音,则匹配失败并且引擎返回去查找另一个<code>c</code>,如果找到一个元音,引擎检查下一个字符是否为<code>t</code>,如果是的话,引擎达到匹配的末尾并返回true,如果下一个字符不是<code>t</code>,则引擎返回去查找另一个<code>c</code></li>
+<li>正则表达式引擎发现一个<code>c</code>,然后检查下一个字符是否是<code>a,e,i,o,u</code>中的一个，如果它不是一个元音，则匹配失败并且引擎返回去查找另一个<code>c</code>,如果找到一个元音，引擎检查下一个字符是否为<code>t</code>,如果是的话，引擎达到匹配的末尾并返回true,如果下一个字符不是<code>t</code>,则引擎返回去查找另一个<code>c</code></li>
 <li>可以在字符类开头使用^来否定该类:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;c[^aeiou]t&#x27;</span>],<span class="hljs-string">&#x27;I cut my hand&#x27;</span>);		<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;c[^aeiou]t&#x27;</span>],<span class="hljs-string">&#x27;Reboot chthon&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;c[^aeiou]t&#x27;</span>],<span class="hljs-string">&#x27;14ct gold&#x27;</span>);			<span class="hljs-comment">//返回false</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里,正则表达式引擎查找一个<code>c</code>,然后是一个非元音字符,接着是一个<code>t</code></li>
-<li>可以用连字符<code>-</code>定义一个字符范围,简单的字符类如所有字母和所有数字</li>
+<li>这里，正则表达式引擎查找一个<code>c</code>,然后是一个非元音字符，接着是一个<code>t</code></li>
+<li>可以用连字符<code>-</code>定义一个字符范围，简单的字符类如所有字母和所有数字</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php">erge(<span class="hljs-string">&#x27;[0-9]%&#x27;</span>,<span class="hljs-string">&#x27;we are 25% complete&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>ergr(<span class="hljs-string">&#x27;[0123456789]%&#x27;</span>,<span class="hljs-string">&#x27;we are 25% complete&#x27;</span>);<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;[a-z]t&#x27;</span>,<span class="hljs-string">&#x27;11th&#x27;</span>);						<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;[a-z]t&#x27;</span>,<span class="hljs-string">&#x27;cat&#x27;</span>);						<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;[a-z]t&#x27;</span>,<span class="hljs-string">&#x27;PIT&#x27;</span>);						<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;[a-zA-Z]!&#x27;</span>,<span class="hljs-string">&#x27;11!&#x27;</span>);					<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;[a-zA-Z]!&#x27;</span>,<span class="hljs-string">&#x27;stop!&#x27;</span>);					<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>当你指定一个字符类时,一些特殊字符就失去了它们的意义,同时其他字符有了新的意义,特别的是,当<code>^</code>字符不再是锚(anchor,就像之前讨论过的,用于指定以某个字符开头)而是用于否定字符类(当它是<code>[</code>的第一个字符串时)时,美元符<code>$</code>和句点<code>.</code>,也在字符类中失去了它们原来的意义(<code>$</code>原指以某字符结尾,<code>.</code>原可代替任意字符),而仅仅只一个字符,例如,<code>[^]]</code>匹配任一不是右括号的字符,<code>[$.^]</code>匹配任意美元符号,句点,或<code>^</code></li>
-<li>不同的正则表达式库为字符类定义了不同的缩写,包括数字,字母表的字符和空白符,POSIX风格和Perl风格的正则表达式在缩写语法上是有区别的,例如,POSIX用<code>[[:space:]]</code>表示空白类,而Perl则是<code>\s</code></li>
+<li>当你指定一个字符类时，一些特殊字符就失去了它们的意义，同时其他字符有了新的意义，特别的是，当<code>^</code>字符不再是锚(anchor,就像之前讨论过的，用于指定以某个字符开头)而是用于否定字符类(当它是<code>[</code>的第一个字符串时)时，美元符<code>$</code>和句点<code>.</code>,也在字符类中失去了它们原来的意义(<code>$</code>原指以某字符结尾,<code>.</code>原可代替任意字符),而仅仅只一个字符，例如,<code>[^]]</code>匹配任一不是右括号的字符,<code>[$.^]</code>匹配任意美元符号，句点，或<code>^</code></li>
+<li>不同的正则表达式库为字符类定义了不同的缩写，包括数字，字母表的字符和空白符,POSIX风格和Perl风格的正则表达式在缩写语法上是有区别的，例如,POSIX用<code>[[:space:]]</code>表示空白类，而Perl则是<code>\s</code></li>
 </ul>
 <h2 id="选择性">选择性</h2>
 <ul>
@@ -288,13 +288,13 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;cat|dog&#x27;</span>,<span class="hljs-string">&#x27;the cat rubbed my legs&#x27;</span>);	<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;cat|dog&#x27;</span>,<span class="hljs-string">&#x27;the dog rubbed my legs&#x27;</span>);	<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;cat|dog&#x27;</span>,<span class="hljs-string">&#x27;the rabbit rubbed my legs&#x27;</span>);<span class="hljs-comment">//返回false</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>选择的优先级会让人惊讶:<code>^cat|dog$</code>选自<code>^cat</code>和<code>dog$</code>,意味着它匹配以<code>cat</code>开头或<code>dog</code>结尾的一行,如果想要一行只包括&quot;cat&quot;或&quot;dog&quot;,需要使用正则表达式<code>^(cat|dog)$</code></li>
-<li>可以组合字符类和选择符号,例如,为字符串作不以大写字母开头的检查:</li>
+<li>选择的优先级会让人惊讶:<code>^cat|dog$</code>选自<code>^cat</code>和<code>dog$</code>,意味着它匹配以<code>cat</code>开头或<code>dog</code>结尾的一行，如果想要一行只包括&quot;cat&quot;或&quot;dog&quot;,需要使用正则表达式<code>^(cat|dog)$</code></li>
+<li>可以组合字符类和选择符号，例如，为字符串作不以大写字母开头的检查:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;^([a-z]|[0-9])&#x27;</span>,<span class="hljs-string">&#x27;The quick brown fox&#x27;</span>);	<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;^([a-z]|[0-9])&#x27;</span>,<span class="hljs-string">&#x27;jumped over&#x27;</span>);			<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;^([a-z]|[0-9])&#x27;</span>,<span class="hljs-string">&#x27;10 lazy dogs&#x27;</span>);			<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <h2 id="重复序列">重复序列</h2>
 <ul>
-<li>要指定一个重复模式,要使用量词(quantifier),量词在重复模式后面,用来说明要重复这个模式多少次,下表显示了POSIX和Perl正则表达式都支持的量词</li>
+<li>要指定一个重复模式，要使用量词(quantifier),量词在重复模式后面，用来说明要重复这个模式多少次，下表显示了POSIX和Perl正则表达式都支持的量词</li>
 </ul>
 <table>
 <thead>
@@ -322,7 +322,7 @@
 </tr>
 <tr>
 <td>{n,m}</td>
-<td>至少n次,不超过m次</td>
+<td>至少n次，不超过m次</td>
 </tr>
 <tr>
 <td>{n,}</td>
@@ -331,33 +331,33 @@
 </tbody>
 </table>
 <ul>
-<li>要重复单个字符,只要简单地把量词放在字符后面:</li>
+<li>要重复单个字符，只要简单地把量词放在字符后面:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;ca+t&#x27;</span>,<span class="hljs-string">&#x27;caaaaaaaaaat&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;ca+t&#x27;</span>,<span class="hljs-string">&#x27;ct&#x27;</span>);					<span class="hljs-comment">//返回false	</span><br>ereg(<span class="hljs-string">&#x27;ca?t&#x27;</span>,<span class="hljs-string">&#x27;caaaaaaaaaat&#x27;</span>);		<span class="hljs-comment">//返回false</span><br>ereg(<span class="hljs-string">&#x27;ca*t&#x27;</span>,<span class="hljs-string">&#x27;ct&#x27;</span>);					<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用量词和字符类,我们可以实际地做一些有用的事情,例如匹配有效的美国电话号码:</li>
+<li>使用量词和字符类，我们可以实际地做一些有用的事情，例如匹配有效的美国电话号码:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;[0-9]&#123;3&#125;-[0-9]&#123;3&#125;-[0-9]&#123;4&#125;&#x27;</span>,<span class="hljs-string">&#x27;303-555-1212);//返回true</span><br><span class="hljs-string">ereg(&#x27;</span>[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]&#123;<span class="hljs-number">3</span>&#125;-[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]&#123;<span class="hljs-number">3</span>&#125;-[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]&#123;<span class="hljs-number">4</span>&#125;<span class="hljs-string">&#x27;,&#x27;</span><span class="hljs-number">64</span>-<span class="hljs-number">9</span>-<span class="hljs-number">555</span>-<span class="hljs-number">1234</span>);<span class="hljs-comment">//返回false</span><br></code></pre></td></tr></table></figure>
 <h2 id="子模式">子模式</h2>
 <ul>
-<li>可以使用小括号把几个正则表达式组合在一起作为一个单独的单元来对待,这个单元被称为子模式(subpattern)</li>
+<li>可以使用小括号把几个正则表达式组合在一起作为一个单独的单元来对待，这个单元被称为子模式(subpattern)</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;a (very )+big dog&#x27;</span>,<span class="hljs-string">&#x27;it was very very big dog&#x27;</span>);	<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;^(cat|dog)$&#x27;</span>,<span class="hljs-string">&#x27;cat&#x27;</span>);						<span class="hljs-comment">//返回true</span><br>ereg(<span class="hljs-string">&#x27;^(cat|dog)$&#x27;</span>,<span class="hljs-string">&#x27;dog&#x27;</span>);						<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>小括号也使得与子模式的匹配的子串被捕获,如果把一个数组当作第三个参数传递给匹配函数,任何捕捉到的字串都将被放进该数组:</li>
+<li>小括号也使得与子模式的匹配的子串被捕获，如果把一个数组当作第三个参数传递给匹配函数，任何捕捉到的字串都将被放进该数组:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;([0-9]+)&#x27;</span>,<span class="hljs-string">&#x27;You have 42 magic beans&#x27;</span>,<span class="hljs-variable">$captured</span>); <span class="hljs-comment">//返回true并对$captured进行赋值</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>数组的第零个元素设置为匹配的整个字符串,第一个元素是与第一个子模式匹配的子串(如果有一个的话),第二个元素是与第二个子模式匹配的子串,依此类推</li>
+<li>数组的第零个元素设置为匹配的整个字符串，第一个元素是与第一个子模式匹配的子串(如果有一个的话),第二个元素是与第二个子模式匹配的子串，依此类推</li>
 </ul>
 <h2 id="POSIX风格的正则表达式">POSIX风格的正则表达式</h2>
 <ul>
-<li>你已经了解了正则表达式的基础知识,接下来我们可以讨论一下其细节,POSIX风格的正则表达式使用Unix地区系统(locale system),该系统提供了排序和识别字符的函数来让你智能地处理其他非英语文本,特别地,各种语言组成单词的&quot;字母&quot;(如à和è)不同,POSIX正则表达式考虑到了这一点并提供相应的字符类</li>
-<li>然而,POSIX正则表达式是为使用仅有原文的数据而设计的,如果数据中有空字节(\x00),那么正则表达式函数把它理解为字符串的末尾,并且匹配不会超过该字节位置,要匹配任意的二进制数据,需要使用本章稍后讨论的兼容Prel的正则表达式,正如我们已经提到的,Perl风格的正则表达式函数常常比等效的POSIX风格的函数快</li>
+<li>你已经了解了正则表达式的基础知识，接下来我们可以讨论一下其细节,POSIX风格的正则表达式使用Unix地区系统(locale system),该系统提供了排序和识别字符的函数来让你智能地处理其他非英语文本，特别地，各种语言组成单词的&quot;字母&quot;(如à和è)不同,POSIX正则表达式考虑到了这一点并提供相应的字符类</li>
+<li>然而,POSIX正则表达式是为使用仅有原文的数据而设计的，如果数据中有空字节(\x00),那么正则表达式函数把它理解为字符串的末尾，并且匹配不会超过该字节位置，要匹配任意的二进制数据，需要使用本章稍后讨论的兼容Prel的正则表达式，正如我们已经提到的,Perl风格的正则表达式函数常常比等效的POSIX风格的函数快</li>
 </ul>
 <h3 id="字符类-2">字符类</h3>
 <ul>
-<li>如下表所示,POSIX定义了许多可以在字符类中使用的命名字符集,在下表中给出的拓展是英语的,实际的字母根据使用者地区(locale)不同而不同</li>
+<li>如下表所示,POSIX定义了许多可以在字符类中使用的命名字符集，在下表中给出的拓展是英语的，实际的字母根据使用者地区(locale)不同而不同</li>
 </ul>
 <table>
 <thead>
@@ -385,7 +385,7 @@
 </tr>
 <tr>
 <td>[:blank:]</td>
-<td>水平空白符(空格,制表符)</td>
+<td>水平空白符(空格，制表符)</td>
 <td>[ \t]</td>
 </tr>
 <tr>
@@ -400,7 +400,7 @@
 </tr>
 <tr>
 <td>[:graph:]</td>
-<td>用墨水打印的字符(非空格,非控制字符)</td>
+<td>用墨水打印的字符(非空格，非控制字符)</td>
 <td>[^\x01-\x20]</td>
 </tr>
 <tr>
@@ -415,12 +415,12 @@
 </tr>
 <tr>
 <td>[:punct:]</td>
-<td>任意标点符号,如句点(.)和分号(😉</td>
+<td>任意标点符号，如句点(.)和分号(😉</td>
 <td>[-!”#$%&amp;’()*+,./:;&lt;=&gt;?@[\\\]^_’{|}~]</td>
 </tr>
 <tr>
 <td>[:space:]</td>
-<td>空白(换行,回车,制表位,空格,垂直制表位)</td>
+<td>空白(换行，回车，制表位，空格，垂直制表位)</td>
 <td>[\n\r\t \x0B]</td>
 </tr>
 <tr>
@@ -436,20 +436,20 @@
 </tbody>
 </table>
 <ul>
-<li>每一个<code>[:something:]</code>类都可被用于替补一个字符类中的字符,例如,要查找任一数字字符,大写字母或一个@符号,可以使用下面的正则表达式:</li>
+<li>每一个<code>[:something:]</code>类都可被用于替补一个字符类中的字符，例如，要查找任一数字字符，大写字母或一个@符号，可以使用下面的正则表达式:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">[@[:digit:][:upper:]]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>但是,不能把一个字符类当作一个范围的终点使用:</li>
+<li>但是，不能把一个字符类当作一个范围的终点使用:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;[A-[:lower:]]&#x27;</span>,<span class="hljs-string">&#x27;string&#x27;</span>);		<span class="hljs-comment">//非法的正则表达式</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>一些地区把某些字符序列当作一个单独的字符来考虑,它们被称为排序序列(collating swquence),在字符类中匹配这些多字符序列中的一个时,要把它用<code>[.</code>和<code>.]</code>括起来</li>
-<li>例如,如果你的地区有排序序列ch,你可以使用下面的字符类类匹配<code>s</code>,<code>t</code>,<code>ch</code>:</li>
+<li>一些地区把某些字符序列当作一个单独的字符来考虑，它们被称为排序序列(collating swquence),在字符类中匹配这些多字符序列中的一个时，要把它用<code>[.</code>和<code>.]</code>括起来</li>
+<li>例如，如果你的地区有排序序列ch,你可以使用下面的字符类类匹配<code>s</code>,<code>t</code>,<code>ch</code>:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">[st[.ch.]]<br></code></pre></td></tr></table></figure>
 <ul>
-<li>POSIX最后的字符类扩展是等价类(equivalence class),把字符用<code>[=</code>和<code>=]</code>括起来指定,等价字符类匹配有相同整理顺序的字符(由当前locate定义),例如,一个地区可能定义<code>a</code>,<code>ā</code>和<code>á</code>有相同的排列优先级,要匹配它们中的一个,等价类为<code>[=a=]</code></li>
+<li>POSIX最后的字符类扩展是等价类(equivalence class),把字符用<code>[=</code>和<code>=]</code>括起来指定，等价字符类匹配有相同整理顺序的字符(由当前locate定义),例如，一个地区可能定义<code>a</code>,<code>ā</code>和<code>á</code>有相同的排列优先级，要匹配它们中的一个，等价类为<code>[=a=]</code></li>
 </ul>
 <h3 id="锚">锚</h3>
 <ul>
@@ -488,11 +488,11 @@
 </ul>
 <h3 id="函数">函数</h3>
 <ul>
-<li>POSIX风格的正则表达式有3类函数:匹配,替换和拆分</li>
+<li>POSIX风格的正则表达式有3类函数:匹配，替换和拆分</li>
 </ul>
 <h4 id="匹配">匹配</h4>
 <ul>
-<li><code>ereg()</code>函数接收一个模式,一个字符串和一个可选的数组,如果给定数组的话就组装数组,并根据是否在字符串中找到模式的一个匹配而返回true或false</li>
+<li><code>ereg()</code>函数接收一个模式，一个字符串和一个可选的数组，如果给定数组的话就组装数组，并根据是否在字符串中找到模式的一个匹配而返回true或false</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$found</span> = ereg(pattern,<span class="hljs-keyword">string</span>[,captured]);<br></code></pre></td></tr></table></figure>
 <ul>
@@ -500,46 +500,46 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ereg(<span class="hljs-string">&#x27;y.*e$&#x27;</span>,<span class="hljs-string">&#x27;Sylvie&#x27;</span>);		<span class="hljs-comment">//返回ture</span><br>ereg(<span class="hljs-string">&#x27;y(.*)e$&#x27;</span>,<span class="hljs-string">&#x27;Sylvie&#x27;</span>,<span class="hljs-variable">$a</span>);	<span class="hljs-comment">//返回true,$a是array(&#x27;Sylvie&#x27;,&#x27;lvi&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>数组的第零个元素设置为与之匹配的整个字符串,第一个元素是与第一个子模式匹配的子字符串,第二个元素是与第二个子模式匹配的子字符串,依此类推</li>
+<li>数组的第零个元素设置为与之匹配的整个字符串，第一个元素是与第一个子模式匹配的子字符串，第二个元素是与第二个子模式匹配的子字符串，依此类推</li>
 <li><code>eregi()</code>函数是不区分大小写的<code>ereg()</code>,它的参数和返回值都和<code>ereg()</code>相同</li>
-<li>下例使用模式匹配来确定一个信用卡号是否通过了Luhn校验,以及该数字是否符合特定的信用卡格式</li>
+<li>下例使用模式匹配来确定一个信用卡号是否通过了Luhn校验，以及该数字是否符合特定的信用卡格式</li>
 </ul>
 <p><strong>示例4-1</strong>:信用卡验证</p>
-<p>luhn验证可以判断一个信用卡号是否遵循正确的校验,但是它不能告知该卡号是否已经发行,当前是否为活动的或有足够的空间来存入金额</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">IsVaildCreditCard</span>(<span class="hljs-params"><span class="hljs-variable">$inCardNumber</span>,<span class="hljs-variable">$inCardType</span></span>)</span>&#123;<br>    <span class="hljs-comment">//假设是正确的</span><br>    <span class="hljs-variable">$isValid</span> = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-comment">//从字符串中删除所有非数字字符</span><br>    <span class="hljs-variable">$inCardNumber</span> = ereg_replace(<span class="hljs-string">&#x27;[^:digit:]]&#x27;</span>.<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br><br>    <span class="hljs-comment">//确认卡号和类型匹配</span><br>    <span class="hljs-keyword">switch</span>(<span class="hljs-variable">$inCardType</span>)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;mastercard&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^5[1-5].&#123;14&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;visa&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^4.[15]$|^4.&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;amex&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^3[47].&#123;13&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;discover&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^6011.&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;diners&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^30[0-5].&#123;11&#125;$|^3[68].&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;jcb&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^3.&#123;15&#125;$|^2131|1800.&#123;11&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//通过了基本的测试,现在进行Luhn校验</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$isValid</span>)&#123;<br>        <span class="hljs-comment">//翻转</span><br>        <span class="hljs-variable">$inCardNumber</span> = strrev(<span class="hljs-variable">$inCardNumber</span>);<br>        <span class="hljs-comment">//合计数字的总位数,在奇数位加倍</span><br>        <span class="hljs-variable">$theTotal</span> = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>;<span class="hljs-variable">$i</span> &lt; strlen(<span class="hljs-variable">$inCardNumberr</span>);<span class="hljs-variable">$i</span>++)&#123;<br>            <span class="hljs-variable">$theAdder</span> = (<span class="hljs-keyword">int</span>)<span class="hljs-variable">$inCardNumber</span>[<span class="hljs-variable">$i</span>];<br>            <span class="hljs-comment">//使在奇数位的数字加倍</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-variable">$i</span> % <span class="hljs-number">2</span>)&#123;<br>                <span class="hljs-variable">$theAdder</span> = <span class="hljs-variable">$theAdder</span> &lt;&lt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span>(<span class="hljs-variable">$theAdder</span> &gt; <span class="hljs-number">9</span>)&#123;<br>                    <span class="hljs-variable">$theAdder</span> -= <span class="hljs-number">9</span>;<br>                &#125;<br>                <span class="hljs-variable">$theTotal</span> += <span class="hljs-variable">$theAdder</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//合法的卡号除以10</span><br>        <span class="hljs-variable">$isValid</span> = ((<span class="hljs-variable">$theTotal</span> % <span class="hljs-number">10</span>) == <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$isValid</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>luhn验证可以判断一个信用卡号是否遵循正确的校验，但是它不能告知该卡号是否已经发行，当前是否为活动的或有足够的空间来存入金额</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">IsVaildCreditCard</span>(<span class="hljs-params"><span class="hljs-variable">$inCardNumber</span>,<span class="hljs-variable">$inCardType</span></span>)</span>&#123;<br>    <span class="hljs-comment">//假设是正确的</span><br>    <span class="hljs-variable">$isValid</span> = <span class="hljs-literal">true</span>;<br><br>    <span class="hljs-comment">//从字符串中删除所有非数字字符</span><br>    <span class="hljs-variable">$inCardNumber</span> = ereg_replace(<span class="hljs-string">&#x27;[^:digit:]]&#x27;</span>.<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br><br>    <span class="hljs-comment">//确认卡号和类型匹配</span><br>    <span class="hljs-keyword">switch</span>(<span class="hljs-variable">$inCardType</span>)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;mastercard&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^5[1-5].&#123;14&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;visa&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^4.[15]$|^4.&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;amex&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^3[47].&#123;13&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;discover&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^6011.&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;diners&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^30[0-5].&#123;11&#125;$|^3[68].&#123;12&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;jcb&#x27;</span>:<br>            <span class="hljs-variable">$isValid</span> = ereg(<span class="hljs-string">&#x27;^3.&#123;15&#125;$|^2131|1800.&#123;11&#125;$&#x27;</span>,<span class="hljs-variable">$inCardNumber</span>);<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//通过了基本的测试，现在进行Luhn校验</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-variable">$isValid</span>)&#123;<br>        <span class="hljs-comment">//翻转</span><br>        <span class="hljs-variable">$inCardNumber</span> = strrev(<span class="hljs-variable">$inCardNumber</span>);<br>        <span class="hljs-comment">//合计数字的总位数，在奇数位加倍</span><br>        <span class="hljs-variable">$theTotal</span> = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>;<span class="hljs-variable">$i</span> &lt; strlen(<span class="hljs-variable">$inCardNumberr</span>);<span class="hljs-variable">$i</span>++)&#123;<br>            <span class="hljs-variable">$theAdder</span> = (<span class="hljs-keyword">int</span>)<span class="hljs-variable">$inCardNumber</span>[<span class="hljs-variable">$i</span>];<br>            <span class="hljs-comment">//使在奇数位的数字加倍</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-variable">$i</span> % <span class="hljs-number">2</span>)&#123;<br>                <span class="hljs-variable">$theAdder</span> = <span class="hljs-variable">$theAdder</span> &lt;&lt; <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span>(<span class="hljs-variable">$theAdder</span> &gt; <span class="hljs-number">9</span>)&#123;<br>                    <span class="hljs-variable">$theAdder</span> -= <span class="hljs-number">9</span>;<br>                &#125;<br>                <span class="hljs-variable">$theTotal</span> += <span class="hljs-variable">$theAdder</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//合法的卡号除以10</span><br>        <span class="hljs-variable">$isValid</span> = ((<span class="hljs-variable">$theTotal</span> % <span class="hljs-number">10</span>) == <span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$isValid</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="替换">替换</h4>
 <ul>
-<li><code>ereg_replace()</code>函数的参数为一个模式,一个替换字符串和一个要在其中进行查找的字符串,函数返回查找字符串的一个拷贝,字符串中与模式匹配的文本用替换字符串来代替</li>
+<li><code>ereg_replace()</code>函数的参数为一个模式，一个替换字符串和一个要在其中进行查找的字符串，函数返回查找字符串的一个拷贝，字符串中与模式匹配的文本用替换字符串来代替</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$changed</span> = ereg_replace(pattern,replacement,<span class="hljs-keyword">string</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果该模式有任何分组的子模式,则该匹配可以通过把字符\1到\9放到替换字符串中来访问,例如,可以使用<code>ereg_replace()</code>以等价的HTML标签替换用[b]和[/b]标签包含的字符:</li>
+<li>如果该模式有任何分组的子模式，则该匹配可以通过把字符\1到\9放到替换字符串中来访问，例如，可以使用<code>ereg_replace()</code>以等价的HTML标签替换用[b]和[/b]标签包含的字符:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;It is [b]not[/b] a matter of diplomacy.&#x27;</span>;<br><span class="hljs-keyword">echo</span> ereg_replace (<span class="hljs-string">&#x27;\[b]([^[]*])\[/b]&#x27;</span>,<span class="hljs-string">&#x27;&lt;b&gt;\1&lt;/b&gt;&#x27;</span>,<span class="hljs-variable">$string</span>);<br>It is&lt;b&gt;not&lt;/b&gt; a matter of diplomacy<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>eregi_replace()</code>函数是<code>ereg_replace()</code>不区分大小写的形式,它的参数和返回值和<code>ereg_replace()</code>相同</li>
+<li><code>eregi_replace()</code>函数是<code>ereg_replace()</code>不区分大小写的形式，它的参数和返回值和<code>ereg_replace()</code>相同</li>
 </ul>
 <h4 id="拆分">拆分</h4>
 <ul>
-<li><code>split()</code>函数使用正则表达式来把字符串拆分成较小的块,作为一个数组返回,如果出现错误,则<code>split()</code>返回false,可以选择要返回多少个小块:</li>
+<li><code>split()</code>函数使用正则表达式来把字符串拆分成较小的块，作为一个数组返回，如果出现错误，则<code>split()</code>返回false,可以选择要返回多少个小块:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$chunks</span> = split(pattern,<span class="hljs-keyword">string</span>[,limit]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>本函数的模式用于匹配分隔成块的文本,例如,从一个算术表达式中拆分项:</li>
+<li>本函数的模式用于匹配分隔成块的文本，例如，从一个算术表达式中拆分项:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$expression</span> = <span class="hljs-string">&#x27;3*5+i/6-12&#x27;</span>;<br><span class="hljs-variable">$terms</span> = split(<span class="hljs-string">&#x27;[/+*-]&#x27;</span>,<span class="hljs-variable">$expression</span>);<br><span class="hljs-comment">//$terms是array(&#x27;3&#x27;,&#x27;5&#x27;,&#x27;i,,6,&#x27;12&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果指定了一个匹配数目限制,则数组的最后一个元素会存放剩余的字符串:</li>
+<li>如果指定了一个匹配数目限制，则数组的最后一个元素会存放剩余的字符串:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$expression</span> = <span class="hljs-string">&#x27;3*5+i/6-12&#x27;</span>;<br><span class="hljs-variable">$terms</span> = split(<span class="hljs-string">&#x27;[/+*-]&#x27;</span>,<span class="hljs-variable">$expression</span>,<span class="hljs-number">3</span>);<br><span class="hljs-comment">//$terms是array(&#x27;3&#x27;,&#x27;5&#x27;,&#x27;i/6-12&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>一直以来,Perl被视为强大的正则表达式的标准,PHP使用一个被称为pcre的C库,几乎完全支持perl正则表达式的特性,Perl正则表达式包括之前介绍过的POSIX类和锚</li>
-<li>在Perl正则表达式中,POSIX风格的字符类可以操作和理解使用Unix地区系统的非英语字符,Perl正则表达式可以作用于任意的二进制数据,所以你可以安全地对带有空字节(NUL-byte,\x00)的模式或字符串进行匹配</li>
+<li>一直以来,Perl被视为强大的正则表达式的标准,PHP使用一个被称为pcre的C库，几乎完全支持perl正则表达式的特性,Perl正则表达式包括之前介绍过的POSIX类和锚</li>
+<li>在Perl正则表达式中,POSIX风格的字符类可以操作和理解使用Unix地区系统的非英语字符,Perl正则表达式可以作用于任意的二进制数据，所以你可以安全地对带有空字节(NUL-byte,\x00)的模式或字符串进行匹配</li>
 </ul>
 <h2 id="兼容Perl风格的正则表达式">兼容Perl风格的正则表达式</h2>
 <h3 id="分隔符">分隔符</h3>
 <ul>
-<li>Perl风格的正则表达式模仿的语法,即每个模式都必须用一对分隔符括起来,习惯上使用左斜杠<code>/</code>,例如<code>/pattern/</code>,不过,任意非数字字母的字符(除了反斜杠<code>\</code>)都可以用于分割一个Perl风格的模式,这在匹配包含斜杠的字符串是很有用的,如文件名,例如,下面的语句是等效的:</li>
+<li>Perl风格的正则表达式模仿的语法，即每个模式都必须用一对分隔符括起来，习惯上使用左斜杠<code>/</code>,例如<code>/pattern/</code>,不过，任意非数字字母的字符(除了反斜杠<code>\</code>)都可以用于分割一个Perl风格的模式，这在匹配包含斜杠的字符串是很有用的，如文件名，例如，下面的语句是等效的:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/\/usr\/local\//&#x27;</span>,<span class="hljs-string">&#x27;/usr/local/bin/perl&#x27;</span>);	<span class="hljs-comment">//返回true</span><br><br>preg_match(<span class="hljs-string">&#x27;#/usr/local/#&#x27;</span>,<span class="hljs-string">&#x27;/usr/local/bin/perl&#x27;</span>);	<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -547,19 +547,19 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;&#123;/usr/local/&#125;&#x27;</span>,<span class="hljs-string">&#x27;/usr/local/bin/perl&#x27;</span>);	<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>后缀选项</strong>:放在结束分隔符后面的单个字符修饰符,它用于修改正则表达式引擎的行为</li>
-<li>非常有用的一个是x,它可以让正则表达式引擎在匹配前从正则表达式中跳过空白符和被#标记的注释,下面这两种模式是相同的,但是其中一个会更易于阅读:</li>
+<li><strong>后缀选项</strong>:放在结束分隔符后面的单个字符修饰符，它用于修改正则表达式引擎的行为</li>
+<li>非常有用的一个是x,它可以让正则表达式引擎在匹配前从正则表达式中跳过空白符和被#标记的注释，下面这两种模式是相同的，但是其中一个会更易于阅读:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-string">&#x27;/([[:alpha:]]+)\s+\1/&#x27;</span><br><br><span class="hljs-string">&#x27;/(				# start capture</span><br><span class="hljs-string">	[[:alpha:]]+	# a word</span><br><span class="hljs-string">	\s+			# whitespace</span><br><span class="hljs-string">	\1			 # the same word again</span><br><span class="hljs-string">	)			# end capture</span><br><span class="hljs-string">/x&#x27;</span>.<br></code></pre></td></tr></table></figure>
 <h3 id="匹配行为">匹配行为</h3>
 <ul>
-<li>虽然Perl正则表达式语法包括我们之前谈到的POSIX结构,但在Perl中一些模式组件有不同的意义,Perl正则表达式特别为单行文字匹配进行了优化(虽然有一些选项来改变这个行为)</li>
-<li>句点<code>.</code>匹配任意除换行符<code>\n</code>之外的字符,美元符号<code>$</code>匹配字符串的末尾或在换行符之前以换行符结尾的字符串</li>
+<li>虽然Perl正则表达式语法包括我们之前谈到的POSIX结构，但在Perl中一些模式组件有不同的意义,Perl正则表达式特别为单行文字匹配进行了优化(虽然有一些选项来改变这个行为)</li>
+<li>句点<code>.</code>匹配任意除换行符<code>\n</code>之外的字符，美元符号<code>$</code>匹配字符串的末尾或在换行符之前以换行符结尾的字符串</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/is(.*)$/&#x27;</span>,<span class="hljs-string">&quot;the key is in my pants&quot;</span>,<span class="hljs-variable">$captured</span>);	<span class="hljs-comment">//$captured[1]是&#x27;&#x27;in my pants&#x27;</span><br></code></pre></td></tr></table></figure>
 <h3 id="字符类-3">字符类</h3>
 <ul>
-<li>Perl风格的正则表达式不仅支持POSIX字符类,而且定义了一些自己的字符类,如下表所示:</li>
+<li>Perl风格的正则表达式不仅支持POSIX字符类，而且定义了一些自己的字符类，如下表所示:</li>
 </ul>
 <table>
 <thead>
@@ -646,13 +646,13 @@
 </table>
 <h3 id="量词和贪婪性">量词和贪婪性</h3>
 <ul>
-<li>Perl也支持POSIX量词,而且是具有贪婪性的(greedy),即当有一个量词时,引擎在仍然满足匹配模式的情况下尽可能多地进行匹配,例如:</li>
+<li>Perl也支持POSIX量词，而且是具有贪婪性的(greedy),即当有一个量词时，引擎在仍然满足匹配模式的情况下尽可能多地进行匹配，例如:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/(&lt;.*&gt;)/&#x27;</span>,<span class="hljs-string">&#x27;do &lt;b&gt;not&lt;/b&gt; press the button&#x27;</span>,<span class="hljs-variable">$match</span>);	<span class="hljs-comment">//$match[1]为&#x27;&lt;b&gt;not&lt;/b&gt;&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里<code>&lt;b&gt;</code>,<code>&lt;/b&gt;</code>和<code>&lt;b&gt;not&lt;/b&gt;</code>都满足模式<code>/(&lt;.*&gt;)/</code>,根据贪婪性原则,取最大的部分,所以<code>$match[1]</code>为<code>&lt;b&gt;not\&lt;b\&gt;</code></li>
-<li>这个正则表达式从第一个小于符号开始匹配到最后一个大于符号,&quot;.*&quot;匹配在第一个小于符号之后的所有字符,并且引擎回溯使得它的匹配越来越少,直到匹配到最后一个大于符号</li>
-<li>贪婪性会产生一个问题,有时你需要最少匹配(非贪婪匹配),就是说量词尽可能少的匹配满足模式的剩余部分,Perl提供了一组用于最小匹配的量词,它们很容易记住,因为它们和贪婪量词相同,只是附加了一个问号<code>?</code>,下表显示了Perl风格正则表达式中相应的贪婪量词和非贪婪量词</li>
+<li>这里<code>&lt;b&gt;</code>,<code>&lt;/b&gt;</code>和<code>&lt;b&gt;not&lt;/b&gt;</code>都满足模式<code>/(&lt;.*&gt;)/</code>,根据贪婪性原则，取最大的部分，所以<code>$match[1]</code>为<code>&lt;b&gt;not\&lt;b\&gt;</code></li>
+<li>这个正则表达式从第一个小于符号开始匹配到最后一个大于符号,&quot;.*&quot;匹配在第一个小于符号之后的所有字符，并且引擎回溯使得它的匹配越来越少，直到匹配到最后一个大于符号</li>
+<li>贪婪性会产生一个问题，有时你需要最少匹配(非贪婪匹配),就是说量词尽可能少的匹配满足模式的剩余部分,Perl提供了一组用于最小匹配的量词，它们很容易记住，因为它们和贪婪量词相同，只是附加了一个问号<code>?</code>,下表显示了Perl风格正则表达式中相应的贪婪量词和非贪婪量词</li>
 </ul>
 <table>
 <thead>
@@ -698,13 +698,13 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/(&lt;[^&gt;]*&gt;)/&#x27;</span>,<span class="hljs-string">&#x27;do &lt;b&gt;not&lt;/b&gt; press the button&#x27;</span>,<span class="hljs-variable">$match</span>);	<span class="hljs-comment">//$match[1]为&#x27;&lt;b&gt;&#x27;</span><br></code></pre></td></tr></table></figure>
 <h3 id="非捕获匹配">非捕获匹配</h3>
 <ul>
-<li>如果把模式的一部分用小括号括起来,那么匹配子模式的文本被捕获并且可以在后面访问,但是有时你想创建一个不捕获匹配文字的子模式,那么在Perl兼容正则表达式中可以使用<code>?:subpattern</code>结构来这样做:</li>
+<li>如果把模式的一部分用小括号括起来，那么匹配子模式的文本被捕获并且可以在后面访问，但是有时你想创建一个不捕获匹配文字的子模式，那么在Perl兼容正则表达式中可以使用<code>?:subpattern</code>结构来这样做:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/(?:ello)(.*)/&#x27;</span>,<span class="hljs-string">&#x27;jello biafra&#x27;</span>,<span class="hljs-variable">$match</span>);	<span class="hljs-comment">//$match[1]是&#x27;biafra&#x27;</span><br></code></pre></td></tr></table></figure>
 <h3 id="逆向引用">逆向引用</h3>
 <ul>
-<li>可以使用一个逆向引用(backreference)来引用模式中之前被捕获的字符串:<code>\1</code>引用第一个子模式的内容,<code>\2</code>引用第二个,以此类推,如果嵌套了子模式,那么第一个引用以第一个左小括号开始,第二个引用以第二个左小括号开始,以此类推</li>
-<li>例如,下面识别两倍的单词:</li>
+<li>可以使用一个逆向引用(backreference)来引用模式中之前被捕获的字符串:<code>\1</code>引用第一个子模式的内容,<code>\2</code>引用第二个，以此类推，如果嵌套了子模式，那么第一个引用以第一个左小括号开始，第二个引用以第二个左小括号开始，以此类推</li>
+<li>例如，下面识别两倍的单词:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/([[:alpha:]]+)\s+\1/&#x27;</span>,<span class="hljs-string">&#x27;Paris in the thespring&#x27;</span>,<span class="hljs-variable">$m</span>);<br><span class="hljs-comment">//返回true并且$m[1]是&#x27;the&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -712,16 +712,16 @@
 <li>逆向引用最有用的功能可以确定文字中连续出现两个相同单词的位置</li>
 <li>如本例中:
 <ul>
-<li>第一次匹配模式<code>Paris\1</code>,Paris前面没有被捕获的字符串,故放弃</li>
-<li>第二次匹配<code>in\1</code>,<code>\1</code>引用前面被捕获的字符串<code>Paris</code>,故合并后为<code>in Paris</code>,没有找到,放弃</li>
-<li>第三次匹配<code>the\1</code>,前面捕获的字符串<code>in</code>,故合并后为<code>the in</code>,未找到,放弃</li>
-<li>第四次匹配<code>the\1</code>,前捕获的字符串为<code>the</code>,故合并后为<code>the the</code>,找到字符串停止匹配,并将<code>the the</code>存入数组<code>$m</code>的0号元素,将<code>the</code>存入数组<code>$m</code>的1号元素故<code>$m[1]</code>为<code>the</code></li>
+<li>第一次匹配模式<code>Paris\1</code>,Paris前面没有被捕获的字符串，故放弃</li>
+<li>第二次匹配<code>in\1</code>,<code>\1</code>引用前面被捕获的字符串<code>Paris</code>,故合并后为<code>in Paris</code>,没有找到，放弃</li>
+<li>第三次匹配<code>the\1</code>,前面捕获的字符串<code>in</code>,故合并后为<code>the in</code>,未找到，放弃</li>
+<li>第四次匹配<code>the\1</code>,前捕获的字符串为<code>the</code>,故合并后为<code>the the</code>,找到字符串停止匹配，并将<code>the the</code>存入数组<code>$m</code>的0号元素，将<code>the</code>存入数组<code>$m</code>的1号元素故<code>$m[1]</code>为<code>the</code></li>
 </ul>
 </li>
 </ul>
 <h3 id="后缀模式">后缀模式</h3>
 <ul>
-<li>Perl风格的正则表达式允许把单个字符选项(标志)放在正则表达式模式后面来修改匹配的解释或行为,例如,要进行不区分大小写的匹配,可以简单地使用i标志:</li>
+<li>Perl风格的正则表达式允许把单个字符选项(标志)放在正则表达式模式后面来修改匹配的解释或行为，例如，要进行不区分大小写的匹配，可以简单地使用i标志:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/cat/i&#x27;</span>,<span class="hljs-string">&#x27;Stop, Catherine!&#x27;</span>);	<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -741,7 +741,7 @@
 </tr>
 <tr>
 <td>/regexp/s</td>
-<td>使句点(.)匹配任何字符,包括换行符(\n)</td>
+<td>使句点(.)匹配任何字符，包括换行符(\n)</td>
 </tr>
 <tr>
 <td>/regexp/x</td>
@@ -749,16 +749,16 @@
 </tr>
 <tr>
 <td>/regexp/m</td>
-<td>使^匹配换行符(\n)之后的内容,美元符号($)匹配换行符(\n)之前的内容</td>
+<td>使^匹配换行符(\n)之后的内容，美元符号($)匹配换行符(\n)之前的内容</td>
 </tr>
 <tr>
 <td>/regexp/e</td>
-<td>如果替换字符串是PHP代码,使用eval()执行该代码来得到实际的替换字符串</td>
+<td>如果替换字符串是PHP代码，使用eval()执行该代码来得到实际的替换字符串</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>PHP的Perl兼容正则表达式函数也支持在Perl中不支持的其他修饰符,如下表所示:</li>
+<li>PHP的Perl兼容正则表达式函数也支持在Perl中不支持的其他修饰符，如下表所示:</li>
 </ul>
 <table>
 <thead>
@@ -778,7 +778,7 @@
 </tr>
 <tr>
 <td>/regexp/X</td>
-<td>如果一个反斜杠之后跟着没有特殊意义的字符,将产生一个错误</td>
+<td>如果一个反斜杠之后跟着没有特殊意义的字符，将产生一个错误</td>
 </tr>
 <tr>
 <td>/regexp/A</td>
@@ -790,25 +790,25 @@
 </tr>
 <tr>
 <td>/regexp/S</td>
-<td>使表达式解析器更加小心地检查模式的结构,使得第二次运行时(如在一个循环中)加快速度</td>
+<td>使表达式解析器更加小心地检查模式的结构，使得第二次运行时(如在一个循环中)加快速度</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>在一个模式中可以使用多个选项,如下所示:</li>
+<li>在一个模式中可以使用多个选项，如下所示:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$message</span> = <span class="hljs-string">&lt;&lt;&lt; END</span><br><span class="hljs-string">To : you@youcorp</span><br><span class="hljs-string">From : me@mecorp</span><br><span class="hljs-string">Subject : pay up</span><br><span class="hljs-string"></span><br><span class="hljs-string">Pay me or else!</span><br><span class="hljs-string">END</span>;<br>preg_match(<span class="hljs-string">&#x27;/subject: (.*)/im&#x27;</span>,<span class="hljs-variable">$message</span>,<span class="hljs-variable">$match</span>);<br><span class="hljs-comment">//$match[1]是&#x27;pay up&#x27;</span><br></code></pre></td></tr></table></figure>
 <h3 id="内联选项">内联选项</h3>
 <ul>
-<li>除了在模式结束分隔符之后指定模式选项之外,还可以在一个模式内部指定仅运用于部分模式的选项,语法如下:</li>
+<li>除了在模式结束分隔符之后指定模式选项之外，还可以在一个模式内部指定仅运用于部分模式的选项，语法如下:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">(?flags:subpattern)<br></code></pre></td></tr></table></figure>
 <ul>
-<li>例如,在这个示例中只有单词&quot;PHP&quot;是不区分大小写的:</li>
+<li>例如，在这个示例中只有单词&quot;PHP&quot;是不区分大小写的:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/I like (?i:PHP)/&#x27;</span>,<span class="hljs-string">&#x27;I like php&#x27;</span>);	<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>i,m,s,U,x和X选项可被用在这种方式的内部,一次可以使用多个选项:</li>
+<li>i,m,s,U,x和X选项可被用在这种方式的内部，一次可以使用多个选项:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/eat (?ix:fo    o   d)/&#x27;</span>.<span class="hljs-string">&#x27;eat FoOD&#x27;</span>);<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -820,12 +820,12 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/I like (?i)PHP/&#x27;</span>,<span class="hljs-string">&#x27;I like pHp&#x27;</span>);	<span class="hljs-comment">//返回true</span><br>preg_match(<span class="hljs-string">&#x27;/I (like (?i)PHP) a lot/&#x27;</span>,<span class="hljs-string">&#x27;/I like pHp a lot&#x27;</span>,<span class="hljs-variable">$match</span>);	<span class="hljs-comment">//$match[1]是&#x27;like pHp&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>内置标志不能用于捕获字符串,需要设置一个附加的小括号来完成捕获(如上示例中用小括号定义了一个子模式)</li>
+<li>内置标志不能用于捕获字符串，需要设置一个附加的小括号来完成捕获(如上示例中用小括号定义了一个子模式)</li>
 </ul>
 <h3 id="前向和后向断言">前向和后向断言</h3>
 <ul>
-<li>有时在模式中能够指出&quot;如果这里是下一个,就匹配这里&quot;是很有用的,这在拆分字符串时是很常见的,这种正则表达式描述了分隔符,但不返回,可以使用前向断言(lookahead assertion)来确保在分隔符之后有更多的数据(因为没有匹配它,所以阻止被返回),类似的,后向断言(lookbehind assertion)检查前面的文字</li>
-<li>前向和后向各有两种形式:正(positive)和负(negative),正的前向或后向表示&quot;下一个/前面的文本必须如此&quot;,负的前向和后向表示&quot;下一个/前面的文本必须不是这样&quot;,下表展示了在Perl兼容模式中可以使用的4中结构,这4中结构都不捕获文本</li>
+<li>有时在模式中能够指出&quot;如果这里是下一个，就匹配这里&quot;是很有用的，这在拆分字符串时是很常见的，这种正则表达式描述了分隔符，但不返回，可以使用前向断言(lookahead assertion)来确保在分隔符之后有更多的数据(因为没有匹配它，所以阻止被返回),类似的，后向断言(lookbehind assertion)检查前面的文字</li>
+<li>前向和后向各有两种形式:正(positive)和负(negative),正的前向或后向表示&quot;下一个/前面的文本必须如此&quot;,负的前向和后向表示&quot;下一个/前面的文本必须不是这样&quot;,下表展示了在Perl兼容模式中可以使用的4中结构，这4中结构都不捕获文本</li>
 </ul>
 <table>
 <thead>
@@ -854,50 +854,50 @@
 </tbody>
 </table>
 <ul>
-<li>正前向的一个简单应用是将一个Unix mbox邮件文件分解成单独的消息,单词&quot;From&quot;通过自己开始一行来指出一条新消息的开始,所以可以通过在一行开始处指定分隔符作为下一个文本中&quot;From&quot;的位置来把mailbox拆分为消息:</li>
+<li>正前向的一个简单应用是将一个Unix mbox邮件文件分解成单独的消息，单词&quot;From&quot;通过自己开始一行来指出一条新消息的开始，所以可以通过在一行开始处指定分隔符作为下一个文本中&quot;From&quot;的位置来把mailbox拆分为消息:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$message</span> = preg_split(<span class="hljs-string">&#x27;/(?=^From)/m&#x27;</span>,<span class="hljs-variable">$mailbox</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>负后向的一个简单应用是析取包含引用分隔符的引用字符串,例如,下面的例子是告诉你如何析取一个用单引号括起来的字符串(注意正则表达式使用x修饰符,可以对模式加上注释);</li>
+<li>负后向的一个简单应用是析取包含引用分隔符的引用字符串，例如，下面的例子是告诉你如何析取一个用单引号括起来的字符串(注意正则表达式使用x修饰符，可以对模式加上注释);</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$input</span> = <span class="hljs-string">&lt;&lt;&lt; END</span><br><span class="hljs-string">name = &#x27;Tim O\&#x27;Rilly&#x27;;</span><br><span class="hljs-string">END</span>;<br><br><span class="hljs-variable">$pattern</span> = <span class="hljs-string">&lt;&lt;&lt; END</span><br><span class="hljs-string">&#x27;					#opening quote</span><br><span class="hljs-string">(					#begin capturing</span><br><span class="hljs-string">	.*?				#the string</span><br><span class="hljs-string">	(?&lt;! \\\\ )		#skip escaped quotes</span><br><span class="hljs-string">)					#end capturing</span><br><span class="hljs-string">&#x27;					#closing quote</span><br><span class="hljs-string">END</span>;<br><br>preg_match(<span class="hljs-string">&quot;(<span class="hljs-subst">$pattern</span>)x&quot;</span>,<span class="hljs-variable">$input</span>,<span class="hljs-variable">$match</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$match</span>[<span class="hljs-number">1</span>];<br>Tim O\<span class="hljs-string">&#x27;Reilly</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里唯一的技巧是,要得到一个后向的模式来查看最后一个字符是否是反斜杠,我们需要转义反斜杠来防止正则表达式引擎看到表示右小括号的<code>\)</code>,也就是说,我们要在反斜杠前面再加上一个反斜杠:<code>\\)</code>,但是PHP中引用字符串的规则认为<code>\\</code>将生成一个单独反斜杠,所以我们需要通过正则表达式用4个反斜杠来得到一个反斜杠,这就是为什么大家都说正则表达式难以阅读的原因</li>
-<li>Perl限制后向只能用于固定长度的表达式上,即表达式不能包含量词,并且如果使用选择符<code>|</code>,所有的选择都必须是相同长度,Perl兼容的正则表达式引擎也禁止在后向中使用量词,但是允许不同长度的选择</li>
+<li>这里唯一的技巧是，要得到一个后向的模式来查看最后一个字符是否是反斜杠，我们需要转义反斜杠来防止正则表达式引擎看到表示右小括号的<code>\)</code>,也就是说，我们要在反斜杠前面再加上一个反斜杠:<code>\\)</code>,但是PHP中引用字符串的规则认为<code>\\</code>将生成一个单独反斜杠，所以我们需要通过正则表达式用4个反斜杠来得到一个反斜杠，这就是为什么大家都说正则表达式难以阅读的原因</li>
+<li>Perl限制后向只能用于固定长度的表达式上，即表达式不能包含量词，并且如果使用选择符<code>|</code>,所有的选择都必须是相同长度,Perl兼容的正则表达式引擎也禁止在后向中使用量词，但是允许不同长度的选择</li>
 </ul>
 <h3 id="剪切">剪切</h3>
 <ul>
-<li>我们很少使用的一次性子模式(once-only subpattern)或称剪切(cut),可以防止正则表达式在对待某些类型的模式时出现最坏的情况,一旦匹配,正则表达式就不会回溯子模式</li>
+<li>我们很少使用的一次性子模式(once-only subpattern)或称剪切(cut),可以防止正则表达式在对待某些类型的模式时出现最坏的情况，一旦匹配，正则表达式就不会回溯子模式</li>
 <li>一次性子模式常用于自身重复的表达式:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">/(a+|b+)*\.+/<br></code></pre></td></tr></table></figure>
 <ul>
-<li>下面的代码段用几秒钟的时间来报告匹配失败,效率很低:</li>
+<li>下面的代码段用几秒钟的时间来报告匹配失败，效率很低:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$p</span> = <span class="hljs-string">&#x27;/(a+|b+)*\.+$/&#x27;</span>;<br><span class="hljs-variable">$s</span> = <span class="hljs-string">&#x27;abababababbabbbabbaaaaaabbbbabbabababababbba..!&#x27;</span>;<br><span class="hljs-keyword">if</span>(preg_match(<span class="hljs-variable">$p</span>,<span class="hljs-variable">$s</span>))&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Y&quot;</span>;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;N&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这是因为正则表达式引擎试图在所有不同的地方开始匹配,但是不得不回溯每一个部分,这花费了很多时间,如本例中,匹配到感叹号<code>!</code>时正则表达式已经发现了不匹配子模式,但是不会停止,而是回过头来将之前的量词减一再重新进行匹配,这样的回溯过程导致了以上代码效率非常低下</li>
-<li>如果你知道一旦有些地方被匹配它就不需要回头来解析(如本例子出现了<code>!</code>已经说明不匹配了,再回溯已经没有意义),可以用<code>(?&gt;subpattern)</code>来标记:</li>
+<li>这是因为正则表达式引擎试图在所有不同的地方开始匹配，但是不得不回溯每一个部分，这花费了很多时间，如本例中，匹配到感叹号<code>!</code>时正则表达式已经发现了不匹配子模式，但是不会停止，而是回过头来将之前的量词减一再重新进行匹配，这样的回溯过程导致了以上代码效率非常低下</li>
+<li>如果你知道一旦有些地方被匹配它就不需要回头来解析(如本例子出现了<code>!</code>已经说明不匹配了，再回溯已经没有意义),可以用<code>(?&gt;subpattern)</code>来标记:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$p</span> = <span class="hljs-string">&#x27;/(?&gt;a+|b+)*\.+$/&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>剪切不会改变匹配的结果,只是让它尽快报错,使用一次性子模式,一旦找到感叹号<code>!</code>就立即停止匹配而直接报错,效率提高</li>
+<li>剪切不会改变匹配的结果，只是让它尽快报错，使用一次性子模式，一旦找到感叹号<code>!</code>就立即停止匹配而直接报错，效率提高</li>
 </ul>
 <h3 id="条件表达式">条件表达式</h3>
 <ul>
-<li>在正则表达式中的条件表达式就像一个if语句,一般格式为:</li>
+<li>在正则表达式中的条件表达式就像一个if语句，一般格式为:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">(?(condition)yespattren)<br>(?(condition)yespattern|nopattern)<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果断言成立,正则表达式引擎匹配yespattern,对于第二个形式,如果断言不成立.正则表达式引擎跳过yespattern并试图匹配nopattern</li>
-<li>断言可以是两种类型中的一种:逆向引用(backreference)或前向和后向匹配(liikahead and lookbehind match),要引用一个之前匹配的子字符串,要求断言是从1到99中的数字(大多数的逆向引用都可以),只有逆向引用被匹配时,条件才能使用断言中的模式,如果断言不是逆向引用,那么它必须时正或负的前向或后向断言</li>
+<li>如果断言成立，正则表达式引擎匹配yespattern,对于第二个形式，如果断言不成立.正则表达式引擎跳过yespattern并试图匹配nopattern</li>
+<li>断言可以是两种类型中的一种:逆向引用(backreference)或前向和后向匹配(liikahead and lookbehind match),要引用一个之前匹配的子字符串，要求断言是从1到99中的数字(大多数的逆向引用都可以),只有逆向引用被匹配时，条件才能使用断言中的模式，如果断言不是逆向引用，那么它必须时正或负的前向或后向断言</li>
 </ul>
 <h3 id="正则表达式相关函数">正则表达式相关函数</h3>
-<p>有5类函数可用于Perl兼容正则表达式:匹配,替换,拆分,过滤和引用文本的通用函数</p>
+<p>有5类函数可用于Perl兼容正则表达式:匹配，替换，拆分，过滤和引用文本的通用函数</p>
 <h4 id="匹配-2">匹配</h4>
 <ul>
-<li><code>preg_match()</code>函数执行Perl风格的模式来匹配字符串,它等效于Perl中的<code>m//</code>操作符</li>
-<li><code>preg_match()</code>函数获得和<code>ereg()</code>函数一样的参数并给出相同的返回值,但接受的是Perl风格的模式而不是标准模式</li>
+<li><code>preg_match()</code>函数执行Perl风格的模式来匹配字符串，它等效于Perl中的<code>m//</code>操作符</li>
+<li><code>preg_match()</code>函数获得和<code>ereg()</code>函数一样的参数并给出相同的返回值，但接受的是Perl风格的模式而不是标准模式</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$found</span> = preg_match(pattern,<span class="hljs-keyword">string</span>[,captured]);<br></code></pre></td></tr></table></figure>
 <ul>
@@ -905,78 +905,78 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;/y.*e$/&#x27;</span>,<span class="hljs-string">&#x27;Sylvie&#x27;</span>);		<span class="hljs-comment">//返回true</span><br>preg_match(<span class="hljs-string">&#x27;/y(.*)e$/&#x27;</span>,<span class="hljs-string">&#x27;Sylvie&#x27;</span>,<span class="hljs-variable">$m</span>);<span class="hljs-comment">//$m时array(&#x27;ylvie&#x27;,&#x27;lvi&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>eregi()</code>函数执行不区分大小写的匹配,这里没有<code>preg_matchi()</code>函数,而是在模式中使用i标志:</li>
+<li><code>eregi()</code>函数执行不区分大小写的匹配，这里没有<code>preg_matchi()</code>函数，而是在模式中使用i标志:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">preg_match(<span class="hljs-string">&#x27;Y.*c$/i&#x27;</span>,<span class="hljs-string">&#x27;SyLvIe&#x27;</span>);		<span class="hljs-comment">//返回true</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>preg_match_all()</code>函数从最后一个匹配末尾重复地匹配,直到没有任何可匹配的为止:</li>
+<li><code>preg_match_all()</code>函数从最后一个匹配末尾重复地匹配，直到没有任何可匹配的为止:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$found</span> = preg_match_all(pattern,<span class="hljs-keyword">string</span>,matches[,order]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>order参数值可以是<code>PREG_PATTERN_ORDER</code>或<code>PREG_SET_ORDER</code>,它用于决定数组matches中的布局,我们可以通过下面的代码来看这两种情况:</li>
+<li>order参数值可以是<code>PREG_PATTERN_ORDER</code>或<code>PREG_SET_ORDER</code>,它用于决定数组matches中的布局，我们可以通过下面的代码来看这两种情况:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&lt;&lt;&lt; END</span><br><span class="hljs-string">13 dogs</span><br><span class="hljs-string">12 rabbits</span><br><span class="hljs-string">8 cows</span><br><span class="hljs-string">1 goat</span><br><span class="hljs-string">END</span>;<br>preg_match_all(<span class="hljs-string">&#x27;/(\d+)(\S+)/&#x27;</span>,<span class="hljs-variable">$string</span>,<span class="hljs-variable">$m1</span>,PREG_PATTREN_ORDER);<br>preg_match_all(<span class="hljs-string">&#x27;/(\d+)(\S+)/&#x27;</span>,<span class="hljs-variable">$string</span>,<span class="hljs-variable">$m2</span>,PREG_SET_ORDER);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使<code>PREG_PATTERN_ORDER(默认)</code>则数组每个元素对应一个特定的捕获子模式,所以<code>$m1[0]</code>是包含所有匹配模式的子字符串的数组,<code>$m1[1]</code>是所有匹配第一个子模式(数字)的子字符串的数组, <code>$m1[2]</code>是所有匹配第二个子模式(单词)子字符串的数组,数组<code>$m1</code>中元素的个数比子模式个数多一个,多了一个0号元素,其他的一一对应</li>
-<li>使用<code>PREG_SET_ORDER</code>,则数组的每个元素对应尝试匹配整个模式的下一个,所以<code>$m2[0]</code>是匹配<code>'13dogs','13','dogs'</code>的第一个子集的数组,<code>$m2[1]</code>是匹配<code>'12 rabbits','12','rabbits'</code>的第二个子集的数组,依此类推,数组<code>$m2</code>的元素个数和成功匹配的模式数目相同</li>
-<li>下例从一个特定Web地址取出HTML放到一个字符串中,并从HTML中析取出URL,对于每个URL,将生成一个返回到程序的链接,该程序将在地址中显示URL</li>
+<li>使<code>PREG_PATTERN_ORDER(默认)</code>则数组每个元素对应一个特定的捕获子模式，所以<code>$m1[0]</code>是包含所有匹配模式的子字符串的数组,<code>$m1[1]</code>是所有匹配第一个子模式(数字)的子字符串的数组, <code>$m1[2]</code>是所有匹配第二个子模式(单词)子字符串的数组，数组<code>$m1</code>中元素的个数比子模式个数多一个，多了一个0号元素，其他的一一对应</li>
+<li>使用<code>PREG_SET_ORDER</code>,则数组的每个元素对应尝试匹配整个模式的下一个，所以<code>$m2[0]</code>是匹配<code>'13dogs','13','dogs'</code>的第一个子集的数组,<code>$m2[1]</code>是匹配<code>'12 rabbits','12','rabbits'</code>的第二个子集的数组，依此类推，数组<code>$m2</code>的元素个数和成功匹配的模式数目相同</li>
+<li>下例从一个特定Web地址取出HTML放到一个字符串中，并从HTML中析取出URL,对于每个URL,将生成一个返回到程序的链接，该程序将在地址中显示URL</li>
 </ul>
 <p><strong>示例4-2</strong>:从HTML页中析取URL</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>if (getenv(&#x27;REQUEST_METHOD&#x27;) == &#x27;POST&#x27;)&#123;<br>    $url = $_POST[url];<br>&#125;else&#123;<br>    $url = $_GET[url];&#125;<br>?&gt;<br><br>&lt;form action=&quot;&lt;?echo $PHP_SELF ?&gt;&quot; method=&quot;POST&quot;&gt;<br>    URL:&lt;input type=&quot;text&quot; name=&quot;url&quot; value=&quot;&lt;?php echo $url ?&gt;&quot; /&gt;&lt;br&gt;<br>    &lt;input type=&quot;submit&quot;&gt;<br>&lt;/form&gt;<br><br>&lt;?php<br>    if($url)&#123;<br>        $remote = fopen($url,&#x27;r&#x27;);<br>        $html = fread($remote,1048576);//读HTML的前1MB内容<br>        fclose($remote);<br><br>        $urls = &#x27;(http|telnet|gopher|file|wais|ftp)&#x27;;<br>        $ltrs = &#x27;\w&#x27;;<br>        $gunk = &#x27;/#~:.?+=&amp;%@\-&#x27;;<br>        $punc = &#x27;.:?\~&#x27;;<br>        $any = &quot;$ltrs$gunk$punc&quot;;<br><br>        preg_match_all(&quot;&#123;<br> 	\b			#从单词边界处开始<br> 	$urls		#需要资源和一个冒号<br> 	[$any]+?	#后跟一个或多个合法的<br> 				#字符--但是是保守的<br> 				#并且只包含你需要的<br> 	(?=			#该匹配在<br> 	  [$punc]*  #punctuation<br> 	  [^$any]	#后跟一个非URL字符<br> 	 |			#或<br> 	 $			#在字符串的末尾处结束<br> 	 )<br> 	 &#125;x&quot;,$html,$matches);<br>        printf(&quot;I found %d URLs&lt;p&gt;\n&quot;,sizeof($matches[0]));<br>        foreach($matches[0] as $u)&#123;<br>            $link = $PHP_SELF . &#x27;?url=&#x27; . urlencode($u);<br>            echo&quot;&lt;A HREF=&#x27;$link&#x27;&gt;$u&lt;/A&gt;&lt;br&gt;\n&quot;;<br>        &#125;<br>    &#125;<br>?&gt;    	 		<br></code></pre></td></tr></table></figure>
 <h4 id="替换-2">替换</h4>
 <ul>
-<li><code>preg_replace()</code>函数的行为就像在文本编辑器中的查找和替换操作一样,它查找模式在字符串中所有出现的位置并把它们替换为其他的内容:</li>
+<li><code>preg_replace()</code>函数的行为就像在文本编辑器中的查找和替换操作一样，它查找模式在字符串中所有出现的位置并把它们替换为其他的内容:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$new</span> = pref_replace(pattern,replacement,subject[,limit]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>最常见的用法是使用除整数参数limit之外所有的字符串参数,limit参数是模式出现最多的次数(默认情况下和限制为-1时,时所有位置)</li>
+<li>最常见的用法是使用除整数参数limit之外所有的字符串参数,limit参数是模式出现最多的次数(默认情况下和限制为-1时，时所有位置)</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">better = preg_replace(<span class="hljs-string">&#x27;/&lt;.*?&gt;/&#x27;</span>,<span class="hljs-string">&#x27;!&#x27;</span>,<span class="hljs-string">&#x27;do&lt;b&gt;not&lt;/b&gt;press the button&#x27;</span>);	<span class="hljs-comment">//$better为&#x27;do !not! press the button&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>传递一个字符串数组作为参数subject,可以替换所有元素中的字符串,新字符串由<code>preg_replace()</code>返回:</li>
+<li>传递一个字符串数组作为参数subject,可以替换所有元素中的字符串，新字符串由<code>preg_replace()</code>返回:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;Fred Flintstone&#x27;</span>,<br>              <span class="hljs-string">&#x27;Barney Rubble&#x27;</span>,<br>              <span class="hljs-string">&#x27;Wilma Flintstone&#x27;</span>,<br>              <span class="hljs-string">&#x27;Betty Rubble&#x27;</span>);<br><span class="hljs-variable">$tidy</span> = preg_replace(<span class="hljs-string">&#x27;/(\w)\w*(\w+)/&#x27;</span>,<span class="hljs-string">&#x27;\1 \2&#x27;</span>,<span class="hljs-variable">$names</span>);	<span class="hljs-comment">//$tidy为array(&#x27;F Flintstone&#x27;,&#x27;B Rubble&#x27;,&#x27;W Flintstone&#x27;,&#x27;B Rubble&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>要调用<code>preg_replace()</code>在用一个字符串或字符串数组中执行多重替换,需要传递模式数组和用于替换的字符串:</li>
+<li>要调用<code>preg_replace()</code>在用一个字符串或字符串数组中执行多重替换，需要传递模式数组和用于替换的字符串:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$contractions</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;/dont&#x27;t/i&quot;</span>,<span class="hljs-string">&quot;/won&#x27;t/i&quot;</span>,<span class="hljs-string">&quot;/can&#x27;t/i&quot;</span>);<br><span class="hljs-variable">$expansions</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;do not&#x27;</span>,<span class="hljs-string">&#x27;will not&#x27;</span>,<span class="hljs-string">&#x27;can not&#x27;</span>);<br><span class="hljs-variable">$string</span> = <span class="hljs-string">&quot;Please don&#x27;t yell--I can&#x27;t jump while you won&#x27;t speak&quot;</span>;<br><span class="hljs-variable">$longer</span> = preg_replace(<span class="hljs-variable">$contractions</span>,<span class="hljs-variable">$expansions</span>,<span class="hljs-variable">$string</span>);	<span class="hljs-comment">//$longer是&#x27;Please do not yell--I can not jump while you will not speak&#x27;;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>如给出的用于替换的字符串(上示例中的$expansions)比模式少,则匹配多出的模式的文本将被删除,这是一次删除大量数据的便捷方法:</li>
+<li>如给出的用于替换的字符串(上示例中的$expansions)比模式少，则匹配多出的模式的文本将被删除，这是一次删除大量数据的便捷方法:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$html_gunk</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;/&lt;.*?&gt;/&#x27;</span>,<span class="hljs-string">&#x27;&amp;.*?;/&#x27;</span>);<br><span class="hljs-variable">$html</span> = <span class="hljs-string">&#x27;&amp;eacute; : &lt;b&gt;very&lt;/b&gt; cute&#x27;</span>;<br><span class="hljs-variable">$stripped</span> = preg_replace(<span class="hljs-variable">$html_gunk</span>,<span class="hljs-keyword">array</span>(),<span class="hljs-variable">$html</span>);<br><span class="hljs-comment">//$stripped是&#x27; : very cute&#x27;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果给出一个模式数组,但是只有一个要替换的字符串,那么每个模式使用相同的替换:</li>
+<li>如果给出一个模式数组，但是只有一个要替换的字符串，那么每个模式使用相同的替换:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$stripped</span> = preg_replace(<span class="hljs-variable">$html_gunk</span>, <span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$html</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>替换可以使用逆向引用,但是和模式中的逆向引用不同,在替换中逆向引用的首选语法是$1,$2,$3等,例如:</li>
+<li>替换可以使用逆向引用，但是和模式中的逆向引用不同，在替换中逆向引用的首选语法是$1,$2,$3等，例如:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> preg_replace(<span class="hljs-string">&#x27;/(\w)\w+\s+(\w+)/&#x27;</span>,<span class="hljs-string">&#x27;$2,$1.&#x27;</span>,<span class="hljs-string">&#x27;Fred Flintstone&#x27;</span>);<br><br>FLintstone, F.<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>/e</code>修饰符使<code>preg_replace()</code>把替换字符串当作PHP代码对待,返回在替换中使用的实际字符串,例如,下面把每个Celsius温度转换为Fahrenheit:</li>
+<li><code>/e</code>修饰符使<code>preg_replace()</code>把替换字符串当作PHP代码对待，返回在替换中使用的实际字符串，例如，下面把每个Celsius温度转换为Fahrenheit:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;It was 5C outside, 20C inside&#x27;</span>);<br><span class="hljs-keyword">echo</span> preg_replace(<span class="hljs-string">&#x27;/(d+)C\b/e&#x27;</span>,<span class="hljs-string">&#x27;$1*9/5+32&#x27;</span>,<span class="hljs-variable">$string</span>);<br><br>It was <span class="hljs-number">41</span> outside, <span class="hljs-number">68</span> inside<br></code></pre></td></tr></table></figure>
 <ul>
-<li>下面是更复杂的例子,它在字符串中扩展变量</li>
+<li>下面是更复杂的例子，它在字符串中扩展变量</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Fred&#x27;</span>;<br><span class="hljs-variable">$age</span> = <span class="hljs-number">35</span>;<br><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;$name is $age&#x27;</span>;<br>preg_replace(<span class="hljs-string">&#x27;/\$(\w+)/e&#x27;</span>,<span class="hljs-string">&#x27;$$1&#x27;</span>,<span class="hljs-variable">$string</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>每一个匹配分隔变量名(<code>$name</code>,<code>$age</code>),替换中的$1引用这些名字,所以PHP代码实际上执行的是<code>$name</code>和<code>$age</code>,上面的代码可计算出用于替换的变量的值</li>
-<li><code>preg_replace()</code>的一个变种是<code>preg_replace_callback()</code>,它调用一个函数来对匹配模式 的每个子字符进行处理,函数的参数是一个由匹配模式的字符串组成的数字(第零个元素是匹配模式的所有字符串,第一个元素是第一个匹配子模式的内容,依此类推),例如:</li>
+<li>每一个匹配分隔变量名(<code>$name</code>,<code>$age</code>),替换中的$1引用这些名字，所以PHP代码实际上执行的是<code>$name</code>和<code>$age</code>,上面的代码可计算出用于替换的变量的值</li>
+<li><code>preg_replace()</code>的一个变种是<code>preg_replace_callback()</code>,它调用一个函数来对匹配模式 的每个子字符进行处理，函数的参数是一个由匹配模式的字符串组成的数字(第零个元素是匹配模式的所有字符串，第一个元素是第一个匹配子模式的内容，依此类推),例如:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">titlecase</span>(<span class="hljs-params"><span class="hljs-variable">$s</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> ucfirst(strtolower(<span class="hljs-variable">$s</span>[<span class="hljs-number">0</span>]));<br>&#125;<br><span class="hljs-variable">$string</span> = <span class="hljs-string">&#x27;goodbye cruel world&#x27;</span>;<br><span class="hljs-variable">$new</span> = preg_replace_callback(<span class="hljs-string">&#x27;/\w+/&#x27;</span>,<span class="hljs-string">&#x27;titlecase&#x27;</span>,<span class="hljs-variable">$string</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$new</span>;<br><br>Goodbye Cruel World<br></code></pre></td></tr></table></figure>
 <h4 id="拆分-2">拆分</h4>
 <ul>
-<li>当你知道要提取的字符块是什么时,应使用<code>preg_match_all()</code>来从字符串中析取字符块,当你知道用什么分隔字符块时,应使用<code>pref_split()</code>来析取:</li>
+<li>当你知道要提取的字符块是什么时，应使用<code>preg_match_all()</code>来从字符串中析取字符块，当你知道用什么分隔字符块时，应使用<code>pref_split()</code>来析取:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$chunks</span> = preg_split(pattern,<span class="hljs-keyword">string</span>[,limit[,flags]]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>pattern匹配两个字符块之间的分隔符,在默认情况下不返回分隔符,limit选项指定要返回字符块的最大数目(默认为-1,即所有字符块),flags参数是对标志<code>PREG_SPLIT_NO_EMPTY(空字符串不返回)</code>和<code>PREG_SPLIT_DELIM_CAPTURE(在模式中捕获的部分字符串被返回)</code>进行按位或操作(bitwise OR combination)的结果</li>
-<li>例如,要从一个简单的数字表达式中析取操作符可以这样做:</li>
+<li>pattern匹配两个字符块之间的分隔符，在默认情况下不返回分隔符,limit选项指定要返回字符块的最大数目(默认为-1,即所有字符块),flags参数是对标志<code>PREG_SPLIT_NO_EMPTY(空字符串不返回)</code>和<code>PREG_SPLIT_DELIM_CAPTURE(在模式中捕获的部分字符串被返回)</code>进行按位或操作(bitwise OR combination)的结果</li>
+<li>例如，要从一个简单的数字表达式中析取操作符可以这样做:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$ops</span> = preg_splist(<span class="hljs-string">&#x27;&#123;[+*/-]&#125;&#x27;</span>,<span class="hljs-string">&#x27;3+5*9/2&#x27;</span>);	<span class="hljs-comment">//$ops是array(&#x27;3&#x27;,&#x27;+&#x27;,&#x27;5&#x27;,&#x27;*&#x27;,&#x27;9&#x27;,&#x27;/&#x27;,&#x27;2&#x27;)</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>一个空模式匹配字符串中字符间的每个边界,这样你就可以把一个字符串拆分为一个字符数组:</li>
+<li>一个空模式匹配字符串中字符间的每个边界，这样你就可以把一个字符串拆分为一个字符数组:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$array</span> = preg_split(<span class="hljs-string">&#x27;//&#x27;</span>,<span class="hljs-variable">$string</span>);<br></code></pre></td></tr></table></figure>
 <h4 id="使用正则表达式过滤数组">使用正则表达式过滤数组</h4>
@@ -985,7 +985,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$matching</span> = preg_grep(pattern,<span class="hljs-keyword">array</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>例如,要得到以.txt结尾的文件名,可以使用:</li>
+<li>例如，要得到以.txt结尾的文件名，可以使用:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$textfiles</span> = preg_grep(<span class="hljs-string">&#x27;/\.txt$/&#x27;</span>,<span class="hljs-variable">$filenames</span>);<br></code></pre></td></tr></table></figure>
 <h4 id="引用正则表达式">引用正则表达式</h4>
@@ -994,18 +994,18 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$re</span> = preg_quote(<span class="hljs-keyword">string</span> [,delimiter]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在string中,每一个在正则表达式中有特定的含义的字符都以反斜杠开始:</li>
+<li>在string中，每一个在正则表达式中有特定的含义的字符都以反斜杠开始:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> preg_quote(<span class="hljs-string">&#x27;%5.00 (five bucks)&#x27;</span>);<br>\$<span class="hljs-number">5</span>\<span class="hljs-number">.00</span> \(five bucks\)<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可选的第二个参数是被引用的额外字符,通常,可以用这个参数传递正则表达式的分隔符:</li>
+<li>可选的第二个参数是被引用的额外字符，通常，可以用这个参数传递正则表达式的分隔符:</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$to_find</span>   =<span class="hljs-string">&#x27;/usr/local/ect/rsync.conf&#x27;</span>;<br><span class="hljs-variable">$re</span> = preg_quote(<span class="hljs-variable">$filename</span>,<span class="hljs-string">&#x27;/&#x27;</span>);<br><span class="hljs-keyword">if</span>(preg_match(<span class="hljs-string">&quot;/<span class="hljs-subst">$re</span>&quot;</span>,<span class="hljs-variable">$filename</span>))&#123;<br>    <span class="hljs-comment">//找到</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="和Perl正则表达式的差别">和Perl正则表达式的差别</h3>
 <ul>
-<li>虽然PHP中的Perl风格正则表达式和实际的Perl正则表达式非常相似,但它们之间还是有一些差别:
+<li>虽然PHP中的Perl风格正则表达式和实际的Perl正则表达式非常相似，但它们之间还是有一些差别:
 <ul>
-<li>在一个模式字符串中null字符(ASCII值为0)不允许作为一个字符直接量,不过可以用其他方式引用它(\000,\x00等)</li>
+<li>在一个模式字符串中null字符(ASCII值为0)不允许作为一个字符直接量，不过可以用其他方式引用它(\000,\x00等)</li>
 <li>不支持\E, \G, \L, \l, \Q, \u和 \U选项</li>
 <li>不支持(?{some perl code})结构</li>
 <li>不支持/D, /G, /U, /u, /A和 /x修饰符</li>
