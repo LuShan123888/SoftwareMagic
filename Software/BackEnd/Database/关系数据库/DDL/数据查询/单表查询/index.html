@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 单表查询 查询指定列  在很多情况下，用户只对表中的一部分属性列感兴趣，这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列。  [例3.16]：查询全体学生的学号与姓名。 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的：从Student表中取出一个元组，取出该元组在属性Sno和Sname上的值，形成一个新的元组">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.560Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.249Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -479,7 +479,7 @@
 </table>
 <h3 id="比较大小">比较大小</h3>
 <ul>
-<li>用于进行比较的运算符一般包括<code>=(等于）</code>,<code>&gt;(大于）</code>,<code>&lt;(小于）</code>,<code>&gt;=(大于等于）</code>,<code>&lt;=(小于等于）</code>,<code>!=或&lt;&gt;(不等于）``,!&gt;(不大于）</code>,<code>!&lt;(不小于）</code></li>
+<li>用于进行比较的运算符一般包括<code>=（等于）</code>,<code>&gt;（大于）</code>,<code>&lt;（小于）</code>,<code>&gt;=（大于等于）</code>,<code>&lt;=（小于等于）</code>,<code>!=或&lt;&gt;（不等于）``,!&gt;（不大于）</code>,<code>!&lt;（不小于）</code></li>
 </ul>
 <p><strong>[例3.22]</strong>：查询计算机科学系全体学生的名单。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CS&#x27;</span>;<br></code></pre></td></tr></table></figure>
@@ -521,8 +521,8 @@
 <ul>
 <li>其含义是查找指定的属性列值与&lt;匹配串&gt;相匹配的元组.&lt;匹配串&gt;可以是一个完整的字符串，也可以含有通配符%和_ 其中：
 <ul>
-<li>%(百分号）代表任意长度（长度可以为0)的字符串，例如a%b表示以a开头，以b结尾的任意长度的字符串，如acb,addgb,ab等都满足该匹配串。</li>
-<li>_(下横线）代表任意单个字符，例如a_b表示以a开头，以b结尾的长度为3的任意字符串，如acb,afb等都满足该匹配串。</li>
+<li>%（百分号）代表任意长度（长度可以为0)的字符串，例如a%b表示以a开头，以b结尾的任意长度的字符串，如acb,addgb,ab等都满足该匹配串。</li>
+<li>_（下横线）代表任意单个字符，例如a_b表示以a开头，以b结尾的长度为3的任意字符串，如acb,afb等都满足该匹配串。</li>
 </ul>
 </li>
 </ul>
@@ -533,7 +533,7 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span><br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;201215121&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果LIKE后面额匹配串中不含通配符，则可以用=(等于）运算符取代LIKE谓词，用!=或&lt;&gt;(不等于）运算符取代NOT LIKE谓词。</li>
+<li>如果LIKE后面额匹配串中不含通配符，则可以用=（等于）运算符取代LIKE谓词，用!=或&lt;&gt;（不等于）运算符取代NOT LIKE谓词。</li>
 </ul>
 <p><strong>[例3.30]</strong>：查询所有姓刘的学生的姓名，学号和性别。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sno,Ssex<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sname <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;刘%&#x27;</span>;<br></code></pre></td></tr></table></figure>
@@ -562,7 +562,7 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> [<span class="hljs-keyword">user</span>] <span class="hljs-keyword">WHERE</span> u_name <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;[张李王]三&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>将找出&quot;张三”,&quot;李三”,&quot;王三”(而不是&quot;张李王三”)</li>
+<li>将找出&quot;张三”,&quot;李三”,&quot;王三”（而不是&quot;张李王三”)</li>
 <li>如<code> [ ]</code> 内有一系列字符（01234,abcde之类的）则可略写为&quot;0-4”,&quot;a-e”</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> [<span class="hljs-keyword">user</span>] <span class="hljs-keyword">WHERE</span> u_name <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;老[1-9]&#x27;</span>;<br></code></pre></td></tr></table></figure>

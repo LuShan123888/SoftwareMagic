@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 用户与权限 用户管理 查看用户  用户信息表。  1SELECT * FROM mysql.user 添加用户 12CREATE USER &amp;#x27;用户名&amp;#x27; IDENTIFIED BY [&amp;#x27;PASSWORD&amp;#x27;] [WITH] [DBAA|RESOURCE|CONNECT];CREATE USER test IDENTIFIED BY &amp;#x27;12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.559Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.253Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -349,12 +349,12 @@
 <p><strong>[例4.5]</strong>：把对表SC的INSERT权限授予U5用户，并允许将此权限再授予其他用户。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U5<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION<br></code></pre></td></tr></table></figure>
 <ul>
-<li>执行此SQL语句后，U5不仅拥有了对表SC的INSERT权限，还可以传播此权限，即由U5用户发上述GRANT命令给其他用户，例如U5可以将此权限授予U6(如下例）</li>
+<li>执行此SQL语句后，U5不仅拥有了对表SC的INSERT权限，还可以传播此权限，即由U5用户发上述GRANT命令给其他用户，例如U5可以将此权限授予U6（如下例）</li>
 </ul>
 <p><strong>[例4.6]</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U6<br><span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTINO<br></code></pre></td></tr></table></figure>
 <ul>
-<li>同样，U6还可以将此权限授予U7(如下例）</li>
+<li>同样，U6还可以将此权限授予U7（如下例）</li>
 </ul>
 <p><strong>[例4.7]</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">TO</span> U7;<br></code></pre></td></tr></table></figure>
@@ -373,7 +373,7 @@
 <p><strong>[例4.10]</strong>：把用户U5对SC表的INSERT权限收回。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">REVOKE</span> <span class="hljs-keyword">INSERT</span><br><span class="hljs-keyword">ON</span> <span class="hljs-keyword">TABLE</span> SC<br><span class="hljs-keyword">FROM</span> U5 CASCADE;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>把用户U5的INSERT权限收回的同时，级联（CASCADE)收回了U6和U7的INSERT权限，否则系统将拒绝执行该命令，因为再例4.6中，U5将对SC表的INSERT权限授予了U6，而U6又将其授予了U7(例4.7)</li>
+<li>把用户U5的INSERT权限收回的同时，级联（CASCADE)收回了U6和U7的INSERT权限，否则系统将拒绝执行该命令，因为再例4.6中，U5将对SC表的INSERT权限授予了U6，而U6又将其授予了U7（例4.7)</li>
 </ul>
 <p><strong>注意</strong>:</p>
 <ul>

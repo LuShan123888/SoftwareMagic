@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="最优装载问题 问题描述  有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为wi,最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船  代码实现 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849public class Loading &amp;#">
+  <meta name="description" content="最优装载问题 问题描述  有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为wi，最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船。  代码实现 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849public class Loading &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最优装载问题">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/%E6%9C%80%E4%BC%98%E8%A3%85%E8%BD%BD/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="最优装载问题 问题描述  有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为wi,最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船  代码实现 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849public class Loading &amp;#">
+<meta property="og:description" content="最优装载问题 问题描述  有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为wi，最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船。  代码实现 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849public class Loading &amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.140Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.129Z">
+<meta property="article:modified_time" content="2024-03-17T17:55:29.987Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -230,24 +230,24 @@
               <h1>最优装载问题</h1>
 <h2 id="问题描述">问题描述</h2>
 <ul>
-<li>有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为w<sub>i</sub>,最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船</li>
+<li>有一批集装箱要装上一艘载重量为c的轮船，其中集装箱i的重量为w<sub>i</sub>，最优装载问题要求在装载体积不受限制的情况下，将尽可能多的集装箱装上轮船。</li>
 </ul>
 <h2 id="代码实现">代码实现</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Loading</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">float</span>[] w = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">12</span>&#125;;<br>        <span class="hljs-keyword">int</span> n = w.length;<br>        Boolean[] x = <span class="hljs-keyword">new</span> Boolean[n];<br>        <span class="hljs-keyword">float</span> c = <span class="hljs-number">30</span>;<br>        Loading(x, w, c, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            System.out.printf(<span class="hljs-string">&quot;%3d: weight: %-6.2f load: %6b\n&quot;</span>, i + <span class="hljs-number">1</span>, w[i], x[i]);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Loading</span><span class="hljs-params">(Boolean[] x, <span class="hljs-keyword">float</span>[] w, <span class="hljs-keyword">float</span> c, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span>[] t = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n];<br>        Sort(w, t, n);<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            x[i] = <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n &amp;&amp; w[t[i]] &lt;= c; i++) &#123;<br>            x[t[i]] = <span class="hljs-keyword">true</span>;<br>            c -= w[t[i]];<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Sort</span><span class="hljs-params">(<span class="hljs-keyword">float</span>[] w, <span class="hljs-keyword">int</span>[] t, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">float</span>[] array = w.clone();<br>        <span class="hljs-keyword">float</span> temp;<br>        <span class="hljs-keyword">int</span> index;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            t[i] = i;<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n - i - <span class="hljs-number">1</span>; j++) &#123;<br>                <span class="hljs-keyword">if</span> (array[j] &gt; array[j + <span class="hljs-number">1</span>]) &#123;<br>                    temp = array[j];<br>                    array[j] = array[j + <span class="hljs-number">1</span>];<br>                    array[j + <span class="hljs-number">1</span>] = temp;<br><br>                    index = t[j];<br>                    t[j] = t[j + <span class="hljs-number">1</span>];<br>                    t[j + <span class="hljs-number">1</span>] = index;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code> Loading(int[] x, int[] w, int c, int n)</code>:采用重量最轻者先装的贪心选择策略，可产生最优装载问题的最优解
+<li><code> Loading(int[] x, int[] w, int c, int n)</code>：采用重量最轻者先装的贪心选择策略，可产生最优装载问题的最优解。
 <ul>
-<li><code>int[] x</code>:每件货物是否装入集装箱,x<sub>i</sub>=1表示第i号货物装入集装箱，为0时则不装入集装箱</li>
-<li><code>int[] w</code>:每件货物的重量,w<sub>i</sub>表示第i号货物的重量</li>
-<li><code>int c</code>:轮船的最大载重量</li>
-<li><code>int n</code>:货物的数量</li>
+<li><code>int[] x</code>：每件货物是否装入集装箱，x<sub>i</sub>=1表示第i号货物装入集装箱，为0时则不装入集装箱。</li>
+<li><code>int[] w</code>：每件货物的重量，w<sub>i</sub>表示第i号货物的重量。</li>
+<li><code>int c</code>：轮船的最大载重量。</li>
+<li><code>int n</code>：货物的数量。</li>
 </ul>
 </li>
-<li><code>Sort(int[] w, int[] t, int n) </code>:对货物的重量由小到大排序，并将下标的顺序记录在数组<code>n</code>中
+<li><code>Sort(int[] w, int[] t, int n) </code>：对货物的重量由小到大排序，并将下标的顺序记录在数组<code>n</code>中。
 <ul>
-<li><code>int[] w</code>:每件货物的重量,w<sub>i</sub>表示第i号货物的重量</li>
-<li><code>int[] t</code>:排序后<code>w</code>数组的下标顺序</li>
-<li><code>int n</code>:数组的长度</li>
+<li><code>int[] w</code>：每件货物的重量，w<sub>i</sub>表示第i号货物的重量。</li>
+<li><code>int[] t</code>：排序后<code>w</code>数组的下标顺序。</li>
+<li><code>int n</code>：数组的长度。</li>
 </ul>
 </li>
 </ul>
@@ -264,7 +264,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Algorithm/">Algorithm</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
+                      <a class="hover-with-bg" href="/categories/Software/Algorithm/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%E3%80%82/">贪心算法。</a>
                     
                   </div>
                 

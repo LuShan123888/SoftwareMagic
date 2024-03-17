@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis 动态SQL 介绍  动态SQL：动态SQL指的是根据不同的查询条件，生成不同的Sql语句。 MyBatis 的强大特性之一便是它的动态 SQL，如果你有使用 JDBC 或其它类似框架的经验，你就能体会到根据不同条件拼接 SQL 语句的痛苦，例如拼接时要确保不能忘记添加必要的空格，还要注意去掉列表最后一个列名的逗号，利用动态 SQL 这一特性可以彻底摆脱这种痛苦。 虽然在以前使用动态">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.577Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.229Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -251,7 +251,7 @@
 <h3 id="choose-when-otherwise">choose, when, otherwise</h3>
 <ul>
 <li>有时候，我们不想使用所有的条件，而只是想从多个条件中选择一个使用，针对这种情况， MyBatis 提供了 choose 元素，它有点像 Java 中的 switch 语句。</li>
-<li>还是上面的例子，但是策略变为：传入了 &quot;title” 就按 &quot;title” 查找，传入了 &quot;author” 就按 &quot;author” 查找的情形，若两者都没有传入，就返回标记为 featured 的 BLOG(这可能是管理员认为，与其返回大量的无意义随机 Blog，还不如返回一些由管理员精选的 Blog)</li>
+<li>还是上面的例子，但是策略变为：传入了 &quot;title” 就按 &quot;title” 查找，传入了 &quot;author” 就按 &quot;author” 查找的情形，若两者都没有传入，就返回标记为 featured 的 BLOG（这可能是管理员认为，与其返回大量的无意义随机 Blog，还不如返回一些由管理员精选的 Blog)</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findActiveBlogLike&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;Blog&quot;</span>&gt;</span><br>    SELECT * FROM BLOG WHERE state = ‘ACTIVE’<br>    <span class="hljs-tag">&lt;<span class="hljs-name">choose</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">when</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;title != null&quot;</span>&gt;</span><br>            AND title like #&#123;title&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">when</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">when</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;author != null and author.name != null&quot;</span>&gt;</span><br>            AND author_name like #&#123;author.name&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">when</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">otherwise</span>&gt;</span><br>            AND featured = 1<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">otherwise</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">choose</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="trim-where-set">trim, where, set</h3>
@@ -333,7 +333,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Mapper</span> </span>&#123;<br>    <span class="hljs-meta">@Lang(MyLanguageDriver.class)</span><br>    <span class="hljs-meta">@Select(&quot;SELECT * FROM BLOG&quot;)</span><br>    <span class="hljs-function">List&lt;Blog&gt; <span class="hljs-title">selectBlog</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>提示</strong> 可以使用 Apache Velocity 作为动态语言，更多细节请参考 MyBatis-Velocity 项目。</li>
-<li>你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 <code>org.apache.ibatis.scripting.xmltags.XmlLanguageDriver</code>(别名为 <code>xml</code>)所提供。</li>
+<li>你前面看到的所有 xml 标签都由默认 MyBatis 语言提供，而它由语言驱动 <code>org.apache.ibatis.scripting.xmltags.XmlLanguageDriver</code>（别名为 <code>xml</code>)所提供。</li>
 </ul>
 
             </div>

@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615173718.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615173609.png">
 <meta property="article:published_time" content="2021-08-28T07:26:43.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.392Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -269,7 +269,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-comment">// ------------------------- 悲观锁的调用方式 -------------------------</span><br><span class="hljs-comment">// synchronized</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testMethod</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 操作同步资源。</span><br>&#125;<br><span class="hljs-comment">// ReentrantLock</span><br><span class="hljs-keyword">private</span> ReentrantLock lock = <span class="hljs-keyword">new</span> ReentrantLock(); <span class="hljs-comment">// 需要保证多个线程使用的是同一个锁。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">modifyPublicResources</span><span class="hljs-params">()</span> </span>&#123;<br>    lock.lock();<br>    <span class="hljs-comment">// 操作同步资源。</span><br>    lock.unlock();<br>&#125;<br><br><span class="hljs-comment">// ------------------------- 乐观锁的调用方式 -------------------------</span><br><span class="hljs-keyword">private</span> AtomicInteger atomicInteger = <span class="hljs-keyword">new</span> AtomicInteger();  <span class="hljs-comment">// 需要保证多个线程使用的是同一个AtomicInteger</span><br>atomicInteger.incrementAndGet(); <span class="hljs-comment">// 执行自增1</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>通过调用方式示例，我们可以发现悲观锁基本都是在显式的锁定之后再操作同步资源，而乐观锁则直接去操作同步资源，那么，为何乐观锁能够做到不锁定同步资源也可以正确的实现线程同步呢？我们通过介绍乐观锁的主要实现方式&quot;CAS” 的技术原理来为大家解惑。</li>
-<li>CAS全称 Compare And Swap(比较与交换），是一种无锁算法，在不使用锁（没有线程被阻塞）的情况下实现多线程之间的变量同步，java.util.concurrent包中的原子类就是通过CAS来实现了乐观锁。</li>
+<li>CAS全称 Compare And Swap（比较与交换），是一种无锁算法，在不使用锁（没有线程被阻塞）的情况下实现多线程之间的变量同步，java.util.concurrent包中的原子类就是通过CAS来实现了乐观锁。</li>
 <li>CAS算法涉及到三个操作数：
 <ul>
 <li>需要读写的内存值 V</li>
@@ -353,7 +353,7 @@
 <h3 id="Java对象头">Java对象头</h3>
 <ul>
 <li>synchronized是悲观锁，在操作同步资源之前需要给同步资源先加锁，这把锁就是存在Java对象头里的，而Java对象头又是什么呢？</li>
-<li>我们以Hotspot虚拟机为例，Hotspot的对象头主要包括两部分数据：Mark Word(标记字段）,Klass Pointer(类型指针）
+<li>我们以Hotspot虚拟机为例，Hotspot的对象头主要包括两部分数据：Mark Word（标记字段）,Klass Pointer（类型指针）
 <ul>
 <li><strong>Mark Word</strong>：默认存储对象的HashCode，分代年龄和锁标志位信息，这些信息都是与对象自身定义无关的数据，所以Mark Word被设计成一个非固定的数据结构以便在极小的空间内存存储尽量多的数据，它会根据对象的状态复用自己的存储空间，也就是说在运行期间Mark Word里存储的数据会随着锁标志位的变化而变化。</li>
 <li><strong>Klass Point</strong>：对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</li>
@@ -364,7 +364,7 @@
 <ul>
 <li>Monitor可以理解为一个同步工具或一种同步机制，通常被描述为一个对象，每一个Java对象就有一把看不见的锁，称为内部锁或者Monitor锁。</li>
 <li>Monitor是线程私有的数据结构，每一个线程都有一个可用monitor record列表，同时还有一个全局的可用列表，每一个被锁住的对象都会和一个monitor关联，同时monitor中有一个Owner字段存放拥有该锁的线程的唯一标识，表示该锁被这个线程占用。</li>
-<li>现在话题回到synchronized,synchronized通过Monitor来实现线程同步，Monitor是依赖于底层的操作系统的Mutex Lock(互斥锁）来实现的线程同步。</li>
+<li>现在话题回到synchronized,synchronized通过Monitor来实现线程同步，Monitor是依赖于底层的操作系统的Mutex Lock（互斥锁）来实现的线程同步。</li>
 <li>如同我们在自旋锁中提到的&quot;阻塞或唤醒一个Java线程需要操作系统切换CPU状态来完成，这种状态转换需要耗费处理器时间，如果同步代码块中的内容过于简单，状态转换消耗的时间有可能比用户代码执行的时间还要长”，这种方式就是synchronized最初实现同步的方式，这就是JDK 6之前synchronized效率低的原因，这种依赖于操作系统Mutex Lock所实现的锁我们称之为&quot;重量级锁”,JDK 6中为了减少获得锁和释放锁带来的性能消耗，引入了&quot;偏向锁”和&quot;轻量级锁”</li>
 <li>所以目前锁一共有4种状态，级别从低到高依次是：无锁，偏向锁，轻量级锁和重量级锁，锁状态只能升级不能降级。</li>
 <li>通过上面的介绍，我们对synchronized的加锁机制以及相关知识有了一个了解，那么下面我们给出四种锁状态对应的的Mark Word内容，然后再分别讲解四种锁状态的思路以及特点：</li>
@@ -496,28 +496,28 @@
 <li>我们看到ReentrantReadWriteLock有两把锁：ReadLock和WriteLock，由词知意，一个读锁一个写锁，合称&quot;读写锁”，再进一步观察可以发现ReadLock和WriteLock是靠内部类Sync实现的锁，Sync是AQS的一个子类，这种结构在CountDownLatch,ReentrantLock,Semaphore里面也都存在。</li>
 <li>在ReentrantReadWriteLock里面，读锁和写锁的锁主体都是Sync，但读锁和写锁的加锁方式不一样，读锁是共享锁，写锁是独享锁，读锁的共享锁可保证并发读非常高效，而读写，写读，写写的过程互斥，因为读锁和写锁是分离的，所以ReentrantReadWriteLock的并发性相比一般的互斥锁有了很大提升。</li>
 <li>那读锁和写锁的具体加锁方式有什么区别呢？在了解源码之前我们需要回顾一下其他知识，在最开始提及AQS的时候我们也提到了state字段（int类型，32位），该字段用来描述有多少线程获持有锁。</li>
-<li>在独享锁中这个值通常是0或者1(如果是重入锁的话state值就是重入的次数），在共享锁中state就是持有锁的数量，但是在ReentrantReadWriteLock中有读，写两把锁，所以需要在一个整型变量state上分别描述读锁和写锁的数量（或者也可以叫状态），于是将state变量&quot;按位切割”切分成了两个部分，高16位表示读锁状态（读锁个数），低16位表示写锁状态（写锁个数），如下图所示：</li>
+<li>在独享锁中这个值通常是0或者1（如果是重入锁的话state值就是重入的次数），在共享锁中state就是持有锁的数量，但是在ReentrantReadWriteLock中有读，写两把锁，所以需要在一个整型变量state上分别描述读锁和写锁的数量（或者也可以叫状态），于是将state变量&quot;按位切割”切分成了两个部分，高16位表示读锁状态（读锁个数），低16位表示写锁状态（写锁个数），如下图所示：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210615173718.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ul>
 <li>了解了概念之后我们再来看代码，先看写锁的加锁源码：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryAcquire</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span> </span>&#123;<br>    Thread current = Thread.currentThread();<br>    <span class="hljs-keyword">int</span> c = getState(); <span class="hljs-comment">// 取到当前锁的个数。</span><br>    <span class="hljs-keyword">int</span> w = exclusiveCount(c); <span class="hljs-comment">// 取写锁的个数w</span><br>    <span class="hljs-keyword">if</span> (c != <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 如果已经有线程持有了锁（c!=0)</span><br>        <span class="hljs-comment">// (Note: if c != 0 and w == 0 then shared count != 0)</span><br>        <span class="hljs-keyword">if</span> (w == <span class="hljs-number">0</span> || current != getExclusiveOwnerThread()) <span class="hljs-comment">// 如果写线程数（w)为0(换言之存在读锁）或者持有锁的线程不是当前线程就返回失败</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (w + exclusiveCount(acquires) &gt; MAX_COUNT)    <span class="hljs-comment">// 如果写入锁的数量大于最大数（65535,2的16次方-1)就抛出一个Error</span><br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);<br>        <span class="hljs-comment">// Reentrant acquire</span><br>        setState(c + acquires);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (writerShouldBlock() || !compareAndSetState(c, c + acquires)) <span class="hljs-comment">// 如果当且写线程数为0，并且当前线程需要阻塞那么就返回失败，或者如果通过CAS增加写线程数失败也返回失败</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    setExclusiveOwnerThread(current); <span class="hljs-comment">// 如果c=0,w=0或者c&gt;0,w&gt;0(重入），则设置当前线程或锁的拥有者。</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tryAcquire</span><span class="hljs-params">(<span class="hljs-keyword">int</span> acquires)</span> </span>&#123;<br>    Thread current = Thread.currentThread();<br>    <span class="hljs-keyword">int</span> c = getState(); <span class="hljs-comment">// 取到当前锁的个数。</span><br>    <span class="hljs-keyword">int</span> w = exclusiveCount(c); <span class="hljs-comment">// 取写锁的个数w</span><br>    <span class="hljs-keyword">if</span> (c != <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 如果已经有线程持有了锁（c!=0)</span><br>        <span class="hljs-comment">// (Note: if c != 0 and w == 0 then shared count != 0)</span><br>        <span class="hljs-keyword">if</span> (w == <span class="hljs-number">0</span> || current != getExclusiveOwnerThread()) <span class="hljs-comment">// 如果写线程数（w)为0（换言之存在读锁）或者持有锁的线程不是当前线程就返回失败</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (w + exclusiveCount(acquires) &gt; MAX_COUNT)    <span class="hljs-comment">// 如果写入锁的数量大于最大数（65535,2的16次方-1)就抛出一个Error</span><br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);<br>        <span class="hljs-comment">// Reentrant acquire</span><br>        setState(c + acquires);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (writerShouldBlock() || !compareAndSetState(c, c + acquires)) <span class="hljs-comment">// 如果当且写线程数为0，并且当前线程需要阻塞那么就返回失败，或者如果通过CAS增加写线程数失败也返回失败</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    setExclusiveOwnerThread(current); <span class="hljs-comment">// 如果c=0,w=0或者c&gt;0,w&gt;0（重入），则设置当前线程或锁的拥有者。</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>这段代码首先取到当前锁的个数c，然后再通过c来获取写锁的个数w，因为写锁是低16位，所以取低16位的最大值与当前的c做与运算（<code>int w = exclusiveCount(c);</code>)，高16位和0与运算后是0，剩下的就是低位运算的值，同时也是持有写锁的线程数目。</p>
 </li>
 <li>
-<p>在取到写锁线程的数目后，首先判断是否已经有线程持有了锁，如果已经有线程持有了锁（c!=0)，则查看当前写锁线程的数目，如果写线程数为0(即此时存在读锁）或者持有锁的线程不是当前线程就返回失败（涉及到公平锁和非公平锁的实现）</p>
+<p>在取到写锁线程的数目后，首先判断是否已经有线程持有了锁，如果已经有线程持有了锁（c!=0)，则查看当前写锁线程的数目，如果写线程数为0（即此时存在读锁）或者持有锁的线程不是当前线程就返回失败（涉及到公平锁和非公平锁的实现）</p>
 </li>
 <li>
 <p>如果写入锁的数量大于最大数（65535,2的16次方-1)就抛出一个Error</p>
 </li>
 <li>
-<p>如果当且写线程数为0(那么读线程也应该为0，因为上面已经处理c!=0的情况），并且当前线程需要阻塞那么就返回失败，如果通过CAS增加写线程数失败也返回失败。</p>
+<p>如果当且写线程数为0（那么读线程也应该为0，因为上面已经处理c!=0的情况），并且当前线程需要阻塞那么就返回失败，如果通过CAS增加写线程数失败也返回失败。</p>
 </li>
 <li>
-<p>如果c=0,w=0或者c&gt;0,w&gt;0(重入），则设置当前线程或锁的拥有者，返回成功!</p>
+<p>如果c=0,w=0或者c&gt;0,w&gt;0（重入），则设置当前线程或锁的拥有者，返回成功!</p>
 </li>
 <li>
 <p><code>tryAcquire()</code>除了重入条件（当前线程为获取了写锁的线程）之外，增加了一个读锁是否存在的判断，如果存在读锁，则写锁不能被获取，原因在于：必须确保写锁的操作对读锁可见，如果允许读锁在已被获取的情况下对写锁的获取，那么正在运行的其他读线程就无法感知到当前写线程的操作。</p>

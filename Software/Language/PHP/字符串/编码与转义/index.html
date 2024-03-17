@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 编码与转义  因为PHP程序经常与HTML页，Web地址（URL)以及数据库交互，所以PHP提供一些函数来帮助你处理这些类型的数据，HTML,Web页地址和数据库命令都是字符串，但是它们每个都要求不同的字符以不同的方法来转义，例如，在Web地址中一个空格被写作%20，而直接量小于符号（&lt;)在HTML文档中必须写作&lt;,PHP有许多内置函数来转换和取得这些编码。  HTML  在H">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T05:01:48.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.209Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -242,12 +242,12 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = htmlentities(<span class="hljs-string">&quot;a &lt; b&quot;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$string</span>;<br><br>a &lt; b<br></code></pre></td></tr></table></figure>
 <ul>
-<li>经过实体转义的版本在Web页面中正确地显示了<code>&lt;</code>(如果在页面上点右键，查看源代码可以看到实体<code>&lt;</code>)，如你所看到的那样，空格没有被转换成<code>$nbsp;</code></li>
+<li>经过实体转义的版本在Web页面中正确地显示了<code>&lt;</code>（如果在页面上点右键，查看源代码可以看到实体<code>&lt;</code>)，如你所看到的那样，空格没有被转换成<code>$nbsp;</code></li>
 <li>函数<code>htmlentities()</code>实际上有3个参数：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$output</span> = htmlentities(input,quote_style,charset);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果给了参数，charset则识别字符集，默认的字符集时&quot;ISO-8859-1&quot;，参数<code>quote_style</code>控制单引号和双引号是否变成它们实体的形式，<code>ENT_COMPAT</code>(默认值）只转换双引号，<code>ENT_QUOTES</code>两种引号都转换，<code>ENT_NOQUOTES</code>则一种都不转换，没有只转换单引号的选项，例如：</li>
+<li>如果给了参数，charset则识别字符集，默认的字符集时&quot;ISO-8859-1&quot;，参数<code>quote_style</code>控制单引号和双引号是否变成它们实体的形式，<code>ENT_COMPAT</code>（默认值）只转换双引号，<code>ENT_QUOTES</code>两种引号都转换，<code>ENT_NOQUOTES</code>则一种都不转换，没有只转换单引号的选项，例如：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$input</span> = &lt;&lt;&lt;End;<br><span class="hljs-string">&quot;Stop pulling my hair!&quot;</span> Jane<span class="hljs-string">&#x27;s eyes flashed.&lt;p&gt;</span><br><span class="hljs-string">End;</span><br><span class="hljs-string">$double = htmlentities($input);	// 输出：&quot;Stop pulling my hair!&quot; Jane&#x27;</span>s eyes flashed.&lt;p&gt;<br><span class="hljs-variable">$both</span> = htmlentities(<span class="hljs-variable">$input</span>,ENT_QUOTES);	<span class="hljs-comment">// 输出：&quot;Stop pulling my hair!&quot; Jane&#x27;s eyes flashed.&lt;p&gt;</span><br><span class="hljs-variable">$neither</span> = htmlentities(<span class="hljs-variable">$input</span>,ENT_NOQUOTES);	<span class="hljs-comment">// 输出：&quot;Stop pulling my hair!&quot; Jane&#x27;s eyes flashed.&lt;p&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="只对HTML语法字符进行实体引用">只对HTML语法字符进行实体引用</h3>
@@ -256,7 +256,7 @@
 <ul>
 <li>与符号<code>&amp;</code>被转换成<code>&amp;amp;</code></li>
 <li>双引号<code>&quot;</code>被转换成<code>&amp;quot;</code></li>
-<li>单引号<code>'</code>被转换成<code>&amp;#039;</code>(就像调用<code>htmlentities()</code>时使用<code>ENT_QUOTES</code>的效果）</li>
+<li>单引号<code>'</code>被转换成<code>&amp;#039;</code>（就像调用<code>htmlentities()</code>时使用<code>ENT_QUOTES</code>的效果）</li>
 <li>小于号<code>&lt;</code>被转换成<code>&amp;lt;</code></li>
 <li>大于号<code>&gt;</code>被转换成<code>&amp;gt;</code></li>
 </ul>
@@ -313,7 +313,7 @@
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html">http%3A%2F%2Fwww.example.com%2Fhello<br></code></pre></td></tr></table></figure>
 <ul>
-<li>应该只编码部分URL(在<a target="_blank" rel="noopener" href="http://www.example.com/%E5%90%8E%E9%9D%A2%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%89%EF%BC%8C%E9%9A%8F%E5%90%8E%E5%86%8D%E5%8A%A0%E4%B8%8A%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%9F%9F%E5%90%8D%E3%80%82">http://www.example.com/后面的部分），随后再加上协议和域名。</a></li>
+<li>应该只编码部分URL（在<a target="_blank" rel="noopener" href="http://www.example.com/%E5%90%8E%E9%9D%A2%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%89%EF%BC%8C%E9%9A%8F%E5%90%8E%E5%86%8D%E5%8A%A0%E4%B8%8A%E5%8D%8F%E8%AE%AE%E5%92%8C%E5%9F%9F%E5%90%8D%E3%80%82">http://www.example.com/后面的部分），随后再加上协议和域名。</a></li>
 </ul>
 <h3 id="RFC1738编码和解码">RFC1738编码和解码</h3>
 <ul>

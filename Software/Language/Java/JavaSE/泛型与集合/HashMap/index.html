@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-377effbf.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-bd20c215.png">
 <meta property="article:published_time" content="2022-05-26T13:33:02.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.392Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,8 +289,8 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> threshold;             <span class="hljs-comment">// 所能容纳的key-value对极限。</span><br><span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> loadFactor;    <span class="hljs-comment">// 负载因子。</span><br><span class="hljs-keyword">int</span> modCount;<br><span class="hljs-keyword">int</span> size;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>首先，Node[] table的初始化长度length(默认值是16),Load factor为负载因子（默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node(键值对）个数，threshold = length * Load factor，也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多。</li>
-<li>结合负载因子的定义公式可知，threshold就是在此Load factor和length(数组长度）对应下允许的最大元素数目，超过这个数目就重新resize(扩容），扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1</li>
+<li>首先，Node[] table的初始化长度length（默认值是16),Load factor为负载因子（默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node（键值对）个数，threshold = length * Load factor，也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多。</li>
+<li>结合负载因子的定义公式可知，threshold就是在此Load factor和length（数组长度）对应下允许的最大元素数目，超过这个数目就重新resize（扩容），扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1</li>
 <li>size这个字段其实很好理解，就是HashMap中实际存在的键值对数量，注意和table的长度length，容纳最大键值对数量threshold的区别，而modCount字段主要用来记录HashMap内部结构发生变化的次数，主要用于迭代的快速失败，强调一点，内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化。</li>
 <li>在HashMap中，Hash桶数组table的长度length大小必须为2的n次方（一定是合数），这是一种非常规的设计，常规的设计是把桶的大小设计为素数，相对来说素数导致冲突的概率要小于合数，Hashtable初始化桶大小为11，就是桶大小设计为素数的应用（Hashtable扩容后不能保证还是素数）,HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突，HashMap定位Hash桶索引位置时，也加入了高位参与运算的过程。</li>
 <li>这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能，于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树，而当链表长度太长（默认超过8)时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入，删除，查找等算法。</li>
@@ -346,7 +346,7 @@
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-4d8022db.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ul>
-<li>元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色），因此新的index就会发生这样的变化：</li>
+<li>元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit（红色），因此新的index就会发生这样的变化：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-d773f86e.png" srcset="/images/loading.gif" lazyload alt="img" style="zoom:50%;" />
 <ul>

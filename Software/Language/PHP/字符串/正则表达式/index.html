@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 正则表达式  正则表达式是一个描述模式（pattern)的字符串，正则表达式函数会将模式和另一个字符串进行比较，检查字符串是否和模式匹配，一些函数会告诉你是否匹配，另一些则改变字符串。 PHP支持两种不同类型的正则表达式：POSIX正则表达式和Perl兼容（Perl&#x3D;compatible)的正则表达式，POSIX正则表达式比Perl兼容的正则表达式功能弱，并且有时速度慢，但是易于阅读。 正">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:10:49.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.209Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -352,7 +352,7 @@
 </ul>
 <h2 id="POSIX风格的正则表达式">POSIX风格的正则表达式</h2>
 <ul>
-<li>你已经了解了正则表达式的基础知识，接下来我们可以讨论一下其细节，POSIX风格的正则表达式使用Unix地区系统（locale system)，该系统提供了排序和识别字符的函数来让你智能地处理其他非英语文本，特别地，各种语言组成单词的&quot;字母&quot;(如à和è)不同，POSIX正则表达式考虑到了这一点并提供相应的字符类。</li>
+<li>你已经了解了正则表达式的基础知识，接下来我们可以讨论一下其细节，POSIX风格的正则表达式使用Unix地区系统（locale system)，该系统提供了排序和识别字符的函数来让你智能地处理其他非英语文本，特别地，各种语言组成单词的&quot;字母&quot;（如à和è)不同，POSIX正则表达式考虑到了这一点并提供相应的字符类。</li>
 <li>然而，POSIX正则表达式是为使用仅有原文的数据而设计的，如果数据中有空字节（\x00)，那么正则表达式函数把它理解为字符串的末尾，并且匹配不会超过该字节位置，要匹配任意的二进制数据，需要使用本章稍后讨论的兼容Prel的正则表达式，正如我们已经提到的，Perl风格的正则表达式函数常常比等效的POSIX风格的函数快。</li>
 </ul>
 <h3 id="字符类-2">字符类</h3>
@@ -917,7 +917,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = <span class="hljs-string">&lt;&lt;&lt; END</span><br><span class="hljs-string">13 dogs</span><br><span class="hljs-string">12 rabbits</span><br><span class="hljs-string">8 cows</span><br><span class="hljs-string">1 goat</span><br><span class="hljs-string">END</span>;<br>preg_match_all(<span class="hljs-string">&#x27;/(\d+)(\S+)/&#x27;</span>,<span class="hljs-variable">$string</span>,<span class="hljs-variable">$m1</span>,PREG_PATTREN_ORDER);<br>preg_match_all(<span class="hljs-string">&#x27;/(\d+)(\S+)/&#x27;</span>,<span class="hljs-variable">$string</span>,<span class="hljs-variable">$m2</span>,PREG_SET_ORDER);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使<code>PREG_PATTERN_ORDER(默认）</code>则数组每个元素对应一个特定的捕获子模式，所以<code>$m1[0]</code>是包含所有匹配模式的子字符串的数组，<code>$m1[1]</code>是所有匹配第一个子模式（数字）的子字符串的数组， <code>$m1[2]</code>是所有匹配第二个子模式（单词）子字符串的数组，数组<code>$m1</code>中元素的个数比子模式个数多一个，多了一个0号元素，其他的一一对应。</li>
+<li>使<code>PREG_PATTERN_ORDER（默认）</code>则数组每个元素对应一个特定的捕获子模式，所以<code>$m1[0]</code>是包含所有匹配模式的子字符串的数组，<code>$m1[1]</code>是所有匹配第一个子模式（数字）的子字符串的数组， <code>$m1[2]</code>是所有匹配第二个子模式（单词）子字符串的数组，数组<code>$m1</code>中元素的个数比子模式个数多一个，多了一个0号元素，其他的一一对应。</li>
 <li>使用<code>PREG_SET_ORDER</code>，则数组的每个元素对应尝试匹配整个模式的下一个，所以<code>$m2[0]</code>是匹配<code>'13dogs','13','dogs'</code>的第一个子集的数组，<code>$m2[1]</code>是匹配<code>'12 rabbits','12','rabbits'</code>的第二个子集的数组，依此类推，数组<code>$m2</code>的元素个数和成功匹配的模式数目相同。</li>
 <li>下例从一个特定Web地址取出HTML放到一个字符串中，并从HTML中析取出URL，对于每个URL，将生成一个返回到程序的链接，该程序将在地址中显示URL</li>
 </ul>
@@ -971,7 +971,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$chunks</span> = preg_split(pattern,<span class="hljs-keyword">string</span>[,limit[,flags]]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>pattern匹配两个字符块之间的分隔符，在默认情况下不返回分隔符，limit选项指定要返回字符块的最大数目（默认为-1，即所有字符块）,flags参数是对标志<code>PREG_SPLIT_NO_EMPTY(空字符串不返回）</code>和<code>PREG_SPLIT_DELIM_CAPTURE(在模式中捕获的部分字符串被返回）</code>进行按位或操作（bitwise OR combination)的结果。</li>
+<li>pattern匹配两个字符块之间的分隔符，在默认情况下不返回分隔符，limit选项指定要返回字符块的最大数目（默认为-1，即所有字符块）,flags参数是对标志<code>PREG_SPLIT_NO_EMPTY（空字符串不返回）</code>和<code>PREG_SPLIT_DELIM_CAPTURE（在模式中捕获的部分字符串被返回）</code>进行按位或操作（bitwise OR combination)的结果。</li>
 <li>例如，要从一个简单的数字表达式中析取操作符可以这样做：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$ops</span> = preg_splist(<span class="hljs-string">&#x27;&#123;[+*/-]&#125;&#x27;</span>,<span class="hljs-string">&#x27;3+5*9/2&#x27;</span>);	<span class="hljs-comment">//$ops是array(&#x27;3&#x27;,&#x27;+&#x27;,&#x27;5&#x27;,&#x27;*&#x27;,&#x27;9&#x27;,&#x27;/&#x27;,&#x27;2&#x27;)</span><br></code></pre></td></tr></table></figure>

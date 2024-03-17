@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mongo Document 文档（document)的数据结构和 JSON 基本一样。所有存储在集合中的数据都是 BSON 格式。 创建文档 创建文档时如果集合不存在，则会隐式创建集合。 单个文档插入 使用insert() 或 save() 方法向集合中插入文档，语法如下： 1234567db.collection.insert(    &lt;document or array of docu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.145Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.249Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.384Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
 </ul>
 <p><strong>文档键命名规范</strong></p>
 <ul>
-<li>键不能含有\0 (空字符）。这个字符用来表示键的结尾。</li>
+<li>键不能含有\0 （空字符）。这个字符用来表示键的结尾。</li>
 <li>.和$有特别的意义，只有在特定环境下才能使用。</li>
 <li>以下划线&quot;_&quot;开头的键是保留的。</li>
 </ul>
@@ -305,7 +305,7 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">// 第一页 </span><br>db<span class="hljs-selector-class">.comment</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.skip</span>(<span class="hljs-number">0</span>)<span class="hljs-selector-class">.limit</span>(<span class="hljs-number">2</span>) <br><span class="hljs-comment">// 第二页 </span><br>db<span class="hljs-selector-class">.comment</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.skip</span>(<span class="hljs-number">2</span>)<span class="hljs-selector-class">.limit</span>(<span class="hljs-number">2</span>) <br><span class="hljs-comment">// 第三页 </span><br>db<span class="hljs-selector-class">.comment</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.skip</span>(<span class="hljs-number">4</span>)<span class="hljs-selector-class">.limit</span>(<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
 <h3 id="排序查询">排序查询</h3>
 <p><code>sort()</code>方法对数据进行排序，<code>sort()</code>方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而 -1 是用于降序排列。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">db.集合名称<span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.sort</span>(排序方式） <br><br>db<span class="hljs-selector-class">.COLLECTION_NAME</span><span class="hljs-selector-class">.find</span>()<span class="hljs-selector-class">.sort</span>(&#123;KEY:<span class="hljs-number">1</span>&#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dos">db.集合名称.<span class="hljs-built_in">find</span>().<span class="hljs-built_in">sort</span>（排序方式） <br><br>db.COLLECTION_NAME.<span class="hljs-built_in">find</span>().<span class="hljs-built_in">sort</span>(&#123;KEY:<span class="hljs-number">1</span>&#125;)<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong>：对userid降序排列，并对访问量进行升序排列。</p>
 <figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sqf">db.<span class="hljs-built_in">comment</span>.<span class="hljs-built_in">find</span>().<span class="hljs-built_in">sort</span>(&#123;userid:-<span class="hljs-number">1</span>,likenum:<span class="hljs-number">1</span>&#125;)<br></code></pre></td></tr></table></figure>
 <p><strong>注意</strong>：<code>skip()</code>,<code>limilt()</code>,<code>sort()</code>执行的顺序是先<code>sort()</code>，然后是<code>skip()</code>，最后是显示的<code>limit()</code>，和命令编写顺序无关。</p>
@@ -360,7 +360,7 @@
 <p>如果我们想实现对某列值在原有值的基础上进行增加或减少，可以使用 $inc 运算符来实现。</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">db</span>.comment.<span class="hljs-keyword">update</span>(&#123;_id:<span class="hljs-string">&quot;3&quot;</span>&#125;,&#123;<span class="hljs-variable">$inc</span>:&#123;likenum:NumberInt(1)&#125;&#125;)<br></code></pre></td></tr></table></figure>
 <h2 id="删除文档">删除文档</h2>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">db.集合名称.<span class="hljs-builtin-name">remove</span>(条件）<br></code></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">db.集合名称.remove（条件）<br></code></pre></td></tr></table></figure>
 <h3 id="删除所有文档">删除所有文档</h3>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">db</span><span class="hljs-selector-class">.comment</span><span class="hljs-selector-class">.remove</span>(&#123;&#125;)<br></code></pre></td></tr></table></figure>
 <h3 id="根据条件删除文档">根据条件删除文档</h3>

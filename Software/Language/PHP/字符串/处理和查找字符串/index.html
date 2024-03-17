@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 处理和查找字符串 PHP有许多函数用于操作字符串，查找和修改字符串最常用的函数是用正则表达式来描述字符串的函数，本节介绍的函数没有使用正则表达式，它们比正则表达式快，但是它们只能用于查找确定的字符串（例如，你在查找12&#x2F;11&#x2F;01，而不是任何用斜杠分隔的数字) 子串  你想知道在一个较大字符串中你感兴趣的数据的位置，可以使用substr()函数把它复制出来：  1$piece &#x3D; subs">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:31:34.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.209Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -304,7 +304,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$string</span> = str_pad(<span class="hljs-string">&#x27;Fred Flintstone&#x27;</span>,<span class="hljs-number">30</span>,<span class="hljs-string">&#x27;. &#x27;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">&#123;$string&#125;</span>35&quot;</span>;<br><br>Fred Flintstone. . . . . . . . . . . :<span class="hljs-number">35</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>可选的第四个参数可以是STR_PAD_RIGHT(默认）,STR_PAD_LEFT或STR_PAD_BOTH(左右都加，长度均分，使原字符串居中对齐），例如：</li>
+<li>可选的第四个参数可以是STR_PAD_RIGHT（默认）,STR_PAD_LEFT或STR_PAD_BOTH（左右都加，长度均分，使原字符串居中对齐），例如：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;[&#x27;</span> . strpad(<span class="hljs-string">&#x27;Fred Flintstone&#x27;</span>,<span class="hljs-number">30</span>,<span class="hljs-string">&#x27; &#x27;</span>,STR_PAD_LEFT) . <span class="hljs-string">&quot;]\n&quot;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;[&#x27;</span> . strpad(<span class="hljs-string">&#x27;Fred Flintstone&#x27;</span>,<span class="hljs-number">30</span>,<span class="hljs-string">&#x27; &#x27;</span>,STR_PAD_BOTH) . <span class="hljs-string">&quot;]\n&quot;</span>;<br><br>[               Fred Flintstone]<br>[         Fred Flintston       ]<br></code></pre></td></tr></table></figure>
 <h2 id="分解字符串">分解字符串</h2>
@@ -420,7 +420,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">is_octal</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> strspn(<span class="hljs-variable">$str</span>,<span class="hljs-string">&#x27;01234567&#x27;</span>) == strlen(<span class="hljs-variable">$str</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 </blockquote>
 <ul>
-<li><code>strcspn()</code>里的c代表complement(补足物），它说明字符串的开头有多少不是由字符集中的字符组成，当感兴趣的字符比不感兴趣的字符多时，使用<code>strcspn()</code>，例如，下面的函数测试一个字符串中是否有任何空字符，制表符或回车：</li>
+<li><code>strcspn()</code>里的c代表complement（补足物），它说明字符串的开头有多少不是由字符集中的字符组成，当感兴趣的字符比不感兴趣的字符多时，使用<code>strcspn()</code>，例如，下面的函数测试一个字符串中是否有任何空字符，制表符或回车：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">has_bad_chars</span>(<span class="hljs-params"><span class="hljs-variable">$str</span></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> strcspn(<span class="hljs-variable">$str</span>,<span class="hljs-string">&quot;\n\t\0&quot;</span>) == strlen(<span class="hljs-variable">$str</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>

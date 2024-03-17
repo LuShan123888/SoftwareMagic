@@ -24,7 +24,7 @@
 <meta property="og:description" content="JVM 垃圾收集策略与算法  程序计数器，虚拟机栈，本地方法栈随线程而生，也随线程而灭，栈帧随着方法的开始而入栈，随着方法的结束而出栈，这几个区域的内存分配和回收都具有确定性，在这几个区域内不需要过多考虑回收的问题，因为方法结束或者线程结束时，内存自然就跟随着回收了。 而对于 Java 堆和方法区，我们只有在程序运行期间才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的正">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:32:13.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.392Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -281,7 +281,7 @@
 <ul>
 <li><strong>浮动垃圾</strong>
 <ul>
-<li>并发标记阶段用户与GC线程同时运行，假设已经遍历到A(变为灰色了），此时应用执行了 <code>A.B = null</code>，此刻之后，对象C是应该被回收的，然而因为<strong>已经变为灰色</strong>了，其仍会被<strong>当作存活对象</strong>继续遍历下去。</li>
+<li>并发标记阶段用户与GC线程同时运行，假设已经遍历到A（变为灰色了），此时应用执行了 <code>A.B = null</code>，此刻之后，对象C是应该被回收的，然而因为<strong>已经变为灰色</strong>了，其仍会被<strong>当作存活对象</strong>继续遍历下去。</li>
 <li>针对并发标记开始后的<strong>新对象</strong>，通常的做法是直接全部<strong>当成黑色</strong>，本轮不会进行清除，这部分对象期间可能会变为垃圾，这也算是浮动垃圾的一部分。</li>
 </ul>
 </li>

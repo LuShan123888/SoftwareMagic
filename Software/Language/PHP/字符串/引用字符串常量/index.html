@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 引用字符串常量  在程序中有3方式来写字符串直接量：使用单引号，双引号和从Unix shell中衍生出来的here文档格式（heredoc)这些方法的不同之处在于它们是否识别特殊的转移的转义序列（escape sequences，用于对字符进行编码）和是否进行变量解析。 一般的规则是只在必要时才使用强大的引用机制，在实际应用中，这意味着除非你需要包含转义序列或替换变量才使用双引号，否则应该">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:39:36.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.209Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,7 +253,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Fred&#x27;</span>;<br><span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;Hello,$name&#x27;</span>;	/用单引号括起来。<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$str</span>;<br><br>Hrllo,<span class="hljs-variable">$name</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>在用单引号括起来的字符串中唯一可用的转义序列是\`(把单引号放在用单引号括起来的字符串中）,\(把一个反斜杠放在用单引号括起来的字符串中），任何其他的反斜杠只能被解释为一个反斜杠。</li>
+<li>在用单引号括起来的字符串中唯一可用的转义序列是\`（把单引号放在用单引号括起来的字符串中）,\\（把一个反斜杠放在用单引号括起来的字符串中），任何其他的反斜杠只能被解释为一个反斜杠。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Tim O\&#x27;Reilly&#x27;</span>;	<span class="hljs-comment">// 转义的单引号。</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$name</span>;<br><span class="hljs-variable">$path</span> = <span class="hljs-string">&#x27;C:\\WINDOWS&#x27;</span>;	<span class="hljs-comment">// 转义的反斜杠。</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$path</span>;<br><span class="hljs-variable">$nope</span> = <span class="hljs-string">&#x27;\n&#x27;</span>;	<span class="hljs-comment">// 不是转义序列。</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$nope</span>;<br><br>Tim O<span class="hljs-string">&#x27;Reilly</span><br><span class="hljs-string">C:\WINDOWS</span><br><span class="hljs-string">\n</span><br></code></pre></td></tr></table></figure>
 <h2 id="用双引号括起来的字符串">用双引号括起来的字符串</h2>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 维持状态  HTTP是一个无状态的通讯协议，这意味着一旦Web服务器完成了客户端的Web页面请求，它们之间的连接也就断开了，换句话说，我们没法使服务器识别来自于同一个客户端的一系列请求。 但是状态是很有用的，比如，如果不能跟踪来自于同一个用户的一系列请求，就无法设计一个购物车程序，你需要知道什么时候一个用户在购物车中放入物品，所以时候删除，当他想结账的时候购物车中有些什么物品。 为了解决W">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-20T05:09:21.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.385Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,7 +239,7 @@
 <ul>
 <li>如果你确定要动态修改所有的本地链接以包含一个用户ID，那么你可以在程序中跟踪单个用户的信息，URL重写可用于所有动态生成的文档，而不仅是包含表单的文档，但是很显然为每个页面重写是非常乏味的工作。</li>
 <li>实现状态维持的第三种方法是使用Cookie,Cookie是服务器给客户端的一些信息，在后续的请求中，客户端将把信息返回给服务器，这样就可以标识自己的身份，Cookie对于浏览器重复访问时保持客户端信息很有用，但它也有不足的地方，主要问题是有些浏览器不支持cookie，即使支持，用户也可以禁用cookie，所以使用cookie来维持状态的程序需要使用另一个叫回退（fallback)的机制，我们会在后面再详细讨论cookie</li>
-<li>在PHP中维持状态的最好的方法是使用其内置的会话跟踪系统（session-tracking system)，该系统允许你创建一个持久型变量，从程序的不同页面和同一用户对站点的不同访问都可以访问该变量，PHP的会话跟踪机制使用cookie(或URL)在后台优雅地解决了维持状态的大部分问题，并为你考虑了所有细节。</li>
+<li>在PHP中维持状态的最好的方法是使用其内置的会话跟踪系统（session-tracking system)，该系统允许你创建一个持久型变量，从程序的不同页面和同一用户对站点的不同访问都可以访问该变量，PHP的会话跟踪机制使用cookie（或URL)在后台优雅地解决了维持状态的大部分问题，并为你考虑了所有细节。</li>
 </ul>
 <h2 id="Cookies">Cookies</h2>
 <ul>
@@ -252,7 +252,7 @@
 <p>该函数利用利用给定的参数创建cookie串，必须以该串为值创建一个cookie头，因为cookie是作为头发送的，所以必须在文件体被传递之前调用<code>setcookie()</code>函数，<code>setcookie()</code>函数的参数包括：</p>
 <ul>
 <li><strong>name</strong>：为某一特定的cookie所取的唯一名称，你可以让多个cookie拥有不同的名称和属性，名称中不能有空格和分号。</li>
-<li><strong>value</strong>:Cookie所带的任意字符串值，老版本的Netscape限制了一个cookie的大小不能大于4KB(包括名称，过期时间和其他信息），所以当没有关于cookie的明确限制时，最好不要让cookie大于3.5KB</li>
+<li><strong>value</strong>:Cookie所带的任意字符串值，老版本的Netscape限制了一个cookie的大小不能大于4KB（包括名称，过期时间和其他信息），所以当没有关于cookie的明确限制时，最好不要让cookie大于3.5KB</li>
 <li><strong>expire</strong>：在cookie的过期时间，如果没有指定过期时间，浏览器将把此cookie保存在内存中而不是硬盘上，当浏览器退出页面访问时，cookie也就消失了，过期时间是以格林尼治标准时间1970年1月1日为开始时间的，单位是秒，例如，传送<code>time()+60*60*2</code>将使cookie在2小时后过期。</li>
 <li><strong>path</strong>：只有对该路径下的URL，浏览器才会返回cookie，默认路径为当前页面所在的目录，例如，如果<code>/store/front/cart.php</code>设置了cookie，且没有指定路径，那么cookie将被浏览器返回给服务器上所有<code>/store/front</code>目录下的页面。</li>
 <li><strong>domain</strong>：只能对此域中的URL，浏览器才会为其返回cookie</li>
@@ -271,7 +271,7 @@
 <p><strong>示例7-10</strong>：首选项选择。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Set Your Preferences&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;form action=&quot;prefs.php&quot; method=&quot;post&quot;&gt;<br>            Background:<br>            &lt;select name=&quot;background&quot;&gt;<br>                &lt;option value=&quot;black&quot;&gt;Black&lt;/option&gt;<br>                &lt;option value=&quot;while&quot;&gt;White&lt;/option&gt;<br>                &lt;option value=&quot;red&quot;&gt;Red&lt;/option&gt;<br>                &lt;option value=&quot;blue&quot;&gt;Blue&lt;/option&gt;<br>            &lt;/select&gt;&lt;br/&gt;<br><br>            Foreground:<br>            &lt;select name=&quot;background&quot;&gt;<br>                &lt;option value=&quot;black&quot;&gt;Black&lt;/option&gt;<br>                &lt;option value=&quot;while&quot;&gt;White&lt;/option&gt;<br>                &lt;option value=&quot;red&quot;&gt;Red&lt;/option&gt;<br>                &lt;option value=&quot;blue&quot;&gt;Blue&lt;/option&gt;<br>            &lt;/select&gt;&lt;br/&gt;<br><br>            &lt;input type=&quot;submit&quot; value=&quot;Change Preferences&quot;&gt;<br>        &lt;/form&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>上例中的表单提交到PHP脚本prefs.php(即示例7-11)，这段脚本为表单中的颜色首选项设置cookie，注意对<code>setcookie()</code>的调用是在HTML页面开始之前完成的。</li>
+<li>上例中的表单提交到PHP脚本prefs.php（即示例7-11)，这段脚本为表单中的颜色首选项设置cookie，注意对<code>setcookie()</code>的调用是在HTML页面开始之前完成的。</li>
 </ul>
 <p><strong>示例7-11</strong>：用cookie来设置首选项。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$color = array(&#x27;black&#x27; =&gt; &#x27;#000000&#x27;,<br>               &#x27;white&#x27; =&gt; &#x27;#ffffff&#x27;,<br>               &#x27;red&#x27; =&gt; &#x27;#ff0000&#x27;,<br>               &#x27;blue&#x27; =&gt; &#x27;#0000ff&#x27;);<br><br>$bg_name = $_POST[&#x27;background&#x27;];<br>$fg_name = $_POST[&#x27;foreground&#x27;];<br><br>setcookie(&#x27;bg&#x27;,$color[$bg_name]);<br>setcookie(&#x27;fg&#x27;,$color[$fg_name]);<br>?&gt;<br>&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Preferences Set&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        Thank you. Your preferences have been changed to:&lt;br/&gt;<br>        Background:&lt;?= $bg_name ?&gt;&lt;br/&gt;<br>        Foreground:&lt;?= $fg_name ?&gt;&lt;br/&gt;<br><br>        Click &lt;a href=&quot;prefs-demo.php&quot;&gt;here&lt;/a&gt;to see the preferences in action.<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
@@ -296,7 +296,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> session_start() <span class="hljs-meta">?&gt;</span><br>&lt;html&gt;<br> ...<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果有必要，以上代码会分配一个新的sessionID(可能会创建一个要发送到浏览器的cookie)，并从数据存储中载入持久性变量。</li>
+<li>如果有必要，以上代码会分配一个新的sessionID（可能会创建一个要发送到浏览器的cookie)，并从数据存储中载入持久性变量。</li>
 <li>如果你注册了对象，这些对象的类定义必须在<code>session_start()</code>调用之前被载入。</li>
 <li>传递一个变量名给<code>$_SESSION[]</code>数组可以注册一个session变量，例如，以下是一个点击计数器：</li>
 </ul>

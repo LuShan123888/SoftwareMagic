@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Go Sync 并发安全和锁  有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 竞态问题 (数据竞态）  1234567891011121314151617181920212223242526272829package mainimport (	&quot;fmt&quot;	&quot;sync&quot;)var (	x int64">
+  <meta name="description" content="Go Sync 并发安全和锁  有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 竞态问题 （数据竞态）  1234567891011121314151617181920212223242526272829package mainimport (	&quot;fmt&quot;	&quot;sync&quot;)var (	x int64">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go Sync">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Go/Concurrent/Sync/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Go Sync 并发安全和锁  有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 竞态问题 (数据竞态）  1234567891011121314151617181920212223242526272829package mainimport (	&quot;fmt&quot;	&quot;sync&quot;)var (	x int64">
+<meta property="og:description" content="Go Sync 并发安全和锁  有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 竞态问题 （数据竞态）  1234567891011121314151617181920212223242526272829package mainimport (	&quot;fmt&quot;	&quot;sync&quot;)var (	x int64">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.189Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.217Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.394Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -230,7 +230,7 @@
               <h1>Go Sync</h1>
 <h2 id="并发安全和锁">并发安全和锁</h2>
 <ul>
-<li>有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 <code>竞态问题</code> (数据竞态）</li>
+<li>有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区）的情况，这种情况下就会发生 <code>竞态问题</code> （数据竞态）</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;sync&quot;</span><br>)<br><br><span class="hljs-keyword">var</span> (<br>	x <span class="hljs-keyword">int64</span><br>	wg sync.WaitGroup <span class="hljs-comment">// 等待组。</span><br>)<br><br><span class="hljs-comment">// add 对全局变量x执行5000次加1操作。</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">add</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5000</span>; i++ &#123;<br>		x = x + <span class="hljs-number">1</span><br>	&#125;<br>	wg.Done()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	wg.Add(<span class="hljs-number">2</span>)<br><br>	<span class="hljs-keyword">go</span> add()<br>	<span class="hljs-keyword">go</span> add()<br><br>	wg.Wait()<br>	fmt.Println(x)<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>

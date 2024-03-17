@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-aba8d9c09e6f054c7061ddd720a04a26147951.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-23-38d5fbeaebd4998f3a30d44bd20b996f113233.png">
 <meta property="article:published_time" content="2024-03-17T15:48:00.609Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.394Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -453,7 +453,7 @@
 </tr>
 <tr>
 <td>TIDYING</td>
-<td>所有的任务都已终止了，workerCount(有效线程数）为0</td>
+<td>所有的任务都已终止了，workerCount（有效线程数）为0</td>
 </tr>
 <tr>
 <td>TERMINATED</td>
@@ -701,7 +701,7 @@
 <ul>
 <li>用户可以在管理平台上通过线程池的名字找到指定的线程池，然后对其参数进行修改，保存后会实时生效，目前支持的动态参数包括核心数，最大值，队列长度等，除此之外，在界面中，我们还能看到用户可以配置是否开启告警，队列等待任务告警阈值，活跃度告警等等，关于监控和告警，我们下面一节会对齐进行介绍。</li>
 </ul>
-<p><strong>线程池监控</strong>：除了参数动态化之外，为了更好地使用线程池，我们需要对线程池的运行状况有感知，比如当前线程池的负载是怎么样的？分配的资源够不够用？任务的执行情况是怎么样的？是长任务还是短任务？基于对这些问题的思考，动态化线程池提供了多个维度的监控和告警能力，包括线程池活跃度，任务的执行Transaction(频率，耗时）,Reject异常，线程池内部统计信息等等，既能帮助用户从多个维度分析线程池的使用情况，又能在出现问题第一时间通知到用户，从而避免故障或加速故障恢复。</p>
+<p><strong>线程池监控</strong>：除了参数动态化之外，为了更好地使用线程池，我们需要对线程池的运行状况有感知，比如当前线程池的负载是怎么样的？分配的资源够不够用？任务的执行情况是怎么样的？是长任务还是短任务？基于对这些问题的思考，动态化线程池提供了多个维度的监控和告警能力，包括线程池活跃度，任务的执行Transaction（频率，耗时）,Reject异常，线程池内部统计信息等等，既能帮助用户从多个维度分析线程池的使用情况，又能在出现问题第一时间通知到用户，从而避免故障或加速故障恢复。</p>
 <ul>
 <li><strong>负载监控和告警</strong>：线程池负载关注的核心问题是：基于当前线程池参数分配的资源够不够，对于这个问题，我们可以从事前和事中两个角度来看，事前，线程池定义了&quot;活跃度”这个概念，来让用户在发生Reject异常之前能够感知线程池负载问题，线程池活跃度计算公式为：线程池活跃度 = activeCount/maximumPoolSize，这个公式代表当活跃线程数趋向于maximumPoolSize的时候，代表线程负载趋高，事中，也可以从两方面来看线程池的过载判定条件，一个是发生了Reject异常，一个是队列中有等待任务（支持定制阈值），以上两种情况发生了都会触发告警，告警信息会通过大象推送给服务所关联的负责人。</li>
 </ul>

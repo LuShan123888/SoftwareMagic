@@ -26,7 +26,7 @@
 <meta property="og:image" content="c:%5CUsers%5Clushan11%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210611095441923.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123727.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
+<meta property="article:modified_time" content="2024-03-17T17:58:50.392Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -249,14 +249,14 @@
 <ul>
 <li>关于主内存与工作内存之间的具体交互协议，即一个变量如何从主内存拷贝到工作内存，如何从工作内存同步到主内存之间的实现细节，Java内存模型定义了以下八种操作来完成：
 <ol>
-<li><strong>lock(锁定）</strong>：作用于主内存的变量，把一个变量标识为一条线程独占状态。</li>
-<li><strong>unlock(解锁）</strong>：作用于主内存变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。</li>
-<li><strong>read(读取）</strong>：作用于主内存变量，把一个变量值从主内存传输到线程的工作内存中，以便随后的load动作使用。</li>
-<li><strong>load(载入）</strong>：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
-<li><strong>use(使用）</strong>：作用于工作内存的变量，把工作内存中的一个变量值传递给执行引擎，每当虚拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</li>
-<li><strong>assign(赋值）</strong>：作用于工作内存的变量，它把一个从执行引擎接收到的值赋值给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
-<li><strong>store(存储）</strong>：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write的操作。</li>
-<li><strong>write(写入）</strong>：作用于主内存的变量，它把store操作从工作内存中一个变量的值传送到主内存的变量中。</li>
+<li><strong>lock（锁定）</strong>：作用于主内存的变量，把一个变量标识为一条线程独占状态。</li>
+<li><strong>unlock（解锁）</strong>：作用于主内存变量，把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。</li>
+<li><strong>read（读取）</strong>：作用于主内存变量，把一个变量值从主内存传输到线程的工作内存中，以便随后的load动作使用。</li>
+<li><strong>load（载入）</strong>：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中。</li>
+<li><strong>use（使用）</strong>：作用于工作内存的变量，把工作内存中的一个变量值传递给执行引擎，每当虚拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</li>
+<li><strong>assign（赋值）</strong>：作用于工作内存的变量，它把一个从执行引擎接收到的值赋值给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</li>
+<li><strong>store（存储）</strong>：作用于工作内存的变量，把工作内存中的一个变量的值传送到主内存中，以便随后的write的操作。</li>
+<li><strong>write（写入）</strong>：作用于主内存的变量，它把store操作从工作内存中一个变量的值传送到主内存的变量中。</li>
 </ol>
 </li>
 <li>Java内存模型还规定了在执行上述八种基本操作时，必须满足如下规则：
@@ -305,7 +305,7 @@
 <blockquote>
 <ul>
 <li>
-<p><strong>as-if-serial语义</strong>：不管怎么重排序（编译器和处理器为了提高并行度）,(单线程）程序的执行结果不能被改变，(编译器，runtime和处理器都必须遵守as-if-serial语义）</p>
+<p><strong>as-if-serial语义</strong>：不管怎么重排序（编译器和处理器为了提高并行度）,（单线程）程序的执行结果不能被改变，（编译器，runtime和处理器都必须遵守as-if-serial语义）</p>
 </li>
 <li>
 <p><strong>指令重排序</strong>：在Java中，JVM能够根据处理器特性（CPU多级缓存系统，多核处理器等）适当对机器指令进行重排序，最大限度发挥机器性能，Java中的指令重排序有两次，第一次发生在将字节码编译成机器码的阶段，第二次发生在CPU执行的时候，也会适当对指令进行重排。</p>
@@ -315,7 +315,7 @@
   <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210611123727.png" srcset="/images/loading.gif" lazyload alt="处理器Cache模型" style="zoom:50%;" />
 </li>
 <li>
-<p>在这种模型下会存在一个现象，即缓存中的数据与主内存的数据并不是实时同步的，各CPU(或CPU核心）间缓存的数据也不是实时同步的，这导致在同一个时间点，各CPU所看到同一内存地址的数据的值可能是不一致的，从程序的视角来看，就是在同一个时间点，各个线程所看到的共享变量的值可能是不一致的。</p>
+<p>在这种模型下会存在一个现象，即缓存中的数据与主内存的数据并不是实时同步的，各CPU（或CPU核心）间缓存的数据也不是实时同步的，这导致在同一个时间点，各CPU所看到同一内存地址的数据的值可能是不一致的，从程序的视角来看，就是在同一个时间点，各个线程所看到的共享变量的值可能是不一致的。</p>
 </li>
 <li>
 <p>有的观点会将这种现象也视为重排序的一种，命名为&quot;内存系统重排序”，因为这种内存可见性问题造成的结果就好像是内存访问指令发生了重排序一样。</p>
