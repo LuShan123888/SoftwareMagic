@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 词法结构 大小写  和内置结构及关键字（如echo,while,Class等）一样，用户定义的类名和函数名也是不区分大小写的，因此，下面3行等价:  123echo(&quot;hello,world&quot;);ECHO(&quot;hello,world&quot;);EcHo(&quot;hello,world&quot;);  但是，变量时区分大小写的。也就是说,$name,$N">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T09:19:14.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.251Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -241,11 +241,11 @@
 <li>语句是指完成一段注释，或完成某个任务的PHP代码，它可以简单的如一个变量赋值，也可以复杂的如有多个退出点的循环</li>
 <li>PHP使用分号来分隔简单的语句，使用大括号将复合语句标记为一个代码块，如条件测试或循环，在右括号后面不需要使用分号，和其他语言不一样的是，在PHP中右括号之前的分号是必须要写的:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$needed</span>)&#123;<br>    <span class="hljs-keyword">Echo</span> <span class="hljs-string">&quot;We must have it!&quot;</span>;<span class="hljs-comment">//这里需要有分号</span><br>&#125;<span class="hljs-comment">//在大括号后不需要有分号</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$needed</span>)&#123;<br>    <span class="hljs-keyword">Echo</span> <span class="hljs-string">&quot;We must have it!&quot;</span>;<span class="hljs-comment">// 这里需要有分号</span><br>&#125;<span class="hljs-comment">// 在大括号后不需要有分号</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>在PHP结束标签之前的分号是可写可不写的:</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>if ($a==$b) &#123; echo &quot;Rhyme? And Reason?&quot;;&#125;<br>Echo &quot;Hello ,World&quot;//结束标签之前可以没有分号<br>?&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>if ($a==$b) &#123; echo &quot;Rhyme? And Reason?&quot;;&#125;<br>Echo &quot;Hello ,World&quot;// 结束标签之前可以没有分号<br>?&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>尽管在结束标签前可不用分号，但写上是一个好的编程习惯，这样做使日后增加代码更加容易</li>
 </ul>
@@ -277,9 +277,9 @@
 </ul>
 <h3 id="C-风格的注释">C++风格的注释</h3>
 <ul>
-<li>当PHP代码中遇到两个//时，从斜杠开始到本行结束或代码段结束（无论先遇到哪一个）的部分被认为时注释，这种注释的方法源于C++,它的结果和shell风格的注释一样</li>
+<li>当PHP代码中遇到两个// 时，从斜杠开始到本行结束或代码段结束（无论先遇到哪一个）的部分被认为时注释，这种注释的方法源于C++,它的结果和shell风格的注释一样</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = <span class="hljs-variable">$p</span>*exp(<span class="hljs-variable">$r</span>*<span class="hljs-variable">$t</span>);<span class="hljs-comment">//取得混合计算的值</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$value</span> = <span class="hljs-variable">$p</span>*exp(<span class="hljs-variable">$r</span>*<span class="hljs-variable">$t</span>);<span class="hljs-comment">// 取得混合计算的值</span><br></code></pre></td></tr></table></figure>
 <h3 id="C风格的注释">C风格的注释</h3>
 <ul>
 <li>shell风格和C++风格的注释对注释代码或做简短的注释很有用，但是更长的注释需要不同的风格，同样的,PHP支持来自于C语言语法的块注释，当PHP代码中遇到一个/*时，在此之后遇到*/的部分被认为时注释，这种注释和之前介绍的那些不同，它可以跨越多行</li>

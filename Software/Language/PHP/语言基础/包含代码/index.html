@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 包含代码  PHP提供了两种结构从其他模块加载代码和HTML:require和include,两者都加载一个文件，把它作为PHP的脚本来运行，并且如果不能找到需要加载的文件就报错，主要的区别是，尝试require一个不存在的文件将导致一个致命错误(fatal error)而停止脚本的执行，而尝试include一个不存在的文件则产生一个警告(warning),不会停止脚本的执行 includ">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T08:12:08.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:35:54.544Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.398Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -236,7 +236,7 @@
 <ul>
 <li>使用include是因为它允许PHP在站点设计文件中有错误发生时继续处理页面,Require则比较严谨，它更适于在如果没有加载库的话，页面就不能显示的地方加载代码库，例如:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">Require</span> <span class="hljs-string">&#x27;codelib.inc&#x27;</span>;<br>mysub();<span class="hljs-comment">//在codlib.inc中定义</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">Require</span> <span class="hljs-string">&#x27;codelib.inc&#x27;</span>;<br>mysub();<span class="hljs-comment">// 在codlib.inc中定义</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>一种或许更有效的处理header和footer的方法是加载一个单独的文件，然后调用函数来生成标准化的站点元素:</li>
 </ul>
@@ -253,7 +253,7 @@
 <li>例如，设计页面时，我们把各个页面组件都存放在各自的文件中，它们需要知道当前用户的偏好选择（例如长宽，样式等),组件库需要使用require_once来加载用户的选择设置代码，然后页面设计师可以包含一个页面组件而不用担心用户设置代码是否已经加载过了</li>
 <li>包含文件中的代码被导入时，它在include语句出现的地方开始有效（即作用域为include语句之后),所以被包含的代码可以看见和修改你代码中的变量，这是非常有用的，例如，一个用户跟踪库可以将当前用户名存放在全局变量<code>$user</code>中</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">//主页面</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;userprefs.inc&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-subst">$user</span>.;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 主页面</span><br><span class="hljs-keyword">include</span> <span class="hljs-string">&#x27;userprefs.inc&#x27;</span>;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Hello, <span class="hljs-subst">$user</span>.;</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>库能够看见和改变你的变量的能力，也会引起问题，你不得不知道库中使用的所有全局变量，以确保你不会偶然地使用它们中的一个来命名自己的变量，因此而覆盖了库中的值并干扰他的工作</li>
 <li>如果include或require结构在一个函数中，在包含文件中的变量会成为该函数中的函数作用域变量</li>

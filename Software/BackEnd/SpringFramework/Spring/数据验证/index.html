@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring 数据验证  Java API规范 (JSR303) 定义了Bean校验的标准validation-api,但没有提供实现,hibernate validation是对这个规范的实现，并增加了校验注解如@Email,@Length等,Spring Validation是对hibernate validation的二次封装，用于支持Springmvc参数自动校验  JSR-303">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.760Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:19.925Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.779Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -411,7 +411,7 @@
 <li>在Controller中，在需要验证的参数前面加入@Valid注解</li>
 <li>方法参数列表中，加入BindingResult对象，用来接收验证的错误信息，并根据这个进行不同情况的跳转</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;addUser&quot;, method = RequestMethod.POST)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sub_data</span><span class="hljs-params">(<span class="hljs-meta">@Valid</span> User user, BindingResult bindingResult)</span> </span>&#123;<br>    <span class="hljs-comment">//打印所有报错信息</span><br>    <span class="hljs-keyword">if</span> (bindingResult.hasErrors()) &#123;<br>        List&lt;ObjectError&gt; errorList = bindingResult.getAllErrors();<br>        <span class="hljs-keyword">for</span> (ObjectError error : errorList) &#123;<br>            System.out.println(error.getDefaultMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;validPage&quot;</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;succeefull&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RequestMapping(value = &quot;addUser&quot;, method = RequestMethod.POST)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sub_data</span><span class="hljs-params">(<span class="hljs-meta">@Valid</span> User user, BindingResult bindingResult)</span> </span>&#123;<br>    <span class="hljs-comment">// 打印所有报错信息</span><br>    <span class="hljs-keyword">if</span> (bindingResult.hasErrors()) &#123;<br>        List&lt;ObjectError&gt; errorList = bindingResult.getAllErrors();<br>        <span class="hljs-keyword">for</span> (ObjectError error : errorList) &#123;<br>            System.out.println(error.getDefaultMessage());<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;validPage&quot;</span>;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;succeefull&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="实体类约束">实体类约束</h3>
 <ul>
 <li>在被验证的表单对象所属类中，给需要验证的属性上加入指定注解</li>

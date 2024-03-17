@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 单表查询 查询指定列  在很多情况下，用户只对表中的一部分属性列感兴趣，这时可以通过在SELECT子句的&lt;目标列表达式&gt;中指定要查询的属性列  [例3.16]:查询全体学生的学号与姓名 12SELECT Sno,SnameFROM Student;   该语句的执行过程可以是这样的：从Student表中取出一个元组，取出该元组在属性Sno和Sname上的值，形成一个新的元组作为">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.560Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:20.103Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.791Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -260,11 +260,11 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">table</span>  LIMIT [<span class="hljs-keyword">offset</span>,] <span class="hljs-keyword">rows</span> <span class="hljs-operator">|</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">OFFSET</span> <span class="hljs-keyword">offset</span>;<br></code></pre></td></tr></table></figure>
 <p><strong>实例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15<br><br>#为了检索从某一个偏移量到记录集的结束所有的记录行，可以指定第二个参数为 -1:<br>SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last<br><br>#如果只给定一个参数，它表示返回最大的记录行数目:<br>SELECT * FROM table LIMIT 5; //检索前 5 个记录行<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mysql">SELECT * FROM table LIMIT 5,10; // 检索记录行 6-15<br><br>#为了检索从某一个偏移量到记录集的结束所有的记录行，可以指定第二个参数为 -1:<br>SELECT * FROM table LIMIT 95,-1; // 检索记录行 96-last<br><br>#如果只给定一个参数，它表示返回最大的记录行数目:<br>SELECT * FROM table LIMIT 5; // 检索前 5 个记录行<br></code></pre></td></tr></table></figure>
 <ul>
 <li>另一种表示方法</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; SELECT * FROM orange LIMIT 2 OFFSET 3;//查询4-5两条记录<br>#等价于<br>mysql&gt; SELECT * FROM orange  LIMIT 3,2;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mysql">mysql&gt; SELECT * FROM orange LIMIT 2 OFFSET 3;// 查询4-5两条记录<br>#等价于<br>mysql&gt; SELECT * FROM orange  LIMIT 3,2;<br></code></pre></td></tr></table></figure>
 <p>查询经过计算的值</p>
 <ul>
 <li>SELECT子句的<code>&lt;目标列表达式&gt;</code>不仅可以是表中的属性列，也可以是表达式</li>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 引用字符串常量  在程序中有3方式来写字符串直接量：使用单引号，双引号和从Unix shell中衍生出来的here文档格式(heredoc)这些方法的不同之处在于它们是否识别特殊的转移的转义序列(escape sequences,用于对字符进行编码）和是否进行变量解析 一般的规则是只在必要时才使用强大的引用机制，在实际应用中，这意味着除非你需要包含转义序列或替换变量才使用双引号，否则应该使">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T04:39:36.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:37:50.988Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -246,7 +246,7 @@
 <li>如果没有大括号的话,PHP就会尝试打印出变量<code>$nth</code>的值</li>
 <li>和其他一些shell环境不同，在PHP字符串中变量不会重复解析，而只处理在双引号字符串中的解析，然后把其结果作为字符串的值:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$bar</span> = <span class="hljs-string">&#x27;this is not printed&#x27;</span>;<br><span class="hljs-variable">$foo</span> = <span class="hljs-string">&#x27;$bar&#x27;</span>;	<span class="hljs-comment">//单引号</span><br><span class="hljs-keyword">print</span>(<span class="hljs-string">&quot;<span class="hljs-subst">$foo</span>&quot;</span>)l	<span class="hljs-comment">//双引号</span><br><br><span class="hljs-variable">$bar</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$bar</span> = <span class="hljs-string">&#x27;this is not printed&#x27;</span>;<br><span class="hljs-variable">$foo</span> = <span class="hljs-string">&#x27;$bar&#x27;</span>;	<span class="hljs-comment">// 单引号</span><br><span class="hljs-keyword">print</span>(<span class="hljs-string">&quot;<span class="hljs-subst">$foo</span>&quot;</span>)l	<span class="hljs-comment">// 双引号</span><br><br><span class="hljs-variable">$bar</span><br></code></pre></td></tr></table></figure>
 <h2 id="用单引号括起来的字符串">用单引号括起来的字符串</h2>
 <ul>
 <li>用单引号括起来的字符串并不替换变量，因为字符串直接量是用单引号括起来的，所以在下面的字符串中变量名没有被解析:</li>
@@ -255,7 +255,7 @@
 <ul>
 <li>在用单引号括起来的字符串中唯一可用的转义序列是\`(把单引号放在用单引号括起来的字符串中),\(把一个反斜杠放在用单引号括起来的字符串中),任何其他的反斜杠只能被解释为一个反斜杠</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Tim O\&#x27;Reilly&#x27;</span>;	<span class="hljs-comment">//转义的单引号</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$name</span>;<br><span class="hljs-variable">$path</span> = <span class="hljs-string">&#x27;C:\\WINDOWS&#x27;</span>;	<span class="hljs-comment">//转义的反斜杠</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$path</span>;<br><span class="hljs-variable">$nope</span> = <span class="hljs-string">&#x27;\n&#x27;</span>;	<span class="hljs-comment">//不是转义序列</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$nope</span>;<br><br>Tim O<span class="hljs-string">&#x27;Reilly</span><br><span class="hljs-string">C:\WINDOWS</span><br><span class="hljs-string">\n</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;Tim O\&#x27;Reilly&#x27;</span>;	<span class="hljs-comment">// 转义的单引号</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$name</span>;<br><span class="hljs-variable">$path</span> = <span class="hljs-string">&#x27;C:\\WINDOWS&#x27;</span>;	<span class="hljs-comment">// 转义的反斜杠</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$path</span>;<br><span class="hljs-variable">$nope</span> = <span class="hljs-string">&#x27;\n&#x27;</span>;	<span class="hljs-comment">// 不是转义序列</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$nope</span>;<br><br>Tim O<span class="hljs-string">&#x27;Reilly</span><br><span class="hljs-string">C:\WINDOWS</span><br><span class="hljs-string">\n</span><br></code></pre></td></tr></table></figure>
 <h2 id="用双引号括起来的字符串">用双引号括起来的字符串</h2>
 <ul>
 <li>用双引号括起来的字符串将会进行变量解析并且允许使用许多转义序列，下表列出了在用双引号括起来的字符串中PHP认可的转义序列</li>
@@ -321,7 +321,7 @@
 <ul>
 <li>如果用双引号括起来的字符串中就发现一个未知的转义序列（例如，一个反斜杠后跟一个不在上表的字符),就忽略这个转义序列（如果警告级设置为E_NOTICE,就会为这样的未知序列产生一个警告):</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;what is \c this?&#x27;</span>;	<span class="hljs-comment">//未知的转义序列</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$str</span>;<br><br>what is \c this?<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$str</span> = <span class="hljs-string">&#x27;what is \c this?&#x27;</span>;	<span class="hljs-comment">// 未知的转义序列</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$str</span>;<br><br>what is \c this?<br></code></pre></td></tr></table></figure>
 <h2 id="字符串定界">字符串定界</h2>
 <ul>
 <li>使用heredoc可以简单地把多行字符串放在程序中，如下所示:</li>
@@ -347,7 +347,7 @@
 <ul>
 <li>如果想用一个换行符来结束heredoc引用的字符串，则需要自己额外加入:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$s</span> = <span class="hljs-string">&lt;&lt;&lt; End</span><br><span class="hljs-string">Foo</span><br><span class="hljs-string"></span><br><span class="hljs-string">End</span>;<br><span class="hljs-comment">//注意Foo后面跟一个空行，不可删除</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$s</span> = <span class="hljs-string">&lt;&lt;&lt; End</span><br><span class="hljs-string">Foo</span><br><span class="hljs-string"></span><br><span class="hljs-string">End</span>;<br><span class="hljs-comment">// 注意Foo后面跟一个空行，不可删除</span><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 变量 概述  PHP的变量是指用一个美元符号$作为前缀的标识符，例如:  1234$name$Age$_debugging$MAXIMUM_IMPACT  变量可以存放任意类型的值，在编译或运行时没有变量的类型检查，可以用其他不同类型的值替换一个变量的值  123$what &#x3D; &quot;Fred&quot;;$what &#x3D; 35;$what &#x3D; array(&amp;#x27;Fred&amp;#x2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-20T15:37:23.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.251Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.398Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -269,7 +269,7 @@
 <ul>
 <li>函数可以通过引用返回值</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> &amp;<span class="hljs-title">ret_ref</span>(<span class="hljs-params"></span>) </span>&#123;<span class="hljs-comment">//注意&amp;</span><br>    <span class="hljs-variable">$var</span> = <span class="hljs-string">&quot;PHP&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var</span>;<br>&#125;<br><span class="hljs-variable">$v</span> = &amp;ret_ref();<span class="hljs-comment">//注意&amp;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> &amp;<span class="hljs-title">ret_ref</span>(<span class="hljs-params"></span>) </span>&#123;<span class="hljs-comment">// 注意&amp;</span><br>    <span class="hljs-variable">$var</span> = <span class="hljs-string">&quot;PHP&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$var</span>;<br>&#125;<br><span class="hljs-variable">$v</span> = &amp;ret_ref();<span class="hljs-comment">// 注意&amp;</span><br></code></pre></td></tr></table></figure>
 <h2 id="变量作用域">变量作用域</h2>
 <ul>
 <li>由变量声明的位置控制的变量作用域(scope),决定程序的哪些部分可以访问变量，在PHP中由4种类型的变量作用域：局部作用域，全局作用域，静态变量和函数参数</li>
@@ -311,11 +311,11 @@
 <li>要理解PHP里的内存管理，首先要知道符号表(symbol table)的思想，一个变量有两部分–变量名（如$name)和变量值（如&quot;Fred&quot;)符号表是一个将变量名映射到内存中变量值所在地址的数组</li>
 <li>当从一个变量复制值到另一个变量时,PHP没有为复制值使用更多的内存，相反，它更新了符号表来说明&quot;这两个变量都是同一内存块的名字&quot;,所以下面的代码实际上并没有创建一个新数组:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$worker</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;Fred&quot;</span>,<span class="hljs-number">35</span>,<span class="hljs-string">&quot;Wilma&quot;</span>);<br><span class="hljs-variable">$other</span> = <span class="hljs-variable">$worker</span>;<span class="hljs-comment">//数组没有被复制</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$worker</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;Fred&quot;</span>,<span class="hljs-number">35</span>,<span class="hljs-string">&quot;Wilma&quot;</span>);<br><span class="hljs-variable">$other</span> = <span class="hljs-variable">$worker</span>;<span class="hljs-comment">// 数组没有被复制</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果后来修改了任意一个人拷贝,PHP将分配所需的内存来产生复制:\</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">%worker[<span class="hljs-number">1</span>] = <span class="hljs-number">36</span>;<span class="hljs-comment">//值改变时，数组被复制</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">%worker[<span class="hljs-number">1</span>] = <span class="hljs-number">36</span>;<span class="hljs-comment">// 值改变时，数组被复制</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>通过延迟分配和复制,PHP在很多情形下节省了时间和内存，这就是写时复制</li>
 <li>符号表指向的每一个值都有引用计数(reference counting),它的数值表示取得那块内存的途径数目，在将数组初值赋给<code>$worker</code>和将<code>$worker</code>赋给<code>$other</code>之后，符号表中指向数组条目(<code>$worker</code>和<code>$other</code>)的引用计数为2,换言之，那片内存有两种取得方式:
@@ -327,11 +327,11 @@
 <li>引用计数是管理内存的较好方式，保持变量作用域限制于函数中，通过值来传递，并让引用计数来管理内存，如果你想要主要获得更多的信息和控制权来释放变量的值，可以使用<code>isset()</code>和<code>unset()</code>函数</li>
 <li>查看一个变量是否被设置甚至是空字符串，使用<code>isset()</code>:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$s1</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$name</span>);<span class="hljs-comment">//$s1是false</span><br><span class="hljs-variable">$name</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<br><span class="hljs-variable">$s2</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$name</span>);<span class="hljs-comment">//是true</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$s1</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$name</span>);<span class="hljs-comment">//$s1是false</span><br><span class="hljs-variable">$name</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<br><span class="hljs-variable">$s2</span> = <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$name</span>);<span class="hljs-comment">// 是true</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用unset()来移除一个变量的值:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<span class="hljs-comment">//值为NULL</span><br><span class="hljs-keyword">unset</span>(<span class="hljs-variable">$name</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$name</span> = <span class="hljs-string">&quot;Fred&quot;</span>;<span class="hljs-comment">// 值为NULL</span><br><span class="hljs-keyword">unset</span>(<span class="hljs-variable">$name</span>);<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>

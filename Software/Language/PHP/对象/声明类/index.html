@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 声明类  如果想用面向对象的风格来设计你的PHP程序或者类库，你需要用class关键字来定义你的类，类定义包括类的名称，属性和方法等，类名不区分大小写，命名规则和PHP标识符的命名规则相同，类名stdClass为保留名称，不可用，下面是定义一个类的语法:  123456789class classname [extends baseclass]&amp;#123;    [var $propert">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-07T13:09:57.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.314Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -231,7 +231,7 @@
 <ul>
 <li>如果想用面向对象的风格来设计你的PHP程序或者类库，你需要用class关键字来定义你的类，类定义包括类的名称，属性和方法等，类名不区分大小写，命名规则和PHP标识符的命名规则相同，类名stdClass为保留名称，不可用，下面是定义一个类的语法:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">classname</span> [<span class="hljs-keyword">extends</span> <span class="hljs-title">baseclass</span>]</span><br><span class="hljs-class"></span>&#123;<br>    [<span class="hljs-keyword">var</span> <span class="hljs-variable">$property</span> [ = value ];...]<br>    [<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">functionname</span>(<span class="hljs-params">args</span>)</span>&#123;<br>        <span class="hljs-comment">//代码</span><br>    &#125;<br>     ...<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">classname</span> [<span class="hljs-keyword">extends</span> <span class="hljs-title">baseclass</span>]</span><br><span class="hljs-class"></span>&#123;<br>    [<span class="hljs-keyword">var</span> <span class="hljs-variable">$property</span> [ = value ];...]<br>    [<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">functionname</span>(<span class="hljs-params">args</span>)</span>&#123;<br>        <span class="hljs-comment">// 代码</span><br>    &#125;<br>     ...<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="声明类方法">声明类方法</h2>
 <ul>
 <li>方法即类内部定义的函数，尽管PHP没有特殊限制，绝大多数类方法通常都只操作方法所在的对象内部的数据，在将来PHP预定义的类方法命名会采用两个下划线<code>__</code>开头（现在已经用在了对象序列化方法<code>__sleep()</code>和<code>__wakup()</code>上),所以建议你自己的类方法命名不要采用<code>__</code>开头</li>
@@ -243,7 +243,7 @@
 <li>就像你看到的,<code>get_name()</code>和<code>set_name()</code>方法使用了<code>$this</code>来访问和设置当前对象的<code>$name</code>属性</li>
 <li>为了声明一个方法为静态方法，可以使用static关键字，在静态方法内部,<code>$this</code>会失效</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">HTML_Stuff</span></span>&#123;<br>    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start_table</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;table border=&#x27;1&#x27;&gt;\n&quot;</span>;<br>    &#125;<br>    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">end_table</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span><span class="hljs-string">&quot;&lt;/table&gt;\n&quot;</span>;<br>    &#125;<br>&#125;<br><br>HTML_Stuff::start_table();<br><span class="hljs-comment">//打印HTML表格的行和列</span><br>HTML_Stuff::end_table();<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">HTML_Stuff</span></span>&#123;<br>    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start_table</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&lt;table border=&#x27;1&#x27;&gt;\n&quot;</span>;<br>    &#125;<br>    <span class="hljs-built_in">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">end_table</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">echo</span><span class="hljs-string">&quot;&lt;/table&gt;\n&quot;</span>;<br>    &#125;<br>&#125;<br><br>HTML_Stuff::start_table();<br><span class="hljs-comment">// 打印HTML表格的行和列</span><br>HTML_Stuff::end_table();<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果使用final关键字来声明一个类方法，子类将无法覆写这个方法，例如:</li>
 </ul>
@@ -257,7 +257,7 @@
 <ul>
 <li>你可以赋予属性默认值，但默认值只能是常量，不能是表达式:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">var</span> <span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;J Doe&#x27;</span>;	<span class="hljs-comment">//有效</span><br><span class="hljs-keyword">var</span> <span class="hljs-variable">$age</span> = <span class="hljs-number">0</span>;			<span class="hljs-comment">//有效</span><br><span class="hljs-keyword">var</span> <span class="hljs-variable">$day</span> = <span class="hljs-number">60</span>*<span class="hljs-number">50</span>*<span class="hljs-number">24</span>;	<span class="hljs-comment">//无效</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">var</span> <span class="hljs-variable">$name</span> = <span class="hljs-string">&#x27;J Doe&#x27;</span>;	<span class="hljs-comment">// 有效</span><br><span class="hljs-keyword">var</span> <span class="hljs-variable">$age</span> = <span class="hljs-number">0</span>;			<span class="hljs-comment">// 有效</span><br><span class="hljs-keyword">var</span> <span class="hljs-variable">$day</span> = <span class="hljs-number">60</span>*<span class="hljs-number">50</span>*<span class="hljs-number">24</span>;	<span class="hljs-comment">// 无效</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>使用访问标识符，你可以改变属性的&quot;可见度&quot;,在对象外部范围内可以访问到的属性应该被声明为public,只能被同一个类中的方法访问到的属性应当声明为private,另外，如果属性被声明为protected,那么属性只能被当前类及其子类访问到</li>
 <li>例如，你可以这样声明一个用户类:</li>
@@ -272,7 +272,7 @@
 <li>如果一个未定义的属性被访问，并且类中定义了<code>__get()</code>或<code>__set()</code>方法，这两个方法将优先给该属性赋值或者取得该属性的值</li>
 <li>例如，定义一个类来从数据库中读取数据，除非是在特定的条件下，你可能不想读取大量数据例如BLOB类型的数据，一个常见的实现方法就是，为需要访问的属性创建访问方法，不管在什么时候请求，都去读写数据库，另一种方法则是:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>&#123;<br>    __get(<span class="hljs-variable">$property</span>)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$property</span> == <span class="hljs-string">&#x27;biography&#x27;</span>)&#123;<br>            <span class="hljs-variable">$biography</span> = <span class="hljs-string">&quot;long text here...&quot;</span>;<span class="hljs-comment">//从数据库中读取数据</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-variable">$biography</span>;<br>        &#125;<br>    &#125;<br>    __set(<span class="hljs-variable">$property</span>,<span class="hljs-variable">$value</span>)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$property</span> == <span class="hljs-string">&#x27;biography&#x27;</span>)&#123;<br>            <span class="hljs-comment">//在数据库中设置值</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>&#123;<br>    __get(<span class="hljs-variable">$property</span>)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$property</span> == <span class="hljs-string">&#x27;biography&#x27;</span>)&#123;<br>            <span class="hljs-variable">$biography</span> = <span class="hljs-string">&quot;long text here...&quot;</span>;<span class="hljs-comment">// 从数据库中读取数据</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-variable">$biography</span>;<br>        &#125;<br>    &#125;<br>    __set(<span class="hljs-variable">$property</span>,<span class="hljs-variable">$value</span>)&#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable">$property</span> == <span class="hljs-string">&#x27;biography&#x27;</span>)&#123;<br>            <span class="hljs-comment">// 在数据库中设置值</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="声明类常量">声明类常量</h2>
 <ul>
 <li>和用<code>define()</code>定义的全局变量不同,PHP提供了一个方法在类内部定义常量，就像静态属性一样，类常量可以直接访问，不需要实例化，一旦定义了一个类常量，它的值就不能改变</li>
@@ -291,7 +291,7 @@
 <li>如果一个衍生类（子类）与它的父类具有相同名称的属性或方法，则衍生类中的属性和方法比父类中的优先级高，会覆写(override,也可称覆盖）父类中的属性和方法，访问类属性会返回子类中的属性值，引用类方法则会调用衍生类中的方法</li>
 <li>为了访问父类中的被覆写的方法，可以用<code>parent::method()</code>:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-built_in">parent</span>::birthday();<span class="hljs-comment">//调用父类中的birthday()方法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-built_in">parent</span>::birthday();<span class="hljs-comment">// 调用父类中的birthday()方法</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>一个常见的错误是把父类的名称硬编码到对被覆写方法的调用中:</li>
 </ul>
@@ -300,9 +300,9 @@
 <li>这样会出错，因为它在子类中直接引用了父类名，正确的作法是在extends语句中使用<code>parent::</code></li>
 <li>如果一个方法为当前类所定义的，并且你想确保调用的是当前类的方法，可使用<code>self::method()</code>:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-built_in">self</span>::birthday();<span class="hljs-comment">//调用当前类的birthday()方法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-built_in">self</span>::birthday();<span class="hljs-comment">// 调用当前类的birthday()方法</span><br></code></pre></td></tr></table></figure>
 <p>为了检查一个对象是否是一个特定的类的实例，或者是否实现了一个特定的接口(interface),你可以使用instanceof操作符:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$object</span> <span class="hljs-keyword">instanceof</span> Animal)&#123;<br>    <span class="hljs-comment">//如果是Animal类的实例，做些什么</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$object</span> <span class="hljs-keyword">instanceof</span> Animal)&#123;<br>    <span class="hljs-comment">// 如果是Animal类的实例，做些什么</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="接口">接口</h2>
 <ul>
 <li>接口(interface)提供了定义一个类所遵循的规则的途径，接口提供了类方法的原型和常量，任何实现(implement)该接口的类必须提供接口中所有方法的具体实现</li>

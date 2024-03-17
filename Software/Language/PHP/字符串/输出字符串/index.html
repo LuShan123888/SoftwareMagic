@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 输出字符串  有4种方法可以向浏览器发送输出内容,echo结构让你一次输出许多值，而print()只能输出一个值,printf()函数通过把值插入到模板中来建立一个格式化的字符串,print_r()函数利于调试–它用更容易读懂的方式来打印数组，对象和其他东西的内容  echo  要把一个字符串放到PHP生成的HTML页面中，可以使用echo,echo的大部分行为看起来像是一个函数，但其实e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-06-20T15:27:30.000Z">
-<meta property="article:modified_time" content="2024-03-17T15:36:21.240Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.399Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -235,7 +235,7 @@
 <ul>
 <li>要把一个字符串放到PHP生成的HTML页面中，可以使用echo,echo的大部分行为看起来像是一个函数，但其实echo是一个语言结构(language construct),这意味着可以省略小括号，所以下面两个语句是等价的:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">echo <span class="hljs-string">&quot;Printy&quot;</span>;<br>echo (<span class="hljs-string">&quot;Printy&quot;</span>);	<span class="hljs-comment">//也是合法的</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">echo <span class="hljs-string">&quot;Printy&quot;</span>;<br>echo (<span class="hljs-string">&quot;Printy&quot;</span>);	<span class="hljs-comment">// 也是合法的</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>可以通过逗号分隔来指定打印多少项:</li>
 </ul>
@@ -243,11 +243,11 @@
 <ul>
 <li>在尝试echo多个值时，使用小括号会产生语法错误:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//这是一个语法错误</span><br>echo (<span class="hljs-string">&quot;Hello&quot;</span>,<span class="hljs-string">&quot;word&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 这是一个语法错误</span><br>echo (<span class="hljs-string">&quot;Hello&quot;</span>,<span class="hljs-string">&quot;word&quot;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>因为echo并不是真正的函数，所以不可以把它作为表达式的一部分使用:</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//语法错误</span><br><span class="hljs-keyword">if</span>(echo(<span class="hljs-string">&quot;test&quot;</span>))&#123;<br>    echo (<span class="hljs-string">&quot;it worked&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 语法错误</span><br><span class="hljs-keyword">if</span>(echo(<span class="hljs-string">&quot;test&quot;</span>))&#123;<br>    echo (<span class="hljs-string">&quot;it worked&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>通过使用函数<code>print()</code>或<code>printf()</code>,很容易补救这种错误</li>
 </ul>
@@ -354,7 +354,7 @@
 <ul>
 <li>函数<code>sprintf()</code>和<code>printf()</code>的参数相同，但只是返回生成的字符串而不打印出来，这可以让你把字符串保存到一个变量中供稍后使用:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$date</span> = sprintf(<span class="hljs-string">&quot;%02d/%02d/%04d&quot;</span>,<span class="hljs-variable">$mouth</span>,<span class="hljs-variable">$day</span>,<span class="hljs-variable">$yyear</span>);	<span class="hljs-comment">//现在我们可以在任何一个需要日期的地方将类型说明符%d替换成$date的值</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$date</span> = sprintf(<span class="hljs-string">&quot;%02d/%02d/%04d&quot;</span>,<span class="hljs-variable">$mouth</span>,<span class="hljs-variable">$day</span>,<span class="hljs-variable">$yyear</span>);	<span class="hljs-comment">// 现在我们可以在任何一个需要日期的地方将类型说明符%d替换成$date的值</span><br></code></pre></td></tr></table></figure>
 <h2 id="print-r-and-var-dump">print_r() and var_dump()</h2>
 <ul>
 <li><code>print_r()</code>结构可以聪明地显示传给它的东西，而不是像<code>echo</code>和<code>print()</code>那样把所有的都转换为字符串，使用<code>print_r()</code>,字符串和数字都简单地打印出来，而数组则以括起来的键和值的列表形式显示，并以Array开头:</li>
@@ -368,7 +368,7 @@
 <ul>
 <li>用<code>print_r</code>输出布尔值和NULL的结果是没有意义的:</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">print_r(<span class="hljs-literal">true</span>);	<span class="hljs-comment">//打印&quot;\n&quot;;</span><br>print_r(<span class="hljs-literal">false</span>);	<span class="hljs-comment">//打印&quot;\n&quot;;</span><br>print_r(<span class="hljs-literal">NULL</span>);	<span class="hljs-comment">//打印&quot;\n&quot;;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">print_r(<span class="hljs-literal">true</span>);	<span class="hljs-comment">// 打印&quot;\n&quot;;</span><br>print_r(<span class="hljs-literal">false</span>);	<span class="hljs-comment">// 打印&quot;\n&quot;;</span><br>print_r(<span class="hljs-literal">NULL</span>);	<span class="hljs-comment">// 打印&quot;\n&quot;;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>由于这个原因,<code>var_dump()</code>比<code>print_r()</code>更适合调试</li>
 <li>函数<code>var_dump()</code>以更适合阅读的格式显示任何PHP值:</li>

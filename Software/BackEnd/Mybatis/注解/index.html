@@ -24,7 +24,7 @@
 <meta property="og:description" content="Mybatis 注解  mybatis最初配置信息是基于 XML ,映射语句(SQL)也是定义在 XML 中的，而到MyBatis 3提供了新的基于注解的配置 但是Java 注解的的表达力和灵活性十分有限，最强大的 MyBatis 映射并不能用注解来构建 注意:利用注解开发就不需要mapper.xml映射文件了，通过class绑定接口  123&lt;mappers&gt;   &lt;mappe">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.579Z">
-<meta property="article:modified_time" content="2024-03-17T15:48:19.929Z">
+<meta property="article:modified_time" content="2024-03-17T17:34:39.772Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年3月17日 晚上
+                  本文最后更新于：2024年3月18日 凌晨
                 
               </p>
             
@@ -238,16 +238,16 @@
 <ol>
 <li>在接口中添加注解</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//查询全部用户</span><br><span class="hljs-meta">@Select(&quot;select id,name,pwd password from user&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">getAllUser</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 查询全部用户</span><br><span class="hljs-meta">@Select(&quot;select id,name,pwd password from user&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">getAllUser</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></table></figure>
 <ol start="2">
 <li>测试</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testGetAllUser</span><span class="hljs-params">()</span> </span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   <span class="hljs-comment">//本质上利用了jvm的动态代理机制</span><br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   List&lt;User&gt; users = mapper.getAllUser();<br>   <span class="hljs-keyword">for</span> (User user : users)&#123;<br>       System.out.println(user);<br>  &#125;<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testGetAllUser</span><span class="hljs-params">()</span> </span>&#123;<br>   SqlSession session = MybatisUtils.getSession();<br>   <span class="hljs-comment">// 本质上利用了jvm的动态代理机制</span><br>   UserMapper mapper = session.getMapper(UserMapper.class);<br><br>   List&lt;User&gt; users = mapper.getAllUser();<br>   <span class="hljs-keyword">for</span> (User user : users)&#123;<br>       System.out.println(user);<br>  &#125;<br><br>   session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="Insert">@Insert</h2>
 <ol>
 <li>编写接口方法注解</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//添加一个用户</span><br><span class="hljs-meta">@Insert(&quot;insert into user (id,name,pwd) values (#&#123;id&#125;,#&#123;name&#125;,#&#123;pwd&#125;)&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">addUser</span><span class="hljs-params">(User user)</span></span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 添加一个用户</span><br><span class="hljs-meta">@Insert(&quot;insert into user (id,name,pwd) values (#&#123;id&#125;,#&#123;name&#125;,#&#123;pwd&#125;)&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">addUser</span><span class="hljs-params">(User user)</span></span>;<br></code></pre></td></tr></table></figure>
 <ol start="2">
 <li>测试</li>
 </ol>
@@ -256,7 +256,7 @@
 <ol>
 <li>编写接口方法注解</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//修改一个用户</span><br><span class="hljs-meta">@Update(&quot;update user set name=#&#123;name&#125;,pwd=#&#123;pwd&#125; where id = #&#123;id&#125;&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">updateUser</span><span class="hljs-params">(User user)</span></span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 修改一个用户</span><br><span class="hljs-meta">@Update(&quot;update user set name=#&#123;name&#125;,pwd=#&#123;pwd&#125; where id = #&#123;id&#125;&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">updateUser</span><span class="hljs-params">(User user)</span></span>;<br></code></pre></td></tr></table></figure>
 <ol start="2">
 <li>测试</li>
 </ol>
@@ -265,7 +265,7 @@
 <ol>
 <li>编写接口方法注解</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//根据id删除用</span><br><span class="hljs-meta">@Delete(&quot;delete from user where id = #&#123;id&#125;&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">deleteUser</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;id&quot;)</span><span class="hljs-keyword">int</span> id)</span></span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据id删除用</span><br><span class="hljs-meta">@Delete(&quot;delete from user where id = #&#123;id&#125;&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">deleteUser</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;id&quot;)</span><span class="hljs-keyword">int</span> id)</span></span>;<br></code></pre></td></tr></table></figure>
 <ol start="2">
 <li>测试</li>
 </ol>
