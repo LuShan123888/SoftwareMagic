@@ -138,7 +138,7 @@ categories:
 **Option-Delete**|删除插入点左边的字词
 **Control-H**|删除插入点左边的字符，也可以使用 Delete 键
 **Control-D**|删除插入点右边的字符，也可以使用 Fn-Delete
-**Fn-Delete**|在没有向前删除  键的键盘上向前删除，也可以使用 Control-D
+**Fn-Delete**|在没有向前删除键的键盘上向前删除，也可以使用 Control-D
 **Control-K**|删除插入点与行或段落末尾处之间的文本
 **Fn–上箭头**|Page Up
 **Fn–下箭头**|Page Down

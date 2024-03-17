@@ -17,7 +17,7 @@ $ git mv [file-original] [file-renamed]
 - 上述命令等同于:
 
 ```shell
-rename/mv 旧文件名 新文件名
+rename/mv 旧文件名新文件名
 git rm 旧文件名
 git add 新文件名
 ```

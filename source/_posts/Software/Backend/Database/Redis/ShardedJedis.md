@@ -26,7 +26,7 @@ categories:
 
 | 类名               | 职责                                                         |
 | ------------------ | ------------------------------------------------------------ |
-| Sharded            | 抽象了基于一致性哈希算法的划分设计,设计思路 基于hash算法划分redis服务器保持每台Redis服务器的Jedis客户端提供基于Key的划分方法,提供了ShardKeyTag实现 |
+| Sharded            | 抽象了基于一致性哈希算法的划分设计,设计思路基于hash算法划分redis服务器保持每台Redis服务器的Jedis客户端提供基于Key的划分方法,提供了ShardKeyTag实现 |
 | BinaryShardedJedis | 同BinaryJedis类似,实现BinaryJedisCommands对外提供基于Byte[]的key,value操作 |
 | ShardedJedis       | 同Jedis类似,实现JedisCommands对外提供基于String的key,value操作 |
 

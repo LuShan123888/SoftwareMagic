@@ -35,7 +35,7 @@ func main() {
     var cityArray = [3]string{"北京", "上海", "深圳"} //使用指定的初始值完成初始化
     fmt.Println(testArray)                      //[0 0 0]
     fmt.Println(numArray)                       //[1 2 0]
-    fmt.Println(cityArray)                      //[北京 上海 深圳]
+    fmt.Println(cityArray)                      //[北京上海深圳]
 }
 ```
 
@@ -47,7 +47,7 @@ func main() {
 	var cityArray = [...]string{"北京", "上海", "深圳"}
 	fmt.Println(numArray)                           //[1 2]
 	fmt.Printf("type of numArray:%T\n", numArray)   //type of numArray:[2]int
-	fmt.Println(cityArray)                          //[北京 上海 深圳]
+	fmt.Println(cityArray)                          //[北京上海深圳]
 	fmt.Printf("type of cityArray:%T\n", cityArray) //type of cityArray:[3]string
 }
 ```
@@ -92,7 +92,7 @@ func main() {
         {"广州", "深圳"},
         {"成都", "重庆"},
     }
-    fmt.Println(a) //[[北京 上海] [广州 深圳] [成都 重庆]]
+    fmt.Println(a) //[[北京上海] [广州深圳] [成都重庆]]
     fmt.Println(a[2][1]) //支持索引取值：重庆
 }
 ```

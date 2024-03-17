@@ -95,7 +95,7 @@ String token = Jwts.builder()
   .setIssuedAt(new Date())
   // 签发者
   .setIssuer("sans")
-  // 自定义属性 放入用户拥有权限
+  // 自定义属性放入用户拥有权限
   .claim("authorities", JSON.toJSONString(selfUserEntity.getAuthorities()))
   // 失效时间
   .setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration))

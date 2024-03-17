@@ -195,7 +195,7 @@ public class CustomConsumer {
 ### 消费者重置offset
 
 - 由于 consumer 在消费过程中可能会出现断电宕机等故障,consumer 恢复后，需要从故障前的位置的继续消费，所以consumer 需要实时记录自己消费到了哪个 offset,以便故障恢复后继续消费
-- 当消费者切换消费者组或数据过期失效的情况下,offset会找不到，此时可以选择不同 的策略重新定位offset
+- 当消费者切换消费者组或数据过期失效的情况下,offset会找不到，此时可以选择不同的策略重新定位offset
 
 ```java
 public static final String AUTO_OFFSET_RESET_CONFIG = "auto.offset.reset";

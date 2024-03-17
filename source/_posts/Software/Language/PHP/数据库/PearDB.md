@@ -329,7 +329,7 @@ $db->insertMultiple($compiled,$books);
 
 PEAR DB提供一些快捷的方法，只需要一个步骤就可以执行一个查询和获取结果集:`getOne()`,`getRow()`,`getCol()`,`getAssoc()`和`getAll()`,这些方法都允许使用占位符
 
-- `getOne()`方法获取SQL查询结果中的第一行的第一列的 内容:
+- `getOne()`方法获取SQL查询结果中的第一行的第一列的内容:
 
     > ```php
     > $value = $db->getOne(SQL [, values ]);
@@ -502,7 +502,7 @@ $res = $db->dropSequence(sequence);
 $data = $db->gerListOf(what);
 ```
 
-- what参数是用于指定要列除的数据库组件的额字符串，大多数的 数据库支持"databases",某些数据库支持"users","views"和"functions"
+- what参数是用于指定要列除的数据库组件的额字符串，大多数的数据库支持"databases",某些数据库支持"users","views"和"functions"
 - 例如，下面的代码是把当前可用的数据库列表存放到`$dbs`中:
 
 ```php

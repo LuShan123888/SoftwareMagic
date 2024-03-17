@@ -162,7 +162,7 @@ coderknock> SETBIT bits-2 3 1
 (integer) 0
 # bits-2 为 1011
 
-#bits-1 bits-2 做 并 操作
+#bits-1 bits-2 做并 操作
 coderknock> BITOP AND and-result bits-1 bits-2
 (integer) 1
 coderknock> GETBIT and-result 0
@@ -175,7 +175,7 @@ coderknock> GETBIT and-result 3
 (integer) 1
 #and-result 1001
 
-#bits-1 bits-2 做 或 操作
+#bits-1 bits-2 做或 操作
 coderknock> BITOP OR or-result bits-1 bits-2
 (integer) 1
 coderknock> GETBIT and-result 0
@@ -188,7 +188,7 @@ coderknock> GETBIT and-result 3
 (integer) 1
 #or-result 1011
 
-# 非 操作只能针对一个 key
+# 非操作只能针对一个 key
 coderknock> BITOP NOT not-result bits-1 bits-2
 (error) ERR BITOP NOT must be called with a single source key.
 coderknock> BITOP NOT not-result bits-1
@@ -420,7 +420,7 @@ long qdCount = redis.bitcount(cacheKey);复制代码
 
 #### 使用场景二：统计活跃用户
 
-- 使用时间作为cacheKey,然后用户ID为offset,如果当日活跃过就设置为1 那么我该如果计算某几天/月/年的活跃用户呢（暂且约定,统计时间内只有有一天在线就称为活跃),有请下一个Redis的命令 命令 BITOP operation destkey key [key ...] 说明：对一个或多个保存二进制位的字符串 key 进行位元操作,并将结果保存到 destkey 上, 说明:BITOP 命令支持 AND , OR , NOT , XOR 这四种操作中的任意一种参数
+- 使用时间作为cacheKey,然后用户ID为offset,如果当日活跃过就设置为1 那么我该如果计算某几天/月/年的活跃用户呢（暂且约定,统计时间内只有有一天在线就称为活跃),有请下一个Redis的命令命令 BITOP operation destkey key [key ...] 说明：对一个或多个保存二进制位的字符串 key 进行位元操作,并将结果保存到 destkey 上, 说明:BITOP 命令支持 AND , OR , NOT , XOR 这四种操作中的任意一种参数
 
 ```
 Map<String,List<Integer>>dateActiveuser = new HashMap<>();

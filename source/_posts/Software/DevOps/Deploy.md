@@ -26,7 +26,7 @@ categories:
 
 ### 红黑部署
 
-- 与蓝绿部署相比,红黑部署 充分利用了云计算的弹性伸缩优势
+- 与蓝绿部署相比,红黑部署充分利用了云计算的弹性伸缩优势
 
 ![iShot2021-12-11 23.51.31](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/iShot2021-12-11%2023.51.31.png)
 

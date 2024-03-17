@@ -69,7 +69,7 @@ class GetURL {
 ## URLConnection类
 
 - 前面介绍的URL访问只能读取URL数据源的数据，实际应用中，有时需要与URL资源进行双向通信，则要用到`URLConnection`类
-- `URLConnection`类将创建一个对指定URL的连接对象，其构造方法是`URLConnection`(URL),当构建`URLConnection`对象并未建立与指定URL的 连接，还必须使用`URLConnection`类中的`connect()`方法建立连接
+- `URLConnection`类将创建一个对指定URL的连接对象，其构造方法是`URLConnection`(URL),当构建`URLConnection`对象并未建立与指定URL的连接，还必须使用`URLConnection`类中的`connect()`方法建立连接
 - 另一种与URL建立双向连接的方法是使用URL类中的`openConnection()`方法，它返回建立好连接的`URLConnection`对象
 - URLConnection类的几个主要方法如下:
     - `void connect()`:打开URL所指资源的通信链路

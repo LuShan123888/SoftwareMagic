@@ -345,7 +345,7 @@ CSRFTester是一款CSRF漏洞的测试工具,CSRFTester工具的测试原理大�
 简单总结一下上文的防护策略:
 
 - CSRF自动防御策略：同源检测(Origin 和 Referer 验证)
-- CSRF主动防御措施:Token验证 或者 双重Cookie验证 以及配合Samesite Cookie
+- CSRF主动防御措施:Token验证或者双重Cookie验证以及配合Samesite Cookie
 - 保证页面的幂等性，后端接口不要在GET页面中做用户操作
 
 为了更好的防御CSRF,最佳实践应该是结合上面总结的防御措施方式中的优缺点来综合考虑，结合当前Web应用程序自身的情况做合适的选择，才能更好的预防CSRF的发生

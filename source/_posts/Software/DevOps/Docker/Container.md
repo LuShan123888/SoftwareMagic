@@ -470,7 +470,7 @@ $ docker attach --sig-proxy=false mynginx
 - **docker rename**: 用于修改容器名
 
 ```
-$ docker rename 原容器名  新容器名
+$ docker rename 原容器名新容器名
 ```
 
 ## 容器rootfs

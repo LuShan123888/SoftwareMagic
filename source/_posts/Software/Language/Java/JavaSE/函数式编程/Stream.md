@@ -209,7 +209,7 @@ List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 List<Integer> list = numbers.stream().toArray();
 ```
 
-- 若是对象数组，则要在 toArray 里面加上 生产对象数组的方法引用
+- 若是对象数组，则要在 toArray 里面加上生产对象数组的方法引用
 
 ```java
 //Integer 数组
@@ -311,7 +311,7 @@ public void reduce() {
 #### 分组
 
 - Collectors.groupingBy()
-- 分组与SQL 中的 **GROUP BY** 十分类似，所以`groupingBy()`的所有参数中有一个参数是 Collector接口，这样就能够和求和/求平均值/归约 一起使用
+- 分组与SQL 中的 **GROUP BY** 十分类似，所以`groupingBy()`的所有参数中有一个参数是 Collector接口，这样就能够和求和/求平均值/归约一起使用
     ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg)
 - 传入参数的接口是 Function 接口，实现这个接口可以是实现从 A 类型到 B 类型的转换
 - 其中有一个方法可以传入参数 `Supplier mapFactory`,这个可以通过自定义 Map工厂，来创建自定义的分组 Map

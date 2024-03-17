@@ -255,7 +255,7 @@ var zhCN = {
     IMAGE_TIP_TOGGLE_NAME: "展示缩放比例提示",
     IMAGE_TIP_TOGGLE_DESC: "开启后，当你缩放图片时会展示当前缩放的比例。",
     IMG_FULL_SCREEN_MODE_NAME: '全屏预览模式',
-    // 全屏预览模式 下拉：
+    // 全屏预览模式下拉：
     FIT: '自适应',
     FILL: '填充',
     STRETCH: '拉伸',

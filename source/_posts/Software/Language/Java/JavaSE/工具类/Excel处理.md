@@ -479,7 +479,7 @@ public class DemoDataListener extends AnalysisEventListener<DemoData> {
     }
 
     /**
-     * 所有数据解析完成了 都会来调用
+     * 所有数据解析完成了都会来调用
      */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
@@ -504,7 +504,7 @@ public class Test {
     public void EasyExcelTest() {
         // 写法1:
         String fileName = PATH + "EasyExcel.xlsx";
-        // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+        // 这里需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
         EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
 
         // 写法2:

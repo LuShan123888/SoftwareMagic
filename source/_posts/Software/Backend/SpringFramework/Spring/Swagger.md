@@ -10,7 +10,7 @@ categories:
 
 ## 简介
 
-- 号称世界上最流行的API框架,Restful Api 文档在线自动生成器，即API 文档 与API 定义同步更新
+- 号称世界上最流行的API框架,Restful Api 文档在线自动生成器，即API 文档与API 定义同步更新
 - 官网:https://swagger.io/
 
 ## pom.xml

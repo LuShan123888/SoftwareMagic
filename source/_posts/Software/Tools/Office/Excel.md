@@ -57,7 +57,7 @@ categories:
         - 向上取整函数ROUNDUP(Number,0)
             - 功能：求大于或等一个整数,即向上舍入到最接近的整数
         - 逻辑函数OR
-            - 功能：在其参数组中,任何一个参数 逻辑值为TRUE,即返回TRUE;所有参数的逻辑值为FALSE才返回FALSE
+            - 功能：在其参数组中,任何一个参数逻辑值为TRUE,即返回TRUE;所有参数的逻辑值为FALSE才返回FALSE
             - 格式:OR(Logical1,Logical2,...)
             - 示例:A3单元格内容为98,B3单元格内容为84,则OR(A3<100,B3>90)结果为TRUE,结果为TURE
         - 逻辑函数AND

@@ -92,7 +92,7 @@ $ docker volume prune
 - **注意**:容器删除后,主机目录仍然存在
 
 ```shell
-$ docker run -v 主机目录：容器目录 镜像名
+$ docker run -v 主机目录：容器目录镜像名
 ```
 
 - 通过在容器目录后加上`:ro`或`:rw`可指定读写权限
@@ -109,7 +109,7 @@ $ docker run -d -P --name nginx2 -v /home/nginx:/etc/nginx:rw nginx # 可读可�
 - 没有指定主机地址但指定了volume名
 
 ```shell
-$ docker run  -v vol_name:容器目录 镜像名
+$ docker run  -v vol_name:容器目录镜像名
 
 $ docker run -d -P --name nginx02 -v nginx:/etc/nginx nginx
 DRIVER              VOLUME NAME
@@ -122,7 +122,7 @@ local               nginx
 - 没有指定主机地址和volume名
 
 ```shell
-$ docker run  -v 容器目录 镜像名
+$ docker run  -v 容器目录镜像名
 
 $ docker run -d -P --name nginx01 -v /etc/nginx nginx
 DRIVER              VOLUME NAME
@@ -132,7 +132,7 @@ local               93fd4d232eeee6c2993acafb46d64bba0d56d1991253185ec0902756d634
 ### 挂载共享
 
 ```shell
-$ docker run --volumes-from 被共享容器名 镜像名
+$ docker run --volumes-from 被共享容器名镜像名
 ```
 
 - 挂载共享 volume 的操作实际上是对被共享容器的外部匿名 volume 的挂载分享

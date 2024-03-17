@@ -131,7 +131,7 @@ $('#conRed').css({"background-color":"red","color":"#fff"});
     console.log($("#remove").attr("class"));
     // 修改样式,那么id为remove的元素样式class只有green
     $('#remove').attr("class","green")
-    // 添加样式名称,class名称 同时添加两个类
+    // 添加样式名称,class名称同时添加两个类
     $('#conBlue').addClass("blue larger");
     // 移除样式
     $("#remove").removeClass("blue larger");
@@ -233,7 +233,7 @@ $('<p>this is a paragraph!!!</p>');
 
 ```html
 <script type="text/javascript">
-    // 删除所选元素 或指定的子元素
+    // 删除所选元素或指定的子元素
     $("span").remove();
     // 删除class为blue的span
     $("span.blue").remove();

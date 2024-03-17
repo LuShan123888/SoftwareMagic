@@ -89,13 +89,13 @@ int size;
 ```java
 static final int hash(Object key) {   //JDK1.8 & JDK1.7
     int h;
-    // h = key.hashCode() 为第一步 取hashCode值
-    // h ^ (h >>> 16)  为第二步 高位参与运算
+    // h = key.hashCode() 为第一步取hashCode值
+    // h ^ (h >>> 16)  为第二步高位参与运算
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
 }
 
 static int indexFor(int h, int length) {  //JDK1.7的源码,JDK1.8没有这个方法，但是实现原理一样的
-    return h & (length-1);  //第三步 取模运算
+    return h & (length-1);  //第三步取模运算
 }
 ```
 
@@ -173,7 +173,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
         }
     }
     ++modCount;
-    // 步骤⑥:超过最大容量 就扩容
+    // 步骤⑥:超过最大容量就扩容
     if (++size > threshold)
         resize();
     afterNodeInsertion(evict);

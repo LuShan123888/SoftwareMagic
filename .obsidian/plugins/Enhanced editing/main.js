@@ -767,7 +767,7 @@ class MyPlugin extends obsidian.Plugin {
     };
 
     /** 以下为自定义功能函数 */
-    光标跳转（方向) {
+    光标跳转(方向) {
         this.获取编辑器信息 ();
         //var 选择字数=0;
         var 表达式;
@@ -835,7 +835,7 @@ class MyPlugin extends obsidian.Plugin {
             选至文首 = 编辑模式.getRange({line:0,ch:0},当前光标);
             var 以前字数 = 选至文首.length;
             var 返回位置 = 0;
-            var 搜索结果，起始位置，结束位置;
+            var 搜索结果,起始位置,结束位置;
             if(方向=="下"){
                 搜索范围 = 编辑模式.getRange(当前光标,{line:末行行号,ch:末行文本.length});
                 返回位置 = 搜索范围.search(表达式);
@@ -969,7 +969,7 @@ class MyPlugin extends obsidian.Plugin {
 			所选文本 = "[[" + 所选文本 + "]]";
 		}
         console.log("您划选了 "+旧文本+"\n"+提示语);
-        this.替换所选文本（所选文本);        
+        this.替换所选文本 (所选文本);        
     };
 
     转换同义链接() {
@@ -985,7 +985,7 @@ class MyPlugin extends obsidian.Plugin {
 		}else{
 			所选文本 = "[[|" + 所选文本 + "]]";
 		}
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
         
         var i=0;
         while (i<lNum){
@@ -1022,7 +1022,7 @@ class MyPlugin extends obsidian.Plugin {
                 }
                 
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         }
         
@@ -1049,7 +1049,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^([\t\s]*)([^\t\s])/mg,"$1==$2").replace(/([^\t\s])([\t\s]*)$/mg,"$1==$2");
                 所选文本 = 所选文本.replace(/^====$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         }
         
@@ -1076,7 +1076,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^(.*)$/mg,"\*$1\*");
                 所选文本 = 所选文本.replace(/^\*\*$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         }
     };
@@ -1102,7 +1102,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^(.*)$/mg,"~~$1~~");
                 所选文本 = 所选文本.replace(/^~~~~$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         }
         
@@ -1129,7 +1129,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^(.*)$/mg,"<u>$1</u>");
                 所选文本 = 所选文本.replace(/^\<u\>\<\/u\>$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         }
         
@@ -1150,7 +1150,7 @@ class MyPlugin extends obsidian.Plugin {
             //new obsidian.Notice("需要补充`符号");
             所选文本 = 所选文本.replace(/^(.*)$/mg,"`$1`");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
         编辑模式.exec("goRight");
     };
 
@@ -1171,7 +1171,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.*)$/m,"↫```↫$1↫```↫");
         }
         所选文本 = 所选文本.replace(/↫/g,"\n");
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
         编辑模式.exec("goLeft");
         编辑模式.exec("goLeft");
         编辑模式.exec("goLeft");
@@ -1195,7 +1195,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.*)$/m,"~~~↫$1↫~~~");
         }
         所选文本 = 所选文本.replace(/↫/g,"\n");
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
         编辑模式.exec("goRight");
     };
 
@@ -1222,7 +1222,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^(.+)$/mg,"\<sup\>$1\<\/sup\>");
                 所选文本 = 所选文本.replace(/^\<sup\>\s*\<\/sup\>$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         };
     };
@@ -1249,7 +1249,7 @@ class MyPlugin extends obsidian.Plugin {
                 所选文本 = 所选文本.replace(/^(.+)$/mg,"\<sub\>$1\<\/sub\>");
                 所选文本 = 所选文本.replace(/^\<sub\>\s*\<\/sub\>$/mg,"");
             }
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
             编辑模式.exec("goRight");
         };
     };
@@ -1266,7 +1266,7 @@ class MyPlugin extends obsidian.Plugin {
         }else{
             所选文本 = 所选文本.replace(/^(.+)$/mg,"\{\{c1::$1\}\}");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     选择当前整段 () {    
@@ -1457,7 +1457,7 @@ class MyPlugin extends obsidian.Plugin {
         }else{
             所选文本 = 所选文本.replace(/^(.+)$/mg,_html2);  //new obsidian.Notice("可以转换颜色！");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     转换背景颜色(_color) {
@@ -1480,7 +1480,7 @@ class MyPlugin extends obsidian.Plugin {
         }else{
             所选文本 = 所选文本.replace(/^(.+)$/mg,_html2);  //new obsidian.Notice("可以转换颜色！");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
     
     转换无语法文本() {
@@ -1513,7 +1513,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/\*\*?([^\*]+)\*\*?/g,"$1");
             所选文本 = 所选文本.replace(/~~([^~]+)~~/g,"$1");
             所选文本 = 所选文本.replace(/(\r*\n)+/mg,"\r\n");
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
         }
     };
 
@@ -1522,7 +1522,7 @@ class MyPlugin extends obsidian.Plugin {
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/\[\[([^\[\]]+)\]\]/g,"[$1]($1)");
         笔记正文 = 笔记正文.replace(/(?<=\]\([^\s]*)\s(?=[^\s]*\))/g,"%20");
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     括选文本1() {
@@ -1538,7 +1538,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.+)$/mg,"【$1】");
             所选文本 = 所选文本.replace(/^【\s*】$/mg,"");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     括选文本2() {
@@ -1554,7 +1554,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.+)$/mg,"($1)");
             所选文本 = 所选文本.replace(/^(\s*)$/mg,"");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     括选文本3() {
@@ -1570,7 +1570,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.+)$/mg,"「$1」");
             所选文本 = 所选文本.replace(/^「\s*」$/mg,"");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     括选文本4() {
@@ -1586,7 +1586,7 @@ class MyPlugin extends obsidian.Plugin {
             所选文本 = 所选文本.replace(/^(.+)$/mg,"《$1》");
             所选文本 = 所选文本.replace(/^《\s*》$/mg,"");
         }
-        this.替换所选文本（所选文本);
+        this.替换所选文本 (所选文本);
     };
 
     删除当前段落() {
@@ -1647,7 +1647,7 @@ class MyPlugin extends obsidian.Plugin {
         笔记正文 = 笔记正文.replace(/#+([^#↫]+)↫*$/mg,"$1");    //取消末行标题
         笔记正文 = 笔记正文.replace(/↫{3,}/g,"\r\n\r\n");
         笔记正文 = 笔记正文.replace(/↫/g,"\r\n");
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     指定当前文件名 () {
@@ -1764,7 +1764,7 @@ class MyPlugin extends obsidian.Plugin {
 
     列表转为图示 () {
         var 大纲文本 = 所选文本.replace(/(    |\t)/mg,"■");
-        大纲文本 = 大纲文本.replace(/(\-\s|\d+\.\s)/mg,"");   //对所有文本行的行首进行替换整理，去除-
+        大纲文本 = 大纲文本.replace(/(\-\s|\d+\.\s)/mg,"");   //对所有文本行的行首进行替换整理,去除-
         大纲文本 = 大纲文本.replace(/\s+$/mg,"");   //对所有文本行的行尾进行替换去除
         大纲文本 = 大纲文本.replace(/\n/g,"↵");
         大纲文本 = 大纲文本.replace(/↵+$/,"");   //去除末尾多余换行符
@@ -1780,7 +1780,7 @@ class MyPlugin extends obsidian.Plugin {
                 var m = upLine.lastIndexOf("■");
             }
             
-            if(n<0){//无■，即为根级大纲，可创建@导航页面
+            if(n<0){//无■，即为根级大纲,可创建@导航页面
                 fName = thisLine;
             }else{
                 //new obsidian.Notice(upLine+"  "+m+"\n"+thisLine+"  "+n);
@@ -1807,7 +1807,7 @@ class MyPlugin extends obsidian.Plugin {
         if(新正文.includes("%%此图示由列表文本转换而成！%%")){
             新正文 = 新正文.replace(/%%此图示由列表文本转换而成！%%↵.+?(?=↵```)/g, 输出语法);
             新正文 = 新正文.replace(/↵/g,"\n");
-            this.替换笔记正文（新正文);
+            this.替换笔记正文 (新正文);
         }else{
             new obsidian.Notice("列表文本已转为MerMaid语法。\n可以粘贴！");
             输出语法 = 输出语法.replace(/↵/g,"\n");
@@ -1838,14 +1838,14 @@ class MyPlugin extends obsidian.Plugin {
 		this.获取编辑器信息 ();
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/(?<!^(\s*\- |\s*[0-9]+\.|\s*\>|\n)[^\n]*)\n(?!(\s*\- |\s*[0-9]+\.|\s*\>|\n))/g,"$1\n\n");
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
     
     批量去除空行() {
         this.获取编辑器信息 ();
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/(\r\n|\n)[\t\s]*(\r\n|\n)/g,"\n");
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     首行缩进两字符() {
@@ -1861,21 +1861,21 @@ class MyPlugin extends obsidian.Plugin {
             笔记正文 = 笔记正文.replace(/^[‌‌‌　]+/mg,"");
             isIndent = true;
         }
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     末尾追加空格() {
 		this.获取编辑器信息 ();
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/(?<!(\-\-\-|\*\*\*|\s\s))\n/g,"  \n");
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
         
     去除末尾空格() {
         this.获取编辑器信息 ();
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/\s\s\n/g,"\n")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     上方插入空行(_str) {
@@ -1896,14 +1896,14 @@ class MyPlugin extends obsidian.Plugin {
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/([a-zA-Z]+)([一-鿆]+)/g,"$1 $2")
         笔记正文 = 笔记正文.replace(/([一-鿆]+)([a-zA-Z]+)/g,"$1 $2")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     去除所有空格() {
         this.获取编辑器信息 ();
         if (!笔记正文) return;
         笔记正文 = 笔记正文.replace(/[ 　]+/g,"")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     /* 此功能暂未启用。*/
@@ -1934,7 +1934,7 @@ class MyPlugin extends obsidian.Plugin {
         笔记正文 = 笔记正文.replace(/(?<=[a-zA-Z])\s+(?=\r*\n)/g," ")
         //去除末尾非字母后的空格，将末尾字母后的多个空格保留一个
         笔记正文 = 笔记正文.replace(/([^。？！\.\?\!])(\r?\n)+/g,"$1")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     修复错误语法() {
@@ -1952,7 +1952,7 @@ class MyPlugin extends obsidian.Plugin {
         //处理 bookXnote 回链语法中的列表
         笔记正文 = 笔记正文.replace(/(?<=\s)[0-9]+。 /g,"1. ");
         //把 1。 转换为 有序列表样式
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     英转中文标点() {
@@ -1968,7 +1968,7 @@ class MyPlugin extends obsidian.Plugin {
         笔记正文 = 笔记正文.replace(/\)/g,"）")
         笔记正文 = 笔记正文.replace(/\{([^{}]*)\}/g,"｛$1｝")
         笔记正文 = 笔记正文.replace(/\"([^\"]*?)\"/g,"“$1”")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     中转英文标点() {
@@ -1984,28 +1984,28 @@ class MyPlugin extends obsidian.Plugin {
         笔记正文 = 笔记正文.replace(/）/g,"\)")
         笔记正文 = 笔记正文.replace(/｛([^｛｝]*)｝/g,"{$1}")
         笔记正文 = 笔记正文.replace(/“([^“”]*)”/g,"\"$1\"")
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     };
 
     转换路径() {
         this.获取编辑器信息 ();
         if(所选文本==null || 笔记正文==null){return};
         var link1 = /^[a-zA-Z]:\\/;	//符合普通路径格式
-        var link2 = /^(\[[^\[\]]*\]\()*file:\/\/\/[^\(\)]*\)*/;	//符合[](file路径）格式
+        var link2 = /^(\[[^\[\]]*\]\()*file:\/\/\/[^\(\)]*\)*/;	//符合[](file路径)格式
         var link3 = /^\[[^\[\]]*\]\(([a-zA-Z]:\\[^\(\)]*)\)*/;	//意外路径格式
         if (link1.test(所选文本)){
             所选文本 = 所选文本.replace(/\s/mg,"%20");
             所选文本 = 所选文本.replace(/^(.*)$/m,"\[file\]\(file:///$1\)");
             所选文本 = 所选文本.replace(/\\/img,"\/");
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
         }else if(link2.test(所选文本)){
             所选文本 = 所选文本.replace(/%20/mg," ");
             所选文本 = 所选文本.replace(/^(\[[^\[\]]*\]\()*file:\/\/\/([^\(\)]*)\)*/m,"$2");
             所选文本 = 所选文本.replace(/\//mg,"\\");
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
         }else if(link3.test(所选文本)){
             所选文本 = 所选文本.replace(/^\[[^\[\]]*\]\(([a-zA-Z]:\\[^\(\)]*)\)*/m,"$1");
-            this.替换所选文本（所选文本);
+            this.替换所选文本 (所选文本);
         }else{
             new obsidian.Notice("您划选的路径格式不正确！");
             return;
@@ -2018,7 +2018,7 @@ class MyPlugin extends obsidian.Plugin {
         for (var i=0;i<简体字表.length;i++){ 
             笔记正文 = 笔记正文.replace(eval("/"+简体字表[i]+"/g"),繁体字表[i]);
         }
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     }
 
     繁体转简() {
@@ -2027,7 +2027,7 @@ class MyPlugin extends obsidian.Plugin {
         for (var i=0;i<繁体字表.length;i++){ 
             笔记正文 = 笔记正文.replace(eval("/"+繁体字表[i]+"/g"),简体字表[i]);
         }
-        this.替换笔记正文（笔记正文);
+        this.替换笔记正文 (笔记正文);
     }
 }
 
@@ -2179,7 +2179,7 @@ class editSettingsTab extends obsidian.PluginSettingTab {
         toolText.appendChild(document.createElement('br'));
         toolText.appendText('选择当前语法「未设置」：选择光标所在的当前MrakDown语法（如加粗、高亮、删除、链接等效果）文本。');
         toolText.appendChild(document.createElement('br'));
-        toolText.appendText('获取标注文本「未设置」∶获取标题、高亮、注释及前缀(#标注\批注\反思）等文本内容');
+        toolText.appendText('获取标注文本「未设置」∶获取标题、高亮、注释及前缀(#标注\批注\反思)等文本内容');
         toolText.appendChild(document.createElement('br'));
         toolText.appendText('自动设置标题「未设置」∶将选文中的单行文本（末尾非标点或数字）转为标题');
         toolText.appendChild(document.createElement('br'));

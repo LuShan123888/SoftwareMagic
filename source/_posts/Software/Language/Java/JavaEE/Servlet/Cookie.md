@@ -70,7 +70,7 @@ Cookie: name=xyz
 | 9    | **public String getPath()** 该方法获取 cookie 适用的路径,   |
 | 10   | **public void setSecure(boolean flag)** 该方法设置布尔值,表示 cookie 是否应该只在加密的（即 SSL)连接上发送, |
 | 11   | **public void setComment(String purpose)** 设置cookie的注释,该注释在浏览器向用户呈现 cookie 时非常有用, |
-| 12   | **public String getComment()** 获取 cookie 的注释,如果 cookie 没有注释 则返回 null, |
+| 12   | **public String getComment()** 获取 cookie 的注释,如果 cookie 没有注释则返回 null, |
 
 ## 通过 Servlet 设置 Cookie
 

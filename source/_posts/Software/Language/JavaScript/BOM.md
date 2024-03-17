@@ -258,7 +258,7 @@ document.getElementById("example").innerHTML=txt;
 ## 弹窗
 
 - 可以在 JavaScript 中创建三种消息框：警告框，确认框，提示框
-- 弹窗使用 反斜杠 + "n"(\n) 来设置换行
+- 弹窗使用反斜杠 + "n"(\n) 来设置换行
 
 ### 警告框
 

@@ -154,7 +154,7 @@ public class RedisUtil {
     /**
      * 根据key 获取过期时间
      *
-     * @param key 键 不能为null
+     * @param key 键不能为null
      * @return 时间（秒) 返回0代表为永久有效
      */
     public long getExpire(String key) {
@@ -179,7 +179,7 @@ public class RedisUtil {
     /**
      * 删除缓存
      *
-     * @param key 可以传一个值 或多个
+     * @param key 可以传一个值或多个
      */
     public void del(String... key) {
         if (key != null && key.length > 0) {
@@ -276,8 +276,8 @@ public class RedisUtil {
     /**
      * HashGet
      *
-     * @param key  键 不能为null
-     * @param item 项 不能为null
+     * @param key  键不能为null
+     * @param item 项不能为null
      */
     public Object hget(String key, String item) {
         return redisTemplate.opsForHash().get(key, item);
@@ -374,8 +374,8 @@ public class RedisUtil {
     /**
      * 删除hash表中的值
      *
-     * @param key  键 不能为null
-     * @param item 项 可以使多个 不能为null
+     * @param key  键不能为null
+     * @param item 项可以使多个不能为null
      */
     public void hdel(String key, Object... item) {
         redisTemplate.opsForHash().delete(key, item);
@@ -384,8 +384,8 @@ public class RedisUtil {
     /**
      * 判断hash表中是否有该项的值
      *
-     * @param key  键 不能为null
-     * @param item 项 不能为null
+     * @param key  键不能为null
+     * @param item 项不能为null
      * @return true 存在 false不存在
      */
     public boolean hHasKey(String key, String item) {
@@ -393,7 +393,7 @@ public class RedisUtil {
     }
 
     /**
-     * hash递增 如果不存在,就会创建一个 并把新增后的值返回
+     * hash递增如果不存在,就会创建一个并把新增后的值返回
      *
      * @param key  键
      * @param item 项
@@ -450,7 +450,7 @@ public class RedisUtil {
      * 将数据放入set缓存
      *
      * @param key    键
-     * @param values 值 可以是多个
+     * @param values 值可以是多个
      * @return 成功个数
      */
     public long sSet(String key, Object... values) {
@@ -467,7 +467,7 @@ public class RedisUtil {
      *
      * @param key    键
      * @param time   时间（秒)
-     * @param values 值 可以是多个
+     * @param values 值可以是多个
      * @return 成功个数
      */
     public long sSetAndTime(String key, long time, Object... values) {
@@ -500,7 +500,7 @@ public class RedisUtil {
      * 移除值为value的
      *
      * @param key    键
-     * @param values 值 可以是多个
+     * @param values 值可以是多个
      * @return 移除的个数
      */
     public long setRemove(String key, Object... values) {
@@ -546,7 +546,7 @@ public class RedisUtil {
     }
 
     /**
-     * 通过索引 获取list中的值
+     * 通过索引获取list中的值
      *
      * @param key   键
      * @param index 索引 index>=0时, 0 表头,1 第二个元素,依次类推,index<0时,-1,表尾,-2倒数第二个元素,依次类推

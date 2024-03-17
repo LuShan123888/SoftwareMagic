@@ -11,7 +11,7 @@ categories:
 
 ## 实现Runnable接口编写多线程
 
-- 由于Java的单重继承限制，有些类必须继承其他某个类的同时又要实现线程的特性，这时可通过实现Runnable接口的方式来满足两方面的要求,Runnable接口只有一个方法`run()`,它就是线程运行时要执行的方法，只要将具体代码 写入其中即可
+- 由于Java的单重继承限制，有些类必须继承其他某个类的同时又要实现线程的特性，这时可通过实现Runnable接口的方式来满足两方面的要求,Runnable接口只有一个方法`run()`,它就是线程运行时要执行的方法，只要将具体代码写入其中即可
 - 使用Thread类的构造函数`public Thread(Runnable target)`可以将一个Runnable接口对象传递给线程，线程在调度执行其`run()`方法时将自动调用Runnable接口对象的`run()`方法
 - Thread类本身实现了Runnable接口，从其`run()`方法的设计可看出线程调度时会自动执行Runnable接口对象的`run()`方法，以下为Thread类的关键代码:
 
