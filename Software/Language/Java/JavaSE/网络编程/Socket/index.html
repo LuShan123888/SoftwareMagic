@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-07-socker1.svg">
 <meta property="article:published_time" content="2022-05-26T13:28:10.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:52:29.518Z">
+<meta property="article:modified_time" content="2024-03-17T18:15:41.466Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +274,7 @@
 <p><strong>服务方程序</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            ServerSocket socket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">5423</span>);<span class="hljs-comment">// 创建服务。</span><br>            <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>)&#123;<br>                Socket s1 = socket.accept(); <span class="hljs-comment">// 监听客户端的连接。</span><br>                OutputStream s1out = s1.getOutputStream();<br>                DataOutputStream dos = <span class="hljs-keyword">new</span> DataOutputStream(s1out);<br>                dos.writeUTF(<span class="hljs-string">&quot;Hello  World!&quot;</span>);<br>                System.out.println(<span class="hljs-string">&quot;a client is connected...&quot;</span>);<br>                s1.close();<br>            &#125;<br>        &#125;<span class="hljs-keyword">catch</span> (IOException e)&#123;  &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>通过<code>accpet()</code>方法等待客户连接，如果无客户连接，线程将进入阻塞状态，一旦有客户连接成功，则将在客户与服务器间建立一条Socket数据传输通道，</li>
+<li>通过<code>accpet()</code>方法等待客户连接，如果无客户连接，线程将进入阻塞状态，一旦有客户连接成功，则将在客户与服务器间建立一条Socket数据传输通道</li>
 <li>通过Socket的<code>getOutputStream()</code>方法可获得该通道本方的输出流，为了方便流操作，可以用DataOutputStream流对其进行过滤，并用<code>DataOutputStream</code>对象的<code>writeUTF()</code>方法给客户发送数据，而后关闭与该客户的连接，继续循环等待其他客户的访问。</li>
 </ul>
 <blockquote>
