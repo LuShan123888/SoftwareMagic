@@ -8,7 +8,7 @@ categories:
 ---
 # DDL
 
-在MySQL使用过程中，根据业务的需求对表结构进行变更是个普遍的运维操作，这些称为DDL操作。常见的DDL操作有在表上增加新列或给某个列添加索引。通常有两种方式可执行DDL，包括MySQL原生在线DDL（online DDL）以及一种第三方工具pt-osc。下图是执行方式的性能对比及说明
+在MySQL使用过程中，根据业务的需求对表结构进行变更是个普遍的运维操作，这些称为DDL操作。常见的DDL操作有在表上增加新列或给某个列添加索引。通常有两种方式可执行DDL，包括MySQL原生在线DDL（online DDL）以及一种第三方工具pt-osc。下图是执行方式的性能对比及说明。
 
 | 指标     | online DDL | pt-osc |
 | ------ | ---------- | ------ |
@@ -27,10 +27,10 @@ MySQL Online DDL 功能从 5.6 版本开始正式引入，发展到现在的 8.0
 在MySQL 5.6版本以前，最昂贵的数据库操作之一就是执行DDL语句，特别是ALTER语句，因为在修改表时，MySQL会阻塞整个表的读写操作。例如，对表 A 进行 DDL 的具体过程如下：
 
 1. 按照表 A 的定义新建一个表 B
-2. 对表 A 加写锁
-3. 在表 B 上执行 DDL 指定的操作
+2. 对表 A 加写锁。
+3. 在表 B 上执行 DDL 指定的操作。
 4. 将 A 中的数据拷贝到 B
-5. 释放 A 的写锁
+5. 释放 A 的写锁。
 6. 删除表 A
 7. 将表 B 重命名为 A
 
@@ -119,7 +119,7 @@ Online DDL主要包括3个阶段，prepare阶段，ddl执行阶段，commit阶�
      -   降级EXCLUSIVE-MDL锁，允许读写（copy不可写）。
      -   扫描old_table的聚集索引每一条记录rec。
      -   遍历新表的聚集索引和二级索引，逐一处理。
-     -   根据rec构造对应的索引项
+     -   根据rec构造对应的索引项。
      -   将构造索引项插入sort_buffer块排序。
      -   将sort_buffer块更新到新的索引上。
      -   记录ddl执行过程中产生的增量（仅rebuild类型需要)
@@ -150,21 +150,21 @@ Online DDL 过程中占用 exclusive MDL 的步骤执行很快，所以几乎不
 ```shell
 # Session 1
 > START TRANSACTION;
-> SELECT * FROM tbl_name; # 正常执行
+> SELECT * FROM tbl_name; # 正常执行。
 ```
 
 这时 Session 2 想要执行 DML 操作也只需要获取 shared MDL，仍然可以正常执行。
 
 ```shell
 # Session 2
-> SELECT * FROM tbl_name; # 正常执行
+> SELECT * FROM tbl_name; # 正常执行。
 ```
 
 但如果 Session 3 想执行 DDL 操作就会阻塞，因为此时 Session 1 已经占用了 shared MDL，而 DDL 的执行需要先获取 exclusive MDL，因此无法正常执行。
 
 ```shell
 # Session 3
-> ALTER TABLE tbl_name ADD COLUMN n INT; # 阻塞
+> ALTER TABLE tbl_name ADD COLUMN n INT; # 阻塞。
 ```
 
 通过 show processlist 可以看到 ALTER 操作正在等待 MDL。
@@ -175,11 +175,11 @@ Online DDL 过程中占用 exclusive MDL 的步骤执行很快，所以几乎不
 | 11 | root            | 172.17.0.1:53048 | demo | Query   |    3 | Waiting for table metadata lock | alter table ... |+----+-----------------+------------------+------+---------+------+---------------------------------+-----------------+
 ```
 
-由于 exclusive MDL 的获取优先于 shared MDL，后续尝试获取 shared MDL 的操作也将会全部阻塞
+由于 exclusive MDL 的获取优先于 shared MDL，后续尝试获取 shared MDL 的操作也将会全部阻塞。
 
 ```shell
 # Session 4
-> SELECT * FROM tbl_name; # 阻塞
+> SELECT * FROM tbl_name; # 阻塞。
 ```
 
 到这一步，后续无论是 DML 和 DDL 都将阻塞，直到 Session 1 提交或者回滚，Session 1 占用的 shared MDL 被释放，后面的操作才能继续执行。
@@ -240,10 +240,10 @@ pt-osc 用于修改表时不锁表，简单地说，这个工具创建一个与�
 
 Percona Toolkit 是成熟的，但是官方还是建议在使用前做到以下几点：
 
-1.   阅读该工具的详细文档
+1.   阅读该工具的详细文档。
 2.   查看该工具的已知“错误”
-3.   在非生产服务器上测试该工具
-4.   备份您的生产数据并验证备份
+3.   在非生产服务器上测试该工具。
+4.   备份您的生产数据并验证备份。
 
 下载安装：
 

@@ -1,18 +1,18 @@
 ---
 title: Java transient
 categories:
-- Software
-- Language
-- Java
-- JavaSE
-- 流式输入输出与文件处理
+  - Software
+  - Language
+  - Java
+  - JavaSE
+  - 流式输入输出与文件处理
 ---
 # Java transient
 
 ## transient的作用及使用方法
 
-- 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问
-- transient关键字只能修饰变量，而不能修饰方法和类，注意，本地变量是不能被transient关键字修饰的，变量如果是用户自定义类变量，则该类需要实现Serializable接口
+- 一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。
+- transient关键字只能修饰变量，而不能修饰方法和类，注意，本地变量是不能被transient关键字修饰的，变量如果是用户自定义类变量，则该类需要实现Serializable接口。
 
 ```java
 public class TransientTest {
@@ -30,7 +30,7 @@ public class TransientTest {
         try {
             ObjectOutputStream os = new ObjectOutputStream(
                 new FileOutputStream("C:/user.txt"));
-            os.writeObject(user); // 将User对象写进文件
+            os.writeObject(user); // 将User对象写进文件。
             os.flush();
             os.close();
         } catch (FileNotFoundException e) {
@@ -41,7 +41,7 @@ public class TransientTest {
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(
                 "C:/user.txt"));
-            user = (User) is.readObject(); // 从流中读取User的数据
+            user = (User) is.readObject(); // 从流中读取User的数据。
             is.close();
 
             System.out.println("\nread after Serializable: ");
@@ -83,7 +83,7 @@ class User implements Serializable {
 }
 ```
 
--   输出为:
+-   输出为：
 
 ```
 read before Serializable:
@@ -95,4 +95,4 @@ username: Alexia
 password: null
 ```
 
-- 密码字段为null,说明反序列化时根本没有从文件中获取到信息
+- 密码字段为null，说明反序列化时根本没有从文件中获取到信息。

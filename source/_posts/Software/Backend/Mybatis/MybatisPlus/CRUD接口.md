@@ -12,10 +12,10 @@ categories:
 
 > **说明**
 >
-> - 通用 Service CRUD 封装IService接口，进一步封装 CRUD 采用 `get 查询单行` `remove 删除` `list 查询集合` `page 分页` 前缀命名方式区分 `Mapper` 层避免混淆,
-> - 泛型 `T` 为任意实体对象
-> - 建议如果存在自定义通用 Service 方法的可能，请创建自己的 `IBaseService` 继承 `Mybatis-Plus` 提供的父类
-> - 对象 `Wrapper` 为条件构造器
+> - 通用 Service CRUD 封装IService接口，进一步封装 CRUD 采用 `get 查询单行` `remove 删除` `list 查询集合` `page 分页` 前缀命名方式区分 `Mapper` 层避免混淆，
+> - 泛型 `T` 为任意实体对象。
+> - 建议如果存在自定义通用 Service 方法的可能，请创建自己的 `IBaseService` 继承 `Mybatis-Plus` 提供的父类。
+> - 对象 `Wrapper` 为条件构造器。
 
 ### Save
 
@@ -28,7 +28,7 @@ boolean saveBatch(Collection<T> entityList);
 boolean saveBatch(Collection<T> entityList, int batchSize);
 ```
 
-- 参数说明
+- 参数说明。
 
 |     类型      |   参数名   |     描述     |
 | :-----------: | :--------: | :----------: |
@@ -39,17 +39,17 @@ boolean saveBatch(Collection<T> entityList, int batchSize);
 ### SaveOrUpdate
 
 ```java
-// TableId 注解存在更新记录，否插入一条记录
+// TableId 注解存在更新记录，否插入一条记录。
 boolean saveOrUpdate(T entity);
-// 根据updateWrapper尝试更新，否继续执行saveOrUpdate(T)方法
+// 根据updateWrapper尝试更新，否继续执行saveOrUpdate(T)方法。
 boolean saveOrUpdate(T entity, Wrapper<T> updateWrapper);
-// 批量修改插入
+// 批量修改插入。
 boolean saveOrUpdateBatch(Collection<T> entityList);
-// 批量修改插入
+// 批量修改插入。
 boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
 ```
 
-- 参数说明
+- 参数说明。
 
 |     类型      |    参数名     |               描述               |
 | :-----------: | :-----------: | :------------------------------: |
@@ -61,17 +61,17 @@ boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
 ### Remove
 
 ```java
-// 根据 entity 条件，删除记录
+// 根据 entity 条件，删除记录。
 boolean remove(Wrapper<T> queryWrapper);
-// 根据 ID 删除
+// 根据 ID 删除。
 boolean removeById(Serializable id);
-// 根据 columnMap 条件，删除记录
+// 根据 columnMap 条件，删除记录。
 boolean removeByMap(Map<String, Object> columnMap);
 // 删除（根据ID 批量删除)
 boolean removeByIds(Collection<? extends Serializable> idList);
 ```
 
-- 参数说明
+- 参数说明。
 
 |                类型                |    参数名    |          描述           |
 | :--------------------------------: | :----------: | :---------------------: |
@@ -85,17 +85,17 @@ boolean removeByIds(Collection<? extends Serializable> idList);
 ```java
 // 根据 UpdateWrapper 条件，更新记录需要设置sqlset
 boolean update(Wrapper<T> updateWrapper);
-// 根据 whereEntity 条件，更新记录
+// 根据 whereEntity 条件，更新记录。
 boolean update(T entity, Wrapper<T> updateWrapper);
-// 根据 ID 选择修改
+// 根据 ID 选择修改。
 boolean updateById(T entity);
-// 根据ID 批量更新
+// 根据ID 批量更新。
 boolean updateBatchById(Collection<T> entityList);
-// 根据ID 批量更新
+// 根据ID 批量更新。
 boolean updateBatchById(Collection<T> entityList, int batchSize);
 ```
 
-- 参数说明
+- 参数说明。
 
 |     类型      |    参数名     |               描述               |
 | :-----------: | :-----------: | :------------------------------: |
@@ -107,19 +107,19 @@ boolean updateBatchById(Collection<T> entityList, int batchSize);
 ### Get
 
 ```java
-// 根据 ID 查询
+// 根据 ID 查询。
 T getById(Serializable id);
-// 根据 Wrapper, 查询一条记录，结果集，如果是多个会抛出异常，随机取一条加上限制条件 wrapper.last("LIMIT 1")
+// 根据 Wrapper，查询一条记录，结果集，如果是多个会抛出异常，随机取一条加上限制条件 wrapper.last("LIMIT 1")
 T getOne(Wrapper<T> queryWrapper);
-// 根据 Wrapper, 查询一条记录
+// 根据 Wrapper，查询一条记录。
 T getOne(Wrapper<T> queryWrapper, boolean throwEx);
-// 根据 Wrapper, 查询一条记录
+// 根据 Wrapper，查询一条记录。
 Map<String, Object> getMap(Wrapper<T> queryWrapper);
-// 根据 Wrapper, 查询一条记录
+// 根据 Wrapper，查询一条记录。
 <V> V getObj(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
 ```
 
-- 参数说明
+- 参数说明。
 
 |            类型             |    参数名    |              描述               |
 | :-------------------------: | :----------: | :-----------------------------: |
@@ -132,29 +132,29 @@ Map<String, Object> getMap(Wrapper<T> queryWrapper);
 ### List
 
 ```java
-// 查询所有
+// 查询所有。
 List<T> list();
-// 查询列表
+// 查询列表。
 List<T> list(Wrapper<T> queryWrapper);
 // 查询（根据ID 批量查询)
 Collection<T> listByIds(Collection<? extends Serializable> idList);
 // 查询（根据 columnMap 条件)
 Collection<T> listByMap(Map<String, Object> columnMap);
-// 查询所有列表
+// 查询所有列表。
 List<Map<String, Object>> listMaps();
-// 查询列表
+// 查询列表。
 List<Map<String, Object>> listMaps(Wrapper<T> queryWrapper);
-// 查询全部记录
+// 查询全部记录。
 List<Object> listObjs();
-// 查询全部记录
+// 查询全部记录。
 <V> List<V> listObjs(Function<? super Object, V> mapper);
-// 根据 Wrapper 条件，查询全部记录
+// 根据 Wrapper 条件，查询全部记录。
 List<Object> listObjs(Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件，查询全部记录
+// 根据 Wrapper 条件，查询全部记录。
 <V> List<V> listObjs(Wrapper<T> queryWrapper, Function<? super Object, V> mapper);
 ```
 
-- 参数说明
+- 参数说明。
 
 |                类型                |    参数名    |              描述               |
 | :--------------------------------: | :----------: | :-----------------------------: |
@@ -166,17 +166,17 @@ List<Object> listObjs(Wrapper<T> queryWrapper);
 ### Page
 
 ```java
-// 无条件分页查询
+// 无条件分页查询。
 IPage<T> page(IPage<T> page);
-// 条件分页查询
+// 条件分页查询。
 IPage<T> page(IPage<T> page, Wrapper<T> queryWrapper);
-// 无条件分页查询
+// 无条件分页查询。
 IPage<Map<String, Object>> pageMaps(IPage<T> page);
-// 条件分页查询
+// 条件分页查询。
 IPage<Map<String, Object>> pageMaps(IPage<T> page, Wrapper<T> queryWrapper);
 ```
 
-- 参数说明
+- 参数说明。
 
 |    类型    |    参数名    |              描述               |
 | :--------: | :----------: | :-----------------------------: |
@@ -186,13 +186,13 @@ IPage<Map<String, Object>> pageMaps(IPage<T> page, Wrapper<T> queryWrapper);
 ### Count
 
 ```java
-// 查询总记录数
+// 查询总记录数。
 int count();
-// 根据 Wrapper 条件，查询总记录数
+// 根据 Wrapper 条件，查询总记录数。
 int count(Wrapper<T> queryWrapper);
 ```
 
-- 参数说明
+- 参数说明。
 
 |    类型    |    参数名    |              描述               |
 | :--------: | :----------: | :-----------------------------: |
@@ -203,12 +203,12 @@ int count(Wrapper<T> queryWrapper);
 #### query
 
 ```java
-// 链式查询普通
+// 链式查询普通。
 QueryChainWrapper<T> query();
 // 链式查询 lambda 式，注意：不支持 Kotlin
 LambdaQueryChainWrapper<T> lambdaQuery();
 
-// 示例:
+// 示例：
 query().eq("column", value).one();
 lambdaQuery().eq(Entity::getId, value).list();
 ```
@@ -216,12 +216,12 @@ lambdaQuery().eq(Entity::getId, value).list();
 #### update
 
 ```java
-// 链式更改普通
+// 链式更改普通。
 UpdateChainWrapper<T> update();
 // 链式更改 lambda 式，注意：不支持 Kotlin
 LambdaUpdateChainWrapper<T> lambdaUpdate();
 
-// 示例:
+// 示例：
 update().eq("column", value).remove();
 lambdaUpdate().eq(Entity::getId, value).update(entity);
 ```
@@ -230,19 +230,19 @@ lambdaUpdate().eq(Entity::getId, value).update(entity);
 
 > **说明**
 >
-> - 通用 CRUD 封装BaseMapper接口，为 `Mybatis-Plus` 启动时自动解析实体表关系映射转换为 `Mybatis` 内部对象注入容器
-> - 泛型 `T` 为任意实体对象
-> - 参数 `Serializable` 为任意类型主键 `Mybatis-Plus` 不推荐使用复合主键约定每一张表都有自己的唯一 `id` 主键
-> - 对象 `Wrapper` 为条件构造器
+> - 通用 CRUD 封装BaseMapper接口，为 `Mybatis-Plus` 启动时自动解析实体表关系映射转换为 `Mybatis` 内部对象注入容器。
+> - 泛型 `T` 为任意实体对象。
+> - 参数 `Serializable` 为任意类型主键 `Mybatis-Plus` 不推荐使用复合主键约定每一张表都有自己的唯一 `id` 主键。
+> - 对象 `Wrapper` 为条件构造器。
 
 ### insert
 
 ```java
-// 插入一条记录
+// 插入一条记录。
 int insert(T entity);
 ```
 
-- 参数说明
+- 参数说明。
 
 | 类型 | 参数名 |   描述   |
 | :--: | :----: | :------: |
@@ -257,25 +257,25 @@ public void testInsert(){
     user.setAge(3);
     user.setEmail("123456@qq.com");
     int result = userMapper.insert(user); // 自动生成id
-    System.out.println(result); // 受影响的行数
-    System.out.println(user); // id会自动回填
+    System.out.println(result); // 受影响的行数。
+    System.out.println(user); // id会自动回填。
 }
 ```
 
 ### delete
 
 ```java
-// 根据 entity 条件，删除记录
+// 根据 entity 条件，删除记录。
 int delete(@Param(Constants.WRAPPER) Wrapper<T> wrapper);
 // 删除（根据ID 批量删除)
 int deleteBatchIds(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList);
-// 根据 ID 删除
+// 根据 ID 删除。
 int deleteById(Serializable id);
-// 根据 columnMap 条件，删除记录
+// 根据 columnMap 条件，删除记录。
 int deleteByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
 ```
 
-- 参数说明
+- 参数说明。
 
 |                类型                |  参数名   |                描述                |
 | :--------------------------------: | :-------: | :--------------------------------: |
@@ -310,18 +310,18 @@ public void testDeleteMap(){
 - 所有的sql都是通过条件自动拼接动态sql
 
 ```java
-// 根据 whereEntity 条件，更新记录
+// 根据 whereEntity 条件，更新记录。
 int update(@Param(Constants.ENTITY) T entity, @Param(Constants.WRAPPER) Wrapper<T> updateWrapper);
-// 根据 ID 修改
+// 根据 ID 修改。
 int updateById(@Param(Constants.ENTITY) T entity);
 ```
 
-- 参数说明
+- 参数说明。
 
 |    类型    |    参数名     |                             描述                             |
 | :--------: | :-----------: | :----------------------------------------------------------: |
 |     T      |    entity     |               实体对象 (set 条件值，可为 null)                |
-| Wrapper<T> | updateWrapper | 实体对象封装操作类（可以为 null,里面的 entity 用于生成 where 语句) |
+| Wrapper<T> | updateWrapper | 实体对象封装操作类（可以为 null，里面的 entity 用于生成 where 语句) |
 
 **实例**
 
@@ -342,31 +342,31 @@ public void testUpdate(){
 ### select
 
 ```java
-// 根据 ID 查询
+// 根据 ID 查询。
 T selectById(Serializable id);
-// 根据 entity 条件，查询一条记录
+// 根据 entity 条件，查询一条记录。
 T selectOne(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
 // 查询（根据ID 批量查询)
 List<T> selectBatchIds(@Param(Constants.COLLECTION) Collection<? extends Serializable> idList);
-// 根据 entity 条件，查询全部记录
+// 根据 entity 条件，查询全部记录。
 List<T> selectList(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 // 查询（根据 columnMap 条件)
 List<T> selectByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
-// 根据 Wrapper 条件，查询全部记录
+// 根据 Wrapper 条件，查询全部记录。
 List<Map<String, Object>> selectMaps(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件，查询全部记录，注意：只返回第一个字段的值
+// 根据 Wrapper 条件，查询全部记录，注意：只返回第一个字段的值。
 List<Object> selectObjs(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
 // 根据 entity 条件，查询全部记录（并翻页)
 IPage<T> selectPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 // 根据 Wrapper 条件，查询全部记录（并翻页)
 IPage<Map<String, Object>> selectMapsPage(IPage<T> page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件，查询总记录数
+// 根据 Wrapper 条件，查询总记录数。
 Integer selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 ```
 
-- 参数说明
+- 参数说明。
 
 |                类型                |    参数名    |                   描述                   |
 | :--------------------------------: | :----------: | :--------------------------------------: |

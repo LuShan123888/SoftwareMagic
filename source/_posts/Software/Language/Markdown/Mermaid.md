@@ -16,8 +16,8 @@ graph LR
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eetirmmj3095037jr5.jpg)
 
-- 这是申明一个由左到右，水平向右的图
-- 可能方向有:
+- 这是申明一个由左到右，水平向右的图。
+- 可能方向有：
     - TB - top bottom
     - BT - bottom top
     - RL - right left
@@ -33,7 +33,7 @@ graph LR
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef20jloj30df02i741.jpg)
 
-- **注意**:`id`显示在节点内部
+- **注意**:`id`显示在节点内部。
 
 ###### 文本节点
 
@@ -82,7 +82,7 @@ id{This is the text in the box}
 
 #### 连接线
 
-节点间的连接线有多种形状，而且可以在连接线中加入标签:
+节点间的连接线有多种形状，而且可以在连接线中加入标签：
 
 ###### 箭头形连接
 
@@ -124,7 +124,7 @@ graph LR
  A-- text -->B
 ```
 
-###### 虚线(dotted link,点连线)
+###### 虚线(dotted link，点连线)
 
 > -.->
 
@@ -211,13 +211,13 @@ d1["This is the (text) in the box"]
 
 ##### html字符的转义字符
 
-转义字符的使用语法:
-流程图定义如下:
+转义字符的使用语法：
+流程图定义如下：
 
 > graph LR
 > A["A double quote:#quot;”] –> B["A dec char:#9829;”]
 
-渲染后的图如下:
+渲染后的图如下：
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eeydnxvj30ep02odfn.jpg)
 
@@ -232,7 +232,7 @@ graph LR
 > graph definition
 > end
 
-示例:
+示例：
 
 ```{mermaid}
 graph TB
@@ -248,16 +248,16 @@ graph TB
         c1 --> a2
 ```
 
-结果:
+结果：
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6eezr54zj30d106raa0.jpg)
 
 #### 基础fontawesome支持
 
-如果想加入来自frontawesome的图表字体，需要像frontawesome网站上那样引用的那样,\
-详情请点击:[fontawdsome](http://fontawesome.io/)
+如果想加入来自frontawesome的图表字体，需要像frontawesome网站上那样引用的那样，\
+详情请点击：[fontawdsome](http://fontawesome.io/)
 
-引用的语法为:++fa:#icon class name#++
+引用的语法为：++fa:#icon class name#++
 
 ```{mermaid}
 graph TD
@@ -267,7 +267,7 @@ graph TD
       B-->E(A fa:fa-camerra-retro perhaps?);
 ```
 
-渲染图如下:
+渲染图如下：
 
 ```
 graph TD
@@ -293,7 +293,7 @@ graph LR
      style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;
 ```
 
-渲染结果:
+渲染结果：
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-17-006tNbRwgy1gb6ef10719j30bi031t8i.jpg)
 
@@ -304,30 +304,30 @@ graph LR
      style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;
 ```
 
-备注：这些样式参考CSS样式
+备注：这些样式参考CSS样式。
 
 ##### 样式类
 
-为了方便样式的使用，可以定义类来使用样式
-类的定义示例:
+为了方便样式的使用，可以定义类来使用样式。
+类的定义示例：
 
 ```
 classDef className fill:#f9f,stroke:#333,stroke-width:4px;
 ```
 
-对节点使用样式类:
+对节点使用样式类：
 
 ```
 class nodeId className;
 ```
 
-同时对多个节点使用相同的样式类:
+同时对多个节点使用相同的样式类：
 
 ```
 class nodeId1,nodeId2 className;
 ```
 
-可以在CSS中提前定义样式类，应用在图表的定义中
+可以在CSS中提前定义样式类，应用在图表的定义中。
 
 ```{mermaid}
 graph LR
@@ -336,13 +336,13 @@ graph LR
       class A cssClass;
 ```
 
-默认样式类：当没有指定样式的时候，默认采用
+默认样式类：当没有指定样式的时候，默认采用。
 
 ```
 classDef default fill:#f9f,stroke:#333,stroke-width:4px;
 ```
 
-示例:
+示例：
 
 ```{mermaid}
 graph LR
@@ -350,7 +350,7 @@ graph LR
     id1(Start)-->id2(Stop)
 ```
 
-结果:
+结果：
 
 ```
 graph LR

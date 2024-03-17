@@ -21,8 +21,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/mast
 
 ### 恢复模式
 
-- 如果使用此脚本后，开机无法进入系统，请到 macos 恢复模式中或使用 clover `-x` 安全模式进入系统，打开终端
-- 这里有两种方式进行关闭，建议选第一种
+- 如果使用此脚本后，开机无法进入系统，请到 macos 恢复模式中或使用 clover `-x` 安全模式进入系统，打开终端。
+- 这里有两种方式进行关闭，建议选第一种。
 
 **快捷恢复**
 
@@ -35,9 +35,9 @@ $ ./disable
 
 **手动恢复**
 
-- 使用终端删除 `/System/Library/Displays/Contents/Resources/Overrides` 下删除显示器 VendorID 对应的文件夹，并把 `HIDPI/backup` 文件夹中的备份复制出来
-- 请使用单个显示器执行以下命令，笔记本关闭外接显示器的 HIDPI 时请关闭内置显示器
-- 具体命令如下:
+- 使用终端删除 `/System/Library/Displays/Contents/Resources/Overrides` 下删除显示器 VendorID 对应的文件夹，并把 `HIDPI/backup` 文件夹中的备份复制出来。
+- 请使用单个显示器执行以下命令，笔记本关闭外接显示器的 HIDPI 时请关闭内置显示器。
+- 具体命令如下：
 
 ```shell
 $ ls /Volumes/

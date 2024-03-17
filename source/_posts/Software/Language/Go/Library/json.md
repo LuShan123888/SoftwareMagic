@@ -63,7 +63,7 @@ p2:main.Person{Name:"Test", Age:18, Weight:71.5}
 序列化与反序列化默认情况下使用结构体的字段名，我们可以通过给结构体字段添加 tag 来指定 json 序列化生成的字段名。
 
 ```go
-// 使用json tag指定序列化与反序列化时的行为
+// 使用json tag指定序列化与反序列化时的行为。
 type Person struct {
 	Name   string `json:"name"` // 指定json序列化/反序列化时使用小写name
 	Age    int64
@@ -76,11 +76,11 @@ type Person struct {
 如果你想在 json 序列化/反序列化的时候忽略掉结构体中的某个字段，可以按如下方式在 tag 中添加 `-`。
 
 ```go
-// 使用json tag指定json序列化与反序列化时的行为
+// 使用json tag指定json序列化与反序列化时的行为。
 type Person struct {
 	Name   string `json:"name"` // 指定json序列化/反序列化时使用小写name
 	Age    int64
-	Weight float64 `json:"-"` // 指定json序列化/反序列化时忽略此字段
+	Weight float64 `json:"-"` // 指定json序列化/反序列化时忽略此字段。
 }
 ```
 
@@ -116,8 +116,8 @@ str:{"name":"Test","email":"","hobby":null}
 如果想要在最终的序列化结果中去掉空值字段，可以像下面这样定义结构体：
 
 ```go
-// 在tag中添加omitempty忽略空值
-// 注意这里 hobby,omitempty 合起来是json tag值，中间用英文逗号分隔
+// 在tag中添加omitempty忽略空值。
+// 注意这里 hobby,omitempty 合起来是json tag值，中间用英文逗号分隔。
 type User struct {
 	Name  string   `json:"name"`
 	Email string   `json:"email,omitempty"`
@@ -128,7 +128,7 @@ type User struct {
 此时，再执行上述的 `omitemptyDemo`，输出结果如下：
 
 ```bash
-str:{"name":"Test"} // 序列化结果中没有email和hobby字段
+str:{"name":"Test"} // 序列化结果中没有email和hobby字段。
 ```
 
 ### 忽略嵌套结构体空值字段
@@ -215,7 +215,7 @@ type User struct {
 }
 
 type PublicUser struct {
-	*User             // 匿名嵌套
+	*User             // 匿名嵌套。
 	Password *struct{} `json:"password,omitempty"`
 }
 
@@ -262,8 +262,8 @@ func intAndStringDemo() {
 
 ```go
 // useNumberDemo 使用json.UseNumber
-// 解决将JSON数据反序列化成map[string]interface{}时
-// 数字变为科学计数法表示的浮点数问题
+// 解决将JSON数据反序列化成map[string]interface{}时。
+// 数字变为科学计数法表示的浮点数问题。
 func useNumberDemo(){
     type student struct {
         ID int64 `json:"id"`
@@ -324,7 +324,7 @@ func decoderDemo () {
 	fmt.Printf ("str:% #v \n", string (b))
 	// json string -> map[string]interface{}
 	var m 2 map[string]interface{}
-	// 使用 decoder 方式反序列化，指定使用 number 类型
+	// 使用 decoder 方式反序列化，指定使用 number 类型。
 	decoder := json.NewDecoder (bytes.NewReader (b))
 	decoder.UseNumber ()
 	err = decoder.Decode (&m 2)
@@ -334,7 +334,7 @@ func decoderDemo () {
 	}
 	fmt.Printf ("value:%v\n", m 2["count"]) // 1
 	fmt.Printf ("type:%T\n", m 2["count"])  // json. Number
-	// 将 m 2["count"]转为 json. Number 之后调用 Int 64 () 方法获得 int 64 类型的值
+	// 将 m 2["count"]转为 json. Number 之后调用 Int 64 () 方法获得 int 64 类型的值。
 	count, err := m 2["count"]. (json. Number). Int 64 ()
 	if err != nil {
 		fmt.Printf ("parse to int 64 failed, err:%v\n", err)
@@ -471,24 +471,24 @@ type Order struct {
 
 const layout = "2006-01-02 15:04:05"
 
-// MarshalJSON 为 Order 类型实现自定义的 MarshalJSON 方法
+// MarshalJSON 为 Order 类型实现自定义的 MarshalJSON 方法。
 func (o *Order) MarshalJSON () ([]byte, error) {
-	type TempOrder Order // 定义与 Order 字段一致的新类型
+	type TempOrder Order // 定义与 Order 字段一致的新类型。
 	return json.Marshal (struct {
 		CreatedTime string `json: "created_time"`
-		*TempOrder         // 避免直接嵌套 Order 进入死循环
+		*TempOrder         // 避免直接嵌套 Order 进入死循环。
 	}{
 		CreatedTime: o.CreatedTime.Format (layout),
 		TempOrder:   (*TempOrder)(o),
 	})
 }
 
-// UnmarshalJSON 为 Order 类型实现自定义的 UnmarshalJSON 方法
+// UnmarshalJSON 为 Order 类型实现自定义的 UnmarshalJSON 方法。
 func (o *Order) UnmarshalJSON (data []byte) error {
-	type TempOrder Order // 定义与 Order 字段一致的新类型
+	type TempOrder Order // 定义与 Order 字段一致的新类型。
 	ot := struct {
 		CreatedTime string `json: "created_time"`
-		*TempOrder         // 避免直接嵌套 Order 进入死循环
+		*TempOrder         // 避免直接嵌套 Order 进入死循环。
 	}{
 		TempOrder: (*TempOrder)(o),
 	}
@@ -503,7 +503,7 @@ func (o *Order) UnmarshalJSON (data []byte) error {
 	return nil
 }
 
-// 自定义序列化方法
+// 自定义序列化方法。
 func customMethodDemo () {
 	o 1 := Order{
 		ID:          123456,
@@ -631,7 +631,7 @@ type sendMsg struct {
 
 func rawMessageDemo () {
 	jsonStr := `{"sendMsg":{"user": "q 1 mi","msg": "TestMsg"},"say": "Hello"}`
-	// 定义一个 map，value 类型为 json. RawMessage，方便后续更灵活地处理
+	// 定义一个 map，value 类型为 json. RawMessage，方便后续更灵活地处理。
 	var data map[string]json. RawMessage
 	if err := json.Unmarshal ([]byte (jsonStr), &data); err != nil {
 		fmt.Printf ("json. Unmarshal jsonStr failed, err:%v\n", err)

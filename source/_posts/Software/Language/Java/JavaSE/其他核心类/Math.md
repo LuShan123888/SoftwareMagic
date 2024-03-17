@@ -1,15 +1,15 @@
 ---
 title: Java  Math
 categories:
-- Software
-- Language
-- Java
-- JavaSE
-- 其他核心类
+  - Software
+  - Language
+  - Java
+  - JavaSE
+  - 其他核心类
 ---
 # Java  Math
 
-`Java.lang.Math`类封装了常用的数学函数和常量,Math.PI和Math.E两个常量分别代表数学上的π和e,下表列出了Math类的常用静态方法，通过类名作前缀即可调用，例如,`Math.round(5.56)`的结果为6,`Math.floor(5.56)`的结果为5.9
+`Java.lang.Math`类封装了常用的数学函数和常量，Math.PI和Math.E两个常量分别代表数学上的π和e，下表列出了Math类的常用静态方法，通过类名作前缀即可调用，例如，`Math.round(5.56)`的结果为6,`Math.floor(5.56)`的结果为5.9
 
 方法|	功能
 :---:|:---:
@@ -27,12 +27,12 @@ double log(double d)|	求d的自然对数
 double exp(double x)|	求e的x次幂(ex)
 double pow(double a,double b)|	求a的b次幂
 
-**[例2-5]**:输入圆的半径，计算圆面积，输出结果精确到小数点后3位
+**[例2-5]**：输入圆的半径，计算圆面积，输出结果精确到小数点后3位。
 
 ```java
 public class Test {
     public static void main(String[] args) {
-        String s = JOptionPane.showInputDialog("请输入圆的半径: ");
+        String s = JOptionPane.showInputDialog("请输入圆的半径： ");
         double r = Double.parseDouble(s);
         double area = Math.PI*r*r;
         System.out.printf("圆的面积=%.3f",area);
@@ -42,4 +42,4 @@ public class Test {
 
 **Math.round(11.5) 等于多少？Math.round(-11.5)等于多少？**
 
-- Math.round(11.5)的返回值是12,Math.round(-11.5)的返回值是-11,四舍五入的原理是在参数上加0.5然后进行下取整
+- Math.round(11.5)的返回值是12,Math.round(-11.5)的返回值是-11，四舍五入的原理是在参数上加0.5然后进行下取整。

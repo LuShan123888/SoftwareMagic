@@ -1,10 +1,10 @@
 ---
 title: Spring Boot 实现 Markdown 编辑与持久化
 categories:
-- Software
-- BackEnd
-- SpringFramework
-- 实例
+  - Software
+  - BackEnd
+  - SpringFramework
+  - 实例
 ---
 # Spring Boot 实现 Markdown 编辑与持久化
 
@@ -12,7 +12,7 @@ categories:
 
 ### 数据库设计
 
-- article:文章表
+- article：文章表。
 
 | 字段    |          | 备注         |
 | ------- | -------- | ------------ |
@@ -35,7 +35,7 @@ CREATE TABLE `article` (
 
 ### 基础项目搭建
 
-- 新建SpringBoot项目并创建如下配置文件
+- 新建SpringBoot项目并创建如下配置文件。
 
 ```yaml
 spring:
@@ -46,39 +46,39 @@ datasource:
   driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-- 实体类
+- 实体类。
 
 ```java
-// 文章类
+// 文章类。
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Article implements Serializable {
 
     private int id; // 文章的唯一ID
-    private String author; // 作者名
-    private String title; // 标题
-    private String content; // 文章的内容
+    private String author; // 作者名。
+    private String title; // 标题。
+    private String content; // 文章的内容。
 
 }
 ```
 
-- mapper接口
+- mapper接口。
 
 ```java
 @Mapper
 @Repository
 public interface ArticleMapper {
-    // 查询所有的文章
+    // 查询所有的文章。
     List<Article> queryArticles();
 
-    // 新增一个文章
+    // 新增一个文章。
     int addArticle(Article article);
 
-    // 根据文章id查询文章
+    // 根据文章id查询文章。
     Article getArticleById(int id);
 
-    // 根据文章id删除文章
+    // 根据文章id删除文章。
     int deleteArticleById(int id);
 
 }
@@ -107,7 +107,7 @@ public interface ArticleMapper {
     </mapper>
 ```
 
-- Mybatis配置
+- Mybatis配置。
 
 ```yaml
 mybatis:
@@ -143,10 +143,10 @@ mybatis:
                     <!--博客表单-->
                     <form name="mdEditorForm">
                         <div>
-                            标题:<input type="text" name="title">
+                            标题：<input type="text" name="title">
                         </div>
                         <div>
-                            作者:<input type="text" name="author">
+                            作者：<input type="text" name="author">
                         </div>
                         <div id="article-content">
                             <textarea name="content" id="content" style="display:none;"> </textarea>
@@ -174,13 +174,13 @@ mybatis:
                 path : "../editormd/lib/",
                 saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
                 emoji: true,
-                theme: "dark",// 工具栏主题
-                previewTheme: "dark",// 预览主题
-                editorTheme: "pastel-on-dark",// 编辑主题
-                tex : true,                   // 开启科学公式TeX语言支持，默认关闭
-                flowChart : true,             // 开启流程图支持，默认关闭
-                sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
-                // 图片上传
+                theme: "dark",// 工具栏主题。
+                previewTheme: "dark",// 预览主题。
+                editorTheme: "pastel-on-dark",// 编辑主题。
+                tex : true,                   // 开启科学公式TeX语言支持，默认关闭。
+                flowChart : true,             // 开启流程图支持，默认关闭。
+                sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭，
+                // 图片上传。
                 imageUpload : true,
                 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                 imageUploadURL : "/article/file/upload",
@@ -208,9 +208,9 @@ mybatis:
                 /*给自定义按钮指定回调函数*/
                 toolbarHandlers:{
                     releaseIcon : function(cm, icon, cursor, selection) {
-                        // 表单提交
+                        // 表单提交。
                         mdEditorForm.method = "post";
-                        mdEditorForm.action = "/article/addArticle";// 提交至服务器的路径
+                        mdEditorForm.action = "/article/addArticle";// 提交至服务器的路径。
                         mdEditorForm.submit();
                     },
                     index : function(){
@@ -224,7 +224,7 @@ mybatis:
 </html>
 ```
 
-- 编写Controller,进行跳转，以及保存文章
+- 编写Controller，进行跳转，以及保存文章。
 
 ```java
 @Controller
@@ -247,27 +247,27 @@ public class ArticleController {
 
 ### 图片上传问题
 
-- `editormd`中添加配置
+- `editormd`中添加配置。
 
 ```js
-// 图片上传
+// 图片上传。
 imageUpload : true,
 imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-imageUploadURL : "/article/file/upload", // // 这个是上传图片时的访问地址
+imageUploadURL : "/article/file/upload", // // 这个是上传图片时的访问地址。
 ```
 
-- 后端请求接收保存这个图片，需要导入`FastJson`的依赖
+- 后端请求接收保存这个图片，需要导入`FastJson`的依赖。
 
 ```java
 @RequestMapping("/file/upload")
 @ResponseBody
 public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", required= true) MultipartFile file, HttpServletRequest request) throws IOException {
-    // 上传路径保存设置
+    // 上传路径保存设置。
 
-    // 获得SpringBoot当前项目的路径:System.getProperty("user.dir")
+    // 获得SpringBoot当前项目的路径：System.getProperty("user.dir")
     String path = System.getProperty("user.dir")+"/upload/";
 
-    // 按照月份进行分类:
+    // 按照月份进行分类：
     Calendar instance = Calendar.getInstance();
     String month = (instance.get(Calendar.MONTH) + 1)+"月";
     path = path+month;
@@ -277,15 +277,15 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
         realPath.mkdir();
     }
 
-    // 上传文件地址
-    System.out.println("上传文件保存地址:"+realPath);
+    // 上传文件地址。
+    System.out.println("上传文件保存地址："+realPath);
 
     // 解决文件名字问题：我们使用uuid;
     String filename = "ks-"+UUID.randomUUID().toString().replaceAll("-", "");
     // 通过CommonsMultipartFile的方法直接写文件（注意这个时候)
     file.transferTo(new File(realPath +"/"+ filename));
 
-    // 给editormd进行回调
+    // 给editormd进行回调。
     JSONObject res = new JSONObject();
     res.put("url","/upload/"+month+"/"+ filename);
     res.put("success", 1);
@@ -295,7 +295,7 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
 }
 ```
 
-- 解决文件回显显示的问题，设置虚拟目录映射
+- 解决文件回显显示的问题，设置虚拟目录映射。
 
 ```java
 @Configuration
@@ -313,8 +313,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
 
 ### 表情包问题
 
-- 自己手动下载emoji 表情包并放到图片路径下
-- 修改`editormd.js`文件
+- 自己手动下载emoji 表情包并放到图片路径下。
+- 修改`editormd.js`文件。
 
 ```js
 // Emoji graphics files url path
@@ -326,7 +326,7 @@ editormd.emoji     = {
 
 ### 文章展示
 
-- Controller 中增加方法
+- Controller 中增加方法。
 
 ```java
 @GetMapping("/{id}")
@@ -353,7 +353,7 @@ public String show(@PathVariable("id") int id,Model model){
         <div>
             <!--文章头部信息：标题，作者，最后更新日期，导航-->
             <h2 style="margin: auto 0" th:text="${article.title}"></h2>
-            作者:<span style="float: left" th:text="${article.author}"></span>
+            作者：<span style="float: left" th:text="${article.author}"></span>
             <!--文章主体内容-->
             <div id="doc-content">
                 <textarea style="display:none;" placeholder="markdown"th:text="${article.content}"></textarea>
@@ -380,9 +380,9 @@ public String show(@PathVariable("id") int id,Model model){
                     emoji: true,
                     taskList: true,
                     tocm: true,
-                    tex: true, // 默认不解析
-                    flowChart: true, // 默认不解析
-                    sequenceDiagram: true, // 默认不解析
+                    tex: true, // 默认不解析。
+                    flowChart: true, // 默认不解析。
+                    sequenceDiagram: true, // 默认不解析。
                     codeFold: true
                 });});
         </script>

@@ -21,7 +21,7 @@ categories:
 /usr/sbin/
 ```
 
-- Mac OS 的 Apache2 的默认根目录:
+- Mac OS 的 Apache2 的默认根目录：
 
 ```shell
 /Library/WebServer/Documents
@@ -30,15 +30,15 @@ categories:
 ## Apache命令
 
 ```cpp
-// 启动服务器
+// 启动服务器。
 sudo apachectl -k start
 sudo apachectl start
 
-// 关闭服务器
+// 关闭服务器。
 sudo apachectl -k stop
 sudo apachectl stop
 
-// 重启服务器
+// 重启服务器。
 sudo apachectl -k restart
 sudo apachectl restart
 ```

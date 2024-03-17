@@ -9,7 +9,7 @@ categories:
 
 ## 删除本地缓存
 
-- 打开"终端”输入如下代码
+- 打开"终端”输入如下代码。
 
 ```shell
 $ sudo tmutil listlocalsnapshots /
@@ -35,7 +35,7 @@ com.apple.TimeMachine.2021-12-10-131731.local
 com.apple.TimeMachine.2021-12-10-141731.local
 ```
 
-- 接下来只需逐个删除就行，终端输入
+- 接下来只需逐个删除就行，终端输入。
 
 ```shell
 $ tmutil deletelocalsnapshots 2017-12-18-093234(上面文件末尾显示的日期)
@@ -47,7 +47,7 @@ $ tmutil deletelocalsnapshots 2017-12-18-093234(上面文件末尾显示的日�
 $ sudo sysctl debug.lowpri_throttle_enabled=0
 ```
 
-- 恢复
+- 恢复。
 
 ```shell
 $ sudo sysctl debug.lowpri_throttle_enabled=1

@@ -26,7 +26,7 @@ func worker() {
         fmt.Println("worker")
         time.Sleep(time.Second)
     }
-    // 如何接收外部命令实现退出
+    // 如何接收外部命令实现退出。
     wg.Done()
 }
 
@@ -46,7 +46,7 @@ var wg sync.WaitGroup
 var exit bool
 
 // 全局变量方式存在的问题：
-// 1. 使用全局变量在跨包调用时不容易统一
+// 1. 使用全局变量在跨包调用时不容易统一。
 // 2. 如果worker中再启动goroutine，就不太好控制了。
 func worker() {
     for {
@@ -62,8 +62,8 @@ func worker() {
 func main() {
     wg.Add(1)
     go worker()
-    time.Sleep(time.Second * 3) // 超时3秒后使程序退出
-    exit = true                 // 修改全局变量实现子goroutine的退出
+    time.Sleep(time.Second * 3) // 超时3秒后使程序退出。
+    exit = true                 // 修改全局变量实现子goroutine的退出。
     wg.Wait()
     fmt.Println("over")
 }
@@ -75,7 +75,7 @@ func main() {
 var wg sync.WaitGroup
 
 // 管道方式存在的问题：
-// 1. 使用全局变量在跨包调用时不容易实现规范和统一
+// 1. 使用全局变量在跨包调用时不容易实现规范和统一。
 // 2. 需要维护一个共用的channel
 
 func worker(exitChan chan struct{}) {
@@ -84,7 +84,7 @@ func worker(exitChan chan struct{}) {
         fmt.Println("worker")
         time.Sleep(time.Second)
         select {
-            case <-exitChan: // 等待接收上级通知
+            case <-exitChan: // 等待接收上级通知。
             break LOOP
             default:
             }
@@ -96,8 +96,8 @@ func main() {
     var exitChan = make(chan struct{})
     wg.Add(1)
     go worker(exitChan)
-    time.Sleep(time.Second * 3) // 超时3秒后使程序退出
-    exitChan <- struct{}{}      // 给子goroutine发送退出信号
+    time.Sleep(time.Second * 3) // 超时3秒后使程序退出。
+    exitChan <- struct{}{}      // 给子goroutine发送退出信号。
     close(exitChan)
     wg.Wait()
     fmt.Println("over")
@@ -115,7 +115,7 @@ func worker(ctx context.Context) {
         fmt.Println("worker")
         time.Sleep(time.Second)
         select {
-            case <-ctx.Done(): // 等待上级通知
+            case <-ctx.Done(): // 等待上级通知。
             	break LOOP
             default:
         }
@@ -128,7 +128,7 @@ func main() {
     wg.Add(1)
     go worker(ctx)
     time.Sleep(time.Second * 3)
-    cancel() // 通知子goroutine结束
+    cancel() // 通知子goroutine结束。
     wg.Wait()
     fmt.Println("over")
 }
@@ -146,7 +146,7 @@ func worker(ctx context.Context) {
         fmt.Println("worker")
         time.Sleep(time.Second)
         select {
-            case <-ctx.Done(): // 等待上级通知
+            case <-ctx.Done(): // 等待上级通知。
             	break LOOP
             default:
             }
@@ -160,7 +160,7 @@ func worker2(ctx context.Context) {
         fmt.Println("worker2")
         time.Sleep(time.Second)
         select {
-            case <-ctx.Done(): // 等待上级通知
+            case <-ctx.Done(): // 等待上级通知。
             	break LOOP
             default:
         }
@@ -171,7 +171,7 @@ func main() {
     wg.Add(1)
     go worker(ctx)
     time.Sleep(time.Second * 3)
-    cancel() // 通知子goroutine结束
+    cancel() // 通知子goroutine结束。
     wg.Wait()
     fmt.Println("over")
 }
@@ -192,10 +192,10 @@ type Context interface {
 
 - `Deadline` 方法需要返回当前 `Context` 被取消的时间，也就是完成工作的截止时间（deadline）
 - `Done` 方法需要返回一个 `Channel`，这个 Channel 会在当前工作完成或者上下文被取消之后关闭，多次调用 `Done` 方法会返回同一个 Channel
-- `Err` 方法会返回当前结束的原因，它只会在返回的 Channel 被关闭时才会返回非空的值
-    - 如果当前 `Context` 被取消就会返回 `Canceled` 错误
-    - 如果当前 `Context` 超时就会返回 `DeadlineExceeded` 错误
-- `Value` 方法会从 `Context` 中返回键对应的值，对于同一个上下文来说，多次调用 `Value` 并传入相同的 `Key` 会返回相同的结果，该方法仅用于传递跨 API 和进程间跟请求域的数据
+- `Err` 方法会返回当前结束的原因，它只会在返回的 Channel 被关闭时才会返回非空的值。
+    - 如果当前 `Context` 被取消就会返回 `Canceled` 错误。
+    - 如果当前 `Context` 超时就会返回 `DeadlineExceeded` 错误。
+- `Value` 方法会从 `Context` 中返回键对应的值，对于同一个上下文来说，多次调用 `Value` 并传入相同的 `Key` 会返回相同的结果，该方法仅用于传递跨 API 和进程间跟请求域的数据。
 
 ### Background () 和 TODO ()
 
@@ -231,7 +231,7 @@ func gen(ctx context.Context) <-chan int {
         for {
             select {
                 case <-ctx.Done():
-                	return // return结束该goroutine，防止泄露
+                	return // return结束该goroutine，防止泄露。
                 case dst <- n:
                 	n++
             }
@@ -307,9 +307,9 @@ func worker (ctx context. Context) {
     LOOP:
     for {
         fmt.Println ("db connecting ...")
-        time.Sleep (time. Millisecond * 10) // 假设正常连接数据库耗时 10 毫秒
+        time.Sleep (time. Millisecond * 10) // 假设正常连接数据库耗时 10 毫秒。
         select {
-            case <-ctx.Done (): // 50 毫秒后自动调用
+            case <-ctx.Done (): // 50 毫秒后自动调用。
         	    break LOOP
             default:
         }
@@ -319,12 +319,12 @@ func worker (ctx context. Context) {
 }
 
 func main () {
-    // 设置一个 50 毫秒的超时
+    // 设置一个 50 毫秒的超时。
     ctx, cancel := context.WithTimeout (context.Background (), time. Millisecond*50)
     wg.Add (1)
     go worker (ctx)
     time.Sleep (time. Second * 5)
-    cancel () // 通知子 goroutine 结束
+    cancel () // 通知子 goroutine 结束。
     wg.Wait ()
     fmt.Println ("over")
 }
@@ -358,9 +358,9 @@ func worker (ctx context. Context) {
     LOOP:
     for {
         fmt.Printf ("worker, trace code:%s\n", traceCode)
-        time.Sleep (time. Millisecond * 10) // 假设正常连接数据库耗时 10 毫秒
+        time.Sleep (time. Millisecond * 10) // 假设正常连接数据库耗时 10 毫秒。
         select {
-            case <-ctx.Done (): // 50 毫秒后自动调用
+            case <-ctx.Done (): // 50 毫秒后自动调用。
             break LOOP
             default:
             }
@@ -370,14 +370,14 @@ func worker (ctx context. Context) {
 }
 
 func main () {
-    // 设置一个 50 毫秒的超时
+    // 设置一个 50 毫秒的超时。
     ctx, cancel := context.WithTimeout (context.Background (), time. Millisecond*50)
-    // 在系统的入口中设置 trace code 传递给后续启动的 goroutine 实现日志数据聚合
+    // 在系统的入口中设置 trace code 传递给后续启动的 goroutine 实现日志数据聚合。
     ctx = context.WithValue (ctx, TraceCode ("TRACE_CODE"), "12512312234")
     wg.Add (1)
     go worker (ctx)
     time.Sleep (time. Second * 5)
-    cancel () // 通知子 goroutine 结束
+    cancel () // 通知子 goroutine 结束。
     wg.Wait ()
     fmt.Println ("over")
 }
@@ -388,8 +388,8 @@ func main () {
 - 推荐以参数的方式显示传递 Context
 - 以 Context 作为参数的函数方法，应该把 Context 作为第一个参数。
 - 给一个函数方法传递 Context 的时候，不要传递 nil，如果不知道传递什么，就使用`context.TODO ()`
-- Context 的 Value 相关方法应该传递请求域的必要数据，不应该用于传递可选参数
-- Context 是线程安全的，可以放心的在多个 goroutine 中传递
+- Context 的 Value 相关方法应该传递请求域的必要数据，不应该用于传递可选参数。
+- Context 是线程安全的，可以放心的在多个 goroutine 中传递。
 
 ## 客户端超时取消示例
 
@@ -401,7 +401,7 @@ func main () {
 func indexHandler (w http. ResponseWriter, r *http. Request) {
     number := rand.Intn (2)
     if number == 0 {
-        time.Sleep (time. Second * 10) // 耗时 10 秒的慢响应
+        time.Sleep (time. Second * 10) // 耗时 10 秒的慢响应。
         fmt.Fprintf (w, "slow response")
         return
     }
@@ -427,8 +427,8 @@ type respData struct {
 
 func doCall (ctx context. Context) {
     transport := http. Transport{
-        // 请求频繁可定义全局的 client 对象并启用长链接
-        // 请求不频繁使用短链接
+        // 请求频繁可定义全局的 client 对象并启用长链接。
+        // 请求不频繁使用短链接。
         DisableKeepAlives: true
     }
     client := http. Client{
@@ -473,9 +473,9 @@ func doCall (ctx context. Context) {
 }
 
 func main () {
-    // 定义一个 100 毫秒的超时
+    // 定义一个 100 毫秒的超时。
     ctx, cancel := context.WithTimeout (context.Background (), time. Millisecond*100)
-    defer cancel () // 调用 cancel 释放子 goroutine 资源
+    defer cancel () // 调用 cancel 释放子 goroutine 资源。
     doCall (ctx)
 }
 ```

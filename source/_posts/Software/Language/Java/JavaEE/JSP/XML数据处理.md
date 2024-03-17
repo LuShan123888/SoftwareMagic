@@ -9,17 +9,17 @@ categories:
 ---
 # JSP XML 数据处理
 
-- 当通过HTTP发送XML数据时，就有必要使用JSP来处理传入和流出的XML文档了，比如RSS文档，作为一个XML文档，它仅仅只是一堆文本而已，使用JSP创建XML文档并不比创建一个HTML文档难
+- 当通过HTTP发送XML数据时，就有必要使用JSP来处理传入和流出的XML文档了，比如RSS文档，作为一个XML文档，它仅仅只是一堆文本而已，使用JSP创建XML文档并不比创建一个HTML文档难。
 
 ## 使用JSP发送XML
 
-- 使用JSP发送XML内容就和发送HTML内容一样，唯一的不同就是您需要把页面的context属性设置为text/xml,要设置context属性，使用`<%@page % >`命令，就像这样:
+- 使用JSP发送XML内容就和发送HTML内容一样，唯一的不同就是您需要把页面的context属性设置为text/xml，要设置context属性，使用`<%@page % >`命令，就像这样：
 
 ```jsp
 <%@ page contentType="text/xml" %>
 ```
 
-- 接下来这个例子向浏览器发送XML内容:
+- 接下来这个例子向浏览器发送XML内容：
 
 ```jsp
 <%@ page contentType="text/xml" %>
@@ -33,14 +33,14 @@ categories:
 </books>
 ```
 
-- 使用不同的浏览器来访问这个例子，看看这个例子所呈现的文档树
+- 使用不同的浏览器来访问这个例子，看看这个例子所呈现的文档树。
 
 ## 在JSP中处理XML
 
-- 在使用JSP处理XML之前，您需要将与XML 和XPath相关的两个库文件放在`<Tomcat Installation Directory>\lib`目录下:
-    - XercesImpl.jar:在这下载http://www.apache.org/dist/xerces/j/
-    - xalan.jar:在这下载http://archive.apache.org/dist/xml/xalan-j/
-- `books.xml`文件:
+- 在使用JSP处理XML之前，您需要将与XML 和XPath相关的两个库文件放在`<Tomcat Installation Directory>\lib`目录下：
+    - XercesImpl.jar：在这下载http://www.apache.org/dist/xerces/j/
+    - xalan.jar：在这下载http://archive.apache.org/dist/xml/xalan-j/
+- `books.xml`文件：
 
 ```xml
 <books>
@@ -57,7 +57,7 @@ categories:
 </books>
 ```
 
-- `main.jsp`文件:
+- `main.jsp`文件：
 
 ```jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -84,7 +84,7 @@ categories:
 </html>
 ```
 
-- 访问http://localhost:8080/main.jsp,运行结果如下:
+- 访问http://localhost:8080/main.jsp，运行结果如下：
 
 ```
 BOOKS INFO:
@@ -94,7 +94,7 @@ The price of the second book: 2000
 
 ## 使用JSP格式化XML
 
-- XSLT样式表style.xsl文件:
+- XSLT样式表style.xsl文件：
 
 ```xml
 <?xml version="1.0"?>
@@ -131,7 +131,7 @@ The price of the second book: 2000
 </xsl:stylesheet>
 ```
 
-- main.jsp文件:
+- main.jsp文件：
 
 ```jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -165,6 +165,6 @@ The price of the second book: 2000
 </html>
 ```
 
-- 运行结果如下:
+- 运行结果如下：
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-xml-1.jpg)

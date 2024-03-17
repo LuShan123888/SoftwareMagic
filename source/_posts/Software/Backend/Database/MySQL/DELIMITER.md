@@ -19,7 +19,7 @@ mysql> CREATE PROCEDURE simpleproc (OUT param1 INT)
 -> BEGIN
 -> SELECT COUNT(*) INTO param1 FROM t;
 -> END;
--> //                   --遇到// 符号结束并执行上面的命令
+-> //                   --遇到// 符号结束并执行上面的命令。
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> delimiter ;        --将结束符改回默认值";”
@@ -37,4 +37,4 @@ mysql> SELECT @a;
 
 ```
 
- **注意**:在定义结束符时:`delimiter //` 命令后不能加上`;`  出于习惯或者是把delimiter命令误以为必须加`;`才能执行而在后面加上了分号，那么在执行存储过程时会报错，因为当`mysql> delimiter // ;`这样定义时，此时的结束符不是`//`,而是`// ;`
+ **注意**：在定义结束符时：`delimiter //` 命令后不能加上`;`  出于习惯或者是把delimiter命令误以为必须加`;`才能执行而在后面加上了分号，那么在执行存储过程时会报错，因为当`mysql> delimiter // ;`这样定义时，此时的结束符不是`//`，而是`// ;`

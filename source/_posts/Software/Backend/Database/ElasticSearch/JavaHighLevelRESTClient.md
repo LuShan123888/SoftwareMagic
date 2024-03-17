@@ -28,9 +28,9 @@ restHighLevelClient.close();
 ### 创建索引
 
 ```java
-// 创建索引请求
+// 创建索引请求。
 CreateIndexRequest request = new CreateIndexRequest("test_index");
-// 客服端执行请求IndicesClient,请求后返回响应
+// 客服端执行请求IndicesClient，请求后返回响应。
 CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
 System.out.println(JSON.toJSONString(response));
 ```
@@ -63,13 +63,13 @@ System.out.println(JSON.toJSONString(response));
 ### 创建文档
 
 ```java
-// 创建请求
+// 创建请求。
 IndexRequest request= new IndexRequest("test_index");
-// 配置请求
+// 配置请求。
 request.id("1");
 request.timeout(TimeValue.timeValueSeconds(1));
 request.source(JSON.toJSONString(new User("user1", 20)), XContentType.JSON);
-// 发送请求，获取响应的结果
+// 发送请求，获取响应的结果。
 IndexResponse response = restHighLevelClient.index(request, RequestOptions.DEFAULT);
 System.out.println(JSON.toJSONString(response));
 ```
@@ -134,7 +134,7 @@ System.out.println(JSON.toJSONString(response));
         userList.add(new User("test3", 22));
 
         for (int i = 0; i < userList.size(); i++) {
-            // 批量添加请求
+            // 批量添加请求。
             request.add(new IndexRequest("test_index")
                     .id("" + (i + 1))
                     .source(JSON.toJSONString(userList.get(i)), XContentType.JSON)
@@ -154,16 +154,16 @@ System.out.println(JSON.toJSONString(response));
 ### match
 
 ```java
-// 创建查询请求
+// 创建查询请求。
 SearchRequest request = new SearchRequest();
-// 构建查询条件
+// 构建查询条件。
 MatchQueryBuilder query = QueryBuilders.matchQuery("name", "test1");
 SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 searchSourceBuilder.from(0);
 searchSourceBuilder.size(2);
 searchSourceBuilder.query(query);
 request.source(searchSourceBuilder);
-// 执行查询
+// 执行查询。
 SearchResponse response= restHighLevelClient.search(request, RequestOptions.DEFAULT);
 System.out.println(JSON.toJSONString(response));
 ```

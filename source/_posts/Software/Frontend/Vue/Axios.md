@@ -24,7 +24,7 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 ```
 
-- 在组件中使用
+- 在组件中使用。
 
 ```vue
 <template>

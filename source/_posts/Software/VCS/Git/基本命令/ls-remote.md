@@ -1,10 +1,10 @@
 ---
 title: Git ls-remote
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git ls-remote
 

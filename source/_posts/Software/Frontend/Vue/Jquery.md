@@ -20,7 +20,7 @@ $ yarn add jquery
 ```js
 const webpack = require('webpack')
 module.exports = {
-  //Webpack配置
+  //Webpack配置。
   configureWebpack: {
     plugins: [
         // 引入Jquery

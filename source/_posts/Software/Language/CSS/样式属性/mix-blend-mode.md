@@ -1,16 +1,16 @@
 ---
 title: CSS mix-blend-mode
 categories:
-- Software
-- Language
-- CSS
-- 样式属性
+  - Software
+  - Language
+  - CSS
+  - 样式属性
 ---
 # CSS mix-blend-mode
 
 **标签定义及使用说明**
 
-mix-blend-mode 属性描述了元素的内容应该与元素的直系父元素的内容和元素的背景如何混合
+mix-blend-mode 属性描述了元素的内容应该与元素的直系父元素的内容和元素的背景如何混合。
 
 **语法**
 
@@ -18,7 +18,7 @@ mix-blend-mode 属性描述了元素的内容应该与元素的直系父元素�
 mix-blend-mod:  <blend-mode>
 ```
 
-`<blend-mode>` 的值可以是以下几个:
+`<blend-mode>` 的值可以是以下几个：
 
 ```css
 mix-blend-mode: normal;
@@ -39,11 +39,11 @@ mix-blend-mode: color;
 mix-blend-mode: luminosity;
 ```
 
-多个值可以使用逗号隔开
+多个值可以使用逗号隔开。
 
 ## 实例
 
-各种混合模式实例:
+各种混合模式实例：
 
 ```css
 .normal {mix-blend-mode: normal;}

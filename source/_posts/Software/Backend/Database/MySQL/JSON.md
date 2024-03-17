@@ -10,7 +10,7 @@ categories:
 
 - JSON 数据类型是 MySQL 5.7.8 开始支持的。在此之前，只能通过字符类型（CHAR，VARCHAR 或 TEXT ）来保存 JSON 文档。
 - 相对字符类型，原生的 JSON 类型具有以下优势：
-    1. 在插入时能自动校验文档是否满足 JSON 格式的要求
+    1. 在插入时能自动校验文档是否满足 JSON 格式的要求。
     2. 优化了存储格式。无需读取整个文档就能快速访问某个元素的值。
 - 在 JSON 类型引入之前，如果我们想要获取 JSON 文档中的某个元素，必须首先读取整个 JSON 文档，然后在客户端将其转换为 JSON 对象，最后再通过对象获取指定元素的值。
 
@@ -556,7 +556,7 @@ mysql> select *,json_storage_size(c1),json_storage_free(c1) from t where id=1;
 update t set c1=json_replace(c1,'$.id',10) where id=1;
 ```
 
-- 不开启
+- 不开启。
 
 ```shell
 ### UPDATE `slowtech`.`t`
@@ -568,7 +568,7 @@ update t set c1=json_replace(c1,'$.id',10) where id=1;
 ###   @2='{"id": 10, "name": "a"}'
 ```
 
-- 开启
+- 开启。
 
 ```shell
 ### UPDATE `slowtech`.`t`

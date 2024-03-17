@@ -13,11 +13,11 @@ categories:
 $ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test-replicated-topic
 ```
 
-- `--topic`:定义 topic 名
-- `--replication-factor`:定义副本数，副本数要小于等于broker数
-- `--partitions`:定义分区数
+- `--topic`：定义 topic 名。
+- `--replication-factor`：定义副本数，副本数要小于等于broker数。
+- `--partitions`：定义分区数。
 
-> 为了实现扩展性，一个非常大的 topic 可以分布到多个 broker(即服务器）上，一个 topic 可以分为多个 partition,每个 partition 是一个有序的队列
+> 为了实现扩展性，一个非常大的 topic 可以分布到多个 broker(即服务器）上，一个 topic 可以分为多个 partition，每个 partition 是一个有序的队列。
 
 ### 查看所有Topic
 
@@ -37,7 +37,7 @@ $ kafka-topics.sh --zookeeper zookeeper:2181 --describe --topic test-topic
 $ kafka-topics.sh --zookeeper zookeeper:2181 --delete --topic test-topic
 ```
 
-- 可以在`server.properties`中设置 `delete.topic.enable=true` 否则只是标记删除
+- 可以在`server.properties`中设置 `delete.topic.enable=true` 否则只是标记删除。
 
 ### 修改Topic分区数
 
@@ -63,4 +63,4 @@ hello, kafka.
 test message
 ```
 
-- `--from-beginning`:会把主题中以往所有的数据都读取出来
+- `--from-beginning`：会把主题中以往所有的数据都读取出来。

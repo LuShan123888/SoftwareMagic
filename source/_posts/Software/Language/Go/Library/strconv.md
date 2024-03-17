@@ -152,7 +152,7 @@ s2 := strconv.FormatFloat(3.1415, 'E', -1, 64)
 
 ### isPrint ()
 
-返回一个字符是否是可打印的
+返回一个字符是否是可打印的。
 
 ```go
 func IsPrint(r rune) bool
@@ -162,7 +162,7 @@ func IsPrint(r rune) bool
 
 ### CanBackquote ()
 
-返回字符串 s 是否可以不被修改的表示为一个单行的、没有空格和 tab 之外控制字符的反引号字符串
+返回字符串 s 是否可以不被修改的表示为一个单行的、没有空格和 tab 之外控制字符的反引号字符串。
 
 ```go
 func CanBackquote(s string) bool

@@ -12,7 +12,7 @@ categories:
 
 如果查询存在适当的索引，MongoDB可以使用该索引限制必须检查的文档数。 索引是特殊的数据结构，它以易于遍历的形式存储集合数据集的一小部分。索引存储特定字段或一组字段的值，按字段值排序。索引项的排序支持有效的相等匹配和基于范围的查询操作。此外，MongoDB还可以使用索引中的排序返回排序结果。 
 
-MongoDB索引使用B-Tree数据结构
+MongoDB索引使用B-Tree数据结构。
 
 ## 索引的类型
 
@@ -24,7 +24,7 @@ MongoDB支持在文档的单个字段上创建用户定义的升序/降序索引
 
 MongoDB还支持多个字段的用户定义索引，即复合索引(Compound Index)。
 
-复合索引中列出的字段顺序具有重要意义。例如，如果复合索引由{ userid: 1, score: -1 }组成，则索引首先按userid正序排序，然后在每个userid的值内，再在按score倒序排序
+复合索引中列出的字段顺序具有重要意义。例如，如果复合索引由{ userid: 1, score: -1 }组成，则索引首先按userid正序排序，然后在每个userid的值内，再在按score倒序排序。
 
 ### 其他索引
 
@@ -42,7 +42,7 @@ MongoDB还支持多个字段的用户定义索引，即复合索引(Compound Ind
 db.collection.getIndexes()
 ```
 
-**实例**:查看comment集合中所有的索引情况
+**实例**：查看comment集合中所有的索引情况。
 
 ```json
 db.comment.getIndexes() 
@@ -71,28 +71,28 @@ db.comment.getIndexes()
 db.collection.createIndex(keys, options)
 ```
 
-- `keys`:包含字段和值对的文档，其中字段是索引键，值描述该字段的索引类型。对于字段上的升序索引，请指定值1,对于降序索引，请指定值-1
-- `options`:可选。包含一组控制索引创建的选项的文档。
-    - `background`:建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引， 默认值为false
-    - `unique`:建立的索引是否唯一。指定为true创建唯一索引。默认值为false
-    - `name`:索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称
-    - `dropDups`:在建立唯一索引时是否删除重复记录，指定 true 创建唯一索引。默认值为 false
-    - `sparse`:对文档中不存在的字段数据不启用索引;这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false
-    - `expireAfterSeconds`:指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间
-    - `v`:索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本
-    - `weights`:索引权重值，数值在 1 到 99,999 之间，表示该索引相对于其他索引字段的得分权重
-    - `default_language`:对于文本索引，该参数决定了停用词及词干和词器的规则的列表。 默认为英语
-    - `language_override`:对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为 language
+- `keys`：包含字段和值对的文档，其中字段是索引键，值描述该字段的索引类型。对于字段上的升序索引，请指定值1，对于降序索引，请指定值-1
+- `options`：可选。包含一组控制索引创建的选项的文档。
+    - `background`：建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引， 默认值为false
+    - `unique`：建立的索引是否唯一。指定为true创建唯一索引。默认值为false
+    - `name`：索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称。
+    - `dropDups`：在建立唯一索引时是否删除重复记录，指定 true 创建唯一索引。默认值为 false
+    - `sparse`：对文档中不存在的字段数据不启用索引;这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false
+    - `expireAfterSeconds`：指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间。
+    - `v`：索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本。
+    - `weights`：索引权重值，数值在 1 到 99,999 之间，表示该索引相对于其他索引字段的得分权重。
+    - `default_language`：对于文本索引，该参数决定了停用词及词干和词器的规则的列表。 默认为英语。
+    - `language_override`：对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为 language
 
 **实例**
 
-- **单字段索引**:对 userid 字段建立索引
+- **单字段索引**：对 userid 字段建立索引。
 
 ```json
 db.comment.createIndex({userid:1})
 ```
 
-- **复合索引**:对 userid 和 nickname 同时建立复合(Compound)索引:
+- **复合索引**：对 userid 和 nickname 同时建立复合(Compound)索引：
 
 ```json
 db.comment.createIndex({userid:1,nickname:-1})
@@ -100,7 +100,7 @@ db.comment.createIndex({userid:1,nickname:-1})
 
 ## 删除索引
 
-可以移除指定的索引，或移除所有索引
+可以移除指定的索引，或移除所有索引。
 
 ### 删除指定索引
 
@@ -108,9 +108,9 @@ db.comment.createIndex({userid:1,nickname:-1})
 db.collection.dropIndex(index)
 ```
 
-- `index`:指定要删除的索引。可以通过索引名称或索引规范文档指定索引。若要删除文本索引，请指定索引名称。
+- `index`：指定要删除的索引。可以通过索引名称或索引规范文档指定索引。若要删除文本索引，请指定索引名称。
 
-**实例**:删除 comment 集合中 userid 字段上的升序索引
+**实例**：删除 comment 集合中 userid 字段上的升序索引。
 
 ```json
 db.comment.dropIndex({userid:1})
@@ -122,7 +122,7 @@ db.comment.dropIndex({userid:1})
 db.collection.dropIndexes()
 ```
 
-**实例**:删除 comment 集合中所有索引
+**实例**：删除 comment 集合中所有索引。
 
 ```json
 db.comment.dropIndexes()
@@ -138,7 +138,7 @@ db.comment.dropIndexes()
 db.collection.find(query,options).explain(options)
 ```
 
-**实例**：查看根据userid查询数据的情况
+**实例**：查看根据userid查询数据的情况。
 
 ```json
 db.comment.find({userid: "1013"}).explain() 

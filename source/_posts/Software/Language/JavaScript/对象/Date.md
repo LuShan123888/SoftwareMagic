@@ -1,20 +1,20 @@
 ---
 title: JavaScript Date对象
 categories:
-- Software
-- Language
-- JavaScript
-- 对象
+  - Software
+  - Language
+  - JavaScript
+  - 对象
 ---
 # JavaScript Date对象
 
-- 日期对象用于处理日期和时间
+- 日期对象用于处理日期和时间。
 
 ## 创建日期
 
-- Date 对象用于处理日期和时间
-- 可以通过 new 关键词来定义 Date 对象，以下代码定义了名为 myDate 的 Date 对象:
-- 有四种方式初始化日期:
+- Date 对象用于处理日期和时间。
+- 可以通过 new 关键词来定义 Date 对象，以下代码定义了名为 myDate 的 Date 对象：
+- 有四种方式初始化日期：
 
 ```js
 new Date();
@@ -24,7 +24,7 @@ new Date(year, monthIndex [, day [, hours [, minutes [, seconds [, milliseconds]
 ```
 
 - 上面的参数大多数都是可选的，在不指定的情况下，默认参数是0
-- 实例化一个日期的一些例子:
+- 实例化一个日期的一些例子：
 
 ```js
 var today = new Date()
@@ -35,7 +35,7 @@ var d3 = new Date(79,5,24,11,33,0)
 
 ## 设置日期
 
-- 通过使用针对日期对象的方法，我们可以很容易地对日期进行操作
+- 通过使用针对日期对象的方法，我们可以很容易地对日期进行操作。
 - 在下面的例子中，我们为日期对象设置了一个特定的日期 (2010 年 1 月 14 日):
 
 ```js
@@ -43,19 +43,19 @@ var myDate=new Date();
 myDate.setFullYear(2010,0,14);
 ```
 
-- 在下面的例子中，我们将日期对象设置为 5 天后的日期:
+- 在下面的例子中，我们将日期对象设置为 5 天后的日期：
 
 ```js
 var myDate=new Date();
 myDate.setDate(myDate.getDate()+5);
 ```
 
-- **注意**:如果增加天数会改变月份或者年份，那么日期对象会自动完成这种转换
+- **注意**：如果增加天数会改变月份或者年份，那么日期对象会自动完成这种转换。
 
 ## 两个日期比较
 
-- 日期对象也可用于比较两个日期
-- 下面的代码将当前日期与 2100 年 1 月 14 日做了比较:
+- 日期对象也可用于比较两个日期。
+- 下面的代码将当前日期与 2100 年 1 月 14 日做了比较：
 
 ```js
 var x=new Date();

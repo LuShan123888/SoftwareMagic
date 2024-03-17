@@ -1,10 +1,10 @@
 ---
 title: Git blame
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git blame
 

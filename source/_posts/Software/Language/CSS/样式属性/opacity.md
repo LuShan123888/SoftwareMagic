@@ -1,16 +1,16 @@
 ---
 title: CSS opacity
 categories:
-- Software
-- Language
-- CSS
-- 样式属性
+  - Software
+  - Language
+  - CSS
+  - 样式属性
 ---
 # CSS opacity
 
 **属性定义及使用说明**
 
-Opacity属性设置一个元素了透明度级别
+Opacity属性设置一个元素了透明度级别。
 
 **语法**
 

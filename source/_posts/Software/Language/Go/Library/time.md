@@ -15,17 +15,17 @@ time 包提供了一些关于时间显示和测量用的函数。time 包中日�
 Go 语言中使用 `time.Time` 类型表示时间。我们可以通过 `time.Now` 函数获取当前的时间对象，然后从时间对象中可以获取到年、月、日、时、分、秒等信息。
 
 ```go
-// timeDemo 时间对象的年月日时分秒
+// timeDemo 时间对象的年月日时分秒。
 func timeDemo() {
-    now := time.Now() // 获取当前时间
+    now := time.Now() // 获取当前时间。
     fmt.Printf("current time:%v\n", now)
 
-    year := now.Year()     // 年
-    month := now.Month()   // 月
-    day := now.Day()       // 日
-    hour := now.Hour()     // 小时
-    minute := now.Minute() // 分钟
-    second := now.Second() // 秒
+    year := now.Year()     // 年。
+    month := now.Month()   // 月。
+    day := now.Day()       // 日。
+    hour := now.Hour()     // 小时。
+    minute := now.Minute() // 分钟。
+    second := now.Second() // 秒。
     fmt.Println(year, month, day, hour, minute, second)
 }
 ```
@@ -37,7 +37,7 @@ Go 语言中使用 location 来映射具体的时区。时区（Time Zone）是�
 下面的示例代码中使用 `beijing` 来表示东八区 8 小时的偏移量，其中 `time.FixedZone` 和 `time.LoadLocation` 这两个函数则是用来获取 location 信息。
 
 ```go
-// timezoneDemo 时区示例
+// timezoneDemo 时区示例。
 func timezoneDemo() {
 	// 中国没有夏令时，使用一个固定的8小时的UTC时差。
 	// 对于很多其他国家需要考虑夏令时。
@@ -45,30 +45,30 @@ func timezoneDemo() {
 	// FixedZone 返回始终使用给定区域名称和偏移量(UTC 以东秒）的 Location。
 	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
 
-	// 如果当前系统有时区数据库，则可以加载一个位置得到对应的时区
-	// 例如，加载纽约所在的时区
+	// 如果当前系统有时区数据库，则可以加载一个位置得到对应的时区。
+	// 例如，加载纽约所在的时区。
 	newYork, err := time.LoadLocation("America/New_York") // UTC-05:00
 	if err != nil {
 		fmt.Println("load America/New_York location failed", err)
 		return
 	}
 	fmt.Println()
-	// 加载上海所在的时区
+	// 加载上海所在的时区。
 	//shanghai, err := time.LoadLocation("Asia/Shanghai") // UTC+08:00
-	// 加载东京所在的时区
+	// 加载东京所在的时区。
 	//tokyo, err := time.LoadLocation("Asia/Tokyo") // UTC+09:00
 
 	// 创建时间对象需要指定位置。常用的位置是 time.Local（当地时间） 和 time.UTC（UTC时间）。
-	//timeInLocal := time.Date(2009, 1, 1, 20, 0, 0, 0, time.Local)  // 系统本地时间
+	//timeInLocal := time.Date(2009, 1, 1, 20, 0, 0, 0, time.Local)  // 系统本地时间。
 	timeInUTC := time.Date(2009, 1, 1, 12, 0, 0, 0, time.UTC)
 	sameTimeInBeijing := time.Date(2009, 1, 1, 20, 0, 0, 0, beijing)
 	sameTimeInNewYork := time.Date(2009, 1, 1, 7, 0, 0, 0, newYork)
 
-	// 北京时间（东八区）比UTC早8小时，所以上面两个时间看似差了8小时，但表示的是同一个时间
+	// 北京时间（东八区）比UTC早8小时，所以上面两个时间看似差了8小时，但表示的是同一个时间。
 	timesAreEqual := timeInUTC.Equal(sameTimeInBeijing)
 	fmt.Println(timesAreEqual)
 
-	// 纽约（西五区）比UTC晚5小时，所以上面两个时间看似差了5小时，但表示的是同一个时间
+	// 纽约（西五区）比UTC晚5小时，所以上面两个时间看似差了5小时，但表示的是同一个时间。
 	timesAreEqual = timeInUTC.Equal(sameTimeInNewYork)
 	fmt.Println(timesAreEqual)
 }
@@ -81,13 +81,13 @@ func timezoneDemo() {
 Unix Time 是自 1970 年 1 月 1 日 00:00:00 UTC 至当前时间经过的总秒数。下面的代码片段演示了如何基于时间对象获取到 Unix 时间。
 
 ```go
-// timestampDemo 时间戳
+// timestampDemo 时间戳。
 func timestampDemo() {
-	now := time.Now()        // 获取当前时间
-	timestamp := now.Unix()  // 秒级时间戳
+	now := time.Now()        // 获取当前时间。
+	timestamp := now.Unix()  // 秒级时间戳。
 	milli := now.UnixMilli() // 毫秒时间戳 Go1.17+
 	micro := now.UnixMicro() // 微秒时间戳 Go1.17+
-	nano := now.UnixNano()   // 纳秒时间戳
+	nano := now.UnixNano()   // 纳秒时间戳。
 	fmt.Println(timestamp, milli, micro, nano)
 }
 ```
@@ -95,9 +95,9 @@ func timestampDemo() {
 time 包还提供了一系列将 int 64 类型的时间戳转换为时间对象的方法。
 
 ```go
-// timestamp2Time 将时间戳转为时间对象
+// timestamp2Time 将时间戳转为时间对象。
 func timestamp2Time() {
-	// 获取北京时间所在的东八区时区对象
+	// 获取北京时间所在的东八区时区对象。
 	secondsEastOfUTC := int((8 * time.Hour).Seconds())
 	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
 
@@ -113,9 +113,9 @@ func timestamp2Time() {
 	// 将秒级时间戳转为时间对象（第二个参数为不足1秒的纳秒数）
 	timeObj := time.Unix(sec, 22)
 	fmt.Println(timeObj)           // 2022-02-22 22:22:22.000000022 +0800 CST
-	timeObj = time.UnixMilli(msec) // 毫秒级时间戳转为时间对象
+	timeObj = time.UnixMilli(msec) // 毫秒级时间戳转为时间对象。
 	fmt.Println(timeObj)           // 2022-02-22 22:22:22 +0800 CST
-	timeObj = time.UnixMicro(usec) // 微秒级时间戳转为时间对象
+	timeObj = time.UnixMicro(usec) // 微秒级时间戳转为时间对象。
 	fmt.Println(timeObj)           // 2022-02-22 22:22:22 +0800 CST
 }
 ```
@@ -143,7 +143,7 @@ const (
 
 ### Add
 
-Go 语言的时间对象有提供 Add 方法如下
+Go 语言的时间对象有提供 Add 方法如下。
 
 ```go
 func (t Time) Add(d Duration) Time
@@ -154,14 +154,14 @@ func (t Time) Add(d Duration) Time
 ```go
 func main() {
     now := time.Now()
-    later := now.Add(time.Hour) // 当前时间加1小时后的时间
+    later := now.Add(time.Hour) // 当前时间加1小时后的时间。
     fmt.Println(later)
 }
 ```
 
 ### Sub
 
-求两个时间之间的差值
+求两个时间之间的差值。
 
 ```go
 func (t Time) Sub(u Time) Duration
@@ -201,9 +201,9 @@ func (t Time) After(u Time) bool
 
 ```go
 func tickDemo() {
-    ticker := time.Tick(time.Second) // 定义一个1秒间隔的定时器
+    ticker := time.Tick(time.Second) // 定义一个1秒间隔的定时器。
     for i := range ticker {
-        fmt.Println(i)// 每秒都会执行的任务
+        fmt.Println(i)// 每秒都会执行的任务。
     }
 }
 ```
@@ -220,24 +220,24 @@ func tickDemo() {
 - 05：秒（S）
 
 ```go
-// formatDemo 时间格式化
+// formatDemo 时间格式化。
 func formatDemo() {
 	now := time.Now()
 	// 格式化的模板为 2006-01-02 15:04:05
 
-	// 24小时制
+	// 24小时制。
 	fmt.Println(now.Format("2006-01-02 15:04:05.000 Mon Jan"))
-	// 12小时制
+	// 12小时制。
 	fmt.Println(now.Format("2006-01-02 03:04:05.000 PM Mon Jan"))
 
-	// 小数点后写0，因为有3个0所以格式化输出的结果也保留3位小数
+	// 小数点后写0，因为有3个0所以格式化输出的结果也保留3位小数。
 	fmt.Println(now.Format("2006/01/02 15:04:05.000")) // 2022/02/27 00:10:42.960
 	// 小数点后写9，会省略末尾可能出现的0
 	fmt.Println(now.Format("2006/01/02 15:04:05.999")) // 2022/02/27 00:10:42.96
 
-	// 只格式化时分秒部分
+	// 只格式化时分秒部分。
 	fmt.Println(now.Format("15:04:05"))
-	// 只格式化日期部分
+	// 只格式化日期部分。
 	fmt.Println(now.Format("2006.01.02"))
 }
 ```
@@ -252,9 +252,9 @@ func formatDemo() {
 `time.Parse` 在解析时不需要额外指定时区信息。
 
 ```go
-// parseDemo 指定时区解析时间
+// parseDemo 指定时区解析时间。
 func parseDemo() {
-	// 在没有时区指示符的情况下，time.Parse 返回UTC时间
+	// 在没有时区指示符的情况下，time.Parse 返回UTC时间。
 	timeObj, err := time.Parse("2006/01/02 15:04:05", "2022/10/05 11:25:20")
 	if err != nil {
 		fmt.Println(err)
@@ -262,7 +262,7 @@ func parseDemo() {
 	}
 	fmt.Println(timeObj) // 2022-10-05 11:25:20 +0000 UTC
 
-	// 在有时区指示符的情况下，time.Parse 返回对应时区的时间表示
+	// 在有时区指示符的情况下，time.Parse 返回对应时区的时间表示。
 	// RFC3339     = "2006-01-02T15:04:05Z07:00"
 	timeObj, err = time.Parse(time.RFC3339, "2022-10-05T11:25:20+08:00")
 	if err != nil {
@@ -276,17 +276,17 @@ func parseDemo() {
 `time.ParseInLocation` 函数需要在解析时额外指定时区信息。
 
 ```go
-// parseDemo 解析时间
+// parseDemo 解析时间。
 func parseDemo() {
 	now := time.Now()
 	fmt.Println(now)
-	// 加载时区
+	// 加载时区。
 	loc, err := time.LoadLocation("Asia/Shanghai")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	// 按照指定时区和指定格式解析字符串时间
+	// 按照指定时区和指定格式解析字符串时间。
 	timeObj, err := time.ParseInLocation("2006/01/02 15:04:05", "2022/10/05 11:25:20", loc)
 	if err != nil {
 		fmt.Println (err)

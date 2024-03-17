@@ -91,7 +91,7 @@ ENV JAVA_OPTS ""
 ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
 ```
 
-4. 构建Docker镜像
+4. 构建Docker镜像。
 
 ```shell
 $ docker build -t lushan123888/dubbo-admin:0.4.0 --build-arg version=0.4.0 .

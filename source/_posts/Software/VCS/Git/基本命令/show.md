@@ -1,10 +1,10 @@
 ---
 title: Git show
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git show
 
@@ -14,7 +14,7 @@ categories:
 $ git show [commit]
 ```
 
-- `--name-only`: 显示某次提交发生变化的文件
+- `--name-only`：显示某次提交发生变化的文件。
 
 **显示某次提交时，某个文件的内容**
 

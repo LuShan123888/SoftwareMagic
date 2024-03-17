@@ -19,7 +19,7 @@ plugins: [
 ]
 ```
 
-- 将版权信息写在括号中
+- 将版权信息写在括号中。
 
 **查看**
 
@@ -32,7 +32,7 @@ plugins: [
 ## HtmlWebpackPlugin
 
 - 自动生成一个`index.html`文件（可以指定模板生成)
-- 将打包的`bundle.js`,自动通过script标签插入到body中
+- 将打包的`bundle.js`，自动通过script标签插入到body中。
 
 **安装**
 
@@ -72,8 +72,8 @@ plugins: [
 
 ## UglifyJsPlugin
 
-- 压缩JS代码
-- webpack4以上只需要在配置文件中配置`mode: "development"`,即可自动开启
+- 压缩JS代码。
+- webpack4以上只需要在配置文件中配置`mode: "development"`，即可自动开启。
 
 **配置**
 
@@ -85,7 +85,7 @@ plugins: [
 
 ## OccurenceOrderPlugin
 
-- 为组件分配ID,通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
+- 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 
 **配置**
 
@@ -97,7 +97,7 @@ plugins: [
 
 ## ExtractTextPlugin
 
-- 分离CSS和JS文件
+- 分离CSS和JS文件。
 
 **安装**
 
@@ -117,7 +117,7 @@ plugins: [
 
 ## CleanWebpackPlugin
 
-- 打包时自动删除指定目录的文件
+- 打包时自动删除指定目录的文件。
 
 **安装**
 
@@ -140,7 +140,7 @@ plugins: [
 
 ## CopyWebpackPlugin
 
-- 把静态资源都拷贝到构建目录
+- 把静态资源都拷贝到构建目录。
 
 **安装**
 
@@ -165,16 +165,16 @@ module.exports = {
 };
 ```
 
-- `form`:相对于项目的路径
-- `to`:相对于outputDir的路径
-- 将`form`指定的文件或文件夹复制到`to`目录下
-- 如果省略`to`,则默认为outputDir
+- `form`：相对于项目的路径。
+- `to`：相对于outputDir的路径。
+- 将`form`指定的文件或文件夹复制到`to`目录下。
+- 如果省略`to`，则默认为outputDir
 
 ## ProvidePlugin
 
 **配置**
 
-- 遇到或处理 `jQuery` 或 `$` 都会去自动加载 jquery 这个库
+- 遇到或处理 `jQuery` 或 `$` 都会去自动加载 jquery 这个库。
 
 ```js
 new webpack.ProvidePlugin({

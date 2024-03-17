@@ -11,7 +11,7 @@ categories:
 ## 基于其他表新建表
 
 ```sql
-create tablename as 查询语句
+create tablename as 查询语句。
 ```
 
 ## 修改表结构
@@ -19,13 +19,13 @@ create tablename as 查询语句
 ### 修改表名
 
 ```sql
-rename 原表名 to 新表名
+rename 原表名 to 新表名。
 ```
 
 ### 修改列名
 
 ```sql
-alter table 表名 rename column 列名 to 新列名
+alter table 表名 rename column 列名 to 新列名。
 ```
 
 ### 修改字段类型

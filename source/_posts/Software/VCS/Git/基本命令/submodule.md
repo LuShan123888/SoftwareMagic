@@ -1,10 +1,10 @@
 ---
 title: Git submodule
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git submodule
 
@@ -20,7 +20,7 @@ categories:
 $ git submodule add https://github.com/maonx/vimwiki-assets.git assets
 ```
 
-添加子模块后运行 `git status`, 可以看到目录有增加 1 个文件 `.gitmodules`, 这个文件用来保存子模块的信息。
+添加子模块后运行 `git status`，可以看到目录有增加 1 个文件 `.gitmodules`，这个文件用来保存子模块的信息。
 
 ```sh
 $ git status
@@ -44,13 +44,13 @@ $ git submodule
 
 ## 更新子模块
 
-- 更新项目内子模块到最新版本
+- 更新项目内子模块到最新版本。
 
 ```sh
 $ git submodule update
 ```
 
-- 更新子模块为远程项目的最新版本
+- 更新子模块为远程项目的最新版本。
 
 ```sh
 $ git submodule update --remote
@@ -62,13 +62,13 @@ $ git submodule update --remote
 
 ### 克隆父项目，再更新子模块
 
-1. 克隆父项目
+1. 克隆父项目。
 
 ```sh
 $ git clone https://github.com/maonx/vimwiki-assets.git assets
 ```
 
-2. 查看子模块
+2. 查看子模块。
 
 ```sh
 $ git submodule
@@ -77,7 +77,7 @@ $ git submodule
 
 - 子模块前面有一个 `-`，说明子模块文件还未检入（空文件夹）。
 
-3. 初始化子模块
+3. 初始化子模块。
 
 ```sh
 $ git submodule init
@@ -86,7 +86,7 @@ Submodule 'assets' (https://github.com/maonx/vimwiki-assets.git) registered for 
 
 - 初始化模块只需在克隆父项目后运行一次。
 
-4. 更新子模块
+4. 更新子模块。
 
 ```sh
 $ git submodule update
@@ -121,16 +121,16 @@ $ git push origin HEAD:master
 ## 删除子模块
 
 **删除子模块比较麻烦，需要手动删除相关的文件，否则在添加子模块时有可能出现错误**
-同样以删除 `assets` 文件夹为例
+同样以删除 `assets` 文件夹为例。
 
-1. 删除子模块文件夹
+1. 删除子模块文件夹。
 
 ```sh
 $ git rm --cached assets
 $ rm -rf assets
 ```
 
-2. 删除 `.gitmodules` 文件中相关子模块信息
+2. 删除 `.gitmodules` 文件中相关子模块信息。
 
 ```sh
 [submodule "assets"]
@@ -138,14 +138,14 @@ $ rm -rf assets
   url = https://github.com/maonx/vimwiki-assets.git
 ```
 
-3. 删除 `.git/config` 中的相关子模块信息
+3. 删除 `.git/config` 中的相关子模块信息。
 
 ```sh
 [submodule "assets"]
   url = https://github.com/maonx/vimwiki-assets.git
 ```
 
-3. 删除 `.git` 文件夹中的相关子模块文件
+3. 删除 `.git` 文件夹中的相关子模块文件。
 
 ```sh
 $ rm -rf .git/modules/assets

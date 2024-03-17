@@ -9,11 +9,11 @@ categories:
 ---
 # Servlet HttpServletRequest
 
-- 当浏览器请求网页时，它会向Web服务器发送特定信息，这些信息不能被直接读取，因为这些信息是作为HTTP请求的头的一部分进行传输
+- 当浏览器请求网页时，它会向Web服务器发送特定信息，这些信息不能被直接读取，因为这些信息是作为HTTP请求的头的一部分进行传输。
 
 ## 读取 HTTP 头的方法
 
-- 下面的方法可用在 Servlet 程序中读取HTTP头，这些方法通过`HttpServletRequest`对象可用
+- 下面的方法可用在 Servlet 程序中读取HTTP头，这些方法通过`HttpServletRequest`对象可用。
 
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
@@ -22,16 +22,16 @@ categories:
 | 3    | **Enumeration getHeaderNames()** 返回一个枚举，包含在该请求中包含的所有的头名 |
 | 4    | **Enumeration getParameterNames()** 返回一个 String 对象的枚举，包含在该请求中包含的参数的名称 |
 | 5    | **HttpSession getSession()** 返回与该请求关联的当前 session 会话，或者如果请求没有 session 会话，则创建一个 |
-| 6    | **HttpSession getSession(boolean create)** 返回与该请求关联的当前 HttpSession,或者如果没有当前会话，且创建是真的，则返回一个新的 session 会话 |
+| 6    | **HttpSession getSession(boolean create)** 返回与该请求关联的当前 HttpSession，或者如果没有当前会话，且创建是真的，则返回一个新的 session 会话 |
 | 7    | **Locale getLocale()** 基于 Accept-Language 头，返回客户端接受内容的首选的区域设置 |
 | 8    | **Object getAttribute(String name)** 以对象形式返回已命名属性的值，如果没有给定名称的属性存在，则返回 null |
-| 9    | **ServletInputStream getInputStream()** 使用 ServletInputStream,以二进制数据形式检索请求的主体 |
-| 10   | **String getAuthType()** 返回用于保护 Servlet 的身份验证方案的名称，例如,"BASIC" 或 "SSL",如果JSP没有受到保护则返回 null |
+| 9    | **ServletInputStream getInputStream()** 使用 ServletInputStream，以二进制数据形式检索请求的主体 |
+| 10   | **String getAuthType()** 返回用于保护 Servlet 的身份验证方案的名称，例如，"BASIC" 或 "SSL"，如果JSP没有受到保护则返回 null |
 | 11   | **String getCharacterEncoding()** 返回请求主体中使用的字符编码的名称 |
 | 12   | **String getContentType()** 返回请求主体的 MIME 类型，如果不知道类型则返回 null |
 | 13   | **String getContextPath()** 返回指示请求上下文的请求 URI 部分 |
 | 14   | **String getHeader(String name)** 以字符串形式返回指定的请求头的值 |
-| 15   | **String getMethod()** 返回请求的 HTTP 方法的名称，例如,GET,POST 或 PUT |
+| 15   | **String getMethod()** 返回请求的 HTTP 方法的名称，例如，GET,POST 或 PUT |
 | 16   | **String getParameter(String name)** 以字符串形式返回请求参数的值，或者如果参数不存在则返回 null |
 | 17   | **String getPathInfo()** 当请求发出时，返回与客户端发送的 URL 相关的任何额外的路径信息 |
 | 18   | **String getProtocol()** 返回请求协议的名称和版本            |
@@ -51,17 +51,17 @@ categories:
 
 ## HTTP Header 请求实例
 
-- 下面的实例使用 HttpServletRequest 的 **getHeaderNames()** 方法读取 HTTP 头信息，该方法返回一个枚举，包含与当前的 HTTP 请求相关的头信息
-- 一旦我们有一个枚举，我们可以以标准方式循环枚举，使用 `hasMoreElements()` 方法来确定何时停止，使用 `nextElement()`方法来获取每个参数的名称
+- 下面的实例使用 HttpServletRequest 的 **getHeaderNames()** 方法读取 HTTP 头信息，该方法返回一个枚举，包含与当前的 HTTP 请求相关的头信息。
+- 一旦我们有一个枚举，我们可以以标准方式循环枚举，使用 `hasMoreElements()` 方法来确定何时停止，使用 `nextElement()`方法来获取每个参数的名称。
 
 ```java
 @WebServlet("/DisplayHeader")
 public class DisplayHeader extends HttpServlet {
 
-    // 处理 GET 方法请求的方法
+    // 处理 GET 方法请求的方法。
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // 设置响应内容类型
+        // 设置响应内容类型。
         response.setContentType("text/html;charset=UTF-8");
 
         PrintWriter out = response.getWriter();
@@ -88,7 +88,7 @@ public class DisplayHeader extends HttpServlet {
         }
         out.println("</table>\n</body></html>");
     }
-    // 处理 POST 方法请求的方法
+    // 处理 POST 方法请求的方法。
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

@@ -14,7 +14,7 @@ categories:
 
 ## 初始化
 
-- 安装 `rxgo` 库
+- 安装 `rxgo` 库。
 
 ```bnash
 go get -u github.com/reactivex/rxgo/v2
@@ -49,7 +49,7 @@ $ go run main.go
 
 - 使用 RxGo 的一般流程如下：
   - 使用相关的 **Operator** 创建 **Observable**，**Operator** 就是用来创建 **Observable** 的。
-  - 中间各个阶段可以使用过滤操作筛选出我们想要的数据，使用转换操作对数据进行转换
+  - 中间各个阶段可以使用过滤操作筛选出我们想要的数据，使用转换操作对数据进行转换。
   - 调用 **Observable** 的 `Observe()` 方法，该方法返回一个 `<- chan rxgo.Item`。然后 `for range` 遍历即可。
 - GitHub 上一张图很形象地描绘了这个过程：
 
@@ -552,13 +552,13 @@ func main () {
   }
 }
 
-// 注意，最后一组只有一个
+// 注意，最后一组只有一个。
 $ go run main. go
 [1 2 3]
 [4]
 ```
 
-- `BufferWithTime`：每 3 s 发送一次
+- `BufferWithTime`：每 3 s 发送一次。
 
 ```go
 func main () {
@@ -608,7 +608,7 @@ func main () {
   }
 }
 
-// 上面 3 s 可以收集 3 个数据，但是设置了收集 2 个就发送
+// 上面 3 s 可以收集 3 个数据，但是设置了收集 2 个就发送。
 $ go run main. go
 [0 1]
 [2 3]
@@ -696,7 +696,7 @@ func main () {
   }
 }
 
-// 上面过滤掉奇数，最后只剩下偶数
+// 上面过滤掉奇数，最后只剩下偶数。
 $ go run main. go
 2
 4
@@ -790,6 +790,6 @@ func main () {
 ## 选项
 
 - rxgo 提供的大部分方法的最后一个参数是一个可变长的选项类型。这是 Go 中特有的、经典的选项设计模式。
-  - `rxgo.WithBufferedChannel (10)`：设置 channel 的缓存大小
-  - `rxgo.WithPool (n)/rxgo.WithCpuPool ()`：使用多个 goroutine 执行转换操作
+  - `rxgo.WithBufferedChannel (10)`：设置 channel 的缓存大小。
+  - `rxgo.WithPool (n)/rxgo.WithCpuPool ()`：使用多个 goroutine 执行转换操作。
   - `rxgo.WithPublishStrategy ()`：使用发布策略，即创建可连接的 **Observable**  

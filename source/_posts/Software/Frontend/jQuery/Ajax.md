@@ -9,9 +9,9 @@ categories:
 
 ## $.ajax
 
-- jQuery 调用 ajax 方法:
+- jQuery 调用 ajax 方法：
 
-### 格式:
+### 格式：
 
 ```js
 $.ajax({
@@ -19,16 +19,16 @@ $.ajax({
 });
 ```
 
-### 参数:
+### 参数：
 
-- `type`:请求方式 GET/POST
-- `url`:请求地址 url
-- `async`:是否异步，默认是 true 表示异步
-- `data`:发送到服务器的数据
-- `dataType`:预期服务器返回的数据类型
-- `contentType`:设置请求头
-- `success`:请求成功时调用此函数
-- `error`:请求失败时调用此函数
+- `type`：请求方式 GET/POST
+- `url`：请求地址 url
+- `async`：是否异步，默认是 true 表示异步。
+- `data`：发送到服务器的数据。
+- `dataType`：预期服务器返回的数据类型。
+- `contentType`：设置请求头。
+- `success`：请求成功时调用此函数。
+- `error`：请求失败时调用此函数。
 
 ### get请求
 
@@ -114,15 +114,15 @@ $.get('js/cuisine_area.json', {name: "tom", age: 100}, function (data) {
 
 - 这是一个简单的 POST 请求功能以取代复杂 `$.ajax`
 - 请求成功时可调用回调函数，如果需要在出错时执行函数，请使用 `$.ajax`
-- 使用方法与`$.get`类似
+- 使用方法与`$.get`类似。
 
 ## $.getJSON
 
-- 表示请求返回的数据类型是JSON格式的ajax请求
+- 表示请求返回的数据类型是JSON格式的ajax请求。
 
 ```js
 $.getJSON('js/cuisine_area.json', {name: "tom", age: 100}, function (data) {
-console.log(data); // 要求返回的数据格式是JSON格式
+console.log(data); // 要求返回的数据格式是JSON格式。
 });
 ```
 

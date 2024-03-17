@@ -24,7 +24,7 @@ $ yarn add gh-pages --save-dev
 }
 ```
 
-- `-d`:需要上传到github的目录
+- `-d`：需要上传到github的目录。
 
 ## 使用
 

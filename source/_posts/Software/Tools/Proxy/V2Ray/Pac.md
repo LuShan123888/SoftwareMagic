@@ -1,5 +1,5 @@
 ---
-title: 自定义pac列表规则
+title：自定义pac列表规则
 categories:
 - Software
 - Tools
@@ -18,7 +18,7 @@ categories:
 
 ## 例外规则 @@
 
-如`@@*.example.com/`满足@@后规则的地址不使用代理
+如`@@*.example.com/`满足@@后规则的地址不使用代理。
 
 ## 匹配地址开始和结尾 |
 
@@ -34,4 +34,4 @@ categories:
 
 ## 分隔符^
 
-表示除了字母，数字或者`_`,`-`,`.`,`%`之外的任何字符，如 `http://example.com^`,`http://example.com/`和`http://example.com:8000/`均满足条件，而`http://example.com.ar/`不满足条件
+表示除了字母，数字或者`_`,`-`,`.`,`%`之外的任何字符，如 `http://example.com^`,`http://example.com/`和`http://example.com:8000/`均满足条件，而`http://example.com.ar/`不满足条件。

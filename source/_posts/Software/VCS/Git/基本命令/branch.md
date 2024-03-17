@@ -1,10 +1,10 @@
 ---
 title: Git branch
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git branch
 
@@ -14,8 +14,8 @@ categories:
 $ git branch
 ```
 
-- `-a`: 列出所有本地分支和远程分支
-- `-r`: 列出所有远程分支
+- `-a`：列出所有本地分支和远程分支。
+- `-r`：列出所有远程分支。
 
 **新建一个分支，但依然停留在当前分支**
 

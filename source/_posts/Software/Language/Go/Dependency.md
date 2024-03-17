@@ -15,8 +15,8 @@ Go 依赖管理的演进经历了以下 3 个阶段：
 
 被广泛应用的是 Go Module，整个演进路线主要围绕实现两个目标来迭代发展：
 
-- 不同环境（项目）依赖的版本不同
-- 控制依赖库的版本
+- 不同环境（项目）依赖的版本不同。
+- 控制依赖库的版本。
 
 ## Go 依赖管理的演进
 
@@ -75,7 +75,7 @@ GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。�
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/56e6d92fe4f647778f93fdbc22d7e950~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image-20220517150510319" style="zoom:50%;" />
 
 - **module 路径（上图的“依赖管理基本单元”)**：用来标识一个 module，从 module 路径可以看出从哪里找到该 module 。例如，如果以 `github` 为前缀开头，表示可以从 Github 仓库找到该 module 。依赖包的源代码由 Github 托管，如果项目的子包想被单独引用，则需要通过单独的 `init go.mod` 文件进行管理。
-- **原生库**：依赖的原生 Go SDK 版本
+- **原生库**：依赖的原生 Go SDK 版本。
 - **单元依赖**：每个依赖单元用 `module路径 + 版本号` 来唯一标识。
 
 #### version
@@ -186,7 +186,7 @@ go get example. org/pkg +...
 ```
 
 - `go get -u` ：更新到最新的次要版本或者修订版本 (x.y.z)
-- `go get -u=patch` ：更新到最新的修订版本
+- `go get -u=patch` ：更新到最新的修订版本。
 - `go get package@version ` ：更新到指定的版本号 version
 - 运行 `go get` 如果有版本的更改，那么 go. mod 文件也会作出相应的更改。
 

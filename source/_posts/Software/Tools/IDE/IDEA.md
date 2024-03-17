@@ -21,7 +21,7 @@ Control + J|	快速查看文档
 Shift + F1|	查看外部文档（在某些代码上会触发打开浏览器显示相关文档)
 Command + 鼠标放在代码上|	显示代码简要信息
 Command + F1|	在错误或警告处显示具体描述信息
-Command + N, Control + Enter, Control + N	|生成代码(getter,setter,hashCode,equals,toString,构造函数等)
+Command + N, Control + Enter, Control + N	|生成代码(getter,setter,hashCode,equals,toString，构造函数等)
 Control + O	|覆盖方法（重写父类方法)
 Control + I	|实现方法（实现接口中的方法)
 Command + Option + T|	包围代码（使用if...else,try...catch,for,synchronized等包围选中的代码)
@@ -177,4 +177,4 @@ Control + `	|快速切换当前的 scheme(切换主题，代码样式等)
 Command + ,	|打开 IDEA 系统设置
 Command + ;	|打开项目结构对话框
 Shift + Command + A	|查找动作（可设置相关选项)
-Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete,则是关闭对应选中的窗口)
+Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete，则是关闭对应选中的窗口)

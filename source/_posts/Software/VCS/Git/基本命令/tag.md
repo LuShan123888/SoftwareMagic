@@ -1,10 +1,10 @@
 ---
 title: Git tag
 categories:
-- Software
-- VCS
-- Git
-- 基本命令
+  - Software
+  - VCS
+  - Git
+  - 基本命令
 ---
 # Git tag
 
@@ -26,7 +26,7 @@ $ git tag [tag]
 $ git tag [tag] [commit]
 ```
 
-- `-m`: 添加注释
+- `-m`：添加注释。
 
 **删除本地 tag**
 

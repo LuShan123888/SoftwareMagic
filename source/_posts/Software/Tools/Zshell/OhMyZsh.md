@@ -11,13 +11,13 @@ categories:
 
 ### 手动安装
 
-1. 直接用git从github上面下载包
+1. 直接用git从github上面下载包。
 
 ```shell
 $ git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 ```
 
-3. 使用脚本安装
+3. 使用脚本安装。
 
 ```shell
 $ cd .oh-my-zsh/tools
@@ -48,10 +48,10 @@ $ sh oh-my-zsh/tools/uninstall.sh
 
 ## oh my zsh 目录结构
 
-- 进入`~/.oh-my-zsh`目录后，看看该目录的结构
-    - **lib**:提供了核心功能的脚本库
-    - **tools**:提供安装，升级等功能的快捷工具
-    - **plugins**:自带插件的存在放位置
-    - **templates**:自带模板的存在放位置
-    - **themes**:自带主题文件的存在放位置
-    - **custom**:个性化配置目录，自安装的插件和主题可放这里
+- 进入`~/.oh-my-zsh`目录后，看看该目录的结构。
+    - **lib**：提供了核心功能的脚本库。
+    - **tools**：提供安装，升级等功能的快捷工具。
+    - **plugins**：自带插件的存在放位置。
+    - **templates**：自带模板的存在放位置。
+    - **themes**：自带主题文件的存在放位置。
+    - **custom**：个性化配置目录，自安装的插件和主题可放这里。

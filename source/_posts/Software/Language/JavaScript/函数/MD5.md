@@ -1,10 +1,10 @@
 ---
 title: JavaScript MD5
 categories:
-- Software
-- Language
-- JavaScript
-- 函数
+  - Software
+  - Language
+  - JavaScript
+  - 函数
 ---
 # JavaScript MD5
 

@@ -38,8 +38,8 @@ func main() {
 执行上面的代码输出：
 
 ```go
-在终端打印该信息。我是：沙河小王子
-在终端打印单独一行显示
+在终端打印该信息。我是：沙河小王子。
+在终端打印单独一行显示。
 ```
 
 ### Fprint
@@ -55,7 +55,7 @@ func Fprintln(w io.Writer, a ...interface{}) (n int, err error)
 举个例子：
 
 ```go
-// 向标准输出写入内容
+// 向标准输出写入内容。
 fmt.Fprintln(os.Stdout, "向标准输出写入内容")
 fileObj, err := os.OpenFile("./xx.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 if err != nil {
@@ -63,7 +63,7 @@ if err != nil {
 	return
 }
 name := "沙河小王子"
-// 向打开的文件句柄中写入内容
+// 向打开的文件句柄中写入内容。
 fmt.Fprintf(fileObj, "往文件中写如信息：%s", name)
 ```
 
@@ -239,7 +239,7 @@ fmt.Printf("%X\n", s)
 ```
 
 ```bash
-小王子
+小王子。
 "小王子"
 e5b08fe78e8be5ad90
 E5B08FE78E8BE5AD90
@@ -319,13 +319,13 @@ fmt.Printf ("%05 s\n", s)
 ```
 
 ```bash
-小王子
-  小王子
+小王子。
+  小王子。
 小王子  
-  小王子
+  小王子。
 小王子  
-   小王
-00 小王子
+   小王。
+00 小王子。
 ```
 
 ## 输入
@@ -362,7 +362,7 @@ func main () {
 ```bash
 $ ./scan_demo 
 小王子 28 false
-扫描结果 name: 小王子 age: 28 married: false 
+扫描结果 name：小王子 age: 28 married: false 
 ```
 
 `fmt. Scan`从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。
@@ -397,7 +397,7 @@ func main () {
 ```bash
 $ ./scan_demo 
 小王子 28 false
-扫描结果 name: 小王子 age: 28 married: false 
+扫描结果 name：小王子 age: 28 married: false 
 ```
 
 `fmt. Scanln`遇到回车就结束扫描了，这个比较常用。
@@ -431,8 +431,8 @@ func main () {
 
 ```bash
 $ ./scan_demo 
-1: 小王子 2:28 3:false
-扫描结果 name: 小王子 age: 28 married: false 
+1：小王子 2:28 3:false
+扫描结果 name：小王子 age: 28 married: false 
 ```
 
 `fmt. Scanf`不同于`fmt. Scan`简单的以空格作为输入数据的分隔符，`fmt. Scanf`为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。
@@ -451,9 +451,9 @@ $ ./scan_demo
 
 ```go
 func bufioDemo () {
-	reader := bufio.NewReader (os. Stdin) // 从标准输入生成读对象
+	reader := bufio.NewReader (os. Stdin) // 从标准输入生成读对象。
 	fmt.Print ("请输入内容：")
-	text, _ := reader.ReadString ('\n') // 读到换行
+	text, _ := reader.ReadString ('\n') // 读到换行。
 	text = strings.TrimSpace (text)
 	fmt.Printf ("% #v \n", text)
 }

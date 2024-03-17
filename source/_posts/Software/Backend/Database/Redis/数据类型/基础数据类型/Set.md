@@ -1,18 +1,18 @@
 ---
 title: Redis Set
 categories:
-- Software
-- BackEnd
-- Database
-- Redis
-- 数据类型
-- 基础数据类型
+  - Software
+  - BackEnd
+  - Database
+  - Redis
+  - 数据类型
+  - 基础数据类型
 ---
 # Redis Set
 
-- Redis 的 Set 是 String 类型的无序集合，集合成员是唯一的，这就意味着集合中不能出现重复的数据
+- Redis 的 Set 是 String 类型的无序集合，集合成员是唯一的，这就意味着集合中不能出现重复的数据。
 - Redis 中集合是通过Hash表实现的，所以添加，删除，查找的复杂度都是 O(1)
-- 集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)
+- 集合中最大的成员数为 232 - 1 (4294967295，每个集合可存储40多亿个成员)
 
 **实例**
 
@@ -32,17 +32,17 @@ $ SMEMBERS testkey
 3) "redis"
 ```
 
-- 在以上实例中我们通过 **SADD** 命令向名为 **testkey** 的集合插入的三个元素
+- 在以上实例中我们通过 **SADD** 命令向名为 **testkey** 的集合插入的三个元素。
 
 ## Redis 集合命令
 
-- 下表列出了 Redis 集合基本命令:
+- 下表列出了 Redis 集合基本命令：
 
 | 序号 | 命令及描述                                                   |
 | :--- | :----------------------------------------------------------- |
 | 1    | [SADD key member1 member2\]  向集合添加一个或多个成员        |
 | 2    | SCARD key  获取集合的成员数                                  |
-| 3    | [SDIFF key1 key2\]  返回第一个集合与其他集合之间的差异,      |
+| 3    | [SDIFF key1 key2\]  返回第一个集合与其他集合之间的差异，      |
 | 4    | [SDIFFSTORE destination key1 key2\]  返回给定所有集合的差集并存储在 destination 中 |
 | 5    | [SINTER key1 key2\]  返回给定所有集合的交集                  |
 | 6    | [SINTERSTORE destination key1 key2\]  返回给定所有集合的交集并存储在 destination 中 |

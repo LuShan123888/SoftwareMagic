@@ -77,7 +77,7 @@ delay := flag.Duration("d", 0, "时间间隔")
 
 ### flag.TypeVar ()
 
-基本格式如下： `flag.TypeVar(Type指针, flag名，默认值，帮助信息)` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
+基本格式如下： `flag.TypeVar(Type指针， flag名，默认值，帮助信息)` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
 
 ```go
 var name string
@@ -108,9 +108,9 @@ Flag 解析在第一个非 flag 参数（单个”-“不是 flag 参数）之�
 ## flag 其他函数
 
 ```go
-flag.Args()  //// 返回命令行参数后的其他参数，以[]string类型
-flag.NArg()  // 返回命令行参数后的其他参数个数
-flag.NFlag() // 返回使用的命令行参数个数
+flag.Args()  //// 返回命令行参数后的其他参数，以[]string类型。
+flag.NArg()  // 返回命令行参数后的其他参数个数。
+flag.NFlag() // 返回使用的命令行参数个数。
 ```
 
 ## 完整示例
@@ -129,14 +129,14 @@ func main() {
     flag.BoolVar(&married, "married", false, "婚否")
     flag.DurationVar(&delay, "d", 0, "延迟的时间间隔")
 
-    // 解析命令行参数
+    // 解析命令行参数。
     flag.Parse()
     fmt.Println(name, age, married, delay)
-    // 返回命令行参数后的其他参数
+    // 返回命令行参数后的其他参数。
     fmt.Println(flag.Args())
-    // 返回命令行参数后的其他参数个数
+    // 返回命令行参数后的其他参数个数。
     fmt.Println(flag.NArg())
-    // 返回使用的命令行参数个数
+    // 返回使用的命令行参数个数。
     fmt.Println(flag.NFlag())
 }
 ```
@@ -151,9 +151,9 @@ Usage of ./flag_demo:
   -age int
         年龄 (default 18)
   -d duration
-        时间间隔
+        时间间隔。
   -married
-        婚否
+        婚否。
   -name string
         姓名 (default "张三")
 ```
