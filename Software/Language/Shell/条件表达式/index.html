@@ -24,7 +24,7 @@
 <meta property="og:description" content="Shell 条件表达式 逻辑条件表达式    运算符 说明 举例     &#x3D;&#x3D; 相等，用于比较两个数字，相同则返回 true, [ $a &#x3D;&#x3D; $b ]   !&#x3D; 不相等，用于比较两个数字，不相同则返回 true, [ $a !&#x3D; $b ]   ! 非运算，表达式为 true 则返回 false，否则返回 true, [ ! false ]   &amp;&amp; 逻辑的 AND [[ $a -">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.877Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.554Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.222Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -279,7 +279,7 @@
 <p><strong>注意</strong>:</p>
 <ul>
 <li>乘号<code>*</code>前边必须加反斜杠<code>\</code>才能实现乘法运算。</li>
-<li>在 MAC 中 shell 的 expr 语法是：<code>$((表达式))</code>，此处表达式中的<code>*</code>不需要转义符号<code>\</code></li>
+<li>在 MAC 中 shell 的 expr 语法是：<code>$((表达式）)</code>，此处表达式中的<code>*</code>不需要转义符号<code>\</code></li>
 </ul>
 </blockquote>
 <h2 id="关系条件表达式">关系条件表达式</h2>
@@ -406,7 +406,7 @@
 </tr>
 <tr>
 <td style="text-align:left">-f file</td>
-<td style="text-align:left">检测文件是否是普通文件（既不是目录，也不是设备文件)，如果是，则返回 true,</td>
+<td style="text-align:left">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true,</td>
 <td style="text-align:left"><code>[ -f $file ]</code></td>
 </tr>
 <tr>
@@ -416,7 +416,7 @@
 </tr>
 <tr>
 <td style="text-align:left">-k file</td>
-<td style="text-align:left">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true,</td>
+<td style="text-align:left">检测文件是否设置了粘着位（Sticky Bit)，如果是，则返回 true,</td>
 <td style="text-align:left"><code>[ -k $file ]</code></td>
 </tr>
 <tr>
@@ -555,7 +555,7 @@
 </ul>
 <figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">文件已存在!<br></code></pre></td></tr></table></figure>
 <ul>
-<li>另外，Shell 还提供了与( -a )，或( -o )，非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：<code>!</code> 最高，<code>-a</code> 次之，<code>-o</code>最低，例如：</li>
+<li>另外，Shell 还提供了与（ -a )，或（ -o )，非（ ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：<code>!</code> 最高，<code>-a</code> 次之，<code>-o</code>最低，例如：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /bin<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> -e ./notFile -o -e ./bash<br><span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;至少有一个文件存在!&#x27;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;两个文件都不存在&#x27;</span><br><span class="hljs-keyword">fi</span><br></code></pre></td></tr></table></figure>
 <ul>

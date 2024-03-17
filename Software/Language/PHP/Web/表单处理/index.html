@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到，所以用PHP处理表单是十分容易的，尽管如此，表单处理还是有很多技巧的，本节将进行介绍。  方法(Method)  如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签()中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要">
+  <meta name="description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到，所以用PHP处理表单是十分容易的，尽管如此，表单处理还是有很多技巧的，本节将进行介绍。  方法（Method)  如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签（)中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 表单处理">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/Web/%E8%A1%A8%E5%8D%95%E5%A4%84%E7%90%86/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到，所以用PHP处理表单是十分容易的，尽管如此，表单处理还是有很多技巧的，本节将进行介绍。  方法(Method)  如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签()中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要">
+<meta property="og:description" content="PHP 表单处理  因为表单变量可以通过$_GET和$_POST数组得到，所以用PHP处理表单是十分容易的，尽管如此，表单处理还是有很多技巧的，本节将进行介绍。  方法（Method)  如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签（)中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.212Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.504Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,18 +231,18 @@
 <ul>
 <li>因为表单变量可以通过<code>$_GET</code>和<code>$_POST</code>数组得到，所以用PHP处理表单是十分容易的，尽管如此，表单处理还是有很多技巧的，本节将进行介绍。</li>
 </ul>
-<h2 id="方法-Method">方法(Method)</h2>
+<h2 id="方法（Method">方法（Method)</h2>
 <ul>
-<li>如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签(<form>)中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要求method为大写。</li>
-<li>一个GET请求把表单的参数编码成URL形式，这称也查询字符串(query string):</li>
+<li>如前所述，客户端可以用两种HTTP方法向服务器传送表单数据：GET和POST，采用哪种方法是由某个表单标签（<form>)中的method属性所指定的，理论上说在HTML中method是不区分大小写的，但是实际上有些浏览器要求method为大写。</li>
+<li>一个GET请求把表单的参数编码成URL形式，这称也查询字符串（query string):</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">/path/to/chunkify.php?word+despocable&amp;length=3<br></code></pre></td></tr></table></figure>
 <ul>
 <li>一个POST请求则通过HTTP请求的主体来传递表单参数，不需要考虑URL</li>
 <li>GET和POST方法的最明显区别在于URL行，因为GET请求的所有表单参数都编码在URL中，用户可以把一个GET请求加入浏览器收藏夹，而对POST请求却无法这样做。</li>
-<li>GET和POST请求之间的最大不同是相当微妙的，HTTP规范指明GET请求是幂等的(idempotent)，也就是说，一个对于一个特定URL的GET请求（包含表单参数)，与对应于这一特定URL的两个或多个GET请求是一样的，因此，Web浏览器可以把GET请求得到的响应页面缓存起来，这是因为不管页面被请求了多少次，响应页面都是不变的，正因为幂等性，GET请求只适用于那些响应页面永不改变的情况，例如将一个单词分解成小块，或者对数字进行乘法运算。</li>
-<li>POST请求不具幂等性，这意味着它们无法被缓存，在每次刷新页面时，都会重新连接服务器，显示或者刷新页面时，你可能会看到浏览器提示：“Repost form data?(重新发送表单数据)”，所以POST适用于响应内容可能会随时间改变的情况，例如：显示购物车的内容，或者在一个论坛中显示当前主题。</li>
-<li>现实中，幂等性常常被忽略，目前浏览器的缓存功能都很差，并且&quot;刷新&quot;按钮很容易用户点到，所以程序员通常只考虑是否想将参数显示在浏览器的URL地址栏上，如果不想显示，就用POST方法，但你要记住，在服务器的响应页面可能会变化的情况下（例如下订单或者更新数据库)，不要使用GET方法。</li>
+<li>GET和POST请求之间的最大不同是相当微妙的，HTTP规范指明GET请求是幂等的（idempotent)，也就是说，一个对于一个特定URL的GET请求（包含表单参数），与对应于这一特定URL的两个或多个GET请求是一样的，因此，Web浏览器可以把GET请求得到的响应页面缓存起来，这是因为不管页面被请求了多少次，响应页面都是不变的，正因为幂等性，GET请求只适用于那些响应页面永不改变的情况，例如将一个单词分解成小块，或者对数字进行乘法运算。</li>
+<li>POST请求不具幂等性，这意味着它们无法被缓存，在每次刷新页面时，都会重新连接服务器，显示或者刷新页面时，你可能会看到浏览器提示：“Repost form data?(重新发送表单数据）”，所以POST适用于响应内容可能会随时间改变的情况，例如：显示购物车的内容，或者在一个论坛中显示当前主题。</li>
+<li>现实中，幂等性常常被忽略，目前浏览器的缓存功能都很差，并且&quot;刷新&quot;按钮很容易用户点到，所以程序员通常只考虑是否想将参数显示在浏览器的URL地址栏上，如果不想显示，就用POST方法，但你要记住，在服务器的响应页面可能会变化的情况下（例如下订单或者更新数据库），不要使用GET方法。</li>
 <li>一个请求所用的方法类型可以用<code>$_SERVER['REQUEST_METHOD']</code>来获知，如：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="hljs-string">&#x27;GET&#x27;</span>)&#123;<br>    <span class="hljs-comment">// 处理一个GET请求。</span><br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;You may only GET this page.&quot;</span>);<br>    <span class="hljs-comment">// 你只能用GET方法请求这个页面。</span><br>&#125;<br></code></pre></td></tr></table></figure>
@@ -260,7 +260,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Chunked Word&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        $word = $_POST[&#x27;word&#x27;];<br>        $number = $_POST[&#x27;number&#x27;];<br>        $chunks = ceil(strlen($word)/$number);<br>        echo &quot;The $number-letter chunks of &#x27;$word&#x27; are:&lt;br/&gt;\n&quot;;<br>        for($i = 0;$i &lt; $chunks;$++)&#123;<br>            $chunk = substr($word,$i*$number,$number);<br>            printf(&quot;%d: %s&lt;br/&gt;\n&quot;,$i+1,$chunks);<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <h3 id="对参数进行自动引号处理">对参数进行自动引号处理</h3>
 <ul>
-<li>默认情况下php.ini中的<code>magic_quotes_gpc()</code>选项启用，该选项指示PHP在所有cookie数据以及GET和POST参数上自动调用<code>addslashes()</code>函数，这使得在数据库查询中使用表单参数变得简单，但同时也对那些没有在数据库查询中使用的表单参数造成了麻烦，因为只需要在单引号，双引号，反斜杠和空字节等前面添加上反斜杠以进行转义（编写PHP程序时依赖<code>magic_quotes_gpc</code>将导致很多问题，所以在新版的PHP所带的php.ini中<code>magic_qutoes_gpc</code>默认设置为不启用，而不是本书所说的默认为启用，在PHP6中，本特性将被彻底移出)</li>
+<li>默认情况下php.ini中的<code>magic_quotes_gpc()</code>选项启用，该选项指示PHP在所有cookie数据以及GET和POST参数上自动调用<code>addslashes()</code>函数，这使得在数据库查询中使用表单参数变得简单，但同时也对那些没有在数据库查询中使用的表单参数造成了麻烦，因为只需要在单引号，双引号，反斜杠和空字节等前面添加上反斜杠以进行转义（编写PHP程序时依赖<code>magic_quotes_gpc</code>将导致很多问题，所以在新版的PHP所带的php.ini中<code>magic_qutoes_gpc</code>默认设置为不启用，而不是本书所说的默认为启用，在PHP6中，本特性将被彻底移出）</li>
 <li>例如，如果你在文本框总输入&quot;O’Reilly&quot;并点击按钮，你就会发现被分块的字符串其实是&quot;O'Reilly&quot;，这就说明<code>magic_quotes_gpc</code>在工作。</li>
 <li>为了处理用户输入的字符串，可以禁用php.ini中的<code>magic_quotes_gpc</code>选项或者对$_GET,$_POST和$_COOKIES使用<code>stripslashes()</code>函数，正确使用字符串的方法如下：</li>
 </ul>
@@ -278,7 +278,7 @@
 <ul>
 <li>一个PHP页面能同时用来生成表单和处理表单，如果示例7-3中页面是用GET方法请求的，它将打印一个接收华氏温度的表单，如果是用POST方法调用的，它将计算并显示相应的摄氏温度。</li>
 </ul>
-<p><strong>示例7-3</strong>：自处理温度转换页面(temp.php)</p>
+<p><strong>示例7-3</strong>：自处理温度转换页面（temp.php)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Temperature Conversion&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;?php<br>        if($_SERVER[&#x27;REQUEST_METHOD&#x27;] == &#x27;GET&#x27;)&#123;<br>        ?&gt;<br>        &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;POST&quot;&gt;<br>            Fahrenheit temperature:<br>            &lt;input type=&quot;text&quot; name=&quot;fahrenheit&quot; /&gt;&lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;Convert to Celsius!&quot;/&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>        &#125;else if($_SERVER[&#x27;REQUEST_METHOD&#x27;] == &#x27;POST&#x27;)&#123;<br>            $fahr = $_POST[&#x27;fahrenheit&#x27;];<br>            $celsius = ($fahr - 32)*5/9;<br>            printf(&quot;%.2fF is %.2fC&quot;,$fahr,$celsius);<br>        &#125;else&#123;<br>            die(&quot;This script only works with GET and POST requests.&quot;);<br>        &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>另一个决定显示表单还是处理表单的方法时，是看是否已经提供了其中的一个参数，这使得你能编写一个使用GET方法提交值的自处理页面，示例7-4显示温度转换程序的新版本，这个程序用是否提供了某个参数来决定做什么。</li>
@@ -302,13 +302,13 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;languages[]&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;c&quot;</span>&gt;</span>C<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;c++&quot;</span>&gt;</span>C++<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;php&quot;</span>&gt;</span>PHP<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;perl&quot;</span>&gt;</span>Perl<span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>现在，当用户提交表单时，<code>$_GET[‘languages’]</code>包含一个数组而不是一个字符串，这个数组包含用户所选择的值。</li>
-<li>下例演示了多种选择，表单为用户提供了一系列个性特征，当用户提交表单时，他可以得到有关他的个性的描述信息（不怎么有趣)</li>
+<li>下例演示了多种选择，表单为用户提供了一系列个性特征，当用户提交表单时，他可以得到有关他的个性的描述信息（不怎么有趣）</li>
 </ul>
 <p><strong>示例7-6</strong>：用选择框进行多重选择。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>&lt;head&gt;&lt;title&gt;Personality&lt;/title&gt;&lt;/head&gt;<br>	&lt;body&gt;<br> &lt;form action=&quot;&lt;?php echo $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>  Select your personality attributes:&lt;br/&gt;<br>  &lt;select name=&quot;attributes[]&quot; multiple&gt;<br>      &lt;option value=&quot;perky&quot;&gt;Perky&lt;/option&gt;<br>      &lt;option value=&quot;morose&quot;&gt;Morose&lt;/option&gt;<br>      &lt;option value=&quot;thinking&quot;&gt;Thinking&lt;/option&gt;<br>      &lt;option value=&quot;feeling&quot;&gt;Feeling&lt;/option&gt;<br>      &lt;option value=&quot;thrifty&quot;&gt;Spend-thrift&lt;/option&gt;<br>      &lt;opiton value=&quot;prodigal&quot;&gt;Shopper&lt;/option&gt;<br> &lt;/select&gt;<br> &lt;br/&gt;<br> &lt;input type=&quot;submit&quot; name=&quot;s&quot; value=&quot;Record my personality!&quot; /&gt;<br> &lt;/form&gt;<br> &lt;?php<br>     if(array_key_exists(&#x27;s&#x27;,$_GET))&#123;<br>         $description = join(&quot; &quot;,$_GET[&#x27;attributes&#x27;]);<br>         echo &quot;You have a $description personality.&quot;;<br>     &#125;<br> ?&gt;<br> &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>在上例中，提交按钮有一个名称&quot;s&quot;，我们检查这个参数是否存在，来判断是否需要产生个性信息的描述。</li>
-<li>对于可以返回多重值的表单字段可以使用同样的技术，下例是个人信息表单的新版，使用了复选框(check box)而不是选择框(select box)，注意只是HTML发生了改变----那些处理表单的PHP代码无须改变，因为它不需要知道多重值是来自于复选框还是选择框。</li>
+<li>对于可以返回多重值的表单字段可以使用同样的技术，下例是个人信息表单的新版，使用了复选框（check box)而不是选择框（select box)，注意只是HTML发生了改变----那些处理表单的PHP代码无须改变，因为它不需要知道多重值是来自于复选框还是选择框。</li>
 </ul>
 <p><strong>示例7-7</strong>：使用复选框的多重选择。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;html&gt;<br>    &lt;head&gt;&lt;title&gt;Personality&lt;/title&gt;&lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;form action=&quot;&lt;?php $_SERVER[&#x27;PHP_SELF&#x27;] ?&gt;&quot; method=&quot;GET&quot;&gt;<br>            Select your personality attributes:&lt;br/&gt;<br>            Perky&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;perky&quot; /&gt;&lt;br/&gt;<br>            Morose&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;morose&quot; /&gt;&lt;br/&gt;<br>            Thinking&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;thinking&quot; /&gt;&lt;br/&gt;<br>            Feeling&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;feeling&quot; /&gt;&lt;br/&gt;<br>            Spend-thrift&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;thrifty&quot; /&gt;&lt;br/&gt;<br>            Shopper&lt;input type=&quot;checkbox&quot; name=&quot;attributes[]&quot; value=&quot;prodigal&quot; /&gt;&lt;br/&gt;<br>            &lt;br/&gt;<br>            &lt;input type=&quot;submit&quot; name=&quot;s&quot; value=&quot;Record my Personality!&quot; /&gt;<br>        &lt;/form&gt;<br>        &lt;?php<br>    if(arrat_key_exists(&#x27;s&#x27;,$_GET))&#123;<br>        $description = join(&quot; &quot;,$GET[&#x27;attributes&#x27;]);<br>        echo &quot;You have a $description personality.&quot;;<br>    &#125;<br>        ?&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
@@ -338,9 +338,9 @@
 </ul>
 <blockquote>
 <ul>
-<li><strong>name</strong>：浏览器提供的文件名，我们很难使用该值，因为客户端机器上的文件名约定有可能和Web服务器的不同（比如，如果客户机为Windows系统，文件名可能为&quot;D:\PHOTOS|ME.JPG&quot;，而服务器为Unix系统，那么这个文件路径没什么意义)</li>
+<li><strong>name</strong>：浏览器提供的文件名，我们很难使用该值，因为客户端机器上的文件名约定有可能和Web服务器的不同（比如，如果客户机为Windows系统，文件名可能为&quot;D:\PHOTOS|ME.JPG&quot;，而服务器为Unix系统，那么这个文件路径没什么意义）</li>
 <li><strong>type</strong>：上传文件的MIME类型。</li>
-<li><strong>size</strong>：上传文件的大小（以字节为单位)，如果用户试图上传一个过大的文件，它的大小将被置为0</li>
+<li><strong>size</strong>：上传文件的大小（以字节为单位），如果用户试图上传一个过大的文件，它的大小将被置为0</li>
 <li><strong>tmp_name</strong>：上传文件在服务器中的临时文件名，如果用户试图上传一个过大的文件，它的大小将为置为0</li>
 </ul>
 </blockquote>
@@ -372,7 +372,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$valid_age</span> = preg_match(<span class="hljs-string">&#x27;/^\d+$/&#x27;</span>,<span class="hljs-variable">$age</span>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>验证E-mail地址是一个很困难的工作，没有现存的方法来检查一个字符串是否满足合法E-mail地址的要求，然而你可以要求用户输入E-mail地址两次（在不同的文本框中)，也可以用如下的方法防止用户输入&quot;me&quot;或者&quot;me@aol&quot;这样的E-mail地址：要求所有输入的字符串都包含一个@符号，并且其中有一个点号，你也可以检查不想向其发送E-mail的域（如whitehouse.gov或竞争对手)，例如：</li>
+<li>验证E-mail地址是一个很困难的工作，没有现存的方法来检查一个字符串是否满足合法E-mail地址的要求，然而你可以要求用户输入E-mail地址两次（在不同的文本框中），也可以用如下的方法防止用户输入&quot;me&quot;或者&quot;me@aol&quot;这样的E-mail地址：要求所有输入的字符串都包含一个@符号，并且其中有一个点号，你也可以检查不想向其发送E-mail的域（如whitehouse.gov或竞争对手），例如：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$email1</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email1&#x27;</span>]);<br><span class="hljs-variable">$email2</span> = strtolower(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;email2&#x27;</span>]);<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$email1</span> !== <span class="hljs-variable">$email2</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email addresses didn&#x27;t match&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(!preg_match(<span class="hljs-string">&#x27;/@.+\..+$/&#x27;</span>,<span class="hljs-variable">$email1</span>)&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;The email address is invalid&quot;</span>);<br>&#125;<br><span class="hljs-keyword">if</span>(strpos(<span class="hljs-variable">$email</span>,<span class="hljs-string">&quot;Whitehorse.gov&quot;</span>))&#123;<br> <span class="hljs-keyword">die</span>(<span class="hljs-string">&quot;I will not send mail to the White House&quot;</span>):<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="Hadoop 初始化 绪论  使用Docker搭建Hadoop技术平台，包括安装Docker, Java, Scala, Hadoop, Hbase, Spark 集群共有5台机器，主机名分别为 hadoop01, hadoop02, hadoop03, hadoop04, hadoop05，其中 hadoop01 为 master，其他的为 slave JDK 1.8 Scala 2.11.6">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.575Z">
-<meta property="article:modified_time" content="2024-03-17T17:46:33.893Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.229Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -552,15 +552,15 @@
 </blockquote>
 <ul>
 <li>重新格式化意味着集群的数据会被全部删除，格式化前需考虑数据备份或转移问题。</li>
-<li>先删除主节点（即namenode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容（注意是删除目录下的内容不是目录)</li>
-<li>删除所有数据节点（即datanode节点), Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容。</li>
+<li>先删除主节点（即namenode节点）, Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容（注意是删除目录下的内容不是目录）</li>
+<li>删除所有数据节点（即datanode节点）, Hadoop的临时存储目录tmp, namenode存储永久性元数据目录dfs/name, Hadoop系统日志文件目录log 中的内容。</li>
 <li>格式化一个新的分布式文件系统：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ ./hadoop namenode -format<br></code></pre></td></tr></table></figure>
 <p><strong>注意事项</strong></p>
 <ul>
 <li>Hadoop的临时存储目录tmp(即core-site.xml配置文件中的hadoop.tmp.dir属性，默认值是/tmp/hadoop-${<a target="_blank" rel="noopener" href="http://user.name">user.name</a>})，如果没有配置hadoop.tmp.dir属性，那么hadoop格式化时将会在/tmp目录下创建一个目录，例如在cloud用户下安装配置hadoop，那么Hadoop的临时存储目录就位于/tmp/hadoop-cloud目录下。</li>
-<li>Hadoop的namenode元数据目录（即hdfs-site.xml配置文件中的dfs.namenode.name.dir属性，默认值是${hadoop.tmp.dir}/dfs/name)，同样如果没有配置该属性，那么hadoop在格式化时将自行创建，必须注意的是在格式化前必须清楚所有子节点（即DataNode节点)dfs/name下的内容，否则在启动hadoop时子节点的守护进程会启动失败，这是由于，每一次format主节点namenode, dfs/name/current目录下的VERSION文件会产生新的clusterID, namespaceID，但是如果子节点的dfs/name/current仍存在， hadoop格式化时就不会重建该目录，因此形成子节点的clusterID, namespaceID与主节点（即namenode节点）的clusterID, namespaceID不一致，最终导致hadoop启动失败。</li>
+<li>Hadoop的namenode元数据目录（即hdfs-site.xml配置文件中的dfs.namenode.name.dir属性，默认值是${hadoop.tmp.dir}/dfs/name)，同样如果没有配置该属性，那么hadoop在格式化时将自行创建，必须注意的是在格式化前必须清楚所有子节点（即DataNode节点）dfs/name下的内容，否则在启动hadoop时子节点的守护进程会启动失败，这是由于，每一次format主节点namenode, dfs/name/current目录下的VERSION文件会产生新的clusterID, namespaceID，但是如果子节点的dfs/name/current仍存在， hadoop格式化时就不会重建该目录，因此形成子节点的clusterID, namespaceID与主节点（即namenode节点）的clusterID, namespaceID不一致，最终导致hadoop启动失败。</li>
 </ul>
 
             </div>

@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQL 参照完整性 定义参照完整性  关系模型的参照完整性在CREATE TABLE中用FOREIGN KEY短语定义哪些列为外码，用REFERENCES短语指明这些外码参照哪些表的主码。 例如，关系SC中一个元组表示一个学生选修的某门课程的成绩，(Sno,Cno)是主码，Sno,Cno分别参照引用Student表的主码和Course表的主码。  [例5.3]：定义SC中的参照完整性。 12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.568Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.420Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.250Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,22 +278,22 @@
 <li>修改Student表中一个元组的Sno属性，造成SC表中某些元组的Sno属性值在表Student中找不到一个元组，其Sno属性值与之相等。</li>
 <li>当上述的不一致发生时，系统可以采用以下策略加以处理。
 <ul>
-<li>拒绝(NO ACTION)执行。
+<li>拒绝（NO ACTION)执行。
 <ul>
 <li>不允许该操作执行，该策略一般设置为默认策略。</li>
 </ul>
 </li>
-<li>级联(CASCADE)操作。
+<li>级联（CASCADE)操作。
 <ul>
-<li>当删除或修改被参照表(Student)的一个元组导致与参照表(SC)的不一致时，删除或修改参照表中的所有道义不一致的元组。</li>
+<li>当删除或修改被参照表（Student)的一个元组导致与参照表（SC)的不一致时，删除或修改参照表中的所有道义不一致的元组。</li>
 <li>例如，删除Student表中Sno值为&quot;201215121&quot;的元组，则从要SC表中级联删除SC.Sno='201215121’的所有元组。</li>
 </ul>
 </li>
 <li>设置为空值。
 <ul>
 <li>当删除或修改被参照表的一个元组时造成了不一致，则将参照表中的所有造成不一致的元组的对应属性设置为空值，例如，有下面两个关系：</li>
-<li>学生(<u>学号</u>，姓名，性别，专业号，年龄)</li>
-<li>专业(<u>专业号</u>，专业名)</li>
+<li>学生（<u>学号</u>，姓名，性别，专业号，年龄）</li>
+<li>专业（<u>专业号</u>，专业名）</li>
 <li>其中学生关系的&quot;专业号&quot;是外码，因为专业号是专业关系的主码。</li>
 <li>假设专业表中的某个元组被删除，专业号为12，按照设置为空值的策略，就要把学生表中专业号=12的所有元组的专业号设置为空值，这对应了这样的语义：某个专业删除了，该专业的所有学生专业未定，等待重新分配专业。</li>
 </ul>
@@ -308,7 +308,7 @@
 <p><strong>[例5.4]</strong>：显式说明参照完整性的违约处理示例。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> SC<br>     (<br>         Sno <span class="hljs-type">CHAR</span>(<span class="hljs-number">9</span>),<br>         Cno <span class="hljs-type">CHAR</span>(<span class="hljs-number">4</span>),<br>         Grade <span class="hljs-type">SMALLINT</span>,<br>         <span class="hljs-keyword">PRIMARY</span> KEY (Sno,Cno),<span class="hljs-comment">/*在表级定义实体完整性，Sno,Cno都不能取空值*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Sno) <span class="hljs-keyword">REFERENCES</span> Student(Sno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span>  <span class="hljs-keyword">DELETE</span> CASCADE <span class="hljs-comment">/*当删除Student表中的元组时，级联删除SC表中相应元组*/</span><br>             <span class="hljs-keyword">ON</span>  UPDATE  CASCADE ,<span class="hljs-comment">/*当更新Student表中的sno时，级联更新SC表中的相应的元组*/</span><br>         <span class="hljs-keyword">FOREIGN</span> KEY (Cno) <span class="hljs-keyword">REFERENCES</span> Course(Cno)<span class="hljs-comment">/*在表级定义参照完整性*/</span><br>             <span class="hljs-keyword">ON</span> <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">NO</span> ACTION <span class="hljs-comment">/*当删除Course表中的元组造成与SC表不一致时，拒绝删除*/</span><br>             <span class="hljs-keyword">ON</span> UPDATE  CASCADE <span class="hljs-comment">/*当更新Course表中的Cno时，级联更新SC表中相应的元组*/</span><br>);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>可以对DELETE和UPDATE采用不同的策略，例如，例5.4中当删除被参照表Course表中的元组，造成与参照表(SC表）不一致时，拒绝删除被参照表的元组，对更新操作则采取级联更新的策略。</li>
+<li>可以对DELETE和UPDATE采用不同的策略，例如，例5.4中当删除被参照表Course表中的元组，造成与参照表（SC表）不一致时，拒绝删除被参照表的元组，对更新操作则采取级联更新的策略。</li>
 <li>从上面的讨论可以看到，关系数据库管理系统在实现参照完整性时，除了要提供定义主码，外码的机制外，还需要提供不同的策略供用户选择，具体选择哪种策略，要根据应用环境的要求确定。</li>
 </ul>
 
@@ -326,11 +326,11 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/">关系数据库。</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DML/">DML</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DML/%E7%BA%A6%E6%9D%9F%E3%80%82/">约束。</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E7%BA%A6%E6%9D%9F/">约束</a>
                     
                   </div>
                 

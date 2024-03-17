@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/cluster.jpg">
 <meta property="article:published_time" content="2022-05-26T13:32:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.492Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.226Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -307,7 +307,7 @@
 <th style="text-align:left">轮前加和权重</th>
 <th style="text-align:left">本轮胜者</th>
 <th style="text-align:left">合计权重</th>
-<th style="text-align:left">轮后权重（胜者减去合计权重)</th>
+<th style="text-align:left">轮后权重（胜者减去合计权重）</th>
 </tr>
 </thead>
 <tbody>
@@ -356,13 +356,13 @@
 </tbody>
 </table>
 <ul>
-<li>我们发现经过合计权重(3+2+1)轮次后，循环又回到了起点，整个过程中节点流量是平滑的，且哪怕在很短的时间周期内，概率都是按期望分布的。</li>
+<li>我们发现经过合计权重（3+2+1)轮次后，循环又回到了起点，整个过程中节点流量是平滑的，且哪怕在很短的时间周期内，概率都是按期望分布的。</li>
 <li>如果用户有加权轮询的需求，可放心使用该算法。</li>
 </ul>
 </blockquote>
 <h4 id="LeastActive">LeastActive</h4>
 <ul>
-<li><strong>加权最少活跃调用优先</strong>，活跃数越低，越优先调用，相同活跃数的进行加权随机，活跃数指调用前后计数差（针对特定提供者：请求发送数 - 响应返回数)，表示特定提供者的任务堆积量，活跃数越低，代表该提供者处理能力越强。</li>
+<li><strong>加权最少活跃调用优先</strong>，活跃数越低，越优先调用，相同活跃数的进行加权随机，活跃数指调用前后计数差（针对特定提供者：请求发送数 - 响应返回数），表示特定提供者的任务堆积量，活跃数越低，代表该提供者处理能力越强。</li>
 <li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大，相对的，处理能力越强的节点，处理更多的请求。</li>
 </ul>
 <h4 id="ShortestResponse">ShortestResponse</h4>
@@ -417,7 +417,7 @@
 <h3 id="集群容错模式">集群容错模式</h3>
 <h4 id="Failover-Cluster">Failover Cluster</h4>
 <ul>
-<li>失败自动切换，当出现失败，重试其它服务器，通常用于读操作，但重试会带来更长延迟，可通过 <code>retries=&quot;2&quot;</code> 来设置重试次数（不含第一次)</li>
+<li>失败自动切换，当出现失败，重试其它服务器，通常用于读操作，但重试会带来更长延迟，可通过 <code>retries=&quot;2&quot;</code> 来设置重试次数（不含第一次）</li>
 <li>重试次数配置如下：</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dubbo:service</span> <span class="hljs-attr">retries</span>=<span class="hljs-string">&quot;2&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
@@ -448,14 +448,14 @@
 <h4 id="Broadcast-Cluster">Broadcast Cluster</h4>
 <ul>
 <li>广播调用所有提供者，逐个调用，任意一台报错则报错，通常用于通知所有提供者更新缓存或日志等本地资源信息。</li>
-<li>现在广播调用中，可以通过 broadcast.fail.percent 配置节点调用失败的比例，当达到这个比例后，BroadcastClusterInvoker 将不再调用其他节点，直接抛出异常，broadcast.fail.percent 取值在 0~100 范围内，默认情况下当全部调用失败后，才会抛出异常，broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点，并不改变结果（任意一台报错则报错),broadcast.fail.percent 参数在 dubbo2.7.10 及以上版本生效。</li>
+<li>现在广播调用中，可以通过 broadcast.fail.percent 配置节点调用失败的比例，当达到这个比例后，BroadcastClusterInvoker 将不再调用其他节点，直接抛出异常，broadcast.fail.percent 取值在 0~100 范围内，默认情况下当全部调用失败后，才会抛出异常，broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点，并不改变结果（任意一台报错则报错）,broadcast.fail.percent 参数在 dubbo2.7.10 及以上版本生效。</li>
 <li>Broadcast Cluster 配置<code>broadcast.fail.percent</code></li>
 <li><code>broadcast.fail.percent=20</code>代表了当 20% 的节点调用失败就抛出异常，不再调用其他节点。</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">@reference(cluster = &quot;broadcast&quot;, parameters = &#123;&quot;broadcast.fail.percent&quot;, &quot;20&quot;&#125;)<br></code></pre></td></tr></table></figure>
 <h4 id="Available-Cluster">Available Cluster</h4>
 <ul>
-<li>调用目前可用的实例（只调用一个)，如果当前没有可用的实例，则抛出异常，通常用于不需要负载均衡的场景。</li>
+<li>调用目前可用的实例（只调用一个），如果当前没有可用的实例，则抛出异常，通常用于不需要负载均衡的场景。</li>
 </ul>
 <h4 id="Mergeable-Cluster">Mergeable Cluster</h4>
 <ul>

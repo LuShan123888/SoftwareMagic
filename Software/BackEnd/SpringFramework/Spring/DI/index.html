@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring DI Bean的实现 @Component  配置扫描包的注解。  12&lt;!--指定注解扫描包--&gt;&lt;context:component-scan base-package&#x3D;&quot;com.example.entity&quot;&#x2F;&gt;  在指定包下编写类，增加注解。  1234@Component(&quot;user&quot;)public class">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.745Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.502Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.235Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
 <h3 id="Autowired">@Autowired</h3>
 <ul>
 <li>自动装配，用于替代基于XML配置的自动装配。</li>
-<li>@Autowired默认按类型装配（属于Spring规范)，默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false，如果我们想使用名称装配可以结合@Qualifier注解进行使用。</li>
+<li>@Autowired默认按类型装配（属于Spring规范），默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false，如果我们想使用名称装配可以结合@Qualifier注解进行使用。</li>
 </ul>
 <h4 id="required">required</h4>
 <ul>
@@ -313,7 +313,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-meta">@Qualifier(value = &quot;cat1&quot;)</span><br><span class="hljs-keyword">private</span> Cat cat;<br><br><span class="hljs-meta">@Autowired</span><br><span class="hljs-meta">@Qualifier(value = &quot;cat2&quot;)</span><br><span class="hljs-keyword">private</span> Cat cat;<br></code></pre></td></tr></table></figure>
 <h3 id="Resource">@Resource</h3>
 <ul>
-<li>@Resource(属于J2EE规范)，默认按照名称进行装配。</li>
+<li>@Resource(属于J2EE规范），默认按照名称进行装配。</li>
 <li>名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行按照名称查找，如果注解写在setter方法上默认取属性名进行装配，当找不到与名称匹配的bean时才按照类型进行装配。</li>
 <li><strong>注意</strong>：如果name属性一旦指定，就只会按照名称进行装配。</li>
 </ul>
@@ -412,8 +412,8 @@
 <ul>
 <li>Spring的自动装配的步骤。
 <ul>
-<li>组件扫描(component scanning):Spring会自动发现应用上下文中所创建的bean</li>
-<li>自动装配(autowiring):Spring自动满足bean之间的依赖，也就是我们说的IoC/DI</li>
+<li>组件扫描（component scanning):Spring会自动发现应用上下文中所创建的bean</li>
+<li>自动装配（autowiring):Spring自动满足bean之间的依赖，也就是我们说的IoC/DI</li>
 </ul>
 </li>
 </ul>
@@ -446,7 +446,7 @@
 <h3 id="静态工厂的方法注入">静态工厂的方法注入</h3>
 <ul>
 <li>静态工厂顾名思义，就是通过调用静态工厂的方法来获取自己需要的对象。</li>
-<li>为了让Spring管理所有对象，我们不能直接通过<code>工程类。静态方法()</code>来获取对象，而是依然通过spring注入的形式获取：</li>
+<li>为了让Spring管理所有对象，我们不能直接通过<code>工程类。静态方法（)</code>来获取对象，而是依然通过spring注入的形式获取：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserMapperFactory</span> </span>&#123;  <br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> UserMapper <span class="hljs-title">getUserMapper</span><span class="hljs-params">()</span></span>&#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> UserMapper();  <br>    &#125;  <br><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>

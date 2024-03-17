@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706183924.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706183929.png">
 <meta property="article:published_time" content="2024-03-17T15:48:00.173Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.503Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.248Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
 <ul>
 <li>更新的时候，先更新数据库，然后再删除缓存。</li>
 </ul>
-<h3 id="Read-Through-Write-Through-读写穿透">Read-Through/Write-Through(读写穿透)</h3>
+<h3 id="Read-Through-Write-Through-读写穿透）">Read-Through/Write-Through(读写穿透）</h3>
 <ul>
 <li>Read/Write-Through模式中，服务端把缓存作为主要数据存储，应用程序跟数据库缓存交互，都是通过<strong>抽象缓存层</strong>完成的。</li>
 </ul>
@@ -297,7 +297,7 @@
 <li>Write-Through模式下，当发生写请求时，也是由<strong>缓存抽象层</strong>完成数据源和缓存数据的更新，流程如下：</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/20210706181204.png" srcset="/images/loading.gif" lazyload alt="图片" style="zoom:50%;" />
-<h3 id="Write-behind-异步缓存写入">Write-behind(异步缓存写入)</h3>
+<h3 id="Write-behind-异步缓存写入）">Write-behind(异步缓存写入）</h3>
 <ul>
 <li>Write-behind 跟Read-Through/Write-Through有相似的地方，都是由Cache Provider来负责缓存和数据库的读写，它们又有个很大的不同：Read/Write-Through是同步更新缓存和数据的，Write-Behind则是只更新缓存，不直接更新数据库，通过批量异步的方式来更新数据库。</li>
 </ul>
@@ -315,7 +315,7 @@
 <li>线程A更新缓存。</li>
 </ol>
 <ul>
-<li>这时候，缓存保存的是A的数据（老数据)，数据库保存的是B的数据（新数据)，数据不一致了，脏数据出现，如果是删除缓存取代更新缓存则不会出现这个脏数据问题。</li>
+<li>这时候，缓存保存的是A的数据（老数据），数据库保存的是B的数据（新数据），数据不一致了，脏数据出现，如果是删除缓存取代更新缓存则不会出现这个脏数据问题。</li>
 </ul>
 <h3 id="先写数据库再删缓存">先写数据库再删缓存</h3>
 <ul>
@@ -348,12 +348,12 @@
 <ol>
 <li>先删除缓存。</li>
 <li>再更新数据库。</li>
-<li>休眠一会（读业务逻辑数据的耗时 + 几百毫秒)</li>
+<li>休眠一会（读业务逻辑数据的耗时 + 几百毫秒）</li>
 <li>再次删除缓存。</li>
 </ol>
 <ul>
 <li>第一次删除缓存的目的在于当最后一次延时删除缓存失败的情况发生，至少一致性策略只会退化成先删缓存再更新数据的策略。</li>
-<li>为了确保读请求结束，写请求第二次删除读请求可能带来的缓存脏数据，只有休眠那一会（比如就那1秒)，可能有脏数据，一般业务也会接受的。</li>
+<li>为了确保读请求结束，写请求第二次删除读请求可能带来的缓存脏数据，只有休眠那一会（比如就那1秒），可能有脏数据，一般业务也会接受的。</li>
 </ul>
 <h3 id="删除缓存重试机制">删除缓存重试机制</h3>
 <ul>
@@ -382,7 +382,7 @@
 <li>数据操作分为两大部分：
 <ul>
 <li>全量更新（将全部数据一次性写入Redis)</li>
-<li>增量更新（实时更新)</li>
+<li>增量更新（实时更新）</li>
 </ul>
 </li>
 <li>一旦MySQL中产生了新的写入，更新，删除等操作，就可以把binlog相关的消息通过消息队列推送至Redis,Redis再根据binlog中的记录，对Redis进行更新。</li>

@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Mybatis CRUD操作  resultType:SQL语句返回值类型（完整的类名或者别名) parameterType：传入SQL语句的参数类型。 接口中的方法名与映射文件中的SQL语句ID 一一对应。 所有的增删改操作都需要提交事务。 接口所有的普通参数，尽量都写上@Param参数。 有时候根据业务的需求，可以考虑使用map传递参数。 为了规范操作，在SQL的配置文件中，尽量编写Param">
+  <meta name="description" content="Mybatis CRUD操作  resultType:SQL语句返回值类型（完整的类名或者别名） parameterType：传入SQL语句的参数类型。 接口中的方法名与映射文件中的SQL语句ID 一一对应。 所有的增删改操作都需要提交事务。 接口所有的普通参数，尽量都写上@Param参数。 有时候根据业务的需求，可以考虑使用map传递参数。 为了规范操作，在SQL的配置文件中，尽量编写Param">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis CRUD操作">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Mybatis/CRUD/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Mybatis CRUD操作  resultType:SQL语句返回值类型（完整的类名或者别名) parameterType：传入SQL语句的参数类型。 接口中的方法名与映射文件中的SQL语句ID 一一对应。 所有的增删改操作都需要提交事务。 接口所有的普通参数，尽量都写上@Param参数。 有时候根据业务的需求，可以考虑使用map传递参数。 为了规范操作，在SQL的配置文件中，尽量编写Param">
+<meta property="og:description" content="Mybatis CRUD操作  resultType:SQL语句返回值类型（完整的类名或者别名） parameterType：传入SQL语句的参数类型。 接口中的方法名与映射文件中的SQL语句ID 一一对应。 所有的增删改操作都需要提交事务。 接口所有的普通参数，尽量都写上@Param参数。 有时候根据业务的需求，可以考虑使用map传递参数。 为了规范操作，在SQL的配置文件中，尽量编写Param">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.577Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.380Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.229Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
             <div class="markdown-body">
               <h1>Mybatis CRUD操作</h1>
 <ul>
-<li><strong>resultType</strong>:SQL语句返回值类型（完整的类名或者别名)</li>
+<li><strong>resultType</strong>:SQL语句返回值类型（完整的类名或者别名）</li>
 <li><strong>parameterType</strong>：传入SQL语句的参数类型。</li>
 <li>接口中的方法名与映射文件中的SQL语句ID 一一对应。</li>
 <li>所有的增删改操作都需要提交事务。</li>
@@ -348,7 +348,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testDeleteUser</span><span class="hljs-params">()</span> </span>&#123;<br>    SqlSession session = MybatisUtils.getSession();<br>    UserMapper mapper = session.getMapper(UserMapper.class);<br>    <span class="hljs-keyword">int</span> i = mapper.deleteUser(<span class="hljs-number">5</span>);<br>    System.out.println(i);<br>    session.commit(); <span class="hljs-comment">// 提交事务，不写的话不会提交到数据库。</span><br>    session.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="与-的区别">#与$的区别</h2>
 <ul>
-<li><code>#&#123;&#125; </code>的作用主要是替换预编译语句(PrepareStatement)中的占位符，可以防止SQL注入攻击。</li>
+<li><code>#&#123;&#125; </code>的作用主要是替换预编译语句（PrepareStatement)中的占位符，可以防止SQL注入攻击。</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">user</span> (name) <span class="hljs-keyword">VALUES</span> (#&#123;name&#125;);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">user</span> (name) <span class="hljs-keyword">VALUES</span> (?);<br></code></pre></td></tr></table></figure>
 <ul>

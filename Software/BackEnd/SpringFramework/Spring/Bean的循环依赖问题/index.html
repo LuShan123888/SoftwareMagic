@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9naXRlZS5jb20vd3hfY2MzNDdiZTY5Ni9ibG9nSW1hZ2UvcmF3L21hc3Rlci9pbWFnZS0yMDIwMDcwNjE3MTUxNDMyNy5wbmc?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9naXRlZS5jb20vd3hfY2MzNDdiZTY5Ni9ibG9nSW1hZ2UvcmF3L21hc3Rlci9pbWFnZS0yMDIwMDcwNjE3MjUyMzI1OC5wbmc?x-oss-process=image/format,png">
 <meta property="article:published_time" content="2022-05-26T13:33:49.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.502Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.236Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -268,22 +268,22 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">AB相互依赖（循环依赖)</td>
+<td style="text-align:left">AB相互依赖（循环依赖）</td>
 <td style="text-align:left">均采用setter方法注入</td>
 <td style="text-align:left">是</td>
 </tr>
 <tr>
-<td style="text-align:left">AB相互依赖（循环依赖)</td>
+<td style="text-align:left">AB相互依赖（循环依赖）</td>
 <td style="text-align:left">均采用构造器注入</td>
 <td style="text-align:left">否</td>
 </tr>
 <tr>
-<td style="text-align:left">AB相互依赖（循环依赖)</td>
+<td style="text-align:left">AB相互依赖（循环依赖）</td>
 <td style="text-align:left">A中注入B的方式为setter方法，B中注入A的方式为构造器</td>
 <td style="text-align:left">是</td>
 </tr>
 <tr>
-<td style="text-align:left">AB相互依赖（循环依赖)</td>
+<td style="text-align:left">AB相互依赖（循环依赖）</td>
 <td style="text-align:left">B中注入A的方式为setter方法，A中注入B的方式为构造器</td>
 <td style="text-align:left">否</td>
 </tr>
@@ -350,7 +350,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 这里传入的参数也是一个lambda表达式，() -&gt; getEarlyBeanReference(beanName, mbd, bean)</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addSingletonFactory</span><span class="hljs-params">(String beanName, ObjectFactory&lt;?&gt; singletonFactory)</span> </span>&#123;<br>    Assert.notNull(singletonFactory, <span class="hljs-string">&quot;Singleton factory must not be null&quot;</span>);<br>    <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>.singletonObjects) &#123;<br>        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.singletonObjects.containsKey(beanName)) &#123;<br>            <span class="hljs-comment">// 添加到三级缓存中。</span><br>            <span class="hljs-keyword">this</span>.singletonFactories.put(beanName, singletonFactory);<br>            <span class="hljs-keyword">this</span>.earlySingletonObjects.remove(beanName);<br>            <span class="hljs-keyword">this</span>.registeredSingletons.add(beanName);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里只是添加了一个工厂，通过这个工厂(<code>ObjectFactory</code>)的<code>getObject</code>方法可以得到一个对象，而这个对象实际上就是通过<code>getEarlyBeanReference</code>这个方法创建的，当创建B的流程中会调用这个工厂的<code>getObject</code>方法。</li>
+<li>这里只是添加了一个工厂，通过这个工厂（<code>ObjectFactory</code>)的<code>getObject</code>方法可以得到一个对象，而这个对象实际上就是通过<code>getEarlyBeanReference</code>这个方法创建的，当创建B的流程中会调用这个工厂的<code>getObject</code>方法。</li>
 <li>当A完成了实例化并添加进了三级缓存后，就要开始为A进行属性注入了，在注入时发现A依赖了B，那么这个时候Spring又会去<code>getBean(b)</code>，然后反射调用setter方法完成属性注入。</li>
 </ul>
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/format,png-20220314235458883.png" srcset="/images/loading.gif" lazyload alt="image-20200706114501300" style="zoom:50%;" />

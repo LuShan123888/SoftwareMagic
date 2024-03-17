@@ -24,7 +24,7 @@
 <meta property="og:description" content="Spring MVC 拦截器 概述  Spring MVC的处理器拦截器类似于Servlet开发中的过滤器Filter，用于对处理器进行预处理和后处理，开发者可以自己定义一些拦截器来实现特定的功能。 过滤器  servlet规范中的一部分，任何java web工程都可以使用。 在url-pattern中配置了&#x2F;*之后，可以对所有要访问的资源进行拦截。   拦截器  拦截器是Spring MVC框架">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.178Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.502Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.235Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -259,7 +259,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoMvcConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;<br>        registry.addInterceptor(<span class="hljs-keyword">new</span> DemoLoginHandlerInterceptor()).addPathPatterns(<span class="hljs-string">&quot;/**&quot;</span>).excludePathPatterns(<span class="hljs-string">&quot;/index.html&quot;</span>,<span class="hljs-string">&quot;/user/login&quot;</span>,<span class="hljs-string">&quot;/css/**&quot;</span>,<span class="hljs-string">&quot;/js/**&quot;</span>,<span class="hljs-string">&quot;/img/**&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="实例">实例</h2>
 <ul>
-<li>验证用户是否登录（认证用户)</li>
+<li>验证用户是否登录（认证用户）</li>
 </ul>
 <p><strong>实现思路</strong></p>
 <ul>

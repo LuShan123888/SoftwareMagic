@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-29-1730512-20200717183701535-768759500.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-30-1730512-20200717202104577-1160921711.jpg">
 <meta property="article:published_time" content="2024-03-17T15:48:00.863Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.523Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,7 +239,7 @@
 <li>Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。</li>
 <li>Stream API可以极大提高Java程序员的生产力，让程序员写出高效率，干净，简洁的代码。</li>
 <li>这种风格将要处理的元素集合看作一种流，流在管道中传输，并且可以在管道的节点上进行处理，比如筛选，排序，聚合等。</li>
-<li>元素流在管道中经过中间操作(intermediate operation)的处理，最后由最终操作(terminal operation)得到前面处理的结果。</li>
+<li>元素流在管道中经过中间操作（intermediate operation)的处理，最后由最终操作（terminal operation)得到前面处理的结果。</li>
 </ul>
 <figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">stream</span> of elements ----&gt;</span> <span class="hljs-function"><span class="hljs-title">filter</span>----&gt;</span><span class="hljs-function"><span class="hljs-title">sorted</span>----&gt;</span> <span class="hljs-function"><span class="hljs-title">map</span>----&gt;</span> collect<br></code></pre></td></tr></table></figure>
 <ul>
@@ -255,15 +255,15 @@
 </ul>
 <p>和以前的Collection操作不同，Stream操作还有两个基础的特征：</p>
 <ul>
-<li><strong>Pipelining</strong>：中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格(fluent style)，这样做可以对操作进行优化，比如延迟执行(laziness)和短路( short-circuiting)</li>
-<li><strong>内部迭代</strong>：以前对集合遍历都是通过Iterator或者For-Each的方式，显式的在集合外部进行迭代，这叫做外部迭代，Stream提供了内部迭代的方式，通过访问者模式(Visitor)实现。</li>
+<li><strong>Pipelining</strong>：中间操作都会返回流对象本身，这样多个操作可以串联成一个管道，如同流式风格（fluent style)，这样做可以对操作进行优化，比如延迟执行（laziness)和短路（ short-circuiting)</li>
+<li><strong>内部迭代</strong>：以前对集合遍历都是通过Iterator或者For-Each的方式，显式的在集合外部进行迭代，这叫做外部迭代，Stream提供了内部迭代的方式，通过访问者模式（Visitor)实现。</li>
 </ul>
 <h2 id="流处理的特性">流处理的特性</h2>
 <ul>
 <li>不存储数据。</li>
 <li>不会改变数据源。</li>
 <li>不可以重复使用。</li>
-<li>通过连续执行多个操作倒便就组成了 Stream 中的执行管道(pipeline)</li>
+<li>通过连续执行多个操作倒便就组成了 Stream 中的执行管道（pipeline)</li>
 <li>需要注意的是这些管道被添加后并不会真正执行，只有等到调用终值操作之后才会执行。</li>
 </ul>
 <h2 id="生成流">生成流</h2>
@@ -287,7 +287,7 @@
 </ul>
 <h3 id="由数组创建流">由数组创建流</h3>
 <ul>
-<li>通过静态方法 <code>Arrays.stream()</code> 将数组转化为流(Stream)</li>
+<li>通过静态方法 <code>Arrays.stream()</code> 将数组转化为流（Stream)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">IntStream stream = Arrays.stream(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;);<br></code></pre></td></tr></table></figure>
 <h3 id="通过静态方法-Stream-of">通过静态方法 Stream.of()</h3>
@@ -304,13 +304,13 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 接受一个 Supplier 作为参数。</span><br>Stream.generate(Math::random).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br><span class="hljs-comment">// 初始值是 0，新值是前一个元素值 + 2</span><br>Stream.iterate(<span class="hljs-number">0</span>, n -&gt; n + <span class="hljs-number">2</span>).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br></code></pre></td></tr></table></figure>
-<h2 id="中间操作-intermediate">中间操作(intermediate)</h2>
+<h2 id="中间操作（intermediate">中间操作（intermediate)</h2>
 <p>调用中间操作方法返回的是一个新的流对象。</p>
 <h3 id="peek">peek()</h3>
 <ul>
-<li>提供了一种对流中所有元素操作的方法，生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数(Consumer实例)</li>
+<li>提供了一种对流中所有元素操作的方法，生成一个包含原Stream的所有元素的新Stream，同时会提供一个消费函数（Consumer实例）</li>
 <li>新Stream每个元素被消费的时候都会执行给定的消费函数。</li>
-<li>一般不推荐使用，文档提示：该方法主要用于调试，做一些消耗这个对象但不修改它的东西（发送通知，打印模型等)</li>
+<li>一般不推荐使用，文档提示：该方法主要用于调试，做一些消耗这个对象但不修改它的东西（发送通知，打印模型等）</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">Stream.of(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>)<br>    .filter(e -&gt; e.length() &gt; <span class="hljs-number">3</span>)<br>    .peek(e -&gt; System.out.println(<span class="hljs-string">&quot;Filtered value: &quot;</span> + e))<br>    .map(String::toUpperCase)<br>    .peek(e -&gt; System.out.println(<span class="hljs-string">&quot;Mapped value: &quot;</span> + e))<br>    .collect(Collectors.toList());<br></code></pre></td></tr></table></figure>
 <ul>
@@ -355,7 +355,7 @@
 <li>以下代码片段使用 sorted 方法对输出的 10 个随机数进行排序。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Random random = <span class="hljs-keyword">new</span> Random();<br>random.ints().limit(<span class="hljs-number">10</span>).sorted().forEach(System.out::println);<br></code></pre></td></tr></table></figure>
-<h2 id="终值操作-terminal">终值操作(terminal)</h2>
+<h2 id="终值操作（terminal">终值操作（terminal)</h2>
 <p>在调用该方法后，将执行之前所有的中间操作，并返回结果。</p>
 <h3 id="toArray">toArray()</h3>
 <ul>
@@ -460,7 +460,7 @@
 <h4 id="计数">计数</h4>
 <ul>
 <li>Collectors.counting()</li>
-<li>计数只是归约的一种特殊形式：等同于初始值为 <strong>0</strong>，转换函数 <strong>f(x)=1</strong>(x 就是<code>Stream&lt;T&gt;</code>的 T 类型)，累积函数就是做加法的reducing()</li>
+<li>计数只是归约的一种特殊形式：等同于初始值为 <strong>0</strong>，转换函数 <strong>f(x)=1</strong>(x 就是<code>Stream&lt;T&gt;</code>的 T 类型），累积函数就是做加法的reducing()</li>
 </ul>
 <h4 id="分组">分组</h4>
 <ul>
@@ -531,7 +531,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E3%80%82/">函数式编程。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">函数式编程</a>
                     
                   </div>
                 

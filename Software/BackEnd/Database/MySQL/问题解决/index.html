@@ -24,7 +24,7 @@
 <meta property="og:description" content="MySQL 问题解决 Date显示不正常 原因：由于JDBC参数Timezone与Mysql系统时区不一致导致的。 解决方法  修改serverTimezone配置。  1jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;Asia&#x2F;Shanghai  在application.properties配置文件增加JSON时区配置。  1spring.jac">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.170Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.381Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.249Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -268,7 +268,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mysql">UPDATE mysql.user SET host = &#x27;%&#x27; WHERE user = &#x27;root&#x27;;<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
 <h2 id="公钥不可用">公钥不可用</h2>
 <p><strong>报错信息</strong>：在使用 MySQL 8.0 时重启应用后提示 com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Public Key Retrieval is not allowed</p>
-<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥，可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥，但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击(MITM)获取到明文密码，所以默认是关闭的，必须显式开启。</p>
+<p><strong>原因</strong>：如果用户使用了 sha256_password 认证，密码在传输过程中必须使用 TLS 协议保护，但是如果 RSA 公钥不可用，可以使用服务器提供的公钥，可以在连接中通过 ServerRSAPublicKeyFile 指定服务器的 RSA 公钥，或者<code>AllowPublicKeyRetrieval=true</code>参数以允许客户端从服务器获取公钥，但是需要注意的是<code>AllowPublicKeyRetrieval=true</code>可能会导致恶意的代理通过中间人攻击（MITM)获取到明文密码，所以默认是关闭的，必须显式开启。</p>
 <p><strong>解决方法</strong>：添加allowPublicKeyRetrieval配置。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">jdbc:mysql:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">3306</span>/test?allowPublicKeyRetrieval=true<br></code></pre></td></tr></table></figure>
 <h2 id="中文乱码">中文乱码</h2>
@@ -330,7 +330,7 @@
 <p><strong>解决方案</strong></p>
 <ul>
 <li>修改索引列varchar小于767</li>
-<li>启用innodb_large_prefix参数能够取消对于索引中每列长度的限制（但是无法取消对于索引总长度的限制)，启用innodb_large_prefix必须同时指定innodb_file_format=barracuda，innodb_file_per_table=true，并且建表的时候指定表的row_format为dynamic或者compressed(mysql 5.6中row_format默认值为compact)</li>
+<li>启用innodb_large_prefix参数能够取消对于索引中每列长度的限制（但是无法取消对于索引总长度的限制），启用innodb_large_prefix必须同时指定innodb_file_format=barracuda，innodb_file_per_table=true，并且建表的时候指定表的row_format为dynamic或者compressed(mysql 5.6中row_format默认值为compact)</li>
 </ul>
 
             </div>

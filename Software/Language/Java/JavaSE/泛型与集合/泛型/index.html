@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java 泛型 泛型简介  泛型是Java语言的新特性，泛型的本质是参数化类型，也就是说，程序中的数据类型被指定为一个参数，泛型可以用在类，接口和方法的创建中，分别称为泛型类，泛型接口，泛型方法，下面给出了一个简单的使用泛型的例子，其中，&lt;&gt;之间定义形式类型参数。  [例14-1]：泛型的简单使用示例。 12345678910111213141516171819202122232425">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.197Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.519Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,7 +238,7 @@
 <li>Java SE1.5之前的Java版本不支持泛型，系统为实现方法参数的通用性，一般将参数定义为Object类型，我们知道，任何对象均可传递给Object类型引用变量，从而实现参数的&quot;任意化”，但是要将对象转换为原有类型就必须使用强制类型转换。</li>
 <li>泛型在定义时不指定参数的类型，用的时候来确定，这增加了程序的通用性，起到了程序&quot;模版”化的效果，泛型的好处是在编译时检查类型安全，并且所有的强制类型转换都是自动和隐式的，泛型在使用中还有一些如下规则和限制：
 <ul>
-<li>泛型的类型参数只能是类（包括自定义类)，不能是简单类型。</li>
+<li>泛型的类型参数只能是类（包括自定义类），不能是简单类型。</li>
 <li>泛型的类型参数可以有多个，例如，Map&lt;K,V&gt;</li>
 <li>泛型的参数类型可以使用extends语句，例如<code>&lt;T extends Numbe&gt;</code>,extends并不代表继承，它是类型范围限制，表示<code>T&lt;=Number</code></li>
 <li>泛型的参数类型还可以是通配符类型，例如，<code>ArratList&lt;? Extends Number&gt;</code>，表示Number范围的某个类型，其中&quot;?”代表未定类型。</li>
@@ -250,10 +250,10 @@
 <li>你可以写一个泛型方法，该方法在调用时可以接收不同类型的参数，根据传递给泛型方法的参数类型，编译器适当地处理每一个方法调用。</li>
 <li>下面是定义泛型方法的规则：
 <ul>
-<li>所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔)，该类型参数声明部分在方法返回类型之前（在下面例子中的<code>&lt;E&gt;</code>)</li>
+<li>所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔），该类型参数声明部分在方法返回类型之前（在下面例子中的<code>&lt;E&gt;</code>)</li>
 <li>每一个类型参数声明部分包含一个或多个类型参数，参数间用逗号隔开，一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型称的标识符。</li>
 <li>类型参数能被用来声明返回值类型，并且能作为泛型方法得到的实际参数类型的占位符。</li>
-<li>泛型方法体的声明和其他方法一样，注意类型参数只能代表引用型类型，不能是原始类型（像int,double,char的等)</li>
+<li>泛型方法体的声明和其他方法一样，注意类型参数只能代表引用型类型，不能是原始类型（像int,double,char的等）</li>
 </ul>
 </li>
 </ul>
@@ -273,7 +273,7 @@
 </ul>
 <p><strong>实例</strong></p>
 <ul>
-<li>下面的例子演示了&quot;extends&quot;如何使用在一般意义上的意思&quot;extends&quot;(类）或者&quot;implements&quot;(接口)，该例子中的泛型方法返回三个可比较对象的最大值。</li>
+<li>下面的例子演示了&quot;extends&quot;如何使用在一般意义上的意思&quot;extends&quot;(类）或者&quot;implements&quot;(接口），该例子中的泛型方法返回三个可比较对象的最大值。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaximumTest</span></span><br><span class="hljs-class"></span>&#123;<br>  <span class="hljs-comment">// 比较三个值并返回最大值。</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="hljs-function">T <span class="hljs-title">maximum</span><span class="hljs-params">(T x, T y, T z)</span></span><br><span class="hljs-function">  </span>&#123;<br>    T max = x; <span class="hljs-comment">// 假设x是初始最大值。</span><br>    <span class="hljs-keyword">if</span> ( y.compareTo( max ) &gt; <span class="hljs-number">0</span> )&#123;<br>      max = y; <span class="hljs-comment">//y 更大。</span><br>    &#125;<br>    <span class="hljs-keyword">if</span> ( z.compareTo( max ) &gt; <span class="hljs-number">0</span> )&#123;<br>      max = z; <span class="hljs-comment">// 现在 z 更大。</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> max; <span class="hljs-comment">// 返回最大对象。</span><br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">( String args[] )</span></span><br><span class="hljs-function">  </span>&#123;<br>    System.out.printf( <span class="hljs-string">&quot;%d, %d 和 %d 中最大的数为 %d\n\n&quot;</span>,<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, maximum( <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> ) );<br><br>    System.out.printf( <span class="hljs-string">&quot;%.1f, %.1f 和 %.1f 中最大的数为 %.1f\n\n&quot;</span>,<span class="hljs-number">6.6</span>, <span class="hljs-number">8.8</span>, <span class="hljs-number">7.7</span>, maximum( <span class="hljs-number">6.6</span>, <span class="hljs-number">8.8</span>, <span class="hljs-number">7.7</span> ) );<br><br>    System.out.printf( <span class="hljs-string">&quot;%s, %s 和 %s 中最大的数为 %s\n&quot;</span>,<span class="hljs-string">&quot;pear&quot;</span>,<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, maximum( <span class="hljs-string">&quot;pear&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span> ) );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -342,7 +342,7 @@
 <h4 id="T-可以多重限定而-不行">T 可以多重限定而 ? 不行</h4>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MultiLimit</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MultiLimitInterfaceA</span>, <span class="hljs-title">MultiLimitInterfaceB</span> </span>&#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>&lt;T extends MultiLimitInterfaceA &amp;MultiLimitInterfaceB&gt;<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(T t)</span></span>&#123;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>使用<code>&amp;</code>符号设定多重边界(Multi Bounds)，指定泛型类型 T 必须是 <code>MultiLimitInterfaceA</code> 和 <code>MultiLimitInterfaceB</code> 的共有子类型，此时变量 t 就具有了所有限定的方法和属性，对于通配符来说，因为它不是一个确定的类型，所以不能进行多重限定。</li>
+<li>使用<code>&amp;</code>符号设定多重边界（Multi Bounds)，指定泛型类型 T 必须是 <code>MultiLimitInterfaceA</code> 和 <code>MultiLimitInterfaceB</code> 的共有子类型，此时变量 t 就具有了所有限定的方法和属性，对于通配符来说，因为它不是一个确定的类型，所以不能进行多重限定。</li>
 </ul>
 <h4 id="可以使用超类限定而-T-不行">? 可以使用超类限定而 T 不行</h4>
 <ul>
@@ -380,7 +380,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88%E3%80%82/">泛型与集合。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
                     
                   </div>
                 

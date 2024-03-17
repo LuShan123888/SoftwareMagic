@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/bVcYRiO.png">
 <meta property="article:published_time" content="2024-03-17T04:26:56.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.622Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.214Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -247,13 +247,13 @@
 <p>不同于一般的类型定义，这里类型名称 <code>Slice</code> 后带了中括号，对各个部分做一个解说就是：</p>
 <ul>
 <li>
-<p><code>T</code> 就是上面介绍过的<strong>类型形参 (Type parameter)</strong>，在定义 Slice 类型的时候 T 代表的具体类型并不确定，类似一个占位符。</p>
+<p><code>T</code> 就是上面介绍过的<strong>类型形参（Type parameter)</strong>，在定义 Slice 类型的时候 T 代表的具体类型并不确定，类似一个占位符。</p>
 </li>
 <li>
-<p><code>int|float32|float64</code> 这部分被称为<strong>类型约束 (Type constraint)</strong>，中间的 <code>|</code> 的意思是告诉编译器，类型形参 T 只可以接收 int 或 float 32 或 float 64 这三种类型的实参</p>
+<p><code>int|float32|float64</code> 这部分被称为<strong>类型约束（Type constraint)</strong>，中间的 <code>|</code> 的意思是告诉编译器，类型形参 T 只可以接收 int 或 float 32 或 float 64 这三种类型的实参</p>
 </li>
 <li>
-<p>中括号里的 <code>T int|float32|float64</code> 这一整串因为定义了所有的类型形参（在这个例子里只有一个类型形参 T），所以我们称其为 <strong>类型形参列表 (type parameter list)</strong></p>
+<p>中括号里的 <code>T int|float32|float64</code> 这一整串因为定义了所有的类型形参（在这个例子里只有一个类型形参 T），所以我们称其为 <strong>类型形参列表（type parameter list)</strong></p>
 </li>
 <li>
 <p>这里新定义的类型名称叫 <code>Slice[T]</code></p>
@@ -261,10 +261,10 @@
 </ul>
 </li>
 <li>
-<p>这种类型定义的方式中带了类型形参，很明显和普通的类型定义非常不一样，所以我们将这种类型定义中带 <strong>类型形参</strong> <strong>的类型，称之为</strong> 泛型类型 (Generic type)</p>
+<p>这种类型定义的方式中带了类型形参，很明显和普通的类型定义非常不一样，所以我们将这种类型定义中带 <strong>类型形参</strong> <strong>的类型，称之为</strong> 泛型类型（Generic type)</p>
 </li>
 <li>
-<p>泛型类型不能直接拿来使用，必须传入<strong>类型实参 (Type argument)</strong> 将其确定为具体的类型之后才可使用。而传入类型实参确定具体类型的操作被称为 <strong>实例化 (Instantiations)</strong> ：</p>
+<p>泛型类型不能直接拿来使用，必须传入<strong>类型实参（Type argument)</strong> 将其确定为具体的类型之后才可使用。而传入类型实参确定具体类型的操作被称为 <strong>实例化（Instantiations)</strong> ：</p>
 </li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 这里传入了类型实参int，泛型类型Slice[T]被实例化为具体的类型 Slice[int]</span><br><span class="hljs-keyword">var</span> a Slice[<span class="hljs-keyword">int</span>] = []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;  <br>fmt.Printf(<span class="hljs-string">&quot;Type Name: %T&quot;</span>,a)  <span class="hljs-comment">// 输出：Type Name: Slice[int]</span><br><br><span class="hljs-comment">// 传入类型实参float32，将泛型类型Slice[T]实例化为具体的类型 Slice[string]</span><br><span class="hljs-keyword">var</span> b Slice[<span class="hljs-keyword">float32</span>] = []<span class="hljs-keyword">float32</span>&#123;<span class="hljs-number">1.0</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">3.0</span>&#125; <br>fmt.Printf(<span class="hljs-string">&quot;Type Name: %T&quot;</span>,b)  <span class="hljs-comment">// 输出：Type Name: Slice[float32]</span><br><br><span class="hljs-comment">// ✗ 错误。因为变量a的类型为Slice[int]，b的类型为Slice[float32]，两者类型不同。</span><br>a = b  <br><br><span class="hljs-comment">// ✗ 错误。string不在类型约束 int|float32|float64 中，不能用来实例化泛型类型</span><br><span class="hljs-keyword">var</span> c Slice[<span class="hljs-keyword">string</span>] = []<span class="hljs-keyword">string</span>&#123;<span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-string">&quot;World&quot;</span>&#125; <br><br><span class="hljs-comment">// ✗ 错误。Slice[T]是泛型类型，不可直接使用必须实例化为具体的类型。</span><br><span class="hljs-keyword">var</span> x Slice[T] = []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125; <br></code></pre></td></tr></table></figure>
@@ -399,7 +399,7 @@
 <ul>
 <li>虽然 type switch 和类型断言不能用，但我们可通过反射机制达到目的：</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(receiver Queue[T])</span> <span class="hljs-title">Put</span> <span class="hljs-params">(value T)</span></span> &#123;<br>    <span class="hljs-comment">// Printf () 可输出变量 value 的类型（底层就是通过反射实现的)</span><br>    fmt.Printf (<span class="hljs-string">&quot;%T&quot;</span>, value) <br><br>    <span class="hljs-comment">// 通过反射可以动态获得变量 value 的类型从而分情况处理。</span><br>    v := reflect.ValueOf (value)<br><br>    <span class="hljs-keyword">switch</span> v.Kind () &#123;<br>    <span class="hljs-keyword">case</span> reflect. Int:<br>        <span class="hljs-comment">// do something</span><br>    <span class="hljs-keyword">case</span> reflect. String:<br>        <span class="hljs-comment">// do something</span><br>    &#125;<br><br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(receiver Queue[T])</span> <span class="hljs-title">Put</span> <span class="hljs-params">(value T)</span></span> &#123;<br>    <span class="hljs-comment">// Printf () 可输出变量 value 的类型（底层就是通过反射实现的）</span><br>    fmt.Printf (<span class="hljs-string">&quot;%T&quot;</span>, value) <br><br>    <span class="hljs-comment">// 通过反射可以动态获得变量 value 的类型从而分情况处理。</span><br>    v := reflect.ValueOf (value)<br><br>    <span class="hljs-keyword">switch</span> v.Kind () &#123;<br>    <span class="hljs-keyword">case</span> reflect. Int:<br>        <span class="hljs-comment">// do something</span><br>    <span class="hljs-keyword">case</span> reflect. String:<br>        <span class="hljs-comment">// do something</span><br>    &#125;<br><br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>这看起来达到了我们的目的，可是当你写出上面这样的代码时候就出现了一个问题：你为了避免使用反射而选择了泛型，结果到头来又为了一些功能在在泛型中使用反射。</li>
 <li>当出现这种情况的时候你可能需要重新思考一下，自己的需求是不是真的需要用泛型（毕竟泛型机制本身就很复杂了，再加上反射的复杂度，增加的复杂度并不一定值得）</li>
@@ -477,16 +477,16 @@
 </li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-keyword">int</span><br><br><span class="hljs-keyword">type</span> _ <span class="hljs-keyword">interface</span> &#123;<br>    ~[]<span class="hljs-keyword">byte</span>  <span class="hljs-comment">// 正确。</span><br>    ~MyInt   <span class="hljs-comment">// 错误，~后的类型必须为基本类型。</span><br>    ~error   <span class="hljs-comment">// 错误，~后的类型不能为接口。</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="从方法集-Method-set-到类型集-Type-set">从方法集 (Method set) 到类型集 (Type set)</h3>
+<h3 id="从方法集（Method-set-到类型集（Type-set">从方法集（Method set) 到类型集（Type set)</h3>
 <ul>
-<li>上面的例子中，我们学习到了一种接口的全新写法，而这种写法在 Go 1.18 之前是不存在的。如果你比较敏锐的话，一定会隐约认识到这种写法的改变这也一定意味着 Go 语言中 <code>接口 (interface)</code> 这个概念发生了非常大的变化。</li>
-<li>是的，在 Go 1.18 之前，Go 官方对 <code>接口 (interface)</code> 的定义是：接口是一个方法集 (method set)</li>
-<li>就如下面这个代码一样， <code>ReadWriter</code> 接口定义了一个接口（方法集)，这个集合中包含了 <code>Read ()</code> 和 <code>Write ()</code> 这两个方法。所有同时定义了这两种方法的类型被视为实现了这一接口。</li>
+<li>上面的例子中，我们学习到了一种接口的全新写法，而这种写法在 Go 1.18 之前是不存在的。如果你比较敏锐的话，一定会隐约认识到这种写法的改变这也一定意味着 Go 语言中 <code>接口（interface)</code> 这个概念发生了非常大的变化。</li>
+<li>是的，在 Go 1.18 之前，Go 官方对 <code>接口（interface)</code> 的定义是：接口是一个方法集（method set)</li>
+<li>就如下面这个代码一样， <code>ReadWriter</code> 接口定义了一个接口（方法集），这个集合中包含了 <code>Read ()</code> 和 <code>Write ()</code> 这两个方法。所有同时定义了这两种方法的类型被视为实现了这一接口。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> ReadWriter <span class="hljs-keyword">interface</span> &#123;<br>    Read (p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)<br>    Write (p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>但是，我们如果换一个角度来重新思考上面这个接口的话，会发现接口的定义实际上还能这样理解：我们可以把 <code>ReaderWriter</code> 接口看成代表了一个 <strong>类型的集合</strong>，所有实现了 <code>Read ()</code> <code>Writer ()</code> 这两个方法的类型都在接口代表的类型集合当中。</li>
-<li>通过换个角度看待接口，在我们眼中接口的定义就从 <strong><code>方法集 (method set)</code></strong> 变为了 <strong><code>类型集 (type set)</code></strong>。而 Go 1.18 开始就是依据这一点将接口的定义正式更改为了 <strong>类型集 (Type set)</strong></li>
+<li>通过换个角度看待接口，在我们眼中接口的定义就从 <strong><code>方法集（method set)</code></strong> 变为了 <strong><code>类型集（type set)</code></strong>。而 Go 1.18 开始就是依据这一点将接口的定义正式更改为了 <strong>类型集（Type set)</strong></li>
 <li>你或许会觉得，这不就是改了下概念上的定义实际上没什么用吗？是的，如果接口功能没变化的话确实如此。但是还记得下面这种用接口来简化类型约束的写法吗：</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Float <span class="hljs-keyword">interface</span> &#123;<br>    ~float <span class="hljs-number">32</span> | ~float <span class="hljs-number">64</span><br>&#125;<br><br><span class="hljs-keyword">type</span> Slice[T Float] []T <br></code></pre></td></tr></table></figure>
@@ -495,19 +495,19 @@
 <li>而 <code>type Slice[T Float] []T</code> 中， <strong>类型约束</strong> 的真正意思是：<strong>类型约束</strong> 指定了类型形参可接受的类型集合，只有属于这个集合中的类型才能替换形参用于实例化。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> s Slice[<span class="hljs-keyword">int</span>]      <span class="hljs-comment">// int 属于类型集 Float ，所以 int 可以作为类型实参。</span><br><span class="hljs-keyword">var</span> s Slice[<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>] <span class="hljs-comment">// chan int 类型不在类型集 Float 中，所以错误。</span><br></code></pre></td></tr></table></figure>
-<h4 id="接口实现-implement-定义的变化">接口实现 (implement) 定义的变化</h4>
+<h4 id="接口实现（implement-定义的变化">接口实现（implement) 定义的变化</h4>
 <ul>
-<li>既然接口定义发生了变化，那么从 Go 1.18 开始 <code>接口实现 (implement)</code> 的定义自然也发生了变化：</li>
+<li>既然接口定义发生了变化，那么从 Go 1.18 开始 <code>接口实现（implement)</code> 的定义自然也发生了变化：</li>
 <li>当满足以下条件时，我们可以说 <strong>类型 T 实现了接口 I ( type T implements interface I)</strong>：
 <ul>
-<li>T 不是接口时：类型 T 是接口 I 代表的类型集中的一个成员 (T is an element of the type set of I)</li>
-<li>T 是接口时： T 接口代表的类型集是 I 代表的类型集的子集 (Type set of T is a subset of the type set of I)</li>
+<li>T 不是接口时：类型 T 是接口 I 代表的类型集中的一个成员（T is an element of the type set of I)</li>
+<li>T 是接口时： T 接口代表的类型集是 I 代表的类型集的子集（Type set of T is a subset of the type set of I)</li>
 </ul>
 </li>
 </ul>
 <h4 id="类型的并集">类型的并集</h4>
 <ul>
-<li>并集我们已经很熟悉了，之前一直使用的 <code>|</code> 符号就是求类型的并集 ( <code>union</code> )</li>
+<li>并集我们已经很熟悉了，之前一直使用的 <code>|</code> 符号就是求类型的并集（ <code>union</code> )</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Uint <span class="hljs-keyword">interface</span> &#123;  <span class="hljs-comment">// 类型集 Uint 是 ~uint 和 ~uint 8 等类型的并集。</span><br>    ~<span class="hljs-keyword">uint</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">8</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">16</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">32</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">64</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="类型的交集">类型的交集</h4>
@@ -554,7 +554,7 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Slice[T any] []T <span class="hljs-comment">// 代码等价于 type Slice[T interface&#123;&#125;] []T</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>实际上 <code>any</code> 的定义就位于 Go 语言的 <code>builtin. go</code> 文件中（参考如下）， <code>any</code> 实际上就是 <code>interaface&#123;&#125;</code>的别名 (alias)，两者完全等价。</li>
+<li>实际上 <code>any</code> 的定义就位于 Go 语言的 <code>builtin. go</code> 文件中（参考如下）， <code>any</code> 实际上就是 <code>interaface&#123;&#125;</code>的别名（alias)，两者完全等价。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// any is an alias for interface&#123;&#125; and is equivalent to interface&#123;&#125; in all ways.</span><br><span class="hljs-keyword">type</span> any = <span class="hljs-keyword">interface</span>&#123;&#125; <br></code></pre></td></tr></table></figure>
 <ul>
@@ -565,7 +565,7 @@
 <li>如果你高兴的话，项目迁移到 Go 1.18 之后可以使用下面这行命令直接把整个项目中的空接口全都替换成 any。当然因为并不强制，所以到底是用 <code>interface&#123;&#125;</code> 还是 <code>any</code> 全看自己喜好。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">gofmt -w -r <span class="hljs-string">&#x27;interface&#123;&#125; -&gt; any&#x27;</span> ./...<br></code></pre></td></tr></table></figure>
-<h4 id="comparable-可比较）和可排序-ordered">comparable (可比较）和可排序 (ordered)</h4>
+<h4 id="comparable-可比较）和可排序（ordered">comparable (可比较）和可排序（ordered)</h4>
 <ul>
 <li>对于一些数据类型，我们需要在类型约束中限制只接受能 <code>!=</code> 和 <code>==</code> 对比的类型，如 map：</li>
 </ul>
@@ -597,15 +597,15 @@
 <p>定义一个 <code>ReadWriter</code> 类型的接口变量，然后接口变量赋值的时候不光要考虑到方法的实现，还必须考虑到具体底层类型？为了解决这个问题也为了保持 Go 语言的兼容性，Go 1.18 开始将接口分为了两种类型。</p>
 </li>
 <li>
-<p><strong>基本接口 (Basic interface)</strong></p>
+<p><strong>基本接口（Basic interface)</strong></p>
 </li>
 <li>
-<p><strong>一般接口 (General interface)</strong></p>
+<p><strong>一般接口（General interface)</strong></p>
 </li>
 </ul>
-<h4 id="基本接口-Basic-interface">基本接口 (Basic interface)</h4>
+<h4 id="基本接口（Basic-interface">基本接口（Basic interface)</h4>
 <ul>
-<li>接口定义中如果只有方法的话，那么这种接口被称为<strong>基本接口 (Basic interface)</strong>。这种接口就是 Go 1.18 之前的接口，用法也基本和 Go 1.18 之前保持一致。基本接口大致可以用于如下几个地方：</li>
+<li>接口定义中如果只有方法的话，那么这种接口被称为<strong>基本接口（Basic interface)</strong>。这种接口就是 Go 1.18 之前的接口，用法也基本和 Go 1.18 之前保持一致。基本接口大致可以用于如下几个地方：</li>
 <li>最常用的，定义接口变量并赋值。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> MyError <span class="hljs-keyword">interface</span> &#123; <span class="hljs-comment">// 接口中只有方法，所以是基本接口。</span><br>    Error () <span class="hljs-keyword">string</span><br>&#125;<br><br><span class="hljs-comment">// 用法和 Go 1.18 之前保持一致。</span><br><span class="hljs-keyword">var</span> err MyError = fmt.Errorf (<span class="hljs-string">&quot;hello world&quot;</span>)<br></code></pre></td></tr></table></figure>
@@ -613,8 +613,8 @@
 <li>基本接口因为也代表了一个类型集，所以也可用在类型约束中。</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// io. Reader 和 io. Writer 都是基本接口，也可以用在类型约束中。</span><br><span class="hljs-keyword">type</span> MySlice[T io. Reader | io. Writer]  []Slice<br></code></pre></td></tr></table></figure>
-<h4 id="一般接口-General-interface">一般接口 (General interface)</h4>
-<p>如果接口内不光只有方法，还有类型的话，这种接口被称为 <strong>一般接口 (General interface)</strong> ，如下例子都是一般接口：</p>
+<h4 id="一般接口（General-interface">一般接口（General interface)</h4>
+<p>如果接口内不光只有方法，还有类型的话，这种接口被称为 <strong>一般接口（General interface)</strong> ，如下例子都是一般接口：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Uint <span class="hljs-keyword">interface</span> &#123; <span class="hljs-comment">// 接口 Uint 中有类型，所以是一般接口。</span><br>    ~<span class="hljs-keyword">uint</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">8</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">16</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">32</span> | ~<span class="hljs-keyword">uint</span> <span class="hljs-number">64</span><br>&#125;<br><br><span class="hljs-keyword">type</span> ReadWriter <span class="hljs-keyword">interface</span> &#123;  <span class="hljs-comment">// ReadWriter 接口既有方法也有类型，所以是一般接口。</span><br>    ~<span class="hljs-keyword">string</span> | ~[]<span class="hljs-keyword">rune</span><br><br>    Read (p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)<br>    Write (p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>一般接口类型不能用来定义变量，只能用于泛型的类型约束中</strong>。所以以下的用法是错误的：</li>
@@ -631,7 +631,7 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go">DataProcessor[<span class="hljs-keyword">string</span>]<br><br><span class="hljs-comment">// 实例化之后的接口定义相当于如下所示：</span><br><span class="hljs-keyword">type</span> DataProcessor[<span class="hljs-keyword">string</span>] <span class="hljs-keyword">interface</span> &#123;<br>    Process (oriData <span class="hljs-keyword">string</span>) (newData <span class="hljs-keyword">string</span>)<br>    Save (data <span class="hljs-keyword">string</span>) error<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>经过实例化之后就好理解了， <code>DataProcessor[string]</code> 因为只有方法，所以它实际上就是个 <strong>基本接口 (Basic interface)</strong>，这个接口包含两个能处理 string 类型的方法。像下面这样实现了这两个能处理 string 类型的方法就算实现了这个接口：</li>
+<li>经过实例化之后就好理解了， <code>DataProcessor[string]</code> 因为只有方法，所以它实际上就是个 <strong>基本接口（Basic interface)</strong>，这个接口包含两个能处理 string 类型的方法。像下面这样实现了这两个能处理 string 类型的方法就算实现了这个接口：</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> CSVProcessor <span class="hljs-keyword">struct</span> &#123;<br>&#125;<br><br><span class="hljs-comment">// 注意，方法中 oriData 等的类型是 string</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CSVProcessor)</span> <span class="hljs-title">Process</span> <span class="hljs-params">(oriData <span class="hljs-keyword">string</span>)</span> <span class="hljs-params">(newData <span class="hljs-keyword">string</span>)</span></span> &#123;<br>    ....<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CSVProcessor)</span> <span class="hljs-title">Save</span> <span class="hljs-params">(oriData <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">error</span></span> &#123;<br>    ...<br>&#125;<br><br><span class="hljs-comment">// CSVProcessor 实现了接口 DataProcessor[string] ，所以可赋值。</span><br><span class="hljs-keyword">var</span> processor DataProcessor[<span class="hljs-keyword">string</span>] = CSVProcessor&#123;&#125;  <br>processor.Process (<span class="hljs-string">&quot;name, age\nbob, 12\njack, 30&quot;</span>)<br>processor.Save (<span class="hljs-string">&quot;name, age\nbob, 13\njack, 31&quot;</span>)<br><br><span class="hljs-comment">// 错误。CSVProcessor 没有实现接口 DataProcessor[int]</span><br><span class="hljs-keyword">var</span> processor <span class="hljs-number">2</span> DataProcessor[<span class="hljs-keyword">int</span>] = CSVProcessor&#123;&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -639,10 +639,10 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs go">DataProcessor <span class="hljs-number">2</span>[<span class="hljs-keyword">string</span>]<br><br><span class="hljs-comment">// 实例化后的接口定义可视为。</span><br><span class="hljs-keyword">type</span> DataProcessor <span class="hljs-number">2</span>[T <span class="hljs-keyword">string</span>] <span class="hljs-keyword">interface</span> &#123;<br>    <span class="hljs-keyword">int</span> | ~<span class="hljs-keyword">struct</span>&#123; Data <span class="hljs-keyword">interface</span>&#123;&#125; &#125;<br><br>    Process (data <span class="hljs-keyword">string</span>) (newData <span class="hljs-keyword">string</span>)<br>    Save (data <span class="hljs-keyword">string</span>) error<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>DataProcessor 2[string]</code> 因为带有类型并集所以它是 <strong>一般接口 (General interface)</strong>，所以实例化之后的这个接口代表的意思是：
+<li><code>DataProcessor 2[string]</code> 因为带有类型并集所以它是 <strong>一般接口（General interface)</strong>，所以实例化之后的这个接口代表的意思是：
 <ul>
 <li>只有实现了 <code>Process (string) string</code> 和 <code>Save (string) error</code> 这两个方法，并且以 <code>int</code> 或 <code>struct&#123; Data interface&#123;&#125; &#125;</code> 为底层类型的类型才算实现了这个接口。</li>
-<li><strong>一般接口 (General interface)</strong> 不能用于变量定义只能用于类型约束，所以接口 <code>DataProcessor 2[string]</code> 只是定义了一个用于类型约束的类型集。</li>
+<li><strong>一般接口（General interface)</strong> 不能用于变量定义只能用于类型约束，所以接口 <code>DataProcessor 2[string]</code> 只是定义了一个用于类型约束的类型集。</li>
 </ul>
 </li>
 </ul>
@@ -650,7 +650,7 @@
 <h3 id="接口定义的限制规则">接口定义的限制规则</h3>
 <ul>
 <li>Go 1.18 从开始，在定义类型集（接口）的时候增加了非常多十分琐碎的限制规则，其中很多规则都在之前的内容中介绍过了，但剩下还有一些规则因为找不到好的地方介绍，所以在这里统一介绍下：</li>
-<li>用 <code>|</code> 连接多个类型的时候，类型之间不能有相交的部分（即必须是不交集):</li>
+<li>用 <code>|</code> 连接多个类型的时候，类型之间不能有相交的部分（即必须是不交集）:</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> MyInt <span class="hljs-keyword">int</span><br><br><span class="hljs-comment">// 错误，MyInt 的底层类型是 int，和 ~int 有相交的部分。</span><br><span class="hljs-keyword">type</span> _ <span class="hljs-keyword">interface</span> &#123;<br>    ~<span class="hljs-keyword">int</span> | MyInt<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -670,7 +670,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript">type OK interface &#123;<br>    comparable <span class="hljs-comment">// 正确。只有一个类型的时候可以使用 comparable</span><br>&#125;<br><br>type Bad <span class="hljs-number">1</span> interface &#123;<br>    []int | comparable <span class="hljs-comment">// 错误，类型并集不能直接并入 comparable 接口</span><br>&#125;<br><br>type CmpInf interface &#123;<br>    comparable<br>&#125;<br>type Bad <span class="hljs-number">2</span> interface &#123;<br>    chan int | CmpInf  <span class="hljs-comment">// 错误，类型并集通过 CmpInf 间接并入了 comparable</span><br>&#125;<br>type Bad <span class="hljs-number">3</span> interface &#123;<br>    chan int | interface&#123;comparable&#125;  <span class="hljs-comment">// 理所当然，这样也是不行的</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>带方法的接口（无论是基本接口还是一般接口)，都不能写入接口的并集中：</li>
+<li>带方法的接口（无论是基本接口还是一般接口），都不能写入接口的并集中：</li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> _ <span class="hljs-keyword">interface</span> &#123;<br>    ~<span class="hljs-keyword">int</span> | ~<span class="hljs-keyword">string</span> | error <span class="hljs-comment">// 错误，error 是带方法的接口（一般接口）不能写入并集中</span><br>&#125;<br><br><span class="hljs-keyword">type</span> DataProcessor[T any] <span class="hljs-keyword">interface</span> &#123;<br>    ~<span class="hljs-keyword">string</span> | ~[]<span class="hljs-keyword">byte</span><br><br>    Process (data T) (newData T)<br>    Save (data T) error<br>&#125;<br><br><span class="hljs-comment">// 错误，实例化之后的 DataProcessor[string] 是带方法的一般接口，不能写入类型并集。</span><br><span class="hljs-keyword">type</span> _ <span class="hljs-keyword">interface</span> &#123;<br>    ~<span class="hljs-keyword">int</span> | ~<span class="hljs-keyword">string</span> | DataProcessor[<span class="hljs-keyword">string</span>] <br>&#125;<br><br><span class="hljs-keyword">type</span> Bad[T any] <span class="hljs-keyword">interface</span> &#123;<br>    ~<span class="hljs-keyword">int</span> | ~<span class="hljs-keyword">string</span> | DataProcessor[T]  <span class="hljs-comment">// 也不行</span><br>&#125;<br></code></pre></td></tr></table></figure>
             </div>

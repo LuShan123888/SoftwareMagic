@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9oZWxsby5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-27-20201118161439441-20201127195628893.png">
 <meta property="article:published_time" content="2022-01-17T14:01:16.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.975Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:52.807Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -261,7 +261,7 @@
 <ul>
 <li>第一步：&quot;M”,&quot;a”,&quot;n&quot;对应的ASCII码值分别为77,97,110，对应的二进制值是01001101,01100001,01101110，如图第二三行所示，由此组成一个24位的二进制字符串。</li>
 <li>第二步：如图红色框，将24位每6位二进制位一组分成四组。</li>
-<li>第三步：在上面每一组前面补两个0，扩展成32个二进制位，此时变为四个字节：00010011,00010110,00000101,00101110，分别对应的值(Base64编码索引）为：19,22,5,46</li>
+<li>第三步：在上面每一组前面补两个0，扩展成32个二进制位，此时变为四个字节：00010011,00010110,00000101,00101110，分别对应的值（Base64编码索引）为：19,22,5,46</li>
 <li>第四步：用上面的值在Base64编码表中进行查找，分别对应：T,W,F,u，因此&quot;Man”Base64编码之后就变为：TWFu</li>
 </ul>
 <h3 id="位数不足情况">位数不足情况</h3>
@@ -275,10 +275,10 @@
 <ul>
 <li>大多数编码都是由字符串转化成二进制的过程，而Base64的编码则是从二进制转换为字符串，与常规恰恰相反。</li>
 <li>Base64编码主要用在传输，存储，表示二进制领域，不能算得上加密，只是无法直接看到明文，也可以通过打乱Base64编码来进行加密。</li>
-<li>中文有多种编码（比如：utf-8,gb2312,gbk等)，不同编码对应Base64编码结果都不一样。</li>
+<li>中文有多种编码（比如：utf-8,gb2312,gbk等），不同编码对应Base64编码结果都不一样。</li>
 </ul>
 <h2 id="延伸">延伸</h2>
-<p>上面我们已经看到了Base64就是用6位(2的6次幂就是64)表示字符，因此成为Base64，同理，Base32就是用5位，Base16就是用4位。</p>
+<p>上面我们已经看到了Base64就是用6位（2的6次幂就是64)表示字符，因此成为Base64，同理，Base32就是用5位，Base16就是用4位。</p>
 <h2 id="Java-API">Java API</h2>
 <p>最后，我们用一段Java代码来验证一下上面的转换结果。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> sun.misc.BASE64Encoder;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base64Utils</span> </span>&#123;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>		String man = <span class="hljs-string">&quot;Man&quot;</span>;<br>		String a = <span class="hljs-string">&quot;A&quot;</span>;<br>		String bc = <span class="hljs-string">&quot;BC&quot;</span>;<br><br>		BASE64Encoder encoder = <span class="hljs-keyword">new</span> BASE64Encoder();<br>		System.out.println(<span class="hljs-string">&quot;Man base64结果为：&quot;</span> + encoder.encode(man.getBytes()));<br>		System.out.println(<span class="hljs-string">&quot;BC base64结果为：&quot;</span> + encoder.encode(bc.getBytes()));<br>		System.out.println(<span class="hljs-string">&quot;A base64结果为：&quot;</span> + encoder.encode(a.getBytes()));<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>

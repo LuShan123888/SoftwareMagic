@@ -24,7 +24,7 @@
 <meta property="og:description" content="PHP 创建和绘制图像  现在，我们从最简单的GD例子来时学习，示例9-1的PHP脚本可以生成一个黑色正方体，这段代码可以在支持PNG图像格式的任何GD版本下运行。  示例9-1：白色背景上的一个黑色正方形。 12345678&lt;?php    $im &#x3D; ImageCreate(200,200);$white &#x3D; ImageColorAllocate($im,0xFF,0xFF,0xFF);">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.212Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.454Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:52.911Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,12 +245,12 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$imgae</span> = ImageCreate(width,height);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>所有在图像中使用的颜色都要用<code>ImagrColorAllocate()</code>来分配，第一个分配的值会被用作背景色（只有当图像包含调色板时才能实现，使用<code>ImageCreateTrueColor()</code>函数创建的真彩色图像不遵循这个原则)</li>
+<li>所有在图像中使用的颜色都要用<code>ImagrColorAllocate()</code>来分配，第一个分配的值会被用作背景色（只有当图像包含调色板时才能实现，使用<code>ImageCreateTrueColor()</code>函数创建的真彩色图像不遵循这个原则）</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$color</span> = ImageColorAllocate(image,red,green,blue);<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>ImageColorAllocate()</code>函数的参数分别是组成一种颜色的RGB分值，在示例9-1，我们使用了16进制来表示颜色值，为的是使函数调用时传送的参数与HTML颜色表示相似(“#FFFFFF”和”#000000”)</li>
-<li>GD中有很多绘图元件(drawing,primitive，如矩形，线段，多边形等)，示例9-1使用了<code>ImageFillRectangle()</code>函数来制定你要填充的区域，参数中含有矩形左上角和右下角的坐标，它们用于控制图像的大小和位置。</li>
+<li><code>ImageColorAllocate()</code>函数的参数分别是组成一种颜色的RGB分值，在示例9-1，我们使用了16进制来表示颜色值，为的是使函数调用时传送的参数与HTML颜色表示相似（“#FFFFFF”和”#000000”)</li>
+<li>GD中有很多绘图元件（drawing,primitive，如矩形，线段，多边形等），示例9-1使用了<code>ImageFillRectangle()</code>函数来制定你要填充的区域，参数中含有矩形左上角和右下角的坐标，它们用于控制图像的大小和位置。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageFillRectangle(image,tlx,tly,brx,bry,color);<br></code></pre></td></tr></table></figure>
 <ul>
@@ -258,7 +258,7 @@
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageJPEG(image [, filename [,quality]]);<br>ImagePNG(iamge [, filename]);<br>ImageWBMP(image [, filename]);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>如果没有指定图像文件名，则图像将发送到浏览器，quality参数可用来指定JPEG图像的质量(0最差，10最好)，质量越小，JPEG文件就越小，它的默认值为7.5</li>
+<li>如果没有指定图像文件名，则图像将发送到浏览器，quality参数可用来指定JPEG图像的质量（0最差，10最好），质量越小，JPEG文件就越小，它的默认值为7.5</li>
 <li>示例9-1中，我们在调用输出函数<code>ImagePNG()</code>之后马上就设置了一个HTTP头，如果你在程序一开始就设置Content-Type，则程序所产生的任何错误都会被当成图像数据来处理，浏览器就会显示一个图像损坏的图标，下表中列出了图像格式和它们相应的Content-Type值：</li>
 </ul>
 <table>
@@ -295,7 +295,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php+HTML">&lt;?php<br>$im = ImageCreate(200,200);<br>$white = ImageColorAllocate($im,0xFF,0xFF,0xFF);<br>$black = ImageColorAllocate($im,0x00,0x00,0x00);<br>ImageFilledRectangle($im,50,50,150,150,$black);<br>header(&#x27;Content-Type: image/jpeg&#x27;);<br>ImageJPEG($im);<br>?&gt;<br></code></pre></td></tr></table></figure>
 <h2 id="测试支持的图像格式">测试支持的图像格式</h2>
 <ul>
-<li>如果你的代码需要在支持不同图像格式的系统间移植，请使用<code>ImageTypes()</code>函数来检测被支持的图像类型，该函数返回一个位字段(bitfield)：你可以使用位与操作符(&amp;)来检验某个位是否被设置，常量IMG_GIF,IMG_JPG,IMG_PNG和IMG----WBMP与相应的图像格式位相对应。</li>
+<li>如果你的代码需要在支持不同图像格式的系统间移植，请使用<code>ImageTypes()</code>函数来检测被支持的图像类型，该函数返回一个位字段（bitfield)：你可以使用位与操作符（&amp;)来检验某个位是否被设置，常量IMG_GIF,IMG_JPG,IMG_PNG和IMG----WBMP与相应的图像格式位相对应。</li>
 <li>示例9-3中，如果支持PNG格式，则生成PNG图像，如果不支持PNG，则生成JPEG图像，如果两个都不支持，则生成GIF图像。</li>
 </ul>
 <p><strong>示例9-3</strong>：检查被支持的图像格式。</p>
@@ -326,11 +326,11 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImagePolygon(image, points,number,color);<br>ImageFilledPolygon(image, points,number,color)<br></code></pre></td></tr></table></figure>
 <ul>
 <li>这两个函数都有一个points参数，它是一个数组，该数组描述了多边形的顶点（每个顶点都有两个整数坐标x和y),number参数指定了顶点的个数（典型值是<code>count($points)/2</code>)</li>
-<li><code>ImageArc()</code>函数用于绘制弧线（即椭圆的一部分)</li>
+<li><code>ImageArc()</code>函数用于绘制弧线（即椭圆的一部分）</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageArc(image,center_X,center_y,width,height,start,end,color);<br></code></pre></td></tr></table></figure>
 <ul>
-<li>一个椭圆是由它的中心，宽和高定义的（对于圆来说，宽和高是一样的)，弧线起始角度（参数start)和结束角度（参数end)是从时钟3点的位置顺时针开始计数的，如果要画一个完整的椭圆，start和end的值应分别为0和360</li>
+<li>一个椭圆是由它的中心，宽和高定义的（对于圆来说，宽和高是一样的），弧线起始角度（参数start)和结束角度（参数end)是从时钟3点的位置顺时针开始计数的，如果要画一个完整的椭圆，start和end的值应分别为0和360</li>
 <li>填充一个已经画好的形状有两种方法，<code>ImageFill()</code>函数将改变指定位置的像素周围的像素的颜色，并向外扩充，像素颜色的变化标识着填充的边界，<code>ImageFillToBorder()</code>函数允许指定填充区域边界的颜色值。</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php">ImageFill(image,x,y,color);<br>ImageFillToBorder(image,x,y,border_color,color);<br></code></pre></td></tr></table></figure>
@@ -357,7 +357,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%9B%BE%E5%BD%A2%E3%80%82/">图形。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%9B%BE%E5%BD%A2/">图形</a>
                     
                   </div>
                 

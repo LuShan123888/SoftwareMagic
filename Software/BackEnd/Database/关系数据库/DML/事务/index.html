@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行，如果一个SQL语句出错，则该批次内的所有SQL都将被取消执行。  ACID原则  原子性(Atomic)：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚(ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。 一致性(Consist)：一个事务可以封装状态">
+  <meta name="description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行，如果一个SQL语句出错，则该批次内的所有SQL都将被取消执行。  ACID原则  原子性（Atomic)：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚（ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。 一致性（Consist)：一个事务可以封装状态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 事务">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/%E4%BA%8B%E5%8A%A1/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行，如果一个SQL语句出错，则该批次内的所有SQL都将被取消执行。  ACID原则  原子性(Atomic)：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚(ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。 一致性(Consist)：一个事务可以封装状态">
+<meta property="og:description" content="SQL 事务  事务就是将一组SQL语句放在同一批次内去执行，如果一个SQL语句出错，则该批次内的所有SQL都将被取消执行。  ACID原则  原子性（Atomic)：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚（ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。 一致性（Consist)：一个事务可以封装状态">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.563Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.503Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.250Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,16 +233,16 @@
 </ul>
 <h2 id="ACID原则">ACID原则</h2>
 <ul>
-<li><strong>原子性(Atomic)</strong>：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚(ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
-<li><strong>一致性(Consist)</strong>：一个事务可以封装状态改变（除非它是一个只读的)，事务必须始终保持系统处于一致的状态，不管在任何给定的时间并发事务有多少，也就是说：如果事务是并发多个，系统也必须如同串行事务一样操作。</li>
-<li><strong>隔离性(Isolated)</strong>：隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作，如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统，这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。</li>
-<li><strong>持久性(Durable)</strong>：在事务完成以后，该事务对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</li>
+<li><strong>原子性（Atomic)</strong>：整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节，事务在执行过程中发生错误，会被回滚（ROLLBACK)到事务开始前的状态，就像这个事务从来没有执行过一样。</li>
+<li><strong>一致性（Consist)</strong>：一个事务可以封装状态改变（除非它是一个只读的），事务必须始终保持系统处于一致的状态，不管在任何给定的时间并发事务有多少，也就是说：如果事务是并发多个，系统也必须如同串行事务一样操作。</li>
+<li><strong>隔离性（Isolated)</strong>：隔离状态执行事务，使它们好像是系统在给定时间内执行的唯一操作，如果有两个事务，运行在相同的时间内，执行相同的功能，事务的隔离性将确保每一事务在系统中认为只有该事务在使用系统，这种属性有时称为串行化，为了防止事务操作间的混淆，必须串行化或序列化请求，使得在同一时间仅有一个请求用于同一数据。</li>
+<li><strong>持久性（Durable)</strong>：在事务完成以后，该事务对数据库所作的更改便持久的保存在数据库之中，并不会被回滚。</li>
 </ul>
 <h2 id="并发下的问题">并发下的问题</h2>
 <ul>
-<li>只有存在并发数据访问时才需要事务，当多个事务访问同一数据时，可能会存在5类问题，包括3类数据读取问题（脏读，不可重复读和幻读）和2类数据更新问题（第1类丢失更新和第2类丢失更新)</li>
+<li>只有存在并发数据访问时才需要事务，当多个事务访问同一数据时，可能会存在5类问题，包括3类数据读取问题（脏读，不可重复读和幻读）和2类数据更新问题（第1类丢失更新和第2类丢失更新）</li>
 </ul>
-<p><strong>脏读(Dirty Read)</strong></p>
+<p><strong>脏读（Dirty Read)</strong></p>
 <ul>
 <li>A事务读取B事务尚未提交的数据并在此基础上操作，而B事务执行回滚，那么A读取到的数据就是脏数据。</li>
 </ul>
@@ -277,7 +277,7 @@
 </tr>
 <tr>
 <td>T5</td>
-<td>查询账户余额为500元（脏读)</td>
+<td>查询账户余额为500元（脏读）</td>
 <td></td>
 </tr>
 <tr>
@@ -297,7 +297,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>不可重复读(Unrepeatable Read)</strong></p>
+<p><strong>不可重复读（Unrepeatable Read)</strong></p>
 <ul>
 <li>事务A重新读取前面读取过的数据，发现该数据已经被另一个已提交的事务B修改过了。</li>
 </ul>
@@ -342,12 +342,12 @@
 </tr>
 <tr>
 <td>T7</td>
-<td>查询账户余额为900元（不可重复读)</td>
+<td>查询账户余额为900元（不可重复读）</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>幻读(Phantom Read)</strong></p>
+<p><strong>幻读（Phantom Read)</strong></p>
 <ul>
 <li>事务A重新执行一个查询，返回一系列符合查询条件的行，发现其中插入了被事务B提交的行。</li>
 </ul>
@@ -387,7 +387,7 @@
 </tr>
 <tr>
 <td>T6</td>
-<td>再次统计总存款为10100元（幻读)</td>
+<td>再次统计总存款为10100元（幻读）</td>
 <td></td>
 </tr>
 </tbody>
@@ -447,7 +447,7 @@
 </tr>
 <tr>
 <td>T9</td>
-<td>余额恢复为1000元（丢失更新)</td>
+<td>余额恢复为1000元（丢失更新）</td>
 <td></td>
 </tr>
 </tbody>
@@ -507,7 +507,7 @@
 </tr>
 <tr>
 <td>T9</td>
-<td>查询账户余额为1100元（丢失更新)</td>
+<td>查询账户余额为1100元（丢失更新）</td>
 <td></td>
 </tr>
 </tbody>
@@ -642,9 +642,9 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/">关系数据库。</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DML/">DML</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DML/">DML</a>
                     
                   </div>
                 

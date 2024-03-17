@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="PHP 颜色处理  在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色)，但创建GD 1.x的8位色图像时，使用的是ImageCreate()函数，并且使用ImageColorAllocate()函数分配的第一个颜色将成为背景色。 GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位(">
+  <meta name="description" content="PHP 颜色处理  在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色），但创建GD 1.x的8位色图像时，使用的是ImageCreate()函数，并且使用ImageColorAllocate()函数分配的第一个颜色将成为背景色。 GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP 颜色处理">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/PHP/%E5%9B%BE%E5%BD%A2/%E9%A2%9C%E8%89%B2%E5%A4%84%E7%90%86/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="PHP 颜色处理  在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色)，但创建GD 1.x的8位色图像时，使用的是ImageCreate()函数，并且使用ImageColorAllocate()函数分配的第一个颜色将成为背景色。 GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位(">
+<meta property="og:description" content="PHP 颜色处理  在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色），但创建GD 1.x的8位色图像时，使用的是ImageCreate()函数，并且使用ImageColorAllocate()函数分配的第一个颜色将成为背景色。 GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位（">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.213Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.454Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:52.916Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,8 +229,8 @@
             <div class="markdown-body">
               <h1>PHP 颜色处理</h1>
 <ul>
-<li>在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色)，但创建GD 1.x的8位色图像时，使用的是<code>ImageCreate()</code>函数，并且使用<code>ImageColorAllocate()</code>函数分配的第一个颜色将成为背景色。</li>
-<li>GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位(0-127)的alpha通道。</li>
+<li>在颜色支持方面，GD 2.x比GD1.x有了明显的进步，GD 1.x不支持alpha通道，颜色处理也相当简单，并且只支持8位色的图像（最多256种颜色），但创建GD 1.x的8位色图像时，使用的是<code>ImageCreate()</code>函数，并且使用<code>ImageColorAllocate()</code>函数分配的第一个颜色将成为背景色。</li>
+<li>GD 2.x支持真彩色图像和alpha通道，GD 2.x有一个7位（0-127)的alpha通道。</li>
 <li>要创建一个真彩色图像，可使用<code>ImageCreateTrueColor()</code>函数：</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$image</span> = ImageCreateTrueColor(width,height);<br></code></pre></td></tr></table></figure>
@@ -240,8 +240,8 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$color</span> = ImageColorResolveAlpha(image,red,green,blue,alpha);<br></code></pre></td></tr></table></figure>
 <ul>
 <li>alpha参数的值介于0(不透明）到127(全透明）之间。</li>
-<li>大多数人习惯于8位(0-255)的alpha通道，所以GD采用的7位(0-127)的alpha通道对他们来说也是很容易接受的，每个像素的颜色用一个32位的带正负的整数来表示，它由4个8位字节组成。</li>
-<li>对于一个标记了正负的整数，最左边的一位（即最高位)，用来指示值的正负，因此只留下31位用于存储真正的信息，PHP的默认整数是一个有正负符号的长整数，我们可以把单个GD调色板项存入其中，整数的正负告诉我们该调色板是否启用抗锯齿功能。</li>
+<li>大多数人习惯于8位（0-255)的alpha通道，所以GD采用的7位（0-127)的alpha通道对他们来说也是很容易接受的，每个像素的颜色用一个32位的带正负的整数来表示，它由4个8位字节组成。</li>
+<li>对于一个标记了正负的整数，最左边的一位（即最高位），用来指示值的正负，因此只留下31位用于存储真正的信息，PHP的默认整数是一个有正负符号的长整数，我们可以把单个GD调色板项存入其中，整数的正负告诉我们该调色板是否启用抗锯齿功能。</li>
 <li>与调色板图像不同的是，GD 2.x创建的真彩色图像的第一种分配颜色并不会自动成为背景色，你可以调用<code>ImageDilledRectangle()</code>函数来使任何你想要的颜色成为背景色。</li>
 </ul>
 <p><strong>示例9-12</strong>：创建了一个真彩色图像并在其白色背景上绘制了一个半透明的桔红色椭圆。</p>
@@ -251,7 +251,7 @@
 </ul>
 <h2 id="使用alpha通道">使用alpha通道</h2>
 <ul>
-<li>在示例9-12中，我们在绘制背景和椭圆之前把alpha合成(blending)功能功能关闭了，alpha合成用于控制在绘图时是否使用alpha通道，如果alpha合成被设置为关闭，则新像素会被原来的旧像素覆盖，如果新像素中存在一个alpha通道，则通道会被保持，但是所有将被覆盖的旧像素的像素信息都会丢失。</li>
+<li>在示例9-12中，我们在绘制背景和椭圆之前把alpha合成（blending)功能功能关闭了，alpha合成用于控制在绘图时是否使用alpha通道，如果alpha合成被设置为关闭，则新像素会被原来的旧像素覆盖，如果新像素中存在一个alpha通道，则通道会被保持，但是所有将被覆盖的旧像素的像素信息都会丢失。</li>
 </ul>
 <p><strong>示例9-13</strong>:alpha合成，在一个橘红色的椭圆上绘制一个带有50%alpha通道的灰色矩形。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$im</span> = ImageCreateTrueColor(<span class="hljs-number">150</span>, <span class="hljs-number">150</span>);<br><span class="hljs-variable">$white</span> = ImageColorAllocate(<span class="hljs-variable">$im</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>);<br>ImageAlphaBlending(<span class="hljs-variable">$im</span>, <span class="hljs-literal">false</span>);<br>ImageFilledRectangle(<span class="hljs-variable">$im</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">150</span>, <span class="hljs-number">150</span>, <span class="hljs-variable">$white</span>);<br><span class="hljs-variable">$red</span> = ImageColorResolveAlpha(<span class="hljs-variable">$im</span>, <span class="hljs-number">255</span>, <span class="hljs-number">50</span>, <span class="hljs-number">0</span>, <span class="hljs-number">63</span>);<br>ImageFilledEllipse(<span class="hljs-variable">$im</span>, <span class="hljs-number">75</span>, <span class="hljs-number">75</span>, <span class="hljs-number">80</span>, <span class="hljs-number">63</span>, <span class="hljs-variable">$red</span>);<br><span class="hljs-variable">$gray</span> = ImageColorResolveAlpha(<span class="hljs-variable">$im</span>, <span class="hljs-number">70</span>,<span class="hljs-number">70</span>,<span class="hljs-number">70</span>,<span class="hljs-number">63</span>);<br>ImageAlphaBlending(<span class="hljs-variable">$im</span>, <span class="hljs-literal">true</span>);<br>ImageFilledRectangle(<span class="hljs-variable">$im</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>, <span class="hljs-number">120</span>, <span class="hljs-number">120</span>, <span class="hljs-variable">$gray</span>);<br>header(<span class="hljs-string">&#x27;Content-Type:image/png&#x27;</span>);<br>ImagePNG(<span class="hljs-variable">$im</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
@@ -311,7 +311,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/PHP/">PHP</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%9B%BE%E5%BD%A2%E3%80%82/">图形。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/PHP/%E5%9B%BE%E5%BD%A2/">图形</a>
                     
                   </div>
                 

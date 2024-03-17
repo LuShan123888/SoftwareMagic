@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223642737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223700724.png">
 <meta property="article:published_time" content="2021-08-30T13:26:39.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.523Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.213Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -291,7 +291,7 @@
 <li>LinkedHashMap 是 HashMap 的一个子类，它保留插入的顺序，如果需要输出的顺序和输入时的相同，那么就选用 LinkedHashMap</li>
 <li>**LinkedHashMap 是 Map 接口的Hash表和链接列表实现，具有可预知的迭代顺序，**此实现提供所有可选的映射操作，并允许使用 null 值和 null 键，此类不保证映射的顺序，特别是它不保证该顺序不变。</li>
 <li>LinkedHashMap 实现与 HashMap 的不同之处在于，前者维护着一个运行于所有条目的双重链接列表，此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序。</li>
-<li>根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序（调用 get 方法）的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾（其实是先删除再插入)</li>
+<li>根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序（调用 get 方法）的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾（其实是先删除再插入）</li>
 </ul>
 <blockquote>
 <p><strong>注意</strong>:</p>
@@ -384,7 +384,7 @@
 <li>可以看出，LinkedHashMap扩容时，数据的再散列和HashMap是不一样的。</li>
 <li>HashMap是先遍历旧table，再遍历旧table中每个元素的单向链表，取得Entry以后，重新计算hash值，然后存放到新table的对应位置。</li>
 <li>LinkedHashMap是遍历的双向链表，取得每一个Entry，然后重新计算hash值，然后存放到新table的对应位置。</li>
-<li>从遍历的效率来说，遍历双向链表的效率要高于遍历table，因为遍历双向链表是N次(N为元素个数)，而遍历table是N+table的空余个数(N为元素个数)</li>
+<li>从遍历的效率来说，遍历双向链表的效率要高于遍历table，因为遍历双向链表是N次（N为元素个数），而遍历table是N+table的空余个数（N为元素个数）</li>
 </ul>
 <h3 id="双向链表的重排序">双向链表的重排序</h3>
 <ul>
@@ -476,7 +476,7 @@
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223700724.png" srcset="/images/loading.gif" lazyload alt="image-20210421223700724" style="zoom:50%;" />
 <h2 id="Hashtable">Hashtable</h2>
 <ul>
-<li>Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁(<code>synchronized</code>)保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。</li>
+<li>Hashtable是原始的java.util的一部分，是一个Dictionary具体的实现，然而，Java 2 重构的Hashtable实现了Map接口，因此，Hashtable现在集成到了集合框架中，它和HashMap类很相似，但是它支持同步，所有的读写等操作都进行了锁（<code>synchronized</code>)保护，在多线程环境下没有安全问题，但是锁保护也是有代价的，会对读写的效率产生较大影响。</li>
 <li>像HashMap一样，Hashtable在Hash表中存储键/值对，当使用一个Hash表，要指定用作键的对象，以及要链接到该键的值，然后，该键经过Hash处理，所得到的Hash值被用作存储在该表中值的索引，但是HashTable 的 key,value 都不可为 null</li>
 <li>HashTable类中，保存实际数据的，依然是<code>Entry</code>对象，其数据结构与HashMap是相同的。</li>
 </ul>
@@ -544,7 +544,7 @@
 </tr>
 <tr>
 <td style="text-align:left">7</td>
-<td style="text-align:left"><strong>Object get(Object key)</strong>  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足 (key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null</td>
+<td style="text-align:left"><strong>Object get(Object key)</strong>  返回指定键所映射到的值，如果此映射不包含此键的映射，则返回 null. 更确切地讲，如果此映射包含满足（key.equals(k)) 的从键 k 到值 v 的映射，则此方法返回 v，否则，返回 null</td>
 </tr>
 <tr>
 <td style="text-align:left">8</td>
@@ -584,7 +584,7 @@
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Qadir</span>: -<span class="hljs-number">19</span>.<span class="hljs-number">08</span><br><span class="hljs-attribute">Zara</span>: <span class="hljs-number">3434</span>.<span class="hljs-number">34</span><br><span class="hljs-attribute">Mahnaz</span>: <span class="hljs-number">123</span>.<span class="hljs-number">22</span><br><span class="hljs-attribute">Daisy</span>: <span class="hljs-number">99</span>.<span class="hljs-number">22</span><br><span class="hljs-attribute">Ayan</span>: <span class="hljs-number">1378</span>.<span class="hljs-number">0</span><br><br><span class="hljs-attribute">Zara</span>&#x27;s new balance: <span class="hljs-number">4434</span>.<span class="hljs-number">34</span><br></code></pre></td></tr></table></figure>
 <h2 id="TreeMap">TreeMap</h2>
 <ul>
-<li>TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树(Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点。</li>
+<li>TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树（Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点。</li>
 <li>放入TreeMap的元素，必须实现<code>Comparable</code>接口，如果没有实现<code>Comparable</code>接口，则必须在创建 TreeMap 时传入自定义的 <code>Comparator</code>对象，TreeMap 会自动对元素的进行排序。</li>
 <li>TreeMap 中判断相等的标准是：两个 key 通过<code>equals()</code>方法返回为 true，并且通过<code>compare()</code>方法比较应该返回为 0</li>
 <li>要严格按照<code>compare()</code>规范实现比较逻辑，否则，<code>TreeMap</code>将不能正常工作，如果使用自定义的类来作为 TreeMap 中的 key 值，且想让 TreeMap 能够良好的工作，则必须重写自定义类中的<code>equals()</code>方法。</li>
@@ -656,7 +656,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.setProperty(<span class="hljs-string">&quot;url&quot;</span>, <span class="hljs-string">&quot;http://www.liaoxuefeng.com&quot;</span>);<br>props.setProperty(<span class="hljs-string">&quot;language&quot;</span>, <span class="hljs-string">&quot;Java&quot;</span>);<br>props.store(<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">&quot;C:\\conf\\setting.properties&quot;</span>), <span class="hljs-string">&quot;这是写入的properties注释&quot;</span>);<br></code></pre></td></tr></table></figure>
 <h3 id="编码">编码</h3>
 <ul>
-<li>早期版本的Java规定<code>.properties</code>文件编码是ASCII编码(ISO8859-1)，如果涉及到中文就必须用<code>name=\u4e2d\u6587</code>来表示，从JDK9开始，Java的<code>.properties</code>文件可以使用UTF-8编码了。</li>
+<li>早期版本的Java规定<code>.properties</code>文件编码是ASCII编码（ISO8859-1)，如果涉及到中文就必须用<code>name=\u4e2d\u6587</code>来表示，从JDK9开始，Java的<code>.properties</code>文件可以使用UTF-8编码了。</li>
 <li>不过，需要注意的是，由于<code>load(InputStream)</code>默认总是以ASCII编码读取字节流，所以会导致读到乱码，我们需要用另一个重载方法<code>load(Reader)</code>读取：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Properties props = <span class="hljs-keyword">new</span> Properties();<br>props.load(<span class="hljs-keyword">new</span> FileReader(<span class="hljs-string">&quot;settings.properties&quot;</span>, StandardCharsets.UTF_8));<br></code></pre></td></tr></table></figure>
@@ -707,7 +707,7 @@
 <blockquote>
 <p><strong>补充</strong>：关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》(很多软件公司，《Effective Java》,《Java编程思想》以及《重构：改善既有代码质量》)中是这样介绍equals方法的：</p>
 <ul>
-<li>首先equals方法必须满足自反性(x.equals(x)必须返回true)，对称性(x.equals(y)返回true时，y.equals(x)也必须返回true)，传递性(x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值)，而且对于任何非null值的引用x,x.equals(null)必须返回false</li>
+<li>首先equals方法必须满足自反性（x.equals(x)必须返回true)，对称性（x.equals(y)返回true时，y.equals(x)也必须返回true)，传递性（x.equals(y)和y.equals(z)都返回true时，x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值），而且对于任何非null值的引用x,x.equals(null)必须返回false</li>
 <li>实现高质量的equals方法的诀窍包括：
 <ol>
 <li>使用==操作符检查&quot;参数是否为这个对象的引用&quot;</li>
@@ -744,7 +744,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88%E3%80%82/">泛型与集合。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E6%B3%9B%E5%9E%8B%E4%B8%8E%E9%9B%86%E5%90%88/">泛型与集合</a>
                     
                   </div>
                 

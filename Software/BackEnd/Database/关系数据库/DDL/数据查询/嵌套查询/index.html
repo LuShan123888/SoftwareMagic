@@ -16,15 +16,15 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="SQL 嵌套查询  在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询(nested query)例如：  123456SELECT Sname    --外层查询或父查询。FROM StudentWHERE Sno IN	(SELECT Sno  --内层查询或子查询。     FROM">
+  <meta name="description" content="SQL 嵌套查询  在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询（nested query)例如：  123456SELECT Sname    --外层查询或父查询。FROM StudentWHERE Sno IN	(SELECT Sno  --内层查询或子查询。     FROM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 嵌套查询">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="SQL 嵌套查询  在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询(nested query)例如：  123456SELECT Sname    --外层查询或父查询。FROM StudentWHERE Sno IN	(SELECT Sno  --内层查询或子查询。     FROM">
+<meta property="og:description" content="SQL 嵌套查询  在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询（nested query)例如：  123456SELECT Sname    --外层查询或父查询。FROM StudentWHERE Sno IN	(SELECT Sno  --内层查询或子查询。     FROM">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-17T15:48:00.561Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.381Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.250Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
             <div class="markdown-body">
               <h1>SQL 嵌套查询</h1>
 <ul>
-<li>在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询(nested query)例如：</li>
+<li>在SQL语言中，一个SELECT-FROM-WHERE语句称为一个查询块，将查询块嵌套在另一个查询块的WHERE子句或HAVING短语的条件中的查询称为嵌套查询（nested query)例如：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname    <span class="hljs-comment">--外层查询或父查询。</span><br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sno <span class="hljs-keyword">IN</span><br>	(<span class="hljs-keyword">SELECT</span> Sno  <span class="hljs-comment">--内层查询或子查询。</span><br>     <span class="hljs-keyword">FROM</span> SC<br>     <span class="hljs-keyword">WHERE</span> Cno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;2&#x27;</span>);<br></code></pre></td></tr></table></figure>
 <ul>
@@ -309,7 +309,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Student.Sno,Sname			<br><span class="hljs-keyword">FROM</span> Student,SC,Course<br><span class="hljs-keyword">WHERE</span> Student.Sno<span class="hljs-operator">=</span>SC.Sno <span class="hljs-keyword">AND</span><br>	SC.Cno<span class="hljs-operator">=</span>Course.Cno <span class="hljs-keyword">AND</span><br>	Course.Cname<span class="hljs-operator">=</span><span class="hljs-string">&#x27;信息系统&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>有些嵌套查询可以用连接运算替代，有些是不能替代的，查询涉及多个关系时，用嵌套查询逐步求解层次关系清楚，易于构造，具有结构化程序设计的优点，但是相比于连接运算，目前商用关系数据库管理系统对嵌套查询的优化做得还不够完善，所以在实际应用中，能够用连接运算的查询尽可能采用连接运算。</li>
-<li>例3.55和例3.56中子查询的查询条件不依赖与父查询，这类子查询称为不相关子查询，不相关子查询是较简单的一类子查询，如果子查询的查询条件依赖于父查询，这类子查询称为相关子查询(correlated subquery)，整个查询语句称为相关嵌套查询(correlated nested query)语句。</li>
+<li>例3.55和例3.56中子查询的查询条件不依赖与父查询，这类子查询称为不相关子查询，不相关子查询是较简单的一类子查询，如果子查询的查询条件依赖于父查询，这类子查询称为相关子查询（correlated subquery)，整个查询语句称为相关嵌套查询（correlated nested query)语句。</li>
 <li>例3.57就是一个相关子查询的例子。</li>
 </ul>
 <h2 id="带有比较运算符的子查询">带有比较运算符的子查询</h2>
@@ -325,11 +325,11 @@
 <li>这个语句的一种可能的执行过程采用以下三个步骤：</li>
 </ul>
 <ol>
-<li>从外层查询中取出SC的一个元组x，将元组x的Sno值(201215121)传送给内层查询：</li>
+<li>从外层查询中取出SC的一个元组x，将元组x的Sno值（201215121)传送给内层查询：</li>
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(Grade)<br><span class="hljs-keyword">FROM</span> SC y<br><span class="hljs-keyword">WHERE</span> y.Sno<span class="hljs-operator">=</span><span class="hljs-string">&#x27;201215121&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ol start="2">
-<li>执行内层，得到88(近似值)，用该值代替内层查询，得到外层查询：</li>
+<li>执行内层，得到88(近似值），用该值代替内层查询，得到外层查询：</li>
 </ol>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sno,Cno<br><span class="hljs-keyword">FROM</span> SC x<br><span class="hljs-keyword">WHERE</span> Grade<span class="hljs-operator">&gt;=</span><span class="hljs-number">88</span>;<br></code></pre></td></tr></table></figure>
 <ol start="3">
@@ -429,12 +429,12 @@
 </tbody>
 </table>
 <ul>
-<li>关系数据库管理系统执行此查询时，首先处理子查询，找出CS系中所有学生的年龄，构成一个集合(20,19)，然后处理父查询，找所有不是CS系且年龄小于20或19的学生。</li>
-<li>本查询也可以用聚集函数来实现，首先用子查询找出CS系中最大年龄(20)，然后在父查询中查所有非CS系且年龄小于20岁的学生，SQL语句如下：</li>
+<li>关系数据库管理系统执行此查询时，首先处理子查询，找出CS系中所有学生的年龄，构成一个集合（20,19)，然后处理父查询，找所有不是CS系且年龄小于20或19的学生。</li>
+<li>本查询也可以用聚集函数来实现，首先用子查询找出CS系中最大年龄（20)，然后在父查询中查所有非CS系且年龄小于20岁的学生，SQL语句如下：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Sname,Sage<br><span class="hljs-keyword">FROM</span> Student<br><span class="hljs-keyword">WHERE</span> Sage <span class="hljs-operator">&lt;</span><br>		(<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(Sage)<br>         <span class="hljs-keyword">FROM</span> Student<br>         <span class="hljs-keyword">WHERE</span> Sdept<span class="hljs-operator">=</span><span class="hljs-string">&#x27;CS&#x27;</span>)<br>	<span class="hljs-keyword">AND</span> Sdept <span class="hljs-operator">&lt;&gt;</span> <span class="hljs-string">&#x27;CS&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>关系数据库管理系统执行此查询时，首先处理子查询，找出CS系中所有学生的年龄，构成一个集合(20,19)然后再处理父查询，找所有不是CS系且年龄既小于20，也小于19的学生，查询结果为：</li>
+<li>关系数据库管理系统执行此查询时，首先处理子查询，找出CS系中所有学生的年龄，构成一个集合（20,19)然后再处理父查询，找所有不是CS系且年龄既小于20，也小于19的学生，查询结果为：</li>
 </ul>
 <table>
 <thead>
@@ -503,7 +503,7 @@
 <ul>
 <li>使用存在量词EXISIT后，若内层查询结果非空，则外增的WHERE子句返回真值，否则返回假值。</li>
 <li>由EXISIT引出的子查询，其目标列表达式通常都用*，因为带EXISIT的子查询只返回真值或假值，给出列名无实际意义。</li>
-<li>本例中子查询的查询条件依赖于外层父查询的某个属性值(Student的Sno值)，因此也是相关子查询，这个相关子查询的处理过程是：首先取外层查询中Student表的第一个元组，根据它与内层查询相关的属性值(Sno值）处理内层查询，若WHERE子句返回值为真，则取外层查询中该元组的Sname放入结果表，然后再取Student表的下一个元组，重复这一过程，直至外层Student表全部检查完为止。</li>
+<li>本例中子查询的查询条件依赖于外层父查询的某个属性值（Student的Sno值），因此也是相关子查询，这个相关子查询的处理过程是：首先取外层查询中Student表的第一个元组，根据它与内层查询相关的属性值（Sno值）处理内层查询，若WHERE子句返回值为真，则取外层查询中该元组的Sname放入结果表，然后再取Student表的下一个元组，重复这一过程，直至外层Student表全部检查完为止。</li>
 <li>本例中的查询也可以用连接运算来实现。</li>
 <li>与EXISIT谓词相对应的时NOT EXISIT谓词，使用存在量词NOT EXISIT后，若内层查询结果为空，则外层的WHERE子句返回真值，否则返回假值。</li>
 </ul>
@@ -518,7 +518,7 @@
 </ul>
 <p><strong>[例3.62]</strong>：查询选修了全部课程的学生姓名。</p>
 <ul>
-<li>SQL没有全称量词(for all)，但是可以把带有全称量词的谓词转换为等价的带有存在量词的谓词：</li>
+<li>SQL没有全称量词（for all)，但是可以把带有全称量词的谓词转换为等价的带有存在量词的谓词：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">(∀x)P≡┐(∃x(┐P))<br></code></pre></td></tr></table></figure>
 <ul>
@@ -537,7 +537,7 @@
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">(∀y)p→q<br></code></pre></td></tr></table></figure>
 <ul>
-<li>SQL语言中没有蕴涵(implication)逻辑运算，但是可以利用谓词演算将一个逻辑蕴涵的谓词等价转换为：</li>
+<li>SQL语言中没有蕴涵（implication)逻辑运算，但是可以利用谓词演算将一个逻辑蕴涵的谓词等价转换为：</li>
 </ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">p→q≡┐p∨q<br></code></pre></td></tr></table></figure>
 <ul>
@@ -563,11 +563,11 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/">Database</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/">关系数据库。</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/">关系数据库</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/">DDL</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/">DDL</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%82/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E3%80%82/">数据查询。</a>
+                      <a class="hover-with-bg" href="/categories/Software/BackEnd/Database/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93/DDL/%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2/">数据查询</a>
                     
                   </div>
                 

@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331211754249.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1.png">
 <meta property="article:published_time" content="2024-03-17T15:48:00.138Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:31.870Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:52.808Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +273,7 @@
 <ul>
 <li>那么Session在何时创建呢？当然还是在服务器端程序运行的过程中创建的，不同语言实现的应用程序有不同创建Session的方法。</li>
 <li>当客户端第一次请求服务端，当server端程序调用<code>HttpServletRequest.getSession(true)</code>这样的语句时的时候，服务器会为客户端创建一个session，并将通过特殊算法算出一个session的ID，用来标识该session对象。</li>
-<li>Session存储在服务器的内存中(tomcat服务器通过StandardManager类将session存储在内存中)，也可以持久化到file，数据库，memcache,Redis等，客户端只保存sessionid到Cookie中，而不会保存session</li>
+<li>Session存储在服务器的内存中（tomcat服务器通过StandardManager类将session存储在内存中），也可以持久化到file，数据库，memcache,Redis等，客户端只保存sessionid到Cookie中，而不会保存session</li>
 <li>浏览器的关闭并不会导致Session的删除，只有当超时，程序调用<code>HttpSession.invalidate()</code>以及服务端程序关闭才会删除。</li>
 </ul>
 <h4 id="Tomcat中的Session创建">Tomcat中的Session创建</h4>
@@ -290,7 +290,7 @@
 </ul>
 <h4 id="Session-复制">Session 复制</h4>
 <ul>
-<li>任何一个服务器上的 Session 发生改变（增删改)，该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session，以此来保证 Session 同步。</li>
+<li>任何一个服务器上的 Session 发生改变（增删改），该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session，以此来保证 Session 同步。</li>
 <li><strong>优点</strong>：可容错，各个服务器间 Session 能够实时响应。</li>
 <li><strong>缺点</strong>：会对网络负荷造成一定压力，如果 Session 量大的话可能会造成网络堵塞，拖慢服务器性能。</li>
 </ul>
@@ -312,7 +312,7 @@
 <li><strong>优点</strong>:
 <ul>
 <li><strong>无状态，可扩展</strong>：在客户端存储的Token是无状态的，并且能够被扩展，基于这种无状态和不存储Session信息，负载均衡器能够将	用户信息从一个服务传到其他服务器上。</li>
-<li><strong>安全</strong>：请求中发送token而不再是发送Cookie能够防止CSRF(跨站请求伪造)</li>
+<li><strong>安全</strong>：请求中发送token而不再是发送Cookie能够防止CSRF(跨站请求伪造）</li>
 <li><strong>可提供接口给第三方服务</strong>：使用token时，可以提供可选的权限给第三方应用程序。</li>
 <li><strong>多平台跨域</strong>：对应用程序和服务进行扩展的时候，需要介入各种各种的设备和应用程序，假如我们的后端api服务器a.com只提供数据，而静态资源则存放在cdn 服务器b.com上，当我们从a.com请求b.com下面的资源时，由于触发浏览器的同源策略限制而被阻止。</li>
 </ul>
@@ -338,7 +338,7 @@
 <li>第二行指明了实际请求中允许携带的首部字段，这里加入了Authorization，用来存放token</li>
 <li>第三行用于预检请求的响应，其指明了实际请求所允许使用的 HTTP 方法。</li>
 <li>然后用户从a.com携带有一个通过了验证的token访问B域名，数据和资源就能够在任何域上被请求到。</li>
-<li><strong>注意</strong>：在ACAO头部标明(designating)*时，不得带有像HTTP认证，客户端SSL证书和Cookies的证书。</li>
+<li><strong>注意</strong>：在ACAO头部标明（designating)*时，不得带有像HTTP认证，客户端SSL证书和Cookies的证书。</li>
 </ul>
 <h4 id="tomcat内置的session同步">tomcat内置的session同步</h4>
 <p><strong>tomcat中server.xml直接配置</strong></p>
@@ -354,9 +354,9 @@
 <li>把 session 放到 Redis 中存储，虽然架构上变得复杂，并且需要多访问一次 Redis，但是这种方案带来的好处也是很大的：
 <ul>
 <li>实现了 session 共享。</li>
-<li>可以水平扩展（增加 Redis 服务器)</li>
-<li>服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制)</li>
-<li>不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端)</li>
+<li>可以水平扩展（增加 Redis 服务器）</li>
+<li>服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制）</li>
+<li>不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端）</li>
 </ul>
 </li>
 </ul>
@@ -367,13 +367,13 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>fastjson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.47<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-comment">&lt;!-- Spring Session 与Redis应用基本环境配置，需要开启Redis后才可以使用，不然启动Spring boot会报错 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.session<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-session-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.commons<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>commons-pool2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>redis.clients<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jedis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><strong>修改application.properties全局配置文件（本地要开启Redis服务)</strong></li>
+<li><strong>修改application.properties全局配置文件（本地要开启Redis服务）</strong></li>
 </ul>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-meta">spring.redis.database</span>=<span class="hljs-string">0</span><br><span class="hljs-meta">spring.redis.host</span>=<span class="hljs-string">localhost</span><br><span class="hljs-meta">spring.redis.port</span>=<span class="hljs-string">6379</span><br><span class="hljs-comment">#spring.redis.password=</span><br><span class="hljs-meta">spring.redis.jedis.pool.max-active</span>=<span class="hljs-string">8</span><br><span class="hljs-meta">spring.redis.jedis.pool.max-wait</span>=<span class="hljs-string">-1</span><br><span class="hljs-meta">spring.redis.jedis.pool.max-idle</span>=<span class="hljs-string">8</span><br><span class="hljs-meta">spring.redis.jedis.pool.min-idle</span>=<span class="hljs-string">8</span><br><span class="hljs-meta">spring.redis.timeout</span>=<span class="hljs-string">10000</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>在代码中添加Session配置类</strong></li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 这个类用配置Redis服务器的连接。</span><br><span class="hljs-comment"> * maxInactiveIntervalInSeconds为SpringSession的过期时间（单位：秒)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SessionConfig</span> </span>&#123;<br>  <span class="hljs-comment">// 冒号后的值为没有配置文件时，制动装载的默认值。</span><br>  <span class="hljs-meta">@Value(&quot;$&#123;redis.hostname:localhost&#125;&quot;)</span><br>  <span class="hljs-keyword">private</span> String hostName;<br>  <span class="hljs-meta">@Value(&quot;$&#123;redis.port:6379&#125;&quot;)</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> port;<br>  <span class="hljs-comment">// @Value(&quot;$&#123;redis.password&#125;&quot;)</span><br>  <span class="hljs-comment">// private String password;</span><br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> JedisConnectionFactory <span class="hljs-title">jedisConnectionFactory</span><span class="hljs-params">()</span> </span>&#123;<br>    RedisStandaloneConfiguration redisStandaloneConfiguration = <span class="hljs-keyword">new</span> RedisStandaloneConfiguration();<br>    redisStandaloneConfiguration.setHostName(hostName);<br>    redisStandaloneConfiguration.setPort(port);<br>    <span class="hljs-comment">// redisStandaloneConfiguration.setDatabase(0);</span><br>    <span class="hljs-comment">// redisStandaloneConfiguration.setPassword(RedisPassword.of(&quot;123456&quot;));</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> JedisConnectionFactory(redisStandaloneConfiguration);<br>  &#125;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> StringRedisTemplate <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory redisConnectionFactory)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StringRedisTemplate(redisConnectionFactory);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 这个类用配置Redis服务器的连接。</span><br><span class="hljs-comment"> * maxInactiveIntervalInSeconds为SpringSession的过期时间（单位：秒）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SessionConfig</span> </span>&#123;<br>  <span class="hljs-comment">// 冒号后的值为没有配置文件时，制动装载的默认值。</span><br>  <span class="hljs-meta">@Value(&quot;$&#123;redis.hostname:localhost&#125;&quot;)</span><br>  <span class="hljs-keyword">private</span> String hostName;<br>  <span class="hljs-meta">@Value(&quot;$&#123;redis.port:6379&#125;&quot;)</span><br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> port;<br>  <span class="hljs-comment">// @Value(&quot;$&#123;redis.password&#125;&quot;)</span><br>  <span class="hljs-comment">// private String password;</span><br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> JedisConnectionFactory <span class="hljs-title">jedisConnectionFactory</span><span class="hljs-params">()</span> </span>&#123;<br>    RedisStandaloneConfiguration redisStandaloneConfiguration = <span class="hljs-keyword">new</span> RedisStandaloneConfiguration();<br>    redisStandaloneConfiguration.setHostName(hostName);<br>    redisStandaloneConfiguration.setPort(port);<br>    <span class="hljs-comment">// redisStandaloneConfiguration.setDatabase(0);</span><br>    <span class="hljs-comment">// redisStandaloneConfiguration.setPassword(RedisPassword.of(&quot;123456&quot;));</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> JedisConnectionFactory(redisStandaloneConfiguration);<br>  &#125;<br><br>  <span class="hljs-meta">@Bean</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> StringRedisTemplate <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory redisConnectionFactory)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StringRedisTemplate(redisConnectionFactory);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li><strong>初始化Session配置</strong></li>
 </ul>
@@ -389,7 +389,7 @@
 <h2 id="Token">Token</h2>
 <ul>
 <li>
-<p>访问资源接口(API)时所需要的资源凭证。</p>
+<p>访问资源接口（API)时所需要的资源凭证。</p>
 <p><strong>特点</strong>:</p>
 <ul>
 <li>

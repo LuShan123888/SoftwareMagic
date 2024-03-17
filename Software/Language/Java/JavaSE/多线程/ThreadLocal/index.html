@@ -16,16 +16,16 @@
   <meta name="description" content="">
   <meta name="author" content="Cian">
   <meta name="keywords" content="software computer programmer otes Cloud personal">
-  <meta name="description" content="Java ThreadLocal  ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。 作用：提供一个线程内公共变量（比如本次请求的用户信息)，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。 ThreadLoal 变量，线程局部变量，同一个">
+  <meta name="description" content="Java ThreadLocal  ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。 作用：提供一个线程内公共变量（比如本次请求的用户信息），减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。 ThreadLoal 变量，线程局部变量，同一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java ThreadLocal">
 <meta property="og:url" content="https://softwaremagic.lushan.tech/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/ThreadLocal/">
 <meta property="og:site_name" content="SoftwareMagic">
-<meta property="og:description" content="Java ThreadLocal  ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。 作用：提供一个线程内公共变量（比如本次请求的用户信息)，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。 ThreadLoal 变量，线程局部变量，同一个">
+<meta property="og:description" content="Java ThreadLocal  ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。 作用：提供一个线程内公共变量（比如本次请求的用户信息），减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。 ThreadLoal 变量，线程局部变量，同一个">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-1156565-20170724121152430-1111069410.png">
 <meta property="article:published_time" content="2022-03-25T06:29:14.000Z">
-<meta property="article:modified_time" content="2024-03-17T17:47:17.448Z">
+<meta property="article:modified_time" content="2024-03-17T17:52:53.212Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
               <h1>Java ThreadLocal</h1>
 <ul>
 <li>ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用。</li>
-<li><strong>作用</strong>：提供一个线程内公共变量（比如本次请求的用户信息)，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。</li>
+<li><strong>作用</strong>：提供一个线程内公共变量（比如本次请求的用户信息），减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响。</li>
 <li>ThreadLoal 变量，线程局部变量，同一个 ThreadLocal 所包含的对象，在不同的 Thread 中有不同的副本，这里有几点需要注意：
 <ul>
 <li>因为每个 Thread 内有自己的实例副本，且该副本只能由当前 Thread 使用，这是也是 ThreadLocal 命名的由来。</li>
@@ -259,7 +259,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createMap</span><span class="hljs-params">(Thread t, T firstValue)</span> </span>&#123;<br>    t.threadLocals = <span class="hljs-keyword">new</span> ThreadLocalMap(<span class="hljs-keyword">this</span>, firstValue);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>Thread类中有一个成员变量属于ThreadLocalMap类（一个定义在ThreadLocal类中的内部类)，它是一个Map，他的key是ThreadLocal实例对象。</li>
+<li>Thread类中有一个成员变量属于ThreadLocalMap类（一个定义在ThreadLocal类中的内部类），它是一个Map，他的key是ThreadLocal实例对象。</li>
 <li>初始容量16，负载因子2/3，解决冲突的方法是再hash法。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadLocalMap</span> </span>&#123;<br>    ........<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -275,12 +275,12 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> threadLocalHashCode = nextHashCode();<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicInteger nextHashCode = <span class="hljs-keyword">new</span> AtomicInteger();<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> HASH_INCREMENT = <span class="hljs-number">0x61c88647</span>;<br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">nextHashCode</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> nextHashCode.getAndAdd(HASH_INCREMENT);<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>对于每一个ThreadLocal对象，都有一个final修饰的int型的threadLocalHashCode不可变属性，对于基本数据类型，可以认为它在初始化后就不可以进行修改，所以可以唯一确定一个ThreadLocal对象。</li>
-<li>但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性：在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类）成员变量（即类变量）和一个static final修饰的常量（作为两个相邻nextHashCode的差值)，由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性。</li>
+<li>但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性：在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类）成员变量（即类变量）和一个static final修饰的常量（作为两个相邻nextHashCode的差值），由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性。</li>
 </ul>
 <p><strong>为什么不直接用线程id来作为ThreadLocalMap的key？</strong></p>
 <ul>
 <li>这一点很容易理解，因为直接用线程id来作为ThreadLocalMap的key，无法区分放入ThreadLocalMap中的多个value，比如我们放入了两个字符串，你如何知道我要取出来的是哪一个字符串呢？</li>
-<li>而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由<code>threadLocalHashCode</code>属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分（下面的例子)，所以可以用不同的ThreadLocal作为key，区分不同的value，方便存取。</li>
+<li>而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由<code>threadLocalHashCode</code>属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分（下面的例子），所以可以用不同的ThreadLocal作为key，区分不同的value，方便存取。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        Thread t = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable()&#123;<br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;<br>                ThreadLocal&lt;Son&gt; threadLocal1 = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();<br>                threadLocal1.set(<span class="hljs-keyword">new</span> Son());<br>                System.out.println(threadLocal1.get());<br>                ThreadLocal&lt;Son&gt; threadLocal2 = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();<br>                threadLocal2.set(<span class="hljs-keyword">new</span> Son());<br>                System.out.println(threadLocal2.get());<br>            &#125;&#125;);<br>        t.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="内存泄漏问题">内存泄漏问题</h2>
@@ -331,7 +331,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateUtil</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;SimpleDateFormat&gt; format1 = <span class="hljs-keyword">new</span> ThreadLocal&lt;SimpleDateFormat&gt;() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">protected</span> SimpleDateFormat <span class="hljs-title">initialValue</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);<br>        &#125;<br>    &#125;;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">formatDate</span><span class="hljs-params">(Date date)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> format1.get().format(date);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 <code>java.time.format.DateTimeFormatter</code>是线程安全的，Joda time里的DateTimeFormat也是线程安全的)</li>
+<li>这里的DateUtil.formatDate()就是线程安全的了，(Java8里的 <code>java.time.format.DateTimeFormatter</code>是线程安全的，Joda time里的DateTimeFormat也是线程安全的）</li>
 </ul>
 <h2 id="ThreadLocalRandom">ThreadLocalRandom</h2>
 <ul>
@@ -355,7 +355,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/">JavaSE</a>
                     
-                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%82/">多线程。</a>
+                      <a class="hover-with-bg" href="/categories/Software/Language/Java/JavaSE/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
                     
                   </div>
                 
