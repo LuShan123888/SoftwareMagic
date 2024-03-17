@@ -62,7 +62,7 @@ public class Map接口的使用 {
 - LinkedHashMap 是 HashMap 的一个子类，它保留插入的顺序，如果需要输出的顺序和输入时的相同，那么就选用 LinkedHashMap
 - **LinkedHashMap 是 Map 接口的Hash表和链接列表实现，具有可预知的迭代顺序,**此实现提供所有可选的映射操作，并允许使用 null 值和 null 键，此类不保证映射的顺序，特别是它不保证该顺序不变
 - LinkedHashMap 实现与 HashMap 的不同之处在于，前者维护着一个运行于所有条目的双重链接列表，此链接列表定义了迭代顺序，该迭代顺序可以是插入顺序或者是访问顺序
-- 根据链表中元素的顺序可以分为:按插入顺序的链表，和按访问顺序 (调用 get 方法) 的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾(其实是先删除再插入)
+- 根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序（调用 get 方法) 的链表，默认是按插入顺序排序，如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾（其实是先删除再插入)
 
 > **注意**:
 >
@@ -110,7 +110,7 @@ public LinkedHashMap() {
 ```
 
 - 首先使用super调用了父类HashMap的构造方法，其实就是根据初始容量，负载因子去初始化Entry[] table
-- 然后把accessOrder设置为false,这就跟存储的顺序有关了,LinkedHashMap存储数据是有序的，而且分为两种:插入顺序和访问顺序
+- 然后把accessOrder设置为false,这就跟存储的顺序有关了,LinkedHashMap存储数据是有序的，而且分为两种：插入顺序和访问顺序
 - 这里accessOrder设置为false,表示不是访问顺序而是插入顺序存储的，这也是默认值，表示LinkedHashMap中存储的顺序是按照调用put方法插入的顺序进行排序的,LinkedHashMap也提供了可以设置accessOrder的构造方法，我们来看看这种模式下，它的顺序有什么特点？
 
 ```dart
@@ -372,7 +372,7 @@ void recordAccess(HashMap<K,V> m) {
 ```
 
 - 在LinkedHashMap中，只有accessOrder为true,即是访问顺序模式，才会put时对更新的Entry进行重新排序，而如果是插入顺序模式时，不会重新排序，这里的排序跟在HashMap中存储没有关系，只是指在双向链表中的顺序
-- 举个栗子:开始时,HashMap中有Entry1,Entry2,Entry3,并设置LinkedHashMap为访问顺序，则更新Entry1时，会先把Entry1从双向链表中删除，然后再把Entry1加入到双向链表的表尾，而Entry1在HashMap结构中的存储位置没有变化，对比图如下所示:
+- 举个栗子：开始时,HashMap中有Entry1,Entry2,Entry3,并设置LinkedHashMap为访问顺序，则更新Entry1时，会先把Entry1从双向链表中删除，然后再把Entry1加入到双向链表的表尾，而Entry1在HashMap结构中的存储位置没有变化，对比图如下所示:
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-04-21-image-20210421223149619.png" alt="image-20210421223149619" style="zoom:50%;" />
 
@@ -392,7 +392,7 @@ public V get(Object key) {
 }
 ```
 
-- 先是调用了getEntry方法，通过key得到Entry,而LinkedHashMap并没有重写getEntry方法，所以调用的是HashMap的getEntry方法，在上一篇文章中我们分析过HashMap的getEntry方法:首先通过key算出hash值，然后根据hash值算出在table中存储的index,然后遍历table[index]的单向链表去对比key,如果找到了就返回Entry
+- 先是调用了getEntry方法，通过key得到Entry,而LinkedHashMap并没有重写getEntry方法，所以调用的是HashMap的getEntry方法，在上一篇文章中我们分析过HashMap的getEntry方法：首先通过key算出hash值，然后根据hash值算出在table中存储的index,然后遍历table[index]的单向链表去对比key,如果找到了就返回Entry
 - 后面调用了LinkedHashMap.Entry的recordAccess方法，上面分析过put过程中这个方法，其实就是在访问顺序的LinkedHashMap进行了get操作以后，重新排序，把get的Entry移动到双向链表的表尾
 
 ### 遍历方式取数据
@@ -645,7 +645,7 @@ private void remove() {
 | 11   | **void rehash( )** 增加此Hashtable的容量并在内部对其进行重组，以便更有效地容纳和访问其元素 |
 | 12   | **Object remove(Object key)** 从Hashtable中移除该键及其相应的值 |
 | 13   | **int size( )**  返回此Hashtable中的键的数量                 |
-| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", "(逗号加空格)分隔开的，括在括号中的一组条目 |
+| 14   | **String toString( )** 返回此 Hashtable 对象的字符串表示形式，其形式为 ASCII 字符 ", "(逗号加空格）分隔开的，括在括号中的一组条目 |
 
 **实例**
 
@@ -700,7 +700,7 @@ Zara's new balance: 4434.34
 
 - TreeMap 是一个有序的 key-value 集合，非同步，基于红黑树(Red-Black tree)实现，每一个 key-value 节点作为红黑树的一个节点
 - 放入TreeMap的元素，必须实现`Comparable`接口，如果没有实现`Comparable`接口，则必须在创建 TreeMap 时传入自定义的 `Comparator`对象,TreeMap 会自动对元素的进行排序
-- TreeMap 中判断相等的标准是:两个 key 通过`equals()`方法返回为 true,并且通过`compare()`方法比较应该返回为 0
+- TreeMap 中判断相等的标准是：两个 key 通过`equals()`方法返回为 true,并且通过`compare()`方法比较应该返回为 0
 - 要严格按照`compare()`规范实现比较逻辑，否则,`TreeMap`将不能正常工作，如果使用自定义的类来作为 TreeMap 中的 key 值，且想让 TreeMap 能够良好的工作，则必须重写自定义类中的`equals()`方法
 
 ### key排序
@@ -853,7 +853,7 @@ props.load(getClass().getResourceAsStream("/common/setting.properties"));
 props.load(new FileInputStream("C:\\conf\\setting.properties"));
 ```
 
-- 上面的代码演示了`Properties`的一个常用用法:可以把默认配置文件放到classpath中，然后，根据机器的环境编写另一个配置文件，覆盖某些默认的配置
+- 上面的代码演示了`Properties`的一个常用用法：可以把默认配置文件放到classpath中，然后，根据机器的环境编写另一个配置文件，覆盖某些默认的配置
 - **注意**:`Properties`设计的目的是存储`String`类型的key－value,但`Properties`实际上是从`Hashtable`派生的，它的设计实际上是有问题的，但是为了保持兼容性，现在已经没法修改了，除了`getProperty()`和`setProperty()`方法外，还有从`Hashtable`继承下来的`get()`和`put()`方法，这些方法的参数签名是`Object`,我们在使用`Properties`的时候，不要去调用这些从`Hashtable`继承下来的方法
 
 ### 写入配置文件
@@ -946,9 +946,9 @@ int hashCode() {
 - 编写`equals()`和`hashCode()`遵循的原则是:`equals()`用到的用于比较的每一个字段，都必须在`hashCode()`中用于计算,`equals()`中没有使用到的字段，绝不可放在`hashCode()`中计算
 - 另外注意，对于放入`HashMap`的`value`对象，没有任何要求
 
-> **补充**:关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》(很多软件公司,《Effective Java》,《Java编程思想》以及《重构:改善既有代码质量》)中是这样介绍equals方法的:
+> **补充**:关于equals和hashCode方法，很多Java程序都知道，但很多人也就是仅仅知道而已，在Joshua Bloch的大作《Effective Java》(很多软件公司,《Effective Java》,《Java编程思想》以及《重构：改善既有代码质量》)中是这样介绍equals方法的:
 >
-> - 首先equals方法必须满足自反性(x.equals(x)必须返回true),对称性(x.equals(y)返回true时,y.equals(x)也必须返回true),传递性(x.equals(y)和y.equals(z)都返回true时,x.equals(z)也必须返回true)和一致性(当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值),而且对于任何非null值的引用x,x.equals(null)必须返回false
+> - 首先equals方法必须满足自反性(x.equals(x)必须返回true),对称性(x.equals(y)返回true时,y.equals(x)也必须返回true),传递性(x.equals(y)和y.equals(z)都返回true时,x.equals(z)也必须返回true)和一致性（当x和y引用的对象信息没有被修改时，多次调用x.equals(y)应该得到同样的返回值),而且对于任何非null值的引用x,x.equals(null)必须返回false
 > - 实现高质量的equals方法的诀窍包括:
 >   1. 使用==操作符检查"参数是否为这个对象的引用"
 >   2. 使用instanceof操作符检查"参数是否为正确的类型"
@@ -960,6 +960,6 @@ int hashCode() {
 ## HashMap/Hashtable/HashSet/LinkedHashMap/TreeMap 比较
 
 - Hashmap 是一个最常用的 Map,它根据键的 HashCode 值存储数据,HashMap 最多只允许一条记录的键为Null,允许多条记录的值为 Null
-- Hashtable 与 HashMap 类似，不同的是:它不允许记录的键或者值为空，是线程安全的，因此也导致了 Hashtale 的效率偏低
+- Hashtable 与 HashMap 类似，不同的是：它不允许记录的键或者值为空，是线程安全的，因此也导致了 Hashtale 的效率偏低
 - LinkedHashMap 是 HashMap 的一个子类，如果需要输出的顺序和输入的相同，那么用 LinkedHashMap 可以实现
 - TreeMap 实现 SortMap 接口，内部实现是红黑树，能够把它保存的记录根据键排序，默认是按键值的升序排序，也可以指定排序的比较器，当用 Iterator 遍历 TreeMap 时，得到的记录是排过序的,TreeMap 不允许 key 的值为 null

@@ -14,7 +14,7 @@ categories:
 
 ### Cookie的结构
 
-- Cookie的内容主要包括:名字，值,过期时间，路径和域，路径与域合在一起就构成了Cookie的作用范围
+- Cookie的内容主要包括：名字，值,过期时间，路径和域，路径与域合在一起就构成了Cookie的作用范围
 - 如果不设置过期时间，则表示这个Cookie的生命期为浏览器会话期间，只要关闭浏览器窗口,Cookie就消失了，这种生命期为浏览器会话期的 Cookie被称为会话Cookie,会话Cookie一般不存储在硬盘上而是保存在内存里，如果设置了过期时间，浏览器就会把Cookie保存到硬盘上，关闭后再次打开浏览器，这些Cookie仍然有效直到超过设定的过期时间
 
 ### Cookie的使用
@@ -64,7 +64,7 @@ categories:
 
 #### Session 复制
 
-- 任何一个服务器上的 Session 发生改变(增删改),该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session,以此来保证 Session 同步
+- 任何一个服务器上的 Session 发生改变（增删改),该节点会把这个 Session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 Session,以此来保证 Session 同步
 - **优点**:可容错，各个服务器间 Session 能够实时响应
 - **缺点**:会对网络负荷造成一定压力，如果 Session 量大的话可能会造成网络堵塞，拖慢服务器性能
 
@@ -99,7 +99,7 @@ upstream backserver {
   - 服务端无法主动让token失效
   - 无法更新token有效期
 
-**通过CORS(跨域资源共享)标准和token来解决资源共享和安全问题**
+**通过CORS(跨域资源共享）标准和token来解决资源共享和安全问题**
 
 - 举个例子，我们可以设置b.com的响应首部字段为:
 
@@ -120,7 +120,7 @@ upstream backserver {
 **tomcat中server.xml直接配置**
 
 ```xml
-<!-- 第1步:修改server.xml,在Host节点下添加如下Cluster节点 -->
+<!-- 第1步：修改server.xml,在Host节点下添加如下Cluster节点 -->
 <!-- 用于Session复制 -->
 <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster" channelSendOptions="8">
   <Manager className="org.apache.catalina.ha.session.DeltaManager" expireSessionsOnShutdown="false" notifyListenersOnReplication="true" />
@@ -157,9 +157,9 @@ upstream backserver {
 - 使用分布式缓存方案比如 Memcached,Redis 来缓存 session,但是要求 Memcached 或 Redis 必须是集群
 - 把 session 放到 Redis 中存储，虽然架构上变得复杂，并且需要多访问一次 Redis,但是这种方案带来的好处也是很大的:
   - 实现了 session 共享
-  - 可以水平扩展(增加 Redis 服务器)
-  - 服务器重启 session 不丢失(不过也要注意 session 在 Redis 中的刷新/失效机制)
-  - 不仅可以跨服务器 session 共享，甚至可以跨平台(例如网页端和 APP 端)
+  - 可以水平扩展（增加 Redis 服务器)
+  - 服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新/失效机制)
+  - 不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-31-1-20210331214312505.png)
 
@@ -192,7 +192,7 @@ upstream backserver {
 </dependency>
 ```
 
-- **修改application.properties全局配置文件(本地要开启Redis服务)**
+- **修改application.properties全局配置文件（本地要开启Redis服务)**
 
 ```properties
 spring.redis.database=0
@@ -211,7 +211,7 @@ spring.redis.timeout=10000
 ```java
 /**
  * 这个类用配置Redis服务器的连接
- * maxInactiveIntervalInSeconds为SpringSession的过期时间(单位:秒)
+ * maxInactiveIntervalInSeconds为SpringSession的过期时间（单位：秒)
  */
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 public class SessionConfig {
@@ -264,7 +264,7 @@ public class RedisSessionInitializer extends AbstractHttpSessionApplicationIniti
   **特点**:
 
   - 服务端无状态化，可扩展性好
-  - 支持移动端设备:小程序等移动端无法使用Cookies,所以可以用token的形式保存和返回sessionid
+  - 支持移动端设备：小程序等移动端无法使用Cookies,所以可以用token的形式保存和返回sessionid
   - 支持跨程序调用
   - 可以防止 crsf 攻击
 

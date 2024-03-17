@@ -58,7 +58,7 @@ public class LoginController {
             String accessToken = null, openID = null;
             long tokenExpireIn = 0L;
             if ("".equals(accessTokenObj.getAccessToken())) {
-                System.out.println("登录失败:没有获取到响应参数");
+                System.out.println("登录失败：没有获取到响应参数");
                 return "accessTokenObj=>" + accessTokenObj + "; accessToken" + accessTokenObj.getAccessToken();
             } else {
                 accessToken = accessTokenObj.getAccessToken();

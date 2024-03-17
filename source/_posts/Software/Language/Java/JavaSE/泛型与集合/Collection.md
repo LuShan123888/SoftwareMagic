@@ -45,8 +45,8 @@ public interface Collection<E> extends Iterable<E>
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-21-image-20210321213904818.png)
 
 - **List 集合代表一个有序集合，集合中每个元素都有其对应的顺序索引,List 集合允许使用重复元素，可以通过索引来访问指定位置的集合元素,**
-- List 接口继承于 Collection 接口，它可以定义一个允许重复的有序集合，因为 List 中的元素是有序的，所以我们可以通过使用索引(元素在 List 中的位置，类似于数组下标)来访问 List 中的元素，这类似于 Java 的数组
-- List 接口为 Collection 直接接口,List 所代表的是有序的 Collection,即它用某种特定的插入顺序来维护元素顺序，用户可以对列表中每个元素的插入位置进行精确地控制，同时可以根据元素的整数索引(在列表中的位置)访问元素，并搜索列表中的元素
+- List 接口继承于 Collection 接口，它可以定义一个允许重复的有序集合，因为 List 中的元素是有序的，所以我们可以通过使用索引（元素在 List 中的位置，类似于数组下标）来访问 List 中的元素，这类似于 Java 的数组
+- List 接口为 Collection 直接接口,List 所代表的是有序的 Collection,即它用某种特定的插入顺序来维护元素顺序，用户可以对列表中每个元素的插入位置进行精确地控制，同时可以根据元素的整数索引（在列表中的位置）访问元素，并搜索列表中的元素
 - 实现 List 接口的集合主要有:`ArrayList,LinkedList,Vector,Stack`
 
 | 方法                                      | 功能                             |
@@ -68,7 +68,7 @@ public interface Collection<E> extends Iterable<E>
 
 - ArrayList 是一个动态数组，也是我们最常用的集合，它允许任何符合规则的元素插入甚至包括 null
 - 每一个 ArrayList 都有一个初始容量(10),该容量代表了数组的大小，随着容器中的元素不断增加，容器的大小也会随着增加，在每次向容器中增加元素的同时都会进行容量检查，当快溢出时，就会进行扩容操作，所以**如果我们明确所插入元素的多少，最好指定一个初始容量值，避免过多的进行扩容操作而浪费时间，效率,**
-- `size()`,`isEmpty()`,`get()`,`set()`,`iterator()`和`listIterator()`操作都以固定时间运行,`add()`操作以分摊的固定时间运行，也就是说，添加 n 个元素需要 O(n) 时间(由于要考虑到扩容，所以这不只是添加元素会带来分摊固定时间开销那样简单)
+- `size()`,`isEmpty()`,`get()`,`set()`,`iterator()`和`listIterator()`操作都以固定时间运行,`add()`操作以分摊的固定时间运行，也就是说，添加 n 个元素需要 O(n) 时间（由于要考虑到扩容，所以这不只是添加元素会带来分摊固定时间开销那样简单)
 - **ArrayList 擅长于随机访问，同时 ArrayList 是非同步的,**
 
 **[例14-4]**:ArrayList的使用
@@ -111,7 +111,7 @@ public class ArrayList的使用 {
 #### LinkedList
 
 - 同样实现 List 接口的 LinkedList 与 ArrayList 不同,**ArrayList 是一个动态数组，而 LinkedList 是一个双向链表**,所以它除了有 ArrayList 的基本操作方法外还额外提供了`get,remove,insert`方法在 LinkedList 的首部或尾部
-- 由于实现的方式不同,**LinkedList 不能随机访问**,它所有的操作都是要按照双重链表的需要执行，在列表中索引的操作将从开头或结尾遍历列表(从靠近指定索引的一端),这样做的好处就是可以通过较低的代价在 List 中进行插入和删除操作
+- 由于实现的方式不同,**LinkedList 不能随机访问**,它所有的操作都是要按照双重链表的需要执行，在列表中索引的操作将从开头或结尾遍历列表（从靠近指定索引的一端),这样做的好处就是可以通过较低的代价在 List 中进行插入和删除操作
 - 与 ArrayList 一样,**LinkedList 也是非同步的**,如果多个线程同时访问一个 List,则必须自己实现访问同步，一种解决方法是在创建 List 时构造一个同步的 List:
 
 ```java
@@ -342,7 +342,7 @@ public boolean equals(Object o) {
 
 - **Set 是一种不包含重复的元素的无序 Collection,Set 最多有一个 null 元素,**它维持它自己的内部排序，所以随机访问没有任何意义
 - Set 接口有三个具体实现类，分别是散列集 HashSet,链式散列集 LinkedHashSet 和树形集 TreeSet
-- 需要注意的是:虽然 Set 中元素没有顺序，但是元素在 set 中的位置是由该元素的 HashCode 决定的，其具体位置其实是固定的
+- 需要注意的是：虽然 Set 中元素没有顺序，但是元素在 set 中的位置是由该元素的 HashCode 决定的，其具体位置其实是固定的
 - 因为放入Set的元素和Map的key类似，都要正确实现`equals()`和`hashCode()`方法，否则该元素无法正确地放入Set
 - Set用于存储不重复的元素集合，它主要提供以下几个方法:
   - 将元素添加进`Set<E>`:`boolean add(E e)`
@@ -373,11 +373,11 @@ public class TestSet {
 }
 ```
 
-- **分析**:程序中,book 集合两次添加的字符串对象明显不是一个对象(程序通过 new 关键字来创建字符串对象),当使用`==`运算符判断返回 false,使用 equals 方法比较返回 true,所以不能添加到 Set 集合中，最后只能输出一个元素
+- **分析**:程序中,book 集合两次添加的字符串对象明显不是一个对象（程序通过 new 关键字来创建字符串对象),当使用`==`运算符判断返回 false,使用 equals 方法比较返回 true,所以不能添加到 Set 集合中，最后只能输出一个元素
 
 ### HashSet
 
-- HashSet 是一个没有重复元素的集合，它是由 HashMap 实现的，不保证元素的顺序 (这里所说的没有顺序是指:元素插入的顺序与输出的顺序不一致),而且 HashSet 允许使用 null 元素
+- HashSet 是一个没有重复元素的集合，它是由 HashMap 实现的，不保证元素的顺序（这里所说的没有顺序是指：元素插入的顺序与输出的顺序不一致),而且 HashSet 允许使用 null 元素
 - HashSet 是非同步的，如果多个线程同时访问一个HashSet,而其中至少一个线程修改了该 Set,那么它必须保持外部同步
 - HashSet 按 Hash 算法来存储集合的元素，因此具有很好的存取和查找性能
 - HashSet 的实现方式大致如下，通过一个 HashMap 存储元素，元素是存放在 HashMap 的 Key 中，而 Value 统一使用一个名为PRESENT的 Object 对象
@@ -483,7 +483,7 @@ public class Main {
 | 取队首元素并删除   | E remove()      | E poll()           |
 | 取队首元素但不删除 | E element()     | E peek()           |
 
-- 假设我们有一个队列，对它做一个添加操作，如果调用`add()`方法，当添加失败时(可能超过了队列的容量),它会抛出异常:
+- 假设我们有一个队列，对它做一个添加操作，如果调用`add()`方法，当添加失败时（可能超过了队列的容量),它会抛出异常:
 
 ```java
 Queue<String> q = ...
@@ -632,7 +632,7 @@ class User {
 
 ```
 
-- 实现`PriorityQueue`的关键在于提供的`UserComparator`对象，它负责比较两个元素的大小(较小的在前),`UserComparator`总是把`V`开头的号码优先返回，只有在开头相同的时候，才比较号码大小
+- 实现`PriorityQueue`的关键在于提供的`UserComparator`对象，它负责比较两个元素的大小（较小的在前),`UserComparator`总是把`V`开头的号码优先返回，只有在开头相同的时候，才比较号码大小
 
 ### Deque
 

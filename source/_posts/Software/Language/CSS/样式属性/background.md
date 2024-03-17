@@ -18,7 +18,7 @@ background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-att
 
 **实例**
 
-在一个div元素中设置多个背景图像(并指定他们的位置):
+在一个div元素中设置多个背景图像（并指定他们的位置):
 
 ```css
 body {     background: #00ff00 url('smiley.gif') no-repeat fixed center;  }
@@ -28,7 +28,7 @@ body {     background: #00ff00 url('smiley.gif') no-repeat fixed center;  }
 
 **标签定义及使用说明**
 
-background-color属性设置一个元素的背景颜色,元素的背景是元素的总大小,包括填充和边界(但不包括边距)
+background-color属性设置一个元素的背景颜色,元素的背景是元素的总大小,包括填充和边界（但不包括边距)
 
 **属性值**
 
@@ -147,9 +147,9 @@ background-clip: border-box|padding-box|content-box;
 
 | 值          | 说明                                             |
 | :---------- | :----------------------------------------------- |
-| border-box  | 默认值,背景绘制在边框方框内(剪切成边框方框), |
-| padding-box | 背景绘制在衬距方框内(剪切成衬距方框),         |
-| content-box | 背景绘制在内容方框内(剪切成内容方框),         |
+| border-box  | 默认值,背景绘制在边框方框内（剪切成边框方框), |
+| padding-box | 背景绘制在衬距方框内（剪切成衬距方框),         |
+| content-box | 背景绘制在内容方框内（剪切成内容方框),         |
 
 ## background-attachment
 
@@ -171,7 +171,7 @@ background-attachment设置背景图像是否固定或者随着页面的其余�
 
 **标签定义及使用说明**
 
-background-image 属性设置一个元素的背景图像,元素的背景是元素的总大小,包括填充和边界(但不包括边距),默认情况下,background-image放置在元素的左上角,并重复垂直和水平方向
+background-image 属性设置一个元素的背景图像,元素的背景是元素的总大小,包括填充和边界（但不包括边距),默认情况下,background-image放置在元素的左上角,并重复垂直和水平方向
 
 **提示**:请设置一种可用的背景颜色,这样的话,假如背景图像不可用,可以使用背景色带代替
 

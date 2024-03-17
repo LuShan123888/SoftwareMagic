@@ -33,7 +33,7 @@ username=John Doe
 document.cookie="username=John Doe";
 ```
 
-- 您还可以为 cookie 添加一个过期时间(以 UTC 或 GMT 时间),默认情况下,cookie 在浏览器关闭时删除:
+- 您还可以为 cookie 添加一个过期时间（以 UTC 或 GMT 时间),默认情况下,cookie 在浏览器关闭时删除:
 
 ```js
 document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT";

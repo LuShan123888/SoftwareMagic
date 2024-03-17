@@ -127,7 +127,7 @@ private List<SecurityScheme> securitySchemes() {
 | ------------------------------------------------------ | ---------------------------------------------------- |
 | @Api(tags = "xxx模块说明")                             | 作用在模块类上                                       |
 | @ApiOperation("xxx接口说明")                           | 作用在接口方法上                                     |
-| @ApiModel("xxxPOJO说明")                               | 作用在模型类上:如VO,BO                             |
+| @ApiModel("xxxPOJO说明")                               | 作用在模型类上：如VO,BO                             |
 | @ApiModelProperty(value = "xxx属性说明",hidden = true) | 作用在类方法和属性上,hidden设置为true可以隐藏该属性 |
 | @ApiParam("xxx参数说明")                               | 作用在参数，方法和字段上，类似@ApiModelProperty      |
 
@@ -151,7 +151,7 @@ public class UserController {
 - 用于方法，表示一个http请求的操作
     - **value**:用于方法描述	
     - **notes**:用于提示内容
-    - **tags**:可以重新分组(视情况而用)
+    - **tags**:可以重新分组（视情况而用)
 
 ```java
 public class UserController {
@@ -164,7 +164,7 @@ public class UserController {
 
 #### @ApiParam()
 
-- 用于方法，参数，字段说明，表示对参数的添加元数据(说明或是否必填等)
+- 用于方法，参数，字段说明，表示对参数的添加元数据（说明或是否必填等)
     - **name**:参数名
     - **value**:参数说明
     - **required**:是否必填
@@ -203,7 +203,7 @@ public class User implements Serializable{
 
 #### @ApiModelProperty()
 
-- 用于方法，字段:表示对model属性的说明或者数据操作更改
+- 用于方法，字段：表示对model属性的说明或者数据操作更改
     - **value**:字段说明
     - **name**:重写属性名字
     - **dataType**:重写属性类型
@@ -231,11 +231,11 @@ public class User implements Serializable{
 
 #### @ApiIgnore()
 
-- 用于类或者方法上:可以不被swagger显示在页面上
+- 用于类或者方法上：可以不被swagger显示在页面上
 
 #### @ApiImplicitParam()
 
-- 用于方法:表示单独的请求参数
+- 用于方法：表示单独的请求参数
 
 #### @ApiImplicitParams()
 

@@ -8,7 +8,7 @@ categories:
 # Go Interface
 
 - 在 Go 语言中接口 (interface) 是一种类型,一种抽象的类型,包含一组方法的集合,接口 (interface) 定义了一个对象的行为规范, 只定义规范不实现, 由具体的对象来实现规范的细节
-- interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议 (规则), 只要一台机器有洗衣服和甩干的功能,我就称它为洗衣机,不关心属性 (数据), 只关心行为 (方法)
+- interface 是一组 method 的集合, 是 duck-type prog ramming 的一种体现,接口做的事情就像是定义一个协议（规则), 只要一台机器有洗衣服和甩干的功能,我就称它为洗衣机,不关心属性（数据), 只关心行为（方法)
 
 ## 接口的定义
 
@@ -362,7 +362,7 @@ func (r reverse) Less(i, j int) bool {
 ```
 
 - `Interface` 类型原本的 `Less` 方法签名为 `Less(i, j int) bool`, 此处重写为 `r.Interface.Less(j, i)`, 即通过将索引参数交换位置实现反转
-- 在这个示例中还有一个需要注意的地方是 `reverse` 结构体本身是不可导出的 (结构体类型名称首字母小写), `sort.go` 中通过定义一个可导出的 `Reverse` 函数来让使用者创建 `reverse` 结构体实例
+- 在这个示例中还有一个需要注意的地方是 `reverse` 结构体本身是不可导出的（结构体类型名称首字母小写), `sort.go` 中通过定义一个可导出的 `Reverse` 函数来让使用者创建 `reverse` 结构体实例
 
 ```go
 func Reverse(data Interface) Interface {
@@ -514,7 +514,7 @@ var (
 fmt.Println (x == y) // false
 ```
 
-- 但是有一种特殊情况需要特别注意,如果接口值的保存的动态类型相同,但是这个动态类型不支持互相比较 (比如切片), 那么对它们相互比较时就会引发 panic
+- 但是有一种特殊情况需要特别注意,如果接口值的保存的动态类型相同,但是这个动态类型不支持互相比较（比如切片), 那么对它们相互比较时就会引发 panic
 
 ```go
 var z interface{} = []int{1, 2, 3}

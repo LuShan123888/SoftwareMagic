@@ -239,7 +239,7 @@ props.put("auto.commit.interval.ms", "1000");
     1. commitSync(同步提交)
     2. commitAsync(异步提交)
 - **相同点**:都会将本次 poll 的一批数据最高的 offset 提交
-- **不同点**:commitSync 阻塞当前线程，一直到提交成功，并且会自动失败重试(由不可控因素导致，也会出现提交失败),而 commitAsync 则没有失败重试机制，故有可能提交失败
+- **不同点**:commitSync 阻塞当前线程，一直到提交成功，并且会自动失败重试（由不可控因素导致，也会出现提交失败),而 commitAsync 则没有失败重试机制，故有可能提交失败
 
 ##### 同步提交offset
 

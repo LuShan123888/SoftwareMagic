@@ -42,7 +42,7 @@ func timezoneDemo() {
 	// 中国没有夏令时，使用一个固定的8小时的UTC时差。
 	// 对于很多其他国家需要考虑夏令时。
 	secondsEastOfUTC := int((8 * time.Hour).Seconds())
-	// FixedZone 返回始终使用给定区域名称和偏移量(UTC 以东秒)的 Location。
+	// FixedZone 返回始终使用给定区域名称和偏移量(UTC 以东秒）的 Location。
 	beijing := time.FixedZone("Beijing Time", secondsEastOfUTC)
 
 	// 如果当前系统有时区数据库，则可以加载一个位置得到对应的时区

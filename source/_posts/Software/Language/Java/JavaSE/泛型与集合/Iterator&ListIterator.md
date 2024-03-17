@@ -134,7 +134,7 @@ public interface ListIterator<E> extends Iterator<E> {
 ```
 
 - 由以上定义我们可以推出 ListIterator 可以:
-  - 双向移动(向前 / 向后遍历)
+  - 双向移动（向前 / 向后遍历)
   - 产生相对于迭代器在列表中指向的当前位置的前一个和后一个元素的索引
   - 可以使用`set()`方法替换它访问过的最后一个元素
   - 可以使用`add()`方法在`next()`方法返回的元素之前或`previous()`方法返回的元素之后插入一个元素
@@ -189,4 +189,4 @@ After iterate : [aaa, bbb, kkk, nnn]
 
 - Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List
 - Iterator对集合只能是前向遍历,ListIterator既可以前向也可以后向
-- ListIterator实现了Iterator接口，并包含其他的功能，比如:增加元素，替换元素，获取前一个和后一个元素的索引，等等
+- ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等

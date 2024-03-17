@@ -24,7 +24,7 @@ categories:
 
 上面代码中,最外层的`<div>`元素就是容器,内层的三个`<div>`元素就是项目
 
-注意:项目只能是容器的顶层子元素,不包含项目的子元素,比如上面代码的`<p>`元素就不是项目,Grid 布局只对项目生效
+注意：项目只能是容器的顶层子元素,不包含项目的子元素,比如上面代码的`<p>`元素就不是项目,Grid 布局只对项目生效
 
 ###  行和列
 
@@ -82,7 +82,7 @@ display: inline-grid;
 
 上图是`display: inline-grid`的效果
 
-> 注意,设为网格布局以后,容器子元素(项目)的`float`,`display: inline-block`,`display: table-cell`,`vertical-align`和`column-*`等设置都将失效
+> 注意,设为网格布局以后,容器子元素（项目）的`float`,`display: inline-block`,`display: table-cell`,`vertical-align`和`column-*`等设置都将失效
 
 ### grid-template-columns&grid-template-rows
 
@@ -122,7 +122,7 @@ grid-template-rows: repeat(3, 33.33%);
 }
 ```
 
-`repeat()`接受两个参数,第一个参数是重复的次数(上例是3),第二个参数是所要重复的值
+`repeat()`接受两个参数,第一个参数是重复的次数（上例是3),第二个参数是所要重复的值
 
 `repeat()`重复某种模式也是可以的
 
@@ -136,7 +136,7 @@ grid-template-columns: repeat(2, 100px 20px 80px);
 
 - **auto-fill 关键字**
 
-有时,单元格的大小是固定的,但是容器的大小不确定,如果希望每一行(或每一列)容纳尽可能多的单元格,这时可以使用`auto-fill`关键字表示自动填充
+有时,单元格的大小是固定的,但是容器的大小不确定,如果希望每一行（或每一列）容纳尽可能多的单元格,这时可以使用`auto-fill`关键字表示自动填充
 
 ```css
 .container {
@@ -234,7 +234,7 @@ grid-template-columns: repeat(12, 1fr);
 
 ### grid-row-gap&grid-column-gap&grid-gap
 
-`grid-row-gap`属性设置行与行的间隔(行间距),`grid-column-gap`属性设置列与列的间隔(列间距)
+`grid-row-gap`属性设置行与行的间隔（行间距),`grid-column-gap`属性设置列与列的间隔（列间距)
 
 ```css
 .container {
@@ -366,7 +366,7 @@ grid-auto-flow: column dense;
 
 ### justify-items&align-items&place-items
 
-`justify-items`属性设置单元格内容的水平位置(左中右),`align-items`属性设置单元格内容的垂直位置(上中下)
+`justify-items`属性设置单元格内容的水平位置（左中右),`align-items`属性设置单元格内容的垂直位置（上中下)
 
 ```css
 .container {
@@ -380,7 +380,7 @@ align-items: start | end | center | stretch;
 - start:对齐单元格的起始边缘
 - end:对齐单元格的结束边缘
 - center:单元格内部居中
-- stretch:拉伸,占满单元格的整个宽度(默认值)
+- stretch:拉伸,占满单元格的整个宽度（默认值)
 
 ```css
 .container {
@@ -418,7 +418,7 @@ place-items: start end;
 
 ### justify-content&align-content&place-content
 
-`justify-content`属性是整个内容区域在容器里面的水平位置(左中右),`align-content`属性是整个内容区域的垂直位置(上中下)
+`justify-content`属性是整个内容区域在容器里面的水平位置（左中右),`align-content`属性是整个内容区域的垂直位置（上中下)
 
 ```css
 .container {
@@ -508,10 +508,10 @@ grid-auto-rows: 50px;
 
 项目的位置是可以指定的,具体方法就是指定项目的四个边框,分别定位在哪根网格线
 
-- `grid-column-start`属性:左边框所在的垂直网格线
-- `grid-column-end`属性:右边框所在的垂直网格线
-- `grid-row-start`属性:上边框所在的水平网格线
-- `grid-row-end`属性:下边框所在的水平网格线
+- `grid-column-start`属性：左边框所在的垂直网格线
+- `grid-column-end`属性：右边框所在的垂直网格线
+- `grid-row-start`属性：上边框所在的水平网格线
+- `grid-row-end`属性：下边框所在的水平网格线
 
 ```css
 .item-1 {
@@ -552,7 +552,7 @@ grid-column-end: 4;
 
 上面代码中,左边框和右边框的位置,都指定为网格线的名字
 
-这四个属性的值还可以使用`span`关键字,表示"跨越",即左右边框(上下边框)之间跨越多少个网格
+这四个属性的值还可以使用`span`关键字,表示"跨越",即左右边框（上下边框）之间跨越多少个网格
 
 ```css
 .item-1 {
@@ -666,9 +666,9 @@ grid-column-end: 4;
 
 ### justify-self&align-self&place-self
 
-`justify-self`属性设置单元格内容的水平位置(左中右),跟`justify-items`属性的用法完全一致,但只作用于单个项目
+`justify-self`属性设置单元格内容的水平位置（左中右),跟`justify-items`属性的用法完全一致,但只作用于单个项目
 
-`align-self`属性设置单元格内容的垂直位置(上中下),跟`align-items`属性的用法完全一致,也是只作用于单个项目
+`align-self`属性设置单元格内容的垂直位置（上中下),跟`align-items`属性的用法完全一致,也是只作用于单个项目
 
 ```css
 .item {
@@ -682,7 +682,7 @@ grid-column-end: 4;
 - start:对齐单元格的起始边缘
 - end:对齐单元格的结束边缘
 - center:单元格内部居中
-- stretch:拉伸,占满单元格的整个宽度(默认值)
+- stretch:拉伸,占满单元格的整个宽度（默认值)
 
 下面是`justify-self: start`的例子
 

@@ -13,7 +13,7 @@ categories:
 
 ## 两种请求
 
-- 浏览器将CORS请求分成两类:简单请求(simple request)和非简单请求(not-so-simple request)
+- 浏览器将CORS请求分成两类：简单请求(simple request)和非简单请求(not-so-simple request)
 - 只要同时满足以下两大条件，就属于简单请求
 
 > 1. 请求方法是以下三种方法之一
@@ -47,8 +47,8 @@ Connection: keep-alive
 User-Agent: Mozilla/5.0...
 ```
 
-- 上面的头信息中,`Origin`字段用来说明，本次请求来自哪个源(协议 + 域名 + 端口),服务器根据这个值，决定是否同意这次请求
-- 如果`Origin`指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应，浏览器发现，这个回应的头信息没有包含`Access-Control-Allow-Origin`字段(详见下文),就知道出错了，从而抛出一个错误，被`XMLHttpRequest`的`onerror`回调函数捕获
+- 上面的头信息中,`Origin`字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口),服务器根据这个值，决定是否同意这次请求
+- 如果`Origin`指定的源，不在许可范围内，服务器会返回一个正常的HTTP回应，浏览器发现，这个回应的头信息没有包含`Access-Control-Allow-Origin`字段（详见下文),就知道出错了，从而抛出一个错误，被`XMLHttpRequest`的`onerror`回调函数捕获
 - **注意**:这种错误无法通过状态码识别，因为HTTP回应的状态码有可能是200
 - 如果`Origin`指定的域名在许可范围内，服务器返回的响应，会多出几个头信息字段
 
@@ -86,7 +86,7 @@ xhr.withCredentials = true;
 xhr.withCredentials = false;
 ```
 
-- 需要注意的是，如果要发送Cookie,`Access-Control-Allow-Origin`就不能设为星号，必须指定明确的，与请求网页一致的域名，同时,Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且(跨源)原网页代码中的`document.cookie`也无法读取服务器域名下的Cookie
+- 需要注意的是，如果要发送Cookie,`Access-Control-Allow-Origin`就不能设为星号，必须指定明确的，与请求网页一致的域名，同时,Cookie依然遵循同源政策，只有用服务器域名设置的Cookie才会上传，其他域名的Cookie并不会上传，且（跨源）原网页代码中的`document.cookie`也无法读取服务器域名下的Cookie
 
 ## 非简单请求
 
@@ -169,7 +169,7 @@ Access-Control-Max-Age: 1728000
 - `Access-Control-Allow-Methods`:该字段必需，它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法，注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法，这是为了避免多次**预检**请求
 - `Access-Control-Allow-Headers`:如果浏览器请求包括`Access-Control-Request-Headers`字段，则`Access-Control-Allow-Headers`字段是必需的，它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在**预检**中请求的字段
 - `Access-Control-Allow-Credentials`:该字段与简单请求时的含义相同
-- `Access-Control-Max-Age`:该字段可选，用来指定本次预检请求的有效期，单位为秒，上面结果中，有效期是20天(1728000秒),即允许缓存该条回应1728000秒(即20天),在此期间，不用发出另一条预检请求
+- `Access-Control-Max-Age`:该字段可选，用来指定本次预检请求的有效期，单位为秒，上面结果中，有效期是20天(1728000秒),即允许缓存该条回应1728000秒（即20天),在此期间，不用发出另一条预检请求
 
 ### 浏览器的正常请求和回应
 

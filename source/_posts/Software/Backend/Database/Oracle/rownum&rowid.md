@@ -110,7 +110,7 @@ select * from tempcp group by deptno,dname,loc;
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-image-20201019133351902.png" alt="image-20201019133351902" style="zoom:50%;" />
 
-- 查找出 rowid 最小的记录 (可以保证只有一条 )
+- 查找出 rowid 最小的记录（可以保证只有一条 )
 
 ```sql
 select min(rowid) from tempcp group by deptno,dname,loc;

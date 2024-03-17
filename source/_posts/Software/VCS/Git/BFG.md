@@ -19,7 +19,7 @@ java -jar bfg.jar --strip-blobs-bigger-than 100M some-big-repo.git
 删除大于 100 M 的文件
 
 
-BFG 将更新您的提交以及所有分支和标记, 此时还没有物理删除,**使用 gc 去除 git 认为多余的数据 (上面调用命令删除的文件)**
+BFG 将更新您的提交以及所有分支和标记, 此时还没有物理删除,**使用 gc 去除 git 认为多余的数据（上面调用命令删除的文件)**
 
 ```shell
 cd some-big-repo.git

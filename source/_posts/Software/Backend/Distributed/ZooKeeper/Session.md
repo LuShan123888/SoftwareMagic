@@ -26,7 +26,7 @@ categories:
 - **connected**:已连接，连接成功之后的状态
 - **closed**:已关闭，发生在 session 过期，一般由于网络故障客户端重连失败，服务器宕机或者客户端主动断开
 
-### 会话超时管理(分桶策略+会话激活)
+### 会话超时管理（分桶策略+会话激活)
 
 - zookeeper 的 leader 服务器再运行期间定时进行会话超时检查，时间间隔是 ExpirationInterval,单位是毫秒，默认值是 tickTime,每隔 tickTime 进行一次会话超时检查
 
@@ -39,7 +39,7 @@ ExpirationTime = CurrentTime + SessionTimeout;
 ExpirationTime = (ExpirationTime / ExpirationInterval + 1) * ExpirationInterval;
 ```
 
-- 在 zookeeper 运行过程中，客户端会在会话超时过期范围内向服务器发送请求(包括读和写)或者 ping 请求，俗称**心跳检测**完成会话激活，从而来保持会话的有效性
+- 在 zookeeper 运行过程中，客户端会在会话超时过期范围内向服务器发送请求（包括读和写）或者 ping 请求，俗称**心跳检测**完成会话激活，从而来保持会话的有效性
 - 会话激活流程:
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-06-14-session03.png" alt="img" style="zoom: 67%;" />

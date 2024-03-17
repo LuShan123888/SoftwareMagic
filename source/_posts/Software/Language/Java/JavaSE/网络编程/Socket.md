@@ -192,7 +192,7 @@ class Client extends Thread {
     }
 
     public void run() {//循环读取客户数据转发给其他客户
-        //循环将数据发送给所有客户(包括自己)的Socket通道
+        //循环将数据发送给所有客户（包括自己）的Socket通道
         while (true) {
             try {
                 //等待接收自己客户发送过来的数据

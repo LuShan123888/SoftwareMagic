@@ -158,7 +158,7 @@ set path data [version]
 
 - **path**:节点路径
 - **data**:需要存储的数据
-- **[version]**:可选项，版本号(可用作乐观锁)
+- **[version]**:可选项，版本号（可用作乐观锁)
 
 **实例**
 
@@ -208,7 +208,7 @@ delete path [version]
 ```
 
 - **path**:节点路径
-- **[version]**:可选项，版本号(同 set 命令)
+- **[version]**:可选项，版本号（同 set 命令)
 
 **实例**
 

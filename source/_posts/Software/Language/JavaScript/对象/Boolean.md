@@ -8,7 +8,7 @@ categories:
 ---
 # JavaScript Boolean对象
 
-- Boolean(布尔)对象用于将非布尔值转换为布尔值(true 或者 false)
+- Boolean(布尔）对象用于将非布尔值转换为布尔值(true 或者 false)
 
 ## 创建 Boolean 对象
 

@@ -49,6 +49,6 @@ Explain + SQL语句
     -  Using temporary:表示MySQL需要使用临时表来存储结果集,常见于排序和分组查询
     -  Using filesort:当Query中包含 order by 操作,而且无法利用索引完成的排序操作称为"文件排序”
     -  Using join buffer:改值强调了在获取连接条件时没有使用索引,并且需要连接缓冲区来存储中间结果,如果出现了这个值,那应该注意,根据查询的具体情况可能需要添加索引来改进能
-    -  Impossible where:这个值强调了where语句会导致没有符合条件的行(通过收集统计信息不可能存在结果)
+    -  Impossible where:这个值强调了where语句会导致没有符合条件的行（通过收集统计信息不可能存在结果)
     -  Select tables optimized away:这个值意味着仅通过使用索引,优化器可能仅从聚合函数结果中返回一行
     -  No tables used:Query语句中使用from dual 或不含任何from子句

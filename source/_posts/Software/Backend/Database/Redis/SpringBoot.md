@@ -137,7 +137,7 @@ public class RedisUtil {
      * 指定缓存失效时间
      *
      * @param key  键
-     * @param time 时间(秒)
+     * @param time 时间（秒)
      */
     public boolean expire(String key, long time) {
         try {
@@ -155,7 +155,7 @@ public class RedisUtil {
      * 根据key 获取过期时间
      *
      * @param key 键 不能为null
-     * @return 时间(秒) 返回0代表为永久有效
+     * @return 时间（秒) 返回0代表为永久有效
      */
     public long getExpire(String key) {
         return redisTemplate.getExpire(key, TimeUnit.SECONDS);
@@ -225,7 +225,7 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     * @param time  时间（秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
     public boolean set(String key, Object value, long time) {
@@ -247,7 +247,7 @@ public class RedisUtil {
      * 递增
      *
      * @param key   键
-     * @param delta 要增加几(大于0)
+     * @param delta 要增加几（大于0)
      */
     public long incr(String key, long delta) {
         if (delta < 0) {
@@ -261,7 +261,7 @@ public class RedisUtil {
      * 递减
      *
      * @param key   键
-     * @param delta 要减少几(小于0)
+     * @param delta 要减少几（小于0)
      */
     public long decr(String key, long delta) {
         if (delta < 0) {
@@ -314,7 +314,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param map  对应多个键值
-     * @param time 时间(秒)
+     * @param time 时间（秒)
      * @return true成功 false失败
      */
     public boolean hmset(String key, Map<String, Object> map, long time) {
@@ -355,7 +355,7 @@ public class RedisUtil {
      * @param key   键
      * @param item  项
      * @param value 值
-     * @param time  时间(秒) 注意:如果已存在的hash表有时间,这里将会替换原有的时间
+     * @param time  时间（秒) 注意：如果已存在的hash表有时间,这里将会替换原有的时间
      * @return true 成功 false失败
      */
     public boolean hset(String key, String item, Object value, long time) {
@@ -397,7 +397,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项
-     * @param by   要增加几(大于0)
+     * @param by   要增加几（大于0)
      */
     public double hincr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, by);
@@ -408,7 +408,7 @@ public class RedisUtil {
      *
      * @param key  键
      * @param item 项
-     * @param by   要减少记(小于0)
+     * @param by   要减少记（小于0)
      */
     public double hdecr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, -by);
@@ -466,7 +466,7 @@ public class RedisUtil {
      * 将set数据放入缓存
      *
      * @param key    键
-     * @param time   时间(秒)
+     * @param time   时间（秒)
      * @param values 值 可以是多个
      * @return 成功个数
      */
@@ -581,7 +581,7 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
+     * @param time  时间（秒)
      */
     public boolean lSet(String key, Object value, long time) {
         try {
@@ -619,7 +619,7 @@ public class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
+     * @param time  时间（秒)
      * @return
      */
     public boolean lSet(String key, List<Object> value, long time) {

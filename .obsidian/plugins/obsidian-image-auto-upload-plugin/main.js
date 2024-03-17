@@ -8845,7 +8845,7 @@ var zhCN = {
     "PicGo server": "PicGo server 上传接口",
     "PicGo server desc": "上传接口，使用PicList时可通过设置URL参数指定图床和配置",
     "Please input PicGo server": "请输入上传接口地址",
-    "PicGo delete server": "PicGo server 删除接口(请使用PicList来启用此功能)",
+    "PicGo delete server": "PicGo server 删除接口（请使用PicList来启用此功能)",
     "PicList desc": "PicList是PicGo二次开发版，请Github搜索PicList下载",
     "Please input PicGo delete server": "请输入删除接口地址",
     "Delete image using PicList": "使用 PicList 删除图片",

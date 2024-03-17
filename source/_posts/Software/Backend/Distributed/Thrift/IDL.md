@@ -16,7 +16,7 @@ Thrift 采用IDL (Interface Definition Language) 来定义通用的服务接口�
 
 ### 基本类型(Base Types)
 
-基本类型就是:不管哪一种语言，都支持的数据形式表现,Apache Thrift中支持以下几种基本类型:
+基本类型就是：不管哪一种语言，都支持的数据形式表现,Apache Thrift中支持以下几种基本类型:
 
 | Type   | Desc                        | JAVA             | GO      |
 | ------ | --------------------------- | ---------------- | ------- |

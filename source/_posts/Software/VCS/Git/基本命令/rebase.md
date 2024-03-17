@@ -33,7 +33,7 @@ git rebase  <branch_name>
 
 - `-i --interactive`:即弹出交互式的界面让用户编辑完成合并操作
 - `[startpoint],[endpoint]`:指定了一个编辑区间，可以用commit-id或HEAD指针指定
-- 如果不指定`[endpoint]`,则该区间的终点默认是当前分支`HEAD`所指向的`commit`(注:该区间指定的是一个前开后闭的区间)
+- 如果不指定`[endpoint]`,则该区间的终点默认是当前分支`HEAD`所指向的`commit`(注：该区间指定的是一个前开后闭的区间)
 
 在 rebase 的提交上，可以执行以下 6 个动作:
 
@@ -84,7 +84,7 @@ git rebase --continue
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-808-20201210114029897.png)
 
 
-希望将develop分支中的C~E部分复制到master分支中，这时就可以通过rebase命令来实现(如果只是复制某一两个提交到其他分支，建议使用更简单的命令:`git cherry-pick`)
+希望将develop分支中的C~E部分复制到master分支中，这时就可以通过rebase命令来实现（如果只是复制某一两个提交到其他分支，建议使用更简单的命令:`git cherry-pick`)
 在实际模拟中，创建了master和develop两个分支:
 **master分支**:
 
@@ -100,7 +100,7 @@ git rebase --continue
 git rebase   [startpoint]   [endpoint]  --onto  [branchName]
 ```
 
-其中,`[startpoint]` `[endpoint]`仍然和上一个命令一样指定了一个编辑区间(前开后闭),`--onto`的意思是要将该指定的提交复制到哪个分支上
+其中,`[startpoint]` `[endpoint]`仍然和上一个命令一样指定了一个编辑区间（前开后闭),`--onto`的意思是要将该指定的提交复制到哪个分支上
 所以，在找到C(90bc0045b)和E(5de0da9f2)的提交id后，运行以下命令:
 
 ```shell

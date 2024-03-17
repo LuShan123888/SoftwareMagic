@@ -44,7 +44,7 @@ OK
 | 7    | HKEYS key  获取所有Hash表中的字段                            |
 | 8    | HLEN key  获取Hash表中字段的数量                             |
 | 9    | [HMGET key field1 field2\]  获取所有给定字段的值             |
-| 10   | [HMSET key field1 value1 field2 value2 \]  同时将多个 field-value (域-值)对设置到Hash表 key 中, |
+| 10   | [HMSET key field1 value1 field2 value2 \]  同时将多个 field-value (域-值）对设置到Hash表 key 中, |
 | 11   | HSET key field value  将Hash表 key 中的字段 field 的值设为 value , |
 | 12   | HSETNX key field value  只有在字段 field 不存在时,设置Hash表字段的值, |
 | 13   | HVALS key  获取Hash表中所有值,                               |

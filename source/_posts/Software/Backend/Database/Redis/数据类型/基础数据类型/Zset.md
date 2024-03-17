@@ -64,7 +64,7 @@ $ ZRANGE testkey 0 10 WITHSCORES
 | 14   | ZREMRANGEBYSCORE key min max  移除有序集合中给定的分数区间的所有成员 |
 | 15   | [ZREVRANGE key start stop WITHSCORES\]  返回有序集中指定区间内的成员,通过索引,分数从高到低 |
 | 16   | [ZREVRANGEBYSCORE key max min WITHSCORES\]  返回有序集中指定分数区间内的成员,分数从高到低排序 |
-| 17   | ZREVRANK key member  返回有序集合中指定成员的排名,有序集成员按分数值递减(从大到小)排序 |
+| 17   | ZREVRANK key member  返回有序集合中指定成员的排名,有序集成员按分数值递减（从大到小）排序 |
 | 18   | ZSCORE key member  返回有序集中,成员的分数值                 |
 | 19   | [ZUNIONSTORE destination numkeys key key ...\]  计算给定的一个或多个有序集的并集,并存储在新的 key 中 |
-| 20   | ZSCAN key cursor [MATCH pattern\] [COUNT count]  迭代有序集合中的元素(包括元素成员和元素分值) |
+| 20   | ZSCAN key cursor [MATCH pattern\] [COUNT count]  迭代有序集合中的元素（包括元素成员和元素分值) |

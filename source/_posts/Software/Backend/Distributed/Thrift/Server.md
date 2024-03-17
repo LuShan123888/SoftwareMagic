@@ -73,13 +73,13 @@ TNonblockingServer模式也是单线程工作，但是采用NIO的模式，利�
 
 ## TThreadedSelectorServer
 
-ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件(read/write)从主线程中分离出来.同时3入 worker工作线程池
+ThreadedSelectorserver是对THSHaServer的一种扩充，它将selector中的读写IO事件(read/write)从主线程中分离出来。同时3入 worker工作线程池
 
 TThreadedSelectorServer模式是目前Thrif提供的最高级的线程服务模型，它内部有如下部分构成:
 
 - —个AcceptThread专门用于处理监听socket上的新连接
 - 若干个SelectorThread专门用于处理业务socket的网络I/O读写操作，所有网络数据的读写均是有这些线程来完成
 - 一个负载均衡器SelectorThreadLoadBalancer对象，主要用于AcceptThread线程接收到一个新socket连接请求时，决定将这个新连求分配给哪个SelectorThread线程
-- 一个ExecutorService类型的工作线程池，在SelectorThread线程中，监听到有业务socket中有调用请求过来，则将请求数据读取之后，交给ExecutorService线程池中的线程完成此次调用的具体执行.主要用于处理每个RPC请求的handler回调处理
+- 一个ExecutorService类型的工作线程池，在SelectorThread线程中，监听到有业务socket中有调用请求过来，则将请求数据读取之后，交给ExecutorService线程池中的线程完成此次调用的具体执行。主要用于处理每个RPC请求的handler回调处理
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/image-20220528023059587.png" alt="image-20220528023059587" style="zoom:50%;" />

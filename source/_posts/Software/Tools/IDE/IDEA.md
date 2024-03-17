@@ -13,18 +13,18 @@ categories:
 
 快捷键|作用
 ---|---
-Control + Space	|基本的代码补全(补全任何类,方法,变量)|
-Control + Shift + Space|	智能代码补全(过滤器方法列表和变量的预期类型)
+Control + Space	|基本的代码补全（补全任何类,方法,变量)|
+Control + Shift + Space|	智能代码补全（过滤器方法列表和变量的预期类型)
 Command + Shift + Enter	|自动结束代码,行末自动添加分号
 Command + P|	显示方法的参数信息
 Control + J|	快速查看文档
-Shift + F1|	查看外部文档(在某些代码上会触发打开浏览器显示相关文档)
+Shift + F1|	查看外部文档（在某些代码上会触发打开浏览器显示相关文档)
 Command + 鼠标放在代码上|	显示代码简要信息
 Command + F1|	在错误或警告处显示具体描述信息
 Command + N, Control + Enter, Control + N	|生成代码(getter,setter,hashCode,equals,toString,构造函数等)
-Control + O	|覆盖方法(重写父类方法)
-Control + I	|实现方法(实现接口中的方法)
-Command + Option + T|	包围代码(使用if...else,try...catch,for,synchronized等包围选中的代码)
+Control + O	|覆盖方法（重写父类方法)
+Control + I	|实现方法（实现接口中的方法)
+Command + Option + T|	包围代码（使用if...else,try...catch,for,synchronized等包围选中的代码)
 Command + /	|注释 / 取消注释与行注释
 Command + Option + /|	注释 / 取消注释与块注释
 Option + 方向键上|	连续选中代码块
@@ -61,8 +61,8 @@ Command + F	|文件内查找
 Command + G	|查找模式下,向下查找
 Command + Shift + G	|查找模式下,向上查找
 Command + R|	文件内替换
-Command + Shift + F	|全局查找(根据路径)
-Command + Shift + R	|全局替换(根据路径)
+Command + Shift + F	|全局查找（根据路径)
+Command + Shift + R	|全局替换（根据路径)
 Command + Shift + S	|查询结构(Ultimate Edition 版专用,需要在 Keymap 中设置)
 Command + Shift + M	|替换结构(Ultimate Edition 版专用,需要在 Keymap 中设置)
 ### Usage Search(使用查询)
@@ -92,9 +92,9 @@ F7	|进入下一步,如果当前行断点是一个方法,则进入当前方法�
 Shift + F7	|智能步入,断点所在行上有多个方法调用,会弹出进入哪个方法
 Shift + F8	|跳出
 Option + F9	|运行到光标处,如果光标前有其他断点会进入到该断点
-Option + F8	|计算表达式(可以更改变量值使其生效)
+Option + F8	|计算表达式（可以更改变量值使其生效)
 Command + Option + R|	恢复程序运行,如果该断点下面代码还有断点则停在下一个断点上
-Command + F8	|切换断点(若光标当前行有断点则取消断点,没有则加上断点)
+Command + F8	|切换断点（若光标当前行有断点则取消断点,没有则加上断点)
 Command + Shift + F8|	查看断点信息
 ### Navigation(导航)
 
@@ -113,7 +113,7 @@ Command + E	|显示最近打开的文件记录列表
 Option + 方向键左 / Option + 方向键右|	光标跳转到当前单词 / 中文句的左 / 右侧开头位置
 Command + Option + 方向键左 / Command + Option + 方向键右|	退回 / 前进到上一个操作的地方
 Command + Shift + Delete	|跳转到最后一个编辑的地方
-Option + F1	|显示当前文件选择目标弹出层,弹出层中有很多目标可以进行选择(如在代码编辑窗口可以选择显示该文件的 Finder)
+Option + F1	|显示当前文件选择目标弹出层,弹出层中有很多目标可以进行选择（如在代码编辑窗口可以选择显示该文件的 Finder)
 Command + B / Command + 鼠标点击|	进入光标所在的方法/变量的接口或是定义处
 Command + Option + B	|跳转到实现处,在某个调用的方法名上使用会跳到具体的实现处,可以跳过接口
 Option + Space, Command + Y	|快速打开光标所在方法,类的定义
@@ -121,7 +121,7 @@ Control + Shift + B|	跳转到类型声明处
 Command + U|	前往当前光标所在方法的父类的方法 / 接口定义
 Control + 方向键下 / Control + 方向键上	|当前光标跳转到当前文件的前一个 / 后一个方法名位置
 Command + ] / Command + [	|移动光标到当前所在代码的花括号开始 / 结束位置
-Command + F12	|弹出当前文件结构层,可以在弹出的层上直接输入进行筛选(可用于搜索类中的方法)
+Command + F12	|弹出当前文件结构层,可以在弹出的层上直接输入进行筛选（可用于搜索类中的方法)
 Control + H	|显示当前类的层次结构
 Command + Shift + H|显示方法层次结构
 Control + Option + H	|显示调用层次结构
@@ -176,5 +176,5 @@ Option + Shift + I	|检查当前文件与当前的配置文件
 Control + `	|快速切换当前的 scheme(切换主题,代码样式等)
 Command + ,	|打开 IDEA 系统设置
 Command + ;	|打开项目结构对话框
-Shift + Command + A	|查找动作(可设置相关选项)
-Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换(如果在切换的过程加按上 delete,则是关闭对应选中的窗口)
+Shift + Command + A	|查找动作（可设置相关选项)
+Control + Shift + Tab	|编辑窗口标签和工具窗口之间切换（如果在切换的过程加按上 delete,则是关闭对应选中的窗口)

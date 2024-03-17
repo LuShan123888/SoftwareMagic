@@ -10,7 +10,7 @@ categories:
 # Java ThreadLocal
 
 - ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用
-- **作用**:提供一个线程内公共变量(比如本次请求的用户信息),减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响
+- **作用**:提供一个线程内公共变量（比如本次请求的用户信息),减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度，或者为线程提供一个私有的变量副本，这样每一个线程都可以随意修改自己的变量副本，而不会对其他线程产生影响
 - ThreadLoal 变量，线程局部变量，同一个 ThreadLocal 所包含的对象，在不同的 Thread 中有不同的副本，这里有几点需要注意:
   - 因为每个 Thread 内有自己的实例副本，且该副本只能由当前 Thread 使用，这是也是 ThreadLocal 命名的由来
   - 既然每个 Thread 有自己的实例副本，且其它 Thread 不可访问，那就不存在多线程间共享的问题
@@ -61,7 +61,7 @@ void createMap(Thread t, T firstValue) {
 }
 ```
 
-- Thread类中有一个成员变量属于ThreadLocalMap类(一个定义在ThreadLocal类中的内部类),它是一个Map,他的key是ThreadLocal实例对象
+- Thread类中有一个成员变量属于ThreadLocalMap类（一个定义在ThreadLocal类中的内部类),它是一个Map,他的key是ThreadLocal实例对象
 - 初始容量16,负载因子2/3,解决冲突的方法是再hash法
 
 ```java
@@ -99,12 +99,12 @@ private static int nextHashCode() {
 ```
 
 - 对于每一个ThreadLocal对象，都有一个final修饰的int型的threadLocalHashCode不可变属性，对于基本数据类型，可以认为它在初始化后就不可以进行修改，所以可以唯一确定一个ThreadLocal对象
-- 但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性:在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类)成员变量(即类变量)和一个static final修饰的常量(作为两个相邻nextHashCode的差值),由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性
+- 但是如何保证两个同时实例化的ThreadLocal对象有不同的threadLocalHashCode属性：在ThreadLocal类中，还包含了一个static修饰的AtomicInteger([əˈtɒmɪk]提供原子操作的Integer类）成员变量（即类变量）和一个static final修饰的常量（作为两个相邻nextHashCode的差值),由于nextHashCode是类变量，所以每一次调用ThreadLocal类都可以保证nextHashCode被更新到新的值，并且下一次调用ThreadLocal类这个被更新的值仍然可用，同时AtomicInteger保证了nextHashCode自增的原子性
 
 **为什么不直接用线程id来作为ThreadLocalMap的key？**
 
 - 这一点很容易理解，因为直接用线程id来作为ThreadLocalMap的key,无法区分放入ThreadLocalMap中的多个value,比如我们放入了两个字符串，你如何知道我要取出来的是哪一个字符串呢？
-- 而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由`threadLocalHashCode`属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分(下面的例子),所以可以用不同的ThreadLocal作为key,区分不同的value,方便存取
+- 而使用ThreadLocal作为key就不一样了，由于每一个ThreadLocal对象都可以由`threadLocalHashCode`属性唯一区分或者说每一个ThreadLocal对象都可以由这个对象的名字唯一区分（下面的例子),所以可以用不同的ThreadLocal作为key,区分不同的value,方便存取
 
 ```java
 public class Son implements Cloneable{
@@ -133,11 +133,11 @@ public class Son implements Cloneable{
 
 - ThreadLocalMap实现中已经考虑了这种情况，在调用 set(),get(),remove() 方法的时候，会清理掉 key 为 null 的记录，如果说会出现内存泄漏，那只有在出现了 key 为 null 的记录后，没有手动调用 remove() 方法，并且之后也不再调用 get(),set(),remove() 方法的情况下,ThreadLocalMap的getEntry函数的流程大概为:
 
-  1. 首先从ThreadLocal的直接索引位置(通过ThreadLocal.threadLocalHashCode & (table.length-1)运算得到)获取Entry e,如果e不为null并且key相同则返回e
+  1. 首先从ThreadLocal的直接索引位置（通过ThreadLocal.threadLocalHashCode & (table.length-1)运算得到）获取Entry e,如果e不为null并且key相同则返回e
 
   2. 如果e为null或者key不一致则向下一个位置查询，如果下一个位置的key和当前需要查询的key相等，则返回对应的Entry,否则，如果key值为null,则擦除该位置的Entry,并继续向下一个位置查询，在这个过程中遇到的key为null的Entry都会被擦除，那么Entry内的value也就没有强引用链，自然会被回收，仔细研究代码可以发现,set操作也有类似的思想，将key为null的这些Entry都删除，防止内存泄露
 
-     但是光这样还是不够的，上面的设计思路依赖一个前提条件:要调用ThreadLocalMap的getEntry函数或者set函数，这当然是不可能任何情况都成立的，所以很多情况下需要使用者手动调用ThreadLocal的remove函数，手动删除不再需要的ThreadLocal,防止内存泄露，所以JDK建议将ThreadLocal变量定义成private static的，这样的话ThreadLocal的生命周期就更长，由于一直存在ThreadLocal的强引用，所以ThreadLocal也就不会被回收，也就能保证任何时候都能根据ThreadLocal的弱引用访问到Entry的value值，然后remove它，防止内存泄露
+     但是光这样还是不够的，上面的设计思路依赖一个前提条件：要调用ThreadLocalMap的getEntry函数或者set函数，这当然是不可能任何情况都成立的，所以很多情况下需要使用者手动调用ThreadLocal的remove函数，手动删除不再需要的ThreadLocal,防止内存泄露，所以JDK建议将ThreadLocal变量定义成private static的，这样的话ThreadLocal的生命周期就更长，由于一直存在ThreadLocal的强引用，所以ThreadLocal也就不会被回收，也就能保证任何时候都能根据ThreadLocal的弱引用访问到Entry的value值，然后remove它，防止内存泄露
 
 - 建议回收自定义的ThreadLocal变量，尤其在线程池场景下，线程经常会被复用，如果不清理自定义的 ThreadLocal变量，可能会影响后续业务逻辑和造成内存泄露等问题，尽量在代码中使用try-finally块进行回收:
 
@@ -157,7 +157,7 @@ finally {
   - 每个线程需要有自己单独的实例
   - 实例需要在多个方法中共享，但不希望被多线程共享
 - 对于第一点，每个线程拥有自己实例，实现它的方式很多，例如可以在线程内部构建一个单独的实例,ThreadLoca 可以以非常方便的形式满足该需求
-- 对于第二点，可以在满足第一点(每个线程有自己的实例)的条件下，通过方法间引用传递的形式实现,ThreadLocal 使得代码耦合度更低，且实现更优雅
+- 对于第二点，可以在满足第一点（每个线程有自己的实例）的条件下，通过方法间引用传递的形式实现,ThreadLocal 使得代码耦合度更低，且实现更优雅
 
 **存储用户Session**
 

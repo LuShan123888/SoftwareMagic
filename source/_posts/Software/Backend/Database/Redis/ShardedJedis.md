@@ -9,7 +9,7 @@ categories:
 # Redis ShardedJedis
 
 - ShardedJedis是基于一致性哈希算法实现的分布式Redis集群客户端,集群使用一致性 hash 来确保一个 Key 始终被指向相同的 Redis Server,每个 Redis Server 被称为一个 Shard
-- 因为每个 Shard 都是一个 Master,因此使用 sharding 机制会产生一些限制:不能在 sharding中直接使用 Jedis 的 transactions,pipelining,pub/sub 这些 API,基本的原则是不能跨越 shard,但 jedis 并没有在 API 的层面上禁止这些行为,但是这些行为会有不确定的结果,一种可能的方式是使用 keytags 来干预 key 的分布,当然,这需要手工的干预
+- 因为每个 Shard 都是一个 Master,因此使用 sharding 机制会产生一些限制：不能在 sharding中直接使用 Jedis 的 transactions,pipelining,pub/sub 这些 API,基本的原则是不能跨越 shard,但 jedis 并没有在 API 的层面上禁止这些行为,但是这些行为会有不确定的结果,一种可能的方式是使用 keytags 来干预 key 的分布,当然,这需要手工的干预
 - 另外一个限制是正在使用的 shards 是不能被改变的,因为所有的 sharding 都是预分片的
 
 ## ShardedJedis实现分析
@@ -31,7 +31,7 @@ categories:
 | ShardedJedis       | 同Jedis类似,实现JedisCommands对外提供基于String的key,value操作 |
 
 - shared一致性哈希算法
-    1. Redis服务器节点划分:将每台服务器节点采用hash算法划分为160个虚拟节点(可以配置划分权重)
+    1. Redis服务器节点划分：将每台服务器节点采用hash算法划分为160个虚拟节点（可以配置划分权重)
     2. 将划分虚拟节点采用TreeMap存储
     3. 对每个Redis服务器的物理连接采用LinkedHashMap存储
     4. 对Key or KeyTag 采用同样的hash算法,然后从TreeMap获取大于等于键hash值得节点,取最邻近节点存储,当key的hash值大于虚拟节点hash值得最大值时,存入第一个虚拟节点

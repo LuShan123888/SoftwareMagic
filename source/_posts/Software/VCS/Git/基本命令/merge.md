@@ -34,7 +34,7 @@ git merge [branch]
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-6f061d950a7b02084d40e06b1e4b74d5552cc8cc.jpeg)
 
-- 如果想把 dev 合并到 master,就会出现一个合并冲突:想要标题是 Hello! 还是 Hey!?
+- 如果想把 dev 合并到 master,就会出现一个合并冲突：想要标题是 Hello! 还是 Hey!?
 - 当尝试合并这些分支时,Git 会向你展示冲突出现的位置，可以手动移除我们不想保留的修改，保存这些修改，再次添加这个已修改的文件，然后提交这些修改
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2a8ce9f5e3f32b399cca693f38418e65.gif)

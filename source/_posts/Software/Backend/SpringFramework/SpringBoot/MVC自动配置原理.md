@@ -37,7 +37,7 @@ categories:
 
 - 内容协商视图解析器
 - 自动配置了ViewResolver,就是Spring MVC的视图解析器
-- 即根据方法的返回值取得视图对象(View),然后由视图对象决定如何渲染(转发，重定向)
+- 即根据方法的返回值取得视图对象(View),然后由视图对象决定如何渲染（转发，重定向)
 
 **分析源码**
 
@@ -252,7 +252,7 @@ public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({ Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class })
-// 这个注解的意思是:容器中没有这个组件的时候，这个自动配置类才生效
+// 这个注解的意思是：容器中没有这个组件的时候，这个自动配置类才生效
 @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)
 @AutoConfigureAfter({ DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class,

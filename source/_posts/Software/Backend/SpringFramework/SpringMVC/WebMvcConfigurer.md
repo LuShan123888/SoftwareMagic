@@ -9,7 +9,7 @@ categories:
 # Spring MVC WebMvcConfigurer
 
 - WebMvcConfigurer配置类其实是`Spring`内部的一种配置方式，采用`JavaBean`的形式来代替传统的`xml`配置文件形式进行针对框架个性化定制，基于java-based方式的Spring MVC配置，需要创建一个配置类并实现`WebMvcConfigurer` 接口
-- `WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象(增加了一些默认实现),但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃，官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
+- `WebMvcConfigurerAdapter` 抽象类是对`WebMvcConfigurer`接口的简单抽象（增加了一些默认实现),但在SpringBoot2.0及Spring5.0中WebMvcConfigurerAdapter已被废弃，官方推荐直接实现WebMvcConfigurer或者直接继承WebMvcConfigurationSupport
 
 ```java
 public interface WebMvcConfigurer {
@@ -112,7 +112,7 @@ public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf
 
 - **注意**:这里的静态资源是放置在web根目录下，而非`WEB-INF`下
 
-- 例如:在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录(webroot)下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是:`/`,它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性(根目录下的文件可以直接访问),`DefaultServletHttpRequestHandler`是帮助回归这个特性的
+- 例如：在webroot目录下有一个图片`1.png`我们知道Servelt规范中web根目录(webroot)下的文件可以直接访问的，但是由于`DispatcherServlet`配置了映射路径是:`/`,它几乎把所有的请求都拦截了，从而导致`1.png`访问不到，这时注册一个`DefaultServletHttpRequestHandler`就可以解决这个问题，其实可以理解为`DispatcherServlet`破坏了Servlet的一个特性（根目录下的文件可以直接访问),`DefaultServletHttpRequestHandler`是帮助回归这个特性的
 
 ## configureViewResolvers
 
@@ -254,7 +254,7 @@ this is test.jsp
 
 显然，两次使用了不同的视图解析器，那么底层到底发生了什么？在配置里我们注册了两个视图解析器:`ContentNegotiatingViewResolver` 和 `InternalResourceViewResolver`,还有一个默认视图:`MappingJackson2JsonView`,controller执行完毕之后返回一个ModelAndView,其中视图的名称为example1
 
-> 1. 返回首先会交给`ContentNegotiatingViewResolver` 进行视图解析处理，而`ContentNegotiatingViewResolver` 会先把视图名example1交给它持有的所有`ViewResolver`尝试进行解析(本实例中只有`InternalResourceViewResolver`)
+> 1. 返回首先会交给`ContentNegotiatingViewResolver` 进行视图解析处理，而`ContentNegotiatingViewResolver` 会先把视图名example1交给它持有的所有`ViewResolver`尝试进行解析（本实例中只有`InternalResourceViewResolver`)
 > 2. 根据请求的`mediaType`,再将`example1.mediaType`(这里是`example1.json` 和`example1.html`)作为视图名让所有视图解析器解析一遍，两步解析完毕之后会获得一堆候选的`List<View>`再加上默认的`MappingJackson2JsonView`
 > 3. 根据请求的`media type`从候选的`List<View>`中选择一个最佳的返回，至此视图解析完毕
 

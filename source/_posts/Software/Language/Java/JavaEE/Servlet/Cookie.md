@@ -11,7 +11,7 @@ categories:
 
 - Cookie 是存储在客户端计算机上的文本文件,并保留了各种跟踪信息,Java Servlet 显然支持 HTTP Cookie
 - 识别返回用户包括三个步骤:
-    - 服务器脚本向浏览器发送一组 Cookie,例如:姓名,年龄或识别号码等
+    - 服务器脚本向浏览器发送一组 Cookie,例如：姓名,年龄或识别号码等
     - 浏览器将这些信息存储在本地计算机上,以备将来使用
     - 当下一次浏览器向 Web 服务器发送任何请求时,浏览器会把这些 Cookie 信息发送到服务器,服务器将使用这些信息来识别用户
 
@@ -24,7 +24,7 @@ categories:
 
 ## Cookie 剖析
 
-- Cookie 通常设置在 HTTP 头信息中(虽然 JavaScript 也可以直接在浏览器上设置一个 Cookie),设置 Cookie 的 Servlet 会发送如下的头信息:
+- Cookie 通常设置在 HTTP 头信息中（虽然 JavaScript 也可以直接在浏览器上设置一个 Cookie),设置 Cookie 的 Servlet 会发送如下的头信息:
 
 ```java
 HTTP/1.1 200 OK
@@ -61,14 +61,14 @@ Cookie: name=xyz
 | :--- | :----------------------------------------------------------- |
 | 1    | **public void setDomain(String pattern)** 该方法设置 cookie 适用的域,例如 test.com, |
 | 2    | **public String getDomain()** 该方法获取 cookie 适用的域,例如 test.com, |
-| 3    | **public void setMaxAge(int expiry)** 该方法设置 cookie 过期的时间(以秒为单位),如果不这样设置,cookie 只会在当前 session 会话中持续有效, |
-| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期(以秒为单位),默认情况下,-1 表示 cookie 将持续下去,直到浏览器关闭, |
+| 3    | **public void setMaxAge(int expiry)** 该方法设置 cookie 过期的时间（以秒为单位),如果不这样设置,cookie 只会在当前 session 会话中持续有效, |
+| 4    | **public int getMaxAge()** 该方法返回 cookie 的最大生存周期（以秒为单位),默认情况下,-1 表示 cookie 将持续下去,直到浏览器关闭, |
 | 5    | **public String getName()** 该方法返回 cookie 的名称,名称在创建后不能改变, |
 | 6    | **public void setValue(String newValue)** 该方法设置与 cookie 关联的值, |
 | 7    | **public String getValue()** 该方法获取与 cookie 关联的值,  |
-| 8    | **public void setPath(String uri)** 该方法设置 cookie 适用的路径,如果您不指定路径,与当前页面相同目录下的(包括子目录下的)所有 URL 都会返回 cookie, |
+| 8    | **public void setPath(String uri)** 该方法设置 cookie 适用的路径,如果您不指定路径,与当前页面相同目录下的（包括子目录下的）所有 URL 都会返回 cookie, |
 | 9    | **public String getPath()** 该方法获取 cookie 适用的路径,   |
-| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值,表示 cookie 是否应该只在加密的(即 SSL)连接上发送, |
+| 10   | **public void setSecure(boolean flag)** 该方法设置布尔值,表示 cookie 是否应该只在加密的（即 SSL)连接上发送, |
 | 11   | **public void setComment(String purpose)** 设置cookie的注释,该注释在浏览器向用户呈现 cookie 时非常有用, |
 | 12   | **public String getComment()** 获取 cookie 的注释,如果 cookie 没有注释 则返回 null, |
 
@@ -88,7 +88,7 @@ Cookie cookie = new Cookie("key","value");
 [ ] ( ) = , " / ? @ : ;
 ```
 
-- **设置最大生存周期**:您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间(以秒为单位),下面将设置一个最长有效期为 24 小时的 cookie
+- **设置最大生存周期**:您可以使用 setMaxAge 方法来指定 cookie 能够保持有效的时间（以秒为单位),下面将设置一个最长有效期为 24 小时的 cookie
 
 ```java
 cookie.setMaxAge(60*60*24);

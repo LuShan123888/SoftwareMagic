@@ -92,7 +92,7 @@ $ docker volume prune
 - **注意**:容器删除后,主机目录仍然存在
 
 ```shell
-$ docker run -v 主机目录:容器目录 镜像名
+$ docker run -v 主机目录：容器目录 镜像名
 ```
 
 - 通过在容器目录后加上`:ro`或`:rw`可指定读写权限

@@ -12,7 +12,7 @@ categories:
 
 ## 创建String对象
 
-- String 对象用于处理文本(字符串)
+- String 对象用于处理文本（字符串)
 - String 对象创建方法: **new String()**
 
 ```js

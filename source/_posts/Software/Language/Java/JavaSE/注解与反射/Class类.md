@@ -24,8 +24,8 @@ Class类封装一个对象和接口运行时的状态，当装载类时,Class类
 以下列出了Class类的几个常用方法:
 
 - `static Class<?>forName(String className)`:返回给定串名相应的Class对象，若给定一个类或接口的完整路径名，那么此方法将试图定位，转载和连接该类，若成功，返回该类对象，否则，抛出ClassNotFoundException异常
-- `T newInstance()`:创建类的一个实例,`newInstance()`方法调用默认构造器(无参数构造器)初始化新建对象
-- `String getName()`:返回Class对象表示的类型(类，接口，数组或父类型)的完整路径名字符串
+- `T newInstance()`:创建类的一个实例,`newInstance()`方法调用默认构造器（无参数构造器）初始化新建对象
+- `String getName()`:返回Class对象表示的类型（类，接口，数组或父类型）的完整路径名字符串
 - `Method[]getMethods()`:返回当前Class对象表示的类或接口的所有公有成员方法对象的数组，包括自身定义的和从父类继承的方法，而且，利用Method类提供的`invoke()`方法可实现相应类的成员方法的调用，例如:
 
 ```java

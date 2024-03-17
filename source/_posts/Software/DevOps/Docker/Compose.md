@@ -230,7 +230,7 @@ services:
 - **endpoint_mode**:访问集群服务的方式
     - **vip**:Docker 集群服务一个对外的虚拟 ip,所有的请求都会通过这个虚拟 ip 到达集群服务内部的机器
     - **dnsrr**:DNS 轮询(DNSRR),所有的请求会自动轮询获取到集群 ip 列表中的一个 ip 地址
-- **labels**:在服务上设置标签,可以用容器上的 labels(跟 deploy 同级的配置)覆盖 deploy 下的 labels
+- **labels**:在服务上设置标签,可以用容器上的 labels(跟 deploy 同级的配置）覆盖 deploy 下的 labels
 - **mode**:指定服务提供的模式
     - **replicated**:复制服务,复制指定服务到集群的机器上
     - **global**:全局服务,服务将部署至集群的每个节点
@@ -238,15 +238,15 @@ services:
 - **resources**:配置服务器资源使用的限制,例如上例子,配置 Redis 集群运行需要的 cpu 的百分比 和 内存的占用,避免占用资源过高出现异常
 - **restart_policy**:配置如何在退出容器时重新启动容器
     - condition:可选 none,on-failure 或者 any(默认值:any)
-    - delay:设置多久之后重启(默认值:0)
-    - max_attempts:尝试重新启动容器的次数,超出次数,则不再尝试(默认值:一直重试)
-    - window:设置容器重启超时时间(默认值:0)
+    - delay:设置多久之后重启（默认值:0)
+    - max_attempts:尝试重新启动容器的次数,超出次数,则不再尝试（默认值：一直重试)
+    - window:设置容器重启超时时间（默认值:0)
 - **rollback_config**:配置在更新失败的情况下应如何回滚服务
     - parallelism:一次要回滚的容器数,如果设置为0,则所有容器将同时回滚
-    - delay:每个容器组回滚之间等待的时间(默认为0s)
+    - delay:每个容器组回滚之间等待的时间（默认为0s)
     - failure_action:如果回滚失败,该怎么办,其中一个 continue 或者 pause(默认pause)
     - monitor:每个容器更新后,持续观察是否失败了的时间 (ns|us|ms|s|m|h)(默认为0s)
-    - max_failure_ratio:在回滚期间可以容忍的故障率(默认为0)
+    - max_failure_ratio:在回滚期间可以容忍的故障率（默认为0)
     - order:回滚期间的操作顺序,其中一个 stop-first(串行回滚),或者 start-first(并行回滚)(默认 stop-first)
 - **update_config**:配置应如何更新服务,对于配置滚动更新很有用
     - parallelism:一次更新的容器数
@@ -503,7 +503,7 @@ ports:
 
 - no:是默认的重启策略,在任何情况下都不会重启容器
 - always:容器总是重新启动
-- on-failure:在容器非正常退出时(退出状态非0),才会重启容器
+- on-failure:在容器非正常退出时（退出状态非0),才会重启容器
 - unless-stopped:在容器退出时总是重启容器,但是不考虑在Docker守护进程启动时就已经停止了的容器
 
 ```yaml
@@ -679,7 +679,7 @@ $ docker-compose conifg
 $ docker-compose ps
 ```
 
-- `-a`:打印所有的容器信息(包括停止的容器)
+- `-a`:打印所有的容器信息（包括停止的容器)
 - `-q` :只打印容器的 ID 信息
 
 ### top
@@ -700,7 +700,7 @@ $ docker-compose images
 
 ### up
 
-- 该命令十分强大,它将尝试自动完成包括构建镜像,(重新)创建服务,启动服务,并关联服务相关容器的一系列操作
+- 该命令十分强大,它将尝试自动完成包括构建镜像,(重新）创建服务,启动服务,并关联服务相关容器的一系列操作
 
 ```
 $ docker-compose up
@@ -712,7 +712,7 @@ $ docker-compose up
 - `--force-recreate` 强制重新创建容器,不能与 `--no-recreate` 同时使用
 - `--no-recreate` 如果容器已经存在了,则不重新创建,不能与 `--force-recreate` 同时使用
 - `--no-build` 不自动构建缺失的服务镜像
-- `-t, --timeout TIMEOUT` 停止容器时候的超时(默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
 
 ### port
 
@@ -722,8 +722,8 @@ $ docker-compose up
 $ docker-compose port [options] SERVICE PRIVATE_PORT
 ```
 
-- `--protocol=proto` 指定端口协议,tcp(默认值)或者 udp
-- `--index=index` 如果同一服务存在多个容器,指定命令对象容器的序号(默认为 1)
+- `--protocol=proto` 指定端口协议,tcp(默认值）或者 udp
+- `--index=index` 如果同一服务存在多个容器,指定命令对象容器的序号（默认为 1)
 
 ### down
 
@@ -749,7 +749,7 @@ $ docker-compose start [SERVICE...]
 $ docker-compose stop [SERVICE...]
 ```
 
-- `-t, --timeout TIMEOUT` 停止容器时候的超时(默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
 
 ### restart
 
@@ -759,11 +759,11 @@ $ docker-compose stop [SERVICE...]
 $ docker-compose restart [SERVICE...]
 ```
 
-- `-t, --timeout TIMEOUT` 指定重启前停止容器的超时(默认为 10 秒)
+- `-t, --timeout TIMEOUT` 指定重启前停止容器的超时（默认为 10 秒)
 
 ### rm
 
-- 删除所有(停止状态的)服务容器
+- 删除所有（停止状态的）服务容器
 
 ```
 $ docker-compose rm  [SERVICE...]
@@ -785,7 +785,7 @@ $ docker-compose logs [SERVICE...]
 
 ### build
 
-- 构建(重新构建)项目中的服务容器
+- 构建（重新构建）项目中的服务容器
 - 服务容器一旦构建后,将会带上一个标记名,例如对于 web 项目中的一个 db 容器,可能是 web_db
 - 可以随时在项目目录下运行该命令来重新构建服务
 
@@ -841,7 +841,7 @@ $ docker-compose scale [options] [SERVICE=NUM...]
 ```
 
 - `service=num` 设置数量,一般的,当指定数目多于该服务当前实际运行容器,将新创建并启动容器,反之,将停止容器
-- `-t, --timeout TIMEOUT` 停止容器时候的超时(默认为 10 秒)
+- `-t, --timeout TIMEOUT` 停止容器时候的超时（默认为 10 秒)
 
 **实例**
 

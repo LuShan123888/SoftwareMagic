@@ -189,7 +189,7 @@ public class ExampleForHbase{
     public static Connection connection;
     public static Admin admin;
 
-    //主函数中的语句请逐句执行，只需删除其前的//即可，如:执行insertRow时请将其他语句注释
+    //主函数中的语句请逐句执行，只需删除其前的//即可，如：执行insertRow时请将其他语句注释
     public static void main(String[] args)throws IOException{
         //创建一个表，表名为Score,列族为sname,course
         createTable("Score",new String[]{"sname","course"});
@@ -221,7 +221,7 @@ public class ExampleForHbase{
 
         //查询Score表中，行键为95001,列族为course,列为Math的值
         //getData("Score", "95001", "course", "Math");
-        //查询Score表中，行键为95001,列族为sname的值(因为sname列族下没有子列所以第四个参数为空)
+        //查询Score表中，行键为95001,列族为sname的值（因为sname列族下没有子列所以第四个参数为空)
         //getData("Score", "95001", "sname", "");
 
         //删除Score表
@@ -309,7 +309,7 @@ public class ExampleForHbase{
      * @param tableName 表名
      * @param rowKey 行键
      * @param colFamily 列族名
-     * @param col 列名(如果其列族下没有子列，此参数可为空)
+     * @param col 列名（如果其列族下没有子列，此参数可为空)
      * @param val 值
      * @throws IOException
      */

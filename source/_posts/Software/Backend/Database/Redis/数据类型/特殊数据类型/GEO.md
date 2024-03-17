@@ -48,7 +48,7 @@ redis>
 
 ## geopos
 
-- geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置(经度和纬度),不存在的返回 nil
+- geopos 用于从给定的 key 里返回一个或多个指定名称(member)的位置（经度和纬度),不存在的返回 nil
 - geopos 语法格式如下:
 
 ```

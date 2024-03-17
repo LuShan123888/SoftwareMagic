@@ -12,7 +12,7 @@ categories:
 ## Future
 
 - `Future<V>`接口表示一个未来可能会返回的结果，它定义的方法有:
-  - `get()`:获取结果(可能会等待)
+  - `get()`:获取结果（可能会等待)
   - `get(long timeout, TimeUnit unit)`:获取结果，但只等待指定的时间
   - `cancel(boolean mayInterruptIfRunning)`:取消当前任务
   - `isDone()`:判断任务是否已完成
@@ -85,7 +85,7 @@ public interface Supplier<T> {
 }
 ```
 
-- 这里我们用lambda语法简化了一下，直接传入`Main::fetchPrice`,因为`Main.fetchPrice()`静态方法的签名符合`Supplier`接口的定义(除了方法名外)
+- 这里我们用lambda语法简化了一下，直接传入`Main::fetchPrice`,因为`Main.fetchPrice()`静态方法的签名符合`Supplier`接口的定义（除了方法名外)
 - 紧接着,`CompletableFuture`已经被提交给默认的线程池执行了，我们需要定义的是`CompletableFuture`完成时和异常时需要回调的实例，完成时,`CompletableFuture`会调用`Consumer`对象:
 
 ```java

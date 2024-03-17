@@ -280,9 +280,9 @@ public JSONObject fileUpload(@RequestParam(value = "editormd-image-file", requir
     //上传文件地址
     System.out.println("上传文件保存地址:"+realPath);
 
-    //解决文件名字问题:我们使用uuid;
+    //解决文件名字问题：我们使用uuid;
     String filename = "ks-"+UUID.randomUUID().toString().replaceAll("-", "");
-    //通过CommonsMultipartFile的方法直接写文件(注意这个时候)
+    //通过CommonsMultipartFile的方法直接写文件（注意这个时候)
     file.transferTo(new File(realPath +"/"+ filename));
 
     //给editormd进行回调
@@ -351,7 +351,7 @@ public String show(@PathVariable("id") int id,Model model){
     <body>
 
         <div>
-            <!--文章头部信息:标题，作者，最后更新日期，导航-->
+            <!--文章头部信息：标题，作者，最后更新日期，导航-->
             <h2 style="margin: auto 0" th:text="${article.title}"></h2>
             作者:<span style="float: left" th:text="${article.author}"></span>
             <!--文章主体内容-->
@@ -375,7 +375,7 @@ public String show(@PathVariable("id") int id,Model model){
         <script type="text/javascript">
             var testEditor;
             $(function () {
-                testEditor = editormd.markdownToHTML("doc-content", {//注意:这里是上面DIV的id
+                testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
                     htmlDecode: "style,script,iframe",
                     emoji: true,
                     taskList: true,

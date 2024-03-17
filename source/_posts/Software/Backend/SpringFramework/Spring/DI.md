@@ -82,7 +82,7 @@ public class MyConfig2 {
 ###  @Autowired
 
 - 自动装配，用于替代基于XML配置的自动装配
-- @Autowired默认按类型装配(属于Spring规范), 默认情况下必须要求依赖对象必须存在, 如果要允许null 值, 可以设置它的required属性为false, 如果我们想使用名称装配可以结合@Qualifier注解进行使用
+- @Autowired默认按类型装配（属于Spring规范), 默认情况下必须要求依赖对象必须存在, 如果要允许null 值, 可以设置它的required属性为false, 如果我们想使用名称装配可以结合@Qualifier注解进行使用
 
 #### required
 
@@ -473,7 +473,7 @@ xmlns:p="http://www.springframework.org/schema/p"
 ### 静态工厂的方法注入
 
 - 静态工厂顾名思义，就是通过调用静态工厂的方法来获取自己需要的对象
-- 为了让Spring管理所有对象，我们不能直接通过`工程类.静态方法()`来获取对象，而是依然通过spring注入的形式获取:
+- 为了让Spring管理所有对象，我们不能直接通过`工程类。静态方法()`来获取对象，而是依然通过spring注入的形式获取:
 
 ```java
 public class UserMapperFactory {  
@@ -581,7 +581,7 @@ public void test(){
 
 ### Prototype
 
-- 当一个bean的作用域为Prototype,表示一个bean定义对应多个对象实例,Prototype作用域的bean会导致在每次对该bean请求(将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法)时都会创建一个新的bean实例
+- 当一个bean的作用域为Prototype,表示一个bean定义对应多个对象实例,Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法）时都会创建一个新的bean实例
 - Prototype是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象，根据经验，对有状态的bean应该使用prototype作用域，而对无状态的bean则应该使用singleton作用域
 
 ```xml

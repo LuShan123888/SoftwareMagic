@@ -19,7 +19,7 @@ categories:
 - AOP实现的关键在于AOP框架自动创建的AOP代理,AOP代理主要分为静态代理和动态代理，静态代理的代表为AspectJ,而动态代理则以Spring AOP为代表
   - AspectJ是静态代理的增强，所谓的静态代理就是AOP框架会在编译阶段生成AOP代理类，因此也称为编译时增强
   - Spring AOP 基于动态代理，主要有两种方式
-      - JDK动态代理:通过反射来接收被代理的类，并且要求被代理的类必须实现InvocationHandler接口,JDK动态代理的核心是
+      - JDK动态代理：通过反射来接收被代理的类，并且要求被代理的类必须实现InvocationHandler接口,JDK动态代理的核心是
           InvocationHandler接口和Proxy类
       - CGLIB (Code Generation Library),是一个代码生成的类库，可以在运行时动态的生成某个类的子类，注意,CGLIB是通过继承
           的方式做的动态代理，因此如果某个类被标记为final,那么它是无法使用CGLIB做动态代理的，诸如private的方法也是不可以作为切面的
@@ -29,7 +29,7 @@ categories:
   - Advice:增强，指特定连接点上执行的动作
   - Introduction:引介，特殊的增强，指为一个已有的Java对象动态地增加新的接口
   - Weaving:织入，将增强添加到目标类具体连接点上的过程
-  - Aspect:切面，由切点和增强(引介)组成，包括了对横切关注功能的定义，已包括了对连接点的定义
+  - Aspect:切面，由切点和增强（引介）组成，包括了对横切关注功能的定义，已包括了对连接点的定义
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-640-4157569.png)
 
@@ -165,7 +165,7 @@ public class MyTest {
 }
 ```
 
-- Spring的Aop就是将公共的业务 (日志 , 安全等) 和领域业务结合起来
+- Spring的Aop就是将公共的业务（日志 , 安全等) 和领域业务结合起来
 - 当执行领域业务时，将会把公共业务加进来，实现公共业务的重复利用，领域业务更纯粹，其本质还是动态代理
 
 ### 自定义类来实现AOP

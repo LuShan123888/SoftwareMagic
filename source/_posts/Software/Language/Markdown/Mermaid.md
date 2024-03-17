@@ -304,7 +304,7 @@ graph LR
      style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray:5,5;
 ```
 
-备注:这些样式参考CSS样式
+备注：这些样式参考CSS样式
 
 ##### 样式类
 
@@ -336,7 +336,7 @@ graph LR
       class A cssClass;
 ```
 
-默认样式类:当没有指定样式的时候,默认采用
+默认样式类：当没有指定样式的时候,默认采用
 
 ```
 classDef default fill:#f9f,stroke:#333,stroke-width:4px;

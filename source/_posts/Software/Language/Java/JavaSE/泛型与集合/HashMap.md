@@ -19,8 +19,8 @@ categories:
         - **线性探测再散列**:线性探测方法就是线性探测空白单元，当数据通过Hash函数计算应该放在700这个位置，但是700这个位置已经有数据了，那么接下来就应该查看701位置是否空闲，再查看702位置，依次类推
         - **二次探测再散列**:二次探测是过程是x+1,x+4,x+9,以此类推,**二次探测的步数是原始位置相隔的步数的平方**
         - **再哈希法**:出现冲突后采用其他的Hash函数计算，直到不再冲突为止
-    - **链地址法(拉链法)**:不同与前两种方法，他是在出现冲突的地方存储一个链表，所有的同义词记录都存在其中
-    - **建立公共溢出区**:建立公共溢出区的基本思想是:假设Hash函数的值域是[1,m-1],则设向量HashTable[0...m-1]为基本表，每个分量存放一个记录，另外设向量OverTable[0...v]为溢出表，所有关键字和基本表中关键字为同义词的记录，不管它们由Hash函数得到的Hash值是什么，一旦发生冲突，都填入溢出表
+    - **链地址法（拉链法)**:不同与前两种方法，他是在出现冲突的地方存储一个链表，所有的同义词记录都存在其中
+    - **建立公共溢出区**:建立公共溢出区的基本思想是：假设Hash函数的值域是[1,m-1],则设向量HashTable[0...m-1]为基本表，每个分量存放一个记录，另外设向量OverTable[0...v]为溢出表，所有关键字和基本表中关键字为同义词的记录，不管它们由Hash函数得到的Hash值是什么，一旦发生冲突，都填入溢出表
 
 ## 内部实现
 
@@ -28,7 +28,7 @@ categories:
 
 ### 存储结构-字段
 
-- 从结构实现来讲,HashMap是数组+链表+红黑树(JDK1.8增加了红黑树部分)实现的，如下如所示
+- 从结构实现来讲,HashMap是数组+链表+红黑树(JDK1.8增加了红黑树部分）实现的，如下如所示
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-e4a19398.png" alt="img" style="zoom:50%;" />
 
@@ -53,7 +53,7 @@ static class Node<K,V> implements Map.Entry<K,V> {
 }
 ```
 
-- Node是HashMap的一个内部类，实现了Map.Entry接口，本质是就是一个映射(键值对),上图中的每个黑色圆点就是一个Node对象
+- Node是HashMap的一个内部类，实现了Map.Entry接口，本质是就是一个映射（键值对),上图中的每个黑色圆点就是一个Node对象
 
 **这样的存储方式有什么优点**
 
@@ -63,7 +63,7 @@ static class Node<K,V> implements Map.Entry<K,V> {
 map.put("美团","小美");
 ```
 
-- 系统将调用”美团”这个key的hashCode()方法得到其hashCode 值(该方法适用于每个Java对象),然后再通过Hash算法的后两步运算(高位运算和取模运算，下文有介绍)来定位该键值对的存储位置，有时两个key会定位到相同的位置，表示发生了Hash碰撞，当然Hash算法计算结果越分散均匀,Hash碰撞的概率就越小,map的存取效率就会越高
+- 系统将调用”美团”这个key的hashCode()方法得到其hashCode 值（该方法适用于每个Java对象),然后再通过Hash算法的后两步运算（高位运算和取模运算，下文有介绍）来定位该键值对的存储位置，有时两个key会定位到相同的位置，表示发生了Hash碰撞，当然Hash算法计算结果越分散均匀,Hash碰撞的概率就越小,map的存取效率就会越高
 - 如果Hash桶数组很大，即使较差的Hash算法也会比较分散，如果Hash桶数组数组很小，即使好的Hash算法也会出现较多碰撞，所以就需要在空间成本和时间成本之间权衡，其实就是在根据实际情况确定Hash桶数组的大小，并在此基础上设计好的hash算法减少Hash碰撞，那么通过什么方式来控制map使得Hash碰撞的概率又小,Hash桶数组(Node[] table)占用空间又少呢？答案就是好的Hash算法和扩容机制
 - 在理解Hash和扩容流程之前，我们得先了解下HashMap的几个字段，从HashMap的默认构造函数源码可知，构造函数就是对下面几个字段进行初始化，源码如下:
 
@@ -74,11 +74,11 @@ int modCount;
 int size;
 ```
 
-- 首先,Node[] table的初始化长度length(默认值是16),Load factor为负载因子(默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node(键值对)个数,threshold = length * Load factor,也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多
-- 结合负载因子的定义公式可知,threshold就是在此Load factor和length(数组长度)对应下允许的最大元素数目，超过这个数目就重新resize(扩容),扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1
+- 首先,Node[] table的初始化长度length(默认值是16),Load factor为负载因子（默认值是0.75),threshold是HashMap所能容纳的最大数据量的Node(键值对）个数,threshold = length * Load factor,也就是说，在数组定义好长度之后，负载因子越大，所能容纳的键值对个数越多
+- 结合负载因子的定义公式可知,threshold就是在此Load factor和length(数组长度）对应下允许的最大元素数目，超过这个数目就重新resize(扩容),扩容后的HashMap容量是之前容量的两倍，默认的负载因子0.75是对空间和时间效率的一个平衡选择，建议大家不要修改，除非在时间和空间比较特殊的情况下，如果内存空间很多而又对时间效率要求很高，可以降低负载因子Load factor的值，相反，如果内存空间紧张而对时间效率要求不高，可以增加负载因子loadFactor的值，这个值可以大于1
 - size这个字段其实很好理解，就是HashMap中实际存在的键值对数量，注意和table的长度length,容纳最大键值对数量threshold的区别，而modCount字段主要用来记录HashMap内部结构发生变化的次数，主要用于迭代的快速失败，强调一点，内部结构发生变化指的是结构发生变化，例如put新键值对，但是某个key对应的value值被覆盖不属于结构变化
-- 在HashMap中,Hash桶数组table的长度length大小必须为2的n次方(一定是合数),这是一种非常规的设计，常规的设计是把桶的大小设计为素数，相对来说素数导致冲突的概率要小于合数,Hashtable初始化桶大小为11,就是桶大小设计为素数的应用(Hashtable扩容后不能保证还是素数),HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突,HashMap定位Hash桶索引位置时，也加入了高位参与运算的过程
-- 这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能，于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树，而当链表长度太长(默认超过8)时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入，删除，查找等算法
+- 在HashMap中,Hash桶数组table的长度length大小必须为2的n次方（一定是合数),这是一种非常规的设计，常规的设计是把桶的大小设计为素数，相对来说素数导致冲突的概率要小于合数,Hashtable初始化桶大小为11,就是桶大小设计为素数的应用(Hashtable扩容后不能保证还是素数),HashMap采用这种非常规设计，主要是为了在取模和扩容时做优化，同时为了减少冲突,HashMap定位Hash桶索引位置时，也加入了高位参与运算的过程
+- 这里存在一个问题，即使负载因子和Hash算法设计的再合理，也免不了会出现拉链过长的情况，一旦出现拉链过长，则会严重影响HashMap的性能，于是，在JDK1.8版本中，对数据结构做了进一步的优化，引入了红黑树，而当链表长度太长（默认超过8)时，链表就转换为红黑树，利用红黑树快速增删改查的特点提高HashMap的性能，其中会用到红黑树的插入，删除，查找等算法
 
 ### 源码分析
 
@@ -100,7 +100,7 @@ static int indexFor(int h, int length) {  //JDK1.7的源码,JDK1.8没有这个�
 ```
 
 - 这里的Hash算法本质上就是三步--**取key的hashCode值，高位运算，取模运算**
-- 对于任意给定的对象，只要它的hashCode()返回值相同，那么程序调用方法一所计算得到的Hash码值总是相同的，我们首先想到的就是把hash值对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的，但是，模运算的消耗还是比较大的，在HashMap中是这样做的:调用方法二来计算该对象应该保存在table数组的哪个索引处
+- 对于任意给定的对象，只要它的hashCode()返回值相同，那么程序调用方法一所计算得到的Hash码值总是相同的，我们首先想到的就是把hash值对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的，但是，模运算的消耗还是比较大的，在HashMap中是这样做的：调用方法二来计算该对象应该保存在table数组的哪个索引处
 - 这个方法非常巧妙，它通过h & (table.length -1)来得到该对象的保存位置，而HashMap底层数组的长度总是2的n次方，这是HashMap在速度上的优化，当length总是2的n次方时,h& (length-1)运算等价于对length取模，也就是h%length,但是&比%具有更高的效率
 - 在JDK1.8的实现中，优化了高位运算的算法，通过hashCode()的高16位异或低16位实现的:`(h = k.hashCode()) ^ (h >>> 16)`,主要是从速度，功效，质量来考虑的，这么做可以在数组table的length比较小的时候，也能保证考虑到高低Bit都参与到Hash的计算中，同时不会有太大的开销
 - 下面举例说明下,n为table的长度
@@ -224,12 +224,12 @@ void transfer(Entry[] newTable) {
 }
 ```
 
-- newTable[i]的引用赋给了e.next,也就是使用了单链表的头插入方式，同一位置上新元素总会被放在链表的头部位置，这样先放在一个索引上的元素终会被放到Entry链的尾部(如果发生了hash冲突的话),这一点和Jdk1.8有区别，下文详解，在旧数组中同一条Entry链上的元素，通过重新计算索引位置后，有可能被放到了新数组的不同位置上
-- 下面举个例子说明下扩容过程，假设了我们的hash算法就是简单的用key mod 一下表的大小(也就是数组的长度),其中的Hash桶数组table的size=2,所以key = 3,7,5,put顺序依次为 5,7,3,在mod 2以后都冲突在table[1]这里了，这里假设负载因子 loadFactor=1,即当键值对的实际大小size 大于 table的实际大小时进行扩容，接下来的三个步骤是Hash桶数组 resize成4,然后所有的Node重新rehash的过程
+- newTable[i]的引用赋给了e.next,也就是使用了单链表的头插入方式，同一位置上新元素总会被放在链表的头部位置，这样先放在一个索引上的元素终会被放到Entry链的尾部（如果发生了hash冲突的话),这一点和Jdk1.8有区别，下文详解，在旧数组中同一条Entry链上的元素，通过重新计算索引位置后，有可能被放到了新数组的不同位置上
+- 下面举个例子说明下扩容过程，假设了我们的hash算法就是简单的用key mod 一下表的大小（也就是数组的长度),其中的Hash桶数组table的size=2,所以key = 3,7,5,put顺序依次为 5,7,3,在mod 2以后都冲突在table[1]这里了，这里假设负载因子 loadFactor=1,即当键值对的实际大小size 大于 table的实际大小时进行扩容，接下来的三个步骤是Hash桶数组 resize成4,然后所有的Node重新rehash的过程
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-b2330062.png" alt="img" style="zoom:50%;" />
 
-- 下面我们讲解下JDK1.8做了哪些优化，经过观测可以发现，我们使用的是2次幂的扩展(指长度扩为原来2倍),所以元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置，看下图可以明白这句话的意思,n为table的长度，图(a)表示扩容前的key1和key2两种key确定索引位置的示例，图(b)表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的Hash与高位运算结果
+- 下面我们讲解下JDK1.8做了哪些优化，经过观测可以发现，我们使用的是2次幂的扩展（指长度扩为原来2倍),所以元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置，看下图可以明白这句话的意思,n为table的长度，图(a)表示扩容前的key1和key2两种key确定索引位置的示例，图(b)表示扩容后key1和key2两种key确定索引位置的示例，其中hash1是key1对应的Hash与高位运算结果
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-4d8022db.png" alt="img" style="zoom:50%;" />
 
@@ -330,7 +330,7 @@ final Node<K,V>[] resize() {
 
 ## 线程安全性
 
-在多线程使用场景中，应该尽量避免使用线程不安全的HashMap,而使用线程安全的ConcurrentHashMap,那么为什么说HashMap是线程不安全的，下面举例子说明在并发的多线程使用场景中使用HashMap可能造成死循环，代码例子如下(便于理解，仍然使用JDK1.7的环境):
+在多线程使用场景中，应该尽量避免使用线程不安全的HashMap,而使用线程安全的ConcurrentHashMap,那么为什么说HashMap是线程不安全的，下面举例子说明在并发的多线程使用场景中使用HashMap可能造成死循环，代码例子如下（便于理解，仍然使用JDK1.7的环境):
 
 ```java
 public class HashMapInfiniteLoop {
@@ -356,7 +356,7 @@ public class HashMapInfiniteLoop {
 ```
 
 - 其中,map初始化为一个长度为2的数组,loadFactor=0.75,threshold=2*0.75=1,也就是说当put第二个key的时候,map就需要进行resize
-- 通过设置断点让线程1和线程2同时debug到transfer方法(3.3小节代码块)的首行，注意此时两个线程已经成功添加数据，放开thread1的断点至transfer方法的"Entry next = e.next;” 这一行，然后放开线程2的的断点，让线程2进行resize,结果如下图
+- 通过设置断点让线程1和线程2同时debug到transfer方法(3.3小节代码块）的首行，注意此时两个线程已经成功添加数据，放开thread1的断点至transfer方法的"Entry next = e.next;” 这一行，然后放开线程2的的断点，让线程2进行resize,结果如下图
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-7df99266.png" alt="img" style="zoom:50%;" />
 
@@ -367,7 +367,7 @@ public class HashMapInfiniteLoop {
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-6c8d086a.png" alt="img" style="zoom:50%;" />
 
-- e.next = newTable[i] 导致 key(3).next 指向了 key(7),注意:此时的key(7).next 已经指向了key(3),环形链表就这样出现了
+- e.next = newTable[i] 导致 key(3).next 指向了 key(7),注意：此时的key(7).next 已经指向了key(3),环形链表就这样出现了
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2021-03-26-6eed9aaf.png" alt="img" style="zoom:50%;" />
 

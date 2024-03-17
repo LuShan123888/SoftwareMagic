@@ -16,7 +16,7 @@ categories:
         - 身份验证是关于验证您的凭据，如用户名/用户ID和密码，以验证您的身份
         - 身份验证通常通过用户名和密码完成，有时与身份验证因素结合使用
     - 授权(Authorization)
-        - 授权发生在系统成功验证您的身份后，最终会授予您访问资源(如信息，文件，数据库，资金，位置，几乎任何内容)的完全权限
+        - 授权发生在系统成功验证您的身份后，最终会授予您访问资源（如信息，文件，数据库，资金，位置，几乎任何内容）的完全权限
         - 这个概念是通用的，而不是只在Spring Security 中存在
 
 ## 过滤器
@@ -48,10 +48,10 @@ protected void configure(HttpSecurity http) throws Exception {
 SecurityContext context = SecurityContextHolder.getContext();
 Authentication authentication = context.getAuthentication();
 
-//保存认证对象 (一般用于自定义认证成功保存认证对象)
+//保存认证对象（一般用于自定义认证成功保存认证对象)
 SecurityContextHolder.getContext().setAuthentication(authResult);
 
-//清空认证对象 (一般用于自定义登出清空认证对象)
+//清空认证对象（一般用于自定义登出清空认证对象)
 SecurityContextHolder.clearContext();
 ```
 
@@ -229,7 +229,7 @@ public abstract class AbstractUserDetailsAuthenticationProvider implements Authe
             catch
         }
         try {
-            //比对前的检查，例如账户以一些状态信息(是否锁定, 过期...)
+            //比对前的检查，例如账户以一些状态信息（是否锁定, 过期...)
             preAuthenticationChecks.check(user);
             //定义比对方式，子类实现该方法
             additionalAuthenticationChecks(user, (UsernamePasswordAuthenticationToken) authentication);
@@ -421,7 +421,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // 不进行权限验证的请求或资源(从配置文件中读取)
+                // 不进行权限验证的请求或资源（从配置文件中读取)
                 .antMatchers(JWTConfig.antMatchers.split(",")).permitAll()
                 // 其他的需要认证后才能访问
                 .anyRequest()

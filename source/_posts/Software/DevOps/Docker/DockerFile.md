@@ -46,9 +46,9 @@ COPY --from=0 /source/dubbo-admin-$version/docker/entrypoint.sh /usr/local/bin/e
 
 ### ADD
 
-- ADD 指令和 COPY 的使用格式一致(同样需求下,官方推荐使用 COPY),功能也类似,不同之处如下:
-- ADD 的优点:在执行 <源文件> 为 tar 压缩文件的话,压缩格式为 gzip, bzip2 以及 xz 的情况下,会自动复制并解压到 <目标路径>
-- ADD 的缺点:在不解压的前提下,无法复制 tar 压缩文件,会令镜像构建缓存失效,从而可能会令镜像构建变得比较缓慢,具体是否使用,可以根据是否需要自动解压来决定
+- ADD 指令和 COPY 的使用格式一致（同样需求下,官方推荐使用 COPY),功能也类似,不同之处如下:
+- ADD 的优点：在执行 <源文件> 为 tar 压缩文件的话,压缩格式为 gzip, bzip2 以及 xz 的情况下,会自动复制并解压到 <目标路径>
+- ADD 的缺点：在不解压的前提下,无法复制 tar 压缩文件,会令镜像构建缓存失效,从而可能会令镜像构建变得比较缓慢,具体是否使用,可以根据是否需要自动解压来决定
 
 ### RUN
 
@@ -147,8 +147,8 @@ ENTRYPOINT ["/bin/sh", "-c" "exec java $JAVA_OPTS -jar /app.jar"]
 ```
 
 - 然而加了 `exec` 的绝妙之处在于shell 的内建命令 exec 将并不启动新的shell,而是用要被执行命令替换当前的 shell 进程,并且将老进程的环境清理掉,exec 后的命令不再是 shell 的子进程序,而且 exec 命令后的其它命令将不再执行,从执行效果上可以看到 exec 会把当前的 shell 关闭掉,直接启动它后面的命令
-- 虽然它与之后的命令(如上 `exec java $JAVA_OPTS -jar /app.jar`)还是作为 "/bin/sh" 的第二个参数,但 `exec` 来了个金蝉脱壳,让这里的 `java` 进程得已作为一个 PID 1 的超级进程,进行使得这个 java 进程可以收到 SIGTERM 信号,或者理解 `exec` 为 "/bin/sh" 的子进程,但是借助于 `exec` 让它后面的进程启动在最顶端
-- 另外,由于通过 "/bin/sh" 的搭桥,命令中的变量(如 $JAVA_OPTS) 也会被正确解析,因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式
+- 虽然它与之后的命令（如上 `exec java $JAVA_OPTS -jar /app.jar`)还是作为 "/bin/sh" 的第二个参数,但 `exec` 来了个金蝉脱壳,让这里的 `java` 进程得已作为一个 PID 1 的超级进程,进行使得这个 java 进程可以收到 SIGTERM 信号,或者理解 `exec` 为 "/bin/sh" 的子进程,但是借助于 `exec` 让它后面的进程启动在最顶端
+- 另外,由于通过 "/bin/sh" 的搭桥,命令中的变量（如 $JAVA_OPTS) 也会被正确解析,因此 `ENTRYPOINT exec command param1 param2 ...` 是被推荐的格式
 - **注意**:exec 只会启动后面的第一个命令,`exec ls; top` 或 `exec ls && top` 只会执行 `ls` 命令
 
 
@@ -227,7 +227,7 @@ WORKDIR <工作目录路径>
 
 ### USER
 
-- 用于指定执行后续命令的用户和用户组,这边只是切换后续命令执行的用户(用户和用户组必须提前已经存在)
+- 用于指定执行后续命令的用户和用户组,这边只是切换后续命令执行的用户（用户和用户组必须提前已经存在)
 
 ```dockerfile
 USER <用户名>[:<用户组>]
@@ -246,7 +246,7 @@ HEALTHCHECK [选项] CMD <命令> : 这边 CMD 后面跟随的命令使用,可�
 
 ### ONBUILD
 
-- 用于延迟构建命令的执行,简单的说,就是 Dockerfile 里用 ONBUILD 指定的命令,在本次构建镜像的过程中不会执行(假设镜像为 test-build),当有新的 Dockerfile 使用了之前构建的镜像 FROM test-build ,这是执行新镜像的 Dockerfile 构建时候,会执行 test-build 的 Dockerfile 里的 ONBUILD 指定的命令
+- 用于延迟构建命令的执行,简单的说,就是 Dockerfile 里用 ONBUILD 指定的命令,在本次构建镜像的过程中不会执行（假设镜像为 test-build),当有新的 Dockerfile 使用了之前构建的镜像 FROM test-build ,这是执行新镜像的 Dockerfile 构建时候,会执行 test-build 的 Dockerfile 里的 ONBUILD 指定的命令
 
 ```dockerfile
 ONBUILD <其它指令>
@@ -290,7 +290,7 @@ $ docker build [OPTIONS] PATH | URL | -
 $ docker build -t test/ubuntu:v1 .
 ```
 
-- 注:最后的 `.` 代表本次执行的上下文路径
+- 注：最后的 `.` 代表本次执行的上下文路径
 - 使用URL **github.com/creack/docker-firefox** 的`Dockerfile`创建镜像
 
 ```shell

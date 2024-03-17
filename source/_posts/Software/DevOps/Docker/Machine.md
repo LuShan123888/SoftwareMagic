@@ -168,7 +168,7 @@ docker-machine scp ~/Downloads/compose.yml manager:/home/docker
 - **scp**:	在 Docker 主机之间以及 Docker 主机和本地主机之间通过 scp 远程复制数据
 - **mount**:	使用 SSHFS 从计算机装载或卸载目录
 - **start**:	启动一个指定的 Docker 主机,如果对象是个虚拟机,该虚拟机将被启动
-- **status**:	获取指定 Docker 主机的状态(包括:Running,Paused,Saved,Stopped,Stopping,Starting,Error)等
+- **status**:	获取指定 Docker 主机的状态（包括:Running,Paused,Saved,Stopped,Stopping,Starting,Error)等
 - **stop**:	停止一个指定的 Docker 主机
 - **upgrade**:	将一个指定主机的 Docker 版本更新为最新
 - **url**:	获取指定 Docker 主机的监听 URL

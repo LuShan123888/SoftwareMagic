@@ -31,7 +31,7 @@ plugins: [
 
 ## HtmlWebpackPlugin
 
-- 自动生成一个`index.html`文件(可以指定模板生成)
+- 自动生成一个`index.html`文件（可以指定模板生成)
 - 将打包的`bundle.js`,自动通过script标签插入到body中
 
 **安装**

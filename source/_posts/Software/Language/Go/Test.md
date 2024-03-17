@@ -25,7 +25,7 @@ categories:
 
 ### 测试函数的格式
 
-- 每个测试函数必须导入 `testing` 包,测试函数的基本格式 (签名) 如下:
+- 每个测试函数必须导入 `testing` 包,测试函数的基本格式（签名) 如下:
 
 ```go
 func TestName(t *testing.T){
@@ -527,7 +527,7 @@ func TestMain (m *testing. M) {
 }
 ```
 
-- 需要注意的是: 在调用`TestMain`时, `flag. Parse`并没有被调用, 所以如果`TestMain` 依赖于 command-line 标志 (包括 testing 包的标记), 则应该显示的调用`flag. Parse`
+- 需要注意的是: 在调用`TestMain`时, `flag. Parse`并没有被调用, 所以如果`TestMain` 依赖于 command-line 标志（包括 testing 包的标记), 则应该显示的调用`flag. Parse`
 
 ### 子测试的 Setup 与 Teardown
 

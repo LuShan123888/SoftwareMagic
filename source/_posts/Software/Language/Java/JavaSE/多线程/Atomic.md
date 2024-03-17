@@ -58,7 +58,7 @@ class IdGenerator {
 
 ### CAS的Java实现
 
->   CAS是一条CPU的原子指令(cmpxchg指令),不会造成所谓的数据不一致问题,Unsafe提供的CAS方法(如compareAndSwapXXX)底层实现即为CPU指令cmpxchg
+>   CAS是一条CPU的原子指令(cmpxchg指令),不会造成所谓的数据不一致问题,Unsafe提供的CAS方法（如compareAndSwapXXX)底层实现即为CPU指令cmpxchg
 
 -   这里我们可以看一下Java的原子类AtomicLong.getAndIncrement()的实现，来理解一下CAS这一乐观锁(JDK 1.8)
 
@@ -121,7 +121,7 @@ public final long getAndAddLong(Object var1, long var2, long var4) {
 
 #### 原子引用解决ABA问题
 
--   既然不能加独占锁，那么只能通过乐观锁的机制来做了，即增加版本号:每次变量更新的时候把变量的版本号加1,那么A-B-A就会变成A(v1)-B(v2)-A(v3),只要变量被某一线程修改过，该变量对应的版本号就会发生递增变化，从而解决了ABA问题
+-   既然不能加独占锁，那么只能通过乐观锁的机制来做了，即增加版本号：每次变量更新的时候把变量的版本号加1,那么A-B-A就会变成A(v1)-B(v2)-A(v3),只要变量被某一线程修改过，该变量对应的版本号就会发生递增变化，从而解决了ABA问题
 
 >   独占锁的替代就是乐观锁，即通过版本号控制，形成逻辑上的独占效果
 

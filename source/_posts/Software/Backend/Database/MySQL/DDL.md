@@ -105,12 +105,12 @@ ALTER 语句中可以指定参数 ALGORITHM 和 LOCK 分别指定 DDL 执行的�
 Online DDL主要包括3个阶段，prepare阶段，ddl执行阶段，commit阶段。下面将主要介绍ddl执行过程中三个阶段的流程。
 
 1.   Prepare阶段：初始化阶段会根据存储引擎、用户指定的操作、用户指定的 ALGORITHM 和 LOCK 计算 DDL 过程中允许的并发量，这个过程中会获取一个 shared metadata lock，用来保护表的结构定义。
-     - 创建新的临时frm文件(与InnoDB无关)。
+     - 创建新的临时frm文件（与InnoDB无关)。
      - 持有EXCLUSIVE-MDL锁，禁止读写。
      - 根据alter类型，确定执行方式(copy,online-rebuild,online-norebuild)。假如是Add Index，则选择online-norebuild即INPLACE方式。
      - 更新数据字典的内存对象。
-     - 分配row_log对象来记录增量(仅rebuild类型需要)。
-     - 生成新的临时ibd文件(仅rebuild类型需要) 。
+     - 分配row_log对象来记录增量（仅rebuild类型需要)。
+     - 生成新的临时ibd文件（仅rebuild类型需要) 。
      - 数据字典上提交事务、释放锁。
 
 注：Row log是一种独占结构，它不是redo log。它以Block的方式管理DML记录的存放，一个Block的大小为由参数innodb_sort_buffer_size控制，默认大小为1M，初始化阶段会申请两个Block。
@@ -122,7 +122,7 @@ Online DDL主要包括3个阶段，prepare阶段，ddl执行阶段，commit阶�
      -   根据rec构造对应的索引项
      -   将构造索引项插入sort_buffer块排序。
      -   将sort_buffer块更新到新的索引上。
-     -   记录ddl执行过程中产生的增量(仅rebuild类型需要)
+     -   记录ddl执行过程中产生的增量（仅rebuild类型需要)
      -   重放row_log中的操作到新索引上(no-rebuild数据是在原表上更新的)。
      -   重放row_log间产生dml操作append到row_log最后一个Block。
 
@@ -130,7 +130,7 @@ Online DDL主要包括3个阶段，prepare阶段，ddl执行阶段，commit阶�
      -   当前Block为row_log最后一个时，禁止读写，升级到EXCLUSIVE-MDL锁。
      -   重做row_log中最后一部分增量。
      -   更新innodb的数据字典表。
-     -   提交事务(刷事务的redo日志)。
+     -   提交事务（刷事务的redo日志)。
      -   修改统计信息。
      -   rename临时idb文件，frm文件。
      -   变更完成。
@@ -226,7 +226,7 @@ pt-osc 用于修改表时不锁表，简单地说，这个工具创建一个与�
 
 **pt-osc大致的工作过程如下：**
 
-1.   创建一个和要执行 alter 操作的表一样的新的空表结构(是alter之前的结构)；
+1.   创建一个和要执行 alter 操作的表一样的新的空表结构（是alter之前的结构)；
 2.   在新表执行alter table 语句（速度应该很快）；
 3.   在原表中创建触发器3个触发器分别对应insert,update,delete操作，如果表中已经定义了触发器这个工具就不能工作了；
 4.   以一定块大小从原表拷贝数据到临时表，拷贝过程中通过原表上的触发器在原表进行的写操作都会更新到新建的临时表，保证数据不会丢失（会限制每次拷贝数据的行数以保证拷贝不会过多消耗服务器资源，采用 LOCK IN SHARE MODE 来获取要拷贝数据段的最新数据并对数据加共享锁阻止其他会话修改数据，不过每次加S锁的行数不多，很快就会被释放）；

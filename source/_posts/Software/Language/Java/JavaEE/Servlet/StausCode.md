@@ -10,7 +10,7 @@ categories:
 # Servlet HTTP 状态码
 
 - HTTP 请求和 HTTP 响应消息的格式是类似的，结构如下:
-    - 初始状态行 + 回车换行符(回车+换行)
+    - 初始状态行 + 回车换行符（回车+换行)
     - 零个或多个标题行+回车换行符
     - 一个空白行，即回车换行符
     - 一个可选的消息主体，比如文件，查询数据或查询输出
@@ -32,7 +32,7 @@ HeaderN: ...
 </html>
 ```
 
-- 状态行包括 HTTP 版本(在本例中为 HTTP/1.1),一个状态码(在本例中为 200)和一个对应于状态码的短消息(在本例中为 OK)
+- 状态行包括 HTTP 版本（在本例中为 HTTP/1.1),一个状态码（在本例中为 200)和一个对应于状态码的短消息（在本例中为 OK)
 - 以下是可能从 Web 服务器返回的 HTTP 状态码和相关的信息列表:
 
 | 代码 | 消息                          | 描述                                                         |
@@ -84,9 +84,9 @@ HeaderN: ...
 
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
-| 1    | **public void setStatus ( int statusCode )** 该方法设置一个任意的状态码,setStatus 方法接受一个 int(状态码)作为参数，如果您的响应包含了一个特殊的状态码和文档，请确保在使用 *PrintWriter* 实际返回任何内容之前调用 setStatus, |
+| 1    | **public void setStatus ( int statusCode )** 该方法设置一个任意的状态码,setStatus 方法接受一个 int(状态码）作为参数，如果您的响应包含了一个特殊的状态码和文档，请确保在使用 *PrintWriter* 实际返回任何内容之前调用 setStatus, |
 | 2    | **public void sendRedirect(String url)** 该方法生成一个 302 响应，连同一个带有新文档 URL 的 *Location* 头, |
-| 3    | **public void sendError(int code, String message)** 该方法发送一个状态码(通常为 404),连同一个在 HTML 文档内部自动格式化并发送到客户端的短消息, |
+| 3    | **public void sendError(int code, String message)** 该方法发送一个状态码（通常为 404),连同一个在 HTML 文档内部自动格式化并发送到客户端的短消息, |
 
 ## HTTP 状态码实例
 

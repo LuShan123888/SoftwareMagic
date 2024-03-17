@@ -8,7 +8,7 @@ categories:
 ---
 # ZooKeeper ACl
 
-- ACL(Access Control List,访问控制表)权限可以针对节点设置相关读写等权限，保障数据安全性
+- ACL(Access Control List,访问控制表）权限可以针对节点设置相关读写等权限，保障数据安全性
 - permissions 可以指定不同的权限范围及角色
 
 ## ACL 命令

@@ -15,14 +15,14 @@ Go 依赖管理的演进经历了以下 3 个阶段：
 
 被广泛应用的是 Go Module，整个演进路线主要围绕实现两个目标来迭代发展：
 
-- 不同环境 (项目) 依赖的版本不同
+- 不同环境（项目) 依赖的版本不同
 - 控制依赖库的版本
 
 ## Go 依赖管理的演进
 
 ### GOPATH
 
-GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。其目录有以下 3 个结构 (需要手动创建文件夹)：
+GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。其目录有以下 3 个结构（需要手动创建文件夹)：
 
 | 文件夹 | 作用                 |
 | ------ | -------------------- |
@@ -33,7 +33,7 @@ GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。�
 - 项目代码直接依赖 `src` 下的代码；
 - `go get` 下载最新版本的包到 `src` 目录下。
 
-**弊端**：下面的场景就体现了 GOPATH 的弊端：项目 A 和项 B 依赖于某一 package 的不同版本 (分别为 `Pkg V1` 和 `Pkg V2` ) 。而 `src` 下只能允许一个版本存在，那项目 A 和项 B 就无法保证都能编译通过。
+**弊端**：下面的场景就体现了 GOPATH 的弊端：项目 A 和项 B 依赖于某一 package 的不同版本（分别为 `Pkg V1` 和 `Pkg V2` ) 。而 `src` 下只能允许一个版本存在，那项目 A 和项 B 就无法保证都能编译通过。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/bb053e42b85b43908d67b1fc1f5a5d9e~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75-20240316163939004.awebp" alt="image-20220517141844767" style="zoom:50%;" />
 
@@ -74,7 +74,7 @@ GOPATH 是 Go 语言支持的一个环境变量，是 Go 项目的工作区。�
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/56e6d92fe4f647778f93fdbc22d7e950~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image-20220517150510319" style="zoom:50%;" />
 
-- **module 路径 (上图的“依赖管理基本单元”)**：用来标识一个 module，从 module 路径可以看出从哪里找到该 module 。例如，如果以 `github` 为前缀开头，表示可以从 Github 仓库找到该 module 。依赖包的源代码由 Github 托管，如果项目的子包想被单独引用，则需要通过单独的 `init go.mod` 文件进行管理。
+- **module 路径（上图的“依赖管理基本单元”)**：用来标识一个 module，从 module 路径可以看出从哪里找到该 module 。例如，如果以 `github` 为前缀开头，表示可以从 Github 仓库找到该 module 。依赖包的源代码由 Github 托管，如果项目的子包想被单独引用，则需要通过单独的 `init go.mod` 文件进行管理。
 - **原生库**：依赖的原生 Go SDK 版本
 - **单元依赖**：每个依赖单元用 `module路径 + 版本号` 来唯一标识。
 
@@ -115,7 +115,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 
 #### indirect
 
-在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `// indirect` 的后缀，这是一个特殊标识符，表示 go. mod 对应的当前 module 没有直接导入的包，也就是非直接依赖 (即间接依赖) 。
+在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `// indirect` 的后缀，这是一个特殊标识符，表示 go. mod 对应的当前 module 没有直接导入的包，也就是非直接依赖（即间接依赖) 。
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/ee43ef2fca7c4c9494a2285985dd6bb3~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" alt="image-20220517153440426" style="zoom:50%;" />
 
@@ -123,7 +123,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 
 #### incompatible
 
-在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `+incompatible` 的后缀，这也是一个特殊标识符。对于 MAJOR 主版本在 V 2 及以上的模块，go. mod 会在模块路径增加 `/vN` 后缀 (如下图中 `example/lib5/v3 v3.0.2` )。这能让 Go Module 按照不同的模块来处理同一个项目不同 MAJOR 主版本的依赖。
+在 go. mod 文件图中，细心观察可以发现有些单元依赖带有 `+incompatible` 的后缀，这也是一个特殊标识符。对于 MAJOR 主版本在 V 2 及以上的模块，go. mod 会在模块路径增加 `/vN` 后缀（如下图中 `example/lib5/v3 v3.0.2` )。这能让 Go Module 按照不同的模块来处理同一个项目不同 MAJOR 主版本的依赖。
 
 - 由于 Go Module 是在 Go 1.11 才实验性地引入，所以在这个更新提出之前，已经有一些仓库打上了 V 2 或者更高版本的 tag 了。
 - 为了兼容这部分仓库，对于没有 go. mod 文件并且 MAJOR 主版本在 V 2 及以上的依赖，会在版本号后加上 `+incompatible` 后缀。表示可能会存在不兼容的源代码。
@@ -173,7 +173,7 @@ v0.0.0-yyyymmddhhmmss-abcdefgh1234
 GOPROXY = "https://proxy1.cn, https://proxy2.cn, direct"
 ```
 
-- 上述代码中，`direct` 表示源站 (如 GitHub) ，`proxy 1` `proxy 2` 是两个 URL 站点。依赖寻址路径为：优先从 `proxy 1` 下载依赖，如果 `proxy 1` 不存在，再从 `proxy 2` 寻找，如果 `proxy 2` 不存在，则会回源到源站直接下载依赖，并缓存到 Go Proxy 站点中 (这种设计思路和 Redis 缓存与 MySQL 数据库一模一样)。
+- 上述代码中，`direct` 表示源站（如 GitHub) ，`proxy 1` `proxy 2` 是两个 URL 站点。依赖寻址路径为：优先从 `proxy 1` 下载依赖，如果 `proxy 1` 不存在，再从 `proxy 2` 寻找，如果 `proxy 2` 不存在，则会回源到源站直接下载依赖，并缓存到 Go Proxy 站点中（这种设计思路和 Redis 缓存与 MySQL 数据库一模一样)。
 
 ![image-20220517184332536](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/02fb6e8a00c84508b02ab2109b5d6c14~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp)
 

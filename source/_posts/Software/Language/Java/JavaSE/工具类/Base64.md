@@ -51,7 +51,7 @@ public class test {
 
             // 使用基本编码
             String base64encodedString = Base64.getEncoder().encodeToString("test?java8".getBytes("utf-8"));
-            System.out.println("Base64 编码字符串 (基本) :" + base64encodedString);
+            System.out.println("Base64 编码字符串（基本) :" + base64encodedString);
 
             // 解码
             byte[] base64decodedBytes = Base64.getDecoder().decode(base64encodedString);
@@ -74,7 +74,7 @@ public class test {
 执行以上脚本，输出结果为:
 
 ```
-Base64 编码字符串 (基本) :dGVzdD9qYXZhOA==
+Base64 编码字符串（基本) :dGVzdD9qYXZhOA==
 原始字符串: test?java8
 Base64 编码字符串 (URL) :dGVzdD9qYXZhOA==
 Base64 编码字符串 (MIME) :dGVzdD9qYXZhOA==

@@ -22,7 +22,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     - Github上非vim-scripts仓库的插件
     - 不在Github上的插件
 - 对于不同的插件,vundle自动管理和下载插件的时候,有不同的地址填写方法,有如下三类:
-    - 在Github上vim-scripts用户下的仓库,只需要写出repos(仓库)名称
+    - 在Github上vim-scripts用户下的仓库,只需要写出repos(仓库）名称
     - 在Github其他用户下的repos, 需要写出"用户名/repos名"
     - 不在Github上的插件,需要写出git全路径
 
@@ -53,7 +53,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 " 由Git支持但不再github上的插件仓库 Plugin 'git clone 后面的地址'
 Plugin 'git://git.wincent.com/command-t.git'
-" 本地的Git仓库(例如自己的插件) Plugin 'file:///+本地插件仓库绝对路径'
+" 本地的Git仓库（例如自己的插件) Plugin 'file:///+本地插件仓库绝对路径'
 Plugin 'file:///home/gmarik/path/to/plugin'
 " 插件在仓库的子目录中
 " 正确指定路径用以设置runtimepath. 以下范例插件在sparkup/vim目录下

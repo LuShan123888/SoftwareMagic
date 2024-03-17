@@ -26,7 +26,7 @@ categories:
 var x=document.getElementById("intro");
 ```
 
-- 如果找到该元素，则该方法将以对象(在 x 中)的形式返回该元素
+- 如果找到该元素，则该方法将以对象（在 x 中）的形式返回该元素
 - 如果未找到该元素，则 x 将包含 null
 
 ### 通过标签名查找 HTML 元素
@@ -195,7 +195,7 @@ document.getElementById("p2").style.fontSize="larger";
  element.addEventListener(event, function, useCapture);
 ```
 
-- 第一个参数是事件的类型 (如 "click" 或 "mousedown")
+- 第一个参数是事件的类型（如 "click" 或 "mousedown")
 - 第二个参数是事件触发后调用的函数
 - 第三个参数是个布尔值用于描述事件是冒泡还是捕获，该参数是可选的
 - **注意**:不要使用 "on" 前缀, 例如，使用 "click" ,而不是使用 "onclick"
@@ -211,9 +211,9 @@ document.getElementById("myBtn").addEventListener("click", displayDate);
 - `addEventListener()` 方法用于向指定元素添加事件句柄
 - `addEventListener()` 方法添加的事件句柄不会覆盖已存在的事件句柄
 - 你可以向一个元素添加多个事件句柄
-- 你可以向同个元素添加多个同类型的事件句柄，如:两个 "click" 事件
+- 你可以向同个元素添加多个同类型的事件句柄，如：两个 "click" 事件
 - 你可以向任何 DOM 对象添加事件监听，不仅仅是 HTML 元素，如: window 对象
-- `addEventListener()` 方法可以更简单的控制事件(冒泡与捕获)
+- `addEventListener()` 方法可以更简单的控制事件（冒泡与捕获)
 - 当你使用 `addEventListener()` 方法时, JavaScript 从 HTML 标记中分离开来，可读性更强, 在没有控制HTML标记时也可以添加事件监听
 - 你可以使用 `removeEventListener()` 方法来移除事件的监听
 
@@ -277,7 +277,7 @@ element.addEventListener("click", function(){ myFunction(p1, p2); });
 
 ### 事件冒泡和事件捕获
 
-- 事件传递有两种方式:冒泡与捕获
+- 事件传递有两种方式：冒泡与捕获
 - 事件传递定义了元素事件触发的顺序, 如果你将 `<p>` 元素插入到 `<div>` 元素中，用户点击 `<p>` 元素, 哪个元素的 "click" 事件先被触发呢?
 - 在 **冒泡** 中，内部元素的事件会先被触发，然后再触发外部元素，即: `<p>` 元素的点击事件先触发，然后会触发 `<div>` 元素的点击事件
 - 在 **捕获** 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即: `<div>` 元素的点击事件先触发，然后再触发 `<p>` 元素的点击事件
@@ -305,7 +305,7 @@ element.removeEventListener("mousemove", myFunction);
 
 ### appendChild()
 
-- 要创建新的 HTML 元素 (节点)需要先创建一个元素，然后在已存在的元素中添加它
+- 要创建新的 HTML 元素（节点）需要先创建一个元素，然后在已存在的元素中添加它
 
 ```html
 <div id="div1">
@@ -397,7 +397,7 @@ parent.removeChild(child);
 
 **实例**
 
-- HTML 文档中 `<div>` 元素包含两个子节点 (两个 `<p>` 元素):
+- HTML 文档中 `<div>` 元素包含两个子节点（两个 `<p>` 元素):
 
 ```html
 <div id="div1">
@@ -425,7 +425,7 @@ parent.removeChild(child);
 ```
 
 - 如果能够在不引用父元素的情况下删除某个元素，就太好了, 不过很遗憾,DOM 需要清楚您需要删除的元素，以及它的父元素
-- 以下代码是已知要查找的子元素，然后查找其父元素，再删除这个子元素(删除节点必须知道父节点):
+- 以下代码是已知要查找的子元素，然后查找其父元素，再删除这个子元素（删除节点必须知道父节点):
 
 ```js
 var child = document.getElementById("p1");
@@ -463,7 +463,7 @@ parent.replaceChild(para, child);
 var x = document.getElementsByTagName("p");
 ```
 
-- 集合中的元素可以通过索引(以 0 为起始位置)来访问
+- 集合中的元素可以通过索引（以 0 为起始位置）来访问
 - 访问第二个 `<p>` 元素可以是以下代码:
 
 ```js
@@ -499,9 +499,9 @@ for (i = 0; i < myCollection.length; i++) {
 
 ## NodeList 对象
 
-- **NodeList** 对象是一个从文档中获取的节点列表 (集合)
+- **NodeList** 对象是一个从文档中获取的节点列表（集合)
 - NodeList 对象类似 [HTMLCollection](https://www.runoob.com/js/js-htmldom-elements.html) 对象
-- 一些旧版本浏览器中的方法(如`getElementsByClassName()`)返回的是 NodeList 对象，而不是 HTMLCollection 对象
+- 一些旧版本浏览器中的方法（如`getElementsByClassName()`)返回的是 NodeList 对象，而不是 HTMLCollection 对象
 - 所有浏览器的`childNodes`属性返回的是 NodeList 对象
 - 大部分浏览器的 `querySelectorAll()`返回 NodeList 对象
 - 下代码选取了文档中所有的 `<p>` 节点:
@@ -510,7 +510,7 @@ for (i = 0; i < myCollection.length; i++) {
 var myNodeList = document.querySelectorAll("p");
 ```
 
-- NodeList 中的元素可以通过索引(以 0 为起始位置)来访问
+- NodeList 中的元素可以通过索引（以 0 为起始位置）来访问
 - 访问第二个 `<p>` 元素可以是以下代码:
 
 ```js

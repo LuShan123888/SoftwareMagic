@@ -8,7 +8,7 @@ categories:
 ---
 # JavaScript Prototype对象
 
-- 所有的 JavaScript 对象都会从一个 prototype(原型对象)中继承属性和方法
+- 所有的 JavaScript 对象都会从一个 prototype(原型对象）中继承属性和方法
 - 在前面的章节中我们学会了如何使用对象的构造器(constructor):
 
 ```js
@@ -43,7 +43,7 @@ function Person(first, last, age, eyecolor) {
 
 ## prototype 继承
 
-- 所有的 JavaScript 对象都会从一个 prototype(原型对象)中继承属性和方法:
+- 所有的 JavaScript 对象都会从一个 prototype(原型对象）中继承属性和方法:
     - `Date` 对象从 `Date.prototype` 继承
     - `Array` 对象从 `Array.prototype` 继承
     - `Person` 对象从 `Person.prototype` 继承

@@ -9,7 +9,7 @@ categories:
 ---
 # Java ReentrantLock与AQS
 
-- Java中的大部分同步类(Lock,Semaphore,ReentrantLock等)都是基于AbstractQueuedSynchronizer(简称为AQS)实现的,AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架
+- Java中的大部分同步类(Lock,Semaphore,ReentrantLock等）都是基于AbstractQueuedSynchronizer(简称为AQS)实现的,AQS是一种提供了原子式管理同步状态，阻塞和唤醒线程功能以及队列模型的简单框架
 
 ## ReentrantLock
 
@@ -72,11 +72,11 @@ static final class NonfairSync extends Sync {
 ```
 
 - 这块代码的含义为:
-    - 若通过CAS设置变量State(同步状态)成功，也就是获取锁成功，则将当前线程设置为独占线程
-    - 若通过CAS设置变量State(同步状态)失败，也就是获取锁失败，则进入Acquire方法进行后续处理
+    - 若通过CAS设置变量State(同步状态）成功，也就是获取锁成功，则将当前线程设置为独占线程
+    - 若通过CAS设置变量State(同步状态）失败，也就是获取锁失败，则进入Acquire方法进行后续处理
 - 某个线程获取锁失败的后续流程有以下两种可能:
     1. 当前线程获锁结果设置为失败，获取锁流程结束，这种设计会极大降低系统的并发度，并不满足我们实际的需求
-    2. AQS框架的处理流程:存在某种排队等候机制，线程继续等待，仍然保留获取锁的可能，获取锁流程仍在继续
+    2. AQS框架的处理流程：存在某种排队等候机制，线程继续等待，仍然保留获取锁的可能，获取锁流程仍在继续
 - 带着非公平锁的这些问题，再看下公平锁源码中获锁的方式:
 
 ```java
@@ -163,7 +163,7 @@ private volatile int state;
 | protected final void setState(int newState)                  | 设置State的值        |
 | protected final boolean compareAndSetState(int expect, int update) | 使用CAS方式更新State |
 
-- 这几个方法都是Final修饰的，说明子类中无法重写它们，我们可以通过修改State字段表示的同步状态来实现多线程的独占模式和共享模式(加锁过程)
+- 这几个方法都是Final修饰的，说明子类中无法重写它们，我们可以通过修改State字段表示的同步状态来实现多线程的独占模式和共享模式（加锁过程)
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/27605d483e8935da683a93be015713f331378.png)
 
@@ -247,7 +247,7 @@ protected boolean tryAcquire(int arg) {
 }
 ```
 
-- 可以看出，这里只是AQS的简单实现，具体获取锁的实现方法是由各自的公平锁和非公平锁单独实现的(以ReentrantLock为例),如果该方法返回了True,则说明当前线程获取锁成功，就不用往后执行了，如果获取失败，就需要加入到等待队列中，下面会详细解释线程是何时以及怎样被加入进等待队列中的
+- 可以看出，这里只是AQS的简单实现，具体获取锁的实现方法是由各自的公平锁和非公平锁单独实现的（以ReentrantLock为例),如果该方法返回了True,则说明当前线程获取锁成功，就不用往后执行了，如果获取失败，就需要加入到等待队列中，下面会详细解释线程是何时以及怎样被加入进等待队列中的
 
 #### 线程加入等待队列
 
@@ -304,7 +304,7 @@ static {
 ```
 
 - 从AQS的静态代码块可以看出，都是获取一个对象的属性相对于该对象在内存当中的偏移量，这样我们就可以根据这个偏移量在对象内存当中找到这个属性,tailOffset指的是tail对应的偏移量，所以这个时候会将new出来的Node置为当前队列的尾节点，同时，由于是双向链表，也需要将前一个节点指向尾节点
-- 如果Pred指针是Null(说明等待队列中没有元素),或者当前Pred指针和Tail指向的位置不同(说明被别的线程已经修改),就需要看一下Enq的方法
+- 如果Pred指针是Null(说明等待队列中没有元素),或者当前Pred指针和Tail指向的位置不同（说明被别的线程已经修改),就需要看一下Enq的方法
 
 ```java
 // java.util.concurrent.locks.AbstractQueuedSynchronizer
@@ -352,7 +352,7 @@ public final boolean hasQueuedPredecessors() {
 
 - 看到这里，我们理解一下`h != t && ((s = h.next) == null || s.thread != Thread.currentThread());`为什么要判断的头结点的下一个节点？第一个节点储存的数据是什么？
 
-> 双向链表中，第一个节点为虚节点，其实并不存储任何信息，只是占位，真正的第一个有数据的节点，是在第二个节点开始的，当h != t时:如果(s = h.next) == null,等待队列正在有线程进行初始化，但只是进行到了Tail指向Head,没有将Head指向Tail,此时队列中有元素，需要返回True(这块具体见下边代码分析),如果(s = h.next) != null,说明此时队列中至少有一个有效节点，如果此时s.thread == Thread.currentThread(),说明等待队列的第一个有效节点中的线程与当前线程相同，那么当前线程是可以获取资源的，如果s.thread != Thread.currentThread(),说明等待队列的第一个有效节点线程与当前线程不同，当前线程必须加入进等待队列
+> 双向链表中，第一个节点为虚节点，其实并不存储任何信息，只是占位，真正的第一个有数据的节点，是在第二个节点开始的，当h != t时：如果(s = h.next) == null,等待队列正在有线程进行初始化，但只是进行到了Tail指向Head,没有将Head指向Tail,此时队列中有元素，需要返回True(这块具体见下边代码分析),如果(s = h.next) != null,说明此时队列中至少有一个有效节点，如果此时s.thread == Thread.currentThread(),说明等待队列的第一个有效节点中的线程与当前线程相同，那么当前线程是可以获取资源的，如果s.thread != Thread.currentThread(),说明等待队列的第一个有效节点线程与当前线程不同，当前线程必须加入进等待队列
 
 ```java
 // java.util.concurrent.locks.AbstractQueuedSynchronizer#enq
@@ -385,7 +385,7 @@ public final void acquire(int arg) {
 ```
 
 - 上文解释了addWaiter方法，这个方法其实就是把对应的线程以Node的数据结构形式加入到双端队列里，返回的是一个包含该线程的Node,而这个Node会作为参数，进入到acquireQueued方法中,acquireQueued方法可以对排队中的线程进行"获锁”操作
-- 总的来说，一个线程获取锁失败了，被放入等待队列,acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取(中断)
+- 总的来说，一个线程获取锁失败了，被放入等待队列,acquireQueued会把放入队列中的线程不断去获取锁，直到获取成功或者不再需要获取（中断)
 - 下面我们从"何时出队列？”和"如何出队列？”两个方向来分析一下acquireQueued源码:
 
 ```java
@@ -401,7 +401,7 @@ final boolean acquireQueued(final Node node, int arg) {
         for (;;) {
             // 获取当前节点的前驱节点
             final Node p = node.predecessor();
-            // 如果p是头结点，说明当前节点在真实数据队列的首部，就尝试获取锁(别忘了头结点是虚节点)
+            // 如果p是头结点，说明当前节点在真实数据队列的首部，就尝试获取锁（别忘了头结点是虚节点)
             if (p == head && tryAcquire(arg)) {
                 // 获取锁成功，头指针移动到当前node
                 setHead(node);
@@ -409,7 +409,7 @@ final boolean acquireQueued(final Node node, int arg) {
                 failed = false;
                 return interrupted;
             }
-            // 说明p为头节点且当前没有获取到锁(可能是非公平锁被抢占了)或者是p不为头结点，这个时候就要判断当前node是否要被阻塞(被阻塞条件:前驱节点的waitStatus为-1),防止无限循环浪费资源，具体两个方法下面细细分析
+            // 说明p为头节点且当前没有获取到锁（可能是非公平锁被抢占了）或者是p不为头结点，这个时候就要判断当前node是否要被阻塞（被阻塞条件：前驱节点的waitStatus为-1),防止无限循环浪费资源，具体两个方法下面细细分析
             if (shouldParkAfterFailedAcquire(p, node) && parkAndCheckInterrupt())
                 interrupted = true;
         }
@@ -545,7 +545,7 @@ private void cancelAcquire(Node node) {
 }
 ```
 
-- 当前的流程:获取当前节点的前驱节点，如果前驱节点的状态是CANCELLED,那就一直往前遍历，找到第一个waitStatus <= 0的节点，将找到的Pred节点和当前Node关联，将当前Node设置为CANCELLED
+- 当前的流程：获取当前节点的前驱节点，如果前驱节点的状态是CANCELLED,那就一直往前遍历，找到第一个waitStatus <= 0的节点，将找到的Pred节点和当前Node关联，将当前Node设置为CANCELLED
 - 根据当前节点的位置，考虑以下三种情况:
     1. 当前节点是尾节点
     2. 当前节点是Head的后继节点
@@ -566,7 +566,7 @@ private void cancelAcquire(Node node) {
 
 通过上面的流程，我们对于CANCELLED节点状态的产生和变化已经有了大致的了解，但是为什么所有的变化都是对Next指针进行了操作，而没有对Prev指针进行操作呢？什么情况下会对Prev指针进行操作？
 
-> 执行cancelAcquire的时候，当前节点的前置节点可能已经从队列中出去了(已经执行过Try代码块中的shouldParkAfterFailedAcquire方法了),如果此时修改Prev指针，有可能会导致Prev指向另一个已经移除队列的Node,因此这块变化Prev指针不安全,shouldParkAfterFailedAcquire方法中，会执行下面的代码，其实就是在处理Prev指针,shouldParkAfterFailedAcquire是获取锁失败的情况下才会执行，进入该方法后，说明共享资源已被获取，当前节点之前的节点都不会出现变化，因此这个时候变更Prev指针比较安全
+> 执行cancelAcquire的时候，当前节点的前置节点可能已经从队列中出去了（已经执行过Try代码块中的shouldParkAfterFailedAcquire方法了),如果此时修改Prev指针，有可能会导致Prev指向另一个已经移除队列的Node,因此这块变化Prev指针不安全,shouldParkAfterFailedAcquire方法中，会执行下面的代码，其实就是在处理Prev指针,shouldParkAfterFailedAcquire是获取锁失败的情况下才会执行，进入该方法后，说明共享资源已被获取，当前节点之前的节点都不会出现变化，因此这个时候变更Prev指针比较安全
 >
 > ```java
 > do {
@@ -756,7 +756,7 @@ static void selfInterrupt() {
 ```
 
 - 该方法其实是为了中断线程，但为什么获取了锁以后还要中断线程呢？这部分属于Java提供的协作式中断知识内容，感兴趣同学可以查阅一下，这里简单介绍一下:
-    1. 当中断线程被唤醒时，并不知道被唤醒的原因，可能是当前线程在等待中被中断，也可能是释放了锁以后被唤醒，因此我们通过Thread.interrupted()方法检查中断标记(该方法返回了当前线程的中断状态，并将当前线程的中断标识设置为False),并记录下来，如果发现该线程被中断过，就再中断一次
+    1. 当中断线程被唤醒时，并不知道被唤醒的原因，可能是当前线程在等待中被中断，也可能是释放了锁以后被唤醒，因此我们通过Thread.interrupted()方法检查中断标记（该方法返回了当前线程的中断状态，并将当前线程的中断标识设置为False),并记录下来，如果发现该线程被中断过，就再中断一次
     2. 线程在等待资源的过程中被唤醒，唤醒后还是会不断地去尝试获取锁，直到抢到锁为止，也就是说，在整个流程中，并不响应中断，只是记录中断记录，最后抢到锁返回了，那么如果被中断过的话，就需要补充一次中断
 - 这里的处理方式主要是运用线程池中基本运作单元Worder中的runWorker,通过Thread.interrupted()进行额外的判断处理，感兴趣的同学可以看下ThreadPoolExecutor源码
 
@@ -826,7 +826,7 @@ private volatile int state;
 | :--------------------- | :----------------------------------------------------------- |
 | ReentrantLock          | 使用AQS保存锁重复持有的次数，当一个线程获取锁时,ReentrantLock记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理,|
 | Semaphore              | 使用AQS同步状态来保存信号量的当前计数,tryRelease会增加计数,acquireShared会减少计数,|
-| CountDownLatch         | 使用AQS同步状态来表示计数，计数为0时，所有的Acquire操作(CountDownLatch的await方法)才可以通过,|
+| CountDownLatch         | 使用AQS同步状态来表示计数，计数为0时，所有的Acquire操作(CountDownLatch的await方法）才可以通过,|
 | ReentrantReadWriteLock | 使用AQS同步状态中的16位保存写锁持有的次数，剩下的16位用于保存读锁的持有次数,|
 | ThreadPoolExecutor     | Worker利用AQS同步状态实现对独占线程变量的设置(tryAcquire和tryRelease),|
 

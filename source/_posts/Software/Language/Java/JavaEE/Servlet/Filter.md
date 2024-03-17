@@ -239,7 +239,7 @@ public class DisplayHeader extends HttpServlet {
     元素用于设置一个 Filter 所负责拦截的资源,一个Filter拦截的资源可通过两种方式来指定:Servlet 名称和资源访问的请求路径
 
     - `<filter-name>`子元素用于设置filter的注册名称,该值必须是在`<filter>`元素中声明过的过滤器的名字
-    - `<url-pattern>`设置 filter 所拦截的请求路径(过滤器关联的URL样式)
+    - `<url-pattern>`设置 filter 所拦截的请求路径（过滤器关联的URL样式)
 
 - `<servlet-name>`指定过滤器所拦截的Servlet名称
 

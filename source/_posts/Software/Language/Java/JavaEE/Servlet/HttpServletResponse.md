@@ -27,7 +27,7 @@ HeaderN: ...
 </html>
 ```
 
-- 状态行包括 HTTP 版本(在本例中为 HTTP/1.1),一个状态码(在本例中为 200)和一个对应于状态码的短消息(在本例中为 OK)
+- 状态行包括 HTTP 版本（在本例中为 HTTP/1.1),一个状态码（在本例中为 200)和一个对应于状态码的短消息（在本例中为 OK)
 
 ## 设置 HTTP 响应报头的方法
 
@@ -51,7 +51,7 @@ HeaderN: ...
 | **void sendRedirect(String location)** 使用指定的重定向位置 URL 发送临时重定向响应到客户端, |
 | **void setAttribute(String key,Object value)**如果需要在服务器端进行跳转,并需要想下个页面发送新的参数时,,可以通过`setAttribute()`,将值放入到request对象,然后在其他页面使用`getAttribute()`获取对应的值,这样就达到一次请求可以在多个页面共享一些对象信息 |
 | **void setBufferSize(int size)** 为响应主体设置首选的缓冲区大小, |
-| **void setCharacterEncoding(String charset)** 设置被发送到客户端的响应的字符编码(MIME 字符集)例如,UTF-8, |
+| **void setCharacterEncoding(String charset)** 设置被发送到客户端的响应的字符编码(MIME 字符集）例如,UTF-8, |
 | **void setContentLength(int len)** 设置在 HTTP Servlet 响应中的内容主体的长度,该方法设置 HTTP Content-Length 头, |
 | **void setContentType(String type)** 如果响应还未被提交,设置被发送到客户端的响应的内容类型, |
 | **void setDateHeader(String name, long date)** 设置一个带有给定的名称和日期值的响应报头, |

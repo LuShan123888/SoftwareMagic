@@ -7,7 +7,7 @@ categories:
 ---
 # Mybatis CRUD操作
 
-- **resultType**:SQL语句返回值类型(完整的类名或者别名)
+- **resultType**:SQL语句返回值类型（完整的类名或者别名)
 - **parameterType**:传入SQL语句的参数类型
 - 接口中的方法名与映射文件中的SQL语句ID 一一对应
 - 所有的增删改操作都需要提交事务
@@ -53,7 +53,7 @@ public void tsetSelectUserById() {
 }
 ```
 
-### 根据密码和名字查询用户(使用Map)
+### 根据密码和名字查询用户（使用Map)
 
 1. 在接口方法中, 参数直接传递Map
 
@@ -100,7 +100,7 @@ List<User> selectUser(Map<String,Integer> map);
 ```
 
 3. 在测试类中传入参数测试
-    - 推断:起始位置 =  (当前页面 - 1 ) * 页面大小
+    - 推断：起始位置 =  (当前页面 - 1 ) * 页面大小
 
 ```java
 //分页查询 , 两个参数startIndex , pageSize

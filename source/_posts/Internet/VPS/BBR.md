@@ -18,7 +18,7 @@ yum -y install wget
 
 ## 一键安装魔改版bbr
 
-依次执行如下三行代码，下载一键安装脚本->赋予执行权限->执行脚本
+依次执行如下三行代载一键安装脚本->赋予执行权限->执行脚本
 
 ```bash
 wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh

@@ -281,7 +281,7 @@ public class CustomLocalDateTimeDeserializer extends LocalDateTimeDeserializer {
 ```
 #### Jackson2ObjectMapperBuilderCustomizer
 
-- 直接修改MappingJackson2HttpMessageConverter中的ObjectMapper默认的序列化器和反序列化器，这样就能全局生效，不需要再使用其他注解或者定制序列化方案(当然，有些时候需要特殊处理定制),或者说，在需要特殊处理的场景才使用其他注解或者定制序列化方案，使用钩子接口Jackson2ObjectMapperBuilderCustomizer可以实现ObjectMapper的属性定制:
+- 直接修改MappingJackson2HttpMessageConverter中的ObjectMapper默认的序列化器和反序列化器，这样就能全局生效，不需要再使用其他注解或者定制序列化方案（当然，有些时候需要特殊处理定制),或者说，在需要特殊处理的场景才使用其他注解或者定制序列化方案，使用钩子接口Jackson2ObjectMapperBuilderCustomizer可以实现ObjectMapper的属性定制:
 
 ```javascript
 @Bean
@@ -314,7 +314,7 @@ public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomiz
 ### JSONObject对象
 
 - JSONObject实现了Map接口, 猜想 JSONObject底层操作是由Map实现的
-- JSONObject对应json对象，通过各种形式的`get()`方法可以获取json对象中的数据，也可利用诸如`size()`,`isEmpty()`等方法获取"键:值"对的个数和判断是否为空，其本质是通过实现Map接口并调用接口中的方法完成的
+- JSONObject对应json对象，通过各种形式的`get()`方法可以获取json对象中的数据，也可利用诸如`size()`,`isEmpty()`等方法获取"键：值"对的个数和判断是否为空，其本质是通过实现Map接口并调用接口中的方法完成的
 
 ### JSONArray对象
 

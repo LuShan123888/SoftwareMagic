@@ -53,7 +53,7 @@ categories:
 **Command-E**|推出所选磁盘或宗卷
 **Command-F**|在"访达”窗口中开始"聚焦”搜索
 **Command-I**|显示所选文件的"显示简介”窗口
-**Command-R**|(1) 如果在"访达”中选择了某个别名:显示所选别名对应的原始文件,(2) 在某些 App(如"日历”或 Safari 浏览器)中，刷新或重新载入页面,(3) 在["软件更新”偏好设置](https://support.apple.com/zh-cn/HT201541)中，再次检查有没有软件更新
+**Command-R**|(1) 如果在"访达”中选择了某个别名：显示所选别名对应的原始文件,(2) 在某些 App(如"日历”或 Safari 浏览器）中，刷新或重新载入页面,(3) 在["软件更新”偏好设置](https://support.apple.com/zh-cn/HT201541)中，再次检查有没有软件更新
 **Shift-Command-C**|打开"电脑”窗口
 **Shift-Command-D**|打开"桌面”文件夹
 **Shift-Command-F**|打开"最近使用”窗口，其中显示了您最近查看或更改过的所有文件
@@ -101,7 +101,7 @@ categories:
 **Command–调高亮度**|打开或关闭[目标显示器模式](https://support.apple.com/zh-cn/HT204592)
 **Command–调低亮度**|当您的 Mac 连接到多台显示器时，打开或关闭[视频镜像](https://support.apple.com/zh-cn/HT202351#mirroring)
 **Option–调高亮度**|打开"显示器”偏好设置，这个快捷键可与任一亮度键搭配使用
-**Control–调高亮度**或 **Control–调低亮度**|更改外部显示器的亮度(如果显示器支持)
+**Control–调高亮度**或 **Control–调低亮度**|更改外部显示器的亮度（如果显示器支持)
 **Option-Shift–调高亮度**或 **Option-Shift–调低亮度**|以较小的步幅调节显示器亮度，如果您的显示器支持，可以将 Control 键添加到此快捷键，以便在外置显示器上进行调节
 **Option–"调度中心”**|打开"调度中心”偏好设置
 **Command–调度中心**|显示桌面
@@ -118,7 +118,7 @@ categories:
 **按住 Option 键点按开合三角**|打开所选文件夹内的所有文件夹，这个快捷键仅在列表视图中有效
 **按住 Command 键点按窗口标题**|查看包含当前文件夹的文件夹
 [了解如何使用 Command 或 Shift 在"访达”中选择多个项目](https://support.apple.com/zh-cn/guide/mac-help/select-items-mchlp1378)
-点按"访达”菜单栏中的"前往”菜单查看用于打开许多常用文件夹(如"应用程序”,"文稿”,"下载”,"实用工具”和"iCloud 云盘”)的快捷键
+点按"访达”菜单栏中的"前往”菜单查看用于打开许多常用文件夹（如"应用程序”,"文稿”,"下载”,"实用工具”和"iCloud 云盘”)的快捷键
 
 ## 文稿快捷键
 
@@ -198,8 +198,8 @@ categories:
 | 移到上一个搜索结果                                           | 上箭头键                                               |
 | 移到下一个类别中的第一个搜索结果                             | Command-下箭头                                         |
 | 移到上一个类别中的第一个搜索结果                             | Command-上箭头                                         |
-| 显示 Mac 上的搜索结果(如文件)路径                          | Command                                                |
-| 放大图像预览                                                 | Control 键(然后在触控板上移动双指以在预览中移动图像) |
+| 显示 Mac 上的搜索结果（如文件）路径                          | Command                                                |
+| 放大图像预览                                                 | Control 键（然后在触控板上移动双指以在预览中移动图像) |
 | 打开所选结果                                                 | Return 键                                              |
 | 在 App 或["访达”](https://support.apple.com/zh-cn/guide/mac-help/aside/glos00063759/10.15/mac/10.15)中查看文件 | Command-R 或 Command-连按                              |
 | 打开搜索结果已选定的"访达”窗口                               | Option-Command-空格键                                  |
@@ -275,12 +275,12 @@ categories:
 ## Mac 的启动组合键
 
 - 若要使用这些组合键中的任何一个，请在按下电源按钮以[开启 Mac](https://support.apple.com/zh-cn/HT201150) 后或在 Mac 开始重新启动后，立即按住相应按键，请一直按住，直至电脑出现对应的行为
-- 如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),这些组合键全都会被停用(下文中另有注明的组合键除外)
+- 如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),这些组合键全都会被停用（下文中另有注明的组合键除外)
 
 快捷键    | 操作
 :---: | :---:
  **Command (⌘)-R** | 从内建的 [macOS 恢复](https://support.apple.com/zh-cn/HT201314)系统启动，或者，您也可以使用 Option-Command-R 或 Shift-Option-Command-R 以通过互联网从 macOS 恢复功能启动,[macOS 恢复功能可以安装不同版本的 macOS](https://support.apple.com/zh-cn/HT204904),具体取决于您在电脑启动时使用的组合键，如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
-**Option (⌥)**|启动进入"[启动管理器](https://support.apple.com/zh-cn/HT202796)”,您可以从中选取其他启动磁盘或宗卷(若可用),如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
+**Option (⌥)**|启动进入"[启动管理器](https://support.apple.com/zh-cn/HT202796)”,您可以从中选取其他启动磁盘或宗卷（若可用),如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),系统将要求您输入这个密码
 **Option-Command-P-R**|[重置 NVRAM](https://support.apple.com/zh-cn/HT204063) 或 PRAM,如果您的 Mac 使用了[固件密码](https://support.apple.com/zh-cn/HT204455),它会忽略这个组合键或从 macOS 恢复功能启动
 **Shift (⇧)**|以[安全模式](https://support.apple.com/zh-cn/HT201262)启动
 **D**|从内建的 [Apple Hardware Test](https://support.apple.com/zh-cn/HT201257) 或"[Apple 诊断](https://support.apple.com/zh-cn/HT202731)”实用工具启动，具体取决于您的 Mac 机型，或者，您也可以使用 Option-D 通过互联网从这个实用工具启动
@@ -346,7 +346,7 @@ categories:
 | 向前删除到字词的结尾 | Option-D(选中[将 Option 键用作 Meta 键](https://support.apple.com/zh-cn/guide/terminal/trmlkbrd/2.10/mac/10.15)后可用) |
 | 向后删除到字词的开头 | Control-W                                                    |
 | 删除一个字符         | Delete/Control+D                                             |
-| 向前删除一个字符     | 向前删除(或使用 Fn-Delete)/Control+D                       |
+| 向前删除一个字符     | 向前删除（或使用 Fn-Delete)/Control+D                       |
 | 转置两个字符         | Control-T                                                    |
 | 清除屏幕             | Control+L                                                    |
 | 搜索之前的命令       | Control+R                                                    |
@@ -402,13 +402,13 @@ categories:
 
 |   快捷键    |                          功能                          |
 | :---------: | :----------------------------------------------------: |
-| Command + ← |                    到行首(不管折行)                    |
+| Command + ← |                    到行首（不管折行)                    |
 | Command + → |                         到行尾                         |
 | Control + F |        光标前进一个字符，相当于右键(F = Forward)        |
 | Control + B |       光标后退一个字符，相当于左键(B = Backward)        |
 | Control + P |           上移一行，相当于上键(P = Previous)            |
 | Control + N |             下移一行，相当于下键(N = Next)              |
-| Control + A | 移动光标到本行行首(函数如果折行，到上一行首)(A = Ahead) |
+| Control + A | 移动光标到本行行首（函数如果折行，到上一行首)(A = Ahead) |
 | Control + E |              移动光标到本行行尾(E = End)               |
 | Option + ←  |                      左移一个单词                      |
 | Option + →  |                      右移一个单词                      |

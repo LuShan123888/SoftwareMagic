@@ -11,7 +11,7 @@ categories:
 ## 并发安全和锁
 
 
-- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源 (临界区) 的情况, 这种情况下就会发生 `竞态问题` (数据竞态)
+- 有时候我们的代码中可能会存在多个 goroutine 同时操作一个资源（临界区) 的情况, 这种情况下就会发生 `竞态问题` (数据竞态)
 
 ```go
 package main
@@ -233,7 +233,7 @@ func (o *Once) Do(f func())
 
 #### 加载配置文件示例
 
-- 延迟一个开销很大的初始化操作到真正用到它的时候再执行是一个很好的实践,因为预先初始化一个变量 (比如在 init 函数中完成初始化) 会增加程序的启动耗时, 而且有可能实际执行过程中这个变量没有用上, 那么这个初始化操作就不是必须要做的, 我们来看一个例子:
+- 延迟一个开销很大的初始化操作到真正用到它的时候再执行是一个很好的实践,因为预先初始化一个变量（比如在 init 函数中完成初始化) 会增加程序的启动耗时, 而且有可能实际执行过程中这个变量没有用上, 那么这个初始化操作就不是必须要做的, 我们来看一个例子:
 
 ```go
 var icons map[string]image.Image
@@ -659,13 +659,13 @@ func (g *Group) Go (f func () error)
 func (g *Group) Wait () error
 ```
 
-- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回, 然后从它们返回第一个非 nil 的错误 (如果有)
+- Wait 会阻塞直至由上述 Go 方法调用的所有函数都返回, 然后从它们返回第一个非 nil 的错误（如果有)
 - 下面的示例代码演示了如何使用 errgroup 包来处理多个子任务 goroutine 中可能返回的 error
 
 ```go
 // fetchUrlDemo 2 使用 errgroup 并发获取 url 内容
 func fetchUrlDemo 2 () error {
-	g := new (errgroup. Group) // 创建等待组 (类似 sync. WaitGroup)
+	g := new (errgroup. Group) // 创建等待组（类似 sync. WaitGroup)
 	var urls = []string{
 		"http://pkg.go.dev",
 		"http://www.liwenzhou.com",

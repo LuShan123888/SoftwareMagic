@@ -12,7 +12,7 @@ categories:
 - Apache Shiro 的首要目标是易于使用和理解，安全通常很复杂，甚至让人感到很痛苦，但是 Shiro 却不是这样子的，一个好的安全框架应该屏蔽复杂性，向外暴露简单，直观的 API,来简化开发人员实现应用程序安全所花费的时间和精力
 - Shiro 能做什么呢？
     - 验证用户身份
-    - 用户访问权限控制，比如:判断用户是否分配了一定的安全角色，判断用户是否被授予完成某个操作的权限
+    - 用户访问权限控制，比如：判断用户是否分配了一定的安全角色，判断用户是否被授予完成某个操作的权限
     - 在非 Web 或 EJB 容器的环境下可以任意使用 Session API
     - 可以响应认证，访问控制，或者 Session 生命周期中发生的事件
     - 可将一个或以上用户安全数据源数据组合成一个复合的用户"view”(视图)
@@ -27,17 +27,17 @@ categories:
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-18-ShiroFeatures.png)
 
-- Authentication(认证), Authorization(授权), Session Management(会话管理), Cryptography(加密)被 Shiro 框架的开发团队称之为应用安全的四大基石，那么就让我们来看看它们吧:
+- Authentication(认证), Authorization(授权), Session Management(会话管理), Cryptography(加密）被 Shiro 框架的开发团队称之为应用安全的四大基石，那么就让我们来看看它们吧:
     - **Authentication(认证)**:用户身份识别，通常被称为用户"登录”
     - **Authorization(授权)**:访问控制，比如某个用户是否具有某个操作的使用权限
     - **Session Management(会话管理)**:特定于用户的会话管理，甚至在非web 或 EJB 应用程序
     - **Cryptography(加密)**:在对数据源使用加密算法加密的同时，保证易于使用
 - 还有其他的功能来支持和加强这些不同应用环境下安全领域的关注点，特别是对以下的功能支持:
     - Web支持:Shiro 提供的 Web 支持 api,可以很轻松的保护 Web 应用程序的安全
-    - 缓存:缓存是 Apache Shiro 保证安全操作快速，高效的重要手段
+    - 缓存：缓存是 Apache Shiro 保证安全操作快速，高效的重要手段
     - 并发:Apache Shiro 支持多线程应用程序的并发特性
-    - 测试:支持单元测试和集成测试，确保代码和预想的一样安全
-    - Run As:这个功能允许用户假设另一个用户的身份(在许可的前提下)
+    - 测试：支持单元测试和集成测试，确保代码和预想的一样安全
+    - Run As:这个功能允许用户假设另一个用户的身份（在许可的前提下)
     - Remember Me:跨 session 记录用户的身份，只有在强制需要时才需要登录
 - **注意**:Shiro 不会去维护用户，维护权限，这些需要我们自己去设计/提供，然后通过相应的接口注入给 Shiro
 
@@ -86,7 +86,7 @@ categories:
 public class UserInfo {
     private Long id; // 主键
     private String username; // 登录账户，唯一
-    private String name; // 名称(匿名或真实姓名),用于UI显示
+    private String name; // 名称（匿名或真实姓名),用于UI显示
     private String password; // 密码
     private String salt; // 加密密码的盐
     @JsonIgnoreProperties(value = {"userInfos"})
@@ -102,10 +102,10 @@ public class SysRole {
     private Long id; // 主键
     private String name; // 角色名称，如 admin/user
     private String description; // 角色描述，用于UI显示
-    // 角色 -- 权限关系:多对多
+    // 角色 -- 权限关系：多对多
     @JsonIgnoreProperties(value = {"roles"})
     private List<SysPermission> permissions;
-    // 用户 -- 角色关系:多对多
+    // 用户 -- 角色关系：多对多
     @JsonIgnoreProperties(value = {"roles"})
     private List<UserInfo> userInfos;// 一个角色对应多个用户
 
@@ -211,7 +211,7 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("md5"); // 散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5"); // 散列算法：这里使用MD5算法;
         hashedCredentialsMatcher.setHashIterations(2); // 散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }
