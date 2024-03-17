@@ -255,7 +255,7 @@ var zhCN = {
     IMAGE_TIP_TOGGLE_NAME: "展示缩放比例提示",
     IMAGE_TIP_TOGGLE_DESC: "开启后，当你缩放图片时会展示当前缩放的比例。",
     IMG_FULL_SCREEN_MODE_NAME: '全屏预览模式',
-    // 全屏预览模式下拉：
+    // 全屏预览模式 下拉：
     FIT: '自适应',
     FILL: '填充',
     STRETCH: '拉伸',
@@ -302,7 +302,7 @@ var zhCN = {
     GOLD: '金色',
     YELLOW: '黄色',
     // >>>Gallery Navbar Settings:
-    GALLERY_NAVBAR_SETTINGS: '图片导航设置（体验版):',
+    GALLERY_NAVBAR_SETTINGS: '图片导航设置 (体验版):',
     GALLERY_NAVBAR_TOGGLE_NAME: "展示图片导航",
     GALLERY_NAVBAR_TOGGLE_DESC: "当前文档的所有图片会展示在弹出层的底部，可随意切换展示不同图片。",
     GALLERY_NAVBAR_DEFAULT_COLOR_NAME: "设置图片导航底栏背景色（默认展示）",
@@ -312,7 +312,7 @@ var zhCN = {
     GALLERY_IMG_BORDER_ACTIVE_COLOR_NAME: '设置被选中图片的边框色',
     // >>>HOTKEYS_SETTINGS:
     HOTKEY_SETTINGS: "快捷键设置:",
-    HOTKEY_SETTINGS_DESC: "📢  你无法为"移动图片"和'切换图片"设置相同的快捷键。（不支持贴图模式）",
+    HOTKEY_SETTINGS_DESC: "📢  你无法为'移动图片'和'切换图片'设置相同的快捷键。（不支持贴图模式）",
     MOVE_THE_IMAGE_NAME: "为移动图片设置快捷键",
     MOVE_THE_IMAGE_DESC: "你可以利用快捷键来移动弹出层上的图片。",
     SWITCH_THE_IMAGE_NAME: "为切换图片设置快捷键",
