@@ -9,34 +9,34 @@ categories:
 
 ## 删除不需要的文件
 
-将下载好的jar放到下载好的git库的同级目录
-删除大于100M的文件
+将下载好的 jar 放到下载好的 git 库的同级目录
+删除大于 100 M 的文件
 
 ```shell
 java -jar bfg.jar --strip-blobs-bigger-than 100M some-big-repo.git
 ```
 
-删除大于100M的文件
+删除大于 100 M 的文件
 
 
-BFG将更新您的提交以及所有分支和标记,此时还没有物理删除,**使用gc去除git认为多余的数据(上面调用命令删除的文件)**
+BFG 将更新您的提交以及所有分支和标记, 此时还没有物理删除,**使用 gc 去除 git 认为多余的数据 (上面调用命令删除的文件)**
 
 ```shell
 cd some-big-repo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 ```
 
-调用上面的命令后,文件将彻底删除(everywhere)
+调用上面的命令后,文件将彻底删除 (everywhere)
 
 ## 将代码提交到远程仓库
 
-确保文件没有任何问题之后,将代码提交到远程仓库,这将影响远程服务器上所有的refs
+确保文件没有任何问题之后, 将代码提交到远程仓库, 这将影响远程服务器上所有的 refs
 
 ```shell
 git push
 ```
 
-如果有必要,让其他人删除原来的仓库,因为原来的仓库中还是有脏数据,有可能会再次提交到远程仓库
+如果有必要, 让其他人删除原来的仓库, 因为原来的仓库中还是有脏数据, 有可能会再次提交到远程仓库
 
 ## 其他命令
 
@@ -51,8 +51,8 @@ java -jar bfg.jar --strip-blobs-bigger-than 50M  my-repo.git
 java -jar bfg.jar --delete-folders doc  my-repo.git
 ```
 
-**注意**:删除文件后别忘了gc命令,工具不会清除最近一次提交的文件内容,如果需要删除,使用
-`--no-blob-protection`,官方不推荐,在删除前最好确保最新的提交为干净的
+**注意**: 删除文件后别忘了 gc 命令, 工具不会清除最近一次提交的文件内容, 如果需要删除, 使用
+`--no-blob-protection`, 官方不推荐, 在删除前最好确保最新的提交为干净的
 
 ## 详细命令
 
