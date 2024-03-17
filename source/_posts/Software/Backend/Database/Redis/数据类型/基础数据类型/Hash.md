@@ -10,7 +10,7 @@ categories:
 ---
 # Redis Hash
 
-- Redis Hash是一个 String类型的 field(字段) 和 value(值) 的映射表，类似于Map,Hash特别适合用于存储对象
+- Redis Hash是一个 String类型的 field(字段）和 value(值）的映射表，类似于Map,Hash特别适合用于存储对象
 - Redis 中每个 Hash可以存储 232 - 1 键值对(40多亿)
 
 ```

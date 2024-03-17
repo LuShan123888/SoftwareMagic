@@ -355,7 +355,7 @@ List<T> selectList(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 List<T> selectByMap(@Param(Constants.COLUMN_MAP) Map<String, Object> columnMap);
 // 根据 Wrapper 条件，查询全部记录
 List<Map<String, Object>> selectMaps(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
-// 根据 Wrapper 条件，查询全部记录，注意: 只返回第一个字段的值
+// 根据 Wrapper 条件，查询全部记录，注意：只返回第一个字段的值
 List<Object> selectObjs(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
 // 根据 entity 条件，查询全部记录（并翻页)

@@ -8,27 +8,27 @@ categories:
 ---
 # Git tag
 
-**列出所有tag**
+**列出所有 tag**
 
 ```shell
 git tag
 ```
 
-**在当前commit新建一个tag**
+**在当前 commit 新建一个 tag**
 
 ```shell
 $ git tag [tag]
 ```
 
-**在指定commit新建一个tag**
+**在指定 commit 新建一个 tag**
 
 ```shell
 $ git tag [tag] [commit]
 ```
 
-- `-m`:添加注释
+- `-m`: 添加注释
 
-**删除本地tag**
+**删除本地 tag**
 
 ```shell
 $ git tag -d [tag]

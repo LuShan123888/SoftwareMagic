@@ -438,7 +438,7 @@ public class Main {
 - TreeSet 支持两种排序方式，自然排序和定制排序，其中自然排序为默认的排序方式
 - 放入TreeSet的元素，必须实现`Comparable`接口，如果没有实现`Comparable`接口，则必须在创建 TreeSet 时传入自定义的 `Comparator`对象,TreeSet 会自动对元素的进行排序
 
-> **注意**:TreeSet 集合不是通过 hashcode 和 equals 函数来比较元素的. 它是通过 compare 或者 comparaeTo 函数来判断元素是否相等. compare 函数通过判断两个对象的 id,相同的 id 判断为重复元素，不会被加入到集合中
+> **注意**:TreeSet 集合不是通过 hashcode 和 equals 函数来比较元素的。它是通过 compare 或者 comparaeTo 函数来判断元素是否相等. compare 函数通过判断两个对象的 id,相同的 id 判断为重复元素，不会被加入到集合中
 
 ```java
 public class Main {

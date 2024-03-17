@@ -191,5 +191,5 @@ public class HelloWorldController {
 }
 ```
 
-- 可以看到返回值类型是对象类型，而且通过`@ModelAttribute("user2")`注解，此时会添加返回值到模型数据( 名字为user2 ) 中供视图展示使用
+- 可以看到返回值类型是对象类型，而且通过`@ModelAttribute("user2")`注解，此时会添加返回值到模型数据（名字为user2 ) 中供视图展示使用
 - @ModelAttribute 注解的返回值会覆盖参数注解对象user

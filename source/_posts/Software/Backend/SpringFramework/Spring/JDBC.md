@@ -10,7 +10,7 @@ categories:
 
 ## Srping Data
 
-- 对于数据访问层，无论是 SQL(关系型数据库) 还是 NOSQL(非关系型数据库),Spring Boot 底层都是采用 Spring Data 的方式进行统一处理
+- 对于数据访问层，无论是 SQL(关系型数据库）还是 NOSQL(非关系型数据库),Spring Boot 底层都是采用 Spring Data 的方式进行统一处理
 - Spring Boot 底层都是采用 Spring Data 的方式进行统一处理各种数据库,Spring Data 也是 Spring 中与 Spring Boot,Spring Cloud 等齐名的知名项目
 
 ## 整合JDBC

@@ -155,7 +155,7 @@ public class RedisUtil {
      * 根据key 获取过期时间
      *
      * @param key 键不能为null
-     * @return 时间（秒) 返回0代表为永久有效
+     * @return 时间（秒）返回0代表为永久有效
      */
     public long getExpire(String key) {
         return redisTemplate.getExpire(key, TimeUnit.SECONDS);
@@ -355,7 +355,7 @@ public class RedisUtil {
      * @param key   键
      * @param item  项
      * @param value 值
-     * @param time  时间（秒) 注意：如果已存在的hash表有时间，这里将会替换原有的时间
+     * @param time  时间（秒）注意：如果已存在的hash表有时间，这里将会替换原有的时间
      * @return true 成功 false失败
      */
     public boolean hset(String key, String item, Object value, long time) {

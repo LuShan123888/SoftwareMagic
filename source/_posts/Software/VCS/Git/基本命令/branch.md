@@ -14,8 +14,8 @@ categories:
 $ git branch
 ```
 
-- `-a`:列出所有本地分支和远程分支
-- `-r`:列出所有远程分支
+- `-a`: 列出所有本地分支和远程分支
+- `-r`: 列出所有远程分支
 
 **新建一个分支，但依然停留在当前分支**
 
@@ -23,7 +23,7 @@ $ git branch
 $ git branch [branch-name]
 ```
 
-**新建一个分支，指向指定commit**
+**新建一个分支，指向指定 commit**
 
 ```shell
 $ git branch [branch] [commit]

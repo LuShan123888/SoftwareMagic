@@ -150,9 +150,9 @@ public class StudentsBean implements java.io.Serializable
 - 访问以上 JSP,运行结果如下:
 
 ```
-学生名字: 小强
+学生名字：小强
 
-学生姓氏: 王
+学生姓氏：王
 
 学生年龄: 10
 ```

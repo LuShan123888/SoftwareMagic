@@ -8,19 +8,19 @@ categories:
 ---
 # Git submodule
 
-经常碰到这种情况：当你在一个Git 项目上工作时，你需要在其中使用另外一个Git 项目。也许它是一个第三方开发的Git 库或者是你独立开发和并在多个父项目中使用的。这个情况下一个常见的问题产生了：你想将两个项目单独处理但是又需要在其中一个中使用另外一个。
+经常碰到这种情况：当你在一个 Git 项目上工作时，你需要在其中使用另外一个 Git 项目。也许它是一个第三方开发的 Git 库或者是你独立开发和并在多个父项目中使用的。这个情况下一个常见的问题产生了：你想将两个项目单独处理但是又需要在其中一个中使用另外一个。
 
-在Git 中你可以用子模块`submodule`来管理这些项目，`submodule`允许你将一个Git 仓库当作另外一个Git 仓库的子目录。这允许你克隆另外一个仓库到你的项目中并且保持你的提交相对独立。
+在 Git 中你可以用子模块 `submodule` 来管理这些项目，`submodule` 允许你将一个 Git 仓库当作另外一个 Git 仓库的子目录。这允许你克隆另外一个仓库到你的项目中并且保持你的提交相对独立。
 
 ## 添加子模块
 
-将远程项目`https://github.com/maonx/vimwiki-assets.git`克隆到本地`assets`文件夹。
+将远程项目 `https://github.com/maonx/vimwiki-assets.git` 克隆到本地 `assets` 文件夹。
 
 ```sh
 $ git submodule add https://github.com/maonx/vimwiki-assets.git assets
 ```
 
-添加子模块后运行`git status`, 可以看到目录有增加1个文件`.gitmodules`, 这个文件用来保存子模块的信息。
+添加子模块后运行 `git status`, 可以看到目录有增加 1 个文件 `.gitmodules`, 这个文件用来保存子模块的信息。
 
 ```sh
 $ git status
@@ -75,7 +75,7 @@ $ git submodule
  -e33f854d3f51f5ebd771a68da05ad0371a3c0570 assets
 ```
 
-- 子模块前面有一个`-`，说明子模块文件还未检入（空文件夹）。
+- 子模块前面有一个 `-`，说明子模块文件还未检入（空文件夹）。
 
 3. 初始化子模块
 
@@ -121,7 +121,7 @@ $ git push origin HEAD:master
 ## 删除子模块
 
 **删除子模块比较麻烦，需要手动删除相关的文件，否则在添加子模块时有可能出现错误**
-同样以删除`assets`文件夹为例
+同样以删除 `assets` 文件夹为例
 
 1. 删除子模块文件夹
 
@@ -130,7 +130,7 @@ $ git rm --cached assets
 $ rm -rf assets
 ```
 
-2. 删除`.gitmodules`文件中相关子模块信息
+2. 删除 `.gitmodules` 文件中相关子模块信息
 
 ```sh
 [submodule "assets"]
@@ -138,14 +138,14 @@ $ rm -rf assets
   url = https://github.com/maonx/vimwiki-assets.git
 ```
 
-3. 删除`.git/config`中的相关子模块信息
+3. 删除 `.git/config` 中的相关子模块信息
 
 ```sh
 [submodule "assets"]
   url = https://github.com/maonx/vimwiki-assets.git
 ```
 
-3. 删除`.git`文件夹中的相关子模块文件
+3. 删除 `.git` 文件夹中的相关子模块文件
 
 ```sh
 $ rm -rf .git/modules/assets

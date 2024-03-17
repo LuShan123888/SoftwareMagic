@@ -91,7 +91,7 @@ ALTER 语句中可以指定参数 ALGORITHM 和 LOCK 分别指定 DDL 执行的�
 
 -   使用Inplace方式执行的DDL，发生错误或被kill时，需要一定时间的回滚期，执行时间越长，回滚时间越长。
 -   使用Copy方式执行的DDL，需要记录过程中的undo和redo日志，同时会消耗buffer pool的资源，效率较低，优点是可以快速停止。
--   不过并不是所有的 DDL 操作都能用 INPLACE 的方式执行，具体的支持情况可以在（在线 DDL 操作) 中查看。
+-   不过并不是所有的 DDL 操作都能用 INPLACE 的方式执行，具体的支持情况可以在（在线 DDL 操作）中查看。
 -   以下是常见DDL操作：
 
 <img src="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/293bb4d1326a4e09a0d8e873a0023388~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp" style="zoom:50%;" />
