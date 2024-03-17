@@ -10,7 +10,7 @@ categories:
 
 ## 函数定义
 
-- Go语言中定义函数使用`func`关键字,具体格式如下:
+- Go 语言中定义函数使用 `func` 关键字, 具体格式如下:
 
 ```go
 func 函数名(参数)(返回值){
@@ -18,10 +18,10 @@ func 函数名(参数)(返回值){
 }
 ```
 
-- **函数名**:由字母,数字,下划线组成,但函数名的第一个字母不能是数字,在同一个包内,函数名也称不能重名
-- **参数**:参数由参数变量和参数变量的类型组成,多个参数之间使用`,`分隔
-- **返回值**:返回值由返回值变量和其变量类型组成,也可以只写返回值的类型,多个返回值必须用`()`包裹,并用`,`分隔
-- **函数体**:实现指定功能的代码块
+- **函数名**: 由字母, 数字, 下划线组成, 但函数名的第一个字母不能是数字, 在同一个包内, 函数名也称不能重名
+- **参数**: 参数由参数变量和参数变量的类型组成, 多个参数之间使用 `,` 分隔
+- **返回值**: 返回值由返回值变量和其变量类型组成, 也可以只写返回值的类型, 多个返回值必须用 `()` 包裹, 并用 `,` 分隔
+- **函数体**: 实现指定功能的代码块
 
 **实例**
 
@@ -33,7 +33,7 @@ func intSum(x int, y int) int {
 }
 ```
 
-**注意**：函数的参数和返回值都是可选的,例如可以实现一个既不需要参数也没有返回值的函数:
+**注意**：函数的参数和返回值都是可选的, 例如可以实现一个既不需要参数也没有返回值的函数:
 
 ```go
 func sayHello() {
@@ -43,7 +43,7 @@ func sayHello() {
 
 ## 函数的调用
 
-- 定义了函数之后,我们可以通过`函数名()`的方式调用函数,例如我们调用上面定义的两个函数,代码如下:
+- 定义了函数之后, 我们可以通过 `函数名()` 的方式调用函数, 例如我们调用上面定义的两个函数, 代码如下:
 
 ```go
 func main() {
@@ -53,13 +53,13 @@ func main() {
 }
 ```
 
-**注意**:调用有返回值的函数时,可以不接收其返回值
+**注意**: 调用有返回值的函数时, 可以不接收其返回值
 
 ## 参数
 
 ### 类型简写
 
-- 函数的参数中如果相邻变量的类型相同,则可以省略类型,例如:
+- 函数的参数中如果相邻变量的类型相同, 则可以省略类型, 例如:
 
 ```go
 func intSum(x, y int) int {
@@ -67,12 +67,12 @@ func intSum(x, y int) int {
 }
 ```
 
-- `intSum`函数有两个参数,这两个参数的类型均为`int`,因此可以省略`x`的类型,因为`y`后面有类型说明,`x`参数也是该类型
+- `intSum` 函数有两个参数, 这两个参数的类型均为 `int`, 因此可以省略 `x` 的类型, 因为 `y` 后面有类型说明, `x` 参数也是该类型
 
 ### 可变参数
 
-- 可变参数是指函数的参数数量不固定,Go语言中的可变参数通过在参数名后加`...`来标识
-- **注意**:可变参数通常要作为函数的最后一个参数
+- 可变参数是指函数的参数数量不固定, Go 语言中的可变参数通过在参数名后加 `...` 来标识
+- **注意**: 可变参数通常要作为函数的最后一个参数
 
 ```go
 func intSum2(x ...int) int {
@@ -93,15 +93,15 @@ func main(){
 }
 ```
 
-- 本质上,函数的可变参数是通过切片来实现的
+- 本质上, 函数的可变参数是通过切片来实现的
 
 ## 返回值
 
-- Go语言中通过`return`关键字向外输出返回值
+- Go 语言中通过 `return` 关键字向外输出返回值
 
 ### 多返回值
 
-- Go语言中函数支持多返回值,函数如果有多个返回值时必须用`()`将所有返回值包裹起来
+- Go 语言中函数支持多返回值, 函数如果有多个返回值时必须用 `()` 将所有返回值包裹起来
 
 ```go
 func calc(x, y int) (int, int) {
@@ -113,7 +113,7 @@ func calc(x, y int) (int, int) {
 
 ### 返回值命名
 
-- 函数定义时可以给返回值命名,并在函数体中直接使用这些变量,最后通过`return`关键字返回
+- 函数定义时可以给返回值命名, 并在函数体中直接使用这些变量, 最后通过 `return` 关键字返回
 
 ```go
 func calc(x, y int) (sum, sub int) {
@@ -125,7 +125,7 @@ func calc(x, y int) (sum, sub int) {
 
 ### 返回值补充
 
-当我们的一个函数返回值类型为slice时,nil可以看做是一个有效的slice,没必要显示返回一个长度为0的切片
+当我们的一个函数返回值类型为 slice 时, nil 可以看做是一个有效的 slice, 没必要显示返回一个长度为 0 的切片
 
 ```go
 func someFunc(x string) []int {
@@ -140,7 +140,7 @@ func someFunc(x string) []int {
 
 ### 全局变量
 
-- 全局变量是定义在函数外部的变量,它在程序整个运行周期内都有效,在函数中可以访问到全局变量
+- 全局变量是定义在函数外部的变量, 它在程序整个运行周期内都有效, 在函数中可以访问到全局变量
 
 ```go
 package main
@@ -160,7 +160,7 @@ func main() {
 
 ### 局部变量
 
-- 局部变量分为两种:函数内定义的变量与语句块定义的变量
+- 局部变量分为两种: 函数内定义的变量与语句块定义的变量
 
 ```go
 func testLocalVar() {
@@ -191,7 +191,7 @@ func testLocalVar3() {
 }
 ```
 
-- 如果局部变量和全局变量重名,优先访问局部变量
+- 如果局部变量和全局变量重名, 优先访问局部变量
 
 ```go
 package main
@@ -214,14 +214,14 @@ func main() {
 
 ### 定义函数类型
 
-- 使用`type`关键字来定义一个函数类型,具体格式如下:
+- 使用 `type` 关键字来定义一个函数类型, 具体格式如下:
 
 ```go
 type calculation func(int, int) int
 ```
 
-- 上面语句定义了一个`calculation`类型,它是一种函数类型,这种函数接收两个int类型的参数并且返回一个int类型的返回值
-- 简单来说,凡是满足这个条件的函数都是calculation类型的函数,例如下面的add和sub是calculation类型
+- 上面语句定义了一个 `calculation` 类型, 它是一种函数类型, 这种函数接收两个 int 类型的参数并且返回一个 int 类型的返回值
+- 简单来说, 凡是满足这个条件的函数都是 calculation 类型的函数, 例如下面的 add 和 sub 是 calculation 类型
 
 ```go
 func add(x, y int) int {
@@ -233,7 +233,7 @@ func sub(x, y int) int {
 }
 ```
 
-- add和sub都能赋值给calculation类型的变量
+- add 和 sub 都能赋值给 calculation 类型的变量
 
 ```go
 var c calculation
@@ -303,7 +303,7 @@ func do(s string) (func(int, int) int, error) {
 ### 匿名函数
 
 - 匿名函数多用于实现回调函数和闭包
-- 函数可以作为返回值,但是在Go语言中函数内部只能定义匿名函数,匿名函数就是没有函数名的函数,匿名函数的定义格式如下:
+- 函数可以作为返回值, 但是在 Go 语言中函数内部只能定义匿名函数, 匿名函数就是没有函数名的函数, 匿名函数的定义格式如下:
 
 ```go
 func(参数)(返回值){
@@ -311,7 +311,7 @@ func(参数)(返回值){
 }
 ```
 
-- 匿名函数因为没有函数名,所以没办法像普通函数那样调用,所以匿名函数需要保存到某个变量或者作为立即执行函数:
+- 匿名函数因为没有函数名, 所以没办法像普通函数那样调用, 所以匿名函数需要保存到某个变量或者作为立即执行函数:
 
 ```go
 func main() {
@@ -330,7 +330,7 @@ func main() {
 
 ### 闭包
 
-- 闭包指的是一个函数和与其相关的引用环境组合而成的实体,简单来说,`闭包 = 函数 + 引用环境`
+- 闭包指的是一个函数和与其相关的引用环境组合而成的实体, 简单来说, `闭包 = 函数 + 引用环境`
 
 ```go
 func adder() func(int) int {
@@ -352,8 +352,8 @@ func main() {
 }
 ```
 
-- 变量`f`是一个函数并且它引用了其外部作用域中的`x`变量,此时`f`就是一个闭包,在`f`的生命周期内,变量`x`也一直有效
-- 闭包进阶示例1:
+- 变量 `f` 是一个函数并且它引用了其外部作用域中的 `x` 变量, 此时 `f` 就是一个闭包, 在 `f` 的生命周期内, 变量 `x` 也一直有效
+- 闭包进阶示例 1:
 
 ```go
 func adder2(x int) func(int) int {
@@ -374,7 +374,7 @@ func main() {
 }
 ```
 
-- 闭包进阶示例2:
+- 闭包进阶示例 2:
 
 ```go
 func makeSuffixFunc(suffix string) func(string) string {
@@ -387,49 +387,49 @@ func makeSuffixFunc(suffix string) func(string) string {
 }
 
 func main() {
-	jpgFunc := makeSuffixFunc(".jpg")
-	txtFunc := makeSuffixFunc(".txt")
-	fmt.Println(jpgFunc("test")) //test.jpg
-	fmt.Println(txtFunc("test")) //test.txt
+	jpgFunc := makeSuffixFunc (". jpg")
+	txtFunc := makeSuffixFunc (". txt")
+	fmt.Println (jpgFunc ("test")) //test. jpg
+	fmt.Println (txtFunc ("test")) //test. txt
 }
 ```
 
-- 闭包进阶示例3:
+- 闭包进阶示例 3:
 
 ```go
-func calc(base int) (func(int) int, func(int) int) {
-	add := func(i int) int {
+func calc (base int) (func (int) int, func (int) int) {
+	add := func (i int) int {
 		base += i
 		return base
 	}
 
-	sub := func(i int) int {
+	sub := func (i int) int {
 		base -= i
 		return base
 	}
 	return add, sub
 }
 
-func main() {
-	f1, f2 := calc(10)
-	fmt.Println(f1(1), f2(2)) //11 9
-	fmt.Println(f1(3), f2(4)) //12 8
-	fmt.Println(f1(5), f2(6)) //13 7
+func main () {
+	f 1, f 2 := calc (10)
+	fmt. Println (f 1 (1), f 2 (2)) //11 9
+	fmt. Println (f 1 (3), f 2 (4)) //12 8
+	fmt. Println (f 1 (5), f 2 (6)) //13 7
 }
 ```
 
-## defer语句
+## defer 语句
 
-- Go语言中的`defer`语句会将其后面跟随的语句进行延迟处理,在`defer`归属的函数即将返回时,将延迟处理的语句按`defer`定义的逆序进行执行,也就是说,先被`defer`的语句最后被执行,最后被`defer`的语句,最先被执行
-- 由于`defer`语句延迟调用的特性,所以`defer`语句能非常方便的处理资源释放问题,比如:资源清理,文件关闭,解锁及记录时间等
+- Go 语言中的`defer`语句会将其后面跟随的语句进行延迟处理, 在`defer`归属的函数即将返回时, 将延迟处理的语句按`defer`定义的逆序进行执行, 也就是说, 先被`defer`的语句最后被执行, 最后被`defer`的语句, 最先被执行
+- 由于`defer`语句延迟调用的特性, 所以`defer`语句能非常方便的处理资源释放问题, 比如: 资源清理, 文件关闭, 解锁及记录时间等
 
 ```go
-func main() {
-	fmt.Println("start")
-	defer fmt.Println(1)
-	defer fmt.Println(2)
-	defer fmt.Println(3)
-	fmt.Println("end")
+func main () {
+	fmt. Println ("start")
+	defer fmt. Println (1)
+	defer fmt. Println (2)
+	defer fmt. Println (3)
+	fmt. Println ("end")
 }
 ```
 
@@ -441,64 +441,64 @@ end
 1
 ```
 
-### defer执行时机
+### defer 执行时机
 
-- 在Go语言的函数中`return`语句在底层并不是原子操作,它分为给返回值赋值和RET指令两步,而`defer`语句执行的时机就在返回值赋值操作后,RET指令执行前,具体如下图所示:
+- 在 Go 语言的函数中`return`语句在底层并不是原子操作, 它分为给返回值赋值和 RET 指令两步, 而`defer`语句执行的时机就在返回值赋值操作后, RET 指令执行前, 具体如下图所示:
 
 ![defer执行时机](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/defer.png)
 
 ### defer 经典案例
 
 ```go
-func f1() int {
+func f 1 () int {
     x := 5
-    defer func() {
+    defer func () {
         x++
     }()
     return x
 }
 
-func f2() (x int) {
-    defer func() {
+func f 2 () (x int) {
+    defer func () {
         x++
     }()
     return 5
 }
 
-func f3() (y int) {
+func f 3 () (y int) {
     x := 5
-    defer func() {
+    defer func () {
         x++
     }()
     return x
 }
-func f4() (x int) {
-    defer func(x int) {
+func f 4 () (x int) {
+    defer func (x int) {
         x++
     }(x)
     return 5
 }
-func main() {
-    fmt.Println(f1()) // 5
-    fmt.Println(f2()) // 6
-    fmt.Println(f3()) // 5
-    fmt.Println(f4()) // 5
+func main () {
+    fmt. Println (f 1 ()) // 5
+    fmt. Println (f 2 ()) // 6
+    fmt. Println (f 3 ()) // 5
+    fmt. Println (f 4 ()) // 5
 }
 ```
 
 ```go
-func calc(index string, a, b int) int {
+func calc (index string, a, b int) int {
 	ret := a + b
-	fmt.Println(index, a, b, ret)
+	fmt. Println (index, a, b, ret)
 	return ret
 }
 
-func main() {
+func main () {
 	x := 1
 	y := 2
-	defer calc("AA", x, calc("A", x, y))
+	defer calc ("AA", x, calc ("A", x, y))
 	x = 10
-	defer calc("BB", x, calc("B", x, y))
+	defer calc ("BB", x, calc ("B", x, y))
 	y = 20
 }
 ```
@@ -514,9 +514,9 @@ AA 1 3 4
 
 |    内置函数    |                             介绍                             |
 | :------------: | :----------------------------------------------------------: |
-|     close      |                     主要用来关闭channel                      |
-|      len       |      用来求长度,比如string,array,slice,map,channel      |
-|      new       | 用来分配内存,主要用来分配值类型,比如int,struct,返回的是指针 |
-|      make      |   用来分配内存,主要用来分配引用类型,比如chan,map,slice   |
-|     append     |                 用来追加元素到数组,slice中                  |
-| panic和recover |                        用来做错误处理                        |
+|     close      |                     主要用来关闭 channel                      |
+|      len       |      用来求长度, 比如 string, array, slice, map, channel      |
+|      new       | 用来分配内存, 主要用来分配值类型, 比如 int, struct, 返回的是指针 |
+|      make      |   用来分配内存, 主要用来分配引用类型, 比如 chan, map, slice   |
+|     append     |                 用来追加元素到数组, slice 中                  |
+| panic 和 recover |                        用来做错误处理                        |

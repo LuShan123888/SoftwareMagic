@@ -8,11 +8,11 @@ categories:
 ---
 # Go flag
 
-Go语言内置的`flag`包实现了命令行参数的解析，`flag`包使得开发命令行工具更为简单。
+Go 语言内置的 `flag` 包实现了命令行参数的解析，`flag` 包使得开发命令行工具更为简单。
 
-## os.Args
+## os. Args
 
-如果只是简单的想要获取命令行参数，可以像下面的代码示例一样使用`os.Args`来获取命令行参数。
+如果只是简单的想要获取命令行参数，可以像下面的代码示例一样使用 `os.Args` 来获取命令行参数。
 
 ```go
 package main
@@ -33,7 +33,7 @@ func main() {
 }
 ```
 
-将上面的代码执行`go build -o "args_demo"`编译之后，执行：
+将上面的代码执行 `go build -o "args_demo"` 编译之后，执行：
 
 ```bash
 $ ./args_demo a b c d
@@ -44,25 +44,25 @@ args[3]=c
 args[4]=d
 ```
 
-- `os.Args`是一个存储命令行参数的字符串切片，它的第一个元素是执行文件的名称。
+- `os.Args` 是一个存储命令行参数的字符串切片，它的第一个元素是执行文件的名称。
 
-## flag参数类型
+## flag 参数类型
 
-flag包支持的命令行参数类型有`bool`、`int`、`int64`、`uint`、`uint64`、`float` `float64`、`string`、`duration`。
+flag 包支持的命令行参数类型有 `bool`、`int`、`int64`、`uint`、`uint64`、`float` `float64`、`string`、`duration`。
 
-|   flag参数   |                            有效值                            |
+|   flag 参数   |                            有效值                            |
 | :----------: | :----------------------------------------------------------: |
-|  字符串flag  |                          合法字符串                          |
-|   整数flag   |           1234、0664、0x1234等类型，也可以是负数。           |
-|  浮点数flag  |                          合法浮点数                          |
-| bool类型flag |  1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False。   |
-|  时间段flag  | 任何合法的时间段字符串。如”300ms”、”-1.5h”、”2h45m”。 合法的单位有”ns”、”us” /“µs”、”ms”、”s”、”m”、”h”。 |
+|  字符串 flag  |                          合法字符串                          |
+|   整数 flag   |           1234、0664、0 x 1234 等类型，也可以是负数。           |
+|  浮点数 flag  |                          合法浮点数                          |
+| bool 类型 flag |  1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False。   |
+|  时间段 flag  | 任何合法的时间段字符串。如”300 ms”、”-1.5 h”、”2 h 45 m”。合法的单位有”ns”、”us” /“µs”、”ms”、”s”、”m”、”h”。 |
 
-## flag.Type() & flag.TypeVar()
+## flag.Type () & flag.TypeVar ()
 
-有以下两种常用的定义命令行`flag`参数的方法。
+有以下两种常用的定义命令行 `flag` 参数的方法。
 
-### flag.Type()
+### flag.Type ()
 
 基本格式：`flag.Type(flag名, 默认值, 帮助信息)*Type` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
 
@@ -73,9 +73,9 @@ married := flag.Bool("married", false, "婚否")
 delay := flag.Duration("d", 0, "时间间隔")
 ```
 
-需要注意的是，此时`name`、`age`、`married`、`delay`均为对应类型的指针。
+需要注意的是，此时 `name`、`age`、`married`、`delay` 均为对应类型的指针。
 
-### flag.TypeVar()
+### flag.TypeVar ()
 
 基本格式如下： `flag.TypeVar(Type指针, flag名, 默认值, 帮助信息)` 例如我们要定义姓名、年龄、婚否三个命令行参数，我们可以按如下方式定义：
 
@@ -90,22 +90,22 @@ flag.BoolVar(&married, "married", false, "婚否")
 flag.DurationVar(&delay, "d", 0, "时间间隔")
 ```
 
-## flag.Parse()
+## flag.Parse ()
 
-通过以上两种方法定义好命令行flag参数后，需要通过调用`flag.Parse()`来对命令行参数进行解析。
+通过以上两种方法定义好命令行 flag 参数后，需要通过调用 `flag.Parse()` 来对命令行参数进行解析。
 
 支持的命令行参数格式有以下几种：
 
-- `-flag xxx` （使用空格，一个`-`符号）
-- `--flag xxx` （使用空格，两个`-`符号）
-- `-flag=xxx` （使用等号，一个`-`符号）
-- `--flag=xxx` （使用等号，两个`-`符号）
+- `-flag xxx` （使用空格，一个 `-` 符号）
+- `--flag xxx` （使用空格，两个 `-` 符号）
+- `-flag=xxx` （使用等号，一个 `-` 符号）
+- `--flag=xxx` （使用等号，两个 `-` 符号）
 
 其中，布尔类型的参数必须使用等号的方式指定。
 
-Flag解析在第一个非flag参数（单个”-“不是flag参数）之前停止，或者在终止符”–“之后停止。
+Flag 解析在第一个非 flag 参数（单个”-“不是 flag 参数）之前停止，或者在终止符”–“之后停止。
 
-## flag其他函数
+## flag 其他函数
 
 ```go
 flag.Args()  ////返回命令行参数后的其他参数，以[]string类型
@@ -158,7 +158,7 @@ Usage of ./flag_demo:
         姓名 (default "张三")
 ```
 
-正常使用命令行flag参数：
+正常使用命令行 flag 参数：
 
 ```bash
 $ ./flag_demo -name Test --age 28 -married=false -d=1h30m
@@ -168,7 +168,7 @@ Test 28 false 1h30m0s
 4
 ```
 
-使用非flag命令行参数：
+使用非 flag 命令行参数：
 
 ```bash
 $ ./flag_demo a b c

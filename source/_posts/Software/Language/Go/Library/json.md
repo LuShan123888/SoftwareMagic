@@ -10,7 +10,7 @@ categories:
 
 ### 基本的序列化
 
-首先我们来看一下Go语言中`json.Marshal`（序列化）与`json.Unmarshal`（反序列化）的基本用法。
+首先我们来看一下 Go 语言中 `json.Marshal`（序列化）与 `json.Unmarshal`（反序列化）的基本用法。
 
 ```go
 type Person struct {
@@ -48,19 +48,19 @@ str:{"Name":"Test","Age":18,"Weight":71.5}
 p2:main.Person{Name:"Test", Age:18, Weight:71.5}
 ```
 
-### 结构体tag介绍
+### 结构体 tag 介绍
 
-`Tag`是结构体的元信息，可以在运行的时候通过反射的机制读取出来。 `Tag`在结构体字段的后方定义，由一对**反引号**包裹起来，具体的格式如下：
+`Tag` 是结构体的元信息，可以在运行的时候通过反射的机制读取出来。 `Tag` 在结构体字段的后方定义，由一对**反引号**包裹起来，具体的格式如下：
 
 ```bash
 `key1:"value1" key2:"value2"`
 ```
 
-结构体tag由一个或多个键值对组成。键与值使用**冒号**分隔，值用**双引号**括起来。同一个结构体字段可以设置多个键值对tag，不同的键值对之间使用**空格**分隔。
+结构体 tag 由一个或多个键值对组成。键与值使用**冒号**分隔，值用**双引号**括起来。同一个结构体字段可以设置多个键值对 tag，不同的键值对之间使用**空格**分隔。
 
-### 使用json tag指定字段名
+### 使用 json tag 指定字段名
 
-序列化与反序列化默认情况下使用结构体的字段名，我们可以通过给结构体字段添加tag来指定json序列化生成的字段名。
+序列化与反序列化默认情况下使用结构体的字段名，我们可以通过给结构体字段添加 tag 来指定 json 序列化生成的字段名。
 
 ```go
 // 使用json tag指定序列化与反序列化时的行为
@@ -73,7 +73,7 @@ type Person struct {
 
 ### 忽略某个字段
 
-如果你想在json序列化/反序列化的时候忽略掉结构体中的某个字段，可以按如下方式在tag中添加`-`。
+如果你想在 json 序列化/反序列化的时候忽略掉结构体中的某个字段，可以按如下方式在 tag 中添加 `-`。
 
 ```go
 // 使用json tag指定json序列化与反序列化时的行为
@@ -86,7 +86,7 @@ type Person struct {
 
 ### 忽略空值字段
 
-当 struct 中的字段没有值时， `json.Marshal()` 序列化的时候不会忽略这些字段，而是默认输出字段的类型零值（例如`int`和`float`类型零值是 0，`string`类型零值是`""`，对象类型零值是 nil）。如果想要在序列序列化时忽略这些没有值的字段时，可以在对应字段添加`omitempty` tag。
+当 struct 中的字段没有值时， `json.Marshal()` 序列化的时候不会忽略这些字段，而是默认输出字段的类型零值（例如 `int` 和 `float` 类型零值是 0，`string` 类型零值是 `""`，对象类型零值是 nil）。如果想要在序列序列化时忽略这些没有值的字段时，可以在对应字段添加 `omitempty` tag。
 
 ```go
 type User struct {
@@ -125,7 +125,7 @@ type User struct {
 }
 ```
 
-此时，再执行上述的`omitemptyDemo`，输出结果如下：
+此时，再执行上述的 `omitemptyDemo`，输出结果如下：
 
 ```bash
 str:{"name":"Test"} // 序列化结果中没有email和hobby字段
@@ -162,13 +162,13 @@ func nestedStructDemo() {
 }
 ```
 
-匿名嵌套`Profile`时序列化后的json串为单层的：
+匿名嵌套 `Profile` 时序列化后的 json 串为单层的：
 
 ```bash
 str:{"name":"Test","hobby":["足球","双色球"],"site":"","slogan":""}
 ```
 
-想要变成嵌套的json串，需要改为具名嵌套或定义字段tag：
+想要变成嵌套的 json 串，需要改为具名嵌套或定义字段 tag：
 
 ```go
 type User struct {
@@ -180,7 +180,7 @@ type User struct {
 // str:{"name":"Test","hobby":["足球","双色球"],"profile":{"site":"","slogan":""}}
 ```
 
-想要在嵌套的结构体为空值时，忽略该字段，仅添加`omitempty`是不够的：
+想要在嵌套的结构体为空值时，忽略该字段，仅添加 `omitempty` 是不够的：
 
 ```go
 type User struct {
@@ -206,7 +206,7 @@ type User struct {
 
 ### 不修改原结构体忽略空值字段
 
-我们需要json序列化`User`，但是不想把密码也序列化，又不想修改`User`结构体，这个时候我们就可以使用创建另外一个结构体`PublicUser`匿名嵌套原`User`，同时指定`Password`字段为匿名结构体指针类型，并添加`omitempty`tag，示例代码如下：
+我们需要 json 序列化 `User`，但是不想把密码也序列化，又不想修改 `User` 结构体，这个时候我们就可以使用创建另外一个结构体 `PublicUser` 匿名嵌套原 `User`，同时指定 `Password` 字段为匿名结构体指针类型，并添加 `omitempty` tag，示例代码如下：
 
 ```go
 type User struct {
@@ -235,7 +235,7 @@ func omitPasswordDemo() {
 
 ### 优雅处理字符串格式的数字
 
-有时候，前端在传递来的json数据中可能会使用字符串类型的数字，这个时候可以在结构体tag中添加`string`来告诉json包从字符串中解析相应字段的数据：
+有时候，前端在传递来的 json 数据中可能会使用字符串类型的数字，这个时候可以在结构体 tag 中添加 `string` 来告诉 json 包从字符串中解析相应字段的数据：
 
 ```go
 type Card struct {
@@ -256,9 +256,9 @@ func intAndStringDemo() {
 
 ### 整数变浮点数
 
-因为在 JSON 协议中是没有整型和浮点型之分的，它们统称为number。json字符串中的数字经过Go语言中的json包反序列化之后都会成为`float64`类型。
+因为在 JSON 协议中是没有整型和浮点型之分的，它们统称为 number。json 字符串中的数字经过 Go 语言中的 json 包反序列化之后都会成为 `float64` 类型。
 
-通常这并不会有什么问题，但是在某些特殊场景下就会产生意想不到的结果。比如，将JSON格式的数据反序列化为`map[string]interface{}`时，数字都变成科学计数法表示的浮点数。
+通常这并不会有什么问题，但是在某些特殊场景下就会产生意想不到的结果。比如，将 JSON 格式的数据反序列化为 `map[string]interface{}` 时，数字都变成科学计数法表示的浮点数。
 
 ```go
 // useNumberDemo 使用json.UseNumber
@@ -279,224 +279,224 @@ func useNumberDemo(){
 
     // use Number decode
     decoder := json.NewDecoder(bytes.NewReader(b))
-    decoder.UseNumber()
-    decoder.Decode(&m)
-    fmt.Printf("id:%#v\n", m["id"])  // "123456789"
-    fmt.Printf("id type:%T\n", m["id"]) // json.Number
+    decoder.UseNumber ()
+    decoder.Decode (&m)
+    fmt.Printf ("id:% #v \n", m["id"])  // "123456789"
+    fmt.Printf ("id type:%T\n", m["id"]) // json. Number
 }
 ```
 
-这种问题通常出现在将JSON格式数据反序列化为`map[string]interface{}`时，再来一个示例。
+这种问题通常出现在将 JSON 格式数据反序列化为`map[string]interface{}`时，再来一个示例。
 
 ```go
-func jsonDemo() {
+func jsonDemo () {
 	// map[string]interface{} -> json string
-	var m = make(map[string]interface{}, 1)
+	var m = make (map[string]interface{}, 1)
 	m["count"] = 1 // int
-	b, err := json.Marshal(m)
+	b, err := json.Marshal (m)
 	if err != nil {
-		fmt.Printf("marshal failed, err:%v\n", err)
+		fmt.Printf ("marshal failed, err:%v\n", err)
 	}
-	fmt.Printf("str:%#v\n", string(b))
+	fmt.Printf ("str:% #v \n", string (b))
 	// json string -> map[string]interface{}
-	var m2 map[string]interface{}
-	err = json.Unmarshal(b, &m2)
+	var m 2 map[string]interface{}
+	err = json.Unmarshal (b, &m 2)
 	if err != nil {
-		fmt.Printf("unmarshal failed, err:%v\n", err)
+		fmt.Printf ("unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("value:%v\n", m2["count"]) // 1
-	fmt.Printf("type:%T\n", m2["count"])  // float64
+	fmt.Printf ("value:%v\n", m 2["count"]) // 1
+	fmt.Printf ("type:%T\n", m 2["count"])  // float 64
 }
 ```
 
 这种场景下如果想更合理的处理数字就需要使用`decoder`去反序列化，示例代码如下：
 
 ```go
-func decoderDemo() {
+func decoderDemo () {
 	// map[string]interface{} -> json string
-	var m = make(map[string]interface{}, 1)
+	var m = make (map[string]interface{}, 1)
 	m["count"] = 1 // int
-	b, err := json.Marshal(m)
+	b, err := json.Marshal (m)
 	if err != nil {
-		fmt.Printf("marshal failed, err:%v\n", err)
+		fmt.Printf ("marshal failed, err:%v\n", err)
 	}
-	fmt.Printf("str:%#v\n", string(b))
+	fmt.Printf ("str:% #v \n", string (b))
 	// json string -> map[string]interface{}
-	var m2 map[string]interface{}
-	// 使用decoder方式反序列化，指定使用number类型
-	decoder := json.NewDecoder(bytes.NewReader(b))
-	decoder.UseNumber()
-	err = decoder.Decode(&m2)
+	var m 2 map[string]interface{}
+	// 使用 decoder 方式反序列化，指定使用 number 类型
+	decoder := json.NewDecoder (bytes.NewReader (b))
+	decoder.UseNumber ()
+	err = decoder.Decode (&m 2)
 	if err != nil {
-		fmt.Printf("unmarshal failed, err:%v\n", err)
+		fmt.Printf ("unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("value:%v\n", m2["count"]) // 1
-	fmt.Printf("type:%T\n", m2["count"])  // json.Number
-	// 将m2["count"]转为json.Number之后调用Int64()方法获得int64类型的值
-	count, err := m2["count"].(json.Number).Int64()
+	fmt.Printf ("value:%v\n", m 2["count"]) // 1
+	fmt.Printf ("type:%T\n", m 2["count"])  // json. Number
+	// 将 m 2["count"]转为 json. Number 之后调用 Int 64 () 方法获得 int 64 类型的值
+	count, err := m 2["count"]. (json. Number). Int 64 ()
 	if err != nil {
-		fmt.Printf("parse to int64 failed, err:%v\n", err)
+		fmt.Printf ("parse to int 64 failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("type:%T\n", int(count)) // int
+	fmt.Printf ("type:%T\n", int (count)) // int
 }
 ```
 
-`json.Number`的源码定义如下：
+`json. Number`的源码定义如下：
 
 ```go
 // A Number represents a JSON number literal.
 type Number string
 
 // String returns the literal text of the number.
-func (n Number) String() string { return string(n) }
+func (n Number) String () string { return string (n) }
 
-// Float64 returns the number as a float64.
-func (n Number) Float64() (float64, error) {
-	return strconv.ParseFloat(string(n), 64)
+// Float 64 returns the number as a float 64.
+func (n Number) Float 64 () (float 64, error) {
+	return strconv.ParseFloat (string (n), 64)
 }
 
-// Int64 returns the number as an int64.
-func (n Number) Int64() (int64, error) {
-	return strconv.ParseInt(string(n), 10, 64)
+// Int 64 returns the number as an int 64.
+func (n Number) Int 64 () (int 64, error) {
+	return strconv.ParseInt (string (n), 10, 64)
 }
 ```
 
-我们在处理number类型的json字段时需要先得到`json.Number`类型，然后根据该字段的实际类型调用`Float64()`或`Int64()`。
+我们在处理 number 类型的 json 字段时需要先得到`json. Number`类型，然后根据该字段的实际类型调用`Float 64 ()`或`Int 64 ()`。
 
 ### 自定义解析时间字段
 
-Go语言内置的 json 包使用 `RFC3339` 标准中定义的时间格式，对我们序列化时间字段的时候有很多限制。
+Go 语言内置的 json 包使用 `RFC 3339` 标准中定义的时间格式，对我们序列化时间字段的时候有很多限制。
 
 ```go
 type Post struct {
-	CreateTime time.Time `json:"create_time"`
+	CreateTime time. Time `json: "create_time"`
 }
 
-func timeFieldDemo() {
-	p1 := Post{CreateTime: time.Now()}
-	b, err := json.Marshal(p1)
+func timeFieldDemo () {
+	p 1 := Post{CreateTime: time.Now ()}
+	b, err := json.Marshal (p 1)
 	if err != nil {
-		fmt.Printf("json.Marshal p1 failed, err:%v\n", err)
+		fmt.Printf ("json. Marshal p 1 failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)
-	jsonStr := `{"create_time":"2020-04-05 12:25:42"}`
-	var p2 Post
-	if err := json.Unmarshal([]byte(jsonStr), &p2); err != nil {
-		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
+	fmt.Printf ("str:%s\n", b)
+	jsonStr := `{"create_time": "2020-04-05 12:25:42"}`
+	var p 2 Post
+	if err := json.Unmarshal ([]byte (jsonStr), &p 2); err != nil {
+		fmt.Printf ("json. Unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("p2:%#v\n", p2)
+	fmt.Printf ("p 2:% #v \n", p 2)
 }
 ```
 
 上面的代码输出结果如下：
 
 ```go
-str:{"create_time":"2020-04-05T12:28:06.799214+08:00"}
-json.Unmarshal failed, err:parsing time ""2020-04-05 12:25:42"" as ""2006-01-02T15:04:05Z07:00"": cannot parse " 12:25:42"" as "T"
+str:{"create_time": "2020-04-05 T 12:28:06.799214+ 08:00"}
+json. Unmarshal failed, err: parsing time ""2020-04-05 12:25:42"" as ""2006-01-02 T 15:04:05Z 07:00"": cannot parse " 12:25:42"" as "T"
 ```
 
-也就是内置的json包不识别我们常用的字符串时间格式，如`2020-04-05 12:25:42`。
+也就是内置的 json 包不识别我们常用的字符串时间格式，如`2020-04-05 12:25:42`。
 
-不过我们通过实现 `json.Marshaler`/`json.Unmarshaler` 接口实现自定义的事件格式解析。
+不过我们通过实现 `json. Marshaler`/`json. Unmarshaler` 接口实现自定义的事件格式解析。
 
 ```go
 type CustomTime struct {
-	time.Time
+	time. Time
 }
 
 const ctLayout = "2006-01-02 15:04:05"
 
-var nilTime = (time.Time{}).UnixNano()
+var nilTime = (time. Time{}). UnixNano ()
 
-func (ct *CustomTime) UnmarshalJSON(b []byte) (err error) {
-	s := strings.Trim(string(b), "\"")
+func (ct *CustomTime) UnmarshalJSON (b []byte) (err error) {
+	s := strings.Trim (string (b), "\"")
 	if s == "null" {
-		ct.Time = time.Time{}
+		ct. Time = time. Time{}
 		return
 	}
-	ct.Time, err = time.Parse(ctLayout, s)
+	ct. Time, err = time.Parse (ctLayout, s)
 	return
 }
 
-func (ct *CustomTime) MarshalJSON() ([]byte, error) {
-	if ct.Time.UnixNano() == nilTime {
-		return []byte("null"), nil
+func (ct *CustomTime) MarshalJSON () ([]byte, error) {
+	if ct.Time.UnixNano () == nilTime {
+		return []byte ("null"), nil
 	}
-	return []byte(fmt.Sprintf("\"%s\"", ct.Time.Format(ctLayout))), nil
+	return []byte (fmt.Sprintf ("\"%s\"", ct.Time.Format (ctLayout))), nil
 }
 
-func (ct *CustomTime) IsSet() bool {
-	return ct.UnixNano() != nilTime
+func (ct *CustomTime) IsSet () bool {
+	return ct.UnixNano () != nilTime
 }
 
 type Post struct {
-	CreateTime CustomTime `json:"create_time"`
+	CreateTime CustomTime `json: "create_time"`
 }
 
-func timeFieldDemo() {
-	p1 := Post{CreateTime: CustomTime{time.Now()}}
-	b, err := json.Marshal(p1)
+func timeFieldDemo () {
+	p 1 := Post{CreateTime: CustomTime{time.Now ()}}
+	b, err := json.Marshal (p 1)
 	if err != nil {
-		fmt.Printf("json.Marshal p1 failed, err:%v\n", err)
+		fmt.Printf ("json. Marshal p 1 failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)
-	jsonStr := `{"create_time":"2020-04-05 12:25:42"}`
-	var p2 Post
-	if err := json.Unmarshal([]byte(jsonStr), &p2); err != nil {
-		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
+	fmt.Printf ("str:%s\n", b)
+	jsonStr := `{"create_time": "2020-04-05 12:25:42"}`
+	var p 2 Post
+	if err := json.Unmarshal ([]byte (jsonStr), &p 2); err != nil {
+		fmt.Printf ("json. Unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("p2:%#v\n", p2)
+	fmt.Printf ("p 2:% #v \n", p 2)
 }
 ```
 
-### 自定义MarshalJSON和UnmarshalJSON方法
+### 自定义 MarshalJSON 和 UnmarshalJSON 方法
 
 上面那种自定义类型的方法稍显啰嗦了一点，下面来看一种相对便捷的方法。
 
-首先你需要知道的是，如果你能够为某个类型实现了`MarshalJSON()([]byte, error)`和`UnmarshalJSON(b []byte) error`方法，那么这个类型在序列化（MarshalJSON）/反序列化（UnmarshalJSON）时就会使用你定制的相应方法。
+首先你需要知道的是，如果你能够为某个类型实现了`MarshalJSON ()([]byte, error)`和`UnmarshalJSON (b []byte) error`方法，那么这个类型在序列化（MarshalJSON）/反序列化（UnmarshalJSON）时就会使用你定制的相应方法。
 
 ```go
 type Order struct {
-	ID          int       `json:"id"`
-	Title       string    `json:"title"`
-	CreatedTime time.Time `json:"created_time"`
+	ID          int       `json: "id"`
+	Title       string    `json: "title"`
+	CreatedTime time. Time `json: "created_time"`
 }
 
 const layout = "2006-01-02 15:04:05"
 
-// MarshalJSON 为Order类型实现自定义的MarshalJSON方法
-func (o *Order) MarshalJSON() ([]byte, error) {
-	type TempOrder Order // 定义与Order字段一致的新类型
-	return json.Marshal(struct {
-		CreatedTime string `json:"created_time"`
-		*TempOrder         // 避免直接嵌套Order进入死循环
+// MarshalJSON 为 Order 类型实现自定义的 MarshalJSON 方法
+func (o *Order) MarshalJSON () ([]byte, error) {
+	type TempOrder Order // 定义与 Order 字段一致的新类型
+	return json.Marshal (struct {
+		CreatedTime string `json: "created_time"`
+		*TempOrder         // 避免直接嵌套 Order 进入死循环
 	}{
-		CreatedTime: o.CreatedTime.Format(layout),
+		CreatedTime: o.CreatedTime.Format (layout),
 		TempOrder:   (*TempOrder)(o),
 	})
 }
 
-// UnmarshalJSON 为Order类型实现自定义的UnmarshalJSON方法
-func (o *Order) UnmarshalJSON(data []byte) error {
-	type TempOrder Order // 定义与Order字段一致的新类型
+// UnmarshalJSON 为 Order 类型实现自定义的 UnmarshalJSON 方法
+func (o *Order) UnmarshalJSON (data []byte) error {
+	type TempOrder Order // 定义与 Order 字段一致的新类型
 	ot := struct {
-		CreatedTime string `json:"created_time"`
-		*TempOrder         // 避免直接嵌套Order进入死循环
+		CreatedTime string `json: "created_time"`
+		*TempOrder         // 避免直接嵌套 Order 进入死循环
 	}{
 		TempOrder: (*TempOrder)(o),
 	}
-	if err := json.Unmarshal(data, &ot); err != nil {
+	if err := json.Unmarshal (data, &ot); err != nil {
 		return err
 	}
 	var err error
-	o.CreatedTime, err = time.Parse(layout, ot.CreatedTime)
+	o.CreatedTime, err = time.Parse (layout, ot. CreatedTime)
 	if err != nil {
 		return err
 	}
@@ -504,33 +504,33 @@ func (o *Order) UnmarshalJSON(data []byte) error {
 }
 
 // 自定义序列化方法
-func customMethodDemo() {
-	o1 := Order{
+func customMethodDemo () {
+	o 1 := Order{
 		ID:          123456,
-		Title:       "《Test的Go学习笔记》",
-		CreatedTime: time.Now(),
+		Title:       "《Test 的 Go 学习笔记》",
+		CreatedTime: time.Now (),
 	}
-	// 通过自定义的MarshalJSON方法实现struct -> json string
-	b, err := json.Marshal(&o1)
+	// 通过自定义的 MarshalJSON 方法实现 struct -> json string
+	b, err := json.Marshal (&o 1)
 	if err != nil {
-		fmt.Printf("json.Marshal o1 failed, err:%v\n", err)
+		fmt.Printf ("json. Marshal o 1 failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)
-	// 通过自定义的UnmarshalJSON方法实现json string -> struct
-	jsonStr := `{"created_time":"2020-04-05 10:18:20","id":123456,"title":"《Test的Go学习笔记》"}`
-	var o2 Order
-	if err := json.Unmarshal([]byte(jsonStr), &o2); err != nil {
-		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
+	fmt.Printf ("str:%s\n", b)
+	// 通过自定义的 UnmarshalJSON 方法实现 json string -> struct
+	jsonStr := `{"created_time": "2020-04-05 10:18:20","id": 123456,"title": "《Test 的 Go 学习笔记》"}`
+	var o 2 Order
+	if err := json.Unmarshal ([]byte (jsonStr), &o 2); err != nil {
+		fmt.Printf ("json. Unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("o2:%#v\n", o2)
+	fmt.Printf ("o 2:% #v \n", o 2)
 }
 ```
 
 ```bash
-str:{"created_time":"2020-04-05 10:32:20","id":123456,"title":"《Test的Go学习笔记》"}
-o2:main.Order{ID:123456, Title:"《Test的Go学习笔记》", CreatedTime:time.Time{wall:0x0, ext:63721678700, loc:(*time.Location)(nil)}}
+str:{"created_time": "2020-04-05 10:32:20","id": 123456,"title": "《Test 的 Go 学习笔记》"}
+o 2: main. Order{ID: 123456, Title: "《Test 的 Go 学习笔记》", CreatedTime: time. Time{wall: 0 x 0, ext: 63721678700, loc: (*time. Location)(nil)}}
 ```
 
 ### 使用匿名结构体添加字段
@@ -539,29 +539,29 @@ o2:main.Order{ID:123456, Title:"《Test的Go学习笔记》", CreatedTime:time.T
 
 ```go
 type UserInfo struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
+	ID   int    `json: "id"`
+	Name string `json: "name"`
 }
 
-func anonymousStructDemo() {
-	u1 := UserInfo{
+func anonymousStructDemo () {
+	u 1 := UserInfo{
 		ID:   123456,
 		Name: "Test",
 	}
-	// 使用匿名结构体内嵌User并添加额外字段Token
-	b, err := json.Marshal(struct {
+	// 使用匿名结构体内嵌 User 并添加额外字段 Token
+	b, err := json.Marshal (struct {
 		*UserInfo
-		Token string `json:"token"`
+		Token string `json: "token"`
 	}{
-		&u1,
-		"91je3a4s72d1da96h",
+		&u 1,
+		"91 je 3 a 4 s 72 d 1 da 96 h",
 	})
 	if err != nil {
-		fmt.Printf("json.Marsha failed, err:%v\n", err)
+		fmt.Printf ("json. Marsha failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)
-	// str:{"id":123456,"name":"Test","token":"91je3a4s72d1da96h"}
+	fmt.Printf ("str:%s\n", b)
+	// str:{"id": 123456,"name": "Test","token": "91 je 3 a 4 s 72 d 1 da 96 h"}
 }
 ```
 
@@ -575,74 +575,74 @@ type Comment struct {
 }
 
 type Image struct {
-	Title string `json:"title"`
-	URL   string `json:"url"`
+	Title string `json: "title"`
+	URL   string `json: "url"`
 }
 
-func anonymousStructDemo2() {
-	c1 := Comment{
+func anonymousStructDemo 2 () {
+	c 1 := Comment{
 		Content: "TestMsg",
 	}
-	i1 := Image{
+	i 1 := Image{
 		Title: "赞赏码",
 		URL:   "https://www.liwenzhou.com/images/zanshang_qr.jpg",
 	}
 	// struct -> json string
-	b, err := json.Marshal(struct {
+	b, err := json.Marshal (struct {
 		*Comment
 		*Image
-	}{&c1, &i1})
+	}{&c 1, &i 1})
 	if err != nil {
-		fmt.Printf("json.Marshal failed, err:%v\n", err)
+		fmt.Printf ("json. Marshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("str:%s\n", b)
+	fmt.Printf ("str:%s\n", b)
 	// json string -> struct
-	jsonStr := `{"Content":"TestMsg","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}`
+	jsonStr := `{"Content": "TestMsg","title": "赞赏码","url": "https://www.liwenzhou.com/images/zanshang_qr.jpg"}`
 	var (
-		c2 Comment
-		i2 Image
+		c 2 Comment
+		i 2 Image
 	)
-	if err := json.Unmarshal([]byte(jsonStr), &struct {
+	if err := json.Unmarshal ([]byte (jsonStr), &struct {
 		*Comment
 		*Image
-	}{&c2, &i2}); err != nil {
-		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
+	}{&c 2, &i 2}); err != nil {
+		fmt.Printf ("json. Unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("c2:%#v i2:%#v\n", c2, i2)
+	fmt.Printf ("c 2:% #v i 2:% #v \n", c 2, i2)
 }
 ```
 
 ```go
-str:{"Content":"TestMsg","title":"赞赏码","url":"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
-c2:main.Comment{Content:"TestMsg"} i2:main.Image{Title:"赞赏码", URL:"https://www.liwenzhou.com/images/zanshang_qr.jpg"}
+str:{"Content": "TestMsg","title": "赞赏码","url": "https://www.liwenzhou.com/images/zanshang_qr.jpg"}
+c 2: main. Comment{Content: "TestMsg"} i 2: main. Image{Title: "赞赏码", URL: "https://www.liwenzhou.com/images/zanshang_qr.jpg"}
 ```
 
-### 处理不确定层级的json
+### 处理不确定层级的 json
 
-如果json串没有固定的格式导致不好定义与其相对应的结构体时，我们可以使用`json.RawMessage`原始字节数据保存下来。
+如果 json 串没有固定的格式导致不好定义与其相对应的结构体时，我们可以使用`json. RawMessage`原始字节数据保存下来。
 
 ```go
 type sendMsg struct {
-	User string `json:"user"`
-	Msg  string `json:"msg"`
+	User string `json: "user"`
+	Msg  string `json: "msg"`
 }
 
-func rawMessageDemo() {
-	jsonStr := `{"sendMsg":{"user":"q1mi","msg":"TestMsg"},"say":"Hello"}`
-	// 定义一个map，value类型为json.RawMessage，方便后续更灵活地处理
-	var data map[string]json.RawMessage
-	if err := json.Unmarshal([]byte(jsonStr), &data); err != nil {
-		fmt.Printf("json.Unmarshal jsonStr failed, err:%v\n", err)
+func rawMessageDemo () {
+	jsonStr := `{"sendMsg":{"user": "q 1 mi","msg": "TestMsg"},"say": "Hello"}`
+	// 定义一个 map，value 类型为 json. RawMessage，方便后续更灵活地处理
+	var data map[string]json. RawMessage
+	if err := json.Unmarshal ([]byte (jsonStr), &data); err != nil {
+		fmt.Printf ("json. Unmarshal jsonStr failed, err:%v\n", err)
 		return
 	}
 	var msg sendMsg
-	if err := json.Unmarshal(data["sendMsg"], &msg); err != nil {
-		fmt.Printf("json.Unmarshal failed, err:%v\n", err)
+	if err := json.Unmarshal (data["sendMsg"], &msg); err != nil {
+		fmt.Printf ("json. Unmarshal failed, err:%v\n", err)
 		return
 	}
-	fmt.Printf("msg:%#v\n", msg)
-	// msg:main.sendMsg{User:"q1mi", Msg:"TestMsg"}
+	fmt.Printf ("msg:% #v \n", msg)
+	// msg: main. sendMsg{User: "q 1 mi", Msg: "TestMsg"}
 }
 ```

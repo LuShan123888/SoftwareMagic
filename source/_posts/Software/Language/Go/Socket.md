@@ -7,21 +7,21 @@ categories:
 ---
 # Go Socket
 
-- Socket是BSD UNIX的进程通信机制,通常也称作”套接字”,用于描述IP地址和端口,是一个通信链的句柄,Socket可以理解为TCP/IP网络的API,它定义了许多函数或例程,程序员可以用它们来开发TCP/IP网络上的应用程序,电脑上运行的应用程序通常通过”套接字”向网络发出请求或者应答网络请求
-- `Socket`是应用层与TCP/IP协议族通信的中间软件抽象层,在设计模式中,`Socket`其实就是一个门面模式,它把复杂的TCP/IP协议族隐藏在`Socket`后面,对用户来说只需要调用Socket规定的相关函数,让`Socket`去组织符合指定的协议数据然后进行通信
+- Socket 是 BSD UNIX 的进程通信机制, 通常也称作”套接字”, 用于描述 IP 地址和端口, 是一个通信链的句柄, Socket 可以理解为 TCP/IP 网络的 API, 它定义了许多函数或例程, 程序员可以用它们来开发 TCP/IP 网络上的应用程序, 电脑上运行的应用程序通常通过”套接字”向网络发出请求或者应答网络请求
+- `Socket` 是应用层与 TCP/IP 协议族通信的中间软件抽象层, 在设计模式中, `Socket` 其实就是一个门面模式, 它把复杂的 TCP/IP 协议族隐藏在 `Socket` 后面, 对用户来说只需要调用 Socket 规定的相关函数, 让 `Socket` 去组织符合指定的协议数据然后进行通信
 
 ![socket图解](https://www.liwenzhou.com/images/Go/socket/socket.png)
 
-## TCP通信
+## TCP 通信
 
-### TCP服务端
+### TCP 服务端
 
-- 一个TCP服务端可以同时连接很多个客户端,例如世界各地的用户使用自己电脑上的浏览器访问淘宝网,因为Go语言中创建多个goroutine实现并发非常方便和高效,所以我们可以每建立一次链接就创建一个goroutine去处理
-- TCP服务端程序的处理流程:
+- 一个 TCP 服务端可以同时连接很多个客户端, 例如世界各地的用户使用自己电脑上的浏览器访问淘宝网, 因为 Go 语言中创建多个 goroutine 实现并发非常方便和高效, 所以我们可以每建立一次链接就创建一个 goroutine 去处理
+- TCP 服务端程序的处理流程:
     1. 监听端口
     2. 接收客户端请求建立链接
-    3. 创建goroutine处理链接
-- 使用Go语言的net包实现的TCP服务端代码如下:
+    3. 创建 goroutine 处理链接
+- 使用 Go 语言的 net 包实现的 TCP 服务端代码如下:
 
 ```go
 // tcp/server/main.go
@@ -62,13 +62,13 @@ func main() {
 }
 ```
 
-### TCP客户端
+### TCP 客户端
 
-- 一个TCP客户端进行TCP通信的流程如下:
+- 一个 TCP 客户端进行 TCP 通信的流程如下:
     1. 建立与服务端的链接
     2. 进行数据收发
     3. 关闭链接
-- 使用Go语言的net包实现的TCP客户端代码如下:
+- 使用 Go 语言的 net 包实现的 TCP 客户端代码如下:
 
 ```go
 // tcp/client/main.go
@@ -103,7 +103,7 @@ func main() {
 }
 ```
 
-## TCP黏包
+## TCP 黏包
 
 ### 黏包示例
 
@@ -168,7 +168,7 @@ func main() {
 }
 ```
 
-- 将上面的代码保存后,分别编译,先启动服务端再启动客户端,可以看到服务端输出结果如下:
+- 将上面的代码保存后, 分别编译, 先启动服务端再启动客户端, 可以看到服务端输出结果如下:
 
 ```bash
 收到client发来的数据:Hello, Hello. How are you?Hello, Hello. How are you?Hello, Hello. How are you?Hello, Hello. How are you?Hello, Hello. How are you?
@@ -178,20 +178,20 @@ func main() {
 收到client发来的数据:Hello, Hello. How are you?Hello, Hello. How are you?
 ```
 
-- 客户端分10次发送的数据,在服务端并没有成功的输出10次,而是多条数据"粘”到了一起
+- 客户端分 10 次发送的数据, 在服务端并没有成功的输出 10 次, 而是多条数据"粘”到了一起
 
 ### 为什么会出现粘包
 
-- 主要原因就是tcp数据传递模式是流模式,在保持长连接的时候可以进行多次的收和发
+- 主要原因就是 tcp 数据传递模式是流模式, 在保持长连接的时候可以进行多次的收和发
 - "粘包”可发生在发送端也可发生在接收端:
-    1. 由Nagle算法造成的发送端的粘包:Nagle算法是一种改善网络传输效率的算法,简单来说就是当我们提交一段数据给TCP发送时,TCP并不立刻发送此段数据,而是等待一小段时间看看在等待期间是否还有要发送的数据,若有则会一次把这两段数据发送出去
-    2. 接收端接收不及时造成的接收端粘包:TCP会把接收到的数据存在自己的缓冲区中,然后通知应用层取数据,当应用层由于某些原因不能及时的把TCP的数据取出来,就会造成TCP缓冲区中存放了几段数据
+    1. 由 Nagle 算法造成的发送端的粘包: Nagle 算法是一种改善网络传输效率的算法, 简单来说就是当我们提交一段数据给 TCP 发送时, TCP 并不立刻发送此段数据, 而是等待一小段时间看看在等待期间是否还有要发送的数据, 若有则会一次把这两段数据发送出去
+    2. 接收端接收不及时造成的接收端粘包: TCP 会把接收到的数据存在自己的缓冲区中, 然后通知应用层取数据, 当应用层由于某些原因不能及时的把 TCP 的数据取出来, 就会造成 TCP 缓冲区中存放了几段数据
 
 ### 解决办法
 
-- 出现”粘包”的关键在于接收方不确定将要传输的数据包的大小,因此我们可以对数据包进行封包和拆包的操作
-- 封包:封包就是给一段数据加上包头,这样一来数据包就分为包头和包体两部分内容了(过滤非法包时封包会加入”包尾”内容),包头部分的长度是固定的,并且它存储了包体的长度,根据包头长度固定以及包头中含有包体长度的变量就能正确的拆分出一个完整的数据包
-- 我们可以自己定义一个协议,比如数据包的前4个字节为包头,里面存储的是发送的数据的长度
+- 出现”粘包”的关键在于接收方不确定将要传输的数据包的大小, 因此我们可以对数据包进行封包和拆包的操作
+- 封包:封包就是给一段数据加上包头,这样一来数据包就分为包头和包体两部分内容了 (过滤非法包时封包会加入”包尾”内容), 包头部分的长度是固定的, 并且它存储了包体的长度, 根据包头长度固定以及包头中含有包体长度的变量就能正确的拆分出一个完整的数据包
+- 我们可以自己定义一个协议, 比如数据包的前 4 个字节为包头, 里面存储的是发送的数据的长度
 
 ```go
 // socket_stick/proto/proto.go
@@ -246,7 +246,7 @@ func Decode(reader *bufio.Reader) (string, error) {
 }
 ```
 
-- 接下来在服务端和客户端分别使用上面定义的`proto`包的`Decode`和`Encode`函数处理数据
+- 接下来在服务端和客户端分别使用上面定义的 `proto` 包的 `Decode` 和 `Encode` 函数处理数据
 - 服务端代码如下:
 
 ```go
@@ -264,25 +264,25 @@ func process(conn net.Conn) {
 			fmt.Println("decode msg failed, err:", err)
 			return
 		}
-		fmt.Println("收到client发来的数据:", msg)
+		fmt.Println ("收到 client 发来的数据: ", msg)
 	}
 }
 
-func main() {
+func main () {
 
-	listen, err := net.Listen("tcp", "127.0.0.1:30000")
+	listen, err := net.Listen ("tcp", "127.0.0. 1:30000")
 	if err != nil {
-		fmt.Println("listen failed, err:", err)
+		fmt.Println ("listen failed, err: ", err)
 		return
 	}
-	defer listen.Close()
+	defer listen.Close ()
 	for {
-		conn, err := listen.Accept()
+		conn, err := listen.Accept ()
 		if err != nil {
-			fmt.Println("accept failed, err:", err)
+			fmt.Println ("accept failed, err: ", err)
 			continue
 		}
-		go process(conn)
+		go process (conn)
 	}
 }
 ```
@@ -290,94 +290,94 @@ func main() {
 - 客户端代码如下:
 
 ```go
-// socket_stick/client2/main.go
+// socket_stick/client 2/main. go
 
-func main() {
-	conn, err := net.Dial("tcp", "127.0.0.1:30000")
+func main () {
+	conn, err := net.Dial ("tcp", "127.0.0. 1:30000")
 	if err != nil {
-		fmt.Println("dial failed, err", err)
+		fmt.Println ("dial failed, err", err)
 		return
 	}
-	defer conn.Close()
+	defer conn.Close ()
 	for i := 0; i < 20; i++ {
 		msg := `Hello, Hello. How are you?`
-		data, err := proto.Encode(msg)
+		data, err := proto.Encode (msg)
 		if err != nil {
-			fmt.Println("encode msg failed, err:", err)
+			fmt.Println ("encode msg failed, err: ", err)
 			return
 		}
-		conn.Write(data)
+		conn.Write (data)
 	}
 }
 ```
 
-## UDP通信
+## UDP 通信
 
-### UDP协议
+### UDP 协议
 
-### UDP服务端
+### UDP 服务端
 
-- 使用Go语言的`net`包实现的UDP服务端代码如下:
+- 使用 Go 语言的`net`包实现的 UDP 服务端代码如下:
 
 ```go
-// UDP/server/main.go
+// UDP/server/main. go
 
-// UDP server端
-func main() {
-    listen, err := net.ListenUDP("udp", &net.UDPAddr{
-        IP:   net.IPv4(0, 0, 0, 0),
+// UDP server 端
+func main () {
+    listen, err := net.ListenUDP ("udp", &net. UDPAddr{
+        IP:   net. IPv 4 (0, 0, 0, 0),
         Port: 30000,
     })
     if err != nil {
-        fmt.Println("listen failed, err:", err)
+        fmt.Println ("listen failed, err: ", err)
         return
     }
-    defer listen.Close()
+    defer listen.Close ()
     for {
         var data [1024]byte
-        n, addr, err := listen.ReadFromUDP(data[:]) // 接收数据
+        n, addr, err := listen.ReadFromUDP (data[:]) // 接收数据
         if err != nil {
-            fmt.Println("read udp failed, err:", err)
+            fmt.Println ("read udp failed, err: ", err)
             continue
         }
-        fmt.Printf("data:%v addr:%v count:%v\n", string(data[:n]), addr, n)
-        _, err = listen.WriteToUDP(data[:n], addr) // 发送数据
+        fmt.Printf ("data:%v addr:%v count:%v\n", string (data[: n]), addr, n)
+        _, err = listen.WriteToUDP (data[: n], addr) // 发送数据
         if err != nil {
-            fmt.Println("write to udp failed, err:", err)
+            fmt.Println ("write to udp failed, err: ", err)
             continue
         }
     }
 }
 ```
 
-### UDP客户端
+### UDP 客户端
 
-- 使用Go语言的`net`包实现的UDP客户端代码如下:
+- 使用 Go 语言的`net`包实现的 UDP 客户端代码如下:
 
 ```go
 // UDP 客户端
-func main() {
-    socket, err := net.DialUDP("udp", nil, &net.UDPAddr{
-        IP:   net.IPv4(0, 0, 0, 0),
+func main () {
+    socket, err := net.DialUDP ("udp", nil, &net. UDPAddr{
+        IP:   net. IPv 4 (0, 0, 0, 0),
         Port: 30000,
     })
     if err != nil {
-        fmt.Println("连接服务端失败,err:", err)
+        fmt.Println ("连接服务端失败, err: ", err)
         return
     }
-    defer socket.Close()
-    sendData := []byte("Hello server")
-    _, err = socket.Write(sendData) // 发送数据
+    defer socket.Close ()
+    sendData := []byte ("Hello server")
+    _, err = socket.Write (sendData) // 发送数据
     if err != nil {
-        fmt.Println("发送数据失败,err:", err)
+        fmt.Println ("发送数据失败, err: ", err)
         return
     }
-    data := make([]byte, 4096)
-    n, remoteAddr, err := socket.ReadFromUDP(data) // 接收数据
+    data := make ([]byte, 4096)
+    n, remoteAddr, err := socket.ReadFromUDP (data) // 接收数据
     if err != nil {
-        fmt.Println("接收数据失败,err:", err)
+        fmt.Println ("接收数据失败, err: ", err)
         return
     }
-    fmt.Printf("recv:%v addr:%v count:%v\n", string(data[:n]), remoteAddr, n)
+    fmt.Printf ("recv:%v addr:%v count:%v\n", string (data[: n]), remoteAddr, n)
 }
 ```

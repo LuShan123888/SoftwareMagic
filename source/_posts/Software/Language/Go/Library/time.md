@@ -12,7 +12,7 @@ time 包提供了一些关于时间显示和测量用的函数。time 包中日�
 
 ## 时间类型
 
-Go 语言中使用`time.Time`类型表示时间。我们可以通过`time.Now`函数获取当前的时间对象，然后从时间对象中可以获取到年、月、日、时、分、秒等信息。
+Go 语言中使用 `time.Time` 类型表示时间。我们可以通过 `time.Now` 函数获取当前的时间对象，然后从时间对象中可以获取到年、月、日、时、分、秒等信息。
 
 ```go
 // timeDemo 时间对象的年月日时分秒
@@ -30,11 +30,11 @@ func timeDemo() {
 }
 ```
 
-## Location和time zone
+## Location 和 time zone
 
-Go 语言中使用 location 来映射具体的时区。时区（Time Zone）是根据世界各国家与地区不同的经度而划分的时间定义，全球共分为24个时区。中国差不多跨5个时区，但为了使用方便只用东八时区的标准时即北京时间为准。
+Go 语言中使用 location 来映射具体的时区。时区（Time Zone）是根据世界各国家与地区不同的经度而划分的时间定义，全球共分为 24 个时区。中国差不多跨 5 个时区，但为了使用方便只用东八时区的标准时即北京时间为准。
 
-下面的示例代码中使用`beijing`来表示东八区8小时的偏移量，其中`time.FixedZone`和`time.LoadLocation`这两个函数则是用来获取location信息。
+下面的示例代码中使用 `beijing` 来表示东八区 8 小时的偏移量，其中 `time.FixedZone` 和 `time.LoadLocation` 这两个函数则是用来获取 location 信息。
 
 ```go
 // timezoneDemo 时区示例
@@ -78,7 +78,7 @@ func timezoneDemo() {
 
 ## Unix Time
 
-Unix Time是自1970年1月1日 00:00:00 UTC 至当前时间经过的总秒数。下面的代码片段演示了如何基于时间对象获取到Unix 时间。
+Unix Time 是自 1970 年 1 月 1 日 00:00:00 UTC 至当前时间经过的总秒数。下面的代码片段演示了如何基于时间对象获取到 Unix 时间。
 
 ```go
 // timestampDemo 时间戳
@@ -92,7 +92,7 @@ func timestampDemo() {
 }
 ```
 
-time 包还提供了一系列将 int64 类型的时间戳转换为时间对象的方法。
+time 包还提供了一系列将 int 64 类型的时间戳转换为时间对象的方法。
 
 ```go
 // timestamp2Time 将时间戳转为时间对象
@@ -122,7 +122,7 @@ func timestamp2Time() {
 
 ## 时间间隔
 
-`time.Duration`是`time`包定义的一个类型，它代表两个时间点之间经过的时间，以纳秒为单位。`time.Duration`表示一段时间间隔，可表示的最长时间段大约290年。
+`time.Duration` 是 `time` 包定义的一个类型，它代表两个时间点之间经过的时间，以纳秒为单位。`time.Duration` 表示一段时间间隔，可表示的最长时间段大约 290 年。
 
 time 包中定义的时间间隔类型的常量如下：
 
@@ -137,13 +137,13 @@ const (
 )
 ```
 
-例如：`time.Duration`表示1纳秒，`time.Second`表示1秒。
+例如：`time.Duration` 表示 1 纳秒，`time.Second` 表示 1 秒。
 
 ### 时间操作
 
 ### Add
 
-Go语言的时间对象有提供Add方法如下
+Go 语言的时间对象有提供 Add 方法如下
 
 ```go
 func (t Time) Add(d Duration) Time
@@ -167,7 +167,7 @@ func main() {
 func (t Time) Sub(u Time) Duration
 ```
 
-- 返回一个时间段`t-u`。如果结果超出了Duration可以表示的最大值/最小值，将返回最大值/最小值。要获取时间点`t-d`（d为Duration），可以使用`t.Add(-d)`。
+- 返回一个时间段 `t-u`。如果结果超出了 Duration 可以表示的最大值/最小值，将返回最大值/最小值。要获取时间点 `t-d`（d 为 Duration），可以使用 `t.Add(-d)`。
 
 ### Equal
 
@@ -177,11 +177,11 @@ func (t Time) Sub(u Time) Duration
 func (t Time) Equal(u Time) bool
 ```
 
-- 本方法和用`t==u`不同，这种方法还会比较地点和时区信息。
+- 本方法和用 `t==u` 不同，这种方法还会比较地点和时区信息。
 
 ### Before
 
-如果t代表的时间点在u之前，返回真；否则返回假。
+如果 t 代表的时间点在 u 之前，返回真；否则返回假。
 
 ```go
 func (t Time) Before(u Time) bool
@@ -189,7 +189,7 @@ func (t Time) Before(u Time) bool
 
 ### After
 
-如果t代表的时间点在u之后，返回真；否则返回假。
+如果 t 代表的时间点在 u 之后，返回真；否则返回假。
 
 ```go
 func (t Time) After(u Time) bool
@@ -197,7 +197,7 @@ func (t Time) After(u Time) bool
 
 ## 定时器
 
-使用`time.Tick(时间间隔)`来设置定时器，定时器的本质上是一个通道（channel）。
+使用 `time.Tick(时间间隔)` 来设置定时器，定时器的本质上是一个通道（channel）。
 
 ```go
 func tickDemo() {
@@ -210,7 +210,7 @@ func tickDemo() {
 
 ## 时间格式化
 
-`time.Format`函数能够将一个时间对象格式化输出为指定布局的文本表示形式，需要注意的是 Go 语言中时间格式化的布局不是常见的`YYYY-mm-dd H:M:S`，而是使用 `2006-01-02 15:04:05.000`
+`time.Format` 函数能够将一个时间对象格式化输出为指定布局的文本表示形式，需要注意的是 Go 语言中时间格式化的布局不是常见的 `YYYY-mm-dd H:M:S`，而是使用 `2006-01-02 15:04:05.000`
 
 - 2006：年（Y）
 - 01：月（m）
@@ -242,14 +242,14 @@ func formatDemo() {
 }
 ```
 
-- 如果想格式化为12小时格式，需在格式化布局中添加`PM`。
-- 小数部分想保留指定位数就写0，如果想省略末尾可能的0就写 9。
+- 如果想格式化为 12 小时格式，需在格式化布局中添加 `PM`。
+- 小数部分想保留指定位数就写 0，如果想省略末尾可能的 0 就写 9。
 
 ## 解析字符串格式的时间
 
-对于从文本的时间表示中解析出时间对象，`time`包中提供了`time.Parse`和`time.ParseInLocation`两个函数。
+对于从文本的时间表示中解析出时间对象，`time` 包中提供了 `time.Parse` 和 `time.ParseInLocation` 两个函数。
 
-`time.Parse`在解析时不需要额外指定时区信息。
+`time.Parse` 在解析时不需要额外指定时区信息。
 
 ```go
 // parseDemo 指定时区解析时间
@@ -273,7 +273,7 @@ func parseDemo() {
 }
 ```
 
-`time.ParseInLocation`函数需要在解析时额外指定时区信息。
+`time.ParseInLocation` 函数需要在解析时额外指定时区信息。
 
 ```go
 // parseDemo 解析时间
@@ -289,11 +289,11 @@ func parseDemo() {
 	// 按照指定时区和指定格式解析字符串时间
 	timeObj, err := time.ParseInLocation("2006/01/02 15:04:05", "2022/10/05 11:25:20", loc)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println (err)
 		return
 	}
-	fmt.Println(timeObj)
-	fmt.Println(timeObj.Sub(now))
+	fmt.Println (timeObj)
+	fmt.Println (timeObj.Sub (now))
 }
 ```
 
