@@ -24,7 +24,7 @@
 <meta property="og:description" content="Raft 选举算法  Raft 算法是分布式系统开发首选的共识算法。 主要在分布式集群架构下进行领导者（主节点）的确认，比如现在流行的组件 Etcd, Consul, Nacos, RocketMQ, RedisSentinel 底层都是采用 Raft 算法来确认集群中的主节点，再通过主节点向其他节点下发指令。 Raft 算法是通过一切以领导者为准的方式，实现一系列值的共识和各节点日志的一致。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-26T13:32:13.000Z">
-<meta property="article:modified_time" content="2024-04-05T19:41:10.992Z">
+<meta property="article:modified_time" content="2024-04-06T11:38:32.485Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年4月6日 凌晨
+                  本文最后更新于：2024年4月6日 晚上
                 
               </p>
             
@@ -241,29 +241,16 @@
 </ul>
 <h2 id="Raft-选举过程">Raft 选举过程</h2>
 <ol>
-<li>
-<p><strong>初始状态</strong>：初始状态下，集群中所有节点都是跟随者的状态，任期（Term）都为 0</p>
-</li>
-<li>
-<p><strong>发起投票</strong>: Raft 算法中每个节点等待领导者节点心跳信息的超时时间间隔是随机的，如果 NodeA 因为没有等到领导者的心跳信息先超时，则 A 节点成为候选者，并增加自己的任期编号，Term 值从 0 更新为 1，并给自己投了一票。</p>
-</li>
-<li>
-<p><strong>成为领导者</strong></p>
+<li><strong>初始状态</strong>：初始状态下，集群中所有节点都是跟随者的状态，任期（Term）都为 0</li>
+<li><strong>发起投票</strong>: Raft 算法中每个节点等待领导者节点心跳信息的超时时间间隔是随机的，如果 NodeA 因为没有等到领导者的心跳信息先超时，则 A 节点成为候选者，并增加自己的任期编号，Term 值从 0 更新为 1，并给自己投了一票。</li>
+<li><strong>成为领导者</strong>
 <ol>
-<li>
-<p>节点 A 成为候选者后，向其他节点发送请求投票 RPC 信息，请它们选举自己为领导者。</p>
-</li>
-<li>
-<p>节点 B 和节点 C 接收到节点 A 发送的请求投票信息后，在编号为 1 的这届任期内，还没有进行过投票，就把选票投给节点 A，并增加自己的任期编号。</p>
-</li>
-<li>
-<p>节点 A 收到了大多数节点（n/2+1）的投票，从候选者成为本届任期内的新的领导者。</p>
-</li>
+<li>节点 A 成为候选者后，向其他节点发送请求投票 RPC 信息，请它们选举自己为领导者。</li>
+<li>节点 B 和节点 C 接收到节点 A 发送的请求投票信息后，在编号为 1 的这届任期内，还没有进行过投票，就把选票投给节点 A，并增加自己的任期编号。</li>
+<li>节点 A 收到了大多数节点（n/2+1）的投票，从候选者成为本届任期内的新的领导者。</li>
 </ol>
 </li>
-<li>
-<p><strong>与其他节点通讯</strong>：节点 A 作为领导者，固定的时间间隔给节点 B 和节点 C 发送心跳信息，告诉节点 B 和 C，我是领导者，节点 B 和节点 C 发送响应信息给节点 A，告诉节点 A 我是正常的。</p>
-</li>
+<li><strong>与其他节点通讯</strong>：节点 A 作为领导者，固定的时间间隔给节点 B 和节点 C 发送心跳信息，告诉节点 B 和 C，我是领导者，节点 B 和节点 C 发送响应信息给节点 A，告诉节点 A 我是正常的。</li>
 </ol>
 <h2 id="选举中遇到的问题">选举中遇到的问题</h2>
 <ol>
