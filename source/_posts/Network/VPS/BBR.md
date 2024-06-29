@@ -1,8 +1,8 @@
 ---
 title: BBR
 categories:
-- Internet
-- VPS
+  - Network
+  - VPS
 ---
 # BBR
 

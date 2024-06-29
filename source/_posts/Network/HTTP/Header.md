@@ -1,8 +1,8 @@
 ---
 title: HTTP Header
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # HTTP Header
 

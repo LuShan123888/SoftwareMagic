@@ -1,8 +1,8 @@
 ---
 title: RESTful
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # RESTful
 

@@ -1,8 +1,8 @@
 ---
 title: HTTP CORS
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # HTTP CORS
 

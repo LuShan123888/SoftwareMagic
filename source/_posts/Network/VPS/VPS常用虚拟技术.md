@@ -1,8 +1,8 @@
 ---
 title: VPS常用虚拟技术
 categories:
-- Internet
-- VPS
+  - Network
+  - VPS
 ---
 # VPS常用虚拟技术
 

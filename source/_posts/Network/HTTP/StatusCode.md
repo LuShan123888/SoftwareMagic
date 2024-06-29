@@ -1,8 +1,8 @@
 ---
 title: HTTP StatusCode
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # HTTP StatusCode
 

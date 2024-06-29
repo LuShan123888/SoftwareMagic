@@ -1,8 +1,8 @@
 ---
 title: Protocol-Relative Links
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # Protocol-Relative Links
 

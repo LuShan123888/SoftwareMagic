@@ -1,8 +1,8 @@
 ---
 title: HTTP Cookie&Session&Token
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # HTTP Cookie&Session&Token
 

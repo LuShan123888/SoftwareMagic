@@ -1,7 +1,7 @@
 ---
 title: NetworkCable
 categories:
-  - Internet
+  - Network
   - Devices
 ---
 # NetworkCable

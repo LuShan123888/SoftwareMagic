@@ -1,8 +1,8 @@
 ---
 title: HTTP Cookie&LocalStorage&SessionStorage
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # HTTP Cookie&LocalStorage&SessionStorage
 

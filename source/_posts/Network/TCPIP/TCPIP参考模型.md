@@ -1,8 +1,8 @@
 ---
 title: TCP/IP参考模型
 categories:
-- Internet
-- TCPIP
+  - Network
+  - TCPIP
 ---
 # TCP/IP参考模型
 

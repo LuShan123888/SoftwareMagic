@@ -1,8 +1,8 @@
 ---
 title: WiFi协议
 categories:
-- Internet
-- WLAN
+  - Network
+  - WLAN
 ---
 # WiFi协议
 

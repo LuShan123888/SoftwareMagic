@@ -1,8 +1,8 @@
 ---
 title: Base64
 categories:
-- Internet
-- HTTP
+  - Network
+  - HTTP
 ---
 # Base64
 
