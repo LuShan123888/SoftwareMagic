@@ -1,8 +1,8 @@
 ---
 title: Base64
 categories:
-  - Network
-  - HTTP
+  - Software
+  - Common
 ---
 # Base64
 
