@@ -8,28 +8,18 @@ categories:
 ---
 # Spring AOP
 
-## AOP 概述
-
 - AOP(Aspect Oriented Programming）面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术，AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型，利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-10-31-640-20201031204745305.png)
 
 ## AOP 概念
-
-- AOP实现的关键在于AOP框架自动创建的AOP代理，AOP代理主要分为静态代理和动态代理，静态代理的代表为AspectJ，而动态代理则以Spring AOP为代表。
-  - AspectJ是静态代理的增强，所谓的静态代理就是AOP框架会在编译阶段生成AOP代理类，因此也称为编译时增强。
-  - Spring AOP 基于动态代理，主要有两种方式。
-      - JDK动态代理：通过反射来接收被代理的类，并且要求被代理的类必须实现InvocationHandler接口，JDK动态代理的核心是。
-          InvocationHandler接口和Proxy类。
-      - CGLIB (Code Generation Library)，是一个代码生成的类库，可以在运行时动态的生成某个类的子类，注意，CGLIB是通过继承。
-          的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的，诸如private的方法也是不可以作为切面的。
-- 在AOP编程中，我们经常会遇到下面的概念：
-  - Joinpoint：连接点，即定义在应用程序流程的何处插入切面的执行。
-  - Pointcut：切入点，即一组连接点的集合。
-  - Advice：增强，指特定连接点上执行的动作。
-  - Introduction：引介，特殊的增强，指为一个已有的Java对象动态地增加新的接口。
-  - Weaving：织入，将增强添加到目标类具体连接点上的过程。
-  - Aspect：切面，由切点和增强（引介）组成，包括了对横切关注功能的定义，已包括了对连接点的定义。
+在AOP编程中，我们经常会遇到下面的概念：
+- Joinpoint：连接点，即定义在应用程序流程的何处插入切面的执行。
+- Pointcut：切入点，即一组连接点的集合。
+- Advice：增强，指特定连接点上执行的动作。
+- Introduction：引介，特殊的增强，指为一个已有的Java对象动态地增加新的接口。
+- Weaving：织入，将增强添加到目标类具体连接点上的过程。
+- Aspect：切面，由切点和增强（引介）组成，包括了对横切关注功能的定义，已包括了对连接点的定义。
 
 ![](https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/2020-12-10-2020-11-06-640-4157569.png)
 
@@ -44,7 +34,13 @@ categories:
   - 环绕通知（@Around)：在被通知的方法调用之前和调用之后执行自定义的方法。
   - 返回通知（@AfterReturning)：在目标方法成功执行之后调用通知。
   - 异常通知（@AfterThrowing)：在目标方法抛出异常之后调用通知。
+# AOP 实现原理
 
+ AOP 实现的关键在于 AOP 框架自动创建的 AOP 代理，AOP 代理主要分为静态代理和动态代理，静态代理的代表为 AspectJ，而动态代理则以 Spring AOP 为代表。
+  - AspectJ 是静态代理的增强，所谓的静态代理就是 AOP 框架会在编译阶段生成 AOP 代理类，因此也称为编译时增强。
+  - Spring AOP 基于动态代理，主要有两种方式。
+      - JDK 动态代理：JDK 动态代理只提供接口的代理，不支持类的代理。JDK 会在运行时为目标类生成一个动态代理类$proxy\*.class。该代理类是实现了接目标类接口的一个类，并且会实现接口所有的方法增强代码。调用时先去调用处理类进行增强．再通过反射的方式调用目标方法、从而实现 AOP
+      - CGLIB：如果代理类没有实现接口，那么 Spring AOP 会选择使用 CGLIB 来动态代理目标类。CGLIB 的底层是通过 ASM 在运行时动态的生成目标类的一个子类。（还有其他相关类）会生成多个，并且会重写父类所有的方法增强代码，
 ## Spring
 
 ### pom.xml
