@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/27191c96c5b4403fbbaa3577a9458593~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp">
 <meta property="og:image" content="https://raw.githubusercontent.com/LuShan123888/Files/main/Pictures/c31e551b546d403fa1cc371203924675~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp">
 <meta property="article:published_time" content="2024-02-19T16:51:15.000Z">
-<meta property="article:modified_time" content="2024-06-14T16:22:04.837Z">
+<meta property="article:modified_time" content="2024-11-10T05:53:56.087Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2024年6月15日 凌晨
+                  本文最后更新于：2024年11月10日 下午
                 
               </p>
             
@@ -423,7 +423,7 @@
 <p>Percona Toolkit 源自 Maatkit 和 Aspersa，这两个最著名的 MySQL 服务器管理工​具包。它由 Percona 开发和支持。</p>
 <h3 id="工作流程">工作流程</h3>
 <p>pt-osc 用于修改表时不锁表，简单地说，这个工具创建一个与原始表一样的新的空表，并根据需要更改表结构，然后将原始表中的数据以小块形式复制到新表中，然后删除原始表，然后将新表重命名为原始名称。在复制过程中，对原始表的所有新的更改（insert，delete，update）都将应用于新表，因为在原始表上创建了一个触发器，以确保所有新的更改都将应用于新表。有关 pt-online-schema-change 工具的更多信息，请查阅手册文档 。</p>
-<p><strong>pt-osc大致的工作过程如下：</strong></p>
+<p><strong>pt-osc大致的工作过程如下</strong>：</p>
 <ol>
 <li>创建一个和要执行 alter 操作的表一样的新的空表结构（是alter之前的结构）；</li>
 <li>在新表执行alter table 语句（速度应该很快）；</li>
@@ -449,7 +449,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pt-online-schema-change --alter=&quot;add column c1 int;&quot; --execute D=test,t=table,u=user,p=password<br></code></pre></td></tr></table></figure>
 <p>alter参数指定修改表结构的语句，execute表示立即执行，D、t、u、p分别指定库名、表名、用户名和密码，执行期间不阻塞其它并行的DML语句。pt-online-schema-change还有许多选项，具体用法可以使用pt-online-schema-change --help查看联机帮助。</p>
 <h3 id="限制-2">限制</h3>
-<p>pt-online-schema-change<strong>也存在一些局限性：</strong></p>
+<p>pt-online-schema-change<strong>也存在一些局限性</strong>：</p>
 <ol>
 <li>在使用此工具之前，应为表定义PRIMARY KEY或唯一索引，因为它是DELETE触发器所必需的；</li>
 <li>如果表已经定义了触发器，则不支持 pt-osc ；（注：不是不能有任何触发器，只是不能有针对insert、update、delete的触发器存在，因为一个表上不能有两个相同类型的触发器）；</li>
