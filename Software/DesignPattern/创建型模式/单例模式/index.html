@@ -24,7 +24,7 @@
 <meta property="og:description" content="设计模式单例模式  单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。 这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。 优点：  在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-03T15:08:27.000Z">
-<meta property="article:modified_time" content="2024-11-10T06:02:51.104Z">
+<meta property="article:modified_time" content="2024-11-10T06:06:48.569Z">
 <meta property="article:author" content="Cian">
 <meta property="article:tag" content="software computer programmer otes Cloud personal">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,15 +278,18 @@
 <li><strong>描述</strong>：这种方式采用双锁机制，安全且在多线程情况下能保持高性能。getSingleton(）的性能对应用程序很关键。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> Singleton singleton;  <br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span> <span class="hljs-params">()</span></span>&#123;&#125;  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getSingleton</span><span class="hljs-params">()</span> </span>&#123;  <br>        <span class="hljs-keyword">if</span> (singleton == <span class="hljs-keyword">null</span>) &#123;  <br>            <span class="hljs-keyword">synchronized</span> (Singleton.class) &#123;  <br>                <span class="hljs-keyword">if</span> (singleton == <span class="hljs-keyword">null</span>) &#123;  <br>                    singleton = <span class="hljs-keyword">new</span> Singleton();  <br>                &#125;  <br>            &#125;  <br>        &#125;  <br>        <span class="hljs-keyword">return</span> singleton;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
-<p><strong>为什么要进行第二次判空？</strong>：防止多次初始化，多线程下，有可能会出现两个线程都经过了前面第一次检查，来到了下面的synchronized这里，如果不判空，就会出现一个线程new了一个Singleton出来，然后释放锁，第二个线程进来又会new一个Singleton出来。<br>
-<strong>volatile能不能不加？</strong>：不能，volatile 作用：</p>
+<ul>
+<li><strong>为什么要进行第二次判空？</strong>：防止多次初始化，多线程下，有可能会出现两个线程都经过了前面第一次检查，来到了下面的synchronized这里，如果不判空，就会出现一个线程new了一个Singleton出来，然后释放锁，第二个线程进来又会new一个Singleton出来。</li>
+<li><strong>volatile能不能不加？</strong>：不能，volatile 作用：
 <ol>
 <li>保持内存可见性</li>
-<li>防止指令重排序 volatile这里的作用就是<strong>防止指令重排</strong>，<code>INSTANCE = new Singleton();</code>这一行主要做了下面几件事：</li>
+<li>防止指令重排序 volatile这里的作用就是<strong>防止指令重排</strong>，<code>INSTANCE = new Singleton();</code> 这一行主要做了下面几件事：</li>
 <li>在内存中开辟空间</li>
 <li>执行构造方法初始化对象</li>
-<li>将对象的引用赋值给INSTANCE变量 在不加volatile的情况下，第2和第3步是有可能发生指令重排的，即执行顺序变成了1、3、2，假如我刚好执行到第3步，还没执行第2步，这时候另外一个线程调了这个方法，获取到的是还没执行初始化函数的对象，在上面的代码中，初始化函数什么都没做，所以没什么影响。但是如果初始化函数中需要做一些操作，那就有影响了。</li>
+<li>将对象的引用赋值给INSTANCE变量在不加volatile的情况下，第2和第3步是有可能发生指令重排的，即执行顺序变成了1、3、2，假如我刚好执行到第3步，还没执行第2步，这时候另外一个线程调了这个方法，获取到的是还没执行初始化函数的对象，在上面的代码中，初始化函数什么都没做，所以没什么影响。但是如果初始化函数中需要做一些操作，那就有影响了。</li>
 </ol>
+</li>
+</ul>
 <h2 id="登记式-静态内部类">登记式/静态内部类</h2>
 <ul>
 <li>
