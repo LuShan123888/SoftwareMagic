@@ -439,7 +439,7 @@ Second observer: 2
 Second observer: 3
 ```
 
-- 上面是等两个观察者都注册之后，并且手动调用了 Observable 的`Connect ()`方法才产生数据。而且可连接的 **Observable** 有一个特性：**它是冷启动的**，即每个观察者都会收到一份相同的拷贝。
+- 上面是等两个观察者都注册之后，并且手动调用了 Observable 的`Connect ()`方法才产生数据。而且可连接的 **Observable** 有一个特性**：它是冷启动的**，即每个观察者都会收到一份相同的拷贝。
 
 ## 转换 **Observable**
 
